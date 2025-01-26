@@ -16,12 +16,16 @@ url                      : https://thromel.github.io # the base hostname & proto
 baseurl                  : "" # the subpath of your site, e.g. "/blog"
 repository               : "thromel/thromel.github.io"
 
+# Add custom CSS
+head_scripts:
+  - /assets/css/custom.css
+
 # Site Author - The following control what appear as part of the author content on the side bar.
 #               If a field is blank the icon and link will not appear, otherwise it will be shown.
 #               Additional customization can be done by editing /_includes/author-profile.html
 author:
   # Biographic information
-  avatar           : "profile_rect.png"
+  avatar           : "profile_rect.jpg"
   name             : "Tanzim Hossain Romel"
   pronouns         : "he/him"  
   bio              : "Software Development Engineer @ IQVIA | BUET CSE Graduate"
