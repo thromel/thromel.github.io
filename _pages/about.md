@@ -8,34 +8,39 @@ redirect_from:
   - /about.html
 ---
 
-Hi! I'm Tanzim Hossain Romel, a Software Development Engineer at IQVIA with a passion for distributed systems and full-stack development. I graduated from Bangladesh University of Engineering and Technology (BUET) with a B.Sc. in Computer Science and Engineering.
+Hi! I'm Tanzim Hossain Romel, a Software Development Engineer at IQVIA with expertise in distributed systems and full-stack development. I leverage full-stack development, cloud-native architectures, and AI/ML to build scalable solutions.
 
 Current Work
 ------
-At IQVIA, I work as a Backend Engineer in the KPI Library team, where I:
-* Optimize microservices architecture using MongoDB and in-memory caching
-* Develop innovative features like LLM-powered dynamic dashboards
-* Implement high-performance solutions using gRPC and modern cloud technologies
-* Work with technologies including C#, .NET, PostgreSQL, MongoDB, Docker, and Kubernetes
+At IQVIA's KPI Library team, I serve as a Backend Engineer & DevOps Specialist, where I:
+* Reduced API latency by 40% using Redis caching for high-traffic endpoints
+* Automated database indexing, cutting query times by 60%
+* Streamlined CI/CD pipelines with GitHub Actions, reducing deployment failures by 70%
+* Implemented automated testing (Jest, xUnit) for 95% code coverage
+* Built a dynamic translation system supporting 15+ languages
+* Prototyped LLM-driven dashboards for real-time analytics
+
+Technical Expertise
+------
+| Category | Proficiencies |
+|----------|---------------|
+| Languages | C#, Python, TypeScript, SQL, Solidity, C++ |
+| Cloud & DevOps | Azure, AWS, Docker, Kubernetes, Terraform, GitHub Actions |
+| AI/ML | PyTorch, TensorFlow, OpenCV, Hugging Face, Scikit-learn |
+| Databases | PostgreSQL, MongoDB, Redis, CosmosDB, Oracle |
+| Frameworks | React.js, Express.js, .NET, Blazor, gRPC, OpenTelemetry |
 
 Research Interests
 ------
-I'm currently investigating Contracts for LLM Libraries, extending ML API contracts research to better understand and improve how developers interact with LLM systems. My undergraduate thesis focused on blockchain applications in healthcare, specifically developing secure systems for storing and sharing patient health data.
+My research interests span multiple domains:
+* Investigating Contracts for LLM Libraries, extending ML API contracts research
+* Blockchain applications in healthcare, focusing on secure data management
+* Network protocol optimization with TCP Vegas+
+* Deep learning for South Asian language processing
 
-Projects
+Career Vision
 ------
-I've worked on various projects showcasing my diverse technical skills:
-* A production-ready URL shortener system using .NET and Azure services
-* An end-to-end event management system (Eventfly) using microservices architecture
-* Enhanced image caption generation using BERT and attention mechanisms
-* E-commerce aggregator platform with web scraping capabilities
+* **Short-Term**: Lead projects integrating generative AI into distributed systems
+* **Long-Term**: Architect large-scale, privacy-first platforms for healthcare or fintech industries
 
-Technical Skills
-------
-* Strong backend development skills in C#, .NET, and Python
-* Extensive experience with cloud technologies and DevOps practices
-* Expertise in database systems including PostgreSQL and MongoDB
-* Proficient in blockchain development with Ethereum and Solidity
-* Full-stack development capabilities with React and Express.js
-
-Feel free to reach out if you'd like to discuss technology, collaboration opportunities, or just have a chat about software engineering!
+Feel free to explore my [projects](/portfolio/) or check out my detailed [CV](/cv/) to learn more about my work and experience.
