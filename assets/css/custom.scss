@@ -1,8 +1,204 @@
-.author__avatar {
-  img {
-    border-radius: 0 !important;
-    max-width: 250px !important;
-    width: 100% !important;
-    height: auto !important;
+/* Modern Color Scheme */
+:root {
+  --primary-color: #2563eb;      /* Bright blue */
+  --secondary-color: #1e40af;    /* Darker blue */
+  --accent-color: #3b82f6;       /* Light blue */
+  --background-color: #f8fafc;   /* Light gray background */
+  --text-color: #1e293b;         /* Dark blue-gray text */
+  --light-text: #64748b;         /* Lighter text for subtitles */
+  --border-color: #e2e8f0;       /* Light border color */
+}
+
+/* Global Styles */
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+
+/* Header and Navigation */
+.masthead {
+  background-color: white;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  
+  &__inner-wrap {
+    padding: 0.8em 1em;
+  }
+}
+
+.greedy-nav {
+  background: transparent;
+  
+  a {
+    color: var(--text-color);
+    
+    &:hover {
+      color: var(--primary-color);
+    }
+  }
+  
+  .visible-links a {
+    &:before {
+      background: var(--primary-color);
+    }
+  }
+}
+
+/* Sidebar Styling */
+.sidebar {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  
+  .author__avatar {
+    img {
+      border-radius: 8px !important;
+      max-width: 250px !important;
+      width: 100% !important;
+      height: auto !important;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+  }
+  
+  .author__name {
+    color: var(--text-color);
+    font-weight: 600;
+  }
+  
+  .author__bio {
+    color: var(--light-text);
+  }
+  
+  .author__urls {
+    li {
+      a {
+        color: var(--text-color);
+        &:hover {
+          color: var(--primary-color);
+        }
+      }
+    }
+  }
+}
+
+/* Content Styling */
+.page__content {
+  h1, h2, h3, h4, h5, h6 {
+    color: var(--text-color);
+    font-weight: 600;
+    margin: 1em 0 0.5em;
+  }
+  
+  a {
+    color: var(--primary-color);
+    text-decoration: none;
+    
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+/* Buttons */
+.btn {
+  background-color: var(--primary-color);
+  color: white !important;
+  border-radius: 6px;
+  border: none;
+  padding: 0.75em 1.5em;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  
+  &:hover {
+    background-color: var(--secondary-color);
+    transform: translateY(-1px);
+  }
+  
+  &--info {
+    background-color: var(--accent-color);
+  }
+}
+
+/* Cards and Grid Items */
+.grid__item {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+  
+  &:hover {
+    transform: translateY(-2px);
+  }
+  
+  .archive__item-title {
+    color: var(--text-color);
+    font-weight: 600;
+  }
+}
+
+/* Tech Grid Styling */
+.tech-grid {
+  gap: 1.5rem;
+  
+  .tech-category {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+    
+    &:hover {
+      transform: translateY(-2px);
+    }
+    
+    h3 {
+      color: var(--primary-color);
+      border-bottom: 2px solid var(--border-color);
+    }
+  }
+}
+
+/* Blog Post Preview Cards */
+.archive__item {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  transition: transform 0.2s ease;
+  
+  &:hover {
+    transform: translateY(-2px);
+  }
+  
+  &-title {
+    color: var(--text-color);
+    font-weight: 600;
+  }
+  
+  &-excerpt {
+    color: var(--light-text);
+  }
+}
+
+/* Footer */
+.page__footer {
+  background-color: var(--text-color);
+  color: white;
+  margin-top: 3em;
+  padding: 2em 0;
+  
+  a {
+    color: var(--accent-color);
+  }
+}
+
+/* Responsive Design Improvements */
+@media (max-width: 1024px) {
+  .sidebar {
+    margin-bottom: 2em;
+  }
+  
+  .tech-grid {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   }
 } 
