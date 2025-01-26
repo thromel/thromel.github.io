@@ -25,7 +25,7 @@ head_scripts:
 #               Additional customization can be done by editing /_includes/author-profile.html
 author:
   # Biographic information
-  avatar           : "profile_rect.png"
+  avatar           : "profile_rect.JPG"
   name             : "Tanzim Hossain Romel"
   pronouns         : "he/him"  
   bio              : "Software Development Engineer @ IQVIA | BUET CSE Graduate"
