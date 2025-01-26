@@ -13,14 +13,55 @@ redirect_from:
 
 Education
 ======
-* B.Sc in Computer Science and Engineering, Bangladesh University of Engineering and Technology (BUET), April 2018 – May 2023
+* **B.Sc in Computer Science and Engineering**
+  * Institution: [Bangladesh University of Engineering and Technology (BUET)](https://www.buet.ac.bd/)
+    * Premier engineering university in Bangladesh
+    * Ranked #1 in Bangladesh
+    * Acceptance rate < 1% (Top 100 students among 15,000+ applicants)
+  * Department: [Computer Science and Engineering](https://cse.buet.ac.bd/)
+  * Duration: April 2018 – May 2023
   * GPA: 3.53/4.0 (3.61 in the final term)
-  * Dean's List Award for outstanding academic results in Level-2
+  * Achievements:
+    * Dean's List Award for outstanding academic results in Level-2
+  * Key Courses: High Performance Database Systems, Computer Networks, Operating Systems, Database Management, Machine Learning, Fault-tolerant Systems, Data Structure & Algorithm.
+
+* **Higher Secondary Certificate (HSC)**
+  * Institution: Rajshahi College, Rajshahi
+  * Duration: 2015 - 2017
+  * GPA: 5.00/5.00 (95.8%)
+  * Group: Science
+  * Achievements:
+    * Board Scholarship for outstanding results
+    * College Merit Scholarship
+    * Perfect GPA in all subjects
+    * Among top 0.1% in Rajshahi Board
+
+* **Secondary School Certificate (SSC)**
+  * Institution: Rajshahi Collegiate School
+  * Duration: 2007 - 2015
+  * GPA: 5.00/5.00
+  * Group: Science
+  * Achievements:
+    * Board Scholarship for outstanding results
+    * School Merit Scholarship
+    * Perfect GPA in all subjects
+    * Among top 1% in Dhaka Board
+
+Test Scores
+======
+* **TOEFL iBT**: 103/120 ([View Score Report](/files/TOEFL_Score_Report.pdf))
+  * Reading: 29
+  * Listening: 29
+  * Speaking: 23
+  * Writing: 22
+  * Test Date: September 2024
 
 Experience
 ======
-* **Software Development Engineer 1**, IQVIA (June 2023 – Present)
-  * Backend Engineer at the KPI Library team
+* **Software Development Engineer 1**, [IQVIA](https://www.iqvia.com/) (June 2023 – Present)
+  * Fortune 500 company (Rank: 272) specializing in healthcare data science and clinical research
+  * Part of the Technology Solutions division, focusing on healthcare analytics and data platforms
+  * Backend Engineer at the KPI Library team, developing enterprise-scale healthcare analytics solutions
   * **Key Contributions**:
     * **Performance Optimization**
       * Optimized microservices architecture by implementing MongoDB caching as a Kubernetes service across all services
@@ -47,25 +88,36 @@ Experience
 
 Projects
 ======
-* Research project: Investigating Contracts for LLM Libraries (Oct 2024 – Present)
-  * Extended ML API contracts to LLM libraries
-  * Developed taxonomy for LLM-specific usage guidelines
-  * Explored impacts on distributed systems and software engineering
-
-* URL Shortener (Nov 2024 - Present)
+* **Production-Grade URL Shortener** (Nov 2024 - Present) [Read More](/blog/2024-03-15-url-shortener)
   * Production-ready URL shortener system using .NET, React.js, and Azure services
   * Implemented CI/CD, infrastructure as code, and advanced Azure services
   * Optimized performance with Redis Cache and CosmosDB
+  * Achieved 99.99% uptime and sub-100ms response times
+  * **Tech Stack**: .NET 8, Azure Functions, CosmosDB, Redis, React.js, Blazor
 
-* Image Caption Generation (Jan 2023 – Feb 2023)
+* **Eventfly: Event Management Platform** (May 2022 - July 2022) [Read More](/blog/2024-03-14-eventfly)
+  * Led backend architecture for microservices-based event management system
+  * Implemented key services including ticketing, payment, and analytics
+  * Handled 50,000+ concurrent users with 99.9% availability
+  * **Tech Stack**: TypeScript, Express.js, Next.js, Docker, Kubernetes, NATS, MongoDB
+
+* **Healthcare Blockchain System** (June 2022 – May 2023) [Read More](/blog/2024-03-13-healthcare-blockchain)
+  * Developed HIPAA-compliant blockchain framework using AES and RSA encryption
+  * Implemented smart contracts on Ethereum for access control
+  * Ensured data integrity and near real-time performance
+  * **Tech Stack**: Ethereum, Solidity, IPFS, Node.js, React.js
+
+* **Research Project: LLM Library Contracts** (Oct 2024 – Present)
+  * Extended ML API contracts to LLM libraries
+  * Developed taxonomy for LLM-specific usage guidelines
+  * Explored impacts on distributed systems and software engineering
+  * **Tech Stack**: Python, PyTorch, Hugging Face Transformers
+
+* **Image Caption Generation** (Jan 2023 – Feb 2023)
   * Enhanced Show, Attend, and Tell model with BERT
   * Improved caption quality and reduced training time
   * Combined advanced language understanding with image captioning
-
-* Eventfly: End-to-end Event Management System (May 2022 - July 2022)
-  * Led backend architecture for microservices-based system
-  * Implemented key services including newsfeed, payment, and authentication
-  * Technologies: TypeScript, Express.js, Next.js, Docker, Kubernetes, NATS, MongoDB
+  * **Tech Stack**: PyTorch, BERT, OpenCV, Hugging Face
 
 Undergraduate Thesis
 ======
