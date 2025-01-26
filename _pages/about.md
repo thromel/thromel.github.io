@@ -14,8 +14,10 @@ Hi! I'm Tanzim Hossain Romel, a Software Development Engineer at IQVIA with expe
 
 Current Work
 ------
-**Software Development Engineer 1** at IQVIA (June 2023 – Present)  
-Backend Engineer at the KPI Library team
+**Software Development Engineer 1**, [IQVIA](https://www.iqvia.com/) (June 2023 – Present)
+* Fortune 500 company (Rank: 272) specializing in healthcare data science and clinical research
+* Part of the Technology Solutions division, focusing on healthcare analytics and data platforms
+* Backend Engineer at the KPI Library team, developing enterprise-scale healthcare analytics solutions
 
 **Key Contributions**:
 * **Performance Optimization**
@@ -37,6 +39,21 @@ Backend Engineer at the KPI Library team
   * Reduced service latency by 40% and increased throughput by 25%
 
 **Tech Stack**: C#, .NET, PostgreSQL, MongoDB, Microsoft SQL Server, Entity Framework, Redis, AWS, Docker, Kubernetes, Jaeger
+
+Current Projects
+------
+### Production-Grade URL Shortener [Read More](/blog/2024-03-15-url-shortener)
+* Production-ready URL shortener system using .NET, React.js, and Azure services
+* Implemented CI/CD, infrastructure as code, and advanced Azure services
+* Optimized performance with Redis Cache and CosmosDB
+* Achieved 99.99% uptime and sub-100ms response times
+* **Tech Stack**: .NET 8, Azure Functions, CosmosDB, Redis, React.js, Blazor
+
+### LLM Library Contracts Research
+* Extended ML API contracts to LLM libraries
+* Developed taxonomy for LLM-specific usage guidelines
+* Explored impacts on distributed systems and software engineering
+* **Tech Stack**: Python, PyTorch, Hugging Face Transformers
 
 Technical Expertise
 ------
@@ -87,15 +104,15 @@ Technical Expertise
   margin: 20px 0;
 }
 .tech-category {
-  background: #f8f9fa;
+  background: var(--background-color-light);
   padding: 15px;
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 .tech-category h3 {
-  color: #2c3e50;
+  color: var(--text-color);
   margin-bottom: 10px;
-  border-bottom: 2px solid #3498db;
+  border-bottom: 2px solid var(--primary-color);
   padding-bottom: 5px;
 }
 .tech-category ul {
@@ -108,9 +125,62 @@ Technical Expertise
   line-height: 1.4;
 }
 .tech-category strong {
-  color: #2c3e50;
+  color: var(--text-color);
+}
+
+/* Dark mode toggle button */
+.theme-toggle {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  transition: all 0.3s ease;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.theme-toggle:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.theme-toggle i {
+  font-size: 24px;
 }
 </style>
+
+<script>
+// Theme toggle functionality
+document.addEventListener('DOMContentLoaded', function() {
+  const root = document.documentElement;
+  const themeToggle = document.createElement('button');
+  themeToggle.className = 'theme-toggle';
+  themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+  document.body.appendChild(themeToggle);
+
+  const isDarkMode = localStorage.getItem('darkMode') === 'true';
+  if (isDarkMode) {
+    document.body.classList.add('dark-theme');
+    themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+  }
+
+  themeToggle.addEventListener('click', function() {
+    document.body.classList.toggle('dark-theme');
+    const isDark = document.body.classList.contains('dark-theme');
+    localStorage.setItem('darkMode', isDark);
+    themeToggle.innerHTML = isDark ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+  });
+});
+</script>
 
 Research & Writing
 ------
