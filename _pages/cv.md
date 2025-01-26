@@ -19,15 +19,25 @@ Education
 
 Experience
 ======
-* Software Development Engineer 1, IQVIA (June 2023 – Present)
+* **Software Development Engineer 1**, IQVIA (June 2023 – Present)
   * Backend Engineer at the KPI Library team
-  * Key Contributions:
-    * Optimized microservices architecture with MongoDB caching and in-memory caching, reducing query response time by 30%
-    * Developed JSON-based dynamic dashboard creation feature powered by LLMs
-    * Enhanced translation system with dynamic translation feature
-    * Improved CI/CD pipeline with parallelized GitLab workflows
-    * Implemented gRPC for high-volume microservice communication
-  * Technologies: C#, .NET, PostgreSQL, MongoDB, Microsoft SQL Server, Entity Framework, Redis, AWS, Docker, Kubernetes, Jaeger
+  * **Key Contributions**:
+    * **Performance Optimization**
+      * Optimized microservices architecture by implementing MongoDB caching as a Kubernetes service across all services
+      * Implemented in-memory caching for specific services, reducing query response time by 30%
+      * Redesigned dashboard loading flow architecture, improving loading times by 40%
+      * Enhanced overall system performance through architectural improvements
+    * **Innovation & AI Integration**
+      * Developed a JSON-based dynamic dashboard creation feature powered by LLMs
+      * Enabled natural language inputs for dashboard generation and customization
+      * Enhanced the existing translation system with dynamic localization features
+      * Improved platform flexibility and efficiency through automation
+    * **DevOps & Infrastructure**
+      * Improved CI/CD pipeline with parallelized GitLab workflows
+      * Implemented automated test retries, reducing build and deployment times by 40%
+      * Implemented gRPC for high-volume microservice communication
+      * Reduced service latency by 40% and increased throughput by 25%
+  * **Tech Stack**: C#, .NET, PostgreSQL, MongoDB, Microsoft SQL Server, Entity Framework, Redis, AWS, Docker, Kubernetes, Jaeger
 
 * Full Stack Engineer, Mindshare Bangladesh (Apr 2021 – Nov 2021)
   * Developed unified e-commerce aggregator platform
@@ -67,35 +77,26 @@ Undergraduate Thesis
 
 Skills
 ======
-* Programming Languages
-  * C#, .NET
-  * Python
-  * JavaScript
-* Web & Backend
-  * ASP.NET
-  * Express.js
-  * React
-* Databases
-  * PostgreSQL
-  * MongoDB
-  * Microsoft SQL Server
-* DevOps & Cloud
-  * Docker
-  * Kubernetes
-  * Azure
-  * AWS
-  * GitHub Actions
-* Blockchain
-  * Ethereum
-  * Solidity
-  * Web3.js
-* Other Technologies
-  * Redis
-  * gRPC
-  * Entity Framework
-  * Azure Bicep
-  * OpenTelemetry
-  * Jaeger
+* **Languages & Frameworks**
+  * Backend: C#/.NET, Python, TypeScript
+  * Frontend: React.js, Blazor
+  * Other: Solidity, C++
+
+* **Cloud & DevOps**
+  * Platforms: Azure, AWS
+  * Containers: Docker, Kubernetes
+  * IaC: Terraform, Azure Bicep
+  * CI/CD: GitHub Actions, GitLab CI
+
+* **Data & AI/ML**
+  * Databases: PostgreSQL, MongoDB, Redis, CosmosDB
+  * ML/DL: PyTorch, TensorFlow
+  * Vision: OpenCV, Hugging Face
+
+* **Tools & Technologies**
+  * Communication: gRPC, REST
+  * Monitoring: OpenTelemetry, Jaeger
+  * Performance: Redis, Entity Framework
 
 Awards
 ======

@@ -14,23 +14,103 @@ Hi! I'm Tanzim Hossain Romel, a Software Development Engineer at IQVIA with expe
 
 Current Work
 ------
-At IQVIA's KPI Library team, I serve as a Backend Engineer & DevOps Specialist, where I:
-* Reduced API latency by 40% using Redis caching for high-traffic endpoints
-* Automated database indexing, cutting query times by 60%
-* Streamlined CI/CD pipelines with GitHub Actions, reducing deployment failures by 70%
-* Implemented automated testing (Jest, xUnit) for 95% code coverage
-* Built a dynamic translation system supporting 15+ languages
-* Prototyped LLM-driven dashboards for real-time analytics
+**Software Development Engineer 1** at IQVIA (June 2023 – Present)  
+Backend Engineer at the KPI Library team
+
+**Key Contributions**:
+* **Performance Optimization**
+  * Optimized microservices architecture by implementing MongoDB caching as a Kubernetes service across all services
+  * Implemented in-memory caching for specific services, reducing query response time by 30%
+  * Redesigned dashboard loading flow architecture, improving loading times by 40%
+  * Enhanced overall system performance through architectural improvements
+
+* **Innovation & AI Integration**
+  * Developed a JSON-based dynamic dashboard creation feature powered by LLMs
+  * Enabled natural language inputs for dashboard generation and customization
+  * Enhanced the existing translation system with dynamic localization features
+  * Improved platform flexibility and efficiency through automation
+
+* **DevOps & Infrastructure**
+  * Improved CI/CD pipeline with parallelized GitLab workflows
+  * Implemented automated test retries, reducing build and deployment times by 40%
+  * Implemented gRPC for high-volume microservice communication
+  * Reduced service latency by 40% and increased throughput by 25%
+
+**Tech Stack**: C#, .NET, PostgreSQL, MongoDB, Microsoft SQL Server, Entity Framework, Redis, AWS, Docker, Kubernetes, Jaeger
 
 Technical Expertise
 ------
-| Category | Proficiencies |
-|----------|---------------|
-| Languages | C#, Python, TypeScript, SQL, Solidity, C++ |
-| Cloud & DevOps | Azure, AWS, Docker, Kubernetes, Terraform, GitHub Actions |
-| AI/ML | PyTorch, TensorFlow, OpenCV, Hugging Face, Scikit-learn |
-| Databases | PostgreSQL, MongoDB, Redis, CosmosDB, Oracle |
-| Frameworks | React.js, Express.js, .NET, Blazor, gRPC, OpenTelemetry |
+<div class="tech-grid" markdown="0">
+<div class="tech-category">
+  <h3>Languages & Frameworks</h3>
+  <ul>
+    <li><strong>Backend:</strong> C#/.NET, Python, TypeScript</li>
+    <li><strong>Frontend:</strong> React.js, Blazor</li>
+    <li><strong>Other:</strong> Solidity, C++</li>
+  </ul>
+</div>
+
+<div class="tech-category">
+  <h3>Cloud & DevOps</h3>
+  <ul>
+    <li><strong>Platforms:</strong> Azure, AWS</li>
+    <li><strong>Containers:</strong> Docker, Kubernetes</li>
+    <li><strong>IaC:</strong> Terraform, Azure Bicep</li>
+    <li><strong>CI/CD:</strong> GitHub Actions, GitLab CI</li>
+  </ul>
+</div>
+
+<div class="tech-category">
+  <h3>Data & AI/ML</h3>
+  <ul>
+    <li><strong>Databases:</strong> PostgreSQL, MongoDB, Redis, CosmosDB</li>
+    <li><strong>ML/DL:</strong> PyTorch, TensorFlow</li>
+    <li><strong>Vision:</strong> OpenCV, Hugging Face</li>
+  </ul>
+</div>
+
+<div class="tech-category">
+  <h3>Tools & Technologies</h3>
+  <ul>
+    <li><strong>Communication:</strong> gRPC, REST</li>
+    <li><strong>Monitoring:</strong> OpenTelemetry, Jaeger</li>
+    <li><strong>Performance:</strong> Redis, Entity Framework</li>
+  </ul>
+</div>
+</div>
+
+<style>
+.tech-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  margin: 20px 0;
+}
+.tech-category {
+  background: #f8f9fa;
+  padding: 15px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.tech-category h3 {
+  color: #2c3e50;
+  margin-bottom: 10px;
+  border-bottom: 2px solid #3498db;
+  padding-bottom: 5px;
+}
+.tech-category ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.tech-category li {
+  margin: 8px 0;
+  line-height: 1.4;
+}
+.tech-category strong {
+  color: #2c3e50;
+}
+</style>
 
 Research & Writing
 ------
