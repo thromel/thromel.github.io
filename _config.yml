@@ -21,7 +21,7 @@ repository               : "thromel/thromel.github.io"
 #               Additional customization can be done by editing /_includes/author-profile.html
 author:
   # Biographic information
-  avatar           : "profile.png"
+  avatar           : "profile_rect.png"
   name             : "Tanzim Hossain Romel"
   pronouns         : "he/him"  
   bio              : "Software Development Engineer @ IQVIA | BUET CSE Graduate"
@@ -50,14 +50,14 @@ author:
   linkedin         : "thromel"
 
   # Social media
-  bluesky          : "bsky.app" # Replace this with you Bluesky username
-  facebook         : "romelbuetcse17"
+  bluesky          : "tanzimhossainromel" # Replace this with you Bluesky username
+  facebook         : "tanzimhossainromel"
   flickr           : # Username
   foursquare       : # Username
-  goodreads        : # Username
+  goodreads        : "78203085-tanzim-romel"
   google_plus      : # Username
   keybase          : # Username
-  instagram        : # Username
+  instagram        : # thromel
   lastfm           : # Username
   medium           : # URL
   pinterest        : # Username
@@ -223,6 +223,12 @@ collections:
   talks:
     output: true
     permalink: /:collection/:path/
+  blog:
+    output: true
+    permalink: /:collection/:path/
+  research:
+    output: true
+    permalink: /:collection/:path/
 
 
 # These settings control how pages and collections are included in the site
@@ -245,41 +251,26 @@ defaults:
     values:
       layout: single
       author_profile: true
-  # _teaching
+  # _blog
   - scope:
       path: ""
-      type: teaching
+      type: blog
+    values:
+      layout: single
+      author_profile: true
+      read_time: true
+      comments: true
+      share: true
+      related: true
+  # _research
+  - scope:
+      path: ""
+      type: research
     values:
       layout: single
       author_profile: true
       share: true
       comments: true
-  # _publications
-  - scope:
-      path: ""
-      type: publications
-    values:
-      layout: single
-      author_profile: true
-      share: true
-      comments: true
-  # _portfolio
-  - scope:
-      path: ""
-      type: portfolio
-    values:
-      layout: single
-      author_profile: true
-      share: true
-      comment: true
-  # _talks
-  - scope:
-      path: ""
-      type: talks
-    values:
-      layout: talk
-      author_profile: true
-      share: true
 
 
 # Sass/SCSS

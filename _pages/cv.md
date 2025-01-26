@@ -9,6 +9,8 @@ redirect_from:
 
 {% include base_path %}
 
+[Download Full CV (PDF)](/files/CV_Tanzim_Hossain_Romel.pdf){: .btn .btn--primary}
+
 Education
 ======
 * B.Sc in Computer Science and Engineering, Bangladesh University of Engineering and Technology (BUET), April 2018 – May 2023

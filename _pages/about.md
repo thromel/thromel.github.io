@@ -10,6 +10,8 @@ redirect_from:
 
 Hi! I'm Tanzim Hossain Romel, a Software Development Engineer at IQVIA with expertise in distributed systems and full-stack development. I leverage full-stack development, cloud-native architectures, and AI/ML to build scalable solutions.
 
+[View Full CV (PDF)](/files/CV_Tanzim_Hossain_Romel.pdf){: .btn .btn--primary} [View CV Page](/cv/){: .btn .btn--info}
+
 Current Work
 ------
 At IQVIA's KPI Library team, I serve as a Backend Engineer & DevOps Specialist, where I:
@@ -30,8 +32,14 @@ Technical Expertise
 | Databases | PostgreSQL, MongoDB, Redis, CosmosDB, Oracle |
 | Frameworks | React.js, Express.js, .NET, Blazor, gRPC, OpenTelemetry |
 
-Research Interests
+Research & Writing
 ------
+I actively contribute to the tech community through:
+* [Research projects](/research/) in distributed systems, blockchain, and AI
+* [Technical blog posts](/blog/) on software engineering and industry trends
+* Paper reviews and insights on emerging technologies
+* Open-source contributions and documentation
+
 My research interests span multiple domains:
 * Investigating Contracts for LLM Libraries, extending ML API contracts research
 * Blockchain applications in healthcare, focusing on secure data management
@@ -42,5 +50,13 @@ Career Vision
 ------
 * **Short-Term**: Lead projects integrating generative AI into distributed systems
 * **Long-Term**: Architect large-scale, privacy-first platforms for healthcare or fintech industries
+
+Latest Blog Posts
+------
+{% for post in site.blog limit:3 %}
+  {% include archive-single.html %}
+{% endfor %}
+
+[View All Posts](/blog/){: .btn .btn--primary}
 
 Feel free to explore my [projects](/portfolio/) or check out my detailed [CV](/cv/) to learn more about my work and experience.
