@@ -130,69 +130,7 @@ Technical Expertise
 .tech-category strong {
   color: var(--text-color);
 }
-
-/* Dark mode toggle button */
-.theme-toggle {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background: var(--primary-color);
-  color: white;
-  border: none;
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  cursor: pointer;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-  transition: all 0.3s ease;
-  z-index: 1000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.theme-toggle:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-}
-
-.theme-toggle i {
-  font-size: 24px;
-}
 </style>
-
-<script>
-// Theme toggle functionality
-function initThemeToggle() {
-  const root = document.documentElement;
-  const themeToggle = document.createElement('button');
-  themeToggle.className = 'theme-toggle';
-  themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
-  document.body.appendChild(themeToggle);
-
-  // Check for saved theme preference
-  const isDarkMode = localStorage.getItem('darkMode') === 'true';
-  if (isDarkMode) {
-    document.body.classList.add('dark-theme');
-    themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
-  }
-
-  // Toggle theme on button click
-  themeToggle.addEventListener('click', function() {
-    document.body.classList.toggle('dark-theme');
-    const isDark = document.body.classList.contains('dark-theme');
-    localStorage.setItem('darkMode', isDark);
-    themeToggle.innerHTML = isDark ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
-  });
-}
-
-// Initialize when DOM is ready
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initThemeToggle);
-} else {
-  initThemeToggle();
-}
-</script>
 
 Research & Writing
 ------
