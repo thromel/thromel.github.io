@@ -55,6 +55,28 @@ Current Work
 
 **Tech Stack**: C#, .NET, PostgreSQL, MongoDB, Microsoft SQL Server, Entity Framework, Redis, AWS, Docker, Kubernetes, Jaeger
 
+Current Learning & Development
+------
+### Technologies & Tools
+* GoLang for high-performance distributed systems
+* Terraform for infrastructure as code
+* Domain Driven Design principles and patterns
+* ELK Stack (Elasticsearch, Logstash, Kibana) for logging and monitoring
+
+### Technical Reading
+* "Designing Data-Intensive Applications" by Martin Kleppmann
+* "Domain-Driven Design: Tackling Complexity in the Heart of Software" by Eric Evans
+* "Mastering API Architecture" by James Gough, Daniel Bryant, and Matthew Auburn
+
+### Certifications In Progress
+* **Certified Kubernetes Application Developer (CKAD)**
+  * Advanced Kubernetes concepts and application deployment
+  * Expected completion: Q2 2025
+
+* **AWS Solutions Architect Associate**
+  * Cloud architecture design and best practices
+  * Expected completion: Q2 2025
+
 Current Projects
 ------
 ### Production-Grade URL Shortener [Read More](/blog/2024-03-15-url-shortener)

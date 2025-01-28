@@ -72,7 +72,7 @@ Education
     * Board Scholarship for outstanding results
     * School Merit Scholarship
     * Perfect GPA in all subjects
-    * Among top 1% in Dhaka Board
+    * Among top 1% in Rajshahi Board
 
 Test Scores
 ======
@@ -82,6 +82,31 @@ Test Scores
   * Speaking: 23
   * Writing: 22
   * Test Date: September 2024
+
+Current Learning Focus
+======
+* **Technologies & Tools**
+  * GoLang for high-performance distributed systems
+  * Terraform for infrastructure as code
+  * Domain Driven Design principles and patterns
+  * ELK Stack (Elasticsearch, Logstash, Kibana) for logging and monitoring
+
+* **Technical Reading**
+  * "Designing Data-Intensive Applications" by Martin Kleppmann
+  * "Domain-Driven Design: Tackling Complexity in the Heart of Software" by Eric Evans
+  * "Mastering API Architecture" by James Gough, Daniel Bryant, and Matthew Auburn
+
+Certifications In Progress
+======
+* **Certified Kubernetes Application Developer (CKAD)**
+  * Advanced Kubernetes concepts and application deployment
+  * Container orchestration and microservices architecture
+  * Expected completion: Q2 2025
+
+* **AWS Solutions Architect Associate**
+  * Cloud architecture design and best practices
+  * AWS services and infrastructure management
+  * Expected completion: Q2 2025
 
 Experience
 ======
