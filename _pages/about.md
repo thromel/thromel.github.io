@@ -13,6 +13,18 @@ redirect_from:
 
 Hi! I'm Tanzim Hossain Romel, a Software Development Engineer at IQVIA with expertise in distributed systems and full-stack development. I leverage full-stack development, cloud-native architectures, and AI/ML to build scalable solutions.
 
+{: .notice--info}
+**Academic Interests & Goals**: I am actively seeking Fall 2026 Ph.D./M.S. positions in:
+* Software Engineering
+* Distributed Systems
+* Human-Computer Interaction (HCI)
+
+My research interests focus on building reliable, scalable systems that enhance human capabilities through innovative software solutions. I am particularly interested in:
+* Distributed Systems & Cloud Computing
+* Software Engineering for AI/ML Systems
+* Human-Centered System Design
+* Software Reliability & Testing
+
 [View Full CV (PDF)](/files/CV_Tanzim_Hossain_Romel.pdf){: .btn .btn--primary} [View CV Page](/cv/){: .btn .btn--info}
 
 Current Work

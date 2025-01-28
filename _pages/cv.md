@@ -11,6 +11,33 @@ redirect_from:
 
 [Download Full CV (PDF)](/files/CV_Tanzim_Hossain_Romel.pdf){: .btn .btn--primary}
 
+Academic Goals
+======
+**Actively seeking Fall 2026 Ph.D./M.S. positions** in:
+* Software Engineering
+* Distributed Systems
+* Human-Computer Interaction (HCI)
+
+Research Interests
+======
+* **Distributed Systems & Cloud Computing**
+  * Scalable system design
+  * Cloud-native architectures
+  * Performance optimization
+  * Fault tolerance
+
+* **Software Engineering for AI/ML Systems**
+  * LLM library contracts and patterns
+  * ML system reliability
+  * AI-powered developer tools
+  * Testing methodologies
+
+* **Human-Centered System Design**
+  * User experience in developer tools
+  * Interactive system design
+  * Accessibility and usability
+  * Human-AI interaction
+
 Education
 ======
 * **B.Sc in Computer Science and Engineering**
