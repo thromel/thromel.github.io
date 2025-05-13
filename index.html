@@ -122,6 +122,24 @@ navbar_title: Home
                         </ul>          
                     </div>
                 </div>
+                <hr />
+
+                <!-- Hobbies -->
+                <div class="row mt-3">
+                    <div class="col">
+                        <h4><img src="/assets/images/icons/idea.png" alt="Hobbies" class="inline-badge" style="width: 30px; height: 30px;"> Hobbies & Interests</h4>
+                        {% for hobby in site.data.profile.hobbies %}
+                        <div class="mb-4">
+                            <h5 class="mb-2">{{ hobby.type }}</h5>
+                            <ul>
+                                {% for item in hobby.items %}
+                                <li>{{ item }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
             </div>
         </div>
     </div>

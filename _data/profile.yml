@@ -205,3 +205,20 @@ test_scores:
 - name: TOEFL iBT
   score: 103/120
   details: Listening - 29, Reading - 29, Writing - 22, Speaking - 23
+
+hobbies:
+- type: Programming & Learning
+  items:
+  - Solving programming problems in my free time
+  - Reading software engineering, architecture, and distributed systems books
+  - Learning development of Agentic AI using LangChain and LangGraph
+
+- type: Reading
+  items:
+  - Science fiction novels including Foundation, Dune, Lord of the Rings
+  - A Song of Ice and Fire series and Harry Potter books
+
+- type: Travel
+  items:
+  - Exploring new places and cultures
+  - Visited Saudi Arabia, India, and various parts of Bangladesh
