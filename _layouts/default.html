@@ -35,8 +35,52 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js" integrity="sha512-XKa9Hemdy1Ui3KSGgJdgMyYlUg1gM+QhL6cnlyTe2qzMCYm4nAZ1PsVerQzTTXzonUR+dmswHqgJPuwCq1MaAg==" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/github-buttons/2.14.2/buttons.min.js" integrity="sha512-OYwZx04hKFeFNYrWBZs72X7T9U+NoHPM1ftUn/Mfw7dRDXrqWA6M1wBg6z6fGE32aeA==" crossorigin="anonymous"></script>
     <script src="{{ '/assets/js/common.js' | relative_url }}"></script>
-    <script src="{{ '/assets/js/dark-mode.js' | relative_url }}"></script>
     <!-- Include bootstrap -->
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    
+    <!-- Dark mode script (at the end to ensure it loads after all elements) -->
+    <script src="{{ '/assets/js/dark-mode.js' | relative_url }}"></script>
+    
+    <!-- Inline fallback for dark mode toggle -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Inline dark mode fallback script loaded');
+            
+            // Get the toggle button and icons
+            const darkModeToggle = document.getElementById('darkModeToggle');
+            const lightIcon = document.getElementById('lightIcon');
+            const darkIcon = document.getElementById('darkIcon');
+            
+            if (!darkModeToggle) {
+                console.error('Dark mode toggle button not found in inline script');
+                return;
+            }
+            
+            console.log('Dark mode toggle found in inline script');
+            
+            // Direct inline toggle function
+            darkModeToggle.onclick = function() {
+                console.log('Dark mode toggle clicked (inline)');
+                document.body.classList.toggle('dark-mode');
+                
+                if (document.body.classList.contains('dark-mode')) {
+                    lightIcon.style.display = 'none';
+                    darkIcon.style.display = 'inline-block';
+                    localStorage.setItem('darkMode', 'enabled');
+                } else {
+                    lightIcon.style.display = 'inline-block';
+                    darkIcon.style.display = 'none';
+                    localStorage.setItem('darkMode', 'disabled');
+                }
+            };
+            
+            // Check if dark mode was previously enabled
+            if (localStorage.getItem('darkMode') === 'enabled') {
+                document.body.classList.add('dark-mode');
+                lightIcon.style.display = 'none';
+                darkIcon.style.display = 'inline-block';
+            }
+        });
+    </script>
 </body>
 </html>
