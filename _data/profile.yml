@@ -11,7 +11,7 @@ positions:
 email: "romel.rcs@gmail.com"
 phone: "+88 01771 600158"
 location: "Uttara, Dhaka, Bangladesh"
-# cv_link: link-to-your-cv-file
+cv_link: https://drive.google.com/file/d/166EX2yVOQNaTkI9mPqoDmB3TzVyjCLYi/view?usp=sharing
 # gscholar: xFmQpf4AAAAJ
 github: thromel
 twitter: # your_twitter_id  # Do not include the '@' symbol
@@ -25,7 +25,7 @@ summary:
 - "Hi I'm Tanzim - <b>Software Development Engineer at IQVIA</b> || Researcher @ BUET"
 - "Passionate about Backend Engineering and AI Systems, especially in the fields of <b>Blockchain Technology, LLM Systems, Image Steganography</b>"
 - "<b>Author of research papers on Blockchain in Healthcare, LLM API Analysis, and Image Steganography</b>"
-- "Graduated From <b>CSE @ BUET</b> with a GPA of 3.53/4.0"
+- "Graduated From <b><a href='https://cse.buet.ac.bd'>CSE @ BUET</a></b> with a GPA of 3.53/4.0"
 - "<b>TOEFL iBT</b>: 103/120 (Listening: 29, Reading: 29, Writing: 22, Speaking: 23)"
 
 short_bio: >-
@@ -47,6 +47,7 @@ education:
   position: B.Sc in Computer Science and Engineering
   date: April 2018 - May 2023
   description: GPA - 3.53/4.0
+  url: https://cse.buet.ac.bd
 
 # experience section is covered by positions
 

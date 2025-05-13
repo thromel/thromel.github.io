@@ -84,7 +84,13 @@ navbar_title: Home
                                 <div class="media-body">
                                     <div><h5>{{ item.position }}</h5></div>
                                     <div class="d-flex">
-                                        <div><b>{{ item.name }}</b></div>
+                                        <div>
+                                            {% if item.url %}
+                                            <b><a href="{{ item.url }}" target="_blank">{{ item.name }}</a></b>
+                                            {% else %}
+                                            <b>{{ item.name }}</b>
+                                            {% endif %}
+                                        </div>
                                         <div class="mt-auto ml-auto no-break text-muted"><em>{{ item.date }}</em></div>
                                     </div>
                                     <div>{{item.description}}</div>
