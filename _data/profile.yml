@@ -1,61 +1,129 @@
-primary_name: "Your Name"
+primary_name: "Tanzim Hossain Romel"
 secondary_name: ""
-navbar_name: "Your Name"
+navbar_name: "Tanzim Hossain Romel"
 
 positions:
-- logo: /assets/images/badges/MIT_Social_circle.png  # Logo is optional
-  name: Position 1 with logo
-- name: Position 2 without logo
+- name: Software Development Engineer 1, IQVIA
+  date: June 2023 - Present
+- name: Full Stack Engineer, Mindshare Bangladesh (Part-time)
+  date: Apr 2021 - Nov 2021
 
-
-email: "your@email.com"
+email: "romel.rcs@gmail.com"
+phone: "+88 01771 600158"
+location: "Uttara, Dhaka, Bangladesh"
 # cv_link: link-to-your-cv-file
-gscholar: xFmQpf4AAAAJ  # This is an example, replace it with your own Google Scholar ID
-github: your_github_id
-twitter: your_twitter_id  # Do not include the '@' symbol
+# gscholar: xFmQpf4AAAAJ
+github: thromel
+twitter: # your_twitter_id  # Do not include the '@' symbol
+linkedin: thromel
 # wechat_qrcode: /assets/images/etc/wechat.jpg
 # wechat_prompt: >-
 #   Please tell me your <strong>name</strong> and <strong>affiliation</strong> (current or past) when adding my wechat. Thanks!
-# linkedin: your-linked-in-id
 # orcid: 0000-0000-0000-0000
 
 short_bio_text_justify: false
 short_bio: >-
   <p>
-    A <a href="https://en.wikipedia.org/wiki/Bicolor_cat" target="_blank">bicolor cat</a> is a cat with white fur combined with fur of some other colour, for example solid black, tabby, or colourpointed.
+    I'm a Software Development Engineer at IQVIA working on backend systems and microservices architecture.
+    My research interests include blockchain technology in healthcare, LLM API analysis, and image steganography.
   </p>
   <p>
-    There are various patterns of a bicolour cat. These range from the Van-patterned (colour on the crown of the head 
-    and the tail only) to a solid colour with a throat locket or medallion. Bicolour coats are found in many cat breeds, 
-    as well as being common in domestic longhair and domestic shorthair cats.
+    I completed my B.Sc in Computer Science and Engineering from Bangladesh University of Engineering and Technology
+    with a GPA of 3.53/4.0. I have experience with C#, .NET, Python, and various cloud technologies.
   </p>
 
 portrait_url: /assets/images/photos/portrait.jpg
-portrait_caption: >-
-  Photo by Manja Vitolic on Unsplash (this caption is optional, comment it out to disable).
+portrait_caption: # Comment this out to disable
 
 education:
-- name: Massachusetts Institute of Technology
-  logo: /assets/images/badges/MIT_Social_circle.png
-  position: >- 
-    Department of Electrical Engineering and Computer Science <br/>
-    Ph.D. Student
-  date: Sep. 2024 - present
-- name: Peking University
-  logo: /assets/images/badges/PKU_red.png
-  position: B.S. in Computer Science
-  date: Sep. 2019 - Jul. 2021
+- name: Bangladesh University of Engineering and Technology
+  position: B.Sc in Computer Science and Engineering
+  date: April 2018 - May 2023
+  description: GPA - 3.53/4.0
 
-# experience:
-# - name: Peking University
-#   logo: /assets/images/badges/PKU_red.png
-#   position: Research Intern
-#   date: Sep. 2019 - Jul. 2021
+# experience section is covered by positions
 
 awards:
-- name: Award Name 2
-  date: 2024
-- name: Award Name 1 
-  date: 2021
-- name: A quick brown fox jumps over the lazy dog and runs away award
-  date: 2021
+- name: 2nd place, Bangla Handwritten Digits Recognition contest
+  date: BUET Level-4
+- name: Dean's List Award
+  date: BUET Level-2
+- name: Bangladesh Physics Olympiad (BdPhO) National prize winner
+  date: 2017
+- name: Bangladesh Chemistry Olympiad National prize winner
+  date: 2017
+- name: Talentpool HSC Scholarship
+  date: 2017
+
+research:
+- title: StegFormer-MC&#58; Multi-Cover Image Steganography with Distributed Secret Embedding
+  date: March 2025 - Present
+  description: >-
+    Extended the StegFormer architecture to hide secret images across multiple cover images, 
+    with innovative channel- and spatial-splitting strategies, parallel processing branches, 
+    and a composite loss function for robust training.
+
+- title: Extending LLM API Contract Analysis&#58; A Refined Taxonomy and Empirical Study
+  date: Nov 2024 - Present
+  description: >-
+    Developed an extended taxonomy for API contracts in LLM libraries, conducted empirical studies on 
+    real-world issues, and proposed recommendations for LLM library developers and LLMOps tool builders.
+
+- title: Blockchain in Healthcare 2.0
+  date: June 2022 - May 2023
+  description: >-
+    Engineered an advanced blockchain framework with sharding, Layer-2 solutions, and a DAG ledger, 
+    implementing patient-centric consent management, HL7 FHIR standards, and privacy-preserving computation.
+
+publications:
+- title: An Unconventional Tale on Sentiment Analysis over Anonymous Online Reporting by the People in Bangladesh during an Outburst Period
+  venue: The 28th ACM Conference on Computer-Supported Cooperative Work and Social Computing (In review)
+  date: Sep 2024 - Nov 2024
+  description: >-
+    Developed Bangladesh's first anonymous online reporting system and analyzed crowd-sourced reports 
+    using transformer models and NRC Lexicon-based analysis.
+
+projects:
+- title: URL Shortener
+  link: https://github.com/thromel/URLShortener
+  date: Nov 2024 - Present
+  description: >-
+    A production-ready URL shortener system using .NET, React.js, and Azure services with CI/CD, 
+    infrastructure as code, and optimized performance using Redis Cache and CosmosDB.
+
+- title: Image Caption Generation with BERT Context Vectors
+  link: https://github.com/thromel/Image-Captioning-ML-Project
+  date: Jan 2023 - Feb 2023
+  description: >-
+    Extended the "Show, Attend, and Tell" image captioning model with BERT to improve caption 
+    quality and reduce training time.
+
+- title: Eventfly&#58; An End-to-end Event Management System
+  link: https://github.com/eventfly/Microservices
+  date: May 2022 - July 2022
+  description: >-
+    A comprehensive microservices-based system for event organization and participation, built with
+    TypeScript, Express.js, Next.js, Docker, Kubernetes, NATS, and MongoDB.
+
+skills:
+- category: Programming Languages
+  items: C#, .NET, Python, JavaScript, Go
+- category: Machine Learning
+  items: PyTorch, NumPy, Pandas, OpenAI API, LangChain
+- category: Blockchain
+  items: Ethereum, Solidity, Hyperledger Fabric
+- category: Web & Backend Frameworks
+  items: ASP.NET, Express.js, FastAPI
+- category: Databases
+  items: PostgreSQL, MongoDB, Microsoft SQL Server
+- category: DevOps & Cloud
+  items: Docker, Kubernetes, Azure, AWS, GitHub Actions
+- category: Monitoring & Observability
+  items: OpenTelemetry, Jaeger
+- category: Other
+  items: Redis, gRPC, Entity Framework, Azure Bicep
+
+test_scores:
+- name: TOEFL iBT
+  score: 103/120
+  details: Listening - 29, Reading - 29, Writing - 22, Speaking - 23
