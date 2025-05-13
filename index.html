@@ -1,34 +1,122 @@
 ---
 layout: default
-title : Homepage
+title: Tanzim Hossain Romel
 navbar_title: Home
 ---
 {% include widgets/profile_card.html %}
 
-{% if site.data.display.homepage.show_about_me %}
-    {% include widgets/about_me_card.html %}
-{% endif %}
-
-{% include widgets/debug_repo_name.html %}
-
-{% include widgets/debug_url.html %}
-
-{% if site.data.display.homepage.show_experience %}
-    {% include widgets/experience_card.html %}
-{% endif %}
-
 {% if site.data.display.homepage.show_news %}
-    {% assign count_news = site.news | size %}
-    {% if count_news > 0 %}
-        {% include widgets/news_card.html limit=site.data.display.homepage.num_news %}
-    {% endif %}
+{% assign count_news = site.data.news | size %}
+{% if count_news > 0 %}
+{% include widgets/news_card.html %}
+{% endif %}
 {% endif %}
 
-{% if site.data.display.homepage.show_selected_publications %}
-    {% assign pubs = site.publications | sort: "date" | reverse | where: "selected", true %}
-    {% 
-        include widgets/publication_card.html 
-        publications=pubs
-        title='<i class="fas fa-star"></i> Selected Publications'
-    %}
-{% endif %}
+<div class="row mt-3">
+    <div class="col">
+        <div class="card border-0 shadow-sm bg-white">
+            <div class="card-body p-5">
+                <div class="row">
+                    <div class="col"><h2>My Resume</h2></div>
+                    <div class="ml-auto">
+                        {% if site.data.profile.cv_link %}
+                        <a class="pr-3 no-break" target="_blank" href="{{site.data.profile.cv_link}}">
+                            <i class="fa-regular fa-file-pdf fa-2x mt-2 mr-2" style="color: #003399;"></i>
+                        </a>
+                        {% endif %}
+                    </div>
+                </div>
+                <hr />
+
+                <!-- Work Experience -->
+                <div class="row mt-3">
+                    <div class="col">
+                        <h4><img src="/assets/images/icons/suitcase.png" alt="Work" class="inline-badge" style="width: 28px; height: 28px;"> Work Experience</h4>
+                        <ul class="timeline">
+                        {% for position in site.data.profile.positions %}
+                            <li class="media mb-4">
+                                <div class="media-body">
+                                    <div class="d-flex mb-2">
+                                        <div style="color: #003399; font-size: 18px;"><strong>{{ position.name }}</strong></div>
+                                        <div class="ml-auto no-break text-muted" style="font-size: 14px;"><em>{{ position.date }}</em></div>
+                                    </div>
+                                </div>
+                            </li>
+                        {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+                <h6 class="d-block text-center">
+                    <a href="{{ 'experience' | relative_url }}">All Work Experience <i class="fas fa-angle-double-right"></i></a>
+                </h6>
+                <hr />
+
+                <!-- Research -->
+                <div class="row mt-3">
+                    <div class="col">
+                        <h4><img src="/assets/images/icons/open-book.png" alt="Research" class="inline-badge" style="width: 28px; height: 28px;"> Research & Projects</h4>
+                        {% for item in site.data.profile.research limit:2 %}
+                        <div class="d-flex mb-3 mr-2">
+                            <div class="col p-3 ml-md-2">
+                                <h5 class="mt-0 mb-2 font-weight-bold">{{ item.title }}</h5>
+                                <div class="small d-flex">
+                                    <div style="color: green"><b>Research Project</b></div>
+                                    <div class="ml-auto"><em>{{ item.date }}</em></div>
+                                </div>
+                                <p class="mt-1 mb-2 small" style="text-align: justify; font-size: 14px;">{{ item.description }}</p>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <h6 class="d-block text-center">
+                    <a href="{{ 'research' | relative_url }}">All Research Projects <i class="fas fa-angle-double-right"></i></a>
+                </h6>
+                <hr />
+
+                <!-- Education -->
+                <div class="row mt-3">
+                    <div class="col">
+                        <h4><img src="/assets/images/icons/graduate-hat.png" alt="Education" class="inline-badge" style="width: 30px; height: 30px;"> Education</h4>
+                        <ul class="timeline">
+                            {% for item in site.data.profile.education %}
+                            <li class="media mb-2">
+                                <div class="media-body">
+                                    <div><h5>{{ item.position }}</h5></div>
+                                    <div class="d-flex">
+                                        <div><b>{{ item.name }}</b></div>
+                                        <div class="mt-auto ml-auto no-break text-muted"><em>{{ item.date }}</em></div>
+                                    </div>
+                                    <div>{{item.description}}</div>
+                                </div>
+                            </li>
+                            {% endfor %}
+                        </ul>          
+                    </div>
+                </div>
+                <hr />
+
+                <!-- Technical Skills -->
+                <div class="row mt-3">
+                    <div class="col">
+                        <h4><img src="/assets/images/icons/code.png" alt="Skill" class="inline-badge" style="width: 30px; height: 30px;"> Technical Skills</h4>
+                        <ul class="timeline">
+                            {% for item in site.data.profile.skills %}
+                            <li class="media mb-2">
+                                <div class="media-body">
+                                    <div><h6>{{ item.type }}</h6></div>
+                                    <div>
+                                        {% for name in item.names %}
+                                            <span style="display: inline-block; margin: 4px; padding: 5px 10px; border: 1px solid #bababa; border-radius: 5px; background-color: #ffffff; font-size: 14px;">{{ name }}</span>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </li>
+                            {% endfor %}
+                        </ul>          
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

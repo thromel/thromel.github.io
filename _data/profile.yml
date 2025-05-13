@@ -21,16 +21,26 @@ linkedin: thromel
 #   Please tell me your <strong>name</strong> and <strong>affiliation</strong> (current or past) when adding my wechat. Thanks!
 # orcid: 0000-0000-0000-0000
 
-short_bio_text_justify: false
+summary:
+- Hi I'm Tanzim - <b>Software Development Engineer at IQVIA</b> || Researcher @ BUET
+- Passionate about Backend Engineering and AI Systems, especially in the fields of <b>Blockchain Technology, LLM Systems, Image Steganography</b>
+- <b>Author of research papers on Blockchain in Healthcare, LLM API Analysis, and Image Steganography</b>
+- Graduated From <b>CSE @ BUET</b> with a GPA of 3.53/4.0
+- <b>TOEFL iBT</b>: 103/120 (Listening: 29, Reading: 29, Writing: 22, Speaking: 23)
+
 short_bio: >-
-  <p>👨‍💻 Hi I'm Tanzim - <strong>Software Development Engineer at IQVIA</strong> || Researcher @ BUET </p>
-  <p>📝 Passionate about Backend Engineering and AI Systems, especially in the fields of <strong>Blockchain Technology, LLM Systems, Image Steganography</strong></p>
-  <p>📝 Graduated From <strong>CSE @ BUET</strong></p>
-  <p>📝 Recipient of <strong>Dean's List Award</strong> for academic excellence.</p>
-  <p>📝 CGPA: <strong>3.53/4.0</strong></p>
+  &#x1F44B Hi I'm Tanzim. I'm a software engineer and aspiring researcher. My interest lies in the fields of <b>Blockchain Technology, LLM Systems, and Image Steganography</b>. My current career goal is to pursue excellence in software engineering while contributing to cutting-edge research.
+  <br/><br/>
+  💼 I am currently a Software Development Engineer at <a href="https://www.iqvia.com/">IQVIA</a>, working on backend systems and microservices architecture.
+  <br/><br/>
+  &#x1F4DC I've conducted research on Blockchain in Healthcare, developing an advanced framework with sharding, Layer-2 solutions, and DAG ledger. I'm also working on projects related to LLM API Contract Analysis and Multi-Cover Image Steganography.
+  <br/><br/>
+  &#x1F3C6 During my time at BUET, I received recognition for my academic achievements, including the <b>Dean's List Award</b> and placing 2nd in the Bangla Handwritten Digits Recognition contest.
+  <br/><br/>
+  🏫 I completed my B.Sc in Computer Science and Engineering from <b>Bangladesh University of Engineering and Technology</b> with a GPA of 3.53/4.0.
 
 portrait_url: /assets/images/photos/DP.JPG
-portrait_caption: # Comment this out to disable
+# portrait_caption: # Comment this out to disable
 
 education:
 - name: Bangladesh University of Engineering and Technology
@@ -43,27 +53,79 @@ education:
 awards:
 - name: 2nd place, Bangla Handwritten Digits Recognition contest
   date: BUET Level-4
+  organization: BUET
+  type: Competition
 - name: Dean's List Award
   date: BUET Level-2
+  organization: BUET
+  type: Honors & Awards
 - name: Bangladesh Physics Olympiad (BdPhO) National prize winner
   date: 2017
+  organization: Bangladesh Physics Olympiad
+  type: Competition
 - name: Bangladesh Chemistry Olympiad National prize winner
   date: 2017
+  organization: Bangladesh Chemistry Olympiad
+  type: Competition
 - name: Talentpool HSC Scholarship
   date: 2017
+  organization: Rajshahi Education Board
+  type: Honors & Awards
 
-about_me: >-
-  <p>👋 Hi I'm Tanzim. I'm a learner and aspiring researcher. My interest lies in the fields of <strong>Blockchain Technology, LLM Systems, and Image Steganography</strong>. 
-  My current career goal is to pursue excellence in software engineering while contributing to cutting-edge research.</p>
-  
-  <p>💼 I am currently a Software Development Engineer at <a href="https://www.iqvia.com/" target="_blank">IQVIA</a>.</p>
-  
-  <p>📚 I've conducted research on Blockchain in Healthcare and am currently working on projects related to LLM API Contract Analysis and Image Steganography. 
-  Among these, one paper titled "<strong>An Unconventional Tale on Sentiment Analysis over Anonymous Online Reporting by the People in Bangladesh during an Outburst Period</strong>" 
-  is in review at The 28th ACM Conference on Computer-Supported Cooperative Work and Social Computing.</p>
-  
-  <p>🎓 I am a graduate from the <strong>Department of Computer Science and Engineering(CSE)</strong> from <strong>Bangladesh University of Engineering and Technology</strong>. 
-  My academic journey has equipped me with a strong foundation in computer science fundamentals, algorithms, and system design.</p>
+research_interests:
+- Blockchain Technology
+- LLM Systems
+- Image Steganography
+- Microservices Architecture
+- Software Engineering
+
+skills:
+- type: Programming Languages
+  names:
+  - C#
+  - .NET
+  - Python
+  - JavaScript
+  - Go
+- type: Machine Learning
+  names:
+  - PyTorch
+  - NumPy
+  - Pandas
+  - OpenAI API
+  - LangChain
+- type: Blockchain
+  names:
+  - Ethereum
+  - Solidity
+  - Hyperledger Fabric
+- type: Web & Backend Frameworks
+  names:
+  - ASP.NET
+  - Express.js
+  - FastAPI
+- type: Databases
+  names:
+  - PostgreSQL
+  - MongoDB
+  - Microsoft SQL Server
+- type: DevOps & Cloud
+  names:
+  - Docker
+  - Kubernetes
+  - Azure
+  - AWS
+  - GitHub Actions
+- type: Monitoring & Observability
+  names:
+  - OpenTelemetry
+  - Jaeger
+- type: Other
+  names:
+  - Redis
+  - gRPC
+  - Entity Framework
+  - Azure Bicep
 
 research:
 - title: StegFormer-MC&#58; Multi-Cover Image Steganography with Distributed Secret Embedding
@@ -100,6 +162,13 @@ projects:
   description: >-
     A production-ready URL shortener system using .NET, React.js, and Azure services with CI/CD, 
     infrastructure as code, and optimized performance using Redis Cache and CosmosDB.
+  technologies:
+  - ASP.NET Core
+  - React.js
+  - Azure
+  - CI/CD
+  - PostgreSQL
+  - Redis
 
 - title: Image Caption Generation with BERT Context Vectors
   link: https://github.com/thromel/Image-Captioning-ML-Project
@@ -107,6 +176,12 @@ projects:
   description: >-
     Extended the "Show, Attend, and Tell" image captioning model with BERT to improve caption 
     quality and reduce training time.
+  technologies:
+  - PyTorch
+  - BERT
+  - Computer Vision
+  - NLP
+  - Deep Learning
 
 - title: Eventfly&#58; An End-to-end Event Management System
   link: https://github.com/eventfly/Microservices
@@ -114,24 +189,14 @@ projects:
   description: >-
     A comprehensive microservices-based system for event organization and participation, built with
     TypeScript, Express.js, Next.js, Docker, Kubernetes, NATS, and MongoDB.
-
-skills:
-- category: Programming Languages
-  items: C#, .NET, Python, JavaScript, Go
-- category: Machine Learning
-  items: PyTorch, NumPy, Pandas, OpenAI API, LangChain
-- category: Blockchain
-  items: Ethereum, Solidity, Hyperledger Fabric
-- category: Web & Backend Frameworks
-  items: ASP.NET, Express.js, FastAPI
-- category: Databases
-  items: PostgreSQL, MongoDB, Microsoft SQL Server
-- category: DevOps & Cloud
-  items: Docker, Kubernetes, Azure, AWS, GitHub Actions
-- category: Monitoring & Observability
-  items: OpenTelemetry, Jaeger
-- category: Other
-  items: Redis, gRPC, Entity Framework, Azure Bicep
+  technologies:
+  - TypeScript
+  - Express.js
+  - Next.js
+  - Docker
+  - Kubernetes
+  - NATS
+  - MongoDB
 
 test_scores:
 - name: TOEFL iBT

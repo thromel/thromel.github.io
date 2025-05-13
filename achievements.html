@@ -1,0 +1,55 @@
+---
+layout: default
+title: Achievements
+navbar_title: Achievements
+body_attr: >-
+  data-spy="scroll" data-target="#navbar-type" data-offset="100"
+---
+
+{% assign achievements_by_type = site.data.profile.awards | group_by: "type" %}
+
+<div class="row">
+    <div class="col-12 col-lg-10">
+
+        <section id="achievement-highlights" class="pt-4">
+            <h2 style="margin-bottom: 8px;"><img src="/assets/images/icons/achievement.png" alt="Achievement" class="inline-badge" style="width: 35px; height: 35px;"> Achievements </h2>
+        </section>
+
+        {% for type in achievements_by_type %}
+        {% assign num_achievements = type.items | size %}
+        <h3 class="pt-4 text-center mb-2" id="type-{{ type.name | slugify }}">
+            {% if type.name == "Competition" %}
+            <img src="/assets/images/icons/award.png" alt="Award" class="inline-badge" style="width: 30px; height: 30px;">
+            {% elsif type.name == "Honors & Awards" %}
+            <img src="/assets/images/icons/medal.png" alt="Medal" class="inline-badge" style="width: 30px; height: 30px;">
+            {% endif %}
+            <u>{{ type.name }}</u>
+        </h3>
+        <div class="my-0 p-4 bg-white shadow-sm rounded-sm">
+            
+            <ul class="timeline">
+                {% for item in type.items %}
+                <li class="media mb-2">
+                    <div class="media-body">
+                        <h6><b>{{ item.name }}</b></h6>
+                        <div class="d-flex">
+                            <div>{{ item.organization }}</div>
+                            <div class="mt-auto ml-auto no-break"><em>{{ item.date }}</em></div>
+                        </div>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="col-2 d-none d-lg-block">
+        <div id="navbar-type" class="nav nav-pills flex-column sticky-top bg-white shadow-sm rounded-sm" style="top: 250px">
+            {% for type in achievements_by_type %}
+            <a class="nav-link d-block" href="#type-{{ type.name | slugify }}"><h6>{{ type.name }}</h6></a>
+            {% endfor %}
+        </div>
+    </div>
+
+</div> 

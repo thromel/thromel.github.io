@@ -1,0 +1,52 @@
+---
+layout: default
+title: News and Updates
+navbar_title: News
+body_attr: >-
+  data-spy="scroll" data-target="#navbar-year" data-offset="100"
+---
+
+{% assign news_by_year = site.data.news | sort: "date" | reverse | group_by_exp: "item", "item.date | date: '%Y'" -%}
+
+<div class="row">
+    <div class="col-12 col-lg-10">
+
+        <section id="news" class="pt-4">
+            <h2 style="margin-bottom: 8px;"><img src="/assets/images/icons/megaphone.png" alt="News" class="inline-badge" style="width: 35px; height: 35px;"> News and Updates </h2>
+        </section>
+        <hr />
+
+        {% for year in news_by_year %}
+        {% assign num_papers = year.items | size %}
+        <h4 class="pt-4 text-right" id="year-{{ year.name }}">{{ year.name }}</h4>
+        <div class="my-0 p-0 bg-white shadow-sm rounded-sm">
+            {% for item in year.items %}
+            <div class="d-none d-md-block">
+                <div class="no-gutters border-bottom border-gray p-3">
+                    <div class="mb-2">
+                        <div class="d-md-block" style="color: #565656"><h6><img src="/assets/images/icons/calendar.png" style="height: 20px; width: 20px;">&nbsp;{{ item.date | date: "%d %b, %Y" }}</h6></div>       
+                            <div class="d-flex">
+                                <h6 class="mt-2 mb-0 font-weight-bold">
+                                    {{ item.title }}
+                                </h6>
+                            </div>
+                    </div>
+                    <div>
+                        <p class="mt-0 mb-2 small" style="text-align: justify; font-size: 14px;">{{ item.description }}</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="col-2 d-none d-lg-block">
+        <div id="navbar-year" class="nav nav-pills flex-column sticky-top" style="top: 250px">
+            {% for year in news_by_year %}
+            <a class="nav-link d-block text-center" href="#year-{{ year.name }}">{{ year.name }}</a>
+            {% endfor %}
+        </div>
+    </div>
+
+</div> 

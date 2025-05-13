@@ -1,7 +1,8 @@
-{% assign news_by_year = site.news | sort: "date" | reverse | slice: 0, include.limit | group_by_exp: "item", "item.date | date: '%Y'" -%}
+{% assign top_news = site.data.news | sort: "date" | reverse | slice: 0, 3 %}
+{% assign news_by_year = top_news | group_by_exp: "item", "item.date | date: '%Y'" %}
 
 <div class="my-3 bg-white shadow-sm rounded-sm">
-    <h6 class="p-3 mb-0 border-bottom border-gray"><i class="fas fa-rss"></i> News</h6>
+    <h4 class="p-3 mb-0 border-bottom border-gray"><img src="/assets/images/icons/megaphone.png" alt="News" class="inline-badge" style="width: 28px; height: 28px;"> News and Updates </h4>
     <div class="px-3 pb-1">
         {% for year in news_by_year %}
         <div class="media py-1 {% if not_first -%}border-top border-gray{%- endif %}">
@@ -10,12 +11,18 @@
             <div class="media-body">
                 {% for item in year.items %}
                 <div class="my-1 d-flex">
-                    <div>{{ item.title }}</div>
-                    <div class="ml-auto mt-auto text-muted no-break"><i>{{ item.date | date: "%b %d" }}</i></div>
+                    <a href="news#year-{{ item.date | date: '%Y' }}" class="text-decoration-none" style="color: black;">
+                        <div>{{ item.title }}</div>
+                    </a>
+                    
+                    <div class="ml-auto mt-auto text-muted no-break"><i>{{ item.date | date: "%b %d, %Y" }}</i></div>
                 </div>
                 {% endfor %}
             </div>
         </div>
         {% endfor %}
     </div>
+    <h6 class="d-block p-3 mt-0 text-center">
+        <a href="{{ 'news' | relative_url }}">All News <i class="fas fa-angle-double-right"></i></a>
+    </h6>
 </div>

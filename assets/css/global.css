@@ -5,6 +5,22 @@ body {
     padding-top: 5.0rem;
 }
 
+.navbar-brand {
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+
+.navbar-nav .nav-link {
+    color: #000000;
+    font-size: 18px;
+    text-decoration: none;
+}
+
+.navbar-nav .nav-item.active .nav-link {
+    text-decoration: underline;
+    color: #0066ff;
+}
+
 h1, h2, h3, h4, h5, h6,
 .h1, .h2, .h3, .h4, .h5, .h6 {
     font-weight: 700;
@@ -65,5 +81,98 @@ div.lazy {
 
 .email-text {
     font-family: Courier, monospace;
+}
+
+ul.timeline {
+    list-style-type: none;
+    position: relative;
+}
+ul.timeline:before {
+    content: ' ';
+    background: #d4d9df;
+    display: inline-block;
+    position: absolute;
+    left: 29px;
+    width: 2px;
+    height: 100%;
+    z-index: 400;
+}
+ul.timeline > li {
+    margin: 20px 0;
+    padding-left: 20px;
+}
+ul.timeline > li:before {
+    content: ' ';
+    background: #ffffff;
+    display: inline-block;
+    position: absolute;
+    border-radius: 50%;
+    border: 4px solid #989898;
+    left: 18px;
+    width: 25px;
+    height: 25px;
+    z-index: 400;
+}
+
+.timeline-custom {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    position: relative;
+}
+
+.timeline-custom::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: #ffffff;
+    left: 20px;
+    margin-left: -1px;
+}
+
+.timeline-item {
+    position: relative;
+    padding-left: 60px;
+    margin-bottom: 20px;
+}
+
+.timeline-item:last-child {
+    margin-bottom: 0;
+}
+
+.timeline-icon {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    width: 35px;
+    height: 35px;
+    background: #fff;
+    border: 2px solid #828282;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+}
+
+.timeline-icon i {
+    color: #828282;
+    font-size: 20px;
+}
+
+.timeline-content h6 {
+    margin: 0;
+    padding-bottom: 5px;
+}
+
+.timeline-content .d-flex {
+    margin-bottom: 5px;
+}
+
+.timeline-content .d-flex div:last-child {
+    margin-left: auto;
 }
 
