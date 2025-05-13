@@ -3,73 +3,6 @@ body {
     font-family: "Lato", sans-serif;
     font-weight: 400;
     padding-top: 5.0rem;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-:root {
-    --background-color: rgba(240, 240, 240, 0.75);
-    --text-color: #000000;
-    --card-bg: #ffffff;
-    --border-color: #d4d9df;
-    --shadow-color: rgba(0, 0, 0, 0.1);
-    --tag-bg: #f5f5f5;
-    --tag-border: #ccc;
-    --link-color: #0066ff;
-    --bg-pattern: url(https://img.freepik.com/free-vector/paper-style-dynamic-smooth-background_23-2148995164.jpg?w=900);
-}
-
-body.dark-mode {
-    --background-color: rgba(32, 33, 36, 0.95);
-    --text-color: #e8eaed;
-    --card-bg: #2d2e31;
-    --border-color: #444;
-    --shadow-color: rgba(0, 0, 0, 0.3);
-    --tag-bg: #3c3d40;
-    --tag-border: #555;
-    --link-color: #8ab4f8;
-    --bg-pattern: url(https://img.freepik.com/free-vector/dark-wavy-background_23-2148393330.jpg?w=900);
-}
-
-body {
-    color: var(--text-color);
-    background: linear-gradient(var(--background-color), var(--background-color)), var(--bg-pattern);
-}
-
-.card, .bg-white {
-    background-color: var(--card-bg) !important;
-    color: var(--text-color);
-}
-
-.navbar-light {
-    background-color: var(--card-bg) !important;
-}
-
-.navbar-light .navbar-nav .nav-link {
-    color: var(--text-color);
-}
-
-.navbar-light .navbar-brand, .navbar-light .navbar-nav .active > .nav-link {
-    color: var(--link-color);
-}
-
-.text-dark {
-    color: var(--text-color) !important;
-}
-
-.border-gray, .border-bottom, .border-top {
-    border-color: var(--border-color) !important;
-}
-
-.text-muted {
-    color: #808080 !important;
-}
-
-body.dark-mode .text-muted {
-    color: #9aa0a6 !important;
-}
-
-.shadow-sm {
-    box-shadow: 0 .125rem .25rem var(--shadow-color) !important;
 }
 
 .navbar-brand {
@@ -241,44 +174,5 @@ ul.timeline > li:before {
 
 .timeline-content .d-flex div:last-child {
     margin-left: auto;
-}
-
-/* Style for tags in dark mode */
-body.dark-mode [style*="background-color: #f5f5f5"] {
-    background-color: var(--tag-bg) !important;
-    border-color: var(--tag-border) !important;
-}
-
-/* Style for timeline */
-ul.timeline:before {
-    background: var(--border-color);
-}
-
-ul.timeline > li:before {
-    background: var(--card-bg);
-    border-color: var(--border-color);
-}
-
-/* Dark mode toggle button */
-.dark-mode-toggle {
-    cursor: pointer;
-    user-select: none;
-    font-size: 1.4rem;
-}
-
-/* Ensure links are visible in dark mode */
-body.dark-mode a:not(.btn) {
-    color: var(--link-color);
-}
-
-/* Make buttons visible in dark mode */
-body.dark-mode .btn-outline-primary {
-    color: var(--link-color);
-    border-color: var(--link-color);
-}
-
-body.dark-mode .btn-outline-primary:hover {
-    background-color: var(--link-color);
-    color: var(--card-bg);
 }
 
