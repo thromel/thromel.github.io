@@ -6,9 +6,33 @@ body {
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+:root {
+    --background-color: rgba(240, 240, 240, 0.75);
+    --text-color: #000000;
+    --card-bg: #ffffff;
+    --border-color: #d4d9df;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    --tag-bg: #f5f5f5;
+    --tag-border: #ccc;
+    --link-color: #0066ff;
+    --bg-pattern: url(https://img.freepik.com/free-vector/paper-style-dynamic-smooth-background_23-2148995164.jpg?w=900);
+}
+
+body.dark-mode {
+    --background-color: rgba(32, 33, 36, 0.95);
+    --text-color: #e8eaed;
+    --card-bg: #2d2e31;
+    --border-color: #444;
+    --shadow-color: rgba(0, 0, 0, 0.3);
+    --tag-bg: #3c3d40;
+    --tag-border: #555;
+    --link-color: #8ab4f8;
+    --bg-pattern: url(https://img.freepik.com/free-vector/dark-wavy-background_23-2148393330.jpg?w=900);
+}
+
 body {
-    background: linear-gradient(rgba(240, 240, 240, 0.75), rgba(240, 240, 240, 0.75)), 
-    url(https://img.freepik.com/free-vector/paper-style-dynamic-smooth-background_23-2148995164.jpg?w=900);
+    color: var(--text-color);
+    background: linear-gradient(var(--background-color), var(--background-color)), var(--bg-pattern);
 }
 
 .card, .bg-white {
