@@ -21,8 +21,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Raleway:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ '/assets/css/global.css' | relative_url }}">
 </head>
-<body class="bg-light" {{ page.body_attr }} style="background: linear-gradient(rgba(240, 240, 240, 0.75), rgba(240, 240, 240, 0.75)), 
-url(https://img.freepik.com/free-vector/paper-style-dynamic-smooth-background_23-2148995164.jpg?w=900);">
+<body class="bg-light" {{ page.body_attr }}>
     {% include navbar.html %}
     <div class="container">
         {{content}}
@@ -36,6 +35,7 @@ url(https://img.freepik.com/free-vector/paper-style-dynamic-smooth-background_23
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js" integrity="sha512-XKa9Hemdy1Ui3KSGgJdgMyYlUg1gM+QhL6cnlyTe2qzMCYm4nAZ1PsVerQzTTXzonUR+dmswHqgJPuwCq1MaAg==" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/github-buttons/2.14.2/buttons.min.js" integrity="sha512-OYwZx04hKFeFNYrWBZs72X7T9U+NoHPM1ftUn/Mfw7dRDXrqWA6M1wBg6z6fGE32aeA==" crossorigin="anonymous"></script>
     <script src="{{ '/assets/js/common.js' | relative_url }}"></script>
+    <script src="{{ '/assets/js/dark-mode.js' | relative_url }}"></script>
     <!-- Include bootstrap -->
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 </body>
