@@ -55,6 +55,11 @@ body_attr: >-
                         <div class="ml-auto text-muted"><em>{{ project.date }}</em></div>
                     </div>
                     <p class="mt-2 mb-2 small" style="text-align: justify; font-size: 14px;">{{ project.description }}</p>
+                    {% if project.title == "Bangla Hand-Written Digit Recognition" %}
+                    <div class="mb-2">
+                        <a href="{{ 'showcase.html#Projects' | relative_url }}" class="btn btn-sm btn-outline-primary">View Project Details</a>
+                    </div>
+                    {% endif %}
                     <div class="small d-flex">
                         <div>
                             <img src="/assets/images/icons/tag.png" alt="tag" class="inline-badge" style="width: 18px; height: 18px; margin-top: 2px;">

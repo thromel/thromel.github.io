@@ -174,7 +174,7 @@ projects:
     deep learning frameworks. Achieved 95.9% test accuracy on NumtaDB benchmark while implementing every 
     convolution, pooling, activation, and optimization step manually for complete transparency and 
     hackability. Includes data normalization, aggressive pre-processing, custom CNN (LeNet-style), 
-    metrics visualization, and model export for inference. [See detailed project page](/showcase.html#Projects).
+    metrics visualization, and model export for inference.
   technologies:
   - Python
   - NumPy
