@@ -166,6 +166,23 @@ publications:
     using transformer models and NRC Lexicon-based analysis.
 
 projects:
+- title: Bangla Hand-Written Digit Recognition
+  link: https://github.com/thromel/CSE-472-Machine-Learning/tree/main/Offline%204
+  date: 2023 # Timeframe: 4 weeks
+  description: >-
+    Built an end-to-end OCR pipeline for Bangla digits with NumPy/OpenCV from scratch without relying on 
+    deep learning frameworks. Achieved 95.9% test accuracy on NumtaDB benchmark while implementing every 
+    convolution, pooling, activation, and optimization step manually for complete transparency and 
+    hackability. Includes data normalization, aggressive pre-processing, custom CNN (LeNet-style), 
+    metrics visualization, and model export for inference.
+  technologies:
+  - Python
+  - NumPy
+  - OpenCV
+  - Matplotlib
+  - scikit-learn
+  - Custom CNN
+
 - title: URL Shortener
   link: https://github.com/thromel/URLShortener
   date: Nov 2024 - Present
