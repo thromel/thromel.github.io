@@ -94,7 +94,7 @@ education:
 - name: Bangladesh University of Engineering and Technology
   position: B.Sc in Computer Science and Engineering
   date: April 2018 - May 2023
-  description: GPA - 3.53/4.0
+  description: GPA - 3.53/4.0 (Overall) | 3.61/4.0 (Final Term, L4-T2)
   url: https://cse.buet.ac.bd
   coursework: >-
     <strong>Selected upper-division coursework demonstrating depth in core CS, systems, and AI/ML:</strong><br>
@@ -343,6 +343,8 @@ hobbies:
   - Solving programming problems in my free time
   - Reading software engineering, architecture, and distributed systems books
   - Learning development of Agentic AI using LangChain and LangGraph
+  - Reading software engineering blogs (Dan Abramov's Overreacted, Martin Fowler's Bliki, The Pragmatic Engineer)
+  - Following publications like The Economist, MIT Technology Review, and thegradient.pub for tech and policy insights
 
 - type: Reading
   items:
