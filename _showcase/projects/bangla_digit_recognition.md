@@ -36,7 +36,7 @@ group: Projects
                     <strong>CNN Architecture</strong>
                 </div>
                 <div class="card-body text-center">
-                    <img src="{{ 'assets/images/projects/cnn-architecture.png' | relative_url }}" class="img-fluid mb-2" alt="CNN Architecture">
+                    <img src="{{ 'assets/images/cnn-architecture.png' | relative_url }}" class="img-fluid mb-2" alt="CNN Architecture">
                     <small class="text-muted">Custom LeNet-style CNN architecture implemented in NumPy</small>
                 </div>
             </div>
