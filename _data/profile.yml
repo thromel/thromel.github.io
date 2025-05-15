@@ -8,42 +8,61 @@ positions:
   description: >-
     IQVIA (NYSE: IQV) is a leading global provider of advanced analytics, technology solutions, and clinical research services to the life sciences industry, with 74,000+ employees across 100+ countries.
   responsibilities:
-  - Developing and optimizing microservices-based healthcare applications handling millions of patient records using .NET Core, C#, and Azure services
+  - Developing and optimizing microservices-based healthcare applications handling millions of patient records using .NET Core and C#
   - Architecting and deploying cloud-native applications on AWS, leveraging services such as Lambda, EC2, S3, DynamoDB, and CloudFormation to build scalable and resilient healthcare data solutions
   - Designing and implementing RESTful APIs following industry best practices and IQVIA's robust security standards for global pharmaceutical clients
   - Integrating LLM capabilities into data analytics dashboards, enabling natural language querying of clinical trial data and automated generation of compliance-ready reports with 85% reduction in manual processing time
-  - Implementing observability solutions with OpenTelemetry, Jaeger, and Azure Application Insights for real-time monitoring of critical healthcare data pipelines
-  - Built an interactive React-based visualization dashboard for clinical trial outcomes with responsive design, reducing data interpretation time by 30% and improving client engagement metrics by 45%
-  - Orchestrating containerized applications on Azure Kubernetes Service (AKS) and AWS ECS/EKS with Helm charts and implementing infrastructure-as-code using Bicep templates and AWS CloudFormation, reducing deployment time from days to minutes
-  - Architecting a robust disaster recovery system with multi-region redundancy and automated failover across AWS regions, achieving 99.99% availability for mission-critical healthcare services
-  - Collaborating with cross-functional teams across multiple time zones to integrate machine learning models that predict patient treatment outcomes
-  - Developing and maintaining CI/CD pipelines using GitHub Actions and Azure DevOps to ensure continuous deployment with 99.9% uptime
+  - Implementing comprehensive database performance optimizations including query tuning, indexing strategies, and execution plan analysis, achieving 60% reduction in complex query execution times
+  - Built an interactive Angular-based visualization dashboard for clinical trial outcomes with responsive design, reducing data interpretation time by 30% and improving client engagement metrics by 45%
+  - Conducting proof-of-concept projects to evaluate and integrate new technologies, leading to the adoption of several innovative features that enhanced product capabilities
+  - Creating advanced data partitioning schemes and implementing materialized views to optimize large-scale data access patterns for healthcare analytics applications
+  - Collaborating with cross-functional teams including data scientists, UX designers, and business analysts across multiple time zones to deliver integrated healthcare solutions
+  - Participating in regular knowledge-sharing sessions and mentoring junior developers on best practices in software architecture and performance optimization
+  - Developing and maintaining CI/CD pipelines using GitLab CI to ensure continuous deployment with 99.9% uptime
+  - Writing comprehensive unit, integration, and end-to-end tests, improving overall test coverage from 72% to 95% and reducing production incidents by 40%
+  - Implementing zero-downtime deployment strategies using blue-green deployment and canary releases, ensuring uninterrupted service availability during software updates for critical healthcare applications
   - Implementing caching strategies with Redis and database optimization techniques, reducing query response times by 40%
   technologies:
   - .NET Core
   - C#
-  - Azure
   - AWS
   - Lambda
   - EC2
   - S3
   - DynamoDB
   - CloudFormation
-  - AKS
-  - React.js
+  - Angular
   - Microservices
-  - OpenTelemetry
   - Entity Framework
   - Redis
   - PostgreSQL
-  - GitHub Actions
-  - Azure DevOps
+  - GitLab CI
   - REST APIs
   - LLM Integration
-  - Azure Bicep
   - Terraform
+  - Performance Optimization
+  - Test Automation
 - name: Full Stack Engineer, Mindshare Bangladesh (Part-time)
   date: Apr 2021 - Nov 2021
+  description: >-
+    Developed an e-commerce aggregator platform allowing brands to promote products by fetching listings from multiple e-commerce platforms across Bangladesh.
+  responsibilities:
+  - Built a high-performance web scraping system using Scrapy that collected product data from approximately 20 major e-commerce platforms in Bangladesh
+  - Deployed and maintained the scraper as a ScrapyRT server on DigitalOcean, enabling real-time product data extraction via API endpoints
+  - Architected and implemented a backend system using Express.js and MongoDB to manage, process, and aggregate product data from the scraper
+  - Created APIs for brands to host advertisements and integrate with the aggregated e-commerce data
+  - Optimized database queries and implemented caching strategies to handle large volumes of product data
+  technologies:
+  - Python
+  - Scrapy
+  - ScrapyRT
+  - Express.js
+  - Node.js
+  - MongoDB
+  - DigitalOcean
+  - REST APIs
+  - Web Scraping
+  - Data Aggregation
 
 email: "romel.rcs@gmail.com"
 phone: "+88 01771 600158"
