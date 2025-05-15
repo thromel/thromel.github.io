@@ -9,12 +9,13 @@ positions:
     IQVIA (NYSE: IQV) is a leading global provider of advanced analytics, technology solutions, and clinical research services to the life sciences industry, with 74,000+ employees across 100+ countries.
   responsibilities:
   - Developing and optimizing microservices-based healthcare applications handling millions of patient records using .NET Core, C#, and Azure services
+  - Architecting and deploying cloud-native applications on AWS, leveraging services such as Lambda, EC2, S3, DynamoDB, and CloudFormation to build scalable and resilient healthcare data solutions
   - Designing and implementing RESTful APIs following industry best practices and IQVIA's robust security standards for global pharmaceutical clients
   - Integrating LLM capabilities into data analytics dashboards, enabling natural language querying of clinical trial data and automated generation of compliance-ready reports with 85% reduction in manual processing time
   - Implementing observability solutions with OpenTelemetry, Jaeger, and Azure Application Insights for real-time monitoring of critical healthcare data pipelines
   - Built an interactive React-based visualization dashboard for clinical trial outcomes with responsive design, reducing data interpretation time by 30% and improving client engagement metrics by 45%
-  - Orchestrating containerized applications on Azure Kubernetes Service (AKS) with Helm charts and implementing infrastructure-as-code using Bicep templates, reducing deployment time from days to minutes
-  - Architecting a robust disaster recovery system with multi-region redundancy and automated failover, achieving 99.99% availability for mission-critical healthcare services
+  - Orchestrating containerized applications on Azure Kubernetes Service (AKS) and AWS ECS/EKS with Helm charts and implementing infrastructure-as-code using Bicep templates and AWS CloudFormation, reducing deployment time from days to minutes
+  - Architecting a robust disaster recovery system with multi-region redundancy and automated failover across AWS regions, achieving 99.99% availability for mission-critical healthcare services
   - Collaborating with cross-functional teams across multiple time zones to integrate machine learning models that predict patient treatment outcomes
   - Developing and maintaining CI/CD pipelines using GitHub Actions and Azure DevOps to ensure continuous deployment with 99.9% uptime
   - Implementing caching strategies with Redis and database optimization techniques, reducing query response times by 40%
@@ -22,6 +23,12 @@ positions:
   - .NET Core
   - C#
   - Azure
+  - AWS
+  - Lambda
+  - EC2
+  - S3
+  - DynamoDB
+  - CloudFormation
   - AKS
   - React.js
   - Microservices
@@ -69,7 +76,7 @@ summary:
 short_bio: >-
   &#x1F44B Hi I'm Tanzim. I'm a software engineer and aspiring researcher. My interest lies in the fields of <b>Blockchain Technology, LLM Systems, and Image Steganography</b>. My current career goal is to pursue excellence in software engineering while contributing to cutting-edge research.
   <br/><br/>
-  💼 I am currently a Software Development Engineer at <a href="https://www.iqvia.com/">IQVIA</a> (NYSE: IQV), a Fortune 500 company and global leader in healthcare data analytics, serving 90% of top pharmaceutical companies worldwide. At IQVIA, I develop microservices-based applications handling millions of patient records, implement observability solutions for critical healthcare data pipelines, and integrate LLM capabilities into clinical data analytics dashboards for natural language querying and automated report generation.
+  💼 I am currently a Software Development Engineer at <a href="https://www.iqvia.com/">IQVIA</a> (NYSE: IQV), a Fortune 500 company and global leader in healthcare data analytics, serving 90% of top pharmaceutical companies worldwide. At IQVIA, I develop microservices-based applications handling millions of patient records, implement observability solutions for critical healthcare data pipelines, architect cloud-native solutions on AWS, and integrate LLM capabilities into clinical data analytics dashboards for natural language querying and automated report generation.
   <br/><br/>
   &#x1F4DC I've conducted research on Blockchain in Healthcare, developing an advanced framework with sharding, Layer-2 solutions, and DAG ledger. I'm also working on projects related to LLM API Contract Analysis and Multi-Cover Image Steganography.
   <br/><br/>
