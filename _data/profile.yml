@@ -41,6 +41,13 @@ positions:
 email: "romel.rcs@gmail.com"
 phone: "+88 01771 600158"
 location: "Uttara, Dhaka, Bangladesh"
+
+hometown: >-
+  I grew up in Rajshahi, a serene city in northwestern Bangladesh known as the "City of Education" and famous for its silk production, clean streets, mangoes, and the beautiful Padma River. Rajshahi's academic environment and strong educational institutions shaped my early intellectual development.
+
+current_residence: >-
+  I currently live in Uttara, Dhaka—Bangladesh's vibrant capital and one of South Asia's fastest-growing megacities. As the economic and cultural hub of Bangladesh, Dhaka offers a dynamic environment with opportunities to collaborate with leading tech companies and research institutions.
+
 cv_link: https://drive.google.com/file/d/166EX2yVOQNaTkI9mPqoDmB3TzVyjCLYi/view?usp=sharing
 # gscholar: xFmQpf4AAAAJ
 github: thromel
@@ -70,6 +77,8 @@ short_bio: >-
   <br/><br/>
   🏫 I completed my B.Sc in Computer Science and Engineering from <b>Bangladesh University of Engineering and Technology</b> with a GPA of 3.53/4.0.
   <br/><br/>
+  🏙️ I grew up in <b>Rajshahi</b>, a serene city in northwestern Bangladesh known as the "City of Education" and famous for its silk production, clean streets, mangoes, and the beautiful Padma River. Currently, I live in <b>Uttara, Dhaka</b>—Bangladesh's vibrant capital and one of South Asia's fastest-growing megacities, which offers a dynamic environment with opportunities to collaborate with leading tech companies and research institutions.
+  <br/><br/>
   📚 I'm currently reading <b>"Designing Data-Intensive Applications"</b> and <b>"Hands-On Large Language Models"</b> by Jay Alammar to deepen my understanding of data systems and LLMs.
   <br/><br/>
   🔄 I'm actively preparing for the <b>Certified Kubernetes Application Developer (CKAD)</b> and <b>AWS Solution Architect Associate</b> certifications to advance my knowledge in cloud infrastructure.
@@ -87,6 +96,64 @@ education:
   date: April 2018 - May 2023
   description: GPA - 3.53/4.0
   url: https://cse.buet.ac.bd
+  coursework: >-
+    <strong>Selected upper-division coursework demonstrating depth in core CS, systems, and AI/ML:</strong><br>
+    <table class="table table-sm table-borderless" style="font-size: 14px;">
+      <tr>
+        <td style="width: 30%; vertical-align: top;"><strong>Algorithms & Theory</strong></td>
+        <td>
+          • Data Structures & Algorithms I-II<br>
+          • Algorithm Engineering<br>
+          • Theory of Computation
+        </td>
+      </tr>
+      <tr>
+        <td style="vertical-align: top;"><strong>Systems & Architecture</strong></td>
+        <td>
+          • Computer Architecture (lecture + lab)<br>
+          • Operating Systems (lecture + lab)<br>
+          • Computer Networks (lecture + lab)<br>
+          • Microprocessors, Microcontrollers & Embedded Systems (lecture + lab)<br>
+          • Fault-Tolerant Systems
+        </td>
+      </tr>
+      <tr>
+        <td style="vertical-align: top;"><strong>Software Engineering</strong></td>
+        <td>
+          • Software Engineering<br>
+          • Software Development (practicum)<br>
+          • Information System Design (lecture + lab)<br>
+          • Technical Writing & Presentation
+        </td>
+      </tr>
+      <tr>
+        <td style="vertical-align: top;"><strong>Databases & Data</strong></td>
+        <td>
+          • Database Systems (lecture + lab)<br>
+          • High-Performance Database Systems
+        </td>
+      </tr>
+      <tr>
+        <td style="vertical-align: top;"><strong>Security</strong></td>
+        <td>• Computer Security (lecture + lab)</td>
+      </tr>
+      <tr>
+        <td style="vertical-align: top;"><strong>AI & Machine Learning</strong></td>
+        <td>
+          • Artificial Intelligence (lecture + lab)<br>
+          • Machine Learning (lecture + lab)
+        </td>
+      </tr>
+      <tr>
+        <td style="vertical-align: top;"><strong>Graphics & Visualization</strong></td>
+        <td>• Computer Graphics (lecture + lab)</td>
+      </tr>
+      <tr>
+        <td style="vertical-align: top;"><strong>Capstone</strong></td>
+        <td>• Undergraduate Project & Thesis</td>
+      </tr>
+    </table>
+    Grades were predominantly A / A+, underscoring consistent high performance across theoretical and applied domains.
 - name: Rajshahi College
   position: Higher Secondary School Certificate (HSC)
   date: 2015 - 2017
