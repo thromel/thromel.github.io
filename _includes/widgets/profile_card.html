@@ -6,12 +6,11 @@
                     <div class="col">
                         <p class="h1 font-weight-normal">{{ site.data.profile.primary_name }} <small>{{ site.data.profile.secondary_name }}</small></p>
                         <p class="text-profile-position">
-                            {% for position in site.data.profile.positions %}
-                            {% if position.logo -%}
-                            <img src="{{ position.logo | relative_url }}" alt="Logo" class="inline-badge"/>
+                            {% assign first_position = site.data.profile.positions | first %}
+                            {% if first_position.logo -%}
+                            <img src="{{ first_position.logo | relative_url }}" alt="Logo" class="inline-badge"/>
                             {%- endif %}
-                            {{ position.name }}<br/>
-                            {% endfor %}
+                            {{ first_position.name }}<br/>
                         </p>
                         <!-- show list from summary -->
                         <ul class="list-unstyled" style="font-size: 16px;">
