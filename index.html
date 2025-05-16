@@ -136,6 +136,32 @@ navbar_title: Home
                 </div>
                 <hr />
 
+                <!-- Tests and Certifications -->
+                <div class="row mt-3">
+                    <div class="col">
+                        <h4><img src="/assets/images/icons/certificate.png" alt="Certifications" class="inline-badge" style="width: 30px; height: 30px;"> Tests & Certifications</h4>
+                        <ul class="timeline">
+                            {% for cert in site.data.profile.tests_and_certifications %}
+                            <li class="media mb-2">
+                                <div class="media-body">
+                                    <div><h6>{{ cert.name }}</h6></div>
+                                    {% if cert.score %}
+                                    <div>Score: <strong>{{ cert.score }}</strong></div>
+                                    {% endif %}
+                                    {% if cert.details %}
+                                    <div>{{ cert.details }}</div>
+                                    {% endif %}
+                                    {% if cert.status %}
+                                    <div><em>Status: {{ cert.status }}</em></div>
+                                    {% endif %}
+                                </div>
+                            </li>
+                            {% endfor %}
+                        </ul>          
+                    </div>
+                </div>
+                <hr />
+
                 <!-- Hobbies -->
                 <div class="row mt-3">
                     <div class="col">

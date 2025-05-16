@@ -180,7 +180,7 @@ education:
     </table>
     Grades were predominantly A / A+, underscoring consistent high performance across theoretical and applied domains.
 - name: Rajshahi College
-  position: Higher Secondary School Certificate (HSC)
+  position: Higher Secondary Certificate (HSC)
   date: 2015 - 2017
   description: Placed 15th in Rajshahi Board, received Talentpool Scholarship, A+ in all subjects with 95.6% marks in Physics, Chemistry, and Higher Mathematics
   url: https://rc.edu.bd
@@ -396,3 +396,15 @@ hobbies:
   items:
   - Exploring new places and cultures
   - Visited Saudi Arabia, India, and various parts of Bangladesh
+
+- type: Sports & Outdoor Activities
+  items:
+  - Playing and watching Football (Soccer) and Cricket
+  - Participating in various sports activities
+  - Enjoying outdoor activities like cycling, hiking, and trekking
+  - Playing video games in my leisure time
+
+- type: Food & Entertainment
+  items:
+  - Exploring different cuisines and food cultures
+  - Trying out new restaurants and street food
