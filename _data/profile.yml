@@ -89,7 +89,6 @@ summary:
 - "Passionate about Backend Engineering and AI Systems, especially in the fields of <b>Blockchain Technology, LLM Systems, Image Steganography</b>"
 - "<b>Author of research papers on Blockchain in Healthcare, LLM API Analysis, and Image Steganography</b>"
 - "Graduated From <b><a href='https://cse.buet.ac.bd'>CSE @ BUET</a></b> with a GPA of 3.53/4.0"
-- "<b>TOEFL iBT</b>: 103/120 (Listening: 29, Reading: 29, Writing: 22, Speaking: 23)"
 - "<b>Motivated researcher looking for PhD/MSc positions for Spring/Fall 2026</b>"
 
 short_bio: >-
@@ -370,10 +369,14 @@ projects:
   - NATS
   - MongoDB
 
-test_scores:
-- name: TOEFL iBT
+tests_and_certifications:
+- name: "📜 TOEFL iBT"
   score: 103/120
   details: Listening - 29, Reading - 29, Writing - 22, Speaking - 23
+- name: "🔄 Certified Kubernetes Application Developer (CKAD)"
+  status: In preparation
+- name: "🔄 AWS Solution Architect Associate"
+  status: In preparation
 
 hobbies:
 - type: Programming & Learning
