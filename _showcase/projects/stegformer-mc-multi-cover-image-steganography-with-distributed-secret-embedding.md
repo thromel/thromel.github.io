@@ -1,19 +1,26 @@
 ---
+layout: showcase
 show: true
 width: 8
 date: 2025-03-01 00:00:00 +0800
 group: Research
 title: StegFormer-MC Multi-Cover Image Steganography with Distributed Secret Embedding
+excerpt: An advanced steganography framework that extends the StegFormer architecture to distribute secret image data across multiple cover images, enhancing security and robustness against steganalysis detection methods.
+technologies:
+  - PyTorch
+  - Transformer Architecture
+  - Computer Vision
+  - Information Security
+  - Deep Learning
+  - Distributed Computing
 ---
 
-<h5 class="card-subtitle mb-3 text-muted">Lead Researcher | Ongoing Research Project</h5>
-<hr/>
+## Lead Researcher | Ongoing Research Project
 
-<h4>Project Overview</h4>
-<p>
-    An advanced steganography framework that extends the StegFormer architecture to distribute secret image data across multiple cover images, 
-    enhancing security and robustness against steganalysis detection methods while maintaining visual imperceptibility.
-</p>
+### Project Overview
+
+An advanced steganography framework that extends the StegFormer architecture to distribute secret image data across multiple cover images, 
+enhancing security and robustness against steganalysis detection methods while maintaining visual imperceptibility.
 
 <div class="row mb-4">
     <div class="col-md-12">
@@ -29,35 +36,24 @@ title: StegFormer-MC Multi-Cover Image Steganography with Distributed Secret Emb
     </div>
 </div>
 
-<h4>Research Innovation</h4>
-<ul>
-    <li><strong>Distributed Embedding Strategy:</strong> Novel approach to split secret data across multiple cover images using both channel-splitting and spatial-splitting techniques.</li>
-    <li><strong>Enhanced Security:</strong> Significantly reduced detectability by steganalysis algorithms by distributing the payload across multiple carriers.</li>
-    <li><strong>Parallel Processing Branches:</strong> Designed a multi-branch architecture that concurrently handles different cover images while maintaining embedding coherence.</li>
-    <li><strong>Composite Loss Function:</strong> Developed a specialized loss function balancing imperceptibility, robustness, and extraction accuracy.</li>
-    <li><strong>Adversarial Training:</strong> Incorporated adversarial components to improve resistance against neural steganalysis attacks.</li>
-</ul>
+### Research Innovation
 
-<h4>Technical Approach</h4>
-<ol>
-    <li><strong>Secret Image Processing</strong> – Decomposition of secret image into distributed segments with redundancy encoding for error resilience.</li>
-    <li><strong>Multi-Cover Embedding</strong> – Parallel transformer-based embedding networks optimized for minimal perceptual distortion.</li>
-    <li><strong>Synergistic Extraction</strong> – Advanced extraction network that synchronizes information from multiple stego images.</li>
-    <li><strong>Robustness Enhancement</strong> – Implementation of noise layers to simulate real-world transmission conditions.</li>
-    <li><strong>Evaluation Framework</strong> – Comprehensive evaluation against modern steganalysis techniques and under various attack scenarios.</li>
-</ol>
+- **Distributed Embedding Strategy:** Novel approach to split secret data across multiple cover images using both channel-splitting and spatial-splitting techniques.
+- **Enhanced Security:** Significantly reduced detectability by steganalysis algorithms by distributing the payload across multiple carriers.
+- **Parallel Processing Branches:** Designed a multi-branch architecture that concurrently handles different cover images while maintaining embedding coherence.
+- **Composite Loss Function:** Developed a specialized loss function balancing imperceptibility, robustness, and extraction accuracy.
+- **Adversarial Training:** Incorporated adversarial components to improve resistance against neural steganalysis attacks.
 
-<h4>Core Technologies</h4>
-<div class="mb-3">
-    <span class="badge bg-primary me-1">PyTorch</span>
-    <span class="badge bg-primary me-1">Transformer Architecture</span>
-    <span class="badge bg-primary me-1">Computer Vision</span>
-    <span class="badge bg-primary me-1">Information Security</span>
-    <span class="badge bg-primary me-1">Deep Learning</span>
-    <span class="badge bg-primary me-1">Distributed Computing</span>
-</div>
+### Technical Approach
 
-<h4>Preliminary Results</h4>
+1. **Secret Image Processing** – Decomposition of secret image into distributed segments with redundancy encoding for error resilience.
+2. **Multi-Cover Embedding** – Parallel transformer-based embedding networks optimized for minimal perceptual distortion.
+3. **Synergistic Extraction** – Advanced extraction network that synchronizes information from multiple stego images.
+4. **Robustness Enhancement** – Implementation of noise layers to simulate real-world transmission conditions.
+5. **Evaluation Framework** – Comprehensive evaluation against modern steganalysis techniques and under various attack scenarios.
+
+### Preliminary Results
+
 <div class="table-responsive mb-3">
     <table class="table table-bordered">
         <thead class="table-light">
@@ -87,12 +83,10 @@ title: StegFormer-MC Multi-Cover Image Steganography with Distributed Secret Emb
     </table>
 </div>
 
-<h4>Research Impact</h4>
-<p>
-    This work advances the state-of-the-art in image steganography by introducing a multi-cover paradigm that significantly enhances security while maintaining high visual quality. The distributed embedding approach offers a promising direction for secure data hiding in adversarial environments.
-</p>
+### Research Impact
 
-<h4>Future Directions</h4>
-<p>
-    Extending the framework to handle video steganography, exploring adaptive payload distribution based on cover image characteristics, and developing cross-modal steganography techniques for embedding across different media types.
-</p> 
+This work advances the state-of-the-art in image steganography by introducing a multi-cover paradigm that significantly enhances security while maintaining high visual quality. The distributed embedding approach offers a promising direction for secure data hiding in adversarial environments.
+
+### Future Directions
+
+Extending the framework to handle video steganography, exploring adaptive payload distribution based on cover image characteristics, and developing cross-modal steganography techniques for embedding across different media types. 

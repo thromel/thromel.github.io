@@ -5,59 +5,142 @@ navbar_title: Showcase
 container_class: container-xl
 ---
 
-<div class="row mb-4">
-    <div class="col-12">
-        <div class="card border-0 shadow-sm bg-white">
-            <div class="card-body p-4">
-                <h2 class="card-title">Project Showcase</h2>
-                <p class="card-text">
-                    Welcome to my project showcase! Here you'll find detailed information about my most significant 
-                    technical projects, including diagrams, architectures, and in-depth explanations.
-                </p>
+<div class="row">
+    <div class="col-12 col-lg-9">
+        <section id="showcase-items" class="pt-4">
+            <h2 style="margin-bottom: 8px;"><img src="/assets/images/icons/code.png" alt="Showcase" class="inline-badge" style="width: 35px; height: 35px;"> Project Showcase</h2>
+            <p class="mb-4">Detailed information about my most significant technical projects, including diagrams, architectures, and in-depth explanations.</p>
+        </section>
+
+        <!-- Projects Section -->
+        <h3 class="mb-3 mt-4 text-primary">Projects</h3>
+        <div class="my-0 p-0 bg-white shadow-sm rounded-sm mb-5">
+            {% assign projects = site.showcase | where: "group", "Projects" | where: "show", true | sort: "date" | reverse %}
+            {% for item in projects %}
+            <div class="d-flex mb-3 mr-2 p-3 border-bottom border-gray">
+                <div class="col p-3 ml-md-2">
+                    <h4 class="mt-0 mb-2 font-weight-bold">
+                        <a href="{{ item.url }}" class="text-dark">{{ item.title }}</a>
+                    </h4>
+                    <div class="small d-flex">
+                        <div>
+                            <img src="/assets/images/icons/calendar.png" alt="Date" class="inline-badge" style="width: 20px; height: 20px;">
+                            <span class="text-muted">{{ item.date | date: "%B %d, %Y" }}</span>
+                        </div>
+                        <div class="ml-auto">
+                            <span class="text-primary">
+                                <i class="fa-solid fa-folder"></i>
+                                Project
+                            </span>
+                        </div>
+                    </div>
+                    <p class="mt-3 mb-2 small" style="text-align: justify; font-size: 14px;">
+                        {% if item.excerpt %}
+                            {{ item.excerpt }}
+                        {% else %}
+                            {{ item.content | strip_html | truncatewords: 50 }}
+                        {% endif %}
+                    </p>
+                    <div class="small">
+                        <a href="{{ item.url }}" class="btn btn-sm btn-outline-primary">View Details</a>
+                        
+                        {% if item.technologies.size > 0 %}
+                        <div class="float-right">
+                            <img src="/assets/images/icons/tag.png" alt="tag" class="inline-badge" style="width: 18px; height: 18px; margin-top: 2px;">
+                            {% for tech in item.technologies %}
+                            <span style="display: inline-block; margin: 2px; padding: 5px 10px; border: 1px solid #ccc; border-radius: 5px; background-color: #f5f5f5; font-size: 12px;">{{ tech }}</span>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Research Section -->
+        <h3 class="mb-3 mt-4 text-success">Research</h3>
+        <div class="my-0 p-0 bg-white shadow-sm rounded-sm mb-5">
+            {% assign research_items = site.showcase | where: "group", "Research" | where: "show", true | sort: "date" | reverse %}
+            {% for item in research_items %}
+            <div class="d-flex mb-3 mr-2 p-3 border-bottom border-gray">
+                <div class="col p-3 ml-md-2">
+                    <h4 class="mt-0 mb-2 font-weight-bold">
+                        <a href="{{ item.url }}" class="text-dark">{{ item.title }}</a>
+                    </h4>
+                    <div class="small d-flex">
+                        <div>
+                            <img src="/assets/images/icons/calendar.png" alt="Date" class="inline-badge" style="width: 20px; height: 20px;">
+                            <span class="text-muted">{{ item.date | date: "%B %d, %Y" }}</span>
+                        </div>
+                        <div class="ml-auto">
+                            <span class="text-success">
+                                <i class="fa-solid fa-folder"></i>
+                                Research
+                            </span>
+                        </div>
+                    </div>
+                    <p class="mt-3 mb-2 small" style="text-align: justify; font-size: 14px;">
+                        {% if item.excerpt %}
+                            {{ item.excerpt }}
+                        {% else %}
+                            {{ item.content | strip_html | truncatewords: 50 }}
+                        {% endif %}
+                    </p>
+                    <div class="small">
+                        <a href="{{ item.url }}" class="btn btn-sm btn-outline-success">View Details</a>
+                        
+                        {% if item.technologies.size > 0 %}
+                        <div class="float-right">
+                            <img src="/assets/images/icons/tag.png" alt="tag" class="inline-badge" style="width: 18px; height: 18px; margin-top: 2px;">
+                            {% for tech in item.technologies %}
+                            <span style="display: inline-block; margin: 2px; padding: 5px 10px; border: 1px solid #ccc; border-radius: 5px; background-color: #f5f5f5; font-size: 12px;">{{ tech }}</span>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="col-12 col-lg-3">
+        <div class="sticky-top" style="top: 120px">
+            <div class="bg-white shadow-sm rounded-sm p-3 mb-4">
+                <h5 class="border-bottom pb-2">Categories</h5>
+                <ul class="list-unstyled">
+                    <li class="mb-2">
+                        <a href="#" class="text-decoration-none text-primary">Projects</a>
+                    </li>
+                    <li class="mb-2">
+                        <a href="#" class="text-decoration-none text-success">Research</a>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="bg-white shadow-sm rounded-sm p-3">
+                <h5 class="border-bottom pb-2">Technologies</h5>
+                <div>
+                    {% assign all_showcase = site.showcase | where: "show", true %}
+                    {% assign all_techs = "" | split: "" %}
+                    
+                    {% for item in all_showcase %}
+                        {% if item.technologies %}
+                            {% assign all_techs = all_techs | concat: item.technologies %}
+                        {% endif %}
+                    {% endfor %}
+                    
+                    {% assign unique_techs = all_techs | uniq %}
+                    
+                    {% for tech in unique_techs %}
+                    <span style="display: inline-block; margin: 2px; padding: 5px 10px; border: 1px solid #ccc; border-radius: 5px; background-color: #f5f5f5; font-size: 12px;">{{ tech }}</span>
+                    {% endfor %}
+                </div>
             </div>
         </div>
     </div>
 </div>
-
-{% assign projects = site.showcase | where: "group", "Projects" | where: "show", true | sort: "date" | reverse %}
-
-{% if projects.size > 0 %}
-<h2 class="mb-3 text-primary">Projects</h2>
-<div class="row g-4 mb-5">
-    {% for item in projects %}
-    <div class="col-lg-6 col-12 mb-4">
-        <div class="card h-100 border-0 shadow-sm hover-shadow">
-            <div class="card-header bg-primary bg-gradient text-white py-3">
-                <h4 class="card-title mb-0">{{ item.title | default: "Project" }}</h4>
-            </div>
-            <div class="card-body p-4">
-                {{ item.content }}
-            </div>
-        </div>
-    </div>
-    {% endfor %}
-</div>
-{% endif %}
-
-{% assign research_showcases = site.showcase | where: "group", "Research" | where: "show", true | sort: "date" | reverse %}
-
-{% if research_showcases.size > 0 %}
-<h2 class="mb-3 text-primary">Research</h2>
-<div class="row g-4 mb-5">
-    {% for item in research_showcases %}
-    <div class="col-lg-6 col-12 mb-4">
-        <div class="card h-100 border-0 shadow-sm hover-shadow">
-            <div class="card-header bg-success bg-gradient text-white py-3">
-                <h4 class="card-title mb-0">{{ item.title | default: "Research" }}</h4>
-            </div>
-            <div class="card-body p-4">
-                {{ item.content }}
-            </div>
-        </div>
-    </div>
-    {% endfor %}
-</div>
-{% endif %}
 
 <!-- Scroll to top button -->
 <button class="btn btn-primary rounded-circle position-fixed scroll-to-top" id="scrollToTop" style="bottom: 30px; right: 30px; width: 50px; height: 50px; z-index: 1000; display: none;">
@@ -65,13 +148,6 @@ container_class: container-xl
 </button>
 
 <style>
-.hover-shadow {
-    transition: all 0.3s ease;
-}
-.hover-shadow:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
-}
 .scroll-to-top {
     transition: all 0.3s ease;
     opacity: 0.7;

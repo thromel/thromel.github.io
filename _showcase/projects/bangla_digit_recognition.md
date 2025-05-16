@@ -1,26 +1,34 @@
 ---
+layout: showcase
 show: true
 width: 8
 date: 2022-12-01 00:00:00 +0800
 group: Projects
 title: Bangla Hand-Written Digit Recognition
+excerpt: An end-to-end OCR pipeline that classifies Bangla digits without relying on TensorFlow/PyTorch, implementing every CNN component from scratch in NumPy and achieving 95.9% accuracy on the NumtaDB benchmark.
+technologies:
+  - Python 3.10
+  - NumPy
+  - OpenCV
+  - Matplotlib
+  - scikit-learn
+  - Custom CNN
 ---
 
-<h5 class="card-subtitle mb-3 text-muted">Author & Sole Engineer | 4-week Project | CSE-472 Coursework</h5>
+## Author & Sole Engineer | 4-week Project | CSE-472 Coursework
+
 <div class="text-end mb-3">
     <a href="https://github.com/thromel/CSE-472-Machine-Learning/tree/main/Offline%204" target="_blank" class="btn btn-sm btn-outline-dark">
         <i class="fab fa-github"></i> View on GitHub
     </a>
 </div>
-<hr/>
 
-<h4>Project Snapshot</h4>
-<p>
-    An end-to-end OCR pipeline that classifies Bangla digits without relying on TensorFlow / PyTorch. 
-    Every convolution, pooling, activation, back-prop step, and optimisation loop is implemented directly 
-    in NumPy + OpenCV. The model delivers ≈ 95.9% test accuracy on the NumtaDB benchmark while remaining 
-    fully transparent and hackable.
-</p>
+### Project Snapshot
+
+An end-to-end OCR pipeline that classifies Bangla digits without relying on TensorFlow / PyTorch. 
+Every convolution, pooling, activation, back-prop step, and optimisation loop is implemented directly 
+in NumPy + OpenCV. The model delivers ≈ 95.9% test accuracy on the NumtaDB benchmark while remaining 
+fully transparent and hackable.
 
 <div class="row mb-4">
     <div class="col-md-6">
@@ -47,33 +55,22 @@ title: Bangla Hand-Written Digit Recognition
     </div>
 </div>
 
-<h4>Why It Matters</h4>
-<ul>
-    <li><strong>Deep-dive into CNN internals:</strong> Coding forward & backward passes from scratch forced me to master tensor algebra, gradient flow, and He/Xavier initialisation instead of treating them as black boxes.</li>
-    <li><strong>Research-style experimentation:</strong> Because the framework is minimal, I can instrument any tensor, inject custom loss terms, or prototype novel layers—an ability that transfers to cutting-edge model research.</li>
-    <li><strong>Production-minded workflow:</strong> The finished artefacts include pickled weights, an inference CLI that produces CSV predictions, and CI-ready train/test scripts—proving the code can move beyond the classroom.</li>
-</ul>
+### Why It Matters
 
-<h4>Pipeline Highlights</h4>
-<ol>
-    <li><strong>Data Acquisition & Normalisation</strong> – Load NumtaDB, balance classes, apply per-pixel min–max scaling.</li>
-    <li><strong>Aggressive Pre-processing</strong> – Grayscale, Otsu binarisation, morphological ops, auto-crop to digit ROI, final resize to 28 × 28.</li>
-    <li><strong>Custom CNN (LeNet-style)</strong> – Conv→ReLU→Pool × 2 → Flatten → FC(120) → FC(84) → FC(10 Softmax) with both SGD and Adam variants.</li>
-    <li><strong>Metrics & Visuals</strong> – Live plots for loss, val-accuracy, macro-F1; confusion-matrix inspection; two architecture diagrams included in the repo.</li>
-    <li><strong>Model Export & Inference</strong> – Persist trained weights as cnn_model_1.pkl and expose a prediction script that batch-scores images and emits a competition-ready CSV.</li>
-</ol>
+- **Deep-dive into CNN internals:** Coding forward & backward passes from scratch forced me to master tensor algebra, gradient flow, and He/Xavier initialisation instead of treating them as black boxes.
+- **Research-style experimentation:** Because the framework is minimal, I can instrument any tensor, inject custom loss terms, or prototype novel layers—an ability that transfers to cutting-edge model research.
+- **Production-minded workflow:** The finished artefacts include pickled weights, an inference CLI that produces CSV predictions, and CI-ready train/test scripts—proving the code can move beyond the classroom.
 
-<h4>Core Technologies</h4>
-<div class="mb-3">
-    <span class="badge bg-primary me-1">Python 3.10</span>
-    <span class="badge bg-primary me-1">NumPy</span>
-    <span class="badge bg-primary me-1">OpenCV</span>
-    <span class="badge bg-primary me-1">Matplotlib</span>
-    <span class="badge bg-primary me-1">scikit-learn</span>
-    <span class="badge bg-primary me-1">Custom CNN</span>
-</div>
+### Pipeline Highlights
 
-<h4>Outcomes</h4>
+1. **Data Acquisition & Normalisation** – Load NumtaDB, balance classes, apply per-pixel min–max scaling.
+2. **Aggressive Pre-processing** – Grayscale, Otsu binarisation, morphological ops, auto-crop to digit ROI, final resize to 28 × 28.
+3. **Custom CNN (LeNet-style)** – Conv→ReLU→Pool × 2 → Flatten → FC(120) → FC(84) → FC(10 Softmax) with both SGD and Adam variants.
+4. **Metrics & Visuals** – Live plots for loss, val-accuracy, macro-F1; confusion-matrix inspection; two architecture diagrams included in the repo.
+5. **Model Export & Inference** – Persist trained weights as cnn_model_1.pkl and expose a prediction script that batch-scores images and emits a competition-ready CSV.
+
+### Outcomes
+
 <div class="table-responsive mb-3">
     <table class="table table-bordered">
         <thead class="table-light">
@@ -99,12 +96,10 @@ title: Bangla Hand-Written Digit Recognition
     </table>
 </div>
 
-<h4>Take-away</h4>
-<p>
-    By stripping away high-level abstractions I proved I can reason about—and optimise—each numerical operation in a CNN. That granularity is invaluable when debugging model failures in production or extending architectures in research.
-</p>
+### Take-away
 
-<h4>Next Steps</h4>
-<p>
-    Port the pipeline to C++ for embedded deployment, and experiment with transformer-based vision layers to push accuracy beyond 97%.
-</p> 
+By stripping away high-level abstractions I proved I can reason about—and optimise—each numerical operation in a CNN. That granularity is invaluable when debugging model failures in production or extending architectures in research.
+
+### Next Steps
+
+Port the pipeline to C++ for embedded deployment, and experiment with transformer-based vision layers to push accuracy beyond 97%. 
