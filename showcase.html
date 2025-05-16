@@ -22,54 +22,82 @@ container_class: container-xl
 {% assign projects = site.showcase | where: "group", "Projects" | where: "show", true | sort: "date" | reverse %}
 
 {% if projects.size > 0 %}
-<h2 class="mb-3">Projects</h2>
-<div class="row grid mb-5">
-    <div class="grid-sizer col-1"></div>
+<h2 class="mb-3 text-primary">Projects</h2>
+<div class="row g-4 mb-5">
     {% for item in projects %}
-    {% if item.width >= 4 -%}
-        {%- assign width_sm = 12 -%}
-        {%- assign width_xs = 12 -%}
-    {%- elsif item.width >= 2 -%}
-        {%- assign width_sm = 6 -%}
-        {%- assign width_xs = 6 -%}
-    {%- else -%}
-        {%- assign width_sm = item.width | times: 2 | at_most: 12 -%}
-        {%- assign width_xs = item.width | times: 2 | at_most: 12 -%}
-    {%- endif -%}
-    <div class="p-2 grid-item col-md-{{ item.width | at_most: 12 }} col-sm-{{ width_sm }} col-{{ width_xs }}">
-        <div class="{% if item.class != null %}{{ item.class }}{% else %}card border-0 shadow-sm bg-white{% endif %}">
-            {{ item.content }}
+    <div class="col-lg-6 col-12 mb-4">
+        <div class="card h-100 border-0 shadow-sm hover-shadow">
+            <div class="card-header bg-primary bg-gradient text-white py-3">
+                <h4 class="card-title mb-0">{{ item.title | default: "Project" }}</h4>
+            </div>
+            <div class="card-body p-4">
+                {{ item.content }}
+            </div>
         </div>
     </div>
     {% endfor %}
 </div>
 {% endif %}
 
-{% comment %}
-<!-- Uncomment below when you have other showcase categories -->
-{% assign other_showcases = site.showcase | where_exp: "item", "item.group != 'Projects'" | where: "show", true | group_by_exp: "item", "item.group" %}
+{% assign research_showcases = site.showcase | where: "group", "Research" | where: "show", true | sort: "date" | reverse %}
 
-{% for group in other_showcases %}
-<h2 class="mb-3">{{ group.name }}</h2>
-<div class="row grid mb-4">
-    <div class="grid-sizer col-1"></div>
-    {% for item in group.items %}
-    {% if item.width >= 4 -%}
-        {%- assign width_sm = 12 -%}
-        {%- assign width_xs = 12 -%}
-    {%- elsif item.width >= 2 -%}
-        {%- assign width_sm = 6 -%}
-        {%- assign width_xs = 6 -%}
-    {%- else -%}
-        {%- assign width_sm = item.width | times: 2 | at_most: 12 -%}
-        {%- assign width_xs = item.width | times: 2 | at_most: 12 -%}
-    {%- endif -%}
-    <div class="p-2 grid-item col-md-{{ item.width | at_most: 12 }} col-sm-{{ width_sm }} col-{{ width_xs }}">
-        <div class="{% if item.class != null %}{{ item.class }}{% else %}card border-0 shadow-sm bg-white{% endif %}">
-            {{ item.content }}
+{% if research_showcases.size > 0 %}
+<h2 class="mb-3 text-primary">Research</h2>
+<div class="row g-4 mb-5">
+    {% for item in research_showcases %}
+    <div class="col-lg-6 col-12 mb-4">
+        <div class="card h-100 border-0 shadow-sm hover-shadow">
+            <div class="card-header bg-success bg-gradient text-white py-3">
+                <h4 class="card-title mb-0">{{ item.title | default: "Research" }}</h4>
+            </div>
+            <div class="card-body p-4">
+                {{ item.content }}
+            </div>
         </div>
     </div>
     {% endfor %}
 </div>
-{% endfor %}
-{% endcomment %}
+{% endif %}
+
+<!-- Scroll to top button -->
+<button class="btn btn-primary rounded-circle position-fixed scroll-to-top" id="scrollToTop" style="bottom: 30px; right: 30px; width: 50px; height: 50px; z-index: 1000; display: none;">
+    <i class="fas fa-arrow-up"></i>
+</button>
+
+<style>
+.hover-shadow {
+    transition: all 0.3s ease;
+}
+.hover-shadow:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+}
+.scroll-to-top {
+    transition: all 0.3s ease;
+    opacity: 0.7;
+}
+.scroll-to-top:hover {
+    opacity: 1;
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var scrollToTopBtn = document.getElementById('scrollToTop');
+    
+    window.addEventListener('scroll', function() {
+        if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+            scrollToTopBtn.style.display = 'block';
+        } else {
+            scrollToTopBtn.style.display = 'none';
+        }
+    });
+    
+    scrollToTopBtn.addEventListener('click', function() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+});
+</script>
