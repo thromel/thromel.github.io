@@ -269,16 +269,28 @@ skills:
   - gRPC
   - Entity Framework
   - Azure Bicep
+- type: Soft Skills
+  names:
+  - Team Leadership
+  - Problem-solving
+  - Technical Communication
+  - Cross-functional Collaboration
+  - Mentoring
+  - Project Management
+  - Stakeholder Management
+  - Critical Thinking
+  - Time Management
+  - Technical Writing
 
 research:
-- title: StegFormer-MC&#58; Multi-Cover Image Steganography with Distributed Secret Embedding
+- title: StegFormer-MC Multi-Cover Image Steganography with Distributed Secret Embedding
   date: March 2025 - Present
   description: >-
     Extended the StegFormer architecture to hide secret images across multiple cover images, 
     with innovative channel- and spatial-splitting strategies, parallel processing branches, 
     and a composite loss function for robust training.
 
-- title: Extending LLM API Contract Analysis&#58; A Refined Taxonomy and Empirical Study
+- title: Extending LLM API Contract Analysis A Refined Taxonomy and Empirical Study
   date: Nov 2024 - Present
   description: >-
     Developed an extended taxonomy for API contracts in LLM libraries, conducted empirical studies on 
@@ -343,7 +355,7 @@ projects:
   - NLP
   - Deep Learning
 
-- title: Eventfly&#58; An End-to-end Event Management System
+- title: "Eventfly: An End-to-end Event Management System"
   link: https://github.com/eventfly/Microservices
   date: May 2022 - July 2022
   description: >-

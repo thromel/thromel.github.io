@@ -3,12 +3,11 @@ show: true
 width: 8
 date: 2023-05-01 00:00:00 +0800
 group: Research
+title: Blockchain in Healthcare 20
 ---
 
-<div class="card-body p-4">
-    <h2 class="card-title">Blockchain in Healthcare 2.0</h2>
-    <h5 class="card-subtitle mb-3 text-muted">Lead Researcher | Undergraduate Thesis Project</h5>
-    <hr/>
+<h5 class="card-subtitle mb-3 text-muted">Lead Researcher | Undergraduate Thesis Project</h5>
+<hr/>
     
     <h4>Project Overview</h4>
     <p>
@@ -104,4 +103,3 @@ group: Research
     <p>
         Extending the framework to support AI/ML analytics on encrypted health data, implementing cross-border health data exchange protocols, and developing governance frameworks for decentralized healthcare networks that balance innovation with regulatory compliance.
     </p>
-</div> 
