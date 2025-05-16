@@ -24,16 +24,21 @@ body_attr: >-
                 <div class="d-flex mb-3 mr-2 p-3 border-bottom border-gray">
                     <div class="col p-3 ml-md-2">
                         <h5 class="mt-0 mb-2 font-weight-bold">
-                            {% assign project_slug = item.title | slugify %}
-                            {% assign showcase_path = "/showcase/projects/" | append: project_slug %}
-                            <a href="{{ showcase_path | relative_url }}">{{ item.title }}</a>
+                            {% assign showcase_item = site.showcase | where: "title", item.title | first %}
+                            {% if showcase_item %}
+                            <a href="{{ showcase_item.url | relative_url }}">{{ item.title }}</a>
+                            {% else %}
+                            {{ item.title }}
+                            {% endif %}
                         </h5>
                         <div class="small d-flex">
                             <div style="color: green"><b>Research Project</b></div>
                             <div class="ml-auto"><em>{{ item.date }}</em></div>
                         </div>
                         <p class="mt-1 mb-2 small" style="text-align: justify; font-size: 14px;">{{ item.description }}</p>
-                        <a href="{{ showcase_path | relative_url }}" class="btn btn-sm btn-outline-primary">Read More</a>
+                        {% if showcase_item %}
+                        <a href="{{ showcase_item.url | relative_url }}" class="btn btn-sm btn-outline-primary">Read More</a>
+                        {% endif %}
                     </div>
                 </div>
                 {% endfor %}

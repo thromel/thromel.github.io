@@ -58,12 +58,22 @@ navbar_title: Home
                         {% for item in site.data.profile.research limit:2 %}
                         <div class="d-flex mb-3 mr-2">
                             <div class="col p-3 ml-md-2">
-                                <h5 class="mt-0 mb-2 font-weight-bold">{{ item.title }}</h5>
+                                {% assign showcase_item = site.showcase | where: "title", item.title | first %}
+                                <h5 class="mt-0 mb-2 font-weight-bold">
+                                    {% if showcase_item %}
+                                    <a href="{{ showcase_item.url | relative_url }}">{{ item.title }}</a>
+                                    {% else %}
+                                    {{ item.title }}
+                                    {% endif %}
+                                </h5>
                                 <div class="small d-flex">
                                     <div style="color: green"><b>Research Project</b></div>
                                     <div class="ml-auto"><em>{{ item.date }}</em></div>
                                 </div>
                                 <p class="mt-1 mb-2 small" style="text-align: justify; font-size: 14px;">{{ item.description }}</p>
+                                {% if showcase_item %}
+                                <a href="{{ showcase_item.url | relative_url }}" class="btn btn-sm btn-outline-primary">Read More</a>
+                                {% endif %}
                             </div>
                         </div>
                         {% endfor %}
