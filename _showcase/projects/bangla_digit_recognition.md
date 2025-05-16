@@ -6,7 +6,7 @@ group: Projects
 ---
 
 <div class="card-body p-4">
-    <h2 class="card-title">Bangla Hand-Written Digit Recognition</h2>
+    <h2 class="card-title"><a href="https://github.com/thromel/CSE-472-Machine-Learning/tree/main/Offline%204" target="_blank" style="color: inherit; text-decoration: none;">Bangla Hand-Written Digit Recognition <i class="fas fa-external-link-alt" style="font-size: 0.7em; vertical-align: super;"></i></a></h2>
     <h5 class="card-subtitle mb-3 text-muted">Author & Sole Engineer | 4-week Project | CSE-472 Coursework</h5>
     <hr/>
     
