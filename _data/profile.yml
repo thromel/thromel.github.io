@@ -22,7 +22,7 @@ positions:
   - Writing comprehensive unit, integration, and end-to-end tests, improving overall test coverage from 72% to 95% and reducing production incidents by 40%
   - Implementing zero-downtime deployment strategies using blue-green deployment and canary releases, ensuring uninterrupted service availability during software updates for critical healthcare applications
   - Implementing caching strategies with Redis and database optimization techniques, reducing query response times by 40%
-  - Received the 🏆 <b>IQVIA Impact Program – Silver</b> award (May 2024) for demonstrating outstanding performance by completing numerous tasks, resolving critical issues, supporting team processes, and developing essential features that significantly improved the product.
+  - Received the 🏆 <b>IQVIA Impact Program – Silver</b> award (May 2025) for demonstrating outstanding performance by completing numerous tasks, resolving critical issues, supporting team processes, and developing essential features that significantly improved the product.
   technologies:
   - .NET Core
   - C#
@@ -98,7 +98,7 @@ summary:
 short_bio: >-
   &#x1F44B Hi I'm Tanzim. I'm a software engineer and aspiring researcher passionate about creating solutions that make lives better for people. My interest lies in the fields of <b>Blockchain Technology, LLM Systems, and Image Steganography</b>, with a strong focus on <b>DevOps, Backend Engineering & AI Engineering</b>. I'm particularly interested in <b>Domain Driven Design, System Architecture, and Software Architecture</b>. Being both research and development oriented, I believe I can tackle challenges that require both kinds of efforts. My current career goal is to pursue excellence in software engineering while contributing to cutting-edge research.
   <br/><br/>
-  🏆 In May 2024, I received the <a href='https://drive.google.com/file/d/1Vc4E2RoQEPmbfS56oLdUih-oJDBok9sP/view?usp=share_link' target='_blank'><b>IQVIA Impact Program – Silver</b></a> award for outstanding performance, critical issue resolution, and impactful feature development.
+  🏆 In May 2025, I received the <a href='https://drive.google.com/file/d/1Vc4E2RoQEPmbfS56oLdUih-oJDBok9sP/view?usp=share_link' target='_blank'><b>IQVIA Impact Program – Silver</b></a> award for outstanding performance, critical issue resolution, and impactful feature development.
   <br/><br/>
   💼 I am currently a Software Development Engineer at <a href="https://www.iqvia.com/">IQVIA</a> (NYSE: IQV), a Fortune 500 company and global leader in healthcare data analytics, serving 90% of top pharmaceutical companies worldwide. At IQVIA, I develop microservices-based applications handling millions of patient records, implement observability solutions for critical healthcare data pipelines, architect cloud-native solutions on AWS, and integrate LLM capabilities into clinical data analytics dashboards for natural language querying and automated report generation.
   <br/><br/>
@@ -218,7 +218,7 @@ awards:
   organization: Rajshahi Education Board
   type: Honors & Awards
 - name: IQVIA Impact Program – Silver
-  date: May 2024
+  date: May 2025
   organization: IQVIA
   type: Recognition
   description: >-
@@ -232,6 +232,7 @@ research_interests:
 - Image Steganography
 - Microservices Architecture
 - Software Engineering
+- Distributed Systems
 
 skills:
 - type: Programming Languages
