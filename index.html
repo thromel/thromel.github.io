@@ -146,6 +146,24 @@ navbar_title: Home
                 </div>
                 <hr />
 
+                <!-- Soft Skills -->
+                <div class="row mt-3">
+                    <div class="col">
+                        <h4><img src="/assets/images/icons/idea.png" alt="Soft Skills" class="inline-badge" style="width: 30px; height: 30px;"> Soft Skills</h4>
+                        <ul class="timeline">
+                            {% assign soft_skill_icons = "fa-users,fa-lightbulb,fa-comments,fa-people-arrows,fa-chalkboard-teacher,fa-tasks,fa-handshake,fa-brain,fa-clock,fa-pen-nib" | split: "," %}
+                            {% for skill in site.data.profile.soft_skills %}
+                            <li class="media mb-2">
+                                <div class="media-body">
+                                    <span><i class="fas {{ soft_skill_icons[forloop.index0] }}" style="color: #4299e1; margin-right: 8px;"></i>{{ skill }}</span>
+                                </div>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+                <hr />
+
                 <!-- Tests and Certifications -->
                 <div class="row mt-3">
                     <div class="col">

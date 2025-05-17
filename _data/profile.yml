@@ -78,7 +78,7 @@ current_residence: >-
 cv_link: https://drive.google.com/file/d/166KeqxoI_06834jh8LvFod2umaOR3m7n/view?usp=sharing
 # gscholar: xFmQpf4AAAAJ
 github: thromel
-twitter: # your_twitter_id  # Do not include the '@' symbol
+twitter: RomelRcs
 linkedin: thromel
 # wechat_qrcode: /assets/images/etc/wechat.jpg
 # wechat_prompt: >-
@@ -222,7 +222,7 @@ awards:
   organization: IQVIA
   type: Recognition
   description: >-
-    For demonstrating outstanding performance by completing numerous tasks and resolving critical issues, supporting team processes, and developing essential features that significantly improved the product.
+    For demonstrating outstanding performance by completing numerous tasks and resolving critical issues, supporting team processes, and developing essential features that significantly improved the product. <a href='https://drive.google.com/file/d/1Vc4E2RoQEPmbfS56oLdUih-oJDBok9sP/view?usp=share_link' target='_blank'>View Certificate</a>
 
 research_interests:
 - Blockchain Technology
@@ -278,8 +278,8 @@ skills:
   - gRPC
   - Entity Framework
   - Azure Bicep
-- type: Soft Skills
-  names:
+
+soft_skills:
   - Team Leadership
   - Problem-solving
   - Technical Communication
@@ -418,3 +418,5 @@ hobbies:
   items:
   - Exploring different cuisines and food cultures
   - Trying out new restaurants and street food
+
+facebook: tanzimhossainromel

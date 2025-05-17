@@ -51,9 +51,15 @@
                                 </a>
                                 {% endif %}
         
+                                {% if site.data.profile.facebook %}
+                                <a class="pr-3 no-break" target="_blank" href="https://facebook.com/{{ site.data.profile.facebook }}">
+                                    <i class="fab fa-facebook fa-2x" style="color: #1877f3;"></i>
+                                </a>
+                                {% endif %}
+        
                                 {% if site.data.profile.twitter %}
                                 <a class="pr-3 no-break" target="_blank" href="https://twitter.com/{{ site.data.profile.twitter }}">
-                                    <i class="fab fa-twitter fa-2x" style="color: #1da1f2;"></i>
+                                    <i class="fab fa-x-twitter fa-2x" style="color: #1da1f2;"></i>
                                 </a>
                                 {% endif %}
         
