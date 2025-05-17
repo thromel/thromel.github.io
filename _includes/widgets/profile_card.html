@@ -34,14 +34,14 @@
                         </ul>
                         <br/>
                         <div class="row">
-                            <div class="col text-left">
-                                <a class="pr-3 no-break" href="mailto:{{ site.data.profile.email | encode_email }}">
-                                     <img src="/assets/images/icons/gmail.png" alt="Email" class="inline-badge" style="margin-top:2px; width: 30px; height: 30px;"/>
+                            <div class="col text-left d-flex align-items-center">
+                                <a class="pr-2 no-break d-flex align-items-center" href="mailto:{{ site.data.profile.email | encode_email }}">
+                                    <img src="/assets/images/icons/gmail.png" alt="Email" style="width: 28px; height: 28px;"/>
                                 </a>
-
+                                <span class="mx-2" style="font-size: 22px; color: #e0e0e0;">|</span>
                                 {% if site.data.profile.phone %}
-                                <a class="pr-3 no-break" href="tel:{{ site.data.profile.phone }}">
-                                    <i class="fas fa-phone fa-2x" style="color: #28a745;"></i>
+                                <a class="pr-2 no-break d-flex align-items-center" href="tel:{{ site.data.profile.phone }}">
+                                    <i class="fas fa-phone fa-lg" style="color: #28a745; font-size: 28px;"></i>
                                 </a>
                                 {% endif %}
                                 
