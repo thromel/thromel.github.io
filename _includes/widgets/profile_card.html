@@ -3,7 +3,22 @@
         <div class="card border-0 shadow-sm bg-white">
             <div class="card-body p-5">
                 <div class="row">
-                    <div class="col">
+                    {% if site.data.profile.portrait_url %}
+                    <div class="col-12 col-md-auto text-center mb-4 mb-md-0 order-md-2">
+                        <figure class="figure">
+                            <img 
+                                src="{{ site.data.profile.portrait_url | relative_url }}" 
+                                class="figure-img img-fluid img-thumbnail" 
+                                style="max-height: 200px; max-width: 100%;"
+                                data-toggle="tooltip" 
+                                data-placement="top" 
+                                title="{{ site.data.profile.portrait_caption }}"
+                            >
+                            <figcaption class="figure-caption text-center">{{ site.data.profile.portrait_caption }}</figcaption>
+                        </figure>
+                    </div>
+                    {% endif %}
+                    <div class="col order-md-1">
                         <p class="h1 font-weight-normal">{{ site.data.profile.primary_name }} <small>{{ site.data.profile.secondary_name }}</small></p>
                         <p class="text-profile-position">
                             {% assign first_position = site.data.profile.positions | first %}
@@ -51,22 +66,6 @@
                             </div>
                         </div>
                     </div>
-                    {% if site.data.profile.portrait_url %}
-                    <div class="col-md-auto d-none d-md-block">
-                        <figure class="figure">
-                            <img 
-                                src="{{ site.data.profile.portrait_url | relative_url }}" 
-                                class="figure-img img-fluid img-thumbnail" 
-                                style="height: 200px;"
-                                data-toggle="tooltip" 
-                                data-placement="top" 
-                                title="{{ site.data.profile.portrait_caption }}"
-                            >
-                            <figcaption class="figure-caption text-right"></figcaption>
-                        </figure>
-                    </div>
-                    {% endif %}
-        
                 </div>
                 {% if site.data.profile.short_bio %}
                 <hr />
