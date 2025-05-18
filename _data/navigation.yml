@@ -15,3 +15,5 @@ pages:
   url: /achievements
 - name: News
   url: /news
+- name: Learning
+  url: /learning
