@@ -4,16 +4,6 @@
   type: book
   starred: true
 
-- title: Learning Go
-  author: Jon Bodner
-  subtitle: 2nd Edition
-  type: book
-  starred: false
-
-- title: Learning Systems Thinking
-  author: Diana Montalion
-  type: book
-  starred: false
 
 - title: The Phoenix Project
   author: Gene Kim, Kevin Behr and George Spafford
@@ -26,22 +16,6 @@
   type: book
   starred: true
 
-- title: Grokking Relational Database Design
-  author: Qiang Hao and Michail Tsikerdekis
-  type: book
-  starred: false
-
-- title: The Survivor's Guide to Enterprise Architecture
-  author: Chloë Gray, Martin Sykes and Paul Homan
-  type: book
-
-- title: Streaming Systems
-  author: Tyler Akidau, Slava Chernyak and Reuven Lax
-  type: book
-
-- title: Writing Clean Code - 20 Common Code Smells and How to Avoid Them
-  author: LM Academy
-  type: course
 
 - title: Engineering Leadership
   author: Juan Pablo Buriticá and James Turnbull
@@ -53,33 +27,15 @@
   subtitle: 2nd Edition
   type: book
 
-- title: C# Concurrency
-  author: Nir Dobovizki
-  type: book
-
-- title: Systems Performance Modeling
-  author: Adarsh Anand and Mangey Ram
-  type: book
 
 - title: Fundamentals of Data Engineering
   author: Joe Reis and Matt Housley
-  type: book
-
-- title: Engineering Resilient Systems on AWS
-  author: Kevin Schwarz, Jennifer Moran and Nate Bachmeier
   type: book
 
 - title: Building Event-Driven Microservices
   author: Adam Bellemare
   type: book
 
-- title: The Software Architect Elevator
-  author: Gregor Hohpe
-  type: book
-
-- title: AI-Assisted Programming
-  author: Tom Taulli
-  type: book
 
 - title: The Pragmatic Programmer
   author: David Thomas and Andrew Hunt
@@ -87,29 +43,6 @@
   type: book
   starred: true
 
-- title: Developing Apps with GPT-4 and ChatGPT
-  author: Olivier Caelen and Marie-Alice Blete
-  type: book
-
-- title: Agile Principles, Patterns, and Practices in C#
-  author: Micah Martin and Robert C. Martin
-  type: book
-
-- title: Software Architecture for Busy Developers
-  author: Stéphane Eyskens
-  type: book
-
-- title: Contract Testing in Action
-  author: Lewis Prescott and Marie Cruz
-  type: book
-
-- title: Writing for Developers
-  author: Piotr Sarna and Cynthia Dunlop
-  type: book
-
-- title: Leveling Up as a Tech Lead
-  author: Anemari Fiser
-  type: book
 
 - title: Systems Performance
   author: Brendan Gregg
@@ -121,13 +54,6 @@
   subtitle: 2nd Edition
   type: book
 
-- title: Implementing Domain-Driven Design
-  author: Vaughn Vernon
-  type: book
-
-- title: Grokking Functional Programming
-  author: Michal Plachta
-  type: book
 
 - title: Building Micro-Frontends
   author: Luca Mezzalira
@@ -135,39 +61,6 @@
 
 - title: Chaos Engineering
   author: Casey Rosenthal and Nora Jones
-  type: book
-
-- title: Collaborative Software Design
-  author: Gien Verschatse, Evelyn van Kelle and Kenny Baas
-  type: book
-
-- title: Communication Patterns
-  author: Jacqui Read
-  type: book
-
-- title: CI/CD Design Patterns
-  author: Garima Bajpai, Michel Schildmeijer, Muktesh Mishra and Pawel Piwosz
-  type: book
-
-- title: Lead Developer Career Guide
-  author: Shelley Benhoff
-  type: book
-
-- title: Microservice APIs
-  author: Jose Haro
-  type: book
-
-- title: Cloud-Native - Microservices, Kubernetes, Service Mesh, CI/CD
-  author: Mehmet Ozkaya
-  type: course
-
-- title: Expert C++
-  author: Marcelo Guerra Hahn, Araks Tigranyan, John Asatryan, Vardan Grigoryan and Shunguang Wu
-  subtitle: Second Edition
-  type: book
-
-- title: Patterns of Distributed Systems
-  author: Unmesh Joshi
   type: book
 
 - title: System Design on AWS
@@ -180,15 +73,6 @@
 
 - title: Monolith to Microservices
   author: Sam Newman
-  type: book
-
-- title: Software Development Superstream
-  author: Sam Newman, Abhishek Kumar, Enys Mones, Ines Montani, Pamela Fox and John Feeney
-  subtitle: Generative AI to Improve Software Development
-  type: conference
-
-- title: Learning API Styles
-  author: Lukasz Dynowski and Marcin Dulak
   type: book
 
 - title: Web Application Security
@@ -213,10 +97,6 @@
   author: James Gough, Daniel Bryant and Matthew Auburn
   type: book
 
-- title: Head First Git
-  author: Raju Gandhi
-  type: book
-
 - title: Fundamentals of Software Architecture
   author: Mark Richards and Neal Ford
   type: book
@@ -235,21 +115,11 @@
   author: Raju Gandhi, Mark Richards and Neal Ford
   type: book
 
-- title: Code Complete
-  author: Steve McConnell
-  subtitle: 2nd Edition
-  type: book
-
 - title: Building Microservices
   author: Sam Newman
   subtitle: 2nd Edition
   type: book
   starred: true
-
-- title: Head First Design Patterns
-  author: Eric Freeman and Elisabeth Robson
-  subtitle: 2nd Edition
-  type: book
 
 - title: Software Architecture
   author: Neal Ford, Mark Richards, Pramod Sadalage and Zhamak Dehghani
@@ -262,24 +132,6 @@
   subtitle: A Craftsman's Guide to Software Structure and Design
   type: book
 
-- title: Learning OpenTelemetry
-  author: Ted Young and Austin Parker
-  type: book
-
-- title: Balancing Coupling in Software Design
-  author: Vlad Khononov
-  subtitle: Universal Design Principles for Architecting Modular Software Systems
-  type: book
-
-- title: Amazon Web Services in Action
-  author: Michael Wittig and Andreas Wittig
-  subtitle: Third Edition
-  type: book
-
-- title: The Staff Engineer's Path
-  author: Tanya Reilly and Wendy Tremont King
-  type: audiobook
-  starred: true
 - title: Tidy First?
   author: Kent Beck
   type: book
@@ -290,9 +142,6 @@
   type: book
   starred: true
 
-- title: Programming C# 12
-  author: Ian Griffiths
-  type: book
 
 - title: Software Engineering at Google
   author: Titus Winters, Tom Manshreck and Hyrum Wright
