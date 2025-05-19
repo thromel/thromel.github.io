@@ -14,3 +14,34 @@
         </div>
     </div>
 </footer>
+
+<!-- Add a script to fix the appointment button in mobile view -->
+<script>
+  // Wait for DOM to be fully loaded
+  document.addEventListener('DOMContentLoaded', function() {
+    // Initial check
+    fixAppointmentButton();
+    
+    // Wait a bit longer for any async components
+    setTimeout(fixAppointmentButton, 1000);
+    setTimeout(fixAppointmentButton, 2000);
+  });
+
+  function fixAppointmentButton() {
+    // Find any calendar button elements
+    var buttons = document.querySelectorAll('[data-calendar-scheduling-button]');
+    if (buttons.length > 0) {
+      buttons.forEach(function(button) {
+        button.classList.add('appointment-button');
+        // Fix any vertical text issues
+        var isMobile = window.innerWidth <= 767;
+        if (isMobile) {
+          // Ensure horizontal text
+          button.style.writingMode = 'horizontal-tb';
+          button.style.textOrientation = 'mixed';
+          button.style.letterSpacing = 'normal';
+        }
+      });
+    }
+  }
+</script>
