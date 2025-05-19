@@ -9,6 +9,34 @@ navbar_title: Learning
         <h2><i class="fas fa-graduation-cap mr-2" style="color: #003399;"></i>Learning</h2>
         <hr />
         <p>Welcome to my Learning page! Here I'll share resources, notes, and ongoing learning journeys related to software engineering, cloud, AI, and more.</p>
-        <!-- Add your learning content here -->
+        
+        <!-- Software Engineering Reading List -->
+        <div class="mt-4 mb-4">
+            <h3><i class="fas fa-book mr-2" style="color: #003399;"></i>Software Engineering Reading List</h3>
+            <p>A curated collection of books and resources for software engineers, architects, and tech leaders.</p>
+            
+            <div class="row">
+                {% for book in site.data.books %}
+                <div class="col-md-6 mb-3">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ book.title }}</h5>
+                            {% if book.subtitle %}
+                            <h6 class="card-subtitle mb-2 text-muted">{{ book.subtitle }}</h6>
+                            {% endif %}
+                            <p class="card-text">
+                                <small class="text-muted">
+                                    <i class="fas {% if book.type == 'book' %}fa-book{% elsif book.type == 'course' %}fa-laptop-code{% elsif book.type == 'conference' %}fa-users{% elsif book.type == 'audiobook' %}fa-headphones{% else %}fa-file-alt{% endif %} mr-1"></i>
+                                    {{ book.type | capitalize }}
+                                </small>
+                                <br>
+                                <small class="text-muted">By {{ book.author }}</small>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
     </div>
 </div> 
