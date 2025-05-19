@@ -15,28 +15,67 @@ navbar_title: Learning
             <h3><i class="fas fa-book mr-2" style="color: #003399;"></i>Software Engineering Reading List</h3>
             <p>A curated collection of books and resources for software engineers, architects, and tech leaders.</p>
             
-            <div class="row">
+            <div class="mb-3">
+                <span class="mr-3"><i class="fas fa-star" style="color: #FFD700;"></i> Highly recommended</span>
+                <button id="showStarredOnly" class="btn btn-sm btn-outline-primary">Show Starred Only</button>
+                <button id="showAll" class="btn btn-sm btn-outline-secondary ml-2">Show All</button>
+            </div>
+            
+            <ul class="list-group">
                 {% for book in site.data.books %}
-                <div class="col-md-6 mb-3">
-                    <div class="card h-100">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ book.title }}</h5>
-                            {% if book.subtitle %}
-                            <h6 class="card-subtitle mb-2 text-muted">{{ book.subtitle }}</h6>
-                            {% endif %}
-                            <p class="card-text">
-                                <small class="text-muted">
+                <li class="list-group-item book-item {% if book.starred %}starred-book{% else %}regular-book{% endif %}" style="border-left: {% if book.starred %}3px solid #FFD700{% else %}3px solid transparent{% endif %}">
+                    <div class="d-flex align-items-start">
+                        <div class="flex-grow-1">
+                            <div>
+                                {% if book.starred %}<i class="fas fa-star mr-2" style="color: #FFD700;"></i>{% endif %}
+                                <strong>{{ book.title }}</strong>
+                                {% if book.subtitle %}<small class="text-muted"> — {{ book.subtitle }}</small>{% endif %}
+                            </div>
+                            <div class="mt-1 text-muted">
+                                <small>by {{ book.author }}</small>
+                                <span class="mx-2">•</span>
+                                <small>
                                     <i class="fas {% if book.type == 'book' %}fa-book{% elsif book.type == 'course' %}fa-laptop-code{% elsif book.type == 'conference' %}fa-users{% elsif book.type == 'audiobook' %}fa-headphones{% else %}fa-file-alt{% endif %} mr-1"></i>
                                     {{ book.type | capitalize }}
                                 </small>
-                                <br>
-                                <small class="text-muted">By {{ book.author }}</small>
-                            </p>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </li>
                 {% endfor %}
-            </div>
+            </ul>
+
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    const showStarredOnlyBtn = document.getElementById('showStarredOnly');
+                    const showAllBtn = document.getElementById('showAll');
+                    const bookItems = document.querySelectorAll('.book-item');
+                    
+                    showStarredOnlyBtn.addEventListener('click', function() {
+                        bookItems.forEach(item => {
+                            if (item.classList.contains('starred-book')) {
+                                item.style.display = '';
+                            } else {
+                                item.style.display = 'none';
+                            }
+                        });
+                        showStarredOnlyBtn.classList.remove('btn-outline-primary');
+                        showStarredOnlyBtn.classList.add('btn-primary');
+                        showAllBtn.classList.remove('btn-secondary');
+                        showAllBtn.classList.add('btn-outline-secondary');
+                    });
+                    
+                    showAllBtn.addEventListener('click', function() {
+                        bookItems.forEach(item => {
+                            item.style.display = '';
+                        });
+                        showAllBtn.classList.remove('btn-outline-secondary');
+                        showAllBtn.classList.add('btn-secondary');
+                        showStarredOnlyBtn.classList.remove('btn-primary');
+                        showStarredOnlyBtn.classList.add('btn-outline-primary');
+                    });
+                });
+            </script>
         </div>
     </div>
 </div> 

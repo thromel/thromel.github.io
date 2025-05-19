@@ -2,28 +2,34 @@
   author: Andrey Akinshin
   subtitle: The Art of Performance Measurement
   type: book
+  starred: true
 
 - title: Learning Go
   author: Jon Bodner
   subtitle: 2nd Edition
   type: book
+  starred: false
 
 - title: Learning Systems Thinking
   author: Diana Montalion
   type: book
+  starred: false
 
 - title: The Phoenix Project
   author: Gene Kim, Kevin Behr and George Spafford
   type: book
+  starred: true
 
 - title: Fundamentals of Software Architecture
   author: Mark Richards and Neal Ford
   subtitle: 2nd Edition
   type: book
+  starred: true
 
 - title: Grokking Relational Database Design
   author: Qiang Hao and Michail Tsikerdekis
   type: book
+  starred: false
 
 - title: The Survivor's Guide to Enterprise Architecture
   author: Chloë Gray, Martin Sykes and Paul Homan
@@ -79,6 +85,7 @@
   author: David Thomas and Andrew Hunt
   subtitle: your journey to mastery, 20th Anniversary Edition, 2nd Edition
   type: book
+  starred: true
 
 - title: Developing Apps with GPT-4 and ChatGPT
   author: Olivier Caelen and Marie-Alice Blete
@@ -196,6 +203,7 @@
 - title: Working Effectively with Legacy Code
   author: Michael Feathers
   type: book
+  starred: true
 
 - title: The Staff Engineer's Path
   author: Tanya Reilly
