@@ -25,7 +25,6 @@
     // Wait a bit longer for any async components
     setTimeout(fixAppointmentButton, 1000);
     setTimeout(fixAppointmentButton, 2000);
-    // Additional check in case the button is loaded after a delay
     setTimeout(fixAppointmentButton, 3500);
   });
 
@@ -34,37 +33,12 @@
     var buttons = document.querySelectorAll('[data-calendar-scheduling-button]');
     if (buttons.length > 0) {
       buttons.forEach(function(button) {
-        // Apply our custom class
         button.classList.add('appointment-button');
         
-        // Fix styling issues regardless of screen size
-        button.style.display = 'inline-flex';
-        button.style.alignItems = 'center';
-        button.style.justifyContent = 'center';
+        // Fix any vertical text issues
         button.style.writingMode = 'horizontal-tb';
         button.style.textOrientation = 'mixed';
-        button.style.letterSpacing = '0.3px';
-        
-        // Add calendar icon if not already present
-        if (!button.getAttribute('data-icon-added')) {
-          var buttonText = button.textContent || button.innerText;
-          // Remove any existing text
-          while (button.firstChild) {
-            button.removeChild(button.firstChild);
-          }
-          
-          // Create icon element
-          var icon = document.createElement('i');
-          icon.className = 'fas fa-calendar-alt mr-2';
-          button.appendChild(icon);
-          
-          // Add text back
-          var textNode = document.createTextNode(buttonText);
-          button.appendChild(textNode);
-          
-          // Mark as processed
-          button.setAttribute('data-icon-added', 'true');
-        }
+        button.style.letterSpacing = 'normal';
       });
     }
   }
