@@ -1,0 +1,19 @@
+To generate proper favicons:
+
+1. Visit a favicon generator site like https://realfavicongenerator.net/
+2. Upload a high-quality square logo/image
+3. Customize settings as needed
+4. Download the favicon package
+5. Extract the files to this directory (assets/images/favicon/)
+6. Delete this placeholder file
+
+Recommended favicon sizes:
+- favicon.ico: 16x16, 32x32, 48x48 (multi-size ICO file)
+- apple-touch-icon.png: 180x180
+- favicon-32x32.png: 32x32
+- favicon-16x16.png: 16x16
+- android-chrome-192x192.png: 192x192
+- android-chrome-512x512.png: 512x512
+- safari-pinned-tab.svg: SVG format for Safari
+
+Using an online generator will create all of these sizes automatically from one source image. 
