@@ -62,33 +62,47 @@ h2:after {
         position: fixed !important;
         bottom: 20px !important;
         right: 20px !important;
+        left: auto !important;
         top: auto !important;
         transform: none !important;
-        z-index: 999 !important;
+        z-index: 9999 !important;
         height: auto !important;
         width: auto !important;
         writing-mode: horizontal-tb !important;
+        text-orientation: mixed !important;
+        writing-mode: initial !important;
+        text-orientation: initial !important;
         padding: 12px 20px !important;
         border-radius: 50px !important;
         font-size: 16px !important;
+        line-height: normal !important;
         white-space: nowrap !important;
         box-shadow: 0 3px 15px rgba(0, 0, 0, 0.25) !important;
-        display: inline-flex !important;
-        align-items: center !important;
-        justify-content: center !important;
+        display: block !important;
         letter-spacing: normal !important;
         word-spacing: normal !important;
-        text-orientation: mixed !important;
         background-color: #039BE5 !important;
         color: white !important;
         text-decoration: none !important;
-        min-width: 180px !important;
+        min-width: 0 !important;
+        max-width: none !important;
+        width: auto !important;
         text-align: center !important;
-        max-width: 80vw !important;
+        transform-origin: center !important;
+        transform: rotate(0deg) !important;
         transition: background-color 0.2s ease !important;
     }
     
     [data-calendar-scheduling-button]:active, .appointment-button:active {
         background-color: #0288D1 !important;
+    }
+    
+    /* Force any text inside to be horizontal */
+    [data-calendar-scheduling-button] *, .appointment-button * {
+        writing-mode: horizontal-tb !important;
+        text-orientation: mixed !important;
+        transform: none !important;
+        display: inline-block !important;
+        vertical-align: middle !important;
     }
 }

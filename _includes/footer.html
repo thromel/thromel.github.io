@@ -26,6 +26,32 @@
     setTimeout(fixAppointmentButton, 1000);
     setTimeout(fixAppointmentButton, 2000);
     setTimeout(fixAppointmentButton, 3500);
+    
+    // Also check when window is resized
+    window.addEventListener('resize', fixAppointmentButton);
+    
+    // Keep checking every 2 seconds for a minute
+    var checkCount = 0;
+    var checkInterval = setInterval(function() {
+      fixAppointmentButton();
+      checkCount++;
+      if (checkCount > 30) {
+        clearInterval(checkInterval);
+      }
+    }, 2000);
+    
+    // For mobile, add a custom appointment button as a fallback
+    if (window.innerWidth <= 767) {
+      addCustomAppointmentButton();
+    }
+    
+    window.addEventListener('resize', function() {
+      if (window.innerWidth <= 767) {
+        addCustomAppointmentButton();
+      } else {
+        removeCustomAppointmentButton();
+      }
+    });
   });
 
   function fixAppointmentButton() {
@@ -39,6 +65,74 @@
         button.style.writingMode = 'horizontal-tb';
         button.style.textOrientation = 'mixed';
         button.style.letterSpacing = 'normal';
+        button.style.position = 'fixed';
+        button.style.bottom = '20px';
+        button.style.right = '20px';
+        button.style.left = 'auto';
+        button.style.top = 'auto';
+        button.style.transform = 'none';
+        button.style.textOrientation = 'mixed';
+        
+        // Also fix any inner elements
+        var innerElements = button.querySelectorAll('*');
+        innerElements.forEach(function(el) {
+          el.style.writingMode = 'horizontal-tb';
+          el.style.textOrientation = 'mixed';
+          el.style.transform = 'none';
+          el.style.display = 'inline-block';
+          el.style.verticalAlign = 'middle';
+        });
+      });
+    }
+  }
+  
+  function addCustomAppointmentButton() {
+    // Only add if it doesn't already exist
+    if (!document.getElementById('custom-appointment-btn')) {
+      // Hide the original button on mobile
+      var originalButtons = document.querySelectorAll('[data-calendar-scheduling-button]');
+      originalButtons.forEach(function(btn) {
+        btn.style.display = 'none';
+      });
+      
+      // Create our custom button
+      var customBtn = document.createElement('a');
+      customBtn.id = 'custom-appointment-btn';
+      customBtn.href = 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ305Mj86OClwYTQjOE86Xp1LXkt1uYhGxI2YeQi7A-am9kKAbc9CXfitygxTrkmS5ZfG8ee3KZv?gv=true';
+      customBtn.target = '_blank';
+      customBtn.innerHTML = '<i class="fas fa-calendar-alt" style="margin-right: 8px;"></i>Book an appointment';
+      
+      // Style it
+      customBtn.style.position = 'fixed';
+      customBtn.style.bottom = '20px';
+      customBtn.style.right = '20px';
+      customBtn.style.zIndex = '9999';
+      customBtn.style.backgroundColor = '#039BE5';
+      customBtn.style.color = 'white';
+      customBtn.style.padding = '12px 20px';
+      customBtn.style.borderRadius = '50px';
+      customBtn.style.fontFamily = 'Lato, sans-serif';
+      customBtn.style.fontSize = '16px';
+      customBtn.style.textDecoration = 'none';
+      customBtn.style.boxShadow = '0 3px 15px rgba(0, 0, 0, 0.25)';
+      customBtn.style.display = 'flex';
+      customBtn.style.alignItems = 'center';
+      customBtn.style.justifyContent = 'center';
+      
+      // Add to body
+      document.body.appendChild(customBtn);
+    }
+  }
+  
+  function removeCustomAppointmentButton() {
+    var customBtn = document.getElementById('custom-appointment-btn');
+    if (customBtn) {
+      customBtn.remove();
+      
+      // Show the original button again
+      var originalButtons = document.querySelectorAll('[data-calendar-scheduling-button]');
+      originalButtons.forEach(function(btn) {
+        btn.style.display = 'inline-flex';
       });
     }
   }
