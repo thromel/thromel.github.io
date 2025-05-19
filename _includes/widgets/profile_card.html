@@ -35,9 +35,14 @@
                         <br/>
                         <div class="row">
                             <div class="col text-left d-flex align-items-center">
-                                <a class="pr-2 no-break d-flex align-items-center" href="mailto:{{ site.data.profile.email | encode_email }}">
-                                    <img src="/assets/images/icons/gmail.png" alt="Email" style="width: 28px; height: 28px;"/>
+                                <a class="pr-2 no-break d-flex align-items-center" href="mailto:{{ site.data.profile.email | encode_email }}" data-toggle="tooltip" title="Personal Email">
+                                    <img src="/assets/images/icons/gmail.png" alt="Personal Email" style="width: 28px; height: 28px;"/>
                                 </a>
+                                {% if site.data.profile.work_email %}
+                                <a class="pr-2 no-break d-flex align-items-center" href="mailto:{{ site.data.profile.work_email | encode_email }}" data-toggle="tooltip" title="Work Email">
+                                    <i class="fas fa-envelope fa-lg" style="color: #cc3333; font-size: 28px;"></i>
+                                </a>
+                                {% endif %}
                                 <span class="mx-2" style="font-size: 22px; color: #e0e0e0;">|</span>
                                 {% if site.data.profile.phone %}
                                 <a class="pr-2 no-break d-flex align-items-center" href="tel:{{ site.data.profile.phone }}">
