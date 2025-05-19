@@ -75,7 +75,14 @@
                                 {% endif %}
                                 
                                 <!-- Calendar button inline with other contact options -->
-                                <span class="no-break d-inline-block ml-2">
+                                <a class="appointment-button-wrapper no-break" href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ305Mj86OClwYTQjOE86Xp1LXkt1uYhGxI2YeQi7A-am9kKAbc9CXfitygxTrkmS5ZfG8ee3KZv?gv=true" target="_blank">
+                                    <span class="appointment-btn">
+                                        <i class="fas fa-calendar-alt mr-2"></i>Book an appointment
+                                    </span>
+                                </a>
+                                
+                                <!-- Hidden Google Calendar button that gets replaced by our custom one -->
+                                <span style="display: none;">
                                   <!-- Google Calendar Appointment Scheduling -->
                                   <link href="https://calendar.google.com/calendar/scheduling-button-script.css" rel="stylesheet">
                                   <script src="https://calendar.google.com/calendar/scheduling-button-script.js" async></script>
