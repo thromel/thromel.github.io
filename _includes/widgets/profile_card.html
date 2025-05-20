@@ -62,9 +62,14 @@
         <div class="card">
             <div class="card-body">
                 <h3 class="mb-3">About Me</h3>
-                <div class="my-4 pl-3 border-left" style="border-left-color: var(--accent-primary) !important; border-left-width: 4px !important;">
+                <div class="about-me-points">
                     {% for item in site.data.profile.summary %}
-                    <div class="mb-2">{{ item }}</div>
+                    <div class="about-me-point">
+                        <div class="point-indicator">
+                            <i class="fas fa-angle-right"></i>
+                        </div>
+                        <div class="point-content">{{ item }}</div>
+                    </div>
                     {% endfor %}
                 </div>
             </div>
