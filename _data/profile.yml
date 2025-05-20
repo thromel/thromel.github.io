@@ -97,7 +97,7 @@ summary:
 - "<b>📄 <a href='https://drive.google.com/file/d/166KeqxoI_06834jh8LvFod2umaOR3m7n/view?usp=sharing' target='_blank'>Download my CV</a></b> to learn more about my experience and qualifications"
 
 short_bio: >-
-  &#x1F44B Hi I'm Tanzim. I'm a software engineer and aspiring researcher passionate about creating solutions that make lives better for people. My interest lies in the fields of <b>Blockchain Technology, LLM Systems, and Image Steganography</b>, with a strong focus on <b>DevOps, Backend Engineering & AI Engineering</b>. I'm particularly interested in <b>Domain Driven Design, System Architecture, and Software Architecture</b>. Being both research and development oriented, I believe I can tackle challenges that require both kinds of efforts. My current career goal is to pursue excellence in software engineering while contributing to cutting-edge research.
+  &#x1F44B Hi I'm Tanzim. I'm a software engineer and aspiring researcher passionate about creating solutions that make lives better for people. My interest lies in the fields of <b>Software Engineering, Blockchain, and Image Steganography</b>, with a strong focus on <b>DevOps, Backend Engineering & AI Engineering</b>. I'm particularly interested in <b>Domain Driven Design, System Architecture, and Software Architecture</b>. Being both research and development oriented, I believe I can tackle challenges that require both kinds of efforts. My current career goal is to pursue excellence in software engineering while contributing to cutting-edge research.
   <br/><br/>
   🏆 In May 2025, I received the <a href='https://drive.google.com/file/d/1Vc4E2RoQEPmbfS56oLdUih-oJDBok9sP/view?usp=share_link' target='_blank'><b>IQVIA Impact Program – Silver</b></a> award for outstanding performance, critical issue resolution, and impactful feature development.
   <br/><br/>
@@ -119,7 +119,7 @@ short_bio: >-
   <br/><br/>
   🔄 I'm actively preparing for the <b>Certified Kubernetes Application Developer (CKAD)</b> and <b>AWS Solution Architect Associate</b> certifications to advance my knowledge in cloud infrastructure.
   <br/><br/>
-  🔍 As a <b>motivated researcher</b>, I am actively seeking <b>PhD/MSc positions for Spring/Fall 2026</b> to further my academic journey in computer science, focusing on distributed systems, AI, and blockchain technology.
+  🔍 As a <b>motivated researcher</b>, I am actively seeking <b>PhD/MSc positions for Spring/Fall 2026</b> to further my academic journey in computer science, focusing on software engineering, distributed systems, AI, and blockchain technology.
 
 portrait_url: /assets/images/photos/DP.JPG
 portrait_caption: Romel in Pahalgam, Kashmir in June, 2024.
@@ -232,11 +232,11 @@ awards:
     <a href='https://drive.google.com/file/d/1Vc4E2RoQEPmbfS56oLdUih-oJDBok9sP/view?usp=share_link' target='_blank'>IQVIA Impact Program – Silver (Certificate)</a>
 
 research_interests:
+- Software Engineering
 - Blockchain Technology
 - LLM Systems
 - Image Steganography
 - Microservices Architecture
-- Software Engineering
 - Distributed Systems
 
 skills:
@@ -292,12 +292,7 @@ soft_skills:
   - Problem-solving
   - Technical Communication
   - Cross-functional Collaboration
-  - Mentoring
-  - Project Management
-  - Stakeholder Management
   - Critical Thinking
-  - Time Management
-  - Technical Writing
 
 professional_memberships:
 - name: ACM (Association for Computing Machinery)

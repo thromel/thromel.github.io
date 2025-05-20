@@ -1,120 +1,96 @@
-<div class="row">
-    <div class="col">
-        <div class="card profile-card border-0 shadow-sm bg-white">
-            <div class="card-body p-5">
-                <div class="row">
-                    {% if site.data.profile.portrait_url %}
-                    <div class="col-12 col-md-auto text-center mb-4 mb-md-0 order-md-2">
-                        <figure class="figure">
-                            <img 
-                                src="{{ site.data.profile.portrait_url | relative_url }}" 
-                                class="figure-img img-fluid img-thumbnail" 
-                                style="max-height: 200px; max-width: 100%;"
-                                data-toggle="tooltip" 
-                                data-placement="top" 
-                                title="{{ site.data.profile.portrait_caption }}"
-                            >
-                        </figure>
-                    </div>
-                    {% endif %}
-                    <div class="col order-md-1">
-                        <p class="h1 font-weight-normal">{{ site.data.profile.primary_name }} <small>{{ site.data.profile.secondary_name }}</small></p>
-                        <p class="text-profile-position">
-                            {% assign first_position = site.data.profile.positions | first %}
-                            {% if first_position.logo -%}
-                            <img src="{{ first_position.logo | relative_url }}" alt="Logo" class="inline-badge"/>
-                            {%- endif %}
-                            {{ first_position.name }}<br/>
-                        </p>
-                        <!-- show list from summary -->
-                        <ul class="list-unstyled" style="font-size: 16px;">
-                            {% for item in site.data.profile.summary %}
-                            <li><i class="fa-regular fa-clone fa-flip-vertical"></i>&ensp;{{ item }}</li>
-                            {% endfor %}
-                        </ul>
-                        <br/>
-                        <div class="row">
-                            <div class="col text-left d-flex align-items-center">
-                                <a class="pr-2 no-break d-flex align-items-center" href="mailto:{{ site.data.profile.email | encode_email }}" data-toggle="tooltip" title="Personal Email">
-                                    <img src="/assets/images/icons/gmail.png" alt="Personal Email" style="width: 28px; height: 28px;"/>
-                                </a>
-                                {% if site.data.profile.work_email %}
-                                <a class="pr-2 no-break d-flex align-items-center" href="mailto:{{ site.data.profile.work_email | encode_email }}" data-toggle="tooltip" title="Work Email">
-                                    <i class="fas fa-envelope fa-lg" style="color: #cc3333; font-size: 28px;"></i>
-                                </a>
-                                {% endif %}
-                                <span class="mx-2" style="font-size: 22px; color: #e0e0e0;">|</span>
-                                {% if site.data.profile.phone %}
-                                <a class="pr-2 no-break d-flex align-items-center" href="tel:{{ site.data.profile.phone }}">
-                                    <i class="fas fa-phone fa-lg" style="color: #28a745; font-size: 28px;"></i>
-                                </a>
-                                {% endif %}
-                                
-                                {% if site.data.profile.github %}
-                                <a class="pr-3 no-break" target="_blank" href="https://github.com/{{ site.data.profile.github }}">
-                                    <i class="fab fa-github fa-2x" style="color: #1c1c1c;"></i>
-                                </a>
-                                {% endif %}
-        
-                                {% if site.data.profile.facebook %}
-                                <a class="pr-3 no-break" target="_blank" href="https://facebook.com/{{ site.data.profile.facebook }}">
-                                    <i class="fab fa-facebook fa-2x" style="color: #1877f3;"></i>
-                                </a>
-                                {% endif %}
-        
-                                {% if site.data.profile.twitter %}
-                                <a class="pr-3 no-break" target="_blank" href="https://twitter.com/{{ site.data.profile.twitter }}">
-                                    <i class="fab fa-x-twitter fa-2x" style="color: #1da1f2;"></i>
-                                </a>
-                                {% endif %}
-        
-                                {% if site.data.profile.linkedin %}
-                                <a class="pr-3 no-break" target="_blank" href="https://www.linkedin.com/in/{{ site.data.profile.linkedin }}">
-                                    <i class="fab fa-linkedin fa-2x" style="color: #0077B5;"></i>
-                                </a>
-                                {% endif %}
-                                
-                                <!-- Simple direct link for booking appointment -->
-                                <a href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ305Mj86OClwYTQjOE86Xp1LXkt1uYhGxI2YeQi7A-am9kKAbc9CXfitygxTrkmS5ZfG8ee3KZv?gv=true" 
-                                   target="_blank" 
-                                   class="btn btn-info btn-sm ml-2" 
-                                   style="background-color: #039BE5; color: white; border: none; border-radius: 4px; padding: 5px 12px; font-size: 14px;">
-                                    <i class="fas fa-calendar-alt mr-1"></i> Book appointment
-                                </a>
-                                
-                                <!-- Hidden Google Calendar button to prevent loading issues -->
-                                <span style="display: none;">
-                                  <!-- Google Calendar Appointment Scheduling -->
-                                  <link href="https://calendar.google.com/calendar/scheduling-button-script.css" rel="stylesheet">
-                                  <script src="https://calendar.google.com/calendar/scheduling-button-script.js" async></script>
-                                  <script>
-                                  (function() {
-                                    var target = document.currentScript;
-                                    window.addEventListener('load', function() {
-                                      calendar.schedulingButton.load({
-                                        url: 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ305Mj86OClwYTQjOE86Xp1LXkt1uYhGxI2YeQi7A-am9kKAbc9CXfitygxTrkmS5ZfG8ee3KZv?gv=true',
-                                        color: '#039BE5',
-                                        label: 'Book an appointment',
-                                        target,
-                                        customClass: 'appointment-button'
-                                      });
-                                    });
-                                  })();
-                                  </script>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                {% if site.data.profile.short_bio %}
-                <hr />
-                <div class="row">
-                    <h4>About Me</h4>
-                    <p>{{ site.data.profile.short_bio }}</p>
-                </div>
-                {% endif %}
+{% assign primary_name = site.data.profile.primary_name %}
+{% assign secondary_name = site.data.profile.secondary_name %}
+
+<div class="row mt-4">
+    <div class="col-md-4 mb-4">
+        <div class="profile-card">
+            <div class="terminal-header">
+                <span class="terminal-dot"></span>
+                <span class="terminal-dot"></span>
+                <span class="terminal-dot"></span>
+                <span class="terminal-title">dev@portfolio:~</span>
             </div>
-        </div>        
+            <div class="card-body">
+                <div class="text-center">
+                    <figure class="figure">
+                        <img src="{{site.data.profile.portrait_url}}" class="figure-img img-fluid" alt="Photo">
+                        {% if site.data.profile.portrait_caption %}
+                        <figcaption class="figure-caption text-center small">{{site.data.profile.portrait_caption}}</figcaption>
+                        {% endif %}
+                    </figure>
+                </div>
+                <div>
+                    <div class="text-center" style="margin-bottom: 0.5rem;">
+                        <div class="h4">
+                            <span class="typing-animation" data-text="{{ primary_name }}">{{ primary_name }}</span>
+                        </div>
+                        {% if secondary_name %}
+                        <div class="text-muted">{{ secondary_name }}</div>
+                        {% endif %}
+                    </div>
+                    <div class="text-center mt-3" style="font-size: 0.9rem; margin-bottom: 1rem;">
+                        <div class="text-muted"><i class="fas fa-map-marker-alt mr-1"></i> {{ site.data.profile.location }}</div>
+                        <div><i class="fas fa-envelope mr-1"></i> {{ site.data.profile.email }}</div>
+                        {% if site.data.profile.work_email %}
+                        <div><i class="fas fa-briefcase mr-1"></i> {{ site.data.profile.work_email }}</div>
+                        {% endif %}
+                        {% if site.data.profile.phone %}
+                        <div><i class="fas fa-phone mr-1"></i> {{ site.data.profile.phone }}</div>
+                        {% endif %}
+                    </div>
+                    <hr>
+                    <div class="text-center" style="font-size: 2rem; margin-bottom: 1rem;">
+                        {% if site.data.profile.github %}
+                        <a href="https://github.com/{{ site.data.profile.github }}" title="Github" style="color: var(--accent-primary); margin: 0 0.4rem;"><i class="fab fa-github"></i></a>
+                        {% endif %}
+                        {% if site.data.profile.linkedin %}
+                        <a href="https://www.linkedin.com/in/{{ site.data.profile.linkedin }}" title="Linkedin" style="color: var(--accent-primary); margin: 0 0.4rem;"><i class="fab fa-linkedin"></i></a>
+                        {% endif %}
+                        {% if site.data.profile.twitter %}
+                        <a href="https://twitter.com/{{ site.data.profile.twitter }}" title="Twitter" style="color: var(--accent-primary); margin: 0 0.4rem;"><i class="fab fa-twitter"></i></a>
+                        {% endif %}
+                        {% if site.data.profile.orcid %}
+                        <a href="https://orcid.org/{{ site.data.profile.orcid }}" title="ORCID" style="color: var(--accent-primary); margin: 0 0.4rem;"><i class="ai ai-orcid"></i></a>
+                        {% endif %}
+                        {% if site.data.profile.gscholar %}
+                        <a href="https://scholar.google.com/citations?user={{ site.data.profile.gscholar }}" title="Google Scholar" style="color: var(--accent-primary); margin: 0 0.4rem;"><i class="ai ai-google-scholar"></i></a>
+                        {% endif %}
+                        {% if site.data.profile.cv_link %}
+                        <a href="{{ site.data.profile.cv_link }}" target="_blank" title="CV" style="color: var(--accent-primary); margin: 0 0.4rem;"><i class="ai ai-cv"></i></a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-8">
+        <div class="card terminal-card">
+            <div class="terminal-header">
+                <span class="terminal-dot"></span>
+                <span class="terminal-dot"></span>
+                <span class="terminal-dot"></span>
+                <span class="terminal-title">about.js</span>
+            </div>
+            <div class="card-body">
+                <pre><code class="text-primary">/**
+ * @portfolio
+ * @version 1.0.0
+ */
+const developer = {
+  name: "{{ primary_name }}",
+  role: "Software Development Engineer & Aspiring Researcher",
+  expertise: ["Software Engineering", "Blockchain", "LLM Systems"],
+  currentFocus: "Building scalable systems and researching cutting-edge tech"
+};</code></pre>
+                <div class="my-4 pl-3 border-left" style="border-left-color: var(--accent-primary) !important; border-left-width: 4px !important;">
+                    {% for item in site.data.profile.summary %}
+                    <div class="mb-2">{{ item }}</div>
+                    {% endfor %}
+                </div>
+                <div>{{ site.data.profile.short_bio }}</div>
+            </div>
+        </div>
     </div>
 </div>
 

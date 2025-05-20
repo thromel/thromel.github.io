@@ -31,56 +31,70 @@ navbar_title: Home
                 <!-- Work Experience -->
                 <div class="row mt-3">
                     <div class="col">
-                        <h4><img src="/assets/images/icons/suitcase.png" alt="Work" class="inline-badge" style="width: 28px; height: 28px;"> Work Experience</h4>
-                        <ul class="timeline">
-                        {% for position in site.data.profile.positions %}
-                            <li class="media mb-4">
-                                <div class="media-body">
-                                    <div class="d-flex mb-2">
-                                        <div style="color: #003399; font-size: 18px;"><strong>{{ position.name }}</strong></div>
-                                        <div class="ml-auto no-break text-muted" style="font-size: 14px;"><em>{{ position.date }}</em></div>
+                        <div class="terminal-header">
+                            <span class="terminal-dot"></span>
+                            <span class="terminal-dot"></span>
+                            <span class="terminal-dot"></span>
+                            <span class="terminal-title">experience.js</span>
+                        </div>
+                        <div class="terminal-body">
+                            <div class="timeline">
+                                {% for position in site.data.profile.positions %}
+                                <div class="media mb-4 position-card">
+                                    <div class="media-body">
+                                        <div class="d-flex mb-2">
+                                            <div class="position-title"><span class="text-primary">const</span> <span class="text-success">{{ position.name | split: "," | first }}</span></div>
+                                            <div class="ml-auto no-break position-date"><span class="text-muted">// {{ position.date }}</span></div>
+                                        </div>
+                                        <div class="position-description mb-2">{{ position.description }}</div>
                                     </div>
                                 </div>
-                            </li>
-                        {% endfor %}
-                        </ul>
+                                {% endfor %}
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <h6 class="d-block text-center">
-                    <a href="{{ 'experience' | relative_url }}">All Work Experience <i class="fas fa-angle-double-right"></i></a>
+                <h6 class="d-block text-center mt-3">
+                    <a href="{{ 'experience' | relative_url }}" class="btn btn-sm btn-outline-primary">View All Experience <i class="fas fa-angle-double-right"></i></a>
                 </h6>
                 <hr />
 
                 <!-- Research -->
                 <div class="row mt-3">
                     <div class="col">
-                        <h4><img src="/assets/images/icons/open-book.png" alt="Research" class="inline-badge" style="width: 28px; height: 28px;"> Research & Projects</h4>
-                        {% for item in site.data.profile.research limit:2 %}
-                        <div class="d-flex mb-3 mr-2">
-                            <div class="col p-3 ml-md-2">
-                                {% assign showcase_item = site.showcase | where: "title", item.title | first %}
-                                <h5 class="mt-0 mb-2 font-weight-bold">
-                                    {% if showcase_item %}
-                                    <a href="{{ showcase_item.url | relative_url }}">{{ item.title }}</a>
-                                    {% else %}
-                                    {{ item.title }}
-                                    {% endif %}
-                                </h5>
-                                <div class="small d-flex">
-                                    <div style="color: green"><b>Research Project</b></div>
-                                    <div class="ml-auto"><em>{{ item.date }}</em></div>
+                        <div class="terminal-header">
+                            <span class="terminal-dot"></span>
+                            <span class="terminal-dot"></span>
+                            <span class="terminal-dot"></span>
+                            <span class="terminal-title">research.js</span>
+                        </div>
+                        <div class="terminal-body">
+                            {% for item in site.data.profile.research limit:2 %}
+                            <div class="research-card mb-4">
+                                <div class="research-title">
+                                    {% assign showcase_item = site.showcase | where: "title", item.title | first %}
+                                    <h5 class="mb-2 text-success">
+                                        <span class="text-primary">import</span> { {{item.title}} } <span class="text-primary">from</span> <span class="text-warning">'./projects'</span>
+                                    </h5>
                                 </div>
-                                <p class="mt-1 mb-2 small" style="text-align: justify; font-size: 14px;">{{ item.description }}</p>
+                                <div class="d-flex small mb-2">
+                                    <div class="text-success"><b>// Research Project</b></div>
+                                    <div class="ml-auto"><span class="text-muted">{{ item.date }}</span></div>
+                                </div>
+                                <div class="research-description mb-2 text-secondary">{{ item.description }}</div>
+                                {% if item.collaborator %}
+                                <div class="research-collaborator mb-3 text-info"><span class="text-primary">collaborator:</span> {{ item.collaborator }}</div>
+                                {% endif %}
                                 {% if showcase_item %}
-                                <a href="{{ showcase_item.url | relative_url }}" class="btn btn-sm btn-outline-primary">Read More</a>
+                                <a href="{{ showcase_item.url | relative_url }}" class="btn btn-sm btn-outline-primary">View Details</a>
                                 {% endif %}
                             </div>
+                            {% endfor %}
                         </div>
-                        {% endfor %}
                     </div>
                 </div>
-                <h6 class="d-block text-center">
-                    <a href="{{ 'research' | relative_url }}">All Research Projects <i class="fas fa-angle-double-right"></i></a>
+                <h6 class="d-block text-center mt-3">
+                    <a href="{{ 'research' | relative_url }}" class="btn btn-sm btn-outline-primary">View All Research <i class="fas fa-angle-double-right"></i></a>
                 </h6>
                 <hr />
 
@@ -127,21 +141,25 @@ navbar_title: Home
                 <!-- Technical Skills -->
                 <div class="row mt-3">
                     <div class="col">
-                        <h4><img src="/assets/images/icons/code.png" alt="Skill" class="inline-badge" style="width: 30px; height: 30px;"> Technical Skills</h4>
-                        <ul class="timeline">
-                            {% for item in site.data.profile.skills %}
-                            <li class="media mb-2">
-                                <div class="media-body">
-                                    <div><h6>{{ item.type }}</h6></div>
-                                    <div>
-                                        {% for name in item.names %}
-                                            <span style="display: inline-block; margin: 4px; padding: 5px 10px; border: 1px solid #bababa; border-radius: 5px; background-color: #ffffff; font-size: 14px;">{{ name }}</span>
-                                        {% endfor %}
-                                    </div>
-                                </div>
-                            </li>
-                            {% endfor %}
-                        </ul>          
+                        <div class="terminal-header">
+                            <span class="terminal-dot"></span>
+                            <span class="terminal-dot"></span>
+                            <span class="terminal-dot"></span>
+                            <span class="terminal-title">skills.json</span>
+                        </div>
+                        <div class="terminal-body">
+                            <pre><code>{
+  "technicalSkills": {
+    {% for item in site.data.profile.skills %}
+    "{{ item.type }}": [
+      {% for name in item.names %}
+      "{{ name }}"{% unless forloop.last %},{% endunless %}
+      {% endfor %}
+    ]{% unless forloop.last %},{% endunless %}
+    {% endfor %}
+  }
+}</code></pre>
+                        </div>
                     </div>
                 </div>
                 <hr />
@@ -149,17 +167,19 @@ navbar_title: Home
                 <!-- Soft Skills -->
                 <div class="row mt-3">
                     <div class="col">
-                        <h4><img src="/assets/images/icons/idea.png" alt="Soft Skills" class="inline-badge" style="width: 30px; height: 30px;"> Soft Skills</h4>
-                        <ul class="timeline">
-                            {% assign soft_skill_icons = "fa-users,fa-lightbulb,fa-comments,fa-people-arrows,fa-chalkboard-teacher,fa-tasks,fa-handshake,fa-brain,fa-clock,fa-pen-nib" | split: "," %}
-                            {% for skill in site.data.profile.soft_skills %}
-                            <li class="media mb-2">
-                                <div class="media-body">
-                                    <span><i class="fas {{ soft_skill_icons[forloop.index0] }}" style="color: #4299e1; margin-right: 8px;"></i>{{ skill }}</span>
-                                </div>
-                            </li>
-                            {% endfor %}
-                        </ul>
+                        <div class="terminal-header">
+                            <span class="terminal-dot"></span>
+                            <span class="terminal-dot"></span>
+                            <span class="terminal-dot"></span>
+                            <span class="terminal-title">softSkills.js</span>
+                        </div>
+                        <div class="terminal-body">
+                            <pre><code>const softSkills = [
+  {% for skill in site.data.profile.soft_skills %}
+  "{{ skill }}"{% unless forloop.last %},{% endunless %}
+  {% endfor %}
+];</code></pre>
+                        </div>
                     </div>
                 </div>
                 <hr />

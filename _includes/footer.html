@@ -1,19 +1,53 @@
-<footer class="footer">
-    <div class="{% if page.container_class %}{{ page.container_class }}{% else %}container-lg{% endif %}">
-        <div class="row my-3">
-            <div class="col-6">
-                <div class="text-muted">
-                    <i>Last updated: {{ "now" | date: "%b %Y" }}</i>
+<footer class="footer py-4">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 mb-3 mb-md-0">
+                <div class="terminal-like">
+                    <span class="text-primary">const</span> <span class="text-success">lastUpdated</span> = <span class="text-warning">"{{ "now" | date: "%b %Y" }}"</span>;
+                </div>
+                <div class="mt-2">
+                    <a href="https://github.com/{{ site.data.profile.github }}" class="social-link" title="GitHub"><i class="fab fa-github"></i></a>
+                    <a href="https://www.linkedin.com/in/{{ site.data.profile.linkedin }}" class="social-link" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    {% if site.data.profile.twitter %}
+                    <a href="https://twitter.com/{{ site.data.profile.twitter }}" class="social-link" title="Twitter"><i class="fab fa-twitter"></i></a>
+                    {% endif %}
                 </div>
             </div>
-            <div class="col-6">
-                <div class="text-right text-muted">
-                    {{ site.data.display.footer_text }}
+            <div class="col-md-6 text-md-right">
+                <div class="terminal-like">
+                    <span class="text-primary">console</span>.<span class="text-success">log</span>(<span class="text-warning">"© {{ 'now' | date: '%Y' }} {{ site.data.profile.primary_name }}"</span>);
+                </div>
+                <div class="small mt-2 text-muted">
+                    Made with <i class="fas fa-code" style="color: var(--accent-primary);"></i> and <i class="fas fa-coffee" style="color: var(--accent-tertiary);"></i>
                 </div>
             </div>
         </div>
     </div>
 </footer>
+
+<style>
+.terminal-like {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.9rem;
+}
+
+.social-link {
+    display: inline-block;
+    margin-right: 15px;
+    color: var(--text-muted);
+    font-size: 1.2rem;
+    transition: color 0.2s ease;
+}
+
+.social-link:hover {
+    color: var(--accent-primary);
+}
+
+.footer {
+    background-color: var(--bg-secondary);
+    border-top: 1px solid var(--border-color);
+}
+</style>
 
 <!-- Simple script to fix the appointment button -->
 <script>
