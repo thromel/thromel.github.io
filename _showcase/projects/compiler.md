@@ -1,4 +1,21 @@
-****
+---
+layout: showcase
+title: "Yet Another C Compiler"
+subtitle: "A complete multi-pass compiler for a subset of C"
+category: projects
+group: Projects
+show: true
+thumbnail: /assets/images/projects/compiler-thumbnail.png
+featured: true
+technologies:
+  - C++
+  - Flex
+  - Bison
+  - Assembly
+  - Compiler Design
+date: 2022-04-15
+---
+
 # Technical Deep Dive: Yet Another C Compiler
 
 ## 1. Architecture Overview
