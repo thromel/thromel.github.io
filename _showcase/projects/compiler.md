@@ -5,6 +5,9 @@ subtitle: "A complete multi-pass compiler for a subset of C"
 category: projects
 group: Projects
 show: true
+width: 8
+date: 2022-04-15 00:00:00 +0800
+excerpt: A sophisticated multi-pass compiler for a subset of C programming language, featuring lexical analysis, syntax analysis, semantic analysis, intermediate code generation, and assembly optimization.
 thumbnail: /assets/images/projects/compiler-thumbnail.png
 featured: true
 technologies:
@@ -13,7 +16,6 @@ technologies:
   - Bison
   - Assembly
   - Compiler Design
-date: 2022-04-15
 ---
 
 # Technical Deep Dive: Yet Another C Compiler
@@ -25,6 +27,8 @@ The compiler follows a traditional multi-pass architecture with distinct phases:
 ```
 Source Code → Lexical Analysis → Syntax Analysis → Semantic Analysis → Code Generation → Optimization → Assembly Code
 ```
+
+![Compiler Architecture Diagram](/assets/images/compiler_architecture_diagram.png)
 
 Each phase is implemented as separate components that communicate through well-defined interfaces:
 
