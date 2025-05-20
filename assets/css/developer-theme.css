@@ -108,6 +108,26 @@ a:hover {
   transition: all 0.2s ease;
 }
 
+/* Interest tags and plain skill tags */
+.interest-tag {
+  display: inline-block;
+  margin: 2px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  background-color: var(--bg-tertiary);
+  border: 1px solid var(--accent-primary);
+  color: var(--text-primary);
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.interest-tag:hover {
+  background-color: var(--accent-primary);
+  color: var(--bg-primary);
+  transition: all 0.2s ease;
+}
+
 /* Technology tags for showcase */
 .tech-tag {
   display: inline-block;

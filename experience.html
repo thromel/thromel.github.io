@@ -27,7 +27,7 @@ body_attr: >-
                     
                     {% if position.responsibilities %}
                     <div class="mb-3">
-                        <h6 style="color: #333;">Key Responsibilities:</h6>
+                        <h6 style="color: var(--accent-primary); font-weight: 600; font-size: 16px;">Key Responsibilities:</h6>
                         <ul style="font-size: 14px; padding-left: 20px;">
                             {% for item in position.responsibilities %}
                             <li class="mb-1">{{ item }}</li>
@@ -118,7 +118,7 @@ body_attr: >-
                         <div><h6>{{ item.type }}</h6></div>
                         <div>
                             {% for name in item.names %}
-                                <span style="display: inline-block; margin: 4px; padding: 5px 10px; border: 1px solid #bababa; border-radius: 5px; background-color: #ffffff; font-size: 14px;">{{ name }}</span>
+                                <span class="interest-tag">{{ name }}</span>
                             {% endfor %}
                         </div>
                     </div>
