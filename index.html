@@ -14,14 +14,14 @@ navbar_title: Home
 
 <div class="row mt-3">
     <div class="col">
-        <div class="card border-0 shadow-sm bg-white">
+        <div class="card border-0 shadow-sm">
             <div class="card-body p-5">
                 <div class="row">
                     <div class="col"><h2>My Resume</h2></div>
                     <div class="ml-auto">
                         {% if site.data.profile.cv_link %}
                         <a class="pr-3 no-break" target="_blank" href="{{site.data.profile.cv_link}}">
-                            <i class="fa-regular fa-file-pdf fa-2x mt-2 mr-2" style="color: #003399;"></i>
+                            <i class="fa-regular fa-file-pdf fa-2x mt-2 mr-2 icon-pdf"></i>
                         </a>
                         {% endif %}
                     </div>
@@ -69,7 +69,7 @@ navbar_title: Home
                                 </h5>
                             </div>
                             <div class="d-flex small mb-2">
-                                <div class="text-success"><b>Research Project</b></div>
+                                <div class="research-type"><b>Research Project</b></div>
                                 <div class="ml-auto text-muted">{{ item.date }}</div>
                             </div>
                             <div class="research-description mb-2">{{ item.description }}</div>
@@ -172,7 +172,7 @@ navbar_title: Home
                 <!-- Tests and Certifications -->
                 <div class="row mt-3">
                     <div class="col">
-                        <h4><i class="fa-solid fa-certificate mt-1 mr-2" style="color: #003399;"></i> Tests & Certifications</h4>
+                        <h4><i class="fa-solid fa-certificate mt-1 mr-2 icon-certificate"></i> Tests & Certifications</h4>
                         <ul class="timeline">
                             {% for cert in site.data.profile.tests_and_certifications %}
                             <li class="media mb-2">
@@ -198,7 +198,7 @@ navbar_title: Home
                 <!-- Professional Memberships -->
                 <div class="row mt-3">
                     <div class="col">
-                        <h4><i class="fa-solid fa-id-card mt-1 mr-2" style="color: #003399;"></i> Professional Memberships</h4>
+                        <h4><i class="fa-solid fa-id-card mt-1 mr-2 icon-membership"></i> Professional Memberships</h4>
                         <ul class="timeline">
                             {% for member in site.data.profile.professional_memberships %}
                             <li class="media mb-2">

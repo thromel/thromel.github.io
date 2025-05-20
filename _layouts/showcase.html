@@ -4,7 +4,7 @@ layout: default
 
 <div class="row mt-3">
     <div class="col">
-        <div class="card border-0 shadow-sm bg-white">
+        <div class="card border-0 shadow-sm">
             <div class="card-body p-5">
                 <h1 class="showcase-title">{{ page.title }}</h1>
                 
@@ -15,12 +15,12 @@ layout: default
                     </div>
                     <div class="ml-auto">
                         {% if page.group == "Projects" %}
-                        <span class="text-primary">
+                        <span class="project-type">
                             <i class="fa-solid fa-folder"></i>
                             Project
                         </span>
                         {% elsif page.group == "Research" %}
-                        <span class="text-success">
+                        <span class="research-type">
                             <i class="fa-solid fa-folder"></i>
                             Research
                         </span>

@@ -1,7 +1,7 @@
 {% assign top_news = site.data.news | sort: "date" | reverse | slice: 0, 3 %}
 {% assign news_by_year = top_news | group_by_exp: "item", "item.date | date: '%Y'" %}
 
-<div class="my-3 bg-white shadow-sm rounded-sm">
+<div class="my-3 shadow-sm rounded-sm">
     <h4 class="p-3 mb-0 border-bottom border-gray"><img src="/assets/images/icons/megaphone.png" alt="News" class="inline-badge" style="width: 28px; height: 28px;"> News and Updates </h4>
     <div class="px-3 pb-1">
         {% for year in news_by_year %}
@@ -11,7 +11,7 @@
             <div class="media-body">
                 {% for item in year.items %}
                 <div class="my-1 d-flex">
-                    <a href="news#year-{{ item.date | date: '%Y' }}" class="text-decoration-none" style="color: black;">
+                    <a href="news#year-{{ item.date | date: '%Y' }}" class="text-decoration-none text-inherit">
                         <div>{{ item.title }}</div>
                     </a>
                     

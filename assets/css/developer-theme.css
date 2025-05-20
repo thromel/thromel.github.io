@@ -32,6 +32,16 @@
   --certificate-icon: #61afff;
   --membership-icon: #61afff;
   
+  /* Code colors */
+  --code-bg: #1e2638;
+  --code-text: #e6edf3;
+  --code-border: #384357;
+  --code-comment: #61afff;
+  --code-keyword: #ff79c6;
+  --code-function: #50fa7b;
+  --code-string: #f1fa8c;
+  --code-number: #bd93f9;
+  
   /* Border and shadow */
   --border-color: #384357;
   --card-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
@@ -68,6 +78,16 @@
   --pdf-icon: #0366d6;
   --certificate-icon: #0366d6;
   --membership-icon: #0366d6;
+  
+  /* Code colors */
+  --code-bg: #f0f4f8;
+  --code-text: #1a1a1a;
+  --code-border: #d1d5da;
+  --code-comment: #0366d6;
+  --code-keyword: #d73a49;
+  --code-function: #6f42c1;
+  --code-string: #032f62;
+  --code-number: #005cc5;
   
   /* Border and shadow */
   --border-color: #e1e4e8;
@@ -588,4 +608,153 @@ strong, b {
 .icon-membership:hover {
   color: var(--accent-tertiary);
   transition: color 0.2s ease;
+}
+
+/* Code blocks styling - improved for high contrast */
+pre {
+  background-color: var(--code-bg);
+  color: var(--code-text);
+  border: 1px solid var(--code-border);
+  border-radius: 6px;
+  padding: 16px;
+  margin: 16px 0;
+  overflow: auto;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+  font-size: 14px;
+  line-height: 1.5;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Specific tweaks for dark theme code blocks */
+:root.dark-theme pre {
+  background-color: #1e2638;
+  color: #e6edf3;
+  border-color: #384357;
+}
+
+/* Specific tweaks for light theme code blocks */
+:root.light-theme pre {
+  background-color: #f0f4f8;
+  color: #1a1a1a;
+  border-color: #d1d5da;
+}
+
+code {
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+  background-color: var(--code-bg);
+  color: var(--code-text);
+  padding: 0.2em 0.4em;
+  border-radius: 3px;
+  font-size: 85%;
+}
+
+pre code {
+  padding: 0;
+  background-color: transparent;
+  border-radius: 0;
+  font-size: 100%;
+  color: inherit;
+}
+
+/* Symbol table CSS for dark theme */
+:root.dark-theme .symbol-table pre {
+  background-color: #253147;
+  color: #e6edf3;
+  border-color: #61afff;
+}
+
+/* Symbol table CSS for light theme */
+:root.light-theme .symbol-table pre {
+  background-color: #f8f9fa;
+  color: #1a1a1a;
+  border-color: #0366d6;
+}
+
+/* Base syntax highlighting colors */
+.code-keyword {
+  color: var(--code-keyword);
+  font-weight: bold;
+}
+
+.code-function {
+  color: var(--code-function);
+}
+
+.code-string {
+  color: var(--code-string);
+}
+
+.code-comment {
+  color: var(--code-comment);
+  font-style: italic;
+}
+
+.code-number {
+  color: var(--code-number);
+}
+
+/* Dark theme specific syntax highlighting */
+:root.dark-theme .code-keyword, :root.dark-theme .key, :root.dark-theme .keyword {
+  color: #ff79c6;
+  font-weight: bold;
+}
+
+:root.dark-theme .code-function, :root.dark-theme .function, :root.dark-theme .title.function_ {
+  color: #50fa7b;
+}
+
+:root.dark-theme .code-string, :root.dark-theme .string {
+  color: #f1fa8c;
+}
+
+:root.dark-theme .code-comment, :root.dark-theme .comment {
+  color: #6272a4;
+  font-style: italic;
+}
+
+:root.dark-theme .code-number, :root.dark-theme .number {
+  color: #bd93f9;
+}
+
+/* Light theme specific syntax highlighting */
+:root.light-theme .code-keyword, :root.light-theme .key, :root.light-theme .keyword {
+  color: #d73a49;
+  font-weight: bold;
+}
+
+:root.light-theme .code-function, :root.light-theme .function, :root.light-theme .title.function_ {
+  color: #6f42c1;
+}
+
+:root.light-theme .code-string, :root.light-theme .string {
+  color: #032f62;
+}
+
+:root.light-theme .code-comment, :root.light-theme .comment {
+  color: #6a737d;
+  font-style: italic;
+}
+
+:root.light-theme .code-number, :root.light-theme .number {
+  color: #005cc5;
+}
+
+/* Showcase page specific styles */
+.showcase-content pre {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  margin: 20px 0;
+}
+
+.showcase-title {
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.showcase-date {
+  color: var(--text-muted);
+}
+
+.showcase-navigation a {
+  text-decoration: none;
+  color: var(--accent-primary);
 } 
