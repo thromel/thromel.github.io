@@ -77,7 +77,7 @@
 
 <!-- Full width Bio section -->
 <div class="row mt-4">
-    <div class="col">
+    <div class="col-md-7">
         <div class="card">
             <div class="card-body">
                 <h3 class="mb-4">Bio</h3>
@@ -85,7 +85,88 @@
             </div>
         </div>
     </div>
+    <div class="col-md-5">
+        <div class="card">
+            <div class="card-body">
+                <h3 class="mb-3">Skills</h3>
+                <div class="skills-chart-container">
+                    <canvas id="skillsChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
+<!-- Add chart.js script -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const ctx = document.getElementById('skillsChart').getContext('2d');
+    
+    const skillsChart = new Chart(ctx, {
+        type: 'radar',
+        data: {
+            labels: ['Backend Engineering', 'DevOps', 'System Architecture', 'AI/ML', 'Blockchain', 'Research'],
+            datasets: [{
+                label: 'Skill Level',
+                data: [90, 85, 80, 78, 88, 82],
+                backgroundColor: 'rgba(97, 175, 255, 0.2)',
+                borderColor: 'rgba(97, 175, 255, 0.8)',
+                pointBackgroundColor: 'rgba(97, 175, 255, 1)',
+                pointBorderColor: '#fff',
+                pointHoverBackgroundColor: '#fff',
+                pointHoverBorderColor: 'rgba(97, 175, 255, 1)'
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: true,
+            scales: {
+                r: {
+                    angleLines: {
+                        color: 'rgba(255, 255, 255, 0.2)'
+                    },
+                    grid: {
+                        color: 'rgba(255, 255, 255, 0.2)'
+                    },
+                    pointLabels: {
+                        color: 'rgba(255, 255, 255, 0.8)',
+                        font: {
+                            family: "'Plus Jakarta Sans', 'Outfit', sans-serif",
+                            size: 12
+                        }
+                    },
+                    ticks: {
+                        color: 'rgba(255, 255, 255, 0.6)',
+                        backdropColor: 'transparent',
+                        font: {
+                            family: "'Plus Jakarta Sans', 'Outfit', sans-serif",
+                            size: 10
+                        }
+                    }
+                }
+            },
+            plugins: {
+                legend: {
+                    display: false
+                }
+            }
+        }
+    });
+    
+    // Apply theme changes when theme is toggled
+    document.addEventListener('themeChanged', function(e) {
+        const isDark = e.detail.isDark;
+        
+        skillsChart.options.scales.r.angleLines.color = isDark ? 'rgba(255, 255, 255, 0.2)' : 'rgba(0, 0, 0, 0.2)';
+        skillsChart.options.scales.r.grid.color = isDark ? 'rgba(255, 255, 255, 0.2)' : 'rgba(0, 0, 0, 0.2)';
+        skillsChart.options.scales.r.pointLabels.color = isDark ? 'rgba(255, 255, 255, 0.8)' : 'rgba(0, 0, 0, 0.8)';
+        skillsChart.options.scales.r.ticks.color = isDark ? 'rgba(255, 255, 255, 0.6)' : 'rgba(0, 0, 0, 0.6)';
+        
+        skillsChart.update();
+    });
+});
+</script>
 
 {% if site.data.profile.wechat_qrcode %}
 <div class="modal fade" id="modal-wechat" tabindex="-1" aria-hidden="true">
