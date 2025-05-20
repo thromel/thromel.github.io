@@ -105,6 +105,8 @@ short_bio: >-
   <br/><br/>
   &#x1F4DC I've conducted research on Blockchain in Healthcare, developing an advanced framework with sharding, Layer-2 solutions, and DAG ledger. I'm also working on projects related to LLM API Contract Analysis and Multi-Cover Image Steganography.
   <br/><br/>
+  🤝 I'm fortunate to collaborate with esteemed researchers: <a href="https://sites.google.com/site/abmalimalislam/home" target="_blank">Professor A. B. M. Alim Al Islam</a> (BUET) on image steganography, <a href="https://akondrahman.github.io" target="_blank">Dr. Akond Rahman</a> (Auburn University) on LLM API contracts, and <a href="https://cse.buet.ac.bd/faculty/faculty_detail/asmlatifulhoque" target="_blank">Professor ASM Latiful Hoque</a> (BUET) on blockchain technology who was also my undergraduate thesis supervisor.
+  <br/><br/>
   &#x1F3C6 During my time at BUET, I received recognition for my academic achievements, including the <b>Dean's List Award</b> and placing 2nd in the Bangla Handwritten Digits Recognition contest.
   <br/><br/>
   🏫 I completed my B.Sc in Computer Science and Engineering from <b>Bangladesh University of Engineering and Technology</b> with a GPA of 3.53/4.0.
@@ -309,7 +311,7 @@ research:
     with innovative channel- and spatial-splitting strategies, parallel processing branches, 
     and a composite loss function for robust training.
   collaborator: >-
-    Working with Professor A. B. M. Alim Al Islam from BUET, whose research 
+    Working with <a href="https://sites.google.com/site/abmalimalislam/home" target="_blank">Professor A. B. M. Alim Al Islam</a> from BUET, whose research 
     covers wireless networking, embedded systems, HCI, security and privacy.
 
 - title: Extending LLM API Contract Analysis A Refined Taxonomy and Empirical Study
@@ -318,7 +320,7 @@ research:
     Developed an extended taxonomy for API contracts in LLM libraries, conducted empirical studies on 
     real-world issues, and proposed recommendations for LLM library developers and LLMOps tool builders.
   collaborator: >-
-    Collaborating with Dr. Akond Rahman, Assistant Professor at Auburn University, 
+    Collaborating with <a href="https://akondrahman.github.io" target="_blank">Dr. Akond Rahman</a>, Assistant Professor at Auburn University, 
     who specializes in DevOps, cybersecurity, and secure software development.
 
 - title: Blockchain in Healthcare 2.0
@@ -327,7 +329,7 @@ research:
     Engineered an advanced blockchain framework with sharding, Layer-2 solutions, and a DAG ledger, 
     implementing patient-centric consent management, HL7 FHIR standards, and privacy-preserving computation.
   collaborator: >-
-    Project supervised by Professor ASM Latiful Hoque from BUET (my undergraduate thesis supervisor), 
+    Project supervised by <a href="https://cse.buet.ac.bd/faculty/faculty_detail/asmlatifulhoque" target="_blank">Professor ASM Latiful Hoque</a> from BUET (my undergraduate thesis supervisor), 
     who specializes in data warehousing, data mining, big data analytics, and database technologies.
 
 publications:
