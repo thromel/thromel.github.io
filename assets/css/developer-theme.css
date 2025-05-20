@@ -1,21 +1,21 @@
-/* Modern dark theme */
+/* Modern dark theme with improved contrast */
 :root {
-  --bg-primary: #0d1117;
-  --bg-secondary: #161b22;
-  --bg-tertiary: #21262d;
-  --text-primary: #e6edf3;
-  --text-secondary: #c9d1d9;
-  --text-muted: #8b949e;
-  --border-color: #30363d;
-  --accent-primary: #58a6ff;
-  --accent-secondary: #238636;
-  --accent-tertiary: #f0883e;
-  --card-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  --bg-primary: #0a0e14;
+  --bg-secondary: #121720;
+  --bg-tertiary: #1c2333;
+  --text-primary: #ffffff;
+  --text-secondary: #e6edf3;
+  --text-muted: #a3b3c9;
+  --border-color: #384357;
+  --accent-primary: #61afff;
+  --accent-secondary: #36d058;
+  --accent-tertiary: #ff9d4d;
+  --card-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
   --section-border: 1px solid var(--border-color);
   --section-padding: 25px;
-  --scrollbar-track: #161b22;
-  --scrollbar-thumb: #30363d;
-  --scrollbar-thumb-hover: #4d565f;
+  --scrollbar-track: #121720;
+  --scrollbar-thumb: #384357;
+  --scrollbar-thumb-hover: #4d5e7a;
 }
 
 /* Base styles */
@@ -63,7 +63,7 @@ a:hover {
 
 .card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
 }
 
 .card-body {
@@ -98,7 +98,7 @@ a:hover {
   border-radius: 4px;
   background-color: var(--bg-tertiary);
   border: 1px solid var(--border-color);
-  color: var(--text-secondary);
+  color: var(--text-primary);
   font-size: 0.85rem;
 }
 
@@ -134,11 +134,40 @@ a:hover {
 .navbar {
   background-color: var(--bg-secondary);
   border-bottom: 1px solid var(--border-color);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 
 .navbar-brand, .nav-link {
   color: var(--text-primary) !important;
+}
+
+/* Improve menu button visibility */
+.navbar-toggler {
+  color: var(--accent-primary) !important;
+  border-color: var(--accent-primary) !important;
+  background-color: rgba(97, 175, 255, 0.2);
+  padding: 0.5rem 0.75rem !important;
+  font-weight: bold;
+}
+
+.navbar-toggler i {
+  color: var(--accent-primary) !important;
+  margin-right: 5px;
+}
+
+.menu-text {
+  color: var(--accent-primary) !important;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.navbar-toggler-icon {
+  filter: brightness(2);
+}
+
+.navbar-text, .navbar-toggler-text {
+  color: var(--text-primary) !important;
+  font-weight: 500;
 }
 
 .nav-link {
@@ -164,21 +193,26 @@ a:hover {
 .btn-primary {
   background-color: var(--accent-primary);
   border-color: var(--accent-primary);
+  color: #000000;
+  font-weight: 500;
 }
 
 .btn-success {
   background-color: var(--accent-secondary);
   border-color: var(--accent-secondary);
+  color: #000000;
+  font-weight: 500;
 }
 
 .btn-outline-primary {
   color: var(--accent-primary);
   border-color: var(--accent-primary);
+  font-weight: 500;
 }
 
 .btn-outline-primary:hover {
   background-color: var(--accent-primary);
-  color: var(--bg-primary);
+  color: #000000;
 }
 
 /* Profile card */
@@ -190,7 +224,7 @@ a:hover {
 
 .profile-card img {
   border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
 /* Scrollbar customization */
@@ -245,6 +279,7 @@ footer {
   margin-bottom: 10px;
   cursor: pointer;
   font-size: 0.9rem;
+  font-weight: 500;
 }
 
 .collapsible-btn:hover {
@@ -253,7 +288,7 @@ footer {
 
 /* Override Bootstrap Dark */
 .bg-light {
-  background-color: var(--bg-primary) !important;
+  background-color: var(--bg-secondary) !important;
 }
 
 .text-muted {
@@ -273,7 +308,7 @@ footer {
 }
 
 .table {
-  color: var(--text-secondary);
+  color: var(--text-primary);
 }
 
 .table-borderless td {
@@ -291,16 +326,18 @@ footer {
 
 .research-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
 }
 
 .research-title h5 {
   margin-bottom: 0.5rem;
+  color: var(--text-primary);
 }
 
 .research-description {
   line-height: 1.6;
   margin-bottom: 1rem;
+  color: var(--text-secondary);
 }
 
 /* Position Card */
@@ -319,6 +356,7 @@ footer {
 .position-title {
   font-size: 1.1rem;
   font-weight: 600;
+  color: var(--text-primary);
 }
 
 .position-date {
@@ -341,4 +379,30 @@ footer {
 #hobby-reading {
   background-color: var(--bg-tertiary);
   border: 1px solid var(--border-color);
+}
+
+/* Additional contrast improvements */
+.text-success {
+  color: var(--accent-secondary) !important;
+}
+
+.text-info {
+  color: #56d4dd !important;
+}
+
+.figure-caption {
+  color: var(--text-muted);
+}
+
+.social-link {
+  color: var(--text-secondary);
+}
+
+/* Improving contrast for list items and paragraphs */
+li, p {
+  color: var(--text-secondary);
+}
+
+strong, b {
+  color: var(--text-primary);
 } 
