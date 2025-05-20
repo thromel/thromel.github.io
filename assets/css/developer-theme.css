@@ -784,29 +784,30 @@ pre code {
   color: var(--accent-primary);
 }
 
-/* About Me section - simplified design */
+/* About Me pointed design */
 .about-me-container {
   margin: 1rem 0;
 }
 
 .about-me-item {
   position: relative;
-  padding: 0.6rem 0.8rem;
-  margin-bottom: 0.6rem;
-  transition: all 0.2s ease;
-  border-radius: 4px;
-  background-color: rgba(97, 175, 255, 0.03);
+  padding: 0.5rem 0.5rem 0.5rem 1.2rem;
+  margin-bottom: 0.7rem;
+  transition: all 0.25s ease;
+  border-left: 3px solid var(--accent-primary);
+  background-color: rgba(97, 175, 255, 0.05);
+  border-radius: 0 4px 4px 0;
 }
 
 .about-me-item:hover {
-  background-color: rgba(97, 175, 255, 0.08);
-  transform: translateY(-2px);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  transform: translateX(5px);
+  background-color: rgba(97, 175, 255, 0.1);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .about-me-arrow {
   color: var(--accent-primary);
-  font-size: 0.5rem;
+  font-size: 1rem;
   margin-right: 0.5rem;
   display: inline-block;
   vertical-align: middle;
@@ -814,8 +815,7 @@ pre code {
 
 .about-me-text {
   color: var(--text-secondary);
-  font-size: 15px;
+  font-size: 16px;
   display: inline-block;
   vertical-align: middle;
-  line-height: 1.4;
 } 
