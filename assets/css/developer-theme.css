@@ -1,21 +1,83 @@
-/* Modern dark theme with improved contrast */
+/* Common variables for light and dark theme */
 :root {
+  /* Spacing */
+  --section-padding: 25px;
+  
+  /* Theme-specific variables will be set in each theme */
+}
+
+/* Dark theme (default) */
+:root.dark-theme {
+  /* Base colors */
   --bg-primary: #0a0e14;
   --bg-secondary: #121720;
   --bg-tertiary: #1c2333;
+  
+  /* Text colors */
   --text-primary: #ffffff;
   --text-secondary: #e6edf3;
   --text-muted: #a3b3c9;
-  --border-color: #384357;
+  
+  /* Accent colors */
   --accent-primary: #61afff;
   --accent-secondary: #36d058;
   --accent-tertiary: #ff9d4d;
+  
+  /* Special purpose colors */
+  --position-title: #61afff;
+  --project-type: #36d058;
+  --research-type: #36d058;
+  --star-color: #FFD700;
+  --pdf-icon: #61afff;
+  --certificate-icon: #61afff;
+  --membership-icon: #61afff;
+  
+  /* Border and shadow */
+  --border-color: #384357;
   --card-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
   --section-border: 1px solid var(--border-color);
-  --section-padding: 25px;
+  
+  /* Scrollbar */
   --scrollbar-track: #121720;
   --scrollbar-thumb: #384357;
   --scrollbar-thumb-hover: #4d5e7a;
+}
+
+/* Light theme */
+:root.light-theme {
+  /* Base colors */
+  --bg-primary: #f5f7fa;
+  --bg-secondary: #ffffff;
+  --bg-tertiary: #e9eef5;
+  
+  /* Text colors */
+  --text-primary: #1a1a1a;
+  --text-secondary: #343a40;
+  --text-muted: #6c757d;
+  
+  /* Accent colors */
+  --accent-primary: #0366d6;
+  --accent-secondary: #28a745;
+  --accent-tertiary: #f48024;
+  
+  /* Special purpose colors */
+  --position-title: #0366d6;
+  --project-type: #28a745;
+  --research-type: #28a745;
+  --star-color: #FFD700;
+  --pdf-icon: #0366d6;
+  --certificate-icon: #0366d6;
+  --membership-icon: #0366d6;
+  
+  /* Border and shadow */
+  --border-color: #e1e4e8;
+  --card-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  --section-border: 1px solid var(--border-color);
+  
+  /* Scrollbar */
+  --scrollbar-track: #f1f1f1;
+  --scrollbar-thumb: #c1c1c1;
+  --scrollbar-thumb-hover: #a8a8a8;
 }
 
 /* Base styles */
@@ -24,6 +86,7 @@ body {
   color: var(--text-primary);
   font-family: 'Inter', 'Roboto', sans-serif;
   line-height: 1.6;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -48,6 +111,29 @@ a {
 a:hover {
   color: var(--accent-tertiary);
   text-decoration: none;
+}
+
+/* Theme toggler */
+.theme-toggle {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: var(--accent-primary);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  transition: all 0.3s ease;
+}
+
+.theme-toggle:hover {
+  transform: scale(1.1);
 }
 
 /* Card styles */
@@ -445,4 +531,61 @@ li, p {
 
 strong, b {
   color: var(--text-primary);
+}
+
+/* Common themed elements */
+.position-title {
+  color: var(--position-title);
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.project-type {
+  color: var(--project-type);
+}
+
+.research-type {
+  color: var(--research-type);
+  font-weight: bold;
+}
+
+.key-responsibilities {
+  color: var(--accent-primary);
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.icon-primary {
+  color: var(--accent-primary);
+  margin: 0 0.4rem;
+}
+
+.icon-pdf {
+  color: var(--pdf-icon);
+}
+
+.icon-certificate {
+  color: var(--certificate-icon);
+}
+
+.icon-membership {
+  color: var(--membership-icon);
+}
+
+.icon-star {
+  color: var(--star-color);
+}
+
+/* Utility classes */
+.text-inherit {
+  color: inherit;
+}
+
+/* Subtle hover effects for icons */
+.icon-primary:hover,
+.icon-pdf:hover,
+.icon-certificate:hover,
+.icon-membership:hover {
+  color: var(--accent-tertiary);
+  transition: color 0.2s ease;
 } 
