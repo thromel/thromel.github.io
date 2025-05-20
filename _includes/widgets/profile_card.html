@@ -3,13 +3,7 @@
 
 <div class="row mt-4">
     <div class="col-md-4 mb-4">
-        <div class="profile-card">
-            <div class="terminal-header">
-                <span class="terminal-dot"></span>
-                <span class="terminal-dot"></span>
-                <span class="terminal-dot"></span>
-                <span class="terminal-title">dev@portfolio:~</span>
-            </div>
+        <div class="card profile-card">
             <div class="card-body">
                 <div class="text-center">
                     <figure class="figure">
@@ -22,7 +16,7 @@
                 <div>
                     <div class="text-center" style="margin-bottom: 0.5rem;">
                         <div class="h4">
-                            <span class="typing-animation" data-text="{{ primary_name }}">{{ primary_name }}</span>
+                            {{ primary_name }}
                         </div>
                         {% if secondary_name %}
                         <div class="text-muted">{{ secondary_name }}</div>
@@ -65,24 +59,9 @@
     </div>
 
     <div class="col-md-8">
-        <div class="card terminal-card">
-            <div class="terminal-header">
-                <span class="terminal-dot"></span>
-                <span class="terminal-dot"></span>
-                <span class="terminal-dot"></span>
-                <span class="terminal-title">about.js</span>
-            </div>
+        <div class="card">
             <div class="card-body">
-                <pre><code class="text-primary">/**
- * @portfolio
- * @version 1.0.0
- */
-const developer = {
-  name: "{{ primary_name }}",
-  role: "Software Development Engineer & Aspiring Researcher",
-  expertise: ["Software Engineering", "Blockchain", "LLM Systems"],
-  currentFocus: "Building scalable systems and researching cutting-edge tech"
-};</code></pre>
+                <h3 class="mb-3">About Me</h3>
                 <div class="my-4 pl-3 border-left" style="border-left-color: var(--accent-primary) !important; border-left-width: 4px !important;">
                     {% for item in site.data.profile.summary %}
                     <div class="mb-2">{{ item }}</div>

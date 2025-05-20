@@ -2,8 +2,8 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6 mb-3 mb-md-0">
-                <div class="terminal-like">
-                    <span class="text-primary">const</span> <span class="text-success">lastUpdated</span> = <span class="text-warning">"{{ "now" | date: "%b %Y" }}"</span>;
+                <div class="text-muted">
+                    <i>Last updated: {{ "now" | date: "%b %Y" }}</i>
                 </div>
                 <div class="mt-2">
                     <a href="https://github.com/{{ site.data.profile.github }}" class="social-link" title="GitHub"><i class="fab fa-github"></i></a>
@@ -14,11 +14,11 @@
                 </div>
             </div>
             <div class="col-md-6 text-md-right">
-                <div class="terminal-like">
-                    <span class="text-primary">console</span>.<span class="text-success">log</span>(<span class="text-warning">"© {{ 'now' | date: '%Y' }} {{ site.data.profile.primary_name }}"</span>);
+                <div class="text-muted">
+                    &copy; {{ 'now' | date: '%Y' }} {{ site.data.profile.primary_name }}
                 </div>
                 <div class="small mt-2 text-muted">
-                    Made with <i class="fas fa-code" style="color: var(--accent-primary);"></i> and <i class="fas fa-coffee" style="color: var(--accent-tertiary);"></i>
+                    Made with <i class="fas fa-heart" style="color: var(--accent-primary);"></i> using modern web technologies
                 </div>
             </div>
         </div>
@@ -26,11 +26,6 @@
 </footer>
 
 <style>
-.terminal-like {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.9rem;
-}
-
 .social-link {
     display: inline-block;
     margin-right: 15px;
