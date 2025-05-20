@@ -31,6 +31,26 @@
                         {% if site.data.profile.phone %}
                         <div><i class="fas fa-phone mr-1"></i> {{ site.data.profile.phone }}</div>
                         {% endif %}
+                        
+                        <!-- Google Calendar Appointment Scheduling -->
+                        <div class="mt-3">
+                            <link href="https://calendar.google.com/calendar/scheduling-button-script.css" rel="stylesheet">
+                            <script src="https://calendar.google.com/calendar/scheduling-button-script.js" async></script>
+                            <script>
+                            (function() {
+                              var target = document.currentScript;
+                              window.addEventListener('load', function() {
+                                calendar.schedulingButton.load({
+                                  url: 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ305Mj86OClwYTQjOE86Xp1LXkt1uYhGxI2YeQi7A-am9kKAbc9CXfitygxTrkmS5ZfG8ee3KZv?gv=true',
+                                  color: 'var(--accent-primary)',
+                                  label: '<i class="far fa-calendar-alt mr-1"></i> Book an appointment',
+                                  target,
+                                  className: 'calendar-button'
+                                });
+                              });
+                            })();
+                            </script>
+                        </div>
                     </div>
                     <hr>
                     <div class="text-center" style="font-size: 2rem; margin-bottom: 1rem;">
@@ -53,26 +73,6 @@
                         <a href="{{ site.data.profile.cv_link }}" target="_blank" title="CV" class="icon-primary"><i class="ai ai-cv"></i></a>
                         {% endif %}
                     </div>
-                    
-                    <!-- Google Calendar Appointment Scheduling -->
-                    <div class="text-center mt-3">
-                        <link href="https://calendar.google.com/calendar/scheduling-button-script.css" rel="stylesheet">
-                        <script src="https://calendar.google.com/calendar/scheduling-button-script.js" async></script>
-                        <script>
-                        (function() {
-                          var target = document.currentScript;
-                          window.addEventListener('load', function() {
-                            calendar.schedulingButton.load({
-                              url: 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ305Mj86OClwYTQjOE86Xp1LXkt1uYhGxI2YeQi7A-am9kKAbc9CXfitygxTrkmS5ZfG8ee3KZv?gv=true',
-                              color: 'var(--accent-primary)',
-                              label: '<i class="far fa-calendar-alt mr-1"></i> Book an appointment',
-                              target,
-                              className: 'calendar-button'
-                            });
-                          });
-                        })();
-                        </script>
-                    </div>
                 </div>
             </div>
         </div>
@@ -81,11 +81,11 @@
     <div class="col-md-8">
         <div class="card h-100">
             <div class="card-body">
-                <h3 class="mb-3">About Me</h3>
+                <h4 class="mb-2">About Me</h4>
                 <div class="about-me-container">
                     {% for item in site.data.profile.summary %}
                     <div class="about-me-item">
-                        <span class="about-me-arrow"><i class="fas fa-circle"></i></span>
+                        <span class="about-me-arrow">•</span>
                         <span class="about-me-text">{{ item }}</span>
                     </div>
                     {% endfor %}
