@@ -308,18 +308,27 @@ research:
     Extended the StegFormer architecture to hide secret images across multiple cover images, 
     with innovative channel- and spatial-splitting strategies, parallel processing branches, 
     and a composite loss function for robust training.
+  collaborator: >-
+    Working with Professor A. B. M. Alim Al Islam from BUET, whose research 
+    covers wireless networking, embedded systems, HCI, security and privacy.
 
 - title: Extending LLM API Contract Analysis A Refined Taxonomy and Empirical Study
   date: Nov 2024 - Present
   description: >-
     Developed an extended taxonomy for API contracts in LLM libraries, conducted empirical studies on 
     real-world issues, and proposed recommendations for LLM library developers and LLMOps tool builders.
+  collaborator: >-
+    Collaborating with Dr. Akond Rahman, Assistant Professor at Auburn University, 
+    who specializes in DevOps, cybersecurity, and secure software development.
 
 - title: Blockchain in Healthcare 2.0
   date: June 2022 - May 2023
   description: >-
     Engineered an advanced blockchain framework with sharding, Layer-2 solutions, and a DAG ledger, 
     implementing patient-centric consent management, HL7 FHIR standards, and privacy-preserving computation.
+  collaborator: >-
+    Project supervised by Professor ASM Latiful Hoque from BUET (my undergraduate thesis supervisor), 
+    who specializes in data warehousing, data mining, big data analytics, and database technologies.
 
 publications:
 - title: An Unconventional Tale on Sentiment Analysis over Anonymous Online Reporting by the People in Bangladesh during an Outburst Period

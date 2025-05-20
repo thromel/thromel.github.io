@@ -36,6 +36,9 @@ body_attr: >-
                             <div class="ml-auto"><em>{{ item.date }}</em></div>
                         </div>
                         <p class="mt-1 mb-2 small" style="text-align: justify; font-size: 14px;">{{ item.description }}</p>
+                        {% if item.collaborator %}
+                        <p class="mt-1 mb-2 small" style="text-align: justify; font-size: 14px; color: #0056b3;"><strong>Collaboration:</strong> {{ item.collaborator }}</p>
+                        {% endif %}
                         {% if showcase_item %}
                         <a href="{{ showcase_item.url | relative_url }}" class="btn btn-sm btn-outline-primary">Read More</a>
                         {% endif %}
