@@ -56,6 +56,34 @@ h2:after {
     box-shadow: 0 0 0 4px rgba(26, 86, 219, 0.1);
 }
 
+/* Table styles for better contrast in dark mode */
+:root.dark-theme .table {
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+}
+
+:root.dark-theme .table-bordered,
+:root.dark-theme .table-bordered td,
+:root.dark-theme .table-bordered th {
+    border-color: var(--border-color);
+}
+
+:root.dark-theme .table-light,
+:root.dark-theme .table-light td,
+:root.dark-theme .table-light th {
+    background-color: var(--bg-tertiary);
+    color: var(--text-primary);
+}
+
+:root.dark-theme .table td,
+:root.dark-theme .table th {
+    color: var(--text-primary);
+}
+
+:root.dark-theme .table-responsive {
+    background-color: var(--bg-secondary);
+}
+
 /* Fix for Google Calendar button */
 [data-calendar-scheduling-button] {
     display: inline-block !important;

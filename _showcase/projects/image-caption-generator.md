@@ -6,6 +6,7 @@ date: 2023-01-15 00:00:00 +0800
 group: Projects
 title: Image Caption Generation with BERT Context Vectors
 excerpt: Extended the "Show, Attend, and Tell" image captioning model with BERT to improve caption quality and reduce training time, achieving 36% improvement in CIDEr score and 43% improvement in BLEU-4.
+thumbnail: /assets/images/image-caption-generator.png
 technologies:
   - PyTorch
   - BERT
@@ -32,19 +33,19 @@ The project demonstrates significant improvements in caption quality while impro
 
 ### Introduction
 
-In the fast-paced world of AI research, staying current with the latest architectures and techniques is crucial for building state-of-the-art systems. Our image captioning project is a perfect example of this evolution. We began with a solid foundation based on the classic "Show, Attend and Tell" architecture and progressively transformed it into a modular, cutting-edge system incorporating the latest advancements in computer vision and natural language processing.
+In the fast-paced world of AI research, staying current with the latest architectures and techniques is crucial for building state-of-the-art systems. Our image captioning project is a perfect example of this evolution. We began with a solid foundation based on the classic ["Show, Attend and Tell"](https://arxiv.org/abs/1502.03044) architecture and progressively transformed it into a modular, cutting-edge system incorporating the latest advancements in computer vision and natural language processing.
 
 ### The Starting Point: Show, Attend and Tell
 
-When we launched our image captioning journey, we documented our baseline approach in our technical_architecture.md file. This initial architecture implemented the groundbreaking work by Xu et al., which introduced visual attention for image captioning:
+When we launched our image captioning journey, we documented our baseline approach in our technical_architecture.md file. This initial architecture implemented the groundbreaking work by [Xu et al.](https://arxiv.org/abs/1502.03044), which introduced visual attention for image captioning:
 
-- **Encoder**: A pretrained ResNet-101 that processes images into 14×14 feature maps
-- **Decoder**: A single LSTM with attention that generates captions word-by-word
+- **Encoder**: A pretrained [ResNet-101](https://arxiv.org/abs/1512.03385) that processes images into 14×14 feature maps
+- **Decoder**: A single [LSTM](https://www.bioinf.jku.at/publications/older/2604.pdf) with attention that generates captions word-by-word
 - **Attention**: Basic soft attention mechanism to focus on relevant image regions
-- **Word Embeddings**: Simple embeddings with an option to use BERT
+- **Word Embeddings**: Simple embeddings with an option to use [BERT](https://arxiv.org/abs/1810.04805)
 - **Training**: Cross-entropy loss with attention regularization
 
-This architecture served us well for basic captioning tasks, achieving reasonable BLEU scores on the MS-COCO dataset. However, as transformer architectures revolutionized both computer vision and NLP, we recognized the need to incorporate these advances.
+This architecture served us well for basic captioning tasks, achieving reasonable BLEU scores on the [MS-COCO dataset](https://cocodataset.org/). However, as transformer architectures revolutionized both computer vision and NLP, we recognized the need to incorporate these advances.
 
 ### The Transformation: Embracing Modern Architectures
 
@@ -63,51 +64,51 @@ Rather than committing to a single architecture, we redesigned our system with m
 
 We expanded from a single ResNet encoder to support multiple modern vision architectures:
 
-- **Vision Transformers (ViT)**: Using self-attention for global image understanding
-- **Swin Transformers**: Hierarchical attention with shifting windows for efficiency
-- **CLIP**: Leveraging multimodal pretraining for better vision-language alignment
-- **Traditional CNNs**: Still supporting ResNet and other CNN backbones
+- **[Vision Transformers (ViT)](https://arxiv.org/abs/2010.11929)**: Using self-attention for global image understanding
+- **[Swin Transformers](https://arxiv.org/abs/2103.14030)**: Hierarchical attention with shifting windows for efficiency
+- **[CLIP](https://arxiv.org/abs/2103.00020)**: Leveraging multimodal pretraining for better vision-language alignment
+- **Traditional CNNs**: Still supporting [ResNet](https://arxiv.org/abs/1512.03385) and other CNN backbones
 
 #### 3. Advanced Decoder Options
 
 Our decoder options now include:
 
 - **LSTM**: Enhanced version of our original decoder with more capabilities
-- **Transformer Decoder**: Multi-head self-attention for sequence generation
-- **GPT-2**: Leveraging large pretrained language models for higher quality captions
-- **Flexible integration**: Support for other HuggingFace models like T5 and BART
+- **[Transformer Decoder](https://arxiv.org/abs/1706.03762)**: Multi-head self-attention for sequence generation
+- **[GPT-2](https://cdn.openai.com/better-language-models/language_models_are_unsupervised_multitask_learners.pdf)**: Leveraging large pretrained language models for higher quality captions
+- **Flexible integration**: Support for other HuggingFace models like [T5](https://arxiv.org/abs/1910.10683) and [BART](https://arxiv.org/abs/1910.13461)
 
 #### 4. Sophisticated Attention Mechanisms
 
 Attention is no longer just an addon but a central, configurable component:
 
-- **Soft Attention**: Our baseline soft attention mechanism
-- **Multi-Head Attention**: Parallel attention heads focusing on different aspects
-- **Adaptive Attention**: Deciding when to rely on visual features vs. language model
-- **Attention-on-Attention (AoA)**: Adding a filtering layer to enhance attention quality
+- **[Soft Attention](https://arxiv.org/abs/1502.03044)**: Our baseline soft attention mechanism
+- **[Multi-Head Attention](https://arxiv.org/abs/1706.03762)**: Parallel attention heads focusing on different aspects
+- **[Adaptive Attention](https://arxiv.org/abs/1612.01887)**: Deciding when to rely on visual features vs. language model
+- **[Attention-on-Attention (AoA)](https://arxiv.org/abs/1908.06954)**: Adding a filtering layer to enhance attention quality
 
 #### 5. Advanced Training Techniques
 
 Perhaps the most significant upgrade is in our training methodology:
 
-- **Reinforcement Learning**: Self-critical sequence training to optimize directly for metrics like CIDEr
-- **Mixed Precision Training**: For efficiency and larger batch sizes
-- **Curriculum Learning**: Progressively increasing task difficulty during training
-- **Contrastive Learning**: CLIP-style vision-language alignment
+- **[Reinforcement Learning](https://arxiv.org/abs/1612.00563)**: Self-critical sequence training to optimize directly for metrics like CIDEr
+- **[Mixed Precision Training](https://arxiv.org/abs/1710.03740)**: For efficiency and larger batch sizes
+- **[Curriculum Learning](https://ronan.collobert.com/pub/matos/2009_curriculum_icml.pdf)**: Progressively increasing task difficulty during training
+- **[Contrastive Learning](https://arxiv.org/abs/2103.00020)**: CLIP-style vision-language alignment
 
 #### 6. Vision-Language Alignment
 
 We've incorporated cutting-edge alignment techniques:
 
-- **Q-Former**: BLIP-2 style query-based transformer for bridging vision and language
-- **Contrastive Loss**: Aligning visual and textual representations
-- **Image-Text Matching**: Ensuring coherence between images and generated captions
+- **[Q-Former](https://arxiv.org/abs/2301.12597)**: BLIP-2 style query-based transformer for bridging vision and language
+- **[Contrastive Loss](https://arxiv.org/abs/1807.03748)**: Aligning visual and textual representations
+- **[Image-Text Matching](https://arxiv.org/abs/1411.2539)**: Ensuring coherence between images and generated captions
 
 ### Results and Benefits: By the Numbers
 
 The transition from our traditional architecture to this modular, advanced system yielded impressive quantitative improvements across all metrics:
 
-#### Captioning Performance Metrics (MS-COCO Test Set)
+#### Captioning Performance Metrics ([MS-COCO Test Set](https://cocodataset.org/))
 
 <div class="table-responsive mb-3">
     <table class="table table-bordered">
@@ -210,7 +211,7 @@ Adding reinforcement learning with SCST produced significant gains:
         <strong>Modern Captioning Architecture</strong>
     </div>
     <div class="card-body text-center">
-        <img src="{{ 'assets/images/empty_300x200.png' | relative_url }}" class="img-fluid mb-2" alt="Modern Image Captioning Architecture">
+        <img src="{{ 'assets/images/image-caption-generator.png' | relative_url }}" class="img-fluid mb-2" alt="Modern Image Captioning Architecture">
         <small class="text-muted">Modular architecture with interchangeable vision encoders and language decoders</small>
     </div>
 </div>
@@ -225,5 +226,5 @@ The performance metrics speak for themselves: our modern architecture delivers s
 
 - Implement real-time captioning capabilities for video streams
 - Explore few-shot learning techniques for domain adaptation
-- Integrate with larger vision-language models like DALL-E and Stable Diffusion
+- Integrate with larger vision-language models like [DALL-E](https://openai.com/research/dall-e) and [Stable Diffusion](https://stability.ai/stable-diffusion)
 - Deploy optimized versions for edge devices 
