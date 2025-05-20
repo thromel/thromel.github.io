@@ -159,17 +159,15 @@ a:hover {
 /* Card styles */
 .card {
   background-color: var(--bg-secondary);
-  border-radius: 8px;
+  border-radius: 6px;
   border: 1px solid var(--border-color);
-  box-shadow: var(--card-shadow);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   margin-bottom: 1.5rem;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  overflow: hidden;
+  transition: box-shadow 0.2s ease;
 }
 
 .card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
 }
 
 .card-body {
@@ -364,13 +362,12 @@ a:hover {
 /* Profile card */
 .profile-card {
   background-color: var(--bg-secondary);
-  border-radius: 8px;
-  overflow: hidden;
+  border-radius: 6px;
 }
 
 .profile-card img {
-  border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  border-radius: 6px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
 /* Scrollbar customization */
@@ -602,7 +599,12 @@ strong, b {
 
 .icon-primary {
   color: var(--accent-primary);
-  margin: 0 0.4rem;
+  margin: 0 0.3rem;
+  transition: color 0.2s ease;
+}
+
+.icon-primary:hover {
+  color: var(--accent-tertiary);
 }
 
 .icon-pdf {
@@ -624,15 +626,6 @@ strong, b {
 /* Utility classes */
 .text-inherit {
   color: inherit;
-}
-
-/* Subtle hover effects for icons */
-.icon-primary:hover,
-.icon-pdf:hover,
-.icon-certificate:hover,
-.icon-membership:hover {
-  color: var(--accent-tertiary);
-  transition: color 0.2s ease;
 }
 
 /* Code blocks styling - improved for high contrast */
@@ -784,30 +777,28 @@ pre code {
   color: var(--accent-primary);
 }
 
-/* About Me pointed design */
+/* About Me section - clean, simple design */
 .about-me-container {
-  margin: 1rem 0;
+  margin: 0.5rem 0;
 }
 
 .about-me-item {
   position: relative;
-  padding: 0.5rem 0.5rem 0.5rem 1.2rem;
-  margin-bottom: 0.7rem;
-  transition: all 0.25s ease;
-  border-left: 3px solid var(--accent-primary);
-  background-color: rgba(97, 175, 255, 0.05);
-  border-radius: 0 4px 4px 0;
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+  transition: all 0.2s ease;
+  border-radius: 4px;
+  background-color: transparent;
+  border-bottom: 1px solid rgba(97, 175, 255, 0.1);
 }
 
 .about-me-item:hover {
-  transform: translateX(5px);
-  background-color: rgba(97, 175, 255, 0.1);
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  background-color: rgba(97, 175, 255, 0.03);
 }
 
 .about-me-arrow {
   color: var(--accent-primary);
-  font-size: 1rem;
+  font-size: 0.4rem;
   margin-right: 0.5rem;
   display: inline-block;
   vertical-align: middle;
@@ -815,7 +806,32 @@ pre code {
 
 .about-me-text {
   color: var(--text-secondary);
-  font-size: 16px;
+  font-size: 15px;
   display: inline-block;
   vertical-align: middle;
+  line-height: 1.4;
+}
+
+/* Google Calendar Appointment Button */
+.calendar-button {
+  display: inline-block;
+  font-weight: 500;
+  text-align: center;
+  vertical-align: middle;
+  user-select: none;
+  padding: 0.375rem 0.75rem;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  border-radius: 0.25rem;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  color: var(--accent-primary) !important;
+  background-color: transparent !important;
+  border: 1px solid var(--accent-primary) !important;
+  text-decoration: none;
+}
+
+.calendar-button:hover {
+  color: #fff !important;
+  background-color: var(--accent-primary) !important;
+  border-color: var(--accent-primary) !important;
 } 
