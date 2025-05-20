@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Compiler Thumbnail Generator</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: #f5f5f5;
+        }
+        canvas {
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="thumbnail" width="800" height="600"></canvas>
+    
+    <script>
+        const canvas = document.getElementById('thumbnail');
+        const ctx = canvas.getContext('2d');
+        
+        // Set background
+        ctx.fillStyle = '#121720';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        
+        // Draw compiler flow diagram
+        ctx.strokeStyle = '#fff';
+        ctx.lineWidth = 3;
+        
+        // Source code icon
+        ctx.fillStyle = '#61afff';
+        ctx.fillRect(100, 200, 120, 160);
+        ctx.strokeRect(100, 200, 120, 160);
+        
+        // Text lines in source code
+        ctx.fillStyle = '#fff';
+        for (let i = 0; i < 8; i++) {
+            ctx.fillRect(120, 220 + i * 15, 80, 6);
+        }
+        
+        // Arrow
+        ctx.beginPath();
+        ctx.moveTo(240, 280);
+        ctx.lineTo(320, 280);
+        ctx.stroke();
+        
+        ctx.beginPath();
+        ctx.moveTo(310, 270);
+        ctx.lineTo(320, 280);
+        ctx.lineTo(310, 290);
+        ctx.stroke();
+        
+        // Compiler box
+        ctx.fillStyle = '#36d058';
+        ctx.fillRect(340, 200, 120, 160);
+        ctx.strokeRect(340, 200, 120, 160);
+        
+        // Compiler text
+        ctx.fillStyle = '#fff';
+        ctx.font = 'bold 18px Arial';
+        ctx.fillText('COMPILER', 355, 280);
+        
+        // Arrow
+        ctx.beginPath();
+        ctx.moveTo(480, 280);
+        ctx.lineTo(560, 280);
+        ctx.stroke();
+        
+        ctx.beginPath();
+        ctx.moveTo(550, 270);
+        ctx.lineTo(560, 280);
+        ctx.lineTo(550, 290);
+        ctx.stroke();
+        
+        // Binary output
+        ctx.fillStyle = '#ff9d4d';
+        ctx.fillRect(580, 200, 120, 160);
+        ctx.strokeRect(580, 200, 120, 160);
+        
+        // Binary content
+        ctx.fillStyle = '#fff';
+        ctx.font = '14px monospace';
+        for (let i = 0; i < 8; i++) {
+            let binText = '';
+            for (let j = 0; j < 8; j++) {
+                binText += Math.round(Math.random());
+            }
+            ctx.fillText(binText, 595, 230 + i * 15);
+        }
+        
+        // Title
+        ctx.fillStyle = '#fff';
+        ctx.font = 'bold 40px Arial';
+        ctx.fillText('Yet Another C Compiler', 150, 100);
+        
+        // Subtitle
+        ctx.font = '24px Arial';
+        ctx.fillText('Multi-pass Compiler Implementation', 220, 150);
+        
+        // Link
+        const link = document.createElement('a');
+        link.download = 'compiler-thumbnail.png';
+        link.href = canvas.toDataURL('image/png');
+        link.textContent = 'Download Thumbnail';
+        link.style.display = 'block';
+        link.style.marginTop = '20px';
+        link.style.textAlign = 'center';
+        link.style.color = '#333';
+        link.style.textDecoration = 'none';
+        link.style.padding = '10px';
+        link.style.backgroundColor = '#ddd';
+        link.style.borderRadius = '5px';
+        document.body.appendChild(link);
+    </script>
+</body>
+</html> 
