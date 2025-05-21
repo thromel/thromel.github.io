@@ -358,6 +358,16 @@ professional_memberships:
   joined: 2024
 
 research:
+- title: "How Can We Design Reliable Testing Frameworks for LLM-Integrated Software Systems?"
+  date: Proposed Research Question
+  description: >-
+    How can we systematically detect, quantify, and mitigate the reliability and behavior variability 
+    challenges in software systems that integrate LLMs? This research would explore novel testing methodologies 
+    for LLM-dependent software, focusing on developing deterministic test frameworks for fundamentally 
+    non-deterministic components, creating automated regression testing strategies, and establishing 
+    industry standards for LLM API robustness evaluation.
+  research_question: true
+
 - title: StegFormer-MC Multi-Cover Image Steganography with Distributed Secret Embedding
   date: March 2025 - Present
   description: >-
