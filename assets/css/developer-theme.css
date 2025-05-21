@@ -133,6 +133,32 @@ a:hover {
   text-decoration: none;
 }
 
+/* Bio heading */
+.row h3 {
+  color: var(--text-primary);
+  font-weight: 700;
+}
+
+/* Fix specific for bio section */
+.bio-section h3, 
+.bio-content {
+  color: var(--text-primary) !important;
+}
+
+/* Ensure all text elements have proper color */
+p, div, span, li {
+  color: var(--text-primary);
+}
+
+/* Ensure proper contrast for text elements */
+:root.dark-theme .text-dark {
+  color: #ffffff !important;
+}
+
+:root.light-theme .text-light {
+  color: #2d3748 !important;
+}
+
 /* Theme toggler */
 .theme-toggle {
   position: fixed;

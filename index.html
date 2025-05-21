@@ -28,6 +28,31 @@ navbar_title: Home
                 </div>
                 <hr />
 
+                <!-- Education -->
+                <div class="row mt-3">
+                    <div class="col">
+                        <h4 class="mb-3">Education</h4>
+                        <div class="timeline">
+                            {% for edu in site.data.profile.education %}
+                            <div class="media mb-4 position-card">
+                                <div class="media-body">
+                                    <div class="d-flex mb-2">
+                                        <div class="position-title">{{ edu.name }}</div>
+                                        <div class="ml-auto no-break position-date text-muted">{{ edu.date }}</div>
+                                    </div>
+                                    <div class="mb-1 education-position">{{ edu.position }}</div>
+                                    <div class="position-description mb-2">{{ edu.description }}</div>
+                                    {% if edu.coursework %}
+                                    <div class="mt-2 education-coursework">{{ edu.coursework }}</div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                <hr />
+
                 <!-- Work Experience -->
                 <div class="row mt-3">
                     <div class="col">

@@ -22,7 +22,6 @@
 /* Enhance section headings */
 h1, h2, h3, h4, h5, h6 {
     font-weight: 700;
-    color: #2d3748;
 }
 
 h2:after {
@@ -33,6 +32,25 @@ h2:after {
     background: linear-gradient(90deg, #4299e1, #7f9cf5);
     margin-top: 10px;
     border-radius: 2px;
+}
+
+/* Theme-specific heading colors */
+:root.dark-theme h1, 
+:root.dark-theme h2, 
+:root.dark-theme h3, 
+:root.dark-theme h4, 
+:root.dark-theme h5, 
+:root.dark-theme h6 {
+    color: #ffffff;
+}
+
+:root.light-theme h1, 
+:root.light-theme h2, 
+:root.light-theme h3, 
+:root.light-theme h4, 
+:root.light-theme h5, 
+:root.light-theme h6 {
+    color: #2d3748;
 }
 
 /* Profile card specific styling */
@@ -54,6 +72,38 @@ h2:after {
 /* Timeline styling */
 .timeline-icon {
     box-shadow: 0 0 0 4px rgba(26, 86, 219, 0.1);
+}
+
+/* Education section styling */
+.education-position {
+    font-weight: 600;
+    font-size: 1.05rem;
+    margin-bottom: 0.5rem;
+}
+
+/* Ensure education coursework has good contrast */
+:root.dark-theme .education-coursework,
+:root.dark-theme .position-description,
+:root.dark-theme .timeline table {
+    color: #ffffff !important;
+}
+
+:root.dark-theme .timeline table th,
+:root.dark-theme .timeline table td {
+    color: #ffffff !important;
+    border-color: #384357;
+}
+
+:root.light-theme .education-coursework,
+:root.light-theme .position-description,
+:root.light-theme .timeline table {
+    color: #2d3748 !important;
+}
+
+:root.light-theme .timeline table th,
+:root.light-theme .timeline table td {
+    color: #2d3748 !important;
+    border-color: #e9ecef;
 }
 
 /* Navbar theming */
@@ -119,11 +169,40 @@ h2:after {
     background-color: var(--bg-secondary);
 }
 
+/* Improved contrast for dark theme */
+:root.dark-theme {
+    --bg-primary: #0a0e14;
+    --bg-secondary: #121720;
+    --bg-tertiary: #1c2333;
+    --text-primary: #ffffff;
+    --text-secondary: #f0f5ff;
+    --text-muted: #d0deff;
+}
+
+:root.dark-theme body {
+    color: var(--text-primary);
+    background-color: var(--bg-primary);
+}
+
+:root.dark-theme .card {
+    background-color: var(--bg-secondary);
+}
+
+:root.dark-theme p, 
+:root.dark-theme div, 
+:root.dark-theme span, 
+:root.dark-theme li {
+    color: var(--text-primary);
+}
+
 /* Light mode styles */
 :root.light-theme {
     --bg-primary: #f8f9fc;
     --bg-secondary: #ffffff;
     --bg-tertiary: #f0f4f9;
+    --text-primary: #2d3748;
+    --text-secondary: #4a5568;
+    --text-muted: #718096;
 }
 
 :root.light-theme body {
@@ -136,18 +215,41 @@ h2:after {
     border: 1px solid #eaedf2;
 }
 
-:root.light-theme h1, 
-:root.light-theme h2, 
-:root.light-theme h3, 
-:root.light-theme h4, 
-:root.light-theme h5, 
-:root.light-theme h6 {
-    color: #2d3748;
+:root.light-theme p, 
+:root.light-theme div, 
+:root.light-theme span, 
+:root.light-theme li {
+    color: var(--text-primary);
 }
 
 :root.light-theme .timeline .media {
     background-color: var(--bg-tertiary);
     border-left: 3px solid var(--accent-primary);
+}
+
+/* Bio Section Specific Contrast Fix */
+.row h3 {
+    font-size: 1.75rem;
+    margin-bottom: 1.5rem;
+    display: inline-block;
+    padding-bottom: 5px;
+    position: relative;
+}
+
+:root.dark-theme .row h3 {
+    color: #ffffff;
+}
+
+:root.light-theme .row h3 {
+    color: #2d3748;
+}
+
+.bio-section .bio-heading {
+    color: var(--text-primary) !important;
+}
+
+.bio-section .bio-content {
+    color: var(--text-primary) !important;
 }
 
 /* Fix for Google Calendar button */
