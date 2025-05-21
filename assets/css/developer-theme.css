@@ -56,9 +56,9 @@
 /* Light theme */
 :root.light-theme {
   /* Base colors */
-  --bg-primary: #f5f7fa;
+  --bg-primary: #f8f9fc;
   --bg-secondary: #ffffff;
-  --bg-tertiary: #e9eef5;
+  --bg-tertiary: #f0f4f9;
   
   /* Text colors */
   --text-primary: #1a1a1a;
@@ -80,9 +80,9 @@
   --membership-icon: #0366d6;
   
   /* Code colors */
-  --code-bg: #f0f4f8;
+  --code-bg: #f7fafd;
   --code-text: #1a1a1a;
-  --code-border: #d1d5da;
+  --code-border: #e1e4e8;
   --code-comment: #0366d6;
   --code-keyword: #d73a49;
   --code-function: #6f42c1;
@@ -90,13 +90,13 @@
   --code-number: #005cc5;
   
   /* Border and shadow */
-  --border-color: #e1e4e8;
-  --card-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  --border-color: #e9ecef;
+  --card-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
   --section-border: 1px solid var(--border-color);
   
   /* Scrollbar */
-  --scrollbar-track: #f1f1f1;
-  --scrollbar-thumb: #c1c1c1;
+  --scrollbar-track: #f8f9fc;
+  --scrollbar-thumb: #d0d7de;
   --scrollbar-thumb-hover: #a8a8a8;
 }
 
@@ -187,6 +187,10 @@ a:hover {
   margin-bottom: 15px;
   border-left: 3px solid var(--accent-primary);
   position: relative;
+}
+
+:root.light-theme .timeline .media {
+  background-color: #f8f9fc;
 }
 
 .timeline .media:hover {
@@ -839,6 +843,11 @@ pre code {
   background-color: rgba(97, 175, 255, 0.03);
 }
 
+:root.light-theme .skills-highlight-container {
+  background-color: rgba(3, 102, 214, 0.03);
+  border: 1px solid #e9ecef;
+}
+
 .skills-icon-container {
   font-size: 1.5rem;
   color: var(--accent-primary);
@@ -961,4 +970,9 @@ pre code {
 :root.light-theme .tech-tag {
   background-color: #f0f5fa;
   color: #333;
+}
+
+:root.light-theme .card {
+  background-color: #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
 } 
