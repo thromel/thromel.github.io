@@ -15,8 +15,8 @@
   
   /* Text colors */
   --text-primary: #ffffff;
-  --text-secondary: #e6edf3;
-  --text-muted: #a3b3c9;
+  --text-secondary: #f0f5ff;
+  --text-muted: #d0deff;
   
   /* Accent colors */
   --accent-primary: #61afff;
@@ -855,4 +855,51 @@ pre code {
 .skills-detail {
   font-size: 0.7rem;
   color: var(--text-muted);
+}
+
+/* News items in dark mode */
+:root.dark-theme .news-date {
+  color: #d0deff !important;
+  font-weight: 500;
+}
+
+:root.dark-theme .news-title {
+  color: #ffffff;
+}
+
+:root.dark-theme .news-title a {
+  color: #ffffff;
+}
+
+:root.dark-theme .news-title a:hover {
+  color: var(--accent-primary);
+}
+
+:root.dark-theme .text-dark {
+  color: #ffffff !important;
+}
+
+/* Additional dark theme improvements for better contrast */
+:root.dark-theme .card {
+  background-color: #15192a;
+}
+
+:root.dark-theme .position-date,
+:root.dark-theme .timeline .media-body .text-muted {
+  color: #d0deff !important;
+  font-weight: 500;
+}
+
+:root.dark-theme .position-description,
+:root.dark-theme .research-description {
+  color: #f0f5ff;
+}
+
+:root.dark-theme .research-collaborator {
+  color: #6cddff !important;
+}
+
+:root.dark-theme strong, 
+:root.dark-theme b {
+  color: #ffffff;
 } 

@@ -23,13 +23,13 @@ body_attr: >-
                 <div class="my-0 p-0">
                     {% for item in year.items %}
                     <div class="d-flex mb-3 pb-2 border-bottom">
-                        <div>
+                        <div class="news-title">
                             <div class="font-weight-bold">{{ item.title }}</div>
                             {% if item.description %}
                             <div class="mt-1">{{ item.description }}</div>
                             {% endif %}
                         </div>
-                        <div class="ml-auto text-muted no-break align-self-start"><em>{{ item.date | date: "%b %d, %Y" }}</em></div>
+                        <div class="ml-auto news-date align-self-start"><em>{{ item.date | date: "%b %d, %Y" }}</em></div>
                     </div>
                     {% endfor %}
                 </div>

@@ -14,12 +14,12 @@
                 </div>
                 {% for item in year.items %}
                 <div class="d-flex mb-3 pb-2 border-bottom">
-                    <div>
-                        <a href="news#year-{{ item.date | date: '%Y' }}" class="text-decoration-none text-dark">
+                    <div class="news-title">
+                        <a href="news#year-{{ item.date | date: '%Y' }}" class="text-decoration-none">
                             <div>{{ item.title }}</div>
                         </a>
                     </div>
-                    <div class="ml-auto text-muted"><em>{{ item.date | date: "%b %d, %Y" }}</em></div>
+                    <div class="ml-auto news-date"><em>{{ item.date | date: "%b %d, %Y" }}</em></div>
                 </div>
                 {% endfor %}
                 {% endfor %}
