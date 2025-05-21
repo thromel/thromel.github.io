@@ -2,9 +2,15 @@ primary_name: "Tanzim Hossain Romel"
 secondary_name: ""
 navbar_name: "Tanzim Hossain Romel"
 
+current_company:
+  name: "IQVIA"
+  logo: "/assets/images/companies/iqvia-logo.png"
+  url: "https://www.iqvia.com/"
+
 positions:
 - name: Software Development Engineer 1, IQVIA
   date: June 2023 - Present
+  logo: "/assets/images/companies/iqvia-logo.png"
   description: >-
     IQVIA (NYSE: IQV) is a leading global provider of advanced analytics, technology solutions, and clinical research services to the life sciences industry, with 74,000+ employees across 100+ countries.
   responsibilities:
@@ -45,6 +51,7 @@ positions:
   - Test Automation
 - name: Full Stack Engineer, Mindshare Bangladesh (Part-time)
   date: Apr 2021 - Nov 2021
+  logo: "/assets/images/companies/mindshare_logo.png"
   description: >-
     Developed an e-commerce aggregator platform allowing brands to promote products by fetching listings from multiple e-commerce platforms across Bangladesh.
   responsibilities:
@@ -100,6 +107,8 @@ short_bio: >-
   &#x1F44B Hi I'm Tanzim. I'm a software engineer and aspiring researcher passionate about creating solutions that make lives better for people. My interest lies in the fields of <b>Software Engineering, Blockchain, and Image Steganography</b>, with a strong focus on <b>DevOps, Backend Engineering & AI Engineering</b>. I'm particularly interested in <b>Domain Driven Design, System Architecture, and Software Architecture</b>. Being both research and development oriented, I believe I can tackle challenges that require both kinds of efforts.
   <br/><br/>
   🏫 I completed my B.Sc in Computer Science and Engineering from <b>Bangladesh University of Engineering and Technology</b> with a GPA of 3.53/4.0. During my time at BUET, I received recognition for my academic achievements, including the <b>Dean's List Award</b> and placing 2nd in the Bangla Handwritten Digits Recognition contest.
+  <br/><br/>
+  🏅 During my undergraduate studies, I was selected as a <b>finalist in the Blockchain Olympiad Bangladesh 2021 (BCOLBD 2021)</b> with our project "Blockchain Based Ticketing Platform." I worked as part of the "Recursively Enumerable" team alongside <a href="https://fazledyn.github.io" target="_blank">Ataf Fazledin Ahamed</a> and <a href="https://www.linkedin.com/in/md-tanzim-azad-a879a51b7/" target="_blank">Md. Tanzim Azad Nishan</a>, developing a decentralized solution to address ticketing fraud and scalping issues through smart contracts and blockchain technology.
   <br/><br/>
   💼 I am currently a Software Development Engineer at <a href="https://www.iqvia.com/">IQVIA</a> (NYSE: IQV), a Fortune 500 company and global leader in healthcare data analytics, serving 90% of top pharmaceutical companies worldwide. At IQVIA, I develop microservices-based applications handling millions of patient records, implement observability solutions for critical healthcare data pipelines, architect cloud-native solutions on AWS, and integrate LLM capabilities into clinical data analytics dashboards for natural language querying and automated report generation.
   <br/><br/>
@@ -202,6 +211,13 @@ awards:
   date: BUET Level-4
   organization: BUET
   type: Competition
+- name: Finalist, Blockchain Olympiad Bangladesh 2021
+  date: April 2021
+  organization: Bangladesh Blockchain Olympiad
+  type: Competition
+  description: >-
+    Selected as one of the 40 finalists among numerous teams from across the country with our project "Blockchain Based Ticketing Platform". 
+    Participated as part of the "Recursively Enumerable" team with Ataf Fazledin Ahamed and Md. Tanzim Azad Nishan.
 - name: Dean's List Award
   date: BUET Level-2
   organization: BUET
@@ -334,6 +350,31 @@ publications:
     using transformer models and NRC Lexicon-based analysis.
 
 projects:
+- title: "Blockchain Based Ticketing Platform (BCOLBD 2021 Finalist)"
+  link: https://bcolbd.org/2021/teams
+  date: Feb 2021 - Apr 2021
+  description: >-
+    Developed a blockchain-based ticketing platform as part of the "Recursively Enumerable" team 
+    that was selected as one of the 40 finalists in the Blockchain Olympiad Bangladesh 2021 (BCOLBD 2021).
+    Our solution addressed ticket fraud, scalping, and counterfeiting issues through smart contracts 
+    and decentralized authentication. The platform enabled secure primary and secondary market transactions
+    while ensuring transparency, fair pricing, and immutable ownership records.
+  team: >-
+    Collaborated with <a href="https://fazledyn.github.io" target="_blank">Ataf Fazledin Ahamed</a> and 
+    <a href="https://www.linkedin.com/in/md-tanzim-azad-a879a51b7/" target="_blank">Md. Tanzim Azad Nishan</a>
+    as the "Recursively Enumerable" team representing Bangladesh University of Engineering & Technology (BUET).
+  technologies:
+  - Ethereum
+  - Solidity
+  - Smart Contracts
+  - Web3.js
+  - React.js
+  - Node.js
+  - IPFS
+  - DApps
+  - Blockchain
+  - Decentralized Identity
+
 - title: Bangla Hand-Written Digit Recognition
   link: https://github.com/thromel/CSE-472-Machine-Learning/tree/main/Offline%204
   date: 2023 # Timeframe: 4 weeks

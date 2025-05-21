@@ -8,62 +8,68 @@ body_attr: >-
 
 <div class="row">
     <div class="col-12 col-lg-10">
-        <section id="work_experience" class="pt-4">
-            <h2 style="margin-bottom: 18px;"><img src="/assets/images/icons/workplace.png" alt="Workplace" class="inline-badge" style="width: 35px; height: 35px;"> Work Experience </h2>
-        </section>
+        <div class="card border-0 shadow-sm">
+            <div class="card-body">
+                <section id="work_experience" class="pt-2">
+                    <h3 class="mb-3">Work Experience</h3>
+                </section>
 
-        <div class="my-0 p-4 bg-white shadow-sm rounded-sm">
-            {% for position in site.data.profile.positions %}
-            <div class="media border-bottom border-gray mb-4">
-                <div class="media-body">
-                    <div class="d-flex mb-2">
-                        <div class="position-title">{{ position.name }}</div>
-                        <div class="ml-auto no-break text-muted" style="font-size: 14px;"><em>{{ position.date }}</em></div>
-                    </div>
-                    
-                    {% if position.description %}
-                    <p class="mb-2" style="text-align: justify; font-size: 14px;">{{ position.description }}</p>
-                    {% endif %}
-                    
-                    {% if position.responsibilities %}
-                    <div class="mb-3">
-                        <h6 class="key-responsibilities">Key Responsibilities:</h6>
-                        <ul style="font-size: 14px; padding-left: 20px;">
-                            {% for item in position.responsibilities %}
-                            <li class="mb-1">{{ item }}</li>
-                            {% endfor %}
-                        </ul>
+                {% for position in site.data.profile.positions %}
+                <div class="media border-bottom border-gray mb-4">
+                    {% if position.logo %}
+                    <div class="mr-3 company-logo-container" style="min-width: 70px; display: flex; align-items: center; justify-content: center;">
+                        <img src="{{ position.logo }}" alt="{{ position.name | split: ',' | first }}" class="company-logo" style="max-width: 70px; max-height: 70px;">
                     </div>
                     {% endif %}
-                    
-                    <div class="small d-flex">
-                        <div>
-                            <img src="/assets/images/icons/tag.png" alt="tag" class="inline-badge" style="width: 18px; height: 18px; margin-top: 2px;">
-                            {% if position.technologies %}
-                                {% for tech in position.technologies %}
-                                <span class="tech-tag">{{ tech }}</span>
-                                {% endfor %}
-                            {% else %}
-                                <span class="tech-tag">Backend Development</span>
-                                <span class="tech-tag">Software Engineering</span>
-                                <span class="tech-tag">Microservices</span>
-                            {% endif %}
+                    <div class="media-body">
+                        <div class="d-flex mb-2">
+                            <div class="position-title">{{ position.name }}</div>
+                            <div class="ml-auto no-break text-muted" style="font-size: 14px;"><em>{{ position.date }}</em></div>
                         </div>
+                        
+                        {% if position.description %}
+                        <p class="mb-2" style="text-align: justify; font-size: 14px;">{{ position.description }}</p>
+                        {% endif %}
+                        
+                        {% if position.responsibilities %}
+                        <div class="mb-3">
+                            <h6 class="key-responsibilities">Key Responsibilities:</h6>
+                            <ul style="font-size: 14px; padding-left: 20px;">
+                                {% for item in position.responsibilities %}
+                                <li class="mb-1">{{ item }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        {% endif %}
+                        
+                        <div class="small d-flex">
+                            <div>
+                                {% if position.technologies %}
+                                    {% for tech in position.technologies %}
+                                    <span class="tech-tag">{{ tech }}</span>
+                                    {% endfor %}
+                                {% else %}
+                                    <span class="tech-tag">Backend Development</span>
+                                    <span class="tech-tag">Software Engineering</span>
+                                    <span class="tech-tag">Microservices</span>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <br/>
                     </div>
-                    <br/>
                 </div>
+                {% endfor %}
             </div>
-            {% endfor %}
         </div>
 
-        <section id="projects" class="pt-4 mt-4">
-            <h2 style="margin-bottom: 18px;"><img src="/assets/images/icons/programming.png" alt="Projects" class="inline-badge" style="width: 35px; height: 35px;"> Projects </h2>
-        </section>
+        <div class="card border-0 shadow-sm mt-4">
+            <div class="card-body">
+                <section id="projects" class="pt-2">
+                    <h3 class="mb-3">Projects</h3>
+                </section>
 
-        <div class="my-0 p-4 bg-white shadow-sm rounded-sm">
-            {% for project in site.data.profile.projects %}
-            <div class="no-gutters border-bottom border-gray mr-3">
-                <div class="p-3">
+                {% for project in site.data.profile.projects %}
+                <div class="border-bottom mb-4">
                     <div class="d-flex">
                         <div>
                             {% assign showcase_item = site.showcase | where: "title", project.title | first %}
@@ -81,55 +87,63 @@ body_attr: >-
                             </div>
                         {%- endif -%}
                     </div>
-                </div>
-                <div class="p-3">
-                    <div class="d-flex">
-                        <div class="project-type"><i class="fa-solid fa-shapes"></i>&nbsp;&nbsp;Software Project</div>
-                        <div class="ml-auto text-muted"><em>{{ project.date }}</em></div>
-                    </div>
-                    <p class="mt-2 mb-2 small" style="text-align: justify; font-size: 14px;">{{ project.description }}</p>
-                    {% if showcase_item %}
-                    <div class="mb-2">
-                        <a href="{{ showcase_item.url | relative_url }}" class="btn btn-sm btn-outline-primary">View Project Details</a>
-                    </div>
-                    {% endif %}
-                    <div class="small d-flex">
-                        <div>
-                            <img src="/assets/images/icons/tag.png" alt="tag" class="inline-badge" style="width: 18px; height: 18px; margin-top: 2px;">
-                            {% for tech in project.technologies %}
-                                <span class="tech-tag">{{ tech }}</span>
-                            {% endfor %}
+                    <div class="mt-2">
+                        <div class="d-flex">
+                            <div class="project-type"><i class="fa-solid fa-shapes"></i>&nbsp;&nbsp;Software Project</div>
+                            <div class="ml-auto text-muted"><em>{{ project.date }}</em></div>
+                        </div>
+                        <p class="mt-2 mb-2 small" style="text-align: justify; font-size: 14px;">{{ project.description }}</p>
+                        
+                        {% if project.team %}
+                        <div class="mt-2 mb-2 small" style="text-align: justify; font-size: 14px;">
+                            <strong>Team:</strong> {{ project.team }}
+                        </div>
+                        {% endif %}
+                        
+                        {% if showcase_item %}
+                        <div class="mb-2">
+                            <a href="{{ showcase_item.url | relative_url }}" class="btn btn-sm btn-outline-primary">View Project Details</a>
+                        </div>
+                        {% endif %}
+                        <div class="small d-flex">
+                            <div>
+                                {% for tech in project.technologies %}
+                                    <span class="tech-tag">{{ tech }}</span>
+                                {% endfor %}
+                            </div>
                         </div>
                     </div>
                 </div>
+                {% endfor %}
             </div>
-            {% endfor %}
         </div>
 
-        <section id="skills" class="pt-4 mt-4">
-            <h2 style="margin-bottom: 18px;"><img src="/assets/images/icons/code.png" alt="Skills" class="inline-badge" style="width: 35px; height: 35px;"> Technical Skills </h2>
-        </section>
+        <div class="card border-0 shadow-sm mt-4">
+            <div class="card-body">
+                <section id="skills" class="pt-2">
+                    <h3 class="mb-3">Technical Skills</h3>
+                </section>
 
-        <div class="my-0 p-4 bg-white shadow-sm rounded-sm">
-            <ul class="timeline">
-                {% for item in site.data.profile.skills %}
-                <li class="media mb-2">
-                    <div class="media-body">
-                        <div><h6>{{ item.type }}</h6></div>
-                        <div>
-                            {% for name in item.names %}
-                                <span class="interest-tag">{{ name }}</span>
-                            {% endfor %}
+                <ul class="timeline mb-0">
+                    {% for item in site.data.profile.skills %}
+                    <li class="media mb-2">
+                        <div class="media-body">
+                            <div><h6>{{ item.type }}</h6></div>
+                            <div>
+                                {% for name in item.names %}
+                                    <span class="interest-tag">{{ name }}</span>
+                                {% endfor %}
+                            </div>
                         </div>
-                    </div>
-                </li>
-                {% endfor %}
-            </ul>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
         </div>
     </div>
 
     <div class="col-2 d-none d-lg-block">
-        <div id="navbar-type" class="nav nav-pills flex-column sticky-top bg-white shadow-sm rounded-sm" style="top: 250px">
+        <div id="navbar-type" class="nav nav-pills flex-column sticky-top" style="top: 250px">
             <a class="nav-link d-block" href="#work_experience"><h6>Experience</h6></a>
             <a class="nav-link d-block" href="#projects"><h6>Projects</h6></a>
             <a class="nav-link d-block" href="#skills"><h6>Skills</h6></a>

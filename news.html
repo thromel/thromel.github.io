@@ -19,23 +19,17 @@ body_attr: >-
 
                 {% for year in news_by_year %}
                 {% assign num_papers = year.items | size %}
-                <h4 class="pt-3 text-right" id="year-{{ year.name }}">{{ year.name }}</h4>
+                <h4 class="pt-3" id="year-{{ year.name }}">{{ year.name }}</h4>
                 <div class="my-0 p-0">
                     {% for item in year.items %}
-                    <div class="d-none d-md-block">
-                        <div class="no-gutters border-bottom p-3">
-                            <div class="mb-2">
-                                <div class="d-md-block text-muted"><h6>{{ item.date | date: "%d %b, %Y" }}</h6></div>       
-                                    <div class="d-flex">
-                                        <h6 class="mt-2 mb-0 font-weight-bold">
-                                            {{ item.title }}
-                                        </h6>
-                                    </div>
-                            </div>
-                            <div>
-                                <p class="mt-0 mb-2 small" style="text-align: justify; font-size: 14px;">{{ item.description }}</p>
-                            </div>
+                    <div class="d-flex mb-3 pb-2 border-bottom">
+                        <div>
+                            <div class="font-weight-bold">{{ item.title }}</div>
+                            {% if item.description %}
+                            <div class="mt-1">{{ item.description }}</div>
+                            {% endif %}
                         </div>
+                        <div class="ml-auto text-muted no-break align-self-start"><em>{{ item.date | date: "%b %d, %Y" }}</em></div>
                     </div>
                     {% endfor %}
                 </div>
@@ -45,9 +39,9 @@ body_attr: >-
     </div>
 
     <div class="col-2 d-none d-lg-block">
-        <div id="navbar-year" class="nav nav-pills flex-column sticky-top" style="top: 250px">
+        <div id="navbar-year" class="nav nav-pills flex-column sticky-top" style="top: 120px">
             {% for year in news_by_year %}
-            <a class="nav-link d-block text-center" href="#year-{{ year.name }}">{{ year.name }}</a>
+            <a class="nav-link" href="#year-{{ year.name }}">{{ year.name }}</a>
             {% endfor %}
         </div>
     </div>
