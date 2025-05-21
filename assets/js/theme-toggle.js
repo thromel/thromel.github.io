@@ -23,6 +23,15 @@ function applyTheme(theme) {
   // Add the current theme class
   document.documentElement.classList.add(`${theme}-theme`);
 
+  // Update body background class
+  if (theme === 'dark') {
+    document.body.classList.add('bg-dark');
+    document.body.classList.remove('bg-light');
+  } else {
+    document.body.classList.add('bg-light');
+    document.body.classList.remove('bg-dark');
+  }
+
   // Store the theme preference
   localStorage.setItem('theme', theme);
 

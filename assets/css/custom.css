@@ -56,6 +56,41 @@ h2:after {
     box-shadow: 0 0 0 4px rgba(26, 86, 219, 0.1);
 }
 
+/* Navbar theming */
+.navbar-themed {
+    transition: all 0.3s ease;
+}
+
+/* Dark theme navbar */
+:root.dark-theme .navbar-themed {
+    background-color: #121720;
+}
+
+:root.dark-theme .navbar-themed .navbar-brand,
+:root.dark-theme .navbar-themed .nav-link {
+    color: #ffffff;
+}
+
+:root.dark-theme .navbar-themed .navbar-toggler {
+    color: #ffffff;
+    border-color: rgba(255,255,255,0.1);
+}
+
+/* Light theme navbar */
+:root.light-theme .navbar-themed {
+    background-color: #ffffff;
+}
+
+:root.light-theme .navbar-themed .navbar-brand,
+:root.light-theme .navbar-themed .nav-link {
+    color: #2d3748;
+}
+
+:root.light-theme .navbar-themed .navbar-toggler {
+    color: #2d3748;
+    border-color: rgba(0,0,0,0.1);
+}
+
 /* Table styles for better contrast in dark mode */
 :root.dark-theme .table {
     background-color: var(--bg-secondary);
@@ -82,6 +117,37 @@ h2:after {
 
 :root.dark-theme .table-responsive {
     background-color: var(--bg-secondary);
+}
+
+/* Light mode styles */
+:root.light-theme {
+    --bg-primary: #f8f9fc;
+    --bg-secondary: #ffffff;
+    --bg-tertiary: #f0f4f9;
+}
+
+:root.light-theme body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+}
+
+:root.light-theme .card {
+    background-color: var(--bg-secondary);
+    border: 1px solid #eaedf2;
+}
+
+:root.light-theme h1, 
+:root.light-theme h2, 
+:root.light-theme h3, 
+:root.light-theme h4, 
+:root.light-theme h5, 
+:root.light-theme h6 {
+    color: #2d3748;
+}
+
+:root.light-theme .timeline .media {
+    background-color: var(--bg-tertiary);
+    border-left: 3px solid var(--accent-primary);
 }
 
 /* Fix for Google Calendar button */
