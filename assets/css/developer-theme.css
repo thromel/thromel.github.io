@@ -830,4 +830,29 @@ pre code {
   background-color: var(--accent-primary);
   border-color: var(--accent-primary);
   text-decoration: none;
+}
+
+/* Skills Highlight Section */
+.skills-highlight-container {
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  background-color: rgba(97, 175, 255, 0.03);
+}
+
+.skills-icon-container {
+  font-size: 1.5rem;
+  color: var(--accent-primary);
+  margin-bottom: 0.2rem;
+}
+
+.skills-label {
+  font-weight: 600;
+  font-size: 0.8rem;
+  color: var(--text-primary);
+  margin-bottom: 0.1rem;
+}
+
+.skills-detail {
+  font-size: 0.7rem;
+  color: var(--text-muted);
 } 
