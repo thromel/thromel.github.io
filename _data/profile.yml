@@ -208,9 +208,15 @@ education:
 
 awards:
 - name: 2nd place, Bangla Handwritten Digits Recognition contest
-  date: BUET Level-4
-  organization: BUET
+  date: November 2022
+  organization: BUET (Department of CSE)
   type: Competition
+  description: >-
+    Won 2nd place among 120 students in the CSE 472 Machine Learning Lab competition at BUET, developing a custom CNN 
+    architecture for Bangla digits recognition implemented from scratch using only NumPy and OpenCV. Achieved 95.9% test 
+    accuracy on the NumtaDB benchmark by implementing every convolution, pooling, activation, and optimization step manually. 
+    <br/>
+    <a href='https://tanzimhromel.com/showcase/projects/bangla_digit_recognition/' target='_blank'>View Project Details</a>
 - name: Finalist, Blockchain Olympiad Bangladesh 2021
   date: April 2021
   organization: Bangladesh Blockchain Olympiad
@@ -376,14 +382,15 @@ projects:
   - Decentralized Identity
 
 - title: Bangla Hand-Written Digit Recognition
-  link: https://github.com/thromel/CSE-472-Machine-Learning/tree/main/Offline%204
-  date: 2023 # Timeframe: 4 weeks
+  link: https://tanzimhromel.com/showcase/projects/bangla_digit_recognition/
+  date: November 2022 # 4-week Project
   description: >-
     Built an end-to-end OCR pipeline for Bangla digits with NumPy/OpenCV from scratch without relying on 
     deep learning frameworks. Achieved 95.9% test accuracy on NumtaDB benchmark while implementing every 
     convolution, pooling, activation, and optimization step manually for complete transparency and 
-    hackability. Includes data normalization, aggressive pre-processing, custom CNN (LeNet-style), 
-    metrics visualization, and model export for inference.
+    hackability. This project won 2nd place among 120 students in the CSE 472 Machine Learning Lab competition at BUET.
+  achievement: >-
+    🏆 <b>2nd place winner</b> in Bangla Handwritten Digits Recognition contest among 120 students at Dept of CSE, BUET
   technologies:
   - Python
   - NumPy

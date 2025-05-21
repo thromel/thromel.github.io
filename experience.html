@@ -94,6 +94,12 @@ body_attr: >-
                         </div>
                         <p class="mt-2 mb-2 small" style="text-align: justify; font-size: 14px;">{{ project.description }}</p>
                         
+                        {% if project.achievement %}
+                        <div class="mt-2 mb-2 small achievement-badge">
+                            {{ project.achievement }}
+                        </div>
+                        {% endif %}
+                        
                         {% if project.team %}
                         <div class="mt-2 mb-2 small" style="text-align: justify; font-size: 14px;">
                             <strong>Team:</strong> {{ project.team }}

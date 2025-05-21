@@ -902,4 +902,22 @@ pre code {
 :root.dark-theme strong, 
 :root.dark-theme b {
   color: #ffffff;
+}
+
+/* Achievement badge styling */
+.achievement-badge {
+  background-color: rgba(255, 215, 0, 0.1);
+  border-left: 3px solid var(--star-color);
+  padding: 8px 12px;
+  border-radius: 4px;
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+:root.dark-theme .achievement-badge {
+  background-color: rgba(255, 215, 0, 0.15);
+}
+
+:root.light-theme .achievement-badge {
+  background-color: rgba(255, 215, 0, 0.1);
 } 
