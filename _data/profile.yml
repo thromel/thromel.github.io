@@ -148,7 +148,7 @@ short_bio: >-
   <br/><br/>
   🏫 I completed my B.Sc in Computer Science and Engineering from <b>Bangladesh University of Engineering and Technology</b> with a GPA of 3.53/4.0. During my time at BUET, I received recognition for my academic achievements, including the <b>Dean's List Award</b> and placing <a href="https://tanzimhromel.com/showcase/projects/bangla_digit_recognition/" target="_blank">2nd in the Bangla Handwritten Digits Recognition contest</a>.
   <br/><br/>
-  🏅 During my undergraduate studies, I was selected as a <b>finalist in the <a href="https://bcolbd.org/2021/teams" target="_blank">Blockchain Olympiad Bangladesh 2021 (BCOLBD 2021)</a></b> with our project "<a href="/experience#projects">Blockchain Based Ticketing Platform</a>." I worked as part of the "Recursively Enumerable" team alongside <a href="https://fazledyn.github.io" target="_blank">Ataf Fazledin Ahamed</a> and <a href="https://www.linkedin.com/in/md-tanzim-azad-a879a51b7/" target="_blank">Md. Tanzim Azad Nishan</a>, developing a decentralized solution to address ticketing fraud and scalping issues through smart contracts and blockchain technology.
+  🏅 During my undergraduate studies, I was selected as a <b>finalist in the <a href="https://bcolbd.org/2021/teams" target="_blank">Blockchain Olympiad Bangladesh 2021 (BCOLBD 2021)</a></b> with our project "<a href="/showcase/projects/blockchain-ticketing" target="_blank">Blockchain Based Ticketing Platform</a>." I worked as part of the "Recursively Enumerable" team alongside <a href="https://fazledyn.github.io" target="_blank">Ataf Fazledin Ahamed</a> and <a href="https://www.linkedin.com/in/md-tanzim-azad-a879a51b7/" target="_blank">Md. Tanzim Azad Nishan</a>, developing a decentralized solution to address ticketing fraud and scalping issues through smart contracts and blockchain technology.
   <br/><br/>
   💼 I am currently a Software Development Engineer at <a href="https://www.iqvia.com/">IQVIA</a> (NYSE: IQV), a Fortune 500 company and global leader in healthcare data analytics, serving 90% of top pharmaceutical companies worldwide. At IQVIA, I develop microservices-based applications handling millions of patient records, implement observability solutions for critical healthcare data pipelines, architect cloud-native solutions on AWS, and integrate LLM capabilities into clinical data analytics dashboards for natural language querying and automated report generation.
   <br/><br/>
@@ -264,7 +264,7 @@ awards:
   organization: Bangladesh Blockchain Olympiad
   type: Competition
   description: >-
-    Selected as one of the 40 finalists among numerous teams from across the country with our project "Blockchain Based Ticketing Platform". 
+    Selected as one of the 40 finalists among numerous teams from across the country with our project "<a href="/showcase/projects/blockchain-ticketing" target="_blank">Blockchain Based Ticketing Platform</a>". 
     Participated as part of the "Recursively Enumerable" team with Ataf Fazledin Ahamed and Md. Tanzim Azad Nishan.
 - name: Dean's List Award
   date: BUET Level-2
@@ -409,7 +409,7 @@ publications:
 
 projects:
 - title: "Blockchain Based Ticketing Platform (BCOLBD 2021 Finalist)"
-  link: https://bcolbd.org/2021/teams
+  link: /showcase/projects/blockchain-ticketing
   date: Feb 2021 - Apr 2021
   description: >-
     Developed a blockchain-based ticketing platform as part of the "Recursively Enumerable" team 
