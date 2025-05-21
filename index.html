@@ -178,45 +178,50 @@ navbar_title: Home
                     <div class="col">
                         <h4 class="mb-3">Technical Skills</h4>
                         
-                        <!-- Skill categories from technical_skills -->
-                        {% for category in site.data.profile.technical_skills %}
-                        <div class="skill-card mb-4">
-                            <div class="d-flex align-items-center mb-2">
-                                <h5 class="mb-0 mr-2">{{ category.type }}</h5>
+                        <!-- Technical Skills Categories -->
+                        <div class="skills-container">
+                            {% for category in site.data.profile.technical_skills %}
+                            <div class="skill-card mb-4">
+                                <div class="d-flex align-items-center mb-2">
+                                    <h5 class="mb-0 mr-2">{{ category.type }}</h5>
+                                </div>
+                                <div class="tech-tags mb-3">
+                                    {% for tech in category.names %}
+                                    <span class="tech-tag">{{ tech }}</span>
+                                    {% endfor %}
+                                </div>
                             </div>
-                            <div class="tech-tags mb-3">
-                                {% for tech in category.names %}
-                                <span class="tech-tag">{{ tech }}</span>
-                                {% endfor %}
-                            </div>
-                        </div>
-                        {% endfor %}
-                        
-                        <!-- .NET Skills (from detailed skills) -->
-                        <div class="skill-card mb-4">
-                            <div class="d-flex align-items-center mb-2">
-                                <h5 class="mb-0 mr-2">{{ site.data.profile.skills.dotnet.name }}</h5>
-                                <span class="skill-level">{{ site.data.profile.skills.dotnet.level }}</span>
-                            </div>
-                            <p class="mb-3">{{ site.data.profile.skills.dotnet.description }}</p>
-                            <div class="tech-tags">
-                                {% for tech in site.data.profile.skills.dotnet.technologies %}
-                                <span class="tech-tag">{{ tech }}</span>
-                                {% endfor %}
-                            </div>
+                            {% endfor %}
                         </div>
                         
-                        <!-- Python Skills (from detailed skills) -->
-                        <div class="skill-card mb-4">
-                            <div class="d-flex align-items-center mb-2">
-                                <h5 class="mb-0 mr-2">{{ site.data.profile.skills.python.name }}</h5>
-                                <span class="skill-level">{{ site.data.profile.skills.python.level }}</span>
+                        <!-- Detailed Skills -->
+                        <div class="detailed-skills-container">
+                            <!-- .NET Skills -->
+                            <div class="skill-card mb-4">
+                                <div class="d-flex align-items-center mb-2">
+                                    <h5 class="mb-0 mr-2">{{ site.data.profile.skills.dotnet.name }}</h5>
+                                    <span class="skill-level">{{ site.data.profile.skills.dotnet.level }}</span>
+                                </div>
+                                <p class="mb-3">{{ site.data.profile.skills.dotnet.description }}</p>
+                                <div class="tech-tags">
+                                    {% for tech in site.data.profile.skills.dotnet.technologies %}
+                                    <span class="tech-tag">{{ tech }}</span>
+                                    {% endfor %}
+                                </div>
                             </div>
-                            <p class="mb-3">{{ site.data.profile.skills.python.description }}</p>
-                            <div class="tech-tags">
-                                {% for tech in site.data.profile.skills.python.technologies %}
-                                <span class="tech-tag">{{ tech }}</span>
-                                {% endfor %}
+                            
+                            <!-- Python Skills -->
+                            <div class="skill-card mb-4">
+                                <div class="d-flex align-items-center mb-2">
+                                    <h5 class="mb-0 mr-2">{{ site.data.profile.skills.python.name }}</h5>
+                                    <span class="skill-level">{{ site.data.profile.skills.python.level }}</span>
+                                </div>
+                                <p class="mb-3">{{ site.data.profile.skills.python.description }}</p>
+                                <div class="tech-tags">
+                                    {% for tech in site.data.profile.skills.python.technologies %}
+                                    <span class="tech-tag">{{ tech }}</span>
+                                    {% endfor %}
+                                </div>
                             </div>
                         </div>
                     </div>
