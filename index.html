@@ -37,13 +37,26 @@ navbar_title: Home
                             <div class="media mb-4 position-card">
                                 <div class="media-body">
                                     <div class="d-flex mb-2">
-                                        <div class="position-title">{{ edu.name }}</div>
+                                        <div class="position-title">
+                                            {% if edu.url %}
+                                            <a href="{{ edu.url }}" target="_blank" class="institution-link">{{ edu.name }}</a>
+                                            {% else %}
+                                            {{ edu.name }}
+                                            {% endif %}
+                                        </div>
                                         <div class="ml-auto no-break position-date text-muted">{{ edu.date }}</div>
                                     </div>
                                     <div class="mb-1 education-position">{{ edu.position }}</div>
                                     <div class="position-description mb-2">{{ edu.description }}</div>
                                     {% if edu.coursework %}
-                                    <div class="mt-2 education-coursework">{{ edu.coursework }}</div>
+                                    <div class="mt-2">
+                                        <button class="collapsible-btn" type="button" data-toggle="collapse" data-target="#coursework-{{ forloop.index }}" aria-expanded="false" aria-controls="coursework-{{ forloop.index }}">
+                                            <i class="fas fa-graduation-cap mr-1"></i> View Coursework <i class="fas fa-chevron-down ml-1 small"></i>
+                                        </button>
+                                        <div class="collapse mt-3" id="coursework-{{ forloop.index }}">
+                                            <div class="education-coursework">{{ edu.coursework }}</div>
+                                        </div>
+                                    </div>
                                     {% endif %}
                                 </div>
                             </div>
