@@ -10,46 +10,42 @@ body_attr: >-
 
 <div class="row">
     <div class="col-12 col-lg-10">
+        <div class="card border-0 shadow-sm">
+            <div class="card-body">
+                <section id="achievement-highlights" class="pt-2">
+                    <h3 class="mb-3">Achievements</h3>
+                </section>
 
-        <section id="achievement-highlights" class="pt-4">
-            <h2 style="margin-bottom: 8px;"><img src="/assets/images/icons/achievement.png" alt="Achievement" class="inline-badge" style="width: 35px; height: 35px;"> Achievements </h2>
-        </section>
-
-        {% for type in achievements_by_type %}
-        {% assign num_achievements = type.items | size %}
-        <h3 class="pt-4 text-center mb-2" id="type-{{ type.name | slugify }}">
-            {% if type.name == "Competition" %}
-            <img src="/assets/images/icons/award.png" alt="Award" class="inline-badge" style="width: 30px; height: 30px;">
-            {% elsif type.name == "Honors & Awards" %}
-            <img src="/assets/images/icons/medal.png" alt="Medal" class="inline-badge" style="width: 30px; height: 30px;">
-            {% endif %}
-            <u>{{ type.name }}</u>
-        </h3>
-        <div class="my-0 p-4 bg-white shadow-sm rounded-sm">
-            
-            <ul class="timeline">
-                {% for item in type.items %}
-                <li class="media mb-2">
-                    <div class="media-body">
-                        <h6><b>{{ item.name }}</b></h6>
-                        <div class="d-flex">
-                            <div>{{ item.organization }}</div>
-                            <div class="mt-auto ml-auto no-break"><em>{{ item.date }}</em></div>
-                        </div>
-                    </div>
-                </li>
+                {% for type in achievements_by_type %}
+                {% assign num_achievements = type.items | size %}
+                <h4 class="pt-3 mb-3" id="type-{{ type.name | slugify }}">
+                    {{ type.name }}
+                </h4>
+                <div class="my-0 p-3 border-bottom">
+                    <ul class="timeline mb-0">
+                        {% for item in type.items %}
+                        <li class="media mb-2">
+                            <div class="media-body">
+                                <h6><b>{{ item.name }}</b></h6>
+                                <div class="d-flex">
+                                    <div>{{ item.organization }}</div>
+                                    <div class="mt-auto ml-auto no-break"><em>{{ item.date }}</em></div>
+                                </div>
+                            </div>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
                 {% endfor %}
-            </ul>
+            </div>
         </div>
-        {% endfor %}
     </div>
 
     <div class="col-2 d-none d-lg-block">
-        <div id="navbar-type" class="nav nav-pills flex-column sticky-top bg-white shadow-sm rounded-sm" style="top: 250px">
+        <div id="navbar-type" class="nav nav-pills flex-column sticky-top" style="top: 250px">
             {% for type in achievements_by_type %}
             <a class="nav-link d-block" href="#type-{{ type.name | slugify }}"><h6>{{ type.name }}</h6></a>
             {% endfor %}
         </div>
     </div>
-
 </div> 
