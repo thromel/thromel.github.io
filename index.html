@@ -131,65 +131,39 @@ navbar_title: Home
                     </div>
                 </div>
                 <h6 class="d-block text-center mt-3">
-                    <a href="{{ 'experience' | relative_url }}#projects" class="btn btn-sm btn-outline-primary">View All Projects <i class="fas fa-angle-double-right"></i></a>
+                    <a href="{{ 'experience' | relative_url }}" class="btn btn-sm btn-outline-primary">View All Projects <i class="fas fa-angle-double-right"></i></a>
                 </h6>
-                <hr />
-
-                <!-- Education -->
-                <div class="row mt-3">
-                    <div class="col">
-                        <h4><img src="/assets/images/icons/graduate-hat.png" alt="Education" class="inline-badge" style="width: 30px; height: 30px;"> Education</h4>
-                        <ul class="timeline">
-                            {% for item in site.data.profile.education %}
-                            <li class="media mb-2">
-                                <div class="media-body">
-                                    <div><h5>{{ item.position }}</h5></div>
-                                    <div class="d-flex">
-                                        <div>
-                                            {% if item.url %}
-                                            <b><a href="{{ item.url }}" target="_blank">{{ item.name }}</a></b>
-                                            {% else %}
-                                            <b>{{ item.name }}</b>
-                                            {% endif %}
-                                        </div>
-                                        <div class="mt-auto ml-auto no-break text-muted"><em>{{ item.date }}</em></div>
-                                    </div>
-                                    <div>{{item.description}}</div>
-                                    {% if item.coursework %}
-                                    <div class="mt-3">
-                                        <button class="btn btn-sm btn-outline-primary mb-2" type="button" data-toggle="collapse" data-target="#coursework-{{forloop.index}}" aria-expanded="false" aria-controls="coursework-{{forloop.index}}">
-                                            View Relevant Coursework
-                                        </button>
-                                        <div class="collapse" id="coursework-{{forloop.index}}">
-                                            <div class="card card-body">
-                                                {{item.coursework}}
-                                            </div>
-                                        </div>
-                                    </div>
-                                    {% endif %}
-                                </div>
-                            </li>
-                            {% endfor %}
-                        </ul>          
-                    </div>
-                </div>
                 <hr />
 
                 <!-- Technical Skills -->
                 <div class="row mt-3">
                     <div class="col">
                         <h4 class="mb-3">Technical Skills</h4>
-                        <div class="card">
-                            <div class="card-body">
-                                {% for item in site.data.profile.skills %}
-                                <div class="mb-3">
-                                    <h5 class="mb-2">{{ item.type }}</h5>
-                                    <div>
-                                        {% for name in item.names %}
-                                        <span class="skill-tag">{{ name }}</span>
-                                        {% endfor %}
-                                    </div>
-                                </div>
+                        
+                        <!-- .NET -->
+                        <div class="skill-card mb-4">
+                            <div class="d-flex align-items-center mb-2">
+                                <h5 class="mb-0 mr-2">{{ site.data.profile.skills.dotnet.name }}</h5>
+                                <span class="skill-level">{{ site.data.profile.skills.dotnet.level }}</span>
+                            </div>
+                            <p class="mb-3">{{ site.data.profile.skills.dotnet.description }}</p>
+                            <div class="tech-tags">
+                                {% for tech in site.data.profile.skills.dotnet.technologies %}
+                                <span class="tech-tag">{{ tech }}</span>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        
+                        <!-- Python -->
+                        <div class="skill-card mb-4">
+                            <div class="d-flex align-items-center mb-2">
+                                <h5 class="mb-0 mr-2">{{ site.data.profile.skills.python.name }}</h5>
+                                <span class="skill-level">{{ site.data.profile.skills.python.level }}</span>
+                            </div>
+                            <p class="mb-3">{{ site.data.profile.skills.python.description }}</p>
+                            <div class="tech-tags">
+                                {% for tech in site.data.profile.skills.python.technologies %}
+                                <span class="tech-tag">{{ tech }}</span>
                                 {% endfor %}
                             </div>
                         </div>

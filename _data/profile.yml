@@ -103,6 +103,45 @@ summary:
 - "<b>Motivated researcher looking for PhD/MSc positions for Spring/Fall 2026</b>"
 - "<b>📄 <a href='https://drive.google.com/file/d/166KeqxoI_06834jh8LvFod2umaOR3m7n/view?usp=sharing' target='_blank'>Download my CV</a></b> to learn more about my experience and qualifications"
 
+skills:
+  dotnet:
+    name: ".NET Ecosystem"
+    level: "Advanced"
+    description: >-
+      Specialized in developing enterprise-grade applications using .NET Core/6+. Extensive experience with 
+      C#, ASP.NET Core Web APIs, Entity Framework Core, LINQ, and Dependency Injection. Proficient in 
+      implementing clean architecture, repository patterns, and CQRS for scalable microservices.
+    technologies:
+      - C#
+      - ASP.NET Core
+      - Entity Framework Core
+      - LINQ
+      - Dependency Injection
+      - xUnit
+      - Moq
+      - MediatR
+      - SignalR
+      - OpenTelemetry
+  
+  python:
+    name: "Python Stack"
+    level: "Intermediate"
+    description: >-
+      Experienced in data processing, web scraping, and backend development with Python. Proficient in 
+      FastAPI, Flask, and Scrapy frameworks. Familiar with scientific computing libraries including NumPy, 
+      Pandas, and basic machine learning implementations with scikit-learn and PyTorch.
+    technologies:
+      - FastAPI
+      - Flask
+      - Scrapy
+      - NumPy
+      - Pandas
+      - Matplotlib
+      - scikit-learn
+      - PyTorch
+      - asyncio
+      - Python-Selenium
+
 short_bio: >-
   &#x1F44B Hi I'm Tanzim. I'm a software engineer and aspiring researcher passionate about creating solutions that make lives better for people. My interest lies in the fields of <b>Software Engineering, Blockchain, and Image Steganography</b>, with a strong focus on <b>DevOps, Backend Engineering & AI Engineering</b>. I'm particularly interested in <b>Domain Driven Design, System Architecture, and Software Architecture</b>. Being both research and development oriented, I believe I can tackle challenges that require both kinds of efforts.
   <br/><br/>
