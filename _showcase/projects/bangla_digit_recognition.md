@@ -20,7 +20,7 @@ technologies:
 
 # Building a Bangla Handwritten Digit Recognizer from Scratch: A Deep Dive into Custom CNN Implementation
 
-![Bangla Digit Recognition](/assets/images/bangla-digit-recognition.png)
+<img src="{{ '/assets/images/bangla-digit-recognition.png' | relative_url }}" class="img-fluid mb-4" alt="Bangla Digit Recognition">
 
 ## Introduction
 
@@ -128,7 +128,7 @@ The preprocessing pipeline is particularly effective for Bangla digits because:
 
 ## CNN Architecture Details
 
-![CNN Architecture](/assets/images/cnn-architecture.png)
+<img src="{{ '/assets/images/cnn-architecture.png' | relative_url }}" class="img-fluid mb-4 rounded shadow-sm" alt="CNN Architecture">
 
 The project implements two different CNN architectures:
 
