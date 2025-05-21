@@ -131,13 +131,13 @@ body_attr: >-
                 </section>
 
                 <ul class="timeline mb-0">
-                    {% for item in site.data.profile.skills %}
-                    <li class="media mb-2">
+                    {% for item in site.data.profile.technical_skills %}
+                    <li class="media mb-4">
                         <div class="media-body">
                             <div><h6>{{ item.type }}</h6></div>
-                            <div>
+                            <div class="mt-2">
                                 {% for name in item.names %}
-                                    <span class="interest-tag">{{ name }}</span>
+                                    <span class="tech-tag">{{ name }}</span>
                                 {% endfor %}
                             </div>
                         </div>

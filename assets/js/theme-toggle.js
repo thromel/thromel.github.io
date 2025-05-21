@@ -23,7 +23,7 @@ function applyTheme(theme) {
   // Add the current theme class
   document.documentElement.classList.add(`${theme}-theme`);
 
-  // Update body background class
+  // Update body background class based on theme
   if (theme === 'dark') {
     document.body.classList.add('bg-dark');
     document.body.classList.remove('bg-light');

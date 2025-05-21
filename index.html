@@ -178,7 +178,21 @@ navbar_title: Home
                     <div class="col">
                         <h4 class="mb-3">Technical Skills</h4>
                         
-                        <!-- .NET -->
+                        <!-- Skill categories from technical_skills -->
+                        {% for category in site.data.profile.technical_skills %}
+                        <div class="skill-card mb-4">
+                            <div class="d-flex align-items-center mb-2">
+                                <h5 class="mb-0 mr-2">{{ category.type }}</h5>
+                            </div>
+                            <div class="tech-tags mb-3">
+                                {% for tech in category.names %}
+                                <span class="tech-tag">{{ tech }}</span>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        {% endfor %}
+                        
+                        <!-- .NET Skills (from detailed skills) -->
                         <div class="skill-card mb-4">
                             <div class="d-flex align-items-center mb-2">
                                 <h5 class="mb-0 mr-2">{{ site.data.profile.skills.dotnet.name }}</h5>
@@ -192,7 +206,7 @@ navbar_title: Home
                             </div>
                         </div>
                         
-                        <!-- Python -->
+                        <!-- Python Skills (from detailed skills) -->
                         <div class="skill-card mb-4">
                             <div class="d-flex align-items-center mb-2">
                                 <h5 class="mb-0 mr-2">{{ site.data.profile.skills.python.name }}</h5>
@@ -236,7 +250,13 @@ navbar_title: Home
                             {% for cert in site.data.profile.tests_and_certifications %}
                             <li class="media mb-2">
                                 <div class="media-body">
-                                    <div><h6>{{ cert.name }}</h6></div>
+                                    <div>
+                                    {% if cert.url %}
+                                    <h6><a href="{{ cert.url }}" target="_blank">{{ cert.name }}</a></h6>
+                                    {% else %}
+                                    <h6>{{ cert.name }}</h6>
+                                    {% endif %}
+                                    </div>
                                     {% if cert.score %}
                                     <div>Score: <strong>{{ cert.score }}</strong></div>
                                     {% endif %}
@@ -273,6 +293,76 @@ navbar_title: Home
                             </li>
                             {% endfor %}
                         </ul>          
+                    </div>
+                </div>
+                <hr />
+
+                <!-- Books -->
+                <div class="row mt-3">
+                    <div class="col">
+                        <h4><i class="fa-solid fa-book mt-1 mr-2 icon-book"></i> Reading List</h4>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h5 class="mb-3">Technical Books</h5>
+                                <ul class="timeline">
+                                    {% for book in site.data.profile.books %}
+                                    {% if book.category == "Technical" %}
+                                    <li class="media mb-3">
+                                        <div class="media-body">
+                                            <div>
+                                                <h6>
+                                                    {% if book.url %}
+                                                    <a href="{{ book.url }}" target="_blank">{{ book.title }}</a>
+                                                    {% else %}
+                                                    {{ book.title }}
+                                                    {% endif %}
+                                                </h6>
+                                            </div>
+                                            <div>by <strong>{{ book.author }}</strong></div>
+                                            {% if book.status %}
+                                            <div class="mt-1">
+                                                <span class="badge {% if book.status == 'Currently Reading' %}badge-primary{% else %}badge-success{% endif %}">
+                                                    {{ book.status }}
+                                                </span>
+                                            </div>
+                                            {% endif %}
+                                        </div>
+                                    </li>
+                                    {% endif %}
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <h5 class="mb-3">Fiction Books</h5>
+                                <ul class="timeline">
+                                    {% for book in site.data.profile.books %}
+                                    {% if book.category == "Fiction" %}
+                                    <li class="media mb-3">
+                                        <div class="media-body">
+                                            <div>
+                                                <h6>
+                                                    {% if book.url %}
+                                                    <a href="{{ book.url }}" target="_blank">{{ book.title }}</a>
+                                                    {% else %}
+                                                    {{ book.title }}
+                                                    {% endif %}
+                                                </h6>
+                                            </div>
+                                            <div>by <strong>{{ book.author }}</strong></div>
+                                            {% if book.status %}
+                                            <div class="mt-1">
+                                                <span class="badge {% if book.status == 'Currently Reading' %}badge-primary{% else %}badge-success{% endif %}">
+                                                    {{ book.status }}
+                                                </span>
+                                            </div>
+                                            {% endif %}
+                                        </div>
+                                    </li>
+                                    {% endif %}
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <hr />

@@ -497,10 +497,45 @@ tests_and_certifications:
 - name: "📜 TOEFL iBT"
   score: 103/120
   details: Listening - 29, Reading - 29, Writing - 22, Speaking - 23
+  url: https://www.ets.org/toefl.html
 - name: "🔄 Certified Kubernetes Application Developer (CKAD)"
   status: In preparation
+  url: https://www.cncf.io/certification/ckad/
 - name: "🔄 AWS Solution Architect Associate"
   status: In preparation
+  url: https://aws.amazon.com/certification/certified-solutions-architect-associate/
+
+books:
+- title: "Designing Data-Intensive Applications"
+  author: "Martin Kleppmann"
+  url: https://dataintensive.net/
+  status: Currently Reading
+  category: Technical
+- title: "Hands-On Large Language Models"
+  author: "Jay Alammar"
+  url: https://www.amazon.com/Hands-Large-Language-Models-Understanding/dp/1098150961
+  status: Currently Reading
+  category: Technical
+- title: "Clean Architecture"
+  author: "Robert C. Martin"
+  url: https://www.amazon.com/Clean-Architecture-Craftsmans-Software-Structure/dp/0134494164
+  status: Completed
+  category: Technical
+- title: "Domain-Driven Design"
+  author: "Eric Evans"
+  url: https://www.domainlanguage.com/ddd/
+  status: Completed
+  category: Technical
+- title: "Foundation Series"
+  author: "Isaac Asimov"
+  url: https://www.asimovonline.com/asimov_home_page.html
+  status: Completed
+  category: Fiction
+- title: "Dune"
+  author: "Frank Herbert" 
+  url: https://www.dunenovels.com/
+  status: Completed
+  category: Fiction
 
 hobbies:
 - type: Programming & Learning

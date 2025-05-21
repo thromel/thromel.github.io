@@ -32,7 +32,7 @@
     <link rel="stylesheet" href="{{ '/assets/css/developer-theme.css' | relative_url }}">
     <link rel="stylesheet" href="{{ '/assets/css/custom.css' | relative_url }}">
 </head>
-<body>
+<body class="{{ page.body_attr }}">
     {% include navbar.html %}
     <div class="container py-4">
         {{content}}
