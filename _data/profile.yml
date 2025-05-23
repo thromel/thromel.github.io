@@ -94,14 +94,14 @@ linkedin: thromel
 # orcid: 0000-0000-0000-0000
 
 summary:
-- "Hi, I'm Tanzim — a <b>Software Development Engineer at IQVIA</b> and <b>aspiring researcher</b> who bridges the gap between industry and academia"
-- "🎓 <b>CSE graduate from BUET</b> (May 2023) with a track record of turning complex problems into scalable solutions"
-- "🏆 At IQVIA, I've integrated <b>LLM capabilities into healthcare analytics</b>, reduced query times by 60%, and earned the <b>IQVIA Impact Silver Award</b> for outstanding performance"
-- "🔬 My research passion: <b>using AI to revolutionize software engineering</b> — making development more intelligent, systems more resilient, and engineering practices more effective"
-- "💡 Currently working on research in <b>LLM API contract analysis</b> and <b>multi-cover image steganography</b>, collaborating with professors from BUET and Auburn University"
-- "🚀 What sets me apart: I don't just build software — I study how to build it better. <a href='/showcase'>Explore my projects</a> and <a href='/research'>research work</a> to see innovation in action"
-- "🎯 <b>Seeking PhD/MSc positions for Spring/Fall 2026</b>"
-- "📄 <b><a href='https://drive.google.com/file/d/166KeqxoI_06834jh8LvFod2umaOR3m7n/view?usp=sharing' target='_blank'>Download my CV</a></b> for the complete story"
+- "I am Tanzim Hossain Romel, a <b>Software Development Engineer at IQVIA</b> and <b>aspiring researcher</b> dedicated to advancing the intersection of industry practice and academic research"
+- "Graduated with a <b>Bachelor of Science in Computer Science and Engineering from BUET</b> (May 2023), with demonstrated expertise in developing scalable, enterprise-grade solutions"
+- "At IQVIA, I have successfully <b>integrated LLM capabilities into healthcare analytics platforms</b>, achieved 60% reduction in query execution times, and received the <b>IQVIA Impact Silver Award</b> for exceptional performance and innovation"
+- "My research focus centers on <b>leveraging artificial intelligence to enhance software engineering methodologies</b>, with particular emphasis on improving development efficiency, system resilience, and engineering practices"
+- "Currently conducting research in <b>LLM API contract analysis</b> and <b>multi-cover image steganography</b>, in collaboration with distinguished faculty from Bangladesh University of Engineering and Technology and Auburn University"
+- "My unique approach combines practical industry experience with rigorous academic research methodology. Please review my <a href='/showcase'>portfolio of projects</a> and <a href='/research'>research contributions</a> for detailed examples of this integrated approach"
+- "<b>Actively seeking PhD/MSc positions for Spring/Fall 2026</b> to pursue advanced research in AI-enhanced software engineering"
+- "<b><a href='https://drive.google.com/file/d/166KeqxoI_06834jh8LvFod2umaOR3m7n/view?usp=sharing' target='_blank'>Complete curriculum vitae available here</a></b>"
 
 skills:
   dotnet:
