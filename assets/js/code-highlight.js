@@ -4,6 +4,9 @@
  */
 
 document.addEventListener('DOMContentLoaded', function () {
+  // Clean up any existing duplicate headers first
+  cleanupDuplicateHeaders();
+
   // Enhance all code blocks with copy buttons and language labels
   enhanceCodeBlocks();
 
@@ -18,6 +21,29 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 /**
+ * Clean up any duplicate headers that might exist
+ */
+function cleanupDuplicateHeaders() {
+  const allHeaders = document.querySelectorAll('.code-header');
+  const seenCodeBlocks = new Set();
+
+  allHeaders.forEach(function (header) {
+    const nextSibling = header.nextElementSibling;
+    if (nextSibling && nextSibling.classList.contains('highlight')) {
+      if (seenCodeBlocks.has(nextSibling)) {
+        // This is a duplicate header, remove it
+        header.remove();
+      } else {
+        seenCodeBlocks.add(nextSibling);
+      }
+    } else {
+      // Header without a following code block, remove it
+      header.remove();
+    }
+  });
+}
+
+/**
  * Enhance all code blocks with copy buttons and language labels
  */
 function enhanceCodeBlocks() {
@@ -26,6 +52,22 @@ function enhanceCodeBlocks() {
   codeBlocks.forEach(function (codeBlock) {
     // Skip if already enhanced
     if (codeBlock.hasAttribute('data-enhanced')) {
+      return;
+    }
+
+    // Check if there's already a code header before this code block
+    const previousSibling = codeBlock.previousElementSibling;
+    if (previousSibling && previousSibling.classList.contains('code-header')) {
+      // Already has a header, just mark as enhanced
+      codeBlock.setAttribute('data-enhanced', 'true');
+      return;
+    }
+
+    // Check if this code block is already inside a container with a header
+    const parent = codeBlock.parentElement;
+    if (parent && parent.querySelector('.code-header')) {
+      // Parent already has a header, mark as enhanced
+      codeBlock.setAttribute('data-enhanced', 'true');
       return;
     }
 
