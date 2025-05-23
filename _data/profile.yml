@@ -94,15 +94,14 @@ linkedin: thromel
 # orcid: 0000-0000-0000-0000
 
 summary:
-- "Hi I'm Tanzim - <b>Software Development Engineer at IQVIA</b> || <b>Aspiring Researcher</b> @ BUET"
-- "Graduated From <b><a href='https://cse.buet.ac.bd'>CSE @ BUET</a></b> with a GPA of 3.53/4.0"
-- "Focused on <b>DevOps, Backend Engineering & AI Engineering</b> with particular interest in <b>Domain Driven Design and System Architecture</b>"
-- "Passionate about Backend Engineering and AI Systems, especially in the fields of <b>Blockchain Technology, LLM Systems, Image Steganography</b>"
-- "<b>Currently working on research projects related to Blockchain in Healthcare, LLM API Analysis, and Image Steganography</b>"
-- "Creating solutions that make lives better through the combination of research and development capabilities"
-- "<b>A perpetually curious learner</b> inspired by the intersection of <b>theory and practice</b> — drawing inspiration from pioneers like Claude Shannon, Richard Feynman, and modern-day tech polyglots who blend deep expertise with cross-disciplinary thinking"
-- "<b>Motivated researcher looking for PhD/MSc positions for Spring/Fall 2026</b>"
-- "<b>📄 <a href='https://drive.google.com/file/d/166KeqxoI_06834jh8LvFod2umaOR3m7n/view?usp=sharing' target='_blank'>Download my CV</a></b> to learn more about my experience and qualifications"
+- "Hi, I'm Tanzim — a <b>Software Development Engineer at IQVIA</b> and <b>aspiring researcher</b> who bridges the gap between industry and academia"
+- "🎓 <b>CSE graduate from BUET</b> (May 2023) with a track record of turning complex problems into scalable solutions"
+- "🏆 At IQVIA, I've integrated <b>LLM capabilities into healthcare analytics</b>, reduced query times by 60%, and earned the <b>IQVIA Impact Silver Award</b> for outstanding performance"
+- "🔬 My research passion: <b>using AI to revolutionize software engineering</b> — making development more intelligent, systems more resilient, and engineering practices more effective"
+- "💡 Currently working on research in <b>LLM API contract analysis</b> and <b>multi-cover image steganography</b>, collaborating with professors from BUET and Auburn University"
+- "🚀 What sets me apart: I don't just build software — I study how to build it better. <a href='/showcase'>Explore my projects</a> and <a href='/research'>research work</a> to see innovation in action"
+- "🎯 <b>Seeking PhD/MSc positions for Spring/Fall 2026</b>"
+- "📄 <b><a href='https://drive.google.com/file/d/166KeqxoI_06834jh8LvFod2umaOR3m7n/view?usp=sharing' target='_blank'>Download my CV</a></b> for the complete story"
 
 skills:
   dotnet:
