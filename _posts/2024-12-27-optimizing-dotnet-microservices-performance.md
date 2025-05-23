@@ -11,7 +11,7 @@ image: /assets/images/projects/dotnet-performance.png
 
 Imagine this: It's Monday morning, you've just joined your first job as a backend engineer, and the Slack alerts are exploding. Your company's core product—a healthcare analytics platform built with .NET 8 microservices—is crawling under load. Response times that should be 200ms are hitting 8+ seconds. Users are abandoning the application, and the business is losing money by the hour.
 
-This isn't fiction. This was my reality six months into my role at IQVIA, and the journey to fix it taught me more about backend performance optimization than any textbook ever could. If you're a junior engineer stepping into the world of enterprise backend systems, this story will equip you with practical knowledge to identify, understand, and resolve the most common performance bottlenecks you'll encounter.
+This isn't fiction. This was my reality six months into my role as a backend engineer, and the journey to fix it taught me more about backend performance optimization than any textbook ever could. If you're a junior engineer stepping into the world of enterprise backend systems, this story will equip you with practical knowledge to identify, understand, and resolve the most common performance bottlenecks you'll encounter.
 
 ## The Battlefield: Understanding Our Microservice Architecture
 
@@ -1741,4 +1741,4 @@ Your first performance crisis will come sooner than you expect. When it does, yo
 
 ---
 
-*This post reflects real experiences optimizing production systems at IQVIA. While the specific metrics and some implementation details have been modified for educational purposes, the core problems and solutions represent actual performance challenges encountered in enterprise .NET applications. The codebase examples have been anonymized by using different architectural patterns and domain examples than our actual production systems to protect proprietary information while preserving the educational value of the performance optimization techniques.* 
+*This post reflects real experiences optimizing production systems in enterprise environments. While the specific metrics and some implementation details have been modified for educational purposes, the core problems and solutions represent actual performance challenges encountered in enterprise .NET applications. The codebase examples have been anonymized by using different architectural patterns and domain examples than the actual production systems to protect proprietary information while preserving the educational value of the performance optimization techniques.* 
