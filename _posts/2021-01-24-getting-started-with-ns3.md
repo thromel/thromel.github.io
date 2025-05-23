@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Getting Started with NS3: A Hands-On Guide to Network Simulation"
-date: 2024-12-27
+date: 2021-12-27
 categories: [networking, simulation, programming]
 tags: [ns3, network-simulation, cpp, networking, tutorial, campus-network]
 image: /assets/images/projects/ns3-simulation.png
