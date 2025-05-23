@@ -36,6 +36,20 @@ collections:
 markdown: kramdown
 highlighter: rouge
 
+# Kramdown settings
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    block:
+      line_numbers: false
+      start_line: 1
+
+# Rouge settings
+rouge:
+  default_lang: python
+  css_class: 'highlight'
+
 plugins:
   - jekyll-feed
   - jekyll-seo-tag
