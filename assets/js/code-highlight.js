@@ -4,87 +4,158 @@
  */
 
 document.addEventListener('DOMContentLoaded', function () {
-  // Add copy buttons to all code blocks
-  addCopyButtons();
+  // Enhance all code blocks with copy buttons and language labels
+  enhanceCodeBlocks();
 
-  // Add language labels to code blocks
-  addLanguageLabels();
+  // Initialize theme-aware highlighting
+  updateCodeTheme();
+
+  // Set up theme change observers
+  setupThemeObserver();
 
   // Add line number support (optional)
   // addLineNumbers();
 });
 
 /**
- * Add copy-to-clipboard buttons to all code blocks
+ * Enhance all code blocks with copy buttons and language labels
  */
-function addCopyButtons() {
+function enhanceCodeBlocks() {
   const codeBlocks = document.querySelectorAll('.highlight');
 
   codeBlocks.forEach(function (codeBlock) {
-    // Skip if already has a copy button
-    if (codeBlock.querySelector('.copy-btn')) {
+    // Skip if already enhanced
+    if (codeBlock.hasAttribute('data-enhanced')) {
       return;
     }
 
-    // Create copy button
-    const copyBtn = document.createElement('button');
-    copyBtn.className = 'copy-btn';
-    copyBtn.innerHTML = '<i class="fas fa-copy"></i> Copy';
-    copyBtn.setAttribute('title', 'Copy code to clipboard');
+    // Mark as enhanced to prevent duplicate processing
+    codeBlock.setAttribute('data-enhanced', 'true');
 
-    // Add click event
-    copyBtn.addEventListener('click', function () {
-      copyCodeToClipboard(codeBlock, copyBtn);
-    });
+    // Extract language from class name (Rouge adds language-* classes)
+    const language = extractLanguage(codeBlock);
 
-    // Create header if it doesn't exist
-    let header = codeBlock.previousElementSibling;
-    if (!header || !header.classList.contains('code-header')) {
-      header = document.createElement('div');
-      header.className = 'code-header';
-      codeBlock.parentNode.insertBefore(header, codeBlock);
-    }
+    // Create header with both language label and copy button
+    const header = createCodeHeader(language, codeBlock);
 
-    // Add copy button to header
-    header.appendChild(copyBtn);
+    // Insert header before code block
+    codeBlock.parentNode.insertBefore(header, codeBlock);
   });
 }
 
 /**
- * Add language labels to code blocks
+ * Extract language from code block classes
  */
-function addLanguageLabels() {
-  const codeBlocks = document.querySelectorAll('.highlight');
+function extractLanguage(codeBlock) {
+  const classes = Array.from(codeBlock.classList);
+  let language = 'code';
 
-  codeBlocks.forEach(function (codeBlock) {
-    // Extract language from class name
-    const classes = codeBlock.className.split(' ');
-    let language = 'code';
-
-    for (const className of classes) {
-      if (className.startsWith('language-')) {
-        language = className.replace('language-', '');
-        break;
-      }
+  // Look for language-* class or data-lang attribute
+  for (const className of classes) {
+    if (className.startsWith('language-')) {
+      language = className.replace('language-', '');
+      break;
     }
+  }
 
-    // Check if header already exists
-    let header = codeBlock.previousElementSibling;
-    if (!header || !header.classList.contains('code-header')) {
-      header = document.createElement('div');
-      header.className = 'code-header';
-      codeBlock.parentNode.insertBefore(header, codeBlock);
+  // Fallback: check for Rouge's highlight class with language
+  const langMatch = codeBlock.className.match(/highlight-(\w+)/);
+  if (langMatch) {
+    language = langMatch[1];
+  }
+
+  // Another fallback: check the first class after 'highlight'
+  if (language === 'code' && classes.length > 1) {
+    const possibleLang = classes[1];
+    if (possibleLang && possibleLang !== 'highlight') {
+      language = possibleLang;
     }
+  }
 
-    // Add language label if it doesn't exist
-    if (!header.querySelector('.code-language')) {
-      const languageLabel = document.createElement('span');
-      languageLabel.className = 'code-language';
-      languageLabel.textContent =
-        language.charAt(0).toUpperCase() + language.slice(1);
-      header.insertBefore(languageLabel, header.firstChild);
+  return language;
+}
+
+/**
+ * Create code header with language label and copy button
+ */
+function createCodeHeader(language, codeBlock) {
+  const header = document.createElement('div');
+  header.className = 'code-header';
+
+  // Create language label
+  const languageLabel = document.createElement('span');
+  languageLabel.className = 'code-language';
+  languageLabel.textContent = formatLanguageName(language);
+
+  // Create copy button
+  const copyBtn = document.createElement('button');
+  copyBtn.className = 'copy-btn';
+  copyBtn.innerHTML = '<i class="fas fa-copy"></i> Copy';
+  copyBtn.setAttribute('title', 'Copy code to clipboard');
+  copyBtn.setAttribute('aria-label', 'Copy code to clipboard');
+
+  // Add click event to copy button
+  copyBtn.addEventListener('click', function () {
+    copyCodeToClipboard(codeBlock, copyBtn);
+  });
+
+  // Add keyboard navigation
+  copyBtn.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      copyBtn.click();
     }
   });
+
+  // Append elements to header
+  header.appendChild(languageLabel);
+  header.appendChild(copyBtn);
+
+  return header;
+}
+
+/**
+ * Format language name for display
+ */
+function formatLanguageName(language) {
+  const languageMap = {
+    js: 'JavaScript',
+    ts: 'TypeScript',
+    py: 'Python',
+    python: 'Python',
+    java: 'Java',
+    cpp: 'C++',
+    c: 'C',
+    cs: 'C#',
+    css: 'CSS',
+    html: 'HTML',
+    xml: 'XML',
+    json: 'JSON',
+    yaml: 'YAML',
+    yml: 'YAML',
+    sql: 'SQL',
+    bash: 'Bash',
+    sh: 'Shell',
+    powershell: 'PowerShell',
+    ruby: 'Ruby',
+    php: 'PHP',
+    go: 'Go',
+    rust: 'Rust',
+    scala: 'Scala',
+    kotlin: 'Kotlin',
+    swift: 'Swift',
+    dart: 'Dart',
+    r: 'R',
+    matlab: 'MATLAB',
+    latex: 'LaTeX',
+    markdown: 'Markdown',
+    md: 'Markdown',
+  };
+
+  return (
+    languageMap[language.toLowerCase()] ||
+    language.charAt(0).toUpperCase() + language.slice(1)
+  );
 }
 
 /**
@@ -95,57 +166,167 @@ function copyCodeToClipboard(codeBlock, button) {
     codeBlock.querySelector('pre code') || codeBlock.querySelector('pre');
   const text = code.textContent || code.innerText;
 
-  // Create a temporary textarea to copy from
+  // Use modern clipboard API if available
+  if (navigator.clipboard && window.isSecureContext) {
+    navigator.clipboard
+      .writeText(text)
+      .then(function () {
+        showCopySuccess(button);
+      })
+      .catch(function (err) {
+        console.error('Failed to copy code: ', err);
+        fallbackCopy(text, button);
+      });
+  } else {
+    fallbackCopy(text, button);
+  }
+}
+
+/**
+ * Fallback copy method for older browsers
+ */
+function fallbackCopy(text, button) {
   const textarea = document.createElement('textarea');
   textarea.value = text;
+  textarea.style.position = 'fixed';
+  textarea.style.opacity = '0';
   document.body.appendChild(textarea);
   textarea.select();
 
   try {
     const successful = document.execCommand('copy');
     if (successful) {
-      // Update button to show success
-      const originalHTML = button.innerHTML;
-      button.innerHTML = '<i class="fas fa-check"></i> Copied!';
-      button.classList.add('copied');
-
-      // Reset button after 2 seconds
-      setTimeout(function () {
-        button.innerHTML = originalHTML;
-        button.classList.remove('copied');
-      }, 2000);
+      showCopySuccess(button);
     }
   } catch (err) {
-    console.error('Failed to copy code: ', err);
-
-    // Fallback for modern browsers
-    if (navigator.clipboard && window.isSecureContext) {
-      navigator.clipboard.writeText(text).then(function () {
-        const originalHTML = button.innerHTML;
-        button.innerHTML = '<i class="fas fa-check"></i> Copied!';
-        button.classList.add('copied');
-
-        setTimeout(function () {
-          button.innerHTML = originalHTML;
-          button.classList.remove('copied');
-        }, 2000);
-      });
-    }
+    console.error('Fallback copy failed: ', err);
   } finally {
     document.body.removeChild(textarea);
   }
 }
 
 /**
+ * Show copy success feedback
+ */
+function showCopySuccess(button) {
+  const originalHTML = button.innerHTML;
+  button.innerHTML = '<i class="fas fa-check"></i> Copied!';
+  button.classList.add('copied');
+
+  // Reset button after 2 seconds
+  setTimeout(function () {
+    button.innerHTML = originalHTML;
+    button.classList.remove('copied');
+  }, 2000);
+}
+
+/**
+ * Detect current theme using your site's theme system
+ */
+function getCurrentTheme() {
+  const htmlElement = document.documentElement;
+
+  // Check for your theme system's classes on :root (html element)
+  if (htmlElement.classList.contains('light-theme')) {
+    return 'light';
+  }
+
+  if (htmlElement.classList.contains('dark-theme')) {
+    return 'dark';
+  }
+
+  // Check for data attributes as fallback
+  const themeData = htmlElement.getAttribute('data-theme');
+  if (themeData) {
+    return themeData.toLowerCase().includes('light') ? 'light' : 'dark';
+  }
+
+  // Check localStorage as another fallback
+  try {
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+      return savedTheme.toLowerCase().includes('light') ? 'light' : 'dark';
+    }
+  } catch (e) {
+    // Ignore localStorage errors
+  }
+
+  // Default to dark theme to match your site
+  return 'dark';
+}
+
+/**
+ * Theme-aware syntax highlighting - No longer needed to add classes to individual elements
+ * The CSS now uses :root.light-theme selectors which work automatically
+ */
+function updateCodeTheme() {
+  const currentTheme = getCurrentTheme();
+  console.log('Current theme detected:', currentTheme);
+
+  // The CSS handles the theming automatically with :root.light-theme selectors
+  // We just need to make sure the theme is properly detected
+
+  // Dispatch a custom event for other scripts that might need it
+  document.dispatchEvent(
+    new CustomEvent('codeThemeUpdated', {
+      detail: { theme: currentTheme },
+    })
+  );
+}
+
+/**
+ * Set up theme change observer
+ */
+function setupThemeObserver() {
+  // Observe changes to the html element's class attribute
+  const observer = new MutationObserver(function (mutations) {
+    let themeChanged = false;
+
+    mutations.forEach(function (mutation) {
+      if (
+        mutation.type === 'attributes' &&
+        (mutation.attributeName === 'class' ||
+          mutation.attributeName === 'data-theme')
+      ) {
+        themeChanged = true;
+      }
+    });
+
+    if (themeChanged) {
+      setTimeout(updateCodeTheme, 100); // Small delay to ensure theme change is complete
+    }
+  });
+
+  // Observe the document element (html) for class changes
+  observer.observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ['class', 'data-theme'],
+  });
+
+  // Also listen for storage events (in case theme is saved to localStorage)
+  window.addEventListener('storage', function (e) {
+    if (e.key === 'theme') {
+      updateCodeTheme();
+    }
+  });
+
+  // Listen for your site's theme toggle events
+  document.addEventListener('themeChanged', updateCodeTheme);
+}
+
+/**
  * Add line numbers to code blocks (optional feature)
  */
 function addLineNumbers() {
-  const codeBlocks = document.querySelectorAll(
-    '.highlight pre code, .highlight pre'
-  );
+  const codeBlocks = document.querySelectorAll('.highlight pre');
 
-  codeBlocks.forEach(function (codeElement) {
-    const code = codeElement.textContent || codeElement.innerText;
+  codeBlocks.forEach(function (pre) {
+    // Skip if already has line numbers
+    if (pre.querySelector('.line-numbers')) {
+      return;
+    }
+
+    const code = pre.textContent || pre.innerText;
     const lines = code.split('\n');
 
     // Remove last empty line if it exists
@@ -154,146 +335,114 @@ function addLineNumbers() {
     }
 
     // Create line numbers
-    const lineNumbers = lines
-      .map((_, index) => `<span class="line-number">${index + 1}</span>`)
-      .join('\n');
+    const lineNumbers = document.createElement('div');
+    lineNumbers.className = 'line-numbers';
+    lineNumbers.setAttribute('aria-hidden', 'true');
 
-    // Create wrapper
+    for (let i = 1; i <= lines.length; i++) {
+      const lineNumber = document.createElement('span');
+      lineNumber.className = 'line-number';
+      lineNumber.textContent = i;
+      lineNumbers.appendChild(lineNumber);
+    }
+
+    // Wrap content in a container
     const wrapper = document.createElement('div');
     wrapper.className = 'code-with-lines';
 
-    // Create line numbers column
-    const lineNumbersColumn = document.createElement('div');
-    lineNumbersColumn.className = 'line-numbers';
-    lineNumbersColumn.innerHTML = lineNumbers;
-
-    // Clone the original code element
-    const codeColumn = codeElement.cloneNode(true);
-    codeColumn.className = 'code-content';
-
-    // Build the new structure
-    wrapper.appendChild(lineNumbersColumn);
-    wrapper.appendChild(codeColumn);
-
-    // Replace the original
-    codeElement.parentNode.replaceChild(wrapper, codeElement);
+    // Move pre content to wrapper
+    pre.parentNode.insertBefore(wrapper, pre);
+    wrapper.appendChild(lineNumbers);
+    wrapper.appendChild(pre);
   });
 }
 
-/**
- * Highlight specific lines in code blocks
- * Usage: Add data-highlight-lines="1,3-5,8" to the code block
- */
-function highlightSpecificLines() {
-  const codeBlocks = document.querySelectorAll(
-    '.highlight[data-highlight-lines]'
-  );
-
-  codeBlocks.forEach(function (codeBlock) {
-    const highlightLines = codeBlock.getAttribute('data-highlight-lines');
-    const ranges = highlightLines.split(',');
-    const linesToHighlight = new Set();
-
-    ranges.forEach(function (range) {
-      if (range.includes('-')) {
-        const [start, end] = range.split('-').map(Number);
-        for (let i = start; i <= end; i++) {
-          linesToHighlight.add(i);
-        }
-      } else {
-        linesToHighlight.add(Number(range));
-      }
-    });
-
-    const pre = codeBlock.querySelector('pre');
-    const code = pre.textContent || pre.innerText;
-    const lines = code.split('\n');
-
-    // Add highlight class to specified lines
-    // This would require additional CSS and DOM manipulation
-    // Implementation depends on your specific highlighting needs
-  });
-}
-
-/**
- * Add smooth scrolling for long code blocks
- */
-function addCodeBlockScrolling() {
-  const codeBlocks = document.querySelectorAll('.highlight');
-
-  codeBlocks.forEach(function (codeBlock) {
-    const pre = codeBlock.querySelector('pre');
-    if (pre && pre.scrollWidth > pre.clientWidth) {
-      codeBlock.classList.add('scrollable');
-    }
-  });
-}
-
-/**
- * Theme-aware syntax highlighting
- * Updates code highlighting when theme changes
- */
-function updateCodeTheme() {
-  const isDarkTheme = document.documentElement.classList.contains('dark-theme');
-  const codeBlocks = document.querySelectorAll('.highlight');
-
-  codeBlocks.forEach(function (codeBlock) {
-    if (isDarkTheme) {
-      codeBlock.classList.remove('light-theme');
-      codeBlock.classList.add('dark-theme');
-    } else {
-      codeBlock.classList.remove('dark-theme');
-      codeBlock.classList.add('light-theme');
-    }
-  });
-}
-
-// Listen for theme changes
-document.addEventListener('themeChanged', updateCodeTheme);
-
-// CSS for copied state
-const style = document.createElement('style');
-style.textContent = `
+// Add CSS for additional features
+const additionalCSS = `
     .copy-btn.copied {
         background: #238636 !important;
         border-color: #238636 !important;
         color: white !important;
+        transform: scale(0.95);
+    }
+    
+    .copy-btn:active {
+        transform: scale(0.95);
     }
     
     .code-with-lines {
         display: flex;
+        overflow-x: auto;
     }
     
     .line-numbers {
-        background: #161b22;
+        background: rgba(22, 27, 34, 0.8);
         border-right: 1px solid #30363d;
-        padding: 1rem 0.5rem;
+        padding: 1rem 0.5rem 1rem 1rem;
         user-select: none;
-        min-width: 2.5rem;
+        min-width: 3rem;
         text-align: right;
         font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', 'Source Code Pro', monospace;
         font-size: 0.875rem;
         line-height: 1.5;
         color: #6e7681;
+        position: sticky;
+        left: 0;
     }
     
     .line-numbers .line-number {
         display: block;
+        padding: 0 0.5rem 0 0;
     }
     
-    .code-content {
-        flex: 1;
-        overflow-x: auto;
+    :root.light-theme .line-numbers {
+        background: rgba(241, 243, 244, 0.8);
+        border-right-color: #d0d7de;
+        color: #586069;
     }
     
-    .highlight.scrollable::after {
-        content: "← Scroll horizontally to see more";
-        position: absolute;
-        bottom: 0.5rem;
-        right: 1rem;
-        font-size: 0.75rem;
-        color: #8b949e;
-        opacity: 0.7;
+    .code-header {
+        position: relative;
+        z-index: 10;
+    }
+    
+    .highlight {
+        position: relative;
+        overflow: visible;
+    }
+    
+    /* Improved scrollbar for code blocks */
+    .highlight pre::-webkit-scrollbar {
+        height: 8px;
+    }
+    
+    .highlight pre::-webkit-scrollbar-track {
+        background: #161b22;
+    }
+    
+    .highlight pre::-webkit-scrollbar-thumb {
+        background: #30363d;
+        border-radius: 4px;
+    }
+    
+    .highlight pre::-webkit-scrollbar-thumb:hover {
+        background: #484f58;
+    }
+    
+    :root.light-theme .highlight pre::-webkit-scrollbar-track {
+        background: #f6f8fa;
+    }
+    
+    :root.light-theme .highlight pre::-webkit-scrollbar-thumb {
+        background: #d0d7de;
+    }
+    
+    :root.light-theme .highlight pre::-webkit-scrollbar-thumb:hover {
+        background: #afb8c1;
     }
 `;
-document.head.appendChild(style);
+
+// Inject additional CSS
+const styleElement = document.createElement('style');
+styleElement.textContent = additionalCSS;
+document.head.appendChild(styleElement);
