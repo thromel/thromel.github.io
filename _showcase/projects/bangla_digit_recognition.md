@@ -18,6 +18,14 @@ technologies:
   - Deep Learning
 ---
 
+## 2nd Place Winner | 4-week Project | Image Recognition
+
+<div class="text-end mb-3">
+    <a href="https://github.com/thromel/CSE-472-Machine-Learning" target="_blank" class="btn btn-sm btn-outline-dark">
+        <i class="fab fa-github"></i> View on GitHub
+    </a>
+</div>
+
 # Building a Bangla Handwritten Digit Recognizer from Scratch: A Deep Dive into Custom CNN Implementation
 
 <img src="{{ '/assets/images/bangla-digit-recognition.png' | relative_url }}" class="img-fluid mb-4" alt="Bangla Digit Recognition">

@@ -5,15 +5,23 @@ width: 8
 date: 2025-03-01 00:00:00 +0800
 group: Research
 title: StegFormer-MC Multi-Cover Image Steganography with Distributed Secret Embedding
-excerpt: An advanced steganography framework that extends the StegFormer architecture to distribute secret image data across multiple cover images, enhancing security and robustness against steganalysis detection methods.
+excerpt: Extended the StegFormer architecture to hide secret images across multiple cover images, with innovative channel- and spatial-splitting strategies, parallel processing branches, and a composite loss function for robust training.
+thumbnail: /assets/images/stegformer-mc.png
 technologies:
+  - Python
   - PyTorch
-  - Transformer Architecture
-  - Computer Vision
-  - Information Security
   - Deep Learning
-  - Distributed Computing
+  - Computer Vision
+  - Steganography
 ---
+
+## Research Collaborator | Ongoing Research | Image Steganography
+
+<div class="text-end mb-3">
+    <a href="https://github.com/thromel/StegFormer" target="_blank" class="btn btn-sm btn-outline-dark">
+        <i class="fab fa-github"></i> View on GitHub
+    </a>
+</div>
 
 ## Lead Researcher | Ongoing Research Project
 

@@ -978,3 +978,11 @@ If you're interested in learning more about compilers, here are some excellent r
 - The **LLVM** project: [llvm.org](https://llvm.org/)
 
 These resources provide deeper explorations of compiler theory and practice, from basic concepts to advanced techniques used in modern production compilers.
+
+## Lead Developer | 12-week Project | Systems Programming
+
+<div class="text-end mb-3">
+    <a href="https://github.com/thromel/Yet-Another-C-Compiler" target="_blank" class="btn btn-sm btn-outline-dark">
+        <i class="fab fa-github"></i> View on GitHub
+    </a>
+</div>

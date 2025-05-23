@@ -558,3 +558,11 @@ Ray tracing represents the intersection of physics, mathematics, and computer sc
 What makes ray tracing particularly beautiful is how naturally it captures complex optical phenomena. As you extend this implementation with physically-based materials, global illumination, and other advanced features, you'll find that many effects emerge organically from the underlying simulation.
 
 The journey from understanding the physics of light to implementing a ray tracer is one of the most rewarding experiences in computer graphics—a journey that continues to drive innovation in film, games, architectural visualization, and scientific research.
+
+## Graphics Engineer | 10-week Project | Computer Graphics
+
+<div class="text-end mb-3">
+    <a href="https://github.com/thromel/CSE-410-Computer-Graphics-Sessional" target="_blank" class="btn btn-sm btn-outline-dark">
+        <i class="fab fa-github"></i> View on GitHub
+    </a>
+</div>

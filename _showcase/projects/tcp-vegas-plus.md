@@ -223,4 +223,12 @@ Future work will focus on testing Vegas+ in larger topologies, implementing the 
 
 This research was conducted as part of the CSE-322 Computer Networks Sessional course at BUET. The authors would like to thank the course instructors for their guidance and the NS3 community for their comprehensive documentation and support.
 
-The complete project code and documentation is available on [GitHub](https://github.com/thromel/CSE-322-Computer-Networks-Sessional). 
+The complete project code and documentation is available on [GitHub](https://github.com/thromel/CSE-322-Computer-Networks-Sessional).
+
+## Network Researcher | 8-week Project | Protocol Implementation
+
+<div class="text-end mb-3">
+    <a href="https://github.com/thromel/CSE-322-Computer-Networks-Sessional" target="_blank" class="btn btn-sm btn-outline-dark">
+        <i class="fab fa-github"></i> View on GitHub
+    </a>
+</div> 
