@@ -9,6 +9,8 @@ image: /assets/images/projects/ai-hallucinations.png
 
 # Taming the Imagination: A Comprehensive Guide to Handling Hallucinations and Implementing Guardrails in Agentic AI
 
+<img src="{{ '/assets/images/projects/ai-hallucinations.png' | relative_url }}" class="img-fluid mb-4" alt="AI Hallucinations and Guardrails Illustration">
+
 ## The $2 Million Hallucination: Why This Matters
 
 Picture this scenario: It's 3 AM, and your agentic AI system is autonomously processing financial reports. It confidently identifies a "trend" in the data, generates a compelling analysis, and triggers an automated trading decision. The only problem? The trend doesn't exist. The AI hallucinated patterns in random noise, and by morning, your company has lost $2 million.
