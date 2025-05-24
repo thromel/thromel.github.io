@@ -7,7 +7,7 @@ tags: [langchain, langgraph, llama, ai, analytics, llm, fine-tuning, python]
 ---
 # Building an Agentic AI Analytics Dashboard: A Deep Dive with LangChain, LangGraph, and Fine-tuned LLAMA
 
-<img src="{{ '/assets/images/agentic-ai-architecture.png' | relative_url }}" class="img-fluid mb-4" alt="Agentic AI Architecture">
+<img src="{{ '/assets/images/agentic_ai_architecture.png' | relative_url }}" class="img-fluid mb-4" alt="Agentic AI Architecture">
 
 
 ## Introduction: Why We Needed More Than Just a Chatbot
