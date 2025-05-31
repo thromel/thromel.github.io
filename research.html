@@ -1,0 +1,80 @@
+---
+layout: default
+title: Research
+navbar_title: Research
+body_attr: >-
+  data-spy="scroll" data-target="#navbar-year" data-offset="100"
+---
+
+<div class="row">
+    <div class="col-12 col-lg-10">
+        <div class="card border-0 shadow-sm">
+            <div class="card-body">
+                <section id="research-interests" class="pt-2">
+                    <h3 class="mb-3">Research Interests</h3>
+                    {% for keyword in site.data.profile.research_interests %}
+                        <span class="interest-tag">{{ keyword }}</span>
+                    {% endfor %}
+                </section>
+                <hr />
+
+                <section id="research-projects" class="pt-3">
+                    <h3 class="mb-3">Research Projects</h3>
+                    <div class="my-0 p-0">
+                        {% for item in site.data.profile.research %}
+                        <div class="d-flex mb-3 p-3 border-bottom">
+                            <div class="col p-0">
+                                <h5 class="mt-0 mb-2 font-weight-bold">
+                                    {% assign showcase_item = site.showcase | where: "title", item.title | first %}
+                                    {% if showcase_item %}
+                                    <a href="{{ showcase_item.url | relative_url }}">{{ item.title }}</a>
+                                    {% else %}
+                                    {{ item.title }}
+                                    {% endif %}
+                                </h5>
+                                <div class="small d-flex">
+                                    <div class="research-type">Research Project</div>
+                                    <div class="ml-auto"><em>{{ item.date }}</em></div>
+                                </div>
+                                <p class="mt-1 mb-2 small" style="text-align: justify; font-size: 14px;">{{ item.description }}</p>
+                                {% if item.collaborator %}
+                                <p class="mt-1 mb-2 small" style="text-align: justify; font-size: 14px; color: #0056b3;"><strong>Collaboration:</strong> {{ item.collaborator }}</p>
+                                {% endif %}
+                                {% if showcase_item %}
+                                <a href="{{ showcase_item.url | relative_url }}" class="btn btn-sm btn-outline-primary">Read More</a>
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </section>
+
+                <section id="publications" class="pt-3 mt-3">
+                    <h3 class="mb-3">Publications</h3>
+                    <div class="my-0 p-0">
+                        {% for item in site.data.profile.publications %}
+                        <div class="d-flex mb-3 p-3 border-bottom">
+                            <div class="col p-0">
+                                <h5 class="mt-0 mb-2 font-weight-bold">{{ item.title }}</h5>
+                                <div class="small d-flex">
+                                    <div class="research-type">{{ item.venue }}</div>
+                                    <div class="ml-auto"><em>{{ item.date }}</em></div>
+                                </div>
+                                <p class="mt-1 mb-2 small" style="text-align: justify; font-size: 14px;">{{ item.description }}</p>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-2 d-none d-lg-block">
+        <div id="navbar-year" class="nav nav-pills flex-column sticky-top" style="top: 250px">
+            <a class="nav-link d-block" href="#research-interests"><h6>Interests</h6></a>
+            <a class="nav-link d-block" href="#research-projects"><h6>Projects</h6></a>
+            <a class="nav-link d-block" href="#publications"><h6>Publications</h6></a>
+        </div>
+    </div>
+</div> 

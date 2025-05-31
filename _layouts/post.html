@@ -1,0 +1,45 @@
+---
+layout: default
+---
+
+<div class="row mt-3">
+    <div class="col">
+        <div class="card border-0 shadow-sm bg-white">
+            <div class="card-body p-5">
+                <h1 class="post-title">{{ page.title }}</h1>
+                <p class="post-meta">
+                    <img src="/assets/images/icons/calendar.png" alt="Date" class="inline-badge" style="width: 20px; height: 20px;">
+                    <span class="post-date">{{ page.date | date: "%B %d, %Y" }}</span>
+                </p>
+                
+                {% if page.tags.size > 0 %}
+                <div class="post-tags mb-4">
+                    <img src="/assets/images/icons/tag.png" alt="tag" class="inline-badge" style="width: 18px; height: 18px; margin-top: 2px;">
+                    {% for tag in page.tags %}
+                    <span class="tech-tag">{{ tag }}</span>
+                    {% endfor %}
+                </div>
+                {% endif %}
+                
+                <div class="post-content">
+                    {{ content }}
+                </div>
+                
+                <div class="post-navigation mt-5 pt-3 border-top">
+                    <div class="row">
+                        <div class="col-6 text-left">
+                            {% if page.previous.url %}
+                            <a href="{{ page.previous.url }}" class="previous">&laquo; {{ page.previous.title }}</a>
+                            {% endif %}
+                        </div>
+                        <div class="col-6 text-right">
+                            {% if page.next.url %}
+                            <a href="{{ page.next.url }}" class="next">{{ page.next.title }} &raquo;</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 

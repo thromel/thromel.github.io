@@ -1,0 +1,831 @@
+/* Custom styling for profile cards and content */
+.card {
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: none;
+    overflow: hidden;
+    background-color: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(5px);
+}
+
+.card:hover {
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.07);
+    transform: translateY(-2px);
+}
+
+.figure-img {
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* Enhance section headings */
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;
+}
+
+h2:after {
+    content: "";
+    display: block;
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(90deg, #4299e1, #7f9cf5);
+    margin-top: 10px;
+    border-radius: 2px;
+}
+
+/* Theme-specific heading colors */
+:root.dark-theme h1, 
+:root.dark-theme h2, 
+:root.dark-theme h3, 
+:root.dark-theme h4, 
+:root.dark-theme h5, 
+:root.dark-theme h6 {
+    color: #ffffff;
+}
+
+:root.light-theme h1, 
+:root.light-theme h2, 
+:root.light-theme h3, 
+:root.light-theme h4, 
+:root.light-theme h5, 
+:root.light-theme h6 {
+    color: #2d3748;
+}
+
+/* Profile card specific styling */
+.profile-card {
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 12px;
+}
+
+/* Publication and project cards */
+.pub-card, .project-card {
+    transition: all 0.3s ease;
+}
+
+.pub-card:hover, .project-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+/* Timeline styling */
+.timeline-icon {
+    box-shadow: 0 0 0 4px rgba(26, 86, 219, 0.1);
+}
+
+/* PhD Seeker Callout Styling */
+.phd-seeker-callout {
+    background: transparent;
+    border-radius: 8px;
+    padding: 15px;
+    border: 2px solid #dc2626;
+    margin-top: 20px;
+}
+
+.phd-callout-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.phd-icon {
+    font-size: 1.3rem;
+    color: #dc2626;
+    margin-right: 8px;
+}
+
+.phd-callout-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #dc2626;
+}
+
+.phd-callout-content {
+    color: var(--text-primary);
+}
+
+.phd-callout-content p {
+    color: var(--text-primary) !important;
+    margin-bottom: 6px;
+    font-weight: 500;
+}
+
+.phd-callout-content strong {
+    font-weight: 700;
+    color: #dc2626;
+}
+
+.phd-action-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.phd-btn-primary {
+    background-color: var(--bg-secondary) !important;
+    color: #dc2626 !important;
+    border: 1px solid #dc2626 !important;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    text-decoration: none !important;
+}
+
+.phd-btn-primary:hover {
+    background-color: #dc2626 !important;
+    color: #ffffff !important;
+}
+
+.phd-btn-secondary {
+    background-color: transparent !important;
+    color: #dc2626 !important;
+    border: 1px solid #dc2626 !important;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    text-decoration: none !important;
+}
+
+.phd-btn-secondary:hover {
+    background-color: #dc2626 !important;
+    color: #ffffff !important;
+}
+
+/* Dark theme adjustments for PhD callout */
+:root.dark-theme .phd-seeker-callout {
+    border-color: #ef4444;
+}
+
+:root.dark-theme .phd-icon,
+:root.dark-theme .phd-callout-title {
+    color: #ef4444;
+}
+
+:root.dark-theme .phd-callout-content strong {
+    color: #ef4444;
+}
+
+:root.dark-theme .phd-btn-primary,
+:root.dark-theme .phd-btn-secondary {
+    border-color: #ef4444 !important;
+    color: #ef4444 !important;
+}
+
+:root.dark-theme .phd-btn-primary:hover,
+:root.dark-theme .phd-btn-secondary:hover {
+    background-color: #ef4444 !important;
+}
+
+/* Light theme adjustments for PhD callout */
+:root.light-theme .phd-seeker-callout {
+    border-color: #dc2626;
+}
+
+:root.light-theme .phd-icon,
+:root.light-theme .phd-callout-title {
+    color: #dc2626;
+}
+
+:root.light-theme .phd-callout-content strong {
+    color: #dc2626;
+}
+
+/* Responsive design for PhD callout */
+@media (max-width: 768px) {
+    .phd-seeker-callout {
+        padding: 12px;
+    }
+    
+    .phd-callout-title {
+        font-size: 1rem;
+    }
+    
+    .phd-action-buttons {
+        flex-direction: column;
+    }
+    
+    .phd-btn-primary,
+    .phd-btn-secondary {
+        width: 100%;
+        margin-left: 0 !important;
+        margin-bottom: 8px;
+    }
+}
+
+/* Education section styling */
+.education-position {
+    font-weight: 600;
+    font-size: 1.05rem;
+    margin-bottom: 0.5rem;
+}
+
+/* Institution links */
+.institution-link {
+    color: var(--accent-primary);
+    text-decoration: none;
+    position: relative;
+    font-weight: 700;
+    transition: color 0.2s ease;
+}
+
+.institution-link:hover {
+    color: var(--accent-tertiary);
+    text-decoration: none;
+}
+
+.institution-link::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    bottom: -2px;
+    left: 0;
+    background-color: var(--accent-primary);
+    transform: scaleX(0);
+    transform-origin: bottom right;
+    transition: transform 0.3s ease;
+}
+
+.institution-link:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
+
+/* Collapsible button styling */
+.collapsible-btn {
+    display: inline-block;
+    background-color: var(--bg-tertiary);
+    color: var(--accent-primary);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    padding: 5px 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.collapsible-btn:hover {
+    background-color: var(--accent-primary);
+    color: white;
+    border-color: var(--accent-primary);
+}
+
+.collapsible-btn:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(97, 175, 255, 0.3);
+}
+
+.collapsible-btn i.fa-chevron-down {
+    transition: transform 0.3s ease;
+}
+
+.collapsible-btn[aria-expanded="true"] i.fa-chevron-down {
+    transform: rotate(180deg);
+}
+
+/* Ensure education coursework has good contrast */
+:root.dark-theme .education-coursework,
+:root.dark-theme .position-description,
+:root.dark-theme .timeline table {
+    color: #ffffff !important;
+}
+
+:root.dark-theme .timeline table th,
+:root.dark-theme .timeline table td {
+    color: #ffffff !important;
+    border-color: #384357;
+}
+
+:root.light-theme .education-coursework,
+:root.light-theme .position-description,
+:root.light-theme .timeline table {
+    color: #2d3748 !important;
+}
+
+:root.light-theme .timeline table th,
+:root.light-theme .timeline table td {
+    color: #2d3748 !important;
+    border-color: #e9ecef;
+}
+
+/* Navbar theming */
+.navbar-themed {
+    transition: all 0.3s ease;
+}
+
+/* Dark theme navbar */
+:root.dark-theme .navbar-themed {
+    background-color: #121720;
+}
+
+:root.dark-theme .navbar-themed .navbar-brand,
+:root.dark-theme .navbar-themed .nav-link {
+    color: #ffffff;
+}
+
+:root.dark-theme .navbar-themed .navbar-toggler {
+    color: #ffffff;
+    border-color: rgba(255,255,255,0.1);
+}
+
+/* Light theme navbar */
+:root.light-theme .navbar-themed {
+    background-color: #ffffff;
+}
+
+:root.light-theme .navbar-themed .navbar-brand,
+:root.light-theme .navbar-themed .nav-link {
+    color: #2d3748;
+}
+
+:root.light-theme .navbar-themed .navbar-toggler {
+    color: #2d3748;
+    border-color: rgba(0,0,0,0.1);
+}
+
+/* Table styles for better contrast in dark mode */
+:root.dark-theme .table {
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+}
+
+:root.dark-theme .table-bordered,
+:root.dark-theme .table-bordered td,
+:root.dark-theme .table-bordered th {
+    border-color: var(--border-color);
+}
+
+:root.dark-theme .table-light,
+:root.dark-theme .table-light td,
+:root.dark-theme .table-light th {
+    background-color: var(--bg-tertiary);
+    color: var(--text-primary);
+}
+
+:root.dark-theme .table td,
+:root.dark-theme .table th {
+    color: var(--text-primary);
+}
+
+:root.dark-theme .table-responsive {
+    background-color: var(--bg-secondary);
+}
+
+/* Improved contrast for dark theme */
+:root.dark-theme {
+    --bg-primary: #0a0e14;
+    --bg-secondary: #121720;
+    --bg-tertiary: #1c2333;
+    --text-primary: #ffffff;
+    --text-secondary: #f0f5ff;
+    --text-muted: #d0deff;
+}
+
+:root.dark-theme body {
+    color: var(--text-primary);
+    background-color: var(--bg-primary);
+}
+
+:root.dark-theme .card {
+    background-color: var(--bg-secondary);
+}
+
+:root.dark-theme p, 
+:root.dark-theme div, 
+:root.dark-theme span, 
+:root.dark-theme li {
+    color: var(--text-primary);
+}
+
+/* Light mode styles */
+:root.light-theme {
+    --bg-primary: #fafaf9;
+    --bg-secondary: #ffffff;
+    --bg-tertiary: #f7f6f4;
+    --text-primary: #2c2c2c;
+    --text-secondary: #4a4a4a;
+    --text-muted: #6b7280;
+}
+
+:root.light-theme body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+}
+
+:root.light-theme .card {
+    background-color: var(--bg-secondary);
+    border: 1px solid #e8e6e3;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+:root.light-theme p, 
+:root.light-theme div, 
+:root.light-theme span, 
+:root.light-theme li {
+    color: var(--text-primary);
+}
+
+:root.light-theme .timeline .media {
+    background-color: var(--bg-tertiary);
+    border-left: 3px solid var(--accent-primary);
+}
+
+/* Bio Section Specific Contrast Fix */
+.row h3 {
+    font-size: 1.75rem;
+    margin-bottom: 1.5rem;
+    display: inline-block;
+    padding-bottom: 5px;
+    position: relative;
+}
+
+:root.dark-theme .row h3 {
+    color: #ffffff;
+}
+
+:root.light-theme .row h3 {
+    color: #2d3748;
+}
+
+.bio-section .bio-heading {
+    color: var(--text-primary) !important;
+}
+
+.bio-section .bio-content {
+    color: var(--text-primary) !important;
+}
+
+/* Fix for Google Calendar button */
+[data-calendar-scheduling-button] {
+    display: inline-block !important;
+    position: static !important;
+    writing-mode: horizontal-tb !important;
+    text-orientation: mixed !important;
+    width: auto !important;
+    height: auto !important;
+    transform: none !important;
+    padding: 8px 16px !important;
+    border-radius: 4px !important;
+    background-color: #039BE5 !important;
+    color: white !important;
+    font-size: 14px !important;
+    line-height: normal !important;
+    font-family: inherit !important;
+}
+
+/* Technical Skills Styling */
+.skill-container {
+    margin-bottom: 20px;
+}
+
+.skill-name {
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.skill-name span {
+    font-weight: 600;
+}
+
+.skill-bar {
+    height: 8px;
+    border-radius: 4px;
+    background-color: rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    position: relative;
+}
+
+:root.dark-theme .skill-bar {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.skill-level {
+    position: relative;
+    background-color: var(--accent-primary);
+    color: #fff;
+    padding: 0.2rem 0.6rem;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    margin-left: 0.5rem;
+    display: inline-block;
+}
+
+.interest-tag, .tech-tag {
+    display: inline-block;
+    background-color: rgba(66, 153, 225, 0.1);
+    color: var(--accent-primary);
+    border-radius: 4px;
+    padding: 4px 8px;
+    margin: 0 6px 6px 0;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+}
+
+:root.dark-theme .interest-tag, 
+:root.dark-theme .tech-tag {
+    background-color: rgba(66, 153, 225, 0.2);
+    color: #81b1ff;
+}
+
+:root.light-theme .interest-tag, 
+:root.light-theme .tech-tag {
+    background-color: rgba(66, 153, 225, 0.1);
+    color: #3182ce;
+}
+
+.interest-tag:hover, .tech-tag:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Override any conflicting styles causing the blue sidebar */
+.skill-card {
+    position: relative;
+    padding-left: 0 !important;
+    border-left: none !important;
+    background-image: none !important;
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 1.5rem;
+    background-color: transparent !important;
+    transform: none !important;
+}
+
+.skill-card::before {
+    display: none !important;
+}
+
+.tech-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 10px;
+}
+
+/* Fix for skills section - remove timeline styles */
+.skills-container .skill-card,
+.detailed-skills-container .skill-card {
+    border-left: none !important;
+    background-color: transparent !important;
+    border-radius: 0 !important;
+    padding: 10px 0 !important;
+    margin-bottom: 15px !important;
+    transform: none !important;
+    transition: none !important;
+}
+
+.skills-container,
+.detailed-skills-container {
+    padding-left: 0 !important;
+}
+
+.skills-container .skill-card:hover,
+.detailed-skills-container .skill-card:hover {
+    transform: none !important;
+    background-color: transparent !important;
+}
+
+/* Ensure skill level badge displays properly */
+.skill-level {
+    display: inline-block !important;
+    position: relative !important;
+    font-size: 0.8rem !important;
+    font-weight: 500 !important;
+    padding: 0.2rem 0.6rem !important;
+    border-radius: 12px !important;
+    margin-left: 0.5rem !important;
+    color: #fff !important;
+    vertical-align: middle !important;
+    background-color: var(--accent-primary) !important;
+}
+
+/* Books and Certifications Styling */
+.icon-book {
+    color: #38b2ac;
+}
+
+.icon-certificate {
+    color: #dd6b20;
+}
+
+.badge-primary {
+    background-color: #4299e1;
+}
+
+.badge-success {
+    background-color: #38a169;
+}
+
+.timeline h6 a {
+    color: var(--accent-primary);
+    text-decoration: none;
+    position: relative;
+    transition: color 0.2s ease;
+}
+
+.timeline h6 a:hover {
+    color: var(--accent-tertiary);
+    text-decoration: none;
+}
+
+.timeline h6 a::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    bottom: -2px;
+    left: 0;
+    background-color: var(--accent-primary);
+    transform: scaleX(0);
+    transform-origin: bottom right;
+    transition: transform 0.3s ease;
+}
+
+.timeline h6 a:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
+
+/* PhD Alert Styling for both themes */
+.alert.alert-danger {
+    border-radius: 8px;
+    border: 2px solid #dc2626;
+    padding: 12px 16px;
+    margin: 16px 0;
+    display: flex;
+    align-items: center;
+}
+
+/* Light theme styling */
+:root.light-theme .alert.alert-danger {
+    background-color: #fef2f2;
+    border-color: #dc2626;
+    color: #dc2626;
+}
+
+/* Dark theme styling */
+:root.dark-theme .alert.alert-danger {
+    background-color: rgba(220, 38, 38, 0.1);
+    border-color: #ef4444;
+    color: #fca5a5;
+}
+
+.alert.alert-danger i {
+    margin-right: 8px;
+    flex-shrink: 0;
+}
+
+.alert.alert-danger strong {
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+/* Responsive design for PhD alert */
+@media (max-width: 768px) {
+    .alert.alert-danger {
+        padding: 10px 12px;
+        font-size: 0.9rem;
+    }
+}
+
+/* Sessional GPA Highlight Styling */
+.highlight-sessional {
+    font-weight: 600;
+}
+
+/* Light theme styling */
+:root.light-theme .highlight-sessional {
+    color: #059669;
+}
+
+/* Dark theme styling */
+:root.dark-theme .highlight-sessional {
+    color: #34d399;
+}
+
+/* Smooth scrolling with offset for fixed headers */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px; /* Adjust based on your header height */
+}
+
+/* Profile navigation links styling */
+.profile-nav-link {
+  color: #007bff;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  border-bottom: 1px solid transparent;
+}
+
+.profile-nav-link:hover {
+  color: #0056b3;
+  text-decoration: none;
+  border-bottom: 1px solid #0056b3;
+}
+
+.profile-nav-link i {
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
+}
+
+.profile-nav-link:hover i {
+  opacity: 1;
+}
+
+/* Section anchor offset for better navigation */
+#education,
+#experience, 
+#research,
+#projects,
+#skills {
+  scroll-margin-top: 80px;
+}
+
+/* Navbar dropdown styling */
+.navbar-themed .dropdown-menu {
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  margin-top: 8px;
+}
+
+.navbar-themed .dropdown-item {
+  padding: 8px 16px;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+}
+
+.navbar-themed .dropdown-item:hover {
+  transform: translateX(2px);
+}
+
+.navbar-themed .dropdown-item i {
+  width: 20px;
+  text-align: center;
+}
+
+/* Dark theme dropdown */
+:root.dark-theme .navbar-themed .dropdown-menu {
+  background-color: #1c2333;
+  border: 1px solid #384357;
+}
+
+:root.dark-theme .navbar-themed .dropdown-item {
+  color: #ffffff;
+}
+
+:root.dark-theme .navbar-themed .dropdown-item:hover {
+  background-color: #384357;
+  color: #81b1ff;
+}
+
+:root.dark-theme .navbar-themed .dropdown-divider {
+  border-color: #384357;
+}
+
+/* Light theme dropdown */
+:root.light-theme .navbar-themed .dropdown-menu {
+  background-color: #ffffff;
+  border: 1px solid #e9ecef;
+}
+
+:root.light-theme .navbar-themed .dropdown-item {
+  color: #2d3748;
+}
+
+:root.light-theme .navbar-themed .dropdown-item:hover {
+  background-color: #f8f9fa;
+  color: #3182ce;
+}
+
+/* Active navbar item styling */
+.navbar-themed .nav-item.active .nav-link {
+  position: relative;
+  font-weight: 700;
+}
+
+.navbar-themed .nav-item.active .nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  height: 3px;
+  background: linear-gradient(90deg, #4299e1, #7f9cf5);
+  border-radius: 2px;
+}
+
+/* Dark theme active nav item */
+:root.dark-theme .navbar-themed .nav-item.active .nav-link {
+  color: #81b1ff;
+}
+
+/* Light theme active nav item */
+:root.light-theme .navbar-themed .nav-item.active .nav-link {
+  color: #3182ce;
+}

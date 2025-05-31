@@ -1,16 +1,46 @@
-<nav class="navbar navbar-expand-sm navbar-light bg-light fixed-top mb-5 shadow-sm">
-    <div class="{% if page.container_class %}{{ page.container_class }}{% else %}container-lg{% endif %}">
-        <a class="navbar-brand"><strong>{{site.data.profile.navbar_name}}</strong></a>
+<nav class="navbar navbar-expand-sm navbar-themed fixed-top mb-4 shadow-sm">
+    <div class="container">
+        <a class="navbar-brand" href="{{ '/' | relative_url }}"><strong>Tanzim's Portfolio</strong></a>
         <button class="navbar-toggler" style="font-size: 1em; padding: 0.5em;" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-            <i class="fas fa-map"></i> Menu
+            <i class="fas fa-map"></i> <span class="menu-text">Menu</span>
         </button>
 
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
                 {% for item in site.data.navigation.pages %}
-                <li class="nav-item {% if item.name == page.navbar_title %}active{% endif %}">
-                    <a class="nav-link" href="{{ item.url | relative_url }}">{{ item.name }}</a>
+                {% if item.name == 'Home' %}
+                <!-- Home dropdown with homepage sections -->
+                <li class="nav-item dropdown {% if page.navbar_title == 'Home' or page.navbar_title == nil %}active{% endif %}">
+                    <a class="nav-link dropdown-toggle" href="{{ item.url | relative_url }}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <strong>{{ item.name }}</strong>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="{{ '/' | relative_url }}">
+                            <i class="fas fa-home mr-2"></i>Overview
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{{ '/' | relative_url }}#education">
+                            <i class="fas fa-graduation-cap mr-2"></i>Education
+                        </a>
+                        <a class="dropdown-item" href="{{ '/' | relative_url }}#experience">
+                            <i class="fas fa-briefcase mr-2"></i>Work Experience
+                        </a>
+                        <a class="dropdown-item" href="{{ '/' | relative_url }}#research">
+                            <i class="fas fa-microscope mr-2"></i>Research
+                        </a>
+                        <a class="dropdown-item" href="{{ '/' | relative_url }}#projects">
+                            <i class="fas fa-code mr-2"></i>Projects
+                        </a>
+                        <a class="dropdown-item" href="{{ '/' | relative_url }}#skills">
+                            <i class="fas fa-tools mr-2"></i>Skills
+                        </a>
+                    </div>
                 </li>
+                {% else %}
+                <li class="nav-item {% if item.name == page.navbar_title %}active{% endif %}">
+                    <a class="nav-link" href="{{ item.url | relative_url }}"><strong>{{ item.name }}</strong></a>
+                </li>
+                {% endif %}
                 {% endfor %}
             </ul>
         </div>

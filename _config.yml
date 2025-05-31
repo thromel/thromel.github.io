@@ -13,12 +13,62 @@
 # you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
-baseurl: "/academic-homepage" # the subpath of your site, e.g. /blog
+title: Tanzim Hossain Romel's Portfolio
+description: Personal Academic Homepage
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "https://thromel.github.io" # the base hostname & protocol
+lang: en
+
+permalink: /blog/:year/:month/:day/:title/
+
+collections:
+  news:
+    output: true
+    permalink: /news/:path/
+  posts:
+    output: true
+  publications:
+    output: true
+  showcase:
+    output: true
 
 # Build settings
 markdown: kramdown
+highlighter: rouge
+
+# Kramdown settings
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    block:
+      line_numbers: false
+      start_line: 1
+
+# Rouge settings
+rouge:
+  default_lang: python
+  css_class: 'highlight'
+
 plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
   - jekyll-email-protect
+
+# Default front matter
+defaults:
+  -
+    scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+  -
+    scope:
+      path: ""
+      type: "showcase"
+    values:
+      layout: "showcase"
 
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list
@@ -33,8 +83,3 @@ plugins:
 #   - vendor/ruby/
 
 # timezone: Asia/Shanghai
-
-collections:
-  - publications
-  - news
-  - showcase

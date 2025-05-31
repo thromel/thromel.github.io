@@ -1,0 +1,157 @@
+- title: Pro .NET Benchmarking
+  author: Andrey Akinshin
+  subtitle: The Art of Performance Measurement
+  type: book
+  starred: true
+
+
+- title: The Phoenix Project
+  author: Gene Kim, Kevin Behr and George Spafford
+  type: book
+  starred: true
+
+- title: Fundamentals of Software Architecture
+  author: Mark Richards and Neal Ford
+  subtitle: 2nd Edition
+  type: book
+  starred: true
+
+
+- title: Engineering Leadership
+  author: Juan Pablo Buriticá and James Turnbull
+  subtitle: The Hard Parts
+  type: book
+
+- title: Why Programs Fail
+  author: Andreas Zeller
+  subtitle: 2nd Edition
+  type: book
+
+
+- title: Fundamentals of Data Engineering
+  author: Joe Reis and Matt Housley
+  type: book
+
+- title: Building Event-Driven Microservices
+  author: Adam Bellemare
+  type: book
+
+
+- title: The Pragmatic Programmer
+  author: David Thomas and Andrew Hunt
+  subtitle: your journey to mastery, 20th Anniversary Edition, 2nd Edition
+  type: book
+  starred: true
+
+
+- title: Systems Performance
+  author: Brendan Gregg
+  subtitle: Enterprise and the Cloud
+  type: book
+
+- title: Designing Distributed Systems
+  author: Brendan Burns
+  subtitle: 2nd Edition
+  type: book
+
+
+- title: Building Micro-Frontends
+  author: Luca Mezzalira
+  type: book
+
+- title: Chaos Engineering
+  author: Casey Rosenthal and Nora Jones
+  type: book
+
+- title: System Design on AWS
+  author: Jayanth Kumar and Mandeep Singh
+  type: book
+
+- title: Microservices Patterns
+  author: Chris Richardson
+  type: book
+
+- title: Monolith to Microservices
+  author: Sam Newman
+  type: book
+
+- title: Web Application Security
+  author: Andrew Hoffman
+  subtitle: 2nd Edition
+  type: book
+
+- title: Logging in Action
+  author: Phil Wilkins
+  type: book
+
+- title: Working Effectively with Legacy Code
+  author: Michael Feathers
+  type: book
+  starred: true
+
+- title: The Staff Engineer's Path
+  author: Tanya Reilly
+  type: book
+
+- title: Mastering API Architecture
+  author: James Gough, Daniel Bryant and Matthew Auburn
+  type: book
+
+- title: Fundamentals of Software Architecture
+  author: Mark Richards and Neal Ford
+  type: book
+
+- title: The Object-Oriented Thought Process
+  author: Matt Weisfeld
+  subtitle: 5th Edition
+  type: book
+
+- title: Modern Software Engineering
+  author: David Farley
+  subtitle: Doing What Works to Build Better Software Faster
+  type: book
+
+- title: Head First Software Architecture
+  author: Raju Gandhi, Mark Richards and Neal Ford
+  type: book
+
+- title: Building Microservices
+  author: Sam Newman
+  subtitle: 2nd Edition
+  type: book
+  starred: true
+
+- title: Software Architecture
+  author: Neal Ford, Mark Richards, Pramod Sadalage and Zhamak Dehghani
+  subtitle: The Hard Parts
+  type: book
+  starred: true
+
+- title: Clean Architecture
+  author: Robert C. Martin
+  subtitle: A Craftsman's Guide to Software Structure and Design
+  type: book
+
+- title: Tidy First?
+  author: Kent Beck
+  type: book
+
+- title: Refactoring
+  author: Martin Fowler
+  subtitle: Improving the Design of Existing Code
+  type: book
+  starred: true
+
+
+- title: Software Engineering at Google
+  author: Titus Winters, Tom Manshreck and Hyrum Wright
+  type: book
+
+- title: Database Internals
+  author: Alex Petrov
+  type: book
+
+- title: Domain-Driven Design
+  author: Eric Evans
+  subtitle: Tackling Complexity in the Heart of Software
+  type: book 

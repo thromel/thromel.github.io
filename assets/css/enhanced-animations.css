@@ -1,0 +1,95 @@
+/* Enhanced Animation Styles to complement AOS and Animate.css */
+
+/* Smooth transitions for all interactive elements */
+.card, .btn, .tech-tag, .position-card, .research-card, .skill-card {
+    transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* Enhanced card hover effects */
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+}
+
+/* Tech tag hover effects */
+.tech-tag:hover {
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+/* Button hover enhancements */
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Icon animations on hover */
+.icon-pdf:hover, .icon-certificate:hover, .icon-membership:hover {
+    transform: scale(1.1) rotate(5deg);
+    transition: transform 0.3s ease;
+}
+
+/* Company logo hover effects */
+.company-logo:hover {
+    transform: scale(1.1);
+    transition: transform 0.3s ease;
+}
+
+/* Enhanced position card hover */
+.position-card:hover, .research-card:hover {
+    transform: translateX(5px);
+    background: rgba(66, 153, 225, 0.02);
+    border-radius: 8px;
+    padding: 10px;
+    margin: -10px;
+}
+
+/* Skill card hover effects */
+.skill-card:hover {
+    background: rgba(66, 153, 225, 0.03);
+    border-radius: 8px;
+    transform: scale(1.02);
+}
+
+/* Link hover animations */
+.institution-link:hover, a:hover {
+    text-decoration: none;
+    color: #4299e1;
+    transition: color 0.3s ease;
+}
+
+/* Collapsible button enhancements */
+.collapsible-btn:hover {
+    background: rgba(66, 153, 225, 0.1);
+    border-radius: 5px;
+    transform: translateX(5px);
+}
+
+/* Smooth scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+    }
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+    .card:hover {
+        transform: translateY(-2px);
+    }
+    
+    .btn:hover {
+        transform: translateY(-1px);
+    }
+    
+    .tech-tag:hover {
+        transform: translateY(-1px) scale(1.02);
+    }
+} 
