@@ -57,6 +57,19 @@ plugins:
   - jekyll-seo-tag
   - jekyll-email-protect
   - jekyll-paginate
+  - jekyll-analytics
+
+# Analytics Configuration
+jekyll_analytics:
+  GoogleAnalytics:          # Add your Google Analytics ID here (e.g., 'G-XXXXXXXXXX' for GA4 or 'UA-XXXXXXXX-X' for Universal Analytics)
+    id: 'G-P0TDZ6WNVT'       # Replace with your Google Analytics tracking ID
+    anonymize_ip: false     # Optional: set to true to anonymize IP addresses
+  Matomo:                   # Optional: Matomo (formerly Piwik) analytics
+    url: ''                 # Replace with your Matomo URL (e.g., 'https://analytics.example.com')
+    site_id: ''             # Replace with your Matomo site ID
+  Plausible:                # Optional: Plausible analytics
+    domain: ''              # Replace with your domain (e.g., 'example.com')
+    source: ''              # Replace with your Plausible source URL (e.g., 'https://plausible.io/js/script.js')
 
 # Default front matter
 defaults:

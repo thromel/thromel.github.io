@@ -62,6 +62,20 @@
     
     <!-- Pace.js Loading Animation -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha512-QX7e4mJyMHH/RFYHtd4k9hfIDlNPFKjS5YdEWuVGqsZEZE5CjOJ7Vkiir/ZJcVVZr92J5bNGQiRGl1Wwy3oPQ==" crossorigin="anonymous"></script>
+    
+    <!-- Google Analytics -->
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-P0TDZ6WNVT"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-P0TDZ6WNVT');
+    </script>
+    
+    <!-- Jekyll Analytics (fallback if gem is installed) -->
+    {% analytics %}
 </head>
 <body class="{{ page.body_attr }}">
     {% include navbar.html %}
