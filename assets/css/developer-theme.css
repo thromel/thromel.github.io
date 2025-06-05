@@ -481,7 +481,7 @@ p, div, span, li {
 .btn-outline-primary {
   color: var(--accent-primary);
   border: 2px solid var(--accent-primary);
-  background: rgba(255, 255, 255, 0.9);
+  background: transparent;
   backdrop-filter: blur(10px);
   font-weight: 600;
   border-radius: 8px;
@@ -493,6 +493,32 @@ p, div, span, li {
   color: #ffffff;
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+}
+
+/* Dark theme specific styling for outline primary buttons */
+:root.dark-theme .btn-outline-primary {
+  background: rgba(28, 35, 51, 0.7);
+  border-color: var(--accent-primary);
+  color: var(--accent-primary);
+}
+
+:root.dark-theme .btn-outline-primary:hover {
+  background: var(--accent-primary);
+  color: #ffffff;
+  border-color: var(--accent-primary);
+}
+
+/* Light theme specific styling for outline primary buttons */
+:root.light-theme .btn-outline-primary {
+  background: rgba(255, 255, 255, 0.8);
+  border-color: var(--accent-primary);
+  color: var(--accent-primary);
+}
+
+:root.light-theme .btn-outline-primary:hover {
+  background: var(--accent-primary);
+  color: #ffffff;
+  border-color: var(--accent-primary);
 }
 
 /* Profile card */

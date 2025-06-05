@@ -1,75 +1,921 @@
 ---
 layout: default
-title: Learning
+title: Learning Hub
 navbar_title: Learning
 ---
 
-<div class="row mt-3">
-    <div class="col-12 col-lg-10 mx-auto">
-        <div class="card border-0 shadow-sm">
-            <div class="card-body">
-                <h3 class="mb-3">Learning</h3>
-                <p>Welcome to my Learning page! Here I'll share resources, notes, and ongoing learning journeys related to software engineering, cloud, AI, and more.</p>
-                
-                <!-- Software Engineering Reading List -->
-                <div class="mt-4">
-                    <h4 class="mb-3">Software Engineering Reading List</h4>
-                    <p>A curated collection of books and resources for software engineers, architects, and tech leaders.</p>
-                    
-                    <div class="mb-3">
-                        <div class="d-flex">
-                            <div><i class="fas fa-star text-warning mr-2"></i> = Highly recommended</div>
-                            <div class="ml-auto">
-                                <button id="showStarredOnly" class="btn btn-sm btn-outline-primary">Recommended Only</button>
-                                <button id="showAll" class="btn btn-sm btn-secondary ml-2">Show All</button>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <ul class="book-list pl-0" style="list-style-type: none;">
-                        {% for book in site.data.books %}
-                        <li class="book-item py-2 {% if book.starred %}starred-book{% else %}regular-book{% endif %}" style="border-bottom: 1px solid var(--border-color);">
-                            {% if book.starred %}<i class="fas fa-star text-warning mr-2"></i>{% else %}<i class="fas fa-book mr-2 text-muted"></i>{% endif %}
-                            <strong>{{ book.title }}</strong>
-                            {% if book.subtitle %}<span class="text-muted"> — {{ book.subtitle }}</span>{% endif %}
-                            <div class="text-muted small">by {{ book.author }}</div>
-                        </li>
-                        {% endfor %}
-                    </ul>
+<style>
+.learning-section {
+    margin-bottom: 2rem;
+    border: 1px solid var(--border-color);
+    border-radius: 0.5rem;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
 
-                    <script>
-                        document.addEventListener('DOMContentLoaded', function() {
-                            const showStarredOnlyBtn = document.getElementById('showStarredOnly');
-                            const showAllBtn = document.getElementById('showAll');
-                            const bookItems = document.querySelectorAll('.book-item');
-                            
-                            showStarredOnlyBtn.addEventListener('click', function() {
-                                bookItems.forEach(item => {
-                                    if (item.classList.contains('starred-book')) {
-                                        item.style.display = '';
-                                    } else {
-                                        item.style.display = 'none';
-                                    }
-                                });
-                                showStarredOnlyBtn.classList.remove('btn-outline-primary');
-                                showStarredOnlyBtn.classList.add('btn-primary');
-                                showAllBtn.classList.remove('btn-secondary');
-                                showAllBtn.classList.add('btn-outline-secondary');
-                            });
-                            
-                            showAllBtn.addEventListener('click', function() {
-                                bookItems.forEach(item => {
-                                    item.style.display = '';
-                                });
-                                showAllBtn.classList.remove('btn-outline-secondary');
-                                showAllBtn.classList.add('btn-secondary');
-                                showStarredOnlyBtn.classList.remove('btn-primary');
-                                showStarredOnlyBtn.classList.add('btn-outline-primary');
-                            });
-                        });
-                    </script>
+.learning-section:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.section-header {
+    background-color: var(--bg-secondary);
+    padding: 1.25rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.section-header:hover {
+    background-color: var(--bg-tertiary);
+}
+
+.section-header h4 {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.section-icon {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+}
+
+.collapse-icon {
+    transition: transform 0.3s ease;
+    color: var(--accent-primary);
+}
+
+.collapsed .collapse-icon {
+    transform: rotate(-90deg);
+}
+
+.section-content {
+    padding: 1.5rem;
+    background-color: var(--bg-primary);
+}
+
+.progress-bar {
+    height: 4px;
+    background-color: var(--bg-tertiary);
+    border-radius: 2px;
+    overflow: hidden;
+    margin-top: 0.5rem;
+}
+
+.progress-fill {
+    height: 100%;
+    background-color: var(--accent-primary);
+    transition: width 0.3s ease;
+}
+
+.course-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.course-card {
+    border: 1px solid var(--border-color);
+    border-radius: 0.375rem;
+    padding: 1rem;
+    transition: all 0.3s ease;
+    background-color: var(--bg-secondary);
+}
+
+.course-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.status-badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 1rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-left: 0.5rem;
+}
+
+.status-in-progress {
+    background-color: #fef3c7;
+    color: #92400e;
+}
+
+.status-completed {
+    background-color: #d1fae5;
+    color: #065f46;
+}
+
+.status-planned {
+    background-color: #e0e7ff;
+    color: #3730a3;
+}
+
+.paper-item {
+    border-left: 3px solid var(--accent-primary);
+    padding-left: 1rem;
+    margin-bottom: 1rem;
+}
+
+.resource-tag {
+    display: inline-block;
+    padding: 0.25rem 0.5rem;
+    background-color: var(--bg-tertiary);
+    border-radius: 0.25rem;
+    font-size: 0.875rem;
+    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.timeline-item {
+    position: relative;
+    padding-left: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.5rem;
+    width: 0.75rem;
+    height: 0.75rem;
+    background-color: var(--accent-primary);
+    border-radius: 50%;
+}
+
+.timeline-item::after {
+    content: '';
+    position: absolute;
+    left: 0.375rem;
+    top: 1.5rem;
+    width: 1px;
+    height: calc(100% + 0.5rem);
+    background-color: var(--border-color);
+}
+
+.timeline-item:last-child::after {
+    display: none;
+}
+
+.book-filter-btn {
+    transition: all 0.3s ease;
+}
+
+.community-card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 0.375rem;
+    margin-bottom: 0.75rem;
+    transition: all 0.3s ease;
+}
+
+.community-card:hover {
+    background-color: var(--bg-secondary);
+    transform: translateX(4px);
+}
+
+.roadmap-quarter {
+    flex: 1;
+    padding: 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 0.375rem;
+    margin: 0.5rem;
+    background-color: var(--bg-secondary);
+}
+
+.intro-banner {
+    background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
+    color: white;
+    padding: 3rem;
+    border-radius: 1rem;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.intro-banner h1 {
+    color: white;
+    margin-bottom: 1rem;
+}
+
+.intro-banner p {
+    font-size: 1.1rem;
+    margin-bottom: 0;
+    opacity: 0.95;
+}
+
+.stats-container {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    margin-top: 2rem;
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-number {
+    font-size: 2rem;
+    font-weight: bold;
+    display: block;
+}
+
+.stat-label {
+    font-size: 0.875rem;
+    opacity: 0.9;
+}
+</style>
+
+<div class="intro-banner">
+    <h1>🚀 My Learning Hub</h1>
+    <p>A comprehensive collection of resources, courses, and materials for continuous learning in software engineering, AI/ML, distributed systems, and more.</p>
+    <div class="stats-container">
+        <div class="stat-item">
+            <span class="stat-number">15+</span>
+            <span class="stat-label">Active Courses</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-number">50+</span>
+            <span class="stat-label">Technical Books</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-number">30+</span>
+            <span class="stat-label">Research Papers</span>
+        </div>
+    </div>
+</div>
+
+<!-- Software Engineering Reading List -->
+<div class="learning-section">
+    <div class="section-header" onclick="toggleSection(this)">
+        <h4><img src="/assets/images/icons/open-book.png" alt="Books" class="section-icon"> Software Engineering Reading List</h4>
+        <i class="fas fa-chevron-down collapse-icon"></i>
+    </div>
+    <div class="section-content">
+        <p>A curated collection of books and resources for software engineers, architects, and tech leaders.</p>
+        
+        <div class="mb-3">
+            <div class="d-flex">
+                <div><i class="fas fa-star text-warning mr-2"></i> = Highly recommended</div>
+                <div class="ml-auto">
+                    <button id="showStarredOnly" class="btn btn-sm btn-outline-primary book-filter-btn">Recommended Only</button>
+                    <button id="showAll" class="btn btn-sm btn-secondary ml-2 book-filter-btn">Show All</button>
+                </div>
+            </div>
+        </div>
+        
+        <ul class="book-list pl-0" style="list-style-type: none;">
+            {% for book in site.data.books %}
+            <li class="book-item py-2 {% if book.starred %}starred-book{% else %}regular-book{% endif %}" style="border-bottom: 1px solid var(--border-color);">
+                {% if book.starred %}<i class="fas fa-star text-warning mr-2"></i>{% else %}<i class="fas fa-book mr-2 text-muted"></i>{% endif %}
+                <strong>{{ book.title }}</strong>
+                {% if book.subtitle %}<span class="text-muted"> — {{ book.subtitle }}</span>{% endif %}
+                <div class="text-muted small">by {{ book.author }}</div>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+
+<!-- Online Courses & Certifications -->
+<div class="learning-section">
+    <div class="section-header" onclick="toggleSection(this)">
+        <h4><img src="/assets/images/icons/certificate.png" alt="Courses" class="section-icon"> Online Courses & Certifications</h4>
+        <i class="fas fa-chevron-down collapse-icon"></i>
+    </div>
+    <div class="section-content" style="display: none;">
+        <div class="mb-4">
+            <h5 class="mb-3">🌩️ Cloud & DevOps Track</h5>
+            <div class="course-grid">
+                <div class="course-card">
+                    <h6>AWS Certified Solutions Architect</h6>
+                    <span class="status-badge status-in-progress">In Progress</span>
+                    <div class="progress-bar mt-2">
+                        <div class="progress-fill" style="width: 65%;"></div>
+                    </div>
+                    <p class="small text-muted mt-2 mb-0">Target: Q3 2025</p>
+                </div>
+                <div class="course-card">
+                    <h6>Certified Kubernetes Application Developer (CKAD)</h6>
+                    <span class="status-badge status-in-progress">In Progress</span>
+                    <div class="progress-bar mt-2">
+                        <div class="progress-fill" style="width: 40%;"></div>
+                    </div>
+                    <p class="small text-muted mt-2 mb-0">Target: Q2 2025</p>
+                </div>
+                <div class="course-card">
+                    <h6>HashiCorp Terraform Associate</h6>
+                    <span class="status-badge status-planned">Planned</span>
+                    <p class="small text-muted mt-2 mb-0">Target: Q4 2025</p>
+                </div>
+                <div class="course-card">
+                    <h6>Azure DevOps Engineer Expert</h6>
+                    <span class="status-badge status-planned">Planned</span>
+                    <p class="small text-muted mt-2 mb-0">Target: 2026</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-4">
+            <h5 class="mb-3">🤖 AI/ML Engineering Track</h5>
+            <div class="course-grid">
+                <div class="course-card">
+                    <h6>Deep Learning Specialization</h6>
+                    <p class="small mb-1">by Andrew Ng (Coursera)</p>
+                    <span class="status-badge status-completed">Completed</span>
+                </div>
+                <div class="course-card">
+                    <h6>MLOps Specialization</h6>
+                    <p class="small mb-1">Google Cloud</p>
+                    <span class="status-badge status-in-progress">In Progress</span>
+                    <div class="progress-bar mt-2">
+                        <div class="progress-fill" style="width: 30%;"></div>
+                    </div>
+                </div>
+                <div class="course-card">
+                    <h6>LLM University</h6>
+                    <p class="small mb-1">by Cohere</p>
+                    <span class="status-badge status-planned">Planned</span>
+                </div>
+                <div class="course-card">
+                    <h6>Fast.ai Practical Deep Learning</h6>
+                    <span class="status-badge status-planned">Planned</span>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <h5 class="mb-3">🔧 Distributed Systems & Architecture</h5>
+            <div class="course-grid">
+                <div class="course-card">
+                    <h6>MIT 6.824: Distributed Systems</h6>
+                    <p class="small mb-1">Open Courseware</p>
+                    <span class="status-badge status-in-progress">In Progress</span>
+                    <div class="progress-bar mt-2">
+                        <div class="progress-fill" style="width: 20%;"></div>
+                    </div>
+                </div>
+                <div class="course-card">
+                    <h6>System Design Interview Preparation</h6>
+                    <p class="small mb-1">ByteByteGo</p>
+                    <span class="status-badge status-completed">Completed</span>
+                </div>
+                <div class="course-card">
+                    <h6>Event-Driven Architecture on AWS</h6>
+                    <span class="status-badge status-planned">Planned</span>
                 </div>
             </div>
         </div>
     </div>
-</div> 
+</div>
+
+<!-- Research Paper Reading List -->
+<div class="learning-section">
+    <div class="section-header" onclick="toggleSection(this)">
+        <h4><i class="fas fa-file-alt section-icon"></i> Research Paper Reading List</h4>
+        <i class="fas fa-chevron-down collapse-icon"></i>
+    </div>
+    <div class="section-content" style="display: none;">
+        <div class="mb-4">
+            <h5>📊 Distributed Systems Papers</h5>
+            <div class="paper-item">
+                <strong>"Time, Clocks, and the Ordering of Events in a Distributed System"</strong>
+                <div class="text-muted small">Leslie Lamport, 1978</div>
+                <div class="mt-1">
+                    <span class="resource-tag">Fundamental</span>
+                    <span class="resource-tag">Consensus</span>
+                </div>
+            </div>
+            <div class="paper-item">
+                <strong>"The Byzantine Generals Problem"</strong>
+                <div class="text-muted small">Lamport, Shostak, and Pease, 1982</div>
+                <div class="mt-1">
+                    <span class="resource-tag">Fault Tolerance</span>
+                    <span class="resource-tag">Consensus</span>
+                </div>
+            </div>
+            <div class="paper-item">
+                <strong>"Raft: In Search of an Understandable Consensus Algorithm"</strong>
+                <div class="text-muted small">Ongaro and Ousterhout, 2014</div>
+                <div class="mt-1">
+                    <span class="resource-tag">Modern</span>
+                    <span class="resource-tag">Practical</span>
+                </div>
+            </div>
+            <div class="paper-item">
+                <strong>"MapReduce: Simplified Data Processing on Large Clusters"</strong>
+                <div class="text-muted small">Dean and Ghemawat, 2004</div>
+                <div class="mt-1">
+                    <span class="resource-tag">Big Data</span>
+                    <span class="resource-tag">Google</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-4">
+            <h5>🔒 AI/ML Security Papers</h5>
+            <div class="paper-item">
+                <strong>"Model Stealing Attacks Against Machine Learning Models"</strong>
+                <div class="text-muted small">Tramèr et al., 2016</div>
+                <div class="mt-1">
+                    <span class="resource-tag">Security</span>
+                    <span class="resource-tag">Privacy</span>
+                </div>
+            </div>
+            <div class="paper-item">
+                <strong>"Adversarial Examples in the Physical World"</strong>
+                <div class="text-muted small">Kurakin, Goodfellow, and Bengio, 2017</div>
+                <div class="mt-1">
+                    <span class="resource-tag">Adversarial ML</span>
+                    <span class="resource-tag">Robustness</span>
+                </div>
+            </div>
+            <div class="paper-item">
+                <strong>"Poisoning Attacks against Support Vector Machines"</strong>
+                <div class="text-muted small">Biggio et al., 2012</div>
+                <div class="mt-1">
+                    <span class="resource-tag">Attack</span>
+                    <span class="resource-tag">Defense</span>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <h5>⛓️ Blockchain & Healthcare</h5>
+            <div class="paper-item">
+                <strong>"MedRec: Using Blockchain for Medical Data Access and Permission Management"</strong>
+                <div class="text-muted small">Azaria et al., 2016</div>
+                <div class="mt-1">
+                    <span class="resource-tag">Healthcare</span>
+                    <span class="resource-tag">Privacy</span>
+                </div>
+            </div>
+            <div class="paper-item">
+                <strong>"Blockchain Technology in Healthcare: A Systematic Review"</strong>
+                <div class="text-muted small">Agbo, Mahmoud, and Eklund, 2019</div>
+                <div class="mt-1">
+                    <span class="resource-tag">Survey</span>
+                    <span class="resource-tag">Applications</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Technical Podcasts & YouTube Channels -->
+<div class="learning-section">
+    <div class="section-header" onclick="toggleSection(this)">
+        <h4><i class="fas fa-podcast section-icon"></i> Technical Podcasts & YouTube Channels</h4>
+        <i class="fas fa-chevron-down collapse-icon"></i>
+    </div>
+    <div class="section-content" style="display: none;">
+        <div class="row">
+            <div class="col-md-6">
+                <h5 class="mb-3">🎧 Podcasts</h5>
+                <div class="community-card">
+                    <i class="fas fa-microphone fa-2x text-primary"></i>
+                    <div>
+                        <h6 class="mb-1">Software Engineering Daily</h6>
+                        <p class="small text-muted mb-0">Daily technical interviews with engineers</p>
+                    </div>
+                </div>
+                <div class="community-card">
+                    <i class="fas fa-code-branch fa-2x text-success"></i>
+                    <div>
+                        <h6 class="mb-1">The Changelog</h6>
+                        <p class="small text-muted mb-0">Open source and software development</p>
+                    </div>
+                </div>
+                <div class="community-card">
+                    <i class="fas fa-brain fa-2x text-info"></i>
+                    <div>
+                        <h6 class="mb-1">Lex Fridman Podcast</h6>
+                        <p class="small text-muted mb-0">AI/ML episodes with leading researchers</p>
+                    </div>
+                </div>
+                <div class="community-card">
+                    <i class="fas fa-rocket fa-2x text-warning"></i>
+                    <div>
+                        <h6 class="mb-1">a16z Podcast</h6>
+                        <p class="small text-muted mb-0">Tech trends and future insights</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <h5 class="mb-3">📺 YouTube Channels</h5>
+                <div class="community-card">
+                    <i class="fab fa-youtube fa-2x text-danger"></i>
+                    <div>
+                        <h6 class="mb-1">ByteByteGo</h6>
+                        <p class="small text-muted mb-0">System design and architecture</p>
+                    </div>
+                </div>
+                <div class="community-card">
+                    <i class="fab fa-youtube fa-2x text-danger"></i>
+                    <div>
+                        <h6 class="mb-1">Hussein Nasser</h6>
+                        <p class="small text-muted mb-0">Backend engineering deep dives</p>
+                    </div>
+                </div>
+                <div class="community-card">
+                    <i class="fab fa-youtube fa-2x text-danger"></i>
+                    <div>
+                        <h6 class="mb-1">Fireship</h6>
+                        <p class="small text-muted mb-0">Modern web dev in 100 seconds</p>
+                    </div>
+                </div>
+                <div class="community-card">
+                    <i class="fab fa-youtube fa-2x text-danger"></i>
+                    <div>
+                        <h6 class="mb-1">Two Minute Papers</h6>
+                        <p class="small text-muted mb-0">Latest AI research explained</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Open Source Contribution Goals -->
+<div class="learning-section">
+    <div class="section-header" onclick="toggleSection(this)">
+        <h4><i class="fab fa-github section-icon"></i> Open Source Contribution Goals</h4>
+        <i class="fas fa-chevron-down collapse-icon"></i>
+    </div>
+    <div class="section-content" style="display: none;">
+        <div class="mb-4">
+            <h5>🎯 Current Focus Areas</h5>
+            <div class="timeline-item">
+                <h6>OpenTelemetry .NET Instrumentation</h6>
+                <p class="small text-muted">Contributing to observability tools for .NET applications</p>
+                <div class="mt-1">
+                    <span class="resource-tag">C#</span>
+                    <span class="resource-tag">Observability</span>
+                    <span class="resource-tag">Active</span>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <h6>LangChain Documentation & Examples</h6>
+                <p class="small text-muted">Improving docs and creating practical examples</p>
+                <div class="mt-1">
+                    <span class="resource-tag">Python</span>
+                    <span class="resource-tag">LLM</span>
+                    <span class="resource-tag">Documentation</span>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <h6>Hugging Face Model Security Tools</h6>
+                <p class="small text-muted">Building tools for ML model security analysis</p>
+                <div class="mt-1">
+                    <span class="resource-tag">Security</span>
+                    <span class="resource-tag">ML</span>
+                    <span class="resource-tag">Planning</span>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <h5>📚 Learning Through Contributing</h5>
+            <ul>
+                <li>Understanding large codebases and architectural patterns</li>
+                <li>Collaboration in distributed teams across time zones</li>
+                <li>Best practices from industry leaders and maintainers</li>
+                <li>Code review processes and quality standards</li>
+                <li>Documentation and technical writing skills</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- Technical Writing & Knowledge Sharing -->
+<div class="learning-section">
+    <div class="section-header" onclick="toggleSection(this)">
+        <h4><i class="fas fa-pen-nib section-icon"></i> Technical Writing & Knowledge Sharing</h4>
+        <i class="fas fa-chevron-down collapse-icon"></i>
+    </div>
+    <div class="section-content" style="display: none;">
+        <div class="mb-4">
+            <h5>📝 Blog Series in Progress</h5>
+            <div class="timeline-item">
+                <h6>"From CRUD to Event Sourcing: My Journey"</h6>
+                <p class="small text-muted">A practical guide to evolving application architectures</p>
+                <span class="status-badge status-in-progress">Writing</span>
+            </div>
+            <div class="timeline-item">
+                <h6>"Implementing Zero-Downtime Deployments in Healthcare Systems"</h6>
+                <p class="small text-muted">Lessons from production deployments at IQVIA</p>
+                <span class="status-badge status-planned">Outlining</span>
+            </div>
+            <div class="timeline-item">
+                <h6>"LLM Integration Patterns for Enterprise Applications"</h6>
+                <p class="small text-muted">Best practices and anti-patterns</p>
+                <span class="status-badge status-planned">Research</span>
+            </div>
+        </div>
+
+        <div>
+            <h5>🎤 Conference Talk Preparations</h5>
+            <div class="timeline-item">
+                <h6>"Securing ML Model Pipelines in Production"</h6>
+                <p class="small text-muted">Target: Security/ML conferences 2026</p>
+                <div class="mt-1">
+                    <span class="resource-tag">ML Security</span>
+                    <span class="resource-tag">DevSecOps</span>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <h6>"Blockchain in Healthcare: Lessons from the Trenches"</h6>
+                <p class="small text-muted">Target: Healthcare IT conferences</p>
+                <div class="mt-1">
+                    <span class="resource-tag">Blockchain</span>
+                    <span class="resource-tag">Healthcare</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Hands-On Lab Projects -->
+<div class="learning-section">
+    <div class="section-header" onclick="toggleSection(this)">
+        <h4><i class="fas fa-flask section-icon"></i> Hands-On Lab Projects</h4>
+        <i class="fas fa-chevron-down collapse-icon"></i>
+    </div>
+    <div class="section-content" style="display: none;">
+        <div class="course-grid">
+            <div class="course-card">
+                <h6>Distributed Cache Implementation</h6>
+                <p class="small mb-2">Building a Redis-like cache in Go</p>
+                <span class="status-badge status-in-progress">In Progress</span>
+                <div class="mt-2">
+                    <span class="resource-tag">Go</span>
+                    <span class="resource-tag">Distributed Systems</span>
+                </div>
+            </div>
+            <div class="course-card">
+                <h6>Mini Kubernetes Operator</h6>
+                <p class="small mb-2">Custom operator for specific workloads</p>
+                <span class="status-badge status-planned">Planning</span>
+                <div class="mt-2">
+                    <span class="resource-tag">K8s</span>
+                    <span class="resource-tag">Go</span>
+                </div>
+            </div>
+            <div class="course-card">
+                <h6>LLM-powered Code Review Bot</h6>
+                <p class="small mb-2">GitHub bot for automated reviews</p>
+                <span class="status-badge status-in-progress">Prototyping</span>
+                <div class="mt-2">
+                    <span class="resource-tag">Python</span>
+                    <span class="resource-tag">LLM</span>
+                </div>
+            </div>
+            <div class="course-card">
+                <h6>Personal Knowledge Graph</h6>
+                <p class="small mb-2">Using Neo4j for knowledge management</p>
+                <span class="status-badge status-planned">Research</span>
+                <div class="mt-2">
+                    <span class="resource-tag">Neo4j</span>
+                    <span class="resource-tag">Graph DB</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Study Groups & Communities -->
+<div class="learning-section">
+    <div class="section-header" onclick="toggleSection(this)">
+        <h4><i class="fas fa-users section-icon"></i> Study Groups & Communities</h4>
+        <i class="fas fa-chevron-down collapse-icon"></i>
+    </div>
+    <div class="section-content" style="display: none;">
+        <div class="row">
+            <div class="col-md-6">
+                <h5 class="mb-3">🏢 Active Memberships</h5>
+                <div class="community-card">
+                    <i class="fas fa-file-code fa-2x text-primary"></i>
+                    <div>
+                        <h6 class="mb-1">Papers We Love (Dhaka Chapter)</h6>
+                        <p class="small text-muted mb-0">Monthly CS paper discussions</p>
+                    </div>
+                </div>
+                <div class="community-card">
+                    <i class="fas fa-dharmachakra fa-2x text-info"></i>
+                    <div>
+                        <h6 class="mb-1">Kubernetes Bangladesh</h6>
+                        <p class="small text-muted mb-0">Cloud-native community</p>
+                    </div>
+                </div>
+                <div class="community-card">
+                    <i class="fas fa-graduation-cap fa-2x text-success"></i>
+                    <div>
+                        <h6 class="mb-1">BUET CS Alumni Research Group</h6>
+                        <p class="small text-muted mb-0">Research collaboration network</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <h5 class="mb-3">🌐 Online Communities</h5>
+                <div class="community-card">
+                    <i class="fab fa-reddit fa-2x text-danger"></i>
+                    <div>
+                        <h6 class="mb-1">r/ExperiencedDevs</h6>
+                        <p class="small text-muted mb-0">Senior developer discussions</p>
+                    </div>
+                </div>
+                <div class="community-card">
+                    <i class="fas fa-chart-line fa-2x text-warning"></i>
+                    <div>
+                        <h6 class="mb-1">High Scalability Newsletter</h6>
+                        <p class="small text-muted mb-0">System design case studies</p>
+                    </div>
+                </div>
+                <div class="community-card">
+                    <i class="fas fa-newspaper fa-2x text-secondary"></i>
+                    <div>
+                        <h6 class="mb-1">The Morning Paper Archives</h6>
+                        <p class="small text-muted mb-0">Daily CS paper summaries</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Learning Roadmaps -->
+<div class="learning-section">
+    <div class="section-header" onclick="toggleSection(this)">
+        <h4><i class="fas fa-road section-icon"></i> 2025 Learning Roadmap</h4>
+        <i class="fas fa-chevron-down collapse-icon"></i>
+    </div>
+    <div class="section-content" style="display: none;">
+        <div class="row">
+            <div class="roadmap-quarter">
+                <h5 class="text-center mb-3">Q1 2025</h5>
+                <ul class="small">
+                    <li>Complete CKAD Certification prep</li>
+                    <li>Finish Terraform basics course</li>
+                    <li>Submit ML Security paper</li>
+                    <li>Launch blog series</li>
+                </ul>
+            </div>
+            <div class="roadmap-quarter">
+                <h5 class="text-center mb-3">Q2 2025</h5>
+                <ul class="small">
+                    <li>Pass CKAD exam</li>
+                    <li>Advanced System Design course</li>
+                    <li>Contribute to OpenTelemetry</li>
+                    <li>Start PhD application prep</li>
+                </ul>
+            </div>
+            <div class="roadmap-quarter">
+                <h5 class="text-center mb-3">Q3 2025</h5>
+                <ul class="small">
+                    <li>AWS SA Associate certification</li>
+                    <li>Complete MLOps specialization</li>
+                    <li>Publish 2nd research paper</li>
+                    <li>GRE preparation</li>
+                </ul>
+            </div>
+            <div class="roadmap-quarter">
+                <h5 class="text-center mb-3">Q4 2025</h5>
+                <ul class="small">
+                    <li>PhD applications submission</li>
+                    <li>Complete research portfolio</li>
+                    <li>Terraform certification</li>
+                    <li>Conference talk preparation</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Learning Resources by Topic -->
+<div class="learning-section">
+    <div class="section-header" onclick="toggleSection(this)">
+        <h4><i class="fas fa-book-reader section-icon"></i> Learning Resources by Topic</h4>
+        <i class="fas fa-chevron-down collapse-icon"></i>
+    </div>
+    <div class="section-content" style="display: none;">
+        <div class="mb-4">
+            <h5>🎓 PhD Preparation Resources</h5>
+            <ul>
+                <li><strong>GRE Prep:</strong> Manhattan 5lb Book, Magoosh Online Course</li>
+                <li><strong>Research Methodology:</strong> "How to Read a Paper" by S. Keshav</li>
+                <li><strong>Academic Writing:</strong> "The Elements of Style" by Strunk & White</li>
+                <li><strong>Statement of Purpose:</strong> MIT EECS guidelines, Berkeley CS examples</li>
+                <li><strong>Professor Outreach:</strong> Cold email templates, research alignment strategies</li>
+            </ul>
+        </div>
+
+        <div class="mb-4">
+            <h5>🏥 Healthcare Domain Knowledge</h5>
+            <ul>
+                <li><strong>HL7 FHIR Fundamentals:</strong> Official FHIR documentation and tutorials</li>
+                <li><strong>HIPAA Compliance:</strong> NIST 800-66 guidelines</li>
+                <li><strong>Clinical Trial Data:</strong> CDISC standards and protocols</li>
+                <li><strong>Healthcare Analytics:</strong> "Healthcare Analytics" by Hui Yang</li>
+            </ul>
+        </div>
+
+        <div>
+            <h5>🏗️ System Design & Architecture</h5>
+            <ul>
+                <li><strong>Books:</strong> "Designing Data-Intensive Applications", "Building Microservices"</li>
+                <li><strong>Courses:</strong> Educative.io System Design, Pramp mock interviews</li>
+                <li><strong>Case Studies:</strong> High Scalability blog, engineering blogs (Uber, Netflix, Airbnb)</li>
+                <li><strong>Practice:</strong> LeetCode system design, System Design Primer GitHub repo</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- Technical Book Club -->
+<div class="learning-section">
+    <div class="section-header" onclick="toggleSection(this)">
+        <h4><i class="fas fa-book-open section-icon"></i> Technical Book Club Schedule</h4>
+        <i class="fas fa-chevron-down collapse-icon"></i>
+    </div>
+    <div class="section-content" style="display: none;">
+        <div class="timeline-item">
+            <h6>January-February 2025</h6>
+            <p class="mb-1"><strong>"Designing Data-Intensive Applications"</strong> by Martin Kleppmann</p>
+            <p class="small text-muted">Focus: Chapters 1-6 (Foundations of Data Systems)</p>
+        </div>
+        <div class="timeline-item">
+            <h6>March 2025</h6>
+            <p class="mb-1"><strong>"Building Microservices"</strong> (2nd Edition) by Sam Newman</p>
+            <p class="small text-muted">Focus: Migration strategies and patterns</p>
+        </div>
+        <div class="timeline-item">
+            <h6>April 2025</h6>
+            <p class="mb-1"><strong>"The Staff Engineer's Path"</strong> by Tanya Reilly</p>
+            <p class="small text-muted">Focus: Technical leadership and influence</p>
+        </div>
+        <div class="timeline-item">
+            <h6>May-June 2025</h6>
+            <p class="mb-1"><strong>"Fundamentals of Software Architecture"</strong> by Mark Richards & Neal Ford</p>
+            <p class="small text-muted">Focus: Architectural thinking and trade-offs</p>
+        </div>
+    </div>
+</div>
+
+<script>
+// Toggle section collapse
+function toggleSection(header) {
+    const section = header.parentElement;
+    const content = section.querySelector('.section-content');
+    const icon = header.querySelector('.collapse-icon');
+    
+    if (content.style.display === 'none' || content.style.display === '') {
+        content.style.display = 'block';
+        header.classList.remove('collapsed');
+    } else {
+        content.style.display = 'none';
+        header.classList.add('collapsed');
+    }
+}
+
+// Book filtering functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const showStarredOnlyBtn = document.getElementById('showStarredOnly');
+    const showAllBtn = document.getElementById('showAll');
+    const bookItems = document.querySelectorAll('.book-item');
+    
+    if (showStarredOnlyBtn && showAllBtn) {
+        showStarredOnlyBtn.addEventListener('click', function() {
+            bookItems.forEach(item => {
+                if (item.classList.contains('starred-book')) {
+                    item.style.display = '';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+            showStarredOnlyBtn.classList.remove('btn-outline-primary');
+            showStarredOnlyBtn.classList.add('btn-primary');
+            showAllBtn.classList.remove('btn-secondary');
+            showAllBtn.classList.add('btn-outline-secondary');
+        });
+        
+        showAllBtn.addEventListener('click', function() {
+            bookItems.forEach(item => {
+                item.style.display = '';
+            });
+            showAllBtn.classList.remove('btn-outline-secondary');
+            showAllBtn.classList.add('btn-secondary');
+            showStarredOnlyBtn.classList.remove('btn-primary');
+            showStarredOnlyBtn.classList.add('btn-outline-primary');
+        });
+    }
+});
+</script>
