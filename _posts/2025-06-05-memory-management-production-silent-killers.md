@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Memory Management in Production: Avoiding the Silent Killers"
-date: 2025-06-05
+date: 2025-06-01
 categories: [backend-engineering, performance, memory-management]
 tags: [memory-management, dotnet, garbage-collection, docker, performance-optimization, production-debugging, aspnet-core]
 image: /assets/images/projects/memory-management.png
