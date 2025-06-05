@@ -28,20 +28,8 @@ The framework emerged from the merger of two earlier projects: OpenTracing and O
 
 **3. Logs** capture the detailed narrative, the "what happened and when" that helps you understand system behavior.
 
-```mermaid
-graph TD
-    A[Application Code] --> B[OpenTelemetry SDK]
-    B --> C[Traces]
-    B --> D[Metrics]
-    B --> E[Logs]
-    C --> F[OTLP Exporter]
-    D --> F
-    E --> F
-    F --> G[Observability Backend]
-    G --> H[Jaeger/Tempo]
-    G --> I[Prometheus]
-    G --> J[Elasticsearch]
-```
+![OpenTelemetry Pipeline Architecture](/assets/images/opentelemetry/diagram1_otel_pipeline.png)
+*OpenTelemetry Pipeline: How traces, metrics, and logs flow from application code through the SDK to observability backends*
 
 ## Our Architecture: Before the Transformation
 
@@ -58,27 +46,8 @@ To understand why OpenTelemetry was transformative for us, you need to see where
 
 Each service had evolved independently, resulting in a Tower of Babel situation for observability:
 
-```mermaid
-graph LR
-    subgraph "Before OpenTelemetry"
-        A[User Service] --> B[Custom JSON Logs]
-        C[Product Catalog] --> D[Log4j to ELK]
-        E[Order Service] --> F[Python Logging to CloudWatch]
-        G[Payment Service] --> H[Structured Logs to Splunk]
-        I[Inventory Service] --> J[Windows Event Logs]
-        
-        A --> K[StatsD Metrics]
-        C --> L[Micrometer to Prometheus]
-        E --> M[Custom Metrics API]
-        G --> N[Prometheus Client]
-        
-        style B fill:#ffcccc
-        style D fill:#ccffcc
-        style F fill:#ccccff
-        style H fill:#ffffcc
-        style J fill:#ffccff
-    end
-```
+![Before OpenTelemetry Architecture](/assets/images/opentelemetry/diagram2_before_otel.png)
+*Our heterogeneous observability landscape before OpenTelemetry: Each service used different logging, metrics, and tracing approaches*
 
 This heterogeneous landscape created several pain points:
 
@@ -482,61 +451,8 @@ The Go implementation highlighted OpenTelemetry's consistency across languages â
 
 As we instrumented more services, we evolved our observability infrastructure to handle the increased telemetry volume:
 
-```mermaid
-graph TB
-    subgraph "Microservices"
-        A[User Service]
-        B[Order Service]
-        C[Payment Service]
-        D[Inventory Service]
-        E[Product Catalog]
-        F[Notification Service]
-    end
-    
-    subgraph "OpenTelemetry Collectors"
-        G[Collector Pool - Zone A]
-        H[Collector Pool - Zone B]
-        I[Collector Pool - Zone C]
-    end
-    
-    subgraph "Load Balancing"
-        J[HAProxy]
-    end
-    
-    subgraph "Storage & Visualization"
-        K[Jaeger/Tempo<br/>Distributed Tracing]
-        L[Prometheus<br/>Metrics]
-        M[Elasticsearch<br/>Logs]
-        N[Grafana<br/>Dashboards]
-    end
-    
-    A --> J
-    B --> J
-    C --> J
-    D --> J
-    E --> J
-    F --> J
-    
-    J --> G
-    J --> H
-    J --> I
-    
-    G --> K
-    G --> L
-    G --> M
-    
-    H --> K
-    H --> L
-    H --> M
-    
-    I --> K
-    I --> L
-    I --> M
-    
-    K --> N
-    L --> N
-    M --> N
-```
+![Infrastructure Evolution](/assets/images/opentelemetry/diagram3_infra_evolution.png)
+*Our evolved observability infrastructure: Microservices send telemetry through load-balanced OpenTelemetry Collector pools to centralized storage and visualization*
 
 Key infrastructure decisions included:
 
@@ -686,30 +602,8 @@ After six months of implementation, the results spoke for themselves:
 
 Here's a before-and-after view of investigating a typical production issue:
 
-```mermaid
-graph TD
-    subgraph "Before OpenTelemetry"
-        A1[Alert: High Error Rate] --> B1[Check Service Logs]
-        B1 --> C1[Manually Correlate Timestamps]
-        C1 --> D1[SSH to Multiple Servers]
-        D1 --> E1[Grep Through Logs]
-        E1 --> F1[Guess at Root Cause]
-        F1 --> G1[3+ Hours to Resolution]
-        
-        style G1 fill:#ffcccc
-    end
-    
-    subgraph "After OpenTelemetry"
-        A2[Alert: High Error Rate] --> B2[Open Trace in Grafana]
-        B2 --> C2[See Full Request Flow]
-        C2 --> D2[Identify Failing Service]
-        D2 --> E2[View Correlated Logs/Metrics]
-        E2 --> F2[Fix Root Cause]
-        F2 --> G2[30 Minutes to Resolution]
-        
-        style G2 fill:#ccffcc
-    end
-```
+![Incident Response Flow](/assets/images/opentelemetry/diagram4_incident_flow.png)
+*Incident response transformation: From manual correlation across multiple systems to unified observability with distributed tracing*
 
 ## Best Practices and Lessons Learned
 
