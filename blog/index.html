@@ -13,7 +13,7 @@ container_class: container-xl
         </section>
 
         <div class="my-0 p-0 shadow-sm rounded-sm mb-5" style="background-color: var(--bg-secondary);">
-            {% for post in site.posts %}
+            {% for post in paginator.posts %}
             <div class="d-flex mb-3 mr-2 p-3 border-bottom border-gray">
                 <div class="col p-3 ml-md-2">
                     <h4 class="mt-0 mb-2 font-weight-bold">
@@ -56,6 +56,53 @@ container_class: container-xl
             </div>
             {% endfor %}
         </div>
+
+        <!-- Pagination -->
+        {% if paginator.total_pages > 1 %}
+        <nav aria-label="Blog pagination">
+            <ul class="pagination justify-content-center">
+                {% if paginator.previous_page %}
+                <li class="page-item">
+                    <a class="page-link" href="{{ paginator.previous_page_path | relative_url }}" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                {% else %}
+                <li class="page-item disabled">
+                    <span class="page-link">&laquo;</span>
+                </li>
+                {% endif %}
+
+                {% for page in (1..paginator.total_pages) %}
+                    {% if page == paginator.page %}
+                    <li class="page-item active">
+                        <span class="page-link">{{ page }}</span>
+                    </li>
+                    {% elsif page == 1 %}
+                    <li class="page-item">
+                        <a class="page-link" href="{{ '/blog/' | relative_url }}">{{ page }}</a>
+                    </li>
+                    {% else %}
+                    <li class="page-item">
+                        <a class="page-link" href="{{ site.paginate_path | relative_url | replace: ':num', page }}">{{ page }}</a>
+                    </li>
+                    {% endif %}
+                {% endfor %}
+
+                {% if paginator.next_page %}
+                <li class="page-item">
+                    <a class="page-link" href="{{ paginator.next_page_path | relative_url }}" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+                {% else %}
+                <li class="page-item disabled">
+                    <span class="page-link">&raquo;</span>
+                </li>
+                {% endif %}
+            </ul>
+        </nav>
+        {% endif %}
     </div>
 
     <div class="col-12 col-lg-3">

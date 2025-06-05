@@ -15,7 +15,25 @@ container_class: container-xl
         <!-- Projects Section -->
         <div class="my-0 p-0 shadow-sm rounded-sm mb-5" style="background-color: var(--bg-secondary);">
             {% assign projects = site.showcase | where: "group", "Projects" | where: "show", true | sort: "date" | reverse %}
-            {% for item in projects %}
+            {% assign items_per_page = 5 %}
+            {% assign total_projects = projects | size %}
+            {% assign total_pages = total_projects | divided_by: items_per_page | ceil %}
+            
+            <!-- Get current page from URL parameter -->
+            {% assign current_page = 1 %}
+            {% if page.url contains "/projects/page" %}
+                {% assign page_num = page.url | split: "page" | last | split: "/" | first | plus: 0 %}
+                {% if page_num > 0 %}
+                    {% assign current_page = page_num %}
+                {% endif %}
+            {% endif %}
+            
+            <!-- Calculate start and end indices -->
+            {% assign start_index = current_page | minus: 1 | times: items_per_page %}
+            {% assign end_index = start_index | plus: items_per_page %}
+            
+            <!-- Display projects for current page -->
+            {% for item in projects limit: items_per_page offset: start_index %}
             <div class="d-flex mb-3 mr-2 p-3 border-bottom border-gray">
                 <div class="col p-3 ml-md-2">
                     <h4 class="mt-0 mb-2 font-weight-bold">
@@ -55,6 +73,13 @@ container_class: container-xl
                 </div>
             </div>
             {% endfor %}
+        </div>
+
+        <!-- Pagination -->
+        <div id="projects-pagination" class="pagination-container">
+            <nav aria-label="Projects pagination">
+                <ul class="pagination justify-content-center"></ul>
+            </nav>
         </div>
     </div>
 
@@ -116,5 +141,127 @@ document.addEventListener('DOMContentLoaded', function() {
             behavior: 'smooth'
         });
     });
+    
+    // Projects pagination
+    const projectsData = [
+        {% assign projects = site.showcase | where: "group", "Projects" | where: "show", true | sort: "date" | reverse %}
+        {% for item in projects %}
+        {
+            title: {{ item.title | jsonify }},
+            url: {{ item.url | jsonify }},
+            date: {{ item.date | date: "%B %d, %Y" | jsonify }},
+            excerpt: {% if item.excerpt %}{{ item.excerpt | jsonify }}{% else %}{{ item.content | strip_html | truncatewords: 50 | jsonify }}{% endif %},
+            technologies: {{ item.technologies | jsonify }}
+        }{% unless forloop.last %},{% endunless %}
+        {% endfor %}
+    ];
+    
+    const itemsPerPage = 5;
+    let currentPage = 1;
+    
+    function renderProjects(page) {
+        const startIndex = (page - 1) * itemsPerPage;
+        const endIndex = startIndex + itemsPerPage;
+        const projectsToShow = projectsData.slice(startIndex, endIndex);
+        
+        const container = document.querySelector('.shadow-sm.rounded-sm.mb-5');
+        container.innerHTML = '';
+        
+        projectsToShow.forEach(project => {
+            const projectHtml = `
+                <div class="d-flex mb-3 mr-2 p-3 border-bottom border-gray">
+                    <div class="col p-3 ml-md-2">
+                        <h4 class="mt-0 mb-2 font-weight-bold">
+                            <a href="${project.url}" style="color: var(--text-primary);">${project.title}</a>
+                        </h4>
+                        <div class="small d-flex">
+                            <div>
+                                <img src="/assets/images/icons/calendar.png" alt="Date" class="inline-badge" style="width: 20px; height: 20px;">
+                                <span class="text-muted">${project.date}</span>
+                            </div>
+                            <div class="ml-auto">
+                                <span style="color: var(--accent-primary);">
+                                    <i class="fa-solid fa-folder"></i>
+                                    Project
+                                </span>
+                            </div>
+                        </div>
+                        <p class="mt-3 mb-2 small" style="text-align: justify; font-size: 14px;">
+                            ${project.excerpt}
+                        </p>
+                        <div class="small">
+                            <a href="${project.url}" class="btn btn-sm" style="color: var(--accent-primary); border: 1px solid var(--accent-primary); background-color: transparent;">View Details</a>
+                            ${project.technologies && project.technologies.length > 0 ? `
+                            <div class="float-right">
+                                <img src="/assets/images/icons/tag.png" alt="tag" class="inline-badge" style="width: 18px; height: 18px; margin-top: 2px;">
+                                ${project.technologies.map(tech => `<span class="tech-tag">${tech}</span>`).join('')}
+                            </div>
+                            ` : ''}
+                        </div>
+                    </div>
+                </div>
+            `;
+            container.innerHTML += projectHtml;
+        });
+        
+        renderPagination(page);
+    }
+    
+    function renderPagination(page) {
+        const totalPages = Math.ceil(projectsData.length / itemsPerPage);
+        const paginationContainer = document.querySelector('#projects-pagination .pagination');
+        
+        if (totalPages <= 1) {
+            paginationContainer.innerHTML = '';
+            return;
+        }
+        
+        let paginationHtml = '';
+        
+        // Previous button
+        paginationHtml += `
+            <li class="page-item ${page === 1 ? 'disabled' : ''}">
+                <a class="page-link" href="#" data-page="${page - 1}" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+        `;
+        
+        // Page numbers
+        for (let i = 1; i <= totalPages; i++) {
+            paginationHtml += `
+                <li class="page-item ${i === page ? 'active' : ''}">
+                    <a class="page-link" href="#" data-page="${i}">${i}</a>
+                </li>
+            `;
+        }
+        
+        // Next button
+        paginationHtml += `
+            <li class="page-item ${page === totalPages ? 'disabled' : ''}">
+                <a class="page-link" href="#" data-page="${page + 1}" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        `;
+        
+        paginationContainer.innerHTML = paginationHtml;
+        
+        // Add click handlers
+        paginationContainer.querySelectorAll('.page-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetPage = parseInt(this.dataset.page);
+                if (targetPage >= 1 && targetPage <= totalPages && targetPage !== currentPage) {
+                    currentPage = targetPage;
+                    renderProjects(currentPage);
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+            });
+        });
+    }
+    
+    // Initial render
+    renderProjects(currentPage);
 });
 </script>
