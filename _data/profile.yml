@@ -431,7 +431,7 @@ research:
     Currently a Ph.D. intern at Meta (Summer 2025) working with WhatsApp Core Consumer Messaging Groups & Communities on LLM applications. 
     Initial independent research expanded to collaboration in January 2025, building upon the work of Zhao et al. (2024) on ML model security vulnerabilities.
 
-- title: StegFormer-MC Multi-Cover Image Steganography with Distributed Secret Embedding
+- title: "MC-StegFormer: Polynomial-Based Multiple Cover Steganography Using Transformer Architecture with Threshold Secret Sharing"
   date: March 2025 - Present
   link: /projects/stegformer-mc-multi-cover-image-steganography-with-distributed-secret-embedding
   description: >-
