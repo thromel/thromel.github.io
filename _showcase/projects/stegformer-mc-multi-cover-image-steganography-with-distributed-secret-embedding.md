@@ -1,19 +1,17 @@
 ---
-layout: showcase
-show: true
-width: 8
-date: 2025-03-01 00:00:00 +0800
-group: Research
-title: MC-StegFormer Multi-Cover Image Steganography with Threshold Secret Sharing
-excerpt: A novel deep learning framework for multiple cover steganography that integrates transformer architecture with polynomial-based threshold secret sharing for enhanced security and robustness.
-thumbnail: /assets/images/stegformer-mc.png
-technologies:
-  - Python
-  - PyTorch
-  - Deep Learning
-  - Computer Vision
-  - Steganography
-  - Cryptography
+layout: Research
+title: "MC-StegFormer: Polynomial-Based Multiple Cover Steganography Using Transformer Architecture with Threshold Secret Sharing"
+subtitle: "Novel Deep Learning Framework for Threshold-Based Multiple Cover Steganography"
+date: 2025-03-01
+category: research
+tags: [deep-learning, steganography, transformer, cryptography, threshold-secret-sharing, computer-vision, research]
+technologies: [Python, PyTorch, Deep Learning, Computer Vision, Steganography, Cryptography]
+github: "https://github.com/thromel/StegFormer"
+demo: #
+paper: #
+status: "Ongoing Research"
+featured: true
+image: "/assets/images/stegformer-mc.png"
 ---
 
 # MC-StegFormer: Polynomial-Based Multiple Cover Steganography Using Transformer Architecture with Threshold Secret Sharing
