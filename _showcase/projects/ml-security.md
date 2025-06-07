@@ -1,9 +1,11 @@
 ---
-layout: post
+layout: showcase
 title: "Securing Machine Learning Model Ecosystems: A Comprehensive Security Analysis"
 subtitle: "Comprehensive Security Analysis of ML Model Hubs and RCE Vulnerabilities"
 date: 2025-05-25
 category: research
+group: Research
+show: true
 tags: [machine-learning, security, vulnerability-analysis, model-hubs, research]
 technologies: [Python, Security Analysis, Vulnerability Assessment, ML Security, Code Analysis]
 github: #
