@@ -1,5 +1,5 @@
 ---
-layout: Research
+layout: post
 title: "MC-StegFormer: Polynomial-Based Multiple Cover Steganography Using Transformer Architecture with Threshold Secret Sharing"
 subtitle: "Novel Deep Learning Framework for Threshold-Based Multiple Cover Steganography"
 date: 2025-03-01

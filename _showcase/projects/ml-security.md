@@ -1,5 +1,5 @@
 ---
-layout: Research
+layout: post
 title: "Securing Machine Learning Model Ecosystems: A Comprehensive Security Analysis"
 subtitle: "Comprehensive Security Analysis of ML Model Hubs and RCE Vulnerabilities"
 date: 2025-05-25
