@@ -3,7 +3,7 @@ layout: showcase
 title: "Making AI Reliable: Design by Contract for Large Language Models"
 subtitle: "A Refined Taxonomy and Empirical Study of LLM API Contracts"
 category: projects
-group: Projects
+group: Research
 show: true
 width: 8
 date: 2025-01-15 00:00:00 +0800

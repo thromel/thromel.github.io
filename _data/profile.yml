@@ -420,7 +420,7 @@ professional_memberships:
   joined: 2024
 
 research:
-- title: "Securing Machine Learning Model Ecosystems"
+- title: "Securing Machine Learning Model Ecosystems: A Comprehensive Security Analysis"
   date: May 2025 - Present
   link: /projects/ml-security
   description: >-
@@ -431,18 +431,8 @@ research:
     Currently a Ph.D. intern at Meta (Summer 2025) working with WhatsApp Core Consumer Messaging Groups & Communities on LLM applications. 
     Initial independent research expanded to collaboration in January 2025, building upon the work of Zhao et al. (2024) on ML model security vulnerabilities.
 
-- title: "MC-StegFormer: Polynomial-Based Multiple Cover Steganography Using Transformer Architecture with Threshold Secret Sharing"
-  date: March 2025 - Present
-  link: /projects/stegformer-mc-multi-cover-image-steganography-with-distributed-secret-embedding
-  description: >-
-    Extended the StegFormer architecture to hide secret images across multiple cover images, 
-    with innovative channel- and spatial-splitting strategies, parallel processing branches, 
-    and a composite loss function for robust training.
-  collaborator: >-
-    Working with <a href="https://sites.google.com/site/abmalimalislam/home" target="_blank">Professor A. B. M. Alim Al Islam</a> from BUET, whose research 
-    covers wireless networking, embedded systems, HCI, security and privacy.
 
-- title: Extending LLM API Contract Analysis and Design by Contract Tool Development
+- title: "Making AI Reliable: Design by Contract for Large Language Models"
   date: Nov 2024 - Present
   link: /projects/extending-llm-api-contract-analysis-a-refined-taxonomy-and-empirical-study
   description: >-
