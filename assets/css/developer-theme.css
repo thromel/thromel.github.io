@@ -53,51 +53,51 @@
   --scrollbar-thumb-hover: #4d5e7a;
 }
 
-/* Light theme */
+/* Light theme - Forest Moss */
 :root.light-theme {
-  /* Base colors - refined warm whites with subtle cream tones */
-  --bg-primary: #fefefe;
+  /* Base colors - natural warm tones with subtle stone accents */
+  --bg-primary: #fafaf9;
   --bg-secondary: #ffffff;
-  --bg-tertiary: #f8fafc;
+  --bg-tertiary: #f5f5f4;
   
-  /* Text colors - improved contrast and readability */
-  --text-primary: #1e293b;
-  --text-secondary: #475569;
-  --text-muted: #64748b;
+  /* Text colors - earthy tones for excellent readability */
+  --text-primary: #1c1917;
+  --text-secondary: #44403c;
+  --text-muted: #78716c;
   
-  /* Accent colors - modern blue palette with better accessibility */
-  --accent-primary: #2563eb;
-  --accent-secondary: #059669;
-  --accent-tertiary: #ea580c;
+  /* Accent colors - forest green primary with complementary colors */
+  --accent-primary: #16a34a;
+  --accent-secondary: #0891b2;
+  --accent-tertiary: #dc2626;
   
   /* Special purpose colors */
-  --position-title: #2563eb;
-  --project-type: #059669;
-  --research-type: #059669;
+  --position-title: #16a34a;
+  --project-type: #0891b2;
+  --research-type: #0891b2;
   --star-color: #fbbf24;
-  --pdf-icon: #2563eb;
-  --certificate-icon: #2563eb;
-  --membership-icon: #2563eb;
+  --pdf-icon: #16a34a;
+  --certificate-icon: #16a34a;
+  --membership-icon: #16a34a;
   
-  /* Code colors - GitHub-inspired syntax highlighting */
-  --code-bg: #f6f8fa;
-  --code-text: #24292f;
-  --code-border: #d1d9e0;
-  --code-comment: #6e7781;
-  --code-keyword: #cf222e;
-  --code-function: #8250df;
-  --code-string: #0a3069;
-  --code-number: #0969da;
+  /* Code colors - natural syntax highlighting */
+  --code-bg: #f5f5f4;
+  --code-text: #1c1917;
+  --code-border: #e7e5e4;
+  --code-comment: #57534e;
+  --code-keyword: #dc2626;
+  --code-function: #16a34a;
+  --code-string: #0891b2;
+  --code-number: #7c3aed;
   
-  /* Border and shadow - enhanced depth and modern aesthetics */
-  --border-color: #e2e8f0;
+  /* Border and shadow - soft natural boundaries */
+  --border-color: #e7e5e4;
   --card-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
   --card-shadow-hover: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   --section-border: 1px solid var(--border-color);
   
-  /* Scrollbar - refined styling */
-  --scrollbar-track: #f8fafc;
-  --scrollbar-thumb: #cbd5e1;
+  /* Scrollbar - stone-inspired styling */
+  --scrollbar-track: #f5f5f4;
+  --scrollbar-thumb: #d6d3d1;
   --scrollbar-thumb-hover: #94a3b8;
   
   /* New variables for enhanced styling */

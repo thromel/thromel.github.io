@@ -75,7 +75,7 @@
                         <a href="https://scholar.google.com/citations?user={{ site.data.profile.gscholar }}" title="Google Scholar" class="icon-primary animate__animated animate__bounceIn" style="animation-delay: 2.0s;"><i class="ai ai-google-scholar"></i></a>
                         {% endif %}
                         {% if site.data.profile.cv_link %}
-                        <a href="{{ site.data.profile.cv_link }}" target="_blank" title="CV" class="icon-primary animate__animated animate__bounceIn" style="animation-delay: 2.1s;"><i class="ai ai-cv"></i></a>
+                        <a href="{{ site.data.profile.cv_link | relative_url }}" title="CV" class="icon-primary animate__animated animate__bounceIn" style="animation-delay: 2.1s;"><i class="ai ai-cv"></i></a>
                         {% endif %}
                     </div>
                 </div>
