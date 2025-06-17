@@ -6,51 +6,64 @@
   /* Theme-specific variables will be set in each theme */
 }
 
-/* Dark theme (default) */
+/* Dark theme - Liquid Glass Dark */
 :root.dark-theme {
-  /* Base colors */
-  --bg-primary: #0a0e14;
-  --bg-secondary: #121720;
-  --bg-tertiary: #1c2333;
+  /* Base colors - deep ethereal surfaces */
+  --bg-primary: #0f172a;
+  --bg-secondary: rgba(15, 23, 42, 0.7);
+  --bg-tertiary: rgba(30, 41, 59, 0.8);
   
-  /* Text colors */
-  --text-primary: #ffffff;
-  --text-secondary: #f0f5ff;
-  --text-muted: #d0deff;
+  /* Text colors - high contrast on dark glass */
+  --text-primary: #f1f5f9;
+  --text-secondary: #e2e8f0;
+  --text-muted: #cbd5e1;
   
-  /* Accent colors */
-  --accent-primary: #61afff;
-  --accent-secondary: #36d058;
-  --accent-tertiary: #ff9d4d;
+  /* Accent colors - vibrant neon-like on dark */
+  --accent-primary: #38bdf8;
+  --accent-secondary: #818cf8;
+  --accent-tertiary: #34d399;
   
   /* Special purpose colors */
-  --position-title: #61afff;
-  --project-type: #36d058;
-  --research-type: #36d058;
-  --star-color: #FFD700;
-  --pdf-icon: #61afff;
-  --certificate-icon: #61afff;
-  --membership-icon: #61afff;
+  --position-title: #38bdf8;
+  --project-type: #818cf8;
+  --research-type: #818cf8;
+  --star-color: #fbbf24;
+  --pdf-icon: #38bdf8;
+  --certificate-icon: #38bdf8;
+  --membership-icon: #38bdf8;
   
-  /* Code colors */
-  --code-bg: #1e2638;
-  --code-text: #e6edf3;
-  --code-border: #384357;
-  --code-comment: #61afff;
-  --code-keyword: #ff79c6;
-  --code-function: #50fa7b;
-  --code-string: #f1fa8c;
-  --code-number: #bd93f9;
+  /* Code colors - neon syntax on dark glass */
+  --code-bg: rgba(30, 41, 59, 0.6);
+  --code-text: #f1f5f9;
+  --code-border: rgba(71, 85, 105, 0.3);
+  --code-comment: #94a3b8;
+  --code-keyword: #f472b6;
+  --code-function: #818cf8;
+  --code-string: #4ade80;
+  --code-number: #fbbf24;
   
-  /* Border and shadow */
-  --border-color: #384357;
-  --card-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  /* Glass morphism effects for dark */
+  --glass-bg: rgba(30, 41, 59, 0.6);
+  --glass-border: rgba(148, 163, 184, 0.1);
+  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  --glass-blur: blur(10px);
+  
+  /* Border and shadow - soft dark glass edges */
+  --border-color: rgba(71, 85, 105, 0.3);
+  --card-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  --card-shadow-hover: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
   --section-border: 1px solid var(--border-color);
   
-  /* Scrollbar */
-  --scrollbar-track: #121720;
-  --scrollbar-thumb: #384357;
-  --scrollbar-thumb-hover: #4d5e7a;
+  /* Scrollbar - dark translucent styling */
+  --scrollbar-track: rgba(15, 23, 42, 0.5);
+  --scrollbar-thumb: rgba(71, 85, 105, 0.5);
+  --scrollbar-thumb-hover: rgba(100, 116, 139, 0.7);
+  
+  /* Dark liquid gradients */
+  --gradient-primary: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%);
+  --gradient-secondary: linear-gradient(135deg, #818cf8 0%, #34d399 100%);
+  --gradient-accent: linear-gradient(135deg, #34d399 0%, #38bdf8 100%);
+  --gradient-glass: linear-gradient(135deg, rgba(148, 163, 184, 0.1) 0%, rgba(148, 163, 184, 0.05) 100%);
 }
 
 /* Light theme - Liquid Glass */
@@ -120,6 +133,13 @@ body {
   font-family: 'Plus Jakarta Sans', 'Outfit', sans-serif;
   line-height: 1.6;
   transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Enhanced body background for dark theme */
+:root.dark-theme body {
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+  background-attachment: fixed;
+  min-height: 100vh;
 }
 
 /* Enhanced body background for light theme */
@@ -356,6 +376,60 @@ p, div, span, li {
 :root.light-theme .container {
   position: relative;
   z-index: 1;
+}
+
+/* Dark theme glass morphism elements */
+:root.dark-theme .card {
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+}
+
+:root.dark-theme .card:hover {
+  background: rgba(30, 41, 59, 0.8);
+  border-color: rgba(56, 189, 248, 0.3);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.6);
+}
+
+:root.dark-theme .timeline .media {
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  border-left: 4px solid var(--accent-primary);
+  box-shadow: var(--glass-shadow);
+}
+
+:root.dark-theme .navbar {
+  background: rgba(15, 23, 42, 0.8) !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+  box-shadow: 0 2px 20px 0 rgba(0, 0, 0, 0.3);
+}
+
+:root.dark-theme .btn-primary {
+  background: linear-gradient(135deg, rgba(56, 189, 248, 0.8) 0%, rgba(129, 140, 248, 0.8) 100%);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  box-shadow: 0 4px 15px 0 rgba(0, 0, 0, 0.3);
+}
+
+:root.dark-theme .btn-primary:hover {
+  background: linear-gradient(135deg, rgba(56, 189, 248, 0.9) 0%, rgba(129, 140, 248, 0.9) 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.4);
+}
+
+:root.dark-theme .theme-toggle {
+  background: rgba(56, 189, 248, 0.8);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  box-shadow: var(--glass-shadow);
 }
 
 :root.light-theme .timeline .media {

@@ -1,14 +1,16 @@
 /* Syntax Highlighting for Jekyll Rouge */
 /* Default dark theme syntax highlighting to match the website's design */
 
-/* Base code block styling - Default to dark theme */
+/* Base code block styling - Liquid Glass Dark theme */
 .highlight {
-  background: #0d1117;
-  border: 1px solid #30363d;
+  background: rgba(30, 41, 59, 0.6);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(148, 163, 184, 0.1);
   border-radius: 8px;
   margin: 1rem 0;
   overflow-x: auto;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
   position: relative;
 }
 
@@ -20,7 +22,7 @@
   font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', 'Source Code Pro', monospace;
   font-size: 0.875rem;
   line-height: 1.5;
-  color: #e6edf3;
+  color: #f1f5f9;
   overflow-x: auto;
 }
 
@@ -37,26 +39,26 @@ pre code {
 
 /* Inline code styling */
 code {
-  background: #21262d;
-  color: #f85149;
+  background: rgba(30, 41, 59, 0.6);
+  color: #f472b6;
   padding: 0.125rem 0.25rem;
   border-radius: 4px;
   font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', 'Source Code Pro', monospace;
   font-size: 0.875em;
-  border: 1px solid #30363d;
+  border: 1px solid rgba(148, 163, 184, 0.1);
 }
 
 /* Ensure inline code in paragraphs doesn't get highlight styling */
 p code, li code, h1 code, h2 code, h3 code, h4 code, h5 code, h6 code {
-  background: #21262d;
-  color: #f85149;
+  background: rgba(30, 41, 59, 0.6);
+  color: #f472b6;
   padding: 0.125rem 0.25rem;
   border-radius: 4px;
-  border: 1px solid #30363d;
+  border: 1px solid rgba(148, 163, 184, 0.1);
 }
 
 /* Rouge syntax highlighting - Default dark theme colors */
-.highlight .c { color: #8b949e; font-style: italic; } /* Comment */
+.highlight .c { color: #94a3b8; font-style: italic; } /* Comment */
 .highlight .ch { color: #8b949e; font-style: italic; } /* Comment.Hashbang */
 .highlight .cm { color: #8b949e; font-style: italic; } /* Comment.Multiline */
 .highlight .cp { color: #8b949e; font-style: italic; } /* Comment.Preproc */
@@ -65,7 +67,7 @@ p code, li code, h1 code, h2 code, h3 code, h4 code, h5 code, h6 code {
 .highlight .cs { color: #8b949e; font-style: italic; } /* Comment.Special */
 
 .highlight .err { color: #f85149; background-color: rgba(248, 81, 73, 0.15); } /* Error */
-.highlight .k { color: #ff7b72; font-weight: 600; } /* Keyword */
+.highlight .k { color: #f472b6; font-weight: 600; } /* Keyword */
 .highlight .l { color: #a5d6ff; } /* Literal */
 .highlight .n { color: #e6edf3; } /* Name */
 .highlight .o { color: #ff7b72; } /* Operator */
@@ -73,24 +75,24 @@ p code, li code, h1 code, h2 code, h3 code, h4 code, h5 code, h6 code {
 .highlight .py { color: #e6edf3; } /* Name.Property */
 
 .highlight .kc { color: #79c0ff; font-weight: 600; } /* Keyword.Constant */
-.highlight .kd { color: #ff7b72; font-weight: 600; } /* Keyword.Declaration */
-.highlight .kn { color: #ff7b72; font-weight: 600; } /* Keyword.Namespace */
+.highlight .kd { color: #f472b6; font-weight: 600; } /* Keyword.Declaration */
+.highlight .kn { color: #f472b6; font-weight: 600; } /* Keyword.Namespace */
 .highlight .kp { color: #79c0ff; font-weight: 600; } /* Keyword.Pseudo */
-.highlight .kr { color: #ff7b72; font-weight: 600; } /* Keyword.Reserved */
+.highlight .kr { color: #f472b6; font-weight: 600; } /* Keyword.Reserved */
 .highlight .kt { color: #ffa657; font-weight: 600; } /* Keyword.Type */
 
 .highlight .ld { color: #a5d6ff; } /* Literal.Date */
-.highlight .m { color: #a5d6ff; } /* Literal.Number */
-.highlight .s { color: #a5d6ff; } /* Literal.String */
+.highlight .m { color: #fbbf24; } /* Literal.Number */
+.highlight .s { color: #4ade80; } /* Literal.String */
 
 .highlight .na { color: #7ee787; } /* Name.Attribute */
 .highlight .nb { color: #ffa657; } /* Name.Builtin */
-.highlight .nc { color: #ffa657; font-weight: 600; } /* Name.Class */
+.highlight .nc { color: #818cf8; font-weight: 600; } /* Name.Class */
 .highlight .no { color: #79c0ff; } /* Name.Constant */
 .highlight .nd { color: #d2a8ff; } /* Name.Decorator */
 .highlight .ni { color: #ffa657; } /* Name.Entity */
 .highlight .ne { color: #ffa657; } /* Name.Exception */
-.highlight .nf { color: #d2a8ff; font-weight: 600; } /* Name.Function */
+.highlight .nf { color: #818cf8; font-weight: 600; } /* Name.Function */
 .highlight .nl { color: #ffa657; } /* Name.Label */
 .highlight .nn { color: #ffa657; } /* Name.Namespace */
 .highlight .nx { color: #e6edf3; } /* Name.Other */
@@ -153,15 +155,17 @@ p code, li code, h1 code, h2 code, h3 code, h4 code, h5 code, h6 code {
 
 /* Copy button styling */
 .code-header {
-  background: #161b22;
-  border-bottom: 1px solid #30363d;
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(148, 163, 184, 0.1);
   padding: 0.5rem 1rem;
   border-radius: 8px 8px 0 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
   font-size: 0.875rem;
-  color: #8b949e;
+  color: #94a3b8;
   position: relative;
 }
 
@@ -179,9 +183,11 @@ p code, li code, h1 code, h2 code, h3 code, h4 code, h5 code, h6 code {
 }
 
 .copy-btn {
-  background: #21262d;
-  border: 1px solid #30363d;
-  color: #c9d1d9;
+  background: rgba(30, 41, 59, 0.6);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(148, 163, 184, 0.1);
+  color: #e2e8f0;
   padding: 0.25rem 0.5rem;
   border-radius: 4px;
   font-size: 0.75rem;
@@ -193,9 +199,9 @@ p code, li code, h1 code, h2 code, h3 code, h4 code, h5 code, h6 code {
 }
 
 .copy-btn:hover {
-  background: #30363d;
-  border-color: #58a6ff;
-  color: #58a6ff;
+  background: rgba(30, 41, 59, 0.8);
+  border-color: #38bdf8;
+  color: #38bdf8;
 }
 
 .copy-btn:focus {
