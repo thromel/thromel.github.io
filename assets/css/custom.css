@@ -398,12 +398,12 @@ h2:after {
     color: var(--text-primary);
 }
 
-/* Light mode styles */
+/* Light mode styles - Liquid Glass */
 :root.light-theme {
-    --bg-primary: #ffffff;
-    --bg-secondary: #f8fafc;
-    --bg-tertiary: #f1f5f9;
-    --text-primary: #0f172a;
+    --bg-primary: #f8fafb;
+    --bg-secondary: rgba(255, 255, 255, 0.7);
+    --bg-tertiary: rgba(248, 250, 252, 0.8);
+    --text-primary: #1e293b;
     --text-secondary: #475569;
     --text-muted: #64748b;
 }
@@ -414,9 +414,11 @@ h2:after {
 }
 
 :root.light-theme .card {
-    background-color: var(--bg-secondary);
-    border: 1px solid #e2e8f0;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
 }
 
 :root.light-theme p, 
@@ -427,8 +429,12 @@ h2:after {
 }
 
 :root.light-theme .timeline .media {
-    background-color: var(--bg-tertiary);
-    border-left: 3px solid var(--accent-primary);
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-left: 3px solid #0ea5e9;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
 }
 
 /* Bio Section Specific Contrast Fix */
@@ -445,7 +451,7 @@ h2:after {
 }
 
 :root.light-theme .row h3 {
-    color: #0f172a;
+    color: #1e293b;
 }
 
 .bio-section .bio-heading {
