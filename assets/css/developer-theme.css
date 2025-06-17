@@ -53,57 +53,57 @@
   --scrollbar-thumb-hover: #4d5e7a;
 }
 
-/* Light theme - Forest Moss */
+/* Light theme - Modern Clean */
 :root.light-theme {
-  /* Base colors - natural warm tones with subtle stone accents */
-  --bg-primary: #fafaf9;
-  --bg-secondary: #ffffff;
-  --bg-tertiary: #f5f5f4;
+  /* Base colors - clean, modern whites and grays */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8fafc;
+  --bg-tertiary: #f1f5f9;
   
-  /* Text colors - earthy tones for excellent readability */
-  --text-primary: #1c1917;
-  --text-secondary: #44403c;
-  --text-muted: #78716c;
+  /* Text colors - high contrast for excellent readability */
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #64748b;
   
-  /* Accent colors - forest green primary with complementary colors */
-  --accent-primary: #16a34a;
-  --accent-secondary: #0891b2;
-  --accent-tertiary: #dc2626;
+  /* Accent colors - vibrant modern palette */
+  --accent-primary: #3b82f6;
+  --accent-secondary: #8b5cf6;
+  --accent-tertiary: #ec4899;
   
   /* Special purpose colors */
-  --position-title: #16a34a;
-  --project-type: #0891b2;
-  --research-type: #0891b2;
-  --star-color: #fbbf24;
-  --pdf-icon: #16a34a;
-  --certificate-icon: #16a34a;
-  --membership-icon: #16a34a;
+  --position-title: #3b82f6;
+  --project-type: #8b5cf6;
+  --research-type: #8b5cf6;
+  --star-color: #f59e0b;
+  --pdf-icon: #3b82f6;
+  --certificate-icon: #3b82f6;
+  --membership-icon: #3b82f6;
   
-  /* Code colors - natural syntax highlighting */
-  --code-bg: #f5f5f4;
-  --code-text: #1c1917;
-  --code-border: #e7e5e4;
-  --code-comment: #57534e;
-  --code-keyword: #dc2626;
-  --code-function: #16a34a;
-  --code-string: #0891b2;
-  --code-number: #7c3aed;
+  /* Code colors - modern syntax highlighting */
+  --code-bg: #f8fafc;
+  --code-text: #0f172a;
+  --code-border: #e2e8f0;
+  --code-comment: #64748b;
+  --code-keyword: #ec4899;
+  --code-function: #8b5cf6;
+  --code-string: #10b981;
+  --code-number: #f59e0b;
   
-  /* Border and shadow - soft natural boundaries */
-  --border-color: #e7e5e4;
-  --card-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-  --card-shadow-hover: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  /* Border and shadow - crisp modern boundaries */
+  --border-color: #e2e8f0;
+  --card-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px -1px rgba(0, 0, 0, 0.04);
+  --card-shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.05);
   --section-border: 1px solid var(--border-color);
   
-  /* Scrollbar - stone-inspired styling */
-  --scrollbar-track: #f5f5f4;
-  --scrollbar-thumb: #d6d3d1;
+  /* Scrollbar - minimal modern styling */
+  --scrollbar-track: #f1f5f9;
+  --scrollbar-thumb: #cbd5e1;
   --scrollbar-thumb-hover: #94a3b8;
   
-  /* New variables for enhanced styling */
-  --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-  --gradient-accent: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  /* Modern gradients */
+  --gradient-primary: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+  --gradient-secondary: linear-gradient(135deg, #ec4899 0%, #f97316 100%);
+  --gradient-accent: linear-gradient(135deg, #14b8a6 0%, #3b82f6 100%);
 }
 
 /* Base styles */
@@ -117,8 +117,7 @@ body {
 
 /* Enhanced body background for light theme */
 :root.light-theme body {
-  background: linear-gradient(135deg, #fefefe 0%, #f8fafc 100%);
-  background-attachment: fixed;
+  background-color: var(--bg-primary);
   min-height: 100vh;
 }
 

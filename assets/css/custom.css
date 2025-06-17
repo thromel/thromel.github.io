@@ -50,7 +50,7 @@ h2:after {
 :root.light-theme h4, 
 :root.light-theme h5, 
 :root.light-theme h6 {
-    color: #2d3748;
+    color: #0f172a;
 }
 
 /* Profile card specific styling */
@@ -300,12 +300,12 @@ h2:after {
 :root.light-theme .education-coursework,
 :root.light-theme .position-description,
 :root.light-theme .timeline table {
-    color: #2d3748 !important;
+    color: #0f172a !important;
 }
 
 :root.light-theme .timeline table th,
 :root.light-theme .timeline table td {
-    color: #2d3748 !important;
+    color: #0f172a !important;
     border-color: #e9ecef;
 }
 
@@ -336,11 +336,11 @@ h2:after {
 
 :root.light-theme .navbar-themed .navbar-brand,
 :root.light-theme .navbar-themed .nav-link {
-    color: #2d3748;
+    color: #0f172a;
 }
 
 :root.light-theme .navbar-themed .navbar-toggler {
-    color: #2d3748;
+    color: #0f172a;
     border-color: rgba(0,0,0,0.1);
 }
 
@@ -400,12 +400,12 @@ h2:after {
 
 /* Light mode styles */
 :root.light-theme {
-    --bg-primary: #fafaf9;
-    --bg-secondary: #ffffff;
-    --bg-tertiary: #f7f6f4;
-    --text-primary: #2c2c2c;
-    --text-secondary: #4a4a4a;
-    --text-muted: #6b7280;
+    --bg-primary: #ffffff;
+    --bg-secondary: #f8fafc;
+    --bg-tertiary: #f1f5f9;
+    --text-primary: #0f172a;
+    --text-secondary: #475569;
+    --text-muted: #64748b;
 }
 
 :root.light-theme body {
@@ -415,8 +415,8 @@ h2:after {
 
 :root.light-theme .card {
     background-color: var(--bg-secondary);
-    border: 1px solid #e8e6e3;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
 :root.light-theme p, 
@@ -445,7 +445,7 @@ h2:after {
 }
 
 :root.light-theme .row h3 {
-    color: #2d3748;
+    color: #0f172a;
 }
 
 .bio-section .bio-heading {
@@ -794,7 +794,7 @@ html {
 }
 
 :root.light-theme .navbar-themed .dropdown-item {
-  color: #2d3748;
+  color: #0f172a;
 }
 
 :root.light-theme .navbar-themed .dropdown-item:hover {

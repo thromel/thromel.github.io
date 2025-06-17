@@ -227,21 +227,21 @@ p code, li code, h1 code, h2 code, h3 code, h4 code, h5 code, h6 code {
   }
 }
 
-/* Light theme overrides - Using your existing theme system */
+/* Light theme overrides - Modern clean theme */
 :root.light-theme .highlight {
-  background: #f6f8fa;
-  border-color: #d0d7de;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  background: #f8fafc;
+  border-color: #e2e8f0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
 :root.light-theme .highlight pre {
-  color: #24292f;
+  color: #0f172a;
 }
 
 :root.light-theme code {
-  background: #f3f4f6;
-  color: #c7254e;
-  border-color: #d0d7de;
+  background: #f1f5f9;
+  color: #ec4899;
+  border-color: #e2e8f0;
 }
 
 :root.light-theme p code, 
@@ -252,40 +252,40 @@ p code, li code, h1 code, h2 code, h3 code, h4 code, h5 code, h6 code {
 :root.light-theme h4 code, 
 :root.light-theme h5 code, 
 :root.light-theme h6 code {
-  background: #f3f4f6;
-  color: #c7254e;
-  border-color: #d0d7de;
+  background: #f1f5f9;
+  color: #ec4899;
+  border-color: #e2e8f0;
 }
 
-:root.light-theme .highlight .c { color: #6a737d; } /* Comments */
-:root.light-theme .highlight .k { color: #d73a49; font-weight: 600; } /* Keywords */
-:root.light-theme .highlight .kd { color: #d73a49; }
-:root.light-theme .highlight .kn { color: #d73a49; }
-:root.light-theme .highlight .kr { color: #d73a49; }
-:root.light-theme .highlight .kt { color: #b31d28; }
-:root.light-theme .highlight .nb { color: #005cc5; } /* Built-ins */
-:root.light-theme .highlight .nc { color: #6f42c1; font-weight: 600; } /* Class names */
-:root.light-theme .highlight .nf { color: #6f42c1; font-weight: 600; } /* Function names */
-:root.light-theme .highlight .s { color: #032f62; } /* Strings */
-:root.light-theme .highlight .s1 { color: #032f62; }
-:root.light-theme .highlight .s2 { color: #032f62; }
-:root.light-theme .highlight .mi { color: #005cc5; } /* Numbers */
-:root.light-theme .highlight .mf { color: #005cc5; }
+:root.light-theme .highlight .c { color: #64748b; } /* Comments */
+:root.light-theme .highlight .k { color: #ec4899; font-weight: 600; } /* Keywords */
+:root.light-theme .highlight .kd { color: #ec4899; }
+:root.light-theme .highlight .kn { color: #ec4899; }
+:root.light-theme .highlight .kr { color: #ec4899; }
+:root.light-theme .highlight .kt { color: #8b5cf6; }
+:root.light-theme .highlight .nb { color: #3b82f6; } /* Built-ins */
+:root.light-theme .highlight .nc { color: #8b5cf6; font-weight: 600; } /* Class names */
+:root.light-theme .highlight .nf { color: #8b5cf6; font-weight: 600; } /* Function names */
+:root.light-theme .highlight .s { color: #10b981; } /* Strings */
+:root.light-theme .highlight .s1 { color: #10b981; }
+:root.light-theme .highlight .s2 { color: #10b981; }
+:root.light-theme .highlight .mi { color: #f59e0b; } /* Numbers */
+:root.light-theme .highlight .mf { color: #f59e0b; }
 
 :root.light-theme .code-header {
-  background: #f1f3f4;
-  border-bottom-color: #d0d7de;
-  color: #586069;
+  background: #f1f5f9;
+  border-bottom-color: #e2e8f0;
+  color: #64748b;
 }
 
 :root.light-theme .copy-btn {
-  background: #fafbfc;
-  border-color: #d0d7de;
-  color: #586069;
+  background: #ffffff;
+  border-color: #e2e8f0;
+  color: #64748b;
 }
 
 :root.light-theme .copy-btn:hover {
-  background: #f3f4f6;
-  border-color: #0969da;
-  color: #0969da;
+  background: #f8fafc;
+  border-color: #3b82f6;
+  color: #3b82f6;
 } 
