@@ -16,10 +16,11 @@ positions:
   responsibilities:
   - Developing and optimizing microservices-based healthcare applications handling millions of patient records using .NET Core and C#
   - Architecting and deploying cloud-native applications on AWS, leveraging services such as Lambda, EC2, S3, DynamoDB, and CloudFormation to build scalable and resilient healthcare data solutions
+  - <b>Architecture Leadership:</b> Led the design and refactoring of complex filter logic architecture, simplifying the codebase by 40% and enhancing filtering performance by 70% across multiple microservices
   - Designing and implementing RESTful APIs following industry best practices and IQVIA's robust security standards for global pharmaceutical clients
   - Integrating LLM capabilities into data analytics dashboards, enabling natural language querying of clinical trial data and automated generation of compliance-ready reports with 85% reduction in manual processing time
   - Implementing comprehensive database performance optimizations including query tuning, indexing strategies, and execution plan analysis, achieving 60% reduction in complex query execution times
-  - Built an interactive Angular-based visualization dashboard for clinical trial outcomes with responsive design, reducing data interpretation time by 30% and improving client engagement metrics by 45%
+  - Built interactive visualization dashboards for clinical trial outcomes with responsive design, reducing data interpretation time by 30% and improving client engagement metrics by 45%
   - Conducting proof-of-concept projects to evaluate and integrate new technologies, leading to the adoption of several innovative features that enhanced product capabilities
   - Creating advanced data partitioning schemes and implementing materialized views to optimize large-scale data access patterns for healthcare analytics applications
   - Collaborating with cross-functional teams including data scientists, UX designers, and business analysts across multiple time zones to deliver integrated healthcare solutions
@@ -38,7 +39,6 @@ positions:
   - S3
   - DynamoDB
   - CloudFormation
-  - Angular
   - Microservices
   - Entity Framework
   - Redis
