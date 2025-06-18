@@ -7,6 +7,12 @@
 
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <button class="nav-link search-button" onclick="siteSearch && siteSearch.openSearchModal()" title="Search (Ctrl+K)">
+                        <i class="fas fa-search"></i>
+                        <span class="d-none d-md-inline">Search</span>
+                    </button>
+                </li>
                 {% for item in site.data.navigation.pages %}
                 {% if item.name == 'Home' %}
                 <!-- Home dropdown with homepage sections -->
