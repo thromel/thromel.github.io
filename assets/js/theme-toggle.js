@@ -1,6 +1,12 @@
+// Apply theme immediately to prevent FOUC
+(function() {
+  const theme = localStorage.getItem('theme') || 'dark';
+  document.documentElement.classList.add(`${theme}-theme`);
+})();
+
 document.addEventListener('DOMContentLoaded', function () {
-  // Get the theme preference from localStorage or default to light
-  const currentTheme = localStorage.getItem('theme') || 'light';
+  // Get the theme preference from localStorage or default to dark
+  const currentTheme = localStorage.getItem('theme') || 'dark';
 
   // Apply the theme
   applyTheme(currentTheme);
@@ -47,7 +53,7 @@ function applyTheme(theme) {
 
 function toggleTheme() {
   // Get current theme
-  const currentTheme = localStorage.getItem('theme') || 'light';
+  const currentTheme = localStorage.getItem('theme') || 'dark';
 
   // Toggle to the other theme
   const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
@@ -63,7 +69,7 @@ function createThemeToggle() {
     toggleButton.className = 'theme-toggle';
 
     // Set initial icon based on current theme
-    const currentTheme = localStorage.getItem('theme') || 'light';
+    const currentTheme = localStorage.getItem('theme') || 'dark';
     toggleButton.innerHTML =
       currentTheme === 'dark'
         ? '<i class="fas fa-sun"></i>'

@@ -20,7 +20,7 @@ navbar_title: Home
                     <div class="col"><h2 data-aos="fade-right" data-aos-delay="200">My Resume</h2></div>
                     <div class="ml-auto">
                         {% if site.data.profile.cv_link %}
-                        <a class="pr-3 no-break animate__animated animate__pulse animate__infinite animate__slow" target="_blank" href="{{site.data.profile.cv_link}}" data-aos="zoom-in" data-aos-delay="300">
+                        <a class="pr-3 no-break" target="_blank" href="{{site.data.profile.cv_link}}" data-aos="zoom-in" data-aos-delay="300">
                             <i class="fa-regular fa-file-pdf fa-2x mt-2 mr-2 icon-pdf"></i>
                         </a>
                         {% endif %}
@@ -91,7 +91,7 @@ navbar_title: Home
                     </div>
                 </div>
                 <h6 class="d-block text-center mt-3">
-                    <a href="{{ 'experience' | relative_url }}" class="btn btn-sm btn-outline-primary animate__animated animate__heartBeat animate__infinite animate__slower" data-aos="fade-up" data-aos-delay="100">View All Experience <i class="fas fa-angle-double-right"></i></a>
+                    <a href="{{ 'experience' | relative_url }}" class="btn btn-sm btn-outline-primary" data-aos="fade-up" data-aos-delay="100">View All Experience <i class="fas fa-angle-double-right"></i></a>
                 </h6>
                 <hr />
 
@@ -127,7 +127,7 @@ navbar_title: Home
                     </div>
                 </div>
                 <h6 class="d-block text-center mt-3">
-                    <a href="{{ 'research' | relative_url }}" class="btn btn-sm btn-outline-primary animate__animated animate__pulse animate__infinite animate__slower" data-aos="fade-up" data-aos-delay="100">View All Research <i class="fas fa-angle-double-right"></i></a>
+                    <a href="{{ 'research' | relative_url }}" class="btn btn-sm btn-outline-primary" data-aos="fade-up" data-aos-delay="100">View All Research <i class="fas fa-angle-double-right"></i></a>
                 </h6>
                 <hr />
 
@@ -169,7 +169,7 @@ navbar_title: Home
                     </div>
                 </div>
                 <h6 class="d-block text-center mt-3">
-                    <a href="{{ 'projects' | relative_url }}" class="btn btn-sm btn-outline-primary animate__animated animate__swing animate__infinite animate__slower" data-aos="fade-up" data-aos-delay="100">View All Projects <i class="fas fa-angle-double-right"></i></a>
+                    <a href="{{ 'projects' | relative_url }}" class="btn btn-sm btn-outline-primary" data-aos="fade-up" data-aos-delay="100">View All Projects <i class="fas fa-angle-double-right"></i></a>
                 </h6>
                 <hr />
 
@@ -263,7 +263,7 @@ navbar_title: Home
                                     {% endif %}
                                     </div>
                                     {% if cert.score %}
-                                    <div>Score: <strong class="animate__animated animate__pulse animate__infinite animate__slow">{{ cert.score }}</strong></div>
+                                    <div>Score: <strong>{{ cert.score }}</strong></div>
                                     {% endif %}
                                     {% if cert.details %}
                                     <div>{{ cert.details }}</div>

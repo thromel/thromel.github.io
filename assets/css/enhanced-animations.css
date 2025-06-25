@@ -1,8 +1,25 @@
 /* Enhanced Animation Styles to complement AOS and Animate.css */
 
+/* Prevent animation conflicts and FOUC */
+* {
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+}
+
+/* Prevent layout shifts during theme changes */
+html {
+    contain-intrinsic-size: 100vh;
+}
+
+body {
+    will-change: background-color, color;
+}
+
 /* Smooth transitions for all interactive elements */
 .card, .btn, .tech-tag, .position-card, .research-card, .skill-card {
     transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
 }
 
 /* Enhanced card hover effects */
@@ -70,11 +87,20 @@ html {
     scroll-behavior: smooth;
 }
 
+/* Prevent infinite animations on page load */
+.animate__infinite {
+    animation-iteration-count: 3 !important;
+}
+
 /* Reduced motion support */
 @media (prefers-reduced-motion: reduce) {
     * {
         transition-duration: 0.01ms !important;
         animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+    }
+    
+    .animate__infinite {
         animation-iteration-count: 1 !important;
     }
 }

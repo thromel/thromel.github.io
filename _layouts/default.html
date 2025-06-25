@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="dark-theme">
+<html lang="en">
 <!-- Template: Modern Dark Theme -->
 <head>
     <meta charset="utf-8">
@@ -43,6 +43,14 @@
     
     <!-- Syntax Highlighting CSS -->
     <link rel="stylesheet" href="{{ '/assets/css/syntax-highlighting.css' | relative_url }}">
+    
+    <!-- Theme initialization script to prevent FOUC -->
+    <script>
+        (function() {
+            const theme = localStorage.getItem('theme') || 'dark';
+            document.documentElement.classList.add(theme + '-theme');
+        })();
+    </script>
     
     <!-- MathJax for rendering mathematical equations -->
     <script type="text/javascript" id="MathJax-script" async
@@ -126,11 +134,13 @@
     <!-- Initialize AOS -->
     <script>
         AOS.init({
-            duration: 800,
+            duration: 600,
             easing: 'ease-in-out',
             once: true,
-            offset: 50,
-            disable: window.innerWidth < 768 ? 'mobile' : false
+            offset: 20,
+            delay: 100,
+            disable: window.innerWidth < 768 ? 'mobile' : false,
+            startEvent: 'DOMContentLoaded'
         });
     </script>
 </body>
