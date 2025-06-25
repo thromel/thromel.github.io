@@ -1,121 +1,165 @@
-/* Enhanced Animation Styles to complement AOS and Animate.css */
+/* Enhanced Animation Styles - Flicker-Free Design */
 
-/* Prevent animation conflicts and FOUC */
-* {
-    -webkit-transform: translateZ(0);
-    transform: translateZ(0);
-}
-
-/* Prevent layout shifts during theme changes */
+/* Base optimizations for smooth rendering */
 html {
-    contain-intrinsic-size: 100vh;
+    scroll-behavior: smooth;
+    contain: layout style;
 }
 
 body {
-    will-change: background-color, color;
+    transition: background-color 0.4s ease, color 0.4s ease;
+    will-change: auto;
 }
 
-/* Smooth transitions for all interactive elements */
-.card, .btn, .tech-tag, .position-card, .research-card, .skill-card {
-    transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+/* Optimized transitions - specific properties only */
+.card {
+    transition: transform 0.25s ease-out, box-shadow 0.25s ease-out, border-color 0.25s ease-out;
+    transform: translateZ(0);
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
 }
 
-/* Enhanced card hover effects */
+.btn {
+    transition: transform 0.2s ease-out, box-shadow 0.2s ease-out, background-color 0.2s ease-out;
+    transform: translateZ(0);
+}
+
+.tech-tag, .position-card, .research-card, .skill-card {
+    transition: transform 0.2s ease-out, background-color 0.2s ease-out;
+    transform: translateZ(0);
+}
+
+/* Smooth hover effects without flicker */
 .card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    transform: translateZ(0) translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
 }
 
-/* Tech tag hover effects */
+/* Tech tag hover - reduced scale for stability */
 .tech-tag:hover {
-    transform: translateY(-2px) scale(1.05);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+    transform: translateZ(0) translateY(-1px) scale(1.02);
+    background-color: var(--accent-primary);
+    color: var(--bg-primary);
 }
 
-/* Button hover enhancements */
+/* Button hover - minimal transform */
 .btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    transform: translateZ(0) translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-/* Icon animations on hover */
+/* Optimized icon animations */
 .icon-pdf:hover, .icon-certificate:hover, .icon-membership:hover {
-    transform: scale(1.1) rotate(5deg);
-    transition: transform 0.3s ease;
+    transform: translateZ(0) scale(1.05);
+    transition: transform 0.2s ease-out;
 }
 
-/* Company logo hover effects */
+/* Company logo - minimal scaling */
 .company-logo:hover {
-    transform: scale(1.1);
-    transition: transform 0.3s ease;
+    transform: translateZ(0) scale(1.03);
+    transition: transform 0.2s ease-out;
 }
 
-/* Enhanced position card hover */
+/* Position cards - stable hover without layout shift */
 .position-card:hover, .research-card:hover {
-    transform: translateX(5px);
-    background: rgba(66, 153, 225, 0.02);
-    border-radius: 8px;
-    padding: 10px;
-    margin: -10px;
+    transform: translateZ(0) translateX(3px);
+    background-color: var(--bg-tertiary);
 }
 
-/* Skill card hover effects */
+/* Skill card - background only hover */
 .skill-card:hover {
-    background: rgba(66, 153, 225, 0.03);
-    border-radius: 8px;
-    transform: scale(1.02);
+    background-color: var(--bg-tertiary);
+    transform: translateZ(0);
 }
 
-/* Link hover animations */
+/* Link hover - color only */
 .institution-link:hover, a:hover {
+    color: var(--accent-primary);
+    transition: color 0.2s ease-out;
     text-decoration: none;
-    color: #4299e1;
-    transition: color 0.3s ease;
 }
 
-/* Collapsible button enhancements */
+/* Collapsible button - stable hover */
 .collapsible-btn:hover {
-    background: rgba(66, 153, 225, 0.1);
-    border-radius: 5px;
-    transform: translateX(5px);
+    background-color: var(--bg-tertiary);
+    transform: translateZ(0);
 }
 
-/* Smooth scrolling */
-html {
-    scroll-behavior: smooth;
-}
-
-/* Prevent infinite animations on page load */
+/* Animation control */
 .animate__infinite {
-    animation-iteration-count: 3 !important;
+    animation-iteration-count: 2 !important;
 }
 
-/* Reduced motion support */
+/* Performance optimization classes */
+.gpu-accelerated {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+}
+
+.no-flicker {
+    will-change: auto;
+    contain: layout;
+}
+
+/* Accessibility - reduced motion */
 @media (prefers-reduced-motion: reduce) {
     * {
         transition-duration: 0.01ms !important;
         animation-duration: 0.01ms !important;
         animation-iteration-count: 1 !important;
+        transform: none !important;
     }
     
     .animate__infinite {
-        animation-iteration-count: 1 !important;
+        animation: none !important;
     }
 }
 
-/* Mobile optimizations */
+/* Mobile optimizations - minimal transforms */
 @media (max-width: 768px) {
     .card:hover {
-        transform: translateY(-2px);
+        transform: translateZ(0);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     }
     
     .btn:hover {
-        transform: translateY(-1px);
+        transform: translateZ(0);
     }
     
     .tech-tag:hover {
-        transform: translateY(-1px) scale(1.02);
+        transform: translateZ(0);
+        background-color: var(--accent-primary);
     }
+    
+    /* Disable complex animations on mobile */
+    .position-card:hover,
+    .research-card:hover,
+    .icon-pdf:hover,
+    .icon-certificate:hover,
+    .icon-membership:hover {
+        transform: translateZ(0);
+    }
+}
+
+/* Theme transition optimization */
+.theme-transition {
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Eliminate backdrop-filter flicker */
+.glass-effect {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    /* Removed backdrop-filter to prevent flicker */
+}
+
+/* Lazy loading animation */
+.fade-in {
+    opacity: 0;
+    transition: opacity 0.3s ease-out;
+}
+
+.fade-in.loaded {
+    opacity: 1;
 } 
