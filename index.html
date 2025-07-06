@@ -14,7 +14,7 @@ navbar_title: Home
 
 <div class="row mt-3">
     <div class="col">
-        <div class="card border-0 shadow-sm" data-aos="fade-up" data-aos-delay="100">
+        <div class="card card-interactive border-0 shadow-sm" data-aos="fade-up" data-aos-delay="100">
             <div class="card-body p-5">
                 <div class="row">
                     <div class="col"><h2 data-aos="fade-right" data-aos-delay="200">My Resume</h2></div>
@@ -29,50 +29,50 @@ navbar_title: Home
                 <hr />
 
                 <!-- Education -->
-                <div class="row mt-3" id="education">
+                <section class="row mt-3 content-section" id="education" aria-labelledby="education-heading">
                     <div class="col">
-                        <h4 class="mb-3" data-aos="fade-left" data-aos-delay="400">Education</h4>
+                        <h3 id="education-heading" class="mb-3" data-aos="fade-left" data-aos-delay="400">Education</h3>
                         <div class="timeline">
                             {% for edu in site.data.profile.education %}
-                            <div class="media mb-4 position-card" data-aos="fade-up" data-aos-delay="{{ forloop.index | times: 100 | plus: 500 }}">
+                            <article class="media mb-4 position-card card-interactive" data-aos="fade-up" data-aos-delay="{{ forloop.index | times: 100 | plus: 500 }}" role="article" aria-labelledby="edu-{{ forloop.index }}">
                                 <div class="media-body">
                                     <div class="d-flex mb-2">
-                                        <div class="position-title">
+                                        <h4 id="edu-{{ forloop.index }}" class="position-title">
                                             {% if edu.url %}
-                                            <a href="{{ edu.url }}" target="_blank" class="institution-link animate__animated animate__fadeIn">{{ edu.name }}</a>
+                                            <a href="{{ edu.url }}" target="_blank" class="institution-link animate__animated animate__fadeIn" aria-label="Visit {{ edu.name }} website">{{ edu.name }}</a>
                                             {% else %}
                                             {{ edu.name }}
                                             {% endif %}
-                                        </div>
+                                        </h4>
                                         <div class="ml-auto no-break position-date text-muted">{{ edu.date }}</div>
                                     </div>
                                     <div class="mb-1 education-position">{{ edu.position }}</div>
                                     <div class="position-description mb-2">{{ edu.description }}</div>
                                     {% if edu.coursework %}
                                     <div class="mt-2">
-                                        <button class="collapsible-btn animate__animated animate__fadeInUp" type="button" data-toggle="collapse" data-target="#coursework-{{ forloop.index }}" aria-expanded="false" aria-controls="coursework-{{ forloop.index }}">
-                                            <i class="fas fa-graduation-cap mr-1"></i> View Coursework <i class="fas fa-chevron-down ml-1 small"></i>
+                                        <button class="collapsible-btn animate__animated animate__fadeInUp" type="button" data-toggle="collapse" data-target="#coursework-{{ forloop.index }}" aria-expanded="false" aria-controls="coursework-{{ forloop.index }}" aria-label="Toggle coursework details for {{ edu.name }}">
+                                            <i class="fas fa-graduation-cap mr-1" aria-hidden="true"></i> View Coursework <i class="fas fa-chevron-down ml-1 small" aria-hidden="true"></i>
                                         </button>
-                                        <div class="collapse mt-3" id="coursework-{{ forloop.index }}">
+                                        <div class="collapse mt-3" id="coursework-{{ forloop.index }}" aria-hidden="true">
                                             <div class="education-coursework">{{ edu.coursework }}</div>
                                         </div>
                                     </div>
                                     {% endif %}
                                 </div>
-                            </div>
+                            </article>
                             {% endfor %}
                         </div>
                     </div>
-                </div>
+                </section>
                 <hr />
 
                 <!-- Work Experience -->
-                <div class="row mt-3" id="experience">
+                <section class="row mt-3 content-section" id="experience" aria-labelledby="experience-heading">
                     <div class="col">
-                        <h4 class="mb-3" data-aos="fade-right" data-aos-delay="200">Work Experience</h4>
+                        <h3 id="experience-heading" class="mb-3" data-aos="fade-right" data-aos-delay="200">Work Experience</h3>
                         <div class="timeline">
                             {% for position in site.data.profile.positions %}
-                            <div class="media mb-4 position-card" data-aos="slide-up" data-aos-delay="{{ forloop.index | times: 150 | plus: 300 }}">
+                            <article class="media mb-4 position-card card-interactive" data-aos="slide-up" data-aos-delay="{{ forloop.index | times: 150 | plus: 300 }}" role="article" aria-labelledby="exp-{{ forloop.index }}">
                                 {% if position.logo %}
                                 <div class="mr-3 company-logo-container" style="min-width: 60px; display: flex; align-items: center; justify-content: center;" data-aos="zoom-in" data-aos-delay="{{ forloop.index | times: 150 | plus: 400 }}">
                                     <img src="{{ position.logo }}" alt="{{ position.name | split: ',' | first }}" class="company-logo animate__animated animate__fadeIn" style="max-width: 60px; max-height: 60px;">
@@ -80,108 +80,134 @@ navbar_title: Home
                                 {% endif %}
                                 <div class="media-body">
                                     <div class="d-flex mb-2">
-                                        <div class="position-title">{{ position.name | split: "," | first }}</div>
+                                        <h4 id="exp-{{ forloop.index }}" class="position-title">{{ position.name | split: "," | first }}</h4>
                                         <div class="ml-auto no-break position-date text-muted">{{ position.date }}</div>
                                     </div>
                                     <div class="position-description mb-2">{{ position.description }}</div>
                                 </div>
-                            </div>
+                            </article>
                             {% endfor %}
                         </div>
                     </div>
+                </section>
+                <div class="text-center mt-3">
+                    <a href="{{ 'experience' | relative_url }}" class="btn btn-sm btn-outline-primary" data-aos="fade-up" data-aos-delay="100" aria-label="View all work experience">View All Experience <i class="fas fa-angle-double-right" aria-hidden="true"></i></a>
                 </div>
-                <h6 class="d-block text-center mt-3">
-                    <a href="{{ 'experience' | relative_url }}" class="btn btn-sm btn-outline-primary" data-aos="fade-up" data-aos-delay="100">View All Experience <i class="fas fa-angle-double-right"></i></a>
-                </h6>
                 <hr />
 
                 <!-- Research -->
-                <div class="row mt-3" id="research">
+                <section class="row mt-3 content-section" id="research" aria-labelledby="research-heading">
                     <div class="col">
-                        <h4 class="mb-3" data-aos="fade-left" data-aos-delay="200">Research Projects</h4>
+                        <h3 id="research-heading" class="mb-3" data-aos="fade-left" data-aos-delay="200">Research Projects</h3>
                         {% for item in site.data.profile.research limit:2 %}
-                        <div class="research-card mb-4" data-aos="flip-left" data-aos-delay="{{ forloop.index | times: 200 | plus: 300 }}">
-                            <div class="research-title">
+                        <div class="project-card-enhanced mb-4" data-aos="flip-left" data-aos-delay="{{ forloop.index | times: 200 | plus: 300 }}">
+                            <div class="project-header">
+                                <div class="project-title">
                                 {% assign showcase_item = site.showcase | where: "title", item.title | first %}
-                                <h5 class="mb-2">
+                                <h5 class="mb-2 project-title">
                                     {% if showcase_item %}
                                     <a href="{{ showcase_item.url | relative_url }}" class="animate__animated animate__fadeInLeft">{{ item.title }}</a>
                                     {% else %}
                                     {{ item.title }}
                                     {% endif %}
                                 </h5>
+                                </div>
+                                <div class="project-meta">
+                                    <div class="meta-item">
+                                        <i class="fas fa-microscope" aria-hidden="true"></i>
+                                        <span><b>Research Project</b></span>
+                                    </div>
+                                    <div class="meta-item ml-auto">
+                                        <i class="fas fa-calendar" aria-hidden="true"></i>
+                                        <span>{{ item.date }}</span>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="d-flex small mb-2">
-                                <div class="research-type"><b>Research Project</b></div>
-                                <div class="ml-auto text-muted">{{ item.date }}</div>
-                            </div>
-                            <div class="research-description mb-2">{{ item.description }}</div>
+                            <div class="project-body">
+                            <div class="project-description mb-2">{{ item.description }}</div>
                             {% if item.collaborator %}
-                            <div class="research-collaborator mb-3 text-info font-weight-bold">Collaboration: {{ item.collaborator }}</div>
+                            <div class="project-collaborator mb-3 text-info font-weight-bold">
+                                <i class="fas fa-users mr-2" aria-hidden="true"></i>Collaboration: {{ item.collaborator }}
+                            </div>
                             {% endif %}
                             {% if showcase_item %}
-                            <a href="{{ showcase_item.url | relative_url }}" class="btn btn-sm btn-outline-primary animate__animated animate__bounceIn">View Details</a>
+                            <div class="project-actions">
+                                <a href="{{ showcase_item.url | relative_url }}" class="project-action-btn primary animate__animated animate__bounceIn">
+                                    <i class="fas fa-eye" aria-hidden="true"></i>View Details
+                                </a>
+                            </div>
                             {% endif %}
+                            </div>
                         </div>
                         {% endfor %}
                     </div>
+                </section>
+                <div class="text-center mt-3">
+                    <a href="{{ 'research' | relative_url }}" class="btn btn-sm btn-outline-primary" data-aos="fade-up" data-aos-delay="100" aria-label="View all research projects">View All Research <i class="fas fa-angle-double-right" aria-hidden="true"></i></a>
                 </div>
-                <h6 class="d-block text-center mt-3">
-                    <a href="{{ 'research' | relative_url }}" class="btn btn-sm btn-outline-primary" data-aos="fade-up" data-aos-delay="100">View All Research <i class="fas fa-angle-double-right"></i></a>
-                </h6>
                 <hr />
 
                 <!-- Projects -->
-                <div class="row mt-3" id="projects">
+                <section class="row mt-3 content-section" id="projects" aria-labelledby="projects-heading">
                     <div class="col">
-                        <h4 class="mb-3" data-aos="fade-right" data-aos-delay="200">Notable Projects</h4>
+                        <h3 id="projects-heading" class="mb-3" data-aos="fade-right" data-aos-delay="200">Notable Projects</h3>
                         {% for project in site.data.profile.projects limit:2 %}
-                        <div class="research-card mb-4" data-aos="fade-up-right" data-aos-delay="{{ forloop.index | times: 250 | plus: 300 }}">
-                            <div class="research-title">
-                                <h5 class="mb-2">
+                        <div class="project-card-enhanced mb-4" data-aos="fade-up-right" data-aos-delay="{{ forloop.index | times: 250 | plus: 300 }}">
+                            <div class="project-header">
+                                <div class="project-title">
+                                <h5 class="mb-2 project-title">
                                     {% if project.link %}
                                     <a href="{{ project.link }}" target="_blank" class="animate__animated animate__fadeInRight">{{ project.title }}</a>
                                     {% else %}
                                     {{ project.title }}
                                     {% endif %}
                                 </h5>
+                                </div>
+                                <div class="project-meta">
+                                    <div class="meta-item">
+                                        <i class="fas fa-code" aria-hidden="true"></i>
+                                        <span><b>Project</b></span>
+                                    </div>
+                                    <div class="meta-item ml-auto">
+                                        <i class="fas fa-calendar" aria-hidden="true"></i>
+                                        <span>{{ project.date }}</span>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="d-flex small mb-2">
-                                <div class="project-type"><b>Project</b></div>
-                                <div class="ml-auto text-muted">{{ project.date }}</div>
-                            </div>
-                            <div class="research-description mb-2">{{ project.description }}</div>
+                            <div class="project-body">
+                            <div class="project-description mb-2">{{ project.description }}</div>
                             {% if project.team %}
-                            <div class="research-collaborator mb-3 text-info">
-                                <strong>Team:</strong> {{ project.team }}
+                            <div class="project-collaborator mb-3 text-info">
+                                <i class="fas fa-users mr-2" aria-hidden="true"></i><strong>Team:</strong> {{ project.team }}
                             </div>
                             {% endif %}
-                            <div class="mb-2" data-aos="fade-up" data-aos-delay="{{ forloop.index | times: 100 | plus: 500 }}">
+                            <div class="project-tags mb-2" data-aos="fade-up" data-aos-delay="{{ forloop.index | times: 100 | plus: 500 }}">
                                 {% for tech in project.technologies limit:5 %}
-                                <span class="tech-tag animate__animated animate__fadeInUp" style="animation-delay: {{ forloop.index | times: 0.1 }}s;">{{ tech }}</span>
+                                <span class="project-tag animate__animated animate__fadeInUp" style="animation-delay: {{ forloop.index | times: 0.1 }}s;">{{ tech }}</span>
                                 {% endfor %}
                                 {% if project.technologies.size > 5 %}
-                                <span class="tech-tag animate__animated animate__fadeInUp" style="animation-delay: 0.6s;">+{{ project.technologies.size | minus: 5 }} more</span>
+                                <span class="project-tag animate__animated animate__fadeInUp" style="animation-delay: 0.6s;">+{{ project.technologies.size | minus: 5 }} more</span>
                                 {% endif %}
+                            </div>
                             </div>
                         </div>
                         {% endfor %}
                     </div>
+                </section>
+                <div class="text-center mt-3">
+                    <a href="{{ 'projects' | relative_url }}" class="btn btn-sm btn-outline-primary" data-aos="fade-up" data-aos-delay="100" aria-label="View all projects">View All Projects <i class="fas fa-angle-double-right" aria-hidden="true"></i></a>
                 </div>
-                <h6 class="d-block text-center mt-3">
-                    <a href="{{ 'projects' | relative_url }}" class="btn btn-sm btn-outline-primary" data-aos="fade-up" data-aos-delay="100">View All Projects <i class="fas fa-angle-double-right"></i></a>
-                </h6>
                 <hr />
 
                 <!-- Technical Skills -->
-                <div class="row mt-3" id="skills">
+                <section class="row mt-3 content-section" id="skills" aria-labelledby="skills-heading">
                     <div class="col">
-                        <h4 class="mb-3" data-aos="fade-left" data-aos-delay="200">Technical Skills</h4>
+                        <h3 id="skills-heading" class="mb-3" data-aos="fade-left" data-aos-delay="200">Technical Skills</h3>
                         
                         <!-- Technical Skills Categories -->
                         <div class="skills-container">
                             {% for category in site.data.profile.technical_skills %}
-                            <div class="skill-card mb-4" data-aos="zoom-in" data-aos-delay="{{ forloop.index | times: 150 | plus: 300 }}">
+                            <div class="card card-interactive skill-card mb-4" data-aos="zoom-in" data-aos-delay="{{ forloop.index | times: 150 | plus: 300 }}">
                                 <div class="d-flex align-items-center mb-2">
                                     <h5 class="mb-0 mr-2 animate__animated animate__fadeInLeft">{{ category.type }}</h5>
                                 </div>
@@ -197,7 +223,7 @@ navbar_title: Home
                         <!-- Detailed Skills -->
                         <div class="detailed-skills-container">
                             <!-- .NET Skills -->
-                            <div class="skill-card mb-4" data-aos="fade-right" data-aos-delay="400">
+                            <div class="card card-interactive skill-card mb-4" data-aos="fade-right" data-aos-delay="400">
                                 <div class="d-flex align-items-center mb-2">
                                     <h5 class="mb-0 mr-2">{{ site.data.profile.skills.dotnet.name }}</h5>
                                     <span class="skill-level animate__animated animate__bounceIn" style="animation-delay: 0.5s;">{{ site.data.profile.skills.dotnet.level }}</span>
@@ -211,7 +237,7 @@ navbar_title: Home
                             </div>
                             
                             <!-- Python Skills -->
-                            <div class="skill-card mb-4" data-aos="fade-left" data-aos-delay="500">
+                            <div class="card card-interactive skill-card mb-4" data-aos="fade-left" data-aos-delay="500">
                                 <div class="d-flex align-items-center mb-2">
                                     <h5 class="mb-0 mr-2">{{ site.data.profile.skills.python.name }}</h5>
                                     <span class="skill-level animate__animated animate__bounceIn" style="animation-delay: 0.7s;">{{ site.data.profile.skills.python.level }}</span>
@@ -225,14 +251,14 @@ navbar_title: Home
                             </div>
                         </div>
                     </div>
-                </div>
+                </section>
                 <hr />
 
                 <!-- Soft Skills -->
-                <div class="row mt-3">
+                <section class="row mt-3 content-section" aria-labelledby="soft-skills-heading">
                     <div class="col">
-                        <h4 class="mb-3" data-aos="fade-right" data-aos-delay="200">Soft Skills</h4>
-                        <div class="card" data-aos="slide-up" data-aos-delay="300">
+                        <h3 id="soft-skills-heading" class="mb-3" data-aos="fade-right" data-aos-delay="200">Soft Skills</h3>
+                        <div class="card card-interactive" data-aos="slide-up" data-aos-delay="300">
                             <div class="card-body">
                                 <div class="row">
                                     {% for skill in site.data.profile.soft_skills %}
@@ -244,13 +270,13 @@ navbar_title: Home
                             </div>
                         </div>
                     </div>
-                </div>
+                </section>
                 <hr />
 
                 <!-- Tests and Certifications -->
-                <div class="row mt-3">
+                <section class="row mt-3 content-section" aria-labelledby="certifications-heading">
                     <div class="col">
-                        <h4 data-aos="fade-left" data-aos-delay="200"><i class="fa-solid fa-certificate mt-1 mr-2 icon-certificate animate__animated animate__rotateIn"></i> Tests & Certifications</h4>
+                        <h3 id="certifications-heading" data-aos="fade-left" data-aos-delay="200"><i class="fa-solid fa-certificate mt-1 mr-2 icon-certificate animate__animated animate__rotateIn" aria-hidden="true"></i> Tests & Certifications</h3>
                         <ul class="timeline">
                             {% for cert in site.data.profile.tests_and_certifications %}
                             <li class="media mb-2" data-aos="fade-right" data-aos-delay="{{ forloop.index | times: 150 | plus: 300 }}">
@@ -276,13 +302,13 @@ navbar_title: Home
                             {% endfor %}
                         </ul>          
                     </div>
-                </div>
+                </section>
                 <hr />
 
                 <!-- Professional Memberships -->
-                <div class="row mt-3">
+                <section class="row mt-3 content-section" aria-labelledby="memberships-heading">
                     <div class="col">
-                        <h4 data-aos="fade-right" data-aos-delay="200"><i class="fa-solid fa-id-card mt-1 mr-2 icon-membership animate__animated animate__flip"></i> Professional Memberships</h4>
+                        <h3 id="memberships-heading" data-aos="fade-right" data-aos-delay="200"><i class="fa-solid fa-id-card mt-1 mr-2 icon-membership animate__animated animate__flip" aria-hidden="true"></i> Professional Memberships</h3>
                         <ul class="timeline">
                             {% for member in site.data.profile.professional_memberships %}
                             <li class="media mb-2" data-aos="fade-left" data-aos-delay="{{ forloop.index | times: 150 | plus: 300 }}">
@@ -299,13 +325,13 @@ navbar_title: Home
                             {% endfor %}
                         </ul>          
                     </div>
-                </div>
+                </section>
                 <hr />
 
                 <!-- Hobbies -->
-                <div class="row mt-3">
+                <section class="row mt-3 content-section" aria-labelledby="hobbies-heading">
                     <div class="col">
-                        <h4 data-aos="zoom-in" data-aos-delay="200"><img src="/assets/images/icons/idea.png" alt="Hobbies" class="inline-badge animate__animated animate__rotateIn" style="width: 30px; height: 30px;"> Hobbies & Interests</h4>
+                        <h3 id="hobbies-heading" data-aos="zoom-in" data-aos-delay="200"><img src="/assets/images/icons/idea.png" alt="" class="inline-badge animate__animated animate__rotateIn" style="width: 30px; height: 30px;" aria-hidden="true"> Hobbies & Interests</h3>
                         {% for hobby in site.data.profile.hobbies %}
                         <div class="mb-4" data-aos="fade-up" data-aos-delay="{{ forloop.index | times: 200 | plus: 300 }}">
                             <h5 class="mb-2 animate__animated animate__fadeInLeft">{{ hobby.type }}</h5>
@@ -317,7 +343,7 @@ navbar_title: Home
                         </div>
                         {% endfor %}
                     </div>
-                </div>
+                </section>
             </div>
         </div>
     </div>

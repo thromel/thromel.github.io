@@ -10,6 +10,41 @@ container_class: container-xl
         <section id="showcase-items" class="pt-4">
             <h2 style="margin-bottom: 8px;"><img src="/assets/images/icons/code.png" alt="Projects" class="inline-badge" style="width: 35px; height: 35px;"> Projects</h2>
             <p class="mb-4">Detailed information about my most significant technical projects, including diagrams, architectures, and in-depth explanations.</p>
+            
+            <!-- Enhanced Project Filtering -->
+            <div class="row mb-4">
+                <div class="col-md-8">
+                    <div class="project-search-container">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-search"></i></span>
+                            </div>
+                            <input type="text" id="project-search" class="form-control" placeholder="Search projects by title, description, or technology..." aria-label="Search projects">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="project-sort-container">
+                        <select id="project-sort" class="form-control" aria-label="Sort projects">
+                            <option value="date-desc">Latest First</option>
+                            <option value="date-asc">Oldest First</option>
+                            <option value="title-asc">Title A-Z</option>
+                            <option value="title-desc">Title Z-A</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Filter Status Display -->
+            <div id="filter-status" class="mb-3" style="display: none;">
+                <div class="alert alert-info d-flex align-items-center">
+                    <i class="fas fa-filter mr-2"></i>
+                    <span id="filter-text"></span>
+                    <button type="button" class="btn btn-sm btn-outline-secondary ml-auto" id="clear-filters">
+                        <i class="fas fa-times mr-1"></i>Clear Filters
+                    </button>
+                </div>
+            </div>
         </section>
 
         <!-- Projects Section -->
@@ -86,8 +121,13 @@ container_class: container-xl
     <div class="col-12 col-lg-3">
         <div class="sticky-top" style="top: 120px">
             <div class="shadow-sm rounded-sm p-3" style="background-color: var(--bg-secondary);">
-                <h5 class="border-bottom pb-2">Technologies</h5>
-                <div>
+                <h5 class="border-bottom pb-2">Filter by Technology</h5>
+                <div class="mb-3">
+                    <button id="clear-tech-filters" class="btn btn-sm btn-outline-secondary mb-2" style="display: none;">
+                        <i class="fas fa-times mr-1"></i>Clear Technology Filters
+                    </button>
+                </div>
+                <div id="technology-filters">
                     {% assign all_projects = site.showcase | where: "group", "Projects" | where: "show", true %}
                     {% assign all_techs = "" | split: "" %}
                     
@@ -100,7 +140,9 @@ container_class: container-xl
                     {% assign unique_techs = all_techs | uniq %}
                     
                     {% for tech in unique_techs %}
-                    <span style="display: inline-block; margin: 2px; padding: 5px 10px; border: 1px solid var(--border-color); border-radius: 5px; background-color: var(--bg-tertiary); font-size: 12px; color: var(--text-primary);">{{ tech }}</span>
+                    <button class="tech-filter-btn" data-tech="{{ tech }}" style="display: inline-block; margin: 2px; padding: 5px 10px; border: 1px solid var(--border-color); border-radius: 5px; background-color: var(--bg-tertiary); font-size: 12px; color: var(--text-primary); cursor: pointer; transition: all 0.2s ease;">
+                        {{ tech }}
+                    </button>
                     {% endfor %}
                 </div>
             </div>
@@ -120,6 +162,95 @@ container_class: container-xl
 }
 .scroll-to-top:hover {
     opacity: 1;
+}
+
+/* Enhanced Project Filtering Styles */
+.project-search-container .input-group-text {
+    background-color: var(--bg-tertiary);
+    border-color: var(--border-color);
+    color: var(--text-secondary);
+}
+
+.project-search-container .form-control {
+    border-color: var(--border-color);
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+}
+
+.project-search-container .form-control:focus {
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 0 0.2rem rgba(var(--accent-primary-rgb), 0.25);
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+}
+
+.project-sort-container .form-control {
+    border-color: var(--border-color);
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+}
+
+.project-sort-container .form-control:focus {
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 0 0.2rem rgba(var(--accent-primary-rgb), 0.25);
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+}
+
+.tech-filter-btn:hover {
+    background-color: var(--accent-secondary) !important;
+    color: white !important;
+    border-color: var(--accent-secondary) !important;
+    transform: translateY(-1px);
+}
+
+.tech-tag.highlighted {
+    background-color: var(--accent-primary);
+    color: white;
+    font-weight: bold;
+}
+
+.project-action-btn:hover {
+    background-color: var(--accent-primary) !important;
+    color: white !important;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(var(--accent-primary-rgb), 0.3);
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.project-item {
+    transition: all 0.3s ease;
+}
+
+.project-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.alert-info {
+    background-color: var(--bg-tertiary);
+    border-color: var(--accent-primary);
+    color: var(--text-primary);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .project-search-container,
+    .project-sort-container {
+        margin-bottom: 1rem;
+    }
+    
+    .tech-filter-btn {
+        font-size: 10px;
+        padding: 3px 6px;
+        margin: 1px;
+    }
 }
 </style>
 
@@ -142,34 +273,234 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Projects pagination
-    const projectsData = [
+    // Enhanced Project Filtering System
+    const originalProjectsData = [
         {% assign projects = site.showcase | where: "group", "Projects" | where: "show", true | sort: "date" | reverse %}
         {% for item in projects %}
         {
             title: {{ item.title | jsonify }},
             url: {{ item.url | jsonify }},
             date: {{ item.date | date: "%B %d, %Y" | jsonify }},
+            rawDate: {{ item.date | jsonify }},
             excerpt: {% if item.excerpt %}{{ item.excerpt | jsonify }}{% else %}{{ item.content | strip_html | truncatewords: 50 | jsonify }}{% endif %},
             technologies: {{ item.technologies | jsonify }}
         }{% unless forloop.last %},{% endunless %}
         {% endfor %}
     ];
     
+    let filteredProjectsData = [...originalProjectsData];
+    let activeTechFilters = new Set();
+    let currentSearchTerm = '';
+    let currentSort = 'date-desc';
     const itemsPerPage = 5;
     let currentPage = 1;
+    
+    // Initialize filter functionality
+    initProjectFilters();
+    
+    function initProjectFilters() {
+        // Search functionality
+        const searchInput = document.getElementById('project-search');
+        if (searchInput) {
+            searchInput.addEventListener('input', debounce(function() {
+                currentSearchTerm = this.value.toLowerCase().trim();
+                applyFilters();
+            }, 300));
+        }
+        
+        // Sort functionality
+        const sortSelect = document.getElementById('project-sort');
+        if (sortSelect) {
+            sortSelect.addEventListener('change', function() {
+                currentSort = this.value;
+                applyFilters();
+            });
+        }
+        
+        // Technology filter buttons
+        document.querySelectorAll('.tech-filter-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const tech = this.dataset.tech;
+                toggleTechFilter(tech);
+                updateTechFilterUI();
+                applyFilters();
+            });
+        });
+        
+        // Clear filters functionality
+        const clearFiltersBtn = document.getElementById('clear-filters');
+        if (clearFiltersBtn) {
+            clearFiltersBtn.addEventListener('click', function() {
+                clearAllFilters();
+            });
+        }
+        
+        const clearTechFiltersBtn = document.getElementById('clear-tech-filters');
+        if (clearTechFiltersBtn) {
+            clearTechFiltersBtn.addEventListener('click', function() {
+                clearTechFilters();
+            });
+        }
+        
+        // Initial render
+        applyFilters();
+    }
+    
+    function toggleTechFilter(tech) {
+        if (activeTechFilters.has(tech)) {
+            activeTechFilters.delete(tech);
+        } else {
+            activeTechFilters.add(tech);
+        }
+    }
+    
+    function updateTechFilterUI() {
+        document.querySelectorAll('.tech-filter-btn').forEach(btn => {
+            const tech = btn.dataset.tech;
+            if (activeTechFilters.has(tech)) {
+                btn.style.backgroundColor = 'var(--accent-primary)';
+                btn.style.color = 'white';
+                btn.style.borderColor = 'var(--accent-primary)';
+            } else {
+                btn.style.backgroundColor = 'var(--bg-tertiary)';
+                btn.style.color = 'var(--text-primary)';
+                btn.style.borderColor = 'var(--border-color)';
+            }
+        });
+        
+        const clearTechBtn = document.getElementById('clear-tech-filters');
+        if (clearTechBtn) {
+            clearTechBtn.style.display = activeTechFilters.size > 0 ? 'block' : 'none';
+        }
+    }
+    
+    function applyFilters() {
+        // Start with original data
+        filteredProjectsData = [...originalProjectsData];
+        
+        // Apply search filter
+        if (currentSearchTerm) {
+            filteredProjectsData = filteredProjectsData.filter(project => {
+                const searchText = `${project.title} ${project.excerpt} ${project.technologies.join(' ')}`.toLowerCase();
+                return searchText.includes(currentSearchTerm);
+            });
+        }
+        
+        // Apply technology filters
+        if (activeTechFilters.size > 0) {
+            filteredProjectsData = filteredProjectsData.filter(project => {
+                return Array.from(activeTechFilters).every(tech => 
+                    project.technologies.includes(tech)
+                );
+            });
+        }
+        
+        // Apply sorting
+        filteredProjectsData.sort((a, b) => {
+            switch (currentSort) {
+                case 'date-asc':
+                    return new Date(a.rawDate) - new Date(b.rawDate);
+                case 'date-desc':
+                    return new Date(b.rawDate) - new Date(a.rawDate);
+                case 'title-asc':
+                    return a.title.localeCompare(b.title);
+                case 'title-desc':
+                    return b.title.localeCompare(a.title);
+                default:
+                    return new Date(b.rawDate) - new Date(a.rawDate);
+            }
+        });
+        
+        // Update filter status
+        updateFilterStatus();
+        
+        // Reset to first page
+        currentPage = 1;
+        
+        // Render results
+        renderProjects(currentPage);
+    }
+    
+    function updateFilterStatus() {
+        const filterStatus = document.getElementById('filter-status');
+        const filterText = document.getElementById('filter-text');
+        
+        if (!filterStatus || !filterText) return;
+        
+        const hasFilters = currentSearchTerm || activeTechFilters.size > 0;
+        
+        if (hasFilters) {
+            let statusParts = [];
+            
+            if (currentSearchTerm) {
+                statusParts.push(`Search: "${currentSearchTerm}"`);
+            }
+            
+            if (activeTechFilters.size > 0) {
+                statusParts.push(`Technologies: ${Array.from(activeTechFilters).join(', ')}`);
+            }
+            
+            statusParts.push(`Found ${filteredProjectsData.length} project(s)`);
+            
+            filterText.textContent = statusParts.join(' | ');
+            filterStatus.style.display = 'block';
+        } else {
+            filterStatus.style.display = 'none';
+        }
+    }
+    
+    function clearAllFilters() {
+        currentSearchTerm = '';
+        activeTechFilters.clear();
+        currentSort = 'date-desc';
+        
+        const searchInput = document.getElementById('project-search');
+        if (searchInput) searchInput.value = '';
+        
+        const sortSelect = document.getElementById('project-sort');
+        if (sortSelect) sortSelect.value = 'date-desc';
+        
+        updateTechFilterUI();
+        applyFilters();
+    }
+    
+    function clearTechFilters() {
+        activeTechFilters.clear();
+        updateTechFilterUI();
+        applyFilters();
+    }
     
     function renderProjects(page) {
         const startIndex = (page - 1) * itemsPerPage;
         const endIndex = startIndex + itemsPerPage;
-        const projectsToShow = projectsData.slice(startIndex, endIndex);
+        const projectsToShow = filteredProjectsData.slice(startIndex, endIndex);
         
         const container = document.querySelector('.shadow-sm.rounded-sm.mb-5');
+        
+        if (projectsToShow.length === 0) {
+            container.innerHTML = `
+                <div class="text-center py-5">
+                    <i class="fas fa-search fa-3x text-muted mb-3"></i>
+                    <h4 class="text-muted">No projects found</h4>
+                    <p class="text-muted">Try adjusting your search terms or filters.</p>
+                    <button id="reset-filters" class="btn btn-primary">Reset Filters</button>
+                </div>
+            `;
+            
+            const resetBtn = container.querySelector('#reset-filters');
+            if (resetBtn) {
+                resetBtn.addEventListener('click', clearAllFilters);
+            }
+            
+            renderPagination(page);
+            return;
+        }
+        
         container.innerHTML = '';
         
-        projectsToShow.forEach(project => {
+        projectsToShow.forEach((project, index) => {
             const projectHtml = `
-                <div class="d-flex mb-3 mr-2 p-3 border-bottom border-gray">
+                <div class="project-item d-flex mb-3 mr-2 p-3 border-bottom border-gray" style="opacity: 0; transform: translateY(20px); animation: fadeInUp 0.5s ease forwards; animation-delay: ${index * 0.1}s;">
                     <div class="col p-3 ml-md-2">
                         <h4 class="mt-0 mb-2 font-weight-bold">
                             <a href="${project.url}" style="color: var(--text-primary);">${project.title}</a>
@@ -187,14 +518,16 @@ document.addEventListener('DOMContentLoaded', function() {
                             </div>
                         </div>
                         <p class="mt-3 mb-2 small" style="text-align: justify; font-size: 14px;">
-                            ${project.excerpt}
+                            ${highlightSearchTerms(project.excerpt, currentSearchTerm)}
                         </p>
                         <div class="small">
-                            <a href="${project.url}" class="btn btn-sm" style="color: var(--accent-primary); border: 1px solid var(--accent-primary); background-color: transparent;">View Details</a>
+                            <a href="${project.url}" class="btn btn-sm project-action-btn" style="color: var(--accent-primary); border: 1px solid var(--accent-primary); background-color: transparent;">
+                                <i class="fas fa-eye mr-1"></i>View Details
+                            </a>
                             ${project.technologies && project.technologies.length > 0 ? `
                             <div class="float-right">
                                 <img src="/assets/images/icons/tag.png" alt="tag" class="inline-badge" style="width: 18px; height: 18px; margin-top: 2px;">
-                                ${project.technologies.map(tech => `<span class="tech-tag">${tech}</span>`).join('')}
+                                ${project.technologies.map(tech => `<span class="tech-tag ${activeTechFilters.has(tech) ? 'highlighted' : ''}">${tech}</span>`).join('')}
                             </div>
                             ` : ''}
                         </div>
@@ -207,8 +540,15 @@ document.addEventListener('DOMContentLoaded', function() {
         renderPagination(page);
     }
     
+    function highlightSearchTerms(text, searchTerm) {
+        if (!searchTerm) return text;
+        
+        const regex = new RegExp(`(${searchTerm.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+        return text.replace(regex, '<mark style="background-color: var(--accent-primary); color: white; padding: 1px 2px; border-radius: 2px;">$1</mark>');
+    }
+    
     function renderPagination(page) {
-        const totalPages = Math.ceil(projectsData.length / itemsPerPage);
+        const totalPages = Math.ceil(filteredProjectsData.length / itemsPerPage);
         const paginationContainer = document.querySelector('#projects-pagination .pagination');
         
         if (totalPages <= 1) {
@@ -255,13 +595,26 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (targetPage >= 1 && targetPage <= totalPages && targetPage !== currentPage) {
                     currentPage = targetPage;
                     renderProjects(currentPage);
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                    document.querySelector('#showcase-items').scrollIntoView({ 
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
                 }
             });
         });
     }
     
-    // Initial render
-    renderProjects(currentPage);
+    // Utility function for debouncing
+    function debounce(func, wait) {
+        let timeout;
+        return function executedFunction(...args) {
+            const later = () => {
+                clearTimeout(timeout);
+                func(...args);
+            };
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+        };
+    }
 });
 </script>
