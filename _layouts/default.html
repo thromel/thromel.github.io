@@ -14,9 +14,29 @@
     <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon/favicon-16x16.png">
-    <link rel="manifest" href="/assets/images/favicon/site.webmanifest">
+    <link rel="manifest" href="/manifest.json">
     <link rel="shortcut icon" href="/assets/images/favicon/favicon.ico">
-    <meta name="theme-color" content="#0d1117">
+    
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#0284c7">
+    <meta name="background-color" content="#0f172a">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Romel Portfolio">
+    <meta name="application-name" content="Romel Portfolio">
+    <meta name="msapplication-TileColor" content="#0284c7">
+    <meta name="mobile-web-app-capable" content="yes">
+    
+    <!-- iOS Splash Screens -->
+    <link rel="apple-touch-startup-image" href="/assets/images/splash/apple-splash-2048-2732.jpg" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image" href="/assets/images/splash/apple-splash-1668-2388.jpg" media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image" href="/assets/images/splash/apple-splash-1536-2048.jpg" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image" href="/assets/images/splash/apple-splash-1290-2796.jpg" media="(device-width: 430px) and (device-height: 932px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image" href="/assets/images/splash/apple-splash-1179-2556.jpg" media="(device-width: 393px) and (device-height: 852px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image" href="/assets/images/splash/apple-splash-1125-2436.jpg" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image" href="/assets/images/splash/apple-splash-1242-2688.jpg" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image" href="/assets/images/splash/apple-splash-750-1334.jpg" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image" href="/assets/images/splash/apple-splash-828-1792.jpg" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
 
     <!-- Stylesheets -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css" integrity="sha512-P5MgMn1jBN01asBgU0z60Qk4QxiXo86+wlFahKrsQf37c9cro517WzVSPPV1tDKzhku2iJ2FVgL67wG03SGnNA==" crossorigin="anonymous" />
@@ -39,6 +59,7 @@
     <link rel="stylesheet" href="{{ '/assets/css/developer-theme.css' | relative_url }}">
     <link rel="stylesheet" href="{{ '/assets/css/custom.css' | relative_url }}">
     <link rel="stylesheet" href="{{ '/assets/css/enhanced-animations.css' | relative_url }}">
+    <link rel="stylesheet" href="{{ '/assets/css/advanced-interactions.css' | relative_url }}">
     <link rel="stylesheet" href="{{ '/assets/css/search.css' | relative_url }}">
     
     <!-- Syntax Highlighting CSS -->
@@ -113,6 +134,8 @@
     <script src="{{ '/assets/js/tag-fix.js' | relative_url }}"></script>
     <script src="{{ '/assets/js/theme-toggle.js' | relative_url }}"></script>
     <script src="{{ '/assets/js/search.js' | relative_url }}"></script>
+    <script src="{{ '/assets/js/advanced-interactions.js' | relative_url }}"></script>
+    <script src="{{ '/assets/js/app-navigation.js' | relative_url }}"></script>
     
     <!-- Code Highlighting Enhancement -->
     <script src="{{ '/assets/js/code-highlight.js' | relative_url }}"></script>
@@ -151,6 +174,173 @@
             disable: window.innerWidth < 768 ? 'mobile' : false,
             startEvent: 'DOMContentLoaded'
         });
+    </script>
+    
+    <!-- PWA Service Worker Registration -->
+    <script>
+        // Register Service Worker for PWA functionality
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('/sw.js', {
+                    scope: '/'
+                }).then(function(registration) {
+                    console.log('🚀 ServiceWorker registration successful:', registration.scope);
+                    
+                    // Check for updates
+                    registration.addEventListener('updatefound', function() {
+                        const newWorker = registration.installing;
+                        console.log('🔄 New service worker found, installing...');
+                        
+                        newWorker.addEventListener('statechange', function() {
+                            if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                                console.log('✨ New content available, please refresh!');
+                                showUpdateNotification();
+                            }
+                        });
+                    });
+                    
+                }).catch(function(error) {
+                    console.warn('❌ ServiceWorker registration failed:', error);
+                });
+                
+                // Listen for messages from service worker
+                navigator.serviceWorker.addEventListener('message', function(event) {
+                    if (event.data && event.data.type === 'CACHE_UPDATED') {
+                        console.log('📦 Cache updated successfully');
+                    }
+                });
+            });
+        }
+        
+        // Show update notification to user
+        function showUpdateNotification() {
+            // Create a subtle notification
+            const notification = document.createElement('div');
+            notification.className = 'alert alert-info position-fixed';
+            notification.style.cssText = `
+                top: 20px; 
+                right: 20px; 
+                z-index: 9999; 
+                max-width: 300px;
+                box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+                border-radius: 8px;
+                animation: slideInRight 0.3s ease-out;
+            `;
+            notification.innerHTML = `
+                <div class="d-flex align-items-center">
+                    <i class="fas fa-sync-alt mr-2"></i>
+                    <div class="flex-grow-1">
+                        <strong>Update Available</strong><br>
+                        <small>New content is ready!</small>
+                    </div>
+                    <button class="btn btn-sm btn-primary ml-2" onclick="window.location.reload()">
+                        <i class="fas fa-redo mr-1"></i>Refresh
+                    </button>
+                    <button class="btn btn-sm btn-outline-secondary ml-1" onclick="this.parentElement.parentElement.remove()">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Auto-remove after 10 seconds
+            setTimeout(() => {
+                if (notification.parentElement) {
+                    notification.remove();
+                }
+            }, 10000);
+        }
+        
+        // Add install prompt for PWA
+        let deferredPrompt;
+        window.addEventListener('beforeinstallprompt', function(e) {
+            console.log('💾 PWA install prompt available');
+            e.preventDefault();
+            deferredPrompt = e;
+            showInstallBanner();
+        });
+        
+        function showInstallBanner() {
+            // Only show if not already installed
+            if (!window.matchMedia('(display-mode: standalone)').matches) {
+                const banner = document.createElement('div');
+                banner.className = 'alert alert-success position-fixed d-flex align-items-center';
+                banner.style.cssText = `
+                    bottom: 20px; 
+                    left: 20px; 
+                    right: 20px; 
+                    z-index: 9999;
+                    margin: 0;
+                    border-radius: 8px;
+                    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+                    animation: slideInUp 0.3s ease-out;
+                `;
+                banner.innerHTML = `
+                    <div class="flex-grow-1">
+                        <i class="fas fa-mobile-alt mr-2"></i>
+                        <strong>Install Portfolio App</strong>
+                        <br><small>Add to your home screen for quick access!</small>
+                    </div>
+                    <button class="btn btn-success btn-sm ml-2" onclick="installPWA()">
+                        <i class="fas fa-download mr-1"></i>Install
+                    </button>
+                    <button class="btn btn-outline-light btn-sm ml-1" onclick="this.parentElement.remove()">
+                        <i class="fas fa-times"></i>
+                    </button>
+                `;
+                
+                document.body.appendChild(banner);
+                
+                // Auto-hide after 15 seconds
+                setTimeout(() => {
+                    if (banner.parentElement) {
+                        banner.remove();
+                    }
+                }, 15000);
+            }
+        }
+        
+        function installPWA() {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                deferredPrompt.userChoice.then(function(choiceResult) {
+                    if (choiceResult.outcome === 'accepted') {
+                        console.log('🎉 User accepted the PWA install prompt');
+                    } else {
+                        console.log('😔 User dismissed the PWA install prompt');
+                    }
+                    deferredPrompt = null;
+                });
+                
+                // Remove banner
+                const banner = document.querySelector('.alert-success.position-fixed');
+                if (banner) banner.remove();
+            }
+        }
+        
+        // Detect if app is running in standalone mode (installed PWA)
+        if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone) {
+            console.log('📱 Running as installed PWA');
+            document.body.classList.add('pwa-mode');
+        }
+        
+        // Add CSS for animations
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideInRight {
+                from { transform: translateX(100%); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+            @keyframes slideInUp {
+                from { transform: translateY(100%); opacity: 0; }
+                to { transform: translateY(0); opacity: 1; }
+            }
+            .pwa-mode .navbar {
+                padding-top: env(safe-area-inset-top, 0);
+            }
+        `;
+        document.head.appendChild(style);
     </script>
 </body>
 </html>

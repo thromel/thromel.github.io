@@ -14,7 +14,7 @@ navbar_title: Home
 
 <div class="row mt-3">
     <div class="col">
-        <div class="card card-interactive border-0 shadow-sm" data-aos="fade-up" data-aos-delay="100">
+        <div class="card card-interactive border-0 shadow-sm morphing-bg glow-border" data-aos="fade-up" data-aos-delay="100">
             <div class="card-body p-5">
                 <div class="row">
                     <div class="col"><h2 data-aos="fade-right" data-aos-delay="200">My Resume</h2></div>
@@ -29,9 +29,9 @@ navbar_title: Home
                 <hr />
 
                 <!-- Education -->
-                <section class="row mt-3 content-section" id="education" aria-labelledby="education-heading">
+                <section class="row mt-3 content-section parallax-element" id="education" aria-labelledby="education-heading">
                     <div class="col">
-                        <h3 id="education-heading" class="mb-3" data-aos="fade-left" data-aos-delay="400">Education</h3>
+                        <h3 id="education-heading" class="mb-3 gradient-text-animated" data-aos="fade-left" data-aos-delay="400">Education</h3>
                         <div class="timeline">
                             {% for edu in site.data.profile.education %}
                             <article class="media mb-4 position-card card-interactive" data-aos="fade-up" data-aos-delay="{{ forloop.index | times: 100 | plus: 500 }}" role="article" aria-labelledby="edu-{{ forloop.index }}">
@@ -67,9 +67,9 @@ navbar_title: Home
                 <hr />
 
                 <!-- Work Experience -->
-                <section class="row mt-3 content-section" id="experience" aria-labelledby="experience-heading">
+                <section class="row mt-3 content-section parallax-element" id="experience" aria-labelledby="experience-heading">
                     <div class="col">
-                        <h3 id="experience-heading" class="mb-3" data-aos="fade-right" data-aos-delay="200">Work Experience</h3>
+                        <h3 id="experience-heading" class="mb-3 gradient-text-animated" data-aos="fade-right" data-aos-delay="200">Work Experience</h3>
                         <div class="timeline">
                             {% for position in site.data.profile.positions %}
                             <article class="media mb-4 position-card card-interactive" data-aos="slide-up" data-aos-delay="{{ forloop.index | times: 150 | plus: 300 }}" role="article" aria-labelledby="exp-{{ forloop.index }}">
@@ -98,9 +98,9 @@ navbar_title: Home
                 <!-- Research -->
                 <section class="row mt-3 content-section" id="research" aria-labelledby="research-heading">
                     <div class="col">
-                        <h3 id="research-heading" class="mb-3" data-aos="fade-left" data-aos-delay="200">Research Projects</h3>
+                        <h3 id="research-heading" class="mb-3 gradient-text-animated" data-aos="fade-left" data-aos-delay="200">Research Projects</h3>
                         {% for item in site.data.profile.research limit:2 %}
-                        <div class="project-card-enhanced mb-4" data-aos="flip-left" data-aos-delay="{{ forloop.index | times: 200 | plus: 300 }}">
+                        <div class="project-card-enhanced mb-4 magnetic-area" data-aos="flip-left" data-aos-delay="{{ forloop.index | times: 200 | plus: 300 }}">
                             <div class="project-header">
                                 <div class="project-title">
                                 {% assign showcase_item = site.showcase | where: "title", item.title | first %}
@@ -150,7 +150,7 @@ navbar_title: Home
                 <!-- Projects -->
                 <section class="row mt-3 content-section" id="projects" aria-labelledby="projects-heading">
                     <div class="col">
-                        <h3 id="projects-heading" class="mb-3" data-aos="fade-right" data-aos-delay="200">Notable Projects</h3>
+                        <h3 id="projects-heading" class="mb-3 gradient-text-animated" data-aos="fade-right" data-aos-delay="200">Notable Projects</h3>
                         {% for project in site.data.profile.projects limit:2 %}
                         <div class="project-card-enhanced mb-4" data-aos="fade-up-right" data-aos-delay="{{ forloop.index | times: 250 | plus: 300 }}">
                             <div class="project-header">
@@ -202,12 +202,12 @@ navbar_title: Home
                 <!-- Technical Skills -->
                 <section class="row mt-3 content-section" id="skills" aria-labelledby="skills-heading">
                     <div class="col">
-                        <h3 id="skills-heading" class="mb-3" data-aos="fade-left" data-aos-delay="200">Technical Skills</h3>
+                        <h3 id="skills-heading" class="mb-3 gradient-text-animated" data-aos="fade-left" data-aos-delay="200">Technical Skills</h3>
                         
                         <!-- Technical Skills Categories -->
                         <div class="skills-container">
                             {% for category in site.data.profile.technical_skills %}
-                            <div class="card card-interactive skill-card mb-4" data-aos="zoom-in" data-aos-delay="{{ forloop.index | times: 150 | plus: 300 }}">
+                            <div class="card card-interactive skill-card mb-4 glow-border" data-aos="zoom-in" data-aos-delay="{{ forloop.index | times: 150 | plus: 300 }}">
                                 <div class="d-flex align-items-center mb-2">
                                     <h5 class="mb-0 mr-2 animate__animated animate__fadeInLeft">{{ category.type }}</h5>
                                 </div>

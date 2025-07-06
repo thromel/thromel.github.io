@@ -1,0 +1,310 @@
+---
+layout: default
+title: You're Offline
+navbar_title: Offline
+---
+
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <div class="card card-interactive text-center py-5">
+            <div class="card-body">
+                <!-- Offline Illustration -->
+                <div class="mb-4">
+                    <div class="offline-icon" style="font-size: 4rem; color: var(--accent-primary); margin-bottom: 1rem;">
+                        <i class="fas fa-wifi-slash"></i>
+                    </div>
+                </div>
+
+                <!-- Offline Message -->
+                <h1 class="h2 mb-3" style="color: var(--text-primary);">You're Currently Offline</h1>
+                <p class="lead mb-4" style="color: var(--text-secondary);">
+                    It looks like you've lost your internet connection. Don't worry, you can still browse some content that's been cached!
+                </p>
+
+                <!-- Available Actions -->
+                <div class="row mb-4">
+                    <div class="col-md-4 mb-3">
+                        <div class="offline-feature">
+                            <i class="fas fa-home fa-2x mb-2" style="color: var(--accent-primary);"></i>
+                            <h5>Homepage</h5>
+                            <p class="small text-muted">View basic profile information</p>
+                            <a href="/" class="btn btn-outline-primary btn-sm">Go Home</a>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="offline-feature">
+                            <i class="fas fa-code fa-2x mb-2" style="color: var(--accent-secondary);"></i>
+                            <h5>Cached Projects</h5>
+                            <p class="small text-muted">Browse previously viewed projects</p>
+                            <a href="/projects" class="btn btn-outline-secondary btn-sm">View Projects</a>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="offline-feature">
+                            <i class="fas fa-search fa-2x mb-2" style="color: var(--accent-tertiary);"></i>
+                            <h5>Local Search</h5>
+                            <p class="small text-muted">Search through cached content</p>
+                            <button class="btn btn-outline-success btn-sm" onclick="openOfflineSearch()">Search Offline</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Connection Status -->
+                <div class="alert alert-info" role="alert">
+                    <div class="d-flex align-items-center">
+                        <i class="fas fa-info-circle mr-2"></i>
+                        <div>
+                            <strong>Connection Status:</strong> <span id="connection-status">Checking...</span>
+                            <br>
+                            <small>We'll automatically refresh when you're back online.</small>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Retry Button -->
+                <div class="mt-4">
+                    <button class="btn btn-primary mr-2" onclick="checkConnection()">
+                        <i class="fas fa-sync-alt mr-1"></i>
+                        Try Again
+                    </button>
+                    <button class="btn btn-outline-primary" onclick="window.history.back()">
+                        <i class="fas fa-arrow-left mr-1"></i>
+                        Go Back
+                    </button>
+                </div>
+
+                <!-- Tips Section -->
+                <div class="mt-5 pt-4 border-top">
+                    <h5 class="mb-3">While You're Offline:</h5>
+                    <div class="row text-left">
+                        <div class="col-md-6">
+                            <ul class="list-unstyled">
+                                <li class="mb-2">
+                                    <i class="fas fa-check text-success mr-2"></i>
+                                    Browse cached pages and content
+                                </li>
+                                <li class="mb-2">
+                                    <i class="fas fa-check text-success mr-2"></i>
+                                    Search through offline content
+                                </li>
+                                <li class="mb-2">
+                                    <i class="fas fa-check text-success mr-2"></i>
+                                    View project details (if previously visited)
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <ul class="list-unstyled">
+                                <li class="mb-2">
+                                    <i class="fas fa-times text-warning mr-2"></i>
+                                    Contact form submissions
+                                </li>
+                                <li class="mb-2">
+                                    <i class="fas fa-times text-warning mr-2"></i>
+                                    Live search suggestions
+                                </li>
+                                <li class="mb-2">
+                                    <i class="fas fa-times text-warning mr-2"></i>
+                                    External links and resources
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Offline Search Modal -->
+<div class="modal fade" id="offlineSearchModal" tabindex="-1" aria-labelledby="offlineSearchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="offlineSearchModalLabel">Offline Search</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" id="offlineSearchInput" placeholder="Search cached content...">
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" type="button" onclick="performOfflineSearch()">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+                <div id="offlineSearchResults">
+                    <p class="text-muted">Enter a search term to find content in your browser cache.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.offline-icon {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.6; }
+    100% { opacity: 1; }
+}
+
+.offline-feature {
+    padding: 1rem;
+    border-radius: 8px;
+    background: var(--bg-tertiary);
+    height: 100%;
+    transition: transform 0.2s ease;
+}
+
+.offline-feature:hover {
+    transform: translateY(-2px);
+}
+
+.connection-indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 8px;
+}
+
+.connection-indicator.offline {
+    background-color: #dc3545;
+}
+
+.connection-indicator.online {
+    background-color: #28a745;
+}
+
+.connection-indicator.checking {
+    background-color: #ffc107;
+    animation: pulse 1s infinite;
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Check initial connection status
+    updateConnectionStatus();
+    
+    // Monitor connection changes
+    window.addEventListener('online', function() {
+        updateConnectionStatus();
+        // Auto-refresh when back online
+        setTimeout(() => {
+            if (navigator.onLine) {
+                window.location.reload();
+            }
+        }, 1000);
+    });
+    
+    window.addEventListener('offline', function() {
+        updateConnectionStatus();
+    });
+    
+    // Check connection periodically
+    setInterval(updateConnectionStatus, 5000);
+});
+
+function updateConnectionStatus() {
+    const statusElement = document.getElementById('connection-status');
+    if (!statusElement) return;
+    
+    if (navigator.onLine) {
+        statusElement.innerHTML = '<span class="connection-indicator online"></span>Connected - Refreshing...';
+        statusElement.className = 'text-success';
+        
+        // Try to fetch a small resource to verify real connectivity
+        fetch('/manifest.json', { method: 'HEAD', cache: 'no-cache' })
+            .then(() => {
+                // Really online, refresh the page
+                setTimeout(() => window.location.reload(), 2000);
+            })
+            .catch(() => {
+                // False positive, still offline
+                statusElement.innerHTML = '<span class="connection-indicator offline"></span>Offline';
+                statusElement.className = 'text-danger';
+            });
+    } else {
+        statusElement.innerHTML = '<span class="connection-indicator offline"></span>Offline';
+        statusElement.className = 'text-danger';
+    }
+}
+
+function checkConnection() {
+    const statusElement = document.getElementById('connection-status');
+    statusElement.innerHTML = '<span class="connection-indicator checking"></span>Checking connection...';
+    statusElement.className = 'text-warning';
+    
+    // Simulate checking
+    setTimeout(() => {
+        updateConnectionStatus();
+    }, 1000);
+}
+
+function openOfflineSearch() {
+    $('#offlineSearchModal').modal('show');
+}
+
+function performOfflineSearch() {
+    const searchTerm = document.getElementById('offlineSearchInput').value.toLowerCase().trim();
+    const resultsContainer = document.getElementById('offlineSearchResults');
+    
+    if (!searchTerm) {
+        resultsContainer.innerHTML = '<p class="text-muted">Enter a search term to find content in your browser cache.</p>';
+        return;
+    }
+    
+    resultsContainer.innerHTML = '<p class="text-info"><i class="fas fa-spinner fa-spin mr-2"></i>Searching cached content...</p>';
+    
+    // Search through cached content
+    if ('caches' in window) {
+        caches.open('romel-portfolio-v1.0.0').then(cache => {
+            cache.keys().then(requests => {
+                const cachedPages = requests.filter(req => 
+                    req.url.includes('.html') || 
+                    req.url.endsWith('/') ||
+                    !req.url.includes('.')
+                );
+                
+                const results = cachedPages.filter(req => 
+                    req.url.toLowerCase().includes(searchTerm)
+                );
+                
+                if (results.length > 0) {
+                    let resultsHtml = '<h6>Found in cache:</h6><ul class="list-unstyled">';
+                    results.forEach(req => {
+                        const url = new URL(req.url);
+                        const path = url.pathname;
+                        const title = path === '/' ? 'Homepage' : 
+                                     path.replace('/', '').replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase());
+                        
+                        resultsHtml += `
+                            <li class="mb-2">
+                                <a href="${path}" class="d-block p-2" style="border: 1px solid var(--border-color); border-radius: 4px; text-decoration: none;">
+                                    <strong>${title}</strong><br>
+                                    <small class="text-muted">${path}</small>
+                                </a>
+                            </li>
+                        `;
+                    });
+                    resultsHtml += '</ul>';
+                    resultsContainer.innerHTML = resultsHtml;
+                } else {
+                    resultsContainer.innerHTML = '<p class="text-muted">No cached content found for "' + searchTerm + '".</p>';
+                }
+            });
+        }).catch(() => {
+            resultsContainer.innerHTML = '<p class="text-danger">Unable to search cache. Cache API not available.</p>';
+        });
+    } else {
+        resultsContainer.innerHTML = '<p class="text-danger">Offline search not supported in this browser.</p>';
+    }
+}
+</script>
