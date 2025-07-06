@@ -153,6 +153,8 @@ function initTabBarEffects() {
 
 // Native-like back button functionality
 function initBackButton() {
+    // Disable back button creation to prevent navbar overlap
+    return;
     // Create back button for mobile
     if (window.innerWidth <= 768) {
         const backButton = $(`

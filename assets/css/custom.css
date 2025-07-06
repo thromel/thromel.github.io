@@ -3,7 +3,7 @@
     position: absolute;
     top: 0;
     left: 0;
-    z-index: 9999;
+    z-index: 10001;
 }
 
 .skip-link {
@@ -19,11 +19,11 @@
     font-size: 0.9rem;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
     transition: top 0.3s ease;
-    z-index: 10000;
+    z-index: 10002;
 }
 
 .skip-link:focus {
-    top: 0;
+    top: 4px; /* Move below scroll indicator */
     text-decoration: none;
     color: white;
 }
@@ -436,7 +436,7 @@ html {
     width: 100%;
     height: 4px;
     background: var(--bg-tertiary);
-    z-index: 9999;
+    z-index: 10000;
     pointer-events: none;
 }
 
@@ -472,11 +472,11 @@ html {
 /* Back to top button */
 .back-to-top {
     position: fixed;
-    bottom: 30px;
+    bottom: 100px; /* Move up to avoid theme toggle */
     right: 30px;
     width: 50px;
     height: 50px;
-    background: var(--accent-primary);
+    background: var(--accent-secondary);
     color: white;
     border: none;
     border-radius: 50%;
@@ -490,7 +490,7 @@ html {
     opacity: 0;
     visibility: hidden;
     transform: translateY(20px);
-    z-index: 1000;
+    z-index: 9997;
 }
 
 .back-to-top.visible {

@@ -218,44 +218,56 @@
    NAVIGATION INTERACTIONS
    ================================= */
 
-/* Enhanced navbar brand */
+/* Enhanced navbar brand with professional subtitle */
 .brand-enhanced {
     display: flex !important;
     align-items: center;
-    text-decoration: none;
+    text-decoration: none !important;
     transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    padding: 0.5rem 0;
+    padding: 0.25rem 0;
+    height: auto !important;
+    min-height: 50px;
 }
 
 .brand-enhanced:hover {
-    text-decoration: none;
+    text-decoration: none !important;
     transform: translateY(-1px);
 }
 
 .brand-text {
     display: flex;
     flex-direction: column;
-    line-height: 1;
+    line-height: 1.1;
+    gap: 2px;
 }
 
-.brand-text strong {
+.brand-name strong {
     color: var(--text-primary);
     font-size: 1.1rem;
     font-weight: 700;
-    margin-bottom: 2px;
-    transition: color 0.3s ease;
+    display: block;
+    transition: all 0.3s ease;
+    background: linear-gradient(45deg, var(--text-primary), var(--accent-primary));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .brand-subtitle {
     color: var(--text-muted);
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     font-weight: 400;
-    opacity: 0.8;
+    opacity: 0.85;
     transition: all 0.3s ease;
+    line-height: 1;
+    margin-top: 1px;
 }
 
-.brand-enhanced:hover .brand-text strong {
-    color: var(--accent-primary);
+.brand-enhanced:hover .brand-name strong {
+    background: linear-gradient(45deg, var(--accent-primary), var(--accent-secondary));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .brand-enhanced:hover .brand-subtitle {
@@ -263,20 +275,43 @@
     color: var(--accent-secondary);
 }
 
-/* Responsive navbar brand */
-@media (max-width: 768px) {
-    .brand-text strong {
+/* Responsive adjustments */
+@media (max-width: 992px) {
+    .brand-name strong {
         font-size: 1rem;
     }
-    
     .brand-subtitle {
-        font-size: 0.7rem;
+        font-size: 0.65rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .brand-name strong {
+        font-size: 0.95rem;
+    }
+    .brand-subtitle {
+        font-size: 0.6rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .brand-enhanced {
+        min-height: 45px;
+    }
+    .brand-name strong {
+        font-size: 0.9rem;
+    }
+    .brand-subtitle {
+        font-size: 0.58rem;
     }
 }
 
 @media (max-width: 480px) {
     .brand-subtitle {
-        display: none;
+        display: none; /* Hide subtitle on very small screens */
+    }
+    .brand-enhanced {
+        min-height: 40px;
     }
 }
 
@@ -530,6 +565,36 @@
 .form-field-advanced input:focus ~ ::after,
 .form-field-advanced textarea:focus ~ ::after {
     width: 100%;
+}
+
+/* =================================
+   UI LAYERING & CONFLICT RESOLUTION
+   ================================= */
+
+/* Ensure proper z-index hierarchy */
+.custom-cursor,
+.custom-cursor-follower {
+    z-index: 10003 !important;
+    pointer-events: none !important;
+}
+
+.page-transition {
+    z-index: 10004 !important;
+}
+
+/* Hide any duplicate back buttons */
+.app-back-button {
+    display: none !important;
+}
+
+/* Ensure navbar is properly layered */
+.navbar {
+    z-index: 1030 !important;
+}
+
+/* Fix any overlapping floating elements */
+body > div:not(.container):not(.skip-links):not(.scroll-indicator) {
+    position: relative;
 }
 
 /* =================================
