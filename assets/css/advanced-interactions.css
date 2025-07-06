@@ -218,6 +218,68 @@
    NAVIGATION INTERACTIONS
    ================================= */
 
+/* Enhanced navbar brand */
+.brand-enhanced {
+    display: flex !important;
+    align-items: center;
+    text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    padding: 0.5rem 0;
+}
+
+.brand-enhanced:hover {
+    text-decoration: none;
+    transform: translateY(-1px);
+}
+
+.brand-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1;
+}
+
+.brand-text strong {
+    color: var(--text-primary);
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 2px;
+    transition: color 0.3s ease;
+}
+
+.brand-subtitle {
+    color: var(--text-muted);
+    font-size: 0.75rem;
+    font-weight: 400;
+    opacity: 0.8;
+    transition: all 0.3s ease;
+}
+
+.brand-enhanced:hover .brand-text strong {
+    color: var(--accent-primary);
+}
+
+.brand-enhanced:hover .brand-subtitle {
+    opacity: 1;
+    color: var(--accent-secondary);
+}
+
+/* Responsive navbar brand */
+@media (max-width: 768px) {
+    .brand-text strong {
+        font-size: 1rem;
+    }
+    
+    .brand-subtitle {
+        font-size: 0.7rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .brand-subtitle {
+        display: none;
+    }
+}
+
 /* Advanced nav link hover effects */
 .nav-link-advanced {
     position: relative;
