@@ -232,4 +232,44 @@ class SiteSearch {
 let siteSearch;
 document.addEventListener('DOMContentLoaded', () => {
     siteSearch = new SiteSearch();
+    
+    // Additional event handler for search button to prevent conflicts
+    const searchButton = document.querySelector('.search-button');
+    if (searchButton) {
+        searchButton.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            e.stopImmediatePropagation();
+            
+            console.log('🔍 Search button clicked');
+            
+            if (siteSearch && siteSearch.isInitialized) {
+                siteSearch.openSearchModal();
+            } else {
+                console.warn('Search not initialized yet');
+            }
+        }, true);
+        
+        console.log('🔍 Search button event handler attached');
+    }
+    
+    // Handle Ctrl+K keyboard shortcut
+    document.addEventListener('keydown', function(e) {
+        if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            if (siteSearch && siteSearch.isInitialized) {
+                siteSearch.openSearchModal();
+            }
+        }
+        
+        // Close search with Escape
+        if (e.key === 'Escape') {
+            const modal = document.getElementById('search-modal');
+            if (modal && modal.style.display === 'flex') {
+                siteSearch.closeSearchModal();
+            }
+        }
+    });
 });
