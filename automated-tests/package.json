@@ -1,0 +1,23 @@
+{
+  "name": "tanzimhromel-automated-tests",
+  "version": "1.0.0",
+  "description": "Automated browser tests for tanzimhromel.com",
+  "main": "index.js",
+  "scripts": {
+    "test": "playwright test",
+    "test:headed": "playwright test --headed",
+    "test:debug": "playwright test --debug",
+    "test:chrome": "playwright test --project=chromium",
+    "test:firefox": "playwright test --project=firefox",
+    "test:safari": "playwright test --project=webkit",
+    "test:mobile": "playwright test --project=mobile-chrome",
+    "test:report": "playwright show-report",
+    "install": "playwright install"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.40.0"
+  },
+  "keywords": ["testing", "playwright", "ui", "automation"],
+  "author": "Portfolio Testing Suite",
+  "license": "MIT"
+}

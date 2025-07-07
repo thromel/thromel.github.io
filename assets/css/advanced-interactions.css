@@ -568,32 +568,105 @@
 }
 
 /* =================================
-   UI LAYERING & CONFLICT RESOLUTION
+   CUSTOM CURSOR SYSTEM
    ================================= */
 
-/* Ensure proper z-index hierarchy */
-.custom-cursor,
-.custom-cursor-follower {
-    z-index: 10003 !important;
-    pointer-events: none !important;
+/* Base cursor styles - always visible when created */
+.custom-cursor {
+    position: fixed;
+    width: 8px;
+    height: 8px;
+    background: var(--accent-primary, #38bdf8);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 10003;
+    transition: all 0.1s ease;
+    transform-origin: center center;
+    mix-blend-mode: difference;
+    opacity: 0;
+    visibility: hidden;
+    display: none;
 }
 
-/* Hide default cursor on desktop when custom cursor is active */
+.custom-cursor-follower {
+    position: fixed;
+    width: 30px;
+    height: 30px;
+    border: 2px solid var(--accent-primary, #38bdf8);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 10002;
+    transition: all 0.15s ease;
+    transform-origin: center center;
+    background: transparent;
+    opacity: 0;
+    visibility: hidden;
+    display: none;
+}
+
+/* Cursor active state - custom cursor is initialized and working */
+body.custom-cursor-initialized .custom-cursor,
+body.custom-cursor-initialized .custom-cursor-follower {
+    display: block;
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Hide default cursor only when custom cursor is fully functional */
 @media (min-width: 768px) {
-    body.custom-cursor-active {
+    body.custom-cursor-working {
         cursor: none !important;
     }
     
-    body.custom-cursor-active a, 
-    body.custom-cursor-active button, 
-    body.custom-cursor-active .btn, 
-    body.custom-cursor-active input, 
-    body.custom-cursor-active textarea, 
-    body.custom-cursor-active select, 
-    body.custom-cursor-active [role="button"] {
+    body.custom-cursor-working *,
+    body.custom-cursor-working a,
+    body.custom-cursor-working button,
+    body.custom-cursor-working .btn,
+    body.custom-cursor-working input,
+    body.custom-cursor-working textarea,
+    body.custom-cursor-working select,
+    body.custom-cursor-working [role="button"],
+    body.custom-cursor-working [tabindex] {
         cursor: none !important;
     }
+    
+    /* Force cursor to be visible on specific elements when needed */
+    body:not(.custom-cursor-working) *,
+    body:not(.custom-cursor-working) a,
+    body:not(.custom-cursor-working) button,
+    body:not(.custom-cursor-working) .btn {
+        cursor: auto !important;
+    }
+    
+    body:not(.custom-cursor-working) a:hover,
+    body:not(.custom-cursor-working) button:hover,
+    body:not(.custom-cursor-working) .btn:hover {
+        cursor: pointer !important;
+    }
 }
+
+/* Mobile - never hide default cursor */
+@media (max-width: 767px) {
+    .custom-cursor,
+    .custom-cursor-follower {
+        display: none !important;
+    }
+    
+    body * {
+        cursor: auto !important;
+    }
+    
+    a:hover,
+    button:hover,
+    .btn:hover,
+    [role="button"]:hover {
+        cursor: pointer !important;
+    }
+}
+
+/* =================================
+   UI LAYERING & CONFLICT RESOLUTION
+   ================================= */
 
 .page-transition {
     z-index: 10004 !important;
