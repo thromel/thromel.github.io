@@ -149,31 +149,40 @@ function initCursorEffects() {
         
         $('body').append(cursor).append(cursorFollower);
         
+        // Add class to indicate custom cursor is active
+        $('body').addClass('custom-cursor-active');
+        
+        // Force immediate visibility with inline styles
         cursor.css({
             position: 'fixed',
             width: '8px',
             height: '8px',
-            background: 'var(--accent-primary)',
+            background: '#38bdf8', // Use direct color instead of CSS variable
             borderRadius: '50%',
             pointerEvents: 'none',
-            zIndex: 9999,
+            zIndex: '10003',
             transition: 'all 0.1s ease',
-            opacity: 1,
+            opacity: '1',
             transformOrigin: 'center center',
-            mixBlendMode: 'difference'
+            mixBlendMode: 'difference',
+            display: 'block',
+            visibility: 'visible'
         });
         
         cursorFollower.css({
             position: 'fixed',
             width: '30px',
             height: '30px',
-            border: '2px solid var(--accent-primary)',
+            border: '2px solid #38bdf8', // Use direct color
             borderRadius: '50%',
             pointerEvents: 'none',
-            zIndex: 9998,
+            zIndex: '10002',
             transition: 'all 0.15s ease',
-            opacity: 1,
-            transformOrigin: 'center center'
+            opacity: '1',
+            transformOrigin: 'center center',
+            background: 'transparent',
+            display: 'block',
+            visibility: 'visible'
         });
         
         // Track mouse position with proper coordinates
@@ -205,6 +214,12 @@ function initCursorEffects() {
             cursor.css('opacity', 1);
             cursorFollower.css('opacity', 1);
         });
+        
+        // Initial positioning
+        cursor.css({ left: '50px', top: '50px' });
+        cursorFollower.css({ left: '35px', top: '35px' });
+        
+        console.log('🖱️ Custom cursor initialized and positioned');
         
         // Cursor interactions
         $('.btn, .card, .nav-link, a').on('mouseenter', function() {

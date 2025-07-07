@@ -202,4 +202,44 @@ a {
 body, .navbar, .card, .profile-card {
     transition: background-color 0.3s ease, color 0.3s ease;
 }
+
+/* Custom cursor critical styles */
+.custom-cursor {
+    position: fixed;
+    width: 8px;
+    height: 8px;
+    background: var(--accent-primary);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 10003;
+    transition: all 0.1s ease;
+    opacity: 1;
+    transform-origin: center center;
+    mix-blend-mode: difference;
+}
+
+.custom-cursor-follower {
+    position: fixed;
+    width: 30px;
+    height: 30px;
+    border: 2px solid var(--accent-primary);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 10002;
+    transition: all 0.15s ease;
+    opacity: 1;
+    transform-origin: center center;
+    background: transparent;
+}
+
+/* Hide default cursor when custom cursor is active */
+@media (min-width: 768px) {
+    body.custom-cursor-active {
+        cursor: none !important;
+    }
+    
+    body.custom-cursor-active * {
+        cursor: none !important;
+    }
+}
 </style>
