@@ -90,13 +90,13 @@ function createThemeToggle() {
     // Force styles to ensure visibility
     toggleButton.style.cssText = `
       position: fixed !important;
-      bottom: 90px !important;
+      bottom: 30px !important;
       right: 30px !important;
-      z-index: 10000 !important;
+      z-index: 10001 !important;
       width: 50px !important;
       height: 50px !important;
       border-radius: 50% !important;
-      background: #38bdf8 !important;
+      background: var(--accent-primary, #38bdf8) !important;
       border: none !important;
       color: white !important;
       cursor: pointer !important;
@@ -107,6 +107,7 @@ function createThemeToggle() {
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3) !important;
       opacity: 1 !important;
       visibility: visible !important;
+      pointer-events: auto !important;
     `;
 
     // Add to the body

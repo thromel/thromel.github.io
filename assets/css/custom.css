@@ -766,7 +766,7 @@ html {
     opacity: 0;
     visibility: hidden;
     transform: translateY(20px);
-    z-index: 9997;
+    z-index: 9999;
 }
 
 .back-to-top.visible {
