@@ -116,9 +116,10 @@ test.describe('Responsive Design Tests', () => {
     const navbar = page.locator('.navbar');
     await expect(navbar).toBeVisible();
     
-    // Should have custom cursor on desktop
-    const cursor = page.locator('.custom-cursor');
-    await expect(cursor).toBeAttached();
+    // Should have proper default cursor behavior
+    const body = page.locator('body');
+    const bodyStyles = await body.evaluate(el => getComputedStyle(el));
+    expect(bodyStyles.cursor).toBe('auto');
     
     // Test hover effects work on desktop
     const button = page.locator('.btn').first();

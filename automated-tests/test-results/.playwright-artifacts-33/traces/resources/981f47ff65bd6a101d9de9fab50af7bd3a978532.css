@@ -1,0 +1,241 @@
+/* Responsive Images CSS */
+
+/* Base responsive image styles */
+.responsive-image-container {
+    display: block;
+    width: 100%;
+    height: auto;
+    position: relative;
+    overflow: hidden;
+}
+
+.responsive-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.3s ease, filter 0.3s ease;
+    background-color: var(--bg-tertiary);
+}
+
+/* Loading state */
+.responsive-image[loading="lazy"]:not([src]) {
+    background: linear-gradient(90deg, var(--bg-tertiary) 25%, var(--bg-secondary) 50%, var(--bg-tertiary) 75%);
+    background-size: 200% 100%;
+    animation: loading-shimmer 1.5s infinite;
+}
+
+@keyframes loading-shimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+/* Image aspect ratio containers */
+.aspect-16-9 {
+    aspect-ratio: 16 / 9;
+}
+
+.aspect-4-3 {
+    aspect-ratio: 4 / 3;
+}
+
+.aspect-1-1 {
+    aspect-ratio: 1 / 1;
+}
+
+.aspect-3-2 {
+    aspect-ratio: 3 / 2;
+}
+
+/* Image fit options */
+.img-cover {
+    object-fit: cover;
+}
+
+.img-contain {
+    object-fit: contain;
+}
+
+.img-fill {
+    object-fit: fill;
+}
+
+/* Interactive image effects */
+.responsive-image-container:hover .responsive-image {
+    transform: scale(1.02);
+}
+
+.responsive-image-container.zoomable:hover .responsive-image {
+    transform: scale(1.1);
+    cursor: zoom-in;
+}
+
+/* Profile picture styles */
+.profile-image {
+    border-radius: 50%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border: 3px solid var(--accent-primary);
+    box-shadow: 0 4px 20px rgba(var(--accent-primary-rgb), 0.3);
+}
+
+/* Gallery image styles */
+.gallery-image {
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.gallery-image:hover {
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px);
+}
+
+/* Card image styles */
+.card-image {
+    border-radius: 8px 8px 0 0;
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+/* Hero image styles */
+.hero-image {
+    width: 100vw;
+    height: 60vh;
+    object-fit: cover;
+    margin-left: calc(-50vw + 50%);
+}
+
+/* Responsive breakpoints for images */
+@media (max-width: 480px) {
+    .hero-image {
+        height: 40vh;
+    }
+    
+    .card-image {
+        height: 150px;
+    }
+}
+
+@media (max-width: 768px) {
+    .responsive-image-container.mobile-full-width {
+        width: 100vw;
+        margin-left: calc(-50vw + 50%);
+    }
+}
+
+/* Image lazy loading optimization */
+.responsive-image[loading="lazy"] {
+    transition: opacity 0.3s ease;
+}
+
+.responsive-image[loading="lazy"]:not([src]) {
+    opacity: 0;
+}
+
+.responsive-image[loading="lazy"][src] {
+    opacity: 1;
+}
+
+/* Accessibility improvements */
+.responsive-image:focus {
+    outline: 3px solid var(--accent-primary);
+    outline-offset: 2px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .responsive-image {
+        filter: contrast(1.2);
+    }
+    
+    .profile-image {
+        border-width: 4px;
+    }
+}
+
+/* Reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    .responsive-image {
+        transition: none;
+    }
+    
+    .responsive-image-container:hover .responsive-image {
+        transform: none;
+    }
+    
+    .loading-shimmer {
+        animation: none;
+    }
+}
+
+/* Print styles */
+@media print {
+    .responsive-image {
+        max-width: 100%;
+        page-break-inside: avoid;
+    }
+    
+    .hero-image {
+        height: auto;
+        max-height: 30vh;
+    }
+}
+
+/* Dark/Light theme specific adjustments */
+:root.light-theme .responsive-image[loading="lazy"]:not([src]) {
+    background: linear-gradient(90deg, #f1f5f9 25%, #ffffff 50%, #f1f5f9 75%);
+    background-size: 200% 100%;
+}
+
+:root.dark-theme .responsive-image[loading="lazy"]:not([src]) {
+    background: linear-gradient(90deg, #1e293b 25%, #334155 50%, #1e293b 75%);
+    background-size: 200% 100%;
+}
+
+/* Image optimization utilities */
+.img-optimized {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: optimize-contrast;
+}
+
+.img-crisp-edges {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+}
+
+/* WebP support detection */
+.no-webp .responsive-image-container source[type="image/webp"] {
+    display: none;
+}
+
+/* Intersection Observer fade-in animation */
+.responsive-image.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.responsive-image.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Grid layout for image galleries */
+.image-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+    margin: 2rem 0;
+}
+
+.image-grid .responsive-image-container {
+    aspect-ratio: 1 / 1;
+}
+
+@media (max-width: 768px) {
+    .image-grid {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 0.5rem;
+    }
+}

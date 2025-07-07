@@ -1,0 +1,1652 @@
+/* ================================
+   NAVBAR & NAVIGATION STYLES
+   ================================ */
+
+/* Ensure proper navbar z-index hierarchy */
+.navbar {
+    z-index: 1030 !important;
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    background: var(--bg-primary) !important;
+}
+
+/* Fix navbar brand display */
+.navbar-brand {
+    display: flex !important;
+    align-items: center !important;
+    text-decoration: none !important;
+    position: relative;
+    z-index: 1031;
+}
+
+/* Ensure navbar content doesn't overlap */
+.navbar > .container {
+    position: relative;
+    z-index: 1;
+}
+
+/* Clear any conflicting styles */
+.navbar-collapse {
+    background: var(--bg-primary);
+    z-index: 1032;
+}
+
+/* Ensure navbar items are properly aligned */
+.navbar-nav {
+    align-items: center;
+}
+
+.nav-item {
+    position: relative;
+}
+
+/* Fix potential menu button issues */
+.navbar-toggler {
+    border: 1px solid var(--border-color) !important;
+    background: var(--bg-secondary) !important;
+}
+
+.navbar-toggler:focus {
+    box-shadow: none !important;
+    outline: 2px solid var(--accent-primary) !important;
+    outline-offset: 2px;
+}
+
+/* Fix search button */
+.search-button {
+    background: none !important;
+    border: none !important;
+    color: var(--text-primary) !important;
+    cursor: pointer !important;
+    padding: 0.5rem 1rem !important;
+    position: relative !important;
+    z-index: 1031 !important;
+    pointer-events: auto !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 0.5rem !important;
+}
+
+.search-button:hover {
+    background: var(--bg-tertiary) !important;
+    border-radius: 4px !important;
+}
+
+.search-button:focus,
+.search-button:active {
+    outline: 2px solid var(--accent-primary) !important;
+    outline-offset: 2px !important;
+    z-index: 1032 !important;
+    background: var(--bg-tertiary) !important;
+}
+
+/* ================================
+   ACCESSIBILITY STYLES
+   ================================ */
+
+/* Skip links for accessibility */
+.skip-links {
+    position: absolute;
+    top: -200px;
+    left: -200px;
+    z-index: 10001;
+    pointer-events: none;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(1px, 1px, 1px, 1px);
+}
+
+.skip-link {
+    pointer-events: none;
+    position: absolute;
+    top: -200px;
+    left: -200px;
+    background: var(--accent-primary);
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+    z-index: 10002;
+    white-space: nowrap;
+    clip: rect(1px, 1px, 1px, 1px);
+    width: 1px;
+    height: 1px;
+}
+
+.skip-link:focus {
+    position: fixed !important;
+    top: 70px !important;
+    left: 20px !important;
+    z-index: 10002 !important;
+    pointer-events: auto !important;
+    clip: auto !important;
+    width: auto !important;
+    height: auto !important;
+}
+
+/* Position multiple skip links when focused */
+.skip-link:nth-child(1):focus { left: 20px !important; }
+.skip-link:nth-child(2):focus { left: 250px !important; }
+
+/* ================================
+   SCROLL & LAYOUT STYLES
+   ================================ */
+
+/* Fix body padding to account for fixed navbar */
+body {
+    padding-top: 60px !important;
+}
+
+/* Scroll Indicator Styling */
+.scroll-indicator {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: var(--bg-tertiary);
+    z-index: 1029; /* Below navbar */
+    opacity: 0.3;
+}
+
+/* Fix any floating action buttons */
+.back-to-top {
+    position: fixed;
+    bottom: 30px !important;
+    right: 30px !important;
+    z-index: 1000; /* Below navbar */
+}
+
+/* Hide any duplicate or overlapping elements */
+.app-back-button,
+.back-button,
+.navigation-back,
+button[style*="position: fixed"][style*="top: 60px"] {
+    display: none !important;
+}
+
+/* Ensure custom cursor is above most elements but below modals */
+.custom-cursor,
+.custom-cursor-follower {
+    z-index: 9999 !important;
+    pointer-events: none !important;
+}
+
+/* Remove any unwanted overlapping elements from navbar area */
+.navbar::before,
+.navbar::after,
+.navbar-brand::before,
+.navbar-brand::after {
+    display: none !important;
+}
+
+/* Fix for any absolute positioned elements in navbar area */
+body > div:not(.container):not(.skip-links):not(.scroll-indicator):not(.back-to-top):not(.theme-toggle) {
+    top: auto !important;
+}
+
+/* Specific fix for overlapping buttons on navbar left */
+.navbar .btn,
+.navbar button:not(.navbar-toggler):not(.search-button) {
+    position: relative !important;
+    z-index: auto !important;
+}
+
+/* Additional fixes for any dynamically added elements */
+[style*="position: fixed"][style*="top: 0"],
+[style*="position: fixed"][style*="top:0"] {
+    top: 3px !important; /* Move below scroll indicator */
+}
+
+/* Ensure proper layering for all UI elements */
+.container {
+    position: relative;
+    z-index: 1;
+}
+
+/* ================================
+   RESPONSIVE STYLES
+   ================================ */
+
+/* Mobile navbar adjustments */
+@media (max-width: 768px) {
+    .navbar {
+        padding: 0.5rem 0;
+    }
+    
+    .navbar-brand {
+        font-size: 0.95rem;
+        max-width: 70%;
+    }
+    
+    .brand-subtitle {
+        display: none; /* Hide subtitle on very small screens to prevent overlap */
+    }
+    
+    body {
+        padding-top: 56px !important;
+    }
+}
+
+/* Extra small screens */
+@media (max-width: 576px) {
+    .navbar-brand {
+        font-size: 0.85rem !important;
+    }
+    
+    .brand-name strong {
+        font-size: 0.9rem !important;
+    }
+    
+    .navbar-toggler {
+        padding: 0.25rem 0.5rem !important;
+        font-size: 0.9rem !important;
+    }
+}
+
+/* ================================
+   PERFORMANCE OPTIMIZATIONS
+   ================================ */
+
+/* GPU acceleration for specific elements only */
+.card,
+.btn,
+.theme-toggle {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+/* Prevent layout shifts */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Smooth theme transitions */
+.theme-transition * {
+    transition: background-color 0.3s ease, 
+                color 0.3s ease, 
+                border-color 0.3s ease !important;
+}
+
+/* Loading states */
+.loading {
+    opacity: 0.7;
+    transition: opacity 0.2s ease-out;
+}
+
+.loaded {
+    opacity: 1;
+    transition: opacity 0.3s ease-out;
+}
+
+/* Mobile performance optimizations */
+@media (max-width: 768px) {
+    /* Optimize touch interactions */
+    .touch-optimized {
+        -webkit-tap-highlight-color: transparent;
+        touch-action: manipulation;
+    }
+    
+    /* Disable transform animations on mobile for performance */
+    .mobile-no-transform:hover {
+        transform: none !important;
+    }
+}
+
+.scroll-indicator-progress {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+    width: 0%;
+    transition: width 0.1s ease-out;
+    box-shadow: 0 0 10px rgba(var(--accent-primary-rgb), 0.5);
+}
+
+/* Enhanced Focus Management */
+.focus-visible,
+*:focus-visible {
+    outline: 3px solid var(--accent-primary);
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+/* Remove default focus for non-keyboard users */
+*:focus:not(:focus-visible) {
+    outline: none;
+}
+
+/* Enhanced focus for interactive elements */
+.btn:focus-visible,
+.nav-link:focus-visible,
+.dropdown-item:focus-visible,
+.collapsible-btn:focus-visible,
+a:focus-visible {
+    outline: 3px solid var(--accent-primary);
+    outline-offset: 2px;
+    box-shadow: 0 0 0 6px rgba(var(--accent-primary-rgb, 14, 165, 233), 0.2);
+}
+
+/* Theme toggle focus */
+.theme-toggle:focus-visible {
+    outline: 3px solid var(--accent-primary);
+    outline-offset: 2px;
+    box-shadow: 0 0 0 6px rgba(var(--accent-primary-rgb, 14, 165, 233), 0.3);
+}
+
+/* Search button focus */
+.search-button:focus-visible {
+    outline: 3px solid var(--accent-primary);
+    outline-offset: 2px;
+    background: var(--bg-tertiary);
+}
+
+/* Card interactive focus */
+.card[tabindex]:focus-visible {
+    outline: 3px solid var(--accent-primary);
+    outline-offset: 2px;
+    transform: translateY(-2px);
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .skip-link {
+        background: #000000;
+        color: #ffffff;
+        border: 2px solid #ffffff;
+    }
+    
+    *:focus-visible {
+        outline: 3px solid #000000;
+        background: #ffff00;
+        color: #000000;
+    }
+}
+
+/* Reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    .skip-link {
+        transition: none;
+    }
+    
+    *:focus-visible {
+        transition: none;
+    }
+}
+
+/* Enhanced Content Hierarchy */
+.content-section {
+    margin-bottom: var(--space-16);
+    padding: var(--space-8) 0;
+}
+
+.section-divider {
+    margin: var(--space-12) 0;
+    border: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent 0%, var(--border-color) 50%, transparent 100%);
+}
+
+.content-card {
+    margin-bottom: var(--space-8);
+}
+
+.content-grid {
+    display: grid;
+    gap: var(--space-6);
+    margin-bottom: var(--space-8);
+}
+
+@media (min-width: 768px) {
+    .content-grid {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
+}
+
+/* Visual hierarchy improvements */
+.section-header {
+    margin-bottom: var(--space-8);
+    padding-bottom: var(--space-4);
+    border-bottom: 2px solid var(--accent-primary);
+    position: relative;
+}
+
+.section-header::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 60px;
+    height: 2px;
+    background: var(--accent-secondary);
+}
+
+.subsection {
+    margin-bottom: var(--space-6);
+    padding: var(--space-6);
+    border-left: 4px solid var(--accent-primary);
+    background: var(--bg-tertiary);
+    border-radius: 0 8px 8px 0;
+}
+
+/* Enhanced Card Components with Advanced Interactions */
+.card {
+    border-radius: 12px;
+    box-shadow: var(--card-shadow);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid var(--border-color);
+    overflow: hidden;
+    background: var(--glass-bg);
+    margin-bottom: var(--space-6);
+    position: relative;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--gradient-primary);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card:hover {
+    box-shadow: var(--card-shadow-hover);
+    transform: translateZ(0) translateY(-6px);
+    border-color: var(--accent-primary);
+}
+
+.card:hover::before {
+    transform: scaleX(1);
+}
+
+/* Enhanced card variants */
+.card-interactive {
+    cursor: pointer;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-interactive:hover {
+    transform: translateZ(0) translateY(-8px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.card-interactive:active {
+    transform: translateZ(0) translateY(-2px) scale(0.98);
+    transition-duration: 0.1s;
+}
+
+/* Card with floating action */
+.card-floating-action {
+    position: relative;
+    overflow: visible;
+}
+
+.card-floating-action .floating-action {
+    position: absolute;
+    top: var(--space-4);
+    right: var(--space-4);
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--accent-primary);
+    color: white;
+    border: none;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0;
+    transform: scale(0.8);
+}
+
+.card-floating-action:hover .floating-action {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.floating-action:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+}
+
+/* Enhanced Project Cards */
+.project-card-enhanced {
+    background: var(--glass-bg);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid var(--border-color);
+    position: relative;
+    transform: translateZ(0);
+    margin-bottom: var(--space-8);
+}
+
+.project-card-enhanced::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, transparent 0%, rgba(var(--accent-primary-rgb), 0.05) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.project-card-enhanced:hover::after {
+    opacity: 1;
+}
+
+.project-card-enhanced:hover {
+    transform: translateZ(0) translateY(-8px);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+    border-color: var(--accent-primary);
+}
+
+.project-header {
+    padding: var(--space-6);
+    background: var(--bg-tertiary);
+    border-bottom: 1px solid var(--border-color);
+    position: relative;
+}
+
+.project-title {
+    color: var(--text-primary);
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: var(--space-2);
+    line-height: var(--line-height-tight);
+}
+
+.project-meta {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    color: var(--text-muted);
+    font-size: var(--font-size-sm);
+}
+
+.project-meta .meta-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+}
+
+.project-body {
+    padding: var(--space-6);
+}
+
+.project-description {
+    color: var(--text-secondary);
+    line-height: var(--line-height-relaxed);
+    margin-bottom: var(--space-4);
+    font-size: var(--font-size-base);
+}
+
+.project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin-bottom: var(--space-6);
+}
+
+.project-tag {
+    background: var(--accent-primary);
+    color: white;
+    padding: var(--space-1) var(--space-3);
+    border-radius: 6px;
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+    transition: all 0.2s ease;
+}
+
+.project-tag:hover {
+    background: var(--accent-secondary);
+    transform: translateY(-1px);
+}
+
+.project-actions {
+    display: flex;
+    gap: var(--space-3);
+    align-items: center;
+}
+
+.project-action-btn {
+    padding: var(--space-2) var(--space-4);
+    border: 1px solid var(--accent-primary);
+    color: var(--accent-primary);
+    background: transparent;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1);
+}
+
+.project-action-btn:hover {
+    background: var(--accent-primary);
+    color: white;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(var(--accent-primary-rgb), 0.3);
+    text-decoration: none;
+}
+
+.project-action-btn.primary {
+    background: var(--accent-primary);
+    color: white;
+}
+
+.project-action-btn.primary:hover {
+    background: var(--accent-secondary);
+}
+
+.figure-img {
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* Enhanced section headings with better hierarchy */
+h1, h2, h3, h4, h5, h6 {
+    font-weight: var(--font-weight-bold);
+    color: var(--text-primary);
+}
+
+/* Smooth Scrolling Navigation */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Enhanced navigation with smooth scrolling */
+.navbar-nav .nav-link {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.navbar-nav .nav-link::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--accent-primary);
+    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.navbar-nav .nav-link:hover::before,
+.navbar-nav .nav-link.active::before {
+    width: 100%;
+}
+
+.navbar-nav .nav-link:hover {
+    color: var(--accent-primary);
+    transform: translateY(-2px);
+}
+
+/* Scroll indicator */
+.scroll-indicator {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: var(--bg-tertiary);
+    z-index: 10000;
+    pointer-events: none;
+}
+
+.scroll-indicator-progress {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+    width: 0%;
+    transition: width 0.1s ease;
+}
+
+/* Section anchors with offset for fixed navbar */
+.section-anchor {
+    position: relative;
+    top: -80px;
+    visibility: hidden;
+}
+
+/* Smooth section transitions */
+.content-section {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.content-section.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Back to top button */
+.back-to-top {
+    position: fixed;
+    bottom: 100px; /* Move up to avoid theme toggle */
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background: var(--accent-secondary);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    z-index: 9997;
+}
+
+.back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.back-to-top:hover {
+    background: var(--accent-secondary);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* Active section highlighting */
+.nav-link.section-active {
+    color: var(--accent-primary);
+    font-weight: var(--font-weight-semibold);
+}
+
+.nav-link.section-active::before {
+    width: 100%;
+}
+
+/* Progressive disclosure patterns */
+.content-preview {
+    max-height: 200px;
+    overflow: hidden;
+    position: relative;
+    transition: max-height 0.3s ease;
+}
+
+.content-preview.expanded {
+    max-height: none;
+}
+
+.content-preview::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 40px;
+    background: linear-gradient(transparent, var(--bg-secondary));
+    pointer-events: none;
+}
+
+.content-preview.expanded::after {
+    display: none;
+}
+
+.expand-button {
+    margin-top: var(--space-3);
+    color: var(--accent-primary);
+    background: none;
+    border: 1px solid var(--accent-primary);
+    padding: var(--space-2) var(--space-4);
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: var(--font-size-sm);
+    transition: all 0.2s ease;
+}
+
+.expand-button:hover {
+    background: var(--accent-primary);
+    color: white;
+}
+
+h2:after {
+    content: "";
+    display: block;
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(90deg, #4299e1, #7f9cf5);
+    margin-top: 10px;
+    border-radius: 2px;
+}
+
+/* Theme-specific heading colors */
+:root.dark-theme h1, 
+:root.dark-theme h2, 
+:root.dark-theme h3, 
+:root.dark-theme h4, 
+:root.dark-theme h5, 
+:root.dark-theme h6 {
+    color: #ffffff;
+}
+
+:root.light-theme h1, 
+:root.light-theme h2, 
+:root.light-theme h3, 
+:root.light-theme h4, 
+:root.light-theme h5, 
+:root.light-theme h6 {
+    color: #0f172a;
+}
+
+/* Profile card specific styling */
+.profile-card {
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 12px;
+}
+
+/* Publication and project cards */
+.pub-card, .project-card {
+    transition: all 0.3s ease;
+}
+
+.pub-card:hover, .project-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+/* Timeline styling */
+.timeline-icon {
+    box-shadow: 0 0 0 4px rgba(26, 86, 219, 0.1);
+}
+
+/* PhD Seeker Callout Styling */
+.phd-seeker-callout {
+    background: transparent;
+    border-radius: 8px;
+    padding: 15px;
+    border: 2px solid #dc2626;
+    margin-top: 20px;
+}
+
+.phd-callout-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.phd-icon {
+    font-size: 1.3rem;
+    color: #dc2626;
+    margin-right: 8px;
+}
+
+.phd-callout-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #dc2626;
+}
+
+.phd-callout-content {
+    color: var(--text-primary);
+}
+
+.phd-callout-content p {
+    color: var(--text-primary) !important;
+    margin-bottom: 6px;
+    font-weight: 500;
+}
+
+.phd-callout-content strong {
+    font-weight: 700;
+    color: #dc2626;
+}
+
+.phd-action-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.phd-btn-primary {
+    background-color: var(--bg-secondary) !important;
+    color: #dc2626 !important;
+    border: 1px solid #dc2626 !important;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    text-decoration: none !important;
+}
+
+.phd-btn-primary:hover {
+    background-color: #dc2626 !important;
+    color: #ffffff !important;
+}
+
+.phd-btn-secondary {
+    background-color: transparent !important;
+    color: #dc2626 !important;
+    border: 1px solid #dc2626 !important;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    text-decoration: none !important;
+}
+
+.phd-btn-secondary:hover {
+    background-color: #dc2626 !important;
+    color: #ffffff !important;
+}
+
+/* Dark theme adjustments for PhD callout */
+:root.dark-theme .phd-seeker-callout {
+    border-color: #ef4444;
+}
+
+:root.dark-theme .phd-icon,
+:root.dark-theme .phd-callout-title {
+    color: #ef4444;
+}
+
+:root.dark-theme .phd-callout-content strong {
+    color: #ef4444;
+}
+
+:root.dark-theme .phd-btn-primary,
+:root.dark-theme .phd-btn-secondary {
+    border-color: #ef4444 !important;
+    color: #ef4444 !important;
+}
+
+:root.dark-theme .phd-btn-primary:hover,
+:root.dark-theme .phd-btn-secondary:hover {
+    background-color: #ef4444 !important;
+}
+
+/* Light theme adjustments for PhD callout */
+:root.light-theme .phd-seeker-callout {
+    border-color: #dc2626;
+}
+
+:root.light-theme .phd-icon,
+:root.light-theme .phd-callout-title {
+    color: #dc2626;
+}
+
+:root.light-theme .phd-callout-content strong {
+    color: #dc2626;
+}
+
+/* Responsive design for PhD callout */
+@media (max-width: 768px) {
+    .phd-seeker-callout {
+        padding: 12px;
+    }
+    
+    .phd-callout-title {
+        font-size: 1rem;
+    }
+    
+    .phd-action-buttons {
+        flex-direction: column;
+    }
+    
+    .phd-btn-primary,
+    .phd-btn-secondary {
+        width: 100%;
+        margin-left: 0 !important;
+        margin-bottom: 8px;
+    }
+}
+
+/* Education section styling */
+.education-position {
+    font-weight: 600;
+    font-size: 1.05rem;
+    margin-bottom: 0.5rem;
+}
+
+/* Institution links */
+.institution-link {
+    color: var(--accent-primary);
+    text-decoration: none;
+    position: relative;
+    font-weight: 700;
+    transition: color 0.2s ease;
+}
+
+.institution-link:hover {
+    color: var(--accent-tertiary);
+    text-decoration: none;
+}
+
+.institution-link::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    bottom: -2px;
+    left: 0;
+    background-color: var(--accent-primary);
+    transform: scaleX(0);
+    transform-origin: bottom right;
+    transition: transform 0.3s ease;
+}
+
+.institution-link:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
+
+/* Collapsible button styling */
+.collapsible-btn {
+    display: inline-block;
+    background-color: var(--bg-tertiary);
+    color: var(--accent-primary);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    padding: 5px 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.collapsible-btn:hover {
+    background-color: var(--accent-primary);
+    color: white;
+    border-color: var(--accent-primary);
+}
+
+.collapsible-btn:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(97, 175, 255, 0.3);
+}
+
+.collapsible-btn i.fa-chevron-down {
+    transition: transform 0.3s ease;
+}
+
+.collapsible-btn[aria-expanded="true"] i.fa-chevron-down {
+    transform: rotate(180deg);
+}
+
+/* Ensure education coursework has good contrast */
+:root.dark-theme .education-coursework,
+:root.dark-theme .position-description,
+:root.dark-theme .timeline table {
+    color: #ffffff !important;
+}
+
+:root.dark-theme .timeline table th,
+:root.dark-theme .timeline table td {
+    color: #ffffff !important;
+    border-color: #384357;
+}
+
+:root.light-theme .education-coursework,
+:root.light-theme .position-description,
+:root.light-theme .timeline table {
+    color: #0f172a !important;
+}
+
+:root.light-theme .timeline table th,
+:root.light-theme .timeline table td {
+    color: #0f172a !important;
+    border-color: #e9ecef;
+}
+
+/* Navbar theming */
+.navbar-themed {
+    transition: all 0.3s ease;
+}
+
+/* Dark theme navbar */
+:root.dark-theme .navbar-themed {
+    background-color: #121720;
+}
+
+:root.dark-theme .navbar-themed .navbar-brand,
+:root.dark-theme .navbar-themed .nav-link {
+    color: #ffffff;
+}
+
+:root.dark-theme .navbar-themed .navbar-toggler {
+    color: #ffffff;
+    border-color: rgba(255,255,255,0.1);
+}
+
+/* Light theme navbar */
+:root.light-theme .navbar-themed {
+    background-color: #ffffff;
+}
+
+:root.light-theme .navbar-themed .navbar-brand,
+:root.light-theme .navbar-themed .nav-link {
+    color: #0f172a;
+}
+
+:root.light-theme .navbar-themed .navbar-toggler {
+    color: #0f172a;
+    border-color: rgba(0,0,0,0.1);
+}
+
+/* Table styles for better contrast in dark mode */
+:root.dark-theme .table {
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+}
+
+:root.dark-theme .table-bordered,
+:root.dark-theme .table-bordered td,
+:root.dark-theme .table-bordered th {
+    border-color: var(--border-color);
+}
+
+:root.dark-theme .table-light,
+:root.dark-theme .table-light td,
+:root.dark-theme .table-light th {
+    background-color: var(--bg-tertiary);
+    color: var(--text-primary);
+}
+
+:root.dark-theme .table td,
+:root.dark-theme .table th {
+    color: var(--text-primary);
+}
+
+:root.dark-theme .table-responsive {
+    background-color: var(--bg-secondary);
+}
+
+/* Improved contrast for dark theme - Liquid Glass */
+:root.dark-theme {
+    --bg-primary: #0f172a;
+    --bg-secondary: rgba(15, 23, 42, 0.7);
+    --bg-tertiary: rgba(30, 41, 59, 0.8);
+    --text-primary: #f1f5f9;
+    --text-secondary: #e2e8f0;
+    --text-muted: #cbd5e1;
+}
+
+:root.dark-theme body {
+    color: var(--text-primary);
+    background-color: var(--bg-primary);
+}
+
+:root.dark-theme .card {
+    background: rgba(30, 41, 59, 0.6);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(148, 163, 184, 0.1);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+:root.dark-theme p, 
+:root.dark-theme div, 
+:root.dark-theme span, 
+:root.dark-theme li {
+    color: var(--text-primary);
+}
+
+/* Light mode styles - Liquid Glass */
+:root.light-theme {
+    --bg-primary: #f8fafb;
+    --bg-secondary: rgba(255, 255, 255, 0.7);
+    --bg-tertiary: rgba(248, 250, 252, 0.8);
+    --text-primary: #1e293b;
+    --text-secondary: #475569;
+    --text-muted: #64748b;
+}
+
+:root.light-theme body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+}
+
+:root.light-theme .card {
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+}
+
+:root.light-theme p, 
+:root.light-theme div, 
+:root.light-theme span, 
+:root.light-theme li {
+    color: var(--text-primary);
+}
+
+:root.light-theme .timeline .media {
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-left: 3px solid #0ea5e9;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+}
+
+/* Bio Section Specific Contrast Fix */
+.row h3 {
+    font-size: 1.75rem;
+    margin-bottom: 1.5rem;
+    display: inline-block;
+    padding-bottom: 5px;
+    position: relative;
+}
+
+:root.dark-theme .row h3 {
+    color: #ffffff;
+}
+
+:root.light-theme .row h3 {
+    color: #1e293b;
+}
+
+.bio-section .bio-heading {
+    color: var(--text-primary) !important;
+}
+
+.bio-section .bio-content {
+    color: var(--text-primary) !important;
+}
+
+/* Fix for Google Calendar button */
+[data-calendar-scheduling-button] {
+    display: inline-block !important;
+    position: static !important;
+    writing-mode: horizontal-tb !important;
+    text-orientation: mixed !important;
+    width: auto !important;
+    height: auto !important;
+    transform: none !important;
+    padding: 8px 16px !important;
+    border-radius: 4px !important;
+    background-color: #039BE5 !important;
+    color: white !important;
+    font-size: 14px !important;
+    line-height: normal !important;
+    font-family: inherit !important;
+}
+
+/* Technical Skills Styling */
+.skill-container {
+    margin-bottom: 20px;
+}
+
+.skill-name {
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.skill-name span {
+    font-weight: 600;
+}
+
+.skill-bar {
+    height: 8px;
+    border-radius: 4px;
+    background-color: rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    position: relative;
+}
+
+:root.dark-theme .skill-bar {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.skill-level {
+    position: relative;
+    background-color: var(--accent-primary);
+    color: #fff;
+    padding: 0.2rem 0.6rem;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    margin-left: 0.5rem;
+    display: inline-block;
+}
+
+.interest-tag, .tech-tag {
+    display: inline-block;
+    background-color: rgba(66, 153, 225, 0.1);
+    color: var(--accent-primary);
+    border-radius: 4px;
+    padding: 4px 8px;
+    margin: 0 6px 6px 0;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+}
+
+:root.dark-theme .interest-tag, 
+:root.dark-theme .tech-tag {
+    background-color: rgba(66, 153, 225, 0.2);
+    color: #81b1ff;
+}
+
+:root.light-theme .interest-tag, 
+:root.light-theme .tech-tag {
+    background-color: rgba(66, 153, 225, 0.1);
+    color: #3182ce;
+}
+
+.interest-tag:hover, .tech-tag:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Override any conflicting styles causing the blue sidebar */
+.skill-card {
+    position: relative;
+    padding-left: 0 !important;
+    border-left: none !important;
+    background-image: none !important;
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 1.5rem;
+    background-color: transparent !important;
+    transform: none !important;
+}
+
+.skill-card::before {
+    display: none !important;
+}
+
+.tech-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 10px;
+}
+
+/* Fix for skills section - remove timeline styles */
+.skills-container .skill-card,
+.detailed-skills-container .skill-card {
+    border-left: none !important;
+    background-color: transparent !important;
+    border-radius: 0 !important;
+    padding: 10px 0 !important;
+    margin-bottom: 15px !important;
+    transform: none !important;
+    transition: none !important;
+}
+
+.skills-container,
+.detailed-skills-container {
+    padding-left: 0 !important;
+}
+
+.skills-container .skill-card:hover,
+.detailed-skills-container .skill-card:hover {
+    transform: none !important;
+    background-color: transparent !important;
+}
+
+/* Ensure skill level badge displays properly */
+.skill-level {
+    display: inline-block !important;
+    position: relative !important;
+    font-size: 0.8rem !important;
+    font-weight: 500 !important;
+    padding: 0.2rem 0.6rem !important;
+    border-radius: 12px !important;
+    margin-left: 0.5rem !important;
+    color: #fff !important;
+    vertical-align: middle !important;
+    background-color: var(--accent-primary) !important;
+}
+
+/* Books and Certifications Styling */
+.icon-book {
+    color: #38b2ac;
+}
+
+.icon-certificate {
+    color: #dd6b20;
+}
+
+.badge-primary {
+    background-color: #4299e1;
+}
+
+.badge-success {
+    background-color: #38a169;
+}
+
+.timeline h6 a {
+    color: var(--accent-primary);
+    text-decoration: none;
+    position: relative;
+    transition: color 0.2s ease;
+}
+
+.timeline h6 a:hover {
+    color: var(--accent-tertiary);
+    text-decoration: none;
+}
+
+.timeline h6 a::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    bottom: -2px;
+    left: 0;
+    background-color: var(--accent-primary);
+    transform: scaleX(0);
+    transform-origin: bottom right;
+    transition: transform 0.3s ease;
+}
+
+.timeline h6 a:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
+
+/* PhD Alert Styling for both themes */
+.alert.alert-danger {
+    border-radius: 8px;
+    border: 2px solid #dc2626;
+    padding: 12px 16px;
+    margin: 16px 0;
+    display: flex;
+    align-items: center;
+}
+
+/* Light theme styling */
+:root.light-theme .alert.alert-danger {
+    background-color: #fef2f2;
+    border-color: #dc2626;
+    color: #dc2626;
+}
+
+/* Dark theme styling */
+:root.dark-theme .alert.alert-danger {
+    background-color: rgba(220, 38, 38, 0.1);
+    border-color: #ef4444;
+    color: #fca5a5;
+}
+
+.alert.alert-danger i {
+    margin-right: 8px;
+    flex-shrink: 0;
+}
+
+.alert.alert-danger strong {
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+/* Responsive design for PhD alert */
+@media (max-width: 768px) {
+    .alert.alert-danger {
+        padding: 10px 12px;
+        font-size: 0.9rem;
+    }
+}
+
+/* Sessional GPA Highlight Styling */
+.highlight-sessional {
+    font-weight: 600;
+}
+
+/* Light theme styling */
+:root.light-theme .highlight-sessional {
+    color: #059669;
+}
+
+/* Dark theme styling */
+:root.dark-theme .highlight-sessional {
+    color: #34d399;
+}
+
+/* Smooth scrolling with offset for fixed headers */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px; /* Adjust based on your header height */
+}
+
+/* Profile navigation links styling */
+.profile-nav-link {
+  color: #007bff;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  border-bottom: 1px solid transparent;
+}
+
+.profile-nav-link:hover {
+  color: #0056b3;
+  text-decoration: none;
+  border-bottom: 1px solid #0056b3;
+}
+
+.profile-nav-link i {
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
+}
+
+.profile-nav-link:hover i {
+  opacity: 1;
+}
+
+/* Section anchor offset for better navigation */
+#education,
+#experience, 
+#research,
+#projects,
+#skills {
+  scroll-margin-top: 80px;
+}
+
+/* Navbar dropdown styling */
+.navbar-themed .dropdown-menu {
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  margin-top: 8px;
+}
+
+.navbar-themed .dropdown-item {
+  padding: 8px 16px;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+}
+
+.navbar-themed .dropdown-item:hover {
+  transform: translateX(2px);
+}
+
+.navbar-themed .dropdown-item i {
+  width: 20px;
+  text-align: center;
+}
+
+/* Dark theme dropdown */
+:root.dark-theme .navbar-themed .dropdown-menu {
+  background-color: #1c2333;
+  border: 1px solid #384357;
+}
+
+:root.dark-theme .navbar-themed .dropdown-item {
+  color: #ffffff;
+}
+
+:root.dark-theme .navbar-themed .dropdown-item:hover {
+  background-color: #384357;
+  color: #81b1ff;
+}
+
+:root.dark-theme .navbar-themed .dropdown-divider {
+  border-color: #384357;
+}
+
+/* Light theme dropdown */
+:root.light-theme .navbar-themed .dropdown-menu {
+  background-color: #ffffff;
+  border: 1px solid #e9ecef;
+}
+
+:root.light-theme .navbar-themed .dropdown-item {
+  color: #0f172a;
+}
+
+:root.light-theme .navbar-themed .dropdown-item:hover {
+  background-color: #f8f9fa;
+  color: #3182ce;
+}
+
+/* Active navbar item styling */
+.navbar-themed .nav-item.active .nav-link {
+  position: relative;
+  font-weight: 700;
+}
+
+.navbar-themed .nav-item.active .nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  height: 3px;
+  background: linear-gradient(90deg, #4299e1, #7f9cf5);
+  border-radius: 2px;
+}
+
+/* Dark theme active nav item */
+:root.dark-theme .navbar-themed .nav-item.active .nav-link {
+  color: #81b1ff;
+}
+
+/* Light theme active nav item */
+:root.light-theme .navbar-themed .nav-item.active .nav-link {
+  color: #3182ce;
+}

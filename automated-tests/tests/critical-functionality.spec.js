@@ -113,70 +113,29 @@ test.describe('Critical Functionality Tests', () => {
     await expect(searchInput).toBeFocused();
   });
 
-  test('Custom Cursor - Desktop Only', async ({ page }) => {
-    // Only test on desktop viewports
-    if (page.viewportSize().width <= 768) {
-      test.skip('Custom cursor only on desktop');
-    }
-    
-    // Wait for custom cursor initialization
-    await page.waitForTimeout(1500); // Allow time for delayed initialization
-    
-    // Check if default cursor is visible initially
+  test('Default Cursor Behavior', async ({ page }) => {
+    // Verify default cursor is working properly
     const body = page.locator('body');
-    const initialCursor = await body.evaluate(el => getComputedStyle(el).cursor);
-    expect(initialCursor).not.toBe('none');
+    const bodyStyles = await body.evaluate(el => getComputedStyle(el));
+    expect(bodyStyles.cursor).toBe('auto');
     
-    // Check if custom cursor elements exist
-    const cursor = page.locator('.custom-cursor');
-    const cursorFollower = page.locator('.custom-cursor-follower');
-    
-    // Custom cursor should be initialized
-    await expect(body).toHaveClass(/custom-cursor-initialized/);
-    
-    // Move mouse to trigger cursor tracking
-    await page.mouse.move(100, 100);
-    await page.waitForTimeout(200);
-    
-    await page.mouse.move(150, 150);
-    await page.waitForTimeout(200);
-    
-    await page.mouse.move(200, 200);
-    await page.waitForTimeout(200);
-    
-    // After sufficient movements, custom cursor should be working
-    const hasWorkingClass = await body.evaluate(el => 
-      el.classList.contains('custom-cursor-working')
-    );
-    
-    if (hasWorkingClass) {
-      // Verify custom cursor elements are visible
-      await expect(cursor).toBeVisible();
-      await expect(cursorFollower).toBeVisible();
-      
-      // Check cursor positioned correctly
-      const cursorBox = await cursor.boundingBox();
-      expect(cursorBox.x).toBeCloseTo(196, 10); // 200 - 4 (cursor offset)
-      expect(cursorBox.y).toBeCloseTo(196, 10); // 200 - 4 (cursor offset)
-      
-      // Test cursor interaction with buttons
-      const button = page.locator('.btn').first();
-      if (await button.isVisible()) {
-        await button.hover();
-        await page.waitForTimeout(300);
-        
-        // Cursor should change on hover
-        const hoverTransform = await cursor.evaluate(el => 
-          getComputedStyle(el).transform
-        );
-        expect(hoverTransform).toContain('scale');
-      }
-    } else {
-      // If custom cursor failed to initialize, default cursor should still work
-      console.log('Custom cursor not working - verifying default cursor');
-      const bodyStyles = await body.evaluate(el => getComputedStyle(el));
-      expect(bodyStyles.cursor).not.toBe('none');
+    // Test interactive elements have proper cursor
+    const button = page.locator('.btn').first();
+    if (await button.isVisible()) {
+      const buttonStyles = await button.evaluate(el => getComputedStyle(el));
+      expect(buttonStyles.cursor).toBe('pointer');
     }
+    
+    // Test links have proper cursor
+    const link = page.locator('a').first();
+    if (await link.isVisible()) {
+      const linkStyles = await link.evaluate(el => getComputedStyle(el));
+      expect(linkStyles.cursor).toBe('pointer');
+    }
+    
+    // Verify no custom cursor elements exist
+    const customCursor = page.locator('.custom-cursor');
+    await expect(customCursor).toHaveCount(0);
   });
 
   test('Skip Links - Accessibility Navigation', async ({ page }) => {
