@@ -6,20 +6,11 @@ $(document).ready(function() {
 });
 
 function initAdvancedInteractions() {
-    // Ensure default cursor is always visible first
-    ensureDefaultCursorVisible();
-    
     // Initialize all advanced interaction features
     initMagneticButtons();
     initCardTiltEffects();
     initParallaxScrolling();
     initAdvancedNavigation();
-    
-    // Initialize custom cursor with delay to ensure page is fully loaded
-    setTimeout(() => {
-        initCursorEffects();
-    }, 1000);
-    
     initScrollTriggeredAnimations();
     initAdvancedFormFields();
     initPageTransitions();
@@ -28,41 +19,6 @@ function initAdvancedInteractions() {
     console.log('🎨 Advanced interactions initialized');
 }
 
-// Ensure default cursor is always visible
-function ensureDefaultCursorVisible() {
-    // Force default cursor styles
-    const style = document.createElement('style');
-    style.id = 'default-cursor-enforcer';
-    style.textContent = `
-        /* Enforce default cursor visibility */
-        body:not(.custom-cursor-working) {
-            cursor: auto !important;
-        }
-        
-        body:not(.custom-cursor-working) a,
-        body:not(.custom-cursor-working) button,
-        body:not(.custom-cursor-working) .btn,
-        body:not(.custom-cursor-working) [role="button"],
-        body:not(.custom-cursor-working) [tabindex]:not([tabindex="-1"]) {
-            cursor: pointer !important;
-        }
-        
-        body:not(.custom-cursor-working) input:not([readonly]),
-        body:not(.custom-cursor-working) textarea:not([readonly]),
-        body:not(.custom-cursor-working) select,
-        body:not(.custom-cursor-working) [contenteditable="true"] {
-            cursor: text !important;
-        }
-        
-        body:not(.custom-cursor-working) [disabled],
-        body:not(.custom-cursor-working) [aria-disabled="true"] {
-            cursor: not-allowed !important;
-        }
-    `;
-    
-    document.head.appendChild(style);
-    console.log('🖱️ Default cursor visibility enforced');
-}
 
 // Magnetic button effects
 function initMagneticButtons() {
@@ -181,196 +137,6 @@ function initAdvancedNavigation() {
     });
 }
 
-// Advanced cursor effects - Complete implementation
-function initCursorEffects() {
-    // Only initialize on desktop devices
-    if (window.innerWidth <= 768) {
-        console.log('🖱️ Mobile device detected - skipping custom cursor');
-        return;
-    }
-    
-    // Check if custom cursor is supported
-    if (!document.body || !window.jQuery) {
-        console.warn('⚠️ Custom cursor requirements not met');
-        return;
-    }
-    
-    let cursor = null;
-    let cursorFollower = null;
-    let isInitialized = false;
-    let isWorking = false;
-    let mouseMovementCount = 0;
-    const MOVEMENT_THRESHOLD = 3; // Require 3 mouse movements to confirm working
-    
-    try {
-        // Create cursor elements
-        cursor = $('<div class="custom-cursor"></div>');
-        cursorFollower = $('<div class="custom-cursor-follower"></div>');
-        
-        // Append to body
-        $('body').append(cursor).append(cursorFollower);
-        
-        // Test if elements were created successfully
-        if (cursor.length === 0 || cursorFollower.length === 0) {
-            throw new Error('Failed to create cursor elements');
-        }
-        
-        // Mark as initialized
-        $('body').addClass('custom-cursor-initialized');
-        isInitialized = true;
-        
-        // Set initial position (off-screen until mouse moves)
-        cursor.css({
-            left: '-100px',
-            top: '-100px'
-        });
-        
-        cursorFollower.css({
-            left: '-100px',
-            top: '-100px'
-        });
-        
-        console.log('🖱️ Custom cursor elements created successfully');
-        
-        // Mouse movement handler
-        $(document).on('mousemove.customCursor', function(e) {
-            if (!isInitialized) return;
-            
-            const mouseX = e.clientX;
-            const mouseY = e.clientY;
-            
-            // Update cursor positions
-            cursor.css({
-                left: mouseX - 4,
-                top: mouseY - 4
-            });
-            
-            cursorFollower.css({
-                left: mouseX - 15,
-                top: mouseY - 15
-            });
-            
-            // Track successful mouse movements
-            mouseMovementCount++;
-            
-            // After sufficient movements, mark as working
-            if (!isWorking && mouseMovementCount >= MOVEMENT_THRESHOLD) {
-                isWorking = true;
-                $('body').addClass('custom-cursor-working');
-                console.log('🖱️ Custom cursor confirmed working - default cursor now hidden');
-                
-                // Verify cursor is still visible
-                if (!cursor.is(':visible') || cursor.css('opacity') === '0') {
-                    console.warn('⚠️ Custom cursor not visible after activation');
-                    disableCustomCursor();
-                    return;
-                }
-            }
-        });
-        
-        // Mouse enter/leave handlers
-        $(document).on('mouseenter.customCursor', function() {
-            if (isInitialized && cursor.length) {
-                cursor.css('opacity', '1');
-                cursorFollower.css('opacity', '1');
-            }
-        });
-        
-        $(document).on('mouseleave.customCursor', function() {
-            if (isInitialized && cursor.length) {
-                cursor.css('opacity', '0');
-                cursorFollower.css('opacity', '0');
-            }
-        });
-        
-        // Hover interactions for interactive elements
-        $(document).on('mouseenter.customCursor', '.btn, .card, .nav-link, a, button, [role="button"]', function() {
-            if (!isWorking || !cursor.length) return;
-            
-            cursor.css({
-                transform: 'scale(2)',
-                background: 'var(--accent-secondary, #818cf8)'
-            });
-            
-            cursorFollower.css({
-                transform: 'scale(1.5)',
-                borderColor: 'var(--accent-secondary, #818cf8)'
-            });
-        });
-        
-        $(document).on('mouseleave.customCursor', '.btn, .card, .nav-link, a, button, [role="button"]', function() {
-            if (!isWorking || !cursor.length) return;
-            
-            cursor.css({
-                transform: 'scale(1)',
-                background: 'var(--accent-primary, #38bdf8)'
-            });
-            
-            cursorFollower.css({
-                transform: 'scale(1)',
-                borderColor: 'var(--accent-primary, #38bdf8)'
-            });
-        });
-        
-        // Verification timeout - disable if not working after 10 seconds
-        setTimeout(() => {
-            if (isInitialized && !isWorking) {
-                console.warn('⚠️ Custom cursor not responding - disabling');
-                disableCustomCursor();
-            }
-        }, 10000);
-        
-        console.log('🖱️ Custom cursor initialization complete');
-        
-    } catch (error) {
-        console.error('❌ Custom cursor initialization failed:', error);
-        disableCustomCursor();
-    }
-    
-    // Function to disable custom cursor and restore defaults
-    function disableCustomCursor() {
-        try {
-            // Remove event listeners
-            $(document).off('.customCursor');
-            
-            // Remove cursor elements
-            if (cursor && cursor.length) {
-                cursor.remove();
-            }
-            if (cursorFollower && cursorFollower.length) {
-                cursorFollower.remove();
-            }
-            
-            // Remove body classes
-            $('body').removeClass('custom-cursor-initialized custom-cursor-working');
-            
-            // Reset variables
-            isInitialized = false;
-            isWorking = false;
-            cursor = null;
-            cursorFollower = null;
-            
-            console.log('🖱️ Custom cursor disabled - default cursor restored');
-            
-        } catch (error) {
-            console.error('❌ Error disabling custom cursor:', error);
-        }
-    }
-    
-    // Handle window resize
-    $(window).on('resize.customCursor', function() {
-        if (window.innerWidth <= 768 && isInitialized) {
-            console.log('🖱️ Switched to mobile - disabling custom cursor');
-            disableCustomCursor();
-        } else if (window.innerWidth > 768 && !isInitialized) {
-            console.log('🖱️ Switched to desktop - reinitializing custom cursor');
-            setTimeout(initCursorEffects, 100);
-        }
-    });
-    
-    // Expose disable function globally for debugging
-    window.disableCustomCursor = disableCustomCursor;
-}
 
 // Scroll-triggered animations
 function initScrollTriggeredAnimations() {

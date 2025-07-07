@@ -1,0 +1,309 @@
+# Page snapshot
+
+```yaml
+- link "Skip to main content":
+  - /url: "#main-content"
+- link "Skip to navigation":
+  - /url: "#navigation"
+- navigation "Main navigation":
+  - link "Tanzim Hossain Romel":
+    - /url: /
+    - strong: Tanzim Hossain Romel
+  - button "Toggle navigation":  Menu
+- main "Main content":
+  - figure:
+    - img "Photo"
+  - text: Tanzim Hossain Romel
+  - img "IQVIA"
+  - link "IQVIA":
+    - /url: https://www.iqvia.com/
+  - text:  Uttara, Dhaka, Bangladesh  romel.rcs@gmail.com  tanzimhossain.romel@iqvia.com  +88 01771 600158
+  - link " Book an appointment":
+    - /url: https://calendar.google.com/calendar/appointments/schedules/AcZssZ305Mj86OClwYTQjOE86Xp1LXkt1uYhGxI2YeQi7A-am9kKAbc9CXfitygxTrkmS5ZfG8ee3KZv?gv=true
+  - separator
+  - link "":
+    - /url: https://github.com/thromel
+  - link "":
+    - /url: https://www.linkedin.com/in/thromel
+  - link "":
+    - /url: https://twitter.com/RomelRcs
+  - link "":
+    - /url: /cv/
+  - heading "About Me" [level=4]
+  - text: • I am Tanzim Hossain Romel, a Software Development Engineer at IQVIA and aspiring researcher dedicated to advancing the intersection of industry practice and academic research • Graduated with a Bachelor of Science in Computer Science and Engineering from BUET (May 2023), with demonstrated expertise in developing scalable, enterprise-grade solutions • At IQVIA, I have successfully integrated LLM capabilities into healthcare analytics platforms, achieved 60% reduction in query execution times, and received the IQVIA Impact Silver Award for exceptional performance and innovation • My research focus centers on leveraging artificial intelligence to enhance software engineering methodologies, with particular emphasis on improving development efficiency, system resilience, and engineering practices • Currently conducting research in ML/AI Security (analyzing vulnerabilities in machine learning model ecosystems), LLM API contract analysis, and multi-cover image steganography, in collaboration with distinguished faculty from Bangladesh University of Engineering and Technology and Auburn University • My unique approach combines practical industry experience with rigorous academic research methodology. Please review my
+  - link "portfolio of projects":
+    - /url: /projects
+  - text: and
+  - link "research contributions":
+    - /url: /research
+  - text: for detailed examples of this integrated approach
+  - alert:
+    - text: 
+    - strong: Actively seeking PhD/MSc positions for Spring/Fall 2026 to pursue advanced research in AI-enhanced software engineering
+  - text: •
+  - link "Complete curriculum vitae available here":
+    - /url: /assets/pdf/cv.pdf
+  - heading "Bio" [level=3]
+  - text: 👋 Hi I'm Tanzim. I'm a software engineer and aspiring researcher passionate about creating solutions that make lives better for people. My interest lies in the fields of Software Engineering, AI/ML Security, Blockchain, and Image Steganography, with a strong focus on DevOps, Backend Engineering & AI Engineering. I'm particularly interested in Domain Driven Design, System Architecture, and Software Architecture. Being both research and development oriented, I believe I can tackle challenges that require both kinds of efforts. 🔥 I'm a firm believer in the compound effect of consistent effort. My daily routine includes dedicating time to learning new technologies, and staying updated with the latest research in my fields of interest. I maintain detailed learning logs and consistently apply new knowledge to real-world projects. This approach has enabled me to successfully juggle multiple research collaborations while excelling in my full-time engineering role. I'm driven by the philosophy that every line of code, every research insight, and every problem solved contributes to a larger mission of technological advancement. 🏫 I completed my B.Sc in Computer Science and Engineering from Bangladesh University of Engineering and Technology with a CGPA of 3.53/4.0, demonstrating consistent academic excellence throughout my undergraduate program. Particularly noteworthy is my 3.86/4.0 GPA in Sessional Courses—the hands-on laboratory and project-based components that form the core of BUET's rigorous engineering curriculum. This achievement reflects my strength in collaborative programming projects, practical system implementations, and applied problem-solving. During my time at BUET, I received recognition for my academic achievements, including the Dean's List Award for exceptional performance and placing
+  - link "2nd in the Bangla Handwritten Digits Recognition contest":
+    - /url: https://tanzimhromel.com/projects/bangla_digit_recognition/
+  - text: . 🏅 During my undergraduate studies, I was selected as a finalist in the
+  - link "Blockchain Olympiad Bangladesh 2021 (BCOLBD 2021)":
+    - /url: https://bcolbd.org/2021/teams
+  - text: with our project "
+  - link "Blockchain Based Ticketing Platform":
+    - /url: /projects/blockchain-ticketing
+  - text: ." I worked as part of the "Recursively Enumerable" team alongside
+  - link "Ataf Fazledin Ahamed":
+    - /url: https://fazledyn.github.io
+  - text: and
+  - link "Md. Tanzim Azad Nishan":
+    - /url: https://www.linkedin.com/in/md-tanzim-azad-a879a51b7/
+  - text: ", developing a decentralized solution to address ticketing fraud and scalping issues through smart contracts and blockchain technology. 💼 I am currently a Software Development Engineer at"
+  - link "IQVIA":
+    - /url: https://www.iqvia.com/
+  - text: "(NYSE: IQV), a Fortune 500 company and global leader in healthcare data analytics, serving 90% of top pharmaceutical companies worldwide. At IQVIA, I develop microservices-based applications handling millions of patient records, implement observability solutions for critical healthcare data pipelines, architect cloud-native solutions on AWS, and integrate LLM capabilities into clinical data analytics dashboards for natural language querying and automated report generation. 🏆 In May 2025, I received the"
+  - link "IQVIA Impact Program – Silver":
+    - /url: https://drive.google.com/file/d/1Vc4E2RoQEPmbfS56oLdUih-oJDBok9sP/view?usp=share_link
+  - text: award for outstanding performance, critical issue resolution, and impactful feature development. 📜 I'm currently working on research projects related to
+  - link "Machine Learning Security":
+    - /url: /research#research-projects
+  - text: (analyzing vulnerabilities in ML model hubs and developing security frameworks),
+  - link "Blockchain in Healthcare":
+    - /url: /research#research-projects
+  - text: (developing an advanced framework with sharding, Layer-2 solutions, and DAG ledger),
+  - link "LLM API Contract Analysis":
+    - /url: /research#research-projects
+  - text: ", and"
+  - link "Multi-Cover Image Steganography":
+    - /url: /research#research-projects
+  - text: ". 🤝 I'm fortunate to collaborate with esteemed researchers:"
+  - link "Professor A. B. M. Alim Al Islam":
+    - /url: https://sites.google.com/site/abmalimalislam/home
+  - text: (BUET) on image steganography,
+  - link "Dr. Akond Rahman":
+    - /url: https://akondrahman.github.io
+  - text: (Auburn University,
+  - link "PASER group":
+    - /url: https://paser-group.github.io/
+  - text: ) on LLM API contracts, and
+  - link "Professor ASM Latiful Hoque":
+    - /url: https://cse.buet.ac.bd/faculty/faculty_detail/asmlatifulhoque
+  - text: (BUET) on blockchain technology who was also my undergraduate thesis supervisor. 🌐 I'm proud to have worked with the
+  - link "uReporter team":
+    - /url: https://ureporter.cse.buet.ac.bd/about_us
+  - text: ", contributing to Bangladesh's first anonymous online reporting system designed to empower citizens to safely and effectively report social issues. This project has received coverage from international media including BBC Bengali, Saudi Gazette, and Global Voices. Our research on this work is currently"
+  - link "under review at the ACM CSCW conference":
+    - /url: /research#publications
+  - text: . 🔮 I consider myself a perpetually curious learner — viewing each new technology not just as a tool, but as a lens through which to understand deeper computational principles. This mindset was cultivated through my admiration of interdisciplinary thinkers like Claude Shannon, who bridged mathematics and engineering, and Richard Feynman, whose playful approach to physics reminds me that the best innovations often happen when exploring at the boundaries of disciplines. I'm particularly drawn to the work of
+  - link "Leslie Lamport":
+    - /url: https://en.wikipedia.org/wiki/Leslie_Lamport
+  - text: in distributed systems and
+  - link "pioneering research in attention mechanisms":
+    - /url: https://papers.nips.cc/paper_files/paper/2017/hash/3f5ee243547dee91fbd053c1c4a845aa-Abstract.html
+  - text: "that transformed modern AI. These inspirations fuel my approach to both engineering and research: build with precision, explore with curiosity, and always seek the elegant principles beneath complex systems. 📚 I'm currently reading \"Designing Data-Intensive Applications\" and \"Hands-On Large Language Models\" by Jay Alammar to deepen my understanding of data systems and LLMs. I'm also actively preparing for the Certified Kubernetes Application Developer (CKAD) and AWS Solution Architect Associate certifications to advance my knowledge in cloud infrastructure. You can check out my"
+  - link "learning resource recommendations here":
+    - /url: /learning
+  - text: . 🏙️ I grew up in Rajshahi, a serene city in northwestern Bangladesh known as the "City of Education" and famous for its silk production, clean streets, mangoes, and the beautiful Padma River. Currently, I live in Uttara, Dhaka—Bangladesh's vibrant capital and one of South Asia's fastest-growing megacities, which offers a dynamic environment with opportunities to collaborate with leading tech companies and research institutions. 🔍 My current career goal is to pursue excellence in software engineering while contributing to cutting-edge research. As a motivated researcher, I am actively seeking PhD/MSc positions for Spring/Fall 2026 to further my academic journey in computer science, focusing on software engineering, distributed systems, AI, and blockchain technology. 📝 I regularly share my knowledge and insights through my
+  - link "technical blog":
+    - /url: /blog
+  - text: ", where I write in-depth articles about software engineering, algorithm analysis, system optimization, and emerging technologies. My blog covers topics ranging from"
+  - link "microservice performance optimization":
+    - /url: /blog/2024/12/27/optimizing-dotnet-microservices-performance/
+  - text: to
+  - link "advanced algorithm theory":
+    - /url: /blog/2024/12/27/advice-complexity-online-algorithms/
+  - text: ", helping fellow developers and students bridge the gap between theoretical concepts and practical implementation."
+  - heading "News and Updates" [level=4]
+  - separator
+  - heading "2024" [level=5]
+  - link "Paper submitted to ACM CSCW Conference":
+    - /url: news#year-2024
+  - emphasis: Oct 21, 2024
+  - heading "2023" [level=5]
+  - link "Started working as a Software Development Engineer at IQVIA":
+    - /url: news#year-2023
+  - emphasis: Jun 01, 2023
+  - link "Graduated from Bangladesh University of Engineering and Technology":
+    - /url: news#year-2023
+  - emphasis: May 27, 2023
+  - link "All News ":
+    - /url: /news
+  - heading "My Resume" [level=2]
+  - link "":
+    - /url: /cv/
+  - separator
+  - region "Education":
+    - heading "Education" [level=3]
+    - article "Visit Bangladesh University of Engineering and Technology website":
+      - heading "Visit Bangladesh University of Engineering and Technology website" [level=4]:
+        - link "Visit Bangladesh University of Engineering and Technology website":
+          - /url: https://cse.buet.ac.bd
+          - text: Bangladesh University of Engineering and Technology
+      - text: April 2018 - May 2023 B.Sc in Computer Science and Engineering
+      - strong: "CGPA: 3.53/4.0"
+      - text: with consistently strong performance throughout the program, culminating in
+      - strong: 3.61/4.0 in the final term
+      - text: . Achieved exceptional performance in practical coursework with
+      - strong: 3.86/4.0 in Sessional Courses
+      - text: ", demonstrating excellence in hands-on laboratory work, collaborative programming projects, and applied engineering challenges."
+      - button "Toggle coursework details for Bangladesh University of Engineering and Technology": View Coursework
+    - article "Visit Rajshahi College website":
+      - heading "Visit Rajshahi College website" [level=4]:
+        - link "Visit Rajshahi College website":
+          - /url: https://rc.edu.bd
+          - text: Rajshahi College
+      - text: 2015 - 2017 Higher Secondary Certificate (HSC) Placed 15th in Rajshahi Board, received Talentpool Scholarship, A+ in all subjects with 96.5% marks in Physics, Chemistry, and Higher Mathematics
+    - article "Visit Rajshahi Collegiate School website":
+      - heading "Visit Rajshahi Collegiate School website" [level=4]:
+        - link "Visit Rajshahi Collegiate School website":
+          - /url: https://rcs.edu.bd
+          - text: Rajshahi Collegiate School
+      - text: 2007 - 2015 Secondary School Certificate (SSC) A+ in all subjects, received General Scholarship
+  - separator
+  - region "Work Experience":
+    - heading "Work Experience" [level=3]
+    - article "Software Development Engineer 1":
+      - img "Software Development Engineer 1"
+      - heading "Software Development Engineer 1" [level=4]
+      - text: "June 2023 - Present IQVIA (NYSE: IQV) is a leading global provider of advanced analytics, technology solutions, and clinical research services to the life sciences industry, with 74,000+ employees across 100+ countries."
+    - article "Full Stack Engineer":
+      - img "Full Stack Engineer"
+      - heading "Full Stack Engineer" [level=4]
+      - text: Apr 2021 - Nov 2021 Developed an e-commerce aggregator platform allowing brands to promote products by fetching listings from multiple e-commerce platforms across Bangladesh.
+  - link "View all work experience":
+    - /url: /experience
+    - text: View All Experience
+  - separator
+  - region "Research Projects":
+    - heading "Research Projects" [level=3]
+    - 'heading "Securing Machine Learning Model Ecosystems: A Comprehensive Security Analysis" [level=5]':
+      - 'link "Securing Machine Learning Model Ecosystems: A Comprehensive Security Analysis"':
+        - /url: /showcase/projects/ml-security/
+    - text: "Research Project May 2025 - Present Conducting a comprehensive security analysis of 15 major machine learning platforms, focusing on remote code execution vulnerabilities in ML model hubs. This research builds upon foundational work treating ML models as executable code, systematically analyzing platforms like Hugging Face Hub (752,000+ models), Kaggle, TensorFlow Hub, and PyTorch Hub. Developing a security maturity framework that categorizes platforms from \"Basic\" to \"Advanced\" based on protective measures, evaluating defensive technologies like SafeTensors and MalHug framework, and contributing to ML supply chain security standards. Collaboration: Collaborating with"
+    - link "Mohammad Latif Siddique":
+      - /url: https://lsiddiqsunny.github.io
+    - text: ", Ph.D. candidate at University of Notre Dame, USA, who specializes in software engineering, software security, code generation, and applied machine learning. Currently a Ph.D. intern at Meta (Summer 2025) working with WhatsApp Core Consumer Messaging Groups & Communities on LLM applications. Initial independent research expanded to collaboration in January 2025, building upon the work of Zhao et al. (2024) on ML model security vulnerabilities."
+    - link "View Details":
+      - /url: /showcase/projects/ml-security/
+    - 'heading "Making AI Reliable: Design by Contract for Large Language Models" [level=5]':
+      - 'link "Making AI Reliable: Design by Contract for Large Language Models"':
+        - /url: /showcase/projects/extending-llm-api-contract-analysis-a-refined-taxonomy-and-empirical-study/
+    - text: "Research Project Nov 2024 - Present Developed an extended taxonomy for API contracts in LLM libraries and created a design by contract tool to enforce API contracts and simplify debugging for popular ML libraries. Conducted empirical studies on real-world issues, implemented automated contract validation, and proposed recommendations for LLM library developers and LLMOps tool builders. Collaboration: Collaborating with"
+    - link "Dr. Akond Rahman":
+      - /url: https://akondrahman.github.io
+    - text: ", Assistant Professor at Auburn University, who specializes in DevOps, cybersecurity, and secure software development. Dr. Rahman leads the PASER (Practical and Actionable Software Engineering Research) group, focusing on practical software engineering research that bridges the gap between academic research and industry practice."
+    - link "View Details":
+      - /url: /showcase/projects/extending-llm-api-contract-analysis-a-refined-taxonomy-and-empirical-study/
+  - link "View all research projects":
+    - /url: /research
+    - text: View All Research
+  - separator
+  - region "Notable Projects":
+    - heading "Notable Projects" [level=3]
+    - heading "URL Shortener" [level=5]:
+      - link "URL Shortener":
+        - /url: https://github.com/thromel/URLShortener
+    - text: Project Nov 2024 - Present A production-ready URL shortener system using .NET, React.js, and Azure services with CI/CD, infrastructure as code, and optimized performance using Redis Cache and CosmosDB. ASP.NET Core React.js Azure CI/CD PostgreSQL +1 more
+  - link "View all projects":
+    - /url: /projects
+    - text: View All Projects
+  - separator
+  - region "Technical Skills":
+    - heading "Technical Skills" [level=3]
+    - heading "Programming Languages" [level=5]
+    - text: C# .NET Python JavaScript Go
+    - heading "Machine Learning" [level=5]
+    - text: PyTorch NumPy Pandas OpenAI API LangChain
+    - heading "Blockchain" [level=5]
+    - text: Ethereum Solidity Hyperledger Fabric
+    - heading "Web & Backend Frameworks" [level=5]
+    - text: ASP.NET Express.js FastAPI
+    - heading "Databases" [level=5]
+    - text: PostgreSQL MongoDB Microsoft SQL Server
+    - heading "DevOps & Cloud" [level=5]
+    - text: Docker Kubernetes Azure AWS GitHub Actions
+    - heading "Monitoring & Observability" [level=5]
+    - text: OpenTelemetry Jaeger
+    - heading "Other" [level=5]
+    - text: Redis gRPC Entity Framework Azure Bicep
+    - heading ".NET Ecosystem" [level=5]
+    - text: Advanced
+    - paragraph: Specialized in developing enterprise-grade applications using .NET Core/6+. Extensive experience with C#, ASP.NET Core Web APIs, Entity Framework Core, LINQ, and Dependency Injection. Proficient in implementing clean architecture, repository patterns, and CQRS for scalable microservices.
+    - text: C# ASP.NET Core Entity Framework Core LINQ Dependency Injection xUnit Moq MediatR SignalR OpenTelemetry
+    - heading "Python Stack" [level=5]
+    - text: Intermediate
+    - paragraph: Experienced in data processing, web scraping, and backend development with Python. Proficient in FastAPI, Flask, and Scrapy frameworks. Familiar with scientific computing libraries including NumPy, Pandas, and basic machine learning implementations with scikit-learn and PyTorch.
+    - text: FastAPI Flask Scrapy NumPy Pandas Matplotlib scikit-learn PyTorch asyncio Python-Selenium
+  - separator
+  - region "Soft Skills":
+    - heading "Soft Skills" [level=3]
+    - text:  Team Leadership & Mentorship  Strategic Problem-solving & Critical Thinking  Technical Communication & Documentation  Cross-functional Collaboration  Proactive Initiative & Ownership  Continuous Learning & Adaptability  Performance-driven Mindset  Research Methodology & Analysis  Time Management & Prioritization  Quality Assurance & Attention to Detail
+  - separator
+  - region "Tests & Certifications":
+    - heading "Tests & Certifications" [level=3]
+    - list:
+      - listitem:
+        - heading "📜 TOEFL iBT" [level=6]:
+          - link "📜 TOEFL iBT":
+            - /url: https://www.ets.org/toefl.html
+        - text: "Score:"
+        - strong: 103/120
+        - text: Listening - 29, Reading - 29, Writing - 22, Speaking - 23
+      - listitem:
+        - heading "🔄 Certified Kubernetes Application Developer (CKAD)" [level=6]:
+          - link "🔄 Certified Kubernetes Application Developer (CKAD)":
+            - /url: https://www.cncf.io/certification/ckad/
+        - emphasis: "Status: In preparation"
+      - listitem:
+        - heading "🔄 AWS Solution Architect Associate" [level=6]:
+          - link "🔄 AWS Solution Architect Associate":
+            - /url: https://aws.amazon.com/certification/certified-solutions-architect-associate/
+        - emphasis: "Status: In preparation"
+  - separator
+  - region "Professional Memberships":
+    - heading "Professional Memberships" [level=3]
+    - list:
+      - listitem:
+        - heading "ACM (Association for Computing Machinery)" [level=6]
+        - strong: Professional Member
+        - text: "(since 2024) Contact: tromel@acm.org"
+  - separator
+  - region "Hobbies & Interests":
+    - heading "Hobbies & Interests" [level=3]
+    - heading "Programming & Learning" [level=5]
+    - list:
+      - listitem: Solving programming problems in my free time
+      - listitem: Reading software engineering, architecture, and distributed systems books
+      - listitem: Learning development of Agentic AI using LangChain and LangGraph
+      - listitem: Reading software engineering blogs (Dan Abramov's Overreacted, Martin Fowler's Bliki, The Pragmatic Engineer)
+      - listitem: Following publications like The Economist, MIT Technology Review, and thegradient.pub for tech and policy insights
+    - heading "Reading" [level=5]
+    - list:
+      - listitem: Science fiction novels including Foundation, Dune, Lord of the Rings
+      - listitem: A Song of Ice and Fire series and Harry Potter books
+    - heading "Travel" [level=5]
+    - list:
+      - listitem: Exploring new places and cultures
+      - listitem: Visited Saudi Arabia, India, and various parts of Bangladesh
+    - heading "Sports & Outdoor Activities" [level=5]
+    - list:
+      - listitem: Playing and watching Football (Soccer) and Cricket
+      - listitem: Participating in various sports activities
+      - listitem: Enjoying outdoor activities like cycling, hiking, and trekking
+      - listitem: Playing video games in my leisure time
+    - heading "Food & Entertainment" [level=5]
+    - list:
+      - listitem: Exploring different cuisines and food cultures
+      - listitem: Trying out new restaurants and street food
+- contentinfo "Site footer":
+  - text: "Last updated: Jul 2025"
+  - link "":
+    - /url: https://github.com/thromel
+  - link "":
+    - /url: https://www.linkedin.com/in/thromel
+  - link "":
+    - /url: https://twitter.com/RomelRcs
+  - text: © 2025 Tanzim Hossain Romel Made with  using modern web technologies
+- button "Toggle dark/light mode"
+```
