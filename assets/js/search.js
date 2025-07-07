@@ -236,6 +236,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Additional event handler for search button to prevent conflicts
     const searchButton = document.querySelector('.search-button');
     if (searchButton) {
+        // Multiple event handlers for maximum compatibility
         searchButton.addEventListener('click', function(e) {
             e.preventDefault();
             e.stopPropagation();
@@ -247,10 +248,27 @@ document.addEventListener('DOMContentLoaded', () => {
                 siteSearch.openSearchModal();
             } else {
                 console.warn('Search not initialized yet');
+                // Retry after a short delay
+                setTimeout(() => {
+                    if (siteSearch && siteSearch.isInitialized) {
+                        siteSearch.openSearchModal();
+                    }
+                }, 100);
             }
         }, true);
         
-        console.log('🔍 Search button event handler attached');
+        // Additional event delegation to catch any missed clicks
+        document.addEventListener('click', function(e) {
+            if (e.target.closest('.search-button')) {
+                e.preventDefault();
+                e.stopPropagation();
+                if (siteSearch && siteSearch.isInitialized) {
+                    siteSearch.openSearchModal();
+                }
+            }
+        }, true);
+        
+        console.log('🔍 Search button event handlers attached');
     }
     
     // Handle Ctrl+K keyboard shortcut

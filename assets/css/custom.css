@@ -134,8 +134,7 @@
 
 /* Position multiple skip links when focused */
 .skip-link:nth-child(1):focus { left: 20px !important; }
-.skip-link:nth-child(2):focus { left: 220px !important; }
-.skip-link:nth-child(3):focus { left: 420px !important; }
+.skip-link:nth-child(2):focus { left: 250px !important; }
 
 /* ================================
    SCROLL & LAYOUT STYLES
