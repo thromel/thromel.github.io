@@ -87,11 +87,11 @@ function createThemeToggle() {
         ? '<i class="fas fa-sun" aria-hidden="true"></i>'
         : '<i class="fas fa-moon" aria-hidden="true"></i>';
 
-    // Force styles to ensure visibility
+    // Force styles to ensure visibility and fixed positioning
     toggleButton.style.cssText = `
       position: fixed !important;
       bottom: 30px !important;
-      right: 30px !important;
+      left: 30px !important;
       z-index: 10001 !important;
       width: 50px !important;
       height: 50px !important;
@@ -108,11 +108,21 @@ function createThemeToggle() {
       opacity: 1 !important;
       visibility: visible !important;
       pointer-events: auto !important;
+      transform: translateZ(0) !important;
     `;
 
     // Add to the body
     document.body.appendChild(toggleButton);
     
-    console.log('🌙 Theme toggle button created and positioned');
+    // Ensure button stays fixed during scroll
+    window.addEventListener('scroll', function() {
+      if (toggleButton && toggleButton.style) {
+        toggleButton.style.position = 'fixed';
+        toggleButton.style.bottom = '30px';
+        toggleButton.style.left = '30px';
+      }
+    });
+    
+    console.log('🌙 Theme toggle button created and positioned at bottom-left');
   }
 }
