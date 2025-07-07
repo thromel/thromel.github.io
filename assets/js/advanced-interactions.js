@@ -157,7 +157,10 @@ function initCursorEffects() {
             borderRadius: '50%',
             pointerEvents: 'none',
             zIndex: 9999,
-            transition: 'all 0.1s ease'
+            transition: 'all 0.1s ease',
+            opacity: 1,
+            transformOrigin: 'center center',
+            mixBlendMode: 'difference'
         });
         
         cursorFollower.css({
@@ -168,19 +171,39 @@ function initCursorEffects() {
             borderRadius: '50%',
             pointerEvents: 'none',
             zIndex: 9998,
-            transition: 'all 0.15s ease'
+            transition: 'all 0.15s ease',
+            opacity: 1,
+            transformOrigin: 'center center'
         });
         
+        // Track mouse position with proper coordinates
+        let mouseX = 0;
+        let mouseY = 0;
+        
         $(document).on('mousemove', function(e) {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            
             cursor.css({
-                left: e.clientX - 4,
-                top: e.clientY - 4
+                left: mouseX - 4,
+                top: mouseY - 4
             });
             
             cursorFollower.css({
-                left: e.clientX - 15,
-                top: e.clientY - 15
+                left: mouseX - 15,
+                top: mouseY - 15
             });
+        });
+        
+        // Hide cursor when mouse leaves window
+        $(document).on('mouseleave', function() {
+            cursor.css('opacity', 0);
+            cursorFollower.css('opacity', 0);
+        });
+        
+        $(document).on('mouseenter', function() {
+            cursor.css('opacity', 1);
+            cursorFollower.css('opacity', 1);
         });
         
         // Cursor interactions

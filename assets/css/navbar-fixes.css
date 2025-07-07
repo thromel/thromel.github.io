@@ -171,10 +171,11 @@ body > div:not(.container):not(.skip-links):not(.scroll-indicator):not(.back-to-
     }
 }
 
-/* Remove any custom cursor that might interfere */
+/* Ensure custom cursor is above most elements but below modals */
 .custom-cursor,
 .custom-cursor-follower {
-    display: none !important;
+    z-index: 9999 !important;
+    pointer-events: none !important;
 }
 
 /* Ensure navbar items are properly aligned */

@@ -578,6 +578,17 @@
     pointer-events: none !important;
 }
 
+/* Hide default cursor on desktop when custom cursor is active */
+@media (min-width: 992px) {
+    body {
+        cursor: none !important;
+    }
+    
+    a, button, .btn, input, textarea, select, [role="button"] {
+        cursor: none !important;
+    }
+}
+
 .page-transition {
     z-index: 10004 !important;
 }
