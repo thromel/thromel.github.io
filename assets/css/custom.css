@@ -1,46 +1,4 @@
-/* Accessibility: Skip Links */
-.skip-links {
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 10001;
-    overflow: hidden;
-    height: 0;
-}
-
-.skip-link {
-    position: absolute;
-    top: -48px;
-    left: 8px;
-    background: var(--accent-primary);
-    color: white;
-    padding: 12px 16px;
-    text-decoration: none;
-    border-radius: 0 0 4px 4px;
-    font-weight: 600;
-    font-size: 0.9rem;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-    transition: top 0.3s ease;
-    z-index: 10002;
-    white-space: nowrap;
-}
-
-.skip-link:focus {
-    top: 60px; /* Move below navbar */
-    text-decoration: none;
-    color: white;
-}
-
-.skip-link:hover {
-    color: white;
-    text-decoration: none;
-    background: var(--accent-secondary);
-}
-
-/* Position skip links for proper stacking */
-.skip-link:nth-child(1) { left: 8px; }
-.skip-link:nth-child(2) { left: 180px; }
-.skip-link:nth-child(3) { left: 340px; }
+/* Skip links are now handled in navbar-fixes.css */
 
 /* Scroll Indicator Styling */
 .scroll-indicator {

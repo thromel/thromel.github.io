@@ -55,16 +55,33 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
     
+    <!-- Preload critical CSS files -->
+    <link rel="preload" href="{{ '/assets/css/global.css' | relative_url }}" as="style">
+    <link rel="preload" href="{{ '/assets/css/developer-theme.css' | relative_url }}" as="style">
+    
+    <!-- Critical CSS files -->
     <link rel="stylesheet" href="{{ '/assets/css/global.css' | relative_url }}">
     <link rel="stylesheet" href="{{ '/assets/css/developer-theme.css' | relative_url }}">
     <link rel="stylesheet" href="{{ '/assets/css/custom.css' | relative_url }}">
-    <link rel="stylesheet" href="{{ '/assets/css/enhanced-animations.css' | relative_url }}">
-    <link rel="stylesheet" href="{{ '/assets/css/advanced-interactions.css' | relative_url }}">
-    <link rel="stylesheet" href="{{ '/assets/css/search.css' | relative_url }}">
     <link rel="stylesheet" href="{{ '/assets/css/navbar-fixes.css' | relative_url }}">
+    <link rel="stylesheet" href="{{ '/assets/css/responsive-images.css' | relative_url }}">
     
-    <!-- Syntax Highlighting CSS -->
-    <link rel="stylesheet" href="{{ '/assets/css/syntax-highlighting.css' | relative_url }}">
+    <!-- Non-critical CSS loaded asynchronously -->
+    <link rel="preload" href="{{ '/assets/css/enhanced-animations.css' | relative_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="{{ '/assets/css/advanced-interactions.css' | relative_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="{{ '/assets/css/search.css' | relative_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="{{ '/assets/css/syntax-highlighting.css' | relative_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    
+    <!-- Fallback for browsers without preload support -->
+    <noscript>
+        <link rel="stylesheet" href="{{ '/assets/css/enhanced-animations.css' | relative_url }}">
+        <link rel="stylesheet" href="{{ '/assets/css/advanced-interactions.css' | relative_url }}">
+        <link rel="stylesheet" href="{{ '/assets/css/search.css' | relative_url }}">
+        <link rel="stylesheet" href="{{ '/assets/css/syntax-highlighting.css' | relative_url }}">
+    </noscript>
+    
+    <!-- Critical CSS inline for faster rendering -->
+    {% include critical-css.html %}
     
     <!-- Theme initialization script to prevent FOUC -->
     <script>
@@ -131,6 +148,7 @@
     <!-- Animation Libraries -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js" integrity="sha512-A7AYk1fGKX6S2SsHywmPkrnzTZHrgiVT7GcQkLGDe2ev0aWb8zejytzS8wjo7PGEXKqJOrjQ4oORtnimIRZBtw==" crossorigin="anonymous"></script>
     
+    <script src="{{ '/assets/js/performance-optimizations.js' | relative_url }}"></script>
     <script src="{{ '/assets/js/common.js' | relative_url }}"></script>
     <script src="{{ '/assets/js/tag-fix.js' | relative_url }}"></script>
     <script src="{{ '/assets/js/theme-toggle.js' | relative_url }}"></script>
