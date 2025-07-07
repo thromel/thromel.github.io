@@ -120,13 +120,7 @@ body {
     z-index: 1000; /* Below navbar */
 }
 
-/* Ensure theme toggle doesn't overlap */
-.theme-toggle {
-    position: fixed;
-    bottom: 90px !important;
-    right: 30px !important;
-    z-index: 1000; /* Below navbar */
-}
+/* Theme toggle styles are in critical CSS */
 
 /* Clear any conflicting styles */
 .navbar-collapse {
