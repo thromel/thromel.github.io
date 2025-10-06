@@ -9,8 +9,6 @@ pages:
   url: /research
 - name: Projects
   url: /projects
-- name: Blog
-  url: /blog
 - name: Achievements
   url: /achievements
 - name: News
