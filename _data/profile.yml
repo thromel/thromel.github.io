@@ -170,7 +170,7 @@ short_bio: >-
   <br/><br/>
   🔍 My current career goal is to pursue excellence in software engineering while contributing to cutting-edge research. As a <b>motivated researcher</b>, I am actively seeking <b>PhD/MSc positions for Spring/Fall 2026</b> to further my academic journey in computer science, focusing on software engineering, distributed systems, AI, and blockchain technology.
   <br/><br/>
-  📝 I regularly share my knowledge and insights through my <a href="/blog" target="_blank"><b>technical blog</b></a>, where I write in-depth articles about software engineering, algorithm analysis, system optimization, and emerging technologies. My blog covers topics ranging from <a href="/blog/2024/12/27/optimizing-dotnet-microservices-performance/" target="_blank">microservice performance optimization</a> to <a href="/blog/2024/12/27/advice-complexity-online-algorithms/" target="_blank">advanced algorithm theory</a>, helping fellow developers and students bridge the gap between theoretical concepts and practical implementation.
+  
   
 
 portrait_url: /assets/images/photos/DP.JPG
@@ -421,18 +421,6 @@ professional_memberships:
   joined: 2024
 
 research:
-- title: "Securing Machine Learning Model Ecosystems: A Comprehensive Security Analysis"
-  date: May 2025 - Present
-  link: /projects/ml-security
-  description: >-
-    Conducting a comprehensive security analysis of 15 major machine learning platforms, focusing on remote code execution vulnerabilities in ML model hubs. This research builds upon foundational work treating ML models as executable code, systematically analyzing platforms like Hugging Face Hub (752,000+ models), Kaggle, TensorFlow Hub, and PyTorch Hub. Developing a security maturity framework that categorizes platforms from "Basic" to "Advanced" based on protective measures, evaluating defensive technologies like SafeTensors and MalHug framework, and contributing to ML supply chain security standards.
-  collaborator: >-
-    Collaborating with <a href="https://lsiddiqsunny.github.io" target="_blank">Mohammad Latif Siddique</a>, Ph.D. candidate at 
-    University of Notre Dame, USA, who specializes in software engineering, software security, code generation, and applied machine learning. 
-    Currently a Ph.D. intern at Meta (Summer 2025) working with WhatsApp Core Consumer Messaging Groups & Communities on LLM applications. 
-    Initial independent research expanded to collaboration in January 2025, building upon the work of Zhao et al. (2024) on ML model security vulnerabilities.
-
-
 - title: "Making AI Reliable: Design by Contract for Large Language Models"
   date: Nov 2024 - Present
   link: /projects/extending-llm-api-contract-analysis-a-refined-taxonomy-and-empirical-study
