@@ -203,8 +203,8 @@ strong, b {
 }
 
 .profile-image {
-  width: 200px;
-  height: 200px;
+  width: 250px;
+  height: 250px;
   border-radius: var(--radius-lg);
   object-fit: cover;
   box-shadow: var(--shadow-md);
@@ -651,8 +651,8 @@ strong, b {
     grid-column: 1;
     grid-row: 1;
     margin: 0 auto;
-    width: 150px;
-    height: 150px;
+    width: 180px;
+    height: 180px;
   }
 
   .profile-content {
