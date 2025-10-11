@@ -16,7 +16,6 @@
 \usepackage[dvipsnames]{xcolor} % for coloring text
 \definecolor{primaryColor}{RGB}{0, 0, 0} % define primary color
 \usepackage{enumitem} % for customizing lists
-\usepackage{fontawesome5} % for using icons
 \usepackage{amsmath} % for math
 \usepackage[
     pdftitle={Tanzim Hossain Romel's CV},
@@ -41,7 +40,7 @@
     \pdfgentounicode=1
     \usepackage[T1]{fontenc}
     \usepackage[utf8]{inputenc}
-    \usepackage{lmodern}
+    % \usepackage{lmodern}
 \fi
 
 \usepackage{charter}
@@ -140,7 +139,7 @@
         \LenToUnit{\paperwidth-2 cm-0 cm+0.05cm},
         \LenToUnit{\paperheight-1.0 cm}
     ){\vtop{{\null}\makebox[0pt][c]{
-        \small\color{gray}\textit{Last updated in July 2024}\hspace{\widthof{Last updated in July 2024}}
+        \small\color{gray}\textit{Last updated in October 2025}\hspace{\widthof{Last updated in October 2025}}
     }}}%
   }%
 }%
@@ -191,6 +190,118 @@
     \vspace{5 pt - 0.3 cm}
 
 
+    \section{Education}
+ 
+        \begin{twocolentry}{
+            April 2018 – May 2023
+        }
+            \textbf{Bangladesh University of Engineering and Technology (BUET)} -- Dhaka, Bangladesh
+        \end{twocolentry}
+
+        \vspace{0.10 cm}
+        \begin{onecolentry}
+            B.Sc. in Computer Science and Engineering
+        \end{onecolentry}
+
+        \vspace{0.10 cm}
+        \begin{onecolentry}
+            \begin{highlights}
+                \item \textbf{CGPA:} 3.53/4.00 (3.61 in final term) | 3.86/4.00 in sessional courses (lab practicals and group projects)
+                \item \textbf{Dean's List:} Level-2 for outstanding academic results
+                \item \textbf{Relevant Coursework:} Machine Learning, High Performance Database Systems, Fault Tolerant Systems, Data Structures and Algorithms, Operating Systems, Computer Security
+                \end{highlights}
+        \end{onecolentry}
+                
+        
+    \section{Research}
+
+    \begin{twocolentry}{Oct 2025 - Present}
+    \textbf{ReAgent++: Runtime Detection of Aligned Backdoors in LLM Agents} \\
+    \textit{(Research in progress)}
+\end{twocolentry}
+
+\begin{onecolentry}
+    \begin{highlights}
+        \item Designing novel backdoor detection system for LLM agents that complements consistency checks with STRIP-style runtime perturbation testing and K-Arm trigger-inversion scanning adapted for agent actions and text inputs
+        \item Developing Text/Env-STRIP detector measuring choice entropy under perturbations (text, environment, multi-turn history) to identify aligned backdoors that preserve instruction compliance while biasing brand/tool selection
+        \item Implementing K-Arm bandit-based trigger inversion using multi-armed optimization over discrete choice schemas (brands, tools, operations) with genetic algorithms and LM-guided beam search for minimal trigger recovery
+        \item Planning comprehensive evaluation on WebShop (1.18M products), OSWorld (369 real desktop tasks), and AgentBench across diverse backdoor types including multi-turn, temporal, and environment-triggered attacks
+    \end{highlights}
+\end{onecolentry}
+
+    \begin{twocolentry}{March 2025 - Present}
+    \textbf{An Empirical Study on Remote Code Execution in ML Model Hosting Ecosystems} \\
+    \textit{(Manuscript in progress; target venue: MSR 2026)}
+\end{twocolentry}
+
+\begin{onecolentry}
+    \begin{highlights}
+        \item Comprehensive analysis of trust\_remote\_code vulnerabilities across 6 ML platforms (Hugging Face, PyTorch Hub, ModelScope, OpenCSG, OpenMMLab, NVIDIA NGC) examining custom code execution during model loading
+        \item Conducted multi-phase empirical study including metadata extraction, custom code download, static analysis for security smells, and qualitative analysis of developer discussions from GitHub and Stack Overflow
+        \item Proposed security recommendations for platform maintainers including SafeTensors format adoption and runtime isolation strategies; developed automated vulnerability detection toolkit
+    \end{highlights}
+\end{onecolentry}
+
+\begin{twocolentry}{
+    Aug 2025 - Present
+}
+
+\textbf{Multi-Agent Framework for Generating Relational DB Schema \& ERD from Requirements} \\
+\textit{(Work in progress)}
+    
+\end{twocolentry}
+
+\begin{onecolentry}
+    \begin{highlights}
+        \item Mentor and co-researcher with Dr. Sukarna Barua (BUET); extending SchemaAgent baseline with domain-specific language for improved agent-to-agent communication
+        \item Reduced schema generation errors by 42\% through DSL-based communication protocol and hierarchical agent architecture with specialized roles for entity extraction, relationship mapping, and constraint validation
+    \end{highlights}
+\end{onecolentry}
+
+\begin{twocolentry}{
+    Nov 2024 - Present
+}
+
+\textbf{Design by Contract for LLM APIs: Automated Enforcement and Runtime Remediation} \\
+\textit{(GitHub repository and draft manuscript available)} \\
+\href{DBC_LINK_PLACEHOLDER}{[Project]}
+    
+\end{twocolentry}
+
+\begin{onecolentry}
+    \begin{highlights}
+        \item Research collaboration with Dr. Akond Rahman (Auburn University); developed taxonomy for API contracts in LLM libraries through empirical study of 412 real-world issues
+        \item Created OpenAI SDK extension and LangChain extension for automatic contract enforcement and runtime remediation, preventing common API misuse patterns
+    \end{highlights}
+\end{onecolentry}
+
+    \begin{twocolentry}{Sep 2024 - Nov 2024}
+    \textbf{An Unconventional Tale on Sentiment Analysis over Anonymous Online Reporting by the People in Bangladesh during an Outburst Period} \\
+    \href{PAPER_LINK_PLACEHOLDER}{[Paper]}
+\end{twocolentry}
+
+\begin{onecolentry}
+    \begin{highlights}
+        \item Developed \textit{uReporter} -- Bangladesh's first anonymous online reporting system critical during 2024 national crisis
+        \item Analyzed 124 crowd-sourced reports using six transformer models (RoBERTa, DistilBERT, XLM-EMO) with multilingual NLP pipeline for Bengali/Romanized Bengali
+        \item Demonstrated anonymous crowd-sourcing's potential for understanding Global South socio-political dynamics
+    \end{highlights}
+\end{onecolentry}
+
+\begin{twocolentry}{
+    {June 2022 – May 2023}
+}
+    \textbf{Patient-Centric Blockchain Framework for Electronic Health Record Management} \\
+    \textit{(Undergraduate Thesis)} \\
+    \href{BLOCKCHAIN_HEALTH_LINK_PLACEHOLDER}{[Thesis]}
+\end{twocolentry}
+
+\begin{onecolentry}
+    \begin{highlights}
+        \item Supervised by Professor ASM Latiful Hoque (BUET); designed blockchain framework separating encrypted off-chain storage from on-chain access control using Ethereum smart contracts and IPFS
+        \item Implemented ERC-721 based patient records with AES-GCM encryption, ECIES key wrapping, and EIP-712 signed permissions; evaluated on 10,000 synthetic patients with comprehensive gas analysis and audit trails
+    \end{highlights}
+\end{onecolentry}
     
     \section{Experience}
         
@@ -202,155 +313,98 @@
         \vspace{0.10 cm}
         \begin{onecolentry}
             \begin{highlights}
-                \item Backend Engineer at KPI Library team developing microservices-based healthcare applications handling millions of patient records using .NET Core and C\#
-                \item Architected cloud-native applications on AWS (Lambda, EC2, S3, DynamoDB) and designed RESTful APIs following industry best practices for global pharmaceutical clients
-                \item \textbf{Architecture Leadership:} Led the design and refactoring of complex filter logic architecture, simplifying the codebase by 40\% and enhancing filtering performance by 70\% across multiple microservices
-                \item Integrated LLM capabilities into clinical data analytics dashboards, enabling natural language querying and automated report generation with 85\% reduction in manual processing time
-                \item \textbf{Performance Optimization Leadership:} Achieved 60\% reduction in complex query execution times through comprehensive database optimization including query plan analysis, strategic indexing, and materialized views implementation
-                \item Implemented advanced caching strategies with Redis and MongoDB optimization techniques, delivering 40\% improvement in API response times across healthcare data pipelines
-                \item Implemented comprehensive testing (72\% to 95\% coverage), CI/CD pipelines (99.9\% uptime), zero-downtime deployments, and distributed tracing with Jaeger reducing troubleshooting time by 50\%
-                \item Led proof-of-concept projects, mentored junior developers, and collaborated with cross-functional teams across multiple time zones
-                \item Received IQVIA Impact Program – Silver award (May 2025) for outstanding performance and essential feature development
-                \item Technologies: C\#, .NET Core, PostgreSQL, MongoDB, AWS, Docker, Kubernetes, Jaeger, OpenTelemetry, GitLab CI, Redis
+                \item Backend Engineer developing microservices-based healthcare applications handling millions of patient records using .NET Core, C\#, and AWS
+                \item Deployed Multi-Agent systems using LangGraph for dashboard generation/modification, integrated with data exploration agent achieving 85\% reduction in setup time
+                \item \textbf{Developed novel gap-based axis break algorithm} for data visualization, addressing outlier-threshold limitations and improving chart clarity
+                \item Achieved 60\% reduction in query execution times through database optimization; implemented 40\% API response improvement via Redis caching
+                \item Pioneered browser automation testing methodology in .NET, simplifying regression testing and improving test coverage from 72\% to 95\%
+                \item Received IQVIA Impact Program – Silver award (May 2025) for outstanding performance
             \end{highlights}
         \end{onecolentry}
 
         \vspace{0.2 cm}
-    
-    \section{Education}
- 
-        \begin{twocolentry}{
-            April 2018 – May 2023
-        }
-            \textbf{Bangladesh University of Engineering and Technology}\end{twocolentry}
-        B.Sc in Computer Science and Engineering
 
-
-        \vspace{0.10 cm}
-        \begin{onecolentry}
-            \begin{highlights}
-                \item GPA: 3.53/4.0 (3.61 in the final term) | 3.86/4.0 in sessional courses (lab practicals and group projects), demonstrating strong implementation and teamwork skills
-                \item Notable Courses: Machine Learning, High Performance Database Systems, Fault Tolerant Systems, Data Structure and Algorithms, Operating Systems, Computer Security
-                \end{highlights}
-        \end{onecolentry}
-                
-        
-\section{Research}
-
-\begin{twocolentry}{
-    Nov 2024 - Present
-}
-\textbf{Making AI Reliable: Design by Contract for Large Language Models}
-\end{twocolentry}
-
-\begin{onecolentry}
-    \begin{highlights}
-        \item Research collaboration with Dr. Akond Rahman, Assistant Professor at Auburn University, specializing in DevOps and cybersecurity
-        \item Developed comprehensive taxonomy for API contracts in LLM libraries with refined classification: Input contracts (60\%), Output contracts (20\%), Temporal/Sequence contracts (15\%), and Extended contract types (5\%)
-        \item Conducted empirical study analyzing 412 real-world issues from Stack Overflow, GitHub, and developer forums covering LangChain, HuggingFace, and LlamaIndex
-        \item Pioneered LLM-based approach for automated contract extraction and validation in production systems
-        \item Currently developing Design by Contract (DbC) tools to automatically enforce API contracts, reducing LLM integration failures by proactive contract validation
-    \end{highlights}
-\end{onecolentry}
-
-\begin{twocolentry}{
-    {June 2022 – May 2023}
-}
-    \textbf{Blockchain in Healthcare 2.0: A Comprehensive Scalable and Privacy-Preserving Health Data Management System} \\
-    \textit{Undergraduate Thesis}
-\end{twocolentry}
-
-\begin{onecolentry}
-    \begin{highlights}
-        \item \textbf{Thesis Supervisor:} Professor ASM Latiful Hoque, BUET (specialist in data warehousing and big data analytics)
-        \item \textbf{Problem Statement:} Addressed critical limitations in current blockchain healthcare systems including scalability bottlenecks, privacy concerns, and interoperability challenges
-        \item \textbf{Technical Innovation:} Engineered novel blockchain architecture combining sharding mechanisms, Layer-2 Plasma solutions, and Directed Acyclic Graph (DAG) ledger to handle millions of healthcare records with sub-second transaction finality
-        \item \textbf{Privacy \& Compliance:} Implemented sophisticated patient-centric consent management using smart contracts, full HL7 FHIR standards compliance, and zero-knowledge proof protocols for privacy-preserving data sharing
-        \item \textbf{Architecture Design:} Built enterprise-grade fault-tolerant microservice architecture with hybrid on-chain/off-chain storage strategy, supporting both public and private blockchain networks
-        \item \textbf{Security Framework:} Integrated next-generation security features including post-quantum cryptography, multi-signature authentication, and automated threat detection systems
-        \item \textbf{Performance Metrics:} Achieved 10,000+ TPS throughput, 99.9\% system availability, and HIPAA/GDPR compliance while maintaining decentralization principles
-        \item \textbf{Impact:} Proposed solution addresses real-world healthcare data interoperability challenges affecting millions of patients across fragmented health systems
-    \end{highlights}
-\end{onecolentry}
 
 \section{Projects}
                \begin{twocolentry}{
-            {Nov 2024 - Present}
+            {Jan 2021 - April 2021}
         }
-            \href{https://github.com/thromel/URLShortener}{\textbf{Building an Enterprise URL Shortener: Event-Sourced, Multi-Region, High-Performance Architecture}}
+            \href{https://tanzimhromel.com/showcase/projects/blockchain-ticketing/}{\textbf{Blockchain-Based Ticketing Platform}}
         \end{twocolentry}
         \begin{onecolentry}
             \begin{highlights}
-                \item \textbf{Advanced Architecture:} Implemented Event Sourcing \& CQRS with hierarchical caching strategy (Memory → Redis → Database) for optimal performance and database load reduction
-                \item \textbf{Multi-Region Deployment:} Built active-active deployment across multiple regions with automatic failover using Kubernetes HPA scaling and circuit breaker patterns for unprecedented resilience
-                \item \textbf{Enterprise DevOps:} Developed complete Infrastructure as Code with Terraform, automated CI/CD with GitHub Actions, zero-downtime rolling deployments, and comprehensive monitoring with OpenTelemetry
-                \item \textbf{Real-time Analytics:} Integrated SignalR for live analytics streaming, ML-powered cache warming with intelligent predictions, and complete audit trails for regulatory compliance
-                \item \textbf{Technologies:} .NET 8.0, Angular, AWS/Kubernetes, Terraform, PostgreSQL, Redis, Event Sourcing, Circuit Breaker patterns, JWT authentication, OWASP compliance
-            \end{highlights}
                 
+                    \item \textbf{Finalist in Blockchain Olympiad Bangladesh (BCOLBD) 2021} with team "Recursively Enumerable" alongside Ataf Fazledin Ahamed and Md. Tanzim Azad Nishan from BUET
+	            \item Designed NFT-based ticketing system using Ethereum and Polygon with ERC-1155 standard, smart contracts for anti-scalping rules, and dynamic QR codes for fraud prevention
+                    \item Implemented decentralized identity management with verifiable credentials and zero-knowledge proofs for privacy-preserving ticket verification
+                \end{highlights}
+                
+        \end{onecolentry}
+
+        \begin{twocolentry}{
+            {Oct 2024 - Present}
+        }
+            \href{https://github.com/thromel/go-database}{\textbf{Production-Ready Database Engine in Go}}
+        \end{twocolentry}
+        \begin{onecolentry}
+            \begin{highlights}
+                \item Built complete database engine from scratch implementing B+ tree indexing with configurable branching factor, automatic node splitting, and O(log n) lookups
+                \item Developed page management system with 8KB fixed-size pages, checksums, and buffer pool with LRU eviction; achieved ~2M ops/sec for reads
+                \item Implementing ACID transactions with WAL, crash recovery using ARIES protocol, and concurrent access support with proper synchronization
+            \end{highlights}
         \end{onecolentry}
 
         \begin{twocolentry}{
     {Jan 2023 – Feb 2023}
 }
-    \href{https://github.com/thromel/Image-Captioning-ML-Project}{\textbf{Image caption generation using enhanced Show, Attend, and Tell with BERT Context Vectors}}
+    \href{https://github.com/thromel/Image-Captioning-ML-Project}{\textbf{Image Captioning with Attention Mechanisms}}
 \end{twocolentry}
 
 \begin{onecolentry}
     \begin{highlights}
-        \item Extended the "Show, Attend, and Tell" image captioning model by adding BERT, improving both the quality and speed of image captions.
-        \item Used BERT's language features to make captions more accurate and context-aware.
-        \item Reduced training time by leveraging BERT's pre-trained knowledge, allowing faster model convergence without losing accuracy.
-        \item Showed how to combine advanced language understanding with image captioning to push the limits of AI-based image analysis.
+        \item Implemented Show, Attend and Tell architecture with ResNet-101 encoder and LSTM decoder achieving BLEU-4: 0.335, CIDEr: 0.92 on MS-COCO (Karpathy split)
+        \item Enhanced baseline with beam search decoding (k=5) and multi-head attention mechanism, achieving 11-point BLEU-4 improvement over VGG+greedy baseline
+        \item Conducted comprehensive ablation studies and attention visualizations; trained model converged in 23 epochs (~25 hours) using mixed precision training on single GPU
     \end{highlights}
 \end{onecolentry}
         
 \begin{twocolentry}{
             {May 2022 - July 2022}
         }
-            \href{https://github.com/eventfly/Microservices}{\textbf{Eventfly: An End-to-end Event Management System}}
+            \href{https://github.com/eventfly/Microservices}{\textbf{Eventfly: End-to-end Event Management System}}
         \end{twocolentry}
         
-        \vspace{0.10 cm}
         
         \begin{onecolentry}
             \begin{highlights}
-    \item Designed and developed a comprehensive microservices-based system to streamline event organization and participation.
-    \item Led the back-end architecture and implemented key services, including newsfeed, payment, authentication, and event management.
-    \item Tools Used: TypeScript, Express.js, Next.js, Docker, Kubernetes, NATS, and MongoDB.
+    \item Designed microservices-based system with TypeScript, Express.js, Next.js, Docker, Kubernetes, NATS, and MongoDB
+    \item Led back-end architecture implementing newsfeed, payment, authentication, and event management services
 \end{highlights}
         \end{onecolentry}
-
-
-        \vspace{0.2 cm}
 
     \section{Achievements \& Awards}
 
         \begin{onecolentry}
-            \begin{itemize}
-                \item \textbf{IQVIA Impact Program – Silver Award} (May 2025) -- Received at IQVIA for demonstrating outstanding performance by completing numerous tasks, resolving critical issues, supporting team processes, and developing essential features that significantly improved the product. \href{https://drive.google.com/file/d/1Vc4E2RoQEPmbfS56oLdUih-oJDBok9sP/view?usp=share_link}{[Certificate]}
-                \item \textbf{Finalist, Blockchain Olympiad Bangladesh 2021} (April 2021) -- Selected as one of the 40 finalists among numerous teams from across the country with our project "Blockchain Based Ticketing Platform". Participated as part of the "Recursively Enumerable" team alongside Ataf Fazledin Ahamed and Md. Tanzim Azad Nishan from BUET.
-                \item Secured \textbf{2nd place} out of 120 participants with an accuracy of 95.9\% in the Bangla Handwritten Digits Recognition contest in CSE 472 Machine Learning Lab at BUET (November 2022). Developed custom CNN architecture implemented from scratch using only NumPy and OpenCV.
-                \item \textbf{Dean's List Award} -- Awarded for outstanding academic results in Level-2 of BUET.
-                \item \textbf{Bangladesh Physics Olympiad (BdPhO)} National prize winner (2017)
-                \item \textbf{Bangladesh Chemistry Olympiad} National prize winner (2017)
-                \item \textbf{Talentpool HSC Scholarship} Received from Rajshahi Education Board in 2017 with 95.6\% marks in science, placing 15th in Rajshahi Board.
-            \end{itemize}
+            \begin{highlights}
+                \item \textbf{IQVIA Impact Program – Silver Award} (May 2025) -- Outstanding performance and essential feature development
+                \item \textbf{Finalist, Blockchain Olympiad Bangladesh 2021} -- Top 40 teams nationally with "Blockchain Based Ticketing Platform"
+                \item \textbf{2nd place} in Bangla Handwritten Digits Recognition contest (95.9\% accuracy) using custom CNN at BUET ML Lab (2022)
+                \item \textbf{Dean's List Award} for outstanding academic results in Level-2 of BUET
+                \item National prize winner in Bangladesh Physics Olympiad (2017) and Chemistry Olympiad (2017)
+                \item \textbf{Talentpool HSC Scholarship} -- 15th in Rajshahi Board with 95.6\% marks (2017)
+            \end{highlights}continue
             
         \end{onecolentry}
 
-         \section{Tools \& Technologies}
+         \section{Technical Skills}
 
 \begin{onecolentry}
     \begin{highlights}
-        \item \textbf{Programming Languages:} C\#, .NET, Python, JavaScript, Go
-        \item \textbf{Machine Learning:} PyTorch, NumPy, Pandas, OpenAI API, LangChain
-        \item \textbf{Blockchain:} Ethereum, Solidity, Hyperledger Fabric
-        \item \textbf{Web \& Backend Frameworks:} ASP.NET, Express.js, FastAPI
-        \item \textbf{Databases:} PostgreSQL, MongoDB, Microsoft SQL Server
-        \item \textbf{DevOps \& Cloud:} Docker, Kubernetes, Azure, AWS, GitHub Actions
-        \item \textbf{Monitoring \& Observability:} OpenTelemetry, Jaeger
-        \item \textbf{Other:} Redis, gRPC, Entity Framework, Azure Bicep
+        \item \textbf{Languages:} C\#, Python, JavaScript, TypeScript, Go, SQL
+        \item \textbf{ML/AI:} PyTorch, LangChain, LangGraph, OpenAI API, Transformers, NumPy, Pandas
+        \item \textbf{Backend \& Databases:} .NET Core, ASP.NET, Express.js, FastAPI, PostgreSQL, MongoDB, Redis, SQL Server, DynamoDB
+        \item \textbf{Cloud \& DevOps:} AWS, Azure, Docker, Kubernetes, GitHub Actions, Terraform, OpenTelemetry, Jaeger
+        \item \textbf{Blockchain:} Ethereum, Solidity, Hyperledger Fabric, Smart Contracts
     \end{highlights}
 \end{onecolentry}
 
