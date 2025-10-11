@@ -1,0 +1,178 @@
+# Machine Learning & AI O'Reilly Reading List
+# Organized by category
+
+books:
+  # LLM & Generative AI
+  - title: "LLM Design Patterns"
+    category: "LLM & Generative AI"
+    url: "https://learning.oreilly.com/api/v1/continue/9781836207030/"
+    status: "📋 Not Started"
+
+  - title: "Building AI Agents with LLMs, RAG, and Knowledge Graphs"
+    category: "LLM & Generative AI"
+    url: "https://learning.oreilly.com/api/v1/continue/9781835087060/"
+    status: "📋 Not Started"
+
+  - title: "Building AI-Powered Products"
+    category: "LLM & Generative AI"
+    url: "https://learning.oreilly.com/api/v1/continue/9781098152697/"
+    status: "📋 Not Started"
+
+  - title: "LLMs in Production"
+    category: "LLM & Generative AI"
+    url: "https://learning.oreilly.com/api/v1/continue/9781633437203/"
+    status: "📋 Not Started"
+
+  - title: "Coding with ChatGPT and Other LLMs"
+    category: "LLM & Generative AI"
+    url: "https://learning.oreilly.com/api/v1/continue/9781805125051/"
+    status: "📋 Not Started"
+
+  - title: "Building LLM Powered Applications"
+    category: "LLM & Generative AI"
+    url: "https://learning.oreilly.com/api/v1/continue/9781835462317/"
+    status: "📋 Not Started"
+
+  - title: "The Developer's Playbook for Large Language Model Security"
+    category: "LLM & Generative AI"
+    url: "https://learning.oreilly.com/api/v1/continue/9781098162191/"
+    status: "📋 Not Started"
+
+  - title: "Building LLMs for Production"
+    category: "LLM & Generative AI"
+    url: "https://learning.oreilly.com/api/v1/continue/9798324731472/"
+    status: "📋 Not Started"
+
+  - title: "LLM Engineer's Handbook"
+    category: "LLM & Generative AI"
+    url: "https://learning.oreilly.com/api/v1/continue/9781836200079/"
+    status: "📋 Not Started"
+
+  - title: "Generative AI on AWS"
+    category: "LLM & Generative AI"
+    url: "https://learning.oreilly.com/api/v1/continue/9781098159214/"
+    status: "📋 Not Started"
+
+  - title: "Learning LangChain"
+    category: "LLM & Generative AI"
+    url: "https://learning.oreilly.com/api/v1/continue/9781098167271/"
+    status: "📋 Not Started"
+
+  - title: "Designing Large Language Model Applications"
+    category: "LLM & Generative AI"
+    url: "https://learning.oreilly.com/api/v1/continue/9781098150495/"
+    status: "📋 Not Started"
+
+  - title: "Hands-On Large Language Models"
+    category: "LLM & Generative AI"
+    url: "https://learning.oreilly.com/api/v1/continue/9781098150952/"
+    status: "📋 Not Started"
+
+  # AI Agents
+  - title: "AI Agents in Action"
+    category: "AI Agents"
+    url: "https://learning.oreilly.com/api/v1/continue/9781633436343/"
+    status: "📋 Not Started"
+
+  - title: "Building Agentic AI Systems"
+    category: "AI Agents"
+    url: "https://learning.oreilly.com/api/v1/continue/9781803238753/"
+    status: "📋 Not Started"
+
+  # Natural Language Processing
+  - title: "Natural Language Processing in Action, Second Edition"
+    category: "NLP"
+    url: "https://learning.oreilly.com/api/v1/continue/9781617299445/"
+    status: "📋 Not Started"
+
+  - title: "Natural Language Processing with Python"
+    category: "NLP"
+    url: "https://learning.oreilly.com/api/v1/continue/9781837021635/"
+    status: "📋 Not Started"
+
+  # Deep Learning & Transformers
+  - title: "Natural Language Processing with Transformers, Revised Edition"
+    category: "Deep Learning & Transformers"
+    url: "https://learning.oreilly.com/api/v1/continue/9781098136789/"
+    status: "📋 Not Started"
+
+  - title: "Hands-On Generative AI with Transformers and Diffusion Models"
+    category: "Deep Learning & Transformers"
+    url: "https://learning.oreilly.com/api/v1/continue/9781098149239/"
+    status: "📋 Not Started"
+
+  - title: "Build a Large Language Model (From Scratch)"
+    category: "Deep Learning & Transformers"
+    url: "https://learning.oreilly.com/api/v1/continue/9781633437166/"
+    status: "📖 Reading"
+
+  # Machine Learning Fundamentals
+  - title: "Machine Learning Algorithms in Depth"
+    category: "Machine Learning Fundamentals"
+    url: "https://learning.oreilly.com/api/v1/continue/9781633439214/"
+    status: "📋 Not Started"
+
+  - title: "Machine Learning System Design"
+    category: "Machine Learning Fundamentals"
+    url: "https://learning.oreilly.com/api/v1/continue/9781633438750/"
+    status: "📋 Not Started"
+
+  - title: "Designing Machine Learning Systems"
+    category: "Machine Learning Fundamentals"
+    url: "https://learning.oreilly.com/api/v1/continue/9781098107956/"
+    status: "📋 Not Started"
+
+  # MLOps & LLMOps
+  - title: "LLMOps"
+    category: "MLOps & LLMOps"
+    url: "https://learning.oreilly.com/api/v1/continue/9781098154196/"
+    status: "📋 Not Started"
+
+  - title: "Introducing MLOps"
+    category: "MLOps & LLMOps"
+    url: "https://learning.oreilly.com/api/v1/continue/9781492083283/"
+    status: "📋 Not Started"
+
+  - title: "Practical MLOps"
+    category: "MLOps & LLMOps"
+    url: "https://learning.oreilly.com/api/v1/continue/9781098103002/"
+    status: "📋 Not Started"
+
+  # Prompt Engineering
+  - title: "Prompt Engineering for Generative AI"
+    category: "Prompt Engineering"
+    url: "https://learning.oreilly.com/api/v1/continue/9781098153427/"
+    status: "📋 Not Started"
+
+  - title: "Prompt Engineering for LLMs"
+    category: "Prompt Engineering"
+    url: "https://learning.oreilly.com/api/v1/continue/9781098156145/"
+    status: "📋 Not Started"
+
+  # Mathematics
+  - title: "Mathematics of Machine Learning"
+    category: "Mathematics"
+    url: "https://learning.oreilly.com/api/v1/continue/9781837027873/"
+    status: "📋 Not Started"
+
+  - title: "Math and Architectures of Deep Learning"
+    category: "Mathematics"
+    url: "https://learning.oreilly.com/api/v1/continue/9781617296482/"
+    status: "📋 Not Started"
+
+  # AI Engineering
+  - title: "AI Engineering"
+    category: "AI Engineering"
+    url: "https://learning.oreilly.com/api/v1/continue/9781098166298/"
+    status: "📋 Not Started"
+
+  # Production Systems
+  - title: "Foundations of Scalable Systems"
+    category: "Production Systems"
+    url: "https://learning.oreilly.com/api/v1/continue/9781098106058/"
+    status: "📋 Not Started"
+
+  - title: "Practical Recommender Systems"
+    category: "Production Systems"
+    url: "https://learning.oreilly.com/api/v1/continue/9781617292705/"
+    status: "📋 Not Started"

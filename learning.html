@@ -240,12 +240,16 @@ navbar_title: Learning
     <p>A comprehensive collection of resources, courses, and materials for continuous learning in software engineering, AI/ML, distributed systems, and more.</p>
     <div class="stats-container">
         <div class="stat-item">
-            <span class="stat-number">15+</span>
-            <span class="stat-label">Active Courses</span>
+            <span class="stat-number">71</span>
+            <span class="stat-label">SWE Books</span>
         </div>
         <div class="stat-item">
-            <span class="stat-number">50+</span>
-            <span class="stat-label">Technical Books</span>
+            <span class="stat-number">34</span>
+            <span class="stat-label">ML/AI Books</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-number">15+</span>
+            <span class="stat-label">Active Courses</span>
         </div>
         <div class="stat-item">
             <span class="stat-number">30+</span>
@@ -283,6 +287,90 @@ navbar_title: Learning
             </li>
             {% endfor %}
         </ul>
+    </div>
+</div>
+
+<!-- O'Reilly Software Engineering Reading List -->
+<div class="learning-section">
+    <div class="section-header" onclick="toggleSection(this)">
+        <h4><img src="/assets/images/icons/open-book.png" alt="Books" class="section-icon"> O'Reilly Software Engineering Library (71 Books)</h4>
+        <i class="fas fa-chevron-down collapse-icon"></i>
+    </div>
+    <div class="section-content" style="display: none;">
+        <p>Comprehensive O'Reilly collection covering software architecture, distributed systems, DevOps, and engineering leadership.</p>
+
+        <div class="mb-3">
+            <span class="resource-tag">🔥 Critical</span> Must-read foundational books
+            <span class="resource-tag ml-2">⭐ High</span> Highly recommended
+            <span class="resource-tag ml-2">📌 Medium</span> Useful references
+        </div>
+
+        {% assign categories = site.data.oreilly_swe.books | map: "category" | uniq | sort %}
+        {% for category in categories %}
+        <div class="mb-4">
+            <h5 class="mb-3">{{ category }}</h5>
+            <div class="course-grid">
+                {% assign category_books = site.data.oreilly_swe.books | where: "category", category | sort: "reading_order" %}
+                {% for book in category_books %}
+                <div class="course-card">
+                    <h6><a href="{{ book.url }}" target="_blank">{{ book.title }}</a></h6>
+                    <div class="small mb-2">
+                        <span class="resource-tag">{{ book.difficulty }}</span>
+                        {% if book.priority %}<span class="resource-tag">{{ book.priority }}</span>{% endif %}
+                        {% if book.est_weeks %}<span class="resource-tag">📅 {{ book.est_weeks }}w</span>{% endif %}
+                    </div>
+                    {% if book.notes %}
+                    <p class="small text-muted mb-2">{{ book.notes }}</p>
+                    {% endif %}
+                    <div class="mt-2">
+                        {% if book.status == "📖 Reading" %}
+                        <span class="status-badge status-in-progress">{{ book.status }}</span>
+                        {% elsif book.status == "✅ Completed" %}
+                        <span class="status-badge status-completed">{{ book.status }}</span>
+                        {% else %}
+                        <span class="status-badge status-planned">{{ book.status }}</span>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- O'Reilly ML/AI Reading List -->
+<div class="learning-section">
+    <div class="section-header" onclick="toggleSection(this)">
+        <h4><img src="/assets/images/icons/open-book.png" alt="Books" class="section-icon"> O'Reilly ML/AI Library (34 Books)</h4>
+        <i class="fas fa-chevron-down collapse-icon"></i>
+    </div>
+    <div class="section-content" style="display: none;">
+        <p>Comprehensive collection on LLMs, generative AI, transformers, ML fundamentals, MLOps, and AI agents.</p>
+
+        {% assign ml_categories = site.data.oreilly_ml.books | map: "category" | uniq | sort %}
+        {% for ml_category in ml_categories %}
+        <div class="mb-4">
+            <h5 class="mb-3">{{ ml_category }}</h5>
+            <div class="course-grid">
+                {% assign ml_category_books = site.data.oreilly_ml.books | where: "category", ml_category %}
+                {% for book in ml_category_books %}
+                <div class="course-card">
+                    <h6><a href="{{ book.url }}" target="_blank">{{ book.title }}</a></h6>
+                    <div class="mt-2">
+                        {% if book.status == "📖 Reading" %}
+                        <span class="status-badge status-in-progress">{{ book.status }}</span>
+                        {% elsif book.status == "✅ Completed" %}
+                        <span class="status-badge status-completed">{{ book.status }}</span>
+                        {% else %}
+                        <span class="status-badge status-planned">{{ book.status }}</span>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endfor %}
     </div>
 </div>
 
