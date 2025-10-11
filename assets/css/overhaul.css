@@ -205,7 +205,7 @@ strong, b {
 .profile-image {
   width: 200px;
   height: 200px;
-  border-radius: var(--radius-full);
+  border-radius: var(--radius-lg);
   object-fit: cover;
   box-shadow: var(--shadow-md);
   grid-column: 2;
