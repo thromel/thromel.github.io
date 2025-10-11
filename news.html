@@ -2,47 +2,38 @@
 layout: default
 title: News and Updates
 navbar_title: News
-body_attr: >-
-  data-spy="scroll" data-target="#navbar-year" data-offset="100"
 ---
 
-{% assign news_by_year = site.data.news | sort: "date" | reverse | group_by_exp: "item", "item.date | date: '%Y'" -%}
+<!-- Page Header -->
+<div class="section-header">
+  <h2 class="section-title">News and Updates</h2>
+  <p class="section-subtitle">Recent updates, announcements, and milestones</p>
+</div>
 
-<div class="row">
-    <div class="col-12 col-lg-10">
-        <div class="card border-0 shadow-sm">
-            <div class="card-body">
-                <section id="news" class="pt-2">
-                    <h3 class="mb-3">News and Updates</h3>
-                </section>
-                <hr />
+{% assign news_by_year = site.data.news | sort: "date" | reverse | group_by_exp: "item", "item.date | date: '%Y'" %}
 
-                {% for year in news_by_year %}
-                {% assign num_papers = year.items | size %}
-                <h4 class="pt-3" id="year-{{ year.name }}">{{ year.name }}</h4>
-                <div class="my-0 p-0">
-                    {% for item in year.items %}
-                    <div class="d-flex mb-3 pb-2 border-bottom">
-                        <div class="news-title">
-                            <div class="font-weight-bold">{{ item.title }}</div>
-                            {% if item.description %}
-                            <div class="mt-1">{{ item.description }}</div>
-                            {% endif %}
-                        </div>
-                        <div class="ml-auto news-date align-self-start"><em>{{ item.date | date: "%b %d, %Y" }}</em></div>
-                    </div>
-                    {% endfor %}
-                </div>
-                {% endfor %}
-            </div>
-        </div>
+{% for year in news_by_year %}
+<!-- {{ year.name }} Section -->
+<section class="section">
+  <div class="section-header" style="margin-bottom: 2rem;">
+    <h2 class="section-title">{{ year.name }}</h2>
+  </div>
+
+  <div class="timeline">
+    {% for item in year.items %}
+    <div class="timeline-item">
+      <div class="timeline-header">
+        <h3 class="timeline-title">{{ item.title }}</h3>
+        <span class="timeline-date">{{ item.date | date: "%b %d, %Y" }}</span>
+      </div>
+
+      {% if item.description %}
+      <div class="timeline-description">
+        {{ item.description }}
+      </div>
+      {% endif %}
     </div>
-
-    <div class="col-2 d-none d-lg-block">
-        <div id="navbar-year" class="nav nav-pills flex-column sticky-top" style="top: 120px">
-            {% for year in news_by_year %}
-            <a class="nav-link" href="#year-{{ year.name }}">{{ year.name }}</a>
-            {% endfor %}
-        </div>
-    </div>
-</div> 
+    {% endfor %}
+  </div>
+</section>
+{% endfor %}

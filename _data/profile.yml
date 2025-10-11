@@ -12,44 +12,28 @@ positions:
   date: June 2023 - Present
   logo: "/assets/images/companies/iqvia-logo.png"
   description: >-
-    IQVIA (NYSE: IQV) is a leading global provider of advanced analytics, technology solutions, and clinical research services to the life sciences industry, with 74,000+ employees across 100+ countries.
+    Backend Engineer at KPI Library team developing microservices-based healthcare applications handling millions of patient records using .NET Core and C#. IQVIA (NYSE: IQV) is a leading global provider of advanced analytics, technology solutions, and clinical research services to the life sciences industry, with 74,000+ employees across 100+ countries.
   responsibilities:
-  - Developing and optimizing microservices-based healthcare applications handling millions of patient records using .NET Core and C#
-  - Architecting and deploying cloud-native applications on AWS, leveraging services such as Lambda, EC2, S3, DynamoDB, and CloudFormation to build scalable and resilient healthcare data solutions
+  - Architected cloud-native applications on AWS (Lambda, EC2, S3, DynamoDB) and designed RESTful APIs following industry best practices for global pharmaceutical clients
   - <b>Architecture Leadership:</b> Led the design and refactoring of complex filter logic architecture, simplifying the codebase by 40% and enhancing filtering performance by 70% across multiple microservices
-  - Designing and implementing RESTful APIs following industry best practices and IQVIA's robust security standards for global pharmaceutical clients
-  - Integrating LLM capabilities into data analytics dashboards, enabling natural language querying of clinical trial data and automated generation of compliance-ready reports with 85% reduction in manual processing time
-  - Implementing comprehensive database performance optimizations including query tuning, indexing strategies, and execution plan analysis, achieving 60% reduction in complex query execution times
-  - <b>Dashboard Loading Architecture Optimization:</b> Streamlined healthcare analytics dashboard loading architecture by implementing lazy loading patterns, component-based code splitting, and virtual scrolling for datasets exceeding 100K records. Introduced GraphQL with DataLoader pattern for efficient batch loading, implemented server-side aggregation pipelines, and established Redis-based caching with TTL strategies for frequently accessed metrics. Achieved 80% reduction in initial page load time (from 8.5s to 1.7s), 65% decrease in browser memory consumption, and 90% reduction in API calls through intelligent prefetching and request deduplication. Applied asynchronous rendering patterns and optimized client-side state management, resulting in 5x improvement in dashboard responsiveness and support for 3x more concurrent users
-  - <b>Performance Testing & Optimization:</b> Established comprehensive performance testing framework using K6 for load testing, Apache JMeter for stress testing, and Lighthouse CI for frontend performance monitoring. Implemented automated performance regression testing in CI/CD pipeline using Grafana k6 Cloud, achieving early detection of performance degradations. Utilized Application Insights Performance Profiler and dotMemory for identifying memory leaks and CPU bottlenecks, resulting in 45% reduction in server resource utilization. Created custom performance dashboards using Grafana to track key metrics including P95/P99 latencies, throughput, and error rates across microservices
-  - Conducting proof-of-concept projects to evaluate and integrate new technologies, leading to the adoption of several innovative features that enhanced product capabilities
-  - Creating advanced data partitioning schemes and implementing materialized views to optimize large-scale data access patterns for healthcare analytics applications
-  - Collaborating with cross-functional teams including data scientists, UX designers, and business analysts across multiple time zones to deliver integrated healthcare solutions
-  - Participating in regular knowledge-sharing sessions and mentoring junior developers on best practices in software architecture and performance optimization
-  - Developing and maintaining CI/CD pipelines using GitLab CI to ensure continuous deployment with 99.9% uptime
-  - Writing comprehensive unit, integration, and end-to-end tests, improving overall test coverage from 72% to 95% and reducing production incidents by 40%
-  - Implementing zero-downtime deployment strategies using blue-green deployment and canary releases, ensuring uninterrupted service availability during software updates for critical healthcare applications
-  - Implementing caching strategies with Redis and database optimization techniques, reducing query response times by 40%
-  - Received the 🏆 <b>IQVIA Impact Program – Silver</b> award (May 2025) for demonstrating outstanding performance by completing numerous tasks, resolving critical issues, supporting team processes, and developing essential features that significantly improved the product.
+  - Integrated LLM capabilities into clinical data analytics dashboards, enabling natural language querying and automated report generation with 85% reduction in manual processing time
+  - <b>Performance Optimization Leadership:</b> Achieved 60% reduction in complex query execution times through comprehensive database optimization including query plan analysis, strategic indexing, and materialized views implementation
+  - Implemented advanced caching strategies with Redis and MongoDB optimization techniques, delivering 40% improvement in API response times across healthcare data pipelines
+  - Implemented comprehensive testing (72% to 95% coverage), CI/CD pipelines (99.9% uptime), zero-downtime deployments, and distributed tracing with Jaeger reducing troubleshooting time by 50%
+  - Led proof-of-concept projects, mentored junior developers, and collaborated with cross-functional teams across multiple time zones
+  - Received 🏆 <b>IQVIA Impact Program – Silver</b> award (May 2025) for outstanding performance and essential feature development
   technologies:
-  - .NET Core
   - C#
-  - AWS
-  - Lambda
-  - EC2
-  - S3
-  - DynamoDB
-  - CloudFormation
-  - Microservices
-  - Entity Framework
-  - Redis
+  - .NET Core
   - PostgreSQL
+  - MongoDB
+  - AWS
+  - Docker
+  - Kubernetes
+  - Jaeger
+  - OpenTelemetry
   - GitLab CI
-  - REST APIs
-  - LLM Integration
-  - Terraform
-  - Performance Optimization
-  - Test Automation
+  - Redis
 - name: Full Stack Engineer, Mindshare Bangladesh (Part-time)
   date: Apr 2021 - Nov 2021
   logo: "/assets/images/companies/mindshare-logo.png"
@@ -99,7 +83,7 @@ summary:
 - "Graduated with a <b>Bachelor of Science in Computer Science and Engineering from BUET</b> (May 2023), with demonstrated expertise in developing scalable, enterprise-grade solutions"
 - "At IQVIA, I have successfully <b>integrated LLM capabilities into healthcare analytics platforms</b>, achieved 60% reduction in query execution times, and received the <b>IQVIA Impact Silver Award</b> for exceptional performance and innovation"
 - "My research focus centers on <b>leveraging artificial intelligence to enhance software engineering methodologies</b>, with particular emphasis on improving development efficiency, system resilience, and engineering practices"
-- "Currently conducting research in <b>ML/AI Security</b> (analyzing vulnerabilities in machine learning model ecosystems), <b>LLM API contract analysis</b>, and <b>multi-cover image steganography</b>, in collaboration with distinguished faculty from Bangladesh University of Engineering and Technology and Auburn University"
+- "Currently conducting research in <b>LLM API contract analysis</b> and <b>blockchain-enabled healthcare systems</b>, in collaboration with distinguished faculty from Bangladesh University of Engineering and Technology and Auburn University"
 - "My unique approach combines practical industry experience with rigorous academic research methodology. Please review my <a href='/projects'>portfolio of projects</a> and <a href='/research'>research contributions</a> for detailed examples of this integrated approach"
 - "<b>Actively seeking PhD/MSc positions for Spring/Fall 2026</b> to pursue advanced research in AI-enhanced software engineering"
 - "<b><a href='/assets/pdf/cv.pdf' target='_blank'>Complete curriculum vitae available here</a></b>"
@@ -144,7 +128,7 @@ skills:
       - Python-Selenium
 
 short_bio: >-
-  &#x1F44B Hi I'm Tanzim. I'm a software engineer and aspiring researcher passionate about creating solutions that make lives better for people. My interest lies in the fields of <b>Software Engineering, AI/ML Security, Blockchain, and Image Steganography</b>, with a strong focus on <b>DevOps, Backend Engineering & AI Engineering</b>. I'm particularly interested in <b>Domain Driven Design, System Architecture, and Software Architecture</b>. Being both research and development oriented, I believe I can tackle challenges that require both kinds of efforts.
+  &#x1F44B Hi I'm Tanzim. I'm a software engineer and aspiring researcher passionate about creating solutions that make lives better for people. My interest lies in the fields of <b>Software Engineering, AI/ML Security, Blockchain, and LLM Systems</b>, with a strong focus on <b>DevOps, Backend Engineering & AI Engineering</b>. I'm particularly interested in <b>Domain Driven Design, System Architecture, and Software Architecture</b>. Being both research and development oriented, I believe I can tackle challenges that require both kinds of efforts.
   <br/><br/>
   🔥 <b>I'm a firm believer in the compound effect of consistent effort.</b> My daily routine includes dedicating time to learning new technologies, and staying updated with the latest research in my fields of interest. I maintain detailed learning logs and consistently apply new knowledge to real-world projects. This approach has enabled me to successfully juggle multiple research collaborations while excelling in my full-time engineering role. I'm driven by the philosophy that every line of code, every research insight, and every problem solved contributes to a larger mission of technological advancement.
   <br/><br/>
@@ -156,9 +140,9 @@ short_bio: >-
   <br/><br/>
   🏆 In May 2025, I received the <a href='https://drive.google.com/file/d/1Vc4E2RoQEPmbfS56oLdUih-oJDBok9sP/view?usp=share_link' target='_blank'><b>IQVIA Impact Program – Silver</b></a> award for outstanding performance, critical issue resolution, and impactful feature development.
   <br/><br/>
-  &#x1F4DC I'm currently working on research projects related to <a href="/research#research-projects">Machine Learning Security</a> (analyzing vulnerabilities in ML model hubs and developing security frameworks), <a href="/research#research-projects">Blockchain in Healthcare</a> (developing an advanced framework with sharding, Layer-2 solutions, and DAG ledger), <a href="/research#research-projects">LLM API Contract Analysis</a>, and <a href="/research#research-projects">Multi-Cover Image Steganography</a>.
+  &#x1F4DC I'm currently working on research projects related to <a href="/research#research-projects">Blockchain in Healthcare</a> (developing an advanced framework with sharding, Layer-2 solutions, and DAG ledger) and <a href="/research#research-projects">LLM API Contract Analysis</a>.
   <br/><br/>
-  🤝 I'm fortunate to collaborate with esteemed researchers: <a href="https://sites.google.com/site/abmalimalislam/home" target="_blank">Professor A. B. M. Alim Al Islam</a> (BUET) on image steganography, <a href="https://akondrahman.github.io" target="_blank">Dr. Akond Rahman</a> (Auburn University, <a href="https://paser-group.github.io/" target="_blank">PASER group</a>) on LLM API contracts, and <a href="https://cse.buet.ac.bd/faculty/faculty_detail/asmlatifulhoque" target="_blank">Professor ASM Latiful Hoque</a> (BUET) on blockchain technology who was also my undergraduate thesis supervisor.
+  🤝 I'm fortunate to collaborate with esteemed researchers: <a href="https://akondrahman.github.io" target="_blank">Dr. Akond Rahman</a> (Auburn University, <a href="https://paser-group.github.io/" target="_blank">PASER group</a>) on LLM API contracts and <a href="https://cse.buet.ac.bd/faculty/faculty_detail/asmlatifulhoque" target="_blank">Professor ASM Latiful Hoque</a> (BUET) on blockchain technology who was also my undergraduate thesis supervisor.
   <br/><br/>
   🌐 I'm proud to have worked with the <a href="https://ureporter.cse.buet.ac.bd/about_us" target="_blank">uReporter team</a>, contributing to Bangladesh's first anonymous online reporting system designed to empower citizens to safely and effectively report social issues. This project has received coverage from international media including BBC Bengali, Saudi Gazette, and Global Voices. Our research on this work is currently <a href="/research#publications">under review at the ACM CSCW conference</a>.
   <br/><br/>
@@ -181,10 +165,11 @@ education:
   position: B.Sc in Computer Science and Engineering
   date: April 2018 - May 2023
   description: >-
-    <strong>CGPA: 3.53/4.0</strong> with consistently strong performance throughout the program, culminating in <strong>3.61/4.0 in the final term</strong>. 
-    Achieved exceptional performance in practical coursework with <span class="highlight-sessional"><strong>3.86/4.0 in Sessional Courses</strong></span>, 
-    demonstrating excellence in hands-on laboratory work, collaborative programming projects, and applied engineering challenges.
+    <strong>GPA: 3.53/4.0 (3.61 in the final term) | 3.86/4.0 in sessional courses (lab practicals and group projects)</strong>, demonstrating
+    strong implementation and teamwork skills. Consistently strong performance throughout the program with exceptional results in practical coursework.
     <br/><br/>
+    <strong>Notable Courses:</strong> Machine Learning, High Performance Database Systems, Fault Tolerant Systems, Data Structure and Algorithms,
+    Operating Systems, Computer Security
   url: https://cse.buet.ac.bd
   coursework: >-
     <strong>Selected upper-division coursework demonstrating depth in core CS, systems, and AI/ML:</strong><br>
@@ -347,12 +332,9 @@ awards:
 
 research_interests:
 - Software Engineering
-- AI/ML Security
-- Blockchain Technology
-- LLM Systems
-- Image Steganography
-- Microservices Architecture
+- Software & System Security
 - Distributed Systems
+- Blockchain
 
 technical_skills:
 - type: Programming Languages
@@ -421,53 +403,128 @@ professional_memberships:
   joined: 2024
 
 research:
+- title: "ReAgent++: Runtime Backdoor Detection for LLM Agents"
+  date: Oct 2025 - Present
+  short_description: Developing runtime detection system for aligned backdoors in LLM agents using STRIP-style perturbation testing and K-Arm trigger inversion.
+  description: >-
+    Developing runtime detection system for aligned backdoors in LLM agents that evade traditional consistency checks.
+    Adapts STRIP-style perturbation testing to measure choice invariance under benign input variations and K-Arm trigger
+    inversion to identify minimal triggers. Targets brand bias, tool manipulation, and multi-turn/temporal backdoors in
+    shopping and computer-use agents (WebShop, OSWorld, AgentBench).
+
+- title: "Multi-Agent Framework for Generating Relational DB Schema & ERD from Requirements"
+  date: Aug 2025 - Present
+  short_description: Extending SchemaAgent baseline with DSL-based communication protocol, achieving 42% reduction in schema generation errors.
+  description: >-
+    Mentor and co-researcher with Dr. Sukarna Barua (BUET); extending SchemaAgent baseline with domain-specific language for improved
+    agent-to-agent communication. Reduced schema generation errors by 42% through DSL-based communication protocol and hierarchical agent
+    architecture with specialized roles for entity extraction, relationship mapping, and constraint validation.
+  collaborator: >-
+    Collaborating with <a href="https://cse.buet.ac.bd/faculty/faculty_detail/sukarnabarua" target="_blank">Dr. Sukarna Barua</a>, Assistant Professor at BUET,
+    who specializes in software engineering, data science, and machine learning applications.
+
+- title: "An Empirical Study on Remote Code Execution in ML Model Hosting Ecosystems"
+  date: March 2025 - Present
+  short_description: Comprehensive analysis of trust_remote_code vulnerabilities across 6 ML platforms with security recommendations for platform maintainers. Manuscript in progress; target venue MSR 2026.
+  description: >-
+    Comprehensive analysis of trust_remote_code vulnerabilities across 6 ML platforms (Hugging Face, PyTorch Hub, ModelScope,
+    OpenCSG, OpenMMLab, NVIDIA NGC) examining custom code execution during model loading. Conducted multi-phase empirical study
+    including metadata extraction, custom code download, static analysis for security smells, and qualitative analysis of developer
+    discussions from GitHub and Stack Overflow. Proposed security recommendations for platform maintainers including SafeTensors
+    format adoption and runtime isolation strategies; developed automated vulnerability detection toolkit. <b>Manuscript in progress;
+    target venue: MSR 2026.</b>
+
 - title: "Making AI Reliable: Design by Contract for Large Language Models"
   date: Nov 2024 - Present
   link: /projects/extending-llm-api-contract-analysis-a-refined-taxonomy-and-empirical-study
+  short_description: Developing Design by Contract (DbC) tools to automatically enforce API contracts in LLM libraries, reducing integration failures through proactive contract validation.
   description: >-
-    Developed an extended taxonomy for API contracts in LLM libraries and created a design by contract tool 
-    to enforce API contracts and simplify debugging for popular ML libraries. Conducted empirical studies 
-    on real-world issues, implemented automated contract validation, and proposed recommendations for 
-    LLM library developers and LLMOps tool builders.
+    Research collaboration with Dr. Akond Rahman, Assistant Professor at Auburn University, specializing in DevOps and cybersecurity.
+    Developed comprehensive taxonomy for API contracts in LLM libraries with refined classification: Input contracts (60%), Output contracts (20%),
+    Temporal/Sequence contracts (15%), and Extended contract types (5%). Conducted empirical study analyzing 412 real-world issues from Stack Overflow,
+    GitHub, and developer forums covering LangChain, HuggingFace, and LlamaIndex. Pioneered LLM-based approach for automated contract extraction
+    and validation in production systems. Currently developing Design by Contract (DbC) tools to automatically enforce API contracts, reducing LLM
+    integration failures by proactive contract validation.
   collaborator: >-
-    Collaborating with <a href="https://akondrahman.github.io" target="_blank">Dr. Akond Rahman</a>, Assistant Professor at Auburn University, 
-    who specializes in DevOps, cybersecurity, and secure software development. Dr. Rahman leads the PASER (Practical and Actionable Software Engineering Research)</a> group, 
+    Collaborating with <a href="https://akondrahman.github.io" target="_blank">Dr. Akond Rahman</a>, Assistant Professor at Auburn University,
+    who specializes in DevOps, cybersecurity, and secure software development. Dr. Rahman leads the PASER (Practical and Actionable Software Engineering Research) group,
     focusing on practical software engineering research that bridges the gap between academic research and industry practice.
 
-- title: Blockchain in Healthcare 2.0
+- title: "uReporter: An Unconventional Tale on Sentiment Analysis over Anonymous Online Reporting"
+  date: Sep 2024 - Nov 2024
+  link: /research#ureporter
+  short_description: Bangladesh's first anonymous online reporting system analyzing crowd-sourced reports using transformer models during 2024 national crisis.
+  description: >-
+    Developed Bangladesh's first anonymous online reporting system (uReporter) and analyzed crowd-sourced reports using transformer models and
+    NRC Lexicon-based analysis. The research focused on sentiment analysis of anonymous reports by people in Bangladesh during an outburst period.
+    <b>Note:</b> This work was initially rejected from The 28th ACM Conference on Computer-Supported Cooperative Work and Social Computing (ACM CSCW)
+    due to novelty concerns and misalignment with conference research goals. Currently revising and preparing for submission to a more suitable venue.
+  collaborator: >-
+    Collaborated with the <a href="https://ureporter.cse.buet.ac.bd/about_us" target="_blank">uReporter team</a> at BUET. The project has received
+    coverage from international media including BBC Bengali, Saudi Gazette, and Global Voices.
+
+- title: "Patient-Centric Blockchain Framework for Electronic Health Record Management"
   date: June 2022 - May 2023
   link: /projects/blockchain-in-healthcare-20
+  short_description: Undergraduate thesis on blockchain framework for EHR management using Ethereum smart contracts, IPFS, and ERC-721 based patient records with comprehensive encryption.
   description: >-
-    Engineered an advanced blockchain framework with sharding, Layer-2 solutions, and a DAG ledger, 
-    implementing patient-centric consent management, HL7 FHIR standards, and privacy-preserving computation.
+    <b>Undergraduate Thesis.</b> Supervised by Professor ASM Latiful Hoque (BUET); designed blockchain framework separating encrypted
+    off-chain storage from on-chain access control using Ethereum smart contracts and IPFS. Implemented ERC-721 based patient records
+    with AES-GCM encryption, ECIES key wrapping, and EIP-712 signed permissions; evaluated on 10,000 synthetic patients with comprehensive
+    gas analysis and audit trails.
   collaborator: >-
-    Project supervised by <a href="https://cse.buet.ac.bd/faculty/faculty_detail/asmlatifulhoque" target="_blank">Professor ASM Latiful Hoque</a> from BUET (my undergraduate thesis supervisor), 
+    Supervised by <a href="https://cse.buet.ac.bd/faculty/faculty_detail/asmlatifulhoque" target="_blank">Professor ASM Latiful Hoque</a> from BUET (my undergraduate thesis supervisor),
     who specializes in data warehousing, data mining, big data analytics, and database technologies.
 
-publications:
-- title: An Unconventional Tale on Sentiment Analysis over Anonymous Online Reporting by the People in Bangladesh during an Outburst Period
-  venue: The 28th ACM Conference on Computer-Supported Cooperative Work and Social Computing (Rejected - Under Revision)
-  date: Sep 2024 - Nov 2024
-  description: >-
-    Developed Bangladesh's first anonymous online reporting system and analyzed crowd-sourced reports 
-    using transformer models and NRC Lexicon-based analysis. Initially rejected due to novelty concerns 
-    and misalignment with conference research goals. Currently working to address these issues and 
-    prepare for submission to a more suitable venue.
-
 projects:
-- title: "URL Shortener"
+- title: "Building an Enterprise URL Shortener: Event-Sourced, Multi-Region, High-Performance Architecture"
   link: https://github.com/thromel/URLShortener
   date: Nov 2024 - Present
   description: >-
-    A production-ready URL shortener system using .NET, React.js, and Azure services with CI/CD, 
-    infrastructure as code, and optimized performance using Redis Cache and CosmosDB.
+    <b>Advanced Architecture:</b> Implemented Event Sourcing & CQRS with hierarchical caching strategy (Memory → Redis → Database) for optimal performance and database load reduction.
+    <b>Multi-Region Deployment:</b> Built active-active deployment across multiple regions with automatic failover using Kubernetes HPA scaling and circuit breaker patterns for unprecedented resilience.
+    <b>Enterprise DevOps:</b> Developed complete Infrastructure as Code with Terraform, automated CI/CD with GitHub Actions, zero-downtime rolling deployments, and comprehensive monitoring with OpenTelemetry.
+    <b>Real-time Analytics:</b> Integrated SignalR for live analytics streaming, ML-powered cache warming with intelligent predictions, and complete audit trails for regulatory compliance.
   technologies:
-  - ASP.NET Core
-  - React.js
-  - Azure
-  - CI/CD
+  - .NET 8.0
+  - Angular
+  - AWS
+  - Kubernetes
+  - Terraform
   - PostgreSQL
   - Redis
+  - Event Sourcing
+  - Circuit Breaker
+  - JWT
+  - OWASP compliance
+- title: "Image caption generation using enhanced Show, Attend, and Tell with BERT Context Vectors"
+  link: https://github.com/thromel/Image-Captioning-ML-Project
+  date: Jan 2023 - Feb 2023
+  description: >-
+    Extended the "Show, Attend, and Tell" image captioning model by adding BERT, improving both the quality and speed of image captions.
+    Used BERT's language features to make captions more accurate and context-aware. Reduced training time by leveraging BERT's pre-trained knowledge,
+    allowing faster model convergence without losing accuracy. Showed how to combine advanced language understanding with image captioning to push
+    the limits of AI-based image analysis.
+  technologies:
+  - Python
+  - PyTorch
+  - BERT
+  - NumPy
+  - Computer Vision
+- title: "Eventfly: An End-to-end Event Management System"
+  link: https://github.com/eventfly/Microservices
+  date: May 2022 - July 2022
+  description: >-
+    Designed and developed a comprehensive microservices-based system to streamline event organization and participation.
+    Led the back-end architecture and implemented key services, including newsfeed, payment, authentication, and event management.
+  technologies:
+  - TypeScript
+  - Express.js
+  - Next.js
+  - Docker
+  - Kubernetes
+  - NATS
+  - MongoDB
 
 tests_and_certifications:
 - name: "📜 TOEFL iBT"

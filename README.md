@@ -20,7 +20,7 @@ This repository contains the source code for my personal academic and profession
 
 ## About
 
-This website showcases my professional experience, research projects, publications, and technical skills as a Software Development Engineer at IQVIA and researcher in the fields of Blockchain Technology, LLM Systems, and Image Steganography.
+This website showcases my professional experience, research projects, publications, and technical skills as a Software Development Engineer at IQVIA and researcher in the fields of Blockchain Technology and LLM Systems.
 
 ## Features
 
