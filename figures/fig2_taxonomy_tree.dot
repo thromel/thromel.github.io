@@ -1,0 +1,187 @@
+// LLM API Contract Taxonomy
+digraph contract_taxonomy {
+	nodesep=0.4 rankdir=TB ranksep=0.7 size="16,14"
+	node [color="#8B008B" fillcolor="#E6B3E6" fontname="Arial Bold" fontsize=12 penwidth=3 shape=box style="filled,rounded"]
+	root [label="LLM API
+Contracts"]
+	node [color="#0066CC" fillcolor="#B3D9FF" fontname="Arial Bold" fontsize=11 penwidth=2]
+	sam [label="Single API Method
+(SAM - 72%)"]
+	amo [label="API Method Order
+(AMO - 22%)"]
+	hybrid [label="Hybrid
+(H - 6%)"]
+	root -> sam
+	root -> amo
+	root -> hybrid
+	node [color="#006600" fillcolor="#B3FFB3" fontsize=10 penwidth=1.5]
+	dt [label="Data Type
+(26%)"]
+	vc [label="Value
+Constraints
+(32%)"]
+	oc [label="Output
+Constraints
+(9%)"]
+	rag [label="RAG
+Contracts
+(8%)"]
+	cm [label="Compatibility
+& Modes
+(5%)"]
+	mme [label="Multimodal
+& Encoding
+(3%)"]
+	sam -> dt
+	sam -> vc
+	sam -> oc
+	sam -> rag
+	sam -> cm
+	sam -> mme
+	node [color="#CC6600" fillcolor="#FFE6B3" fontsize=9 penwidth=1]
+	pt [label="Primitive
+(7%)"]
+	bit [label="Built-in
+(13%)"]
+	st [label="Structured
+(8%)"]
+	dt -> pt
+	dt -> bit
+	dt -> st
+	sp [label="Single
+Param
+(24%)"]
+	mp [label="Multi-
+Param
+(11%)"]
+	vc -> sp
+	vc -> mp
+	fr [label="Format
+Req.
+(6%)"]
+	pc [label="Policy
+Comp.
+(4%)"]
+	oc -> fr
+	oc -> pc
+	rc [label="Retrieval
+Contracts
+(5%)"]
+	gc [label="Grounding
+Contracts
+(3%)"]
+	rag -> rc
+	rag -> gc
+	node [color="#8B8B00" fillcolor="#FFFACD" fontsize=8 penwidth=0.8]
+	emb [label="Embedding/
+Index Compat.
+(2%)"]
+	topk [label="Top-k
+Bounds
+(1.5%)"]
+	fresh [label="Retrieval
+Freshness
+(1.5%)"]
+	rc -> emb
+	rc -> topk
+	rc -> fresh
+	cite [label="Citation
+Req.
+(1.5%)"]
+	hall [label="Hallucination
+Guards
+(1%)"]
+	empty [label="Empty
+Retrieval
+(0.5%)"]
+	gc -> cite
+	gc -> hall
+	gc -> empty
+	node [color="#CC6600" fillcolor="#FFE6B3" fontsize=9 penwidth=1]
+	mvc [label="Model/Version
+Compatibility
+(2%)"]
+	fme [label="Feature/Mode
+Mutual Exclusion
+(1.5%)"]
+	repro [label="Reproducibility
+Contracts
+(1%)"]
+	telem [label="Telemetry
+Shape
+(0.5%)"]
+	cm -> mvc
+	cm -> fme
+	cm -> repro
+	cm -> telem
+	mmpay [label="Multimodal
+Payload
+(2%)"]
+	locale [label="Locale &
+Encoding
+(1%)"]
+	mme -> mmpay
+	mme -> locale
+	node [color="#CC0000" fillcolor="#FFB3B3" fontsize=10 penwidth=1.5]
+	init [label="Initialization
+(7%)"]
+	seq [label="Sequencing
+(6%)"]
+	sm [label="State Mgmt
+(3%)"]
+	sa [label="Streaming
+& Async
+(6%)"]
+	amo -> init
+	amo -> seq
+	amo -> sm
+	amo -> sa
+	node [color="#CC6600" fillcolor="#FFE6B3" fontsize=9 penwidth=1]
+	sse [label="SSE
+Semantics
+(2.5%)"]
+	async [label="Async Job
+Lifecycle
+(2%)"]
+	session [label="Session/Thread
+Identity
+(1.5%)"]
+	sa -> sse
+	sa -> async
+	sa -> session
+	node [color="#6600CC" fillcolor="#D9B3FF" fontsize=10 penwidth=1.5]
+	cond [label="Conditional
+(2%)"]
+	alt [label="Alternative
+(1%)"]
+	tool [label="Tool
+Contracts
+(2%)"]
+	econ [label="Economic &
+Governance
+(1%)"]
+	hybrid -> cond
+	hybrid -> alt
+	hybrid -> tool
+	hybrid -> econ
+	node [color="#CC6600" fillcolor="#FFE6B3" fontsize=9 penwidth=1]
+	reg [label="Registry
+Membership
+(1%)"]
+	budget [label="Call Budget
+& Loop Guard
+(1%)"]
+	tool -> reg
+	tool -> budget
+	slo [label="Budget/SLO
+Contracts
+(0.5%)"]
+	privacy [label="Data Gov.
+& Privacy
+(0.3%)"]
+	idemp [label="Idempotency
+(0.2%)"]
+	econ -> slo
+	econ -> privacy
+	econ -> idemp
+}
