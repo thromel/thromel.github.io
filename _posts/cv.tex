@@ -223,22 +223,18 @@
 \begin{onecolentry}
     \begin{highlights}
         \item Designing novel backdoor detection system for LLM agents that complements consistency checks with STRIP-style runtime perturbation testing and K-Arm trigger-inversion scanning adapted for agent actions and text inputs
-        \item Developing Text/Env-STRIP detector measuring choice entropy under perturbations (text, environment, multi-turn history) to identify aligned backdoors that preserve instruction compliance while biasing brand/tool selection
-        \item Implementing K-Arm bandit-based trigger inversion using multi-armed optimization over discrete choice schemas (brands, tools, operations) with genetic algorithms and LM-guided beam search for minimal trigger recovery
-        \item Planning comprehensive evaluation on WebShop (1.18M products), OSWorld (369 real desktop tasks), and AgentBench across diverse backdoor types including multi-turn, temporal, and environment-triggered attacks
     \end{highlights}
 \end{onecolentry}
 
     \begin{twocolentry}{March 2025 - Present}
     \textbf{An Empirical Study on Remote Code Execution in ML Model Hosting Ecosystems} \\
-    \textit{(Manuscript in progress; target venue: MSR 2026)}
+    \textit{(Manuscript in progress; target venue: MSR 2026)} \\
+    \href{https://tanzimhromel.com/assets/pdf/ml-rce-study.pdf}{[Paper]}
 \end{twocolentry}
 
 \begin{onecolentry}
     \begin{highlights}
-        \item Comprehensive analysis of trust\_remote\_code vulnerabilities across 6 ML platforms (Hugging Face, PyTorch Hub, ModelScope, OpenCSG, OpenMMLab, NVIDIA NGC) examining custom code execution during model loading
-        \item Conducted multi-phase empirical study including metadata extraction, custom code download, static analysis for security smells, and qualitative analysis of developer discussions from GitHub and Stack Overflow
-        \item Proposed security recommendations for platform maintainers including SafeTensors format adoption and runtime isolation strategies; developed automated vulnerability detection toolkit
+        \item Comprehensive analysis of remote code execution (RCE) vulnerabilities across 5 ML platforms with multi-phase empirical study including static analysis and developer discussion analysis; proposed security recommendations and developed automated vulnerability detection toolkit
     \end{highlights}
 \end{onecolentry}
 
@@ -253,8 +249,7 @@
 
 \begin{onecolentry}
     \begin{highlights}
-        \item Mentor and co-researcher with Dr. Sukarna Barua (BUET); extending SchemaAgent baseline with domain-specific language for improved agent-to-agent communication
-        \item Reduced schema generation errors by 42\% through DSL-based communication protocol and hierarchical agent architecture with specialized roles for entity extraction, relationship mapping, and constraint validation
+        \item Extending SchemaAgent baseline with Dr. Sukarna Barua (BUET) through DSL-based communication protocol and hierarchical agent architecture for entity extraction, relationship mapping, and constraint validation to reduce schema generation errors
     \end{highlights}
 \end{onecolentry}
 
@@ -263,28 +258,26 @@
 }
 
 \textbf{Design by Contract for LLM APIs: Automated Enforcement and Runtime Remediation} \\
-\textit{(GitHub repository and draft manuscript available)} \\
-\href{DBC_LINK_PLACEHOLDER}{[Project]}
-    
+\textit{(Manuscript in Progress)} \\
+\href{https://tanzimhromel.com/assets/pdf/llm-api-contracts.pdf}{[Paper]}
+
 \end{twocolentry}
 
 \begin{onecolentry}
     \begin{highlights}
-        \item Research collaboration with Dr. Akond Rahman (Auburn University); developed taxonomy for API contracts in LLM libraries through empirical study of 412 real-world issues
-        \item Created OpenAI SDK extension and LangChain extension for automatic contract enforcement and runtime remediation, preventing common API misuse patterns
+        \item Research collaboration with Dr. Akond Rahman (Auburn University) developing taxonomy for API contracts through empirical study of 412 real-world issues; created OpenAI SDK and LangChain extensions for automatic contract enforcement and runtime remediation
     \end{highlights}
 \end{onecolentry}
 
     \begin{twocolentry}{Sep 2024 - Nov 2024}
     \textbf{An Unconventional Tale on Sentiment Analysis over Anonymous Online Reporting by the People in Bangladesh during an Outburst Period} \\
-    \href{PAPER_LINK_PLACEHOLDER}{[Paper]}
+    \href{https://tanzimhromel.com/assets/pdf/Ureporter.pdf}{[Paper]}
+    \href{https://ureporter.cse.buet.ac.bd/about_us}{[Website]}
 \end{twocolentry}
 
 \begin{onecolentry}
     \begin{highlights}
-        \item Developed \textit{uReporter} -- Bangladesh's first anonymous online reporting system critical during 2024 national crisis
-        \item Analyzed 124 crowd-sourced reports using six transformer models (RoBERTa, DistilBERT, XLM-EMO) with multilingual NLP pipeline for Bengali/Romanized Bengali
-        \item Demonstrated anonymous crowd-sourcing's potential for understanding Global South socio-political dynamics
+        \item Developed uReporter -- Bangladesh's first anonymous reporting system during 2024 national crisis; analyzed 124 crowd-sourced reports using six transformer models with multilingual NLP pipeline for Bengali/Romanized Bengali, demonstrating anonymous crowd-sourcing's potential for understanding Global South socio-political dynamics
     \end{highlights}
 \end{onecolentry}
 
@@ -293,13 +286,12 @@
 }
     \textbf{Patient-Centric Blockchain Framework for Electronic Health Record Management} \\
     \textit{(Undergraduate Thesis)} \\
-    \href{BLOCKCHAIN_HEALTH_LINK_PLACEHOLDER}{[Thesis]}
+    \href{https://tanzimhromel.com/assets/pdf/blockchain-ehr.pdf}{[Paper]}
 \end{twocolentry}
 
 \begin{onecolentry}
     \begin{highlights}
-        \item Supervised by Professor ASM Latiful Hoque (BUET); designed blockchain framework separating encrypted off-chain storage from on-chain access control using Ethereum smart contracts and IPFS
-        \item Implemented ERC-721 based patient records with AES-GCM encryption, ECIES key wrapping, and EIP-712 signed permissions; evaluated on 10,000 synthetic patients with comprehensive gas analysis and audit trails
+        \item Supervised by Professor ASM Latiful Hoque (BUET); designed blockchain framework with encrypted off-chain IPFS storage and on-chain Ethereum access control using ERC-721 based patient records with AES-GCM encryption, ECIES key wrapping, and EIP-712 signed permissions; evaluated on 10,000 synthetic patients
     \end{highlights}
 \end{onecolentry}
     
@@ -333,10 +325,7 @@
         \end{twocolentry}
         \begin{onecolentry}
             \begin{highlights}
-                
-                    \item \textbf{Finalist in Blockchain Olympiad Bangladesh (BCOLBD) 2021} with team "Recursively Enumerable" alongside Ataf Fazledin Ahamed and Md. Tanzim Azad Nishan from BUET
-	            \item Designed NFT-based ticketing system using Ethereum and Polygon with ERC-1155 standard, smart contracts for anti-scalping rules, and dynamic QR codes for fraud prevention
-                    \item Implemented decentralized identity management with verifiable credentials and zero-knowledge proofs for privacy-preserving ticket verification
+                \item Finalist in Blockchain Olympiad Bangladesh (BCOLBD) 2021 with team "Recursively Enumerable"; designed NFT-based ticketing system using Ethereum and Polygon with ERC-1155 standard, smart contracts for anti-scalping, dynamic QR codes, and decentralized identity management with zero-knowledge proofs
                 \end{highlights}
                 
         \end{onecolentry}
@@ -348,9 +337,7 @@
         \end{twocolentry}
         \begin{onecolentry}
             \begin{highlights}
-                \item Built complete database engine from scratch implementing B+ tree indexing with configurable branching factor, automatic node splitting, and O(log n) lookups
-                \item Developed page management system with 8KB fixed-size pages, checksums, and buffer pool with LRU eviction; achieved ~2M ops/sec for reads
-                \item Implementing ACID transactions with WAL, crash recovery using ARIES protocol, and concurrent access support with proper synchronization
+                \item Built complete database engine from scratch with B+ tree indexing, page management system with 8KB pages and LRU buffer pool achieving ~2M ops/sec for reads, implementing ACID transactions with WAL, crash recovery using ARIES protocol, and concurrent access support
             \end{highlights}
         \end{onecolentry}
 
@@ -362,9 +349,7 @@
 
 \begin{onecolentry}
     \begin{highlights}
-        \item Implemented Show, Attend and Tell architecture with ResNet-101 encoder and LSTM decoder achieving BLEU-4: 0.335, CIDEr: 0.92 on MS-COCO (Karpathy split)
-        \item Enhanced baseline with beam search decoding (k=5) and multi-head attention mechanism, achieving 11-point BLEU-4 improvement over VGG+greedy baseline
-        \item Conducted comprehensive ablation studies and attention visualizations; trained model converged in 23 epochs (~25 hours) using mixed precision training on single GPU
+        \item Implemented Show, Attend and Tell architecture with ResNet-101 encoder and LSTM decoder achieving BLEU-4: 0.335, CIDEr: 0.92 on MS-COCO; enhanced with beam search and multi-head attention achieving 11-point BLEU-4 improvement, with comprehensive ablation studies and attention visualizations
     \end{highlights}
 \end{onecolentry}
         
@@ -377,8 +362,7 @@
         
         \begin{onecolentry}
             \begin{highlights}
-    \item Designed microservices-based system with TypeScript, Express.js, Next.js, Docker, Kubernetes, NATS, and MongoDB
-    \item Led back-end architecture implementing newsfeed, payment, authentication, and event management services
+    \item Designed microservices-based event management system with TypeScript, Express.js, Next.js, Docker, Kubernetes, NATS, and MongoDB; led back-end architecture implementing newsfeed, payment, authentication, and event management services
 \end{highlights}
         \end{onecolentry}
 
