@@ -1,0 +1,518 @@
+/* ============================================
+   MOBILE-SPECIFIC OPTIMIZATIONS
+   Enhances phone experience while keeping desktop unchanged
+   Target: max-width 768px (tablets and phones)
+   ============================================ */
+
+/* ========== Base Mobile Optimizations ========== */
+@media (max-width: 768px) {
+
+  /* Better touch scrolling */
+  html {
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Optimized container padding for mobile */
+  .container {
+    padding: 0 var(--space-4) !important;
+  }
+
+  /* Reduce section spacing for mobile */
+  .section {
+    margin-bottom: var(--space-8) !important;
+  }
+
+  /* ========== Profile Header Mobile Optimization ========== */
+  .profile-header {
+    padding: var(--space-6) 0 !important;
+    grid-template-columns: 1fr !important;
+    text-align: center !important;
+    gap: var(--space-6) !important;
+  }
+
+  .profile-image {
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+    margin: 0 auto var(--space-4) !important;
+    width: 140px !important;
+    height: 140px !important;
+  }
+
+  .profile-content {
+    align-items: center !important;
+    gap: var(--space-3) !important;
+  }
+
+  .profile-name {
+    font-size: 1.75rem !important;
+    line-height: 1.2 !important;
+  }
+
+  .profile-title {
+    font-size: 1rem !important;
+    line-height: 1.6 !important;
+    text-align: left !important;
+    padding: 0 var(--space-2) !important;
+  }
+
+  .profile-bio {
+    max-width: 100% !important;
+    font-size: 0.9375rem !important;
+    text-align: left !important;
+  }
+
+  /* Profile Links - Stack vertically on mobile */
+  .profile-links {
+    flex-direction: column !important;
+    gap: var(--space-3) !important;
+    width: 100% !important;
+    align-items: center !important;
+  }
+
+  .profile-link {
+    font-size: 0.9375rem !important;
+    padding: var(--space-2) !important;
+    min-height: 44px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  /* ========== Social Links - Larger Touch Targets ========== */
+  .social-links {
+    justify-content: center !important;
+    gap: var(--space-4) !important;
+    margin-top: var(--space-2) !important;
+  }
+
+  .social-link {
+    width: 44px !important;
+    height: 44px !important;
+    font-size: 1.25rem !important;
+  }
+
+  /* ========== Section Headers ========== */
+  .section-header {
+    margin-bottom: var(--space-6) !important;
+    padding-bottom: var(--space-3) !important;
+  }
+
+  .section-title {
+    font-size: 1.5rem !important;
+  }
+
+  /* ========== Research Interests ========== */
+  .interests-grid {
+    gap: var(--space-2) !important;
+    justify-content: center !important;
+  }
+
+  .interest-tag {
+    padding: var(--space-2) var(--space-3) !important;
+    font-size: 0.8125rem !important;
+  }
+
+  /* ========== Timeline Improvements ========== */
+  .timeline {
+    gap: var(--space-6) !important;
+  }
+
+  .timeline-item {
+    padding-left: var(--space-4) !important;
+  }
+
+  .timeline-header {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: var(--space-1) !important;
+  }
+
+  .timeline-title {
+    font-size: 1.125rem !important;
+    line-height: 1.4 !important;
+  }
+
+  .timeline-title a {
+    word-wrap: break-word !important;
+  }
+
+  .timeline-date {
+    white-space: normal !important;
+    font-size: 0.8125rem !important;
+  }
+
+  .timeline-subtitle {
+    font-size: 0.9375rem !important;
+    line-height: 1.5 !important;
+  }
+
+  .timeline-description {
+    font-size: 0.9375rem !important;
+    line-height: 1.6 !important;
+  }
+
+  /* ========== Projects Grid - Single Column ========== */
+  .projects-grid {
+    grid-template-columns: 1fr !important;
+    gap: var(--space-4) !important;
+  }
+
+  .project-card {
+    padding: var(--space-4) !important;
+  }
+
+  .project-title {
+    font-size: 1.125rem !important;
+    margin-bottom: var(--space-2) !important;
+  }
+
+  .project-description {
+    font-size: 0.9375rem !important;
+    margin-bottom: var(--space-3) !important;
+  }
+
+  .project-tags {
+    gap: var(--space-1) !important;
+  }
+
+  .project-tag {
+    padding: var(--space-1) var(--space-2) !important;
+    font-size: 0.75rem !important;
+  }
+
+  /* Disable hover effects on mobile */
+  .project-card:hover {
+    transform: none !important;
+  }
+
+  /* ========== Skills Grid - Single Column ========== */
+  .skills-grid {
+    grid-template-columns: 1fr !important;
+    gap: var(--space-4) !important;
+  }
+
+  .skill-category {
+    padding: var(--space-4) !important;
+  }
+
+  .skill-category-title {
+    font-size: 0.9375rem !important;
+    margin-bottom: var(--space-3) !important;
+  }
+
+  .skill-item {
+    padding: var(--space-1) var(--space-2) !important;
+    font-size: 0.8125rem !important;
+  }
+
+  /* ========== Buttons - Larger Touch Targets ========== */
+  .btn {
+    padding: var(--space-3) var(--space-4) !important;
+    font-size: 0.9375rem !important;
+    min-height: 44px !important;
+    width: 100% !important;
+    justify-content: center !important;
+  }
+
+  .btn-text {
+    width: auto !important;
+  }
+
+  /* Disable transform on mobile for better performance */
+  .btn:hover {
+    transform: none !important;
+  }
+
+  /* ========== Alerts & Callouts ========== */
+  .alert {
+    padding: var(--space-3) var(--space-4) !important;
+    font-size: 0.9375rem !important;
+  }
+
+  .about-section {
+    padding: var(--space-6) var(--space-4) !important;
+  }
+
+  .about-content {
+    font-size: 1rem !important;
+  }
+
+  /* ========== PhD Callout Mobile ========== */
+  .phd-seeker-callout {
+    padding: var(--space-3) !important;
+  }
+
+  .phd-callout-title {
+    font-size: 1rem !important;
+  }
+
+  .phd-callout-content p {
+    font-size: 0.9375rem !important;
+  }
+
+  .phd-action-buttons {
+    flex-direction: column !important;
+    gap: var(--space-2) !important;
+  }
+
+  .phd-btn-primary,
+  .phd-btn-secondary {
+    width: 100% !important;
+    text-align: center !important;
+    justify-content: center !important;
+    min-height: 44px !important;
+  }
+
+  /* ========== Site Header/Navigation ========== */
+  .site-header {
+    padding: var(--space-3) 0 !important;
+  }
+
+  .nav-links {
+    gap: var(--space-3) !important;
+    font-size: 0.875rem !important;
+  }
+
+  .nav-link {
+    padding: var(--space-2) !important;
+    min-height: 44px !important;
+    display: flex !important;
+    align-items: center !important;
+  }
+
+  /* ========== Theme Toggle - Better positioning ========== */
+  .theme-toggle {
+    width: 48px !important;
+    height: 48px !important;
+    bottom: var(--space-4) !important;
+    right: var(--space-4) !important;
+  }
+
+  /* ========== Back to Top Button ========== */
+  .back-to-top {
+    width: 48px !important;
+    height: 48px !important;
+    bottom: 90px !important;
+    right: var(--space-4) !important;
+  }
+
+  /* ========== Cards - Disable fancy effects ========== */
+  .card {
+    margin-bottom: var(--space-4) !important;
+  }
+
+  .card:hover {
+    transform: translateZ(0) !important;
+    box-shadow: var(--shadow-md) !important;
+  }
+
+  .card::before {
+    display: none !important;
+  }
+
+  /* ========== Typography Optimizations ========== */
+  h1 {
+    font-size: 2rem !important;
+    line-height: 1.2 !important;
+  }
+
+  h2 {
+    font-size: 1.5rem !important;
+    line-height: 1.3 !important;
+  }
+
+  h3 {
+    font-size: 1.25rem !important;
+    line-height: 1.3 !important;
+  }
+
+  h4 {
+    font-size: 1.125rem !important;
+  }
+
+  p {
+    font-size: 0.9375rem !important;
+    line-height: 1.6 !important;
+  }
+
+  /* ========== Footer ========== */
+  .site-footer {
+    padding: var(--space-8) 0 !important;
+    margin-top: var(--space-12) !important;
+  }
+
+  .footer-content {
+    font-size: 0.8125rem !important;
+  }
+
+  /* ========== Table Responsiveness ========== */
+  .table-responsive {
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+
+  table {
+    font-size: 0.875rem !important;
+  }
+
+  /* ========== Collapsible Buttons ========== */
+  .collapsible-btn {
+    padding: var(--space-2) var(--space-3) !important;
+    font-size: 0.875rem !important;
+    min-height: 44px !important;
+    width: 100% !important;
+    text-align: left !important;
+  }
+
+  /* ========== Disable expensive animations on mobile ========== */
+  .card-interactive:hover,
+  .card-floating-action:hover,
+  .project-card-enhanced:hover {
+    transform: translateZ(0) !important;
+  }
+
+  /* Disable backdrop filters on mobile for performance */
+  @supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
+    .card {
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
+    }
+  }
+
+  /* ========== Text Selection - Better mobile UX ========== */
+  ::selection {
+    background-color: var(--color-accent);
+    color: white;
+  }
+
+  /* ========== Prevent text size adjustment on orientation change ========== */
+  html {
+    -webkit-text-size-adjust: 100%;
+    -moz-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  /* ========== Better tap highlighting ========== */
+  a, button, .btn, .nav-link, .social-link {
+    -webkit-tap-highlight-color: rgba(37, 99, 235, 0.2);
+  }
+
+  /* ========== Content Grid Improvements ========== */
+  .content-grid {
+    grid-template-columns: 1fr !important;
+    gap: var(--space-4) !important;
+  }
+
+  /* ========== Search Modal Mobile ========== */
+  .search-modal {
+    padding: var(--space-4) !important;
+  }
+
+  .search-input {
+    font-size: 1rem !important;
+    padding: var(--space-3) !important;
+  }
+
+  /* ========== Skip Links - Better mobile positioning ========== */
+  .skip-link:focus {
+    top: var(--space-4) !important;
+    left: var(--space-4) !important;
+    font-size: 0.875rem !important;
+  }
+}
+
+/* ========== Extra Small Phones (< 480px) ========== */
+@media (max-width: 480px) {
+
+  .container {
+    padding: 0 var(--space-3) !important;
+  }
+
+  .profile-image {
+    width: 120px !important;
+    height: 120px !important;
+  }
+
+  .profile-name {
+    font-size: 1.5rem !important;
+  }
+
+  .profile-title {
+    font-size: 0.9375rem !important;
+  }
+
+  .section-title {
+    font-size: 1.375rem !important;
+  }
+
+  .timeline-title {
+    font-size: 1rem !important;
+  }
+
+  .interest-tag,
+  .skill-item,
+  .project-tag {
+    font-size: 0.75rem !important;
+    padding: 0.25rem 0.5rem !important;
+  }
+
+  h1 {
+    font-size: 1.75rem !important;
+  }
+
+  h2 {
+    font-size: 1.375rem !important;
+  }
+
+  h3 {
+    font-size: 1.125rem !important;
+  }
+
+  /* Even more compact spacing on very small screens */
+  .section {
+    margin-bottom: var(--space-6) !important;
+  }
+
+  .profile-header {
+    padding: var(--space-4) 0 !important;
+  }
+}
+
+/* ========== Landscape Orientation Optimizations ========== */
+@media (max-width: 768px) and (orientation: landscape) {
+
+  .profile-image {
+    width: 100px !important;
+    height: 100px !important;
+  }
+
+  .profile-header {
+    padding: var(--space-4) 0 !important;
+  }
+
+  .section {
+    margin-bottom: var(--space-6) !important;
+  }
+}
+
+/* ========== Reduced Motion Preference ========== */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ========== High Contrast Mode ========== */
+@media (prefers-contrast: high) {
+  @media (max-width: 768px) {
+    .btn,
+    .social-link,
+    .interest-tag,
+    .skill-item {
+      border: 2px solid currentColor !important;
+    }
+  }
+}
