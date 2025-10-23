@@ -12,6 +12,11 @@
     -webkit-overflow-scrolling: touch;
   }
 
+  /* Reduce body padding since navbar is more compact */
+  body {
+    padding-top: 0 !important;
+  }
+
   /* Optimized container padding for mobile */
   .container {
     padding: 0 var(--space-4) !important;
@@ -263,21 +268,32 @@
     min-height: 44px !important;
   }
 
-  /* ========== Site Header/Navigation ========== */
+  /* ========== Site Header/Navigation - Compact Mobile ========== */
   .site-header {
-    padding: var(--space-3) 0 !important;
+    padding: var(--space-2) 0 !important; /* Reduced from space-3 to space-2 (0.5rem = 8px) */
+    border-bottom: 1px solid var(--color-border) !important;
+  }
+
+  .site-nav {
+    min-height: auto !important;
+  }
+
+  .site-title {
+    font-size: 0.9375rem !important; /* 15px - smaller title on mobile */
+    font-weight: 600 !important;
   }
 
   .nav-links {
-    gap: var(--space-3) !important;
-    font-size: 0.875rem !important;
+    gap: var(--space-2) !important; /* Reduced gap between items */
+    font-size: 0.8125rem !important; /* 13px - smaller nav text */
   }
 
   .nav-link {
-    padding: var(--space-2) !important;
-    min-height: 44px !important;
+    padding: var(--space-1) var(--space-2) !important; /* Compact padding */
+    min-height: 36px !important; /* Reduced from 44px to save space */
     display: flex !important;
     align-items: center !important;
+    font-size: 0.8125rem !important;
   }
 
   /* ========== Theme Toggle - Better positioning ========== */
@@ -429,6 +445,25 @@
     padding: 0 var(--space-3) !important;
   }
 
+  /* Even more compact navbar for very small phones */
+  .site-header {
+    padding: var(--space-1) 0 !important; /* Just 0.25rem = 4px top/bottom */
+  }
+
+  .site-title {
+    font-size: 0.875rem !important; /* 14px */
+  }
+
+  .nav-links {
+    gap: var(--space-1) !important; /* Minimal gap */
+  }
+
+  .nav-link {
+    padding: var(--space-1) !important;
+    min-height: 32px !important; /* Even smaller */
+    font-size: 0.75rem !important; /* 12px */
+  }
+
   .profile-image {
     width: 120px !important;
     height: 120px !important;
@@ -481,6 +516,21 @@
 
 /* ========== Landscape Orientation Optimizations ========== */
 @media (max-width: 768px) and (orientation: landscape) {
+
+  /* Ultra-compact navbar for landscape mode (limited vertical space) */
+  .site-header {
+    padding: var(--space-1) 0 !important;
+  }
+
+  .site-title {
+    font-size: 0.875rem !important;
+  }
+
+  .nav-link {
+    padding: 0.125rem var(--space-2) !important;
+    min-height: 28px !important;
+    font-size: 0.75rem !important;
+  }
 
   .profile-image {
     width: 100px !important;
