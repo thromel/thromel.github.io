@@ -66,6 +66,13 @@
     text-align: left !important;
   }
 
+  /* Profile Contact Row - Stack vertically on mobile */
+  .profile-contact-row {
+    flex-direction: column !important;
+    gap: var(--space-4) !important;
+    width: 100% !important;
+  }
+
   /* Profile Links - Stack vertically on mobile */
   .profile-links {
     flex-direction: column !important;
@@ -87,7 +94,6 @@
   .social-links {
     justify-content: center !important;
     gap: var(--space-4) !important;
-    margin-top: var(--space-2) !important;
   }
 
   .social-link {

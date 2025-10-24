@@ -13,40 +13,42 @@ navbar_title: Home
       </p>
     </div>
 
-    <div class="profile-links">
-      <a href="mailto:{{ site.data.profile.email }}" class="profile-link">
-        <i class="fas fa-envelope"></i>
-        {{ site.data.profile.email }}
-      </a>
-      <span class="profile-link">
-        <i class="fas fa-map-marker-alt"></i>
-        {{ site.data.profile.location }}
-      </span>
-      <a href="/assets/pdf/cv.pdf" class="profile-link" target="_blank">
-        <i class="fas fa-file-pdf"></i>
-        Curriculum Vitae
-      </a>
-    </div>
+    <div class="profile-contact-row">
+      <div class="profile-links">
+        <a href="mailto:{{ site.data.profile.email }}" class="profile-link">
+          <i class="fas fa-envelope"></i>
+          {{ site.data.profile.email }}
+        </a>
+        <span class="profile-link">
+          <i class="fas fa-map-marker-alt"></i>
+          {{ site.data.profile.location }}
+        </span>
+        <a href="/assets/pdf/cv.pdf" class="profile-link" target="_blank">
+          <i class="fas fa-file-pdf"></i>
+          Curriculum Vitae
+        </a>
+      </div>
 
-    <div class="social-links">
-      <a href="mailto:{{ site.data.profile.email }}" class="social-link" title="Email">
-        <i class="fas fa-envelope"></i>
-      </a>
-      {% if site.data.profile.linkedin %}
-      <a href="https://www.linkedin.com/in/{{ site.data.profile.linkedin }}" class="social-link" title="LinkedIn" target="_blank">
-        <i class="fab fa-linkedin"></i>
-      </a>
-      {% endif %}
-      {% if site.data.profile.github %}
-      <a href="https://github.com/{{ site.data.profile.github }}" class="social-link" title="GitHub" target="_blank">
-        <i class="fab fa-github"></i>
-      </a>
-      {% endif %}
-      {% if site.data.profile.gscholar %}
-      <a href="https://scholar.google.com/citations?user={{ site.data.profile.gscholar }}" class="social-link" title="Google Scholar" target="_blank">
-        <i class="ai ai-google-scholar"></i>
-      </a>
-      {% endif %}
+      <div class="social-links">
+        <a href="mailto:{{ site.data.profile.email }}" class="social-link" title="Email">
+          <i class="fas fa-envelope"></i>
+        </a>
+        {% if site.data.profile.linkedin %}
+        <a href="https://www.linkedin.com/in/{{ site.data.profile.linkedin }}" class="social-link" title="LinkedIn" target="_blank">
+          <i class="fab fa-linkedin"></i>
+        </a>
+        {% endif %}
+        {% if site.data.profile.github %}
+        <a href="https://github.com/{{ site.data.profile.github }}" class="social-link" title="GitHub" target="_blank">
+          <i class="fab fa-github"></i>
+        </a>
+        {% endif %}
+        {% if site.data.profile.gscholar %}
+        <a href="https://scholar.google.com/citations?user={{ site.data.profile.gscholar }}" class="social-link" title="Google Scholar" target="_blank">
+          <i class="ai ai-google-scholar"></i>
+        </a>
+        {% endif %}
+      </div>
     </div>
   </div>
 
