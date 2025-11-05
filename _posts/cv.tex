@@ -212,7 +212,6 @@ AI for Software Engineering (AI4SE), Empirical Software Engineering, Software an
       \resumeItemListStart
         \item Backend Engineer developing microservices-based healthcare applications handling millions of patient records using .NET Core, C\#, and AWS
         \item Deployed Multi-Agent systems using LangGraph for dashboard generation/modification, integrated with data exploration agent achieving 85\% reduction in setup time
-        \item Developed novel gap-based axis break algorithm for data visualization, addressing outlier-threshold limitations and improving chart clarity
         \item Achieved 60\% reduction in query execution times through database optimization; implemented 40\% API response improvement via Redis caching
         \item Pioneered browser automation testing methodology in .NET, simplifying regression testing and improving test coverage from 72\% to 95\%
         \item Received IQVIA Impact Program – Silver award (May 2025) for outstanding performance
@@ -225,52 +224,52 @@ AI for Software Engineering (AI4SE), Empirical Software Engineering, Software an
 \resumeSubHeadingListStart
 
 \resumeProject
-  {\href{https://tanzimhromel.com/assets/pdf/reagent-plus-plus.pdf}{ReAgent++: Detecting Aligned Backdoors in LLM Agents}}
-  {Research Collaboration}
-  {August 2025 - Present}
-  {}
-\resumeItemListStart
-  \item Developing runtime detection system for aligned backdoors in LLM agents using STRIP-style perturbation testing and K-Arm trigger inversion
-  \item Extending ReAgent framework with targeted malicious scenario testing and comprehensive evaluation on LLM agent benchmarks
-  \item Collaboration with Dr. Chowdhury Md. Rakin Haider (BUET)
-\resumeItemListEnd
-
-\resumeProject
-  {\href{https://tanzimhromel.com/assets/pdf/ml-rce-study.pdf}{An Empirical Study on Remote Code Execution in Machine
-Learning Model Hosting Ecosystems}}
-  {Publication (Under Review at \href{https://2026.msrconf.org}{MSR 2026})}
+  {\href{https://tanzimhromel.com/assets/pdf/ml-rce-study.pdf}{An Empirical Study on Remote Code Execution in ML Model Hosting Ecosystems}}
+  {Tools: Python, Bandit, CodeQL, Semgrep, YARA, CWE Analysis | In Review at MSR 2026}
   {June 2025 - Oct 2025}
   {{}}
 \resumeItemListStart
-  \item \textbf{Co-authors:} Mohammad Latif Siddiq, Joanna C. Santos
-  \item Comprehensive analysis of remote code execution (RCE) vulnerabilities across 5 ML platforms with multi-phase empirical study
-  \item Static analysis and developer discussion analysis; proposed security recommendations and developed automated vulnerability detection toolkit
+  \item First large-scale cross-platform study analyzing \textasciitilde45,000 repositories across 5 major platforms (Hugging Face, ModelScope, OpenCSG, OpenMMLab, PyTorch Hub) with co-authors Mohammad Latif Siddiq and Joanna C. Santos
+  \item Detected security vulnerabilities using static analyzers and YARA malware signatures: found CWE-502 (unsafe deserialization) in 74.54\% and CWE-95 (eval injection) in 15.02\% of affected repositories; 10.41\% of Hugging Face repos contain security smells
+  \item Analyzed 600+ developer discussions to create taxonomy of security misconceptions; revealed only 6.6\% SafeTensors adoption and widespread trust\_remote\_code usage
+\resumeItemListEnd
+
+\resumeProject
+  {\href{https://tanzimhromel.com/assets/pdf/reagent-plus-plus.pdf}{ReAgent++: Detecting Aligned Backdoors in LLM Agents}}
+  {Tools: Python, STRIP, K-Arm, UCB Scheduler, WebShop, OSWorld, AgentBench}
+  {August 2025 - Present}
+  {{}}
+\resumeItemListStart
+  \item Extending ReAgent to detect aligned backdoors that maintain semantic consistency while subverting user intent through preference manipulation; collaboration with Dr. Chowdhury Md. Rakin Haider (BUET)
+  \item Implementing Text/Env-STRIP for perturbation-based runtime detection, and K-Arm trigger inversion for forensic analysis with multi-armed bandit optimization
+  \item Evaluating on 3 benchmarks (WebShop-1.18M products, OSWorld-369 tasks, AgentBench) against comprehensive attack suite including Sleeper-style, instruction backdoors, and multi-turn hidden triggers
 \resumeItemListEnd
 
 \resumeProject
   {Multi-Agent Framework for Generating Relational DB Schema \& ERD}
-  {Research Project}
+  {Tools: Python, LangGraph, StateGraph, Z3 Solver, SQLAlchemy, Text2Schema}
   {July 2025 - Present}
   {{}}
 \resumeItemListStart
-  \item Extending SchemaAgent baseline with Dr. Sukarna Barua (BUET) through DSL-based communication protocol
-  \item Hierarchical agent architecture for entity extraction, relationship mapping, and constraint validation to reduce schema generation errors
+  \item Extended SchemaAgent with Dr. Sukarna Barua (BUET) using LangGraph StateGraph architecture with conditional routing and 3-tier auto-repair system
+  \item Designed 6-stage decomposed pipeline with specialized agents for entity extraction, relationship mining, and normalization with Z3 formal verification
+  \item Implemented granular component-level retry mechanism with intelligent violation analysis, reducing redundant LLM calls by 80\%
 \resumeItemListEnd
 
 \resumeProject
   {\href{https://tanzimhromel.com/assets/pdf/llm-api-contracts.pdf}{Design by Contract for LLM APIs}}
-  {Research Collaboration}
+  {Tools: Python, OpenAI SDK, LangChain, Runtime Monitoring, Contract Enforcement | Manuscript in preparation}
   {Nov 2024 - Present}
   {}
 \resumeItemListStart
-  \item Developing taxonomy for API contracts through empirical study of 412 real-world issues
+  \item Developing taxonomy for API contracts through empirical study of 412 real-world issues with Dr. Akond Rahman (Auburn University)
   \item Created OpenAI SDK and LangChain extensions for automatic contract enforcement and runtime remediation
-  \item Collaboration with Dr. Akond Rahman (Auburn University)
+  \item Implemented precondition/postcondition validators with automatic retry mechanisms and fallback strategies
 \resumeItemListEnd
 
 \resumeProject
   {\href{https://tanzimhromel.com/assets/pdf/Ureporter.pdf}{Sentiment Analysis of Anonymous Crisis Reports in Bangladesh}}
-  {Research Project | \href{https://ureporter.cse.buet.ac.bd/about_us}{Website}}
+  {Tools: Python, BERT, XLM-RoBERTa, Transformers, Bengali NLP, Flask}
   {Sep 2024 - Nov 2024}
   {}
 \resumeItemListStart
@@ -280,16 +279,17 @@ Learning Model Hosting Ecosystems}}
 \resumeItemListEnd
 
 \resumeProject
-  {\href{https://tanzimhromel.com/assets/pdf/blockchain-ehr.pdf}{Patient-Centric Blockchain Framework for EHR Management}}
-  {Undergraduate Thesis}
-  {June 2022 - May 2023}
+  {\href{https://tanzimhromel.com/assets/pdf/blockchain-ehr.pdf}{Patient-Centric Blockchain Framework for Secure EHR Management}}
+  {Tools: Solidity, Ethereum, IPFS, React, Web3.js, AES-GCM, ECIES, EIP-712}
+  {June 2022 – May 2023}
   {}
 \resumeItemListStart
-  \item Supervised by Professor ASM Latiful Hoque (BUET)
-  \item Designed blockchain framework with encrypted off-chain IPFS storage and on-chain Ethereum access control
-  \item Implemented ERC-721 based patient records with AES-GCM encryption, ECIES key wrapping, and EIP-712 signed permissions
-  \item Evaluated on 10,000 synthetic patients
+  \item Proposed a patient-centric blockchain architecture that decouples encrypted off-chain FHIR record storage from on-chain access control, eliminating trusted intermediaries and enabling verifiable patient.
+  \item Implemented an ERC-721–based smart contract for record ownership with EIP-712 signed, time-bounded permissions and ECIES-wrapped AES-GCM keys ensuring confidentiality and non-repudiable authorization.
+  \item Integrated off-chain IPFS storage with on-chain audit trails, achieving tamper-evident data integrity and complete access traceability through event logs.
+  \item Evaluated scalability on 10,000 synthetic FHIR records; achieved 1.3–2.0 s end-to-end latency for 1 MB records and 10× gas reduction via Layer-2 (zkSync/Arbitrum) deployment.
 \resumeItemListEnd
+
 
 \resumeSubHeadingListEnd
 
@@ -298,7 +298,19 @@ Learning Model Hosting Ecosystems}}
 \resumeSubHeadingListStart
 
 \resumeProject
-  {\href{https://github.com/thromel/go-database}{Production-Ready Database Engine in Go}}
+{\href{https://github.com/thromel/Yet-Another-C-Compiler}{Yet Another C Compiler}}
+{Tools: C++17, CMake}
+{Jun-Aug 2021, Oct 2024}
+{}
+\resumeItemListStart
+\item Built complete C compiler with hand-written lexer and parser, semantic analysis, and x86-64 code generation
+\item Implemented SSA-based optimization pipeline including SCCP, GVN, LICM, and dead code elimination
+\item Designed a linear scan register allocator with spilling support
+\item Modernized legacy Flex/Bison-based prototype into a compiler architecture with modular IR passes and extensible optimization pipeline
+\resumeItemListEnd
+
+\resumeProject
+  {\href{https://github.com/thromel/go-database}{Database Engine in Go}}
   {Tools: Go, B+ Tree, WAL, ARIES Protocol}
   {Oct 2024 - Present}
   {}
@@ -309,26 +321,15 @@ Learning Model Hosting Ecosystems}}
 \resumeItemListEnd
 
 \resumeProject
-  {\href{https://tanzimhromel.com/showcase/projects/blockchain-ticketing/}{Blockchain-Based Ticketing Platform}}
-  {Tools: Ethereum, Polygon, Solidity, ERC-1155, Web3.js}
-  {Jan 2021 - April 2021}
-  {}
+{\href{https://github.com/thromel/Image-Captioning-ML-Project}{Modern Image Captioning System}}
+{Tools: PyTorch, CLIP, ViT, GPT-2, AoA, SCST, MS-COCO}
+{Jan 2023 – Feb 2023}
+{}
 \resumeItemListStart
-  \item Finalist in Blockchain Olympiad Bangladesh (BCOLBD) 2021 with team "Recursively Enumerable"
-  \item Designed NFT-based ticketing system using ERC-1155 standard
-  \item Implemented smart contracts for anti-scalping, dynamic QR codes, and decentralized identity management with zero-knowledge proofs
-\resumeItemListEnd
-
-\resumeProject
-  {\href{https://github.com/thromel/Image-Captioning-ML-Project}{Image Captioning with Attention Mechanisms}}
-  {Tools: PyTorch, ResNet-101, LSTM, MS-COCO}
-  {Jan 2023 - Feb 2023}
-  {}
-\resumeItemListStart
-  \item Implemented Show, Attend and Tell architecture with ResNet-101 encoder and LSTM decoder
-  \item Achieved BLEU-4: 0.335, CIDEr: 0.92 on MS-COCO dataset
-  \item Enhanced with beam search and multi-head attention achieving 11-point BLEU-4 improvement
-  \item Conducted comprehensive ablation studies and attention visualizations
+\item Built modular image captioning system combining vision (ResNet, ViT, CLIP) and language (LSTM, Transformer, GPT-2) models
+\item Reached \textbf{127.6 CIDEr}, \textbf{0.392 BLEU-4}, \textbf{0.298 METEOR} on MS-COCO (Karpathy split) using CLIP + GPT-2 + AoA + SCST
+\item Improved CIDEr by +26.4 over ResNet-LSTM baseline through architectural and training refinements
+\item Applied Self-Critical Sequence Training and attention visualization for interpretability
 \resumeItemListEnd
 
 \resumeProject
@@ -341,16 +342,7 @@ Learning Model Hosting Ecosystems}}
   \item Led back-end architecture implementing newsfeed, payment, authentication, and event management services
 \resumeItemListEnd
 
-\resumeProject
-  {\href{https://github.com/thromel/Yet-Another-C-Compiler}{C Compiler Implementation}}
-  {Tools: Flex, Bison, C++}
-  {Jan 2022 - April 2022}
-  {}
-\resumeItemListStart
-  \item Built complete compiler for subset of C language using Flex (lexical analysis) and Bison (parsing)
-  \item Implemented symbol table management with scope handling and comprehensive error reporting
-  \item Added semantic analysis for type checking and function validation
-\resumeItemListEnd
+
 
 \resumeProject
   {\href{https://github.com/thromel/CSE-322-Computer-Networks-Sessional}{Network Simulation \& TCP Protocol Analysis}}

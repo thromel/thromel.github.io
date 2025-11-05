@@ -403,120 +403,160 @@ professional_memberships:
   joined: 2024
 
 research:
-- title: "ReAgent++: Runtime Backdoor Detection for LLM Agents"
-  date: Oct 2025 - Present
-  short_description: Developing runtime detection system for aligned backdoors in LLM agents using STRIP-style perturbation testing and K-Arm trigger inversion.
+- title: "An Empirical Study on Remote Code Execution in ML Model Hosting Ecosystems"
+  date: June 2025 - Oct 2025
+  short_description: First large-scale cross-platform study analyzing ~45,000 repositories across 5 major ML platforms for security vulnerabilities. In Review at MSR 2026.
   description: >-
-    Developing runtime detection system for aligned backdoors in LLM agents that evade traditional consistency checks.
-    Adapts STRIP-style perturbation testing to measure choice invariance under benign input variations and K-Arm trigger
-    inversion to identify minimal triggers. Targets brand bias, tool manipulation, and multi-turn/temporal backdoors in
-    shopping and computer-use agents (WebShop, OSWorld, AgentBench).
+    First large-scale cross-platform study analyzing ~45,000 repositories across 5 major platforms (Hugging Face, ModelScope, OpenCSG,
+    OpenMMLab, PyTorch Hub) with co-authors Mohammad Latif Siddiq and Joanna C. Santos. Detected security vulnerabilities using static
+    analyzers (Bandit, CodeQL, Semgrep) and YARA malware signatures: found CWE-502 (unsafe deserialization) in 74.54% and CWE-95
+    (eval injection) in 15.02% of affected repositories; 10.41% of Hugging Face repos contain security smells. Analyzed 600+ developer
+    discussions to create taxonomy of security misconceptions; revealed only 6.6% SafeTensors adoption and widespread trust_remote_code
+    usage. <b>In Review at MSR 2026.</b>
 
-- title: "Multi-Agent Framework for Generating Relational DB Schema & ERD from Requirements"
-  date: Aug 2025 - Present
-  short_description: Extending SchemaAgent baseline with DSL-based communication protocol, achieving 42% reduction in schema generation errors.
+- title: "ReAgent++: Detecting Aligned Backdoors in LLM Agents"
+  date: August 2025 - Present
+  short_description: Extending ReAgent to detect aligned backdoors that maintain semantic consistency while subverting user intent through preference manipulation.
   description: >-
-    Mentor and co-researcher with Dr. Sukarna Barua (BUET); extending SchemaAgent baseline with domain-specific language for improved
-    agent-to-agent communication. Reduced schema generation errors by 42% through DSL-based communication protocol and hierarchical agent
-    architecture with specialized roles for entity extraction, relationship mapping, and constraint validation.
+    Extending ReAgent to detect aligned backdoors that maintain semantic consistency while subverting user intent through preference
+    manipulation; collaboration with Dr. Chowdhury Md. Rakin Haider (BUET). Implementing Text/Env-STRIP for perturbation-based runtime
+    detection achieving FAR ≤ 5% at FRR = 1-2%, and K-Arm trigger inversion for forensic analysis with multi-armed bandit optimization.
+    Evaluating on 3 benchmarks (WebShop-1.18M products, OSWorld-369 tasks, AgentBench) against comprehensive attack suite including
+    Sleeper-style, instruction backdoors, and multi-turn hidden triggers.
+  technologies:
+  - Python
+  - STRIP
+  - K-Arm
+  - UCB Scheduler
+  - WebShop
+  - OSWorld
+  - AgentBench
+
+- title: "Multi-Agent Framework for Generating Relational DB Schema & ERD"
+  date: July 2025 - Present
+  short_description: Extended SchemaAgent with LangGraph StateGraph architecture and 3-tier auto-repair system, reducing redundant LLM calls by 80%.
+  description: >-
+    Extended SchemaAgent with Dr. Sukarna Barua (BUET) using LangGraph StateGraph architecture with conditional routing and 3-tier
+    auto-repair system. Designed 6-stage decomposed pipeline with specialized agents for entity extraction, relationship mining, and
+    normalization with Z3 formal verification. Implemented granular component-level retry mechanism with intelligent violation analysis,
+    reducing redundant LLM calls by 80%.
   collaborator: >-
     Collaborating with <a href="https://cse.buet.ac.bd/faculty/faculty_detail/sukarnabarua" target="_blank">Dr. Sukarna Barua</a>, Assistant Professor at BUET,
     who specializes in software engineering, data science, and machine learning applications.
+  technologies:
+  - Python
+  - LangGraph
+  - StateGraph
+  - Z3 Solver
+  - SQLAlchemy
+  - Text2Schema
 
-- title: "An Empirical Study on Remote Code Execution in ML Model Hosting Ecosystems"
-  date: March 2025 - Present
-  short_description: Comprehensive analysis of trust_remote_code vulnerabilities across 6 ML platforms with security recommendations for platform maintainers. Manuscript in progress; target venue MSR 2026.
-  description: >-
-    Comprehensive analysis of trust_remote_code vulnerabilities across 6 ML platforms (Hugging Face, PyTorch Hub, ModelScope,
-    OpenCSG, OpenMMLab, NVIDIA NGC) examining custom code execution during model loading. Conducted multi-phase empirical study
-    including metadata extraction, custom code download, static analysis for security smells, and qualitative analysis of developer
-    discussions from GitHub and Stack Overflow. Proposed security recommendations for platform maintainers including SafeTensors
-    format adoption and runtime isolation strategies; developed automated vulnerability detection toolkit. <b>Manuscript in progress;
-    target venue: MSR 2026.</b>
-
-- title: "Making AI Reliable: Design by Contract for Large Language Models"
+- title: "Design by Contract for LLM APIs"
   date: Nov 2024 - Present
   link: /projects/extending-llm-api-contract-analysis-a-refined-taxonomy-and-empirical-study
-  short_description: Developing Design by Contract (DbC) tools to automatically enforce API contracts in LLM libraries, reducing integration failures through proactive contract validation.
+  short_description: Developing taxonomy for API contracts through empirical study of 412 real-world issues and creating automatic contract enforcement tools.
   description: >-
-    Research collaboration with Dr. Akond Rahman, Assistant Professor at Auburn University, specializing in DevOps and cybersecurity.
-    Developed comprehensive taxonomy for API contracts in LLM libraries with refined classification: Input contracts (60%), Output contracts (20%),
-    Temporal/Sequence contracts (15%), and Extended contract types (5%). Conducted empirical study analyzing 412 real-world issues from Stack Overflow,
-    GitHub, and developer forums covering LangChain, HuggingFace, and LlamaIndex. Pioneered LLM-based approach for automated contract extraction
-    and validation in production systems. Currently developing Design by Contract (DbC) tools to automatically enforce API contracts, reducing LLM
-    integration failures by proactive contract validation.
+    Developing taxonomy for API contracts through empirical study of 412 real-world issues with Dr. Akond Rahman (Auburn University). Created OpenAI SDK
+    and LangChain extensions for automatic contract enforcement and runtime remediation. Implemented precondition/postcondition validators with automatic
+    retry mechanisms and fallback strategies.
   collaborator: >-
     Collaborating with <a href="https://akondrahman.github.io" target="_blank">Dr. Akond Rahman</a>, Assistant Professor at Auburn University,
     who specializes in DevOps, cybersecurity, and secure software development. Dr. Rahman leads the PASER (Practical and Actionable Software Engineering Research) group,
     focusing on practical software engineering research that bridges the gap between academic research and industry practice.
+  technologies:
+  - Python
+  - OpenAI SDK
+  - LangChain
+  - Runtime Monitoring
+  - Contract Enforcement
 
-- title: "uReporter: An Unconventional Tale on Sentiment Analysis over Anonymous Online Reporting"
+- title: "Sentiment Analysis of Anonymous Crisis Reports in Bangladesh"
   date: Sep 2024 - Nov 2024
   link: /research#ureporter
-  short_description: Bangladesh's first anonymous online reporting system analyzing crowd-sourced reports using transformer models during 2024 national crisis.
+  short_description: Developed uReporter -- Bangladesh's first anonymous reporting system during 2024 national crisis, analyzing 124 crowd-sourced reports using transformer models.
   description: >-
-    Developed Bangladesh's first anonymous online reporting system (uReporter) and analyzed crowd-sourced reports using transformer models and
-    NRC Lexicon-based analysis. The research focused on sentiment analysis of anonymous reports by people in Bangladesh during an outburst period.
-    <b>Note:</b> This work was initially rejected from The 28th ACM Conference on Computer-Supported Cooperative Work and Social Computing (ACM CSCW)
-    due to novelty concerns and misalignment with conference research goals. Currently revising and preparing for submission to a more suitable venue.
+    Developed uReporter -- Bangladesh's first anonymous reporting system during 2024 national crisis. Analyzed 124 crowd-sourced reports using
+    six transformer models with multilingual NLP pipeline for Bengali/Romanized Bengali. Demonstrated anonymous crowd-sourcing's potential for
+    understanding Global South socio-political dynamics.
   collaborator: >-
     Collaborated with the <a href="https://ureporter.cse.buet.ac.bd/about_us" target="_blank">uReporter team</a> at BUET. The project has received
     coverage from international media including BBC Bengali, Saudi Gazette, and Global Voices.
+  technologies:
+  - Python
+  - BERT
+  - XLM-RoBERTa
+  - Transformers
+  - Bengali NLP
+  - Flask
 
-- title: "Patient-Centric Blockchain Framework for Electronic Health Record Management"
+- title: "Patient-Centric Blockchain Framework for EHR Management"
   date: June 2022 - May 2023
   link: /projects/blockchain-in-healthcare-20
-  short_description: Undergraduate thesis on blockchain framework for EHR management using Ethereum smart contracts, IPFS, and ERC-721 based patient records with comprehensive encryption.
+  short_description: Undergraduate thesis on blockchain framework for EHR management with encrypted off-chain IPFS storage and on-chain Ethereum access control.
   description: >-
-    <b>Undergraduate Thesis.</b> Supervised by Professor ASM Latiful Hoque (BUET); designed blockchain framework separating encrypted
-    off-chain storage from on-chain access control using Ethereum smart contracts and IPFS. Implemented ERC-721 based patient records
-    with AES-GCM encryption, ECIES key wrapping, and EIP-712 signed permissions; evaluated on 10,000 synthetic patients with comprehensive
-    gas analysis and audit trails.
+    <b>Undergraduate Thesis.</b> Designed blockchain framework with encrypted off-chain IPFS storage and on-chain Ethereum access control under
+    Professor ASM Latiful Hoque (BUET). Implemented ERC-721 based patient records with AES-GCM encryption, ECIES key wrapping, and EIP-712 signed
+    permissions. Evaluated system performance and security on 10,000 synthetic patient records demonstrating scalability and privacy preservation.
   collaborator: >-
     Supervised by <a href="https://cse.buet.ac.bd/faculty/faculty_detail/asmlatifulhoque" target="_blank">Professor ASM Latiful Hoque</a> from BUET (my undergraduate thesis supervisor),
     who specializes in data warehousing, data mining, big data analytics, and database technologies.
+  technologies:
+  - Solidity
+  - Ethereum
+  - IPFS
+  - React
+  - Web3.js
+  - AES-GCM
+  - ECIES
 
 projects:
-- title: "Building an Enterprise URL Shortener: Event-Sourced, Multi-Region, High-Performance Architecture"
-  link: https://github.com/thromel/URLShortener
-  date: Nov 2024 - Present
+- title: "Production-Ready Database Engine in Go"
+  link: https://github.com/thromel/go-database
+  date: Oct 2024 - Present
   description: >-
-    <b>Advanced Architecture:</b> Implemented Event Sourcing & CQRS with hierarchical caching strategy (Memory → Redis → Database) for optimal performance and database load reduction.
-    <b>Multi-Region Deployment:</b> Built active-active deployment across multiple regions with automatic failover using Kubernetes HPA scaling and circuit breaker patterns for unprecedented resilience.
-    <b>Enterprise DevOps:</b> Developed complete Infrastructure as Code with Terraform, automated CI/CD with GitHub Actions, zero-downtime rolling deployments, and comprehensive monitoring with OpenTelemetry.
-    <b>Real-time Analytics:</b> Integrated SignalR for live analytics streaming, ML-powered cache warming with intelligent predictions, and complete audit trails for regulatory compliance.
+    Built complete database engine from scratch with B+ tree indexing and page management system with 8KB pages. Implemented LRU buffer pool
+    achieving ~2M ops/sec for reads. Implemented ACID transactions with WAL, crash recovery using ARIES protocol, and concurrent access support.
   technologies:
-  - .NET 8.0
-  - Angular
-  - AWS
-  - Kubernetes
-  - Terraform
-  - PostgreSQL
-  - Redis
-  - Event Sourcing
-  - Circuit Breaker
-  - JWT
-  - OWASP compliance
-- title: "Image caption generation using enhanced Show, Attend, and Tell with BERT Context Vectors"
+  - Go
+  - B+ Tree
+  - WAL
+  - ARIES Protocol
+  - LRU Cache
+  - ACID Transactions
+- title: "Blockchain-Based Ticketing Platform"
+  link: /showcase/projects/blockchain-ticketing/
+  date: Jan 2021 - April 2021
+  description: >-
+    <b>Finalist in Blockchain Olympiad Bangladesh (BCOLBD) 2021</b> with team "Recursively Enumerable". Designed NFT-based ticketing system
+    using ERC-1155 standard. Implemented smart contracts for anti-scalping, dynamic QR codes, and decentralized identity management with
+    zero-knowledge proofs.
+  technologies:
+  - Ethereum
+  - Polygon
+  - Solidity
+  - ERC-1155
+  - Web3.js
+  - Zero-Knowledge Proofs
+- title: "Image Captioning with Attention Mechanisms"
   link: https://github.com/thromel/Image-Captioning-ML-Project
   date: Jan 2023 - Feb 2023
   description: >-
-    Extended the "Show, Attend, and Tell" image captioning model by adding BERT, improving both the quality and speed of image captions.
-    Used BERT's language features to make captions more accurate and context-aware. Reduced training time by leveraging BERT's pre-trained knowledge,
-    allowing faster model convergence without losing accuracy. Showed how to combine advanced language understanding with image captioning to push
-    the limits of AI-based image analysis.
+    Implemented Show, Attend and Tell architecture with ResNet-101 encoder and LSTM decoder. Achieved BLEU-4: 0.335, CIDEr: 0.92 on MS-COCO
+    dataset. Enhanced with beam search and multi-head attention achieving 11-point BLEU-4 improvement. Conducted comprehensive ablation studies
+    and attention visualizations.
   technologies:
-  - Python
   - PyTorch
-  - BERT
-  - NumPy
-  - Computer Vision
-- title: "Eventfly: An End-to-end Event Management System"
+  - ResNet-101
+  - LSTM
+  - MS-COCO
+  - Attention Mechanisms
+  - Beam Search
+- title: "Eventfly: End-to-end Event Management System"
   link: https://github.com/eventfly/Microservices
   date: May 2022 - July 2022
   description: >-
-    Designed and developed a comprehensive microservices-based system to streamline event organization and participation.
-    Led the back-end architecture and implemented key services, including newsfeed, payment, authentication, and event management.
+    Designed microservices-based event management system. Led back-end architecture implementing newsfeed, payment, authentication, and event
+    management services.
   technologies:
   - TypeScript
   - Express.js
@@ -525,6 +565,33 @@ projects:
   - Kubernetes
   - NATS
   - MongoDB
+- title: "C Compiler Implementation"
+  link: https://github.com/thromel/Yet-Another-C-Compiler
+  date: Jan 2022 - April 2022
+  description: >-
+    Built complete compiler for subset of C language using Flex (lexical analysis) and Bison (parsing). Implemented symbol table management with
+    scope handling and comprehensive error reporting. Added semantic analysis for type checking and function validation.
+  technologies:
+  - Flex
+  - Bison
+  - C++
+  - Compiler Design
+  - Symbol Table
+  - Semantic Analysis
+- title: "Network Simulation & TCP Protocol Analysis"
+  link: https://github.com/thromel/CSE-322-Computer-Networks-Sessional
+  date: Jan 2022 - May 2022
+  description: >-
+    Implemented and analyzed TCP congestion control variants (Reno vs Vegas) using NS3 network simulator. Designed TCP Vegas+ modification
+    addressing fairness issues through dual-mode operation. Conducted comprehensive performance analysis measuring throughput, fairness index,
+    and packet drop ratios.
+  technologies:
+  - NS3
+  - C++
+  - TCP Reno
+  - TCP Vegas
+  - Network Simulation
+  - Performance Analysis
 
 tests_and_certifications:
 - name: "📜 TOEFL iBT"
