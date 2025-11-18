@@ -8,9 +8,16 @@ navbar_title: Home
 <div class="profile-header">
   <div class="profile-content">
     <div>
-      <p class="profile-title" style="font-size: 1.25rem; line-height: 1.7; margin-bottom: 0;">
-        I'm <strong>{{ site.data.profile.primary_name }}</strong>, a Software Development Engineer at <a href="{{ site.data.profile.current_company.url }}" target="_blank">{{ site.data.profile.current_company.name }}</a> and a recent graduate from <a href="https://cse.buet.ac.bd" target="_blank">CSE, BUET</a>. My work at IQVIA—integrating LLM capabilities into healthcare analytics, architecting distributed microservices for pharmaceutical data systems, and implementing observability solutions—has deepened my interest in the challenges of building secure, reliable, and scalable systems. These experiences have inspired my research focus in Software Engineering, Software & System Security, Distributed Systems, and Blockchain. Currently, I'm pursuing research under the guidance of various faculty members, bridging practical industry challenges with academic rigor.
+      <p class="profile-bio">
+        I'm <strong>{{ site.data.profile.primary_name }}</strong>, a Software Development Engineer at <a href="{{ site.data.profile.current_company.url }}" target="_blank">{{ site.data.profile.current_company.name }}</a> and recent <a href="https://cse.buet.ac.bd" target="_blank">BUET CSE</a> graduate. My research focuses on <strong>AI for Software Engineering</strong> and <strong>LLM Security</strong>. I'm currently working on an <strong>empirical study of remote code execution vulnerabilities in ML model hosting ecosystems</strong> (under review at MSR 2026), analyzing ~45,000 repositories across platforms like Hugging Face and ModelScope. I'm also extending <strong>ReAgent++ for detecting aligned backdoors in LLM agents</strong> and developing a <strong>multi-agent framework for database schema generation</strong> (SchemaAgent++) using LangGraph with formal verification. My other research includes <strong>Design by Contract for LLM APIs</strong>, exploring runtime contract enforcement and automatic remediation strategies.
       </p>
+
+      <!-- Research Interests -->
+      <div class="interests-grid" style="margin-top: var(--space-4); margin-bottom: var(--space-6);">
+        {% for interest in site.data.profile.research_interests %}
+        <span class="interest-tag">{{ interest }}</span>
+        {% endfor %}
+      </div>
     </div>
 
     <div class="profile-contact-row">
@@ -65,18 +72,6 @@ navbar_title: Home
 </div>
   {% endif %}
 {% endfor %}
-
-<!-- Research Interests -->
-<section class="section">
-  <div class="section-header">
-    <h2 class="section-title">Research Interests</h2>
-  </div>
-  <div class="interests-grid">
-    {% for interest in site.data.profile.research_interests %}
-    <span class="interest-tag">{{ interest }}</span>
-    {% endfor %}
-  </div>
-</section>
 
 <!-- Publications -->
 {% if site.data.profile.publications %}

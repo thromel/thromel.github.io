@@ -1,76 +1,120 @@
 /* ========================================
-   Complete UI Overhaul - Modern Academic CV
-   Light Mode Only | Typography-Focused | Minimal Design
+   Academic Portfolio - Refined Minimalist Design
+   Professional Typography | Clean Aesthetics | Scholarly Focus
    ======================================== */
 
 /* ========== Design Tokens ========== */
 :root {
-  /* Colors - Light Mode */
-  --color-bg: #ffffff;
-  --color-surface: #fafafa;
-  --color-border: #e5e5e5;
-  --color-text-primary: #1a1a1a;
-  --color-text-secondary: #525252;
-  --color-text-muted: #737373;
-  --color-accent: #2563eb;
-  --color-accent-hover: #1d4ed8;
-  --color-success: #16a34a;
+  /* Colors - Academic Light Mode */
+  --color-bg: #fefefe;
+  --color-surface: #f9fafb;
+  --color-surface-raised: #ffffff;
+  --color-border: #e2e4e9;
+  --color-border-light: #f1f3f5;
+  --color-text-primary: #111827;
+  --color-text-secondary: #4b5563;
+  --color-text-muted: #6b7280;
+  --color-text-light: #9ca3af;
+  --color-accent: #1e40af;
+  --color-accent-hover: #1e3a8a;
+  --color-accent-light: #dbeafe;
+  --color-success: #059669;
+  --color-warning: #d97706;
 
-  /* Typography */
-  --font-sans: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, sans-serif;
-  --font-serif: "Georgia", "Times New Roman", serif;
-  --font-mono: "SF Mono", "Consolas", "Monaco", monospace;
+  /* Academic Accent Colors */
+  --color-publication: #7c3aed;
+  --color-research: #0891b2;
+  --color-teaching: #dc2626;
+  --color-award: #ca8a04;
 
-  /* Spacing Scale */
+  /* Typography - Academic Focused */
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-serif: "Charter", "Georgia", "Cambria", "Times New Roman", serif;
+  --font-mono: "JetBrains Mono", "SF Mono", "Consolas", monospace;
+
+  /* Enhanced Spacing Scale */
+  --space-0-5: 0.125rem;
   --space-1: 0.25rem;
   --space-2: 0.5rem;
   --space-3: 0.75rem;
   --space-4: 1rem;
+  --space-5: 1.25rem;
   --space-6: 1.5rem;
   --space-8: 2rem;
+  --space-10: 2.5rem;
   --space-12: 3rem;
   --space-16: 4rem;
+  --space-20: 5rem;
 
-  /* Font Sizes */
-  --text-xs: 0.75rem;
-  --text-sm: 0.875rem;
-  --text-base: 1rem;
-  --text-lg: 1.125rem;
-  --text-xl: 1.25rem;
-  --text-2xl: 1.5rem;
-  --text-3xl: 1.875rem;
-  --text-4xl: 2.25rem;
+  /* Refined Font Sizes - Compact Academic Style */
+  --text-xs: 0.6875rem;   /* 11px */
+  --text-sm: 0.75rem;     /* 12px */
+  --text-base: 0.8125rem; /* 13px */
+  --text-lg: 0.875rem;    /* 14px */
+  --text-xl: 1rem;        /* 16px */
+  --text-2xl: 1.125rem;   /* 18px */
+  --text-3xl: 1.25rem;    /* 20px */
+  --text-4xl: 1.5rem;     /* 24px */
+  --text-5xl: 1.75rem;    /* 28px */
 
-  /* Shadows */
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
-  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.05);
-  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.06);
+  /* Line Heights */
+  --leading-tight: 1.25;
+  --leading-snug: 1.375;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.625;
+  --leading-loose: 1.75;
 
-  /* Border Radius */
-  --radius-sm: 4px;
-  --radius-md: 8px;
-  --radius-lg: 12px;
+  /* Shadows - Subtle and Professional */
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.02);
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.03);
+  --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.04);
+  --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.05);
+  --shadow-xl: 0 16px 32px rgba(0, 0, 0, 0.06);
+  --shadow-focus: 0 0 0 3px rgba(30, 64, 175, 0.15);
+
+  /* Border Radius - Refined */
+  --radius-sm: 3px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
   --radius-full: 9999px;
 
   /* Container */
-  --container-max: 900px;
+  --container-max: 960px;
+  --container-reading: 720px;
+
 }
 
-/* Dark Mode */
+/* Dark Mode - Sophisticated Academic Theme */
 [data-theme="dark"] {
-  --color-bg: #0a0a0a;
-  --color-surface: #1a1a1a;
-  --color-border: #2a2a2a;
-  --color-text-primary: #f5f5f5;
-  --color-text-secondary: #d4d4d4;
-  --color-text-muted: #a3a3a3;
-  --color-accent: #3b82f6;
-  --color-accent-hover: #60a5fa;
-  --color-success: #22c55e;
+  --color-bg: #0f0f10;
+  --color-surface: #18181b;
+  --color-surface-raised: #1f1f23;
+  --color-border: #27272a;
+  --color-border-light: #2e2e33;
+  --color-text-primary: #f4f4f5;
+  --color-text-secondary: #d4d4d8;
+  --color-text-muted: #a1a1aa;
+  --color-text-light: #71717a;
+  --color-accent: #60a5fa;
+  --color-accent-hover: #93bbfc;
+  --color-accent-light: #1e3a5f;
+  --color-success: #34d399;
+  --color-warning: #fbbf24;
 
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
-  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.4);
-  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.5);
+  /* Academic Accent Colors - Dark Mode */
+  --color-publication: #a78bfa;
+  --color-research: #67e8f9;
+  --color-teaching: #f87171;
+  --color-award: #fcd34d;
+
+  /* Dark Mode Shadows */
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.2);
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.5);
+  --shadow-xl: 0 16px 32px rgba(0, 0, 0, 0.6);
+  --shadow-focus: 0 0 0 3px rgba(96, 165, 250, 0.2);
 }
 
 /* ========== Reset & Base ========== */
@@ -95,39 +139,159 @@ body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* ========== Typography ========== */
+/* ========== Typography - Academic Focus ========== */
 h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-sans);
   font-weight: 600;
-  line-height: 1.3;
-  letter-spacing: -0.02em;
+  line-height: var(--leading-tight);
+  letter-spacing: -0.015em;
   color: var(--color-text-primary);
+  margin-top: 0;
 }
 
-h1 { font-size: var(--text-4xl); margin-bottom: var(--space-6); }
-h2 { font-size: var(--text-3xl); margin-bottom: var(--space-4); }
-h3 { font-size: var(--text-2xl); margin-bottom: var(--space-4); }
-h4 { font-size: var(--text-xl); margin-bottom: var(--space-3); }
-h5 { font-size: var(--text-lg); margin-bottom: var(--space-2); }
-h6 { font-size: var(--text-base); margin-bottom: var(--space-2); }
+h1 {
+  font-size: var(--text-4xl);
+  font-weight: 700;
+  margin-bottom: var(--space-8);
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+}
 
+h2 {
+  font-size: var(--text-3xl);
+  font-weight: 600;
+  margin-bottom: var(--space-6);
+  margin-top: var(--space-12);
+  padding-bottom: var(--space-3);
+  border-bottom: 1px solid var(--color-border-light);
+}
+
+h3 {
+  font-size: var(--text-2xl);
+  margin-bottom: var(--space-4);
+  margin-top: var(--space-8);
+}
+
+h4 {
+  font-size: var(--text-xl);
+  margin-bottom: var(--space-3);
+  margin-top: var(--space-6);
+}
+
+h5 {
+  font-size: var(--text-lg);
+  margin-bottom: var(--space-2);
+  font-weight: 500;
+}
+
+h6 {
+  font-size: var(--text-base);
+  margin-bottom: var(--space-2);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Body Text */
 p {
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  line-height: var(--leading-relaxed);
   margin-bottom: var(--space-4);
   color: var(--color-text-secondary);
 }
 
+/* Academic content often has denser paragraphs */
+.abstract, .summary {
+  font-size: var(--text-sm);
+  line-height: var(--leading-loose);
+  font-family: var(--font-serif);
+  color: var(--color-text-secondary);
+}
+
+/* Links - Subtle and professional */
 a {
   color: var(--color-accent);
   text-decoration: none;
-  transition: color 0.15s ease;
+  transition: all 0.2s ease;
+  border-bottom: 1px solid transparent;
 }
 
 a:hover {
   color: var(--color-accent-hover);
+  border-bottom-color: var(--color-accent-hover);
+}
+
+/* External links indicator */
+a[target="_blank"]:after {
+  content: " ↗";
+  font-size: 0.75em;
+  opacity: 0.5;
+  margin-left: 0.1em;
 }
 
 strong, b {
   font-weight: 600;
   color: var(--color-text-primary);
+}
+
+em, i {
+  font-style: italic;
+  color: inherit;
+}
+
+/* Academic Emphasis */
+.highlight {
+  background: var(--color-accent-light);
+  padding: 0.125em 0.25em;
+  border-radius: var(--radius-sm);
+}
+
+/* Quotations - Academic Style */
+blockquote {
+  margin: var(--space-6) 0;
+  padding: var(--space-4) var(--space-6);
+  border-left: 3px solid var(--color-accent);
+  background: var(--color-surface);
+  font-style: italic;
+  font-family: var(--font-serif);
+  color: var(--color-text-secondary);
+}
+
+blockquote cite {
+  display: block;
+  margin-top: var(--space-3);
+  font-size: var(--text-sm);
+  font-style: normal;
+  color: var(--color-text-muted);
+}
+
+/* Code - Academic Papers Often Include Code Snippets */
+code {
+  font-family: var(--font-mono);
+  font-size: 0.875em;
+  background: var(--color-surface);
+  padding: 0.125em 0.375em;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border-light);
+}
+
+pre {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  line-height: var(--leading-relaxed);
+  padding: var(--space-4);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  overflow-x: auto;
+  margin: var(--space-6) 0;
+}
+
+pre code {
+  background: transparent;
+  padding: 0;
+  border: none;
 }
 
 /* ========== Layout ========== */
@@ -141,19 +305,27 @@ strong, b {
   margin-bottom: var(--space-12);
 }
 
-/* ========== Header ========== */
+/* ========== Header - Academic Navigation ========== */
 .site-header {
-  padding: var(--space-8) 0;
-  border-bottom: 1px solid var(--color-border);
+  padding: var(--space-6) 0;
   position: sticky;
   top: 0;
-  z-index: 100;
-  backdrop-filter: blur(8px);
-  background: rgba(255, 255, 255, 0.8);
+  z-index: 1000;
+  background: var(--color-bg);
+  border-bottom: 1px solid var(--color-border-light);
+  backdrop-filter: saturate(180%) blur(20px);
+  background: rgba(254, 254, 254, 0.85);
+  transition: all 0.3s ease;
+}
+
+/* Subtle shadow on scroll */
+.site-header.scrolled {
+  box-shadow: var(--shadow-sm);
+  padding: var(--space-4) 0;
 }
 
 [data-theme="dark"] .site-header {
-  background: rgba(10, 10, 10, 0.8);
+  background: rgba(15, 15, 16, 0.85);
 }
 
 .site-nav {
@@ -163,33 +335,77 @@ strong, b {
 }
 
 .site-title {
-  font-size: var(--text-xl);
+  font-size: var(--text-lg);
   font-weight: 600;
   color: var(--color-text-primary);
-  letter-spacing: -0.02em;
+  letter-spacing: -0.015em;
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  border: none;
+}
+
+.site-title:hover {
+  color: var(--color-accent);
+  border: none;
+}
+
+/* Academic Institution Badge (optional) */
+.institution-badge {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  font-weight: 400;
+  padding: var(--space-1) var(--space-2);
+  background: var(--color-surface);
+  border-radius: var(--radius-sm);
 }
 
 .nav-links {
   display: flex;
-  gap: var(--space-8);
+  gap: var(--space-6);
   list-style: none;
+  align-items: center;
 }
 
 .nav-link {
-  color: var(--color-text-secondary);
-  font-weight: 500;
+  color: var(--color-text-muted);
+  font-weight: 450;
   font-size: var(--text-sm);
-  transition: color 0.15s ease;
+  transition: all 0.2s ease;
+  position: relative;
+  padding: var(--space-1) 0;
+  border: none;
 }
 
-.nav-link:hover,
+.nav-link:after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--color-accent);
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover {
+  color: var(--color-text-primary);
+  border: none;
+}
+
+.nav-link:hover:after,
+.nav-link.active:after {
+  width: 100%;
+}
+
 .nav-link.active {
   color: var(--color-text-primary);
+  font-weight: 500;
 }
 
-/* ========== Profile Section ========== */
+/* ========== Profile Section - Academic Presentation ========== */
 .profile-header {
-  padding: var(--space-12) 0;
+  padding: var(--space-16) 0 var(--space-12) 0;
   display: grid;
   grid-template-columns: 1fr auto;
   gap: var(--space-12);
@@ -203,36 +419,84 @@ strong, b {
 }
 
 .profile-image {
-  width: 250px;
-  height: 250px;
+  width: 180px;
+  height: 180px;
   border-radius: var(--radius-lg);
   object-fit: cover;
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--shadow-lg);
+  border: 3px solid var(--color-surface-raised);
   grid-column: 2;
   grid-row: 1;
+  transition: transform 0.3s ease;
+}
+
+.profile-image:hover {
+  transform: scale(1.02);
 }
 
 .profile-name {
-  font-size: var(--text-4xl);
+  font-size: var(--text-5xl);
   font-weight: 700;
   margin-bottom: var(--space-2);
-  letter-spacing: -0.03em;
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+  color: var(--color-text-primary);
 }
 
+/* Academic Titles and Affiliations */
 .profile-title {
+  font-size: var(--text-xl);
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-2);
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.profile-affiliation {
   font-size: var(--text-lg);
   color: var(--color-text-secondary);
-  margin-bottom: var(--space-4);
-  font-weight: 400;
-  line-height: 1.6;
+  margin-bottom: var(--space-6);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
 }
 
 .profile-bio {
-  font-size: var(--text-base);
+  font-size: var(--text-lg);  /* 14px for better readability */
   color: var(--color-text-secondary);
-  line-height: 1.7;
+  line-height: var(--leading-relaxed);
   margin-bottom: var(--space-6);
-  max-width: 600px;
+  max-width: 650px;
+  font-family: var(--font-sans);
+}
+
+/* Academic Metrics Row */
+.academic-metrics {
+  display: flex;
+  gap: var(--space-6);
+  margin-bottom: var(--space-6);
+  padding: var(--space-4) 0;
+  border-top: 1px solid var(--color-border-light);
+  border-bottom: 1px solid var(--color-border-light);
+}
+
+.metric-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.metric-value {
+  font-size: var(--text-2xl);
+  font-weight: 600;
+  color: var(--color-accent);
+}
+
+.metric-label {
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-text-muted);
 }
 
 .profile-contact-row {
@@ -248,40 +512,61 @@ strong, b {
 }
 
 .profile-link {
-  color: var(--color-text-secondary);
-  font-size: var(--text-xs);
-  display: flex;
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+  display: inline-flex;
   align-items: center;
   gap: var(--space-2);
+  transition: all 0.2s ease;
+  border: none;
+}
+
+.profile-link i {
+  width: 16px;
+  text-align: center;
 }
 
 .profile-link:hover {
   color: var(--color-accent);
+  transform: translateX(2px);
+  border: none;
 }
 
+/* Academic Social Links */
 .social-links {
   display: flex;
-  gap: var(--space-3);
+  gap: var(--space-2);
+  flex-wrap: wrap;
 }
 
 .social-link {
-  width: 36px;
-  height: 36px;
+  width: 40px;
+  height: 40px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-full);
   background: var(--color-surface);
-  color: var(--color-text-secondary);
-  transition: all 0.15s ease;
-  font-size: var(--text-lg);
+  border: 1px solid var(--color-border-light);
+  color: var(--color-text-muted);
+  transition: all 0.2s ease;
+  font-size: var(--text-base);
 }
 
 .social-link:hover {
   background: var(--color-accent);
+  border-color: var(--color-accent);
   color: white;
   transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
 }
+
+/* Academic-specific social icons */
+.social-link.orcid:hover { background: #A6CE39; border-color: #A6CE39; }
+.social-link.scholar:hover { background: #4285F4; border-color: #4285F4; }
+.social-link.researchgate:hover { background: #00CCBB; border-color: #00CCBB; }
+.social-link.github:hover { background: #333; border-color: #333; }
+.social-link.linkedin:hover { background: #0A66C2; border-color: #0A66C2; }
 
 /* ========== About Section ========== */
 .about-section {
@@ -339,28 +624,40 @@ strong, b {
   color: var(--color-text-primary);
 }
 
-/* ========== Timeline Items (Publications, Experience, Education) ========== */
+/* ========== Timeline - Academic CV Style ========== */
 .timeline {
   display: flex;
   flex-direction: column;
-  gap: var(--space-8);
+  gap: var(--space-6);
 }
 
 .timeline-item {
   position: relative;
-  padding-left: var(--space-6);
-  border-left: 2px solid var(--color-border);
+  padding: var(--space-6);
+  background: var(--color-surface-raised);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-lg);
+  transition: all 0.3s ease;
 }
 
-.timeline-item::before {
-  content: '';
+.timeline-item:hover {
+  box-shadow: var(--shadow-md);
+  border-color: var(--color-border);
+  transform: translateX(2px);
+}
+
+/* Academic Year Badge */
+.timeline-year {
   position: absolute;
-  left: -6px;
-  top: 4px;
-  width: 10px;
-  height: 10px;
+  top: var(--space-6);
+  right: var(--space-6);
+  padding: var(--space-1) var(--space-3);
+  background: var(--color-accent-light);
+  color: var(--color-accent);
+  font-size: var(--text-xs);
+  font-weight: 600;
   border-radius: var(--radius-full);
-  background: var(--color-accent);
+  letter-spacing: 0.05em;
 }
 
 .timeline-header {
@@ -376,104 +673,280 @@ strong, b {
   font-weight: 600;
   color: var(--color-text-primary);
   flex: 1;
+  line-height: 1.4;
 }
 
 .timeline-date {
   font-size: var(--text-sm);
   color: var(--color-text-muted);
   white-space: nowrap;
-  font-weight: 500;
+  font-weight: 450;
 }
 
 .timeline-subtitle {
   font-size: var(--text-base);
   color: var(--color-text-secondary);
-  margin-bottom: var(--space-2);
+  margin-bottom: var(--space-3);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.timeline-institution {
+  font-weight: 500;
+  color: var(--color-text-primary);
+}
+
+.timeline-location {
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
 }
 
 .timeline-description {
   font-size: var(--text-base);
   color: var(--color-text-secondary);
-  line-height: 1.7;
+  line-height: var(--leading-relaxed);
+  margin-bottom: var(--space-3);
+}
+
+/* Publication-specific styles */
+.publication-item {
+  border-left: 3px solid var(--color-publication);
+}
+
+.publication-authors {
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-2);
+}
+
+.publication-authors .author-self {
+  font-weight: 600;
+  color: var(--color-text-primary);
+  text-decoration: underline;
+  text-decoration-style: dotted;
+  text-underline-offset: 2px;
+}
+
+.publication-venue {
+  font-style: italic;
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+  margin-bottom: var(--space-2);
+}
+
+.publication-links {
+  display: flex;
+  gap: var(--space-3);
+  margin-top: var(--space-3);
+}
+
+.publication-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: var(--space-1) var(--space-3);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-md);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  transition: all 0.2s ease;
+}
+
+.publication-link:hover {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: white;
+  transform: translateY(-1px);
+}
+
+/* Achievement Badges */
+.timeline-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-top: var(--space-3);
+}
+
+.achievement-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: var(--space-1) var(--space-2);
+  background: var(--color-warning);
+  color: white;
+  font-size: var(--text-xs);
+  font-weight: 600;
+  border-radius: var(--radius-sm);
 }
 
 .timeline-meta {
   display: flex;
   align-items: center;
-  gap: var(--space-2);
-  margin-top: var(--space-2);
+  gap: var(--space-3);
+  margin-top: var(--space-3);
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--color-border-light);
   font-size: var(--text-sm);
   color: var(--color-text-muted);
-  font-style: italic;
 }
 
-/* ========== Project Cards ========== */
+/* ========== Research Projects & Work ========== */
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   gap: var(--space-6);
 }
 
 .project-card {
+  position: relative;
   padding: var(--space-6);
-  border: 1px solid var(--color-border);
+  background: var(--color-surface-raised);
+  border: 1px solid var(--color-border-light);
   border-radius: var(--radius-lg);
-  background: var(--color-bg);
-  transition: all 0.2s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
 }
 
 .project-card:hover {
   box-shadow: var(--shadow-lg);
   border-color: var(--color-accent);
+  transform: translateY(-2px);
 }
+
+/* Project Type Badge */
+.project-type {
+  position: absolute;
+  top: var(--space-4);
+  right: var(--space-4);
+  padding: var(--space-1) var(--space-2);
+  background: var(--color-research);
+  color: white;
+  font-size: var(--text-xs);
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.project-type.research { background: var(--color-research); }
+.project-type.teaching { background: var(--color-teaching); }
+.project-type.industry { background: var(--color-accent); }
 
 .project-title {
   font-size: var(--text-lg);
   font-weight: 600;
+  margin-bottom: var(--space-2);
+  color: var(--color-text-primary);
+  line-height: 1.3;
+}
+
+.project-subtitle {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
   margin-bottom: var(--space-3);
 }
 
 .project-description {
   font-size: var(--text-base);
   color: var(--color-text-secondary);
-  line-height: 1.7;
+  line-height: var(--leading-relaxed);
   margin-bottom: var(--space-4);
+  flex-grow: 1;
+}
+
+.project-metrics {
+  display: flex;
+  gap: var(--space-4);
+  margin-bottom: var(--space-4);
+  padding: var(--space-3) 0;
+  border-top: 1px solid var(--color-border-light);
+  border-bottom: 1px solid var(--color-border-light);
+}
+
+.project-metric {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+.project-metric i {
+  color: var(--color-accent);
 }
 
 .project-tags {
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-2);
+  margin-top: auto;
 }
 
 .project-tag {
-  padding: var(--space-1) var(--space-3);
+  padding: var(--space-1) var(--space-2);
   background: var(--color-surface);
-  border: 1px solid var(--color-border);
+  border: 1px solid var(--color-border-light);
   border-radius: var(--radius-sm);
   font-size: var(--text-xs);
   font-weight: 500;
   color: var(--color-text-secondary);
+  transition: all 0.2s ease;
 }
 
-/* ========== Skills Grid ========== */
-.skills-grid {
+.project-tag:hover {
+  background: var(--color-accent-light);
+  color: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+/* ========== Skills & Expertise - Academic Style ========== */
+.skills-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: var(--space-8);
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-6);
 }
 
 .skill-category {
   padding: var(--space-6);
-  background: var(--color-surface);
+  background: var(--color-surface-raised);
+  border: 1px solid var(--color-border-light);
   border-radius: var(--radius-lg);
+  transition: all 0.3s ease;
+}
+
+.skill-category:hover {
+  box-shadow: var(--shadow-md);
+  border-color: var(--color-border);
+}
+
+.skill-category-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+}
+
+.skill-category-icon {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-accent-light);
+  color: var(--color-accent);
+  border-radius: var(--radius-md);
+  font-size: var(--text-lg);
 }
 
 .skill-category-title {
-  font-size: var(--text-base);
+  font-size: var(--text-lg);
   font-weight: 600;
-  margin-bottom: var(--space-4);
   color: var(--color-text-primary);
+  letter-spacing: -0.01em;
 }
 
 .skill-list {
@@ -483,12 +956,50 @@ strong, b {
 }
 
 .skill-item {
+  position: relative;
   padding: var(--space-2) var(--space-3);
-  background: var(--color-bg);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-md);
   font-size: var(--text-sm);
   color: var(--color-text-secondary);
+  transition: all 0.2s ease;
+  cursor: default;
+}
+
+.skill-item:hover {
+  background: var(--color-accent-light);
+  color: var(--color-accent);
+  border-color: var(--color-accent);
+  transform: translateY(-1px);
+}
+
+/* Skill proficiency indicator */
+.skill-item[data-level="expert"]::after {
+  content: "●●●";
+  position: absolute;
+  top: -8px;
+  right: 4px;
+  font-size: 8px;
+  color: var(--color-success);
+}
+
+.skill-item[data-level="advanced"]::after {
+  content: "●●○";
+  position: absolute;
+  top: -8px;
+  right: 4px;
+  font-size: 8px;
+  color: var(--color-accent);
+}
+
+.skill-item[data-level="intermediate"]::after {
+  content: "●○○";
+  position: absolute;
+  top: -8px;
+  right: 4px;
+  font-size: 8px;
+  color: var(--color-text-muted);
 }
 
 /* ========== Buttons ========== */
@@ -593,13 +1104,152 @@ strong, b {
 .mb-4 { margin-bottom: var(--space-4); }
 .mb-8 { margin-bottom: var(--space-8); }
 
-/* Remove all animations */
+/* ========== Academic Components ========== */
+
+/* Publications List - Numbered */
+.publications-list {
+  counter-reset: publication;
+}
+
+.publication-entry {
+  position: relative;
+  padding-left: var(--space-10);
+  margin-bottom: var(--space-6);
+  counter-increment: publication;
+}
+
+.publication-entry::before {
+  content: "[" counter(publication) "]";
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-weight: 600;
+  color: var(--color-accent);
+  font-size: var(--text-sm);
+}
+
+/* Citation Block */
+.citation-block {
+  padding: var(--space-4);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-md);
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  margin: var(--space-4) 0;
+}
+
+/* Download CV Button */
+.cv-download {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-6);
+  background: var(--color-accent);
+  color: white;
+  border-radius: var(--radius-md);
+  font-weight: 500;
+  transition: all 0.2s ease;
+  border: 2px solid var(--color-accent);
+}
+
+.cv-download:hover {
+  background: transparent;
+  color: var(--color-accent);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+/* Academic Badges */
+.badge-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin: var(--space-4) 0;
+}
+
+.academic-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-4);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  font-size: var(--text-sm);
+  font-weight: 500;
+}
+
+.academic-badge.verified {
+  background: var(--color-success);
+  color: white;
+  border-color: var(--color-success);
+}
+
+/* Research Interests Tags */
+.research-interests {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  padding: var(--space-6);
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+}
+
+.interest-tag {
+  padding: var(--space-2) var(--space-4);
+  background: var(--color-surface-raised);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-full);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--color-text-primary);
+  transition: all 0.2s ease;
+  cursor: default;
+}
+
+.interest-tag:hover {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: white;
+  transform: scale(1.05);
+}
+
+/* Smooth Scrolling and Focus States */
+html {
+  scroll-behavior: smooth;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+/* Remove default animations */
 [data-aos],
 .animate__animated {
   opacity: 1 !important;
   transform: none !important;
   animation: none !important;
   transition: none !important;
+}
+
+/* Subtle Page Load Animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeInUp 0.6s ease-out;
 }
 
 /* ========== Theme Toggle ========== */
@@ -634,47 +1284,110 @@ strong, b {
   transform: translateY(0);
 }
 
-/* ========== Responsive Design ========== */
+/* ========== Responsive Design - Academic Mobile Experience ========== */
+
+/* Tablet View */
+@media (max-width: 1024px) {
+  .container {
+    --container-max: 800px;
+  }
+
+  .projects-grid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  }
+}
+
+/* Mobile View */
 @media (max-width: 768px) {
   :root {
-    --text-4xl: 2rem;
-    --text-3xl: 1.5rem;
-    --text-2xl: 1.25rem;
+    --text-5xl: 1.375rem;   /* 22px */
+    --text-4xl: 1.125rem;   /* 18px */
+    --text-3xl: 1rem;       /* 16px */
+    --text-2xl: 0.875rem;   /* 14px */
+    --text-xl: 0.8125rem;   /* 13px */
   }
 
   .container {
     padding: 0 var(--space-4);
   }
 
+  /* Mobile Navigation */
+  .site-header {
+    padding: var(--space-4) 0;
+  }
+
+  .nav-links {
+    gap: var(--space-3);
+    overflow-x: auto;
+    padding: var(--space-2) 0;
+  }
+
+  .nav-link {
+    font-size: var(--text-xs);
+    white-space: nowrap;
+  }
+
+  /* Mobile Profile Section */
   .profile-header {
-    padding: var(--space-8) 0;
+    padding: var(--space-10) 0 var(--space-8) 0;
     grid-template-columns: 1fr;
-    text-align: center;
     gap: var(--space-6);
   }
 
   .profile-image {
     grid-column: 1;
     grid-row: 1;
-    margin: 0 auto;
-    width: 180px;
-    height: 180px;
+    margin: 0 auto var(--space-6) auto;
+    width: 150px;
+    height: 150px;
   }
 
   .profile-content {
-    align-items: center;
+    text-align: center;
+  }
+
+  .profile-name {
+    font-size: var(--text-4xl);
   }
 
   .profile-bio {
     max-width: 100%;
+    text-align: left;
+  }
+
+  .academic-metrics {
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .metric-item {
+    flex: 0 0 calc(50% - var(--space-3));
+  }
+
+  .profile-contact-row {
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-4);
   }
 
   .profile-links {
-    justify-content: center;
+    align-items: center;
   }
 
   .social-links {
     justify-content: center;
+  }
+
+  /* Mobile Timeline */
+  .timeline-item {
+    padding: var(--space-4);
+  }
+
+  .timeline-year {
+    position: static;
+    display: inline-block;
+    margin-bottom: var(--space-2);
   }
 
   .timeline-header {
@@ -684,22 +1397,73 @@ strong, b {
 
   .timeline-date {
     white-space: normal;
+    order: -1;
+    margin-bottom: var(--space-2);
   }
 
+  /* Mobile Cards */
   .projects-grid {
     grid-template-columns: 1fr;
-  }
-
-  .skills-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .nav-links {
     gap: var(--space-4);
   }
 
-  .site-header {
-    padding: var(--space-4) 0;
+  .project-card {
+    padding: var(--space-4);
+  }
+
+  .skills-container {
+    grid-template-columns: 1fr;
+  }
+
+  /* Mobile Typography */
+  h2 {
+    font-size: var(--text-2xl);
+    margin-top: var(--space-8);
+  }
+
+  h3 {
+    font-size: var(--text-xl);
+    margin-top: var(--space-6);
+  }
+
+  /* Mobile Buttons */
+  .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .cv-download {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* Mobile Theme Toggle */
+  .theme-toggle {
+    bottom: var(--space-6);
+    right: var(--space-6);
+    width: 44px;
+    height: 44px;
+  }
+}
+
+/* Small Mobile */
+@media (max-width: 375px) {
+  :root {
+    --text-base: 0.75rem;    /* 12px */
+    --text-sm: 0.6875rem;    /* 11px */
+  }
+
+  .container {
+    padding: 0 var(--space-3);
+  }
+
+  .profile-image {
+    width: 120px;
+    height: 120px;
+  }
+
+  .nav-links {
+    gap: var(--space-2);
   }
 }
 

@@ -85,7 +85,7 @@ summary:
 - "My research focus centers on <b>leveraging artificial intelligence to enhance software engineering methodologies</b>, with particular emphasis on improving development efficiency, system resilience, and engineering practices"
 - "Currently conducting research in <b>LLM API contract analysis</b> and <b>blockchain-enabled healthcare systems</b>, in collaboration with distinguished faculty from Bangladesh University of Engineering and Technology and Auburn University"
 - "My unique approach combines practical industry experience with rigorous academic research methodology. Please review my <a href='/projects'>portfolio of projects</a> and <a href='/research'>research contributions</a> for detailed examples of this integrated approach"
-- "<b>Actively seeking PhD/MSc positions for Spring/Fall 2026</b> to pursue advanced research in AI-enhanced software engineering"
+- "<b>Actively seeking PhD/MSc positions for Spring/Fall 2026</b> to pursue advanced research in computer science"
 - "<b><a href='/assets/pdf/cv.pdf' target='_blank'>Complete curriculum vitae available here</a></b>"
 
 skills:
@@ -152,7 +152,7 @@ short_bio: >-
   <br/><br/>
   🏙️ I grew up in <b>Rajshahi</b>, a serene city in northwestern Bangladesh known as the "City of Education" and famous for its silk production, clean streets, mangoes, and the beautiful Padma River. Currently, I live in <b>Uttara, Dhaka</b>—Bangladesh's vibrant capital and one of South Asia's fastest-growing megacities, which offers a dynamic environment with opportunities to collaborate with leading tech companies and research institutions.
   <br/><br/>
-  🔍 My current career goal is to pursue excellence in software engineering while contributing to cutting-edge research. As a <b>motivated researcher</b>, I am actively seeking <b>PhD/MSc positions for Spring/Fall 2026</b> to further my academic journey in computer science, focusing on software engineering, distributed systems, AI, and blockchain technology.
+  🔍 My current career goal is to pursue excellence in software engineering while contributing to cutting-edge research. As a <b>motivated researcher</b>, I am actively seeking <b>PhD/MSc positions for Spring/Fall 2026</b> to advance my academic journey in computer science.
   <br/><br/>
   
   
@@ -165,8 +165,11 @@ education:
   position: B.Sc in Computer Science and Engineering
   date: April 2018 - May 2023
   description: >-
-    <strong>GPA: 3.53/4.0 (3.61 in the final term) | 3.86/4.0 in sessional courses (lab practicals and group projects)</strong>, demonstrating
-    strong implementation and teamwork skills. Consistently strong performance throughout the program with exceptional results in practical coursework.
+    <strong>Cumulative GPA: 3.53/4.00</strong><br>
+    <strong>Final Term GPA: 3.61/4.00</strong><br>
+    <strong>Sessional Courses GPA: 3.86/4.00</strong> (lab practicals and group projects)
+    <br/><br/>
+    <strong>Dean's List Award</strong> - Level 2 (outstanding academic performance)
     <br/><br/>
     <strong>Notable Courses:</strong> Machine Learning, High Performance Database Systems, Fault Tolerant Systems, Data Structure and Algorithms,
     Operating Systems, Computer Security
@@ -331,58 +334,74 @@ awards:
     <a href='https://drive.google.com/file/d/1Vc4E2RoQEPmbfS56oLdUih-oJDBok9sP/view?usp=share_link' target='_blank'>IQVIA Impact Program – Silver (Certificate)</a>
 
 research_interests:
-- Software Engineering
-- Software & System Security
-- Distributed Systems
-- Blockchain
+- AI for Software Engineering (AI4SE)
+- Empirical Software Engineering
+- Software and LLM Security
+- Human-Centered Computing
+- Blockchain Systems
 
 technical_skills:
 - type: Programming Languages
   names:
   - C#
-  - .NET
   - Python
   - JavaScript
+  - TypeScript
   - Go
-- type: Machine Learning
+  - SQL
+  - Java
+  - Solidity
+- type: ML/AI Frameworks
   names:
   - PyTorch
-  - NumPy
-  - Pandas
-  - OpenAI API
   - LangChain
-- type: Blockchain
+  - LangGraph
+  - Transformers
+  - ResNet
+  - LSTM
+  - BERT
+- type: Backend Frameworks
   names:
-  - Ethereum
-  - Solidity
-  - Hyperledger Fabric
-- type: Web & Backend Frameworks
-  names:
+  - .NET Core
   - ASP.NET
   - Express.js
   - FastAPI
+  - Next.js
 - type: Databases
   names:
   - PostgreSQL
   - MongoDB
-  - Microsoft SQL Server
-- type: DevOps & Cloud
+  - Redis
+  - SQL Server
+  - DynamoDB
+- type: Cloud & DevOps
   names:
+  - AWS
+  - Azure
   - Docker
   - Kubernetes
-  - Azure
-  - AWS
   - GitHub Actions
-- type: Monitoring & Observability
-  names:
+  - Terraform
   - OpenTelemetry
   - Jaeger
-- type: Other
+  - NATS
+- type: Blockchain & Web3
   names:
-  - Redis
-  - gRPC
-  - Entity Framework
-  - Azure Bicep
+  - Ethereum
+  - Solidity
+  - IPFS
+  - ERC-721
+  - ERC-1155
+  - Web3.js
+- type: Tools & Technologies
+  names:
+  - NS3
+  - Flex
+  - Bison
+  - Git
+  - Linux
+  - WAL
+  - ARIES Protocol
 
 soft_skills:
   - Team Leadership & Mentorship
@@ -405,6 +424,7 @@ professional_memberships:
 research:
 - title: "An Empirical Study on Remote Code Execution in ML Model Hosting Ecosystems"
   date: June 2025 - Oct 2025
+  link: /assets/pdf/ml-rce-study.pdf
   short_description: First large-scale cross-platform study analyzing ~45,000 repositories across 5 major ML platforms for security vulnerabilities. In Review at MSR 2026.
   description: >-
     First large-scale cross-platform study analyzing ~45,000 repositories across 5 major platforms (Hugging Face, ModelScope, OpenCSG,
@@ -413,9 +433,17 @@ research:
     (eval injection) in 15.02% of affected repositories; 10.41% of Hugging Face repos contain security smells. Analyzed 600+ developer
     discussions to create taxonomy of security misconceptions; revealed only 6.6% SafeTensors adoption and widespread trust_remote_code
     usage. <b>In Review at MSR 2026.</b>
+  technologies:
+  - Python
+  - Bandit
+  - CodeQL
+  - Semgrep
+  - YARA
+  - CWE Analysis
 
 - title: "ReAgent++: Detecting Aligned Backdoors in LLM Agents"
   date: August 2025 - Present
+  link: /assets/pdf/reagent-plus-plus.pdf
   short_description: Extending ReAgent to detect aligned backdoors that maintain semantic consistency while subverting user intent through preference manipulation.
   description: >-
     Extending ReAgent to detect aligned backdoors that maintain semantic consistency while subverting user intent through preference
@@ -453,7 +481,7 @@ research:
 
 - title: "Design by Contract for LLM APIs"
   date: Nov 2024 - Present
-  link: /projects/extending-llm-api-contract-analysis-a-refined-taxonomy-and-empirical-study
+  link: /assets/pdf/llm-api-contracts.pdf
   short_description: Developing taxonomy for API contracts through empirical study of 412 real-world issues and creating automatic contract enforcement tools.
   description: >-
     Developing taxonomy for API contracts through empirical study of 412 real-world issues with Dr. Akond Rahman (Auburn University). Created OpenAI SDK
@@ -472,7 +500,7 @@ research:
 
 - title: "Sentiment Analysis of Anonymous Crisis Reports in Bangladesh"
   date: Sep 2024 - Nov 2024
-  link: /research#ureporter
+  link: /assets/pdf/Ureporter.pdf
   short_description: Developed uReporter -- Bangladesh's first anonymous reporting system during 2024 national crisis, analyzing 124 crowd-sourced reports using transformer models.
   description: >-
     Developed uReporter -- Bangladesh's first anonymous reporting system during 2024 national crisis. Analyzed 124 crowd-sourced reports using
@@ -491,7 +519,7 @@ research:
 
 - title: "Patient-Centric Blockchain Framework for EHR Management"
   date: June 2022 - May 2023
-  link: /projects/blockchain-in-healthcare-20
+  link: /assets/pdf/blockchain-ehr.pdf
   short_description: Undergraduate thesis on blockchain framework for EHR management with encrypted off-chain IPFS storage and on-chain Ethereum access control.
   description: >-
     <b>Undergraduate Thesis.</b> Designed blockchain framework with encrypted off-chain IPFS storage and on-chain Ethereum access control under
