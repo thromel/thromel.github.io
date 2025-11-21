@@ -79,12 +79,12 @@ linkedin: thromel
 # orcid: 0000-0000-0000-0000
 
 summary:
-- "I am Tanzim Hossain Romel, a <b>Software Development Engineer at IQVIA</b> and <b>aspiring researcher</b> dedicated to advancing the intersection of industry practice and academic research"
-- "Graduated with a <b>Bachelor of Science in Computer Science and Engineering from BUET</b> (May 2023), with demonstrated expertise in developing scalable, enterprise-grade solutions"
-- "At IQVIA, I have successfully <b>integrated LLM capabilities into healthcare analytics platforms</b>, achieved 60% reduction in query execution times, and received the <b>IQVIA Impact Silver Award</b> for exceptional performance and innovation"
-- "My research focus centers on <b>leveraging artificial intelligence to enhance software engineering methodologies</b>, with particular emphasis on improving development efficiency, system resilience, and engineering practices"
-- "Currently conducting research in <b>LLM API contract analysis</b> and <b>blockchain-enabled healthcare systems</b>, in collaboration with distinguished faculty from Bangladesh University of Engineering and Technology and Auburn University"
-- "My unique approach combines practical industry experience with rigorous academic research methodology. Please review my <a href='/projects'>portfolio of projects</a> and <a href='/research'>research contributions</a> for detailed examples of this integrated approach"
+- "I am Tanzim Hossain Romel, a <b>Software Development Engineer at IQVIA</b> and recent <b>BUET CSE graduate</b>, dedicated to advancing the intersection of industry practice and academic research"
+- "My research interests lie at the intersection of <b>AI and Software Engineering</b>, with particular focus on <b>software security, LLM systems safety, and empirical software engineering</b>. I am passionate about understanding and improving how AI systems are built, deployed, and secured in real-world environments"
+- "I explore security vulnerabilities in machine learning ecosystems, develop techniques for detecting adversarial behaviors in AI systems, and investigate methods to improve the reliability and safety of AI-powered applications through formal verification and runtime monitoring"
+- "I collaborate with distinguished researchers from <b>Bangladesh University of Engineering and Technology</b> and <b>Auburn University</b>, contributing to research that bridges theoretical computer science with practical software engineering challenges"
+- "At IQVIA, I develop microservices-based healthcare applications handling millions of patient records, architect cloud-native solutions, and integrate AI capabilities into production systems. I received the <b>IQVIA Impact Silver Award</b> for exceptional performance and innovation"
+- "My approach combines hands-on industry experience in building scalable systems with rigorous academic research methodology. Please review my <a href='/projects'>portfolio of projects</a> and <a href='/research'>research contributions</a> for detailed examples of this integrated approach"
 - "<b>Actively seeking PhD/MSc positions for Spring/Fall 2026</b> to pursue advanced research in computer science"
 - "<b><a href='/assets/pdf/cv.pdf' target='_blank'>Complete curriculum vitae available here</a></b>"
 
