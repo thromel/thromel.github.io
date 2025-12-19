@@ -49,6 +49,9 @@ navbar_title: Home
         <a href="https://github.com/{{ site.data.profile.github }}" class="social-link" title="GitHub" target="_blank">
           <i class="fab fa-github"></i>
         </a>
+        <a href="{{ 'contributions' | relative_url }}" class="social-link" title="Open Source Contributions">
+          <i class="fas fa-code-branch"></i>
+        </a>
         {% endif %}
         {% if site.data.profile.gscholar %}
         <a href="https://scholar.google.com/citations?user={{ site.data.profile.gscholar }}" class="social-link" title="Google Scholar" target="_blank">
