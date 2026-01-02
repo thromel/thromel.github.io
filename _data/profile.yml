@@ -14,26 +14,31 @@ positions:
   description: >-
     Backend Engineer at KPI Library team developing microservices-based healthcare applications handling millions of patient records using .NET Core and C#. IQVIA (NYSE: IQV) is a leading global provider of advanced analytics, technology solutions, and clinical research services to the life sciences industry, with 74,000+ employees across 100+ countries.
   responsibilities:
-  - Architected cloud-native applications on AWS (Lambda, EC2, S3, DynamoDB) and designed RESTful APIs following industry best practices for global pharmaceutical clients
+  - Developed and deployed cloud-native microservices using <b>C#/.NET Core</b> and <b>EF Core</b> on <b>AWS</b> (Lambda, EC2, S3, DynamoDB); built RESTful APIs serving global pharmaceutical clients
   - <b>Architecture Leadership:</b> Led the design and refactoring of complex filter logic architecture, simplifying the codebase by 40% and enhancing filtering performance by 70% across multiple microservices
-  - Integrated LLM capabilities into clinical data analytics dashboards, enabling natural language querying and automated report generation with 85% reduction in manual processing time
-  - <b>Performance Optimization Leadership:</b> Achieved 60% reduction in complex query execution times through comprehensive database optimization including query plan analysis, strategic indexing, and materialized views implementation
-  - Implemented advanced caching strategies with Redis and MongoDB optimization techniques, delivering 40% improvement in API response times across healthcare data pipelines
-  - Implemented comprehensive testing (72% to 95% coverage), CI/CD pipelines (99.9% uptime), zero-downtime deployments, and distributed tracing with Jaeger reducing troubleshooting time by 50%
+  - <b>AI/LLM Integration:</b> Built a multi-agent system using <b>LangGraph</b> and <b>LangChain</b> with MCP (Model Context Protocol) to generate real-time dashboards from natural language prompts; implemented <b>RAG</b> systems for intelligent document retrieval and context-aware responses
+  - <b>Performance Optimization:</b> Achieved 60% reduction in complex query execution times through <b>PostgreSQL</b> optimization including query plan analysis, strategic indexing, and materialized views
+  - Implemented <b>in-memory caching</b> strategies in <b>.NET</b> microservices and <b>MongoDB</b> optimization techniques, delivering 40% improvement in API response times across healthcare data pipelines
+  - <b>Testing Leadership:</b> Developed multi-layered hashing approach enabling automated <b>Playwright</b> testing for export features; led export-related test suite development; increased code coverage from 72% to 95%
+  - Improved CI/CD pipelines with optimized build stages and parallel test execution, reducing deployment time by 35%; integrated distributed tracing with <b>Jaeger</b> cutting troubleshooting time by 50%
   - Led proof-of-concept projects, mentored junior developers, and collaborated with cross-functional teams across multiple time zones
   - Received 🏆 <b>IQVIA Impact Program – Silver</b> award (May 2025) for outstanding performance and essential feature development
   technologies:
   - C#
   - .NET Core
+  - EF Core
   - PostgreSQL
   - MongoDB
   - AWS
   - Docker
   - Kubernetes
+  - LangGraph
+  - LangChain
+  - RAG
+  - Playwright
   - Jaeger
   - OpenTelemetry
   - GitLab CI
-  - Redis
 - name: Full Stack Engineer, Mindshare Bangladesh (Part-time)
   date: Apr 2021 - Nov 2021
   logo: "/assets/images/companies/mindshare-logo.png"
@@ -341,67 +346,32 @@ research_interests:
 - Blockchain Systems
 
 technical_skills:
-- type: Programming Languages
+- type: "Backend & Systems"
   names:
-  - C#
-  - Python
-  - JavaScript
-  - TypeScript
+  - C#/.NET Core
   - Go
-  - SQL
-  - Java
-  - Solidity
-- type: ML/AI Frameworks
+  - C++
+  - EF Core
+- type: "AI & Agents"
   names:
-  - PyTorch
-  - LangChain
+  - Python
   - LangGraph
-  - Transformers
-  - ResNet
-  - LSTM
-  - BERT
-- type: Backend Frameworks
-  names:
-  - .NET Core
-  - ASP.NET
-  - Express.js
-  - FastAPI
-  - Next.js
-- type: Databases
+  - RAG
+  - PyTorch
+  - CUDA
+- type: "Databases"
   names:
   - PostgreSQL
   - MongoDB
-  - Redis
   - SQL Server
   - DynamoDB
-- type: Cloud & DevOps
+- type: "Cloud & DevOps"
   names:
   - AWS
-  - Azure
   - Docker
   - Kubernetes
-  - GitHub Actions
   - Terraform
-  - OpenTelemetry
-  - Jaeger
-  - NATS
-- type: Blockchain & Web3
-  names:
-  - Ethereum
-  - Solidity
-  - IPFS
-  - ERC-721
-  - ERC-1155
-  - Web3.js
-- type: Tools & Technologies
-  names:
-  - NS3
-  - Flex
-  - Bison
-  - Git
-  - Linux
-  - WAL
-  - ARIES Protocol
+  - GitHub Actions
 
 soft_skills:
   - Team Leadership & Mentorship

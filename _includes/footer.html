@@ -1,8 +1,82 @@
 <footer class="site-footer">
     <div class="container">
-        <div class="footer-content">
+        <div class="footer-grid">
+            <!-- Brand & Brief -->
+            <div class="footer-brand">
+                <a href="{{ '/' | relative_url }}" class="footer-logo">
+                    {{ site.data.profile.primary_name }}
+                </a>
+                <p class="footer-tagline">Software Engineer & SE Researcher</p>
+                <div class="footer-social">
+                    {% if site.data.profile.github %}
+                    <a href="https://github.com/{{ site.data.profile.github }}" class="footer-social-link" title="GitHub" target="_blank">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    {% endif %}
+                    {% if site.data.profile.linkedin %}
+                    <a href="https://www.linkedin.com/in/{{ site.data.profile.linkedin }}" class="footer-social-link" title="LinkedIn" target="_blank">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    {% endif %}
+                    {% if site.data.profile.gscholar %}
+                    <a href="https://scholar.google.com/citations?user={{ site.data.profile.gscholar }}" class="footer-social-link" title="Google Scholar" target="_blank">
+                        <i class="ai ai-google-scholar"></i>
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="footer-links">
+                <h4 class="footer-heading">Quick Links</h4>
+                <ul class="footer-nav">
+                    <li><a href="{{ '/' | relative_url }}">Home</a></li>
+                    <li><a href="{{ 'experience' | relative_url }}">Work</a></li>
+                    <li><a href="{{ 'research' | relative_url }}">Research</a></li>
+                    <li><a href="{{ 'projects' | relative_url }}">Projects</a></li>
+                </ul>
+            </div>
+
+            <!-- More Links -->
+            <div class="footer-links">
+                <h4 class="footer-heading">Explore</h4>
+                <ul class="footer-nav">
+                    <li><a href="{{ 'achievements' | relative_url }}">Achievements</a></li>
+                    <li><a href="{{ 'contributions' | relative_url }}">Open Source</a></li>
+                    <li><a href="{{ 'learning' | relative_url }}">Learning</a></li>
+                    <li><a href="{{ 'news' | relative_url }}">News</a></li>
+                </ul>
+            </div>
+
+            <!-- Contact -->
+            <div class="footer-contact">
+                <h4 class="footer-heading">Contact</h4>
+                <ul class="footer-nav">
+                    <li>
+                        <a href="mailto:{{ site.data.profile.email }}">
+                            <i class="fas fa-envelope"></i>
+                            <span>{{ site.data.profile.email }}</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/assets/pdf/cv.pdf" target="_blank">
+                            <i class="fas fa-file-alt"></i>
+                            <span>Download CV</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Bottom Bar -->
+        <div class="footer-bottom">
             <p>&copy; {{ 'now' | date: '%Y' }} {{ site.data.profile.primary_name }}. All rights reserved.</p>
-            <p>Last updated: {{ "now" | date: "%B %Y" }}</p>
+            <p class="footer-updated">Last updated: {{ "now" | date: "%B %Y" }}</p>
         </div>
     </div>
 </footer>
+
+<!-- Back to Top Button -->
+<button class="back-to-top" id="backToTop" aria-label="Back to top">
+    <i class="fas fa-arrow-up"></i>
+</button>

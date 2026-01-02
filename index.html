@@ -4,115 +4,124 @@ title: Tanzim Hossain Romel
 navbar_title: Home
 ---
 
-<!-- Profile Header -->
-<div class="profile-header">
-  <div class="profile-content">
-    <div>
-      <p class="profile-bio">
-        I'm <strong>{{ site.data.profile.primary_name }}</strong>, a Software Development Engineer at <a href="{{ site.data.profile.current_company.url }}" target="_blank">{{ site.data.profile.current_company.name }}</a> and recent <a href="https://cse.buet.ac.bd" target="_blank">BUET CSE</a> graduate. I believe AI systems should be both powerful and trustworthy. My research sits at the intersection of <strong>software engineering</strong>, <strong>security</strong>, and <strong>machine learning</strong>, focusing on building AI systems that developers can genuinely rely on. I work on <strong>secure model supply chains</strong>, <strong>verifiable AI-assisted workflows</strong>, and <strong>defenses against adversarial manipulation</strong>. Beyond research, I'm passionate about <strong>software craftsmanship</strong> and <strong>open source</strong>—contributing to projects I use and building tools that help others ship better software.
-      </p>
+<!-- Hero Section - Minimal Style -->
+<div class="hero-section">
+  <div class="hero-content">
+    <!-- Name & Tagline -->
+    <h1 class="hero-name">{{ site.data.profile.primary_name }}</h1>
+    <p class="hero-tagline">Software Engineer · Software Engineering Researcher</p>
 
-      <!-- Research Interests -->
-      <div class="interests-grid" style="margin-top: var(--space-4); margin-bottom: var(--space-6);">
-        {% for interest in site.data.profile.research_interests %}
-        <span class="interest-tag">{{ interest }}</span>
-        {% endfor %}
-      </div>
+    <!-- PhD Seeking Badge -->
+    <div class="hero-badge">
+      <i class="fas fa-graduation-cap"></i>
+      <span>Seeking PhD/MSc positions for Fall 2026</span>
     </div>
 
-    <div class="profile-contact-row">
-      <div class="profile-links">
-        <a href="mailto:{{ site.data.profile.email }}" class="profile-link">
+    <!-- Minimal Bio -->
+    <p class="hero-bio">
+      Researching how AI transforms software development — from secure ML pipelines to intelligent developer tools. Currently at <a href="{{ site.data.profile.current_company.url }}" target="_blank">{{ site.data.profile.current_company.name }}</a>, building scalable healthcare systems. Passionate about open source and research that makes software engineering more accessible.
+    </p>
+
+    <!-- Research Interests -->
+    <div class="hero-interests">
+      {% for interest in site.data.profile.research_interests %}
+      <span class="interest-pill">{{ interest }}</span>
+      {% endfor %}
+    </div>
+
+    <!-- Contact & Social Row -->
+    <div class="hero-actions">
+      <div class="hero-links">
+        <a href="mailto:{{ site.data.profile.email }}" class="hero-link">
           <i class="fas fa-envelope"></i>
-          {{ site.data.profile.email }}
+          <span>{{ site.data.profile.email }}</span>
         </a>
-        <span class="profile-link">
-          <i class="fas fa-map-marker-alt"></i>
-          {{ site.data.profile.location }}
-        </span>
-        <a href="/assets/pdf/cv.pdf" class="profile-link" target="_blank">
-          <i class="fas fa-file-pdf"></i>
-          Curriculum Vitae
+        <a href="/assets/pdf/cv.pdf" class="hero-link hero-link-primary" target="_blank">
+          <i class="fas fa-file-alt"></i>
+          <span>CV</span>
         </a>
       </div>
 
-      <div class="social-links">
-        <a href="mailto:{{ site.data.profile.email }}" class="social-link" title="Email">
-          <i class="fas fa-envelope"></i>
+      <div class="hero-social">
+        {% if site.data.profile.github %}
+        <a href="https://github.com/{{ site.data.profile.github }}" class="social-icon" title="GitHub" target="_blank">
+          <i class="fab fa-github"></i>
         </a>
+        {% endif %}
         {% if site.data.profile.linkedin %}
-        <a href="https://www.linkedin.com/in/{{ site.data.profile.linkedin }}" class="social-link" title="LinkedIn" target="_blank">
+        <a href="https://www.linkedin.com/in/{{ site.data.profile.linkedin }}" class="social-icon" title="LinkedIn" target="_blank">
           <i class="fab fa-linkedin"></i>
         </a>
         {% endif %}
-        {% if site.data.profile.github %}
-        <a href="https://github.com/{{ site.data.profile.github }}" class="social-link" title="GitHub" target="_blank">
-          <i class="fab fa-github"></i>
-        </a>
-        <a href="{{ 'contributions' | relative_url }}" class="social-link" title="Open Source Contributions">
-          <i class="fas fa-code-branch"></i>
-        </a>
-        {% endif %}
         {% if site.data.profile.gscholar %}
-        <a href="https://scholar.google.com/citations?user={{ site.data.profile.gscholar }}" class="social-link" title="Google Scholar" target="_blank">
+        <a href="https://scholar.google.com/citations?user={{ site.data.profile.gscholar }}" class="social-icon" title="Google Scholar" target="_blank">
           <i class="ai ai-google-scholar"></i>
         </a>
         {% endif %}
+        <a href="{{ 'contributions' | relative_url }}" class="social-icon" title="Open Source">
+          <i class="fas fa-code-branch"></i>
+        </a>
       </div>
     </div>
   </div>
 
-  <img src="{{ site.data.profile.portrait_url }}" alt="{{ site.data.profile.primary_name }}" class="profile-image">
-</div>
-
-<!-- PhD Seeking Alert -->
-{% for item in site.data.profile.summary %}
-  {% if item contains "seeking PhD" or item contains "Actively seeking" %}
-<div class="about-section">
-  <div class="alert alert-info">
-    {{ item }}
+  <!-- Profile Image -->
+  <div class="hero-image-wrapper">
+    <img src="{{ site.data.profile.portrait_url }}" alt="{{ site.data.profile.primary_name }}" class="hero-image">
   </div>
 </div>
-  {% endif %}
-{% endfor %}
 
-<!-- Open Source Contributions Summary -->
-<div id="oss-summary" class="oss-summary" style="display: none;">
-  <a href="{{ 'contributions' | relative_url }}" class="oss-summary-link">
+<!-- Open Source Contributions -->
+<div id="oss-summary" class="oss-inline" style="display: none;">
+  <a href="{{ 'contributions' | relative_url }}" class="oss-badge">
     <i class="fas fa-code-merge"></i>
     <span id="oss-summary-text"></span>
-    <i class="fas fa-arrow-right"></i>
   </a>
+  <span class="oss-repos">
+    to <a href="https://github.com/microsoft/TypeScript/pulls?q=author%3Athromel" target="_blank">TypeScript</a>,
+    <a href="https://github.com/dotnet/efcore/pulls?q=author%3Athromel" target="_blank">EF Core</a>,
+    <a href="https://github.com/langchain-ai/langchain/pulls?q=author%3Athromel" target="_blank">LangChain</a>,
+    <a href="https://github.com/Kaliumhexacyanoferrat/GenHTTP/pulls?q=author%3Athromel" target="_blank">GenHTTP</a>
+  </span>
 </div>
 
 <style>
-.oss-summary {
+.oss-inline {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-2);
   margin-bottom: var(--space-6);
+  font-size: var(--font-size-sm);
+  color: var(--text-muted);
 }
-.oss-summary-link {
+.oss-badge {
   display: inline-flex;
   align-items: center;
-  gap: var(--space-3);
-  padding: var(--space-3) var(--space-4);
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
-  border-radius: 8px;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  background: rgba(34, 197, 94, 0.1);
+  border: 1px solid rgba(34, 197, 94, 0.3);
+  border-radius: 6px;
+  color: var(--color-success);
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+.oss-badge:hover {
+  background: rgba(34, 197, 94, 0.2);
+  transform: translateY(-1px);
+}
+.oss-badge i {
+  font-size: 0.875em;
+}
+.oss-repos a {
   color: var(--text-secondary);
   text-decoration: none;
-  font-size: var(--font-size-sm);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-weight: 500;
 }
-.oss-summary-link:hover {
-  border-color: var(--accent-primary);
+.oss-repos a:hover {
   color: var(--accent-primary);
-  transform: translateY(-2px);
-}
-.oss-summary-link i:first-child {
-  color: var(--accent-primary);
-}
-.oss-summary-link i:last-child {
-  font-size: 0.75rem;
-  opacity: 0.7;
 }
 </style>
 
@@ -177,9 +186,9 @@ navbar_title: Home
 {% endif %}
 
 <!-- Current Research -->
-<section class="section">
+<section class="section section-research">
   <div class="section-header">
-    <h2 class="section-title">Research</h2>
+    <h2 class="section-title"><i class="fas fa-microscope section-icon"></i> Research</h2>
   </div>
   <div class="timeline">
     {% for item in site.data.profile.research %}
@@ -202,9 +211,9 @@ navbar_title: Home
 </section>
 
 <!-- Education -->
-<section class="section">
+<section class="section section-education">
   <div class="section-header">
-    <h2 class="section-title">Education</h2>
+    <h2 class="section-title"><i class="fas fa-graduation-cap section-icon"></i> Education</h2>
   </div>
   <div class="timeline">
     {% for edu in site.data.profile.education limit:2 %}
@@ -227,9 +236,9 @@ navbar_title: Home
 </section>
 
 <!-- Work -->
-<section class="section">
+<section class="section section-work">
   <div class="section-header">
-    <h2 class="section-title">Work</h2>
+    <h2 class="section-title"><i class="fas fa-briefcase section-icon"></i> Work</h2>
   </div>
   <div class="timeline">
     {% for position in site.data.profile.positions limit:2 %}
@@ -248,9 +257,9 @@ navbar_title: Home
 </section>
 
 <!-- Selected Projects -->
-<section class="section">
+<section class="section section-projects">
   <div class="section-header">
-    <h2 class="section-title">Selected Projects</h2>
+    <h2 class="section-title"><i class="fas fa-code section-icon"></i> Selected Projects</h2>
   </div>
   <div class="projects-grid">
     {% for project in site.data.profile.projects limit:4 %}
@@ -279,17 +288,51 @@ navbar_title: Home
 </section>
 
 <!-- Technical Skills -->
-<section class="section">
+<section class="section section-skills">
   <div class="section-header">
-    <h2 class="section-title">Technical Skills</h2>
+    <h2 class="section-title"><i class="fas fa-tools section-icon"></i> Technical Skills</h2>
   </div>
   <div class="skills-grid">
-    {% for category in site.data.profile.technical_skills limit:6 %}
+    {% for category in site.data.profile.technical_skills limit:4 %}
     <div class="skill-category">
-      <h4 class="skill-category-title">{{ category.type }}</h4>
+      <h4 class="skill-category-title">
+        {% case category.type %}
+          {% when "Backend & Systems" %}
+            <i class="fas fa-server"></i>
+          {% when "AI & Agents" %}
+            <i class="fas fa-brain"></i>
+          {% when "Databases" %}
+            <i class="fas fa-database"></i>
+          {% when "Cloud & DevOps" %}
+            <i class="fas fa-cloud"></i>
+          {% else %}
+            <i class="fas fa-cogs"></i>
+        {% endcase %}
+        {{ category.type }}
+      </h4>
       <div class="skill-list">
-        {% for skill in category.names limit:8 %}
-        <span class="skill-item">{{ skill }}</span>
+        {% for skill in category.names limit:5 %}
+        <span class="skill-item">
+          {% case skill %}
+            {% when "C#/.NET Core" %}<i class="devicon-dotnetcore-plain"></i>
+            {% when "Go" %}<i class="devicon-go-plain"></i>
+            {% when "C++" %}<i class="devicon-cplusplus-plain"></i>
+            {% when "EF Core" %}<i class="devicon-dotnetcore-plain"></i>
+            {% when "Python" %}<i class="devicon-python-plain"></i>
+            {% when "PyTorch" %}<i class="devicon-pytorch-plain"></i>
+            {% when "CUDA" %}<i class="devicon-nvidia-plain"></i>
+            {% when "PostgreSQL" %}<i class="devicon-postgresql-plain"></i>
+            {% when "MongoDB" %}<i class="devicon-mongodb-plain"></i>
+            {% when "SQL Server" %}<i class="devicon-microsoftsqlserver-plain"></i>
+            {% when "DynamoDB" %}<i class="devicon-dynamodb-plain"></i>
+            {% when "AWS" %}<i class="devicon-amazonwebservices-plain-wordmark"></i>
+            {% when "Docker" %}<i class="devicon-docker-plain"></i>
+            {% when "Kubernetes" %}<i class="devicon-kubernetes-plain"></i>
+            {% when "Terraform" %}<i class="devicon-terraform-plain"></i>
+            {% when "GitHub Actions" %}<i class="devicon-github-original"></i>
+          {% endcase %}
+          {{ skill }}
+        </span>
         {% endfor %}
       </div>
     </div>

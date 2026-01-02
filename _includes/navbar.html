@@ -1,4 +1,7 @@
 <header class="site-header">
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+
     <div class="container">
         <nav class="site-nav" role="navigation" aria-label="Main navigation">
             <a href="{{ '/' | relative_url }}" class="site-title">
@@ -16,6 +19,32 @@
                 </li>
                 {% endfor %}
             </ul>
+
+            <!-- Mobile Menu Toggle -->
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu" aria-expanded="false">
+                <i class="fas fa-bars"></i>
+            </button>
         </nav>
     </div>
 </header>
+
+<!-- Mobile Navigation Drawer -->
+<div class="mobile-nav-drawer" id="mobileNavDrawer" aria-hidden="true">
+    <div class="mobile-nav-header">
+        <span class="mobile-nav-title">Menu</span>
+        <button class="mobile-nav-close" id="mobileNavClose" aria-label="Close menu">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+    <ul class="mobile-nav-links">
+        {% for item in site.data.navigation.pages %}
+        <li>
+            <a href="{{ item.url | relative_url }}"
+               class="mobile-nav-link {% if item.name == page.navbar_title or (item.name == 'Home' and page.navbar_title == nil) %}active{% endif %}">
+                {{ item.name }}
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+<div class="mobile-nav-overlay" id="mobileNavOverlay"></div>

@@ -102,6 +102,87 @@
     font-size: 1.25rem !important;
   }
 
+  /* ========== Hero Section Mobile ========== */
+  .hero-section {
+    padding: var(--space-6) 0 !important;
+    grid-template-columns: 1fr !important;
+    text-align: center !important;
+    gap: var(--space-6) !important;
+  }
+
+  .hero-image-wrapper {
+    order: -1;
+  }
+
+  .hero-image {
+    width: 140px !important;
+    height: 140px !important;
+    margin: 0 auto !important;
+  }
+
+  .hero-content {
+    align-items: center !important;
+  }
+
+  .hero-name {
+    font-size: 1.75rem !important;
+  }
+
+  .hero-tagline {
+    font-size: 1rem !important;
+  }
+
+  .hero-badge {
+    font-size: 0.75rem !important;
+  }
+
+  .hero-bio {
+    text-align: center !important;
+    font-size: 0.9375rem !important;
+    max-width: 100% !important;
+  }
+
+  .hero-interests {
+    justify-content: center !important;
+  }
+
+  .interest-pill {
+    font-size: 0.75rem !important;
+  }
+
+  .hero-actions {
+    flex-direction: column !important;
+    gap: var(--space-4) !important;
+    width: 100% !important;
+  }
+
+  .hero-links {
+    flex-direction: column !important;
+    width: 100% !important;
+    gap: var(--space-3) !important;
+  }
+
+  .hero-link {
+    justify-content: center !important;
+    padding: var(--space-3) !important;
+    min-height: 44px !important;
+  }
+
+  .hero-link-primary {
+    width: 100% !important;
+    justify-content: center !important;
+  }
+
+  .hero-social {
+    justify-content: center !important;
+    gap: var(--space-4) !important;
+  }
+
+  .social-icon {
+    width: 44px !important;
+    height: 44px !important;
+  }
+
   /* ========== Section Headers ========== */
   .section-header {
     margin-bottom: var(--space-6) !important;
@@ -274,9 +355,9 @@
     min-height: 44px !important;
   }
 
-  /* ========== Site Header/Navigation - Compact Mobile ========== */
+  /* ========== Site Header/Navigation - Mobile Hamburger Menu ========== */
   .site-header {
-    padding: var(--space-2) 0 !important; /* Reduced from space-3 to space-2 (0.5rem = 8px) */
+    padding: var(--space-2) 0 !important;
     border-bottom: 1px solid var(--color-border) !important;
   }
 
@@ -285,21 +366,17 @@
   }
 
   .site-title {
-    font-size: 0.9375rem !important; /* 15px - smaller title on mobile */
+    font-size: 0.9375rem !important;
     font-weight: 600 !important;
   }
 
+  /* Hide desktop nav, show hamburger */
   .nav-links {
-    gap: var(--space-2) !important; /* Reduced gap between items */
-    font-size: 0.8125rem !important; /* 13px - smaller nav text */
+    display: none !important;
   }
 
-  .nav-link {
-    padding: var(--space-1) var(--space-2) !important; /* Compact padding */
-    min-height: 36px !important; /* Reduced from 44px to save space */
+  .mobile-menu-toggle {
     display: flex !important;
-    align-items: center !important;
-    font-size: 0.8125rem !important;
   }
 
   /* ========== Theme Toggle - Better positioning ========== */
