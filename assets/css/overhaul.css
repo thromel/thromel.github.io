@@ -597,6 +597,13 @@ pre code {
   text-decoration: underline;
 }
 
+.hero-bio-personal {
+  font-size: var(--text-base);
+  color: var(--color-text-muted);
+  font-style: italic;
+  margin-top: var(--space-3);
+}
+
 .hero-interests {
   display: flex;
   flex-wrap: wrap;

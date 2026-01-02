@@ -1,18 +1,21 @@
-- title: "Graduated from Bangladesh University of Engineering and Technology"
-  description: "I am pleased to announce that I have successfully completed my Bachelor's degree in Computer Science and Engineering from BUET with a GPA of 3.53 out of 4.0."
-  date: 2023-05-27
-- title: "Started working as a Software Development Engineer at IQVIA"
-  description: "I am excited to begin my professional journey as a Software Development Engineer at IQVIA. Looking forward to contributing to innovative healthcare technology solutions."
-  date: 2023-06-01
-- title: "Completed Research on Blockchain in Healthcare 2.0"
-  description: "Successfully finished my research on advanced blockchain framework for healthcare with features like sharding, Layer-2 solutions, and DAG ledger implementation."
-  date: 2023-05-15
-- title: "Paper submitted to ACM CSCW Conference"
-  description: "Submitted my paper titled 'An Unconventional Tale on Sentiment Analysis over Anonymous Online Reporting by the People in Bangladesh during an Outburst Period' to the 28th ACM Conference on Computer-Supported Cooperative Work and Social Computing."
+- title: "Paper submitted to MSR 2026"
+  description: "Submitted 'An Empirical Study on Remote Code Execution in ML Model Hosting Ecosystems' to the Mining Software Repositories (MSR) 2026 conference. First large-scale cross-platform security study analyzing ~45,000 repositories across 5 major ML platforms."
+  date: 2025-10-15
+- title: "Received IQVIA Impact Program Silver Award"
+  description: "Honored with the IQVIA Impact Program Silver Award for outstanding performance and contributions to the KPI Library team."
+  date: 2025-05-15
+- title: "Published arXiv preprint on Blockchain EHR"
+  description: "Published preprint 'Patient-Centric Blockchain Framework for Secure EHR Management' on arXiv, presenting a novel architecture for healthcare data management using Ethereum and IPFS."
+  date: 2025-11-28
+- title: "Started research collaboration with Auburn University"
+  description: "Began working with Dr. Akond Rahman at Auburn University on 'Design by Contract for LLM APIs', developing taxonomy for API contracts through empirical study of real-world issues."
+  date: 2024-11-01
+- title: "Paper submitted to ACM CSCW"
+  description: "Submitted 'Sentiment Analysis of Anonymous Crisis Reports in Bangladesh' to ACM CSCW 2025, analyzing crowd-sourced reports from Bangladesh's 2024 national crisis using transformer models."
   date: 2024-10-21
-- title: "Started undergraduate studies at BUET"
-  description: "Began my journey in Computer Science and Engineering at Bangladesh University of Engineering and Technology (BUET), one of the most prestigious engineering institutions in South Asia."
-  date: 2018-03-31
-- title: "Completed Higher Secondary Certificate (HSC)"
-  description: "Successfully completed HSC from Rajshahi College with excellent results, placing 15th in Rajshahi Board and receiving the Talentpool Scholarship for academic excellence."
-  date: 2017-07-31 
+- title: "Started working as Software Development Engineer at IQVIA"
+  description: "Joined IQVIA as a Software Development Engineer, working on healthcare technology solutions and microservices-based applications handling millions of patient records."
+  date: 2023-06-01
+- title: "Graduated from BUET"
+  description: "Completed B.Sc in Computer Science and Engineering from Bangladesh University of Engineering and Technology with a GPA of 3.53/4.00."
+  date: 2023-05-27
