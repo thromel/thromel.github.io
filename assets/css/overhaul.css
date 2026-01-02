@@ -1369,6 +1369,96 @@ pre code {
   color: var(--color-text-muted);
 }
 
+/* ========== Currently Learning ========== */
+.section-learning {
+  --section-color: #10b981;
+}
+
+.learning-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--space-6);
+}
+
+.learning-category {
+  padding: var(--space-5);
+  background: var(--color-surface-raised);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-lg);
+  border-left: 3px solid var(--section-color);
+}
+
+.learning-category-title {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-base);
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-4);
+}
+
+.learning-category-title i {
+  color: var(--section-color);
+  font-size: var(--text-sm);
+}
+
+.learning-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.learning-item {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  transition: all 0.2s ease;
+}
+
+.learning-item i {
+  font-size: var(--text-base);
+  color: var(--color-text-muted);
+}
+
+.learning-item:hover {
+  background: rgba(16, 185, 129, 0.1);
+  border-color: var(--section-color);
+  color: var(--section-color);
+}
+
+.learning-item:hover i {
+  color: var(--section-color);
+}
+
+.learning-author {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+
+.learning-link {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.learning-link:hover {
+  background: rgba(16, 185, 129, 0.1);
+  border-color: var(--section-color);
+  color: var(--section-color);
+  transform: translateY(-1px);
+}
+
+.learning-link:hover i {
+  color: var(--section-color);
+}
+
 /* ========== Buttons ========== */
 .btn {
   display: inline-flex;
