@@ -1,15 +1,3 @@
-%
-%Academic CV LaTeX Template
-% Author: Dubasi Pavan Kumar
-% LinkedIn: https://www.linkedin.com/in/im-pavankumar/
-% License: MIT
-%
-% For errors, suggestions, or improvements, please contact:
-% Email: pavankumard.pg19.ma@nitp.ac.in
-%
-
-
-
 \documentclass[a4paper,11pt]{article}
 
 % Package imports
@@ -162,7 +150,7 @@
 
 \begin{center}
     \small{
-    +88 01771 600158 | \href{mailto:romel.rcs@gmail.com}{romel.rcs@gmail.com} | 
+    \href{mailto:romel.rcs@gmail.com}{romel.rcs@gmail.com} | 
     \href{https://tanzimhromel.com}{tanzimhromel.com}
     }
 \end{center}
@@ -172,6 +160,7 @@
     \small{
     LinkedIn: \href{https://www.linkedin.com/in/thromel/}{thromel} | 
     GitHub: \href{https://github.com/thromel}{thromel}
+    | \href{https://scholar.google.com/citations?user=zHV4EU8AAAAJ}{Google Scholar}
     }
 \end{center}
 \vspace{-6mm}
@@ -180,6 +169,13 @@
 \end{center}
 
 \vspace{-4mm}
+
+\section{\textbf{Research Interests}}
+\vspace{1mm}
+\small{
+AI for Software Engineering (AI4SE), Empirical Software Engineering, Software and LLM Security, Human-Centered Computing, Blockchain Systems
+}
+\vspace{-2mm}
 
 \section{\textbf{Education}}
 \vspace{-0.4mm}
@@ -196,12 +192,6 @@
 \resumeSubHeadingListEnd
 \vspace{-6mm}
 
-\section{\textbf{Research Interests}}
-\vspace{1mm}
-\small{
-AI for Software Engineering (AI4SE), Empirical Software Engineering, Software and LLM Security, Human-Centered Computing, Blockchain Systems
-}
-\vspace{-2mm}
 
 \section{\textbf{Work Experience}}
 \vspace{-0.4mm}
@@ -224,26 +214,33 @@ AI for Software Engineering (AI4SE), Empirical Software Engineering, Software an
 \resumeSubHeadingListStart
 
 \resumeProject
-  {\href{https://tanzimhromel.com/assets/pdf/ml-rce-study.pdf}{An Empirical Study on Remote Code Execution in ML Model Hosting Ecosystems}}
+  {An Empirical Study on Remote Code Execution in ML Model Hosting Ecosystems}
   {Tools: Python, Bandit, CodeQL, Semgrep, YARA, CWE Analysis | In Review at MSR 2026}
   {June 2025 - Oct 2025}
   {{}}
 \resumeItemListStart
   \item First large-scale cross-platform study analyzing \textasciitilde45,000 repositories across 5 major platforms (Hugging Face, ModelScope, OpenCSG, OpenMMLab, PyTorch Hub) with co-authors Mohammad Latif Siddiq and Joanna C. Santos
-  \item Detected security vulnerabilities using static analyzers and YARA malware signatures: found CWE-502 (unsafe deserialization) in 74.54\% and CWE-95 (eval injection) in 15.02\% of affected repositories; 10.41\% of Hugging Face repos contain security smells
-  \item Analyzed 600+ developer discussions to create taxonomy of security misconceptions; revealed only 6.6\% SafeTensors adoption and widespread trust\_remote\_code usage
+  \item Detected security vulnerabilities using static analyzers and YARA malware signatures.
+  \item Analyzed 600+ developer discussions to create taxonomy of security misconceptions.
 \resumeItemListEnd
 
 \resumeProject
-  {\href{https://tanzimhromel.com/assets/pdf/reagent-plus-plus.pdf}{ReAgent++: Detecting Aligned Backdoors in LLM Agents}}
-  {Tools: Python, STRIP, K-Arm, UCB Scheduler, WebShop, OSWorld, AgentBench}
-  {August 2025 - Present}
-  {{}}
+  {ReAgent++: Detecting Backdoor Triggers in LLM Agents}
+  {Tools: Python, Knockout Testing, cK-Arm Localization, SPRT, Black-box LLM Evaluation}
+  {August 2025 -- Present}
+  {}
 \resumeItemListStart
-  \item Extending ReAgent to detect aligned backdoors that maintain semantic consistency while subverting user intent through preference manipulation; collaboration with Dr. Chowdhury Md. Rakin Haider (BUET)
-  \item Implementing Text/Env-STRIP for perturbation-based runtime detection, and K-Arm trigger inversion for forensic analysis with multi-armed bandit optimization
-  \item Evaluating on 3 benchmarks (WebShop-1.18M products, OSWorld-369 tasks, AgentBench) against comprehensive attack suite including Sleeper-style, instruction backdoors, and multi-turn hidden triggers
+  \item Developing ReAgent++, a lightweight framework for identifying hidden prompt-level backdoors in LLM agents using only black-box access.
+  
+  \item Implementing a two-stage pipeline: (1) simple behavioral tests to generate contrastive seeds, and (2) a cK-Arm knockout procedure with SPRT to recover minimal trigger tokens and logical conditions.
+  
+  \item Building deterministic checks for structural and negation violations, mode stability, and output clustering.
+  
+  \item Evaluating the approach on prompt-based backdoor scenarios involving semantic triggers, multi-condition triggers, and reasoning overrides to assess reliability and robustness under real LLM behavior.
 \resumeItemListEnd
+
+
+
 
 \resumeProject
   {Multi-Agent Framework for Generating Relational DB Schema \& ERD}
@@ -257,7 +254,7 @@ AI for Software Engineering (AI4SE), Empirical Software Engineering, Software an
 \resumeItemListEnd
 
 \resumeProject
-  {\href{https://tanzimhromel.com/assets/pdf/llm-api-contracts.pdf}{Design by Contract for LLM APIs}}
+  {Design by Contract for LLM APIs}
   {Tools: Python, OpenAI SDK, LangChain, Runtime Monitoring, Contract Enforcement | Manuscript in preparation}
   {Nov 2024 - Present}
   {}
@@ -269,7 +266,7 @@ AI for Software Engineering (AI4SE), Empirical Software Engineering, Software an
 
 \resumeProject
   {\href{https://tanzimhromel.com/assets/pdf/Ureporter.pdf}{Sentiment Analysis of Anonymous Crisis Reports in Bangladesh}}
-  {Tools: Python, BERT, XLM-RoBERTa, Transformers, Bengali NLP, Flask}
+  {Tools: Python, BERT, XLM-RoBERTa, Transformers, Bengali NLP, Flask | Submitted to ACM CSCW}
   {Sep 2024 - Nov 2024}
   {}
 \resumeItemListStart
@@ -279,8 +276,8 @@ AI for Software Engineering (AI4SE), Empirical Software Engineering, Software an
 \resumeItemListEnd
 
 \resumeProject
-  {\href{https://tanzimhromel.com/assets/pdf/blockchain-ehr.pdf}{Patient-Centric Blockchain Framework for Secure EHR Management}}
-  {Tools: Solidity, Ethereum, IPFS, React, Web3.js, AES-GCM, ECIES, EIP-712}
+  {\href{https://arxiv.org/abs/2511.17464}{Patient-Centric Blockchain Framework for Secure EHR Management}}
+  {Tools: Solidity, Ethereum, IPFS, React, Web3.js, AES-GCM, ECIES, EIP-712 | arXiv Preprint}
   {June 2022 – May 2023}
   {}
 \resumeItemListStart
@@ -303,21 +300,10 @@ AI for Software Engineering (AI4SE), Empirical Software Engineering, Software an
 {Jun-Aug 2021, Oct 2024}
 {}
 \resumeItemListStart
-\item Built complete C compiler with hand-written lexer and parser, semantic analysis, and x86-64 code generation
+\item Built complete C compiler with lexer and parser, semantic analysis, and x86-64 code generation
 \item Implemented SSA-based optimization pipeline including SCCP, GVN, LICM, and dead code elimination
 \item Designed a linear scan register allocator with spilling support
 \item Modernized legacy Flex/Bison-based prototype into a compiler architecture with modular IR passes and extensible optimization pipeline
-\resumeItemListEnd
-
-\resumeProject
-  {\href{https://github.com/thromel/go-database}{Database Engine in Go}}
-  {Tools: Go, B+ Tree, WAL, ARIES Protocol}
-  {Oct 2024 - Present}
-  {}
-\resumeItemListStart
-  \item Built complete database engine from scratch with B+ tree indexing and page management system with 8KB pages
-  \item Implemented LRU buffer pool achieving \textasciitilde 2M ops/sec for reads
-  \item Implemented ACID transactions with WAL, crash recovery using ARIES protocol, and concurrent access support
 \resumeItemListEnd
 
 \resumeProject
@@ -357,11 +343,12 @@ AI for Software Engineering (AI4SE), Empirical Software Engineering, Software an
 
 \resumeSubHeadingListEnd
 
+\vspace{-2mm}
 \section{\textbf{Skills}}
 \vspace{-0.4mm}
  \resumeHeadingSkillStart
   \resumeSubItem{Programming Languages:}
-    {C\#, Python, JavaScript, TypeScript, Go, SQL, Java, Solidity}
+    {C++, C\#, Python, JavaScript, TypeScript, Go, SQL, Java, Solidity}
   \resumeSubItem{ML/AI Frameworks:}
     {PyTorch, LangChain, LangGraph, Transformers, ResNet, LSTM, BERT}
   \resumeSubItem{Backend Frameworks:}
@@ -373,7 +360,7 @@ AI for Software Engineering (AI4SE), Empirical Software Engineering, Software an
   \resumeSubItem{Blockchain \& Web3:}
     {Ethereum, Solidity, IPFS, ERC-721, ERC-1155, Web3.js}
   \resumeSubItem{Tools \& Technologies:}
-    {NS3, Flex, Bison, Git, Linux, WAL, ARIES Protocol}
+    {NS3, Flex, Bison, Git, Linux}
  \resumeHeadingSkillEnd
 
 \section{\textbf{Honors and Awards}}
@@ -452,6 +439,7 @@ AI for Software Engineering (AI4SE), Empirical Software Engineering, Software an
 \vspace{-0.4mm}
 \small{
 \textbf{Languages:} Bengali (Native), English (Professional proficiency)
+
 }
 \vspace{-4mm}
 
