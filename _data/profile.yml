@@ -415,6 +415,7 @@ research:
 - title: "ReAgent++: Detecting Aligned Backdoors in LLM Agents"
   date: August 2025 - Present
   link: /assets/pdf/reagent-plus-plus.pdf
+  status: "In Progress"
   short_description: Extending ReAgent to detect aligned backdoors that maintain semantic consistency while subverting user intent through preference manipulation.
   description: >-
     Extending ReAgent to detect aligned backdoors that maintain semantic consistency while subverting user intent through preference
@@ -433,6 +434,7 @@ research:
 
 - title: "Multi-Agent Framework for Generating Relational DB Schema & ERD"
   date: July 2025 - Present
+  status: "Targeting PVLDB"
   short_description: Extended SchemaAgent with LangGraph StateGraph architecture and 3-tier auto-repair system, reducing redundant LLM calls by 80%.
   description: >-
     Extended SchemaAgent with Dr. Sukarna Barua (BUET) using LangGraph StateGraph architecture with conditional routing and 3-tier

@@ -228,8 +228,8 @@ navbar_title: Home
           {% else %}
           {{ item.title }}
           {% endif %}
-          {% if forloop.first and item.status %}
-          <span class="research-badge in-review"><i class="fas fa-clock"></i> {{ item.status }}</span>
+          {% if item.status %}
+          <span class="research-badge {% if item.status == 'In Review' %}in-review{% elsif item.status == 'In Progress' %}in-progress{% else %}targeting{% endif %}"><i class="fas fa-{% if item.status == 'In Progress' %}code{% else %}clock{% endif %}"></i> {{ item.status }}</span>
           {% endif %}
         </h3>
         <span class="timeline-date">{{ item.date }}</span>
