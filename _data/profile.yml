@@ -454,7 +454,6 @@ research:
 
 - title: "Design by Contract for LLM APIs"
   date: Nov 2024 - Present
-  link: /assets/pdf/llm-api-contracts.pdf
   short_description: Developing taxonomy for API contracts through empirical study of 412 real-world issues and creating automatic contract enforcement tools.
   description: >-
     Developing taxonomy for API contracts through empirical study of 412 real-world issues with Dr. Akond Rahman (Auburn University). Created OpenAI SDK
