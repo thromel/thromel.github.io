@@ -163,6 +163,29 @@ navbar_title: Home
 })();
 </script>
 
+<!-- Recent News Widget -->
+<div class="news-widget">
+  <div class="news-widget-header">
+    <h3 class="news-widget-title"><i class="fas fa-newspaper"></i> Recent News</h3>
+    <a href="{{ 'news' | relative_url }}" class="news-widget-more">View all →</a>
+  </div>
+  <div class="news-list">
+    {% assign sorted_news = site.data.news | sort: 'date' | reverse %}
+    {% for item in sorted_news limit:3 %}
+    <div class="news-item">
+      <div class="news-date">
+        <span class="news-date-month">{{ item.date | date: "%b" }}</span>
+        <span class="news-date-year">{{ item.date | date: "%Y" }}</span>
+      </div>
+      <div class="news-content">
+        <div class="news-title">{{ item.title }}</div>
+        <div class="news-description">{{ item.description | truncate: 120 }}</div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
 <!-- Publications -->
 {% if site.data.profile.publications %}
 <section class="section">
@@ -196,7 +219,7 @@ navbar_title: Home
   </div>
   <div class="timeline">
     {% for item in site.data.profile.research %}
-    <div class="timeline-item">
+    <div class="timeline-item{% if forloop.first %} featured{% endif %}">
       <div class="timeline-header">
         {% assign showcase_item = site.showcase | where: "title", item.title | first %}
         <h3 class="timeline-title">
@@ -204,6 +227,9 @@ navbar_title: Home
           <a href="{{ showcase_item.url | relative_url }}">{{ item.title }}</a>
           {% else %}
           {{ item.title }}
+          {% endif %}
+          {% if forloop.first and item.status %}
+          <span class="research-badge in-review"><i class="fas fa-clock"></i> {{ item.status }}</span>
           {% endif %}
         </h3>
         <span class="timeline-date">{{ item.date }}</span>
@@ -281,6 +307,20 @@ navbar_title: Home
         {% for tech in project.technologies limit:5 %}
         <span class="project-tag">{{ tech }}</span>
         {% endfor %}
+      </div>
+      {% endif %}
+      {% if project.github or project.link %}
+      <div class="project-actions">
+        {% if project.github %}
+        <a href="{{ project.github }}" target="_blank" class="project-action">
+          <i class="fab fa-github"></i> Code
+        </a>
+        {% endif %}
+        {% if project.link %}
+        <a href="{{ project.link }}" target="_blank" class="project-action">
+          <i class="fas fa-external-link-alt"></i> View
+        </a>
+        {% endif %}
       </div>
       {% endif %}
     </div>

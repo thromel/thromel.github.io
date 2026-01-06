@@ -4,12 +4,6 @@
 - title: "Received IQVIA Impact Program Silver Award"
   description: "Honored with the IQVIA Impact Program Silver Award for outstanding performance and contributions to the KPI Library team."
   date: 2025-05-15
-- title: "Published arXiv preprint on Blockchain EHR"
-  description: "Published preprint 'Patient-Centric Blockchain Framework for Secure EHR Management' on arXiv, presenting a novel architecture for healthcare data management using Ethereum and IPFS."
-  date: 2025-11-28
-- title: "Started research collaboration with Auburn University"
-  description: "Began working with Dr. Akond Rahman at Auburn University on 'Design by Contract for LLM APIs', developing taxonomy for API contracts through empirical study of real-world issues."
-  date: 2024-11-01
 - title: "Paper submitted to ACM CSCW"
   description: "Submitted 'Sentiment Analysis of Anonymous Crisis Reports in Bangladesh' to ACM CSCW 2025, analyzing crowd-sourced reports from Bangladesh's 2024 national crisis using transformer models."
   date: 2024-10-21

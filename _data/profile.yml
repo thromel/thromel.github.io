@@ -395,7 +395,8 @@ research:
 - title: "An Empirical Study on Remote Code Execution in ML Model Hosting Ecosystems"
   date: June 2025 - Oct 2025
   link: /assets/pdf/ml-rce-study.pdf
-  short_description: First large-scale cross-platform study analyzing ~45,000 repositories across 5 major ML platforms for security vulnerabilities. In Review at MSR 2026.
+  status: "In Review"
+  short_description: First large-scale cross-platform study analyzing ~45,000 repositories across 5 major ML platforms for security vulnerabilities.
   description: >-
     First large-scale cross-platform study analyzing ~45,000 repositories across 5 major platforms (Hugging Face, ModelScope, OpenCSG,
     OpenMMLab, PyTorch Hub) with co-authors Mohammad Latif Siddiq and Joanna C. Santos. Detected security vulnerabilities using static
