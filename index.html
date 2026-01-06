@@ -225,6 +225,8 @@ navbar_title: Home
         <h3 class="timeline-title">
           {% if showcase_item %}
           <a href="{{ showcase_item.url | relative_url }}">{{ item.title }}</a>
+          {% elsif item.link %}
+          <a href="{{ item.link }}" target="_blank">{{ item.title }}</a>
           {% else %}
           {{ item.title }}
           {% endif %}
