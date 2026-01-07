@@ -395,6 +395,7 @@ research:
 - title: "An Empirical Study on Remote Code Execution in ML Model Hosting Ecosystems"
   date: June 2025 - Oct 2025
   link: /assets/pdf/ml-rce-study.pdf
+  thumbnail: /assets/images/ml-rce.png
   status: "In Review"
   short_description: First large-scale cross-platform study analyzing ~45,000 repositories across 5 major ML platforms for security vulnerabilities.
   description: >-
@@ -452,24 +453,6 @@ research:
   - SQLAlchemy
   - Text2Schema
 
-- title: "Design by Contract for LLM APIs"
-  date: Nov 2024 - Present
-  short_description: Developing taxonomy for API contracts through empirical study of 412 real-world issues and creating automatic contract enforcement tools.
-  description: >-
-    Developing taxonomy for API contracts through empirical study of 412 real-world issues with Dr. Akond Rahman (Auburn University). Created OpenAI SDK
-    and LangChain extensions for automatic contract enforcement and runtime remediation. Implemented precondition/postcondition validators with automatic
-    retry mechanisms and fallback strategies.
-  collaborator: >-
-    Collaborating with <a href="https://akondrahman.github.io" target="_blank">Dr. Akond Rahman</a>, Assistant Professor at Auburn University,
-    who specializes in DevOps, cybersecurity, and secure software development. Dr. Rahman leads the PASER (Practical and Actionable Software Engineering Research) group,
-    focusing on practical software engineering research that bridges the gap between academic research and industry practice.
-  technologies:
-  - Python
-  - OpenAI SDK
-  - LangChain
-  - Runtime Monitoring
-  - Contract Enforcement
-
 - title: "Sentiment Analysis of Anonymous Crisis Reports in Bangladesh"
   date: Sep 2024 - Nov 2024
   link: /assets/pdf/Ureporter.pdf
@@ -492,6 +475,7 @@ research:
 - title: "Patient-Centric Blockchain Framework for EHR Management"
   date: June 2022 - May 2023
   link: /assets/pdf/blockchain-ehr.pdf
+  thumbnail: /assets/images/blockchain/blockchain.png
   short_description: Undergraduate thesis on blockchain framework for EHR management with encrypted off-chain IPFS storage and on-chain Ethereum access control.
   description: >-
     <b>Undergraduate Thesis.</b> Designed blockchain framework with encrypted off-chain IPFS storage and on-chain Ethereum access control under
@@ -510,19 +494,6 @@ research:
   - ECIES
 
 projects:
-- title: "Production-Ready Database Engine in Go"
-  link: https://github.com/thromel/go-database
-  date: Oct 2024 - Present
-  description: >-
-    Built complete database engine from scratch with B+ tree indexing and page management system with 8KB pages. Implemented LRU buffer pool
-    achieving ~2M ops/sec for reads. Implemented ACID transactions with WAL, crash recovery using ARIES protocol, and concurrent access support.
-  technologies:
-  - Go
-  - B+ Tree
-  - WAL
-  - ARIES Protocol
-  - LRU Cache
-  - ACID Transactions
 - title: "Blockchain-Based Ticketing Platform"
   link: /showcase/projects/blockchain-ticketing/
   date: Jan 2021 - April 2021

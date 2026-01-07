@@ -10,35 +10,222 @@ navbar_title: Projects
   <p class="section-subtitle">Technical projects showcasing practical implementations and architectures</p>
 </div>
 
-<!-- Projects Timeline -->
-<section class="section">
-  <div class="timeline">
-    {% assign projects = site.showcase | where: "group", "Projects" | where: "show", true | sort: "date" | reverse %}
-    {% for project in projects %}
-    <div class="timeline-item">
-      <div class="timeline-header">
-        <h3 class="timeline-title">
-          <a href="{{ project.url | relative_url }}">{{ project.title }}</a>
-        </h3>
-        <span class="timeline-date">{{ project.date | date: "%B %Y" }}</span>
-      </div>
+{% assign showcase_projects = site.showcase | where: "show", true | sort: "date" | reverse %}
+{% assign profile_projects = site.data.profile.projects %}
 
-      <div class="timeline-description">
-        {% if project.excerpt %}
-          {{ project.excerpt }}
+<!-- Projects Stats -->
+<section class="projects-stats">
+  {% assign total_projects = showcase_projects.size | plus: profile_projects.size %}
+  {% assign featured_count = 0 %}
+  {% for project in showcase_projects %}
+    {% if project.featured %}
+      {% assign featured_count = featured_count | plus: 1 %}
+    {% endif %}
+  {% endfor %}
+
+  <div class="stat-card">
+    <div class="stat-icon"><i class="fas fa-code"></i></div>
+    <div class="stat-value">{{ total_projects }}</div>
+    <div class="stat-label">Total Projects</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-icon"><i class="fas fa-star"></i></div>
+    <div class="stat-value">{{ featured_count }}</div>
+    <div class="stat-label">Featured</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-icon"><i class="fas fa-layer-group"></i></div>
+    <div class="stat-value">{{ showcase_projects.size }}</div>
+    <div class="stat-label">With Showcase</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-icon"><i class="fab fa-github"></i></div>
+    <div class="stat-value">{{ profile_projects.size }}</div>
+    <div class="stat-label">On GitHub</div>
+  </div>
+</section>
+
+<!-- Showcase Projects Grid -->
+{% if showcase_projects.size > 0 %}
+<section class="section">
+  <div class="section-header" style="margin-bottom: 2rem;">
+    <h2 class="section-title">Project Showcases</h2>
+  </div>
+
+  <div class="projects-grid">
+    {% for project in showcase_projects %}
+    <div class="project-card">
+      <div class="project-card-thumbnail">
+        {% if project.thumbnail %}
+        <img src="{{ project.thumbnail | relative_url }}" alt="{{ project.title }}" class="project-card-image">
         {% else %}
-          {{ project.content | strip_html | truncatewords: 50 }}
+        {% assign category = 'default' %}
+        {% if project.title contains 'Database' or project.title contains 'Go' %}
+          {% assign category = 'database' %}
+        {% elsif project.title contains 'Blockchain' or project.title contains 'NFT' %}
+          {% assign category = 'blockchain' %}
+        {% elsif project.title contains 'Caption' or project.title contains 'ML' or project.title contains 'Recognition' %}
+          {% assign category = 'ai' %}
+        {% elsif project.title contains 'Compiler' %}
+          {% assign category = 'compiler' %}
+        {% elsif project.title contains 'TCP' or project.title contains 'Network' %}
+          {% assign category = 'networking' %}
+        {% elsif project.title contains 'Event' or project.title contains 'Web' %}
+          {% assign category = 'web' %}
+        {% endif %}
+        <div class="project-card-placeholder {{ category }}">
+          {% if category == 'database' %}
+          <i class="fas fa-database"></i>
+          {% elsif category == 'blockchain' %}
+          <i class="fas fa-link"></i>
+          {% elsif category == 'ai' %}
+          <i class="fas fa-brain"></i>
+          {% elsif category == 'compiler' %}
+          <i class="fas fa-cogs"></i>
+          {% elsif category == 'networking' %}
+          <i class="fas fa-network-wired"></i>
+          {% elsif category == 'web' %}
+          <i class="fas fa-globe"></i>
+          {% else %}
+          <i class="fas fa-code"></i>
+          {% endif %}
+        </div>
         {% endif %}
       </div>
 
-      {% if project.technologies %}
-      <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem;">
-        {% for tech in project.technologies %}
-        <span class="project-tag">{{ tech }}</span>
-        {% endfor %}
+      <div class="project-card-content">
+        <div class="project-card-header">
+          <h3 class="project-card-title">
+            <a href="{{ project.url | relative_url }}">{{ project.title }}</a>
+          </h3>
+          {% if project.group %}
+          <span class="project-badge completed">{{ project.group }}</span>
+          {% endif %}
+        </div>
+
+        <p class="project-card-description">
+          {% if project.excerpt %}
+            {{ project.excerpt | strip_html | truncatewords: 30 }}
+          {% else %}
+            {{ project.content | strip_html | truncatewords: 30 }}
+          {% endif %}
+        </p>
+
+        {% if project.technologies %}
+        <div class="project-card-tags">
+          {% for tech in project.technologies limit:5 %}
+          <span class="project-tech-tag">{{ tech }}</span>
+          {% endfor %}
+          {% if project.technologies.size > 5 %}
+          <span class="project-tech-tag more">+{{ project.technologies.size | minus: 5 }}</span>
+          {% endif %}
+        </div>
+        {% endif %}
+
+        <div class="project-card-meta">
+          <span class="project-card-date"><i class="far fa-calendar-alt"></i> {{ project.date | date: "%B %Y" }}</span>
+          <span class="project-card-link"><a href="{{ project.url | relative_url }}">View Details <i class="fas fa-arrow-right"></i></a></span>
+        </div>
       </div>
-      {% endif %}
     </div>
     {% endfor %}
   </div>
 </section>
+{% endif %}
+
+<!-- Additional Projects from Profile -->
+{% if profile_projects.size > 0 %}
+<section class="section" style="margin-top: 3rem;">
+  <div class="section-header" style="margin-bottom: 2rem;">
+    <h2 class="section-title">More Projects</h2>
+  </div>
+
+  <div class="projects-grid">
+    {% for project in profile_projects %}
+    {% assign has_showcase = false %}
+    {% for sp in showcase_projects %}
+      {% if sp.title contains project.title or project.title contains sp.title %}
+        {% assign has_showcase = true %}
+        {% break %}
+      {% endif %}
+    {% endfor %}
+    {% unless has_showcase %}
+    <div class="project-card">
+      <div class="project-card-thumbnail">
+        {% assign category = 'default' %}
+        {% if project.title contains 'Database' or project.title contains 'Go' %}
+          {% assign category = 'database' %}
+        {% elsif project.title contains 'Blockchain' or project.title contains 'Ticketing' %}
+          {% assign category = 'blockchain' %}
+        {% elsif project.title contains 'Caption' or project.title contains 'Image' %}
+          {% assign category = 'ai' %}
+        {% elsif project.title contains 'Compiler' %}
+          {% assign category = 'compiler' %}
+        {% elsif project.title contains 'TCP' or project.title contains 'Network' %}
+          {% assign category = 'networking' %}
+        {% elsif project.title contains 'Event' or project.title contains 'fly' %}
+          {% assign category = 'web' %}
+        {% endif %}
+        <div class="project-card-placeholder {{ category }}">
+          {% if category == 'database' %}
+          <i class="fas fa-database"></i>
+          {% elsif category == 'blockchain' %}
+          <i class="fas fa-link"></i>
+          {% elsif category == 'ai' %}
+          <i class="fas fa-brain"></i>
+          {% elsif category == 'compiler' %}
+          <i class="fas fa-cogs"></i>
+          {% elsif category == 'networking' %}
+          <i class="fas fa-network-wired"></i>
+          {% elsif category == 'web' %}
+          <i class="fas fa-globe"></i>
+          {% else %}
+          <i class="fas fa-code"></i>
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="project-card-content">
+        <div class="project-card-header">
+          <h3 class="project-card-title">
+            {% if project.link contains 'github.com' %}
+            <a href="{{ project.link }}" target="_blank">{{ project.title }}</a>
+            {% elsif project.link %}
+            <a href="{{ project.link | relative_url }}">{{ project.title }}</a>
+            {% else %}
+            {{ project.title }}
+            {% endif %}
+          </h3>
+          {% if project.description contains 'Finalist' %}
+          <span class="project-badge finalist">Finalist</span>
+          {% elsif project.date contains 'Present' %}
+          <span class="project-badge active">Active</span>
+          {% endif %}
+        </div>
+
+        <p class="project-card-description">{{ project.description | strip_html | truncatewords: 30 }}</p>
+
+        {% if project.technologies %}
+        <div class="project-card-tags">
+          {% for tech in project.technologies limit:5 %}
+          <span class="project-tech-tag">{{ tech }}</span>
+          {% endfor %}
+          {% if project.technologies.size > 5 %}
+          <span class="project-tech-tag more">+{{ project.technologies.size | minus: 5 }}</span>
+          {% endif %}
+        </div>
+        {% endif %}
+
+        <div class="project-card-meta">
+          <span class="project-card-date"><i class="far fa-calendar-alt"></i> {{ project.date }}</span>
+          {% if project.link contains 'github.com' %}
+          <span class="project-card-link"><a href="{{ project.link }}" target="_blank"><i class="fab fa-github"></i> GitHub</a></span>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    {% endunless %}
+    {% endfor %}
+  </div>
+</section>
+{% endif %}

@@ -10,6 +10,45 @@ navbar_title: Research
   <p class="section-subtitle">Current research interests and ongoing projects</p>
 </div>
 
+<!-- Research Stats -->
+<section class="research-stats">
+  {% assign active_count = 0 %}
+  {% assign in_review_count = 0 %}
+  {% assign collaborator_count = 0 %}
+  {% for item in site.data.profile.research %}
+    {% if item.status == "In Progress" or item.status contains "Targeting" %}
+      {% assign active_count = active_count | plus: 1 %}
+    {% endif %}
+    {% if item.status == "In Review" %}
+      {% assign in_review_count = in_review_count | plus: 1 %}
+    {% endif %}
+    {% if item.collaborator %}
+      {% assign collaborator_count = collaborator_count | plus: 1 %}
+    {% endif %}
+  {% endfor %}
+
+  <div class="stat-card">
+    <div class="stat-icon"><i class="fas fa-flask"></i></div>
+    <div class="stat-value">{{ site.data.profile.research | size }}</div>
+    <div class="stat-label">Research Projects</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-icon"><i class="fas fa-spinner"></i></div>
+    <div class="stat-value">{{ active_count }}</div>
+    <div class="stat-label">Active Projects</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-icon"><i class="fas fa-paper-plane"></i></div>
+    <div class="stat-value">{{ in_review_count }}</div>
+    <div class="stat-label">In Review</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-icon"><i class="fas fa-users"></i></div>
+    <div class="stat-value">{{ collaborator_count }}</div>
+    <div class="stat-label">Collaborations</div>
+  </div>
+</section>
+
 <!-- Research Interests -->
 <section class="section" style="margin-bottom: 3rem;">
   <h3 style="font-size: 1.125rem; font-weight: 600; margin-bottom: 1rem; color: var(--color-text-primary);">Research Interests</h3>
@@ -20,45 +59,150 @@ navbar_title: Research
   </div>
 </section>
 
-<!-- Research Projects -->
+<!-- Featured Research -->
+{% assign featured = site.data.profile.research | first %}
+<section class="section" style="margin-bottom: 3rem;">
+  <div class="research-featured">
+    <div class="research-featured-content">
+      {% if featured.status %}
+      <span class="research-badge {% if featured.status == 'In Review' %}in-review{% elsif featured.status == 'In Progress' %}in-progress{% elsif featured.status contains 'Targeting' %}targeting{% endif %}">
+        {{ featured.status }}
+      </span>
+      {% endif %}
+
+      <h2 class="research-featured-title">
+        {% assign showcase_item = site.showcase | where: "title", featured.title | first %}
+        {% if showcase_item %}
+        <a href="{{ showcase_item.url | relative_url }}">{{ featured.title }}</a>
+        {% elsif featured.link %}
+        <a href="{{ featured.link | relative_url }}" target="_blank">{{ featured.title }}</a>
+        {% else %}
+        {{ featured.title }}
+        {% endif %}
+      </h2>
+
+      <p class="research-featured-description">{{ featured.description | strip_html }}</p>
+
+      {% if featured.technologies %}
+      <div class="research-card-tags">
+        {% for tech in featured.technologies %}
+        <span class="research-tech-tag">{{ tech }}</span>
+        {% endfor %}
+      </div>
+      {% endif %}
+
+      <div class="research-card-meta">
+        <span class="research-card-date"><i class="far fa-calendar-alt"></i> {{ featured.date }}</span>
+        {% if featured.collaborator %}
+        <span class="research-card-collaborator"><i class="fas fa-user-friends"></i> {{ featured.collaborator | strip_html | truncatewords: 10 }}</span>
+        {% endif %}
+      </div>
+
+      {% if showcase_item or featured.link %}
+      <div style="margin-top: 1.5rem;">
+        {% if showcase_item %}
+        <a href="{{ showcase_item.url | relative_url }}" class="btn btn-primary">Read More <i class="fas fa-arrow-right"></i></a>
+        {% elsif featured.link %}
+        <a href="{{ featured.link | relative_url }}" target="_blank" class="btn btn-primary">View Paper <i class="fas fa-file-pdf"></i></a>
+        {% endif %}
+      </div>
+      {% endif %}
+    </div>
+
+    <div class="research-featured-visual">
+      {% if featured.thumbnail %}
+      <img src="{{ featured.thumbnail | relative_url }}" alt="{{ featured.title }}" class="research-featured-image">
+      {% else %}
+      <div class="research-card-placeholder security">
+        <i class="fas fa-shield-alt"></i>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+<!-- Research Projects Grid -->
 <section class="section">
   <div class="section-header" style="margin-bottom: 2rem;">
-    <h2 class="section-title">Research Projects</h2>
+    <h2 class="section-title">All Research Projects</h2>
   </div>
 
-  <div class="timeline">
-    {% for item in site.data.profile.research %}
-    <div class="timeline-item">
-      <div class="timeline-header">
-        <h3 class="timeline-title">
-          {% assign showcase_item = site.showcase | where: "title", item.title | first %}
-          {% if showcase_item %}
-          <a href="{{ showcase_item.url | relative_url }}">{{ item.title }}</a>
-          {% elsif item.link %}
-          <a href="{{ item.link | relative_url }}">{{ item.title }}</a>
+  <div class="research-grid">
+    {% for item in site.data.profile.research offset:1 %}
+    <div class="research-card">
+      <div class="research-card-thumbnail">
+        {% if item.thumbnail %}
+        <img src="{{ item.thumbnail | relative_url }}" alt="{{ item.title }}" class="research-card-image">
+        {% else %}
+        {% assign category = 'default' %}
+        {% if item.title contains 'Blockchain' or item.title contains 'EHR' %}
+          {% assign category = 'blockchain' %}
+        {% elsif item.title contains 'LLM' or item.title contains 'Agent' or item.title contains 'ML' or item.title contains 'Schema' %}
+          {% assign category = 'ai' %}
+        {% elsif item.title contains 'Security' or item.title contains 'Backdoor' or item.title contains 'Code Execution' %}
+          {% assign category = 'security' %}
+        {% elsif item.title contains 'Sentiment' or item.title contains 'NLP' or item.title contains 'Crisis' %}
+          {% assign category = 'nlp' %}
+        {% elsif item.title contains 'Data' or item.title contains 'Database' %}
+          {% assign category = 'data' %}
+        {% endif %}
+        <div class="research-card-placeholder {{ category }}">
+          {% if category == 'security' %}
+          <i class="fas fa-shield-alt"></i>
+          {% elsif category == 'ai' %}
+          <i class="fas fa-robot"></i>
+          {% elsif category == 'blockchain' %}
+          <i class="fas fa-link"></i>
+          {% elsif category == 'nlp' %}
+          <i class="fas fa-language"></i>
+          {% elsif category == 'data' %}
+          <i class="fas fa-database"></i>
           {% else %}
-          {{ item.title }}
+          <i class="fas fa-microscope"></i>
           {% endif %}
-        </h3>
-        <span class="timeline-date">{{ item.date }}</span>
+        </div>
+        {% endif %}
       </div>
 
-      <div class="timeline-description">
-        {{ item.description }}
-      </div>
+      <div class="research-card-content">
+        <div class="research-card-header">
+          <h3 class="research-card-title">
+            {% assign showcase_item = site.showcase | where: "title", item.title | first %}
+            {% if showcase_item %}
+            <a href="{{ showcase_item.url | relative_url }}">{{ item.title }}</a>
+            {% elsif item.link %}
+            <a href="{{ item.link | relative_url }}" target="_blank">{{ item.title }}</a>
+            {% else %}
+            {{ item.title }}
+            {% endif %}
+          </h3>
+          {% if item.status %}
+          <span class="research-badge {% if item.status == 'In Review' %}in-review{% elsif item.status == 'In Progress' %}in-progress{% elsif item.status contains 'Targeting' %}targeting{% endif %}">
+            {{ item.status }}
+          </span>
+          {% endif %}
+        </div>
 
-      {% if item.collaborator %}
-      <div class="timeline-meta" style="margin-top: 1rem;">
-        <i class="fas fa-user-friends"></i>
-        {{ item.collaborator | strip_html }}
-      </div>
-      {% endif %}
+        <p class="research-card-description">{{ item.short_description | default: item.description | strip_html | truncatewords: 25 }}</p>
 
-      {% if showcase_item %}
-      <div style="margin-top: 1rem;">
-        <a href="{{ showcase_item.url | relative_url }}" class="btn btn-text">Read More →</a>
+        {% if item.technologies %}
+        <div class="research-card-tags">
+          {% for tech in item.technologies limit:5 %}
+          <span class="research-tech-tag">{{ tech }}</span>
+          {% endfor %}
+          {% if item.technologies.size > 5 %}
+          <span class="research-tech-tag more">+{{ item.technologies.size | minus: 5 }}</span>
+          {% endif %}
+        </div>
+        {% endif %}
+
+        <div class="research-card-meta">
+          <span class="research-card-date"><i class="far fa-calendar-alt"></i> {{ item.date }}</span>
+          {% if item.collaborator %}
+          <span class="research-card-collaborator"><i class="fas fa-user-friends"></i> Collaboration</span>
+          {% endif %}
+        </div>
       </div>
-      {% endif %}
     </div>
     {% endfor %}
   </div>
