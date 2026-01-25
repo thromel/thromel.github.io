@@ -2,266 +2,230 @@
 layout: default
 title: Projects
 navbar_title: Projects
-container_class: container-xl
 ---
 
-<div class="row">
-    <div class="col-12 col-lg-9">
-        <section id="showcase-items" class="pt-4">
-            <h2 style="margin-bottom: 8px;"><img src="/assets/images/icons/code.png" alt="Projects" class="inline-badge" style="width: 35px; height: 35px;"> Projects</h2>
-            <p class="mb-4">Detailed information about my most significant technical projects, including diagrams, architectures, and in-depth explanations.</p>
-        </section>
-
-        <!-- Projects Section -->
-        <div class="my-0 p-0 shadow-sm rounded-sm mb-5" style="background-color: var(--bg-secondary);">
-            {% assign projects = site.showcase | where: "group", "Projects" | where: "show", true | sort: "date" | reverse %}
-            {% assign items_per_page = 5 %}
-            {% assign total_projects = projects | size %}
-            {% assign total_pages = total_projects | divided_by: items_per_page | ceil %}
-            
-            <!-- Get current page from URL parameter -->
-            {% assign current_page = 1 %}
-            {% if page.url contains "/projects/page" %}
-                {% assign page_num = page.url | split: "page" | last | split: "/" | first | plus: 0 %}
-                {% if page_num > 0 %}
-                    {% assign current_page = page_num %}
-                {% endif %}
-            {% endif %}
-            
-            <!-- Calculate start and end indices -->
-            {% assign start_index = current_page | minus: 1 | times: items_per_page %}
-            {% assign end_index = start_index | plus: items_per_page %}
-            
-            <!-- Display projects for current page -->
-            {% for item in projects limit: items_per_page offset: start_index %}
-            <div class="d-flex mb-3 mr-2 p-3 border-bottom border-gray">
-                <div class="col p-3 ml-md-2">
-                    <h4 class="mt-0 mb-2 font-weight-bold">
-                        <a href="{{ item.url }}" style="color: var(--text-primary);">{{ item.title }}</a>
-                    </h4>
-                    <div class="small d-flex">
-                        <div>
-                            <img src="/assets/images/icons/calendar.png" alt="Date" class="inline-badge" style="width: 20px; height: 20px;">
-                            <span class="text-muted">{{ item.date | date: "%B %d, %Y" }}</span>
-                        </div>
-                        <div class="ml-auto">
-                            <span style="color: var(--accent-primary);">
-                                <i class="fa-solid fa-folder"></i>
-                                Project
-                            </span>
-                        </div>
-                    </div>
-                    <p class="mt-3 mb-2 small" style="text-align: justify; font-size: 14px;">
-                        {% if item.excerpt %}
-                            {{ item.excerpt }}
-                        {% else %}
-                            {{ item.content | strip_html | truncatewords: 50 }}
-                        {% endif %}
-                    </p>
-                    <div class="small">
-                        <a href="{{ item.url }}" class="btn btn-sm" style="color: var(--accent-primary); border: 1px solid var(--accent-primary); background-color: transparent;">View Details</a>
-                        
-                        {% if item.technologies.size > 0 %}
-                        <div class="float-right">
-                            <img src="/assets/images/icons/tag.png" alt="tag" class="inline-badge" style="width: 18px; height: 18px; margin-top: 2px;">
-                            {% for tech in item.technologies %}
-                            <span class="tech-tag">{{ tech }}</span>
-                            {% endfor %}
-                        </div>
-                        {% endif %}
-                    </div>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
-
-        <!-- Pagination -->
-        <div id="projects-pagination" class="pagination-container">
-            <nav aria-label="Projects pagination">
-                <ul class="pagination justify-content-center"></ul>
-            </nav>
-        </div>
-    </div>
-
-    <div class="col-12 col-lg-3">
-        <div class="sticky-top" style="top: 120px">
-            <div class="shadow-sm rounded-sm p-3" style="background-color: var(--bg-secondary);">
-                <h5 class="border-bottom pb-2">Technologies</h5>
-                <div>
-                    {% assign all_projects = site.showcase | where: "group", "Projects" | where: "show", true %}
-                    {% assign all_techs = "" | split: "" %}
-                    
-                    {% for item in all_projects %}
-                        {% if item.technologies %}
-                            {% assign all_techs = all_techs | concat: item.technologies %}
-                        {% endif %}
-                    {% endfor %}
-                    
-                    {% assign unique_techs = all_techs | uniq %}
-                    
-                    {% for tech in unique_techs %}
-                    <span style="display: inline-block; margin: 2px; padding: 5px 10px; border: 1px solid var(--border-color); border-radius: 5px; background-color: var(--bg-tertiary); font-size: 12px; color: var(--text-primary);">{{ tech }}</span>
-                    {% endfor %}
-                </div>
-            </div>
-        </div>
-    </div>
+<!-- Page Header -->
+<div class="section-header">
+  <h2 class="section-title">Projects</h2>
+  <p class="section-subtitle">Technical projects showcasing practical implementations and architectures</p>
 </div>
 
-<!-- Scroll to top button -->
-<button class="btn btn-primary rounded-circle position-fixed scroll-to-top" id="scrollToTop" style="bottom: 30px; right: 30px; width: 50px; height: 50px; z-index: 1000; display: none;">
-    <i class="fas fa-arrow-up"></i>
-</button>
+{% assign showcase_projects = site.showcase | where: "show", true | sort: "date" | reverse %}
+{% assign profile_projects = site.data.profile.projects %}
 
-<style>
-.scroll-to-top {
-    transition: all 0.3s ease;
-    opacity: 0.7;
-}
-.scroll-to-top:hover {
-    opacity: 1;
-}
-</style>
+<!-- Projects Stats -->
+<section class="projects-stats">
+  {% assign total_projects = showcase_projects.size | plus: profile_projects.size %}
+  {% assign featured_count = 0 %}
+  {% for project in showcase_projects %}
+    {% if project.featured %}
+      {% assign featured_count = featured_count | plus: 1 %}
+    {% endif %}
+  {% endfor %}
 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    var scrollToTopBtn = document.getElementById('scrollToTop');
-    
-    window.addEventListener('scroll', function() {
-        if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
-            scrollToTopBtn.style.display = 'block';
-        } else {
-            scrollToTopBtn.style.display = 'none';
-        }
-    });
-    
-    scrollToTopBtn.addEventListener('click', function() {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-    });
-    
-    // Projects pagination
-    const projectsData = [
-        {% assign projects = site.showcase | where: "group", "Projects" | where: "show", true | sort: "date" | reverse %}
-        {% for item in projects %}
-        {
-            title: {{ item.title | jsonify }},
-            url: {{ item.url | jsonify }},
-            date: {{ item.date | date: "%B %d, %Y" | jsonify }},
-            excerpt: {% if item.excerpt %}{{ item.excerpt | jsonify }}{% else %}{{ item.content | strip_html | truncatewords: 50 | jsonify }}{% endif %},
-            technologies: {{ item.technologies | jsonify }}
-        }{% unless forloop.last %},{% endunless %}
-        {% endfor %}
-    ];
-    
-    const itemsPerPage = 5;
-    let currentPage = 1;
-    
-    function renderProjects(page) {
-        const startIndex = (page - 1) * itemsPerPage;
-        const endIndex = startIndex + itemsPerPage;
-        const projectsToShow = projectsData.slice(startIndex, endIndex);
-        
-        const container = document.querySelector('.shadow-sm.rounded-sm.mb-5');
-        container.innerHTML = '';
-        
-        projectsToShow.forEach(project => {
-            const projectHtml = `
-                <div class="d-flex mb-3 mr-2 p-3 border-bottom border-gray">
-                    <div class="col p-3 ml-md-2">
-                        <h4 class="mt-0 mb-2 font-weight-bold">
-                            <a href="${project.url}" style="color: var(--text-primary);">${project.title}</a>
-                        </h4>
-                        <div class="small d-flex">
-                            <div>
-                                <img src="/assets/images/icons/calendar.png" alt="Date" class="inline-badge" style="width: 20px; height: 20px;">
-                                <span class="text-muted">${project.date}</span>
-                            </div>
-                            <div class="ml-auto">
-                                <span style="color: var(--accent-primary);">
-                                    <i class="fa-solid fa-folder"></i>
-                                    Project
-                                </span>
-                            </div>
-                        </div>
-                        <p class="mt-3 mb-2 small" style="text-align: justify; font-size: 14px;">
-                            ${project.excerpt}
-                        </p>
-                        <div class="small">
-                            <a href="${project.url}" class="btn btn-sm" style="color: var(--accent-primary); border: 1px solid var(--accent-primary); background-color: transparent;">View Details</a>
-                            ${project.technologies && project.technologies.length > 0 ? `
-                            <div class="float-right">
-                                <img src="/assets/images/icons/tag.png" alt="tag" class="inline-badge" style="width: 18px; height: 18px; margin-top: 2px;">
-                                ${project.technologies.map(tech => `<span class="tech-tag">${tech}</span>`).join('')}
-                            </div>
-                            ` : ''}
-                        </div>
-                    </div>
-                </div>
-            `;
-            container.innerHTML += projectHtml;
-        });
-        
-        renderPagination(page);
-    }
-    
-    function renderPagination(page) {
-        const totalPages = Math.ceil(projectsData.length / itemsPerPage);
-        const paginationContainer = document.querySelector('#projects-pagination .pagination');
-        
-        if (totalPages <= 1) {
-            paginationContainer.innerHTML = '';
-            return;
-        }
-        
-        let paginationHtml = '';
-        
-        // Previous button
-        paginationHtml += `
-            <li class="page-item ${page === 1 ? 'disabled' : ''}">
-                <a class="page-link" href="#" data-page="${page - 1}" aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span>
-                </a>
-            </li>
-        `;
-        
-        // Page numbers
-        for (let i = 1; i <= totalPages; i++) {
-            paginationHtml += `
-                <li class="page-item ${i === page ? 'active' : ''}">
-                    <a class="page-link" href="#" data-page="${i}">${i}</a>
-                </li>
-            `;
-        }
-        
-        // Next button
-        paginationHtml += `
-            <li class="page-item ${page === totalPages ? 'disabled' : ''}">
-                <a class="page-link" href="#" data-page="${page + 1}" aria-label="Next">
-                    <span aria-hidden="true">&raquo;</span>
-                </a>
-            </li>
-        `;
-        
-        paginationContainer.innerHTML = paginationHtml;
-        
-        // Add click handlers
-        paginationContainer.querySelectorAll('.page-link').forEach(link => {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                const targetPage = parseInt(this.dataset.page);
-                if (targetPage >= 1 && targetPage <= totalPages && targetPage !== currentPage) {
-                    currentPage = targetPage;
-                    renderProjects(currentPage);
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                }
-            });
-        });
-    }
-    
-    // Initial render
-    renderProjects(currentPage);
-});
-</script>
+  <div class="stat-card">
+    <div class="stat-icon"><i class="fas fa-code"></i></div>
+    <div class="stat-value">{{ total_projects }}</div>
+    <div class="stat-label">Total Projects</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-icon"><i class="fas fa-star"></i></div>
+    <div class="stat-value">{{ featured_count }}</div>
+    <div class="stat-label">Featured</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-icon"><i class="fas fa-layer-group"></i></div>
+    <div class="stat-value">{{ showcase_projects.size }}</div>
+    <div class="stat-label">With Showcase</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-icon"><i class="fab fa-github"></i></div>
+    <div class="stat-value">{{ profile_projects.size }}</div>
+    <div class="stat-label">On GitHub</div>
+  </div>
+</section>
+
+<!-- Showcase Projects Grid -->
+{% if showcase_projects.size > 0 %}
+<section class="section">
+  <div class="section-header" style="margin-bottom: 2rem;">
+    <h2 class="section-title">Project Showcases</h2>
+  </div>
+
+  <div class="projects-grid">
+    {% for project in showcase_projects %}
+    <div class="project-card">
+      <div class="project-card-thumbnail">
+        {% if project.thumbnail %}
+        <img src="{{ project.thumbnail | relative_url }}" alt="{{ project.title }}" class="project-card-image">
+        {% else %}
+        {% assign category = 'default' %}
+        {% if project.title contains 'Database' or project.title contains 'Go' %}
+          {% assign category = 'database' %}
+        {% elsif project.title contains 'Blockchain' or project.title contains 'NFT' %}
+          {% assign category = 'blockchain' %}
+        {% elsif project.title contains 'Caption' or project.title contains 'ML' or project.title contains 'Recognition' %}
+          {% assign category = 'ai' %}
+        {% elsif project.title contains 'Compiler' %}
+          {% assign category = 'compiler' %}
+        {% elsif project.title contains 'TCP' or project.title contains 'Network' %}
+          {% assign category = 'networking' %}
+        {% elsif project.title contains 'Event' or project.title contains 'Web' %}
+          {% assign category = 'web' %}
+        {% endif %}
+        <div class="project-card-placeholder {{ category }}">
+          {% if category == 'database' %}
+          <i class="fas fa-database"></i>
+          {% elsif category == 'blockchain' %}
+          <i class="fas fa-link"></i>
+          {% elsif category == 'ai' %}
+          <i class="fas fa-brain"></i>
+          {% elsif category == 'compiler' %}
+          <i class="fas fa-cogs"></i>
+          {% elsif category == 'networking' %}
+          <i class="fas fa-network-wired"></i>
+          {% elsif category == 'web' %}
+          <i class="fas fa-globe"></i>
+          {% else %}
+          <i class="fas fa-code"></i>
+          {% endif %}
+        </div>
+        {% endif %}
+      </div>
+
+      <div class="project-card-content">
+        <div class="project-card-header">
+          <h3 class="project-card-title">
+            <a href="{{ project.url | relative_url }}">{{ project.title }}</a>
+          </h3>
+          {% if project.group %}
+          <span class="project-badge completed">{{ project.group }}</span>
+          {% endif %}
+        </div>
+
+        <p class="project-card-description">
+          {% if project.excerpt %}
+            {{ project.excerpt | strip_html | truncatewords: 30 }}
+          {% else %}
+            {{ project.content | strip_html | truncatewords: 30 }}
+          {% endif %}
+        </p>
+
+        {% if project.technologies %}
+        <div class="project-card-tags">
+          {% for tech in project.technologies limit:5 %}
+          <span class="project-tech-tag">{{ tech }}</span>
+          {% endfor %}
+          {% if project.technologies.size > 5 %}
+          <span class="project-tech-tag more">+{{ project.technologies.size | minus: 5 }}</span>
+          {% endif %}
+        </div>
+        {% endif %}
+
+        <div class="project-card-meta">
+          <span class="project-card-date"><i class="far fa-calendar-alt"></i> {{ project.date | date: "%B %Y" }}</span>
+          <span class="project-card-link"><a href="{{ project.url | relative_url }}">View Details <i class="fas fa-arrow-right"></i></a></span>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+
+<!-- Additional Projects from Profile -->
+{% if profile_projects.size > 0 %}
+<section class="section" style="margin-top: 3rem;">
+  <div class="section-header" style="margin-bottom: 2rem;">
+    <h2 class="section-title">More Projects</h2>
+  </div>
+
+  <div class="projects-grid">
+    {% for project in profile_projects %}
+    {% assign has_showcase = false %}
+    {% for sp in showcase_projects %}
+      {% if sp.title contains project.title or project.title contains sp.title %}
+        {% assign has_showcase = true %}
+        {% break %}
+      {% endif %}
+    {% endfor %}
+    {% unless has_showcase %}
+    <div class="project-card">
+      <div class="project-card-thumbnail">
+        {% assign category = 'default' %}
+        {% if project.title contains 'Database' or project.title contains 'Go' %}
+          {% assign category = 'database' %}
+        {% elsif project.title contains 'Blockchain' or project.title contains 'Ticketing' %}
+          {% assign category = 'blockchain' %}
+        {% elsif project.title contains 'Caption' or project.title contains 'Image' %}
+          {% assign category = 'ai' %}
+        {% elsif project.title contains 'Compiler' %}
+          {% assign category = 'compiler' %}
+        {% elsif project.title contains 'TCP' or project.title contains 'Network' %}
+          {% assign category = 'networking' %}
+        {% elsif project.title contains 'Event' or project.title contains 'fly' %}
+          {% assign category = 'web' %}
+        {% endif %}
+        <div class="project-card-placeholder {{ category }}">
+          {% if category == 'database' %}
+          <i class="fas fa-database"></i>
+          {% elsif category == 'blockchain' %}
+          <i class="fas fa-link"></i>
+          {% elsif category == 'ai' %}
+          <i class="fas fa-brain"></i>
+          {% elsif category == 'compiler' %}
+          <i class="fas fa-cogs"></i>
+          {% elsif category == 'networking' %}
+          <i class="fas fa-network-wired"></i>
+          {% elsif category == 'web' %}
+          <i class="fas fa-globe"></i>
+          {% else %}
+          <i class="fas fa-code"></i>
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="project-card-content">
+        <div class="project-card-header">
+          <h3 class="project-card-title">
+            {% if project.link contains 'github.com' %}
+            <a href="{{ project.link }}" target="_blank">{{ project.title }}</a>
+            {% elsif project.link %}
+            <a href="{{ project.link | relative_url }}">{{ project.title }}</a>
+            {% else %}
+            {{ project.title }}
+            {% endif %}
+          </h3>
+          {% if project.description contains 'Finalist' %}
+          <span class="project-badge finalist">Finalist</span>
+          {% elsif project.date contains 'Present' %}
+          <span class="project-badge active">Active</span>
+          {% endif %}
+        </div>
+
+        <p class="project-card-description">{{ project.description | strip_html | truncatewords: 30 }}</p>
+
+        {% if project.technologies %}
+        <div class="project-card-tags">
+          {% for tech in project.technologies limit:5 %}
+          <span class="project-tech-tag">{{ tech }}</span>
+          {% endfor %}
+          {% if project.technologies.size > 5 %}
+          <span class="project-tech-tag more">+{{ project.technologies.size | minus: 5 }}</span>
+          {% endif %}
+        </div>
+        {% endif %}
+
+        <div class="project-card-meta">
+          <span class="project-card-date"><i class="far fa-calendar-alt"></i> {{ project.date }}</span>
+          {% if project.link contains 'github.com' %}
+          <span class="project-card-link"><a href="{{ project.link }}" target="_blank"><i class="fab fa-github"></i> GitHub</a></span>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    {% endunless %}
+    {% endfor %}
+  </div>
+</section>
+{% endif %}

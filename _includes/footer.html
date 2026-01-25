@@ -1,62 +1,87 @@
-<footer class="footer py-4">
+<footer class="site-footer">
     <div class="container">
-        <div class="row">
-            <div class="col-md-6 mb-3 mb-md-0">
-                <div class="text-muted">
-                    <i>Last updated: {{ "now" | date: "%b %Y" }}</i>
-                </div>
-                <div class="mt-2">
-                    <a href="https://github.com/{{ site.data.profile.github }}" class="social-link" title="GitHub"><i class="fab fa-github"></i></a>
-                    <a href="https://www.linkedin.com/in/{{ site.data.profile.linkedin }}" class="social-link" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                    {% if site.data.profile.twitter %}
-                    <a href="https://twitter.com/{{ site.data.profile.twitter }}" class="social-link" title="Twitter"><i class="fab fa-twitter"></i></a>
+        <div class="footer-grid">
+            <!-- Brand & Brief -->
+            <div class="footer-brand">
+                <a href="{{ '/' | relative_url }}" class="footer-logo">
+                    {{ site.data.profile.primary_name }}
+                </a>
+                <p class="footer-tagline">Software Engineer & SE Researcher</p>
+                <div class="footer-social">
+                    {% if site.data.profile.github %}
+                    <a href="https://github.com/{{ site.data.profile.github }}" class="footer-social-link" title="GitHub" target="_blank">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    {% endif %}
+                    {% if site.data.profile.linkedin %}
+                    <a href="https://www.linkedin.com/in/{{ site.data.profile.linkedin }}" class="footer-social-link" title="LinkedIn" target="_blank">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    {% endif %}
+                    {% if site.data.profile.gscholar %}
+                    <a href="https://scholar.google.com/citations?user={{ site.data.profile.gscholar }}" class="footer-social-link" title="Google Scholar" target="_blank">
+                        <i class="ai ai-google-scholar"></i>
+                    </a>
+                    {% endif %}
+                    {% if site.data.profile.orcid %}
+                    <a href="https://orcid.org/{{ site.data.profile.orcid }}" class="footer-social-link" title="ORCID" target="_blank">
+                        <i class="ai ai-orcid"></i>
+                    </a>
                     {% endif %}
                 </div>
             </div>
-            <div class="col-md-6 text-md-right">
-                <div class="text-muted">
-                    &copy; {{ 'now' | date: '%Y' }} {{ site.data.profile.primary_name }}
-                </div>
-                <div class="small mt-2 text-muted">
-                    Made with <i class="fas fa-heart" style="color: var(--accent-primary);"></i> using modern web technologies
-                </div>
+
+            <!-- Quick Links -->
+            <div class="footer-links">
+                <h4 class="footer-heading">Quick Links</h4>
+                <ul class="footer-nav">
+                    <li><a href="{{ '/' | relative_url }}">Home</a></li>
+                    <li><a href="{{ 'experience' | relative_url }}">Work</a></li>
+                    <li><a href="{{ 'research' | relative_url }}">Research</a></li>
+                    <li><a href="{{ 'projects' | relative_url }}">Projects</a></li>
+                </ul>
             </div>
+
+            <!-- More Links -->
+            <div class="footer-links">
+                <h4 class="footer-heading">Explore</h4>
+                <ul class="footer-nav">
+                    <li><a href="{{ 'achievements' | relative_url }}">Achievements</a></li>
+                    <li><a href="{{ 'contributions' | relative_url }}">Open Source</a></li>
+                    <li><a href="{{ 'learning' | relative_url }}">Learning</a></li>
+                    <li><a href="{{ 'news' | relative_url }}">News</a></li>
+                </ul>
+            </div>
+
+            <!-- Contact -->
+            <div class="footer-contact">
+                <h4 class="footer-heading">Contact</h4>
+                <ul class="footer-nav">
+                    <li>
+                        <a href="mailto:{{ site.data.profile.email }}">
+                            <i class="fas fa-envelope"></i>
+                            <span>{{ site.data.profile.email }}</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/assets/pdf/cv.pdf" target="_blank">
+                            <i class="fas fa-file-alt"></i>
+                            <span>Download CV</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Bottom Bar -->
+        <div class="footer-bottom">
+            <p>&copy; {{ 'now' | date: '%Y' }} {{ site.data.profile.primary_name }}. All rights reserved.</p>
+            <p class="footer-updated">Last updated: {{ "now" | date: "%B %Y" }}</p>
         </div>
     </div>
 </footer>
 
-<style>
-.social-link {
-    display: inline-block;
-    margin-right: 15px;
-    color: var(--text-muted);
-    font-size: 1.2rem;
-    transition: color 0.2s ease;
-}
-
-.social-link:hover {
-    color: var(--accent-primary);
-}
-
-.footer {
-    background-color: var(--bg-secondary);
-    border-top: 1px solid var(--border-color);
-}
-</style>
-
-<!-- Simple script to fix the appointment button -->
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    setTimeout(fixButton, 1000);
-    setTimeout(fixButton, 2000);
-  });
-  
-  function fixButton() {
-    var buttons = document.querySelectorAll('[data-calendar-scheduling-button]');
-    if (buttons.length > 0) {
-      buttons.forEach(function(btn) {
-        btn.style.cssText = "display: inline-block !important; position: static !important; writing-mode: horizontal-tb !important; text-orientation: mixed !important; width: auto !important; height: auto !important; transform: none !important;";
-      });
-    }
-  }
-</script>
+<!-- Back to Top Button -->
+<button class="back-to-top" id="backToTop" aria-label="Back to top">
+    <i class="fas fa-arrow-up"></i>
+</button>

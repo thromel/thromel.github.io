@@ -1,0 +1,214 @@
+---
+layout: default
+title: About
+navbar_title: About
+---
+
+<!-- Page Header -->
+<div class="about-header">
+  <div class="about-header-content">
+    <h1 class="about-title">About Me</h1>
+    <p class="about-subtitle">My journey, passions, and what drives me</p>
+  </div>
+</div>
+
+<!-- About Content -->
+<div class="about-content">
+  <div class="about-bio">
+    {{ site.data.profile.short_bio }}
+  </div>
+
+  <!-- Back to Home -->
+  <div class="about-footer">
+    <a href="{{ '/' | relative_url }}" class="about-back-link">
+      <i class="fas fa-arrow-left"></i>
+      <span>Back to Home</span>
+    </a>
+  </div>
+</div>
+
+<style>
+/* Header */
+.about-header {
+  text-align: center;
+  margin-bottom: var(--space-8);
+  padding-bottom: var(--space-6);
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.about-title {
+  font-size: var(--font-size-4xl, 2.25rem);
+  font-weight: 700;
+  margin: 0 0 var(--space-3, 0.75rem) 0;
+  letter-spacing: -0.02em;
+  background: linear-gradient(135deg, #38bdf8, #818cf8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
+:root.light-theme .about-title {
+  background: linear-gradient(135deg, #0ea5e9, #6366f1);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+.about-subtitle {
+  font-size: var(--font-size-lg);
+  color: var(--text-muted);
+  margin: 0;
+  font-weight: 400;
+}
+
+/* Content */
+.about-content {
+  max-width: 800px;
+  margin: 0 auto;
+  animation: fadeInUp 0.5s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Bio Card */
+.about-bio {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  padding: var(--space-8);
+  line-height: 1.9;
+  font-size: var(--font-size-base);
+  color: var(--text-secondary);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.about-bio:hover {
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+  border-color: var(--accent-primary);
+}
+
+/* Typography enhancements */
+.about-bio b {
+  color: var(--text-primary);
+  font-weight: 600;
+  position: relative;
+}
+
+.about-bio a {
+  color: var(--accent-primary);
+  text-decoration: none;
+  font-weight: 500;
+  position: relative;
+  transition: color 0.2s ease;
+}
+
+.about-bio a::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: var(--accent-primary);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.3s ease;
+}
+
+.about-bio a:hover {
+  color: var(--accent-secondary);
+}
+
+.about-bio a:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* Highlight spans with class */
+.about-bio .highlight-sessional {
+  background: linear-gradient(120deg, rgba(99, 102, 241, 0.1) 0%, rgba(99, 102, 241, 0.05) 100%);
+  padding: 0.1em 0.4em;
+  border-radius: 4px;
+}
+
+/* First letter styling */
+.about-bio::first-letter {
+  font-size: 2.5em;
+  font-weight: 700;
+  float: left;
+  line-height: 1;
+  margin-right: 0.15em;
+  margin-top: 0.05em;
+  color: var(--accent-primary);
+}
+
+/* Footer */
+.about-footer {
+  margin-top: var(--space-8);
+  padding-top: var(--space-6);
+  border-top: 1px solid var(--glass-border);
+}
+
+.about-back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  padding: var(--space-2) var(--space-4);
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.about-back-link:hover {
+  color: var(--accent-primary);
+  background: var(--glass-bg);
+  transform: translateX(-4px);
+}
+
+.about-back-link i {
+  font-size: 0.85em;
+  transition: transform 0.2s ease;
+}
+
+.about-back-link:hover i {
+  transform: translateX(-2px);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .about-title {
+    font-size: var(--font-size-3xl);
+  }
+
+  .about-bio {
+    padding: var(--space-6);
+    border-radius: 12px;
+  }
+
+  .about-bio::first-letter {
+    font-size: 2em;
+  }
+}
+
+/* Dark theme adjustments */
+:root.dark-theme .about-bio {
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
+}
+
+:root.dark-theme .about-bio:hover {
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+</style>

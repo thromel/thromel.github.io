@@ -7,6 +7,9 @@ on:
       - '.github/workflows/compile-cv.yml'
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   compile:
     runs-on: ubuntu-latest
@@ -24,15 +27,15 @@ jobs:
           mkdir -p assets/pdf
           mv _posts/cv.pdf assets/pdf/cv.pdf
           
-      - name: Commit PDF
+      - name: Upload PDF artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: cv-pdf
+          path: assets/pdf/cv.pdf
+          
+      - name: Commit and push PDF
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add assets/pdf/cv.pdf
-          git diff --quiet && git diff --staged --quiet || git commit -m "Update CV PDF"
-          
-      - name: Push changes
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: ${{ github.ref }}
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Update CV PDF [skip ci]" && git push)

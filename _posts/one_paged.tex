@@ -1,0 +1,284 @@
+\documentclass[10pt, letterpaper]{article}
+
+% Packages:
+\usepackage[
+    ignoreheadfoot, % set margins without considering header and footer
+    top=1.5 cm, % seperation between body and page edge from the top
+    bottom=1.5 cm, % seperation between body and page edge from the bottom
+    left=1.8 cm, % seperation between body and page edge from the left
+    right=1.8 cm, % seperation between body and page edge from the right
+    footskip=1.0 cm, % seperation between body and footer
+    % showframe % for debugging 
+]{geometry} % for adjusting page geometry
+\usepackage{titlesec} % for customizing section titles
+\usepackage{tabularx} % for making tables with fixed width columns
+\usepackage{array} % tabularx requires this
+\usepackage[dvipsnames]{xcolor} % for coloring text
+\definecolor{primaryColor}{RGB}{0, 0, 0} % define primary color
+\usepackage{enumitem} % for customizing lists
+\usepackage{fontawesome5} % for using icons
+\usepackage{amsmath} % for math
+\usepackage[
+    pdftitle={Tanzim Hossain Romel - Software Engineer},
+    pdfauthor={Tanzim Hossain Romel},
+    pdfcreator={LaTeX with RenderCV},
+    colorlinks=true,
+    urlcolor=primaryColor
+]{hyperref} % for links, metadata and bookmarks
+\usepackage[pscoord]{eso-pic} % for floating text on the page
+\usepackage{calc} % for calculating lengths
+\usepackage{bookmark} % for bookmarks
+\usepackage{lastpage} % for getting the total number of pages
+\usepackage{changepage} % for one column entries (adjustwidth environment)
+\usepackage{paracol} % for two and three column entries
+\usepackage{ifthen} % for conditional statements
+\usepackage{needspace} % for avoiding page brake right after the section title
+\usepackage{iftex} % check if engine is pdflatex, xetex or luatex
+
+% Ensure that generate pdf is machine readable/ATS parsable:
+\ifPDFTeX
+    \input{glyphtounicode}
+    \pdfgentounicode=1
+    \usepackage[T1]{fontenc}
+    \usepackage[utf8]{inputenc}
+    \usepackage{lmodern}
+\fi
+
+\usepackage{charter}
+
+% Some settings:
+\raggedright
+\AtBeginEnvironment{adjustwidth}{\partopsep0pt} % remove space before adjustwidth environment
+\pagestyle{empty} % no header or footer
+\setcounter{secnumdepth}{0} % no section numbering
+\setlength{\parindent}{0pt} % no indentation
+\setlength{\topskip}{0pt} % no top skip
+\setlength{\columnsep}{0.15cm} % set column seperation
+\pagenumbering{gobble} % no page numbering
+
+\titleformat{\section}{\needspace{4\baselineskip}\bfseries\large}{}{0pt}{}[\vspace{1pt}\titlerule]
+
+\titlespacing{\section}{
+    % left space:
+    -1pt
+}{
+    % top space:
+    0.15 cm
+}{
+    % bottom space:
+    0.1 cm
+} % section title spacing
+
+\renewcommand\labelitemi{$\vcenter{\hbox{\small$\bullet$}}$} % custom bullet points
+\newenvironment{highlights}{
+    \begin{itemize}[
+        topsep=0.05 cm,
+        parsep=0.05 cm,
+        partopsep=0pt,
+        itemsep=0pt,
+        leftmargin=0 cm + 10pt
+    ]
+}{
+    \end{itemize}
+} % new environment for highlights
+
+
+\newenvironment{highlightsforbulletentries}{
+    \begin{itemize}[
+        topsep=0.10 cm,
+        parsep=0.10 cm,
+        partopsep=0pt,
+        itemsep=0pt,
+        leftmargin=10pt
+    ]
+}{
+    \end{itemize}
+} % new environment for highlights for bullet entries
+
+\newenvironment{onecolentry}{
+    \begin{adjustwidth}{
+        0 cm + 0.00001 cm
+    }{
+        0 cm + 0.00001 cm
+    }
+}{
+    \end{adjustwidth}
+} % new environment for one column entries
+
+\newenvironment{twocolentry}[2][]{
+    \onecolentry
+    \def\secondColumn{#2}
+    \setcolumnwidth{\fill, 4.5 cm}
+    \begin{paracol}{2}
+}{
+    \switchcolumn \raggedleft \secondColumn
+    \end{paracol}
+    \endonecolentry
+} % new environment for two column entries
+
+\newenvironment{threecolentry}[3][]{
+    \onecolentry
+    \def\thirdColumn{#3}
+    \setcolumnwidth{, \fill, 4.5 cm}
+    \begin{paracol}{3}
+    {\raggedright #2} \switchcolumn
+}{
+    \switchcolumn \raggedleft \thirdColumn
+    \end{paracol}
+    \endonecolentry
+} % new environment for three column entries
+
+\newenvironment{header}{
+    \setlength{\topsep}{0pt}\par\kern\topsep\centering\linespread{0.95}
+}{
+    \par\kern\topsep
+} % new environment for the header
+
+\newcommand{\placelastupdatedtext}{% \placetextbox{<horizontal pos>}{<vertical pos>}{<stuff>}
+  \AddToShipoutPictureFG*{% Add <stuff> to current page foreground
+    \put(
+        \LenToUnit{\paperwidth-2 cm-0 cm+0.05cm},
+        \LenToUnit{\paperheight-1.0 cm}
+    ){\vtop{{\null}\makebox[0pt][c]{
+        \small\color{gray}\textit{Last updated in January 2025}\hspace{\widthof{Last updated in January 2025}}
+    }}}%
+  }%
+}%
+
+% save the original href command in a new command:
+\let\hrefWithoutArrow\href
+
+% new command for external links:
+
+
+\begin{document}
+    \newcommand{\AND}{\unskip
+        \cleaders\copy\ANDbox\hskip\wd\ANDbox
+        \ignorespaces
+    }
+    \newsavebox\ANDbox
+    \sbox\ANDbox{$|$}
+
+    \begin{header}
+        \fontsize{18 pt}{18 pt}\selectfont Tanzim Hossain Romel
+
+        \vspace{3 pt}
+
+        \normalsize
+        \mbox{Dhaka, Bangladesh}%
+        \kern 5.0 pt%
+        \AND%
+        \kern 5.0 pt%
+        \mbox{\hrefWithoutArrow{mailto:romel.rcs@gmail.com}{romel.rcs@gmail.com}}%
+        \kern 5.0 pt%
+        \AND%
+        \kern 5.0 pt%
+        \mbox{\hrefWithoutArrow{tel:+8801771600158}{+88 01771 600158}}%
+        \kern 5.0 pt%
+        \AND%
+        \kern 5.0 pt%
+        \mbox{\hrefWithoutArrow{https://www.linkedin.com/in/thromel/}{linkedin.com/in/thromel}}%
+        \kern 5.0 pt%
+        \AND%
+        \kern 5.0 pt%
+        \mbox{\hrefWithoutArrow{https://github.com/thromel}{github.com/thromel}}%
+        
+    \end{header}
+
+    \vspace{2 pt}
+
+    \section{Professional Summary}
+    \begin{onecolentry}
+        Backend Engineer with 2+ years at IQVIA building scalable microservices and AI-powered healthcare analytics. Pioneered agentic AI systems reducing dashboard setup time by 75\%. Expertise in .NET Core, AWS, and distributed systems handling millions of records with 60\% performance improvements.
+    \end{onecolentry}
+
+    \section{Technical Skills}
+    \begin{onecolentry}
+        \begin{highlights}
+            \item \textbf{Languages:} C\#, Python, JavaScript/TypeScript, Go, SQL
+            \item \textbf{Backend:} .NET Core, ASP.NET, Entity Framework, Express.js, FastAPI, gRPC
+            \item \textbf{AI/ML:} LangChain, OpenAI API, Claude API, GPT-4, PyTorch
+            \item \textbf{Cloud \& Databases:} AWS, Docker, Kubernetes, PostgreSQL, MongoDB, Redis, DynamoDB
+            \item \textbf{Architecture:} Microservices, Event Sourcing, CQRS, Domain-Driven Design
+        \end{highlights}
+    \end{onecolentry>
+
+    \section{Professional Experience}
+        
+        \begin{twocolentry}{
+            June 2023 – Present
+        }
+            \textbf{Software Development Engineer}, IQVIA -- Dhaka, Bangladesh\end{twocolentry}
+        \begin{onecolentry}
+            \textit{Fortune 500 healthcare data analytics leader serving pharmaceutical companies across 100+ countries}
+            \begin{highlights}
+                \item Developed microservices-based healthcare analytics platform processing millions of patient records using .NET Core
+                \item \textbf{AI Innovation:} Pioneered agentic AI system reducing dashboard configuration time by 75\% through NLP and automated visualization; integrated GPT-4/Claude APIs enabling conversational dashboard creation with 90\% accuracy
+                \item \textbf{Performance:} Achieved 60\% reduction in P99 latency through memory optimization, SIMD vectorization, and database query optimization; implemented multi-tier caching reducing database load by 65\%
+                \item \textbf{Architecture:} Led transformation to event-driven architecture with CQRS/Event Sourcing, achieving 70\% performance improvement; built cloud-native applications handling 10,000+ concurrent requests with 99.99\% availability
+                \item \textbf{Leadership:} Led 5+ POC initiatives; primary on-call engineer for \$10M+ daily transaction systems; mentored junior developers
+                \item Received IQVIA Impact Program Silver Award for outstanding performance and critical feature development
+            \end{highlights}
+        \end{onecolentry}
+
+    \section{Key Projects}
+
+        \begin{twocolentry}{
+            Nov 2024 - Present
+        }
+            \href{https://github.com/thromel/URLShortener}{\textbf{Enterprise URL Shortener}}
+        \end{twocolentry}
+        \begin{onecolentry}
+            \begin{highlights}
+                \item Built distributed system handling 100K+ req/sec with Event Sourcing/CQRS; hierarchical caching achieving sub-ms latency
+                \item Multi-region Kubernetes deployment with circuit breakers; Tech: .NET 8, Angular, PostgreSQL, Redis, Terraform
+            \end{highlights}
+        \end{onecolentry}
+
+        \begin{twocolentry}{
+            2022 – 2023
+        }
+            \textbf{Blockchain Healthcare Platform (Thesis)}
+        \end{twocolentry}
+        \begin{onecolentry}
+            \begin{highlights}
+                \item Engineered blockchain architecture achieving 10,000+ TPS with sharding and Layer-2 solutions
+                \item Implemented HIPAA/GDPR compliant smart contracts; Tech: Ethereum, Solidity, Node.js, PostgreSQL
+            \end{highlights}
+        \end{onecolentry}
+
+        \begin{twocolentry}{
+            May - Jul 2022
+        }
+            \href{https://github.com/eventfly/Microservices}{\textbf{Eventfly - Event Management Platform}}
+        \end{twocolentry}
+        \begin{onecolentry}
+            \begin{highlights}
+                \item Architected microservices system with authentication, payments, real-time features; Tech: TypeScript, Node.js, MongoDB, Kubernetes
+            \end{highlights}
+        \end{onecolentry}
+
+    \section{Education}
+ 
+        \begin{twocolentry}{
+            2018 – 2023
+        }
+            \textbf{Bachelor of Science in Computer Science and Engineering} -- Bangladesh University of Engineering and Technology (BUET)\end{twocolentry}
+        \begin{onecolentry}
+            \begin{highlights}
+                \item GPA: 3.53/4.0 | Relevant Coursework: Data Structures, Algorithms, Database Systems, Operating Systems, Distributed Systems
+            \end{highlights}
+        \end{onecolentry}
+
+    \section{Achievements \& Certifications}
+
+        \begin{onecolentry}
+            \begin{highlights}
+                \item \textbf{IQVIA Impact Program Silver Award} (2025) - Outstanding performance in critical feature development
+                \item \textbf{Blockchain Olympiad Bangladesh Finalist} (2021) - Top 40 teams nationally with blockchain ticketing platform
+                \item \textbf{2nd Place, ML Competition} - Achieved 95.9\% accuracy in handwritten digit recognition (120 participants)
+                \item \textbf{Dean's List Award} - Outstanding academic performance at BUET
+            \end{highlights}
+        \end{onecolentry}
+
+\end{document}

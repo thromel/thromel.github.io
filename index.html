@@ -3,324 +3,408 @@ layout: default
 title: Tanzim Hossain Romel
 navbar_title: Home
 ---
-{% include widgets/profile_card.html %}
 
-{% if site.data.display.homepage.show_news %}
-{% assign count_news = site.data.news | size %}
-{% if count_news > 0 %}
-{% include widgets/news_card.html %}
-{% endif %}
-{% endif %}
+<!-- Hero Section - Minimal Style -->
+<div class="hero-section">
+  <div class="hero-content">
+    <!-- Name & Tagline -->
+    <h1 class="hero-name">{{ site.data.profile.primary_name }}</h1>
+    <p class="hero-tagline">Software Engineer · Software Engineering Researcher</p>
 
-<div class="row mt-3">
-    <div class="col">
-        <div class="card border-0 shadow-sm" data-aos="fade-up" data-aos-delay="100">
-            <div class="card-body p-5">
-                <div class="row">
-                    <div class="col"><h2 data-aos="fade-right" data-aos-delay="200">My Resume</h2></div>
-                    <div class="ml-auto">
-                        {% if site.data.profile.cv_link %}
-                        <a class="pr-3 no-break animate__animated animate__pulse animate__infinite animate__slow" target="_blank" href="{{site.data.profile.cv_link}}" data-aos="zoom-in" data-aos-delay="300">
-                            <i class="fa-regular fa-file-pdf fa-2x mt-2 mr-2 icon-pdf"></i>
-                        </a>
-                        {% endif %}
-                    </div>
-                </div>
-                <hr />
+    <!-- Minimal Bio -->
+    <p class="hero-bio">
+      <strong>Incoming PhD student (Fall 2026)</strong> and CS graduate from <a href="https://cse.buet.ac.bd" target="_blank">BUET</a>, researching how AI transforms software development, from secure ML pipelines to intelligent developer tools. Currently at <a href="{{ site.data.profile.current_company.url }}" target="_blank">{{ site.data.profile.current_company.name }}</a>, building scalable healthcare systems. Passionate about open source and research that makes software engineering more accessible.
+    </p>
+    <p class="hero-bio hero-bio-personal">
+      Beyond code, I'm fascinated by history and economics: how civilizations rise and fall, and how markets shape human behavior. When not debugging, you'll find me traveling to new places or lost in a good fiction novel.
+      <a href="{{ 'about' | relative_url }}" class="hero-about-link">More about me →</a>
+    </p>
 
-                <!-- Education -->
-                <div class="row mt-3" id="education">
-                    <div class="col">
-                        <h4 class="mb-3" data-aos="fade-left" data-aos-delay="400">Education</h4>
-                        <div class="timeline">
-                            {% for edu in site.data.profile.education %}
-                            <div class="media mb-4 position-card" data-aos="fade-up" data-aos-delay="{{ forloop.index | times: 100 | plus: 500 }}">
-                                <div class="media-body">
-                                    <div class="d-flex mb-2">
-                                        <div class="position-title">
-                                            {% if edu.url %}
-                                            <a href="{{ edu.url }}" target="_blank" class="institution-link animate__animated animate__fadeIn">{{ edu.name }}</a>
-                                            {% else %}
-                                            {{ edu.name }}
-                                            {% endif %}
-                                        </div>
-                                        <div class="ml-auto no-break position-date text-muted">{{ edu.date }}</div>
-                                    </div>
-                                    <div class="mb-1 education-position">{{ edu.position }}</div>
-                                    <div class="position-description mb-2">{{ edu.description }}</div>
-                                    {% if edu.coursework %}
-                                    <div class="mt-2">
-                                        <button class="collapsible-btn animate__animated animate__fadeInUp" type="button" data-toggle="collapse" data-target="#coursework-{{ forloop.index }}" aria-expanded="false" aria-controls="coursework-{{ forloop.index }}">
-                                            <i class="fas fa-graduation-cap mr-1"></i> View Coursework <i class="fas fa-chevron-down ml-1 small"></i>
-                                        </button>
-                                        <div class="collapse mt-3" id="coursework-{{ forloop.index }}">
-                                            <div class="education-coursework">{{ edu.coursework }}</div>
-                                        </div>
-                                    </div>
-                                    {% endif %}
-                                </div>
-                            </div>
-                            {% endfor %}
-                        </div>
-                    </div>
-                </div>
-                <hr />
-
-                <!-- Work Experience -->
-                <div class="row mt-3" id="experience">
-                    <div class="col">
-                        <h4 class="mb-3" data-aos="fade-right" data-aos-delay="200">Work Experience</h4>
-                        <div class="timeline">
-                            {% for position in site.data.profile.positions %}
-                            <div class="media mb-4 position-card" data-aos="slide-up" data-aos-delay="{{ forloop.index | times: 150 | plus: 300 }}">
-                                {% if position.logo %}
-                                <div class="mr-3 company-logo-container" style="min-width: 60px; display: flex; align-items: center; justify-content: center;" data-aos="zoom-in" data-aos-delay="{{ forloop.index | times: 150 | plus: 400 }}">
-                                    <img src="{{ position.logo }}" alt="{{ position.name | split: ',' | first }}" class="company-logo animate__animated animate__fadeIn" style="max-width: 60px; max-height: 60px;">
-                                </div>
-                                {% endif %}
-                                <div class="media-body">
-                                    <div class="d-flex mb-2">
-                                        <div class="position-title">{{ position.name | split: "," | first }}</div>
-                                        <div class="ml-auto no-break position-date text-muted">{{ position.date }}</div>
-                                    </div>
-                                    <div class="position-description mb-2">{{ position.description }}</div>
-                                </div>
-                            </div>
-                            {% endfor %}
-                        </div>
-                    </div>
-                </div>
-                <h6 class="d-block text-center mt-3">
-                    <a href="{{ 'experience' | relative_url }}" class="btn btn-sm btn-outline-primary animate__animated animate__heartBeat animate__infinite animate__slower" data-aos="fade-up" data-aos-delay="100">View All Experience <i class="fas fa-angle-double-right"></i></a>
-                </h6>
-                <hr />
-
-                <!-- Research -->
-                <div class="row mt-3" id="research">
-                    <div class="col">
-                        <h4 class="mb-3" data-aos="fade-left" data-aos-delay="200">Research Projects</h4>
-                        {% for item in site.data.profile.research limit:2 %}
-                        <div class="research-card mb-4" data-aos="flip-left" data-aos-delay="{{ forloop.index | times: 200 | plus: 300 }}">
-                            <div class="research-title">
-                                {% assign showcase_item = site.showcase | where: "title", item.title | first %}
-                                <h5 class="mb-2">
-                                    {% if showcase_item %}
-                                    <a href="{{ showcase_item.url | relative_url }}" class="animate__animated animate__fadeInLeft">{{ item.title }}</a>
-                                    {% else %}
-                                    {{ item.title }}
-                                    {% endif %}
-                                </h5>
-                            </div>
-                            <div class="d-flex small mb-2">
-                                <div class="research-type"><b>Research Project</b></div>
-                                <div class="ml-auto text-muted">{{ item.date }}</div>
-                            </div>
-                            <div class="research-description mb-2">{{ item.description }}</div>
-                            {% if item.collaborator %}
-                            <div class="research-collaborator mb-3 text-info font-weight-bold">Collaboration: {{ item.collaborator }}</div>
-                            {% endif %}
-                            {% if showcase_item %}
-                            <a href="{{ showcase_item.url | relative_url }}" class="btn btn-sm btn-outline-primary animate__animated animate__bounceIn">View Details</a>
-                            {% endif %}
-                        </div>
-                        {% endfor %}
-                    </div>
-                </div>
-                <h6 class="d-block text-center mt-3">
-                    <a href="{{ 'research' | relative_url }}" class="btn btn-sm btn-outline-primary animate__animated animate__pulse animate__infinite animate__slower" data-aos="fade-up" data-aos-delay="100">View All Research <i class="fas fa-angle-double-right"></i></a>
-                </h6>
-                <hr />
-
-                <!-- Projects -->
-                <div class="row mt-3" id="projects">
-                    <div class="col">
-                        <h4 class="mb-3" data-aos="fade-right" data-aos-delay="200">Notable Projects</h4>
-                        {% for project in site.data.profile.projects limit:2 %}
-                        <div class="research-card mb-4" data-aos="fade-up-right" data-aos-delay="{{ forloop.index | times: 250 | plus: 300 }}">
-                            <div class="research-title">
-                                <h5 class="mb-2">
-                                    {% if project.link %}
-                                    <a href="{{ project.link }}" target="_blank" class="animate__animated animate__fadeInRight">{{ project.title }}</a>
-                                    {% else %}
-                                    {{ project.title }}
-                                    {% endif %}
-                                </h5>
-                            </div>
-                            <div class="d-flex small mb-2">
-                                <div class="project-type"><b>Project</b></div>
-                                <div class="ml-auto text-muted">{{ project.date }}</div>
-                            </div>
-                            <div class="research-description mb-2">{{ project.description }}</div>
-                            {% if project.team %}
-                            <div class="research-collaborator mb-3 text-info">
-                                <strong>Team:</strong> {{ project.team }}
-                            </div>
-                            {% endif %}
-                            <div class="mb-2" data-aos="fade-up" data-aos-delay="{{ forloop.index | times: 100 | plus: 500 }}">
-                                {% for tech in project.technologies limit:5 %}
-                                <span class="tech-tag animate__animated animate__fadeInUp" style="animation-delay: {{ forloop.index | times: 0.1 }}s;">{{ tech }}</span>
-                                {% endfor %}
-                                {% if project.technologies.size > 5 %}
-                                <span class="tech-tag animate__animated animate__fadeInUp" style="animation-delay: 0.6s;">+{{ project.technologies.size | minus: 5 }} more</span>
-                                {% endif %}
-                            </div>
-                        </div>
-                        {% endfor %}
-                    </div>
-                </div>
-                <h6 class="d-block text-center mt-3">
-                    <a href="{{ 'projects' | relative_url }}" class="btn btn-sm btn-outline-primary animate__animated animate__swing animate__infinite animate__slower" data-aos="fade-up" data-aos-delay="100">View All Projects <i class="fas fa-angle-double-right"></i></a>
-                </h6>
-                <hr />
-
-                <!-- Technical Skills -->
-                <div class="row mt-3" id="skills">
-                    <div class="col">
-                        <h4 class="mb-3" data-aos="fade-left" data-aos-delay="200">Technical Skills</h4>
-                        
-                        <!-- Technical Skills Categories -->
-                        <div class="skills-container">
-                            {% for category in site.data.profile.technical_skills %}
-                            <div class="skill-card mb-4" data-aos="zoom-in" data-aos-delay="{{ forloop.index | times: 150 | plus: 300 }}">
-                                <div class="d-flex align-items-center mb-2">
-                                    <h5 class="mb-0 mr-2 animate__animated animate__fadeInLeft">{{ category.type }}</h5>
-                                </div>
-                                <div class="tech-tags mb-3">
-                                    {% for tech in category.names %}
-                                    <span class="tech-tag animate__animated animate__zoomIn" style="animation-delay: {{ forloop.index | times: 0.1 }}s;">{{ tech }}</span>
-                                    {% endfor %}
-                                </div>
-                            </div>
-                            {% endfor %}
-                        </div>
-                        
-                        <!-- Detailed Skills -->
-                        <div class="detailed-skills-container">
-                            <!-- .NET Skills -->
-                            <div class="skill-card mb-4" data-aos="fade-right" data-aos-delay="400">
-                                <div class="d-flex align-items-center mb-2">
-                                    <h5 class="mb-0 mr-2">{{ site.data.profile.skills.dotnet.name }}</h5>
-                                    <span class="skill-level animate__animated animate__bounceIn" style="animation-delay: 0.5s;">{{ site.data.profile.skills.dotnet.level }}</span>
-                                </div>
-                                <p class="mb-3">{{ site.data.profile.skills.dotnet.description }}</p>
-                                <div class="tech-tags">
-                                    {% for tech in site.data.profile.skills.dotnet.technologies %}
-                                    <span class="tech-tag animate__animated animate__fadeInUp" style="animation-delay: {{ forloop.index | times: 0.1 | plus: 0.6 }}s;">{{ tech }}</span>
-                                    {% endfor %}
-                                </div>
-                            </div>
-                            
-                            <!-- Python Skills -->
-                            <div class="skill-card mb-4" data-aos="fade-left" data-aos-delay="500">
-                                <div class="d-flex align-items-center mb-2">
-                                    <h5 class="mb-0 mr-2">{{ site.data.profile.skills.python.name }}</h5>
-                                    <span class="skill-level animate__animated animate__bounceIn" style="animation-delay: 0.7s;">{{ site.data.profile.skills.python.level }}</span>
-                                </div>
-                                <p class="mb-3">{{ site.data.profile.skills.python.description }}</p>
-                                <div class="tech-tags">
-                                    {% for tech in site.data.profile.skills.python.technologies %}
-                                    <span class="tech-tag animate__animated animate__fadeInUp" style="animation-delay: {{ forloop.index | times: 0.1 | plus: 0.8 }}s;">{{ tech }}</span>
-                                    {% endfor %}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <hr />
-
-                <!-- Soft Skills -->
-                <div class="row mt-3">
-                    <div class="col">
-                        <h4 class="mb-3" data-aos="fade-right" data-aos-delay="200">Soft Skills</h4>
-                        <div class="card" data-aos="slide-up" data-aos-delay="300">
-                            <div class="card-body">
-                                <div class="row">
-                                    {% for skill in site.data.profile.soft_skills %}
-                                    <div class="col-md-6 mb-2" data-aos="fade-up" data-aos-delay="{{ forloop.index | times: 100 | plus: 400 }}">
-                                        <i class="fas fa-check-circle text-success mr-2 animate__animated animate__bounceIn" style="animation-delay: {{ forloop.index | times: 0.1 | plus: 0.5 }}s;"></i>{{ skill }}
-                                    </div>
-                                    {% endfor %}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <hr />
-
-                <!-- Tests and Certifications -->
-                <div class="row mt-3">
-                    <div class="col">
-                        <h4 data-aos="fade-left" data-aos-delay="200"><i class="fa-solid fa-certificate mt-1 mr-2 icon-certificate animate__animated animate__rotateIn"></i> Tests & Certifications</h4>
-                        <ul class="timeline">
-                            {% for cert in site.data.profile.tests_and_certifications %}
-                            <li class="media mb-2" data-aos="fade-right" data-aos-delay="{{ forloop.index | times: 150 | plus: 300 }}">
-                                <div class="media-body">
-                                    <div>
-                                    {% if cert.url %}
-                                    <h6><a href="{{ cert.url }}" target="_blank" class="animate__animated animate__fadeInLeft">{{ cert.name }}</a></h6>
-                                    {% else %}
-                                    <h6>{{ cert.name }}</h6>
-                                    {% endif %}
-                                    </div>
-                                    {% if cert.score %}
-                                    <div>Score: <strong class="animate__animated animate__pulse animate__infinite animate__slow">{{ cert.score }}</strong></div>
-                                    {% endif %}
-                                    {% if cert.details %}
-                                    <div>{{ cert.details }}</div>
-                                    {% endif %}
-                                    {% if cert.status %}
-                                    <div><em>Status: {{ cert.status }}</em></div>
-                                    {% endif %}
-                                </div>
-                            </li>
-                            {% endfor %}
-                        </ul>          
-                    </div>
-                </div>
-                <hr />
-
-                <!-- Professional Memberships -->
-                <div class="row mt-3">
-                    <div class="col">
-                        <h4 data-aos="fade-right" data-aos-delay="200"><i class="fa-solid fa-id-card mt-1 mr-2 icon-membership animate__animated animate__flip"></i> Professional Memberships</h4>
-                        <ul class="timeline">
-                            {% for member in site.data.profile.professional_memberships %}
-                            <li class="media mb-2" data-aos="fade-left" data-aos-delay="{{ forloop.index | times: 150 | plus: 300 }}">
-                                <div class="media-body">
-                                    <div><h6 class="animate__animated animate__fadeInRight">{{ member.name }}</h6></div>
-                                    {% if member.status %}
-                                    <div><strong>{{ member.status }}</strong> {% if member.joined %}(since {{ member.joined }}){% endif %}</div>
-                                    {% endif %}
-                                    {% if member.member_id %}
-                                    <div>Contact: {{ member.member_id }}</div>
-                                    {% endif %}
-                                </div>
-                            </li>
-                            {% endfor %}
-                        </ul>          
-                    </div>
-                </div>
-                <hr />
-
-                <!-- Hobbies -->
-                <div class="row mt-3">
-                    <div class="col">
-                        <h4 data-aos="zoom-in" data-aos-delay="200"><img src="/assets/images/icons/idea.png" alt="Hobbies" class="inline-badge animate__animated animate__rotateIn" style="width: 30px; height: 30px;"> Hobbies & Interests</h4>
-                        {% for hobby in site.data.profile.hobbies %}
-                        <div class="mb-4" data-aos="fade-up" data-aos-delay="{{ forloop.index | times: 200 | plus: 300 }}">
-                            <h5 class="mb-2 animate__animated animate__fadeInLeft">{{ hobby.type }}</h5>
-                            <ul>
-                                {% for item in hobby.items %}
-                                <li class="animate__animated animate__fadeInUp" style="animation-delay: {{ forloop.index | times: 0.1 | plus: 0.5 }}s;">{{ item }}</li>
-                                {% endfor %}
-                            </ul>
-                        </div>
-                        {% endfor %}
-                    </div>
-                </div>
-            </div>
-        </div>
+    <!-- Research Interests -->
+    <div class="hero-interests">
+      {% for interest in site.data.profile.research_interests %}
+      <span class="interest-pill">{{ interest }}</span>
+      {% endfor %}
     </div>
+
+    <!-- Contact & Social Row -->
+    <div class="hero-actions">
+      <div class="hero-links">
+        <a href="mailto:{{ site.data.profile.email }}" class="hero-link">
+          <i class="fas fa-envelope"></i>
+          <span>{{ site.data.profile.email }}</span>
+        </a>
+        <a href="/assets/pdf/cv.pdf" class="hero-link hero-link-primary" target="_blank">
+          <i class="fas fa-file-alt"></i>
+          <span>CV</span>
+        </a>
+      </div>
+
+      <div class="hero-social">
+        {% if site.data.profile.github %}
+        <a href="https://github.com/{{ site.data.profile.github }}" class="social-icon" title="GitHub" target="_blank">
+          <i class="fab fa-github"></i>
+        </a>
+        {% endif %}
+        {% if site.data.profile.linkedin %}
+        <a href="https://www.linkedin.com/in/{{ site.data.profile.linkedin }}" class="social-icon" title="LinkedIn" target="_blank">
+          <i class="fab fa-linkedin"></i>
+        </a>
+        {% endif %}
+        {% if site.data.profile.gscholar %}
+        <a href="https://scholar.google.com/citations?user={{ site.data.profile.gscholar }}" class="social-icon" title="Google Scholar" target="_blank">
+          <i class="ai ai-google-scholar"></i>
+        </a>
+        {% endif %}
+        {% if site.data.profile.orcid %}
+        <a href="https://orcid.org/{{ site.data.profile.orcid }}" class="social-icon" title="ORCID" target="_blank">
+          <i class="ai ai-orcid"></i>
+        </a>
+        {% endif %}
+        <a href="{{ 'contributions' | relative_url }}" class="social-icon" title="Open Source">
+          <i class="fas fa-code-branch"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Profile Image -->
+  <div class="hero-image-wrapper">
+    <img src="{{ site.data.profile.portrait_url }}" alt="{{ site.data.profile.primary_name }}" class="hero-image">
+  </div>
 </div>
 
+<!-- Open Source Contributions -->
+<div id="oss-summary" class="oss-inline" style="display: none;">
+  <a href="{{ 'contributions' | relative_url }}" class="oss-badge">
+    <i class="fas fa-code-merge"></i>
+    <span id="oss-summary-text"></span>
+  </a>
+  <span class="oss-repos">
+    to <a href="https://github.com/microsoft/TypeScript/pulls?q=author%3Athromel" target="_blank">TypeScript</a>,
+    <a href="https://github.com/dotnet/efcore/pulls?q=author%3Athromel" target="_blank">EF Core</a>,
+    <a href="https://github.com/langchain-ai/langchain/pulls?q=author%3Athromel" target="_blank">LangChain</a>,
+    <a href="https://github.com/Kaliumhexacyanoferrat/GenHTTP/pulls?q=author%3Athromel" target="_blank">GenHTTP</a>,
+    <a href="https://github.com/dynaroars/csconfs/pulls?q=author%3Athromel" target="_blank">csconfs</a>
+  </span>
+</div>
 
+<style>
+.oss-inline {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-bottom: var(--space-6);
+  font-size: var(--font-size-sm);
+  color: var(--text-muted);
+}
+.oss-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  background: rgba(34, 197, 94, 0.1);
+  border: 1px solid rgba(34, 197, 94, 0.3);
+  border-radius: 6px;
+  color: var(--color-success);
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+.oss-badge:hover {
+  background: rgba(34, 197, 94, 0.2);
+  transform: translateY(-1px);
+}
+.oss-badge i {
+  font-size: 0.875em;
+}
+.oss-repos a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-weight: 500;
+}
+.oss-repos a:hover {
+  color: var(--accent-primary);
+}
+</style>
+
+<script>
+(function() {
+  const GITHUB_USERNAME = '{{ site.data.profile.github | default: "thromel" }}';
+
+  async function fetchOSSSummary() {
+    try {
+      const response = await fetch(
+        `https://api.github.com/search/issues?q=author:${GITHUB_USERNAME}+type:pr+-user:${GITHUB_USERNAME}&per_page=1`,
+        { headers: { 'Accept': 'application/vnd.github.v3+json' } }
+      );
+      if (!response.ok) return;
+
+      const data = await response.json();
+      const total = data.total_count || 0;
+      if (total === 0) return;
+
+      // Get merged count
+      const mergedRes = await fetch(
+        `https://api.github.com/search/issues?q=author:${GITHUB_USERNAME}+type:pr+is:merged+-user:${GITHUB_USERNAME}&per_page=1`,
+        { headers: { 'Accept': 'application/vnd.github.v3+json' } }
+      );
+      const mergedData = await mergedRes.json();
+      const merged = mergedData.total_count || 0;
+
+      document.getElementById('oss-summary-text').textContent =
+        `${merged} merged pull requests to open source projects`;
+      document.getElementById('oss-summary').style.display = 'block';
+    } catch (e) {}
+  }
+
+  document.addEventListener('DOMContentLoaded', fetchOSSSummary);
+})();
+</script>
+
+<!-- Recent News Widget -->
+<div class="news-widget">
+  <div class="news-widget-header">
+    <h3 class="news-widget-title"><i class="fas fa-newspaper"></i> Recent News</h3>
+    <a href="{{ 'news' | relative_url }}" class="news-widget-more">View all →</a>
+  </div>
+  <div class="news-list">
+    {% assign sorted_news = site.data.news | sort: 'date' | reverse %}
+    {% for item in sorted_news limit:3 %}
+    <div class="news-item">
+      <div class="news-date">
+        <span class="news-date-month">{{ item.date | date: "%b" }}</span>
+        <span class="news-date-year">{{ item.date | date: "%Y" }}</span>
+      </div>
+      <div class="news-content">
+        <div class="news-title">{{ item.title }}</div>
+        <div class="news-description">{{ item.description | truncate: 120 }}</div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+<!-- Publications -->
+{% if site.data.profile.publications %}
+<section class="section">
+  <div class="section-header">
+    <h2 class="section-title">Publications</h2>
+  </div>
+  <div class="timeline">
+    {% for pub in site.data.profile.publications limit:3 %}
+    <div class="timeline-item">
+      <div class="timeline-header">
+        <h3 class="timeline-title">{{ pub.title }}</h3>
+        <span class="timeline-date">{{ pub.date }}</span>
+      </div>
+      <p class="timeline-subtitle"><em>{{ pub.venue }}</em></p>
+      {% if pub.description %}
+      <p class="timeline-description">{{ pub.description }}</p>
+      {% endif %}
+    </div>
+    {% endfor %}
+  </div>
+  <div class="text-right mt-4">
+    <a href="{{ 'publications' | relative_url }}" class="btn btn-text">View All Publications →</a>
+  </div>
+</section>
+{% endif %}
+
+<!-- Current Research -->
+<section class="section section-research">
+  <div class="section-header">
+    <h2 class="section-title"><a href="/research"><i class="fas fa-microscope section-icon"></i> Research</a></h2>
+  </div>
+  <div class="timeline">
+    {% for item in site.data.profile.research %}
+    <div class="timeline-item{% if forloop.first %} featured{% endif %}">
+      <div class="timeline-header">
+        {% assign showcase_item = site.showcase | where: "title", item.title | first %}
+        <h3 class="timeline-title">
+          {% if showcase_item %}
+          <a href="{{ showcase_item.url | relative_url }}">{{ item.title }}</a>
+          {% elsif item.link %}
+          <a href="{{ item.link }}" target="_blank">{{ item.title }}</a>
+          {% else %}
+          {{ item.title }}
+          {% endif %}
+          {% if item.status %}
+          <span class="research-badge {% if item.status == 'In Review' %}in-review{% elsif item.status == 'In Progress' %}in-progress{% else %}targeting{% endif %}"><i class="fas fa-{% if item.status == 'In Progress' %}code{% else %}clock{% endif %}"></i> {{ item.status }}</span>
+          {% endif %}
+        </h3>
+        <span class="timeline-date">{{ item.date }}</span>
+      </div>
+      <p class="timeline-description">{{ item.short_description | default: item.description }}</p>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+<!-- Education -->
+<section class="section section-education">
+  <div class="section-header">
+    <h2 class="section-title"><i class="fas fa-graduation-cap section-icon"></i> Education</h2>
+  </div>
+  <div class="timeline">
+    {% for edu in site.data.profile.education limit:2 %}
+    <div class="timeline-item">
+      <div class="timeline-header">
+        <h3 class="timeline-title">
+          {% if edu.url %}
+          <a href="{{ edu.url }}" target="_blank">{{ edu.name }}</a>
+          {% else %}
+          {{ edu.name }}
+          {% endif %}
+        </h3>
+        <span class="timeline-date">{{ edu.date }}</span>
+      </div>
+      <p class="timeline-subtitle">{{ edu.position }}</p>
+      <div class="timeline-description">{{ edu.description }}</div>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+<!-- Work -->
+<section class="section section-work">
+  <div class="section-header">
+    <h2 class="section-title"><i class="fas fa-briefcase section-icon"></i> Work</h2>
+  </div>
+  <div class="timeline">
+    {% for position in site.data.profile.positions limit:2 %}
+    <div class="timeline-item">
+      <div class="timeline-header">
+        <h3 class="timeline-title">{{ position.name | split: "," | first }}</h3>
+        <span class="timeline-date">{{ position.date }}</span>
+      </div>
+      <p class="timeline-description">{{ position.description }}</p>
+    </div>
+    {% endfor %}
+  </div>
+  <div class="text-right mt-4">
+    <a href="{{ 'experience' | relative_url }}" class="btn btn-text">View All Work →</a>
+  </div>
+</section>
+
+<!-- Selected Projects -->
+<section class="section section-projects">
+  <div class="section-header">
+    <h2 class="section-title"><i class="fas fa-code section-icon"></i> Selected Projects</h2>
+  </div>
+  <div class="projects-grid">
+    {% for project in site.data.profile.projects limit:4 %}
+    <div class="project-card">
+      <h3 class="project-title">
+        {% if project.link %}
+        <a href="{{ project.link }}" target="_blank">{{ project.title }}</a>
+        {% else %}
+        {{ project.title }}
+        {% endif %}
+      </h3>
+      <p class="project-description">{{ project.description }}</p>
+      {% if project.technologies %}
+      <div class="project-tags">
+        {% for tech in project.technologies limit:5 %}
+        <span class="project-tag">{{ tech }}</span>
+        {% endfor %}
+      </div>
+      {% endif %}
+      {% if project.github or project.link %}
+      <div class="project-actions">
+        {% if project.github %}
+        <a href="{{ project.github }}" target="_blank" class="project-action">
+          <i class="fab fa-github"></i> Code
+        </a>
+        {% endif %}
+        {% if project.link %}
+        <a href="{{ project.link }}" target="_blank" class="project-action">
+          <i class="fas fa-external-link-alt"></i> View
+        </a>
+        {% endif %}
+      </div>
+      {% endif %}
+    </div>
+    {% endfor %}
+  </div>
+  <div class="text-center mt-8">
+    <a href="{{ 'projects' | relative_url }}" class="btn btn-secondary">View All Projects</a>
+  </div>
+</section>
+
+<!-- Currently Learning -->
+<section class="section section-learning">
+  <div class="section-header">
+    <h2 class="section-title"><i class="fas fa-seedling section-icon"></i> Currently Learning</h2>
+  </div>
+  <div class="learning-grid">
+    <div class="learning-category">
+      <h4 class="learning-category-title"><i class="fas fa-code"></i> Learning</h4>
+      <div class="learning-items">
+        <span class="learning-item"><i class="devicon-nvidia-plain"></i> CUDA Programming</span>
+        <span class="learning-item"><i class="devicon-go-plain"></i> GoLang</span>
+      </div>
+    </div>
+    <div class="learning-category">
+      <h4 class="learning-category-title"><i class="fas fa-book"></i> Reading</h4>
+      <div class="learning-items">
+        <a href="https://www.oreilly.com/library/view/designing-data-intensive-applications/9781098119058/" target="_blank" class="learning-item learning-link"><i class="fas fa-database"></i> Designing Data-Intensive Applications (2nd ed)</a>
+        <a href="https://www.oreilly.com/library/view/ai-engineering/9781098166298/" target="_blank" class="learning-item learning-link"><i class="fas fa-robot"></i> AI Engineering <span class="learning-author">by Chip Huyen</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Technical Skills -->
+<section class="section section-skills">
+  <div class="section-header">
+    <h2 class="section-title"><i class="fas fa-tools section-icon"></i> Technical Skills</h2>
+  </div>
+  <div class="skills-grid">
+    {% for category in site.data.profile.technical_skills limit:4 %}
+    <div class="skill-category">
+      <h4 class="skill-category-title">
+        {% case category.type %}
+          {% when "Backend & Systems" %}
+            <i class="fas fa-server"></i>
+          {% when "AI & Agents" %}
+            <i class="fas fa-brain"></i>
+          {% when "Databases" %}
+            <i class="fas fa-database"></i>
+          {% when "Cloud & DevOps" %}
+            <i class="fas fa-cloud"></i>
+          {% else %}
+            <i class="fas fa-cogs"></i>
+        {% endcase %}
+        {{ category.type }}
+      </h4>
+      <div class="skill-list">
+        {% for skill in category.names limit:5 %}
+        <span class="skill-item">
+          {% case skill %}
+            {% when "C#/.NET Core" %}<i class="devicon-dotnetcore-plain"></i>
+            {% when "Go" %}<i class="devicon-go-plain"></i>
+            {% when "C++" %}<i class="devicon-cplusplus-plain"></i>
+            {% when "EF Core" %}<i class="devicon-dotnetcore-plain"></i>
+            {% when "Python" %}<i class="devicon-python-plain"></i>
+            {% when "PyTorch" %}<i class="devicon-pytorch-plain"></i>
+            {% when "CUDA" %}<i class="devicon-nvidia-plain"></i>
+            {% when "PostgreSQL" %}<i class="devicon-postgresql-plain"></i>
+            {% when "MongoDB" %}<i class="devicon-mongodb-plain"></i>
+            {% when "SQL Server" %}<i class="devicon-microsoftsqlserver-plain"></i>
+            {% when "DynamoDB" %}<i class="devicon-dynamodb-plain"></i>
+            {% when "AWS" %}<i class="devicon-amazonwebservices-plain-wordmark"></i>
+            {% when "Docker" %}<i class="devicon-docker-plain"></i>
+            {% when "Kubernetes" %}<i class="devicon-kubernetes-plain"></i>
+            {% when "Terraform" %}<i class="devicon-terraform-plain"></i>
+            {% when "GitHub Actions" %}<i class="devicon-github-original"></i>
+          {% endcase %}
+          {{ skill }}
+        </span>
+        {% endfor %}
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</section>

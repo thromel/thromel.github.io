@@ -1,0 +1,71 @@
+﻿Book Title,Category,Difficulty,Est. Weeks,Notes,O'Reilly URL,Priority,Reading Order,Status
+Head First Software Architecture,Software Architecture,🟢 Beginner,3,Beginner-friendly architecture introduction. Visual learning style.,https://learning.oreilly.com/api/v1/continue/9781098134341/,⭐ High,8,📋 Not Started
+Clean Architecture: A Craftsman's Guide to Software Structure and Design,Software Architecture,🟡 Intermediate,2,Essential foundation for software architecture. Start here.,https://learning.oreilly.com/api/v1/continue/9780134494272/,🔥 Critical,1,📋 Not Started
+"The Pragmatic Programmer: your journey to mastery, 20th Anniversary Edition, 2nd Edition",General Engineering,🟢 Beginner,2,Timeless software development wisdom. Must-read for all developers.,https://learning.oreilly.com/api/v1/continue/9780135956977/,🔥 Critical,3,📋 Not Started
+Working Effectively with Legacy Code,Testing & Quality,🟡 Intermediate,2,Critical for working with existing codebases. Practical strategies.,https://learning.oreilly.com/api/v1/continue/0131177052/,⭐ High,7,📋 Not Started
+"Head First Design Patterns, 2nd Edition",Design Patterns & Principles,🟢 Beginner,3,"Visual, engaging introduction to design patterns. Great for beginners.",https://learning.oreilly.com/api/v1/continue/9781492077992/,🔥 Critical,2,📋 Not Started
+"Code Complete, 2nd Edition",General Engineering,🟡 Intermediate,4,Comprehensive guide to software construction. Dense but valuable.,https://learning.oreilly.com/api/v1/continue/0735619670/,🔥 Critical,4,📋 Not Started
+Software Engineering at Google,General Engineering,🟡 Intermediate,3,Insights into engineering practices at scale. Real-world examples.,https://learning.oreilly.com/api/v1/continue/9781492082781/,⭐ High,5,📋 Not Started
+Refactoring: Improving the Design of Existing Code,Design Patterns & Principles,🟡 Intermediate,3,Essential refactoring techniques. Reference-style book.,https://learning.oreilly.com/api/v1/continue/9780134757681/,⭐ High,6,📋 Not Started
+Modern Software Engineering: Doing What Works to Build Better Software Faster,General Engineering,🟡 Intermediate,2,Modern approaches to software development. Practical and opinionated.,https://learning.oreilly.com/api/v1/continue/9780137314942/,⭐ High,10,📋 Not Started
+Fundamentals of Software Architecture,Software Architecture,🟡 Intermediate,3,Comprehensive architecture fundamentals. Core reading for architects.,https://learning.oreilly.com/api/v1/continue/9781492043447/,⭐ High,9,📋 Not Started
+Tidy First?,Design Patterns & Principles,🟢 Beginner,1,Quick read on incremental refactoring. Practical advice from Kent Beck.,https://learning.oreilly.com/api/v1/continue/9781098151232/,📌 Medium,13,📋 Not Started
+The Effective Software Engineer,General Engineering,🟡 Intermediate,2,Career and effectiveness tips. Complements technical skills.,https://learning.oreilly.com/api/v1/continue/9798341638167/,⭐ High,15,📋 Not Started
+"The Object-Oriented Thought Process, 5th Edition",Design Patterns & Principles,🟢 Beginner,2,OOP fundamentals. Good refresher for object-oriented thinking.,https://learning.oreilly.com/api/v1/continue/9780135182130/,📌 Medium,12,📋 Not Started
+Head First Git,DevOps & CI/CD,🟢 Beginner,2,Visual Git learning. Great for understanding Git internals.,https://learning.oreilly.com/api/v1/continue/9781492092506/,📌 Medium,14,📋 Not Started
+Domain-Driven Design: Tackling Complexity in the Heart of Software,Software Architecture,🔴 Advanced,4,Foundational DDD book. Complex but essential for domain modeling.,https://learning.oreilly.com/api/v1/continue/0321125215/,⭐ High,11,📋 Not Started
+"Fundamentals of Software Architecture, 2nd Edition",Software Architecture,🟡 Intermediate,3,,https://learning.oreilly.com/api/v1/continue/9781098175504/,⭐ High,17,📋 Not Started
+"Building Microservices, 2nd Edition",Microservices & Distributed,🟡 Intermediate,3,,https://learning.oreilly.com/api/v1/continue/9781492034018/,🔥 Critical,18,📋 Not Started
+Software Architecture: The Hard Parts,Software Architecture,🔴 Advanced,3,,https://learning.oreilly.com/api/v1/continue/9781492086888/,⭐ High,16,📋 Not Started
+Monolith to Microservices,Microservices & Distributed,🟡 Intermediate,2,,https://learning.oreilly.com/api/v1/continue/9781492047834/,⭐ High,20,📋 Not Started
+Microservices Patterns,Microservices & Distributed,🟡 Intermediate,3,,https://learning.oreilly.com/api/v1/continue/9781617294549/,⭐ High,19,📋 Not Started
+Building Resilient Distributed Systems,Microservices & Distributed,🔴 Advanced,2,,https://learning.oreilly.com/api/v1/continue/9781098163532/,⭐ High,24,📋 Not Started
+Building Event-Driven Microservices,Microservices & Distributed,🟡 Intermediate,2,,https://learning.oreilly.com/api/v1/continue/9781492057888/,⭐ High,21,📋 Not Started
+Streaming Systems,Microservices & Distributed,🔴 Advanced,3,,https://learning.oreilly.com/api/v1/continue/9781491983867/,📌 Medium,25,📋 Not Started
+"Designing Distributed Systems, 2nd Edition",Microservices & Distributed,🔴 Advanced,2,,https://learning.oreilly.com/api/v1/continue/9781098156343/,⭐ High,22,📋 Not Started
+Patterns of Distributed Systems,Microservices & Distributed,🔴 Advanced,3,,https://learning.oreilly.com/api/v1/continue/9780138222246/,⭐ High,23,📋 Not Started
+Fundamentals of Data Engineering,Data Engineering,🟡 Intermediate,3,,https://learning.oreilly.com/api/v1/continue/9781098108298/,⭐ High,28,📋 Not Started
+Learning API Styles,Design Patterns & Principles,🟡 Intermediate,2,,https://learning.oreilly.com/api/v1/continue/9781098153984/,⭐ High,29,📋 Not Started
+Mastering API Architecture,Design Patterns & Principles,🔴 Advanced,3,,https://learning.oreilly.com/api/v1/continue/9781492090625/,⭐ High,30,📋 Not Started
+Database Internals,Data Engineering,🔴 Advanced,4,,https://learning.oreilly.com/api/v1/continue/9781492040330/,⭐ High,27,📋 Not Started
+Grokking Relational Database Design,Data Engineering,🟡 Intermediate,2,,https://learning.oreilly.com/api/v1/continue/9781633437418/,⭐ High,26,📋 Not Started
+Logging in Action,DevOps & CI/CD,🟡 Intermediate,2,,https://learning.oreilly.com/api/v1/continue/9781617298356/,📌 Medium,34,📋 Not Started
+Contract Testing in Action,Testing & Quality,🟡 Intermediate,2,,https://learning.oreilly.com/api/v1/continue/9781633437241/,📌 Medium,33,📋 Not Started
+Microservice APIs,Microservices & Distributed,🟡 Intermediate,2,,https://learning.oreilly.com/api/v1/continue/9781617298417/,⭐ High,31,📋 Not Started
+"Web Application Security, 2nd Edition",Testing & Quality,🟡 Intermediate,3,,https://learning.oreilly.com/api/v1/continue/9781098143923/,⭐ High,32,📋 Not Started
+Learning OpenTelemetry,DevOps & CI/CD,🟡 Intermediate,2,,https://learning.oreilly.com/api/v1/continue/9781098147174/,⭐ High,35,📋 Not Started
+The Phoenix Project,General Engineering,🟢 Beginner,2,,https://learning.oreilly.com/api/v1/continue/9781457191350/,⭐ High,38,📋 Not Started
+Collaborative Software Design,General Engineering,🟡 Intermediate,2,,https://learning.oreilly.com/api/v1/continue/9781633439252/,📌 Medium,40,📋 Not Started
+CI/CD Design Patterns,DevOps & CI/CD,🟡 Intermediate,2,,https://learning.oreilly.com/api/v1/continue/9781835889640/,⭐ High,36,📋 Not Started
+Chaos Engineering,Testing & Quality,🔴 Advanced,2,,https://learning.oreilly.com/api/v1/continue/9781492043850/,📌 Medium,37,📋 Not Started
+"Agile Principles, Patterns, and Practices in C#",General Engineering,🟡 Intermediate,3,,https://learning.oreilly.com/api/v1/continue/0131857258/,📌 Medium,39,📋 Not Started
+Balancing Coupling in Software Design,Design Patterns & Principles,🔴 Advanced,2,,https://learning.oreilly.com/api/v1/continue/9780137353514/,⭐ High,44,📋 Not Started
+Writing for Developers,General Engineering,🟢 Beginner,2,,https://learning.oreilly.com/api/v1/continue/9781633436282/,📌 Medium,42,📋 Not Started
+Communication Patterns,Leadership & Career,🟡 Intermediate,2,,https://learning.oreilly.com/api/v1/continue/9781098140533/,📌 Medium,41,📋 Not Started
+Implementing Domain-Driven Design,Software Architecture,⚫ Expert,5,,https://learning.oreilly.com/api/v1/continue/9780133039900/,⭐ High,43,📋 Not Started
+Software Architecture for Busy Developers,Software Architecture,🟡 Intermediate,2,,https://learning.oreilly.com/api/v1/continue/9781801071598/,📌 Medium,45,📋 Not Started
+Building Micro-Frontends,Software Architecture,🟡 Intermediate,2,,https://learning.oreilly.com/api/v1/continue/9781492082989/,📌 Medium,48,📋 Not Started
+The Survivor's Guide to Enterprise Architecture,Software Architecture,🟡 Intermediate,2,,https://learning.oreilly.com/api/v1/continue/9781780176970/,📌 Medium,47,📋 Not Started
+Systems Performance Modeling,Performance & Systems,🔴 Advanced,3,,https://learning.oreilly.com/api/v1/continue/9783110607635/,📌 Medium,50,📋 Not Started
+The Software Architect Elevator,Software Architecture,🟡 Intermediate,2,,https://learning.oreilly.com/api/v1/continue/9781492077534/,⭐ High,46,📋 Not Started
+Systems Performance: Enterprise and the Cloud,Performance & Systems,🔴 Advanced,4,,https://learning.oreilly.com/api/v1/continue/9780133390124/,⭐ High,49,📋 Not Started
+"Amazon Web Services in Action, Third Edition",Cloud & AWS,🟡 Intermediate,4,,https://learning.oreilly.com/api/v1/continue/9781633439160/,⭐ High,54,📋 Not Started
+"Why Programs Fail, 2nd Edition",Testing & Quality,🟡 Intermediate,3,,https://learning.oreilly.com/api/v1/continue/9780123745156/,📌 Medium,52,📋 Not Started
+Engineering Resilient Systems on AWS,Cloud & AWS,🔴 Advanced,2,,https://learning.oreilly.com/api/v1/continue/9781098162412/,⭐ High,55,📋 Not Started
+System Design on AWS,Cloud & AWS,🟡 Intermediate,3,,https://learning.oreilly.com/api/v1/continue/9781098146887/,⭐ High,53,📋 Not Started
+Pro .NET Benchmarking,Performance & Systems,🔴 Advanced,2,,https://learning.oreilly.com/api/v1/continue/9781484249413/,📌 Medium,51,📋 Not Started
+"Learning Go, 2nd Edition",Programming Languages,🟡 Intermediate,3,,https://learning.oreilly.com/api/v1/continue/9781098139285/,📌 Medium,57,📋 Not Started
+Programming C# 12,Programming Languages,🟡 Intermediate,4,,https://learning.oreilly.com/api/v1/continue/9781098158354/,📌 Medium,56,📋 Not Started
+Expert C++ - Second Edition,Programming Languages,🔴 Advanced,4,,https://learning.oreilly.com/api/v1/continue/9781804617830/,💡 Low,59,📋 Not Started
+Grokking Functional Programming,Programming Languages,🔴 Advanced,3,,https://learning.oreilly.com/api/v1/continue/9781617291838/,📌 Medium,60,📋 Not Started
+C# Concurrency,Programming Languages,🔴 Advanced,3,,https://learning.oreilly.com/api/v1/continue/9781633438651/,📌 Medium,58,📋 Not Started
+Learning Systems Thinking,General Engineering,🟡 Intermediate,2,,https://learning.oreilly.com/api/v1/continue/9781098151324/,📌 Medium,65,📋 Not Started
+Lead Developer Career Guide,Leadership & Career,🟡 Intermediate,2,,https://learning.oreilly.com/api/v1/continue/9781633438071/,⭐ High,63,📋 Not Started
+Engineering Leadership: The Hard Parts,Leadership & Career,🟡 Intermediate,2,,https://learning.oreilly.com/api/v1/continue/9781098175627/,⭐ High,62,📋 Not Started
+Leveling Up as a Tech Lead,Leadership & Career,🟡 Intermediate,2,,https://learning.oreilly.com/api/v1/continue/9781098177508/,⭐ High,64,📋 Not Started
+The Staff Engineer's Path,Leadership & Career,🟡 Intermediate,2,,https://learning.oreilly.com/api/v1/continue/9781098118723/,🔥 Critical,61,📋 Not Started
+Systems Performance: Enterprise and the Cloud,Performance & Systems,🔴 Advanced,4,,https://learning.oreilly.com/api/v1/continue/9780133390124/,💡 Low,70,🔖 Reference
+Developing Apps with GPT-4 and ChatGPT,General Engineering,🟡 Intermediate,2,,https://learning.oreilly.com/api/v1/continue/9781098152475/,📌 Medium,67,📋 Not Started
+Beyond Vibe Coding,General Engineering,🟢 Beginner,1,,https://learning.oreilly.com/api/v1/continue/9798341634749/,📌 Medium,68,📋 Not Started
+AI-Assisted Programming,General Engineering,🟡 Intermediate,2,,https://learning.oreilly.com/api/v1/continue/9781098164553/,⭐ High,66,📋 Not Started
+Head First Software Architecture,Software Architecture,🟢 Beginner,3,,https://learning.oreilly.com/api/v1/continue/9781098134341/,💡 Low,69,🔖 Reference

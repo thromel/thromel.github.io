@@ -1,0 +1,57 @@
+{% comment %}
+Responsive Image Component
+Usage: {% include responsive-image.html src="image.jpg" alt="Description" %}
+Optional parameters:
+- sizes: Custom sizes attribute
+- class: Additional CSS classes
+- loading: lazy (default) or eager
+- aspect_ratio: e.g., "16:9" or "4:3"
+{% endcomment %}
+
+{% assign src = include.src %}
+{% assign alt = include.alt | default: "" %}
+{% assign sizes = include.sizes | default: "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" %}
+{% assign class = include.class | default: "" %}
+{% assign loading = include.loading | default: "lazy" %}
+{% assign aspect_ratio = include.aspect_ratio %}
+
+{% comment %} Generate responsive image sources {% endcomment %}
+{% assign base_url = site.baseurl | append: "/assets/images/" %}
+{% assign image_name = src | split: "." | first %}
+{% assign image_ext = src | split: "." | last %}
+
+<picture class="responsive-image-container {{ class }}">
+    {% comment %} WebP sources for modern browsers {% endcomment %}
+    <source 
+        srcset="{{ base_url }}{{ image_name }}-320.webp 320w,
+                {{ base_url }}{{ image_name }}-640.webp 640w,
+                {{ base_url }}{{ image_name }}-960.webp 960w,
+                {{ base_url }}{{ image_name }}-1280.webp 1280w,
+                {{ base_url }}{{ image_name }}-1920.webp 1920w"
+        sizes="{{ sizes }}"
+        type="image/webp">
+    
+    {% comment %} JPEG/PNG sources for fallback {% endcomment %}
+    <source 
+        srcset="{{ base_url }}{{ image_name }}-320.{{ image_ext }} 320w,
+                {{ base_url }}{{ image_name }}-640.{{ image_ext }} 640w,
+                {{ base_url }}{{ image_name }}-960.{{ image_ext }} 960w,
+                {{ base_url }}{{ image_name }}-1280.{{ image_ext }} 1280w,
+                {{ base_url }}{{ image_name }}-1920.{{ image_ext }} 1920w"
+        sizes="{{ sizes }}"
+        type="image/{{ image_ext }}">
+    
+    {% comment %} Fallback image {% endcomment %}
+    <img 
+        src="{{ base_url }}{{ image_name }}-640.{{ image_ext }}"
+        alt="{{ alt }}"
+        loading="{{ loading }}"
+        decoding="async"
+        {% if aspect_ratio %}
+        style="aspect-ratio: {{ aspect_ratio | replace: ':', ' / ' }}; width: 100%; height: auto;"
+        {% endif %}
+        class="responsive-image {{ class }}"
+        {% comment %} Add dimensions to prevent layout shift {% endcomment %}
+        width="640"
+        height="{% if aspect_ratio %}{% assign ratio = aspect_ratio | split: ':' %}{{ 640 | divided_by: ratio[0] | times: ratio[1] | round }}{% else %}480{% endif %}">
+</picture>
