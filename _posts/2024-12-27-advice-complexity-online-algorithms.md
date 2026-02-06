@@ -9,11 +9,11 @@ image: /assets/images/projects/online-algorithms.png
 
 # Advice Complexity in Online Algorithms: When Knowing the Future Makes All the Difference
 
-Picture this scenario: You're managing a cache for a web server, and requests are coming in real-time. You have limited memory and must decide which pages to keep cached and which to evict, but you have no idea what the next request will be. This is the essence of an **online algorithm**—making decisions with incomplete information while being judged against an optimal solution that knows the entire future.
+Picture this scenario: You're managing a cache for a web server, and requests are coming in real-time. You have limited memory and must decide which pages to keep cached and which to evict, but you have no idea what the next request will be. This is the essence of an **online algorithm** - making decisions with incomplete information while being judged against an optimal solution that knows the entire future.
 
-Traditional competitive analysis tells us how well online algorithms can perform compared to optimal offline algorithms, but it often yields pessimistic bounds that don't reflect real-world performance. This is where **advice complexity** comes in—a powerful framework that quantifies exactly how much "future information" an online algorithm needs to achieve better performance guarantees.
+Traditional competitive analysis tells us how well online algorithms can perform compared to optimal offline algorithms, but it often yields pessimistic bounds that don't reflect real-world performance. This is where **advice complexity** comes in - a powerful framework that quantifies exactly how much "future information" an online algorithm needs to achieve better performance guarantees.
 
-If you're an undergraduate stepping into algorithm engineering, understanding online algorithms and advice complexity will equip you with essential tools for analyzing and designing algorithms that operate under uncertainty—a fundamental challenge in modern computing systems.
+If you're an undergraduate stepping into algorithm engineering, understanding online algorithms and advice complexity will equip you with essential tools for analyzing and designing algorithms that operate under uncertainty - a fundamental challenge in modern computing systems.
 
 ## Understanding the Online vs Offline Paradigm
 
@@ -1412,7 +1412,7 @@ As computing systems become increasingly complex and distributed, the ability to
 
 The journey from simple competitive analysis to sophisticated advice complexity frameworks illustrates how theoretical computer science evolves to meet practical needs. Understanding these concepts will serve you well whether you pursue theoretical research, practical algorithm engineering, or system design.
 
-Remember: every online algorithm you'll encounter in practice—from cache replacement policies to load balancing strategies—can potentially benefit from the insights that advice complexity provides. The question is not whether future information is available, but how to use it most effectively.
+Remember: every online algorithm you'll encounter in practice - from cache replacement policies to load balancing strategies - can potentially benefit from the insights that advice complexity provides. The question is not whether future information is available, but how to use it most effectively.
 
 ---
 

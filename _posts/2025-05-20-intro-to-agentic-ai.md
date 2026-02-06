@@ -14,7 +14,7 @@ tags: [langchain, langgraph, llama, ai, analytics, llm, fine-tuning, python]
 
 Picture this: You're a data analyst at 9 PM, staring at your company's analytics dashboard. You need to understand why customer churn spiked last quarter, correlate it with marketing campaigns, and prepare a report for tomorrow's board meeting. Traditional dashboards show you the numbers, but they don't help you connect the dots or suggest next steps.
 
-This is where our journey began. We didn't just want to add a chat interface to our analytics dashboard – we wanted to create an intelligent agent that could reason about data, execute multi-step analyses, and provide actionable insights. An agent that doesn't just answer questions but actively helps you explore your data.
+This is where our journey began. We wanted more than a chat interface in our analytics dashboard. We wanted an intelligent agent that could reason about data, execute multi-step analyses, and provide actionable insights. An agent that answers questions and actively helps users explore their data.
 
 ## Understanding Agentic AI: Beyond Simple Question-Answering
 
@@ -26,13 +26,13 @@ Before diving into our implementation, let's establish what makes AI "agentic." 
 - Adjust their approach based on what they discover
 - Explain their reasoning
 
-Agentic AI systems embody these mathematician-like qualities. They don't just process queries; they plan, execute, observe, and adapt. In the context of our analytics dashboard, this means our AI doesn't just retrieve data – it formulates hypotheses, runs analyses, and iterates based on findings.
+Agentic AI systems embody these mathematician-like qualities. They process queries, plan, execute, observe, and adapt. In the context of our analytics dashboard, this means our AI retrieves data, formulates hypotheses, runs analyses, and iterates based on findings.
 
 ## The Architecture Stack: Why LangChain, LangGraph, and Fine-tuned LLAMA?
 
 ### LangChain: The Foundation
 
-LangChain provides the building blocks for LLM applications. Think of it as a well-organized toolbox where each tool has a specific purpose. At its core, LangChain helps us:
+LangChain provides the building blocks for LLM applications. Think of it as a well-organized toolbox where each tool has a specific purpose. At a basic level, LangChain helps us:
 
 1. **Chain Operations**: Connect LLM calls with data retrievals, API calls, and computations
 2. **Manage Prompts**: Structure and version our prompts systematically
@@ -120,7 +120,7 @@ Generic language models are like talented generalists – they know a bit about 
 
 ## The Fine-tuning Journey: Creating Our Analytics Expert
 
-Fine-tuning isn't just about making the model "better" – it's about making it specifically better for your use case. Here's how we approached it:
+Fine-tuning is not about making the model broadly "better." It is about making it better for your use case. Here's how we approached it:
 
 ### Step 1: Data Collection and Curation
 
@@ -923,7 +923,7 @@ Building an agentic AI analytics system is not a destination but a journey. Our 
 
 The key insight from our journey: successful agentic AI isn't about having the most powerful model or the most complex architecture. It's about thoughtfully combining the right tools, carefully fine-tuning for your domain, and building systems that can reason, reflect, and improve.
 
-Start small, iterate based on real usage, and always keep the end user's analytical needs at the center of your design. The future of analytics isn't just about dashboards showing data – it's about intelligent systems that help us understand what the data means and what to do about it.
+Start small, iterate based on real usage, and keep the end user's analytical needs at the center of your design. The future of analytics is not only dashboards showing data; it is also intelligent systems that help us understand what the data means and what to do about it.
 
 ## Code Repository and Resources
 

@@ -9,29 +9,29 @@ image: /assets/images/projects/design-patterns.png
 
 # Design Patterns: Your First Step Toward Professional Software Engineering
 
-Picture this scenario: You're building a messaging app for your software engineering class. At first, everything seems straightforward—users can send messages to each other, and you store everything in a simple database. But then requirements start piling up. Users want group chats, message reactions, read receipts, typing indicators, and the ability to share files. Suddenly, your neat little program becomes a tangled web of if-else statements and copy-pasted code. Sound familiar?
+Picture this scenario: You're building a messaging app for your software engineering class. At first, everything seems straightforward - users can send messages to each other, and you store everything in a simple database. But then requirements start piling up. Users want group chats, message reactions, read receipts, typing indicators, and the ability to share files. Suddenly, your neat little program becomes a tangled web of if-else statements and copy-pasted code. Sound familiar?
 
-This is the moment when most students realize that software engineering is about more than just making things work. It's about building systems that can grow, adapt, and survive in the real world. Design patterns are your toolkit for this challenge—they're battle-tested solutions to problems that developers have been solving for decades.
+This is the moment when most students realize that software engineering is about more than just making things work. It's about building systems that can grow, adapt, and survive in the real world. Design patterns are your toolkit for this challenge - they're battle-tested solutions to problems that developers have been solving for decades.
 
 ## Understanding the Need: Why Clean Code Matters
 
-Let's start with a fundamental truth: the code you write in university will likely be the worst code you'll ever write, and that's perfectly fine. What matters is recognizing why it's problematic and learning how to improve. Clean code isn't about impressing your professors or following arbitrary rules—it's about writing software that won't make you (or your teammates) want to tear your hair out six months later.
+Let's start with a fundamental truth: the code you write in university will likely be the worst code you'll ever write, and that's perfectly fine. What matters is recognizing why it's problematic and learning how to improve. Clean code isn't about impressing your professors or following arbitrary rules - it's about writing software that won't make you (or your teammates) want to tear your hair out six months later.
 
 Consider these essential principles that form the foundation of professional software development:
 
 ### The Single Responsibility Principle (SRP)
 
-Imagine you're building a food delivery app. You might be tempted to create a `Restaurant` class that handles everything: menu management, order processing, payment handling, delivery tracking, and customer reviews. This seems logical at first—after all, restaurants do all these things, right?
+Imagine you're building a food delivery app. You might be tempted to create a `Restaurant` class that handles everything: menu management, order processing, payment handling, delivery tracking, and customer reviews. This seems logical at first - after all, restaurants do all these things, right?
 
 The problem emerges when you need to change how payments are processed. Suddenly, you're modifying a class that dozens of other components depend on, risking breaks in completely unrelated features like menu display or review posting. SRP tells us that each class should have exactly one reason to change. In our example, we'd separate concerns into focused classes: `Menu`, `OrderProcessor`, `PaymentGateway`, `DeliveryTracker`, and `ReviewSystem`.
 
 ### The Open/Closed Principle
 
-Think about how Netflix regularly adds new features—new types of content, viewing modes, or recommendation algorithms—without breaking existing functionality. This is the Open/Closed Principle in action. Your code should welcome new features (open for extension) without requiring surgery on working components (closed for modification).
+Think about how Netflix regularly adds new features - new types of content, viewing modes, or recommendation algorithms - without breaking existing functionality. This is the Open/Closed Principle in action. Your code should welcome new features (open for extension) without requiring surgery on working components (closed for modification).
 
 ### Don't Repeat Yourself (DRY)
 
-Every time you copy and paste code, you're creating a future bug. When that inevitable change request comes, will you remember to update all seven places where you pasted that validation logic? DRY isn't just about avoiding repetition—it's about creating a single source of truth for each piece of functionality in your system.
+Every time you copy and paste code, you're creating a future bug. When that inevitable change request comes, will you remember to update all seven places where you pasted that validation logic? DRY isn't just about avoiding repetition - it's about creating a single source of truth for each piece of functionality in your system.
 
 ### Dependency Inversion
 
@@ -109,7 +109,7 @@ public class DatabaseConnectionPool {
 }
 ```
 
-This pattern ensures that your application maintains a controlled number of database connections, preventing resource exhaustion. Notice how we use double-check locking to ensure thread safety while maintaining performance—a crucial consideration in real applications where multiple threads might request connections simultaneously.
+This pattern ensures that your application maintains a controlled number of database connections, preventing resource exhaustion. Notice how we use double-check locking to ensure thread safety while maintaining performance - a crucial consideration in real applications where multiple threads might request connections simultaneously.
 
 The Singleton pattern appears in many frameworks and libraries. Spring Framework's application context, logging frameworks, and configuration managers often use this pattern. However, be cautious: overusing Singleton can lead to hidden dependencies and make testing difficult. Use it only when you genuinely need to ensure a single instance, not just as a convenient global access point.
 
@@ -301,7 +301,7 @@ public class OnlineStore {
 }
 ```
 
-The beauty of this pattern lies in its flexibility. Adding a new payment method—say, cryptocurrency—requires only creating a new class implementing `PaymentStrategy`. The `ShoppingCart` class remains unchanged, perfectly demonstrating the Open/Closed Principle.
+The beauty of this pattern lies in its flexibility. Adding a new payment method - say, cryptocurrency - requires only creating a new class implementing `PaymentStrategy`. The `ShoppingCart` class remains unchanged, perfectly demonstrating the Open/Closed Principle.
 
 This pattern appears everywhere in real applications. Text editors use it for different file saving formats, compression utilities use it for different algorithms, and game engines use it for different rendering techniques. The key insight is separating the algorithm from the code that uses it.
 
@@ -482,7 +482,7 @@ public class WeatherMonitoringApp {
 }
 ```
 
-This implementation shows how the Observer pattern creates a loosely coupled system. The `WeatherStation` doesn't need to know anything about how the displays work or what they do with the data. New observers can be added without modifying the station's code—perhaps a `MobileAppNotifier` or a `WeatherAPIPublisher`.
+This implementation shows how the Observer pattern creates a loosely coupled system. The `WeatherStation` doesn't need to know anything about how the displays work or what they do with the data. New observers can be added without modifying the station's code - perhaps a `MobileAppNotifier` or a `WeatherAPIPublisher`.
 
 The Observer pattern is fundamental to modern software architecture. It's the foundation of:
 - Event handling in GUI frameworks
@@ -931,7 +931,7 @@ For hands-on practice:
 
 ## Conclusion: Patterns as a Professional Mindset
 
-Design patterns represent more than just coding techniques—they embody a professional approach to software development. They teach you to think beyond immediate requirements, to anticipate change, and to value clarity and maintainability.
+Design patterns represent more than just coding techniques - they embody a professional approach to software development. They teach you to think beyond immediate requirements, to anticipate change, and to value clarity and maintainability.
 
 As you progress from student to professional developer, patterns become part of your mental toolkit. You'll start recognizing situations where a particular pattern fits naturally. You'll communicate more effectively with other developers using the shared vocabulary patterns provide. Most importantly, you'll write code that stands the test of time.
 

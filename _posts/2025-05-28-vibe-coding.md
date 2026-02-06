@@ -15,7 +15,7 @@ image: /assets/images/projects/vibe-coding.png
 
 ## Introduction: The Ground is Shifting
 
-I've been writing code professionally for over five years, and the technological shifts in just the last half-decade have been staggering. I've watched Kubernetes go from a complex orchestration tool to the default deployment strategy. I've seen TypeScript evolve from a Microsoft experiment to the backbone of modern web development. I've witnessed the rise of serverless computing, the maturation of cloud-native architectures, and the explosion of microservices patterns. But nothing has felt quite as transformative—or as unsettling—as the sudden emergence of Large Language Models (LLMs) in our daily workflow.
+I've been writing code professionally for over five years, and the technological shifts in just the last half-decade have been staggering. I've watched Kubernetes go from a complex orchestration tool to the default deployment strategy. I've seen TypeScript evolve from a Microsoft experiment to the backbone of modern web development. I've witnessed the rise of serverless computing, the maturation of cloud-native architectures, and the explosion of microservices patterns. But nothing has felt quite as major - or as unsettling - as the sudden emergence of Large Language Models (LLMs) in our daily workflow.
 
 Just yesterday, I watched a junior developer prototype a complex React component in minutes using Claude, complete with proper state management and error handling. The code wasn't just functional; it was elegant. Meanwhile, I spent an hour carefully architecting a distributed system design, questioning whether my years of experience were becoming obsolete.
 
@@ -57,7 +57,7 @@ No LLM can replace the human ability to understand business context, anticipate 
 - Design for the non-functional requirements that stakeholders forget to mention
 - Make the political and practical trade-offs that real systems require
 
-I recently worked on migrating a monolithic application to microservices. While Claude helped me generate boilerplate code and service templates, the critical decisions—service boundaries, data consistency strategies, deployment approaches—required human judgment informed by years of experience and deep understanding of our specific context.
+I recently worked on migrating a monolithic application to microservices. While Claude helped me generate boilerplate code and service templates, the critical decisions - service boundaries, data consistency strategies, deployment approaches - required human judgment informed by years of experience and deep understanding of our specific context.
 
 ### 2. Debugging and Problem Solving
 
@@ -182,7 +182,7 @@ The traditional advice to specialize deeply in one area while maintaining broad 
 
 Create personal workflows that maximize the AI advantage:
 
-1. **Morning Code Reviews**: Use AI to pre-review PRs, highlighting areas needing human attention
+1. **Morning Code Reviews**: Use AI to pre-review PRs and flag areas needing human attention
 2. **Documentation Generation**: Let AI create first drafts, then add context and nuance
 3. **Test Case Generation**: Use AI to think of edge cases you might miss
 4. **Learning Acceleration**: Use AI to explain new concepts and create practice exercises
@@ -269,7 +269,7 @@ If you're wondering how to start adapting to this new reality, here are concrete
 
 ## Conclusion: The Future is Human + AI
 
-As I write this, I'm more excited about software engineering than I've been in years. Yes, the landscape is changing rapidly. Yes, some of our traditional skills are being automated. But the core of what makes a great software engineer—the ability to solve problems, create value, and work effectively with others remains unchanged.
+As I write this, I'm more excited about software engineering than I've been in years. Yes, the landscape is changing rapidly. Yes, some of our traditional skills are being automated. But the core of what makes a great software engineer - the ability to solve problems, create value, and work effectively with others remains unchanged.
 
 The engineers who will thrive in this new era are those who:
 - Embrace AI as a powerful tool rather than a threat
@@ -278,11 +278,11 @@ The engineers who will thrive in this new era are those who:
 - Stay curious and continue learning
 - Remember that software is ultimately about serving human needs
 
-We're not being replaced; we're being augmented. We're not becoming obsolete; we're becoming more powerful. The age of LLMs and vibe coding isn't the end of software engineering as we know it—it's the beginning of software engineering as we've always dreamed it could be.
+We're not being replaced; we're being augmented. We're not becoming obsolete; we're becoming more powerful. The age of LLMs and vibe coding isn't the end of software engineering as we know it - it's the beginning of software engineering as we've always dreamed it could be.
 
 The code we write with AI assistance today would have seemed like magic just a few years ago. Imagine what we'll be building a few years from now. The future belongs to engineers who can harness these tools while maintaining the wisdom, judgment, and human insight that no AI can replicate.
 
-So let's embrace this change. Let's learn these new tools. Let's push the boundaries of what's possible. But let's also remember that at the end of the day, we're not just writing code—we're solving problems, building products, and creating the future.
+So let's embrace this change. Let's learn these new tools. Let's push the boundaries of what's possible. But let's also remember that at the end of the day, we're not just writing code - we're solving problems, building products, and creating the future.
 
 The best time to be a software engineer isn't in the past. It's right now. And it's only getting better.
 

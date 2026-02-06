@@ -1560,7 +1560,7 @@ class ContinuousImprovement:
 
 ## Conclusion: Building Trust in Agentic AI
 
-Implementing robust hallucination detection and guardrails isn't just about preventing errors – it's about building systems that users can trust with increasingly important tasks. As we've seen, this requires:
+Implementing robust hallucination detection and guardrails is about preventing errors and building systems users can trust with increasingly important tasks. As we've seen, this requires:
 
 1. **Multi-layered detection** combining statistical, semantic, and behavioral analysis
 2. **Proactive guardrails** that prevent dangerous actions before they occur
@@ -1568,7 +1568,7 @@ Implementing robust hallucination detection and guardrails isn't just about prev
 4. **Continuous monitoring** and improvement based on real-world performance
 5. **Framework integration** that makes safety transparent to developers
 
-The journey toward reliable agentic AI is ongoing. As models become more capable, our safety systems must evolve alongside them. By implementing the techniques in this guide, you're not just preventing hallucinations – you're building the foundation for AI systems that can be trusted with real responsibility.
+The journey toward reliable agentic AI is ongoing. As models become more capable, safety systems must evolve alongside them. Implementing the techniques in this guide helps reduce hallucinations and build a foundation for AI systems that can be trusted with real responsibility.
 
 ## Resources and Further Reading
 
@@ -1580,6 +1580,6 @@ The journey toward reliable agentic AI is ongoing. As models become more capable
 - [Great Expectations](https://greatexpectations.io/) - Data validation framework adaptable for AI outputs
 - [Microsoft's Guidance](https://github.com/microsoft/guidance) - Framework for controlling language models
 
-Remember: The goal isn't to eliminate all risks – it's to understand, quantify, and manage them appropriately for your use case. Start with critical guardrails and gradually expand your safety coverage as you learn what your specific application needs.
+Remember: The goal is not to eliminate all risks. The goal is to understand, quantify, and manage them for your use case. Start with critical guardrails and gradually expand your safety coverage as you learn what your specific application needs.
 
 Happy building, and stay safe out there!

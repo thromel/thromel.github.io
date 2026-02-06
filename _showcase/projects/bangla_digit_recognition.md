@@ -34,7 +34,7 @@ technologies:
 
 Handwritten digit recognition is a fundamental challenge in computer vision that has applications ranging from digitizing historical documents to automating postal services. While Latin digit recognition has been thoroughly explored, Bangla (Bengali) digit recognition presents unique challenges due to the script's distinctive features and the relative scarcity of large, standardized datasets.
 
-In this blog post, we'll explore a fascinating project that implements a Convolutional Neural Network (CNN) from scratch—without relying on deep learning frameworks—to recognize handwritten Bangla digits. We'll delve into the neural network architecture, the mathematics behind it, the implementation details, and the results achieved.
+In this blog post, we'll explore a fascinating project that implements a Convolutional Neural Network (CNN) from scratch - without relying on deep learning frameworks - to recognize handwritten Bangla digits. We'll delve into the neural network architecture, the mathematics behind it, the implementation details, and the results achieved.
 
 ## Project Overview
 
@@ -96,7 +96,7 @@ These operations ensure that:
 3. All images have a consistent background (black) and foreground (white) format
 4. Noise is reduced through morphological operations (dilation and erosion)
 
-Additionally, the code removes empty rows and columns around the digit (where pixel intensity is near zero) and then resizes the image back to 28×28 pixels:
+The code also removes empty rows and columns around the digit (where pixel intensity is near zero) and then resizes the image back to 28×28 pixels:
 
 ```python
 # Drop rows and columns with very low pixel values
@@ -484,6 +484,6 @@ This Bangla handwritten digit recognition system has numerous practical applicat
 
 This project demonstrates that it's possible to build a highly effective neural network from scratch using only NumPy, without relying on deep learning frameworks. By achieving an accuracy of 95.87% on Bangla handwritten digit recognition, it shows that a well-designed architecture with appropriate preprocessing can perform exceptionally well even without the advanced optimizations provided by modern deep learning libraries.
 
-The implementation provides valuable insights into the inner workings of convolutional neural networks, including forward and backward propagation, various layer types, and optimization algorithms. It serves as both a practical solution for Bangla digit recognition and an educational resource for those wanting to understand the fundamentals of neural networks.
+The implementation provides valuable insights into the inner workings of convolutional neural networks, including forward and backward propagation, various layer types, and optimization algorithms. It is both a practical solution for Bangla digit recognition and an educational resource for those wanting to understand the fundamentals of neural networks.
 
 As AI applications continue to expand globally, projects like this that focus on languages beyond English make technology more inclusive and accessible to diverse populations. The techniques and insights from this project can inspire similar efforts for other scripts and languages, contributing to a more equitable technological landscape.

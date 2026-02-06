@@ -37,7 +37,7 @@ In the fast-paced world of AI research, staying current with the latest architec
 
 ### The Starting Point: Show, Attend and Tell
 
-When we launched our image captioning journey, we documented our baseline approach in our technical_architecture.md file. This initial architecture implemented the groundbreaking work by [Xu et al.](https://arxiv.org/abs/1502.03044), which introduced visual attention for image captioning:
+When we launched our image captioning journey, we documented our baseline approach in our technical_architecture.md file. This initial architecture implemented the foundational work by [Xu et al.](https://arxiv.org/abs/1502.03044), which introduced visual attention for image captioning:
 
 - **Encoder**: A pretrained [ResNet-101](https://arxiv.org/abs/1512.03385) that processes images into 14×14 feature maps
 - **Decoder**: A single [LSTM](https://www.bioinf.jku.at/publications/older/2604.pdf) with attention that generates captions word-by-word

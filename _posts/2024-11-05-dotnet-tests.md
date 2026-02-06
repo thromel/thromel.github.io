@@ -1738,6 +1738,6 @@ We've covered a comprehensive approach to testing in .NET 9, from unit testing w
 4. **Implement Contract Testing**: Pact.NET ensures your APIs maintain their contracts
 5. **Set Up Continuous Testing**: Integrate your tests into CI/CD pipelines for immediate feedback
 
-Remember, the goal isn't to write tests for the sake of testing – it's to build confidence in your code, enable fearless refactoring, and ultimately deliver better software to your users. Start small, be consistent, and gradually build a comprehensive test suite that serves as both a safety net and living documentation for your system.
+Remember, the goal is not to write tests for the sake of testing. The goal is to build confidence in your code, enable fearless refactoring, and deliver better software to your users. Start small, be consistent, and gradually build a comprehensive test suite that acts as both a safety net and living documentation for your system.
 
-Happy testing, and may your builds always be green! 🚀
+Happy testing, and may your builds always be green.

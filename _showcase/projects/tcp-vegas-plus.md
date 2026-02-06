@@ -28,7 +28,7 @@ Network simulators provide researchers and engineers with powerful tools to test
 
 TCP is the backbone of our internet, handling reliable data transmission for most applications. However, not all TCP variants are created equal. The classic TCP Reno implements an aggressive congestion avoidance mechanism, rapidly increasing its congestion window until packet loss occurs. In contrast, TCP Vegas uses a more proactive approach, monitoring Round-Trip Time (RTT) variations to detect congestion before losses occur.
 
-While Vegas offers several advantages—reduced packet loss, lower queuing delay, and greater stability—it suffers from a significant drawback when competing with Reno flows. When both variants share the same bottleneck link, Vegas' conservative approach causes it to receive significantly less bandwidth than Reno.
+While Vegas offers several advantages - reduced packet loss, lower queuing delay, and greater stability - it suffers from a significant drawback when competing with Reno flows. When both variants share the same bottleneck link, Vegas' conservative approach causes it to receive significantly less bandwidth than Reno.
 
 Our measurements showed:
 - Vegas flows achieve only 22-35% of the throughput of Reno flows in mixed environments

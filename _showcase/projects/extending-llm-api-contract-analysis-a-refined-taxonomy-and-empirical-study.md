@@ -261,7 +261,7 @@ As LLMs become increasingly integrated into critical software systems, framework
 
 Design by Contract for LLMs brings time-tested software engineering principles to the frontier of AI development. By formalizing the "rules of engagement" for LLMs, we can build systems that fail less, are easier to debug when they do fail, and provide stronger guarantees about their behavior.
 
-The papers suggest we're moving toward a future where specifying contracts for AI components will be as standard as writing unit tests for traditional software. For developers working with LLMs today, adopting these principles—even informally—can significantly improve reliability and reduce development headaches.
+The papers suggest we're moving toward a future where specifying contracts for AI components will be as standard as writing unit tests for traditional software. For developers working with LLMs today, adopting these principles - even informally - can significantly improve reliability and reduce development headaches.
 
 As AI becomes increasingly embedded in our software ecosystem, approaches like this will be crucial for bridging the gap between AI's inherent probabilistic nature and the deterministic guarantees we expect from reliable software.
 

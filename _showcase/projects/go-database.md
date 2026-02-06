@@ -7,7 +7,7 @@ group: Systems Programming
 show: true
 width: 12
 date: 2024-12-25 00:00:00 +0800
-excerpt: A comprehensive implementation of a custom database engine in Go featuring ACID compliance, B+ tree storage, MVCC concurrency control, adaptive indexing, and ML-enhanced query optimization—built entirely from scratch without external database libraries.
+excerpt: A comprehensive implementation of a custom database engine in Go featuring ACID compliance, B+ tree storage, MVCC concurrency control, adaptive indexing, and ML-enhanced query optimization - built entirely from scratch without external database libraries.
 thumbnail: /assets/images/go-database-engine.png
 featured: true
 technologies:
@@ -41,7 +41,7 @@ In this comprehensive project, I'm implementing a full-featured database engine 
 ## Project Vision and Goals
 
 ### Educational Excellence
-This project serves as a comprehensive learning platform for understanding database internals. Rather than simply using existing database libraries, every component—from page management to query optimization—is implemented from scratch, providing deep insights into how databases actually work.
+This project is a comprehensive learning platform for understanding database internals. Rather than simply using existing database libraries, every component - from page management to query optimization - is implemented from scratch, providing deep insights into how databases actually work.
 
 ### Production Readiness
 While educational in nature, this database engine is designed to be production-ready, featuring:
@@ -291,10 +291,10 @@ The database engine is designed to meet aggressive performance targets:
 - **Parse time**: <10ms for typical queries
 - **Optimization time**: <100ms even for complex queries
 
-## Advanced Features Showcase
+## Advanced features
 
 ### Adaptive Indexing
-One of the most innovative aspects of this database is its adaptive indexing system:
+One useful part of this database is its adaptive indexing system:
 
 ```go
 type AdaptiveIndexManager struct {
@@ -500,7 +500,7 @@ The project provides a foundation for exploring advanced database research:
 
 Building a database engine from scratch is one of the most challenging and rewarding projects in systems programming. This implementation demonstrates that with careful design, systematic development, and attention to detail, it's possible to create a production-quality database that incorporates both time-tested algorithms and cutting-edge research.
 
-The project showcases expertise in:
+The project shows expertise in:
 - **Low-level systems programming** with Go
 - **Advanced algorithms** and data structures
 - **Concurrent programming** and synchronization
@@ -509,6 +509,6 @@ The project showcases expertise in:
 
 More importantly, it provides deep insights into how modern databases work, making the complex seem approachable and inspiring confidence to tackle other ambitious systems programming challenges.
 
-The resulting database engine serves as both a testament to the power of understanding fundamentals and a practical tool that could find real-world applications in embedded systems, edge computing, and specialized workloads where a lightweight, Go-native database solution would be valuable.
+The resulting database engine highlights the value of strong fundamentals and provides a practical tool that could find real-world applications in embedded systems, edge computing, and specialized workloads where a lightweight, Go-native database solution would be valuable.
 
-This project represents the intersection of theoretical computer science and practical engineering, demonstrating how academic concepts translate into working systems that solve real problems. It's a portfolio piece that showcases not just programming ability, but deep technical understanding and the persistence to tackle complex, multi-faceted engineering challenges.
+This project represents the intersection of theoretical computer science and practical engineering, demonstrating how academic concepts translate into working systems that solve real problems. It's a portfolio piece that shows programming ability, deep technical understanding, and the persistence to tackle complex, multi-faceted engineering challenges.

@@ -57,7 +57,7 @@ This boot process teaches several crucial concepts. First, it demonstrates how s
 
 At the heart of any operating system lies process management. xv6 implements processes with elegant simplicity, yet the implementation contains all the essential elements found in production systems.
 
-In xv6, each process is represented by a `struct proc` defined in `proc.h`. This structure contains everything the kernel needs to know about a process: its state, memory mappings, open files, and saved register values. The process table, a fixed-size array of these structures, limits xv6 to 64 concurrent processes—a reasonable constraint for a teaching system.
+In xv6, each process is represented by a `struct proc` defined in `proc.h`. This structure contains everything the kernel needs to know about a process: its state, memory mappings, open files, and saved register values. The process table, a fixed-size array of these structures, limits xv6 to 64 concurrent processes - a reasonable constraint for a teaching system.
 
 ```c
 // Simplified proc structure from proc.h
@@ -129,7 +129,7 @@ This implementation teaches several fundamental concepts. The distinction betwee
 
 Memory management in xv6 demonstrates how operating systems create the illusion that each process has its own private memory space. This virtual memory system, though simpler than those in production systems, contains all the essential elements.
 
-xv6 uses a two-level page table structure on x86. Each process has its own page directory, which points to page tables, which in turn map virtual addresses to physical addresses. This hierarchical structure allows efficient memory usage—unmapped regions don't require page table entries.
+xv6 uses a two-level page table structure on x86. Each process has its own page directory, which points to page tables, which in turn map virtual addresses to physical addresses. This hierarchical structure allows efficient memory usage - unmapped regions don't require page table entries.
 
 The virtual memory layout in xv6 is straightforward. Each process sees a virtual address space from 0 to 2GB. The kernel maps itself at high virtual addresses (above 2GB), allowing it to access process memory directly while remaining protected from user code.
 
@@ -204,7 +204,7 @@ struct buf {
 
 Above the buffer cache, the logging layer (`log.c`) provides crash recovery. xv6 uses a write-ahead log to ensure file system consistency. All file system modifications first go to the log, then to their final locations. If the system crashes, the log can replay or discard incomplete operations.
 
-The block allocator manages free disk blocks using a bitmap. Each bit represents one disk block—1 for free, 0 for allocated. This simple scheme allows quick allocation and deallocation:
+The block allocator manages free disk blocks using a bitmap. Each bit represents one disk block - 1 for free, 0 for allocated. This simple scheme allows quick allocation and deallocation:
 
 ```c
 // Allocate a disk block
@@ -479,7 +479,7 @@ This code demonstrates several important concepts. The use of I/O ports (`inb` a
 
 ## The Shell: Bringing It All Together
 
-The xv6 shell (`sh.c`) serves as both a user interface and a demonstration of how system calls work together. Though simple, it implements core shell features: command execution, I/O redirection, and pipes.
+The xv6 shell (`sh.c`) is both a user interface and a demonstration of how system calls work together. Though simple, it implements core shell features: command execution, I/O redirection, and pipes.
 
 The shell's main loop reads commands, parses them, and executes them:
 
@@ -638,11 +638,11 @@ Understanding xv6 provides the foundation to explore these advanced topics. The 
 
 Your journey with xv6 has just begun. As you work with the code, you'll discover layers of subtlety in its seemingly simple implementation. Each reading reveals new insights about the careful design decisions that make operating systems work.
 
-Start by reading the xv6 book alongside the source code. Run xv6 in QEMU, try the exercises, and don't hesitate to add debug prints when confused. Join the community of students and educators using xv6—their insights and questions will deepen your understanding.
+Start by reading the xv6 book alongside the source code. Run xv6 in QEMU, try the exercises, and don't hesitate to add debug prints when confused. Join the community of students and educators using xv6 - their insights and questions will deepen your understanding.
 
 Remember that xv6 is a teaching tool. Its goal isn't to be fast or feature-complete, but to be understandable. Every line of code exists for a reason, usually to illustrate an important concept. When something seems unnecessarily complex, ask yourself what it teaches about operating system design.
 
-Operating systems remain one of the most challenging and rewarding areas of computer science. Through xv6, you're joining a tradition stretching back to the original Unix pioneers. The concepts you learn here—processes, virtual memory, file systems, and synchronization—form the foundation of all modern computing.
+Operating systems remain one of the most challenging and rewarding areas of computer science. Through xv6, you're joining a tradition stretching back to the original Unix pioneers. The concepts you learn here - processes, virtual memory, file systems, and synchronization - form the foundation of all modern computing.
 
 Take time to appreciate the elegance of xv6's design. Notice how simple abstractions like files and processes combine to create a complete system. Observe how careful coding prevents race conditions and maintains invariants. These lessons extend far beyond operating systems to all systems programming.
 

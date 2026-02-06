@@ -9,7 +9,7 @@ image: /assets/images/projects/dotnet-performance.png
 
 # The Performance Crisis: How We Rescued a .NET 8 Microservice from 10 Critical Bottlenecks
 
-Imagine this: It's Monday morning, you've just joined your first job as a backend engineer, and the Slack alerts are exploding. Your company's core product—a healthcare analytics platform built with .NET 8 microservices—is crawling under load. Response times that should be 200ms are hitting 8+ seconds. Users are abandoning the application, and the business is losing money by the hour.
+Imagine this: It's Monday morning, you've just joined your first job as a backend engineer, and the Slack alerts are exploding. Your company's core product - a healthcare analytics platform built with .NET 8 microservices - is crawling under load. Response times that should be 200ms are hitting 8+ seconds. Users are abandoning the application, and the business is losing money by the hour.
 
 This isn't fiction. This was my reality six months into my role as a backend engineer, and the journey to fix it taught me more about backend performance optimization than any textbook ever could. If you're a junior engineer stepping into the world of enterprise backend systems, this story will equip you with practical knowledge to identify, understand, and resolve the most common performance bottlenecks you'll encounter.
 
@@ -100,11 +100,11 @@ public async Task<IActionResult> GetPatientsWithHistory()
 }
 ```
 
-**Result**: Response time dropped from 12 seconds to 300ms—a **97% improvement**.
+**Result**: Response time dropped from 12 seconds to 300ms - a **97% improvement**.
 
 ### The Intuition
 
-Think of it like grocery shopping. The broken version is like making a separate trip to the store for each item on your list. The optimized version is like getting everything in one trip. Database round-trips are expensive—minimize them whenever possible.
+Think of it like grocery shopping. The broken version is like making a separate trip to the store for each item on your list. The optimized version is like getting everything in one trip. Database round-trips are expensive - minimize them whenever possible.
 
 **Advanced Alternative**: For more complex scenarios, consider using `Select` projections:
 
@@ -152,7 +152,7 @@ public async Task<IActionResult> GetAnalytics(int reportId)
 
 ### The Concept: JSON Serialization Performance
 
-JSON serialization involves converting .NET objects into JSON strings. The default serializer in .NET uses reflection heavily, which can be slow for large objects. Additionally, certain patterns in your objects can make serialization much slower.
+JSON serialization involves converting .NET objects into JSON strings. The default serializer in .NET uses reflection heavily, which can be slow for large objects. Certain patterns in your objects can make serialization much slower too.
 
 ### The Solution: System.Text.Json Optimization
 
@@ -313,7 +313,7 @@ public partial class AddReportsIndexes : Migration
 }
 ```
 
-**Result**: Query time dropped from 45 seconds to 23ms—a **99.9% improvement**.
+**Result**: Query time dropped from 45 seconds to 23ms - a **99.9% improvement**.
 
 ### Advanced Indexing Strategies
 
@@ -1205,7 +1205,7 @@ app.MapControllers();
 
 ### The Concept: Middleware Pipeline Optimization
 
-ASP.NET Core processes requests through a middleware pipeline. The order matters, and inefficient middleware can create bottlenecks. Additionally, excessive logging and processing on every request adds latency.
+ASP.NET Core processes requests through a middleware pipeline. The order matters, and inefficient middleware can create bottlenecks. Excessive logging and processing on every request adds latency.
 
 ### The Solution: Optimized Middleware Pipeline
 
@@ -1674,7 +1674,7 @@ After implementing these 10 optimizations, our system transformation was remarka
 
 ### The Engineering Mindset That Made This Possible
 
-As a junior engineer, the most valuable lesson from this experience wasn't the specific techniques—it was developing a performance-conscious mindset:
+As a junior engineer, the most valuable lesson from this experience wasn't the specific techniques - it was developing a performance-conscious mindset:
 
 **1. Measure First, Optimize Later**
 Never guess where performance problems are. Use profilers, monitoring tools, and metrics to identify actual bottlenecks.
@@ -1735,7 +1735,7 @@ The journey from a failing system to a high-performance application taught me th
 
 As you begin your career in backend engineering, remember that performance optimization is a skill that develops over time. Start with the fundamentals: write asynchronous code, understand your database queries, implement proper caching, and always measure before optimizing.
 
-The most important lesson? Performance problems are rarely caused by the code you think is slow—they're usually caused by systemic issues in how components interact. Developing the discipline to measure, analyze, and systematically address these issues will make you a more effective engineer.
+The most important lesson? Performance problems are rarely caused by the code you think is slow - they're usually caused by systemic issues in how components interact. Developing the discipline to measure, analyze, and systematically address these issues will make you a more effective engineer.
 
 Your first performance crisis will come sooner than you expect. When it does, you'll be ready.
 

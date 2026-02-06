@@ -323,7 +323,7 @@ Let's create an IAM policy for our deployment user:
 - **S3 Access**: Allows storing deployment artifacts for rollbacks and auditing
 - **Describe Instances**: Enables dynamic discovery of deployment targets
 
-This policy follows the principle of least privilege—it only allows what's necessary for deployment.
+This policy follows the principle of least privilege - it only allows what's necessary for deployment.
 
 > **Security Deep Dive**: For comprehensive AWS security best practices, see the [AWS Security Best Practices](https://aws.amazon.com/architecture/security-identity-compliance/) documentation and the [AWS IAM Best Practices Guide](https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html).
 
@@ -348,7 +348,7 @@ In your repository settings, add these secrets:
 
 ## Chapter 3: Building the Deployment Pipeline
 
-Now comes the exciting part—creating the deployment workflow. **Why separate workflows?** While you could combine CI and CD in one workflow, separation provides:
+Now comes the exciting part - creating the deployment workflow. **Why separate workflows?** While you could combine CI and CD in one workflow, separation provides:
 
 1. **Flexibility**: Run tests on pull requests without deploying
 2. **Security**: Different permission levels for different stages
@@ -1759,7 +1759,7 @@ Design your pipeline to catch issues as early as possible. **Why fail fast?** Th
 
 ### 3. Security is Not Optional
 
-Treat secrets with respect, scan for vulnerabilities, and follow the principle of least privilege. **Why security first?** A compromised CI/CD pipeline can be more dangerous than a compromised application—it's the key to your entire infrastructure.
+Treat secrets with respect, scan for vulnerabilities, and follow the principle of least privilege. **Why security first?** A compromised CI/CD pipeline can be more dangerous than a compromised application - it's the key to your entire infrastructure.
 
 **Security Checklist**:
 - ✅ All secrets stored in GitHub Secrets
@@ -1811,7 +1811,7 @@ Congratulations! You've built a production-ready CI/CD pipeline that automatical
 - ✅ Monitoring and observability
 - ✅ Documentation and best practices
 
-But this is just the beginning. **Why continue improving?** CI/CD is not a destination—it's a practice that evolves with your team and application needs.
+But this is just the beginning. **Why continue improving?** CI/CD is not a destination - it's a practice that evolves with your team and application needs.
 
 Here are some next steps to consider:
 
@@ -1849,7 +1849,7 @@ For deeper dives into specific topics:
 
 ### Final Thoughts
 
-Remember that CI/CD is about more than just tools—it's about culture, collaboration, and continuous improvement. **The real value** comes from the confidence it gives your team to ship features quickly and safely.
+Remember that CI/CD is about more than just tools - it's about culture, collaboration, and continuous improvement. **The real value** comes from the confidence it gives your team to ship features quickly and safely.
 
 As you continue your DevOps journey, focus on:
 - **Measuring and improving** your key metrics
@@ -1858,9 +1858,9 @@ As you continue your DevOps journey, focus on:
 - **Learning from failures** and improving processes
 - **Staying current** with new tools and practices
 
-The pipeline you've built today is a foundation for scaling your development practices. With each improvement, you're not just making deployments faster—you're enabling your team to deliver more value to users, more reliably, and with greater confidence.
+The pipeline you've built today is a foundation for scaling your development practices. With each improvement, you're not just making deployments faster - you're enabling your team to deliver more value to users, more reliably, and with greater confidence.
 
-**Happy deploying!** 🚀
+**Happy deploying.**
 
 ---
 

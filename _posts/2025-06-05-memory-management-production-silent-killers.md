@@ -9,9 +9,9 @@ image: /assets/images/projects/memory-management.png
 
 # Memory Management in Production: Avoiding the Silent Killers
 
-It's 2:47 AM when the alerts start flooding in. Your e-commerce platform—handling Black Friday traffic—begins throwing OutOfMemoryErrors. Orders are failing, customers are abandoning carts, and your revenue is hemorrhaging by the minute. The CPU usage looks normal, disk I/O is fine, but something is silently consuming memory until your applications crash.
+It's 2:47 AM when the alerts start flooding in. Your e-commerce platform - handling Black Friday traffic - begins throwing OutOfMemoryErrors. Orders are failing, customers are abandoning carts, and your revenue is hemorrhaging by the minute. The CPU usage looks normal, disk I/O is fine, but something is silently consuming memory until your applications crash.
 
-This was our reality eight months ago. What started as occasional "minor hiccups" escalated into a full-blown production crisis that taught our team hard lessons about memory management in .NET applications running in production. If you're running .NET services, ASP.NET Core applications, or containerized .NET workloads in production, this story—and the solutions we discovered—could save you from similar catastrophic failures.
+This was our reality eight months ago. What started as occasional "minor hiccups" escalated into a full-blown production crisis that taught our team hard lessons about memory management in .NET applications running in production. If you're running .NET services, ASP.NET Core applications, or containerized .NET workloads in production, this story - and the solutions we discovered - could save you from similar catastrophic failures.
 
 Memory issues are the silent killers of production systems. Unlike CPU spikes or network outages that announce themselves dramatically, memory problems creep in slowly, often going unnoticed until they bring down your entire system. This comprehensive guide will equip you with the knowledge, tools, and strategies to identify, prevent, and resolve memory issues before they become business-critical failures.
 
@@ -250,7 +250,7 @@ builder.Services.AddHostedService(provider => provider.GetService<BackgroundOrde
 
 ### The Deeper Insight: Memory-Aware .NET Architecture
 
-The real lesson wasn't just fixing the immediate leak—it was designing memory-conscious .NET systems:
+The real lesson wasn't just fixing the immediate leak - it was designing memory-conscious .NET systems:
 
 ```csharp
 // Memory-efficient event processing pattern
@@ -567,7 +567,7 @@ Our containerized services were randomly dying with exit code 137 (OOMKilled). C
 
 ### The Investigation: Container Memory Deep Dive
 
-The issue was subtle but deadly—we were monitoring application memory usage, not total container memory consumption:
+The issue was subtle but deadly - we were monitoring application memory usage, not total container memory consumption:
 
 ```bash
 # What we were monitoring (application memory)
@@ -1313,7 +1313,7 @@ predict_linear(container_memory_usage_bytes[10m], 30*60) > container_spec_memory
 
 ## Conclusion: Building Memory-Resilient Systems
 
-Memory management in production environments isn't just about preventing OutOfMemoryErrors—it's about building systems that remain performant and predictable under varying load conditions. The lessons we learned from our production crises have shaped how we approach system design:
+Memory management in production environments isn't just about preventing OutOfMemoryErrors - it's about building systems that remain performant and predictable under varying load conditions. The lessons we learned from our production crises have shaped how we approach system design:
 
 **Key Takeaways**:
 
@@ -1333,9 +1333,9 @@ The transformation in our system reliability has been remarkable:
 - **$2.3M in prevented downtime** based on our previous incident costs
 - **40% improvement** in developer productivity due to reduced firefighting
 
-Memory management is a journey, not a destination. As your applications evolve and scale, new memory challenges will emerge. The key is building systems with observability, limits, and cleanup mechanisms from the start. When memory issues do arise—and they will—you'll have the tools and knowledge to identify and resolve them quickly.
+Memory management is a journey, not a destination. As your applications evolve and scale, new memory challenges will emerge. The key is building systems with observability, limits, and cleanup mechanisms from the start. When memory issues do arise - and they will - you'll have the tools and knowledge to identify and resolve them quickly.
 
-Remember: in production systems, memory leaks aren't just technical debt—they're business risk. Invest in proper memory management practices, and your future self (and your on-call teammates) will thank you.
+Remember: in production systems, memory leaks aren't just technical debt - they're business risk. Invest in proper memory management practices, and your future self (and your on-call teammates) will thank you.
 
 ---
 

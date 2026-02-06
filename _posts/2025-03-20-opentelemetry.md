@@ -18,13 +18,13 @@ This was our reality eighteen months ago. Our microservices architecture had gro
 
 Before diving into our implementation journey, let's establish what OpenTelemetry is and why it matters for microservices architectures.
 
-OpenTelemetry (often abbreviated as OTel) is an open-source observability framework that provides a standardized way to collect and export telemetry data. Think of it as a universal translator for your application's vital signs – it speaks the language of logs, metrics, and traces fluently and can translate them into formats that various observability backends understand.
+OpenTelemetry (often abbreviated as OTel) is an open-source observability framework that provides a standardized way to collect and export telemetry data. Think of it as a universal translator for your application's core signals - it speaks the language of logs, metrics, and traces fluently and can translate them into formats that various observability backends understand.
 
 The framework emerged from the merger of two earlier projects: OpenTracing and OpenCensus. This unification created a vendor-neutral standard that has become the de facto approach for instrumenting cloud-native applications. What makes OpenTelemetry particularly powerful is its comprehensive approach to the three pillars of observability:
 
 **1. Traces** tell the story of a request as it travels through your system, like following breadcrumbs through a forest of microservices.
 
-**2. Metrics** provide the vital statistics – the heartbeat, blood pressure, and temperature of your applications.
+**2. Metrics** provide operating statistics - the heartbeat, blood pressure, and temperature of your applications.
 
 **3. Logs** capture the detailed narrative, the "what happened and when" that helps you understand system behavior.
 
@@ -33,7 +33,7 @@ The framework emerged from the merger of two earlier projects: OpenTracing and O
 
 ## Our Architecture: Before the Transformation
 
-To understand why OpenTelemetry was transformative for us, you need to see where we started. Our e-commerce platform consisted of:
+To understand why OpenTelemetry was an important shift for us, you need to see where we started. Our e-commerce platform consisted of:
 
 - **API Gateway**: Built with Kong, handling request routing
 - **User Service**: Node.js application managing authentication and profiles
@@ -342,7 +342,7 @@ async def create_order(request: Request, order_data: dict):
         raise
 ```
 
-This implementation showcases several important patterns:
+This implementation shows several important patterns:
 
 1. **Resource Attributes**: We defined service-level attributes that get attached to all telemetry
 2. **Auto-instrumentation**: Libraries like FastAPI, PyMongo, and Requests were automatically instrumented

@@ -24,9 +24,9 @@ technologies:
 
 ## Introduction: The Magic of Ray Tracing
 
-Ray tracing stands as one of the most elegant algorithms in computer graphics, simulating the physical behavior of light to create stunningly realistic images. Unlike rasterization (the technique used in most real-time graphics), ray tracing follows light's natural path through a scene, capturing subtle optical phenomena like reflections, refractions, and shadows with remarkable fidelity.
+Ray tracing is one of the most elegant algorithms in computer graphics. It simulates the physical behavior of light to produce realistic images. Unlike rasterization (the technique used in most real-time graphics), ray tracing follows light's path through a scene and captures effects like reflections, refractions, and shadows with high fidelity.
 
-At its essence, ray tracing is a computational implementation of geometric optics—the branch of physics that models light as rays traveling in straight lines until they encounter a surface. But unlike nature, where photons stream from light sources in all directions, ray tracing inverts this process for computational efficiency, tracing rays backward from the viewer into the scene.
+At a basic level, ray tracing is a computational implementation of geometric optics - the branch of physics that models light as rays traveling in straight lines until they encounter a surface. Unlike nature, where photons stream from light sources in all directions, ray tracing inverts this process for computational efficiency and traces rays backward from the viewer into the scene.
 
 ## The Physics Behind Light Transport
 
@@ -318,7 +318,7 @@ Modern renderers often trace packets of nearby rays together to leverage SIMD (S
 
 ### 4. Multi-threading and GPU Acceleration
 
-Ray tracing is "embarrassingly parallel"—each pixel can be computed independently. Our implementation could be enhanced with multi-threading:
+Ray tracing is "embarrassingly parallel" - each pixel can be computed independently. Our implementation could be enhanced with multi-threading:
 
 ```cpp
 void capture() {
@@ -557,7 +557,7 @@ Ray tracing represents the intersection of physics, mathematics, and computer sc
 
 What makes ray tracing particularly beautiful is how naturally it captures complex optical phenomena. As you extend this implementation with physically-based materials, global illumination, and other advanced features, you'll find that many effects emerge organically from the underlying simulation.
 
-The journey from understanding the physics of light to implementing a ray tracer is one of the most rewarding experiences in computer graphics—a journey that continues to drive innovation in film, games, architectural visualization, and scientific research.
+The journey from understanding the physics of light to implementing a ray tracer is one of the most rewarding experiences in computer graphics - a journey that continues to drive innovation in film, games, architectural visualization, and scientific research.
 
 ## Graphics Engineer | 10-week Project | Computer Graphics
 

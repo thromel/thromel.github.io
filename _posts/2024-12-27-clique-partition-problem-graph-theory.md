@@ -9,11 +9,11 @@ image: /assets/images/projects/clique-partition.png
 
 # The Clique Partition Problem: Dividing Networks into Perfect Communities
 
-Imagine you're analyzing a social network where people are connected based on mutual friendships. You want to divide this network into groups where everyone within each group knows everyone else—perfect communities where all members are mutually connected. This is the essence of the **Clique Partition Problem**: finding the minimum number of cliques needed to cover all vertices in a graph.
+Imagine you're analyzing a social network where people are connected based on mutual friendships. You want to divide this network into groups where everyone within each group knows everyone else - perfect communities where all members are mutually connected. This is the essence of the **Clique Partition Problem**: finding the minimum number of cliques needed to cover all vertices in a graph.
 
 While this sounds straightforward, the clique partition problem is one of the fundamental NP-complete problems in graph theory, with deep connections to graph coloring, social network analysis, and machine learning. Understanding this problem will give you insights into computational complexity, approximation algorithms, and real-world applications spanning from community detection to image segmentation.
 
-If you're an undergraduate exploring graph theory and algorithmic problem-solving, the clique partition problem serves as an excellent introduction to NP-completeness while providing practical relevance in modern data analysis and network science.
+If you're an undergraduate exploring graph theory and algorithmic problem-solving, the clique partition problem is an excellent introduction to NP-completeness while providing practical relevance in modern data analysis and network science.
 
 ## Understanding Cliques and Graph Partitioning
 
@@ -21,7 +21,7 @@ If you're an undergraduate exploring graph theory and algorithmic problem-solvin
 
 Before diving into the partition problem, let's establish what we mean by a clique in graph theory.
 
-**Definition**: A clique in an undirected graph G = (V, E) is a subset of vertices C ⊆ V such that every two distinct vertices in C are adjacent—that is, every pair of vertices in C is connected by an edge.
+**Definition**: A clique in an undirected graph G = (V, E) is a subset of vertices C ⊆ V such that every two distinct vertices in C are adjacent - that is, every pair of vertices in C is connected by an edge.
 
 **Intuition**: Think of a clique as a group of people where everyone knows everyone else. In graph terms, it's a complete subgraph.
 
@@ -1857,7 +1857,7 @@ The clique partition problem exemplifies the beautiful interplay between theoret
 
 ### Key Insights
 
-1. **Fundamental Complexity**: The problem's NP-completeness doesn't prevent practical solutions—it guides us toward approximation algorithms and heuristics.
+1. **Fundamental Complexity**: The problem's NP-completeness doesn't prevent practical solutions - it guides us toward approximation algorithms and heuristics.
 
 2. **Algorithmic Diversity**: Multiple approaches (greedy, Tseng's, branch-and-bound, randomized) each have their strengths for different graph types and constraints.
 
@@ -1881,9 +1881,9 @@ For undergraduate researchers and practitioners:
 1. **Start with understanding**: Master the fundamental concepts before diving into advanced algorithms
 2. **Implement and experiment**: Hands-on coding builds intuition about algorithm behavior
 3. **Study applications**: Real-world problems provide motivation and insight into algorithm design
-4. **Compare approaches**: No single algorithm dominates—understanding trade-offs is crucial
+4. **Compare approaches**: No single algorithm dominates - understanding trade-offs is crucial
 
-The clique partition problem serves as an excellent introduction to the world of combinatorial optimization, where elegant mathematical structures meet computational challenges. Whether you're analyzing social networks, segmenting images, or clustering data, the insights from clique partitioning will serve you well in understanding how to divide complex systems into meaningful, cohesive components.
+The clique partition problem is an excellent introduction to the world of combinatorial optimization, where elegant mathematical structures meet computational challenges. Whether you're analyzing social networks, segmenting images, or clustering data, the insights from clique partitioning will serve you well in understanding how to divide complex systems into meaningful, cohesive components.
 
 ---
 

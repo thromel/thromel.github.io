@@ -46,7 +46,7 @@ Hello everyone! I'm excited to share our journey of building EventFly, a compreh
 
 ## What Is EventFly?
 
-EventFly helps people create and manage events of all sizes. We designed it to be a complete solution that handles everything from event creation to participant engagement. An organizer can set up an event, sell tickets, send announcements, and collect feedback—all in one platform.
+EventFly helps people create and manage events of all sizes. We designed it to be a complete solution that handles everything from event creation to participant engagement. An organizer can set up an event, sell tickets, send announcements, and collect feedback - all in one platform.
 
 ### Features We Built
 
@@ -120,7 +120,7 @@ This visual exercise helped us identify natural boundaries in our system. We cou
 
 ### Bounded Contexts
 
-From our event storming sessions, we identified distinct bounded contexts—areas of the system with their own consistent terminology and rules. These became our microservices:
+From our event storming sessions, we identified distinct bounded contexts - areas of the system with their own consistent terminology and rules. These became our microservices:
 
 1. **Authentication & Identity**: Handling user accounts and authentication
 2. **Organization Management**: Managing organizations and their staff
@@ -130,7 +130,7 @@ From our event storming sessions, we identified distinct bounded contexts—area
 6. **Payment Processing**: Handling financial transactions
 7. **Analytics & Recommendations**: Providing insights and suggestions
 
-Each bounded context had its own ubiquitous language—a consistent set of terms used by both developers and business stakeholders. For example, in the Event Management context, we used terms like "organizer," "venue," and "schedule." In the Payment context, we used "transaction," "refund," and "payment method."
+Each bounded context had its own ubiquitous language - a consistent set of terms used by both developers and business stakeholders. For example, in the Event Management context, we used terms like "organizer," "venue," and "schedule." In the Payment context, we used "transaction," "refund," and "payment method."
 
 For more on Domain-Driven Design, I recommend the article ["Domain-Driven Design: Tackling Complexity in the Heart of Software"](https://martinfowler.com/bliki/DomainDrivenDesign.html) by Martin Fowler, which greatly influenced our approach.
 
@@ -412,7 +412,7 @@ This hands-on approach let me identify and address cross-cutting concerns early.
 
 ### Knowledge Sharing
 
-In our small team, knowledge sharing was vital. I established:
+In our small team, knowledge sharing was important. I established:
 
 - Weekly architecture review sessions
 - Pair programming for complex features

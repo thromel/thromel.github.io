@@ -52,7 +52,7 @@ The result is predictable: fans overpay, organizers lose control of the attendee
 
 Blockchain is useful here for a narrow reason: it gives a shared, tamper-resistant record of ownership and transfer history.
 
-**Immutable record-keeping:** At its core, a blockchain is a distributed ledger—a database maintained across multiple computers (nodes) that contains an unalterable, time-stamped record of transactions. Once information is recorded on the blockchain, it cannot be modified without consensus from the network, making it extremely difficult to forge or alter ticket records. This stands in stark contrast to centralized databases where a single authority controls and can potentially modify records.
+**Immutable record-keeping:** At a basic level, a blockchain is a distributed ledger - a database maintained across multiple computers (nodes) that contains an unalterable, time-stamped record of transactions. Once information is recorded on the blockchain, it cannot be modified without consensus from the network, making it extremely difficult to forge or alter ticket records. This stands in stark contrast to centralized databases where a single authority controls and can potentially modify records.
 
 **Ownership through cryptographic proof:** Blockchain uses public and private key cryptography to establish ownership. When you own a ticket on a blockchain, you control it through a private key (similar to a complex password) that mathematically proves your ownership. No one can transfer or use your ticket without access to this key, creating significantly stronger security than traditional ticketing systems where possession of a printed barcode or PDF is sufficient.
 
@@ -79,7 +79,7 @@ At the base level, the solution uses Ethereum-compatible infrastructure for tran
 
 **Polygon PoS** addresses practical throughput and fee constraints for high-volume events. Polygon's own positioning highlights throughput on the order of ~1,000 TPS with fees typically under $0.01 ([Polygon PoS overview](https://polygon.technology/polygon-pos)), which is better aligned with bursty ticket issuance and transfer demand than relying on Ethereum mainnet alone.
 
-All core ticket transactions—creation, transfers, and redemptions—are recorded at this layer, creating an immutable record of the entire ticket lifecycle.
+All core ticket transactions - creation, transfers, and redemptions - are recorded at this layer, creating an immutable record of the entire ticket lifecycle.
 
 ### 2. Smart Contract Layer
 
@@ -153,7 +153,7 @@ In contrast, **ERC-1155** is a multi-token standard that offers several advantag
 
 - **Batch operations:** Multiple tokens can be minted or transferred in a single transaction. For example, an organizer could mint 10,000 tickets in one transaction rather than 10,000 separate transactions, dramatically reducing gas costs and improving efficiency.
 
-- **Flexible token types:** One contract can manage both fungible and non-fungible tokens. This allows a single contract to handle various ticket types—from unique assigned seats to general admission tickets where multiple identical tokens represent the same ticket type.
+- **Flexible token types:** One contract can manage both fungible and non-fungible tokens. This allows a single contract to handle various ticket types - from unique assigned seats to general admission tickets where multiple identical tokens represent the same ticket type.
 
 - **Resource optimization:** Instead of deploying a separate contract for each event (consuming blockchain space and increasing costs), one ERC-1155 contract can manage tickets for all events by using the token ID space to distinguish between events.
 
@@ -287,7 +287,7 @@ This approach addresses several practical needs:
 
 ### Optional ZKP-based privacy layer
 
-For enhanced privacy, the system can implement zero-knowledge proofs (ZKPs)—cryptographic methods that allow one party to prove they know something without revealing what that something is.
+For enhanced privacy, the system can implement zero-knowledge proofs (ZKPs) - cryptographic methods that allow one party to prove they know something without revealing what that something is.
 
 For example, at an event entry:
 1. The scanning app generates a cryptographic challenge

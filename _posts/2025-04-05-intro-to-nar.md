@@ -11,15 +11,15 @@ tags: [neural-networks, algorithms, deep-learning, reasoning, python, pytorch]
 
 ## Introduction: When Neural Networks Meet Classical Algorithms
 
-Imagine you're planning a road trip across the country. You pull up your favorite navigation app, type in your destination, and within seconds, you have the optimal route. Behind this seemingly simple task lies decades of algorithmic research—Dijkstra's algorithm, A* search, and countless optimizations. But what if I told you that we could teach a neural network to not just memorize routes, but to actually *reason* like these classical algorithms?
+Imagine you're planning a road trip across the country. You pull up your favorite navigation app, type in your destination, and within seconds, you have the optimal route. Behind this seemingly simple task lies decades of algorithmic research - Dijkstra's algorithm, A* search, and countless optimizations. But what if I told you that we could teach a neural network to not just memorize routes, but to actually *reason* like these classical algorithms?
 
-This is the promise of Neural Algorithmic Reasoning (NAR)—a fascinating paradigm that bridges the gap between the rigid precision of classical algorithms and the flexible learning capabilities of neural networks. In this post, we'll explore this exciting field through a hands-on example, building intuition about how neural networks can learn to execute algorithms, and why this matters for the future of AI.
+This is the promise of Neural Algorithmic Reasoning (NAR) - a fascinating paradigm that bridges the gap between the rigid precision of classical algorithms and the flexible learning capabilities of neural networks. In this post, we'll explore this exciting field through a hands-on example, building intuition about how neural networks can learn to execute algorithms, and why this matters for the future of AI.
 
 ## The Big Picture: Why Neural Algorithmic Reasoning?
 
 Before we dive into code, let's understand why NAR is revolutionary. Traditional approaches to problem-solving fall into two camps:
 
-**Classical Algorithms**: These are like precise recipes. Given the same input, they always produce the same output. They're interpretable, provably correct, and efficient for their designed purpose. However, they're brittle—they can't adapt to noisy data or learn from experience.
+**Classical Algorithms**: These are like precise recipes. Given the same input, they always produce the same output. They're interpretable, provably correct, and efficient for their designed purpose. However, they're brittle - they can't adapt to noisy data or learn from experience.
 
 **Neural Networks**: These are like talented improvisers. They excel at pattern recognition, can handle messy real-world data, and improve with experience. But they're often black boxes, and we can't guarantee they'll always give the correct answer.
 
@@ -34,7 +34,7 @@ Let's ground our exploration in a concrete problem. Imagine you're designing a n
 3. Handle incomplete or noisy sensor data (real-world messiness)
 4. Learn from historical patterns (machine learning strength)
 
-We'll build a neural network that learns to execute the Bellman-Ford algorithm—a classic shortest path algorithm—while being robust to the challenges of real-world data.
+We'll build a neural network that learns to execute the Bellman-Ford algorithm - a classic shortest path algorithm - while being robust to the challenges of real-world data.
 
 ## Understanding the Bellman-Ford Algorithm
 
@@ -283,7 +283,7 @@ class NeuralBellmanFord(nn.Module):
 
 ## Training the Neural Algorithmic Reasoner
 
-The key to NAR is supervision at every step. We don't just show the network the final shortest paths—we show it how distances evolve at each iteration of the algorithm. This teaches the network the reasoning process, not just the answer.
+The key to NAR is supervision at every step. We don't just show the network the final shortest paths - we show it how distances evolve at each iteration of the algorithm. This teaches the network the reasoning process, not just the answer.
 
 ```python
 def generate_training_data(num_graphs: int, min_nodes: int = 5, max_nodes: int = 15):
@@ -536,7 +536,7 @@ class AdaptiveAlgorithmicProcessor(MessagePassing):
 
 ## Putting It All Together: A Complete Navigation System
 
-Let's build a complete example that showcases the power of Neural Algorithmic Reasoning:
+Let's build a complete example that shows the power of Neural Algorithmic Reasoning:
 
 <img src="{{ '/assets/images/nar_navigation_system.png' | relative_url }}" class="img-fluid mb-4" alt="Smart City Navigation System">
 
@@ -738,7 +738,7 @@ if __name__ == "__main__":
 Through our journey building a neural navigation system, we've discovered several key insights about Neural Algorithmic Reasoning:
 
 ### 1. **Interpretability Through Process**
-Unlike black-box neural networks, NAR models learn interpretable reasoning steps. We can inspect intermediate computations and understand how the model arrives at its decisions—just like tracing through algorithm execution.
+Unlike black-box neural networks, NAR models learn interpretable reasoning steps. We can inspect intermediate computations and understand how the model arrives at its decisions - just like tracing through algorithm execution.
 
 ### 2. **Robustness to Real-World Messiness**
 Classical algorithms assume perfect inputs. Our neural reasoner gracefully handles:
@@ -770,7 +770,7 @@ Just as we compose simple algorithms into complex systems, we can compose neural
 Many algorithms operate on discrete structures. NAR naturally creates continuous relaxations that can be optimized with gradient descent while maintaining algorithmic structure.
 
 ### **Meta-Learning Algorithmic Strategies**
-Instead of learning a single algorithm, models could learn to select and adapt different algorithmic strategies based on problem characteristics—like an expert programmer choosing the right tool for the job.
+Instead of learning a single algorithm, models could learn to select and adapt different algorithmic strategies based on problem characteristics - like an expert programmer choosing the right tool for the job.
 
 ## Practical Implementation Tips
 
@@ -796,7 +796,7 @@ In our navigation example, we saw how NAR can take a classical algorithm (Bellma
 - Adaptation to dynamic conditions
 - Learning from historical patterns
 
-This is just the beginning. As we develop better techniques for algorithmic supervision and more sophisticated neural architectures, we'll unlock new possibilities for AI systems that truly reason—not just recognize patterns, but follow logical steps to solve complex problems.
+This is just the beginning. As we develop better techniques for algorithmic supervision and more sophisticated neural architectures, we'll unlock new possibilities for AI systems that truly reason - not just recognize patterns, but follow logical steps to solve complex problems.
 
 The future of AI isn't about choosing between neural networks or classical algorithms. It's about teaching neural networks to think algorithmically, combining the best of human-designed algorithms with the adaptability of learned systems. And that future is already here, waiting for you to explore it.
 
