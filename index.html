@@ -34,6 +34,12 @@ navbar_title: Home
           <i class="fas fa-envelope"></i>
           <span>{{ site.data.profile.email }}</span>
         </a>
+        {% if site.data.profile.meeting_link %}
+        <a href="{{ site.data.profile.meeting_link }}" class="hero-link" target="_blank" rel="noopener noreferrer">
+          <i class="far fa-calendar-alt"></i>
+          <span>Meeting</span>
+        </a>
+        {% endif %}
         <a href="/assets/pdf/cv.pdf" class="hero-link hero-link-primary" target="_blank">
           <i class="fas fa-file-alt"></i>
           <span>CV</span>
