@@ -81,7 +81,7 @@
                 <!-- About Summary -->
                 <div class="about-summary">
                     {% for item in site.data.profile.summary %}
-                    {% if item contains "Actively seeking PhD/MSc positions" or item contains "actively seeking" or item contains "seeking PhD" %}
+                    {% if item contains "actively seeking" %}
                     <div class="alert alert-info mb-3" role="alert">
                         <strong><i class="fas fa-graduation-cap mr-2"></i>{{ item | strip_html }}</strong>
                     </div>
