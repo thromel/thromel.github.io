@@ -21,11 +21,28 @@ navbar_title: Projects
 {% for project in profile_projects %}
   {% assign has_showcase = false %}
   {% assign profile_slug = project.title | slugify %}
+  {% assign profile_alias = "" %}
+  {% if project.title contains "EventFly" or project.title contains "Eventfly" %}
+    {% assign profile_alias = "eventfly" %}
+  {% elsif project.title contains "Image Caption" %}
+    {% assign profile_alias = "image-captioning" %}
+  {% endif %}
   {% for showcase_project in showcase_projects %}
     {% assign showcase_slug = showcase_project.title | slugify %}
+    {% assign showcase_alias = "" %}
+    {% if showcase_project.title contains "EventFly" or showcase_project.title contains "Eventfly" %}
+      {% assign showcase_alias = "eventfly" %}
+    {% elsif showcase_project.title contains "Image Caption" %}
+      {% assign showcase_alias = "image-captioning" %}
+    {% endif %}
     {% if showcase_slug == profile_slug %}
       {% assign has_showcase = true %}
       {% break %}
+    {% elsif profile_alias != "" %}
+      {% if profile_alias == showcase_alias %}
+        {% assign has_showcase = true %}
+        {% break %}
+      {% endif %}
     {% endif %}
   {% endfor %}
   {% unless has_showcase %}
@@ -89,6 +106,7 @@ navbar_title: Projects
           href=project_card_href
           description=project_card_description
           date=project_card_date
+          scope="Long-form narrative"
           badge=project.group
           badge_class="completed"
           tags=project.technologies
@@ -118,6 +136,7 @@ navbar_title: Projects
           href=project_card_href
           description=project_card_description
           date=project_card_date
+          scope="Project narrative"
           badge=project.group
           badge_class="completed"
           tags=project.technologies
@@ -130,11 +149,28 @@ navbar_title: Projects
     {% for project in profile_projects %}
       {% assign has_showcase = false %}
       {% assign profile_slug = project.title | slugify %}
+      {% assign profile_alias = "" %}
+      {% if project.title contains "EventFly" or project.title contains "Eventfly" %}
+        {% assign profile_alias = "eventfly" %}
+      {% elsif project.title contains "Image Caption" %}
+        {% assign profile_alias = "image-captioning" %}
+      {% endif %}
       {% for showcase_project in showcase_projects %}
         {% assign showcase_slug = showcase_project.title | slugify %}
+        {% assign showcase_alias = "" %}
+        {% if showcase_project.title contains "EventFly" or showcase_project.title contains "Eventfly" %}
+          {% assign showcase_alias = "eventfly" %}
+        {% elsif showcase_project.title contains "Image Caption" %}
+          {% assign showcase_alias = "image-captioning" %}
+        {% endif %}
         {% if showcase_slug == profile_slug %}
           {% assign has_showcase = true %}
           {% break %}
+        {% elsif profile_alias != "" %}
+          {% if profile_alias == showcase_alias %}
+            {% assign has_showcase = true %}
+            {% break %}
+          {% endif %}
         {% endif %}
       {% endfor %}
 
@@ -149,14 +185,14 @@ navbar_title: Projects
         {% if project.github %}
           {% assign project_href = project.github %}
           {% assign project_external = true %}
-          {% assign project_cta = "View on GitHub" %}
+          {% assign project_cta = "View repository" %}
         {% elsif project.link and project.link contains "github.com" %}
           {% assign project_href = project.link %}
           {% assign project_external = true %}
-          {% assign project_cta = "View on GitHub" %}
+          {% assign project_cta = "View repository" %}
         {% elsif project.link %}
           {% assign project_href = project.link | relative_url %}
-          {% assign project_cta = "View project" %}
+          {% assign project_cta = "Visit project" %}
         {% endif %}
 
         {% if project.description contains "Finalist" %}
@@ -173,6 +209,7 @@ navbar_title: Projects
           external=project_external
           description=project_description
           date=project.date
+          scope="Project archive"
           badge=project_badge
           badge_class=project_badge_class
           tags=project.technologies

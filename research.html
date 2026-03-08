@@ -160,11 +160,17 @@ navbar_title: Research
   <div class="research-track-grid">
     {% for item in research_items offset:1 %}
       {% assign item_showcase = site.showcase | where: "title", item.title | first %}
-      {% assign item_href = item.link %}
+      {% assign item_href = "" %}
+      {% assign has_item_href = false %}
       {% assign item_external = true %}
       {% assign item_cta = "View paper" %}
+      {% if item.link %}
+        {% assign item_href = item.link %}
+        {% assign has_item_href = true %}
+      {% endif %}
       {% if item_showcase %}
         {% assign item_href = item_showcase.url | relative_url %}
+        {% assign has_item_href = true %}
         {% assign item_external = false %}
         {% assign item_cta = "Read narrative" %}
       {% endif %}
@@ -208,16 +214,23 @@ navbar_title: Research
 
         <div class="research-track-body">
           <div class="research-track-header">
+            <div class="research-track-heading">
+              <p class="research-track-kicker">Research track</p>
+              <h3 class="research-track-title">
+                {% if has_item_href %}
+                  {% if item_external %}
+                  <a href="{{ item_href }}" target="_blank" rel="noopener noreferrer">{{ item.title }}</a>
+                  {% else %}
+                  <a href="{{ item_href }}">{{ item.title }}</a>
+                  {% endif %}
+                {% else %}
+                {{ item.title }}
+                {% endif %}
+              </h3>
+            </div>
             <span class="research-badge {% if item.status contains 'Submitted' or item.status == 'In Review' %}in-review{% elsif item.status == 'In Progress' %}in-progress{% else %}targeting{% endif %}">
               {{ item.status }}
             </span>
-            <h3 class="research-track-title">
-              {% if item_external %}
-              <a href="{{ item_href }}" target="_blank" rel="noopener noreferrer">{{ item.title }}</a>
-              {% else %}
-              <a href="{{ item_href }}">{{ item.title }}</a>
-              {% endif %}
-            </h3>
           </div>
 
           <p class="research-track-summary">{{ item.short_description | default: item.description | strip_html | truncatewords: 28 }}</p>
@@ -234,13 +247,35 @@ navbar_title: Research
           {% endif %}
 
           <div class="research-track-meta">
-            <span><i class="far fa-calendar-alt"></i> {{ item.date }}</span>
+            <span>
+              <span class="research-track-meta-label">Date</span>
+              <span><i class="far fa-calendar-alt"></i> {{ item.date }}</span>
+            </span>
             {% if item.collaborator %}
-            <span><i class="fas fa-user-friends"></i> Collaboration</span>
+            <span>
+              <span class="research-track-meta-label">Scope</span>
+              <span><i class="fas fa-user-friends"></i> Collaborative</span>
+            </span>
+            {% else %}
+            <span>
+              <span class="research-track-meta-label">Scope</span>
+              <span><i class="fas fa-user"></i> Independent</span>
+            </span>
+            {% endif %}
+            {% if item_showcase %}
+            <span>
+              <span class="research-track-meta-label">Format</span>
+              <span><i class="fas fa-book-open"></i> Narrative available</span>
+            </span>
+            {% elsif item.link %}
+            <span>
+              <span class="research-track-meta-label">Format</span>
+              <span><i class="fas fa-file-alt"></i> Paper link</span>
+            </span>
             {% endif %}
           </div>
 
-          {% if item_href %}
+          {% if has_item_href %}
           <div class="research-track-actions">
             {% if item_external %}
             <a href="{{ item_href }}" class="research-track-link" target="_blank" rel="noopener noreferrer">{{ item_cta }}</a>

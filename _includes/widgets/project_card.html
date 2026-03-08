@@ -1,6 +1,7 @@
 {% assign project_title = include.title %}
 {% assign project_href = include.href %}
 {% assign project_image = include.image %}
+{% assign project_scope = include.scope %}
 {% assign placeholder = include.placeholder | default: "default" %}
 
 {% if placeholder == "default" %}
@@ -82,20 +83,33 @@
     </div>
     {% endif %}
 
+    {% if include.date or project_scope %}
     <div class="project-card-meta">
       {% if include.date %}
-      <span class="project-card-date"><i class="far fa-calendar-alt"></i> {{ include.date }}</span>
+      <span class="project-card-meta-item">
+        <span class="project-card-meta-label">Date</span>
+        <span class="project-card-date"><i class="far fa-calendar-alt"></i> {{ include.date }}</span>
+      </span>
+      {% endif %}
+      {% if project_scope %}
+      <span class="project-card-meta-item">
+        <span class="project-card-meta-label">Scope</span>
+        <span>{{ project_scope }}</span>
+      </span>
       {% endif %}
     </div>
+    {% endif %}
 
-    {% if project_href %}
     <div class="project-card-actions">
+      {% if project_href %}
       {% if include.external %}
       <a href="{{ project_href }}" class="project-card-cta" target="_blank" rel="noopener noreferrer">{{ include.cta_label | default: "View project" }}</a>
       {% else %}
       <a href="{{ project_href }}" class="project-card-cta">{{ include.cta_label | default: "View project" }}</a>
       {% endif %}
+      {% else %}
+      <span class="project-card-cta project-card-cta--muted">{{ include.cta_label | default: "Summary only" }}</span>
+      {% endif %}
     </div>
-    {% endif %}
   </div>
 </article>

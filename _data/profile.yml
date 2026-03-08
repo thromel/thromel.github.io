@@ -428,6 +428,7 @@ research:
 
 - title: "Multi-Agent Framework for Generating Relational DB Schema & ERD"
   date: July 2025 - Present
+  link: /research/multi-agent-db-schema/
   status: "Targeting PVLDB"
   short_description: Extended SchemaAgent with LangGraph StateGraph architecture and 3-tier auto-repair system, reducing redundant LLM calls by 80%.
   description: >-
