@@ -4036,8 +4036,7 @@ html {
 .hero-image {
   width: 100%;
   max-width: 280px;
-  aspect-ratio: 1 / 1;
-  object-fit: cover;
+  height: auto;
   border-radius: var(--radius-xl);
   border: 1px solid var(--color-border);
   box-shadow: var(--shadow-xl);
