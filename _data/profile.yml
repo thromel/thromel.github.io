@@ -406,25 +406,24 @@ research:
   - YARA
   - CWE Analysis
 
-- title: "ReAgent++: Detecting Aligned Backdoors in LLM Agents"
+- title: "The Choice Can Be the Attack: Auditing Aligned Backdoors in LLM Agents"
   date: August 2025 - Present
   link: /assets/pdf/reagent-plus-plus.pdf
   status: "In Progress"
-  short_description: Extending ReAgent to detect aligned backdoors that maintain semantic consistency while subverting user intent through preference manipulation.
+  short_description: Endpoint-black-box auditing framework for aligned backdoors in LLM agents using counterfactual environments and discrete-choice estimation.
   description: >-
-    Extending ReAgent to detect aligned backdoors that keep semantic consistency while subverting user intent through preference
-    manipulation; collaboration with Dr. Chowdhury Md. Rakin Haider (BUET). Implementing Text/Env-STRIP for perturbation-based runtime
-    detection with FAR ≤ 5% at FRR = 1-2%, and K-Arm trigger inversion for forensic analysis with multi-armed bandit optimization.
-    Evaluating on three benchmarks (WebShop-1.18M products, OSWorld-369 tasks, AgentBench) against an attack suite including
-    Sleeper-style, instruction backdoors, and multi-turn hidden triggers.
+    Studies aligned backdoors in agentic LLM systems: trigger-dependent behaviors that still satisfy the user's instruction but covertly
+    steer which acceptable option the agent selects. Introduces CCA, an endpoint-black-box auditing framework with environment
+    instrumentation, constraint-preserving randomized counterfactual environments, and pooled discrete-choice estimation over eligible
+    options. Evaluated through synthetic WebShop stress tests and a real 3B WebShop endpoint case study to measure trigger-dependent
+    steering, identify mechanism aliasing, and characterize when counterfactual randomization is sufficient versus when
+    feature-controlled choice modeling is necessary.
   technologies:
-  - Python
-  - STRIP
-  - K-Arm
-  - UCB Scheduler
+  - CCA
+  - CCIA
   - WebShop
-  - OSWorld
-  - AgentBench
+  - Counterfactual Auditing
+  - Discrete Choice Modeling
 
 - title: "Multi-Agent Framework for Generating Relational DB Schema & ERD"
   date: July 2025 - Present
