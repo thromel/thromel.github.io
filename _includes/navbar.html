@@ -1,11 +1,16 @@
 <header class="site-header">
     <!-- Scroll Progress Bar -->
     <div class="scroll-progress" id="scrollProgress"></div>
+    {% assign is_homepage = page.navbar_title == 'Home' or page.url == '/' %}
 
     <div class="container">
         <nav class="site-nav" id="site-navigation" role="navigation" aria-label="Main navigation">
-            <a href="{{ '/' | relative_url }}" class="site-title">
+            <a href="{{ '/' | relative_url }}" class="site-title" aria-label="{{ site.data.profile.primary_name }}">
+                {% if is_homepage %}
+                TR
+                {% else %}
                 {{ site.data.profile.primary_name }}
+                {% endif %}
             </a>
 
             <ul class="nav-links" role="menubar">
