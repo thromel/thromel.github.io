@@ -167,6 +167,10 @@ navbar_title: Research
       {% if item.link %}
         {% assign item_href = item.link %}
         {% assign has_item_href = true %}
+        {% if item.link contains "/research/" %}
+          {% assign item_external = false %}
+          {% assign item_cta = "Read abstract" %}
+        {% endif %}
       {% endif %}
       {% if item_showcase %}
         {% assign item_href = item_showcase.url | relative_url %}

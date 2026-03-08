@@ -408,16 +408,16 @@ research:
 
 - title: "The Choice Can Be the Attack: Auditing Aligned Backdoors in LLM Agents"
   date: August 2025 - Present
-  link: /assets/pdf/reagent-plus-plus.pdf
+  link: /research/reagent-plus-plus/
   status: "In Progress"
   short_description: Endpoint-black-box auditing framework for aligned backdoors in LLM agents using counterfactual environments and discrete-choice estimation.
   description: >-
-    Studies aligned backdoors in agentic LLM systems: trigger-dependent behaviors that still satisfy the user's instruction but covertly
-    steer which acceptable option the agent selects. Introduces CCA, an endpoint-black-box auditing framework with environment
-    instrumentation, constraint-preserving randomized counterfactual environments, and pooled discrete-choice estimation over eligible
-    options. Evaluated through synthetic WebShop stress tests and a real 3B WebShop endpoint case study to measure trigger-dependent
-    steering, identify mechanism aliasing, and characterize when counterfactual randomization is sufficient versus when
-    feature-controlled choice modeling is necessary.
+    Agentic LLM systems are vulnerable to aligned backdoors: triggered behaviors that still satisfy the user's instruction but
+    systematically steer which acceptable option the agent selects. This ongoing work introduces CCA, an endpoint-black-box audit
+    with environment instrumentation, constraint-preserving randomized counterfactual environments, and pooled discrete-choice
+    estimation over eligible options. The current evaluation covers synthetic WebShop stress tests and a real 3B WebShop endpoint
+    case study to measure trigger-dependent steering, identify suspect-only effects, and clarify when counterfactual randomization
+    alone is sufficient versus when feature-controlled choice modeling is necessary.
   technologies:
   - CCA
   - CCIA
