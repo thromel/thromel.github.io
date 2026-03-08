@@ -145,10 +145,10 @@ jobs:
     - uses: actions/checkout@v3
     
     # Set up Node.js environment
-    - name: Use Node.js ${{ matrix.node-version }}
+    - name: Use Node.js {% raw %}${{ matrix.node-version }}{% endraw %}
       uses: actions/setup-node@v3
       with:
-        node-version: ${{ matrix.node-version }}
+        node-version: {% raw %}${{ matrix.node-version }}{% endraw %}
         
     # Cache dependencies for faster builds
     # Why cache? npm install can take 30-60 seconds; caching reduces this to 5-10 seconds
@@ -157,9 +157,9 @@ jobs:
       with:
         path: ~/.npm
         # Why hash the lock file? Cache is invalidated only when dependencies change
-        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+        key: {% raw %}${{ runner.os }}{% endraw %}-node-{% raw %}${{ hashFiles('**/package-lock.json') }}{% endraw %}
         restore-keys: |
-          ${{ runner.os }}-node-
+          {% raw %}${{ runner.os }}{% endraw %}-node-
     
     # Install project dependencies
     # Why npm ci instead of npm install? It's faster and more reliable for CI environments
@@ -413,7 +413,7 @@ jobs:
         echo "DEPLOY_VERSION=$(date +%Y%m%d%H%M%S)" >> $GITHUB_ENV
         
         # Package application
-        tar -czf deploy-${{ env.DEPLOY_VERSION }}.tar.gz .
+        tar -czf deploy-{% raw %}${{ env.DEPLOY_VERSION }}{% endraw %}.tar.gz .
     
     # Upload artifact for deployment job
     # Why separate build and deploy jobs? Enables different runners, security boundaries
@@ -440,9 +440,9 @@ jobs:
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v2
       with:
-        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: ${{ secrets.AWS_REGION }}
+        aws-access-key-id: {% raw %}${{ secrets.AWS_ACCESS_KEY_ID }}{% endraw %}
+        aws-secret-access-key: {% raw %}${{ secrets.AWS_SECRET_ACCESS_KEY }}{% endraw %}
+        aws-region: {% raw %}${{ secrets.AWS_REGION }}{% endraw %}
     
     # Upload to S3 first (backup and staging)
     # Why S3 first? Creates a backup, enables multi-server deployments, provides audit trail
@@ -455,7 +455,7 @@ jobs:
     # Deploy to EC2
     - name: Deploy to EC2
       env:
-        PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
+        PRIVATE_KEY: {% raw %}${{ secrets.EC2_SSH_KEY }}{% endraw %}
       run: |
         # Save private key
         echo "$PRIVATE_KEY" > private_key
@@ -528,8 +528,8 @@ jobs:
         
         # Execute deployment
         ssh -o StrictHostKeyChecking=no -i private_key \
-          ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} \
-          'bash -s' < deploy.sh ${{ env.DEPLOY_FILE }}
+          {% raw %}${{ secrets.EC2_USER }}{% endraw %}@{% raw %}${{ secrets.EC2_HOST }}{% endraw %} \
+          'bash -s' < deploy.sh {% raw %}${{ env.DEPLOY_FILE }}{% endraw %}
         
         # Cleanup
         rm -f private_key deploy.sh
@@ -538,7 +538,7 @@ jobs:
     - name: Send deployment notification
       if: always()  # Run even if deployment fails
       run: |
-        if [ "${{ job.status }}" == "success" ]; then
+        if [ "{% raw %}${{ job.status }}{% endraw %}" == "success" ]; then
           MESSAGE="✅ Deployment successful to production"
           COMMIT_MSG=$(git log -1 --pretty=format:"%s")
           AUTHOR=$(git log -1 --pretty=format:"%an")
@@ -556,7 +556,7 @@ jobs:
         # Example Slack webhook:
         # curl -X POST -H 'Content-type: application/json' \
         #   --data "{\"text\":\"$MESSAGE\\nCommit: $COMMIT_MSG\\nAuthor: $AUTHOR\"}" \
-        #   ${{ secrets.SLACK_WEBHOOK_URL }}
+        #   {% raw %}${{ secrets.SLACK_WEBHOOK_URL }}{% endraw %}
 ```
 
 ### Understanding the Deployment Strategy
@@ -609,15 +609,15 @@ jobs:
   determine-environment:
     runs-on: ubuntu-latest
     outputs:
-      environment: ${{ steps.determine.outputs.environment }}
+      environment: {% raw %}${{ steps.determine.outputs.environment }}{% endraw %}
     steps:
     - name: Determine deployment environment
       id: determine
       run: |
         # Why this logic? Different branches represent different stages of code maturity
-        if [[ "${{ github.ref }}" == "refs/heads/main" ]]; then
+        if [[ "{% raw %}${{ github.ref }}{% endraw %}" == "refs/heads/main" ]]; then
           echo "environment=production" >> $GITHUB_OUTPUT
-        elif [[ "${{ github.ref }}" == "refs/heads/develop" ]]; then
+        elif [[ "{% raw %}${{ github.ref }}{% endraw %}" == "refs/heads/develop" ]]; then
           echo "environment=staging" >> $GITHUB_OUTPUT
         else
           echo "environment=development" >> $GITHUB_OUTPUT
@@ -627,17 +627,17 @@ jobs:
     needs: determine-environment
     runs-on: ubuntu-latest
     # Why environment gates? GitHub provides manual approval and protection rules
-    environment: ${{ needs.determine-environment.outputs.environment }}
+    environment: {% raw %}${{ needs.determine-environment.outputs.environment }}{% endraw %}
     steps:
     - uses: actions/checkout@v3
     
     # Environment-specific secrets are automatically available
     # Why automatic? GitHub manages secret scoping by environment
-    - name: Deploy to ${{ needs.determine-environment.outputs.environment }}
+    - name: Deploy to {% raw %}${{ needs.determine-environment.outputs.environment }}{% endraw %}
       run: |
-        echo "Deploying to ${{ needs.determine-environment.outputs.environment }}"
-        echo "Using server: ${{ secrets.SERVER_HOST }}"
-        echo "Using database: ${{ secrets.DATABASE_URL }}"
+        echo "Deploying to {% raw %}${{ needs.determine-environment.outputs.environment }}{% endraw %}"
+        echo "Using server: {% raw %}${{ secrets.SERVER_HOST }}{% endraw %}"
+        echo "Using database: {% raw %}${{ secrets.DATABASE_URL }}{% endraw %}"
         # Your deployment logic here
 ```
 
@@ -680,19 +680,19 @@ on:
 jobs:
   rollback:
     runs-on: ubuntu-latest
-    environment: ${{ inputs.environment }}
+    environment: {% raw %}${{ inputs.environment }}{% endraw %}
     steps:
     - name: Validate version exists
       run: |
         # Check if version exists in S3
-        aws s3 ls s3://your-deployment-bucket/releases/deploy-${{ inputs.version }}.tar.gz || {
-          echo "❌ Version ${{ inputs.version }} not found!"
+        aws s3 ls s3://your-deployment-bucket/releases/deploy-{% raw %}${{ inputs.version }}{% endraw %}.tar.gz || {
+          echo "❌ Version {% raw %}${{ inputs.version }}{% endraw %} not found!"
           exit 1
         }
     
-    - name: Rollback to version ${{ inputs.version }}
+    - name: Rollback to version {% raw %}${{ inputs.version }}{% endraw %}
       env:
-        PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
+        PRIVATE_KEY: {% raw %}${{ secrets.EC2_SSH_KEY }}{% endraw %}
       run: |
         # Save private key
         echo "$PRIVATE_KEY" > private_key
@@ -758,8 +758,8 @@ jobs:
         
         # Execute rollback
         ssh -o StrictHostKeyChecking=no -i private_key \
-          ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} \
-          'bash -s' < rollback.sh ${{ inputs.version }}
+          {% raw %}${{ secrets.EC2_USER }}{% endraw %}@{% raw %}${{ secrets.EC2_HOST }}{% endraw %} \
+          'bash -s' < rollback.sh {% raw %}${{ inputs.version }}{% endraw %}
         
         # Cleanup
         rm -f private_key rollback.sh
@@ -767,7 +767,7 @@ jobs:
     # Post-rollback notification
     - name: Notify team of rollback
       run: |
-        MESSAGE="🔄 Rollback completed to version ${{ inputs.version }} on ${{ inputs.environment }}"
+        MESSAGE="🔄 Rollback completed to version {% raw %}${{ inputs.version }}{% endraw %} on {% raw %}${{ inputs.environment }}{% endraw %}"
         echo "$MESSAGE"
         
         # Post to incident management system
@@ -1009,13 +1009,13 @@ Here's how to add basic monitoring to your workflow:
       # Example: Post to Slack, PagerDuty, or custom monitoring
       curl -X POST -H 'Content-type: application/json' \
         --data "{\"text\":\"🚨 High response time after deployment: ${response_time}s\"}" \
-        ${{ secrets.MONITORING_WEBHOOK_URL }} || echo "Failed to send alert"
+        {% raw %}${{ secrets.MONITORING_WEBHOOK_URL }}{% endraw %} || echo "Failed to send alert"
     fi
     
     # Check database connection
     echo "🗄️  Checking database connectivity..."
     ssh -o StrictHostKeyChecking=no -i private_key \
-      ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} \
+      {% raw %}${{ secrets.EC2_USER }}{% endraw %}@{% raw %}${{ secrets.EC2_HOST }}{% endraw %} \
       'cd /home/ubuntu/app && npm run db:check' || {
       echo "❌ Database connectivity check failed"
       exit 1
@@ -1024,7 +1024,7 @@ Here's how to add basic monitoring to your workflow:
     # Check memory usage
     echo "💾 Checking system resources..."
     memory_usage=$(ssh -o StrictHostKeyChecking=no -i private_key \
-      ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} \
+      {% raw %}${{ secrets.EC2_USER }}{% endraw %}@{% raw %}${{ secrets.EC2_HOST }}{% endraw %} \
       "free | grep Mem | awk '{printf \"%.0f\", \$3/\$2 * 100.0}'")
     
     echo "Memory usage: ${memory_usage}%"
@@ -1072,7 +1072,7 @@ Add automated dependency scanning to catch vulnerabilities:
 - name: Run Snyk security scan
   uses: snyk/actions/node@master
   env:
-    SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+    SNYK_TOKEN: {% raw %}${{ secrets.SNYK_TOKEN }}{% endraw %}
   with:
     # Why severity threshold? Focus on actionable vulnerabilities
     args: --severity-threshold=high
@@ -1103,7 +1103,7 @@ Prevent accidental commits of secrets:
   uses: trufflesecurity/trufflehog@main
   with:
     path: ./
-    base: ${{ github.event.repository.default_branch }}
+    base: {% raw %}${{ github.event.repository.default_branch }}{% endraw %}
     head: HEAD
     # Why these options? Balance between thoroughness and false positives
     extra_args: --debug --only-verified
@@ -1111,7 +1111,7 @@ Prevent accidental commits of secrets:
 - name: GitLeaks secret scan
   uses: gitleaks/gitleaks-action@v2
   env:
-    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    GITHUB_TOKEN: {% raw %}${{ secrets.GITHUB_TOKEN }}{% endraw %}
   with:
     # Why fail on detection? Prevent secrets from entering the codebase
     fail: true
@@ -1134,13 +1134,13 @@ If you're deploying containers, scan them for vulnerabilities:
 - name: Build Docker image
   run: |
     # Build with specific tag for tracking
-    docker build -t ${{ github.repository }}:${{ github.sha }} .
-    docker build -t ${{ github.repository }}:latest .
+    docker build -t {% raw %}${{ github.repository }}{% endraw %}:{% raw %}${{ github.sha }}{% endraw %} .
+    docker build -t {% raw %}${{ github.repository }}{% endraw %}:latest .
 
 - name: Run Trivy vulnerability scanner
   uses: aquasecurity/trivy-action@master
   with:
-    image-ref: '${{ github.repository }}:${{ github.sha }}'
+    image-ref: '{% raw %}${{ github.repository }}{% endraw %}:{% raw %}${{ github.sha }}{% endraw %}'
     format: 'sarif'
     output: 'trivy-results.sarif'
     # Why these severities? Focus on actionable vulnerabilities
@@ -1158,7 +1158,7 @@ If you're deploying containers, scan them for vulnerabilities:
   uses: docker/scout-action@v1
   with:
     command: cves
-    image: ${{ github.repository }}:${{ github.sha }}
+    image: {% raw %}${{ github.repository }}{% endraw %}:{% raw %}${{ github.sha }}{% endraw %}
     # Why exit on vulnerabilities? Prevent vulnerable images from being deployed
     exit-code: true
     only-severities: critical,high
@@ -1200,14 +1200,14 @@ GitHub Actions provides several tools for debugging:
   run: |
     echo "🐛 Debug Information for Failed Workflow"
     echo "======================================"
-    echo "Event: ${{ github.event_name }}"
-    echo "Ref: ${{ github.ref }}"
-    echo "SHA: ${{ github.sha }}"
-    echo "Actor: ${{ github.actor }}"
-    echo "Workflow: ${{ github.workflow }}"
-    echo "Job: ${{ github.job }}"
-    echo "Run ID: ${{ github.run_id }}"
-    echo "Run Number: ${{ github.run_number }}"
+    echo "Event: {% raw %}${{ github.event_name }}{% endraw %}"
+    echo "Ref: {% raw %}${{ github.ref }}{% endraw %}"
+    echo "SHA: {% raw %}${{ github.sha }}{% endraw %}"
+    echo "Actor: {% raw %}${{ github.actor }}{% endraw %}"
+    echo "Workflow: {% raw %}${{ github.workflow }}{% endraw %}"
+    echo "Job: {% raw %}${{ github.job }}{% endraw %}"
+    echo "Run ID: {% raw %}${{ github.run_id }}{% endraw %}"
+    echo "Run Number: {% raw %}${{ github.run_number }}{% endraw %}"
     
     # Show environment variables (be careful with secrets!)
     echo ""
@@ -1217,10 +1217,10 @@ GitHub Actions provides several tools for debugging:
     # Show runner information
     echo ""
     echo "🖥️  Runner Information:"
-    echo "Runner OS: ${{ runner.os }}"
-    echo "Runner Arch: ${{ runner.arch }}"
-    echo "Runner Temp: ${{ runner.temp }}"
-    echo "Runner Tool Cache: ${{ runner.tool_cache }}"
+    echo "Runner OS: {% raw %}${{ runner.os }}{% endraw %}"
+    echo "Runner Arch: {% raw %}${{ runner.arch }}{% endraw %}"
+    echo "Runner Temp: {% raw %}${{ runner.temp }}{% endraw %}"
+    echo "Runner Tool Cache: {% raw %}${{ runner.tool_cache }}{% endraw %}"
     
     # Show disk space (common issue)
     echo ""
@@ -1234,7 +1234,7 @@ GitHub Actions provides several tools for debugging:
 
 - name: Setup tmate session for debugging
   # Why only on manual trigger? Prevents accidental exposure of debugging sessions
-  if: ${{ failure() && github.event_name == 'workflow_dispatch' }}
+  if: {% raw %}${{ failure() && github.event_name == 'workflow_dispatch' }}{% endraw %}
   uses: mxschmitt/action-tmate@v3
   with:
     # Why limit access? Security - only the workflow triggerer can access
@@ -1246,11 +1246,11 @@ GitHub Actions provides several tools for debugging:
   if: failure()
   uses: actions/upload-artifact@v3
   with:
-    name: debug-logs-${{ github.run_id }}
+    name: debug-logs-{% raw %}${{ github.run_id }}{% endraw %}
     path: |
       /tmp/debug.log
       ~/.npm/_logs/
-      ${{ runner.temp }}
+      {% raw %}${{ runner.temp }}{% endraw %}
     retention-days: 7
 ```
 
@@ -1275,27 +1275,27 @@ When SSH connections fail, here's a systematic debugging approach:
     
     # Test basic connectivity
     echo "🌐 Testing network connectivity..."
-    ping -c 4 ${{ secrets.EC2_HOST }} || echo "❌ Ping failed - check security groups and network"
+    ping -c 4 {% raw %}${{ secrets.EC2_HOST }}{% endraw %} || echo "❌ Ping failed - check security groups and network"
     
     # Test SSH port
     echo ""
     echo "🔌 Testing SSH port 22..."
-    timeout 10 nc -zv ${{ secrets.EC2_HOST }} 22 || echo "❌ Port 22 not accessible - check security groups"
+    timeout 10 nc -zv {% raw %}${{ secrets.EC2_HOST }}{% endraw %} 22 || echo "❌ Port 22 not accessible - check security groups"
     
     # Check if host key has changed
     echo ""
     echo "🔑 Testing SSH host key..."
-    ssh-keyscan -H ${{ secrets.EC2_HOST }} 2>/dev/null || echo "❌ SSH host key scan failed"
+    ssh-keyscan -H {% raw %}${{ secrets.EC2_HOST }}{% endraw %} 2>/dev/null || echo "❌ SSH host key scan failed"
     
     # Verbose SSH attempt (remove sensitive key content from logs)
     echo ""
     echo "🐛 Verbose SSH connection test..."
-    echo "${{ secrets.EC2_SSH_KEY }}" > private_key
+    echo "{% raw %}${{ secrets.EC2_SSH_KEY }}{% endraw %}" > private_key
     chmod 600 private_key
     
     # Why timeout? Prevents hanging on failed connections
     timeout 30 ssh -vvv -o StrictHostKeyChecking=no -o ConnectTimeout=10 -i private_key \
-      ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} \
+      {% raw %}${{ secrets.EC2_USER }}{% endraw %}@{% raw %}${{ secrets.EC2_HOST }}{% endraw %} \
       'echo "✅ SSH connection successful"' 2>&1 | head -50 || {
       echo "❌ SSH connection failed"
       echo ""
@@ -1320,7 +1320,7 @@ When SSH connections fail, here's a systematic debugging approach:
     
     # This requires EC2 permissions in your IAM policy
     aws ec2 describe-instances \
-      --filters "Name=ip-address,Values=${{ secrets.EC2_HOST }}" \
+      --filters "Name=ip-address,Values={% raw %}${{ secrets.EC2_HOST }}{% endraw %}" \
       --query 'Reservations[*].Instances[*].[InstanceId,State.Name,PublicIpAddress]' \
       --output table || echo "Failed to get EC2 status (check AWS permissions)"
 ```
@@ -1349,12 +1349,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
-    - name: Setup Node.js ${{ matrix.node-version }}
+    - name: Setup Node.js {% raw %}${{ matrix.node-version }}{% endraw %}
       uses: actions/setup-node@v3
       with:
-        node-version: ${{ matrix.node-version }}
-    - name: Run ${{ matrix.test-suite }} tests
-      run: npm run test:${{ matrix.test-suite }}
+        node-version: {% raw %}${{ matrix.node-version }}{% endraw %}
+    - name: Run {% raw %}${{ matrix.test-suite }}{% endraw %} tests
+      run: npm run test:{% raw %}${{ matrix.test-suite }}{% endraw %}
   
   # Jobs run in parallel by default - Why? Maximize resource utilization
   lint:
@@ -1399,10 +1399,10 @@ Effective caching can significantly speed up your workflows:
       node_modules
       # Why cache node_modules? npm ci can be slow even with cache
     # Why complex key? Ensures cache invalidation when any dependency changes
-    key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}-${{ hashFiles('**/*.js', '**/*.json') }}
+    key: {% raw %}${{ runner.os }}{% endraw %}-node-{% raw %}${{ hashFiles('**/package-lock.json') }}{% endraw %}-{% raw %}${{ hashFiles('**/*.js', '**/*.json') }}{% endraw %}
     restore-keys: |
-      ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}-
-      ${{ runner.os }}-node-
+      {% raw %}${{ runner.os }}{% endraw %}-node-{% raw %}${{ hashFiles('**/package-lock.json') }}{% endraw %}-
+      {% raw %}${{ runner.os }}{% endraw %}-node-
 
 # Docker layer caching - Why? Docker builds can be very slow
 - name: Set up Docker Buildx
@@ -1423,7 +1423,7 @@ Effective caching can significantly speed up your workflows:
   uses: actions/cache@v3
   with:
     path: /tmp/test-db
-    key: test-db-${{ hashFiles('migrations/**') }}
+    key: test-db-{% raw %}${{ hashFiles('migrations/**') }}{% endraw %}
   
 # Warm up cache in separate job
 warm-cache:
@@ -1434,7 +1434,7 @@ warm-cache:
     uses: actions/cache@v3
     with:
       path: ~/.npm
-      key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+      key: {% raw %}${{ runner.os }}{% endraw %}-node-{% raw %}${{ hashFiles('**/package-lock.json') }}{% endraw %}
   - run: npm ci
 ```
 
@@ -1479,7 +1479,7 @@ jobs:
     - name: Calculate and store metrics
       uses: actions/github-script@v6
       with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
+        github-token: {% raw %}${{ secrets.GITHUB_TOKEN }}{% endraw %}
         script: |
           const workflow_run = context.payload.workflow_run;
           
@@ -1720,7 +1720,7 @@ Example integration with CloudWatch:
     aws cloudwatch put-metric-data \
       --namespace "GitHubActions/Deployments" \
       --metric-data \
-        MetricName=DeploymentDuration,Value=${{ env.DEPLOY_DURATION }},Unit=Seconds \
+        MetricName=DeploymentDuration,Value={% raw %}${{ env.DEPLOY_DURATION }}{% endraw %},Unit=Seconds \
         MetricName=DeploymentSuccess,Value=1,Unit=Count
     
     # Create deployment marker in CloudWatch Insights
@@ -1728,7 +1728,7 @@ Example integration with CloudWatch:
       --log-group-name "/aws/lambda/deployment-events" \
       --log-stream-name "deployments" \
       --log-events \
-        timestamp=$(date +%s)000,message='{"event":"deployment","status":"success","commit":"${{ github.sha }}","duration":${{ env.DEPLOY_DURATION }}}'
+        timestamp=$(date +%s)000,message='{"event":"deployment","status":"success","commit":"{% raw %}${{ github.sha }}{% endraw %}","duration":{% raw %}${{ env.DEPLOY_DURATION }}{% endraw %}}'
 ```
 
 ## Best Practices Summary

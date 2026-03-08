@@ -4,6 +4,8 @@ title: Tanzim Hossain Romel
 navbar_title: Home
 ---
 
+<div class="homepage-classic">
+
 <!-- Hero Section - Minimal Style -->
 <div class="hero-section">
   <div class="hero-content">
@@ -40,6 +42,10 @@ navbar_title: Home
           <span>Meeting</span>
         </a>
         {% endif %}
+        <a href="{{ 'research' | relative_url }}" class="hero-link">
+          <i class="fas fa-microscope"></i>
+          <span>Research</span>
+        </a>
         <a href="/assets/pdf/cv.pdf" class="hero-link hero-link-primary" target="_blank">
           <i class="fas fa-file-alt"></i>
           <span>CV</span>
@@ -81,93 +87,19 @@ navbar_title: Home
 </div>
 
 <!-- Open Source Contributions -->
-<div id="oss-summary" class="oss-inline" style="display: none;">
+<div id="oss-summary" class="oss-inline" data-github-user="{{ site.data.profile.github | default: 'thromel' }}" style="display: none;">
   <a href="{{ 'contributions' | relative_url }}" class="oss-badge">
     <i class="fas fa-code-merge"></i>
-    <span id="oss-summary-text"></span>
+    <span id="oss-summary-text" aria-live="polite"></span>
   </a>
   <span class="oss-repos">
-    to <a href="https://github.com/microsoft/TypeScript/pulls?q=author%3Athromel" target="_blank">TypeScript</a>,
-    <a href="https://github.com/dotnet/efcore/pulls?q=author%3Athromel" target="_blank">EF Core</a>,
-    <a href="https://github.com/langchain-ai/langchain/pulls?q=author%3Athromel" target="_blank">LangChain</a>,
-    <a href="https://github.com/Kaliumhexacyanoferrat/GenHTTP/pulls?q=author%3Athromel" target="_blank">GenHTTP</a>,
-    <a href="https://github.com/dynaroars/csconfs/pulls?q=author%3Athromel" target="_blank">csconfs</a>
+    to <a href="https://github.com/microsoft/TypeScript/pulls?q=author%3Athromel" target="_blank" rel="noopener noreferrer">TypeScript</a>,
+    <a href="https://github.com/dotnet/efcore/pulls?q=author%3Athromel" target="_blank" rel="noopener noreferrer">EF Core</a>,
+    <a href="https://github.com/langchain-ai/langchain/pulls?q=author%3Athromel" target="_blank" rel="noopener noreferrer">LangChain</a>,
+    <a href="https://github.com/Kaliumhexacyanoferrat/GenHTTP/pulls?q=author%3Athromel" target="_blank" rel="noopener noreferrer">GenHTTP</a>,
+    <a href="https://github.com/dynaroars/csconfs/pulls?q=author%3Athromel" target="_blank" rel="noopener noreferrer">csconfs</a>
   </span>
 </div>
-
-<style>
-.oss-inline {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: var(--space-2);
-  margin-bottom: var(--space-6);
-  font-size: var(--font-size-sm);
-  color: var(--text-muted);
-}
-.oss-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-2);
-  padding: var(--space-2) var(--space-3);
-  background: rgba(34, 197, 94, 0.1);
-  border: 1px solid rgba(34, 197, 94, 0.3);
-  border-radius: 6px;
-  color: var(--color-success);
-  text-decoration: none;
-  font-weight: 500;
-  transition: all 0.2s ease;
-}
-.oss-badge:hover {
-  background: rgba(34, 197, 94, 0.2);
-  transform: translateY(-1px);
-}
-.oss-badge i {
-  font-size: 0.875em;
-}
-.oss-repos a {
-  color: var(--text-secondary);
-  text-decoration: none;
-  font-weight: 500;
-}
-.oss-repos a:hover {
-  color: var(--accent-primary);
-}
-</style>
-
-<script>
-(function() {
-  const GITHUB_USERNAME = '{{ site.data.profile.github | default: "thromel" }}';
-
-  async function fetchOSSSummary() {
-    try {
-      const response = await fetch(
-        `https://api.github.com/search/issues?q=author:${GITHUB_USERNAME}+type:pr+-user:${GITHUB_USERNAME}&per_page=1`,
-        { headers: { 'Accept': 'application/vnd.github.v3+json' } }
-      );
-      if (!response.ok) return;
-
-      const data = await response.json();
-      const total = data.total_count || 0;
-      if (total === 0) return;
-
-      // Get merged count
-      const mergedRes = await fetch(
-        `https://api.github.com/search/issues?q=author:${GITHUB_USERNAME}+type:pr+is:merged+-user:${GITHUB_USERNAME}&per_page=1`,
-        { headers: { 'Accept': 'application/vnd.github.v3+json' } }
-      );
-      const mergedData = await mergedRes.json();
-      const merged = mergedData.total_count || 0;
-
-      document.getElementById('oss-summary-text').textContent =
-        `${merged} merged pull requests to open source projects`;
-      document.getElementById('oss-summary').style.display = 'block';
-    } catch (e) {}
-  }
-
-  document.addEventListener('DOMContentLoaded', fetchOSSSummary);
-})();
-</script>
 
 <!-- Recent News Widget -->
 <div class="news-widget">
@@ -414,3 +346,5 @@ navbar_title: Home
     {% endfor %}
   </div>
 </section>
+
+</div>

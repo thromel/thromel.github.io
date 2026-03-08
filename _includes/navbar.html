@@ -3,7 +3,7 @@
     <div class="scroll-progress" id="scrollProgress"></div>
 
     <div class="container">
-        <nav class="site-nav" role="navigation" aria-label="Main navigation">
+        <nav class="site-nav" id="site-navigation" role="navigation" aria-label="Main navigation">
             <a href="{{ '/' | relative_url }}" class="site-title">
                 {{ site.data.profile.primary_name }}
             </a>
@@ -13,7 +13,8 @@
                 <li role="none">
                     <a href="{{ item.url | relative_url }}"
                        class="nav-link {% if item.name == page.navbar_title or (item.name == 'Home' and page.navbar_title == nil) %}active{% endif %}"
-                       role="menuitem">
+                       role="menuitem"
+                       {% if item.name == page.navbar_title or (item.name == 'Home' and page.navbar_title == nil) %}aria-current="page"{% endif %}>
                         {{ item.name }}
                     </a>
                 </li>
@@ -21,7 +22,7 @@
             </ul>
 
             <!-- Mobile Menu Toggle -->
-            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu" aria-expanded="false">
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobileNavDrawer">
                 <i class="fas fa-bars"></i>
             </button>
         </nav>
@@ -29,7 +30,7 @@
 </header>
 
 <!-- Mobile Navigation Drawer -->
-<div class="mobile-nav-drawer" id="mobileNavDrawer" aria-hidden="true">
+<div class="mobile-nav-drawer" id="mobileNavDrawer" role="navigation" aria-label="Mobile navigation" aria-hidden="true">
     <div class="mobile-nav-header">
         <span class="mobile-nav-title">Menu</span>
         <button class="mobile-nav-close" id="mobileNavClose" aria-label="Close menu">
@@ -40,7 +41,8 @@
         {% for item in site.data.navigation.pages %}
         <li>
             <a href="{{ item.url | relative_url }}"
-               class="mobile-nav-link {% if item.name == page.navbar_title or (item.name == 'Home' and page.navbar_title == nil) %}active{% endif %}">
+               class="mobile-nav-link {% if item.name == page.navbar_title or (item.name == 'Home' and page.navbar_title == nil) %}active{% endif %}"
+               {% if item.name == page.navbar_title or (item.name == 'Home' and page.navbar_title == nil) %}aria-current="page"{% endif %}>
                 {{ item.name }}
             </a>
         </li>

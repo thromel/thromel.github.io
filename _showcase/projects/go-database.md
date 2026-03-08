@@ -9,6 +9,7 @@ width: 12
 date: 2024-12-25 00:00:00 +0800
 excerpt: A comprehensive implementation of a custom database engine in Go featuring ACID compliance, B+ tree storage, MVCC concurrency control, adaptive indexing, and ML-enhanced query optimization - built entirely from scratch without external database libraries.
 thumbnail: /assets/images/go-database-engine.png
+card_image: /assets/images/cards/go-database-card.svg
 featured: true
 technologies:
   - Go

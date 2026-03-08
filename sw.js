@@ -1,18 +1,18 @@
 // Portfolio Service Worker - PWA Offline Support
-// Version: 1.0.0
+// Version: 1.1.0
 
-const CACHE_NAME = 'romel-portfolio-v1.0.0';
+const CACHE_NAME = 'romel-portfolio-v1.1.0';
 const OFFLINE_URL = '/offline.html';
 
 // Core files to cache immediately (App Shell)
 const CORE_CACHE_FILES = [
   '/',
   '/offline.html',
-  '/assets/css/developer-theme.css',
-  '/assets/css/custom.css', 
-  '/assets/js/common.js',
-  '/assets/js/theme-toggle.js',
-  '/assets/js/search.js',
+  '/assets/css/overhaul.css',
+  '/assets/css/mobile-optimizations.css',
+  '/assets/css/components/oss-summary.css',
+  '/assets/js/site-shell.js',
+  '/assets/js/oss-summary.js',
   '/manifest.json'
 ];
 
@@ -33,7 +33,6 @@ const STATIC_CACHE_PATTERNS = [
 // Network-first patterns (dynamic content)
 const NETWORK_FIRST_PATTERNS = [
   /\/api\//,
-  /\/search/,
   /\.json$/
 ];
 

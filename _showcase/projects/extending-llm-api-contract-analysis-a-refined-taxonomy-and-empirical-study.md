@@ -9,6 +9,7 @@ width: 8
 date: 2025-01-15 00:00:00 +0800
 excerpt: An in-depth exploration of applying "Design by Contract" principles to Large Language Models, offering a comprehensive taxonomy, detection methods, and enforcement strategies to make AI systems more reliable and predictable.
 thumbnail: /assets/images/llm-api-taxonomy.png
+card_image: /assets/images/cards/llm-contract-card.svg
 featured: true
 technologies:
   - LLM Systems

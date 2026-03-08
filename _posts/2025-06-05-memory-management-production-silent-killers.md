@@ -570,12 +570,14 @@ Our containerized services were randomly dying with exit code 137 (OOMKilled). C
 The issue was subtle but deadly - we were monitoring application memory usage, not total container memory consumption:
 
 ```bash
+{% raw %}
 # What we were monitoring (application memory)
 docker stats --format "table {{.Container}}\t{{.CPUPerc}}\t{{.MemUsage}}\t{{.MemPerc}}"
 
 # What we should have been monitoring (total memory including buffers, cache, etc.)
 docker exec <container_id> cat /sys/fs/cgroup/memory/memory.usage_in_bytes
 docker exec <container_id> cat /sys/fs/cgroup/memory/memory.limit_in_bytes
+{% endraw %}
 ```
 
 ### The Solution: Comprehensive Container Memory Management
@@ -634,6 +636,7 @@ spec:
 **2. Memory Monitoring and Alerting**
 
 ```yaml
+{% raw %}
 # Prometheus alerts for memory issues
 groups:
 - name: memory-alerts
@@ -663,6 +666,7 @@ groups:
     annotations:
       summary: "Pod was OOMKilled"
       description: "Pod {{ $labels.pod }} in namespace {{ $labels.namespace }} was killed due to out of memory"
+{% endraw %}
 ```
 
 **3. Memory-Aware Application Configuration**

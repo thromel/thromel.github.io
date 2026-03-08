@@ -30,8 +30,9 @@ function initPerformanceOptimizations() {
 // Preload critical resources
 function preloadCriticalResources() {
     const criticalResources = [
-        { href: '/assets/css/global.css', as: 'style' },
-        { href: '/assets/css/developer-theme.css', as: 'style' }
+        { href: '/assets/css/overhaul.css', as: 'style' },
+        { href: '/assets/css/mobile-optimizations.css', as: 'style' },
+        { href: '/assets/css/components/oss-summary.css', as: 'style' }
     ];
     
     criticalResources.forEach(resource => {
@@ -49,9 +50,8 @@ function preloadCriticalResources() {
 function loadNonCriticalCSS() {
     const nonCriticalCSS = [
         '/assets/css/enhanced-animations.css',
-        '/assets/css/advanced-interactions.css',
-        '/assets/css/search.css',
-        '/assets/css/syntax-highlighting.css'
+        '/assets/css/mobile-optimizations.css',
+        '/assets/css/components/oss-summary.css'
     ];
     
     // Use requestIdleCallback to load during idle time

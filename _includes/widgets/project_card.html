@@ -1,2 +1,101 @@
-<div class="card project-card mb-4 h-100">
-                    <div class="card-body"> 
+{% assign project_title = include.title %}
+{% assign project_href = include.href %}
+{% assign project_image = include.image %}
+{% assign placeholder = include.placeholder | default: "default" %}
+
+{% if placeholder == "default" %}
+  {% if project_title contains "Database" or project_title contains "Go" %}
+    {% assign placeholder = "database" %}
+  {% elsif project_title contains "Blockchain" or project_title contains "NFT" %}
+    {% assign placeholder = "blockchain" %}
+  {% elsif project_title contains "LLM" or project_title contains "AI" or project_title contains "Caption" or project_title contains "Recognition" %}
+    {% assign placeholder = "ai" %}
+  {% elsif project_title contains "Compiler" %}
+    {% assign placeholder = "compiler" %}
+  {% elsif project_title contains "TCP" or project_title contains "Network" %}
+    {% assign placeholder = "networking" %}
+  {% elsif project_title contains "Event" or project_title contains "Web" %}
+    {% assign placeholder = "web" %}
+  {% endif %}
+{% endif %}
+
+<article class="project-card{% if include.variant %} {{ include.variant }}{% endif %}">
+  <div class="project-card-thumbnail">
+    {% if project_image %}
+    <img src="{{ project_image | relative_url }}" alt="{{ project_title }}" class="project-card-image">
+    {% else %}
+    <div class="project-card-placeholder {{ placeholder }}">
+      {% if placeholder == "database" %}
+      <i class="fas fa-database"></i>
+      {% elsif placeholder == "blockchain" %}
+      <i class="fas fa-link"></i>
+      {% elsif placeholder == "ai" %}
+      <i class="fas fa-brain"></i>
+      {% elsif placeholder == "compiler" %}
+      <i class="fas fa-cogs"></i>
+      {% elsif placeholder == "networking" %}
+      <i class="fas fa-network-wired"></i>
+      {% elsif placeholder == "web" %}
+      <i class="fas fa-globe"></i>
+      {% else %}
+      <i class="fas fa-code"></i>
+      {% endif %}
+    </div>
+    {% endif %}
+  </div>
+
+  <div class="project-card-content">
+    <div class="project-card-header">
+      <div class="project-card-heading">
+        {% if include.context %}
+        <p class="project-card-kicker">{{ include.context }}</p>
+        {% endif %}
+        <h3 class="project-card-title">
+          {% if project_href %}
+            {% if include.external %}
+            <a href="{{ project_href }}" target="_blank" rel="noopener noreferrer">{{ project_title }}</a>
+            {% else %}
+            <a href="{{ project_href }}">{{ project_title }}</a>
+            {% endif %}
+          {% else %}
+          {{ project_title }}
+          {% endif %}
+        </h3>
+      </div>
+      {% if include.badge %}
+      <span class="project-badge{% if include.badge_class %} {{ include.badge_class }}{% endif %}">{{ include.badge }}</span>
+      {% endif %}
+    </div>
+
+    {% if include.description %}
+    <p class="project-card-description">{{ include.description }}</p>
+    {% endif %}
+
+    {% if include.tags %}
+    <div class="project-card-tags">
+      {% for tech in include.tags limit:5 %}
+      <span class="project-tech-tag">{{ tech }}</span>
+      {% endfor %}
+      {% if include.tags.size > 5 %}
+      <span class="project-tech-tag more">+{{ include.tags.size | minus: 5 }}</span>
+      {% endif %}
+    </div>
+    {% endif %}
+
+    <div class="project-card-meta">
+      {% if include.date %}
+      <span class="project-card-date"><i class="far fa-calendar-alt"></i> {{ include.date }}</span>
+      {% endif %}
+    </div>
+
+    {% if project_href %}
+    <div class="project-card-actions">
+      {% if include.external %}
+      <a href="{{ project_href }}" class="project-card-cta" target="_blank" rel="noopener noreferrer">{{ include.cta_label | default: "View project" }}</a>
+      {% else %}
+      <a href="{{ project_href }}" class="project-card-cta">{{ include.cta_label | default: "View project" }}</a>
+      {% endif %}
+    </div>
+    {% endif %}
+  </div>
+</article>

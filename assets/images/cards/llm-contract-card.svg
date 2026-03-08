@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="96" y1="76" x2="1070" y2="724" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0F172A"/>
+      <stop offset="1" stop-color="#1D4ED8"/>
+    </linearGradient>
+    <linearGradient id="panel" x1="190" y1="150" x2="955" y2="648" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#1E293B" stop-opacity="0.96"/>
+      <stop offset="1" stop-color="#0F172A" stop-opacity="0.78"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="800" rx="36" fill="url(#bg)"/>
+  <circle cx="984" cy="146" r="122" fill="#60A5FA" fill-opacity="0.16"/>
+  <circle cx="1090" cy="286" r="62" fill="#22D3EE" fill-opacity="0.16"/>
+  <path d="M88 620C226 496 330 454 470 474C632 498 740 648 912 648C1016 648 1106 614 1186 560" stroke="#93C5FD" stroke-opacity="0.34" stroke-width="18" stroke-linecap="round"/>
+  <rect x="142" y="130" width="916" height="540" rx="30" fill="url(#panel)" stroke="#BFDBFE" stroke-opacity="0.24" stroke-width="2"/>
+  <rect x="192" y="182" width="206" height="40" rx="20" fill="#DBEAFE" fill-opacity="0.12"/>
+  <text x="222" y="208" fill="#DBEAFE" font-size="24" font-family="Arial, sans-serif" letter-spacing="3">RESEARCH SHOWCASE</text>
+  <text x="192" y="324" fill="#F8FAFC" font-size="74" font-family="Georgia, serif" font-weight="700">LLM API</text>
+  <text x="192" y="404" fill="#F8FAFC" font-size="74" font-family="Georgia, serif" font-weight="700">Contracts</text>
+  <text x="194" y="484" fill="#BFDBFE" font-size="32" font-family="Arial, sans-serif">Reliability taxonomy, contract boundaries,</text>
+  <text x="194" y="528" fill="#BFDBFE" font-size="32" font-family="Arial, sans-serif">and empirical evidence for AI systems.</text>
+  <rect x="192" y="576" width="174" height="54" rx="27" fill="#2563EB"/>
+  <text x="227" y="611" fill="#FFFFFF" font-size="28" font-family="Arial, sans-serif">DESIGN BY CONTRACT</text>
+  <path d="M796 234H940" stroke="#E0F2FE" stroke-width="16" stroke-linecap="round"/>
+  <path d="M796 320H994" stroke="#E0F2FE" stroke-opacity="0.84" stroke-width="16" stroke-linecap="round"/>
+  <path d="M796 406H918" stroke="#E0F2FE" stroke-opacity="0.62" stroke-width="16" stroke-linecap="round"/>
+  <path d="M742 230V430" stroke="#38BDF8" stroke-width="10" stroke-linecap="round"/>
+  <circle cx="742" cy="230" r="18" fill="#F8FAFC"/>
+  <circle cx="742" cy="320" r="18" fill="#BFDBFE"/>
+  <circle cx="742" cy="410" r="18" fill="#38BDF8"/>
+</svg>

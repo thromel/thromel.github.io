@@ -55,7 +55,8 @@ layout: default
     </div>
 
     <div style="text-align: right;">
-      {% if item_index < same_group_items.size | minus: 1 %}
+      {% assign last_item_index = same_group_items.size | minus: 1 %}
+      {% if item_index < last_item_index %}
         {% assign next_index = item_index | plus: 1 %}
         {% assign next_item = same_group_items[next_index] %}
         <a href="{{ next_item.url }}" class="btn btn-text" style="display: inline-flex; align-items: center; gap: 0.5rem;">

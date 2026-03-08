@@ -9,6 +9,7 @@ width: 8
 date: 2022-05-15 00:00:00 +0800
 excerpt: Modified TCP Vegas implementation with dynamic aggressiveness to address fairness issues when competing with TCP Reno, achieving near-perfect fairness while preserving Vegas' efficiency advantages.
 thumbnail: /assets/images/projects/tcp-vegas-plus.png
+card_image: /assets/images/cards/tcp-vegas-card.svg
 featured: true
 technologies:
   - C++

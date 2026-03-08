@@ -112,20 +112,18 @@ The portfolio implements a **Liquid Glass** design philosophy that combines:
 ├── _showcase/            # Project showcases
 ├── assets/
 │   ├── css/              # Stylesheets
-│   │   ├── developer-theme.css  # Main theme system with CSS custom properties
-│   │   ├── custom.css    # Component-specific styles and accessibility
-│   │   ├── enhanced-animations.css  # Performance-optimized animations
-│   │   └── performance-optimizations.css  # Core Web Vitals improvements
+│   │   ├── overhaul.css  # Primary design system and page styling
+│   │   ├── mobile-optimizations.css  # Mobile-first responsive overrides
+│   │   └── components/oss-summary.css  # Homepage OSS summary component styles
 │   ├── js/               # JavaScript functionality
 │   └── images/           # Static assets
 └── scripts/              # Build and utility scripts
 ```
 
 ### CSS Architecture
-- **developer-theme.css** - Core design system with CSS custom properties, typography scale, and theme switching
-- **custom.css** - Component-specific styling, accessibility enhancements, and focus management
-- **enhanced-animations.css** - Performance-optimized animations and micro-interactions
-- **performance-optimizations.css** - Core Web Vitals and loading optimizations
+- **overhaul.css** - Primary design system, typography tokens, section components, and interaction states
+- **mobile-optimizations.css** - Phone/tablet specific usability refinements and reduced-motion handling
+- **components/oss-summary.css** - Isolated styling for homepage open-source summary UI
 
 ### Component System
 - **Cards** - Consistent content containers with glass morphism effects
