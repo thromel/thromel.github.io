@@ -349,9 +349,8 @@ awards:
     <a href='https://drive.google.com/file/d/1Vc4E2RoQEPmbfS56oLdUih-oJDBok9sP/view?usp=share_link' target='_blank'>IQVIA Impact Program - Silver (Certificate)</a>
 
 research_interests:
-- Trustworthy AI for Software Engineering
-- Security & Reliability of LLM-Based Systems
-- Empirical Software Engineering Research
+- AI4SE
+- SE4AI
 
 technical_skills:
 - type: "Backend & Systems"
