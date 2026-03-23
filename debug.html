@@ -1,0 +1,29 @@
+---
+layout: default
+---
+
+<h3>Debug Research Matching</h3>
+
+<h4>Research items from profile.yml:</h4>
+{% for item in site.data.profile.research %}
+<div style="border: 1px solid #ccc; margin: 10px; padding: 10px;">
+  <strong>Title:</strong> "{{ item.title }}"<br>
+  <strong>Length:</strong> {{ item.title | size }}<br>
+  <strong>ASCII:</strong> 
+  {% for char in item.title %}
+    {{ char | jsonify }}
+  {% endfor %}
+</div>
+{% endfor %}
+
+<h4>Showcase items:</h4>
+{% for item in site.showcase %}
+<div style="border: 1px solid #ccc; margin: 10px; padding: 10px;">
+  <strong>Title:</strong> "{{ item.title }}"<br>
+  <strong>Group:</strong> "{{ item.group }}"<br>
+  <strong>Show:</strong> "{{ item.show }}"<br>
+  <strong>Length:</strong> {{ item.title | size }}<br>
+  <strong>URL:</strong> {{ item.url }}<br>
+</div>
+{% endfor %}
+

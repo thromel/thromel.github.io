@@ -1,0 +1,140 @@
+# Currently Learning
+currently_learning:
+  - title: "Designing Data-Intensive Applications"
+    type: "Book"
+    category: "DB"
+    progress: 65
+    icon: "fas fa-book"
+
+  - title: "Hands-On Large Language Models"
+    type: "Book"
+    category: "AI"
+    progress: 40
+    icon: "fas fa-book"
+
+  - title: "Certified Kubernetes Application Developer (CKAD)"
+    type: "Certification"
+    category: "DevOps"
+    progress: 30
+    icon: "fas fa-certificate"
+
+  - title: "AWS Solutions Architect Associate"
+    type: "Certification"
+    category: "DevOps"
+    progress: 20
+    icon: "fas fa-certificate"
+
+# Learning Resources
+resources:
+  # Software Engineering
+  - title: "Clean Code"
+    author: "Robert C. Martin"
+    type: "Book"
+    category: "SWE"
+    link: "https://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882"
+    description: "Essential guide to writing readable, maintainable code."
+
+  - title: "The Pragmatic Programmer"
+    author: "David Thomas & Andrew Hunt"
+    type: "Book"
+    category: "SWE"
+    link: "https://pragprog.com/titles/tpp20/the-pragmatic-programmer-20th-anniversary-edition/"
+    description: "Timeless advice for software developers on craft and career."
+
+  - title: "Refactoring"
+    author: "Martin Fowler"
+    type: "Book"
+    category: "SWE"
+    link: "https://martinfowler.com/books/refactoring.html"
+    description: "Improving the design of existing code without changing behavior."
+
+  # Databases
+  - title: "Designing Data-Intensive Applications"
+    author: "Martin Kleppmann"
+    type: "Book"
+    category: "DB"
+    link: "https://dataintensive.net/"
+    description: "Deep dive into distributed systems, databases, and data processing."
+
+  - title: "Database Internals"
+    author: "Alex Petrov"
+    type: "Book"
+    category: "DB"
+    link: "https://www.databass.dev/"
+    description: "How distributed data systems work under the hood."
+
+  - title: "CMU 15-445 Database Systems"
+    author: "Andy Pavlo"
+    type: "Course"
+    category: "DB"
+    link: "https://15445.courses.cs.cmu.edu/"
+    description: "Comprehensive database systems course from Carnegie Mellon."
+
+  # DevOps & Cloud
+  - title: "Kubernetes Up & Running"
+    author: "Brendan Burns, Joe Beda, Kelsey Hightower"
+    type: "Book"
+    category: "DevOps"
+    link: "https://www.oreilly.com/library/view/kubernetes-up-and/9781098110192/"
+    description: "Dive into the future of infrastructure with Kubernetes."
+
+  - title: "The DevOps Handbook"
+    author: "Gene Kim et al."
+    type: "Book"
+    category: "DevOps"
+    link: "https://itrevolution.com/product/the-devops-handbook-second-edition/"
+    description: "Creating world-class agility, reliability, and security."
+
+  - title: "AWS Certified Solutions Architect Study Guide"
+    author: "Ben Piper & David Clinton"
+    type: "Book"
+    category: "DevOps"
+    link: "https://www.wiley.com/en-us/AWS+Certified+Solutions+Architect+Study+Guide-p-9781119713081"
+    description: "Comprehensive preparation for AWS SAA certification."
+
+  # Research & AI
+  - title: "Hands-On Large Language Models"
+    author: "Jay Alammar & Maarten Grootendorst"
+    type: "Book"
+    category: "Research"
+    link: "https://www.oreilly.com/library/view/hands-on-large-language/9781098150952/"
+    description: "Practical guide to understanding and building with LLMs."
+
+  - title: "Deep Learning"
+    author: "Ian Goodfellow, Yoshua Bengio, Aaron Courville"
+    type: "Book"
+    category: "Research"
+    link: "https://www.deeplearningbook.org/"
+    description: "The definitive textbook on deep learning fundamentals."
+
+  - title: "Stanford CS229 Machine Learning"
+    author: "Andrew Ng"
+    type: "Course"
+    category: "Research"
+    link: "https://cs229.stanford.edu/"
+    description: "Classic machine learning course from Stanford."
+
+  - title: "How to Read a Paper"
+    author: "S. Keshav"
+    type: "Article"
+    category: "Research"
+    link: "https://web.stanford.edu/class/ee384m/Handouts/HowtoReadPaper.pdf"
+    description: "Essential skill for any researcher - the three-pass approach."
+
+# Filter categories
+categories:
+  - id: "all"
+    name: "All"
+    icon: "fas fa-th"
+  - id: "SWE"
+    name: "Software Engineering"
+    icon: "fas fa-code"
+  - id: "DB"
+    name: "Databases"
+    icon: "fas fa-database"
+  - id: "DevOps"
+    name: "DevOps & Cloud"
+    icon: "fas fa-cloud"
+  - id: "Research"
+    name: "Research & AI"
+    icon: "fas fa-flask"

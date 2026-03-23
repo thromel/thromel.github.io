@@ -1,0 +1,92 @@
+---
+layout: default
+title: Learning
+navbar_title: Learning
+---
+
+<!-- Page Header -->
+<div class="section-header">
+  <h2 class="section-title">Learning</h2>
+  <p class="section-subtitle">What I'm currently learning and recommended resources</p>
+</div>
+
+<!-- Currently Learning -->
+<section class="section" style="margin-bottom: 3rem;">
+  <h3 class="learning-section-title">Currently Learning</h3>
+
+  <div class="currently-learning-grid">
+    {% for item in site.data.learning.currently_learning %}
+    <div class="learning-item">
+      <div class="learning-item-icon">
+        <i class="{{ item.icon }}"></i>
+      </div>
+      <div class="learning-item-content">
+        <h4 class="learning-item-title">{{ item.title }}</h4>
+        <div class="learning-item-meta">
+          <span class="learning-type">{{ item.type }}</span>
+          <span class="learning-category" data-category="{{ item.category }}">{{ item.category }}</span>
+        </div>
+        <div class="learning-progress">
+          <div class="learning-progress-bar" style="width: {{ item.progress }}%;"></div>
+        </div>
+        <span class="learning-progress-text">{{ item.progress }}% complete</span>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+<!-- Learning Resources -->
+<section class="section">
+  <h3 class="learning-section-title">Recommended Resources</h3>
+
+  <!-- Filter Buttons -->
+  <div class="learning-filters">
+    {% for cat in site.data.learning.categories %}
+    <button class="filter-btn {% if cat.id == 'all' %}active{% endif %}" data-filter="{{ cat.id }}">
+      <i class="{{ cat.icon }}"></i>
+      <span>{{ cat.name }}</span>
+    </button>
+    {% endfor %}
+  </div>
+
+  <!-- Resources Grid -->
+  <div class="resources-grid">
+    {% for resource in site.data.learning.resources %}
+    <a href="{{ resource.link }}" target="_blank" class="resource-card" data-category="{{ resource.category }}">
+      <div class="resource-type">{{ resource.type }}</div>
+      <h4 class="resource-title">{{ resource.title }}</h4>
+      <p class="resource-author">{{ resource.author }}</p>
+      <p class="resource-description">{{ resource.description }}</p>
+      <span class="resource-category">{{ resource.category }}</span>
+    </a>
+    {% endfor %}
+  </div>
+</section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const resourceCards = document.querySelectorAll('.resource-card');
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', function() {
+      // Update active state
+      filterBtns.forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+
+      const filter = this.dataset.filter;
+
+      // Filter cards
+      resourceCards.forEach(card => {
+        if (filter === 'all' || card.dataset.category === filter) {
+          card.style.display = '';
+          card.style.animation = 'fadeIn 0.3s ease';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  });
+});
+</script>

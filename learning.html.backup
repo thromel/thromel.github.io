@@ -1,0 +1,75 @@
+---
+layout: default
+title: Learning
+navbar_title: Learning
+---
+
+<div class="row mt-3">
+    <div class="col-12 col-lg-10 mx-auto">
+        <div class="card border-0 shadow-sm">
+            <div class="card-body">
+                <h3 class="mb-3">Learning</h3>
+                <p>Welcome to my Learning page! Here I'll share resources, notes, and ongoing learning journeys related to software engineering, cloud, AI, and more.</p>
+                
+                <!-- Software Engineering Reading List -->
+                <div class="mt-4">
+                    <h4 class="mb-3">Software Engineering Reading List</h4>
+                    <p>A curated collection of books and resources for software engineers, architects, and tech leaders.</p>
+                    
+                    <div class="mb-3">
+                        <div class="d-flex">
+                            <div><i class="fas fa-star text-warning mr-2"></i> = Highly recommended</div>
+                            <div class="ml-auto">
+                                <button id="showStarredOnly" class="btn btn-sm btn-outline-primary">Recommended Only</button>
+                                <button id="showAll" class="btn btn-sm btn-secondary ml-2">Show All</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <ul class="book-list pl-0" style="list-style-type: none;">
+                        {% for book in site.data.books %}
+                        <li class="book-item py-2 {% if book.starred %}starred-book{% else %}regular-book{% endif %}" style="border-bottom: 1px solid var(--border-color);">
+                            {% if book.starred %}<i class="fas fa-star text-warning mr-2"></i>{% else %}<i class="fas fa-book mr-2 text-muted"></i>{% endif %}
+                            <strong>{{ book.title }}</strong>
+                            {% if book.subtitle %}<span class="text-muted"> — {{ book.subtitle }}</span>{% endif %}
+                            <div class="text-muted small">by {{ book.author }}</div>
+                        </li>
+                        {% endfor %}
+                    </ul>
+
+                    <script>
+                        document.addEventListener('DOMContentLoaded', function() {
+                            const showStarredOnlyBtn = document.getElementById('showStarredOnly');
+                            const showAllBtn = document.getElementById('showAll');
+                            const bookItems = document.querySelectorAll('.book-item');
+                            
+                            showStarredOnlyBtn.addEventListener('click', function() {
+                                bookItems.forEach(item => {
+                                    if (item.classList.contains('starred-book')) {
+                                        item.style.display = '';
+                                    } else {
+                                        item.style.display = 'none';
+                                    }
+                                });
+                                showStarredOnlyBtn.classList.remove('btn-outline-primary');
+                                showStarredOnlyBtn.classList.add('btn-primary');
+                                showAllBtn.classList.remove('btn-secondary');
+                                showAllBtn.classList.add('btn-outline-secondary');
+                            });
+                            
+                            showAllBtn.addEventListener('click', function() {
+                                bookItems.forEach(item => {
+                                    item.style.display = '';
+                                });
+                                showAllBtn.classList.remove('btn-outline-secondary');
+                                showAllBtn.classList.add('btn-secondary');
+                                showStarredOnlyBtn.classList.remove('btn-primary');
+                                showStarredOnlyBtn.classList.add('btn-outline-primary');
+                            });
+                        });
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 

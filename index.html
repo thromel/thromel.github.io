@@ -1,0 +1,385 @@
+---
+layout: default
+title: Tanzim Hossain Romel
+navbar_title: Home
+---
+
+<div class="homepage-classic">
+
+<!-- Hero Section - Minimal Style -->
+<div class="hero-section">
+  <div class="hero-content">
+    <!-- Name & Tagline -->
+    <h1 class="hero-name">{{ site.data.profile.primary_name }}</h1>
+    <p class="hero-tagline">Software Engineer · Software Engineering Researcher</p>
+
+    <!-- Minimal Bio -->
+    <p class="hero-bio">
+      <strong>Software engineer and researcher</strong> and CS graduate from <a href="https://cse.buet.ac.bd" target="_blank">BUET</a>. I will soon be starting an <strong>M.Sc in Computing Science</strong> at the <a href="https://www.ualberta.ca/en/computing-science/index.html" target="_blank">University of Alberta</a>. I study how AI changes software development, from secure ML pipelines to developer tools. At <a href="{{ site.data.profile.current_company.url }}" target="_blank">{{ site.data.profile.current_company.name }}</a>, I build healthcare systems that scale. I care about open source and research that makes software engineering more accessible.
+    </p>
+    <p class="hero-bio hero-bio-personal">
+      Outside of work, I read a lot of history and economics, especially how civilizations rise and fall and how markets shape behavior. When I'm not debugging, I'm usually traveling or reading fiction.
+      <a href="{{ 'about' | relative_url }}" class="hero-about-link">More about me →</a>
+    </p>
+
+    <!-- Research Interests -->
+    <div class="hero-interests">
+      {% for interest in site.data.profile.research_interests %}
+      <span class="interest-pill">{{ interest }}</span>
+      {% endfor %}
+    </div>
+
+    <!-- Contact & Social Row -->
+    <div class="hero-actions">
+      <div class="hero-links">
+        <a href="mailto:{{ site.data.profile.email }}" class="hero-link">
+          <i class="fas fa-envelope"></i>
+          <span>{{ site.data.profile.email }}</span>
+        </a>
+        {% if site.data.profile.meeting_link %}
+        <a href="{{ site.data.profile.meeting_link }}" class="hero-link" target="_blank" rel="noopener noreferrer">
+          <i class="far fa-calendar-alt"></i>
+          <span>Meeting</span>
+        </a>
+        {% endif %}
+        <a href="{{ 'research' | relative_url }}" class="hero-link">
+          <i class="fas fa-microscope"></i>
+          <span>Research</span>
+        </a>
+        <a href="/assets/pdf/cv.pdf" class="hero-link hero-link-primary" target="_blank">
+          <i class="fas fa-file-alt"></i>
+          <span>CV</span>
+        </a>
+      </div>
+
+      <div class="hero-social">
+        {% if site.data.profile.github %}
+        <a href="https://github.com/{{ site.data.profile.github }}" class="social-icon" title="GitHub" target="_blank">
+          <i class="fab fa-github"></i>
+        </a>
+        {% endif %}
+        {% if site.data.profile.linkedin %}
+        <a href="https://www.linkedin.com/in/{{ site.data.profile.linkedin }}" class="social-icon" title="LinkedIn" target="_blank">
+          <i class="fab fa-linkedin"></i>
+        </a>
+        {% endif %}
+        {% if site.data.profile.gscholar %}
+        <a href="https://scholar.google.com/citations?user={{ site.data.profile.gscholar }}" class="social-icon" title="Google Scholar" target="_blank">
+          <i class="ai ai-google-scholar"></i>
+        </a>
+        {% endif %}
+        {% if site.data.profile.orcid %}
+        <a href="https://orcid.org/{{ site.data.profile.orcid }}" class="social-icon" title="ORCID" target="_blank">
+          <i class="ai ai-orcid"></i>
+        </a>
+        {% endif %}
+        <a href="{{ 'contributions' | relative_url }}" class="social-icon" title="Open Source">
+          <i class="fas fa-code-branch"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Profile Image -->
+  <div class="hero-image-wrapper">
+    <img src="{{ site.data.profile.portrait_url }}" alt="{{ site.data.profile.primary_name }}" class="hero-image">
+  </div>
+</div>
+
+<section class="current-focus" aria-labelledby="current-focus-title">
+  <div class="current-focus-header">
+    <p class="current-focus-kicker">What I am focused on now</p>
+    <h2 id="current-focus-title" class="current-focus-title">The current mix of research questions, production systems work, and reading that is shaping the next phase.</h2>
+  </div>
+  <div class="current-focus-grid">
+    <article class="current-focus-card">
+      <span class="current-focus-label">Research</span>
+      <p>I am studying how AI-assisted developer tooling fails in practice, especially around reliability, unsafe defaults, and the gap between demo behavior and real engineering workflows.</p>
+    </article>
+    <article class="current-focus-card">
+      <span class="current-focus-label">Engineering</span>
+      <p>I am building backend healthcare systems at {{ site.data.profile.current_company.name }}, which keeps the research grounded in safety, scale, and operational reality.</p>
+    </article>
+    <article class="current-focus-card">
+      <span class="current-focus-label">Reading</span>
+      <p>I am alternating between systems and AI books, history, and economics. That mix is still the fastest way for me to reset and notice better questions.</p>
+    </article>
+  </div>
+</section>
+
+<!-- Open Source Contributions -->
+<div id="oss-summary" class="oss-inline" data-github-user="{{ site.data.profile.github | default: 'thromel' }}" style="display: none;">
+  <a href="{{ 'contributions' | relative_url }}" class="oss-badge">
+    <i class="fas fa-code-merge"></i>
+    <span id="oss-summary-text" aria-live="polite"></span>
+  </a>
+  <span class="oss-repos">
+    to <a href="https://github.com/microsoft/TypeScript/pulls?q=author%3Athromel" target="_blank" rel="noopener noreferrer">TypeScript</a>,
+    <a href="https://github.com/dotnet/efcore/pulls?q=author%3Athromel" target="_blank" rel="noopener noreferrer">EF Core</a>,
+    <a href="https://github.com/langchain-ai/langchain/pulls?q=author%3Athromel" target="_blank" rel="noopener noreferrer">LangChain</a>,
+    <a href="https://github.com/Kaliumhexacyanoferrat/GenHTTP/pulls?q=author%3Athromel" target="_blank" rel="noopener noreferrer">GenHTTP</a>,
+    <a href="https://github.com/dynaroars/csconfs/pulls?q=author%3Athromel" target="_blank" rel="noopener noreferrer">csconfs</a>
+  </span>
+</div>
+
+<!-- Recent News Widget -->
+<div class="news-widget">
+  <div class="news-widget-header">
+    <h3 class="news-widget-title"><i class="fas fa-newspaper"></i> Recent News</h3>
+    <a href="{{ 'news' | relative_url }}" class="news-widget-more">View all →</a>
+  </div>
+  <div class="news-list">
+    {% assign sorted_news = site.data.news | sort: 'date' | reverse %}
+    {% for item in sorted_news limit:3 %}
+    <div class="news-item">
+      <div class="news-date">
+        <span class="news-date-month">{{ item.date | date: "%b" }}</span>
+        <span class="news-date-year">{{ item.date | date: "%Y" }}</span>
+      </div>
+      <div class="news-content">
+        <div class="news-title">{{ item.title }}</div>
+        <div class="news-description">{{ item.description | truncate: 120 }}</div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+<!-- Publications -->
+{% if site.data.profile.publications %}
+<section class="section">
+  <div class="section-header">
+    <h2 class="section-title">Publications</h2>
+  </div>
+  <div class="timeline">
+    {% for pub in site.data.profile.publications limit:3 %}
+    <div class="timeline-item">
+      <div class="timeline-header">
+        <h3 class="timeline-title">{{ pub.title }}</h3>
+        <span class="timeline-date">{{ pub.date }}</span>
+      </div>
+      <p class="timeline-subtitle"><em>{{ pub.venue }}</em></p>
+      {% if pub.description %}
+      <p class="timeline-description">{{ pub.description }}</p>
+      {% endif %}
+    </div>
+    {% endfor %}
+  </div>
+  <div class="text-right mt-4">
+    <a href="{{ 'publications' | relative_url }}" class="btn btn-text">View All Publications →</a>
+  </div>
+</section>
+{% endif %}
+
+<!-- Current Research -->
+<section class="section section-research">
+  <div class="section-header">
+    <h2 class="section-title"><a href="/research"><i class="fas fa-microscope section-icon"></i> Research</a></h2>
+  </div>
+  <div class="timeline">
+    {% for item in site.data.profile.research %}
+    <div class="timeline-item{% if forloop.first %} featured{% endif %}">
+      <div class="timeline-header">
+        {% assign showcase_item = site.showcase | where: "title", item.title | first %}
+        <h3 class="timeline-title">
+          {% if showcase_item %}
+          <a href="{{ showcase_item.url | relative_url }}">{{ item.title }}</a>
+          {% elsif item.link and item.link contains "/research/" %}
+          <a href="{{ item.link | relative_url }}">{{ item.title }}</a>
+          {% elsif item.link %}
+          <a href="{{ item.link }}" target="_blank">{{ item.title }}</a>
+          {% else %}
+          {{ item.title }}
+          {% endif %}
+          {% if item.status %}
+          <span class="research-badge {% if item.status == 'In Review' %}in-review{% elsif item.status == 'In Progress' %}in-progress{% else %}targeting{% endif %}"><i class="fas fa-{% if item.status == 'In Progress' %}code{% else %}clock{% endif %}"></i> {{ item.status }}</span>
+          {% endif %}
+        </h3>
+        <span class="timeline-date">{{ item.date }}</span>
+      </div>
+      <p class="timeline-description">{{ item.short_description | default: item.description }}</p>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+<!-- Education -->
+<section class="section section-education">
+  <div class="section-header">
+    <h2 class="section-title"><i class="fas fa-graduation-cap section-icon"></i> Education</h2>
+  </div>
+  <div class="timeline">
+    {% for edu in site.data.profile.education limit:2 %}
+    <div class="timeline-item">
+      <div class="timeline-header timeline-header-with-logo">
+        <div class="timeline-heading-group">
+          {% if edu.logo %}
+          <img src="{{ edu.logo | relative_url }}" alt="{{ edu.name }} badge" class="timeline-logo">
+          {% endif %}
+          <div class="timeline-heading-copy">
+            <h3 class="timeline-title">
+              {% if edu.url %}
+              <a href="{{ edu.url }}" target="_blank" class="institution-link">{{ edu.name }}</a>
+              {% else %}
+              {{ edu.name }}
+              {% endif %}
+            </h3>
+            <p class="timeline-subtitle">
+              <span>{{ edu.position }}</span>
+              {% if edu.status %}
+              <span class="education-status-badge">{{ edu.status }}</span>
+              {% endif %}
+            </p>
+          </div>
+        </div>
+        <span class="timeline-date">{{ edu.date }}</span>
+      </div>
+      <div class="timeline-description">{{ edu.description }}</div>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+<!-- Work -->
+<section class="section section-work">
+  <div class="section-header">
+    <h2 class="section-title"><i class="fas fa-briefcase section-icon"></i> Work</h2>
+  </div>
+  <div class="timeline">
+    {% for position in site.data.profile.positions limit:2 %}
+    <div class="timeline-item">
+      <div class="timeline-header">
+        <h3 class="timeline-title">{{ position.name | split: "," | first }}</h3>
+        <span class="timeline-date">{{ position.date }}</span>
+      </div>
+      <p class="timeline-description">{{ position.description }}</p>
+    </div>
+    {% endfor %}
+  </div>
+  <div class="text-right mt-4">
+    <a href="{{ 'experience' | relative_url }}" class="btn btn-text">View All Work →</a>
+  </div>
+</section>
+
+<!-- Selected Projects -->
+<section class="section section-projects">
+  <div class="section-header">
+    <h2 class="section-title"><i class="fas fa-code section-icon"></i> Selected Projects</h2>
+  </div>
+  <div class="projects-grid">
+    {% for project in site.data.profile.projects limit:4 %}
+    <div class="project-card">
+      <h3 class="project-title">
+        {% if project.link %}
+        <a href="{{ project.link }}" target="_blank">{{ project.title }}</a>
+        {% else %}
+        {{ project.title }}
+        {% endif %}
+      </h3>
+      <p class="project-description">{{ project.description }}</p>
+      {% if project.technologies %}
+      <div class="project-tags">
+        {% for tech in project.technologies limit:5 %}
+        <span class="project-tag">{{ tech }}</span>
+        {% endfor %}
+      </div>
+      {% endif %}
+      {% if project.github or project.link %}
+      <div class="project-actions">
+        {% if project.github %}
+        <a href="{{ project.github }}" target="_blank" class="project-action">
+          <i class="fab fa-github"></i> Code
+        </a>
+        {% endif %}
+        {% if project.link %}
+        <a href="{{ project.link }}" target="_blank" class="project-action">
+          <i class="fas fa-external-link-alt"></i> View
+        </a>
+        {% endif %}
+      </div>
+      {% endif %}
+    </div>
+    {% endfor %}
+  </div>
+  <div class="text-center mt-8">
+    <a href="{{ 'projects' | relative_url }}" class="btn btn-secondary">View All Projects</a>
+  </div>
+</section>
+
+<!-- Currently Learning -->
+<section class="section section-learning">
+  <div class="section-header">
+    <h2 class="section-title"><i class="fas fa-seedling section-icon"></i> Currently Learning</h2>
+  </div>
+  <div class="learning-grid">
+    <div class="learning-category">
+      <h4 class="learning-category-title"><i class="fas fa-code"></i> Learning</h4>
+      <div class="learning-items">
+        <span class="learning-item"><i class="devicon-nvidia-plain"></i> CUDA Programming</span>
+        <span class="learning-item"><i class="devicon-go-plain"></i> GoLang</span>
+      </div>
+    </div>
+    <div class="learning-category">
+      <h4 class="learning-category-title"><i class="fas fa-book"></i> Reading</h4>
+      <div class="learning-items">
+        <a href="https://www.oreilly.com/library/view/designing-data-intensive-applications/9781098119058/" target="_blank" class="learning-item learning-link"><i class="fas fa-database"></i> Designing Data-Intensive Applications (2nd ed)</a>
+        <a href="https://www.oreilly.com/library/view/ai-engineering/9781098166298/" target="_blank" class="learning-item learning-link"><i class="fas fa-robot"></i> AI Engineering <span class="learning-author">by Chip Huyen</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Technical Skills -->
+<section class="section section-skills">
+  <div class="section-header">
+    <h2 class="section-title"><i class="fas fa-tools section-icon"></i> Technical Skills</h2>
+  </div>
+  <div class="skills-grid">
+    {% for category in site.data.profile.technical_skills limit:4 %}
+    <div class="skill-category">
+      <h4 class="skill-category-title">
+        {% case category.type %}
+          {% when "Backend & Systems" %}
+            <i class="fas fa-server"></i>
+          {% when "AI & Agents" %}
+            <i class="fas fa-brain"></i>
+          {% when "Databases" %}
+            <i class="fas fa-database"></i>
+          {% when "Cloud & DevOps" %}
+            <i class="fas fa-cloud"></i>
+          {% else %}
+            <i class="fas fa-cogs"></i>
+        {% endcase %}
+        {{ category.type }}
+      </h4>
+      <div class="skill-list">
+        {% for skill in category.names limit:5 %}
+        <span class="skill-item">
+          {% case skill %}
+            {% when "C#/.NET Core" %}<i class="devicon-dotnetcore-plain"></i>
+            {% when "Go" %}<i class="devicon-go-plain"></i>
+            {% when "C++" %}<i class="devicon-cplusplus-plain"></i>
+            {% when "EF Core" %}<i class="devicon-dotnetcore-plain"></i>
+            {% when "Python" %}<i class="devicon-python-plain"></i>
+            {% when "PyTorch" %}<i class="devicon-pytorch-plain"></i>
+            {% when "CUDA" %}<i class="devicon-nvidia-plain"></i>
+            {% when "PostgreSQL" %}<i class="devicon-postgresql-plain"></i>
+            {% when "MongoDB" %}<i class="devicon-mongodb-plain"></i>
+            {% when "SQL Server" %}<i class="devicon-microsoftsqlserver-plain"></i>
+            {% when "DynamoDB" %}<i class="devicon-dynamodb-plain"></i>
+            {% when "AWS" %}<i class="devicon-amazonwebservices-plain-wordmark"></i>
+            {% when "Docker" %}<i class="devicon-docker-plain"></i>
+            {% when "Kubernetes" %}<i class="devicon-kubernetes-plain"></i>
+            {% when "Terraform" %}<i class="devicon-terraform-plain"></i>
+            {% when "GitHub Actions" %}<i class="devicon-github-original"></i>
+          {% endcase %}
+          {{ skill }}
+        </span>
+        {% endfor %}
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+</div>

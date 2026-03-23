@@ -1,0 +1,394 @@
+# Software Engineering O'Reilly Reading List
+# Organized by priority and reading order
+
+books:
+  # Critical Priority Books (Reading Order 1-4)
+  - title: "Clean Architecture: A Craftsman's Guide to Software Structure and Design"
+    category: "Software Architecture"
+    difficulty: "🟡 Intermediate"
+    est_weeks: 2
+    notes: "Essential foundation for software architecture. Start here."
+    url: "https://learning.oreilly.com/api/v1/continue/9780134494272/"
+    priority: "🔥 Critical"
+    reading_order: 1
+    status: "📋 Not Started"
+
+  - title: "Head First Design Patterns, 2nd Edition"
+    category: "Design Patterns & Principles"
+    difficulty: "🟢 Beginner"
+    est_weeks: 3
+    notes: "Visual, engaging introduction to design patterns. Great for beginners."
+    url: "https://learning.oreilly.com/api/v1/continue/9781492077992/"
+    priority: "🔥 Critical"
+    reading_order: 2
+    status: "📋 Not Started"
+
+  - title: "The Pragmatic Programmer: your journey to mastery, 20th Anniversary Edition, 2nd Edition"
+    category: "General Engineering"
+    difficulty: "🟢 Beginner"
+    est_weeks: 2
+    notes: "Timeless software development wisdom. Must-read for all developers."
+    url: "https://learning.oreilly.com/api/v1/continue/9780135956977/"
+    priority: "🔥 Critical"
+    reading_order: 3
+    status: "📋 Not Started"
+
+  - title: "Code Complete, 2nd Edition"
+    category: "General Engineering"
+    difficulty: "🟡 Intermediate"
+    est_weeks: 4
+    notes: "Comprehensive guide to software construction. Dense but valuable."
+    url: "https://learning.oreilly.com/api/v1/continue/0735619670/"
+    priority: "🔥 Critical"
+    reading_order: 4
+    status: "📋 Not Started"
+
+  - title: "Building Microservices, 2nd Edition"
+    category: "Microservices & Distributed"
+    difficulty: "🟡 Intermediate"
+    est_weeks: 3
+    url: "https://learning.oreilly.com/api/v1/continue/9781492034018/"
+    priority: "🔥 Critical"
+    reading_order: 18
+    status: "📋 Not Started"
+
+  - title: "The Staff Engineer's Path"
+    category: "Leadership & Career"
+    difficulty: "🟡 Intermediate"
+    est_weeks: 2
+    url: "https://learning.oreilly.com/api/v1/continue/9781098118723/"
+    priority: "🔥 Critical"
+    reading_order: 61
+    status: "📋 Not Started"
+
+  # High Priority Books
+  - title: "Software Engineering at Google"
+    category: "General Engineering"
+    difficulty: "🟡 Intermediate"
+    est_weeks: 3
+    notes: "Insights into engineering practices at scale. Real-world examples."
+    url: "https://learning.oreilly.com/api/v1/continue/9781492082781/"
+    priority: "⭐ High"
+    reading_order: 5
+    status: "📋 Not Started"
+
+  - title: "Refactoring: Improving the Design of Existing Code"
+    category: "Design Patterns & Principles"
+    difficulty: "🟡 Intermediate"
+    est_weeks: 3
+    notes: "Essential refactoring techniques. Reference-style book."
+    url: "https://learning.oreilly.com/api/v1/continue/9780134757681/"
+    priority: "⭐ High"
+    reading_order: 6
+    status: "📋 Not Started"
+
+  - title: "Working Effectively with Legacy Code"
+    category: "Testing & Quality"
+    difficulty: "🟡 Intermediate"
+    est_weeks: 2
+    notes: "Critical for working with existing codebases. Practical strategies."
+    url: "https://learning.oreilly.com/api/v1/continue/0131177052/"
+    priority: "⭐ High"
+    reading_order: 7
+    status: "📋 Not Started"
+
+  - title: "Head First Software Architecture"
+    category: "Software Architecture"
+    difficulty: "🟢 Beginner"
+    est_weeks: 3
+    notes: "Beginner-friendly architecture introduction. Visual learning style."
+    url: "https://learning.oreilly.com/api/v1/continue/9781098134341/"
+    priority: "⭐ High"
+    reading_order: 8
+    status: "📋 Not Started"
+
+  - title: "Fundamentals of Software Architecture"
+    category: "Software Architecture"
+    difficulty: "🟡 Intermediate"
+    est_weeks: 3
+    notes: "Comprehensive architecture fundamentals. Core reading for architects."
+    url: "https://learning.oreilly.com/api/v1/continue/9781492043447/"
+    priority: "⭐ High"
+    reading_order: 9
+    status: "📋 Not Started"
+
+  - title: "Modern Software Engineering: Doing What Works to Build Better Software Faster"
+    category: "General Engineering"
+    difficulty: "🟡 Intermediate"
+    est_weeks: 2
+    notes: "Modern approaches to software development. Practical and opinionated."
+    url: "https://learning.oreilly.com/api/v1/continue/9780137314942/"
+    priority: "⭐ High"
+    reading_order: 10
+    status: "📋 Not Started"
+
+  - title: "Domain-Driven Design: Tackling Complexity in the Heart of Software"
+    category: "Software Architecture"
+    difficulty: "🔴 Advanced"
+    est_weeks: 4
+    notes: "Foundational DDD book. Complex but essential for domain modeling."
+    url: "https://learning.oreilly.com/api/v1/continue/0321125215/"
+    priority: "⭐ High"
+    reading_order: 11
+    status: "📋 Not Started"
+
+  - title: "Software Architecture: The Hard Parts"
+    category: "Software Architecture"
+    difficulty: "🔴 Advanced"
+    est_weeks: 3
+    url: "https://learning.oreilly.com/api/v1/continue/9781492086888/"
+    priority: "⭐ High"
+    reading_order: 16
+    status: "📋 Not Started"
+
+  - title: "Microservices Patterns"
+    category: "Microservices & Distributed"
+    difficulty: "🟡 Intermediate"
+    est_weeks: 3
+    url: "https://learning.oreilly.com/api/v1/continue/9781617294549/"
+    priority: "⭐ High"
+    reading_order: 19
+    status: "📋 Not Started"
+
+  - title: "Monolith to Microservices"
+    category: "Microservices & Distributed"
+    difficulty: "🟡 Intermediate"
+    est_weeks: 2
+    url: "https://learning.oreilly.com/api/v1/continue/9781492047834/"
+    priority: "⭐ High"
+    reading_order: 20
+    status: "📋 Not Started"
+
+  - title: "Building Event-Driven Microservices"
+    category: "Microservices & Distributed"
+    difficulty: "🟡 Intermediate"
+    est_weeks: 2
+    url: "https://learning.oreilly.com/api/v1/continue/9781492057888/"
+    priority: "⭐ High"
+    reading_order: 21
+    status: "📋 Not Started"
+
+  - title: "Designing Distributed Systems, 2nd Edition"
+    category: "Microservices & Distributed"
+    difficulty: "🔴 Advanced"
+    est_weeks: 2
+    url: "https://learning.oreilly.com/api/v1/continue/9781098156343/"
+    priority: "⭐ High"
+    reading_order: 22
+    status: "📋 Not Started"
+
+  - title: "Patterns of Distributed Systems"
+    category: "Microservices & Distributed"
+    difficulty: "🔴 Advanced"
+    est_weeks: 3
+    url: "https://learning.oreilly.com/api/v1/continue/9780138222246/"
+    priority: "⭐ High"
+    reading_order: 23
+    status: "📋 Not Started"
+
+  - title: "Building Resilient Distributed Systems"
+    category: "Microservices & Distributed"
+    difficulty: "🔴 Advanced"
+    est_weeks: 2
+    url: "https://learning.oreilly.com/api/v1/continue/9781098163532/"
+    priority: "⭐ High"
+    reading_order: 24
+    status: "📋 Not Started"
+
+  - title: "Grokking Relational Database Design"
+    category: "Data Engineering"
+    difficulty: "🟡 Intermediate"
+    est_weeks: 2
+    url: "https://learning.oreilly.com/api/v1/continue/9781633437418/"
+    priority: "⭐ High"
+    reading_order: 26
+    status: "📋 Not Started"
+
+  - title: "Database Internals"
+    category: "Data Engineering"
+    difficulty: "🔴 Advanced"
+    est_weeks: 4
+    url: "https://learning.oreilly.com/api/v1/continue/9781492040330/"
+    priority: "⭐ High"
+    reading_order: 27
+    status: "📋 Not Started"
+
+  - title: "Fundamentals of Data Engineering"
+    category: "Data Engineering"
+    difficulty: "🟡 Intermediate"
+    est_weeks: 3
+    url: "https://learning.oreilly.com/api/v1/continue/9781098108298/"
+    priority: "⭐ High"
+    reading_order: 28
+    status: "📋 Not Started"
+
+  - title: "Learning API Styles"
+    category: "Design Patterns & Principles"
+    difficulty: "🟡 Intermediate"
+    est_weeks: 2
+    url: "https://learning.oreilly.com/api/v1/continue/9781098153984/"
+    priority: "⭐ High"
+    reading_order: 29
+    status: "📋 Not Started"
+
+  - title: "Mastering API Architecture"
+    category: "Design Patterns & Principles"
+    difficulty: "🔴 Advanced"
+    est_weeks: 3
+    url: "https://learning.oreilly.com/api/v1/continue/9781492090625/"
+    priority: "⭐ High"
+    reading_order: 30
+    status: "📋 Not Started"
+
+  - title: "Microservice APIs"
+    category: "Microservices & Distributed"
+    difficulty: "🟡 Intermediate"
+    est_weeks: 2
+    url: "https://learning.oreilly.com/api/v1/continue/9781617298417/"
+    priority: "⭐ High"
+    reading_order: 31
+    status: "📋 Not Started"
+
+  - title: "Web Application Security, 2nd Edition"
+    category: "Testing & Quality"
+    difficulty: "🟡 Intermediate"
+    est_weeks: 3
+    url: "https://learning.oreilly.com/api/v1/continue/9781098143923/"
+    priority: "⭐ High"
+    reading_order: 32
+    status: "📋 Not Started"
+
+  - title: "Learning OpenTelemetry"
+    category: "DevOps & CI/CD"
+    difficulty: "🟡 Intermediate"
+    est_weeks: 2
+    url: "https://learning.oreilly.com/api/v1/continue/9781098147174/"
+    priority: "⭐ High"
+    reading_order: 35
+    status: "📋 Not Started"
+
+  - title: "CI/CD Design Patterns"
+    category: "DevOps & CI/CD"
+    difficulty: "🟡 Intermediate"
+    est_weeks: 2
+    url: "https://learning.oreilly.com/api/v1/continue/9781835889640/"
+    priority: "⭐ High"
+    reading_order: 36
+    status: "📋 Not Started"
+
+  - title: "The Phoenix Project"
+    category: "General Engineering"
+    difficulty: "🟢 Beginner"
+    est_weeks: 2
+    url: "https://learning.oreilly.com/api/v1/continue/9781457191350/"
+    priority: "⭐ High"
+    reading_order: 38
+    status: "📋 Not Started"
+
+  - title: "Implementing Domain-Driven Design"
+    category: "Software Architecture"
+    difficulty: "⚫ Expert"
+    est_weeks: 5
+    url: "https://learning.oreilly.com/api/v1/continue/9780133039900/"
+    priority: "⭐ High"
+    reading_order: 43
+    status: "📋 Not Started"
+
+  - title: "Balancing Coupling in Software Design"
+    category: "Design Patterns & Principles"
+    difficulty: "🔴 Advanced"
+    est_weeks: 2
+    url: "https://learning.oreilly.com/api/v1/continue/9780137353514/"
+    priority: "⭐ High"
+    reading_order: 44
+    status: "📋 Not Started"
+
+  - title: "The Software Architect Elevator"
+    category: "Software Architecture"
+    difficulty: "🟡 Intermediate"
+    est_weeks: 2
+    url: "https://learning.oreilly.com/api/v1/continue/9781492077534/"
+    priority: "⭐ High"
+    reading_order: 46
+    status: "📋 Not Started"
+
+  - title: "Systems Performance: Enterprise and the Cloud"
+    category: "Performance & Systems"
+    difficulty: "🔴 Advanced"
+    est_weeks: 4
+    url: "https://learning.oreilly.com/api/v1/continue/9780133390124/"
+    priority: "⭐ High"
+    reading_order: 49
+    status: "📋 Not Started"
+
+  - title: "System Design on AWS"
+    category: "Cloud & AWS"
+    difficulty: "🟡 Intermediate"
+    est_weeks: 3
+    url: "https://learning.oreilly.com/api/v1/continue/9781098146887/"
+    priority: "⭐ High"
+    reading_order: 53
+    status: "📋 Not Started"
+
+  - title: "Amazon Web Services in Action, Third Edition"
+    category: "Cloud & AWS"
+    difficulty: "🟡 Intermediate"
+    est_weeks: 4
+    url: "https://learning.oreilly.com/api/v1/continue/9781633439160/"
+    priority: "⭐ High"
+    reading_order: 54
+    status: "📋 Not Started"
+
+  - title: "Engineering Resilient Systems on AWS"
+    category: "Cloud & AWS"
+    difficulty: "🔴 Advanced"
+    est_weeks: 2
+    url: "https://learning.oreilly.com/api/v1/continue/9781098162412/"
+    priority: "⭐ High"
+    reading_order: 55
+    status: "📋 Not Started"
+
+  - title: "Engineering Leadership: The Hard Parts"
+    category: "Leadership & Career"
+    difficulty: "🟡 Intermediate"
+    est_weeks: 2
+    url: "https://learning.oreilly.com/api/v1/continue/9781098175627/"
+    priority: "⭐ High"
+    reading_order: 62
+    status: "📋 Not Started"
+
+  - title: "Lead Developer Career Guide"
+    category: "Leadership & Career"
+    difficulty: "🟡 Intermediate"
+    est_weeks: 2
+    url: "https://learning.oreilly.com/api/v1/continue/9781633438071/"
+    priority: "⭐ High"
+    reading_order: 63
+    status: "📋 Not Started"
+
+  - title: "Leveling Up as a Tech Lead"
+    category: "Leadership & Career"
+    difficulty: "🟡 Intermediate"
+    est_weeks: 2
+    url: "https://learning.oreilly.com/api/v1/continue/9781098177508/"
+    priority: "⭐ High"
+    reading_order: 64
+    status: "📋 Not Started"
+
+  - title: "AI-Assisted Programming"
+    category: "General Engineering"
+    difficulty: "🟡 Intermediate"
+    est_weeks: 2
+    url: "https://learning.oreilly.com/api/v1/continue/9781098164553/"
+    priority: "⭐ High"
+    reading_order: 66
+    status: "📋 Not Started"
+
+  - title: "The Effective Software Engineer"
+    category: "General Engineering"
+    difficulty: "🟡 Intermediate"
+    est_weeks: 2
+    url: "https://learning.oreilly.com/api/v1/continue/9798341638167/"
+    priority: "⭐ High"
+    reading_order: 15
+    status: "📋 Not Started"

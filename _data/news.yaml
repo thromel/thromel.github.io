@@ -1,0 +1,18 @@
+- title: "Paper submitted to TOSEM 2026"
+  description: "Resubmitted 'An Empirical Study on Remote Code Execution in ML Model Hosting Ecosystems' to ACM Transactions on Software Engineering and Methodology (TOSEM) 2026. Preprint available on arXiv."
+  date: 2026-02-01
+- title: "Paper submitted to MSR 2026"
+  description: "Submitted 'An Empirical Study on Remote Code Execution in ML Model Hosting Ecosystems' to the Mining Software Repositories (MSR) 2026 conference. First large-scale cross-platform security study analyzing ~45,000 repositories across 5 major ML platforms."
+  date: 2025-10-15
+- title: "Received IQVIA Impact Program Silver Award"
+  description: "Honored with the IQVIA Impact Program Silver Award for outstanding performance and contributions to the KPI Library team."
+  date: 2025-05-15
+- title: "Paper submitted to ACM CSCW"
+  description: "Submitted 'Sentiment Analysis of Anonymous Crisis Reports in Bangladesh' to ACM CSCW 2025, analyzing crowd-sourced reports from Bangladesh's 2024 national crisis using transformer models."
+  date: 2024-10-21
+- title: "Started working as Software Development Engineer at IQVIA"
+  description: "Joined IQVIA as a Software Development Engineer, working on healthcare technology solutions and microservices-based applications handling millions of patient records."
+  date: 2023-06-01
+- title: "Graduated from BUET"
+  description: "Completed B.Sc in Computer Science and Engineering from Bangladesh University of Engineering and Technology with a GPA of 3.53/4.00."
+  date: 2023-05-27

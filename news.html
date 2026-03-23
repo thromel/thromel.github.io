@@ -1,0 +1,39 @@
+---
+layout: default
+title: News and Updates
+navbar_title: News
+---
+
+<!-- Page Header -->
+<div class="section-header">
+  <h2 class="section-title">News and Updates</h2>
+  <p class="section-subtitle">Recent updates, announcements, and milestones</p>
+</div>
+
+{% assign news_by_year = site.data.news | sort: "date" | reverse | group_by_exp: "item", "item.date | date: '%Y'" %}
+
+{% for year in news_by_year %}
+<!-- {{ year.name }} Section -->
+<section class="section">
+  <div class="section-header" style="margin-bottom: 2rem;">
+    <h2 class="section-title">{{ year.name }}</h2>
+  </div>
+
+  <div class="timeline">
+    {% for item in year.items %}
+    <div class="timeline-item">
+      <div class="timeline-header">
+        <h3 class="timeline-title">{{ item.title }}</h3>
+        <span class="timeline-date">{{ item.date | date: "%b %d, %Y" }}</span>
+      </div>
+
+      {% if item.description %}
+      <div class="timeline-description">
+        {{ item.description }}
+      </div>
+      {% endif %}
+    </div>
+    {% endfor %}
+  </div>
+</section>
+{% endfor %}

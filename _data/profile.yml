@@ -1,0 +1,649 @@
+primary_name: "Tanzim Hossain Romel"
+secondary_name: ""
+navbar_name: "Tanzim Hossain Romel"
+
+about_snippet: >-
+  Hi, I'm Tanzim. I'm a software engineer and researcher focused on AI/ML security and software engineering.
+  At <a href="https://www.iqvia.com" target="_blank">IQVIA</a>, I build microservices that handle millions of patient records
+  and add LLM features to healthcare analytics. I also work with researchers at
+  <a href="https://eng.auburn.edu" target="_blank">Auburn University</a> and
+  <a href="https://cse.buet.ac.bd" target="_blank">BUET</a> on ML security and blockchain systems.
+  I'm a <b>software engineer and researcher</b> and plan to push my work in computer science.
+
+current_company:
+  name: "IQVIA"
+  logo: "/assets/images/companies/iqvia-logo.png"
+  url: "https://www.iqvia.com/"
+
+positions:
+- name: Software Development Engineer 1, IQVIA
+  date: June 2023 - Present
+  logo: "/assets/images/companies/iqvia-logo.png"
+  description: >-
+    Backend engineer on the KPI Library team, building microservices-based healthcare applications that handle millions of patient records using .NET Core and C#. IQVIA (NYSE: IQV) provides analytics, technology solutions, and clinical research services to the life sciences industry, with 74,000+ employees across 100+ countries.
+  responsibilities:
+  - Built and deployed cloud-native microservices with <b>C#/.NET Core</b> and <b>EF Core</b> on <b>AWS</b> (Lambda, EC2, S3, DynamoDB); shipped RESTful APIs used by global pharmaceutical clients
+  - Led design and refactoring of complex filter logic, simplifying the codebase by 40% and improving filtering performance by 70% across multiple microservices
+  - Built a multi-agent system with <b>LangGraph</b> and <b>LangChain</b> using MCP (Model Context Protocol) to generate real-time dashboards from natural language prompts; implemented <b>RAG</b> pipelines for document retrieval and context-aware responses
+  - Cut complex query execution time by 60% through <b>PostgreSQL</b> query planning, indexing, and materialized views
+  - Implemented <b>in-memory caching</b> in <b>.NET</b> services and tuned <b>MongoDB</b> performance, improving API response times by 40% across healthcare data pipelines
+  - Built a multi-layer hashing approach that enabled automated <b>Playwright</b> tests for export features; led export test suite development; raised code coverage from 72% to 95%
+  - Improved CI/CD pipelines with optimized build stages and parallel test execution, cutting deployment time by 35%; added distributed tracing with <b>Jaeger</b> to reduce troubleshooting time by 50%
+  - Led proof-of-concept projects, mentored junior developers, and collaborated with cross-functional teams across time zones
+  - Received the <b>IQVIA Impact Program - Silver</b> award (May 2025) for performance and essential feature delivery
+  technologies:
+  - C#
+  - .NET Core
+  - EF Core
+  - PostgreSQL
+  - MongoDB
+  - AWS
+  - Docker
+  - Kubernetes
+  - LangGraph
+  - LangChain
+  - RAG
+  - Playwright
+  - Jaeger
+  - OpenTelemetry
+  - GitLab CI
+- name: Full Stack Engineer, Mindshare Bangladesh (Part-time)
+  date: Apr 2021 - Nov 2021
+  logo: "/assets/images/companies/mindshare-logo.png"
+  description: >-
+    Built an e-commerce aggregator platform that let brands promote products by pulling listings from multiple e-commerce sites across Bangladesh.
+  responsibilities:
+  - Built a web scraping system with Scrapy that collected product data from about 20 major e-commerce platforms in Bangladesh
+  - Deployed and maintained the scraper as a ScrapyRT server on DigitalOcean, enabling real-time extraction via API endpoints
+  - Built the backend with Express.js and MongoDB to manage, process, and aggregate product data from the scraper
+  - Created APIs for brands to host ads and integrate with the aggregated data
+  - Optimized database queries and caching to handle large volumes of product data
+  technologies:
+  - Python
+  - Scrapy
+  - ScrapyRT
+  - Express.js
+  - Node.js
+  - MongoDB
+  - DigitalOcean
+  - REST APIs
+  - Web Scraping
+  - Data Aggregation
+
+email: "romel.rcs@gmail.com"
+work_email: "tanzimhossain.romel@iqvia.com"
+phone: "+88 01771 600158"
+location: "Uttara, Dhaka, Bangladesh"
+meeting_link: "https://calendar.app.google/TfJi4rtVVpSrhdv9A"
+
+hometown: >-
+  I grew up in Rajshahi in northwestern Bangladesh, often called the "City of Education." It is known for its universities, silk production, mangoes, and the Padma River. That academic environment shaped my early interests.
+
+current_residence: >-
+  I live in Uttara, Dhaka, Bangladesh's capital and the country's main economic and cultural hub. It is a good place to collaborate with tech companies and research groups.
+
+cv_link: /cv/
+gscholar: zHV4EU8AAAAJ
+github: thromel
+twitter: tanzimhromel
+linkedin: thromel
+# wechat_qrcode: /assets/images/etc/wechat.jpg
+# wechat_prompt: >-
+#   Please tell me your <strong>name</strong> and <strong>affiliation</strong> (current or past) when adding my wechat. Thanks!
+orcid: 0009-0009-2432-8960
+
+summary:
+- "I'm Tanzim Hossain Romel, a <b>Software Development Engineer at IQVIA</b> and a recent <b>BUET CSE graduate</b>, working at the intersection of industry practice and academic research"
+- "My research focuses on <b>AI and software engineering</b>, especially <b>software security, LLM systems safety, and empirical software engineering</b>"
+- "I study vulnerabilities in machine learning ecosystems, methods for detecting adversarial behavior, and ways to improve reliability and safety through verification and runtime monitoring"
+- "I collaborate with researchers at <b>Bangladesh University of Engineering and Technology</b> and <b>Auburn University</b> on projects that connect theory with real software engineering challenges"
+- "At IQVIA, I build healthcare microservices, design cloud-native solutions, and integrate AI capabilities into production systems. I received the <b>IQVIA Impact Silver Award</b> for performance and innovation"
+- "I try to balance hands-on system building with rigorous research. See my <a href='/projects'>portfolio of projects</a> and <a href='/research'>research contributions</a> for examples"
+- "<b><a href='/assets/pdf/cv.pdf' target='_blank'>Complete curriculum vitae available here</a></b>"
+
+skills:
+  dotnet:
+    name: ".NET Ecosystem"
+    level: "Advanced"
+    description: >-
+      Build enterprise applications with .NET Core/6+ and C#. Regularly use ASP.NET Core Web APIs, Entity Framework Core,
+      LINQ, and dependency injection. Comfortable with clean architecture, repository patterns, and CQRS for scalable
+      microservices.
+    technologies:
+      - C#
+      - ASP.NET Core
+      - Entity Framework Core
+      - LINQ
+      - Dependency Injection
+      - xUnit
+      - Moq
+      - MediatR
+      - SignalR
+      - OpenTelemetry
+  
+  python:
+    name: "Python Stack"
+    level: "Intermediate"
+    description: >-
+      Use Python for data processing, web scraping, and backend development. Comfortable with FastAPI, Flask,
+      and Scrapy. Familiar with NumPy, Pandas, and basic machine learning work in scikit-learn and PyTorch.
+    technologies:
+      - FastAPI
+      - Flask
+      - Scrapy
+      - NumPy
+      - Pandas
+      - Matplotlib
+      - scikit-learn
+      - PyTorch
+      - asyncio
+      - Python-Selenium
+
+short_bio: >-
+  Hi I'm Tanzim. I'm a software engineer and aspiring researcher focused on <b>Software Engineering, AI/ML Security, Blockchain, and LLM Systems</b>, with a strong focus on <b>DevOps, Backend Engineering, and AI Engineering</b>. I'm especially interested in <b>Domain Driven Design, System Architecture, and Software Architecture</b>. I like work that blends research with hands-on building.
+  <br/><br/>
+  I believe consistent effort compounds. I keep a daily learning routine, maintain learning logs, and try to apply new ideas to real projects. That habit helps me balance research collaborations with my full-time engineering role.
+  <br/><br/>
+  I completed my B.Sc in Computer Science and Engineering from <b>Bangladesh University of Engineering and Technology</b> with a <b>CGPA of 3.53/4.0</b>. I earned a <span class="highlight-sessional"><b>3.86/4.0 GPA in Sessional Courses</b></span>, the lab and project-based core of BUET's curriculum. I received the <b>Dean's List Award</b> and placed <a href="https://tanzimhromel.com/projects/bangla_digit_recognition/" target="_blank">2nd in the Bangla Handwritten Digits Recognition contest</a>.
+  <br/><br/>
+  I will be starting the <b>M.Sc in Computing Science</b> at the <b>University of Alberta</b> soon, where I want to go deeper into software engineering research, trustworthy AI, and large-scale systems.
+  <br/><br/>
+  During undergrad, our project "<a href="/projects/blockchain-ticketing" target="_blank">Blockchain Based Ticketing Platform</a>" was a finalist in the <b><a href="https://bcolbd.org/2021/teams" target="_blank">Blockchain Olympiad Bangladesh 2021 (BCOLBD 2021)</a></b>. I worked with <a href="https://fazledyn.github.io" target="_blank">Ataf Fazledin Ahamed</a> and <a href="https://www.linkedin.com/in/md-tanzim-azad-a879a51b7/" target="_blank">Md. Tanzim Azad Nishan</a> to build a decentralized solution that addressed ticket fraud and scalping through smart contracts.
+  <br/><br/>
+  I work as a Software Development Engineer at <a href="https://www.iqvia.com/">IQVIA</a> (NYSE: IQV), a Fortune 500 company and healthcare data analytics provider that serves 90% of the top pharmaceutical companies worldwide. At IQVIA, I build microservices that handle millions of patient records, add observability for critical data pipelines, design cloud-native solutions on AWS, and integrate LLM capabilities into clinical analytics dashboards for natural language querying and report generation.
+  <br/><br/>
+  In May 2025, I received the <a href='https://drive.google.com/file/d/1Vc4E2RoQEPmbfS56oLdUih-oJDBok9sP/view?usp=share_link' target='_blank'><b>IQVIA Impact Program - Silver</b></a> award for performance, critical issue resolution, and feature delivery.
+  <br/><br/>
+  I'm currently working on research projects related to <a href="/research#research-projects">Blockchain in Healthcare</a> and <a href="/research#research-projects">LLM API Contract Analysis</a>.
+  <br/><br/>
+  I collaborate with <a href="https://akondrahman.github.io" target="_blank">Dr. Akond Rahman</a> (Auburn University, <a href="https://paser-group.github.io/" target="_blank">PASER group</a>) on LLM API contracts and with <a href="https://cse.buet.ac.bd/faculty/faculty_detail/asmlatifulhoque" target="_blank">Professor ASM Latiful Hoque</a> (BUET), who supervised my undergraduate thesis, on blockchain technology.
+  <br/><br/>
+  I worked with the <a href="https://ureporter.cse.buet.ac.bd/about_us" target="_blank">uReporter team</a> on Bangladesh's first anonymous online reporting system for citizens to report social issues. The project received coverage from BBC Bengali, Saudi Gazette, and Global Voices. Our research on this work is under review at the ACM CSCW conference.
+  <br/><br/>
+  I tend to learn by chasing first principles. I draw inspiration from Claude Shannon and Richard Feynman, and from the distributed systems work of <a href="https://en.wikipedia.org/wiki/Leslie_Lamport" target="_blank">Leslie Lamport</a>. I'm also influenced by early attention-mechanism research that reshaped modern AI.
+  <br/><br/>
+  I'm currently reading <b>"Designing Data-Intensive Applications"</b> and <b>"Hands-On Large Language Models"</b> by Jay Alammar. I'm also preparing for the <b>Certified Kubernetes Application Developer (CKAD)</b> and <b>AWS Solution Architect Associate</b> certifications. You can check out my <a href="/learning">learning resource recommendations here</a>.
+  <br/><br/>
+  I grew up in <b>Rajshahi</b> and now live in <b>Uttara, Dhaka</b>.
+  <br/><br/>
+  I am a <b>researcher</b>, and I'm excited to continue my academic journey in computer science while staying hands-on in software engineering and research.
+  <br/><br/>
+  
+  
+
+portrait_url: /assets/images/photos/romel.png
+portrait_caption: Romel in Pahalgam, Kashmir in June, 2024.
+
+education:
+- name: University of Alberta
+  position: Incoming M.Sc in Computing Science
+  date: Starting soon
+  status: Incoming
+  description: >-
+    Preparing to begin the <strong>M.Sc in Computing Science</strong> program, with a research focus on software engineering,
+    trustworthy AI, distributed systems, and LLM systems.
+  url: https://www.ualberta.ca/en/computing-science/index.html
+  logo: /assets/images/education/ualberta-logo.svg
+- name: Bangladesh University of Engineering and Technology
+  position: B.Sc in Computer Science and Engineering
+  date: April 2018 - May 2023
+  description: >-
+    <strong>Dean's List Award</strong> - Level 2 (outstanding academic performance)
+    <br/><br/>
+    <strong>Notable Courses:</strong> Machine Learning, High Performance Database Systems, Fault Tolerant Systems, Data Structure and Algorithms,
+    Operating Systems, Computer Security
+  url: https://cse.buet.ac.bd
+  coursework: >-
+    <strong>Selected upper-division coursework demonstrating depth in core CS, systems, and AI/ML:</strong><br>
+    <table class="table table-sm table-borderless" style="font-size: 14px;">
+      <tr>
+        <td style="width: 30%; vertical-align: top;"><strong>Algorithms & Theory</strong></td>
+        <td>
+          • Data Structures & Algorithms I-II<br>
+          • Algorithm Engineering<br>
+          • Theory of Computation
+        </td>
+      </tr>
+      <tr>
+        <td style="vertical-align: top;"><strong>Systems & Architecture</strong></td>
+        <td>
+          • Computer Architecture (lecture + lab)<br>
+          • Operating Systems (lecture + lab)<br>
+          • Computer Networks (lecture + lab)<br>
+          • Microprocessors, Microcontrollers & Embedded Systems (lecture + lab)<br>
+          • Fault-Tolerant Systems
+        </td>
+      </tr>
+      <tr>
+        <td style="vertical-align: top;"><strong>Software Engineering</strong></td>
+        <td>
+          • Software Engineering<br>
+          • Software Development (practicum)<br>
+          • Information System Design (lecture + lab)<br>
+          • Technical Writing & Presentation
+        </td>
+      </tr>
+      <tr>
+        <td style="vertical-align: top;"><strong>Databases & Data</strong></td>
+        <td>
+          • Database Systems (lecture + lab)<br>
+          • High-Performance Database Systems
+        </td>
+      </tr>
+      <tr>
+        <td style="vertical-align: top;"><strong>Security</strong></td>
+        <td>• Computer Security (lecture + lab)</td>
+      </tr>
+      <tr>
+        <td style="vertical-align: top;"><strong>AI & Machine Learning</strong></td>
+        <td>
+          • Artificial Intelligence (lecture + lab)<br>
+          • Machine Learning (lecture + lab)
+        </td>
+      </tr>
+      <tr>
+        <td style="vertical-align: top;"><strong>Graphics & Visualization</strong></td>
+        <td>• Computer Graphics (lecture + lab)</td>
+      </tr>
+      <tr>
+        <td style="vertical-align: top;"><strong>Capstone</strong></td>
+        <td>• Undergraduate Project & Thesis</td>
+      </tr>
+    </table>
+    Grades were mostly A/A+, showing consistent performance across theory and labs.
+  logo: /assets/images/education/buet-logo.png
+- name: Rajshahi College
+  position: Higher Secondary Certificate (HSC)
+  date: 2015 - 2017
+  description: Placed 15th in Rajshahi Board, received Talentpool Scholarship, A+ in all subjects with 96.5% marks in Physics, Chemistry, and Higher Mathematics
+  url: https://rc.edu.bd
+  logo: /assets/images/education/rajshahi-college-logo.png
+- name: Rajshahi Collegiate School
+  position: Secondary School Certificate (SSC)
+  date: 2007 - 2015
+  description: A+ in all subjects, received General Scholarship
+  url: https://rcs.edu.bd
+  logo: /assets/images/education/rajshahi-collegiate-school-logo.png
+
+# experience section is covered by positions
+
+awards:
+- name: 2nd place, Bangla Handwritten Digits Recognition contest
+  date: November 2022
+  organization: BUET (Department of CSE)
+  type: Competition
+  description: >-
+    Placed 2nd among 120 students in the CSE 472 Machine Learning Lab competition at BUET, building a custom CNN for Bangla
+    digits recognition from scratch using only NumPy and OpenCV. Achieved 95.9% test accuracy on the NumtaDB benchmark by
+    implementing every convolution, pooling, activation, and optimization step manually.
+    <br/>
+    <a href='https://tanzimhromel.com/projects/bangla_digit_recognition/' target='_blank'>View Project Details</a>
+- name: Finalist, Blockchain Olympiad Bangladesh 2021
+  date: April 2021
+  organization: Bangladesh Blockchain Olympiad
+  type: Competition
+  description: >-
+    Selected as one of the 40 finalists with our project "<a href="/projects/blockchain-ticketing" target="_blank">Blockchain Based Ticketing Platform</a>".
+    Participated as part of the "Recursively Enumerable" team with <a href="https://fazledyn.github.io" target="_blank">Ataf Fazledin Ahamed</a> and <a href="https://www.linkedin.com/in/md-tanzim-azad-a879a51b7/" target="_blank">Md. Tanzim Azad Nishan</a>.
+    <br/><br/>
+    <strong>About the Competition:</strong> The Bangladesh Blockchain Olympiad (BCOLBD) is a national blockchain innovation contest that
+    brings together university teams to build practical solutions. The 2021 edition focused on decentralized applications for societal
+    challenges using distributed ledger technology.
+    <br/><br/>
+    <strong>Our Project:</strong> We built a blockchain ticketing platform to reduce ticket fraud and scalping and improve transparency
+    in event management. The system used smart contracts for ticket validation, immutable records, and dynamic pricing to limit secondary
+    market manipulation.
+- name: Dean's List Award
+  date: BUET Level-2
+  organization: BUET
+  type: Honors & Awards
+  description: >-
+    Received the Dean's List for academic performance during Level-2 (sophomore year) at Bangladesh University of Engineering and
+    Technology (BUET). The Dean's List is awarded to undergraduates who earn a cumulative GPA of 3.75 or higher out of 4.0 in an
+    academic year.
+    <br/><br/>
+    <strong>Notes:</strong> BUET is a top engineering university in Bangladesh. The Dean's List goes to the top-performing students in
+    each level, typically less than 15% of the student body.
+- name: Bangladesh Physics Olympiad (BdPhO) National prize winner
+  date: 2017
+  organization: Bangladesh Physics Olympiad
+  type: Competition
+  description: >-
+    Earned national recognition in the Bangladesh Physics Olympiad (BdPhO) 2017.
+    <br/><br/>
+    <strong>About BdPhO:</strong> The Bangladesh Physics Olympiad is the national selection process for the International Physics
+    Olympiad (IPhO). It includes multiple rounds of theoretical and experimental problems, and only top performers receive national prizes.
+    <br/><br/>
+    <strong>Competition Structure:</strong> The olympiad runs through divisional, regional, and national rounds and covers mechanics,
+    electromagnetism, thermodynamics, optics, and modern physics.
+- name: Bangladesh Chemistry Olympiad National prize winner
+  date: 2017
+  organization: Bangladesh Chemistry Olympiad
+  type: Competition
+  description: >-
+    Achieved national recognition in the Bangladesh Chemistry Olympiad 2017.
+    <br/><br/>
+    <strong>About the Competition:</strong> The Bangladesh Chemistry Olympiad is the national selection process for the
+    International Chemistry Olympiad (IChO). The competition covers organic, inorganic, physical, and analytical chemistry through
+    theoretical and practical exams.
+    <br/><br/>
+    <strong>Impact:</strong> Earning national prizes in both Physics and Chemistry Olympiads in the same year helped build my foundation
+    for studying Computer Science and Engineering and supported my BUET admission.
+- name: Talentpool HSC Scholarship
+  date: 2017
+  organization: Rajshahi Education Board
+  type: Honors & Awards
+  description: >-
+    Received the Talentpool Scholarship from the Rajshahi Education Board for HSC performance, placing 15th in the Rajshahi Board with
+    95.6% marks in Physics, Chemistry, and Higher Mathematics.
+    <br/><br/>
+    <strong>About the Scholarship:</strong> This merit-based scholarship is awarded to top-performing students in each education board
+    across Bangladesh based on academic results.
+- name: IQVIA Impact Program - Silver
+  date: May 2025
+  organization: IQVIA
+  type: Recognition
+  description: >-
+    For completing key tasks, resolving critical issues, supporting team processes, and delivering features that improved the product.
+    <br/>
+    <a href='https://drive.google.com/file/d/1Vc4E2RoQEPmbfS56oLdUih-oJDBok9sP/view?usp=share_link' target='_blank'>IQVIA Impact Program - Silver (Certificate)</a>
+
+research_interests:
+- Trustworthy AI for Software Engineering
+- Security & Reliability of LLM-Based Systems
+- Empirical Software Engineering Research
+
+technical_skills:
+- type: "Backend & Systems"
+  names:
+  - C#/.NET Core
+  - Go
+  - C++
+  - EF Core
+- type: "AI & Agents"
+  names:
+  - Python
+  - LangGraph
+  - RAG
+  - PyTorch
+  - CUDA
+- type: "Databases"
+  names:
+  - PostgreSQL
+  - MongoDB
+  - SQL Server
+  - DynamoDB
+- type: "Cloud & DevOps"
+  names:
+  - AWS
+  - Docker
+  - Kubernetes
+  - Terraform
+  - GitHub Actions
+
+soft_skills:
+  - Team Leadership & Mentorship
+  - Strategic Problem-solving & Critical Thinking
+  - Technical Communication & Documentation
+  - Cross-functional Collaboration
+  - Proactive Initiative & Ownership
+  - Continuous Learning & Adaptability
+  - Performance-driven Mindset
+  - Research Methodology & Analysis
+  - Time Management & Prioritization
+  - Quality Assurance & Attention to Detail
+
+professional_memberships:
+- name: ACM (Association for Computing Machinery)
+  member_id: tromel@acm.org
+  status: Professional Member
+  joined: 2024
+
+research:
+- title: "An Empirical Study on Remote Code Execution in ML Model Hosting Ecosystems"
+  date: June 2025 - Oct 2025
+  link: https://arxiv.org/pdf/2601.14163
+  thumbnail: /assets/images/ml-rce.png
+  status: "Submitted to TOSEM 2026"
+  short_description: First large-scale cross-platform study analyzing ~45,000 repositories across 5 major ML platforms for security vulnerabilities.
+  description: >-
+    Cross-platform study of ~45,000 repositories across five ML platforms (Hugging Face, ModelScope, OpenCSG, OpenMMLab, PyTorch Hub)
+    with co-authors Mohammad Latif Siddiq and Joanna C. Santos. Detected security issues using static analyzers (Bandit, CodeQL, Semgrep)
+    and YARA malware signatures: found CWE-502 (unsafe deserialization) in 74.54% and CWE-95 (eval injection) in 15.02% of affected
+    repositories; 10.41% of Hugging Face repos contain security smells. Analyzed 600+ developer discussions to build a taxonomy of
+    security misconceptions; found 6.6% SafeTensors adoption and heavy trust_remote_code usage. <b>Submitted to TOSEM 2026.</b>
+  technologies:
+  - Python
+  - Bandit
+  - CodeQL
+  - Semgrep
+  - YARA
+  - CWE Analysis
+
+- title: "The Choice Can Be the Attack: Auditing Aligned Backdoors in LLM Agents"
+  date: August 2025 - Present
+  link: /research/reagent-plus-plus/
+  status: "In Progress"
+  short_description: Endpoint-black-box auditing framework for aligned backdoors in LLM agents using counterfactual environments and discrete-choice estimation.
+  description: >-
+    Agentic LLM systems are vulnerable to aligned backdoors: triggered behaviors that still satisfy the user's instruction but
+    systematically steer which acceptable option the agent selects. This ongoing work introduces CCA, an endpoint-black-box audit
+    with environment instrumentation, constraint-preserving randomized counterfactual environments, and pooled discrete-choice
+    estimation over eligible options. The current evaluation covers synthetic WebShop stress tests and a real 3B WebShop endpoint
+    case study to measure trigger-dependent steering, identify suspect-only effects, and clarify when counterfactual randomization
+    alone is sufficient versus when feature-controlled choice modeling is necessary.
+  technologies:
+  - CCA
+  - CCIA
+  - WebShop
+  - Counterfactual Auditing
+  - Discrete Choice Modeling
+
+- title: "Multi-Agent Framework for Generating Relational DB Schema & ERD"
+  date: July 2025 - Present
+  link: /research/multi-agent-db-schema/
+  status: "Targeting PVLDB"
+  short_description: Extended SchemaAgent with LangGraph StateGraph architecture and 3-tier auto-repair system, reducing redundant LLM calls by 80%.
+  description: >-
+    Extended SchemaAgent with Dr. Sukarna Barua (BUET) using LangGraph StateGraph architecture with conditional routing and a three-tier
+    auto-repair system. Designed a six-stage pipeline with specialized agents for entity extraction, relationship mining, and
+    normalization with Z3 formal verification. Implemented component-level retry logic with violation analysis, reducing redundant LLM
+    calls by 80%.
+  collaborator: >-
+    Collaborating with <a href="https://cse.buet.ac.bd/faculty/faculty_detail/sukarnabarua" target="_blank">Dr. Sukarna Barua</a>, Assistant Professor at BUET,
+    who specializes in software engineering, data science, and machine learning applications.
+  technologies:
+  - Python
+  - LangGraph
+  - StateGraph
+  - Z3 Solver
+  - SQLAlchemy
+  - Text2Schema
+
+- title: "Sentiment Analysis of Anonymous Crisis Reports in Bangladesh"
+  date: Sep 2024 - Nov 2024
+  link: /assets/pdf/Ureporter.pdf
+  short_description: Developed uReporter -- Bangladesh's first anonymous reporting system during 2024 national crisis, analyzing 124 crowd-sourced reports using transformer models.
+  description: >-
+    Developed uReporter, Bangladesh's first anonymous reporting system during the 2024 national crisis. Analyzed 124 crowd-sourced reports using
+    six transformer models with a multilingual NLP pipeline for Bengali and Romanized Bengali. Demonstrated how anonymous crowd-sourcing can
+    help understand socio-political dynamics in the Global South.
+  collaborator: >-
+    Collaborated with the <a href="https://ureporter.cse.buet.ac.bd/about_us" target="_blank">uReporter team</a> at BUET. The project has received
+    coverage from international media including BBC Bengali, Saudi Gazette, and Global Voices.
+  technologies:
+  - Python
+  - BERT
+  - XLM-RoBERTa
+  - Transformers
+  - Bengali NLP
+  - Flask
+
+- title: "Patient-Centric Blockchain Framework for EHR Management"
+  date: June 2022 - May 2023
+  link: https://arxiv.org/pdf/2511.17464
+  thumbnail: /assets/images/blockchain/blockchain.png
+  short_description: Undergraduate thesis on blockchain framework for EHR management with encrypted off-chain IPFS storage and on-chain Ethereum access control.
+  description: >-
+    <b>Undergraduate Thesis.</b> Designed a blockchain framework with encrypted off-chain IPFS storage and on-chain Ethereum access control under
+    Professor ASM Latiful Hoque (BUET). Implemented ERC-721 based patient records with AES-GCM encryption, ECIES key wrapping, and EIP-712 signed
+    permissions. Evaluated performance and security on 10,000 synthetic patient records to assess scalability and privacy.
+  collaborator: >-
+    Supervised by <a href="https://cse.buet.ac.bd/faculty/faculty_detail/asmlatifulhoque" target="_blank">Professor ASM Latiful Hoque</a> from BUET (my undergraduate thesis supervisor),
+    who specializes in data warehousing, data mining, big data analytics, and database technologies.
+  technologies:
+  - Solidity
+  - Ethereum
+  - IPFS
+  - React
+  - Web3.js
+  - AES-GCM
+  - ECIES
+
+projects:
+- title: "Blockchain-Based Ticketing Platform"
+  link: /showcase/projects/blockchain-ticketing/
+  date: Jan 2021 - April 2021
+  description: >-
+    <b>Finalist in Blockchain Olympiad Bangladesh (BCOLBD) 2021</b> with team "Recursively Enumerable". Designed NFT-based ticketing system
+    using ERC-1155 standard. Implemented smart contracts for anti-scalping, dynamic QR codes, and decentralized identity management with
+    zero-knowledge proofs.
+  technologies:
+  - Ethereum
+  - Polygon
+  - Solidity
+  - ERC-1155
+  - Web3.js
+  - Zero-Knowledge Proofs
+- title: "Image Captioning with Attention Mechanisms"
+  link: https://github.com/thromel/Image-Captioning-ML-Project
+  date: Jan 2023 - Feb 2023
+  description: >-
+    Implemented Show, Attend and Tell architecture with ResNet-101 encoder and LSTM decoder. Achieved BLEU-4: 0.335, CIDEr: 0.92 on MS-COCO
+    dataset. Enhanced with beam search and multi-head attention achieving 11-point BLEU-4 improvement. Conducted comprehensive ablation studies
+    and attention visualizations.
+  technologies:
+  - PyTorch
+  - ResNet-101
+  - LSTM
+  - MS-COCO
+  - Attention Mechanisms
+  - Beam Search
+- title: "Eventfly: End-to-end Event Management System"
+  link: https://github.com/eventfly/Microservices
+  date: May 2022 - July 2022
+  description: >-
+    Designed microservices-based event management system. Led back-end architecture implementing newsfeed, payment, authentication, and event
+    management services.
+  technologies:
+  - TypeScript
+  - Express.js
+  - Next.js
+  - Docker
+  - Kubernetes
+  - NATS
+  - MongoDB
+- title: "C Compiler Implementation"
+  link: https://github.com/thromel/Yet-Another-C-Compiler
+  date: Jan 2022 - April 2022
+  description: >-
+    Built complete compiler for subset of C language using Flex (lexical analysis) and Bison (parsing). Implemented symbol table management with
+    scope handling and comprehensive error reporting. Added semantic analysis for type checking and function validation.
+  technologies:
+  - Flex
+  - Bison
+  - C++
+  - Compiler Design
+  - Symbol Table
+  - Semantic Analysis
+- title: "Network Simulation & TCP Protocol Analysis"
+  link: https://github.com/thromel/CSE-322-Computer-Networks-Sessional
+  date: Jan 2022 - May 2022
+  description: >-
+    Implemented and analyzed TCP congestion control variants (Reno vs Vegas) using NS3 network simulator. Designed TCP Vegas+ modification
+    addressing fairness issues through dual-mode operation. Conducted comprehensive performance analysis measuring throughput, fairness index,
+    and packet drop ratios.
+  technologies:
+  - NS3
+  - C++
+  - TCP Reno
+  - TCP Vegas
+  - Network Simulation
+  - Performance Analysis
+
+tests_and_certifications:
+- name: "TOEFL iBT"
+  score: 103/120
+  details: Listening - 29, Reading - 29, Writing - 22, Speaking - 23
+  url: https://www.ets.org/toefl.html
+- name: "Certified Kubernetes Application Developer (CKAD)"
+  status: In preparation
+  url: https://www.cncf.io/certification/ckad/
+- name: "AWS Solution Architect Associate"
+  status: In preparation
+  url: https://aws.amazon.com/certification/certified-solutions-architect-associate/
+
+books:
+- title: "Designing Data-Intensive Applications"
+  author: "Martin Kleppmann"
+  url: https://dataintensive.net/
+  status: Currently Reading
+  category: Technical
+- title: "Hands-On Large Language Models"
+  author: "Jay Alammar"
+  url: https://www.amazon.com/Hands-Large-Language-Models-Understanding/dp/1098150961
+  status: Currently Reading
+  category: Technical
+- title: "Clean Architecture"
+  author: "Robert C. Martin"
+  url: https://www.amazon.com/Clean-Architecture-Craftsmans-Software-Structure/dp/0134494164
+  status: Completed
+  category: Technical
+- title: "Domain-Driven Design"
+  author: "Eric Evans"
+  url: https://www.domainlanguage.com/ddd/
+  status: Completed
+  category: Technical
+- title: "Foundation Series"
+  author: "Isaac Asimov"
+  url: https://www.asimovonline.com/asimov_home_page.html
+  status: Completed
+  category: Fiction
+- title: "Dune"
+  author: "Frank Herbert" 
+  url: https://www.dunenovels.com/
+  status: Completed
+  category: Fiction
+
+hobbies:
+- type: Programming & Learning
+  items:
+  - Solving programming problems in my free time
+  - Reading software engineering, architecture, and distributed systems books
+  - Learning development of Agentic AI using LangChain and LangGraph
+  - Reading software engineering blogs (Dan Abramov's Overreacted, Martin Fowler's Bliki, The Pragmatic Engineer)
+  - Following publications like The Economist, MIT Technology Review, and thegradient.pub for tech and policy insights
+
+- type: Reading
+  items:
+  - Science fiction novels including Foundation, Dune, Lord of the Rings
+  - A Song of Ice and Fire series and Harry Potter books
+
+- type: Travel
+  items:
+  - Exploring new places and cultures
+  - Visited Saudi Arabia, India, and various parts of Bangladesh
+
+- type: Sports & Outdoor Activities
+  items:
+  - Playing and watching Football (Soccer) and Cricket
+  - Participating in various sports activities
+  - Enjoying outdoor activities like cycling, hiking, and trekking
+  - Playing video games in my leisure time
+
+- type: Food & Entertainment
+  items:
+  - Exploring different cuisines and food cultures
+  - Trying out new restaurants and street food
+
+facebook: tanzimhossainromel

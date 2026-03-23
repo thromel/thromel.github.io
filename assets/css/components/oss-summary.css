@@ -1,0 +1,50 @@
+.oss-inline {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-bottom: var(--space-6);
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+.oss-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  background: color-mix(in srgb, var(--color-success) 14%, transparent);
+  border: 1px solid color-mix(in srgb, var(--color-success) 35%, transparent);
+  border-radius: var(--radius-md);
+  color: var(--color-success);
+  text-decoration: none;
+  font-weight: 600;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.oss-badge:hover,
+.oss-badge:focus-visible {
+  background: color-mix(in srgb, var(--color-success) 22%, transparent);
+  transform: translateY(-1px);
+}
+
+.oss-badge i {
+  font-size: 0.875em;
+}
+
+.oss-repos a {
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.oss-repos a:hover,
+.oss-repos a:focus-visible {
+  color: var(--color-accent);
+}
+
+@media (max-width: 768px) {
+  .oss-inline {
+    margin-bottom: var(--space-4);
+  }
+}

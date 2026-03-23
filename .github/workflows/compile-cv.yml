@@ -1,0 +1,41 @@
+name: Compile CV to PDF
+
+on:
+  push:
+    paths:
+      - '_posts/cv.tex'
+      - '.github/workflows/compile-cv.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  compile:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Compile LaTeX document
+        uses: xu-cheng/latex-action@v3
+        with:
+          root_file: cv.tex
+          working_directory: _posts
+          
+      - name: Move PDF to assets
+        run: |
+          mkdir -p assets/pdf
+          mv _posts/cv.pdf assets/pdf/cv.pdf
+          
+      - name: Upload PDF artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: cv-pdf
+          path: assets/pdf/cv.pdf
+          
+      - name: Commit and push PDF
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add assets/pdf/cv.pdf
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Update CV PDF [skip ci]" && git push)

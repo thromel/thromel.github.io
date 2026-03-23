@@ -1,0 +1,122 @@
+// Browser Console Smoke Tests for thromel.github.io
+// Run in DevTools console on any page: testSite.runAll()
+
+const testResults = {
+  passed: 0,
+  failed: 0,
+  warnings: 0,
+  tests: []
+};
+
+function record(name, passed, message) {
+  testResults.tests.push({ name, passed, message: message || '' });
+  if (passed) {
+    testResults.passed += 1;
+    console.log('PASS:', name, message || '');
+  } else {
+    testResults.failed += 1;
+    console.error('FAIL:', name, message || '');
+  }
+}
+
+function warn(name, message) {
+  testResults.warnings += 1;
+  console.warn('WARN:', name, message || '');
+}
+
+function testThemeToggle() {
+  const button = document.getElementById('themeToggle');
+  record('Theme toggle exists', !!button, button ? '' : 'Missing #themeToggle');
+
+  const hasSiteUX = typeof window.siteUX !== 'undefined';
+  record('siteUX object exists', hasSiteUX, hasSiteUX ? '' : 'site-shell.js did not initialize');
+}
+
+function testSkipLinks() {
+  const links = Array.from(document.querySelectorAll('.skip-link'));
+  const hasMain = links.some((l) => l.getAttribute('href') === '#main-content');
+  const hasNav = links.some((l) => l.getAttribute('href') === '#site-navigation');
+
+  record('Skip link to main', hasMain);
+  record('Skip link to navigation', hasNav);
+}
+
+function testNavigation() {
+  const nav = document.getElementById('site-navigation');
+  const mobileToggle = document.getElementById('mobileMenuToggle');
+  const mobileDrawer = document.getElementById('mobileNavDrawer');
+
+  record('Main navigation exists', !!nav, nav ? '' : 'Missing #site-navigation');
+  record('Mobile menu toggle exists', !!mobileToggle, mobileToggle ? '' : 'Missing #mobileMenuToggle');
+  record('Mobile nav drawer exists', !!mobileDrawer, mobileDrawer ? '' : 'Missing #mobileNavDrawer');
+}
+
+function testCoreStylesLoaded() {
+  const loaded = Array.from(document.styleSheets)
+    .map((sheet) => (sheet.href ? sheet.href.split('/').pop() : 'inline'));
+
+  ['overhaul.css', 'mobile-optimizations.css'].forEach((file) => {
+    record('Stylesheet loaded: ' + file, loaded.some((x) => x.includes(file)));
+  });
+}
+
+function testHomeEnhancements() {
+  const hasSectionNav = !!document.querySelector('.home-section-nav');
+  const hasOssSummary = !!document.getElementById('oss-summary');
+
+  if (!hasSectionNav) {
+    warn('Home section nav', 'Not present on this page (expected for non-home pages).');
+  } else {
+    record('Home section nav exists', true);
+  }
+
+  if (!hasOssSummary) {
+    warn('OSS summary', 'Not present on this page (expected for non-home pages).');
+  } else {
+    record('OSS summary container exists', true);
+  }
+}
+
+function testPerformanceEntry() {
+  const navigation = performance.getEntriesByType('navigation')[0];
+  if (!navigation) {
+    warn('Navigation timing', 'Performance API entry not available.');
+    return;
+  }
+
+  const domReady = navigation.domContentLoadedEventEnd - navigation.fetchStart;
+  const loadComplete = navigation.loadEventEnd - navigation.fetchStart;
+
+  record('DOM ready under 3000ms', domReady < 3000, 'DOM ready: ' + Math.round(domReady) + 'ms');
+  record('Load complete under 5000ms', loadComplete < 5000, 'Load: ' + Math.round(loadComplete) + 'ms');
+}
+
+function runAll() {
+  console.clear();
+  console.log('Running smoke tests...');
+
+  testThemeToggle();
+  testSkipLinks();
+  testNavigation();
+  testCoreStylesLoaded();
+  testHomeEnhancements();
+  testPerformanceEntry();
+
+  console.log('----- Summary -----');
+  console.log('Passed:', testResults.passed);
+  console.log('Failed:', testResults.failed);
+  console.log('Warnings:', testResults.warnings);
+
+  if (testResults.failed === 0) {
+    console.log('All required smoke tests passed.');
+  }
+
+  return testResults;
+}
+
+window.testSite = {
+  runAll,
+  results: testResults
+};
+
+console.log('Ready. Run testSite.runAll()');

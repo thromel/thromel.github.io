@@ -1,0 +1,32 @@
+---
+layout: default
+title: The Choice Can Be the Attack
+navbar_title: Research
+---
+
+<section class="section">
+  <div class="section-header section-header--narrative">
+    <h1 class="section-title">The Choice Can Be the Attack: Auditing Aligned Backdoors in LLM Agents</h1>
+    <p class="section-subtitle">Ongoing work. The manuscript is not public yet, so this page exposes only the abstract-level summary.</p>
+  </div>
+
+  <div class="narrative-panel">
+    <div class="narrative-panel-copy">
+      <p class="narrative-panel-kicker">Abstract</p>
+      <p>
+        Agentic LLM systems are vulnerable to aligned backdoors: triggered behaviors that still satisfy the user's instruction but
+        systematically steer which acceptable option the agent selects, such as which brand, vendor, or tool the agent chooses.
+        This work introduces CCA, an endpoint-black-box auditing framework with environment instrumentation, constraint-preserving
+        randomized counterfactual environments, and pooled discrete-choice estimation over eligible options.
+      </p>
+      <p>
+        Across synthetic WebShop stress tests and a real 3B WebShop endpoint case study, the framework is used to measure
+        trigger-dependent steering, characterize when counterfactual randomization is sufficient, and identify when
+        feature-controlled choice modeling is necessary to separate suspect-only steering from benign quality effects.
+      </p>
+    </div>
+    <div class="narrative-panel-actions">
+      <a href="{{ site.baseurl }}/research#reagent-plus-plus" class="btn btn-text">Back to research overview</a>
+    </div>
+  </div>
+</section>

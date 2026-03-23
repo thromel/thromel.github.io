@@ -1,0 +1,445 @@
+\documentclass[a4paper,11pt]{article}
+
+% Package imports
+\usepackage{latexsym}
+\usepackage{xcolor}
+\usepackage{float}
+\usepackage{ragged2e}
+\usepackage[empty]{fullpage}
+\usepackage{wrapfig}
+\usepackage{lipsum}
+\usepackage{tabularx}
+\usepackage{titlesec}
+\usepackage{geometry}
+\usepackage{marvosym}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage[T1]{fontenc}
+
+% Color definitions
+\definecolor{darkblue}{RGB}{0,0,139}
+
+% Page layout
+\setlength{\multicolsep}{0pt} 
+\pagestyle{fancy}
+\fancyhf{} % clear all header and footer fields
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+\geometry{left=1.4cm, top=0.8cm, right=1.2cm, bottom=1cm}
+\setlength{\footskip}{5pt} % Addressing fancyhdr warning
+
+% Hyperlink setup (moved after fancyhdr to address warning)
+\usepackage[hidelinks]{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=darkblue,
+    filecolor=darkblue,
+    urlcolor=darkblue,
+}
+
+% Custom box settings
+\usepackage[most]{tcolorbox}
+\tcbset{
+    frame code={},
+    center title,
+    left=0pt,
+    right=0pt,
+    top=0pt,
+    bottom=0pt,
+    colback=gray!20,
+    colframe=white,
+    width=\dimexpr\textwidth\relax,
+    enlarge left by=-2mm,
+    boxsep=4pt,
+    arc=0pt,outer arc=0pt,
+}
+
+% URL style
+\urlstyle{same}
+
+% Text alignment
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+% Section formatting
+\titleformat{\section}{
+  \vspace{-4pt}\scshape\raggedright\large
+}{}{0em}{}[\color{black}\titlerule \vspace{-7pt}]
+
+% Custom commands
+\newcommand{\resumeItem}[2]{
+  \item{
+    \textbf{#1}{\hspace{0.5mm}#2 \vspace{-0.5mm}}
+  }
+}
+
+\newcommand{\resumePOR}[3]{
+\vspace{0.5mm}\item
+    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+        \textbf{#1}\hspace{0.3mm}#2 & \textit{\small{#3}} 
+    \end{tabular*}
+    \vspace{-2mm}
+}
+
+\newcommand{\resumeSubheading}[4]{
+\vspace{0.5mm}\item
+    \begin{tabular*}{0.98\textwidth}[t]{l@{\extracolsep{\fill}}r}
+        \textbf{#1} & \textit{\footnotesize{#4}} \\
+        \textit{\footnotesize{#3}} &  \footnotesize{#2}\\
+    \end{tabular*}
+    \vspace{-2.4mm}
+}
+
+\newcommand{\resumeProject}[4]{
+\vspace{0.5mm}\item
+    \begin{tabular*}{0.98\textwidth}[t]{l@{\extracolsep{\fill}}r}
+        \textbf{#1} & \textit{\footnotesize{#3}} \\
+        \footnotesize{\textit{#2}} & \footnotesize{#4}
+    \end{tabular*}
+    \vspace{-2.4mm}
+}
+
+\newcommand{\resumeSubItem}[2]{\resumeItem{#1}{#2}\vspace{-4pt}}
+
+\renewcommand{\labelitemi}{$\vcenter{\hbox{\tiny$\bullet$}}$}
+\renewcommand{\labelitemii}{$\vcenter{\hbox{\tiny$\circ$}}$}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=*,labelsep=1mm]}
+\newcommand{\resumeHeadingSkillStart}{\begin{itemize}[leftmargin=*,itemsep=1.7mm, rightmargin=2ex]}
+\newcommand{\resumeItemListStart}{\begin{itemize}[leftmargin=*,labelsep=1mm,itemsep=0.5mm]}
+
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}\vspace{2mm}}
+\newcommand{\resumeHeadingSkillEnd}{\end{itemize}\vspace{-2mm}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-2mm}}
+\newcommand{\cvsection}[1]{%
+\vspace{2mm}
+\begin{tcolorbox}
+    \textbf{\large #1}
+\end{tcolorbox}
+    \vspace{-4mm}
+}
+
+\newcolumntype{L}{>{\raggedright\arraybackslash}X}%
+\newcolumntype{R}{>{\raggedleft\arraybackslash}X}%
+\newcolumntype{C}{>{\centering\arraybackslash}X}%
+
+% Font options
+\newcommand{\headerfonti}{\fontfamily{phv}\selectfont} % Helvetica-like (similar to Arial/Calibri)
+\newcommand{\headerfontii}{\fontfamily{ptm}\selectfont} % Times-like (similar to Times New Roman)
+\newcommand{\headerfontiii}{\fontfamily{ppl}\selectfont} % Palatino (elegant serif)
+\newcommand{\headerfontiv}{\fontfamily{pbk}\selectfont} % Bookman (readable serif)
+\newcommand{\headerfontv}{\fontfamily{pag}\selectfont} % Avant Garde-like (similar to Trebuchet MS)
+\newcommand{\headerfontvi}{\fontfamily{cmss}\selectfont} % Computer Modern Sans Serif
+\newcommand{\headerfontvii}{\fontfamily{qhv}\selectfont} % Quasi-Helvetica (another Arial/Calibri alternative)
+\newcommand{\headerfontviii}{\fontfamily{qpl}\selectfont} % Quasi-Palatino (another elegant serif option)
+\newcommand{\headerfontix}{\fontfamily{qtm}\selectfont} % Quasi-Times (another Times New Roman alternative)
+\newcommand{\headerfontx}{\fontfamily{bch}\selectfont} % Charter (clean serif font)
+
+\begin{document}
+\headerfontiii
+
+% Header
+\begin{center}
+    {\Huge\textbf{Tanzim Hossain Romel}}
+\end{center}
+\vspace{-6mm}
+
+\begin{center}
+    \small{
+    \href{mailto:romel.rcs@gmail.com}{romel.rcs@gmail.com} | 
+    \href{https://tanzimhromel.com}{tanzimhromel.com}
+    }
+\end{center}
+\vspace{-6mm}
+
+\begin{center}
+    \small{
+    LinkedIn: \href{https://www.linkedin.com/in/thromel/}{thromel} | 
+    GitHub: \href{https://github.com/thromel}{thromel}
+    | \href{https://scholar.google.com/citations?user=zHV4EU8AAAAJ}{Google Scholar}
+    }
+\end{center}
+\vspace{-6mm}
+\begin{center}
+    \small{Uttara, Dhaka, Bangladesh}
+\end{center}
+
+\vspace{-4mm}
+
+\section{\textbf{Research Interests}}
+\vspace{1mm}
+\small{
+AI for Software Engineering (AI4SE), Empirical Software Engineering, Software and LLM Security, Human-Centered Computing, Blockchain Systems
+}
+\vspace{-2mm}
+
+\section{\textbf{Education}}
+\vspace{-0.4mm}
+\resumeSubHeadingListStart
+
+\resumeSubheading
+{Bangladesh University of Engineering and Technology (BUET)}{Dhaka, Bangladesh}
+{B.Sc. in Computer Science and Engineering}{Mar 2018 - May 2023}
+\resumeItemListStart
+\item Thesis: Patient-Centric Blockchain Framework for Electronic Health Record Management
+\resumeItemListEnd
+
+\resumeSubHeadingListEnd
+\vspace{-6mm}
+
+
+\section{\textbf{Work Experience}}
+\vspace{-0.4mm}
+  \resumeSubHeadingListStart
+  \resumeSubheading
+      {{IQVIA}}{Dhaka, Bangladesh}
+      {Software Development Engineer}{June 2023 - Present}
+      \resumeItemListStart
+        \item Backend Engineer developing microservices-based healthcare applications handling millions of patient records using .NET Core, C\#, and AWS
+        \item Deployed Multi-Agent systems using LangGraph for dashboard generation/modification, integrated with data exploration agent achieving 85\% reduction in setup time
+        \item Achieved 60\% reduction in query execution times through database optimization; implemented 40\% API response improvement via Redis caching
+        \item Contributed to browser automation testing methodology in .NET, simplifying regression testing and improving test coverage from 72\% to 95\%
+        \item Received IQVIA Impact Program – Silver award (May 2025) for outstanding performance
+      \resumeItemListEnd 
+  \resumeSubHeadingListEnd
+\vspace{-6mm}
+
+\section{\textbf{Research Experience}}
+\vspace{-0.4mm}
+\resumeSubHeadingListStart
+
+\resumeProject
+  {An Empirical Study on Remote Code Execution in ML Model Hosting Ecosystems}
+  {Tools: Python, Bandit, CodeQL, Semgrep, YARA, CWE Analysis | In Review at MSR 2026}
+  {June 2025 - Oct 2025}
+  {{}}
+\resumeItemListStart
+  \item First large-scale cross-platform study analyzing \textasciitilde45,000 repositories across 5 major platforms (Hugging Face, ModelScope, OpenCSG, OpenMMLab, PyTorch Hub) with co-authors Mohammad Latif Siddiq and Joanna C. Santos
+  \item Detected security vulnerabilities using static analyzers and YARA malware signatures.
+  \item Analyzed 600+ developer discussions to create taxonomy of security misconceptions.
+\resumeItemListEnd
+
+\resumeProject
+  {ReAgent++: Detecting Backdoor Triggers in LLM Agents}
+  {Tools: Python, Knockout Testing, cK-Arm Localization, SPRT, Black-box LLM Evaluation}
+  {August 2025 -- Present}
+  {}
+\resumeItemListStart
+  \item Developing ReAgent++, a lightweight framework for identifying hidden prompt-level backdoors in LLM agents using only black-box access.
+  
+  \item Implementing a two-stage pipeline: (1) simple behavioral tests to generate contrastive seeds, and (2) a cK-Arm knockout procedure with SPRT to recover minimal trigger tokens and logical conditions.
+  
+  \item Building deterministic checks for structural and negation violations, mode stability, and output clustering.
+  
+  \item Evaluating the approach on prompt-based backdoor scenarios involving semantic triggers, multi-condition triggers, and reasoning overrides to assess reliability and robustness under real LLM behavior.
+\resumeItemListEnd
+
+
+
+
+\resumeProject
+  {Multi-Agent Framework for Generating Relational DB Schema \& ERD}
+  {Tools: Python, LangGraph, StateGraph, Z3 Solver, SQLAlchemy, Text2Schema}
+  {July 2025 - Present}
+  {{}}
+\resumeItemListStart
+  \item Extended SchemaAgent with Dr. Sukarna Barua (BUET) using LangGraph StateGraph architecture with conditional routing and 3-tier auto-repair system
+  \item Designed 6-stage decomposed pipeline with specialized agents for entity extraction, relationship mining, and normalization with Z3 formal verification
+  \item Implemented granular component-level retry mechanism with intelligent violation analysis, reducing redundant LLM calls by 80\%
+\resumeItemListEnd
+
+\resumeProject
+  {Design by Contract for LLM APIs}
+  {Tools: Python, OpenAI SDK, LangChain, Runtime Monitoring, Contract Enforcement | Manuscript in preparation}
+  {Nov 2024 - Present}
+  {}
+\resumeItemListStart
+  \item Developing taxonomy for API contracts through empirical study of 412 real-world issues with Dr. Akond Rahman (Auburn University)
+  \item Created OpenAI SDK and LangChain extensions for automatic contract enforcement and runtime remediation
+  \item Implemented precondition/postcondition validators with automatic retry mechanisms and fallback strategies
+\resumeItemListEnd
+
+\resumeProject
+  {\href{https://tanzimhromel.com/assets/pdf/Ureporter.pdf}{Sentiment Analysis of Anonymous Crisis Reports in Bangladesh}}
+  {Tools: Python, BERT, XLM-RoBERTa, Transformers, Bengali NLP, Flask | Submitted to ACM CSCW}
+  {Sep 2024 - Nov 2024}
+  {}
+\resumeItemListStart
+  \item Developed uReporter -- Bangladesh's first anonymous reporting system during 2024 national crisis
+  \item Analyzed 124 crowd-sourced reports using six transformer models with multilingual NLP pipeline for Bengali/Romanized Bengali
+  \item Demonstrated anonymous crowd-sourcing's potential for understanding Global South socio-political dynamics
+\resumeItemListEnd
+
+\resumeProject
+  {\href{https://arxiv.org/abs/2511.17464}{Patient-Centric Blockchain Framework for Secure EHR Management}}
+  {Tools: Solidity, Ethereum, IPFS, React, Web3.js, AES-GCM, ECIES, EIP-712 | arXiv Preprint}
+  {June 2022 – May 2023}
+  {}
+\resumeItemListStart
+  \item Proposed a patient-centric blockchain architecture that decouples encrypted off-chain FHIR record storage from on-chain access control, eliminating trusted intermediaries and enabling verifiable patient.
+  \item Implemented an ERC-721–based smart contract for record ownership with EIP-712 signed, time-bounded permissions and ECIES-wrapped AES-GCM keys ensuring confidentiality and non-repudiable authorization.
+  \item Integrated off-chain IPFS storage with on-chain audit trails, achieving tamper-evident data integrity and complete access traceability through event logs.
+  \item Evaluated scalability on 10,000 synthetic FHIR records; achieved 1.3–2.0 s end-to-end latency for 1 MB records and 10× gas reduction via Layer-2 (zkSync/Arbitrum) deployment.
+\resumeItemListEnd
+
+
+\resumeSubHeadingListEnd
+
+\section{\textbf{Projects}}
+\vspace{-0.4mm}
+\resumeSubHeadingListStart
+
+\resumeProject
+{\href{https://github.com/thromel/Yet-Another-C-Compiler}{Yet Another C Compiler}}
+{Tools: C++17, CMake}
+{Jun-Aug 2021, Oct 2024}
+{}
+\resumeItemListStart
+\item Built complete C compiler with lexer and parser, semantic analysis, and x86-64 code generation
+\item Implemented SSA-based optimization pipeline including SCCP, GVN, LICM, and dead code elimination
+\item Designed a linear scan register allocator with spilling support
+\item Modernized legacy Flex/Bison-based prototype into a compiler architecture with modular IR passes and extensible optimization pipeline
+\resumeItemListEnd
+
+\resumeProject
+{\href{https://github.com/thromel/Image-Captioning-ML-Project}{Modern Image Captioning System}}
+{Tools: PyTorch, CLIP, ViT, GPT-2, AoA, SCST, MS-COCO}
+{Jan 2023 – Feb 2023}
+{}
+\resumeItemListStart
+\item Built modular image captioning system combining vision (ResNet, ViT, CLIP) and language (LSTM, Transformer, GPT-2) models
+\item Reached \textbf{127.6 CIDEr}, \textbf{0.392 BLEU-4}, \textbf{0.298 METEOR} on MS-COCO (Karpathy split) using CLIP + GPT-2 + AoA + SCST
+\item Improved CIDEr by +26.4 over ResNet-LSTM baseline through architectural and training refinements
+\item Applied Self-Critical Sequence Training and attention visualization for interpretability
+\resumeItemListEnd
+
+\resumeProject
+  {\href{https://github.com/eventfly/Microservices}{Eventfly: End-to-end Event Management System}}
+  {Tools: TypeScript, Express.js, Next.js, Docker, Kubernetes, NATS, MongoDB}
+  {May 2022 - July 2022}
+  {}
+\resumeItemListStart
+  \item Designed microservices-based event management system
+  \item Led back-end architecture implementing newsfeed, payment, authentication, and event management services
+\resumeItemListEnd
+
+
+
+\resumeProject
+  {\href{https://github.com/thromel/CSE-322-Computer-Networks-Sessional}{Network Simulation \& TCP Protocol Analysis}}
+  {Tools: NS3, C++, TCP Reno, TCP Vegas}
+  {Jan 2022 - May 2022}
+  {}
+\resumeItemListStart
+  \item Implemented and analyzed TCP congestion control variants (Reno vs Vegas) using NS3 network simulator
+  \item Designed TCP Vegas+ modification addressing fairness issues through dual-mode operation
+  \item Conducted comprehensive performance analysis measuring throughput, fairness index, and packet drop ratios
+\resumeItemListEnd
+
+\resumeSubHeadingListEnd
+
+\vspace{-2mm}
+\section{\textbf{Skills}}
+\vspace{-0.4mm}
+ \resumeHeadingSkillStart
+  \resumeSubItem{Programming Languages:}
+    {C++, C\#, Python, JavaScript, TypeScript, Go, SQL, Java, Solidity}
+  \resumeSubItem{ML/AI Frameworks:}
+    {PyTorch, LangChain, LangGraph, Transformers, ResNet, LSTM, BERT}
+  \resumeSubItem{Backend Frameworks:}
+    {.NET Core, ASP.NET, Express.js, FastAPI, Next.js}
+  \resumeSubItem{Databases:}
+    {PostgreSQL, MongoDB, Redis, SQL Server, DynamoDB}
+  \resumeSubItem{Cloud \& DevOps:}
+    {AWS, Azure, Docker, Kubernetes, GitHub Actions, Terraform, OpenTelemetry, Jaeger, NATS}
+  \resumeSubItem{Blockchain \& Web3:}
+    {Ethereum, Solidity, IPFS, ERC-721, ERC-1155, Web3.js}
+  \resumeSubItem{Tools \& Technologies:}
+    {NS3, Flex, Bison, Git, Linux}
+ \resumeHeadingSkillEnd
+
+\section{\textbf{Honors and Awards}}
+\vspace{-0.4mm}
+\resumeSubHeadingListStart
+
+\resumeProject
+  {IQVIA Impact Program – Silver Award}
+  {IQVIA}
+  {May 2025}
+  {{}}
+\resumeItemListStart
+  \item Awarded for outstanding performance and essential feature development
+\resumeItemListEnd
+
+\resumeProject
+  {Finalist, Blockchain Olympiad Bangladesh}
+  {BCOLBD}
+  {2021}
+  {{}}
+\resumeItemListStart
+  \item Top 40 teams nationally with "Blockchain Based Ticketing Platform"
+\resumeItemListEnd
+
+\resumeProject
+  {2nd Place - Bangla Handwritten Digits Recognition}
+  {BUET ML Lab}
+  {2022}
+  {{}}
+\resumeItemListStart
+  \item Achieved 95.9\% accuracy using custom CNN
+\resumeItemListEnd
+
+\resumeProject
+  {Dean's List Award}
+  {BUET}
+  {Level-2}
+  {{}}
+\resumeItemListStart
+  \item Awarded for outstanding academic results
+\resumeItemListEnd
+
+\resumeProject
+  {National Science Olympiads}
+  {Bangladesh}
+  {2017}
+  {{}}
+\resumeItemListStart
+  \item National prize winner in Bangladesh Physics Olympiad (2017)
+  \item National prize winner in Chemistry Olympiad (2017)
+\resumeItemListEnd
+
+\resumeProject
+  {Talentpool HSC Scholarship}
+  {Rajshahi Board}
+  {2017}
+  {{}}
+\resumeItemListStart
+  \item 15th in Rajshahi Board with 95.6\% marks
+\resumeItemListEnd
+
+\resumeSubHeadingListEnd
+
+\vspace{-6mm}
+
+\section{\textbf{Test Scores}}
+\vspace{-0.4mm}
+\resumeSubHeadingListStart
+\resumePOR{TOEFL iBT}
+    {: 103/120 (Listening: 29, Reading: 29, Writing: 22, Speaking: 23)}
+    {}
+\resumeSubHeadingListEnd
+\vspace{-6mm}
+
+\section{\textbf{Additional Information}}
+\vspace{-0.4mm}
+\small{
+\textbf{Languages:} Bengali (Native), English (Professional proficiency)
+
+}
+\vspace{-4mm}
+
+\end{document}
