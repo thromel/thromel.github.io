@@ -351,6 +351,9 @@ awards:
 research_interests:
 - AI4SE
 - SE4AI
+- Trustworthy AI
+- Software Security
+- LLM Security
 
 technical_skills:
 - type: "Backend & Systems"
