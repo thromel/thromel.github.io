@@ -17,7 +17,7 @@ current_company:
 
 positions:
 - name: Software Development Engineer 1, IQVIA
-  date: June 2023 - Present
+  date: June 2023 - June 2026
   logo: "/assets/images/companies/iqvia-logo.png"
   description: >-
     Backend engineer on the KPI Library team, building microservices-based healthcare applications that handle millions of patient records using .NET Core and C#. IQVIA (NYSE: IQV) provides analytics, technology solutions, and clinical research services to the life sciences industry, with 74,000+ employees across 100+ countries.
@@ -176,12 +176,12 @@ portrait_caption: Romel in Pahalgam, Kashmir in June, 2024.
 
 education:
 - name: University of Alberta
-  position: Incoming M.Sc in Computing Science
-  date: Starting soon
+  position: M.Sc in Computing Science
+  date: Starting September 2026
   status: Incoming
   description: >-
-    Preparing to begin the <strong>M.Sc in Computing Science</strong> program, with a research focus on software engineering,
-    trustworthy AI, distributed systems, and LLM systems.
+    Starting the <strong>M.Sc in Computing Science</strong> program in <strong>September 2026</strong>, with interests in
+    software engineering research, trustworthy AI, distributed systems, and LLM systems.
   url: https://www.ualberta.ca/en/computing-science/index.html
   logo: /assets/images/education/ualberta-logo.svg
 - name: Bangladesh University of Engineering and Technology

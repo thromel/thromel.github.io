@@ -5,13 +5,11 @@
 
     <div class="container">
         <nav class="site-nav" id="site-navigation" role="navigation" aria-label="Main navigation">
+            {% unless is_homepage %}
             <a href="{{ '/' | relative_url }}" class="site-title" aria-label="{{ site.data.profile.primary_name }}">
-                {% if is_homepage %}
-                TR
-                {% else %}
                 {{ site.data.profile.primary_name }}
-                {% endif %}
             </a>
+            {% endunless %}
 
             <ul class="nav-links" role="menubar">
                 {% for item in site.data.navigation.pages %}
