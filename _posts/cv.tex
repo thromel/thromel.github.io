@@ -150,6 +150,7 @@
 
 \begin{center}
     \small{
+    \href{mailto:tanzimho@ualberta.ca}{tanzimho@ualberta.ca} |
     \href{mailto:romel.rcs@gmail.com}{romel.rcs@gmail.com} | 
     \href{https://tanzimhromel.com}{tanzimhromel.com}
     }
@@ -182,6 +183,13 @@ AI for Software Engineering (AI4SE), Software Engineering for AI (SE4AI), Trustw
 \resumeSubHeadingListStart
 
 \resumeSubheading
+{University of Alberta}{Edmonton, Canada}
+{Incoming M.Sc. in Computing Science}{Starting Sep 2026}
+\resumeItemListStart
+\item Incoming member of the \href{https://u-a-goose.github.io}{U-A-Goose} research group in the Department of Computing Science.
+\resumeItemListEnd
+
+\resumeSubheading
 {Bangladesh University of Engineering and Technology (BUET)}{Dhaka, Bangladesh}
 {B.Sc. in Computer Science and Engineering}{Mar 2018 - May 2023}
 \resumeItemListStart
@@ -208,13 +216,13 @@ AI for Software Engineering (AI4SE), Software Engineering for AI (SE4AI), Trustw
   \resumeSubHeadingListEnd
 \vspace{-6mm}
 
-\section{\textbf{Research Experience}}
+\section{\textbf{Research Experience (Selected)}}
 \vspace{-0.4mm}
 \resumeSubHeadingListStart
 
 \resumeProject
-  {An Empirical Study on Remote Code Execution in ML Model Hosting Ecosystems}
-  {Tools: Python, Bandit, CodeQL, Semgrep, YARA, CWE Analysis | In Review at MSR 2026}
+  {\href{https://arxiv.org/pdf/2601.14163}{An Empirical Study on Remote Code Execution in ML Model Hosting Ecosystems}}
+  {Tools: Python, Bandit, CodeQL, Semgrep, YARA, CWE Analysis | Submitted to TOSEM 2026}
   {June 2025 - Oct 2025}
   {{}}
 \resumeItemListStart
@@ -224,18 +232,18 @@ AI for Software Engineering (AI4SE), Software Engineering for AI (SE4AI), Trustw
 \resumeItemListEnd
 
 \resumeProject
-  {ReAgent++: Detecting Backdoor Triggers in LLM Agents}
-  {Tools: Python, Knockout Testing, cK-Arm Localization, SPRT, Black-box LLM Evaluation}
+  {The Choice Can Be the Attack: Auditing Aligned Backdoors in LLM Agents}
+  {Tools: Python, WebShop, LLM Agent Auditing, Counterfactual Evaluation, Choice Modeling}
   {August 2025 -- Present}
   {}
 \resumeItemListStart
-  \item Developing ReAgent++, a lightweight framework for identifying hidden prompt-level backdoors in LLM agents using only black-box access.
-  
-  \item Implementing a two-stage pipeline: (1) simple behavioral tests to generate contrastive seeds, and (2) a cK-Arm knockout procedure with SPRT to recover minimal trigger tokens and logical conditions.
-  
-  \item Building deterministic checks for structural and negation violations, mode stability, and output clustering.
-  
-  \item Evaluating the approach on prompt-based backdoor scenarios involving semantic triggers, multi-condition triggers, and reasoning overrides to assess reliability and robustness under real LLM behavior.
+  \item Built ReAgent++, an endpoint-black-box audit for \emph{aligned backdoors} in LLM agents, targeting attacks that keep the response instruction-valid while covertly steering which acceptable brand, seller, or product gets chosen.
+
+  \item Reframed the problem as \emph{choice auditing} rather than task-failure detection by comparing matched control/trigger runs across constraint-preserving catalog perturbations and estimating whether the trigger adds extra preference for attacker-chosen options after accounting for observable quality signals.
+
+  \item Implemented the full WebShop evaluation stack: synthetic stress tests, training and serving three independently seeded 3B clean/suspect endpoint pairs, and a 9B scale-up replication with fresh option-level logs collected from live model endpoints.
+
+  \item Showed that the method recovers consistent suspect-only steering on real endpoints, stays better calibrated than label-shift baselines under observed-feature confounding, and exposes a clear failure boundary when important option features are missing from the audit logs.
 \resumeItemListEnd
 
 
@@ -262,30 +270,6 @@ AI for Software Engineering (AI4SE), Software Engineering for AI (SE4AI), Trustw
   \item Created OpenAI SDK and LangChain extensions for automatic contract enforcement and runtime remediation
   \item Implemented precondition/postcondition validators with automatic retry mechanisms and fallback strategies
 \resumeItemListEnd
-
-\resumeProject
-  {\href{https://tanzimhromel.com/assets/pdf/Ureporter.pdf}{Sentiment Analysis of Anonymous Crisis Reports in Bangladesh}}
-  {Tools: Python, BERT, XLM-RoBERTa, Transformers, Bengali NLP, Flask | Submitted to ACM CSCW}
-  {Sep 2024 - Nov 2024}
-  {}
-\resumeItemListStart
-  \item Developed uReporter -- Bangladesh's first anonymous reporting system during 2024 national crisis
-  \item Analyzed 124 crowd-sourced reports using six transformer models with multilingual NLP pipeline for Bengali/Romanized Bengali
-  \item Demonstrated anonymous crowd-sourcing's potential for understanding Global South socio-political dynamics
-\resumeItemListEnd
-
-\resumeProject
-  {\href{https://arxiv.org/abs/2511.17464}{Patient-Centric Blockchain Framework for Secure EHR Management}}
-  {Tools: Solidity, Ethereum, IPFS, React, Web3.js, AES-GCM, ECIES, EIP-712 | arXiv Preprint}
-  {June 2022 – May 2023}
-  {}
-\resumeItemListStart
-  \item Proposed a patient-centric blockchain architecture that decouples encrypted off-chain FHIR record storage from on-chain access control, eliminating trusted intermediaries and enabling verifiable patient.
-  \item Implemented an ERC-721–based smart contract for record ownership with EIP-712 signed, time-bounded permissions and ECIES-wrapped AES-GCM keys ensuring confidentiality and non-repudiable authorization.
-  \item Integrated off-chain IPFS storage with on-chain audit trails, achieving tamper-evident data integrity and complete access traceability through event logs.
-  \item Evaluated scalability on 10,000 synthetic FHIR records; achieved 1.3–2.0 s end-to-end latency for 1 MB records and 10× gas reduction via Layer-2 (zkSync/Arbitrum) deployment.
-\resumeItemListEnd
-
 
 \resumeSubHeadingListEnd
 
@@ -338,6 +322,27 @@ AI for Software Engineering (AI4SE), Software Engineering for AI (SE4AI), Trustw
   \item Implemented and analyzed TCP congestion control variants (Reno vs Vegas) using NS3 network simulator
   \item Designed TCP Vegas+ modification addressing fairness issues through dual-mode operation
   \item Conducted comprehensive performance analysis measuring throughput, fairness index, and packet drop ratios
+\resumeItemListEnd
+
+\resumeSubHeadingListEnd
+
+\vspace{-2mm}
+\section{\textbf{Open Source Contributions}}
+\vspace{-0.4mm}
+\resumeSubHeadingListStart
+
+\resumeProject
+  {Open Source Contributions (Selected)}
+  {Selected upstream contributions across program analysis, compilers, developer tooling, and .NET}
+  {2025 -- 2026}
+  {\href{https://github.com/thromel?tab=pull_requests}{GitHub}}
+\resumeItemListStart
+  \item \textbf{\href{https://github.com/tsantalis/RefactoringMiner/pull/1047}{RefactoringMiner}}: contributing merge-parent-aware commit diff support for merge commits, including parent selection, merge-specific commit APIs, paginated file handling, and review-thread fixes for GitHub-backed diffs.
+  \item \textbf{\href{https://github.com/microsoft/typescript-go/pull/3314}{typescript-go}}: contributing a declaration-emit alias reuse fix for inferred exports in Microsoft's Go port of TypeScript.
+  \item \textbf{\href{https://github.com/dotnet/efcore}{EF Core}}: merged runtime migration creation/application, \texttt{ON DELETE SET DEFAULT} support, and nullable complex-property reload handling.
+  \item \textbf{\href{https://github.com/langchain-ai/langchain}{LangChain}}: improved diagnostics for non-JSON-serializable tool schemas during tool definition.
+  \item \textbf{\href{https://github.com/ohmyzsh/ohmyzsh}{Oh My Zsh}}: added \texttt{extract} fallback support for RAR archives via \texttt{unar}.
+  \item \textbf{\href{https://github.com/Kaliumhexacyanoferrat/GenHTTP}{GenHTTP}}: added automatic request decompression and binary-response support.
 \resumeItemListEnd
 
 \resumeSubHeadingListEnd
