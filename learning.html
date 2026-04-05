@@ -7,7 +7,7 @@ navbar_title: Learning
 <!-- Page Header -->
 <div class="section-header">
   <h2 class="section-title">Learning</h2>
-  <p class="section-subtitle">What I'm currently learning and recommended resources</p>
+  <p class="section-subtitle">What I'm currently learning, plus selected courses and recommended resources</p>
 </div>
 
 <!-- Currently Learning -->
@@ -36,6 +36,34 @@ navbar_title: Learning
   </div>
 </section>
 
+<!-- Selected Courses -->
+<section class="section" style="margin-bottom: 3rem;">
+  <h3 class="learning-section-title">Selected Courses &amp; Academic Playlists</h3>
+  <p class="learning-section-copy">
+    University courses, lecture series, and academic playlists I keep coming back to across AI, systems,
+    databases, economics, history, and politics.
+  </p>
+
+  {% for group in site.data.learning.selected_courses %}
+  <div class="learning-group">
+    <h4 class="learning-subsection-title">{{ group.provider }}</h4>
+    <div class="resources-grid">
+      {% for item in group.items %}
+      <a href="{{ item.link }}" target="_blank" class="resource-card">
+        <div class="resource-type">{{ item.type }}</div>
+        <h4 class="resource-title">{{ item.title }}</h4>
+        {% if item.author %}
+        <p class="resource-author">{{ item.author }}</p>
+        {% endif %}
+        <p class="resource-description">{{ item.description }}</p>
+        <span class="resource-category">{{ item.focus }}</span>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+  {% endfor %}
+</section>
+
 <!-- Learning Resources -->
 <section class="section">
   <h3 class="learning-section-title">Recommended Resources</h3>
@@ -56,7 +84,9 @@ navbar_title: Learning
     <a href="{{ resource.link }}" target="_blank" class="resource-card" data-category="{{ resource.category }}">
       <div class="resource-type">{{ resource.type }}</div>
       <h4 class="resource-title">{{ resource.title }}</h4>
+      {% if resource.author %}
       <p class="resource-author">{{ resource.author }}</p>
+      {% endif %}
       <p class="resource-description">{{ resource.description }}</p>
       <span class="resource-category">{{ resource.category }}</span>
     </a>
@@ -67,7 +97,7 @@ navbar_title: Learning
 <script>
 document.addEventListener('DOMContentLoaded', function() {
   const filterBtns = document.querySelectorAll('.filter-btn');
-  const resourceCards = document.querySelectorAll('.resource-card');
+  const resourceCards = document.querySelectorAll('.resource-card[data-category]');
 
   filterBtns.forEach(btn => {
     btn.addEventListener('click', function() {

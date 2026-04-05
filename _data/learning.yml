@@ -24,6 +24,194 @@ currently_learning:
     progress: 20
     icon: "fas fa-certificate"
 
+# Selected Courses and Academic Playlists
+selected_courses:
+  - provider: "Stanford"
+    items:
+      - title: "Stanford CS 153 - Infrastructure at Scale - Winter 2025"
+        type: "Course"
+        focus: "Systems"
+        link: "https://www.youtube.com/playlist?list=PL2aDf5-VARtCwgVceDClce1OcnUk1vIvR"
+        description: "Production-scale infrastructure, distributed systems, and reliability engineering."
+
+      - title: "Stanford CS109 Introduction to Probability for Computer Scientists I 2022 I Chris Piech"
+        type: "Course"
+        focus: "Math"
+        link: "https://www.youtube.com/playlist?list=PLoROMvodv4rOpr_A7B9SriE_iZmkanvUg"
+        description: "Probability foundations for machine learning, inference, and algorithmic reasoning."
+
+      - title: "Stanford EE364A Convex Optimization I Stephen Boyd I 2023"
+        type: "Course"
+        focus: "Math"
+        link: "https://www.youtube.com/playlist?list=PLoROMvodv4rMJqxxviPa4AmDClvcbHi6h"
+        description: "Convex analysis, duality, and optimization methods from Stephen Boyd."
+
+      - title: "Stanford AA228V I Validation of Safety Critical Systems I 2025"
+        type: "Course"
+        focus: "Safety"
+        link: "https://www.youtube.com/playlist?list=PLoROMvodv4rOq1LMLI8U7djzDb8--xpaC"
+        description: "Methods for validating safety-critical AI and autonomous systems."
+
+      - title: "Stanford CS224N Natural Language Processing with Deep Learning I Spring 2024 I Professor Christopher Manning"
+        type: "Course"
+        focus: "NLP"
+        link: "https://www.youtube.com/playlist?list=PLoROMvodv4rOaMFbaqxPDoLWjDaRAdP9D"
+        description: "Modern NLP with deep learning, transformers, and language models."
+
+      - title: "Stanford CS149 I Parallel Computing I 2023 I Kayvon Fatahalian and Kunle Olukotun"
+        type: "Course"
+        focus: "Systems"
+        link: "https://www.youtube.com/playlist?list=PLoROMvodv4rMp7MTFr4hQsDEcX7Bx6Odp"
+        description: "Parallel programming models, GPU execution, and performance optimization."
+
+      - title: "Stanford CS329A Series (Self-Improving AI Agents) Winter 2025"
+        type: "Lecture Series"
+        focus: "Agents"
+        link: "https://www.youtube.com/playlist?list=PL3058ht9NqT1NG6Y663elpHSDh-AW1TIr"
+        description: "Agentic systems that improve through feedback, tools, and iteration."
+
+      - title: "Stanford CS224R Deep Reinforcement Learning"
+        type: "Course"
+        focus: "RL"
+        link: "https://www.youtube.com/playlist?list=PLoROMvodv4rPwxE0ONYRa_itZFdaKCylL"
+        description: "Deep reinforcement learning algorithms, exploration, and sequential decision making."
+
+      - title: "Stanford CS221: Artificial Intelligence: Principles and Techniques | Autumn 2025"
+        type: "Course"
+        focus: "AI"
+        link: "https://www.youtube.com/playlist?list=PLoROMvodv4rMeDqwS1yFl3j3sR_-MQNEN"
+        description: "Broad AI foundations covering search, reasoning, learning, and decision making."
+
+      - title: "Stanford CS336 Language Modeling from Scratch I 2025"
+        type: "Course"
+        focus: "LLMs"
+        link: "https://www.youtube.com/playlist?list=PLoROMvodv4rOY23Y0BoGoBGgQ1zmU_MT_"
+        description: "Build and understand modern language models from first principles."
+
+      - title: "Algorithmic Game Theory (Stanford CS364A, Fall 2013)"
+        type: "Course"
+        focus: "Theory"
+        link: "https://www.youtube.com/playlist?list=PLEGCF-WLh2RJBqmxvZ0_ie-mleCFhi2N4"
+        description: "Strategic behavior, auctions, equilibria, and mechanism design."
+
+      - title: "Stanford CME295: Transformers and Large Language Models I Autumn 2025"
+        type: "Course"
+        focus: "LLMs"
+        link: "https://www.youtube.com/playlist?list=PLoROMvodv4rOCXd21gf0CF4xr35yINeOy"
+        description: "Transformers, scaling laws, and large language model systems."
+
+      - title: "Stanford CS236: Deep Generative Models I 2023 I Stefano Ermon"
+        type: "Course"
+        focus: "Generative Models"
+        link: "https://www.youtube.com/playlist?list=PLoROMvodv4rPOWA-omMM6STXaWW4FvJT8"
+        description: "Deep generative modeling, latent-variable methods, and modern generative learning."
+
+      - title: "Conversations with Andrew Ng"
+        type: "Academic Playlist"
+        focus: "AI"
+        link: "https://www.youtube.com/playlist?list=PLoROMvodv4rNS_gfs76OBp97bXIhYWt07"
+        description: "Long-form conversations on AI research, systems, and the field's direction."
+
+      - title: "Engineering Leadership Program"
+        type: "Academic Playlist"
+        focus: "Leadership"
+        link: "https://www.youtube.com/playlist?list=PLoROMvodv4rMqIT1NUKUsl2dsDoWjNl7t"
+        description: "Engineering leadership, management, communication, and team-building lessons."
+
+      - title: "AI In Healthcare with Stanford professors Matt Lungren and Justin Norden"
+        type: "Academic Playlist"
+        focus: "AI"
+        link: "https://www.youtube.com/playlist?list=PLoROMvodv4rPXCVjB8Xy1eiWGIAOBwNEf"
+        description: "Applications of AI in healthcare, medical imaging, and clinical workflows."
+
+      - title: "Large Language Models (LLMs)"
+        type: "Academic Playlist"
+        focus: "LLMs"
+        link: "https://www.youtube.com/playlist?list=PLoROMvodv4rObv1FMizXqumgVVdzX4_05"
+        description: "Stanford talks and lectures focused on modern large language models."
+
+      - title: "Human-AI Interaction"
+        type: "Academic Playlist"
+        focus: "HCI"
+        link: "https://www.youtube.com/playlist?list=PLoROMvodv4rPAuXU5vKnZN-tySsKBt2mO"
+        description: "Designing, evaluating, and reasoning about interactive AI systems."
+
+      - title: "Stanford CS25 - Transformers United"
+        type: "Academic Playlist"
+        focus: "Transformers"
+        link: "https://www.youtube.com/playlist?list=PLoROMvodv4rNiJRchCzutFw5ItR_Z27CM"
+        description: "Research talks on transformers across modalities and applications."
+
+      - title: "Agentic AI"
+        type: "Academic Playlist"
+        focus: "Agents"
+        link: "https://www.youtube.com/playlist?list=PLoROMvodv4rMC33Ucp4aumGNn8SpjEork"
+        description: "Talks and lectures on autonomous, tool-using, and agentic AI systems."
+
+  - provider: "CMU"
+    items:
+      - title: "17803 Empirical Methods - Fall 2022 - Carnegie Mellon University"
+        type: "Course"
+        focus: "Research Methods"
+        link: "https://www.youtube.com/playlist?list=PLuPUOEODcOmsS409iKohAewobtQswdI7M"
+        description: "Empirical methods for rigorous systems and software evaluation."
+
+      - title: "CMU Advanced Database Systems (15-721 / Spring 2024)"
+        type: "Course"
+        focus: "Databases"
+        link: "https://www.youtube.com/playlist?list=PLSE8ODhjZXjYa_zX-KeMJui7pcN1rIaIJ"
+        description: "Modern database internals, query processing, and system design."
+
+      - title: "15-721 Advanced Database Systems (Spring 2023)"
+        type: "Course"
+        focus: "Databases"
+        link: "https://www.youtube.com/playlist?list=PLSE8ODhjZXjYzlLMbX3cR0sxWnRM7CLFn"
+        description: "Advanced database systems from Andy Pavlo's CMU graduate course."
+
+      - title: "CMU Intro to Database Systems (15-445/645 - Fall 2024)"
+        type: "Course"
+        focus: "Databases"
+        link: "https://www.youtube.com/playlist?list=PLSE8ODhjZXjYDBpQnSymaectKjxCy6BYq"
+        description: "Storage, indexing, query execution, concurrency, and recovery fundamentals."
+
+      - title: "CMU Neural Nets for NLP 2021"
+        type: "Course"
+        focus: "NLP"
+        link: "https://www.youtube.com/playlist?list=PL8PYTP1V4I8AkaHEJ7lOOrlex-pcxS-XV"
+        description: "Neural methods for language understanding, sequence modeling, and text generation."
+
+      - title: "CMU Advanced NLP Spring 2024"
+        type: "Course"
+        focus: "NLP"
+        link: "https://www.youtube.com/playlist?list=PL8PYTP1V4I8DZprnWryM4nR8IZl1ZXDjg"
+        description: "Advanced natural language processing with modern representation learning."
+
+  - provider: "Yale"
+    items:
+      - title: "Financial Markets (2011) with Robert Shiller"
+        type: "Course"
+        focus: "Economics"
+        link: "https://www.youtube.com/playlist?list=PL8FB14A2200B87185"
+        description: "Markets, risk, valuation, and behavioral finance from Robert Shiller."
+
+      - title: "Game Theory with Ben Polak"
+        type: "Course"
+        focus: "Economics"
+        link: "https://www.youtube.com/playlist?list=PL6EF60E1027E1A10B"
+        description: "Strategic interaction, incentives, equilibrium, and rational decision making."
+
+      - title: "Power and Politics in Today's World"
+        type: "Course"
+        focus: "Politics"
+        link: "https://www.youtube.com/playlist?list=PLh9mgdi4rNeyViG2ar68jkgEi4y6doNZy"
+        description: "Contemporary global politics, state power, and international affairs."
+
+      - title: "The Early Middle Ages, 284-1000 with Paul Freedman"
+        type: "Course"
+        focus: "History"
+        link: "https://www.youtube.com/playlist?list=PL77A337915A76F660"
+        description: "Political, religious, and social history of late antiquity and the early medieval world."
+
 # Learning Resources
 resources:
   # Software Engineering

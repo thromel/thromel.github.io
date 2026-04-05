@@ -3924,6 +3924,23 @@ html {
   color: var(--color-text-muted);
 }
 
+.learning-section-copy {
+  margin: 0 0 var(--space-6) 0;
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+}
+
+.learning-group + .learning-group {
+  margin-top: var(--space-8);
+}
+
+.learning-subsection-title {
+  margin: 0 0 var(--space-4) 0;
+  font-size: var(--text-lg);
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
 /* Filter Buttons */
 .learning-filters {
   display: flex;
