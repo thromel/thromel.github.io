@@ -279,7 +279,7 @@ If you use these figures or scripts, please cite:
 
 For questions or issues:
 - **Author**: Tanzim Hossain Romel
-- **Email**: romel.rcs@gmail.com
+- **Email**: tanhromel@gmail.com
 - **GitHub**: @thromel
 
 ---

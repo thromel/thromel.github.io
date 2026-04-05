@@ -367,7 +367,7 @@ const debouncedHandler = debounce(expensiveFunction, 250);
 ## Contact
 
 For any inquiries, feel free to contact me at:
-- 📧 **Email**: romel.rcs@gmail.com
+- 📧 **Email**: tanhromel@gmail.com
 - 💼 **LinkedIn**: [thromel](https://www.linkedin.com/in/thromel)
 - 🐙 **GitHub**: [thromel](https://github.com/thromel)
 - 🌐 **Website**: [thromel.github.io](https://thromel.github.io)

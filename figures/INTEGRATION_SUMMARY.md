@@ -203,7 +203,7 @@ All figures are:
 
 For questions or issues with the figures:
 - **Author**: Tanzim Hossain Romel
-- **Email**: romel.rcs@gmail.com
+- **Email**: tanhromel@gmail.com
 
 ---
 
