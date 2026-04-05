@@ -40,26 +40,23 @@ navbar_title: Learning
 <section class="section" style="margin-bottom: 3rem;">
   <h3 class="learning-section-title">Selected Courses &amp; Academic Playlists</h3>
   <p class="learning-section-copy">
-    University courses, lecture series, and academic playlists I keep coming back to across AI, systems,
-    databases, economics, history, and politics.
+    A compact list of university courses, lecture series, and academic playlists I revisit regularly.
   </p>
 
   {% for group in site.data.learning.selected_courses %}
   <div class="learning-group">
     <h4 class="learning-subsection-title">{{ group.provider }}</h4>
-    <div class="resources-grid">
+    <ul class="learning-link-list">
       {% for item in group.items %}
-      <a href="{{ item.link }}" target="_blank" class="resource-card">
-        <div class="resource-type">{{ item.type }}</div>
-        <h4 class="resource-title">{{ item.title }}</h4>
-        {% if item.author %}
-        <p class="resource-author">{{ item.author }}</p>
-        {% endif %}
-        <p class="resource-description">{{ item.description }}</p>
-        <span class="resource-category">{{ item.focus }}</span>
-      </a>
+      <li class="learning-link-item">
+        <a href="{{ item.link }}" target="_blank" class="learning-link-title">{{ item.title }}</a>
+        <div class="learning-link-meta">
+          <span class="learning-list-badge">{{ item.type }}</span>
+          <span class="learning-list-badge">{{ item.focus }}</span>
+        </div>
+      </li>
       {% endfor %}
-    </div>
+    </ul>
   </div>
   {% endfor %}
 </section>
