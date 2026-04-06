@@ -13,7 +13,9 @@ test('home education summary links to a dedicated education page', async ({ page
   await fullEducationLink.click();
   await page.waitForURL('**/education');
 
-  await expect(page.locator('.section-education .section-title')).toContainText('Education');
-  await expect(page.locator('.section-subtitle')).toContainText('Academic background');
+  const educationPageSection = page.locator('.education-page');
+  await expect(educationPageSection.locator('.timeline-item')).toHaveCount(4);
+  await expect(educationPageSection.locator('.section-title')).toContainText('Education');
+  await expect(educationPageSection.locator('.section-subtitle')).toContainText('Academic background');
   await expect(page.locator('.nav-links .nav-link').filter({ hasText: 'Education' })).toHaveCount(0);
 });
