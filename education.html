@@ -1,0 +1,45 @@
+---
+layout: default
+title: Education
+navbar_title: Education
+permalink: /education
+---
+
+<section class="section section-education education-page">
+  <div class="section-header">
+    <h2 class="section-title"><i class="fas fa-graduation-cap section-icon"></i> Education</h2>
+    <p class="section-subtitle">Academic background, degrees, and selected milestones</p>
+  </div>
+
+  <div class="timeline">
+    {% for edu in site.data.profile.education %}
+    <div class="timeline-item">
+      <div class="timeline-header timeline-header-with-logo">
+        <div class="timeline-heading-group">
+          {% if edu.logo %}
+          <img src="{{ edu.logo | relative_url }}" alt="{{ edu.name }} badge" class="timeline-logo">
+          {% endif %}
+          <div class="timeline-heading-copy">
+            <h3 class="timeline-title">
+              {% if edu.url %}
+              <a href="{{ edu.url }}" target="_blank" class="institution-link">{{ edu.name }}</a>
+              {% else %}
+              {{ edu.name }}
+              {% endif %}
+            </h3>
+            <p class="timeline-subtitle">
+              <span>{{ edu.position }}</span>
+              {% if edu.status %}
+              <span class="education-status-badge">{{ edu.status }}</span>
+              {% endif %}
+            </p>
+          </div>
+        </div>
+        <span class="timeline-date">{{ edu.date }}</span>
+      </div>
+
+      <div class="timeline-description">{{ edu.description }}</div>
+    </div>
+    {% endfor %}
+  </div>
+</section>
