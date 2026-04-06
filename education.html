@@ -39,6 +39,9 @@ permalink: /education
       </div>
 
       <div class="timeline-description">{{ edu.description }}</div>
+      {% if edu.coursework %}
+      <div class="timeline-description education-coursework">{{ edu.coursework }}</div>
+      {% endif %}
     </div>
     {% endfor %}
   </div>

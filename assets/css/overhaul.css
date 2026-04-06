@@ -1157,6 +1157,14 @@ pre code {
   vertical-align: middle;
 }
 
+.education-page .education-coursework {
+  margin-top: var(--space-4);
+}
+
+.education-page .education-coursework table {
+  width: 100%;
+}
+
 .education-list-item {
   align-items: flex-start;
   gap: 0.75rem;
