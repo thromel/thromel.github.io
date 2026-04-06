@@ -1159,10 +1159,62 @@ pre code {
 
 .education-page .education-coursework {
   margin-top: var(--space-4);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .education-page .education-coursework table {
   width: 100%;
+}
+
+@media (max-width: 640px) {
+  .education-page .education-coursework {
+    margin-top: var(--space-3);
+    padding-bottom: var(--space-2);
+  }
+
+  .education-page .education-coursework table {
+    display: block;
+    min-width: 0;
+    width: 100%;
+    font-size: 0.875rem;
+  }
+
+  .education-page .education-coursework tbody {
+    display: block;
+  }
+
+  .education-page .education-coursework tr {
+    display: block;
+    padding: var(--space-3) 0;
+    border-top: 1px solid var(--color-border-light);
+  }
+
+  .education-page .education-coursework tr:first-child {
+    border-top: 0;
+    padding-top: 0;
+  }
+
+  .education-page .education-coursework td,
+  .education-page .education-coursework th {
+    display: block;
+    width: 100%;
+    padding: 0.35rem 0.5rem;
+    line-height: 1.35;
+    vertical-align: top;
+  }
+
+  .education-page .education-coursework td:first-child,
+  .education-page .education-coursework th:first-child {
+    margin-bottom: 0.1rem;
+    padding-left: 0;
+    font-weight: 700;
+  }
+
+  .education-page .education-coursework td:last-child,
+  .education-page .education-coursework th:last-child {
+    padding-right: 0;
+  }
 }
 
 .education-list-item {
