@@ -13,6 +13,7 @@ test('home education summary links to a dedicated education page', async ({ page
 
   const educationSection = page.locator('.section-education');
   await expect(educationSection.locator('.timeline-item')).toHaveCount(2);
+  await expect(educationSection.locator('.education-coursework')).toHaveCount(0);
 
   const fullEducationLink = educationSection.getByRole('link', { name: 'View Full Education →' });
   await expect(fullEducationLink).toHaveAttribute('href', '/education');
@@ -21,7 +22,7 @@ test('home education summary links to a dedicated education page', async ({ page
   await page.waitForURL('**/education');
 
   await expect(page.locator('.section-education .section-title')).toContainText('Education');
-  await expect(page.locator('.section-subtitle')).toContainText('Academic background');
+  await expect(page.locator('.section-education .section-subtitle')).toContainText('Academic background');
   await expect(page.locator('.nav-links .nav-link').filter({ hasText: 'Education' })).toHaveCount(0);
 });
 
