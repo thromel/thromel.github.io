@@ -4458,7 +4458,7 @@ html {
 }
 
 .homepage-classic .hero-section {
-  align-items: center;
+  align-items: start;
   gap: clamp(2rem, 5vw, 4rem);
   padding: clamp(1rem, 2vw, 1.5rem) 0 var(--space-4);
 }
@@ -4549,6 +4549,11 @@ html {
 
 .homepage-classic .hero-link-primary:hover {
   color: #ffffff;
+}
+
+.homepage-classic .hero-image-wrapper {
+  align-self: start;
+  padding-top: clamp(6.1rem, 9.5vw, 7.9rem);
 }
 
 .homepage-classic .hero-image {
@@ -4782,6 +4787,10 @@ html {
 @media (max-width: 900px) {
   .homepage-classic .hero-section {
     gap: var(--space-8);
+  }
+
+  .homepage-classic .hero-image-wrapper {
+    padding-top: 0;
   }
 
   .homepage-classic .hero-actions {
