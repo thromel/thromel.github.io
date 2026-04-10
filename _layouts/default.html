@@ -36,16 +36,22 @@
 
     <script>
       (function() {
+        var resolvedTheme = 'dark';
+        var supportsMatchMedia = typeof window.matchMedia === 'function';
+        var systemPrefersDark = supportsMatchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+
         try {
-          var theme = localStorage.getItem('theme');
-          if (theme === 'dark' || theme === 'light') {
-            document.documentElement.setAttribute('data-theme', theme);
+          var storedTheme = localStorage.getItem('theme');
+          if (storedTheme === 'dark' || storedTheme === 'light') {
+            resolvedTheme = storedTheme;
           } else {
-            document.documentElement.setAttribute('data-theme', 'dark');
+            resolvedTheme = systemPrefersDark ? 'dark' : 'light';
           }
         } catch (e) {
-          document.documentElement.setAttribute('data-theme', 'dark');
+          resolvedTheme = systemPrefersDark ? 'dark' : 'light';
         }
+
+        document.documentElement.setAttribute('data-theme', resolvedTheme);
       })();
     </script>
 
