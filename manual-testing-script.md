@@ -2,7 +2,8 @@
 
 ## Automated Command
 1. If the repo does not already have Playwright installed locally, run `npm install --no-save @playwright/test`.
-2. Run `npx playwright test tests/navbar-layout.spec.js tests/shell-behavior.spec.js`.
+2. Run `npx playwright test tests/homepage-hierarchy.spec.js tests/navbar-layout.spec.js tests/shell-behavior.spec.js`.
+3. For homepage-only verification, run `npx playwright test tests/homepage-hierarchy.spec.js`.
 
 ## Representative Pages
 1. Test `Home`, `About`, and `Contributions` on desktop and mobile widths.
@@ -26,6 +27,14 @@
 2. Confirm the section pill nav appears below the OSS summary area.
 3. Click each section pill (`News`, `Publications`, `Research`, `Work`, `Projects`, `Skills`) and verify smooth scroll to section.
 4. Scroll through the homepage and confirm the currently visible section pill highlights.
+
+## Homepage Hierarchy
+1. Run `npx playwright test tests/homepage-hierarchy.spec.js`.
+2. On `Home` desktop, confirm the hero has one primary action row with only `Research` and `CV`.
+3. Switch to a mobile viewport (`390x844`) and verify the hero text block appears before the portrait.
+4. Confirm the secondary contact row feels quieter than the primary actions and does not read like a second CTA row.
+5. Confirm the `home-section-nav` section nav appears below the intro support band, after current focus and before the longer homepage sections.
+6. Click the pills and verify the URL hash and scroll position move to `homepage-news`, `homepage-publications`, `homepage-research`, `homepage-work`, `homepage-projects`, and `homepage-skills`.
 
 ## Mobile Drawer
 1. Switch to a mobile viewport (`390x844` or equivalent).

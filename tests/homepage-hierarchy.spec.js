@@ -1,0 +1,69 @@
+const { test, expect } = require('@playwright/test');
+
+const BASE_URL = process.env.PLAYWRIGHT_TEST_BASE_URL || 'http://127.0.0.1:4000';
+// Desktop viewport: 1280, 720
+const DESKTOP_VIEWPORT = { width: 1280, height: 720 };
+// Mobile viewport: 390, 844
+const MOBILE_VIEWPORT = { width: 390, height: 844 };
+
+const SECTION_IDS = [
+  'homepage-news',
+  'homepage-publications',
+  'homepage-research',
+  'homepage-work',
+  'homepage-projects',
+  'homepage-skills',
+];
+
+test.describe('homepage hierarchy', () => {
+  test('desktop hero keeps one primary action row and exposes section navigation targets', async ({ page }) => {
+    await page.setViewportSize(DESKTOP_VIEWPORT);
+    await page.goto(BASE_URL, { waitUntil: 'domcontentloaded' });
+
+    await expect(page.locator('#site-navigation')).toHaveCount(1);
+    await expect(page.locator('.hero-primary-actions')).toHaveCount(1);
+
+    const primaryLinks = page.locator('.hero-primary-actions a');
+    await expect(primaryLinks).toHaveCount(2);
+
+    const primaryTexts = (await primaryLinks.allInnerTexts()).map((text) => text.replace(/\s+/g, ' ').trim());
+    expect(primaryTexts).toEqual(['Research', 'CV']);
+
+    await expect(page.locator('.home-section-nav')).toHaveCount(1);
+
+    for (const sectionId of SECTION_IDS) {
+      await expect(page.locator(`#${sectionId}`), `Expected #${sectionId} to exist on the homepage.`).toHaveCount(1);
+    }
+  });
+
+  test('mobile hero keeps text above the portrait and section nav pills update the hash', async ({ page }) => {
+    await page.setViewportSize(MOBILE_VIEWPORT);
+    await page.goto(BASE_URL, { waitUntil: 'domcontentloaded' });
+
+    const heroContent = page.locator('.hero-content');
+    const heroPortrait = page.locator('.hero-image-wrapper');
+    const sectionNav = page.locator('.home-section-nav');
+
+    await expect(heroContent).toBeVisible();
+    await expect(heroPortrait).toBeVisible();
+    await expect(sectionNav).toHaveCount(1);
+
+    const [contentBox, portraitBox] = await Promise.all([
+      heroContent.boundingBox(),
+      heroPortrait.boundingBox(),
+    ]);
+
+    expect(contentBox).not.toBeNull();
+    expect(portraitBox).not.toBeNull();
+    expect(
+      contentBox.y,
+      `Expected the mobile hero text block to render before the portrait, but content started at ${contentBox.y}px and the portrait started at ${portraitBox.y}px.`,
+    ).toBeLessThan(portraitBox.y);
+
+    const projectsPill = page.locator('.home-section-nav a[href="#homepage-projects"]');
+    await projectsPill.click();
+
+    await expect.poll(async () => page.evaluate(() => window.location.hash)).toBe('#homepage-projects');
+    await expect(page.locator('#homepage-projects')).toHaveCount(1);
+  });
+});

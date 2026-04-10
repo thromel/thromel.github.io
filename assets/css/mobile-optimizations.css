@@ -110,10 +110,6 @@
     gap: var(--space-6) !important;
   }
 
-  .hero-image-wrapper {
-    order: -1;
-  }
-
   .hero-image {
     width: 140px !important;
     height: auto !important;
@@ -181,6 +177,40 @@
   .social-icon {
     width: 44px !important;
     height: 44px !important;
+  }
+
+  .homepage-classic .hero-section {
+    text-align: left !important;
+    align-items: flex-start !important;
+    gap: var(--space-5) !important;
+  }
+
+  .homepage-classic .hero-content {
+    align-items: flex-start !important;
+  }
+
+  .homepage-classic .hero-bio {
+    text-align: left !important;
+  }
+
+  .homepage-classic .hero-interests,
+  .homepage-classic .hero-primary-actions,
+  .homepage-classic .hero-contact-row,
+  .homepage-classic .hero-social {
+    justify-content: flex-start !important;
+  }
+
+  .homepage-classic .hero-actions {
+    align-items: flex-start !important;
+  }
+
+  .homepage-classic .hero-image-wrapper {
+    align-self: flex-start !important;
+  }
+
+  .homepage-classic .hero-image {
+    width: min(180px, 48vw) !important;
+    margin: 0 !important;
   }
 
   /* ========== Section Headers ========== */

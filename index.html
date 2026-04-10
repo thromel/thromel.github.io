@@ -9,13 +9,15 @@ navbar_title: Home
 <!-- Hero Section - Minimal Style -->
 <div class="hero-section">
   <div class="hero-content">
+    <p class="hero-kicker">Software engineering, research, and open source</p>
+
     <!-- Name & Tagline -->
     <h1 class="hero-name">{{ site.data.profile.primary_name }}</h1>
     <p class="hero-tagline">Software Engineer · Software Engineering Researcher</p>
 
     <!-- Minimal Bio -->
     <p class="hero-bio">
-      I’m a software engineer and researcher from <a href="https://cse.buet.ac.bd" target="_blank">BUET</a>. Over the past 3 years at <a href="{{ site.data.profile.current_company.url }}" target="_blank">{{ site.data.profile.current_company.name }}</a>, I’ve worked across backend engineering and AI engineering, including 1 year focused on AI systems. My research focuses on how AI is changing software engineering, especially developer tools, reliability, and security. In September 2026, I’ll begin an <strong>M.Sc in Computing Science</strong> at the <a href="https://www.ualberta.ca/en/computing-science/index.html" target="_blank">University of Alberta</a>.
+      <strong>Software engineer and researcher</strong> from <a href="https://cse.buet.ac.bd" target="_blank">BUET</a>. Over the past 3 years at <a href="{{ site.data.profile.current_company.url }}" target="_blank">{{ site.data.profile.current_company.name }}</a>, I have worked across backend engineering and AI engineering, including 1 year focused on AI systems. My research focuses on how AI is changing software engineering, especially developer tools, reliability, and security. In September 2026, I will begin an <strong>M.Sc in Computing Science</strong> at the <a href="https://www.ualberta.ca/en/computing-science/index.html" target="_blank">University of Alberta</a>.
     </p>
     <p class="hero-bio hero-bio-personal">
       Outside work, I read a lot of history and economics, travel when I can, and usually have a novel in progress.
@@ -31,51 +33,53 @@ navbar_title: Home
 
     <!-- Contact & Social Row -->
     <div class="hero-actions">
-      <div class="hero-links">
-        <a href="mailto:{{ site.data.profile.email }}" class="hero-link">
-          <i class="fas fa-envelope"></i>
-          <span>{{ site.data.profile.email }}</span>
-        </a>
-        {% if site.data.profile.meeting_link %}
-        <a href="{{ site.data.profile.meeting_link }}" class="hero-link" target="_blank" rel="noopener noreferrer">
-          <i class="far fa-calendar-alt"></i>
-          <span>Meeting</span>
-        </a>
-        {% endif %}
+      <div class="hero-primary-actions">
         <a href="{{ 'research' | relative_url }}" class="hero-link">
           <i class="fas fa-microscope"></i>
           <span>Research</span>
         </a>
-        <a href="/assets/pdf/cv.pdf" class="hero-link hero-link-primary" target="_blank">
+        <a href="/assets/pdf/cv.pdf" class="hero-link hero-link-primary" target="_blank" rel="noopener noreferrer">
           <i class="fas fa-file-alt"></i>
           <span>CV</span>
         </a>
       </div>
 
-      <div class="hero-social">
-        {% if site.data.profile.github %}
-        <a href="https://github.com/{{ site.data.profile.github }}" class="social-icon" title="GitHub" target="_blank">
-          <i class="fab fa-github"></i>
+      <div class="hero-contact-row">
+        <a href="mailto:{{ site.data.profile.email }}" class="hero-contact-link">
+          <i class="fas fa-envelope"></i>
+          <span>{{ site.data.profile.email }}</span>
+        </a>
+        {% if site.data.profile.meeting_link %}
+        <a href="{{ site.data.profile.meeting_link }}" class="hero-contact-link" target="_blank" rel="noopener noreferrer">
+          <i class="far fa-calendar-alt"></i>
+          <span>Meeting</span>
         </a>
         {% endif %}
-        {% if site.data.profile.linkedin %}
-        <a href="https://www.linkedin.com/in/{{ site.data.profile.linkedin }}" class="social-icon" title="LinkedIn" target="_blank">
-          <i class="fab fa-linkedin"></i>
-        </a>
-        {% endif %}
-        {% if site.data.profile.gscholar %}
-        <a href="https://scholar.google.com/citations?user={{ site.data.profile.gscholar }}" class="social-icon" title="Google Scholar" target="_blank">
-          <i class="ai ai-google-scholar"></i>
-        </a>
-        {% endif %}
-        {% if site.data.profile.orcid %}
-        <a href="https://orcid.org/{{ site.data.profile.orcid }}" class="social-icon" title="ORCID" target="_blank">
-          <i class="ai ai-orcid"></i>
-        </a>
-        {% endif %}
-        <a href="{{ 'contributions' | relative_url }}" class="social-icon" title="Open Source">
-          <i class="fas fa-code-branch"></i>
-        </a>
+        <div class="hero-social" aria-label="Profiles and contributions">
+          {% if site.data.profile.github %}
+          <a href="https://github.com/{{ site.data.profile.github }}" class="social-icon" title="GitHub" aria-label="GitHub" target="_blank" rel="noopener noreferrer">
+            <i class="fab fa-github"></i>
+          </a>
+          {% endif %}
+          {% if site.data.profile.linkedin %}
+          <a href="https://www.linkedin.com/in/{{ site.data.profile.linkedin }}" class="social-icon" title="LinkedIn" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
+            <i class="fab fa-linkedin"></i>
+          </a>
+          {% endif %}
+          {% if site.data.profile.gscholar %}
+          <a href="https://scholar.google.com/citations?user={{ site.data.profile.gscholar }}" class="social-icon" title="Google Scholar" aria-label="Google Scholar" target="_blank" rel="noopener noreferrer">
+            <i class="ai ai-google-scholar"></i>
+          </a>
+          {% endif %}
+          {% if site.data.profile.orcid %}
+          <a href="https://orcid.org/{{ site.data.profile.orcid }}" class="social-icon" title="ORCID" aria-label="ORCID" target="_blank" rel="noopener noreferrer">
+            <i class="ai ai-orcid"></i>
+          </a>
+          {% endif %}
+          <a href="{{ 'contributions' | relative_url }}" class="social-icon" title="Open Source" aria-label="Open source contributions">
+            <i class="fas fa-code-branch"></i>
+          </a>
+        </div>
       </div>
     </div>
   </div>
@@ -86,82 +90,102 @@ navbar_title: Home
   </div>
 </div>
 
-<section class="current-focus" aria-labelledby="current-focus-title">
-  <div class="current-focus-header">
-    <p class="current-focus-kicker">What I am focused on now</p>
-    <h2 id="current-focus-title" class="current-focus-title">The papers, open source work, and reading that are getting most of my attention right now.</h2>
-  </div>
-  <div class="current-focus-grid">
-    <article class="current-focus-card">
-      <span class="current-focus-label">Research</span>
-      <p>I am currently focused on <em>The Choice Can Be the Attack</em> and VeriSchema. That is where most of my research time is going right now.</p>
-    </article>
-    <article class="current-focus-card">
-      <span class="current-focus-label">Open Source</span>
-      <p>On the open source side, I am mostly focused on RefactoringMiner.</p>
-    </article>
-    <article class="current-focus-card">
-      <span class="current-focus-label">Reading</span>
-      <p>I am reading <em>Designing Data-Intensive Applications</em>, 2nd edition.</p>
-    </article>
-  </div>
-</section>
-
-<!-- Open Source Contributions -->
-<div id="oss-summary" class="oss-inline" data-github-user="{{ site.data.profile.github | default: 'thromel' }}" style="display: none;">
-  <a href="{{ 'contributions' | relative_url }}" class="oss-badge">
-    <i class="fas fa-code-merge"></i>
-    <span id="oss-summary-text" aria-live="polite"></span>
-  </a>
-  <span class="oss-repos">
-    to <a href="https://github.com/langchain-ai/deepagents/pulls?q=author%3Athromel" target="_blank" rel="noopener noreferrer">deepagents</a>,
-    <a href="https://github.com/microsoft/typescript-go/pulls?q=author%3Athromel" target="_blank" rel="noopener noreferrer">typescript-go</a>,
-    <a href="https://github.com/tsantalis/RefactoringMiner/pulls?q=author%3Athromel" target="_blank" rel="noopener noreferrer">RefactoringMiner</a>,
-    <a href="https://github.com/dotnet/efcore/pulls?q=author%3Athromel" target="_blank" rel="noopener noreferrer">EF Core</a>,
-    <a href="https://github.com/langchain-ai/langchain/pulls?q=author%3Athromel" target="_blank" rel="noopener noreferrer">LangChain</a>,
-    <a href="https://github.com/Kaliumhexacyanoferrat/GenHTTP/pulls?q=author%3Athromel" target="_blank" rel="noopener noreferrer">GenHTTP</a>
-  </span>
-</div>
-
-<!-- Recent News Widget -->
-<div class="news-widget">
-  <div class="news-widget-header">
-    <h3 class="news-widget-title"><i class="fas fa-newspaper"></i> Recent News</h3>
-    <a href="{{ 'news' | relative_url }}" class="news-widget-more">View all →</a>
-  </div>
-  <div class="news-list">
-    {% assign sorted_news = site.data.news | sort: 'date' | reverse %}
-    {% for item in sorted_news limit:3 %}
-    <div class="news-item">
-      <div class="news-date">
-        <span class="news-date-month">{{ item.date | date: "%b" }}</span>
-        <span class="news-date-year">{{ item.date | date: "%Y" }}</span>
-      </div>
-      <div class="news-content">
-        <div class="news-title">{{ item.title }}</div>
-        <div class="news-description">{{ item.description | truncate: 120 }}</div>
-      </div>
+<div class="home-support-stack">
+  <section class="current-focus" aria-labelledby="current-focus-title">
+    <div class="current-focus-header">
+      <p class="current-focus-kicker">What I am focused on now</p>
+      <h2 id="current-focus-title" class="current-focus-title">The papers, open source work, and reading that are getting most of my attention right now.</h2>
     </div>
-    {% endfor %}
+    <div class="current-focus-grid">
+      <article class="current-focus-card">
+        <span class="current-focus-label">Research</span>
+        <p>I am currently focused on <em>The Choice Can Be the Attack</em> and VeriSchema. That is where most of my research time is going right now.</p>
+      </article>
+      <article class="current-focus-card">
+        <span class="current-focus-label">Open Source</span>
+        <p>On the open source side, I am mostly focused on RefactoringMiner.</p>
+      </article>
+      <article class="current-focus-card">
+        <span class="current-focus-label">Reading</span>
+        <p>I am reading <em>Designing Data-Intensive Applications</em>, 2nd edition.</p>
+      </article>
+    </div>
+  </section>
+
+  <nav class="home-section-nav" aria-label="Jump to homepage sections">
+    <a class="section-pill" href="#homepage-news">News</a>
+    <a class="section-pill" href="#homepage-publications">Publications</a>
+    <a class="section-pill" href="#homepage-research">Research</a>
+    <a class="section-pill" href="#homepage-work">Work</a>
+    <a class="section-pill" href="#homepage-projects">Projects</a>
+    <a class="section-pill" href="#homepage-skills">Skills</a>
+  </nav>
+
+  <!-- Open Source Contributions -->
+  <div id="oss-summary" class="oss-inline" data-github-user="{{ site.data.profile.github | default: 'thromel' }}" style="display: none;">
+    <a href="{{ 'contributions' | relative_url }}" class="oss-badge">
+      <i class="fas fa-code-merge"></i>
+      <span id="oss-summary-text" aria-live="polite"></span>
+    </a>
+    <span class="oss-repos">
+      to <a href="https://github.com/langchain-ai/deepagents/pulls?q=author%3Athromel" target="_blank" rel="noopener noreferrer">deepagents</a>,
+      <a href="https://github.com/microsoft/typescript-go/pulls?q=author%3Athromel" target="_blank" rel="noopener noreferrer">typescript-go</a>,
+      <a href="https://github.com/tsantalis/RefactoringMiner/pulls?q=author%3Athromel" target="_blank" rel="noopener noreferrer">RefactoringMiner</a>,
+      <a href="https://github.com/dotnet/efcore/pulls?q=author%3Athromel" target="_blank" rel="noopener noreferrer">EF Core</a>,
+      <a href="https://github.com/langchain-ai/langchain/pulls?q=author%3Athromel" target="_blank" rel="noopener noreferrer">LangChain</a>,
+      <a href="https://github.com/Kaliumhexacyanoferrat/GenHTTP/pulls?q=author%3Athromel" target="_blank" rel="noopener noreferrer">GenHTTP</a>
+    </span>
+  </div>
+
+  <!-- Recent News Widget -->
+  <div id="homepage-news" class="news-widget">
+    <div class="news-widget-header">
+      <h3 class="news-widget-title"><i class="fas fa-newspaper"></i> Recent News</h3>
+      <a href="{{ 'news' | relative_url }}" class="news-widget-more">View all →</a>
+    </div>
+    <div class="news-list">
+      {% assign sorted_news = site.data.news | sort: 'date' | reverse %}
+      {% for item in sorted_news limit:3 %}
+      <div class="news-item">
+        <div class="news-date">
+          <span class="news-date-month">{{ item.date | date: "%b" }}</span>
+          <span class="news-date-year">{{ item.date | date: "%Y" }}</span>
+        </div>
+        <div class="news-content">
+          <div class="news-title">{{ item.title }}</div>
+          <div class="news-description">{{ item.description | truncate: 120 }}</div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
   </div>
 </div>
 
 <!-- Publications -->
-{% if site.data.profile.publications %}
-<section class="section">
+{% assign homepage_publications = site.publications | sort: "date" | reverse %}
+{% if homepage_publications.size > 0 %}
+<section id="homepage-publications" class="section">
   <div class="section-header">
     <h2 class="section-title">Publications</h2>
   </div>
   <div class="timeline">
-    {% for pub in site.data.profile.publications limit:3 %}
+    {% for pub in homepage_publications limit:3 %}
     <div class="timeline-item">
       <div class="timeline-header">
-        <h3 class="timeline-title">{{ pub.title }}</h3>
-        <span class="timeline-date">{{ pub.date }}</span>
+        <h3 class="timeline-title">
+          {% if pub.url %}
+          <a href="{{ pub.url | relative_url }}">{{ pub.title }}</a>
+          {% else %}
+          {{ pub.title }}
+          {% endif %}
+        </h3>
+        <span class="timeline-date">{{ pub.pub_date | default: pub.date | date: "%Y" }}</span>
       </div>
-      <p class="timeline-subtitle"><em>{{ pub.venue }}</em></p>
-      {% if pub.description %}
-      <p class="timeline-description">{{ pub.description }}</p>
+      {% if pub.pub %}
+      <p class="timeline-subtitle"><em>{{ pub.pub }}</em></p>
+      {% endif %}
+      {% if pub.abstract %}
+      <p class="timeline-description">{{ pub.abstract }}</p>
       {% endif %}
     </div>
     {% endfor %}
@@ -173,7 +197,7 @@ navbar_title: Home
 {% endif %}
 
 <!-- Current Research -->
-<section class="section section-research">
+<section id="homepage-research" class="section section-research">
   <div class="section-header">
     <h2 class="section-title"><a href="/research"><i class="fas fa-microscope section-icon"></i> Research</a></h2>
   </div>
@@ -239,13 +263,10 @@ navbar_title: Home
     </div>
     {% endfor %}
   </div>
-  <div class="text-right mt-4">
-    <a href="{{ 'education' | relative_url }}" class="btn btn-text">View Full Education →</a>
-  </div>
 </section>
 
 <!-- Work -->
-<section class="section section-work">
+<section id="homepage-work" class="section section-work">
   <div class="section-header">
     <h2 class="section-title"><i class="fas fa-briefcase section-icon"></i> Work</h2>
   </div>
@@ -266,7 +287,7 @@ navbar_title: Home
 </section>
 
 <!-- Selected Projects -->
-<section class="section section-projects">
+<section id="homepage-projects" class="section section-projects">
   <div class="section-header">
     <h2 class="section-title"><i class="fas fa-code section-icon"></i> Selected Projects</h2>
   </div>
@@ -334,7 +355,7 @@ navbar_title: Home
 </section>
 
 <!-- Technical Skills -->
-<section class="section section-skills">
+<section id="homepage-skills" class="section section-skills">
   <div class="section-header">
     <h2 class="section-title"><i class="fas fa-tools section-icon"></i> Technical Skills</h2>
   </div>
