@@ -1,8 +1,8 @@
 # Manual Testing Script
 
 ## Automated Command
-1. Run `npx -y -p @playwright/test playwright test tests/navbar-layout.spec.js tests/shell-behavior.spec.js` for a self-contained shell regression run.
-2. If `@playwright/test` is installed locally, the equivalent project command is `npx playwright test tests/navbar-layout.spec.js tests/shell-behavior.spec.js`.
+1. If the repo does not already have Playwright installed locally, run `npm install --no-save @playwright/test`.
+2. Run `npx playwright test tests/navbar-layout.spec.js tests/shell-behavior.spec.js`.
 
 ## Representative Pages
 1. Test `Home`, `About`, and `Contributions` on desktop and mobile widths.
