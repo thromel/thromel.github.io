@@ -7,8 +7,8 @@
 
 ### Shared UI System
 
-- [ ] **UI-01**: Visitor experiences one consistent theme system across shared pages without duplicate toggles or conflicting theme states
-- [ ] **UI-02**: Visitor can use one consistent shared navigation shell across desktop and mobile pages
+- [x] **UI-01**: Visitor experiences one consistent theme system across shared pages without duplicate toggles or conflicting theme states
+- [x] **UI-02**: Visitor can use one consistent shared navigation shell across desktop and mobile pages
 - [ ] **UI-03**: Shared pages and shared states use the current design-token vocabulary so cards, buttons, and emphasis feel consistent
 
 ### Homepage Hierarchy
@@ -60,8 +60,8 @@
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| UI-01 | Phase 1 | Pending |
-| UI-02 | Phase 1 | Pending |
+| UI-01 | Phase 1 | Complete |
+| UI-02 | Phase 1 | Complete |
 | UI-03 | Phase 1 | Pending |
 | HOME-01 | Phase 2 | Pending |
 | HOME-02 | Phase 2 | Pending |

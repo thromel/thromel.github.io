@@ -32,7 +32,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 **Plans**: 3 plans
 
 Plans:
-- [ ] 01-01: Inventory and isolate conflicting shell, theme, and navigation code paths
+- [x] 01-01: Inventory and isolate conflicting shell, theme, and navigation code paths
 - [ ] 01-02: Normalize shared layout and include files around the canonical shell layer
 - [ ] 01-03: Verify shell behavior across representative pages and breakpoints
 
