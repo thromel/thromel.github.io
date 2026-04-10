@@ -2,7 +2,40 @@
 <style>
 /* Critical CSS - Inline styles for immediate rendering */
 
-/* Reset and base styles */
+[data-theme="light"] {
+    --color-bg: #fefefe;
+    --color-surface: #f9fafb;
+    --color-surface-raised: #ffffff;
+    --color-border: #e2e4e9;
+    --color-border-light: #f1f3f5;
+    --color-text-primary: #111827;
+    --color-text-secondary: #4b5563;
+    --color-text-muted: #6b7280;
+    --color-accent: #1e40af;
+    --color-accent-light: #dbeafe;
+    --color-success: #059669;
+    --radius-md: 6px;
+    --radius-lg: 8px;
+    --radius-xl: 12px;
+}
+
+[data-theme="dark"] {
+    --color-bg: #0f0f10;
+    --color-surface: #18181b;
+    --color-surface-raised: #1f1f23;
+    --color-border: #27272a;
+    --color-border-light: #2e2e33;
+    --color-text-primary: #f4f4f5;
+    --color-text-secondary: #d4d4d8;
+    --color-text-muted: #a1a1aa;
+    --color-accent: #60a5fa;
+    --color-accent-light: #1e3a5f;
+    --color-success: #34d399;
+    --radius-md: 6px;
+    --radius-lg: 8px;
+    --radius-xl: 12px;
+}
+
 *, *::before, *::after {
     box-sizing: border-box;
 }
@@ -17,82 +50,58 @@ body {
     margin: 0;
     padding: 0;
     font-family: 'Plus Jakarta Sans', 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    background-color: #0f172a;
-    color: #ffffff;
+    background-color: var(--color-bg);
+    color: var(--color-text-primary);
     min-height: 100vh;
-}
-
-/* Dark theme critical styles */
-:root.dark-theme {
-    --bg-primary: #0f172a;
-    --bg-secondary: rgba(15, 23, 42, 0.7);
-    --text-primary: #ffffff;
-    --text-secondary: #f1f5f9;
-    --accent-primary: #38bdf8;
-    --accent-secondary: #818cf8;
-}
-
-/* Light theme critical styles */
-:root.light-theme {
-    --bg-primary: #f8fafb;
-    --bg-secondary: rgba(255, 255, 255, 0.7);
-    --text-primary: #1a202c;
-    --text-secondary: #2d3748;
-    --accent-primary: #0284c7;
-    --accent-secondary: #4f46e5;
 }
 
 /* Critical layout styles */
 .container {
     width: 100%;
-    max-width: 1200px;
+    max-width: 960px;
     margin: 0 auto;
-    padding: 0 15px;
+    padding: 0 1rem;
 }
 
-/* Navbar critical styles */
-.navbar {
+/* Canonical shell critical styles */
+.site-header {
+    position: sticky;
+    top: 0;
+    z-index: 1030;
+    background: color-mix(in srgb, var(--color-bg) 88%, transparent);
+    border-bottom: 1px solid var(--color-border);
+    backdrop-filter: blur(14px);
+}
+
+.scroll-progress {
     position: fixed;
     top: 0;
     left: 0;
-    right: 0;
-    z-index: 1030;
-    background: var(--bg-primary);
-    padding: 0.5rem 0;
-    min-height: 60px;
+    height: 3px;
+    width: 0;
+    z-index: 1031;
+    background: linear-gradient(90deg, var(--color-accent), var(--color-success));
 }
 
-.navbar-brand {
+.site-nav {
     display: flex;
     align-items: center;
-    text-decoration: none;
-    color: var(--text-primary);
-}
-
-/* Body padding for fixed navbar */
-body {
-    padding-top: 60px;
+    justify-content: space-between;
+    gap: 1.5rem;
+    min-height: 4.25rem;
 }
 
 /* Skip links for accessibility */
-.skip-links {
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 10001;
-    width: 100%;
-    height: auto;
-}
-
 .skip-link {
-    position: absolute;
+    position: fixed;
     top: -200px;
     left: 20px;
-    background: var(--accent-primary);
+    z-index: 10002;
+    background: var(--color-accent);
     color: white;
     padding: 12px 16px;
     text-decoration: none;
-    border-radius: 0 0 4px 4px;
+    border-radius: 0 0 var(--radius-md) var(--radius-md);
     font-weight: 600;
     transition: top 0.3s ease;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
@@ -106,17 +115,18 @@ body {
 
 /* Profile card critical styles */
 .profile-card {
-    background: var(--bg-secondary);
-    border-radius: 12px;
+    background: var(--color-surface-raised);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
     padding: 2rem;
     margin-bottom: 2rem;
 }
 
 /* Card base styles */
 .card {
-    background: var(--bg-secondary);
-    border: 1px solid rgba(148, 163, 184, 0.1);
-    border-radius: 8px;
+    background: var(--color-surface-raised);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
     padding: 1.5rem;
     margin-bottom: 1rem;
 }
@@ -127,7 +137,7 @@ h1, h2, h3, h4, h5, h6 {
     margin-bottom: 0.5rem;
     font-weight: 700;
     line-height: 1.2;
-    color: var(--text-primary);
+    color: var(--color-text-primary);
 }
 
 h1 { font-size: 2.5rem; }
@@ -140,7 +150,7 @@ p {
 }
 
 a {
-    color: var(--accent-primary);
+    color: var(--color-accent);
     text-decoration: none;
 }
 
@@ -158,7 +168,7 @@ a {
 }
 
 .btn-primary {
-    background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+    background: linear-gradient(135deg, var(--color-accent), var(--color-success));
     color: white;
 }
 
@@ -191,6 +201,10 @@ a {
     .container {
         padding: 0 10px;
     }
+
+    .site-nav {
+        min-height: 4rem;
+    }
 }
 
 /* Theme toggle critical positioning */
@@ -201,8 +215,8 @@ a {
     z-index: 10000 !important;
     width: 50px !important;
     height: 50px !important;
-    border-radius: 50% !important;
-    background: var(--accent-primary) !important;
+    border-radius: 9999px !important;
+    background: var(--color-accent) !important;
     border: none !important;
     color: white !important;
     cursor: pointer !important;
@@ -222,7 +236,7 @@ a {
 }
 
 /* Smooth transitions for theme switching */
-body, .navbar, .card, .profile-card {
+body, .site-header, .card, .profile-card {
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
