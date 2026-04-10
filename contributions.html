@@ -63,30 +63,32 @@ navbar_title: Contributions
 }
 
 .stat-card {
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
-  border-radius: 8px;
+  background: var(--color-surface-raised);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
   padding: var(--space-6);
   text-align: center;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: var(--shadow-md);
 }
 
 .stat-card:hover {
   transform: translateY(-2px);
-  border-color: var(--accent-primary);
+  border-color: var(--color-accent);
+  box-shadow: var(--shadow-lg);
 }
 
 .stat-number {
   display: block;
-  font-size: var(--font-size-3xl);
+  font-size: clamp(var(--text-4xl), 5vw, 2rem);
   font-weight: 700;
-  color: var(--accent-primary);
+  color: var(--color-accent);
   margin-bottom: var(--space-2);
 }
 
 .stat-label {
-  font-size: var(--font-size-sm);
-  color: var(--text-muted);
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
@@ -96,14 +98,14 @@ navbar_title: Contributions
 .empty-container {
   text-align: center;
   padding: var(--space-12);
-  color: var(--text-muted);
+  color: var(--color-text-muted);
 }
 
 .loading-spinner {
   width: 40px;
   height: 40px;
-  border: 3px solid var(--glass-border);
-  border-top-color: var(--accent-primary);
+  border: 3px solid var(--color-border);
+  border-top-color: var(--color-accent);
   border-radius: 50%;
   animation: spin 1s linear infinite;
   margin: 0 auto var(--space-4);
@@ -117,11 +119,11 @@ navbar_title: Contributions
 .empty-container i {
   font-size: 2.5rem;
   margin-bottom: var(--space-4);
-  color: var(--text-muted);
+  color: var(--color-text-muted);
 }
 
 .error-container i {
-  color: #ef4444;
+  color: var(--color-warning);
 }
 
 .contribution-item {
@@ -132,13 +134,13 @@ navbar_title: Contributions
   display: inline-flex;
   align-items: center;
   gap: var(--space-2);
-  font-size: var(--font-size-sm);
-  color: var(--text-secondary);
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
   margin-bottom: var(--space-2);
 }
 
 .contribution-repo i {
-  color: var(--accent-primary);
+  color: var(--color-accent);
 }
 
 .pr-status {
@@ -146,19 +148,19 @@ navbar_title: Contributions
   align-items: center;
   gap: var(--space-1);
   padding: 0.25rem 0.5rem;
-  border-radius: 4px;
-  font-size: var(--font-size-xs);
+  border-radius: var(--radius-md);
+  font-size: var(--text-xs);
   font-weight: 500;
 }
 
 .pr-status.merged {
-  background: rgba(139, 92, 246, 0.15);
-  color: #a78bfa;
+  background: var(--color-accent-light);
+  color: var(--color-publication);
 }
 
 .pr-status.open {
-  background: rgba(34, 197, 94, 0.15);
-  color: #4ade80;
+  background: rgba(5, 150, 105, 0.12);
+  color: var(--color-success);
 }
 
 
@@ -171,10 +173,10 @@ navbar_title: Contributions
 
 .contribution-label {
   padding: 0.25rem 0.5rem;
-  border-radius: 4px;
-  font-size: var(--font-size-xs);
-  background: var(--bg-tertiary);
-  color: var(--text-secondary);
+  border-radius: var(--radius-md);
+  font-size: var(--text-xs);
+  background: var(--color-surface);
+  color: var(--color-text-secondary);
 }
 
 .contribution-meta {
@@ -182,12 +184,12 @@ navbar_title: Contributions
   align-items: center;
   gap: var(--space-4);
   margin-top: var(--space-3);
-  font-size: var(--font-size-sm);
-  color: var(--text-muted);
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
 }
 
 .contribution-meta a {
-  color: var(--accent-primary);
+  color: var(--color-accent);
   text-decoration: none;
 }
 
