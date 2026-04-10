@@ -13,7 +13,7 @@ This roadmap turns an already-working portfolio site into a more coherent brownf
 Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 1: Shell Convergence** - Make the current shell the only shared UI foundation (completed 2026-04-10)
-- [ ] **Phase 2: Homepage Hierarchy** - Simplify the homepage first impression and restore mobile-first clarity
+- [x] **Phase 2: Homepage Hierarchy** - Simplify the homepage first impression and restore mobile-first clarity (completed 2026-04-10)
 - [ ] **Phase 3: Readability Upgrade** - Raise reading comfort and hierarchy across dense content surfaces
 - [ ] **Phase 4: Proof Surfaces** - Bring GitHub-driven sections onto the current system with stable states
 - [ ] **Phase 5: Verification Hardening** - Lock in repeatable checks and guidance for future UI work
@@ -45,12 +45,12 @@ Plans:
   1. Visitor sees the homepage message before the portrait on mobile.
   2. Visitor can scan the hero without competing clusters of actions or decorative noise.
   3. Visitor moves from hero to supporting sections through clearer pacing and section hierarchy.
-**Plans**: 3 plans
+**Plans**: 3/3 plans complete
 
 Plans:
-- [ ] 02-01: Rework homepage hero structure and mobile order
-- [ ] 02-02: Simplify action density and section pacing on the homepage
-- [ ] 02-03: Validate desktop and mobile hierarchy with rendered-browser checks
+- [x] 02-01: Rework homepage hero structure and mobile order
+- [x] 02-02: Simplify action density and section pacing on the homepage
+- [x] 02-03: Validate desktop and mobile hierarchy with rendered-browser checks
 
 ### Phase 3: Readability Upgrade
 **Goal**: Improve comfort and hierarchy on dense reading surfaces without losing the site's academic tone.
@@ -108,7 +108,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Shell Convergence | 3/3 | Complete | 2026-04-10 |
-| 2. Homepage Hierarchy | 0/3 | Not started | - |
+| 2. Homepage Hierarchy | 3/3 | Complete | 2026-04-10 |
 | 3. Readability Upgrade | 0/3 | Not started | - |
 | 4. Proof Surfaces | 0/3 | Not started | - |
 | 5. Verification Hardening | 0/3 | Not started | - |

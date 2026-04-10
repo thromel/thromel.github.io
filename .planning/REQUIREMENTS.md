@@ -13,9 +13,9 @@
 
 ### Homepage Hierarchy
 
-- [ ] **HOME-01**: Visitor sees the homepage headline and core message before the portrait on mobile
-- [ ] **HOME-02**: Visitor can scan the homepage hero without competing primary actions or overcrowded controls
-- [ ] **HOME-03**: Visitor can move from hero to supporting homepage sections through a clearer visual hierarchy and pacing
+- [x] **HOME-01**: Visitor sees the homepage headline and core message before the portrait on mobile
+- [x] **HOME-02**: Visitor can scan the homepage hero without competing primary actions or overcrowded controls
+- [x] **HOME-03**: Visitor can move from hero to supporting homepage sections through a clearer visual hierarchy and pacing
 
 ### Readability
 
@@ -63,9 +63,9 @@
 | UI-01 | Phase 1 | Complete |
 | UI-02 | Phase 1 | Complete |
 | UI-03 | Phase 1 | Complete |
-| HOME-01 | Phase 2 | Pending |
-| HOME-02 | Phase 2 | Pending |
-| HOME-03 | Phase 2 | Pending |
+| HOME-01 | Phase 2 | Complete |
+| HOME-02 | Phase 2 | Complete |
+| HOME-03 | Phase 2 | Complete |
 | READ-01 | Phase 3 | Pending |
 | READ-02 | Phase 3 | Pending |
 | READ-03 | Phase 3 | Pending |
@@ -83,4 +83,4 @@
 
 ---
 *Requirements defined: 2026-04-09*
-*Last updated: 2026-04-09 after initial definition*
+*Last updated: 2026-04-10 after phase 2 completion*
