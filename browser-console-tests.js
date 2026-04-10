@@ -8,6 +8,13 @@ const testResults = {
   tests: []
 };
 
+function resetResults() {
+  testResults.passed = 0;
+  testResults.failed = 0;
+  testResults.warnings = 0;
+  testResults.tests.length = 0;
+}
+
 function record(name, passed, message) {
   testResults.tests.push({ name, passed, message: message || '' });
   if (passed) {
@@ -25,11 +32,19 @@ function warn(name, message) {
 }
 
 function testThemeToggle() {
-  const button = document.getElementById('themeToggle');
-  record('Theme toggle exists', !!button, button ? '' : 'Missing #themeToggle');
+  const buttons = document.querySelectorAll('#themeToggle');
+  const button = buttons[0];
+  const dataTheme = document.documentElement.getAttribute('data-theme');
 
-  const hasSiteUX = typeof window.siteUX !== 'undefined';
+  record('Exactly one theme toggle exists', buttons.length === 1, 'Found ' + buttons.length + ' #themeToggle nodes');
+  record('Canonical data-theme exists', dataTheme === 'dark' || dataTheme === 'light', 'Current theme: ' + dataTheme);
+
+  const hasSiteUX = typeof window.siteUX !== 'undefined' && typeof window.siteUX.toggleTheme === 'function';
   record('siteUX object exists', hasSiteUX, hasSiteUX ? '' : 'site-shell.js did not initialize');
+
+  if (button) {
+    record('Theme toggle has accessible label', !!button.getAttribute('aria-label'));
+  }
 }
 
 function testSkipLinks() {
@@ -45,10 +60,12 @@ function testNavigation() {
   const nav = document.getElementById('site-navigation');
   const mobileToggle = document.getElementById('mobileMenuToggle');
   const mobileDrawer = document.getElementById('mobileNavDrawer');
+  const mobileOverlay = document.getElementById('mobileNavOverlay');
 
   record('Main navigation exists', !!nav, nav ? '' : 'Missing #site-navigation');
   record('Mobile menu toggle exists', !!mobileToggle, mobileToggle ? '' : 'Missing #mobileMenuToggle');
   record('Mobile nav drawer exists', !!mobileDrawer, mobileDrawer ? '' : 'Missing #mobileNavDrawer');
+  record('Mobile nav overlay exists', !!mobileOverlay, mobileOverlay ? '' : 'Missing #mobileNavOverlay');
 }
 
 function testCoreStylesLoaded() {
@@ -58,6 +75,14 @@ function testCoreStylesLoaded() {
   ['overhaul.css', 'mobile-optimizations.css'].forEach((file) => {
     record('Stylesheet loaded: ' + file, loaded.some((x) => x.includes(file)));
   });
+}
+
+function testShellBehavior() {
+  const progress = document.getElementById('scrollProgress');
+  const backToTop = document.getElementById('backToTop');
+
+  record('Scroll progress exists', !!progress, progress ? '' : 'Missing #scrollProgress');
+  record('Back-to-top button exists', !!backToTop, backToTop ? '' : 'Missing #backToTop');
 }
 
 function testHomeEnhancements() {
@@ -92,12 +117,14 @@ function testPerformanceEntry() {
 }
 
 function runAll() {
+  resetResults();
   console.clear();
   console.log('Running smoke tests...');
 
   testThemeToggle();
   testSkipLinks();
   testNavigation();
+  testShellBehavior();
   testCoreStylesLoaded();
   testHomeEnhancements();
   testPerformanceEntry();

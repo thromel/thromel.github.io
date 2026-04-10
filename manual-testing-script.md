@@ -1,44 +1,45 @@
 # Manual Testing Script
 
-## Core Smoke Checks
-1. Open Home page and verify no visual flicker during load.
-2. Confirm typography renders with `Plus Jakarta Sans` body style and readable serif accents.
-3. Verify no JavaScript errors in browser console.
+## Automated Command
+1. Run `npx -y -p @playwright/test playwright test tests/navbar-layout.spec.js tests/shell-behavior.spec.js` for a self-contained shell regression run.
+2. If `@playwright/test` is installed locally, the equivalent project command is `npx playwright test tests/navbar-layout.spec.js tests/shell-behavior.spec.js`.
+
+## Representative Pages
+1. Test `Home`, `About`, and `Contributions` on desktop and mobile widths.
+2. Verify no JavaScript errors in browser console on each page.
+3. Confirm header, footer, and shell controls render consistently across the three pages.
 
 ## Theme and Visual State
-1. Click theme toggle in bottom corner.
-2. Refresh the page and confirm theme persists.
-3. Navigate to `Work`, `Research`, and `Projects` and confirm theme remains consistent.
+1. Open `Home` and verify no visual flicker during first paint.
+2. Click the theme toggle and confirm `data-theme` changes.
+3. Refresh the page and confirm theme persists.
+4. Repeat the theme toggle check on `About` and `Contributions`.
 
 ## Navigation and Accessibility
-1. Press `Tab` from top of page and confirm skip links appear.
+1. Press `Tab` from the top of each page and confirm skip links appear.
 2. Activate `Skip to main content` and confirm focus jumps to page content.
-3. Activate `Skip to navigation` and confirm focus moves to main nav.
-4. Confirm active nav item has visual active state and `aria-current`.
+3. Activate `Skip to navigation` and confirm focus moves to `#site-navigation`.
+4. Confirm the active nav item has visual active state and `aria-current`.
 
-## Home IA and Scanning
-1. Confirm highlight cards appear below hero intro.
-2. Confirm section pill nav appears below OSS summary.
+## Home-Specific Shell Checks
+1. Confirm highlight cards appear below the hero intro.
+2. Confirm the section pill nav appears below the OSS summary area.
 3. Click each section pill (`News`, `Publications`, `Research`, `Work`, `Projects`, `Skills`) and verify smooth scroll to section.
-4. Scroll through sections and confirm the currently visible section pill highlights.
+4. Scroll through the homepage and confirm the currently visible section pill highlights.
 
-## Mobile UX (<= 768px)
-1. Open responsive mode.
-2. Tap hamburger button and confirm drawer opens.
-3. Tap overlay and close button; confirm drawer closes in both cases.
-4. Press `Escape` (if keyboard available) and confirm drawer closes.
-5. Verify touch targets feel comfortable for nav links, theme toggle, and back-to-top.
+## Mobile Drawer
+1. Switch to a mobile viewport (`390x844` or equivalent).
+2. On `Home`, tap the hamburger button and confirm the mobile drawer opens.
+3. Close the mobile drawer with the overlay, then reopen it and close it with the close button.
+4. Repeat the open and close flow on `About` and `Contributions`.
+5. Press `Escape` when the drawer is open and confirm it closes.
 
-## Back-to-Top and Progress
-1. Scroll down and confirm progress bar width updates.
-2. Confirm back-to-top button appears after scrolling.
-3. Click back-to-top and verify smooth return to page top.
+## Scroll Progress and Back-to-Top
+1. Scroll on each representative page and confirm the progress bar width updates.
+2. Confirm the back-to-top button appears after scrolling.
+3. Click back-to-top and verify smooth return to the top of the page.
 
-## OSS Summary
-1. On Home page, confirm OSS summary appears when GitHub API succeeds.
-2. If API is rate-limited, confirm summary remains hidden without layout breakage.
-
-## Regression Spot Checks
-1. Open `About`, `Contributions`, `News`, and `Learning`.
-2. Confirm header/footer render correctly and theme toggle works.
-3. Confirm no broken layout shifts on mobile and desktop.
+## Contributions and Proof Surface Guardrails
+1. On `Contributions`, confirm the page shell is usable before GitHub data finishes loading.
+2. If the GitHub request succeeds, confirm stats and timeline render inside the shared shell.
+3. If the GitHub request fails or rate-limits, confirm the page still keeps stable shell layout and readable loading or error states.
