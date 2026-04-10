@@ -12,7 +12,7 @@ This roadmap turns an already-working portfolio site into a more coherent brownf
 
 Decimal phases appear between their surrounding integers in numeric order.
 
-- [ ] **Phase 1: Shell Convergence** - Make the current shell the only shared UI foundation
+- [x] **Phase 1: Shell Convergence** - Make the current shell the only shared UI foundation (completed 2026-04-10)
 - [ ] **Phase 2: Homepage Hierarchy** - Simplify the homepage first impression and restore mobile-first clarity
 - [ ] **Phase 3: Readability Upgrade** - Raise reading comfort and hierarchy across dense content surfaces
 - [ ] **Phase 4: Proof Surfaces** - Bring GitHub-driven sections onto the current system with stable states
@@ -29,12 +29,12 @@ Decimal phases appear between their surrounding integers in numeric order.
   1. Visitor experiences one theme model across shared pages with no duplicate toggle behavior or contradictory theme states.
   2. Visitor can use one shared navigation shell consistently on desktop and mobile pages.
   3. Shared layouts and shared states read from the current token vocabulary instead of a competing legacy system.
-**Plans**: 3 plans
+**Plans**: 3/3 plans complete
 
 Plans:
 - [x] 01-01: Inventory and isolate conflicting shell, theme, and navigation code paths
 - [x] 01-02: Normalize shared layout and include files around the canonical shell layer
-- [ ] 01-03: Verify shell behavior across representative pages and breakpoints
+- [x] 01-03: Verify shell behavior across representative pages and breakpoints
 
 ### Phase 2: Homepage Hierarchy
 **Goal**: Make the homepage communicate the site's message faster and with less visual competition, especially on mobile.
@@ -107,7 +107,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Shell Convergence | 0/3 | Not started | - |
+| 1. Shell Convergence | 3/3 | Complete | 2026-04-10 |
 | 2. Homepage Hierarchy | 0/3 | Not started | - |
 | 3. Readability Upgrade | 0/3 | Not started | - |
 | 4. Proof Surfaces | 0/3 | Not started | - |
