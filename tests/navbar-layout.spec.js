@@ -1,11 +1,13 @@
 const { test, expect } = require('@playwright/test');
 
+const BASE_URL = process.env.PLAYWRIGHT_TEST_BASE_URL || 'http://127.0.0.1:4000';
+
 test('home navbar removes the TR marker and keeps nav links left-aligned', async ({ page }) => {
   await page.setViewportSize({ width: 1280, height: 720 });
-  await page.goto('http://127.0.0.1:4000', { waitUntil: 'networkidle' });
+  await page.goto(BASE_URL, { waitUntil: 'domcontentloaded' });
 
   const siteTitle = page.locator('.site-title');
-  const siteNav = page.locator('.site-nav');
+  const siteNav = page.locator('#site-navigation');
   const navLinks = page.locator('.nav-links');
 
   const siteTitleCount = await siteTitle.count();
@@ -14,6 +16,8 @@ test('home navbar removes the TR marker and keeps nav links left-aligned', async
   if (siteTitleCount === 1) {
     await expect(siteTitle).not.toContainText('TR');
   }
+
+  await expect(siteNav).toHaveCount(1);
 
   const [navBox, linksBox] = await Promise.all([
     siteNav.boundingBox(),
