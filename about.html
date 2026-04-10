@@ -38,30 +38,32 @@ navbar_title: About
   text-align: center;
   margin-bottom: var(--space-8);
   padding-bottom: var(--space-6);
-  border-bottom: 1px solid var(--glass-border);
+  border-bottom: 1px solid var(--color-border);
 }
 
 .about-title {
-  font-size: var(--font-size-4xl, 2.25rem);
+  font-size: clamp(var(--text-4xl), 5vw, 2.75rem);
   font-weight: 700;
-  margin: 0 0 var(--space-3, 0.75rem) 0;
+  margin: 0 0 var(--space-3) 0;
   letter-spacing: -0.02em;
-  background: linear-gradient(135deg, #38bdf8, #818cf8);
+  background: linear-gradient(135deg, var(--color-accent), var(--color-publication));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   color: transparent;
 }
 
-:root.light-theme .about-title {
-  background: linear-gradient(135deg, #0ea5e9, #6366f1);
-  -webkit-background-clip: text;
-  background-clip: text;
+[data-theme="light"] .about-title {
+  background: linear-gradient(135deg, var(--color-accent), var(--color-publication));
+}
+
+[data-theme="dark"] .about-title {
+  background: linear-gradient(135deg, var(--color-accent), var(--color-research));
 }
 
 .about-subtitle {
-  font-size: var(--font-size-lg);
-  color: var(--text-muted);
+  font-size: var(--text-xl);
+  color: var(--color-text-muted);
   margin: 0;
   font-weight: 400;
 }
@@ -86,20 +88,20 @@ navbar_title: About
 
 /* Bio Card */
 .about-bio {
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
-  border-radius: 16px;
+  background: var(--color-surface-raised);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
   padding: var(--space-8);
   line-height: 1.9;
-  font-size: var(--font-size-base);
-  color: var(--text-secondary);
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+  font-size: var(--text-lg);
+  color: var(--color-text-secondary);
+  box-shadow: var(--shadow-lg);
   transition: box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
 .about-bio:hover {
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
-  border-color: var(--accent-primary);
+  box-shadow: var(--shadow-xl);
+  border-color: var(--color-accent);
 }
 
 .about-travel {
@@ -127,13 +129,13 @@ navbar_title: About
 
 /* Typography enhancements */
 .about-bio b {
-  color: var(--text-primary);
+  color: var(--color-text-primary);
   font-weight: 600;
   position: relative;
 }
 
 .about-bio a {
-  color: var(--accent-primary);
+  color: var(--color-accent);
   text-decoration: none;
   font-weight: 500;
   position: relative;
@@ -147,14 +149,14 @@ navbar_title: About
   left: 0;
   width: 100%;
   height: 1px;
-  background: var(--accent-primary);
+  background: var(--color-accent);
   transform: scaleX(0);
   transform-origin: right;
   transition: transform 0.3s ease;
 }
 
 .about-bio a:hover {
-  color: var(--accent-secondary);
+  color: var(--color-accent-hover);
 }
 
 .about-bio a:hover::after {
@@ -164,9 +166,10 @@ navbar_title: About
 
 /* Highlight spans with class */
 .about-bio .highlight-sessional {
-  background: linear-gradient(120deg, rgba(99, 102, 241, 0.1) 0%, rgba(99, 102, 241, 0.05) 100%);
+  background: var(--color-accent-light);
+  color: var(--color-text-primary);
   padding: 0.1em 0.4em;
-  border-radius: 4px;
+  border-radius: var(--radius-sm);
 }
 
 /* First letter styling */
@@ -177,32 +180,32 @@ navbar_title: About
   line-height: 1;
   margin-right: 0.15em;
   margin-top: 0.05em;
-  color: var(--accent-primary);
+  color: var(--color-accent);
 }
 
 /* Footer */
 .about-footer {
   margin-top: var(--space-8);
   padding-top: var(--space-6);
-  border-top: 1px solid var(--glass-border);
+  border-top: 1px solid var(--color-border);
 }
 
 .about-back-link {
   display: inline-flex;
   align-items: center;
   gap: var(--space-2);
-  color: var(--text-muted);
+  color: var(--color-text-muted);
   text-decoration: none;
-  font-size: var(--font-size-sm);
+  font-size: var(--text-base);
   font-weight: 500;
   padding: var(--space-2) var(--space-4);
-  border-radius: 8px;
+  border-radius: var(--radius-lg);
   transition: all 0.2s ease;
 }
 
 .about-back-link:hover {
-  color: var(--accent-primary);
-  background: var(--glass-bg);
+  color: var(--color-accent);
+  background: var(--color-surface);
   transform: translateX(-4px);
 }
 
@@ -218,12 +221,12 @@ navbar_title: About
 /* Responsive */
 @media (max-width: 768px) {
   .about-title {
-    font-size: var(--font-size-3xl);
+    font-size: 2rem;
   }
 
   .about-bio {
     padding: var(--space-6);
-    border-radius: 12px;
+    border-radius: var(--radius-lg);
   }
 
   .about-travel {
@@ -236,12 +239,13 @@ navbar_title: About
 }
 
 /* Dark theme adjustments */
-:root.dark-theme .about-bio {
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
+[data-theme="dark"] .about-bio {
+  background: var(--color-surface);
+  border-color: var(--color-border-light);
 }
 
-:root.dark-theme .about-bio:hover {
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+[data-theme="dark"] .about-bio:hover {
+  border-color: var(--color-accent);
 }
 
 :root.dark-theme .about-travel {
