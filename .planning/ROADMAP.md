@@ -16,7 +16,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 2: Homepage Hierarchy** - Simplify the homepage first impression and restore mobile-first clarity (completed 2026-04-10)
 - [x] **Phase 3: Readability Upgrade** - Raise reading comfort and hierarchy across dense content surfaces (completed 2026-04-11)
 - [x] **Phase 4: Proof Surfaces** - Bring GitHub-driven sections onto the current system with stable states (completed 2026-04-11)
-- [ ] **Phase 5: Verification Hardening** - Lock in repeatable checks and guidance for future UI work
+- [x] **Phase 5: Verification Hardening** - Lock in repeatable checks and guidance for future UI work (completed 2026-04-11)
 
 ## Phase Details
 
@@ -93,12 +93,12 @@ Plans:
   1. Maintainer can run repeatable shell regression checks for desktop and mobile behavior.
   2. Maintainer can verify async GitHub-driven states through documented checks.
   3. Project documentation clearly identifies the canonical shared shell and warns against conflicting legacy layers.
-**Plans**: 3 plans
+**Plans**: 3/3 plans complete
 
 Plans:
-- [ ] 05-01: Expand regression coverage for shell and responsive behavior
-- [ ] 05-02: Document async-state verification and brownfield UI guardrails
-- [ ] 05-03: Finalize maintainability notes and cleanup follow-up guidance
+- [x] 05-01: Expand regression coverage for shell and responsive behavior
+- [x] 05-02: Document async-state verification and brownfield UI guardrails
+- [x] 05-03: Finalize maintainability notes and cleanup follow-up guidance
 
 ## Progress
 
@@ -111,4 +111,4 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 | 2. Homepage Hierarchy | 3/3 | Complete | 2026-04-10 |
 | 3. Readability Upgrade | 3/3 | Complete | 2026-04-11 |
 | 4. Proof Surfaces | 3/3 | Complete | 2026-04-11 |
-| 5. Verification Hardening | 0/3 | Not started | - |
+| 5. Verification Hardening | 3/3 | Complete | 2026-04-11 |

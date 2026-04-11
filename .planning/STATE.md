@@ -2,16 +2,16 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: ready_to_plan
-stopped_at: Phase 04 complete
-last_updated: "2026-04-11T11:02:56Z"
-last_activity: 2026-04-11 -- Phase 04 complete; Phase 05 ready to plan
+status: ready_to_complete
+stopped_at: Phase 05 complete
+last_updated: "2026-04-11T12:22:59Z"
+last_activity: 2026-04-11 -- Phase 05 complete
 progress:
   total_phases: 5
-  completed_phases: 4
+  completed_phases: 5
   total_plans: 15
-  completed_plans: 12
-  percent: 80
+  completed_plans: 15
+  percent: 100
 ---
 
 # Project State
@@ -21,24 +21,24 @@ progress:
 See: .planning/PROJECT.md (updated 2026-04-09)
 
 **Core value:** Visitors can quickly understand Romel's work through a credible, readable, and consistent portfolio experience.
-**Current focus:** Phase 05 — verification-hardening
+**Current focus:** Milestone audit and completion
 
 ## Current Position
 
-Phase: 05 (verification-hardening) — READY TO PLAN
-Plan: 0 of 3
-Status: Ready to plan Phase 05
-Last activity: 2026-04-11 -- Phase 04 complete; Phase 05 ready to plan
+Phase: 05 (verification-hardening) — COMPLETE
+Plan: 3 of 3
+Status: Milestone ready to complete
+Last activity: 2026-04-11 -- Phase 05 complete
 
-Progress: [████████░░] 80%
+Progress: [██████████] 100%
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed: 12
-- Average duration: 2.8 min
-- Total execution time: 0.6 hours
+- Total plans completed: 15
+- Average duration: 2.7 min
+- Total execution time: 0.7 hours
 
 **By Phase:**
 
@@ -48,10 +48,11 @@ Progress: [████████░░] 80%
 | 02 | 3 | 10 min | 3.3 min |
 | 03 | 3 | 6 min | 2.0 min |
 | 04 | 3 | 10 min | 3.3 min |
+| 05 | 3 | 6 min | 2.0 min |
 
 **Recent Trend:**
 
-- Last 5 plans: Phase 03 P02, Phase 03 P03, Phase 04 P01, Phase 04 P02, Phase 04 P03
+- Last 5 plans: Phase 04 P02, Phase 04 P03, Phase 05 P01, Phase 05 P02, Phase 05 P03
 - Trend: Stable
 
 | Phase 01 P01 | 1 min | 2 tasks | 2 files |
@@ -66,6 +67,9 @@ Progress: [████████░░] 80%
 | Phase 04 P01 | 3 min | 2 tasks | 3 files |
 | Phase 04 P02 | 4 min | 2 tasks | 5 files |
 | Phase 04 P03 | 3 min | 2 tasks | 2 files |
+| Phase 05 P01 | 2 min | 2 tasks | 2 files |
+| Phase 05 P02 | 3 min | 2 tasks | 3 files |
+| Phase 05 P03 | 1 min | 2 tasks | 2 files |
 
 ## Accumulated Context
 
@@ -90,6 +94,8 @@ Recent decisions affecting current work:
 - [Phase 03]: Readability regressions now have dedicated Playwright coverage across Home, About, Learning, and Contributions, with mocked GitHub contribution data for deterministic async-state hierarchy checks. — This leaves the phase with browser evidence instead of CSS-only assumptions.
 - [Phase 04]: Homepage OSS summary and Contributions now render through one shared proof-surface language instead of hiding or diverging when GitHub slows down, empties out, or fails. — This makes proof-of-work surfaces stable and keeps repository context visible even during API problems.
 - [Phase 04]: Proof-surface regressions now have dedicated Playwright coverage for success, slow, empty, rate-limit, and generic failure paths. — This gives future UI work deterministic browser evidence without depending on live GitHub uptime.
+- [Phase 05]: UI verification now runs through `scripts/verify-ui.sh`, which rebuilds `_site`, serves it locally, and executes shell or full Playwright suites through one repo-local entrypoint. — This makes browser verification repeatable without adding a committed Node manifest in v1.
+- [Phase 05]: Maintainer-facing docs now point future UI work toward `assets/css/overhaul.css`, `assets/js/site-shell.js`, and the shared proof-surface checks, while recording CI, toolchain manifest, legacy-retirement, and artifact-hygiene work as explicit post-v1 follow-ups. — This keeps the v1 boundary clear and prevents brownfield drift.
 
 ### Pending Todos
 
@@ -102,6 +108,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-04-11T11:02:56Z
-Stopped at: Phase 04 complete
+Last session: 2026-04-11T12:22:59Z
+Stopped at: Phase 05 complete
 Resume file: None

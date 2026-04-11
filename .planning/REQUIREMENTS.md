@@ -31,9 +31,9 @@
 
 ### Verification and Maintenance
 
-- [ ] **QUAL-01**: Maintainer can run repeatable regression checks for the shared shell on desktop and mobile
-- [ ] **QUAL-02**: Maintainer can verify GitHub-driven async states for the homepage OSS summary and contributions page
-- [ ] **QUAL-03**: Maintainer has documentation that points future UI work toward the canonical shared shell and away from conflicting legacy layers
+- [x] **QUAL-01**: Maintainer can run repeatable regression checks for the shared shell on desktop and mobile
+- [x] **QUAL-02**: Maintainer can verify GitHub-driven async states for the homepage OSS summary and contributions page
+- [x] **QUAL-03**: Maintainer has documentation that points future UI work toward the canonical shared shell and away from conflicting legacy layers
 
 ## v2 Requirements
 
@@ -72,9 +72,9 @@
 | OSS-01 | Phase 4 | Complete |
 | OSS-02 | Phase 4 | Complete |
 | OSS-03 | Phase 4 | Complete |
-| QUAL-01 | Phase 5 | Pending |
-| QUAL-02 | Phase 5 | Pending |
-| QUAL-03 | Phase 5 | Pending |
+| QUAL-01 | Phase 5 | Complete |
+| QUAL-02 | Phase 5 | Complete |
+| QUAL-03 | Phase 5 | Complete |
 
 **Coverage:**
 - v1 requirements: 15 total
@@ -83,4 +83,4 @@
 
 ---
 *Requirements defined: 2026-04-09*
-*Last updated: 2026-04-11 after phase 4 completion*
+*Last updated: 2026-04-11 after phase 5 completion*
