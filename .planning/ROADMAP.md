@@ -15,7 +15,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 1: Shell Convergence** - Make the current shell the only shared UI foundation (completed 2026-04-10)
 - [x] **Phase 2: Homepage Hierarchy** - Simplify the homepage first impression and restore mobile-first clarity (completed 2026-04-10)
 - [x] **Phase 3: Readability Upgrade** - Raise reading comfort and hierarchy across dense content surfaces (completed 2026-04-11)
-- [ ] **Phase 4: Proof Surfaces** - Bring GitHub-driven sections onto the current system with stable states
+- [x] **Phase 4: Proof Surfaces** - Bring GitHub-driven sections onto the current system with stable states (completed 2026-04-11)
 - [ ] **Phase 5: Verification Hardening** - Lock in repeatable checks and guidance for future UI work
 
 ## Phase Details
@@ -77,12 +77,12 @@ Plans:
   1. Visitor sees the homepage OSS summary render with stable loading, success, and failure behavior.
   2. Visitor sees the contributions page use the shared card language across loading, empty, error, and success states.
   3. Visitor still gets useful context when GitHub API data is unavailable or rate-limited.
-**Plans**: 3 plans
+**Plans**: 3/3 plans complete
 
 Plans:
-- [ ] 04-01: Refactor shared async-state styling and loading/fallback presentation
-- [ ] 04-02: Modernize OSS summary and contributions page implementation onto current tokens
-- [ ] 04-03: Verify GitHub-driven states under success, slow, and failure conditions
+- [x] 04-01: Refactor shared async-state styling and loading/fallback presentation
+- [x] 04-02: Modernize OSS summary and contributions page implementation onto current tokens
+- [x] 04-03: Verify GitHub-driven states under success, slow, and failure conditions
 
 ### Phase 5: Verification Hardening
 **Goal**: Leave the repo with repeatable regression checks and guidance that keep future UI work pointed at the right foundation.
@@ -110,5 +110,5 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 | 1. Shell Convergence | 3/3 | Complete | 2026-04-10 |
 | 2. Homepage Hierarchy | 3/3 | Complete | 2026-04-10 |
 | 3. Readability Upgrade | 3/3 | Complete | 2026-04-11 |
-| 4. Proof Surfaces | 0/3 | Not started | - |
+| 4. Proof Surfaces | 3/3 | Complete | 2026-04-11 |
 | 5. Verification Hardening | 0/3 | Not started | - |

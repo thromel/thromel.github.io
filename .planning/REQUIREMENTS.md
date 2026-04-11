@@ -25,9 +25,9 @@
 
 ### Dynamic Proof Surfaces
 
-- [ ] **OSS-01**: Visitor sees the homepage open-source summary render with stable loading, success, and failure presentation
-- [ ] **OSS-02**: Visitor sees the contributions page render loading, empty, error, and success states using the shared card language
-- [ ] **OSS-03**: Visitor still gets useful proof-of-work context when GitHub API data is unavailable or rate-limited
+- [x] **OSS-01**: Visitor sees the homepage open-source summary render with stable loading, success, and failure presentation
+- [x] **OSS-02**: Visitor sees the contributions page render loading, empty, error, and success states using the shared card language
+- [x] **OSS-03**: Visitor still gets useful proof-of-work context when GitHub API data is unavailable or rate-limited
 
 ### Verification and Maintenance
 
@@ -69,9 +69,9 @@
 | READ-01 | Phase 3 | Complete |
 | READ-02 | Phase 3 | Complete |
 | READ-03 | Phase 3 | Complete |
-| OSS-01 | Phase 4 | Pending |
-| OSS-02 | Phase 4 | Pending |
-| OSS-03 | Phase 4 | Pending |
+| OSS-01 | Phase 4 | Complete |
+| OSS-02 | Phase 4 | Complete |
+| OSS-03 | Phase 4 | Complete |
 | QUAL-01 | Phase 5 | Pending |
 | QUAL-02 | Phase 5 | Pending |
 | QUAL-03 | Phase 5 | Pending |
@@ -83,4 +83,4 @@
 
 ---
 *Requirements defined: 2026-04-09*
-*Last updated: 2026-04-11 after phase 3 completion*
+*Last updated: 2026-04-11 after phase 4 completion*
