@@ -9,6 +9,7 @@ const MOBILE_VIEWPORT = { width: 390, height: 844 };
 const PAGE_CASES = [
   { name: 'Home', path: '/', fallbackPath: '/' },
   { name: 'About', path: '/about', fallbackPath: '/about.html' },
+  { name: 'Learning', path: '/learning', fallbackPath: '/learning.html' },
   { name: 'Contributions', path: '/contributions', fallbackPath: '/contributions.html' }
 ];
 
@@ -34,6 +35,11 @@ async function clearStoredTheme(page) {
       // Ignore private browsing/storage restrictions.
     }
   });
+}
+
+async function getInlineWidthPercentage(locator) {
+  const widthValue = await locator.evaluate((element) => element.style.width || '0%');
+  return parseFloat(String(widthValue).replace('%', '')) || 0;
 }
 
 test.describe('canonical shell theme behavior', () => {
@@ -63,6 +69,20 @@ test.describe('canonical shell theme behavior', () => {
       const toggledTheme = await html.getAttribute('data-theme');
       await page.reload({ waitUntil: 'domcontentloaded' });
       await expect(html).toHaveAttribute('data-theme', toggledTheme);
+    });
+  }
+});
+
+test.describe('canonical shell landmarks and skip links', () => {
+  for (const pageCase of PAGE_CASES) {
+    test(`${pageCase.name} exposes the canonical skip links and shared navigation landmarks`, async ({ page }) => {
+      await page.setViewportSize(DESKTOP_VIEWPORT);
+      await gotoShellPage(page, pageCase);
+
+      await expect(page.locator('.skip-link[href="#main-content"]')).toHaveCount(1);
+      await expect(page.locator('.skip-link[href="#site-navigation"]')).toHaveCount(1);
+      await expect(page.locator('#main-content')).toHaveCount(1);
+      await expect(page.locator('#site-navigation')).toHaveCount(1);
     });
   }
 });
@@ -100,6 +120,44 @@ test.describe('canonical shell mobile navigation behavior', () => {
       await mobileNavClose.click();
       await expect(mobileNavDrawer).not.toHaveClass(/open/);
       await expect(mobileNavOverlay).not.toHaveClass(/open/);
+    });
+  }
+});
+
+test.describe('canonical shell scroll affordances', () => {
+  const SCROLL_CASES = [
+    { name: 'Home', path: '/', fallbackPath: '/' },
+    { name: 'Learning', path: '/learning', fallbackPath: '/learning.html' },
+  ];
+
+  for (const pageCase of SCROLL_CASES) {
+    test(`${pageCase.name} updates scroll progress and back-to-top state during scrolling`, async ({ page }) => {
+      await page.setViewportSize(DESKTOP_VIEWPORT);
+      await gotoShellPage(page, pageCase);
+
+      const progressBar = page.locator('#scrollProgress');
+      const backToTop = page.locator('#backToTop');
+
+      await expect(progressBar).toHaveCount(1);
+      await expect(backToTop).toHaveCount(1);
+
+      const scrollableDistance = await page.evaluate(() => document.documentElement.scrollHeight - window.innerHeight);
+      expect(scrollableDistance, `${pageCase.name} should have enough scrollable content to exercise shell affordances.`).toBeGreaterThan(400);
+
+      const initialWidth = await getInlineWidthPercentage(progressBar);
+      await expect(backToTop).not.toHaveClass(/visible/);
+
+      await page.evaluate(() => {
+        window.scrollTo({ top: 900, behavior: 'auto' });
+      });
+
+      await expect.poll(async () => page.evaluate(() => window.scrollY)).toBeGreaterThan(300);
+      await expect.poll(async () => getInlineWidthPercentage(progressBar)).toBeGreaterThan(initialWidth);
+      await expect(backToTop).toHaveClass(/visible/);
+
+      await backToTop.click();
+
+      await expect.poll(async () => page.evaluate(() => window.scrollY)).toBeLessThan(50);
     });
   }
 });

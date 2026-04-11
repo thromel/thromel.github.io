@@ -31,6 +31,10 @@ function warn(name, message) {
   console.warn('WARN:', name, message || '');
 }
 
+function hasValidProofState(value) {
+  return ['loading', 'success', 'empty', 'error'].includes(value);
+}
+
 function testThemeToggle() {
   const buttons = document.querySelectorAll('#themeToggle');
   const button = buttons[0];
@@ -87,18 +91,48 @@ function testShellBehavior() {
 
 function testHomeEnhancements() {
   const hasSectionNav = !!document.querySelector('.home-section-nav');
-  const hasOssSummary = !!document.getElementById('oss-summary');
 
   if (!hasSectionNav) {
     warn('Home section nav', 'Not present on this page (expected for non-home pages).');
   } else {
     record('Home section nav exists', true);
   }
+}
 
-  if (!hasOssSummary) {
-    warn('OSS summary', 'Not present on this page (expected for non-home pages).');
+function testProofSurfaces() {
+  const homeProof = document.getElementById('oss-summary');
+  const contributionsProof = document.getElementById('contributions-proof');
+
+  if (!homeProof) {
+    warn('Homepage proof surface', 'Not present on this page (expected for non-home pages).');
   } else {
-    record('OSS summary container exists', true);
+    const homeStatus = document.getElementById('oss-summary-status');
+    const homeText = document.getElementById('oss-summary-text');
+    const homeLinks = homeProof.querySelectorAll('.proof-links a');
+    const homeState = homeProof.getAttribute('data-state');
+    const statusState = homeStatus ? homeStatus.getAttribute('data-state') : '';
+
+    record('Homepage proof surface exists', true);
+    record('Homepage proof status exists', !!homeStatus, homeStatus ? '' : 'Missing #oss-summary-status');
+    record('Homepage proof state is valid', hasValidProofState(homeState), 'Current state: ' + homeState);
+    record('Homepage proof status state is valid', hasValidProofState(statusState), 'Current state: ' + statusState);
+    record('Homepage proof copy exists', !!homeText && homeText.textContent.trim().length > 0);
+    record('Homepage proof links exist', homeLinks.length > 0, 'Found ' + homeLinks.length + ' proof links');
+  }
+
+  if (!contributionsProof) {
+    warn('Contributions proof surface', 'Not present on this page (expected for non-contributions pages).');
+  } else {
+    const contributionState = contributionsProof.getAttribute('data-state');
+    const errorMessage = document.getElementById('error-state-message');
+
+    record('Contributions proof surface exists', true);
+    record('Contributions proof state is valid', hasValidProofState(contributionState), 'Current state: ' + contributionState);
+    record('Contributions loading state exists', !!document.getElementById('loading-state'));
+    record('Contributions error state exists', !!document.getElementById('error-state'));
+    record('Contributions empty state exists', !!document.getElementById('empty-state'));
+    record('Contributions success section exists', !!document.getElementById('contributions-section'));
+    record('Contributions error message exists', !!errorMessage && errorMessage.textContent.trim().length > 0);
   }
 }
 
@@ -127,6 +161,7 @@ function runAll() {
   testShellBehavior();
   testCoreStylesLoaded();
   testHomeEnhancements();
+  testProofSurfaces();
   testPerformanceEntry();
 
   console.log('----- Summary -----');

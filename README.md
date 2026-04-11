@@ -106,36 +106,48 @@ The portfolio implements a **Liquid Glass** design philosophy that combines:
 │   ├── navigation.yml     # Site navigation structure
 │   └── display.yml        # Display preferences
 ├── _includes/             # Reusable template components
-│   └── widgets/          # UI components
+│   ├── navbar.html        # Canonical shared navigation markup
+│   ├── footer.html        # Canonical shared footer markup
+│   └── widgets/          # Page-local UI components
 ├── _layouts/              # Page layouts
+│   └── default.html       # Canonical shared shell
 ├── _posts/               # Blog posts and articles
 ├── _showcase/            # Project showcases
 ├── assets/
 │   ├── css/              # Stylesheets
-│   │   ├── overhaul.css  # Primary design system and page styling
+│   │   ├── overhaul.css  # Canonical shared stylesheet and token layer
 │   │   ├── mobile-optimizations.css  # Mobile-first responsive overrides
 │   │   └── components/oss-summary.css  # Homepage OSS summary component styles
 │   ├── js/               # JavaScript functionality
+│   │   ├── site-shell.js  # Canonical shared shell behavior
+│   │   ├── github-proof.js  # Shared async proof-state helpers
+│   │   └── contributions.js / oss-summary.js  # GitHub-driven proof surfaces
 │   └── images/           # Static assets
-└── scripts/              # Build and utility scripts
+├── docs/
+│   └── ui-maintenance.md  # Maintainer guide for shared-shell ownership
+└── scripts/
+    └── verify-ui.sh       # Repo-local browser verification runner
 ```
 
 ### CSS Architecture
-- **overhaul.css** - Primary design system, typography tokens, section components, and interaction states
+- **overhaul.css** - Canonical shared stylesheet for tokens, typography, shell surfaces, and proof-state presentation
 - **mobile-optimizations.css** - Phone/tablet specific usability refinements and reduced-motion handling
 - **components/oss-summary.css** - Isolated styling for homepage open-source summary UI
+- Older layers such as `assets/css/developer-theme.css` and `assets/css/custom.css` still exist for brownfield compatibility and should not become the default path for new shared work
 
 ### Component System
 - **Cards** - Consistent content containers with glass morphism effects
 - **Timeline** - Experience and education presentation with enhanced accessibility
 - **Tech Tags** - Skill and technology indicators with hover interactions
-- **Navigation** - Responsive navigation with complete ARIA support
+- **Shared Shell** - Shared navigation, theme toggle, skip links, scroll progress, and back-to-top behavior owned by `assets/js/site-shell.js`
+- **Navigation** - Responsive navigation with complete ARIA support through `_includes/navbar.html`
 
 ## Local Development
 
 ### Prerequisites
-- Ruby 2.7+ and Bundler
-- Node.js 14+ (for build tools)
+- Homebrew Ruby 3.3 available at `/opt/homebrew/opt/ruby@3.3/bin`
+- Bundler for Jekyll dependencies
+- Node.js 18+ for Playwright-based verification
 - Git
 
 ### Setup
@@ -147,34 +159,41 @@ The portfolio implements a **Liquid Glass** design philosophy that combines:
 
 2. **Install dependencies**
    ```bash
+   export PATH="/opt/homebrew/opt/ruby@3.3/bin:$PATH"
    bundle install
+   npm install --no-save @playwright/test
    ```
 
-3. **Start development server**
+3. **Start the local Jekyll server**
    ```bash
-   bundle exec jekyll serve --livereload
+   PATH="/opt/homebrew/opt/ruby@3.3/bin:$PATH" bundle exec jekyll serve --livereload
    ```
 
 4. **View the site**
    Open `http://localhost:4000` in your browser
 
+5. **Use the maintainer guide for shared UI work**
+   Review `docs/ui-maintenance.md` before touching shared shell behavior, proof surfaces, or legacy theme/navigation files.
+
 ### Development Commands
 ```bash
 # Development with live reload
-bundle exec jekyll serve --livereload
+PATH="/opt/homebrew/opt/ruby@3.3/bin:$PATH" bundle exec jekyll serve --livereload
 
 # Build for production
-bundle exec jekyll build
+PATH="/opt/homebrew/opt/ruby@3.3/bin:$PATH" bundle exec jekyll build
 
-# Run accessibility tests
-npx axe-core --tags wcag21aa https://thromel.github.io
+# Full UI regression suite
+bash scripts/verify-ui.sh full
 
-# Run performance audit
-npx lighthouse --only=performance --output=html https://thromel.github.io
+# Shell-focused regression suite
+bash scripts/verify-ui.sh shell
 
-# Validate HTML
-npx html-validate **/*.html
+# Browser-console smoke follow-up
+# Open the page in DevTools and run testSite.runAll() from browser-console-tests.js
 ```
+
+The repository does not currently commit a Node toolchain manifest for Playwright or the broader audit tools. Treat `npm install --no-save @playwright/test` as the current lightweight local prerequisite and keep `bash scripts/verify-ui.sh full` as the canonical repeatable verification entrypoint.
 
 ## Accessibility Features
 
@@ -289,27 +308,28 @@ const debouncedHandler = debounce(expensiveFunction, 250);
    git checkout -b feature/improvement-name
    ```
 
-2. **Follow the design system**
-   - Use existing CSS custom properties
-   - Follow semantic HTML structure
-   - Ensure WCAG 2.1 AA compliance
-   - Test with keyboard navigation and screen readers
+2. **Start from the canonical shared shell**
+   - Use `assets/css/overhaul.css` for shared styling and token changes
+   - Use `assets/js/site-shell.js` for shared shell behavior
+   - Treat `_layouts/default.html`, `_includes/navbar.html`, and `_includes/footer.html` as the shared shell markup path
+   - Avoid extending legacy layers such as `assets/js/theme-toggle.js`, `assets/js/app-navigation.js`, `assets/css/developer-theme.css`, or `assets/css/custom.css` unless the task is explicitly migrating or retiring them
 
 3. **Test your changes**
    ```bash
-   # Run local development server
-   bundle exec jekyll serve --livereload
-   
-   # Run accessibility tests
-   npx axe-core --tags wcag21aa http://localhost:4000
-   
-   # Test keyboard navigation manually
+   # Canonical full verification path
+   bash scripts/verify-ui.sh full
+
+   # Faster shared-shell regression path
+   bash scripts/verify-ui.sh shell
    ```
+   - Use `manual-testing-script.md` for manual checks
+   - Use `browser-console-tests.js` as a browser-side smoke layer after the Playwright run
+   - Use `docs/ui-maintenance.md` when the change touches proof surfaces, shell ownership, or brownfield guardrails
 
 4. **Submit a pull request**
    - Include description of changes
    - Add screenshots for visual changes
-   - Include accessibility testing results
+   - Include the verification commands you ran
 
 ### Code Style Guidelines
 - **CSS**: Use CSS custom properties for consistent theming
