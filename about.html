@@ -62,9 +62,11 @@ navbar_title: About
 }
 
 .about-subtitle {
-  font-size: var(--text-xl);
+  font-size: var(--text-lg);
   color: var(--color-text-muted);
-  margin: 0;
+  line-height: var(--leading-relaxed);
+  margin: 0 auto;
+  max-width: 34rem;
   font-weight: 400;
 }
 
@@ -92,11 +94,21 @@ navbar_title: About
   border: 1px solid var(--color-border);
   border-radius: var(--radius-xl);
   padding: var(--space-8);
-  line-height: 1.9;
+  line-height: 1.85;
   font-size: var(--text-lg);
   color: var(--color-text-secondary);
   box-shadow: var(--shadow-lg);
   transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.about-bio p {
+  font-size: inherit;
+  line-height: inherit;
+  margin-bottom: var(--space-5);
+}
+
+.about-bio p:last-child {
+  margin-bottom: 0;
 }
 
 .about-bio:hover {
@@ -224,9 +236,16 @@ navbar_title: About
     font-size: 2rem;
   }
 
+  .about-subtitle {
+    font-size: var(--text-base);
+    line-height: 1.65;
+  }
+
   .about-bio {
     padding: var(--space-6);
     border-radius: var(--radius-lg);
+    font-size: var(--text-base);
+    line-height: 1.8;
   }
 
   .about-travel {

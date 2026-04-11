@@ -2,13 +2,14 @@
 
 ## Automated Command
 1. If the repo does not already have Playwright installed locally, run `npm install --no-save @playwright/test`.
-2. Run `npx playwright test tests/homepage-hierarchy.spec.js tests/navbar-layout.spec.js tests/shell-behavior.spec.js`.
-3. For homepage-only verification, run `npx playwright test tests/homepage-hierarchy.spec.js`.
+2. Run `npx playwright test tests/readability-hierarchy.spec.js tests/homepage-hierarchy.spec.js tests/navbar-layout.spec.js tests/shell-behavior.spec.js`.
+3. For readability-only verification, run `npx playwright test tests/readability-hierarchy.spec.js`.
+4. For homepage-only verification, run `npx playwright test tests/homepage-hierarchy.spec.js`.
 
 ## Representative Pages
-1. Test `Home`, `About`, and `Contributions` on desktop and mobile widths.
+1. Test `Home`, `About`, `Learning`, and `Contributions` on desktop and mobile widths.
 2. Verify no JavaScript errors in browser console on each page.
-3. Confirm header, footer, and shell controls render consistently across the three pages.
+3. Confirm header, footer, and shell controls render consistently across the four pages.
 
 ## Theme and Visual State
 1. Open `Home` and verify no visual flicker during first paint.
@@ -36,11 +37,19 @@
 5. Confirm the `home-section-nav` section nav appears below the intro support band, after current focus and before the longer homepage sections.
 6. Click the pills and verify the URL hash and scroll position move to `homepage-news`, `homepage-publications`, `homepage-research`, `homepage-work`, `homepage-projects`, and `homepage-skills`.
 
+## Readability Hierarchy
+1. Run `npx playwright test tests/readability-hierarchy.spec.js`.
+2. On `Home` desktop and mobile, confirm `news-description`, `timeline-description`, and current-focus copy read comfortably without shrinking below the surrounding body text floor.
+3. On `About`, confirm the biography card reads as long-form body copy rather than dense footnote text, and that the title still leads the page.
+4. On `Learning`, confirm `learning-section-copy`, `resource-description`, and link-list titles are easy to scan on both desktop and mobile.
+5. On `Contributions`, confirm the stat labels, repository line, and metadata row stay readable in loading, success, and narrow-screen states.
+6. On `Contributions`, if GitHub data renders, confirm contribution titles remain visually stronger than metadata and labels do not collapse into unreadable microtext.
+
 ## Mobile Drawer
 1. Switch to a mobile viewport (`390x844` or equivalent).
 2. On `Home`, tap the hamburger button and confirm the mobile drawer opens.
 3. Close the mobile drawer with the overlay, then reopen it and close it with the close button.
-4. Repeat the open and close flow on `About` and `Contributions`.
+4. Repeat the open and close flow on `About`, `Learning`, and `Contributions`.
 5. Press `Escape` when the drawer is open and confirm it closes.
 
 ## Scroll Progress and Back-to-Top

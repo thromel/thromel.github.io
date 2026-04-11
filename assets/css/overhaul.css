@@ -53,16 +53,16 @@
   --space-16: 4rem;
   --space-20: 5rem;
 
-  /* Refined Font Sizes - Compact Academic Style */
-  --text-xs: 0.6875rem;   /* 11px */
-  --text-sm: 0.75rem;     /* 12px */
-  --text-base: 0.8125rem; /* 13px */
-  --text-lg: 0.875rem;    /* 14px */
-  --text-xl: 1rem;        /* 16px */
-  --text-2xl: 1.125rem;   /* 18px */
-  --text-3xl: 1.25rem;    /* 20px */
-  --text-4xl: 1.5rem;     /* 24px */
-  --text-5xl: 1.75rem;    /* 28px */
+  /* Refined Font Sizes - Raised reading floor without overstating the display scale */
+  --text-xs: 0.75rem;     /* 12px */
+  --text-sm: 0.875rem;    /* 14px */
+  --text-base: 0.9375rem; /* 15px */
+  --text-lg: 1rem;        /* 16px */
+  --text-xl: 1.0625rem;   /* 17px */
+  --text-2xl: 1.1875rem;  /* 19px */
+  --text-3xl: 1.375rem;   /* 22px */
+  --text-4xl: 1.625rem;   /* 26px */
+  --text-5xl: 1.875rem;   /* 30px */
 
   /* Line Heights */
   --leading-tight: 1.25;
@@ -226,7 +226,7 @@ p {
 
 /* Academic content often has denser paragraphs */
 .abstract, .summary {
-  font-size: var(--text-sm);
+  font-size: var(--text-base);
   line-height: var(--leading-loose);
   font-family: var(--font-serif);
   color: var(--color-text-secondary);
@@ -979,10 +979,11 @@ pre code {
 .section-skills .section-icon { color: var(--section-skills); }
 
 .section-subtitle {
-  font-size: var(--text-sm);
+  font-size: var(--text-base);
   color: var(--color-text-muted);
   font-weight: 400;
   margin-top: var(--space-2);
+  line-height: var(--leading-relaxed);
 }
 
 /* ========== Research Interests ========== */
@@ -1047,11 +1048,11 @@ pre code {
 }
 
 .timeline-title {
-  font-size: var(--text-lg);
+  font-size: var(--text-xl);
   font-weight: 600;
   color: var(--color-text-primary);
   flex: 1;
-  line-height: 1.4;
+  line-height: 1.45;
 }
 
 .timeline-date {
@@ -1059,6 +1060,7 @@ pre code {
   color: var(--color-text-muted);
   white-space: nowrap;
   font-weight: 450;
+  line-height: var(--leading-normal);
 }
 
 .timeline-subtitle {
@@ -1068,6 +1070,8 @@ pre code {
   display: flex;
   align-items: center;
   gap: var(--space-2);
+  flex-wrap: wrap;
+  line-height: 1.65;
 }
 
 .timeline-institution {
@@ -1083,8 +1087,9 @@ pre code {
 .timeline-description {
   font-size: var(--text-base);
   color: var(--color-text-secondary);
-  line-height: var(--leading-relaxed);
+  line-height: 1.72;
   margin-bottom: var(--space-3);
+  max-width: 68ch;
 }
 
 .timeline-header-with-logo {
@@ -1333,7 +1338,7 @@ pre code {
 .project-description {
   font-size: var(--text-base);
   color: var(--color-text-secondary);
-  line-height: var(--leading-relaxed);
+  line-height: 1.72;
   margin-bottom: var(--space-4);
   flex-grow: 1;
 }
@@ -1449,11 +1454,12 @@ pre code {
   display: inline-flex;
   align-items: center;
   gap: var(--space-2);
-  padding: var(--space-2) var(--space-3);
+  padding: calc(var(--space-2) + 1px) var(--space-3);
   background: var(--color-surface);
   border: 1px solid var(--color-border-light);
   border-radius: var(--radius-md);
   font-size: var(--text-sm);
+  line-height: 1.45;
   color: var(--color-text-secondary);
   transition: all 0.2s ease;
   cursor: default;
@@ -2237,8 +2243,8 @@ html {
 /* Small Mobile */
 @media (max-width: 375px) {
   :root {
-    --text-base: 0.75rem;    /* 12px */
-    --text-sm: 0.6875rem;    /* 11px */
+    --text-base: 0.875rem;   /* 14px */
+    --text-sm: 0.8125rem;    /* 13px */
   }
 
   .container {
@@ -2539,16 +2545,17 @@ html {
 }
 
 .news-title {
-  font-size: var(--text-base);
+  font-size: var(--text-lg);
   font-weight: 600;
   color: var(--color-text-primary);
   margin-bottom: var(--space-1);
+  line-height: 1.45;
 }
 
 .news-description {
-  font-size: var(--text-sm);
+  font-size: var(--text-base);
   color: var(--color-text-muted);
-  line-height: var(--leading-relaxed);
+  line-height: 1.7;
 }
 
 /* Mobile adjustments for enhancements */
@@ -3951,8 +3958,10 @@ html {
 
 .learning-section-copy {
   margin: 0 0 var(--space-6) 0;
+  font-size: var(--text-base);
   color: var(--color-text-secondary);
-  line-height: 1.6;
+  line-height: 1.72;
+  max-width: 68ch;
 }
 
 .learning-group + .learning-group {
@@ -3984,8 +3993,8 @@ html {
 
 .learning-link-title {
   color: var(--color-text-primary);
-  font-size: var(--text-sm);
-  line-height: 1.6;
+  font-size: var(--text-base);
+  line-height: 1.68;
   text-decoration: none;
   flex: 1;
 }
@@ -4085,11 +4094,11 @@ html {
 }
 
 .resource-title {
-  font-size: var(--text-base);
+  font-size: var(--text-lg);
   font-weight: 600;
   color: var(--color-text-primary);
   margin: 0 0 var(--space-1) 0;
-  line-height: 1.3;
+  line-height: 1.45;
 }
 
 .resource-author {
@@ -4099,9 +4108,9 @@ html {
 }
 
 .resource-description {
-  font-size: var(--text-sm);
+  font-size: var(--text-base);
   color: var(--color-text-secondary);
-  line-height: 1.5;
+  line-height: 1.72;
   margin: 0;
   flex: 1;
 }
@@ -4619,6 +4628,9 @@ html {
 
 .homepage-classic .current-focus-card p {
   margin-bottom: 0;
+  font-size: var(--text-base);
+  line-height: 1.7;
+  color: var(--color-text-secondary);
 }
 
 .homepage-classic .current-focus-label {

@@ -250,8 +250,8 @@
   }
 
   .timeline-title {
-    font-size: 1.125rem !important;
-    line-height: 1.4 !important;
+    font-size: var(--text-lg) !important;
+    line-height: 1.45 !important;
   }
 
   .timeline-title a {
@@ -260,17 +260,18 @@
 
   .timeline-date {
     white-space: normal !important;
-    font-size: 0.8125rem !important;
+    font-size: var(--text-sm) !important;
+    line-height: 1.45 !important;
   }
 
   .timeline-subtitle {
-    font-size: 0.9375rem !important;
-    line-height: 1.5 !important;
+    font-size: var(--text-base) !important;
+    line-height: 1.65 !important;
   }
 
   .timeline-description {
-    font-size: 0.9375rem !important;
-    line-height: 1.6 !important;
+    font-size: var(--text-base) !important;
+    line-height: 1.72 !important;
   }
 
   /* ========== Projects Grid - Single Column ========== */
@@ -289,7 +290,8 @@
   }
 
   .project-description {
-    font-size: 0.9375rem !important;
+    font-size: var(--text-base) !important;
+    line-height: 1.7 !important;
     margin-bottom: var(--space-3) !important;
   }
 
@@ -324,7 +326,8 @@
 
   .skill-item {
     padding: var(--space-1) var(--space-2) !important;
-    font-size: 0.8125rem !important;
+    font-size: var(--text-sm) !important;
+    line-height: 1.45 !important;
   }
 
   /* ========== Buttons - Larger Touch Targets ========== */
@@ -357,6 +360,19 @@
 
   .about-content {
     font-size: 1rem !important;
+  }
+
+  .news-description,
+  .learning-section-copy,
+  .resource-description,
+  .homepage-classic .current-focus-card p {
+    font-size: var(--text-base) !important;
+    line-height: 1.7 !important;
+  }
+
+  .learning-link-title {
+    font-size: var(--text-base) !important;
+    line-height: 1.68 !important;
   }
 
   /* ========== Site Header/Navigation - Mobile Hamburger Menu ========== */
@@ -569,14 +585,30 @@
   }
 
   .timeline-title {
-    font-size: 1rem !important;
+    font-size: var(--text-lg) !important;
   }
 
   .interest-tag,
-  .skill-item,
   .project-tag {
     font-size: 0.75rem !important;
     padding: 0.25rem 0.5rem !important;
+  }
+
+  .skill-item {
+    font-size: var(--text-sm) !important;
+    line-height: 1.4 !important;
+    padding: var(--space-1) var(--space-2) !important;
+  }
+
+  .timeline-subtitle,
+  .timeline-description,
+  .project-description,
+  .news-description,
+  .learning-section-copy,
+  .resource-description,
+  .learning-link-title {
+    font-size: var(--text-base) !important;
+    line-height: 1.68 !important;
   }
 
   h1 {

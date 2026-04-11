@@ -91,6 +91,7 @@ navbar_title: Contributions
   color: var(--color-text-muted);
   text-transform: uppercase;
   letter-spacing: 0.05em;
+  line-height: 1.45;
 }
 
 .loading-container,
@@ -99,6 +100,15 @@ navbar_title: Contributions
   text-align: center;
   padding: var(--space-12);
   color: var(--color-text-muted);
+}
+
+.loading-container p,
+.error-container p,
+.empty-container p {
+  max-width: 34rem;
+  margin: 0 auto;
+  font-size: var(--text-base);
+  line-height: var(--leading-relaxed);
 }
 
 .loading-spinner {
@@ -134,9 +144,11 @@ navbar_title: Contributions
   display: inline-flex;
   align-items: center;
   gap: var(--space-2);
-  font-size: var(--text-sm);
+  font-size: var(--text-base);
+  line-height: 1.5;
   color: var(--color-text-secondary);
   margin-bottom: var(--space-2);
+  flex-wrap: wrap;
 }
 
 .contribution-repo i {
@@ -174,17 +186,20 @@ navbar_title: Contributions
 .contribution-label {
   padding: 0.25rem 0.5rem;
   border-radius: var(--radius-md);
-  font-size: var(--text-xs);
+  font-size: var(--text-sm);
   background: var(--color-surface);
   color: var(--color-text-secondary);
+  line-height: 1.35;
 }
 
 .contribution-meta {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: var(--space-4);
   margin-top: var(--space-3);
   font-size: var(--text-sm);
+  line-height: 1.5;
   color: var(--color-text-muted);
 }
 
@@ -195,6 +210,23 @@ navbar_title: Contributions
 
 .contribution-meta a:hover {
   text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .stat-card {
+    padding: var(--space-5);
+  }
+
+  .loading-container,
+  .error-container,
+  .empty-container {
+    padding: var(--space-8) var(--space-4);
+  }
+
+  .contribution-repo,
+  .contribution-meta {
+    gap: var(--space-2);
+  }
 }
 </style>
 
