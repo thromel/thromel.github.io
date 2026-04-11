@@ -197,7 +197,13 @@ navbar_title: Home
           {{ pub.title }}
           {% endif %}
         </h3>
-        <span class="timeline-date">{{ pub.pub_date | default: pub.date | date: "%Y" }}</span>
+        <span class="timeline-date">
+          {% if pub.pub_date %}
+          {{ pub.pub_date }}
+          {% elsif pub.date %}
+          {{ pub.date | date: "%Y" }}
+          {% endif %}
+        </span>
       </div>
       {% if pub.pub %}
       <p class="timeline-subtitle"><em>{{ pub.pub }}</em></p>
