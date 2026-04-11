@@ -19,9 +19,9 @@
 
 ### Readability
 
-- [ ] **READ-01**: Visitor can comfortably read dense homepage and internal-page text on desktop without metadata-sized body copy
-- [ ] **READ-02**: Visitor can comfortably read dense homepage and internal-page text on mobile without cramped line length or spacing
-- [ ] **READ-03**: Visitor sees clear typographic hierarchy across news, timeline, subtitle, and metadata-heavy surfaces after readability adjustments
+- [x] **READ-01**: Visitor can comfortably read dense homepage and internal-page text on desktop without metadata-sized body copy
+- [x] **READ-02**: Visitor can comfortably read dense homepage and internal-page text on mobile without cramped line length or spacing
+- [x] **READ-03**: Visitor sees clear typographic hierarchy across news, timeline, subtitle, and metadata-heavy surfaces after readability adjustments
 
 ### Dynamic Proof Surfaces
 
@@ -66,9 +66,9 @@
 | HOME-01 | Phase 2 | Complete |
 | HOME-02 | Phase 2 | Complete |
 | HOME-03 | Phase 2 | Complete |
-| READ-01 | Phase 3 | Pending |
-| READ-02 | Phase 3 | Pending |
-| READ-03 | Phase 3 | Pending |
+| READ-01 | Phase 3 | Complete |
+| READ-02 | Phase 3 | Complete |
+| READ-03 | Phase 3 | Complete |
 | OSS-01 | Phase 4 | Pending |
 | OSS-02 | Phase 4 | Pending |
 | OSS-03 | Phase 4 | Pending |
@@ -83,4 +83,4 @@
 
 ---
 *Requirements defined: 2026-04-09*
-*Last updated: 2026-04-10 after phase 2 completion*
+*Last updated: 2026-04-11 after phase 3 completion*

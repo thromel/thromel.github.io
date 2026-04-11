@@ -2,16 +2,16 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: planning
-stopped_at: Phase 02 complete
-last_updated: "2026-04-10T13:13:10Z"
-last_activity: 2026-04-10 -- Phase 02 complete
+status: ready_to_plan
+stopped_at: Phase 03 complete
+last_updated: "2026-04-11T10:19:35Z"
+last_activity: 2026-04-11 -- Phase 03 complete
 progress:
   total_phases: 5
-  completed_phases: 2
-  total_plans: 6
-  completed_plans: 6
-  percent: 40
+  completed_phases: 3
+  total_plans: 9
+  completed_plans: 9
+  percent: 60
 ---
 
 # Project State
@@ -21,24 +21,24 @@ progress:
 See: .planning/PROJECT.md (updated 2026-04-09)
 
 **Core value:** Visitors can quickly understand Romel's work through a credible, readable, and consistent portfolio experience.
-**Current focus:** Phase 03 — readability-upgrade
+**Current focus:** Phase 04 — proof-surfaces
 
 ## Current Position
 
-Phase: 03 (readability-upgrade) — READY TO PLAN
-Plan: Not started
-Status: Ready to plan
-Last activity: 2026-04-10 -- Phase 02 complete
+Phase: 04 (proof-surfaces) — READY TO PLAN
+Plan: 0 of 3
+Status: Ready to plan Phase 04
+Last activity: 2026-04-11 -- Phase 03 complete
 
-Progress: [████░░░░░░] 40%
+Progress: [██████░░░░] 60%
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed: 6
-- Average duration: 3.0 min
-- Total execution time: 0.3 hours
+- Total plans completed: 9
+- Average duration: 2.7 min
+- Total execution time: 0.4 hours
 
 **By Phase:**
 
@@ -46,10 +46,11 @@ Progress: [████░░░░░░] 40%
 |-------|-------|-------|----------|
 | 01 | 3 | 8 min | 2.7 min |
 | 02 | 3 | 10 min | 3.3 min |
+| 03 | 3 | 6 min | 2.0 min |
 
 **Recent Trend:**
 
-- Last 5 plans: Phase 01 P02, Phase 01 P03, Phase 02 P01, Phase 02 P02, Phase 02 P03
+- Last 5 plans: Phase 02 P02, Phase 02 P03, Phase 03 P01, Phase 03 P02, Phase 03 P03
 - Trend: Stable
 
 | Phase 01 P01 | 1 min | 2 tasks | 2 files |
@@ -58,6 +59,9 @@ Progress: [████░░░░░░] 40%
 | Phase 02 P01 | 6 min | 2 tasks | 3 files |
 | Phase 02 P02 | 4 min | 2 tasks | 3 files |
 | Phase 02 P03 | 4 min | 2 tasks | 2 files |
+| Phase 03 P01 | 2 min | 2 tasks | 2 files |
+| Phase 03 P02 | 1 min | 2 tasks | 3 files |
+| Phase 03 P03 | 3 min | 2 tasks | 2 files |
 
 ## Accumulated Context
 
@@ -77,6 +81,9 @@ Recent decisions affecting current work:
 - [Phase 02]: Homepage hero now leads with copy, `Research`, and `CV`, while email and profile exits live in a quieter secondary contact row. — This removes the old flat action cluster without discarding the existing destinations.
 - [Phase 02]: Homepage support surfaces now flow through current focus, section-pill wayfinding, OSS proof, and news before the longer content sections. — This gives the homepage a calmer transition from intro to detail.
 - [Phase 02]: Homepage publications now source from `site.publications`, and homepage hierarchy regressions are covered in Playwright on desktop and mobile. — This keeps the new section pills backed by real rendered targets and leaves the phase with repeatable evidence.
+- [Phase 03]: Shared reading tokens now use a 14px/15px/16px floor and preserve that floor down to the smallest-phone breakpoint. — This fixes the audit's metadata-sized dense copy without adding a second typography system.
+- [Phase 03]: About and Contributions page-local typography now follow the same title/body/metadata hierarchy as the shared shell. — This keeps dense content readable while leaving async GitHub behavior untouched for Phase 4.
+- [Phase 03]: Readability regressions now have dedicated Playwright coverage across Home, About, Learning, and Contributions, with mocked GitHub contribution data for deterministic async-state hierarchy checks. — This leaves the phase with browser evidence instead of CSS-only assumptions.
 
 ### Pending Todos
 
@@ -85,10 +92,10 @@ None yet.
 ### Blockers/Concerns
 
 - GitHub-driven proof surfaces depend on unauthenticated browser-side API calls
-- Dense timeline and metadata-heavy surfaces still need the readability pass planned for Phase 03
+- The repo still lacks a committed Playwright toolchain manifest, so local verification currently relies on `npm install --no-save @playwright/test`
 
 ## Session Continuity
 
-Last session: 2026-04-10T13:13:10Z
-Stopped at: Phase 02 complete
+Last session: 2026-04-11T10:19:35Z
+Stopped at: Phase 03 complete
 Resume file: None

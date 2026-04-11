@@ -14,7 +14,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 1: Shell Convergence** - Make the current shell the only shared UI foundation (completed 2026-04-10)
 - [x] **Phase 2: Homepage Hierarchy** - Simplify the homepage first impression and restore mobile-first clarity (completed 2026-04-10)
-- [ ] **Phase 3: Readability Upgrade** - Raise reading comfort and hierarchy across dense content surfaces
+- [x] **Phase 3: Readability Upgrade** - Raise reading comfort and hierarchy across dense content surfaces (completed 2026-04-11)
 - [ ] **Phase 4: Proof Surfaces** - Bring GitHub-driven sections onto the current system with stable states
 - [ ] **Phase 5: Verification Hardening** - Lock in repeatable checks and guidance for future UI work
 
@@ -61,12 +61,12 @@ Plans:
   1. Visitor can read dense homepage and internal-page content comfortably on desktop.
   2. Visitor can read dense homepage and internal-page content comfortably on mobile.
   3. News, timeline, subtitle, and metadata-heavy surfaces preserve hierarchy after typography changes.
-**Plans**: 3 plans
+**Plans**: 3/3 plans complete
 
 Plans:
-- [ ] 03-01: Retune shared typography and spacing tokens for dense content
-- [ ] 03-02: Apply readability adjustments to timeline, news, and metadata-heavy surfaces
-- [ ] 03-03: Verify cross-page typography hierarchy on desktop and mobile
+- [x] 03-01: Retune shared typography and spacing tokens for dense content
+- [x] 03-02: Apply readability adjustments to timeline, news, and metadata-heavy surfaces
+- [x] 03-03: Verify cross-page typography hierarchy on desktop and mobile
 
 ### Phase 4: Proof Surfaces
 **Goal**: Make live GitHub-driven proof-of-work surfaces feel trustworthy, stable, and visually aligned with the rest of the site.
@@ -109,6 +109,6 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 |-------|----------------|--------|-----------|
 | 1. Shell Convergence | 3/3 | Complete | 2026-04-10 |
 | 2. Homepage Hierarchy | 3/3 | Complete | 2026-04-10 |
-| 3. Readability Upgrade | 0/3 | Not started | - |
+| 3. Readability Upgrade | 3/3 | Complete | 2026-04-11 |
 | 4. Proof Surfaces | 0/3 | Not started | - |
 | 5. Verification Hardening | 0/3 | Not started | - |
