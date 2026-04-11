@@ -2,9 +2,10 @@
 
 ## Automated Command
 1. If the repo does not already have Playwright installed locally, run `npm install --no-save @playwright/test`.
-2. Run `npx playwright test tests/readability-hierarchy.spec.js tests/homepage-hierarchy.spec.js tests/navbar-layout.spec.js tests/shell-behavior.spec.js`.
-3. For readability-only verification, run `npx playwright test tests/readability-hierarchy.spec.js`.
-4. For homepage-only verification, run `npx playwright test tests/homepage-hierarchy.spec.js`.
+2. Run `npx playwright test tests/proof-surfaces.spec.js tests/readability-hierarchy.spec.js tests/homepage-hierarchy.spec.js tests/navbar-layout.spec.js tests/shell-behavior.spec.js`.
+3. For proof-surface-only verification, run `npx playwright test tests/proof-surfaces.spec.js`.
+4. For readability-only verification, run `npx playwright test tests/readability-hierarchy.spec.js`.
+5. For homepage-only verification, run `npx playwright test tests/homepage-hierarchy.spec.js`.
 
 ## Representative Pages
 1. Test `Home`, `About`, `Learning`, and `Contributions` on desktop and mobile widths.
@@ -61,3 +62,12 @@
 1. On `Contributions`, confirm the page shell is usable before GitHub data finishes loading.
 2. If the GitHub request succeeds, confirm stats and timeline render inside the shared shell.
 3. If the GitHub request fails or rate-limits, confirm the page still keeps stable shell layout and readable loading or error states.
+
+## Proof Surfaces
+1. Run `npx playwright test tests/proof-surfaces.spec.js`.
+2. On `Home`, confirm the OSS summary renders as an explicit proof surface even when GitHub is slow, empty, or unavailable.
+3. If the homepage GitHub request succeeds, confirm `#oss-summary` moves from `loading` to `success` and keeps the recent repository targets visible.
+4. If the homepage GitHub request fails or rate-limits, confirm the fallback copy reads `GitHub data is unavailable right now. Browse recent contribution targets instead.` and the repository links remain usable.
+5. On `Contributions`, confirm the shell shows `loading`, then either `success`, `empty`, or `error` without collapsing the page structure.
+6. If the contributions request rate-limits, confirm the error copy reads `GitHub is rate-limited right now. Check back shortly or use the repository links below.`
+7. If the contributions request fails generically, confirm the error copy reads `Unable to fetch contributions right now. Please try again later.`

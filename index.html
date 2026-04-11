@@ -122,20 +122,38 @@ navbar_title: Home
   </nav>
 
   <!-- Open Source Contributions -->
-  <div id="oss-summary" class="oss-inline" data-github-user="{{ site.data.profile.github | default: 'thromel' }}" style="display: none;">
-    <a href="{{ 'contributions' | relative_url }}" class="oss-badge">
-      <i class="fas fa-code-merge"></i>
-      <span id="oss-summary-text" aria-live="polite"></span>
-    </a>
-    <span class="oss-repos">
-      to <a href="https://github.com/langchain-ai/deepagents/pulls?q=author%3Athromel" target="_blank" rel="noopener noreferrer">deepagents</a>,
-      <a href="https://github.com/microsoft/typescript-go/pulls?q=author%3Athromel" target="_blank" rel="noopener noreferrer">typescript-go</a>,
-      <a href="https://github.com/tsantalis/RefactoringMiner/pulls?q=author%3Athromel" target="_blank" rel="noopener noreferrer">RefactoringMiner</a>,
-      <a href="https://github.com/dotnet/efcore/pulls?q=author%3Athromel" target="_blank" rel="noopener noreferrer">EF Core</a>,
-      <a href="https://github.com/langchain-ai/langchain/pulls?q=author%3Athromel" target="_blank" rel="noopener noreferrer">LangChain</a>,
+  <div
+    id="oss-summary"
+    class="oss-inline proof-surface"
+    data-github-user="{{ site.data.profile.github | default: 'thromel' }}"
+    data-state="loading"
+  >
+    <div class="proof-surface-header">
+      <a href="{{ 'contributions' | relative_url }}" class="oss-badge">
+        <i class="fas fa-code-merge"></i>
+        <span>Open source proof</span>
+      </a>
+    </div>
+    <div id="oss-summary-status" class="proof-state" data-state="loading" aria-live="polite">
+      <span class="proof-state-icon" aria-hidden="true">
+        <i class="fas fa-circle-notch fa-spin"></i>
+      </span>
+      <span class="proof-state-copy">
+        <span class="proof-state-label">GitHub status</span>
+        <span id="oss-summary-text" class="proof-state-text">Loading recent merged pull requests...</span>
+      </span>
+    </div>
+    <div class="proof-links oss-repos" aria-label="Recent contribution targets">
+      <span>Recent targets:</span>
+      <a href="https://github.com/langchain-ai/deepagents/pulls?q=author%3Athromel" target="_blank" rel="noopener noreferrer">deepagents</a>
+      <a href="https://github.com/microsoft/typescript-go/pulls?q=author%3Athromel" target="_blank" rel="noopener noreferrer">typescript-go</a>
+      <a href="https://github.com/tsantalis/RefactoringMiner/pulls?q=author%3Athromel" target="_blank" rel="noopener noreferrer">RefactoringMiner</a>
+      <a href="https://github.com/dotnet/efcore/pulls?q=author%3Athromel" target="_blank" rel="noopener noreferrer">EF Core</a>
+      <a href="https://github.com/langchain-ai/langchain/pulls?q=author%3Athromel" target="_blank" rel="noopener noreferrer">LangChain</a>
       <a href="https://github.com/Kaliumhexacyanoferrat/GenHTTP/pulls?q=author%3Athromel" target="_blank" rel="noopener noreferrer">GenHTTP</a>
-    </span>
+    </div>
   </div>
+  <script src="{{ '/assets/js/github-proof.js' | relative_url }}" defer></script>
 
   <!-- Recent News Widget -->
   <div id="homepage-news" class="news-widget">
