@@ -233,18 +233,19 @@ AI for Software Engineering (AI4SE), Software Engineering for AI (SE4AI), Trustw
 
 \resumeProject
   {The Choice Can Be the Attack: Auditing Aligned Backdoors in LLM Agents}
-  {Tools: Python, WebShop, LLM Agent Auditing, Counterfactual Evaluation, Choice Modeling}
+  {Tools: Python, WebShop-style Evaluation, Hugging Face Jobs, vLLM, Counterfactual Auditing, Choice Modeling}
   {August 2025 -- Present}
   {}
 \resumeItemListStart
-  \item Built ReAgent++, an endpoint-black-box audit for \emph{aligned backdoors} in LLM agents, targeting attacks that keep the response instruction-valid while covertly steering which acceptable brand, seller, or product gets chosen.
+  \item Built \textbf{SHIFT} (\emph{Structured Hidden Influence Test}), an endpoint-black-box audit for \emph{aligned backdoors} in LLM agents, targeting attacks that preserve instruction validity while covertly steering which acceptable brand, seller, or product gets chosen.
 
-  \item Reframed the problem as \emph{choice auditing} rather than task-failure detection by comparing matched control/trigger runs across constraint-preserving catalog perturbations and estimating whether the trigger adds extra preference for attacker-chosen options after accounting for observable quality signals.
+  \item Reframed aligned backdoor detection as \emph{choice auditing} rather than task-failure detection by combining a matched trigger audit with a feature-controlled choice model to test whether a trigger adds extra preference for attacker-chosen options after accounting for observable quality signals.
 
-  \item Implemented the full WebShop evaluation stack: synthetic stress tests, training and serving three independently seeded 3B clean/suspect endpoint pairs, and a 9B scale-up replication with fresh option-level logs collected from live model endpoints.
+  \item Implemented the full controlled WebShop-style evaluation stack: synthetic confounding studies, live clean/suspect endpoint logging, 29-variant benign-vs-trigger-preserved stress suites, same-anchor external baseline comparisons, and a Qwen3.5-9B scale-up replication.
 
-  \item Showed that the method recovers consistent suspect-only steering on real endpoints, stays better calibrated than label-shift baselines under observed-feature confounding, and exposes a clear failure boundary when important option features are missing from the audit logs.
+  \item Showed a strong 9B endpoint case study with perfect weak-stage clean/suspect separation and large bounded target uplift, while also documenting the method’s main limitation: stronger benign catalog shifts and omitted option features remain the key calibration boundary.
 \resumeItemListEnd
+
 
 
 
@@ -350,22 +351,25 @@ AI for Software Engineering (AI4SE), Software Engineering for AI (SE4AI), Trustw
 \vspace{-2mm}
 \section{\textbf{Skills}}
 \vspace{-0.4mm}
- \resumeHeadingSkillStart
-  \resumeSubItem{Programming Languages:}
-    {C++, C\#, Python, JavaScript, TypeScript, Go, SQL, Java, Solidity}
+\resumeHeadingSkillStart
+  \resumeSubItem{Agentic AI \& LLM Systems:}
+    {LLM agents, tool calling, RAG, prompt engineering, multi-step workflows, LLM evaluation, counterfactual auditing, model serving, fine-tuning}
   \resumeSubItem{ML/AI Frameworks:}
-    {PyTorch, LangChain, LangGraph, Transformers, ResNet, LSTM, BERT}
+    {PyTorch, Transformers, Hugging Face, LangChain, LangGraph, vLLM}
+  \resumeSubItem{Programming Languages:}
+    {Python, TypeScript, JavaScript, C\#, C++, Go, SQL, Java, Solidity}
   \resumeSubItem{Backend Frameworks:}
-    {.NET Core, ASP.NET, Express.js, FastAPI, Next.js}
+    {.NET Core, ASP.NET, FastAPI, Express.js, Next.js}
   \resumeSubItem{Databases:}
     {PostgreSQL, MongoDB, Redis, SQL Server, DynamoDB}
   \resumeSubItem{Cloud \& DevOps:}
     {AWS, Azure, Docker, Kubernetes, GitHub Actions, Terraform, OpenTelemetry, Jaeger, NATS}
   \resumeSubItem{Blockchain \& Web3:}
     {Ethereum, Solidity, IPFS, ERC-721, ERC-1155, Web3.js}
-  \resumeSubItem{Tools \& Technologies:}
-    {NS3, Flex, Bison, Git, Linux}
- \resumeHeadingSkillEnd
+  \resumeSubItem{Tools \& Platforms:}
+    {Linux, Git, Hugging Face Jobs, WebShop, NS3, Flex, Bison}
+\resumeHeadingSkillEnd
+
 
 \section{\textbf{Honors and Awards}}
 \vspace{-0.4mm}
