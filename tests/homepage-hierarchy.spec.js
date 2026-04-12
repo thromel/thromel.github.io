@@ -40,7 +40,7 @@ test.describe('homepage hierarchy', () => {
     await page.setViewportSize(MOBILE_VIEWPORT);
     await page.goto(BASE_URL, { waitUntil: 'domcontentloaded' });
 
-    const heroContent = page.locator('.hero-content');
+    const heroContent = page.locator('.hero-content--intro');
     const heroPortrait = page.locator('.hero-image-wrapper');
     const sectionNav = page.locator('.home-section-nav');
 
@@ -59,6 +59,10 @@ test.describe('homepage hierarchy', () => {
       contentBox.y,
       `Expected the mobile hero text block to render before the portrait, but content started at ${contentBox.y}px and the portrait started at ${portraitBox.y}px.`,
     ).toBeLessThan(portraitBox.y);
+    expect(
+      portraitBox.y + Math.min(portraitBox.height, 96),
+      `Expected the mobile portrait to enter the first viewport, but it started at ${portraitBox.y}px with height ${portraitBox.height}px inside an ${MOBILE_VIEWPORT.height}px viewport.`,
+    ).toBeLessThan(MOBILE_VIEWPORT.height);
 
     const projectsPill = page.locator('.home-section-nav a[href="#homepage-projects"]');
     await projectsPill.click();

@@ -4406,6 +4406,10 @@ html {
 }
 
 .homepage-classic .hero-section {
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas:
+    "intro image"
+    "support image";
   align-items: center;
   gap: clamp(2rem, 5vw, 4rem);
   padding: clamp(1rem, 2vw, 1.5rem) 0 var(--space-4);
@@ -4413,6 +4417,14 @@ html {
 
 .homepage-classic .hero-content {
   max-width: 42rem;
+}
+
+.homepage-classic .hero-content--intro {
+  grid-area: intro;
+}
+
+.homepage-classic .hero-content--support {
+  grid-area: support;
 }
 
 .homepage-classic .hero-kicker {
@@ -4552,6 +4564,11 @@ html {
   border-radius: 24px;
   border: 1px solid rgba(17, 24, 39, 0.08);
   box-shadow: 0 24px 50px rgba(15, 23, 42, 0.14);
+}
+
+.homepage-classic .hero-image-wrapper {
+  grid-area: image;
+  grid-row: 1 / span 2;
 }
 
 [data-theme="dark"] .homepage-classic .hero-image {
@@ -4917,11 +4934,19 @@ html {
 
 @media (max-width: 900px) {
   .homepage-classic .hero-section {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "intro"
+      "image"
+      "support";
     gap: var(--space-8);
   }
 
   .homepage-classic .hero-image-wrapper {
     padding-top: 0;
+    grid-row: auto;
+    justify-self: center;
+    align-self: start;
   }
 
   .homepage-classic .hero-actions {

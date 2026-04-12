@@ -8,7 +8,7 @@ navbar_title: Home
 
 <!-- Hero Section - Minimal Style -->
 <div class="hero-section">
-  <div class="hero-content">
+  <div class="hero-content hero-content--intro">
     <p class="hero-kicker">Software engineering, research, and open source</p>
 
     <!-- Name & Tagline -->
@@ -19,6 +19,14 @@ navbar_title: Home
     <p class="hero-bio">
       <strong>Software engineer and researcher</strong> from <a href="https://cse.buet.ac.bd" target="_blank">BUET</a>. Over the past 3 years at <a href="{{ site.data.profile.current_company.url }}" target="_blank">{{ site.data.profile.current_company.name }}</a>, I have worked across backend engineering and AI engineering, including 1 year focused on AI systems. My research focuses on how AI is changing software engineering, especially developer tools, reliability, and security. In September 2026, I will begin an <strong>M.Sc in Computing Science</strong> at the <a href="https://www.ualberta.ca/en/computing-science/index.html" target="_blank">University of Alberta</a>.
     </p>
+  </div>
+
+  <!-- Profile Image -->
+  <div class="hero-image-wrapper">
+    <img src="{{ site.data.profile.portrait_url }}" alt="{{ site.data.profile.primary_name }}" class="hero-image">
+  </div>
+
+  <div class="hero-content hero-content--support">
     <p class="hero-bio hero-bio-personal">
       Outside work, I read a lot of history and economics, travel when I can, and usually have a novel in progress.
       <a href="{{ 'about' | relative_url }}" class="hero-about-link">More about me →</a>
@@ -82,11 +90,6 @@ navbar_title: Home
         </div>
       </div>
     </div>
-  </div>
-
-  <!-- Profile Image -->
-  <div class="hero-image-wrapper">
-    <img src="{{ site.data.profile.portrait_url }}" alt="{{ site.data.profile.primary_name }}" class="hero-image">
   </div>
 </div>
 
