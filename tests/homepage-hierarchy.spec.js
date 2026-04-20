@@ -36,6 +36,24 @@ test.describe('homepage hierarchy', () => {
     }
   });
 
+  test('homepage profile sections keep employer names and link education to the dedicated page', async ({ page }) => {
+    await page.setViewportSize(DESKTOP_VIEWPORT);
+    await page.goto(BASE_URL, { waitUntil: 'domcontentloaded' });
+
+    const workHeaders = page.locator('#homepage-work .timeline-item .timeline-header');
+    await expect(workHeaders.first()).toContainText('IQVIA');
+    await expect(workHeaders.nth(1)).toContainText('Mindshare Bangladesh');
+
+    const educationCta = page.getByRole('link', { name: 'View Full Education →' });
+    await expect(educationCta).toBeVisible();
+    await educationCta.click();
+
+    await expect(page).toHaveURL(/\/education\/?$/);
+    await expect(page.locator('.page-intro-title')).toHaveText('Education');
+    await expect(page.locator('.section-education .timeline-item')).toHaveCount(4);
+    await expect(page.locator('a[href="https://u-a-goose.github.io/"]')).toHaveCount(1);
+  });
+
   test('mobile hero keeps text above the portrait and section nav pills update the hash', async ({ page }) => {
     await page.setViewportSize(MOBILE_VIEWPORT);
     await page.goto(BASE_URL, { waitUntil: 'domcontentloaded' });

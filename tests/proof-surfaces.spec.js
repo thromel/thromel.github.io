@@ -85,6 +85,8 @@ test.describe('proof surfaces', () => {
 
     await expect(page.locator('#oss-summary')).toHaveAttribute('data-state', 'success');
     await expect(page.locator('#oss-summary-status')).toHaveAttribute('data-state', 'success');
+    await expect(page.locator('#oss-summary .oss-badge')).toContainText('Open source activity');
+    await expect(page.locator('#oss-summary .proof-state-label')).toHaveText('GitHub activity');
     await expect(page.locator('#oss-summary-text')).toHaveText('12 merged pull requests to open source projects.');
     await expect(page.locator('#oss-summary .proof-links a')).toHaveCount(6);
   });
@@ -116,8 +118,10 @@ test.describe('proof surfaces', () => {
 
     await gotoPage(page, PAGE_CASES.contributions);
 
+    await expect(page.locator('.contributions-proof-title')).toHaveText('Live contribution activity');
     await expect(page.locator('#contributions-proof')).toHaveAttribute('data-state', 'loading');
     await expect(page.locator('#loading-state')).toBeVisible();
+    await expect(page.locator('#loading-state .proof-state-label')).toHaveText('GitHub activity');
     await expect(page.locator('#loading-state .proof-state-text')).toHaveText('Fetching contributions from GitHub...');
 
     await expect(page.locator('#contributions-proof')).toHaveAttribute('data-state', 'success');

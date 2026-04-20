@@ -134,7 +134,7 @@ navbar_title: Home
     <div class="proof-surface-header">
       <a href="{{ 'contributions' | relative_url }}" class="oss-badge">
         <i class="fas fa-code-merge"></i>
-        <span>Open source proof</span>
+        <span>Open source activity</span>
       </a>
     </div>
     <div id="oss-summary-status" class="proof-state" data-state="loading" aria-live="polite">
@@ -142,12 +142,12 @@ navbar_title: Home
         <i class="fas fa-circle-notch fa-spin"></i>
       </span>
       <span class="proof-state-copy">
-        <span class="proof-state-label">GitHub status</span>
+        <span class="proof-state-label">GitHub activity</span>
         <span id="oss-summary-text" class="proof-state-text">Loading recent merged pull requests...</span>
       </span>
     </div>
     <div class="proof-links oss-repos" aria-label="Recent contribution targets">
-      <span>Recent targets:</span>
+      <span>Recent repositories:</span>
       <a href="https://github.com/langchain-ai/deepagents/pulls?q=author%3Athromel" target="_blank" rel="noopener noreferrer">deepagents</a>
       <a href="https://github.com/microsoft/typescript-go/pulls?q=author%3Athromel" target="_blank" rel="noopener noreferrer">typescript-go</a>
       <a href="https://github.com/tsantalis/RefactoringMiner/pulls?q=author%3Athromel" target="_blank" rel="noopener noreferrer">RefactoringMiner</a>
@@ -256,7 +256,7 @@ navbar_title: Home
 </section>
 
 <!-- Education -->
-<section class="section section-education">
+<section id="homepage-education" class="section section-education">
   <div class="section-header">
     <h2 class="section-title"><i class="fas fa-graduation-cap section-icon"></i> Education</h2>
   </div>
@@ -271,7 +271,7 @@ navbar_title: Home
           <div class="timeline-heading-copy">
             <h3 class="timeline-title">
               {% if edu.url %}
-              <a href="{{ edu.url }}" target="_blank" class="institution-link">{{ edu.name }}</a>
+              <a href="{{ edu.url }}" target="_blank" rel="noopener noreferrer" class="institution-link">{{ edu.name }}</a>
               {% else %}
               {{ edu.name }}
               {% endif %}
@@ -290,6 +290,9 @@ navbar_title: Home
     </div>
     {% endfor %}
   </div>
+  <div class="text-right mt-4">
+    <a href="{{ 'education' | relative_url }}" class="btn btn-text">View Full Education →</a>
+  </div>
 </section>
 
 <!-- Work -->
@@ -299,9 +302,20 @@ navbar_title: Home
   </div>
   <div class="timeline">
     {% for position in site.data.profile.positions limit:2 %}
+    {% assign position_title = position.name %}
+    {% assign position_company = "" %}
+    {% if position.name contains "," %}
+      {% assign position_title = position.name | split: "," | first | strip %}
+      {% assign position_company = position.name | remove_first: position_title | remove_first: "," | strip %}
+    {% endif %}
     <div class="timeline-item">
       <div class="timeline-header">
-        <h3 class="timeline-title">{{ position.name | split: "," | first }}</h3>
+        <div>
+          <h3 class="timeline-title">{{ position_title }}</h3>
+          {% if position_company != "" %}
+          <p class="timeline-subtitle">{{ position_company }}</p>
+          {% endif %}
+        </div>
         <span class="timeline-date">{{ position.date }}</span>
       </div>
       <p class="timeline-description">{{ position.description }}</p>

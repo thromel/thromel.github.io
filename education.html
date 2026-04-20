@@ -2,13 +2,30 @@
 layout: default
 title: Education
 navbar_title: Education
-permalink: /education
+permalink: /education/
 ---
 
+<div class="page-intro">
+  <p class="page-intro-kicker">Education</p>
+  <h1 class="page-intro-title">Education</h1>
+  <p class="page-intro-copy">
+    Academic background, degrees, and the institutions that shaped my path into software engineering research, trustworthy AI, and large-scale systems work.
+  </p>
+</div>
+
 <section class="section section-education education-page">
-  <div class="section-header">
-    <h2 class="section-title"><i class="fas fa-graduation-cap section-icon"></i> Education</h2>
-    <p class="section-subtitle">Academic background, degrees, and selected milestones</p>
+  <div class="section-intro">
+    <div>
+      <div class="section-header">
+        <h2 class="section-title"><i class="fas fa-graduation-cap section-icon"></i> Academic Timeline</h2>
+      </div>
+      <p class="section-subtitle">
+        The full record behind the concise homepage summary, from school milestones to graduate study.
+      </p>
+    </div>
+    <div class="section-actions">
+      <a href="{{ '/cv/' | relative_url }}" class="btn btn-text">CV →</a>
+    </div>
   </div>
 
   <div class="timeline">
@@ -37,7 +54,6 @@ permalink: /education
         </div>
         <span class="timeline-date">{{ edu.date }}</span>
       </div>
-
       <div class="timeline-description">{{ edu.description }}</div>
       {% if edu.coursework %}
       <div class="timeline-description education-coursework">{{ edu.coursework }}</div>
