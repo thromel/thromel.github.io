@@ -4,69 +4,26 @@ title: Work Experience
 navbar_title: Work
 ---
 
-<!-- Page Header -->
-<div class="section-header">
-  <h2 class="section-title">Work Experience</h2>
-  <p class="section-subtitle">Professional journey and key contributions</p>
-</div>
+<section class="academic-section">
+  <h1 class="academic-page-title">Work</h1>
+  <p>Professional engineering experience and selected responsibilities.</p>
+</section>
 
-<!-- Experience Timeline -->
-<div class="timeline">
+<section class="academic-section">
+  <h2>Experience</h2>
   {% for position in site.data.profile.positions %}
-  <div class="timeline-item">
-    <div class="timeline-header">
-      <div style="display: flex; align-items: center; gap: 1rem; flex: 1;">
-        {% if position.logo %}
-        <img src="{{ position.logo }}" alt="{{ position.name | split: ',' | first }}" style="width: 48px; height: 48px; object-fit: contain; border-radius: 8px;">
-        {% endif %}
-        <h3 class="timeline-title" style="margin: 0;">{{ position.name }}</h3>
-      </div>
-      <span class="timeline-date">{{ position.date }}</span>
-    </div>
-
-    {% if position.description %}
-    <p class="timeline-description" style="margin-bottom: 1.5rem;">{{ position.description }}</p>
-    {% endif %}
-
-    {% if position.responsibilities %}
-    <div style="margin-bottom: 1.5rem;">
-      <h4 style="font-size: 0.875rem; font-weight: 600; color: var(--color-text-primary); margin-bottom: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em;">Key Responsibilities</h4>
-      <ul style="margin: 0; padding-left: 1.5rem; display: flex; flex-direction: column; gap: 0.5rem;">
-        {% for item in position.responsibilities %}
-        <li style="color: var(--color-text-secondary); line-height: 1.6;">{{ item }}</li>
-        {% endfor %}
-      </ul>
-    </div>
-    {% endif %}
-
-    {% if position.technologies %}
-    <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
-      {% for tech in position.technologies %}
-      <span class="project-tag">{{ tech }}</span>
-      {% endfor %}
-    </div>
-    {% endif %}
-  </div>
+  <article class="academic-entry">
+    {% if position.logo %}<img class="academic-entry__media" src="{{ position.logo | relative_url }}" alt="{{ position.name | split: ',' | first }} logo">{% endif %}
+    <h3>{{ position.name }}</h3>
+    <p class="academic-entry__meta">{{ position.date }}</p>
+    <p>{{ position.description | strip_html }}</p>
+    {% if position.responsibilities %}<ul>{% for item in position.responsibilities %}<li>{{ item | strip_html }}</li>{% endfor %}</ul>{% endif %}
+    {% if position.technologies %}<p class="academic-tags">{% for tech in position.technologies limit:12 %}<span class="academic-tag">{{ tech }}</span>{% endfor %}</p>{% endif %}
+  </article>
   {% endfor %}
-</div>
+</section>
 
-<!-- Technical Skills Section -->
-<section class="section" style="margin-top: 4rem;">
-  <div class="section-header">
-    <h2 class="section-title">Technical Skills</h2>
-    <p class="section-subtitle">Technologies and tools I work with</p>
-  </div>
-
-  <div class="skills-grid">
-    {% for category in site.data.profile.technical_skills %}
-    <div class="skill-category">
-      <h4 class="skill-category-title">{{ category.type }}</h4>
-      <div class="skill-list">
-        {% for skill in category.names %}
-        <span class="skill-item">{{ skill }}</span>
-        {% endfor %}
-      </div>
-    </div>
-    {% endfor %}
-  </div>
+<section class="academic-section">
+  <h2>Technical Skills</h2>
+  {% for category in site.data.profile.technical_skills %}<p><strong>{{ category.type }}:</strong> {{ category.names | join: ", " }}</p>{% endfor %}
 </section>

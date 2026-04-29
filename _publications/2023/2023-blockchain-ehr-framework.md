@@ -8,6 +8,9 @@ abstract: >-
 cover: /assets/images/blockchain/blockchain.png
 authors:
   - Tanzim Hossain Romel
+primary_link: /research/blockchain-healthcare/
+primary_label: Research summary
+primary_external: false
 links:
   Preprint: https://arxiv.org/pdf/2511.17464
   Project: /research/blockchain-healthcare/

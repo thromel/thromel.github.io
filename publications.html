@@ -2,31 +2,23 @@
 layout: default
 title : Publications
 navbar_title: Publications
-body_attr: >-
-  data-spy="scroll" data-target="#navbar-year" data-offset="100"
 ---
 
-{% assign pubs_by_year = site.publications | sort: "date" | reverse | group_by_exp: "item", "item.date | date: '%Y'" %}
+{% assign ordered_publications = site.publications | sort: "date" | reverse %}
+{% assign pubs_by_year = ordered_publications | group_by: "pub_date" %}
 
-<div class="row">
-    <div class="col-12 col-lg-10">
-        {% for year in pubs_by_year %}
-        {% assign num_papers = year.items | size %}
-        <h2 class="pt-4" id="year-{{ year.name }}">{{ year.name }}</h2>
-        <div class="my-0 p-0 bg-white shadow-sm rounded-sm">
-            {% for item in year.items %}
-                {% include widgets/publication_item.html item=item hide_bottom_border=forloop.last first=forloop.first last=forloop.last %}
-            {% endfor %}
-        </div>
-        {% endfor %}
+<section class="academic-section academic-publications-page section-publications">
+  <h1 class="academic-page-title">Publications</h1>
+  <p>Selected papers, research summaries, and artifacts across software engineering, security, and applied machine learning.</p>
+
+  {% for year in pubs_by_year %}
+  <section class="academic-section publication-year-group" id="year-{{ year.name }}">
+    <h2>{{ year.name }}</h2>
+    <div class="academic-publication-list">
+      {% for item in year.items %}
+        {% include widgets/publication_item.html item=item highlight=forloop.first %}
+      {% endfor %}
     </div>
-
-    <div class="col-2 d-none d-lg-block">
-        <div id="navbar-year" class="nav nav-pills flex-column sticky-top" style="top: 80px">
-            {% for year in pubs_by_year %}
-            <a class="nav-link d-block" href="#year-{{ year.name }}">{{ year.name }}</a>
-            {% endfor %}
-        </div>
-    </div>
-
-</div>
+  </section>
+  {% endfor %}
+</section>

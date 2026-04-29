@@ -4,38 +4,21 @@ title: Achievements
 navbar_title: Achievements
 ---
 
-<!-- Page Header -->
-<div class="section-header">
-  <h2 class="section-title">Achievements</h2>
-  <p class="section-subtitle">Awards, recognitions, and notable accomplishments</p>
-</div>
+<section class="academic-section">
+  <h1 class="academic-page-title">Achievements</h1>
+  <p>Awards, recognitions, and notable milestones.</p>
+</section>
 
 {% assign achievements_by_type = site.data.profile.awards | group_by: "type" %}
-
 {% for type in achievements_by_type %}
-<!-- {{ type.name }} Section -->
-<section class="section">
-  <div class="section-header" style="margin-bottom: 2rem;">
-    <h2 class="section-title">{{ type.name }}</h2>
-  </div>
-
-  <div class="timeline">
-    {% for item in type.items %}
-    <div class="timeline-item">
-      <div class="timeline-header">
-        <h3 class="timeline-title">{{ item.name }}</h3>
-        <span class="timeline-date">{{ item.date }}</span>
-      </div>
-
-      <p class="timeline-subtitle">{{ item.organization }}</p>
-
-      {% if item.description %}
-      <div class="timeline-description">
-        {{ item.description }}
-      </div>
-      {% endif %}
-    </div>
-    {% endfor %}
-  </div>
+<section class="academic-section">
+  <h2>{{ type.name }}</h2>
+  {% for item in type.items %}
+  <article class="academic-entry">
+    <h3>{{ item.name }}</h3>
+    <p class="academic-entry__meta">{{ item.organization }} · {{ item.date }}</p>
+    {% if item.description %}<p>{{ item.description | strip_html }}</p>{% endif %}
+  </article>
+  {% endfor %}
 </section>
 {% endfor %}

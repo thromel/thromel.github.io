@@ -5,6 +5,8 @@ pages:
   url: /
 - name: About
   url: /about
+- name: Education
+  url: /education
 - name: Work
   url: /experience
 - name: Research

@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: ready_to_complete
-stopped_at: Phase 05 complete
-last_updated: "2026-04-11T12:22:59Z"
-last_activity: 2026-04-11 -- Phase 05 complete
+stopped_at: Phase 6 complete
+last_updated: "2026-04-12T01:04:28+0600"
+last_activity: 2026-04-30 -- Jon Barron-inspired theme migration complete
 progress:
-  total_phases: 5
-  completed_phases: 5
-  total_plans: 15
-  completed_plans: 15
+  total_phases: 6
+  completed_phases: 6
+  total_plans: 18
+  completed_plans: 18
   percent: 100
 ---
 
@@ -25,10 +25,10 @@ See: .planning/PROJECT.md (updated 2026-04-09)
 
 ## Current Position
 
-Phase: 05 (verification-hardening) — COMPLETE
+Phase: 6 (jon-barron-inspired-theme-migration) — COMPLETE
 Plan: 3 of 3
 Status: Milestone ready to complete
-Last activity: 2026-04-11 -- Phase 05 complete
+Last activity: 2026-04-12 -- Phase 05.1 complete
 
 Progress: [██████████] 100%
 
@@ -36,9 +36,9 @@ Progress: [██████████] 100%
 
 **Velocity:**
 
-- Total plans completed: 15
-- Average duration: 2.7 min
-- Total execution time: 0.7 hours
+- Total plans completed: 18
+- Average duration: 2.6 min
+- Total execution time: 0.8 hours
 
 **By Phase:**
 
@@ -49,10 +49,11 @@ Progress: [██████████] 100%
 | 03 | 3 | 6 min | 2.0 min |
 | 04 | 3 | 10 min | 3.3 min |
 | 05 | 3 | 6 min | 2.0 min |
+| 05.1 | 3 | 5 min | 1.7 min |
 
 **Recent Trend:**
 
-- Last 5 plans: Phase 04 P02, Phase 04 P03, Phase 05 P01, Phase 05 P02, Phase 05 P03
+- Last 5 plans: Phase 05 P02, Phase 05 P03, Phase 05.1 P01, Phase 05.1 P02, Phase 05.1 P03
 - Trend: Stable
 
 | Phase 01 P01 | 1 min | 2 tasks | 2 files |
@@ -70,8 +71,15 @@ Progress: [██████████] 100%
 | Phase 05 P01 | 2 min | 2 tasks | 2 files |
 | Phase 05 P02 | 3 min | 2 tasks | 3 files |
 | Phase 05 P03 | 1 min | 2 tasks | 2 files |
+| Phase 05.1 P01 | 1 min | 2 tasks | 8 files |
+| Phase 05.1 P02 | 2 min | 2 tasks | 5 files |
+| Phase 05.1 P03 | 2 min | 2 tasks | 6 files |
 
 ## Accumulated Context
+
+### Roadmap Evolution
+
+- Phase 05.1 inserted after Phase 05: Publications convergence and final UI polish (URGENT)
 
 ### Decisions
 
@@ -96,6 +104,10 @@ Recent decisions affecting current work:
 - [Phase 04]: Proof-surface regressions now have dedicated Playwright coverage for success, slow, empty, rate-limit, and generic failure paths. — This gives future UI work deterministic browser evidence without depending on live GitHub uptime.
 - [Phase 05]: UI verification now runs through `scripts/verify-ui.sh`, which rebuilds `_site`, serves it locally, and executes shell or full Playwright suites through one repo-local entrypoint. — This makes browser verification repeatable without adding a committed Node manifest in v1.
 - [Phase 05]: Maintainer-facing docs now point future UI work toward `assets/css/overhaul.css`, `assets/js/site-shell.js`, and the shared proof-surface checks, while recording CI, toolchain manifest, legacy-retirement, and artifact-hygiene work as explicit post-v1 follow-ups. — This keeps the v1 boundary clear and prevents brownfield drift.
+- [Phase 05.1]: Publication destinations now come from primary_link metadata — Homepage and publications surfaces can point to meaningful research summaries without relying on blank collection URLs or page-specific branching.
+- [Phase 05.1]: Homepage and publications now share section-intro framing and CTA vocabulary — The inserted polish phase needed the archive and preview surfaces to read as one system without adding a new hero or a second CTA cluster.
+- [Phase 05.1]: Homepage publication previews expose at most one secondary artifact link — The broader polish needed stronger publication affordances, but the Phase 2 hierarchy would regress if publication cards grew into another crowded action cluster.
+- [Phase 05.1]: Publications now run inside the canonical full verification path — The milestone cannot close credibly if publications remain outside verify-ui, because that is how the template-era regressions slipped through the first pass.
 
 ### Pending Todos
 
@@ -108,6 +120,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-04-11T12:22:59Z
-Stopped at: Phase 05 complete
+Last session: 2026-04-12T01:04:28+0600
+Stopped at: Phase 05.1 complete
 Resume file: None

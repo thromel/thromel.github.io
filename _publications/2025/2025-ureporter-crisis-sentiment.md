@@ -8,6 +8,9 @@ abstract: >-
   Transformer-based analysis of 124 anonymous crisis reports from Bangladesh's 2024 national crisis, using a multilingual pipeline for Bengali and Romanized Bengali to study crowd-sourced sentiment in a high-risk setting.
 authors:
   - Tanzim Hossain Romel
+primary_link: /research/ureporter/
+primary_label: Research summary
+primary_external: false
 links:
   PDF: /assets/pdf/Ureporter.pdf
 ---

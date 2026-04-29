@@ -1,163 +1,66 @@
 const { test, expect } = require('@playwright/test');
 
 const BASE_URL = process.env.PLAYWRIGHT_TEST_BASE_URL || 'http://127.0.0.1:4000';
-// Desktop viewport: 1280, 720
 const DESKTOP_VIEWPORT = { width: 1280, height: 720 };
-// Mobile viewport: 390, 844
 const MOBILE_VIEWPORT = { width: 390, height: 844 };
-
 const PAGE_CASES = [
-  { name: 'Home', path: '/', fallbackPath: '/' },
-  { name: 'About', path: '/about', fallbackPath: '/about.html' },
-  { name: 'Learning', path: '/learning', fallbackPath: '/learning.html' },
-  { name: 'Contributions', path: '/contributions', fallbackPath: '/contributions.html' }
+  { name: 'Home', path: '/' },
+  { name: 'About', path: '/about' },
+  { name: 'Learning', path: '/learning' },
+  { name: 'Contributions', path: '/contributions' },
 ];
 
 async function gotoShellPage(page, pageCase) {
-  const primaryResponse = await page.goto(BASE_URL + pageCase.path, { waitUntil: 'domcontentloaded' });
-
-  if (pageCase.path === pageCase.fallbackPath) {
-    return primaryResponse;
-  }
-
-  if (!primaryResponse || primaryResponse.status() === 404) {
-    return page.goto(BASE_URL + pageCase.fallbackPath, { waitUntil: 'domcontentloaded' });
-  }
-
-  return primaryResponse;
+  return page.goto(BASE_URL + pageCase.path, { waitUntil: 'domcontentloaded' });
 }
 
-async function clearStoredTheme(page) {
-  await page.evaluate(() => {
-    try {
-      window.localStorage.removeItem('theme');
-    } catch (_) {
-      // Ignore private browsing/storage restrictions.
-    }
-  });
+async function expectNoHorizontalOverflow(page, label) {
+  const dimensions = await page.evaluate(() => ({ width: window.innerWidth, scrollWidth: document.documentElement.scrollWidth }));
+  expect(dimensions.scrollWidth, `${label} should not overflow horizontally.`).toBeLessThanOrEqual(dimensions.width + 1);
 }
 
-async function getInlineWidthPercentage(locator) {
-  const widthValue = await locator.evaluate((element) => element.style.width || '0%');
-  return parseFloat(String(widthValue).replace('%', '')) || 0;
-}
-
-test.describe('canonical shell theme behavior', () => {
+test.describe('academic shell landmarks', () => {
   for (const pageCase of PAGE_CASES) {
-    test(`${pageCase.name} keeps exactly one theme toggle and persists explicit theme choice`, async ({ page }) => {
-      await page.setViewportSize(DESKTOP_VIEWPORT);
-      await gotoShellPage(page, pageCase);
-      await clearStoredTheme(page);
-      await page.reload({ waitUntil: 'domcontentloaded' });
-
-      const themeToggle = page.locator('#themeToggle');
-      const nav = page.locator('#site-navigation');
-      const html = page.locator('html');
-
-      await expect(themeToggle).toHaveCount(1);
-      await expect(nav).toHaveCount(1);
-
-      const initialTheme = await html.getAttribute('data-theme');
-      expect(['dark', 'light']).toContain(initialTheme);
-
-      await themeToggle.click();
-
-      await expect
-        .poll(async () => html.getAttribute('data-theme'))
-        .not.toBe(initialTheme);
-
-      const toggledTheme = await html.getAttribute('data-theme');
-      await page.reload({ waitUntil: 'domcontentloaded' });
-      await expect(html).toHaveAttribute('data-theme', toggledTheme);
-    });
-  }
-});
-
-test.describe('canonical shell landmarks and skip links', () => {
-  for (const pageCase of PAGE_CASES) {
-    test(`${pageCase.name} exposes the canonical skip links and shared navigation landmarks`, async ({ page }) => {
+    test(`${pageCase.name} exposes one minimal academic shell`, async ({ page }) => {
       await page.setViewportSize(DESKTOP_VIEWPORT);
       await gotoShellPage(page, pageCase);
 
       await expect(page.locator('.skip-link[href="#main-content"]')).toHaveCount(1);
       await expect(page.locator('.skip-link[href="#site-navigation"]')).toHaveCount(1);
-      await expect(page.locator('#main-content')).toHaveCount(1);
-      await expect(page.locator('#site-navigation')).toHaveCount(1);
+      await expect(page.locator('#main-content.academic-page')).toHaveCount(1);
+      await expect(page.locator('#site-navigation.academic-nav')).toHaveCount(1);
+      await expect(page.locator('#themeToggle.theme-toggle')).toHaveCount(1);
+      await expect(page.locator('.mobile-nav-drawer')).toHaveCount(0);
+      await expect(page.locator('.back-to-top')).toHaveCount(0);
     });
-  }
-});
 
-test.describe('canonical shell mobile navigation behavior', () => {
-  for (const pageCase of PAGE_CASES) {
-    test(`${pageCase.name} mobile drawer opens and closes through canonical shell controls`, async ({ page }) => {
+    test(`${pageCase.name} mobile shell wraps without drawer or overflow`, async ({ page }) => {
       await page.setViewportSize(MOBILE_VIEWPORT);
       await gotoShellPage(page, pageCase);
 
-      const mobileMenuToggle = page.locator('#mobileMenuToggle');
-      const mobileNavDrawer = page.locator('#mobileNavDrawer');
-      const mobileNavOverlay = page.locator('#mobileNavOverlay');
-      const mobileNavClose = page.locator('#mobileNavClose');
-
-      await expect(mobileMenuToggle).toHaveCount(1);
-      await expect(mobileNavDrawer).toHaveCount(1);
-      await expect(mobileNavOverlay).toHaveCount(1);
-      await expect(mobileNavClose).toHaveCount(1);
-
-      await mobileMenuToggle.click();
-      await expect(mobileNavDrawer).toHaveClass(/open/);
-      await expect(mobileNavOverlay).toHaveClass(/open/);
-      await expect(mobileMenuToggle).toHaveAttribute('aria-expanded', 'true');
-      await expect(mobileNavDrawer).toHaveAttribute('aria-hidden', 'false');
-
-      await mobileNavOverlay.click();
-      await expect(mobileNavDrawer).not.toHaveClass(/open/);
-      await expect(mobileNavOverlay).not.toHaveClass(/open/);
-      await expect(mobileMenuToggle).toHaveAttribute('aria-expanded', 'false');
-      await expect(mobileNavDrawer).toHaveAttribute('aria-hidden', 'true');
-
-      await mobileMenuToggle.click();
-      await expect(mobileNavDrawer).toHaveClass(/open/);
-      await mobileNavClose.click();
-      await expect(mobileNavDrawer).not.toHaveClass(/open/);
-      await expect(mobileNavOverlay).not.toHaveClass(/open/);
+      await expect(page.locator('#site-navigation.academic-nav')).toHaveCount(1);
+      await expect(page.locator('.mobile-menu-toggle')).toHaveCount(0);
+      await expectNoHorizontalOverflow(page, pageCase.name);
     });
   }
 });
 
-test.describe('canonical shell scroll affordances', () => {
-  const SCROLL_CASES = [
-    { name: 'Home', path: '/', fallbackPath: '/' },
-    { name: 'Learning', path: '/learning', fallbackPath: '/learning.html' },
-  ];
 
-  for (const pageCase of SCROLL_CASES) {
-    test(`${pageCase.name} updates scroll progress and back-to-top state during scrolling`, async ({ page }) => {
-      await page.setViewportSize(DESKTOP_VIEWPORT);
-      await gotoShellPage(page, pageCase);
+test('academic shell dark mode toggle persists explicit choice', async ({ page }) => {
+  await page.setViewportSize(DESKTOP_VIEWPORT);
+  await page.goto(BASE_URL, { waitUntil: 'domcontentloaded' });
+  await page.evaluate(() => localStorage.removeItem('theme'));
+  await page.reload({ waitUntil: 'domcontentloaded' });
 
-      const progressBar = page.locator('#scrollProgress');
-      const backToTop = page.locator('#backToTop');
+  const html = page.locator('html');
+  const toggle = page.locator('#themeToggle');
+  const initialTheme = await html.getAttribute('data-theme');
+  expect(['dark', 'light']).toContain(initialTheme);
 
-      await expect(progressBar).toHaveCount(1);
-      await expect(backToTop).toHaveCount(1);
+  await toggle.click();
+  await expect.poll(async () => html.getAttribute('data-theme')).not.toBe(initialTheme);
+  const toggledTheme = await html.getAttribute('data-theme');
 
-      const scrollableDistance = await page.evaluate(() => document.documentElement.scrollHeight - window.innerHeight);
-      expect(scrollableDistance, `${pageCase.name} should have enough scrollable content to exercise shell affordances.`).toBeGreaterThan(400);
-
-      const initialWidth = await getInlineWidthPercentage(progressBar);
-      await expect(backToTop).not.toHaveClass(/visible/);
-
-      await page.evaluate(() => {
-        window.scrollTo({ top: 900, behavior: 'auto' });
-      });
-
-      await expect.poll(async () => page.evaluate(() => window.scrollY)).toBeGreaterThan(300);
-      await expect.poll(async () => getInlineWidthPercentage(progressBar)).toBeGreaterThan(initialWidth);
-      await expect(backToTop).toHaveClass(/visible/);
-
-      await backToTop.click();
-
-      await expect.poll(async () => page.evaluate(() => window.scrollY)).toBeLessThan(50);
-    });
-  }
+  await page.reload({ waitUntil: 'domcontentloaded' });
+  await expect(html).toHaveAttribute('data-theme', toggledTheme);
 });

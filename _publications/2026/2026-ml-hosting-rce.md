@@ -11,6 +11,9 @@ authors:
   - Tanzim Hossain Romel
   - Mohammad Latif Siddiq
   - Joanna C. Santos
+primary_link: /research/ml-remote-code-execution/
+primary_label: Research summary
+primary_external: false
 links:
   ArXiv: https://arxiv.org/pdf/2601.14163
   Research: /research/ml-remote-code-execution/

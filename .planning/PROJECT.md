@@ -67,6 +67,7 @@ The repo is already in active use and already has unrelated local changes, so pl
 | Treat `overhaul.css` + `site-shell.js` as the canonical shared layer | The repo needs convergence, not another parallel styling or shell system | — Pending |
 | Skip separate domain research during initialization | The immediate scope is a targeted brownfield remediation with enough local evidence already gathered | — Pending |
 | Prioritize consistency, readability, and reliability before adding new portfolio features | The current bottlenecks are experience quality and maintainability, not missing surface area | — Pending |
+| Adopt a Jon Barron-inspired minimal academic theme for v2 | The portfolio now shifts from a modern card-heavy site to a narrow, text-first academic homepage that foregrounds research and publications | Complete |
 
 ## Evolution
 

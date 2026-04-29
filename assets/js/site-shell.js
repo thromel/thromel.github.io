@@ -1,290 +1,81 @@
 (function () {
-  const THEME_KEY = 'theme';
-  const DARK_THEME = 'dark';
-  const LIGHT_THEME = 'light';
-  const root = document.documentElement;
+  var THEME_KEY = 'theme';
 
-  function readStoredTheme() {
+  function getStoredTheme() {
     try {
-      const storedTheme = localStorage.getItem(THEME_KEY);
-      return storedTheme === LIGHT_THEME || storedTheme === DARK_THEME ? storedTheme : null;
+      var stored = localStorage.getItem(THEME_KEY);
+      return stored === 'dark' || stored === 'light' ? stored : null;
     } catch (_) {
       return null;
     }
   }
 
-  function writeTheme(theme) {
-    try {
-      localStorage.setItem(THEME_KEY, theme);
-    } catch (_) {
-      // Ignore write failures in private/restricted contexts.
+  function getPreferredTheme() {
+    if (getStoredTheme()) {
+      return getStoredTheme();
     }
-  }
-
-  function getSystemTheme() {
-    if (
-      typeof window.matchMedia === 'function' &&
-      window.matchMedia('(prefers-color-scheme: dark)').matches
-    ) {
-      return DARK_THEME;
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      return 'dark';
     }
-
-    return LIGHT_THEME;
+    return 'light';
   }
 
-  function resolveTheme() {
-    return readStoredTheme() || getSystemTheme();
+  function setTheme(theme, persist) {
+    document.documentElement.setAttribute('data-theme', theme);
+    if (persist) {
+      try { localStorage.setItem(THEME_KEY, theme); } catch (_) {}
+    }
+    updateThemeToggle(theme);
   }
 
-  function dispatchThemeChanged(theme) {
-    document.dispatchEvent(new CustomEvent('themeChanged', { detail: { theme: theme } }));
-  }
-
-  function updateThemeIcon(theme) {
-    const icon = document.getElementById('themeIcon');
-    const button = document.getElementById('themeToggle');
-    if (!icon || !button) {
+  function updateThemeToggle(theme) {
+    var toggle = document.getElementById('themeToggle');
+    if (!toggle) {
       return;
     }
-
-    const isDark = theme === DARK_THEME;
-    icon.classList.toggle('fa-sun', isDark);
-    icon.classList.toggle('fa-moon', !isDark);
-    button.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
-    button.setAttribute('title', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+    var isDark = theme === 'dark';
+    toggle.textContent = isDark ? 'Light' : 'Dark';
+    toggle.setAttribute('aria-pressed', String(isDark));
+    toggle.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
   }
 
-  function applyTheme(theme, options) {
-    const shouldPersist = options && options.persist === true;
-    root.setAttribute('data-theme', theme);
-
-    if (shouldPersist) {
-      writeTheme(theme);
-    }
-
-    updateThemeIcon(theme);
-    dispatchThemeChanged(theme);
-  }
-
-  function toggleTheme() {
-    const currentTheme = root.getAttribute('data-theme') || resolveTheme();
-    applyTheme(currentTheme === DARK_THEME ? LIGHT_THEME : DARK_THEME, { persist: true });
-  }
-
-  function initTheme() {
-    applyTheme(resolveTheme());
-
-    const themeButton = document.getElementById('themeToggle');
-    if (!themeButton) {
+  function initThemeToggle() {
+    var toggle = document.getElementById('themeToggle');
+    var initial = document.documentElement.getAttribute('data-theme') || getPreferredTheme();
+    setTheme(initial, false);
+    if (!toggle) {
       return;
     }
-
-    themeButton.addEventListener('click', toggleTheme);
-  }
-
-  function initSystemThemeSync() {
-    if (typeof window.matchMedia !== 'function') {
-      return;
-    }
-
-    const colorSchemeMatcher = window.matchMedia('(prefers-color-scheme: dark)');
-    if (typeof colorSchemeMatcher.addEventListener !== 'function') {
-      return;
-    }
-
-    colorSchemeMatcher.addEventListener('change', function (event) {
-      if (readStoredTheme()) {
-        return;
-      }
-
-      applyTheme(event.matches ? DARK_THEME : LIGHT_THEME);
-    });
-  }
-
-  function initMobileNav() {
-    const toggle = document.getElementById('mobileMenuToggle');
-    const drawer = document.getElementById('mobileNavDrawer');
-    const closeButton = document.getElementById('mobileNavClose');
-    const overlay = document.getElementById('mobileNavOverlay');
-
-    if (!toggle || !drawer || !overlay) {
-      return;
-    }
-
-    const openNav = function () {
-      drawer.classList.add('open');
-      overlay.classList.add('open');
-      toggle.setAttribute('aria-expanded', 'true');
-      drawer.setAttribute('aria-hidden', 'false');
-      document.body.style.overflow = 'hidden';
-    };
-
-    const closeNav = function () {
-      drawer.classList.remove('open');
-      overlay.classList.remove('open');
-      toggle.setAttribute('aria-expanded', 'false');
-      drawer.setAttribute('aria-hidden', 'true');
-      document.body.style.overflow = '';
-    };
-
     toggle.addEventListener('click', function () {
-      if (drawer.classList.contains('open')) {
-        closeNav();
-      } else {
-        openNav();
-      }
-    });
-
-    if (closeButton) {
-      closeButton.addEventListener('click', closeNav);
-    }
-
-    overlay.addEventListener('click', closeNav);
-
-    drawer.querySelectorAll('a').forEach(function (link) {
-      link.addEventListener('click', closeNav);
-    });
-
-    document.addEventListener('keydown', function (event) {
-      if (event.key === 'Escape' && drawer.classList.contains('open')) {
-        closeNav();
-      }
+      var current = document.documentElement.getAttribute('data-theme') || 'light';
+      setTheme(current === 'dark' ? 'light' : 'dark', true);
     });
   }
 
-  function initScrollProgress() {
-    const progressBar = document.getElementById('scrollProgress');
-    if (!progressBar) {
-      return;
-    }
+  function initAcademicSectionNav() {
+    var linkRows = document.querySelectorAll('.academic-link-row');
+    var reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    let ticking = false;
-
-    const update = function () {
-      const scrollTop = window.scrollY;
-      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const scrollPercent = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
-      progressBar.style.width = Math.max(0, Math.min(100, scrollPercent)) + '%';
-      ticking = false;
-    };
-
-    const requestUpdate = function () {
-      if (!ticking) {
-        window.requestAnimationFrame(update);
-        ticking = true;
-      }
-    };
-
-    window.addEventListener('scroll', requestUpdate, { passive: true });
-    update();
-  }
-
-  function initBackToTop() {
-    const backToTop = document.getElementById('backToTop');
-    if (!backToTop) {
-      return;
-    }
-
-    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    const updateVisibility = function () {
-      if (window.scrollY > 300) {
-        backToTop.classList.add('visible');
-      } else {
-        backToTop.classList.remove('visible');
-      }
-    };
-
-    window.addEventListener('scroll', updateVisibility, { passive: true });
-    updateVisibility();
-
-    backToTop.addEventListener('click', function () {
-      window.scrollTo({ top: 0, behavior: reducedMotion ? 'auto' : 'smooth' });
-    });
-  }
-
-  function initHomeSectionNav() {
-    var sectionNav = document.querySelector('.home-section-nav');
-    if (!sectionNav) {
-      return;
-    }
-
-    var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    var sectionLinks = sectionNav.querySelectorAll('a[href^="#"]');
-
-    sectionLinks.forEach(function (link) {
-      link.addEventListener('click', function (event) {
-        var targetId = link.getAttribute('href');
-        var target = targetId ? document.querySelector(targetId) : null;
-        if (!target) {
-          return;
-        }
-
-        event.preventDefault();
-        target.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth', block: 'start' });
-        window.history.replaceState(null, '', targetId);
-      });
-    });
-
-    if (!('IntersectionObserver' in window)) {
-      return;
-    }
-
-    var sections = Array.from(sectionLinks)
-      .map(function (link) {
-        var href = link.getAttribute('href');
-        return href ? document.querySelector(href) : null;
-      })
-      .filter(Boolean);
-
-    if (!sections.length) {
-      return;
-    }
-
-    var observer = new IntersectionObserver(
-      function (entries) {
-        entries.forEach(function (entry) {
-          if (!entry.isIntersecting) {
+    linkRows.forEach(function (row) {
+      row.querySelectorAll('a[href^="#"]').forEach(function (link) {
+        link.addEventListener('click', function (event) {
+          var target = document.querySelector(link.getAttribute('href'));
+          if (!target) {
             return;
           }
-
-          var currentId = '#' + entry.target.id;
-          sectionLinks.forEach(function (link) {
-            var isActive = link.getAttribute('href') === currentId;
-            link.classList.toggle('active', isActive);
-            if (isActive) {
-              link.setAttribute('aria-current', 'true');
-            } else {
-              link.removeAttribute('aria-current');
-            }
-          });
+          event.preventDefault();
+          target.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth', block: 'start' });
+          window.history.replaceState(null, '', link.getAttribute('href'));
         });
-      },
-      { rootMargin: '-35% 0px -55% 0px', threshold: 0 }
-    );
-
-    sections.forEach(function (section) {
-      observer.observe(section);
+      });
     });
   }
 
   function init() {
-    initTheme();
-    initSystemThemeSync();
-    initMobileNav();
-    initScrollProgress();
-    initBackToTop();
-    initHomeSectionNav();
+    initThemeToggle();
+    initAcademicSectionNav();
   }
 
-  root.setAttribute('data-theme', resolveTheme());
   document.addEventListener('DOMContentLoaded', init);
-
-  window.siteUX = {
-    init: init,
-    setTheme: applyTheme,
-    toggleTheme: toggleTheme,
-    initNavigation: initMobileNav,
-    initHomePageEnhancements: initHomeSectionNav
-  };
+  window.siteUX = { init: init, setTheme: setTheme, initHomePageEnhancements: initAcademicSectionNav };
 })();

@@ -4,116 +4,43 @@ title: Learning
 navbar_title: Learning
 ---
 
-<!-- Page Header -->
-<div class="section-header">
-  <h2 class="section-title">Learning</h2>
-  <p class="section-subtitle">What I'm currently learning, plus selected courses and recommended resources</p>
-</div>
-
-<!-- Currently Learning -->
-<section class="section" style="margin-bottom: 3rem;">
-  <h3 class="learning-section-title">Currently Learning</h3>
-
-  <div class="currently-learning-grid">
-    {% for item in site.data.learning.currently_learning %}
-    <div class="learning-item">
-      <div class="learning-item-icon">
-        <i class="{{ item.icon }}"></i>
-      </div>
-      <div class="learning-item-content">
-        <h4 class="learning-item-title">{{ item.title }}</h4>
-        <div class="learning-item-meta">
-          <span class="learning-type">{{ item.type }}</span>
-          <span class="learning-category" data-category="{{ item.category }}">{{ item.category }}</span>
-        </div>
-        <div class="learning-progress">
-          <div class="learning-progress-bar" style="width: {{ item.progress }}%;"></div>
-        </div>
-        <span class="learning-progress-text">{{ item.progress }}% complete</span>
-      </div>
-    </div>
-    {% endfor %}
-  </div>
+<section class="academic-section">
+  <h1 class="academic-page-title">Learning</h1>
+  <p>Books, courses, and learning notes I recommend or revisit.</p>
 </section>
 
-<!-- Selected Courses -->
-<section class="section" style="margin-bottom: 3rem;">
-  <h3 class="learning-section-title">Selected Courses &amp; Academic Playlists</h3>
-  <p class="learning-section-copy">
-    A compact list of university courses, lecture series, and academic playlists I revisit regularly.
-  </p>
-
-  {% for group in site.data.learning.selected_courses %}
-  <div class="learning-group">
-    <h4 class="learning-subsection-title">{{ group.provider }}</h4>
-    <ul class="learning-link-list">
-      {% for item in group.items %}
-      <li class="learning-link-item">
-        <a href="{{ item.link }}" target="_blank" class="learning-link-title">{{ item.title }}</a>
-        <div class="learning-link-meta">
-          <span class="learning-list-badge">{{ item.type }}</span>
-          <span class="learning-list-badge">{{ item.focus }}</span>
-        </div>
-      </li>
-      {% endfor %}
-    </ul>
-  </div>
+<section class="academic-section">
+  <h2>Currently Learning</h2>
+  {% for item in site.data.learning.currently_learning %}
+  <article class="academic-entry">
+    <h3>{{ item.title }}</h3>
+    <p class="academic-entry__meta">{{ item.type }} · {{ item.category }} · {{ item.progress }}% complete</p>
+  </article>
   {% endfor %}
 </section>
 
-<!-- Learning Resources -->
-<section class="section">
-  <h3 class="learning-section-title">Recommended Resources</h3>
-
-  <!-- Filter Buttons -->
-  <div class="learning-filters">
-    {% for cat in site.data.learning.categories %}
-    <button class="filter-btn {% if cat.id == 'all' %}active{% endif %}" data-filter="{{ cat.id }}">
-      <i class="{{ cat.icon }}"></i>
-      <span>{{ cat.name }}</span>
-    </button>
-    {% endfor %}
-  </div>
-
-  <!-- Resources Grid -->
-  <div class="resources-grid">
-    {% for resource in site.data.learning.resources %}
-    <a href="{{ resource.link }}" target="_blank" class="resource-card" data-category="{{ resource.category }}">
-      <div class="resource-type">{{ resource.type }}</div>
-      <h4 class="resource-title">{{ resource.title }}</h4>
-      {% if resource.author %}
-      <p class="resource-author">{{ resource.author }}</p>
-      {% endif %}
-      <p class="resource-description">{{ resource.description }}</p>
-      <span class="resource-category">{{ resource.category }}</span>
-    </a>
-    {% endfor %}
-  </div>
+<section class="academic-section">
+  <h2>Selected Courses and Academic Playlists</h2>
+  <p>A compact list of university courses, lecture series, and academic playlists I revisit regularly.</p>
+  {% for group in site.data.learning.selected_courses %}
+  <article class="academic-entry">
+    <h3>{{ group.provider }}</h3>
+    <ul class="learning-link-list">
+      {% for item in group.items %}
+      <li class="learning-link-item"><a href="{{ item.link }}" target="_blank" rel="noopener noreferrer">{{ item.title }}</a> <span class="academic-entry__meta">{{ item.type }} · {{ item.focus }}</span></li>
+      {% endfor %}
+    </ul>
+  </article>
+  {% endfor %}
 </section>
 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  const filterBtns = document.querySelectorAll('.filter-btn');
-  const resourceCards = document.querySelectorAll('.resource-card[data-category]');
-
-  filterBtns.forEach(btn => {
-    btn.addEventListener('click', function() {
-      // Update active state
-      filterBtns.forEach(b => b.classList.remove('active'));
-      this.classList.add('active');
-
-      const filter = this.dataset.filter;
-
-      // Filter cards
-      resourceCards.forEach(card => {
-        if (filter === 'all' || card.dataset.category === filter) {
-          card.style.display = '';
-          card.style.animation = 'fadeIn 0.3s ease';
-        } else {
-          card.style.display = 'none';
-        }
-      });
-    });
-  });
-});
-</script>
+<section class="academic-section">
+  <h2>Recommended Resources</h2>
+  {% for resource in site.data.learning.resources %}
+  <article class="academic-entry">
+    <h3><a href="{{ resource.link }}" target="_blank" rel="noopener noreferrer">{{ resource.title }}</a></h3>
+    <p class="academic-entry__meta">{{ resource.type }}{% if resource.author %} · {{ resource.author }}{% endif %} · {{ resource.category }}</p>
+    <p>{{ resource.description }}</p>
+  </article>
+  {% endfor %}
+</section>

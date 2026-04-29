@@ -5,217 +5,34 @@ navbar_title: Projects
 ---
 
 {% assign showcase_projects = site.showcase | where: "show", true | sort: "date" | reverse %}
-{% assign profile_projects = site.data.profile.projects %}
 
-{% assign featured_count = 0 %}
-{% assign archive_showcase_count = 0 %}
-{% for project in showcase_projects %}
-  {% if project.featured %}
-    {% assign featured_count = featured_count | plus: 1 %}
-  {% else %}
-    {% assign archive_showcase_count = archive_showcase_count | plus: 1 %}
-  {% endif %}
-{% endfor %}
+<section class="academic-section">
+  <h1 class="academic-page-title">Projects</h1>
+  <p>Selected software, research, and systems projects.</p>
+</section>
 
-{% assign unique_profile_count = 0 %}
-{% for project in profile_projects %}
-  {% assign has_showcase = false %}
-  {% assign profile_slug = project.title | slugify %}
-  {% assign profile_alias = "" %}
-  {% if project.title contains "EventFly" or project.title contains "Eventfly" %}
-    {% assign profile_alias = "eventfly" %}
-  {% elsif project.title contains "Image Caption" %}
-    {% assign profile_alias = "image-captioning" %}
-  {% endif %}
-  {% for showcase_project in showcase_projects %}
-    {% assign showcase_slug = showcase_project.title | slugify %}
-    {% assign showcase_alias = "" %}
-    {% if showcase_project.title contains "EventFly" or showcase_project.title contains "Eventfly" %}
-      {% assign showcase_alias = "eventfly" %}
-    {% elsif showcase_project.title contains "Image Caption" %}
-      {% assign showcase_alias = "image-captioning" %}
-    {% endif %}
-    {% if showcase_slug == profile_slug %}
-      {% assign has_showcase = true %}
-      {% break %}
-    {% elsif profile_alias != "" %}
-      {% if profile_alias == showcase_alias %}
-        {% assign has_showcase = true %}
-        {% break %}
-      {% endif %}
-    {% endif %}
+<section class="academic-section">
+  <h2>Featured Project Narratives</h2>
+  {% for project in showcase_projects %}
+  <article class="academic-entry">
+    {% assign project_image = project.card_image | default: project.thumbnail %}
+    {% if project_image %}<img class="academic-entry__media" src="{{ project_image | relative_url }}" alt="{{ project.title }}">{% endif %}
+    <h3><a href="{{ project.url | relative_url }}">{{ project.title }}</a></h3>
+    <p class="academic-entry__meta">{{ project.date | date: "%B %Y" }}{% if project.group %} · {{ project.group }}{% endif %}</p>
+    <p>{{ project.excerpt | default: project.content | strip_html | truncatewords: 40 }}</p>
+    {% if project.technologies %}<p class="academic-tags">{% for tech in project.technologies limit:8 %}<span class="academic-tag">{{ tech }}</span>{% endfor %}</p>{% endif %}
+  </article>
   {% endfor %}
-  {% unless has_showcase %}
-    {% assign unique_profile_count = unique_profile_count | plus: 1 %}
-  {% endunless %}
-{% endfor %}
-
-{% assign total_projects = showcase_projects.size | plus: unique_profile_count %}
-{% assign archive_count = archive_showcase_count | plus: unique_profile_count %}
-
-<div class="page-intro page-intro--projects">
-  <p class="page-intro-kicker">Project portfolio</p>
-  <h1 class="page-intro-title">Systems, tooling, and implementation work that supports the research story.</h1>
-  <p class="page-intro-copy">
-    This page prioritizes projects that best demonstrate systems depth, technical judgment, and research-adjacent engineering. The goal is not to list everything equally, but to make the strongest work easier to scan and trust.
-  </p>
-  <div class="page-intro-actions">
-    <a href="{{ 'research' | relative_url }}" class="btn btn-primary">Research profile</a>
-    <a href="/assets/pdf/cv.pdf" class="btn btn-text" target="_blank" rel="noopener noreferrer">CV</a>
-  </div>
-</div>
-
-<section class="projects-stats">
-  <div class="stat-card">
-    <div class="stat-icon"><i class="fas fa-code"></i></div>
-    <div class="stat-value">{{ total_projects }}</div>
-    <div class="stat-label">Total Projects</div>
-  </div>
-  <div class="stat-card">
-    <div class="stat-icon"><i class="fas fa-star"></i></div>
-    <div class="stat-value">{{ featured_count }}</div>
-    <div class="stat-label">Featured Narratives</div>
-  </div>
-  <div class="stat-card">
-    <div class="stat-icon"><i class="fas fa-layer-group"></i></div>
-    <div class="stat-value">{{ archive_count }}</div>
-    <div class="stat-label">Archive Projects</div>
-  </div>
-  <div class="stat-card">
-    <div class="stat-icon"><i class="fas fa-book-open"></i></div>
-    <div class="stat-value">{{ showcase_projects.size }}</div>
-    <div class="stat-label">Long-Form Showcases</div>
-  </div>
 </section>
 
-<section class="section">
-  <div class="section-header section-header--narrative">
-    <h2 class="section-title">Featured project narratives</h2>
-    <p class="section-subtitle">The strongest project stories appear first: research-adjacent systems work, deeper engineering builds, and projects with the clearest technical through-line.</p>
-  </div>
-
-  <div class="projects-grid">
-    {% for project in showcase_projects %}
-      {% if project.featured %}
-        {% assign project_card_href = project.url | relative_url %}
-        {% assign project_card_description = project.excerpt | default: project.content | strip_html | truncatewords: 28 %}
-        {% assign project_card_date = project.date | date: "%B %Y" %}
-        {% assign project_card_image = project.card_image | default: project.thumbnail %}
-        {% include widgets/project_card.html
-          title=project.title
-          href=project_card_href
-          description=project_card_description
-          date=project_card_date
-          scope="Long-form narrative"
-          badge=project.group
-          badge_class="completed"
-          tags=project.technologies
-          image=project_card_image
-          cta_label="Read narrative"
-          context="Showcase" %}
-      {% endif %}
-    {% endfor %}
-  </div>
-</section>
-
-<section class="section">
-  <div class="section-header section-header--narrative">
-    <h2 class="section-title">Project archive</h2>
-    <p class="section-subtitle">Everything here is intentionally non-overlapping with the featured showcase section.</p>
-  </div>
-
-  <div class="projects-grid">
-    {% for project in showcase_projects %}
-      {% unless project.featured %}
-        {% assign project_card_href = project.url | relative_url %}
-        {% assign project_card_description = project.excerpt | default: project.content | strip_html | truncatewords: 24 %}
-        {% assign project_card_date = project.date | date: "%B %Y" %}
-        {% assign project_card_image = project.card_image | default: project.thumbnail %}
-        {% include widgets/project_card.html
-          title=project.title
-          href=project_card_href
-          description=project_card_description
-          date=project_card_date
-          scope="Project narrative"
-          badge=project.group
-          badge_class="completed"
-          tags=project.technologies
-          image=project_card_image
-          cta_label="Read narrative"
-          context="Showcase archive" %}
-      {% endunless %}
-    {% endfor %}
-
-    {% for project in profile_projects %}
-      {% assign has_showcase = false %}
-      {% assign profile_slug = project.title | slugify %}
-      {% assign profile_alias = "" %}
-      {% if project.title contains "EventFly" or project.title contains "Eventfly" %}
-        {% assign profile_alias = "eventfly" %}
-      {% elsif project.title contains "Image Caption" %}
-        {% assign profile_alias = "image-captioning" %}
-      {% endif %}
-      {% for showcase_project in showcase_projects %}
-        {% assign showcase_slug = showcase_project.title | slugify %}
-        {% assign showcase_alias = "" %}
-        {% if showcase_project.title contains "EventFly" or showcase_project.title contains "Eventfly" %}
-          {% assign showcase_alias = "eventfly" %}
-        {% elsif showcase_project.title contains "Image Caption" %}
-          {% assign showcase_alias = "image-captioning" %}
-        {% endif %}
-        {% if showcase_slug == profile_slug %}
-          {% assign has_showcase = true %}
-          {% break %}
-        {% elsif profile_alias != "" %}
-          {% if profile_alias == showcase_alias %}
-            {% assign has_showcase = true %}
-            {% break %}
-          {% endif %}
-        {% endif %}
-      {% endfor %}
-
-      {% unless has_showcase %}
-        {% assign project_href = "" %}
-        {% assign project_external = false %}
-        {% assign project_cta = "View project" %}
-        {% assign project_badge = "" %}
-        {% assign project_badge_class = "" %}
-        {% assign project_description = project.description | strip_html | truncatewords: 24 %}
-
-        {% if project.github %}
-          {% assign project_href = project.github %}
-          {% assign project_external = true %}
-          {% assign project_cta = "View repository" %}
-        {% elsif project.link and project.link contains "github.com" %}
-          {% assign project_href = project.link %}
-          {% assign project_external = true %}
-          {% assign project_cta = "View repository" %}
-        {% elsif project.link %}
-          {% assign project_href = project.link | relative_url %}
-          {% assign project_cta = "Visit project" %}
-        {% endif %}
-
-        {% if project.description contains "Finalist" %}
-          {% assign project_badge = "Finalist" %}
-          {% assign project_badge_class = "finalist" %}
-        {% elsif project.date contains "Present" %}
-          {% assign project_badge = "Active" %}
-          {% assign project_badge_class = "active" %}
-        {% endif %}
-
-        {% include widgets/project_card.html
-          title=project.title
-          href=project_href
-          external=project_external
-          description=project_description
-          date=project.date
-          scope="Project archive"
-          badge=project_badge
-          badge_class=project_badge_class
-          tags=project.technologies
-          cta_label=project_cta
-          context="Archive" %}
-      {% endunless %}
-    {% endfor %}
-  </div>
+<section class="academic-section">
+  <h2>Project Archive</h2>
+  {% for project in site.data.profile.projects %}
+  <article class="academic-entry">
+    <h3>{% if project.link %}<a href="{{ project.link }}">{{ project.title }}</a>{% else %}{{ project.title }}{% endif %}</h3>
+    <p class="academic-entry__meta">{{ project.date }}</p>
+    <p>{{ project.description | strip_html }}</p>
+    {% if project.technologies %}<p class="academic-tags">{% for tech in project.technologies limit:8 %}<span class="academic-tag">{{ tech }}</span>{% endfor %}</p>{% endif %}
+  </article>
+  {% endfor %}
 </section>

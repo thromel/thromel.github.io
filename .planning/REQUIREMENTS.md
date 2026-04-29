@@ -35,6 +35,24 @@
 - [x] **QUAL-02**: Maintainer can verify GitHub-driven async states for the homepage OSS summary and contributions page
 - [x] **QUAL-03**: Maintainer has documentation that points future UI work toward the canonical shared shell and away from conflicting legacy layers
 
+### Final UI Polish
+
+- [x] **PUB-01**: Visitor sees one responsive publications surface that uses the canonical shell/token language instead of duplicated desktop/mobile widget branches
+- [x] **PUB-02**: Publication titles and CTAs land on meaningful destinations instead of blank collection output pages
+- [x] **PUB-03**: Publications and publication-adjacent homepage surfaces match the current typography, spacing, and CTA rhythm of the rest of the site
+- [x] **PUB-04**: Publications are included in the canonical repo-local verification boundary, smoke tooling, and maintainer guidance
+
+## v2 Theme Migration Requirements
+
+### Jon Barron-Inspired Academic Theme
+
+- [x] **JB-01**: Visitor sees a narrow, text-first academic homepage with intro copy, circular portrait, and slash-separated identity links.
+- [x] **JB-02**: Visitor sees research and publication work as compact media/content rows rather than large cards or timelines.
+- [x] **JB-03**: Visitor can navigate core pages through minimal text links without competing app-like navbar, drawer, theme toggle, gradients, or floating controls.
+- [x] **JB-04**: Visitor can read secondary pages in the same narrow academic typography and spacing system.
+- [x] **JB-05**: Visitor still gets useful GitHub proof-of-work context when async data loads, fails, is empty, or is rate-limited.
+- [x] **JB-06**: Maintainer can run repeatable checks for the academic theme on desktop and mobile.
+
 ## v2 Requirements
 
 ### Content Evolution
@@ -75,12 +93,16 @@
 | QUAL-01 | Phase 5 | Complete |
 | QUAL-02 | Phase 5 | Complete |
 | QUAL-03 | Phase 5 | Complete |
+| PUB-01 | Phase 05.1 | Complete |
+| PUB-02 | Phase 05.1 | Complete |
+| PUB-03 | Phase 05.1 | Complete |
+| PUB-04 | Phase 05.1 | Complete |
 
 **Coverage:**
-- v1 requirements: 15 total
-- Mapped to phases: 15
+- v1 requirements: 19 total
+- Mapped to phases: 19
 - Unmapped: 0 ✓
 
 ---
 *Requirements defined: 2026-04-09*
-*Last updated: 2026-04-11 after phase 5 completion*
+*Last updated: 2026-04-12 after Phase 05.1 planning kickoff*

@@ -2,63 +2,36 @@
 layout: default
 title: Education
 navbar_title: Education
-permalink: /education/
 ---
 
-<div class="page-intro">
-  <p class="page-intro-kicker">Education</p>
-  <h1 class="page-intro-title">Education</h1>
-  <p class="page-intro-copy">
-    Academic background, degrees, and the institutions that shaped my path into software engineering research, trustworthy AI, and large-scale systems work.
-  </p>
-</div>
+<section class="academic-section section-education education-page">
+  <h1 class="academic-page-title page-intro-title">Education</h1>
+  <p>Academic background, coursework, and recognitions.</p>
 
-<section class="section section-education education-page">
-  <div class="section-intro">
-    <div>
-      <div class="section-header">
-        <h2 class="section-title"><i class="fas fa-graduation-cap section-icon"></i> Academic Timeline</h2>
-      </div>
-      <p class="section-subtitle">
-        The full record behind the concise homepage summary, from school milestones to graduate study.
-      </p>
-    </div>
-    <div class="section-actions">
-      <a href="{{ '/cv/' | relative_url }}" class="btn btn-text">CV →</a>
-    </div>
-  </div>
-
-  <div class="timeline">
+  <div class="education-list">
     {% for edu in site.data.profile.education %}
-    <div class="timeline-item">
-      <div class="timeline-header timeline-header-with-logo">
-        <div class="timeline-heading-group">
-          {% if edu.logo %}
-          <img src="{{ edu.logo | relative_url }}" alt="{{ edu.name }} badge" class="timeline-logo">
-          {% endif %}
-          <div class="timeline-heading-copy">
-            <h3 class="timeline-title">
-              {% if edu.url %}
-              <a href="{{ edu.url }}" target="_blank" rel="noopener noreferrer" class="institution-link">{{ edu.name }}</a>
-              {% else %}
-              {{ edu.name }}
-              {% endif %}
-            </h3>
-            <p class="timeline-subtitle">
-              <span>{{ edu.position }}</span>
-              {% if edu.status %}
-              <span class="education-status-badge">{{ edu.status }}</span>
-              {% endif %}
-            </p>
-          </div>
-        </div>
-        <span class="timeline-date">{{ edu.date }}</span>
+    <article class="education-entry{% if forloop.index <= 2 %} education-entry--featured{% endif %} timeline-item">
+      {% if edu.logo %}
+      <div class="education-entry__logo-wrap">
+        <img class="education-entry__logo{% if edu.name == 'Rajshahi College' %} education-entry__logo--rajshahi-college{% endif %}" src="{{ edu.logo | relative_url }}" alt="{{ edu.name }} logo">
       </div>
-      <div class="timeline-description">{{ edu.description }}</div>
-      {% if edu.coursework %}
-      <div class="timeline-description education-coursework">{{ edu.coursework }}</div>
       {% endif %}
-    </div>
+      <div class="education-entry__body">
+        <h2 class="education-entry__degree">{{ edu.position }}</h2>
+        <p class="education-entry__meta">
+          {% if edu.url %}<a href="{{ edu.url }}" target="_blank" rel="noopener noreferrer">{{ edu.name }}</a>{% else %}{{ edu.name }}{% endif %}
+          <span aria-hidden="true">/</span>
+          <span>{{ edu.date }}</span>{% if edu.status %}<span aria-hidden="true">/</span><span>{{ edu.status }}</span>{% endif %}
+        </p>
+        <div class="education-entry__description">{{ edu.description }}</div>
+        {% if edu.coursework %}
+        <details class="education-coursework">
+          <summary>Selected coursework</summary>
+          <div class="education-coursework__body">{{ edu.coursework }}</div>
+        </details>
+        {% endif %}
+      </div>
+    </article>
     {% endfor %}
   </div>
 </section>

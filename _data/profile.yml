@@ -256,7 +256,7 @@ education:
   date: 2015 - 2017
   description: Placed 15th in Rajshahi Board, received Talentpool Scholarship, A+ in all subjects with 96.5% marks in Physics, Chemistry, and Higher Mathematics
   url: https://rc.edu.bd
-  logo: /assets/images/education/rajshahi-college-logo.png
+  logo: /assets/images/education/rajshahi-college-logo-cropped.png
 - name: Rajshahi Collegiate School
   position: Secondary School Certificate (SSC)
   date: 2007 - 2015
@@ -440,7 +440,7 @@ research:
   - Counterfactual Auditing
   - Discrete Choice Modeling
 
-- title: "Multi-Agent Framework for Generating Relational DB Schema & ERD"
+- title: "VeriSchema: Multi-Agent Framework for Generating Relational DB Schema & ERD"
   date: July 2025 - Present
   link: /research/multi-agent-db-schema/
   status: "Targeting PVLDB"

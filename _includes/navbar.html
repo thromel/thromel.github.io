@@ -1,55 +1,9 @@
-<header class="site-header">
-    <!-- Scroll Progress Bar -->
-    <div class="scroll-progress" id="scrollProgress"></div>
-    {% assign is_homepage = page.navbar_title == 'Home' or page.url == '/' %}
-
-    <div class="container">
-        <nav class="site-nav" id="site-navigation" role="navigation" aria-label="Main navigation">
-            {% unless is_homepage %}
-            <a href="{{ '/' | relative_url }}" class="site-title" aria-label="{{ site.data.profile.primary_name }}">
-                {{ site.data.profile.primary_name }}
-            </a>
-            {% endunless %}
-
-            <ul class="nav-links" role="menubar">
-                {% for item in site.data.navigation.pages %}
-                <li role="none">
-                    <a href="{{ item.url | relative_url }}"
-                       class="nav-link {% if item.name == page.navbar_title or (item.name == 'Home' and page.navbar_title == nil) %}active{% endif %}"
-                       role="menuitem"
-                       {% if item.name == page.navbar_title or (item.name == 'Home' and page.navbar_title == nil) %}aria-current="page"{% endif %}>
-                        {{ item.name }}
-                    </a>
-                </li>
-                {% endfor %}
-            </ul>
-
-            <!-- Mobile Menu Toggle -->
-            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobileNavDrawer">
-                <i class="fas fa-bars"></i>
-            </button>
-        </nav>
-    </div>
+<header class="academic-header">
+  <nav id="site-navigation" class="academic-nav" role="navigation" aria-label="Main navigation">
+    {% for item in site.data.navigation.pages %}
+      <a href="{{ item.url | relative_url }}"{% if item.name == page.navbar_title or (item.name == 'Home' and page.navbar_title == nil) %} aria-current="page"{% endif %}>{{ item.name }}</a>{% unless forloop.last %}<span aria-hidden="true">/</span>{% endunless %}
+    {% endfor %}
+    <span aria-hidden="true">/</span>
+    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch theme" aria-pressed="false">Dark</button>
+  </nav>
 </header>
-
-<!-- Mobile Navigation Drawer -->
-<div class="mobile-nav-drawer" id="mobileNavDrawer" role="navigation" aria-label="Mobile navigation" aria-hidden="true">
-    <div class="mobile-nav-header">
-        <span class="mobile-nav-title">Menu</span>
-        <button class="mobile-nav-close" id="mobileNavClose" aria-label="Close menu">
-            <i class="fas fa-times"></i>
-        </button>
-    </div>
-    <ul class="mobile-nav-links">
-        {% for item in site.data.navigation.pages %}
-        <li>
-            <a href="{{ item.url | relative_url }}"
-               class="mobile-nav-link {% if item.name == page.navbar_title or (item.name == 'Home' and page.navbar_title == nil) %}active{% endif %}"
-               {% if item.name == page.navbar_title or (item.name == 'Home' and page.navbar_title == nil) %}aria-current="page"{% endif %}>
-                {{ item.name }}
-            </a>
-        </li>
-        {% endfor %}
-    </ul>
-</div>
-<div class="mobile-nav-overlay" id="mobileNavOverlay"></div>

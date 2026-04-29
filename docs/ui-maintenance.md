@@ -17,7 +17,8 @@ If a UI change affects multiple pages, start here before touching page-local isl
 Use the repo-local runner for repeatable checks:
 
 - `bash scripts/verify-ui.sh shell` — shell-focused browser regressions
-- `bash scripts/verify-ui.sh full` — full UI regression suite
+- `bash scripts/verify-ui.sh full` — full UI regression suite, including publications
+- `npx playwright test tests/publications-data.spec.js tests/publications-surface.spec.js` — publication-only regression path
 
 Current prerequisites:
 
@@ -61,6 +62,28 @@ When verifying proof surfaces, use:
 - the `Proof Surfaces` section in `manual-testing-script.md`
 - `testSite.runAll()` from `browser-console-tests.js`
 
+## Publications Surface
+
+The canonical publications surface currently spans:
+
+- `publications.html` — archive framing, year grouping, and page-level CTA
+- `_includes/widgets/publication_item.html` — canonical publication card markup
+- `index.html` — homepage publications preview and section-level archive CTA
+- `_publications/*.md` — publication source records and destination metadata
+- `_config.yml` — `publications.output: false` to avoid blank collection detail routes
+
+When a change touches publications, verify:
+
+- `tests/publications-data.spec.js`
+- `tests/publications-surface.spec.js`
+- `bash scripts/verify-ui.sh full`
+- the `Publications Surface` section in `manual-testing-script.md`
+- `testSite.runAll()` on `Home` and `Publications`
+
+Guardrail:
+
+- do not flip `publications.output` back to `true` unless the change also introduces real publication detail pages and corresponding verification
+
 ## Brownfield Guardrails
 
 Do not casually extend or reintroduce the older parallel layers unless the task is explicitly about retiring or migrating them:
@@ -91,6 +114,7 @@ Use these files as the practical entrypoints:
 - `manual-testing-script.md` — step-by-step manual verification path
 - `browser-console-tests.js` — console smoke checks
 - `scripts/verify-ui.sh` — repo-local verification runner
+- `publications.html` and `_includes/widgets/publication_item.html` — canonical publications surface
 - `AGENTS.md` — project-specific guardrails for canonical shell ownership and brownfield warnings
 
 ## Deferred follow-ups
@@ -102,3 +126,10 @@ The items below are intentionally outside the v1 UI remediation milestone. Do no
 - legacy layers still need explicit retirement planning: `assets/js/theme-toggle.js`, `assets/js/app-navigation.js`, `assets/js/advanced-interactions.js`, `assets/css/developer-theme.css`, `assets/css/custom.css`, and remaining inline page islands should be removed or migrated in a dedicated pass.
 - artifact hygiene also remains deferred work: generated LaTeX outputs, duplicate PDFs, and stray filesystem artifacts should be cleaned up alongside a clear ignore/build policy instead of being mixed into unrelated UI fixes.
 - GitHub proof surfaces currently depend on unauthenticated browser-side API access. Any move toward cached, build-time, or server-assisted data architecture should be handled as explicit future work, not as a silent change inside shell maintenance.
+
+## Jon Barron-Inspired Academic Theme Guardrails
+
+- `assets/css/overhaul.css` remains the canonical stylesheet, but the active design target is now a narrow academic document: 800px max width, Lato typography, blue/orange links, compact publication rows, and minimal slash-separated navigation.
+- Do not reintroduce card-heavy homepage sections, floating theme toggles, mobile drawers, gradient backgrounds, or duplicate navigation systems unless the project explicitly changes direction again.
+- New research/publication surfaces should use `.academic-publication`; new secondary-page entries should use `.academic-entry`; new page wrappers should use `.academic-section` inside `.academic-page`.
+- GitHub-driven proof surfaces must preserve loading, success, empty, rate-limit, and failure states even when styled minimally.

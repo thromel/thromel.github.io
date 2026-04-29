@@ -17,6 +17,8 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 3: Readability Upgrade** - Raise reading comfort and hierarchy across dense content surfaces (completed 2026-04-11)
 - [x] **Phase 4: Proof Surfaces** - Bring GitHub-driven sections onto the current system with stable states (completed 2026-04-11)
 - [x] **Phase 5: Verification Hardening** - Lock in repeatable checks and guidance for future UI work (completed 2026-04-11)
+- [x] **Phase 05.1: Publications convergence and final UI polish** - Bring publications onto the canonical UI system and close the remaining near-miss polish gaps (completed 2026-04-12)
+- [x] **Phase 6: Jon Barron-Inspired Theme Migration** - Convert the site to a narrow, text-first academic theme while preserving content, URLs, and verification. (completed 2026-04-30)
 
 ## Phase Details
 
@@ -112,3 +114,37 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 | 3. Readability Upgrade | 3/3 | Complete | 2026-04-11 |
 | 4. Proof Surfaces | 3/3 | Complete | 2026-04-11 |
 | 5. Verification Hardening | 3/3 | Complete | 2026-04-11 |
+| 05.1. Publications convergence and final UI polish | 3/3 | Complete   | 2026-04-12 |
+
+### Phase 05.1: Publications convergence and final UI polish (INSERTED)
+
+**Goal:** Bring the publications surfaces onto the canonical UI system, fix misleading publication destinations, and finish the remaining final-polish gaps before milestone closeout.
+**Requirements**: PUB-01, PUB-02, PUB-03, PUB-04
+**Depends on:** Phase 5
+**UI hint**: yes
+**Success Criteria** (what must be TRUE):
+  1. Visitor sees one responsive, canonical publications surface instead of duplicated desktop/mobile widget paths.
+  2. Publication titles and CTAs lead to meaningful destinations instead of blank collection output pages.
+  3. Publications and publication-adjacent homepage surfaces share the current typography, spacing, and CTA rhythm.
+  4. Publications are inside the canonical repo-local verification boundary through the runner, smoke tooling, and maintainer docs.
+**Plans**: 3/3 plans drafted
+
+Plans:
+- [x] 05.1-01: Converge publications markup and destination behavior onto the canonical system
+- [x] 05.1-02: Apply final cross-surface polish to publications and homepage-adjacent pacing
+- [x] 05.1-03: Close verification gaps for publications and final polish regressions
+
+
+### Phase 6: Jon Barron-Inspired Theme Migration
+
+**Goal**: Replace the current modern portfolio visual language with a compact academic homepage and row-based research/publication system inspired by jonbarron.info.
+**Requirements**: JB-01, JB-02, JB-03, JB-04, JB-05, JB-06
+**Depends on**: Phase 05.1
+**UI hint**: yes
+**Success Criteria**:
+  1. Homepage uses narrow academic layout, intro plus circular portrait, slash-separated profile links, and compact sections.
+  2. Publications and research surfaces use row-based media/content entries with stable links and readable metadata.
+  3. Global shell is minimal and does not expose duplicate theme/nav/floating controls.
+  4. Contributions and homepage GitHub proof surfaces retain deterministic loading, success, empty, and failure states.
+  5. Full UI verification passes on desktop and mobile.
+**Plans**: 8/8 plans complete
