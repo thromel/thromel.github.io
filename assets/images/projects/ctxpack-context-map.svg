@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 420" role="img" aria-labelledby="title desc">
+  <title id="title">ctxpack context compiler flow</title>
+  <desc id="desc">A compact diagram showing a software task moving through safe repository inventory, lexical and symbol search, test and git history signals, and then into a context plan for coding agents.</desc>
+  <rect width="720" height="420" fill="#ffffff"/>
+  <g fill="none" stroke="#d7d7d7" stroke-width="1">
+    <path d="M80 94h560"/>
+    <path d="M80 210h560"/>
+    <path d="M80 326h560"/>
+  </g>
+  <g font-family="Lato, Verdana, Helvetica, sans-serif" fill="#111111">
+    <text x="58" y="50" font-size="28" font-weight="700">ctxpack</text>
+    <text x="58" y="76" font-size="14" fill="#555555">local context compiler for coding agents</text>
+  </g>
+  <g font-family="Lato, Verdana, Helvetica, sans-serif">
+    <rect x="58" y="116" width="144" height="76" rx="8" fill="#f6fbff" stroke="#1772d0"/>
+    <text x="82" y="148" font-size="15" font-weight="700" fill="#111111">Software task</text>
+    <text x="82" y="170" font-size="12" fill="#555555">intent, paths, errors</text>
+
+    <rect x="288" y="72" width="144" height="64" rx="8" fill="#ffffff" stroke="#bdbdbd"/>
+    <text x="312" y="101" font-size="14" font-weight="700" fill="#111111">Safe inventory</text>
+    <text x="312" y="121" font-size="12" fill="#555555">ignore + privacy rules</text>
+
+    <rect x="288" y="158" width="144" height="64" rx="8" fill="#ffffff" stroke="#bdbdbd"/>
+    <text x="312" y="187" font-size="14" font-weight="700" fill="#111111">Search signals</text>
+    <text x="312" y="207" font-size="12" fill="#555555">lexical + symbols</text>
+
+    <rect x="288" y="244" width="144" height="64" rx="8" fill="#ffffff" stroke="#bdbdbd"/>
+    <text x="312" y="273" font-size="14" font-weight="700" fill="#111111">Repo evidence</text>
+    <text x="312" y="293" font-size="12" fill="#555555">tests + git history</text>
+
+    <rect x="518" y="116" width="144" height="76" rx="8" fill="#fffaf3" stroke="#f09228"/>
+    <text x="542" y="148" font-size="15" font-weight="700" fill="#111111">Context plan</text>
+    <text x="542" y="170" font-size="12" fill="#555555">files, tests, packs</text>
+
+    <rect x="518" y="244" width="144" height="76" rx="8" fill="#f8f8f8" stroke="#bdbdbd"/>
+    <text x="542" y="276" font-size="15" font-weight="700" fill="#111111">Agent native</text>
+    <text x="542" y="298" font-size="12" fill="#555555">MCP + AGENTS.md</text>
+  </g>
+  <g fill="none" stroke="#1772d0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M202 154h58"/>
+    <path d="M260 154l-9-6m9 6l-9 6"/>
+    <path d="M432 104c38 0 50 24 78 46"/>
+    <path d="M510 150l-11-2m11 2l-5-10"/>
+    <path d="M432 190h58"/>
+    <path d="M490 190l-9-6m9 6l-9 6"/>
+    <path d="M432 276c42 0 54-38 78-82"/>
+    <path d="M510 194l-1 12m1-12l-10 6"/>
+    <path d="M590 192v38"/>
+    <path d="M590 230l-6-9m6 9l6-9"/>
+  </g>
+  <g font-family="Lato, Verdana, Helvetica, sans-serif" font-size="12" fill="#555555">
+    <text x="58" y="372">Read-only by default</text>
+    <text x="58" y="394">No cloud indexing, no autonomous edits</text>
+  </g>
+</svg>

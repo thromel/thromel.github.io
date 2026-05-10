@@ -115,6 +115,7 @@ navbar_title: Home
   <h2>Projects</h2>
   {% for project in site.data.profile.projects limit:4 %}
   {% assign project_image = '' %}
+  {% if project.title contains 'ctxpack' %}{% assign project_image = '/assets/images/projects/ctxpack-context-map.svg' %}{% endif %}
   {% if project.title contains 'Blockchain-Based Ticketing' %}{% assign project_image = '/assets/images/projects/blockchain-ticketing-banner.jpg' %}{% endif %}
   {% if project.title contains 'Image Captioning' %}{% assign project_image = '/assets/images/image-caption-generator.png' %}{% endif %}
   {% if project.title contains 'Eventfly' %}{% assign project_image = '/assets/images/eventfly.png' %}{% endif %}

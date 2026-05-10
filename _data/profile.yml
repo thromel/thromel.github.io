@@ -506,14 +506,16 @@ projects:
   link: https://github.com/thromel/ctxpack
   date: May 2026 - Present
   description: >-
-    Ongoing Rust project building a local-first context compiler and MCP context broker for AI coding agents. ctxpack indexes safe repository
-    context, prepares task-conditioned context plans, compiles budgeted Markdown/JSON packs, and integrates with agent-native workflows such as
-    AGENTS.md, Codex, Claude Code, Cursor, and OpenCode without becoming an autonomous editor.
+    Ongoing Rust project building a local-first context compiler and MCP context broker for AI coding agents. ctxpack now indexes safe repository
+    inventory, lexical matches, language symbols, related tests, and git co-change hints; prepares task-conditioned context plans; compiles
+    budgeted Markdown/JSON packs; and exposes source-free eval traces for measuring retrieval quality without becoming an autonomous editor.
   technologies:
   - Rust
   - MCP
   - Coding Agents
   - Context Engineering
+  - Symbol Indexing
+  - Evaluation
   - Git
   - CLI
 - title: "Blockchain-Based Ticketing Platform"

@@ -100,6 +100,261 @@ em { font-style: italic; }
 .academic-tag, .project-tag, .skill-item, .research-tech-tag, .learning-list-badge { color: var(--color-text-muted); }
 .academic-tag::before, .project-tag::before, .skill-item::before, .research-tech-tag::before, .learning-list-badge::before { content: "#"; }
 
+.project-feature-list {
+  display: grid;
+  gap: 0;
+}
+
+.project-feature-list > h2 {
+  margin-bottom: 10px;
+}
+
+.project-feature-entry {
+  display: grid;
+  grid-template-columns: 132px minmax(0, 1fr);
+  gap: 16px;
+  align-items: start;
+  padding: 18px 0;
+  border-top: 1px solid var(--color-border);
+}
+
+.project-feature-entry:first-of-type {
+  border-top: 0;
+}
+
+.project-feature-entry--featured {
+  background: transparent;
+}
+
+.project-feature-entry--agent-tooling {
+  padding-left: 14px;
+  border-left: 3px solid var(--color-accent);
+}
+
+.project-feature-entry__media {
+  display: block;
+  width: 132px;
+  aspect-ratio: 4 / 3;
+  border: 1px solid var(--color-border);
+  overflow: hidden;
+  background: #ffffff;
+}
+
+.project-feature-entry__media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.project-feature-entry__body {
+  min-width: 0;
+}
+
+.project-feature-entry__body p {
+  margin-bottom: 0.55rem;
+}
+
+.project-feature-entry--agent-tooling .academic-entry__meta::after {
+  content: " · local-first agent tooling";
+  color: var(--color-text-muted);
+}
+
+.showcase-header {
+  margin-bottom: 10px;
+}
+
+.showcase-title {
+  font-size: 2rem;
+}
+
+.showcase-meta,
+.showcase-tags {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.45rem 1rem;
+}
+
+.showcase-meta {
+  margin-top: 8px;
+}
+
+.showcase-group {
+  color: var(--color-accent);
+}
+
+.showcase-tags {
+  margin-bottom: 28px;
+}
+
+.showcase-article {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.showcase-article--agent-tooling {
+  border-top: 1px solid var(--color-border);
+  padding-top: 16px;
+}
+
+.showcase-content {
+  color: var(--color-text-primary);
+  font-size: 15px;
+  line-height: 1.65;
+}
+
+.showcase-content h1,
+.showcase-content h2 {
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+  color: var(--color-text-primary);
+  font-size: 1.45rem;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.showcase-content h1:first-child {
+  margin-top: 0;
+}
+
+.showcase-content h3 {
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+  color: var(--color-text-primary);
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.showcase-content h4 {
+  margin-top: 1.25rem;
+  margin-bottom: 0.4rem;
+  color: var(--color-text-primary);
+  font-size: var(--text-body);
+  font-weight: 700;
+}
+
+.showcase-content p {
+  margin-bottom: 1rem;
+  color: var(--color-text-primary);
+}
+
+.showcase-content ul,
+.showcase-content ol {
+  margin-bottom: 1rem;
+  padding-left: 1.2rem;
+}
+
+.showcase-content li {
+  margin-bottom: 0.35rem;
+  color: var(--color-text-primary);
+  line-height: 1.6;
+}
+
+.showcase-content strong {
+  color: var(--color-text-primary);
+  font-weight: 700;
+}
+
+.showcase-content a {
+  color: var(--color-accent);
+}
+
+.showcase-content code {
+  padding: 0.1rem 0.3rem;
+  border: 1px solid var(--color-border);
+  background: color-mix(in srgb, var(--color-bg) 92%, var(--color-text-primary) 8%);
+  border-radius: 4px;
+  color: var(--color-text-primary);
+  font-size: 0.9em;
+}
+
+.showcase-content pre {
+  margin-bottom: 1rem;
+  padding: 0.9rem;
+  border: 1px solid var(--color-border);
+  background: color-mix(in srgb, var(--color-bg) 92%, var(--color-text-primary) 8%);
+  overflow-x: auto;
+}
+
+.showcase-content pre code {
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+
+.showcase-content blockquote {
+  margin: 1.25rem 0;
+  padding-left: 1rem;
+  border-left: 3px solid var(--color-accent);
+  color: var(--color-text-secondary);
+}
+
+.showcase-content img {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 1.25rem 0;
+  border: 1px solid var(--color-border);
+}
+
+.showcase-article--agent-tooling .showcase-content img[src*="ctxpack-context-map"] {
+  max-width: 720px;
+  margin-top: 1rem;
+  background: #ffffff;
+}
+
+.showcase-content table {
+  width: 100%;
+  margin: 1.25rem 0;
+  border-collapse: collapse;
+}
+
+.showcase-content th,
+.showcase-content td {
+  padding: 0.6rem;
+  border: 1px solid var(--color-border);
+  text-align: left;
+}
+
+.showcase-content th {
+  font-weight: 700;
+}
+
+.showcase-navigation {
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--color-border);
+}
+
+.showcase-navigation__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.showcase-navigation__next {
+  text-align: right;
+}
+
+.showcase-navigation__link {
+  display: inline-flex;
+  align-items: center;
+  max-width: 100%;
+  gap: 0.5rem;
+}
+
+.showcase-navigation__link span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.showcase-navigation__back {
+  text-align: center;
+}
+
 .proof-surface { background: transparent; border: 0; box-shadow: none; padding: 16px 0; }
 .proof-surface-header, .proof-state, .proof-links { margin: 0 0 8px; color: var(--color-text-primary); }
 .proof-links { display: flex; flex-wrap: wrap; gap: 0.35rem; }
@@ -128,6 +383,38 @@ em { font-style: italic; }
   .academic-publication { grid-template-columns: 96px minmax(0, 1fr); gap: 12px; padding: 12px 0; }
   .academic-publication__media { width: 96px; height: 96px; }
   .timeline-header { display: block; }
+  .project-feature-entry,
+  .project-feature-entry--featured,
+  .project-feature-entry--agent-tooling {
+    grid-template-columns: 88px minmax(0, 1fr);
+    gap: 12px;
+    padding: 16px 0;
+    border-left: 0;
+  }
+  .project-feature-entry__media {
+    width: 88px;
+  }
+  .showcase-title {
+    font-size: 1.65rem;
+  }
+  .showcase-tags {
+    margin-bottom: 20px;
+  }
+  .showcase-content {
+    font-size: var(--text-body);
+    line-height: 1.55;
+  }
+  .showcase-content h1,
+  .showcase-content h2 {
+    font-size: 1.25rem;
+  }
+  .showcase-navigation__grid {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+  .showcase-navigation__next {
+    text-align: left;
+  }
 }
 
 /* Education page: keep academic minimalism, but give degree entries clearer hierarchy. */

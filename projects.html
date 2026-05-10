@@ -11,16 +11,22 @@ navbar_title: Projects
   <p>Selected software, research, and systems projects.</p>
 </section>
 
-<section class="academic-section">
+<section class="academic-section project-feature-list">
   <h2>Featured Project Narratives</h2>
   {% for project in showcase_projects %}
-  <article class="academic-entry">
+  <article class="academic-entry project-feature-entry{% if project.featured %} project-feature-entry--featured{% endif %}{% if project.showcase_style %} project-feature-entry--{{ project.showcase_style }}{% endif %}">
     {% assign project_image = project.card_image | default: project.thumbnail %}
-    {% if project_image %}<img class="academic-entry__media" src="{{ project_image | relative_url }}" alt="{{ project.title }}">{% endif %}
-    <h3><a href="{{ project.url | relative_url }}">{{ project.title }}</a></h3>
-    <p class="academic-entry__meta">{{ project.date | date: "%B %Y" }}{% if project.group %} · {{ project.group }}{% endif %}</p>
-    <p>{{ project.excerpt | default: project.content | strip_html | truncatewords: 40 }}</p>
-    {% if project.technologies %}<p class="academic-tags">{% for tech in project.technologies limit:8 %}<span class="academic-tag">{{ tech }}</span>{% endfor %}</p>{% endif %}
+    {% if project_image %}
+    <a class="project-feature-entry__media" href="{{ project.url | relative_url }}" aria-label="{{ project.title }}">
+      <img src="{{ project_image | relative_url }}" alt="{{ project.title }}">
+    </a>
+    {% endif %}
+    <div class="project-feature-entry__body">
+      <h3><a href="{{ project.url | relative_url }}">{{ project.title }}</a></h3>
+      <p class="academic-entry__meta">{{ project.date | date: "%B %Y" }}{% if project.group %} · {{ project.group }}{% endif %}</p>
+      <p>{{ project.excerpt | default: project.content | strip_html | truncatewords: 40 }}</p>
+      {% if project.technologies %}<p class="academic-tags">{% for tech in project.technologies limit:8 %}<span class="academic-tag">{{ tech }}</span>{% endfor %}</p>{% endif %}
+    </div>
   </article>
   {% endfor %}
 </section>
