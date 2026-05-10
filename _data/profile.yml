@@ -502,6 +502,20 @@ research:
   - ECIES
 
 projects:
+- title: "ctxpack: Repo Context Packer"
+  link: https://github.com/thromel/ctxpack
+  date: May 2026 - Present
+  description: >-
+    Ongoing Rust project building a local-first context compiler and MCP context broker for AI coding agents. ctxpack indexes safe repository
+    context, prepares task-conditioned context plans, compiles budgeted Markdown/JSON packs, and integrates with agent-native workflows such as
+    AGENTS.md, Codex, Claude Code, Cursor, and OpenCode without becoming an autonomous editor.
+  technologies:
+  - Rust
+  - MCP
+  - Coding Agents
+  - Context Engineering
+  - Git
+  - CLI
 - title: "Blockchain-Based Ticketing Platform"
   link: /showcase/projects/blockchain-ticketing/
   date: Jan 2021 - April 2021
