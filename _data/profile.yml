@@ -3,8 +3,9 @@ secondary_name: ""
 navbar_name: "Tanzim Hossain Romel"
 
 about_snippet: >-
-  Hi, I'm Tanzim. I'm a software engineer and researcher focused on AI/ML security and software engineering.
-  At <a href="https://www.iqvia.com" target="_blank">IQVIA</a>, I build microservices that handle millions of patient records
+  Hi, I'm Tanzim. I'm a software engineer and researcher focused on AI/ML security, LLM systems, and software engineering.
+  I build agent-native developer tools, research pipelines, and production backend systems. At
+  <a href="https://www.iqvia.com" target="_blank">IQVIA</a>, I build microservices that handle millions of patient records
   and add LLM features to healthcare analytics. I also work with researchers at
   <a href="https://eng.auburn.edu" target="_blank">Auburn University</a> and
   <a href="https://cse.buet.ac.bd" target="_blank">BUET</a> on ML security and blockchain systems.
@@ -140,7 +141,7 @@ skills:
       - Python-Selenium
 
 short_bio: >-
-  Hi I'm Tanzim. I'm a software engineer and aspiring researcher focused on <b>Software Engineering, AI/ML Security, Blockchain, and LLM Systems</b>, with a strong focus on <b>DevOps, Backend Engineering, and AI Engineering</b>. I'm especially interested in <b>Domain Driven Design, System Architecture, and Software Architecture</b>. I like work that blends research with hands-on building.
+  Hi I'm Tanzim. I'm a software engineer and aspiring researcher focused on <b>AI/ML Security, LLM Systems, Software Engineering, and Backend Systems</b>. I build agent-native developer tools, research pipelines, cloud-native microservices, and systems projects across <b>Rust, Python, C#/.NET, TypeScript, and C++</b>. I'm especially interested in <b>context engineering for coding agents, trustworthy AI systems, software architecture, and empirical software engineering</b>. I like work that blends research with hands-on building.
   <br/><br/>
   I believe consistent effort compounds. I keep a daily learning routine, maintain learning logs, and try to apply new ideas to real projects. That habit helps me balance research collaborations with my full-time engineering role.
   <br/><br/>
@@ -355,25 +356,38 @@ research_interests:
 - LLM Security
 
 technical_skills:
-- type: "Backend & Systems"
+- type: "Languages & Systems"
   names:
+  - Rust
   - C#/.NET Core
-  - Go
   - C++
-  - EF Core
+  - Go
+  - Java
+  - Shell
 - type: "AI & Agents"
   names:
   - Python
   - LangGraph
+  - MCP
   - RAG
   - PyTorch
-  - CUDA
-- type: "Databases"
+  - LLM Evaluation
+- type: "Web & Backend"
+  names:
+  - TypeScript
+  - Node.js/Express
+  - React/Next.js
+  - Microservices
+  - REST APIs
+  - EF Core
+- type: "Data & Storage"
   names:
   - PostgreSQL
   - MongoDB
   - SQL Server
+  - Oracle/PLSQL
   - DynamoDB
+  - SQLAlchemy
 - type: "Cloud & DevOps"
   names:
   - AWS
@@ -381,6 +395,14 @@ technical_skills:
   - Kubernetes
   - Terraform
   - GitHub Actions
+- type: "Security & Research Tooling"
+  names:
+  - CodeQL
+  - Semgrep
+  - Bandit
+  - YARA
+  - Z3
+  - Solidity/Web3
 
 soft_skills:
   - Team Leadership & Mentorship
