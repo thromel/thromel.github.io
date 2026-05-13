@@ -7,12 +7,18 @@ navbar_title: Projects
 {% assign showcase_projects = site.showcase | where: "show", true | sort: "date" | reverse %}
 
 <section class="academic-section">
-  <h1 class="academic-page-title">Projects</h1>
-  <p>Selected software, research, and systems projects.</p>
+  <div class="projects-hero">
+    <p class="projects-kicker">Selected build work</p>
+    <h1 class="academic-page-title">Projects</h1>
+    <p class="projects-intro">Software systems, research prototypes, and agent tooling that connect implementation detail with measurable engineering outcomes.</p>
+  </div>
 </section>
 
 <section class="academic-section project-feature-list">
-  <h2>Featured Project Narratives</h2>
+  <div class="project-section-heading">
+    <h2>Featured Project Narratives</h2>
+    <span>Current and representative work</span>
+  </div>
   {% for project in showcase_projects %}
   <article class="academic-entry project-feature-entry{% if project.featured %} project-feature-entry--featured{% endif %}{% if project.showcase_style %} project-feature-entry--{{ project.showcase_style }}{% endif %}">
     {% assign project_image = project.card_image | default: project.thumbnail %}
@@ -31,10 +37,13 @@ navbar_title: Projects
   {% endfor %}
 </section>
 
-<section class="academic-section">
-  <h2>Project Archive</h2>
+<section class="academic-section project-archive">
+  <div class="project-section-heading">
+    <h2>Project Archive</h2>
+    <span>Earlier systems and research builds</span>
+  </div>
   {% for project in site.data.profile.projects %}
-  <article class="academic-entry">
+  <article class="academic-entry project-archive-entry">
     <h3>{% if project.link %}<a href="{{ project.link }}">{{ project.title }}</a>{% else %}{{ project.title }}{% endif %}</h3>
     <p class="academic-entry__meta">{{ project.date }}</p>
     <p>{{ project.description | strip_html }}</p>

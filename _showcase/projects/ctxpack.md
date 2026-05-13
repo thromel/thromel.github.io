@@ -7,7 +7,7 @@ group: Projects
 show: true
 width: 8
 date: 2026-05-10 00:00:00 +0800
-excerpt: An ongoing Rust project that turns repository tasks into compact, evidence-labeled context plans and packs for Codex, Claude Code, Cursor, OpenCode, and other MCP-compatible coding agents.
+excerpt: An ongoing Rust project that turns repository tasks into compact, evidence-labeled context plans and packs for Codex, Claude Code, Cursor, OpenCode, and other MCP-compatible coding agents. v1 now includes real-client MCP smoke proof for Codex CLI and Claude Code.
 featured: true
 showcase_style: agent-tooling
 card_image: /assets/images/projects/ctxpack-context-map.svg
@@ -18,6 +18,8 @@ technologies:
   - Context Engineering
   - Symbol Indexing
   - Evaluation
+  - Codex CLI
+  - Claude Code
   - Git
   - CLI
 ---
@@ -36,11 +38,12 @@ The project is built around a context compiler: given a software task, it identi
 - Agent-native setup through `AGENTS.md`, Cursor rules, Claude command scaffolding, OpenCode config guidance, and a local MCP server.
 - Local safe inventory that respects ignore files and excludes sensitive/generated files by default.
 - Lexical repository search, symbol extraction for TypeScript/JavaScript, Python, Rust, and Go, related-test detection, and git co-change hints.
-- `prepare-task` context-plan compilation with target files, matched symbols, line ranges, related tests, validation commands, risk flags, and privacy status.
+- `prepare-task` context-plan compilation with attributed target files, matched symbols, line ranges, related tests, validation commands, risk flags, diagnostics, and privacy status.
 - Materialized `get-pack` output in Markdown and JSON for brief, standard, and deep budgets, with source-linked snippets around matched evidence.
-- MCP tools, resources, and prompts for `prepare_task`, `get_pack`, search, related tests, and current-diff style workflows.
-- Source-free evaluation traces and a dogfood checklist so retrieval behavior can be measured without leaking source code.
-- CLI coverage for `init`, `index`, `prepare-task`, `get-pack`, `search`, `symbols`, `related-tests`, `co-changes`, `eval traces`, `eval checklist`, and `serve-mcp`.
+- MCP tools, resources, and prompts for `prepare_task`, `get_pack`, search, related tests, current-diff, and progressive context workflows.
+- Source-free evaluation traces, fixed-budget historical evals, lexical baselines, signal ablations, and grouped retrieval-gap reports.
+- Deterministic MCP protocol smoke coverage from a wrong working directory with explicit `repo` arguments.
+- Required-mode real-client smoke scripts for Codex CLI and Claude Code that prove `prepare_task` and `get_pack` calls through server-side JSON-RPC evidence.
 
 ## Direction
 
@@ -48,6 +51,8 @@ The goal is to make agents retrieve less irrelevant context, read better evidenc
 
 ## What Works Now
 
-The MVP can scan a repository, build a safe file inventory, extract useful symbols, run lexical search, infer related tests, use git history for co-change hints, and compile task-conditioned context plans. The MCP layer exposes that work to existing coding agents, while the CLI remains mostly plumbing for setup, debugging, and evaluation.
+The v1 milestone can scan a repository, build a safe file inventory, extract useful symbols, run lexical search, infer related tests, use dependency and git-history signals, rank typed retrieval candidates, and compile task-conditioned context plans. The MCP layer exposes that work to existing coding agents, while the CLI remains mostly plumbing for setup, debugging, and evaluation.
+
+The latest hardening cycle added compatibility guardrails, stale-cache diagnostics, source-read privacy gates, measured retrieval-eval reporting, session-scoped pack-resource diagnostics, and real Codex CLI / Claude Code integration proof.
 
 <p><a href="https://github.com/thromel/ctxpack" target="_blank">View the public repository on GitHub</a></p>
