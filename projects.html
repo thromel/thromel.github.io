@@ -10,7 +10,7 @@ navbar_title: Projects
   <div class="projects-hero">
     <p class="projects-kicker">Selected build work</p>
     <h1 class="academic-page-title">Projects</h1>
-    <p class="projects-intro">Software systems, research prototypes, and agent tooling that connect implementation detail with measurable engineering outcomes.</p>
+    <p class="projects-intro">Software systems, research prototypes, and tools I built while trying to understand how the code actually behaves.</p>
   </div>
 </section>
 
@@ -20,14 +20,15 @@ navbar_title: Projects
     <span>Current and representative work</span>
   </div>
   {% for project in showcase_projects %}
-  <article class="academic-entry project-feature-entry{% if project.featured %} project-feature-entry--featured{% endif %}{% if project.showcase_style %} project-feature-entry--{{ project.showcase_style }}{% endif %}">
     {% assign project_image = project.card_image | default: project.thumbnail %}
+  <article class="academic-entry project-feature-entry{% if project.featured %} project-feature-entry--featured{% endif %}{% if project.showcase_style %} project-feature-entry--{{ project.showcase_style }}{% endif %}{% unless project_image %} project-feature-entry--text-only{% endunless %}">
     {% if project_image %}
     <a class="project-feature-entry__media" href="{{ project.url | relative_url }}" aria-label="{{ project.title }}">
       <img src="{{ project_image | relative_url }}" alt="{{ project.title }}">
     </a>
     {% endif %}
     <div class="project-feature-entry__body">
+      {% if project.project_type %}<p class="project-feature-entry__eyebrow">{{ project.project_type }}</p>{% endif %}
       <h3><a href="{{ project.url | relative_url }}">{{ project.title }}</a></h3>
       <p class="academic-entry__meta">{{ project.date | date: "%B %Y" }}{% if project.group %} · {{ project.group }}{% endif %}</p>
       <p>{{ project.excerpt | default: project.content | strip_html | truncatewords: 40 }}</p>

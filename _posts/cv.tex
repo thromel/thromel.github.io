@@ -174,7 +174,7 @@
 \section{\textbf{Research Interests}}
 \vspace{1mm}
 \small{
-AI for Software Engineering (AI4SE), Software Engineering for AI (SE4AI), Trustworthy AI, Software Security, LLM Security
+AI for Software Engineering (AI4SE), Software Engineering for AI (SE4AI), Trustworthy AI, LLM Agent Security, Empirical Software Engineering, Developer Tooling
 }
 \vspace{-2mm}
 
@@ -208,7 +208,7 @@ AI for Software Engineering (AI4SE), Software Engineering for AI (SE4AI), Trustw
       {Software Development Engineer}{June 2023 - June 2026}
       \resumeItemListStart
         \item Backend Engineer developing microservices-based healthcare applications handling millions of patient records using .NET Core, C\#, and AWS
-        \item Deployed Multi-Agent systems using LangGraph for dashboard generation/modification, integrated with data exploration agent achieving 85\% reduction in setup time
+        \item Deployed multi-agent systems using LangGraph, MCP, and RAG for dashboard generation/modification, integrated with data exploration agents achieving 85\% reduction in setup time
         \item Achieved 60\% reduction in query execution times through database optimization; implemented 40\% API response improvement via Redis caching
         \item Contributed to browser automation testing methodology in .NET, simplifying regression testing and improving test coverage from 72\% to 95\%
         \item Received IQVIA Impact Program – Silver award (May 2025) for outstanding performance
@@ -226,24 +226,19 @@ AI for Software Engineering (AI4SE), Software Engineering for AI (SE4AI), Trustw
   {June 2025 - Oct 2025}
   {{}}
 \resumeItemListStart
-  \item First large-scale cross-platform study analyzing \textasciitilde45,000 repositories across 5 major platforms (Hugging Face, ModelScope, OpenCSG, OpenMMLab, PyTorch Hub) with co-authors Mohammad Latif Siddiq and Joanna C. Santos
-  \item Detected security vulnerabilities using static analyzers and YARA malware signatures.
-  \item Analyzed 600+ developer discussions to create taxonomy of security misconceptions.
+  \item Studied remote-code-execution risk across \textasciitilde45,000 ML model repositories with Mohammad Latif Siddiq and Joanna C. Santos.
+  \item Used Bandit, CodeQL, Semgrep, and YARA to find vulnerability patterns and explain 600+ related developer discussions.
 \resumeItemListEnd
 
 \resumeProject
   {The Choice Can Be the Attack: Auditing Aligned Backdoors in LLM Agents}
-  {Tools: Python, WebShop-style Evaluation, Hugging Face Jobs, vLLM, Counterfactual Auditing, Choice Modeling}
+  {Tools: Python, vLLM, PyTorch, pandas, NumPy}
   {August 2025 -- Present}
   {}
 \resumeItemListStart
-  \item Built \textbf{SHIFT} (\emph{Structured Hidden Influence Test}), an endpoint-black-box audit for \emph{aligned backdoors} in LLM agents, targeting attacks that preserve instruction validity while covertly steering which acceptable brand, seller, or product gets chosen.
+  \item Studied a hidden backdoor risk where a trigger changes which valid option an LLM agent chooses while the final answer still appears correct.
 
-  \item Reframed aligned backdoor detection as \emph{choice auditing} rather than task-failure detection by combining a matched trigger audit with a feature-controlled choice model to test whether a trigger adds extra preference for attacker-chosen options after accounting for observable quality signals.
-
-  \item Implemented the full controlled WebShop-style evaluation stack: synthetic confounding studies, live clean/suspect endpoint logging, 29-variant benign-vs-trigger-preserved stress suites, same-anchor external baseline comparisons, and a Qwen3.5-9B scale-up replication.
-
-  \item Showed a strong 9B endpoint case study with perfect weak-stage clean/suspect separation and large bounded target uplift, while also documenting the method’s main limitation: stronger benign catalog shifts and omitted option features remain the key calibration boundary.
+  \item Built \textbf{SHIFT}, which reruns the same task with and without a known trigger, then checks whether the changed choice favors the attacker's target rather than normal reasons like price or rating.
 \resumeItemListEnd
 
 
@@ -256,20 +251,8 @@ AI for Software Engineering (AI4SE), Software Engineering for AI (SE4AI), Trustw
   {July 2025 - Present}
   {{}}
 \resumeItemListStart
-  \item Extended SchemaAgent with Dr. Sukarna Barua (BUET) using LangGraph StateGraph architecture with conditional routing and 3-tier auto-repair system
-  \item Designed 6-stage decomposed pipeline with specialized agents for entity extraction, relationship mining, and normalization with Z3 formal verification
-  \item Implemented granular component-level retry mechanism with intelligent violation analysis, reducing redundant LLM calls by 80\%
-\resumeItemListEnd
-
-\resumeProject
-  {Design by Contract for LLM APIs}
-  {Tools: Python, OpenAI SDK, LangChain, Runtime Monitoring, Contract Enforcement | Manuscript in preparation}
-  {Nov 2024 - Present}
-  {}
-\resumeItemListStart
-  \item Developing taxonomy for API contracts through empirical study of 412 real-world issues with Dr. Akond Rahman (Auburn University)
-  \item Created OpenAI SDK and LangChain extensions for automatic contract enforcement and runtime remediation
-  \item Implemented precondition/postcondition validators with automatic retry mechanisms and fallback strategies
+  \item Extended SchemaAgent with Dr. Sukarna Barua (BUET) to turn natural-language requirements into relational schemas and ER diagrams.
+  \item Built a LangGraph pipeline for entity extraction, relationship detection, normalization checks, Z3 validation, and targeted retry.
 \resumeItemListEnd
 
 \resumeSubHeadingListEnd
@@ -279,27 +262,33 @@ AI for Software Engineering (AI4SE), Software Engineering for AI (SE4AI), Trustw
 \resumeSubHeadingListStart
 
 \resumeProject
+{\href{https://github.com/thromel/ctxpack}{ctxpack: Repo Context Packer}}
+{Tools: Rust, MCP, CLI, Git, Symbol Indexing, Context Engineering, Evaluation}
+{May 2026 -- Present}
+{}
+\resumeItemListStart
+\item Building a local-first context compiler for AI coding agents with repository inventory, symbol retrieval, related-test detection, and git-history signals.
+\item Implemented budgeted Markdown/JSON context packs, MCP protocol tests, retrieval evals, and Codex CLI / Claude Code smoke checks.
+\resumeItemListEnd
+
+\resumeProject
 {\href{https://github.com/thromel/Yet-Another-C-Compiler}{Yet Another C Compiler}}
 {Tools: C++17, CMake}
 {Jun-Aug 2021, Oct 2024}
 {}
 \resumeItemListStart
-\item Built complete C compiler with lexer and parser, semantic analysis, and x86-64 code generation
-\item Implemented SSA-based optimization pipeline including SCCP, GVN, LICM, and dead code elimination
-\item Designed a linear scan register allocator with spilling support
-\item Modernized legacy Flex/Bison-based prototype into a compiler architecture with modular IR passes and extensible optimization pipeline
+\item Built a C compiler with lexer/parser, semantic analysis, x86-64 code generation, and a linear-scan register allocator.
+\item Modernized the Flex/Bison prototype with modular IR passes and SSA optimizations including SCCP, GVN, LICM, and dead-code elimination.
 \resumeItemListEnd
 
 \resumeProject
-{\href{https://github.com/thromel/Image-Captioning-ML-Project}{Modern Image Captioning System}}
-{Tools: PyTorch, CLIP, ViT, GPT-2, AoA, SCST, MS-COCO}
-{Jan 2023 – Feb 2023}
+{\href{https://github.com/thromel/CSE-472-Machine-Learning}{Bangla Handwritten Digit Recognition}}
+{Tools: Python, NumPy, OpenCV, CNN from Scratch, NumtaDB}
+{Jan 2023 -- Feb 2023}
 {}
 \resumeItemListStart
-\item Built modular image captioning system combining vision (ResNet, ViT, CLIP) and language (LSTM, Transformer, GPT-2) models
-\item Reached \textbf{127.6 CIDEr}, \textbf{0.392 BLEU-4}, \textbf{0.298 METEOR} on MS-COCO (Karpathy split) using CLIP + GPT-2 + AoA + SCST
-\item Improved CIDEr by +26.4 over ResNet-LSTM baseline through architectural and training refinements
-\item Applied Self-Critical Sequence Training and attention visualization for interpretability
+\item Implemented a NumPy CNN from scratch to recognize handwritten Bangla digits from the NumtaDB dataset.
+\item Built the preprocessing and training pipeline, reaching \textbf{95.9\% accuracy} and placing \textbf{2nd among 120 students}.
 \resumeItemListEnd
 
 \resumeProject
@@ -314,17 +303,6 @@ AI for Software Engineering (AI4SE), Software Engineering for AI (SE4AI), Trustw
 
 
 
-\resumeProject
-  {\href{https://github.com/thromel/CSE-322-Computer-Networks-Sessional}{Network Simulation \& TCP Protocol Analysis}}
-  {Tools: NS3, C++, TCP Reno, TCP Vegas}
-  {Jan 2022 - May 2022}
-  {}
-\resumeItemListStart
-  \item Implemented and analyzed TCP congestion control variants (Reno vs Vegas) using NS3 network simulator
-  \item Designed TCP Vegas+ modification addressing fairness issues through dual-mode operation
-  \item Conducted comprehensive performance analysis measuring throughput, fairness index, and packet drop ratios
-\resumeItemListEnd
-
 \resumeSubHeadingListEnd
 
 \vspace{-2mm}
@@ -333,17 +311,16 @@ AI for Software Engineering (AI4SE), Software Engineering for AI (SE4AI), Trustw
 \resumeSubHeadingListStart
 
 \resumeProject
-  {Open Source Contributions (Selected)}
-  {Selected upstream contributions across agent systems, program analysis, compilers, developer tooling, and .NET}
+  {Selected Upstream Contributions}
+  {Selected upstream contributions across program analysis, .NET, web servers, agent systems, and compilers}
   {2025 -- 2026}
   {\href{https://github.com/thromel?tab=pull_requests}{GitHub}}
 \resumeItemListStart
-  \item \textbf{\href{https://github.com/langchain-ai/deepagents/pull/2396}{deepagents}}: merged a CLI fix that stops and clears \texttt{LoadingWidget} animation timers on stop and unmount, preventing interval leaks in long-running terminal sessions and adding regression coverage for both cleanup paths.
-  \item \textbf{\href{https://github.com/tsantalis/RefactoringMiner/pull/1047}{RefactoringMiner}}: merged merge-parent-aware commit diff support for merge commits, including parent selection in the CLI and webdiff, parent-aware caching, and robust handling of empty commit compares.
-  \item \textbf{\href{https://github.com/microsoft/typescript-go/pull/3314}{typescript-go}}: merged an upstream-aligned declaration-emit alias-resolution fix that preserves imported type aliases for inferred exports across module boundaries in Microsoft's Go port of TypeScript.
+  \item \textbf{\href{https://github.com/tsantalis/RefactoringMiner/pulls?q=author\%3Athromel}{RefactoringMiner}}: merged merge-parent-aware commit diffs, advanced assertion migration matching, and single-page PR viewed toggles; currently proposing a read-only local MCP server for refactoring analysis and intent validation.
   \item \textbf{\href{https://github.com/dotnet/efcore}{EF Core}}: merged runtime migration creation/application, \texttt{ON DELETE SET DEFAULT} support, and nullable complex-property reload handling.
-  \item \textbf{\href{https://github.com/langchain-ai/langchain}{LangChain}}: improved diagnostics for non-JSON-serializable tool schemas during tool definition.
   \item \textbf{\href{https://github.com/Kaliumhexacyanoferrat/GenHTTP}{GenHTTP}}: added automatic request decompression and binary-response support.
+  \item \textbf{\href{https://github.com/langchain-ai/deepagents/pull/2396}{deepagents}}: merged a CLI fix that stops and clears \texttt{LoadingWidget} animation timers on stop and unmount, preventing interval leaks in long-running terminal sessions and adding regression coverage for both cleanup paths.
+  \item \textbf{\href{https://github.com/microsoft/typescript-go/pull/3314}{TypeScript}}: merged an upstream-aligned declaration-emit alias-resolution fix that preserves imported type aliases for inferred exports across module boundaries in Microsoft's Go port of TypeScript.
 \resumeItemListEnd
 
 \resumeSubHeadingListEnd
@@ -352,22 +329,16 @@ AI for Software Engineering (AI4SE), Software Engineering for AI (SE4AI), Trustw
 \section{\textbf{Skills}}
 \vspace{-0.4mm}
 \resumeHeadingSkillStart
-  \resumeSubItem{Agentic AI \& LLM Systems:}
-    {LLM agents, tool calling, RAG, prompt engineering, multi-step workflows, LLM evaluation, counterfactual auditing, model serving, fine-tuning}
-  \resumeSubItem{ML/AI Frameworks:}
-    {PyTorch, Transformers, Hugging Face, LangChain, LangGraph, vLLM}
-  \resumeSubItem{Programming Languages:}
-    {Python, TypeScript, JavaScript, C\#, C++, Go, SQL, Java, Solidity}
-  \resumeSubItem{Backend Frameworks:}
-    {.NET Core, ASP.NET, FastAPI, Express.js, Next.js}
-  \resumeSubItem{Databases:}
-    {PostgreSQL, MongoDB, Redis, SQL Server, DynamoDB}
-  \resumeSubItem{Cloud \& DevOps:}
-    {AWS, Azure, Docker, Kubernetes, GitHub Actions, Terraform, OpenTelemetry, Jaeger, NATS}
-  \resumeSubItem{Blockchain \& Web3:}
-    {Ethereum, Solidity, IPFS, ERC-721, ERC-1155, Web3.js}
-  \resumeSubItem{Tools \& Platforms:}
-    {Linux, Git, Hugging Face Jobs, WebShop, NS3, Flex, Bison}
+  \resumeSubItem{Agentic AI \& LLM Tooling:}
+    {MCP, LangGraph, LangChain, RAG, vLLM, tool calling, LLM evaluation, context engineering}
+  \resumeSubItem{Backend \& Data Systems:}
+    {C\#/.NET, REST APIs, PostgreSQL, MongoDB, SQL Server, Redis, SQLAlchemy, Oracle/PLSQL}
+  \resumeSubItem{Research \& Security Tooling:}
+    {CodeQL, Semgrep, Bandit, YARA, Z3, RefactoringMiner, static analysis}
+  \resumeSubItem{Core Languages:}
+    {Rust, Python, C\#, TypeScript, C++, Go, Java, SQL, Solidity}
+  \resumeSubItem{Cloud \& Engineering Infrastructure:}
+    {AWS, Docker, Kubernetes, GitHub Actions, Terraform, OpenTelemetry, Jaeger, Linux, Git}
 \resumeHeadingSkillEnd
 
 
@@ -375,79 +346,28 @@ AI for Software Engineering (AI4SE), Software Engineering for AI (SE4AI), Trustw
 \vspace{-0.4mm}
 \resumeSubHeadingListStart
 
-\resumeProject
-  {IQVIA Impact Program – Silver Award}
-  {IQVIA}
-  {May 2025}
-  {{}}
-\resumeItemListStart
-  \item Awarded for outstanding performance and essential feature development
-\resumeItemListEnd
-
-\resumeProject
-  {Finalist, Blockchain Olympiad Bangladesh}
-  {BCOLBD}
-  {2021}
-  {{}}
-\resumeItemListStart
-  \item Top 40 teams nationally with "Blockchain Based Ticketing Platform"
-\resumeItemListEnd
-
-\resumeProject
-  {2nd Place - Bangla Handwritten Digits Recognition}
-  {BUET ML Lab}
-  {2022}
-  {{}}
-\resumeItemListStart
-  \item Achieved 95.9\% accuracy using custom CNN
-\resumeItemListEnd
-
-\resumeProject
-  {Dean's List Award}
-  {BUET}
-  {Level-2}
-  {{}}
-\resumeItemListStart
-  \item Awarded for outstanding academic results
-\resumeItemListEnd
-
-\resumeProject
-  {National Science Olympiads}
-  {Bangladesh}
-  {2017}
-  {{}}
-\resumeItemListStart
-  \item National prize winner in Bangladesh Physics Olympiad (2017)
-  \item National prize winner in Chemistry Olympiad (2017)
-\resumeItemListEnd
-
-\resumeProject
-  {Talentpool HSC Scholarship}
-  {Rajshahi Board}
-  {2017}
-  {{}}
-\resumeItemListStart
-  \item 15th in Rajshahi Board with 95.6\% marks
-\resumeItemListEnd
+\resumePOR{IQVIA Impact Program -- Silver Award}{: outstanding performance and essential feature delivery}{May 2025}
+\resumePOR{Finalist, Blockchain Olympiad Bangladesh}{: top 40 national team for blockchain-based ticketing}{2021}
+\resumePOR{\href{https://github.com/thromel/CSE-472-Machine-Learning}{2nd Place -- Bangla Handwritten Digits Recognition}}{: 95.9\% accuracy, BUET ML Lab contest}{2022}
+\resumePOR{Dean's List Award}{: academic performance, BUET Level 2}{}
+\resumePOR{National Science Olympiads}{: prize winner in Bangladesh Physics and Chemistry Olympiads}{2017}
+\resumePOR{Talentpool HSC Scholarship}{: 15th in Rajshahi Board with 95.6\% marks}{2017}
 
 \resumeSubHeadingListEnd
 
 \vspace{-6mm}
 
-\section{\textbf{Test Scores}}
-\vspace{-0.4mm}
-\resumeSubHeadingListStart
-\resumePOR{TOEFL iBT}
-    {: 103/120 (Listening: 29, Reading: 29, Writing: 22, Speaking: 23)}
-    {}
-\resumeSubHeadingListEnd
-\vspace{-6mm}
-
-\section{\textbf{Additional Information}}
+\section{\textbf{References}}
 \vspace{-0.4mm}
 \small{
-\textbf{Languages:} Bengali (Native), English (Professional proficiency)
-
+\begin{tabularx}{\textwidth}{@{}L L@{}}
+\textbf{\href{https://cse.buet.ac.bd/faculty/faculty_detail/rakinhaider}{Dr. Chowdhury Md. Rakin Haider}} &
+\textbf{\href{https://apps.ualberta.ca/directory/person/zy25}{Dr. Zhou Yang}} \\
+Assistant Professor, CSE, BUET &
+Assistant Professor, Computing Science, University of Alberta; Amii Fellow \\
+\href{mailto:rakinhaider@cse.buet.ac.bd}{rakinhaider@cse.buet.ac.bd} &
+\href{mailto:zy25@ualberta.ca}{zy25@ualberta.ca}
+\end{tabularx}
 }
 \vspace{-4mm}
 

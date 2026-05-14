@@ -3,18 +3,24 @@ secondary_name: ""
 navbar_name: "Tanzim Hossain Romel"
 
 about_snippet: >-
-  Hi, I'm Tanzim. I'm a software engineer and researcher focused on AI/ML security, LLM systems, and software engineering.
-  I build agent-native developer tools, research pipelines, and production backend systems. At
+  Hi, I'm Tanzim. I'm a software engineer and researcher working on software engineering, LLM systems, and AI/ML security.
+  I build developer tools for coding agents, research pipelines, and backend systems. At
   <a href="https://www.iqvia.com" target="_blank">IQVIA</a>, I build microservices that handle millions of patient records
   and add LLM features to healthcare analytics. I also work with researchers at
   <a href="https://eng.auburn.edu" target="_blank">Auburn University</a> and
   <a href="https://cse.buet.ac.bd" target="_blank">BUET</a> on ML security and blockchain systems.
-  I'm a <b>software engineer and researcher</b> and plan to push my work in computer science.
 
 current_company:
   name: "IQVIA"
   logo: "/assets/images/companies/iqvia-logo.png"
   url: "https://www.iqvia.com/"
+
+current_focus:
+  primary: >-
+    Right now I am working on <span class="academic-highlight">The Choice Can Be the Attack</span>, ctxpack, VeriSchema,
+    RefactoringMiner, and reading <em>Designing Data-Intensive Applications</em>.
+  open_source: >-
+    I have also been contributing to RefactoringMiner, EF Core, GenHTTP, deepagents, and TypeScript.
 
 positions:
 - name: Software Development Engineer 1, IQVIA
@@ -141,9 +147,9 @@ skills:
       - Python-Selenium
 
 short_bio: >-
-  Hi I'm Tanzim. I'm a software engineer and aspiring researcher focused on <b>AI/ML Security, LLM Systems, Software Engineering, and Backend Systems</b>. I build agent-native developer tools, research pipelines, cloud-native microservices, and systems projects across <b>Rust, Python, C#/.NET, TypeScript, and C++</b>. I'm especially interested in <b>context engineering for coding agents, trustworthy AI systems, software architecture, and empirical software engineering</b>. I like work that blends research with hands-on building.
+  Hi I'm Tanzim. I'm a software engineer and aspiring researcher working on <b>AI/ML security, LLM systems, software engineering, and backend systems</b>. Most of my work sits between research and building: coding-agent tools, research software, microservices, and systems projects in <b>Rust, Python, C#/.NET, TypeScript, and C++</b>. I care about coding agents, trustworthy AI systems, software architecture, and empirical software engineering.
   <br/><br/>
-  I believe consistent effort compounds. I keep a daily learning routine, maintain learning logs, and try to apply new ideas to real projects. That habit helps me balance research collaborations with my full-time engineering role.
+  I keep a daily learning routine, maintain learning logs, and try to turn reading into small builds. That habit helps me balance research collaborations with my full-time engineering role.
   <br/><br/>
   I completed my B.Sc in Computer Science and Engineering from <b>Bangladesh University of Engineering and Technology</b> with a <b>CGPA of 3.53/4.0</b>. I earned a <span class="highlight-sessional"><b>3.86/4.0 GPA in Sessional Courses</b></span>, the lab and project-based core of BUET's curriculum. I received the <b>Dean's List Award</b> and placed <a href="https://tanzimhromel.com/projects/bangla_digit_recognition/" target="_blank">2nd in the Bangla Handwritten Digits Recognition contest</a>.
   <br/><br/>
@@ -528,10 +534,9 @@ projects:
   link: https://github.com/thromel/ctxpack
   date: May 2026 - Present
   description: >-
-    Ongoing Rust project building a local-first context compiler and MCP context broker for AI coding agents. ctxpack now ships a complete v1
-    agent-native path: safe repository inventory, lexical and symbol retrieval, related tests, dependency and git-history signals,
-    budgeted Markdown/JSON context packs, source-free historical evals, deterministic MCP protocol smoke tests, and real Codex CLI / Claude Code
-    MCP smoke proof with explicit repository arguments.
+    Ongoing Rust project for packing useful repository context for coding agents. The current version can inventory a repo, retrieve lexical
+    and symbol matches, include dependency and git-history signals, build Markdown or JSON context packs, and run MCP smoke tests with Codex CLI
+    and Claude Code.
   technologies:
   - Rust
   - MCP
@@ -543,6 +548,32 @@ projects:
   - Claude Code
   - Git
   - CLI
+- title: "Go Container Runtime: Docker from Scratch"
+  link: /showcase/projects/docker-from-scratch-go/
+  date: Jan 2026 - Present
+  description: >-
+    Freelance learning project where I am building a small Docker-like runtime in Go. It covers process isolation, namespaces,
+    filesystem setup, container networking, and command-line behavior.
+  technologies:
+  - Go
+  - Docker
+  - Containers
+  - Linux Namespaces
+  - Linux Networking
+  - Systems Programming
+- title: "Mini Deep Learning Framework: PyTorch from Scratch"
+  link: /showcase/projects/deep-learning-framework-capstone/
+  date: Dec 2025 - Present
+  description: >-
+    Freelance learning project where I am rebuilding the basic parts of PyTorch: scalar values, tensors, autodiff,
+    neural-network layers, convolutional operators, and simple training loops.
+  technologies:
+  - Python
+  - PyTorch
+  - Autograd
+  - Tensors
+  - Neural Networks
+  - Deep Learning
 - title: "Blockchain-Based Ticketing Platform"
   link: /showcase/projects/blockchain-ticketing/
   date: Jan 2021 - April 2021
