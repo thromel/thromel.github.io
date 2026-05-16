@@ -12,11 +12,14 @@ navbar_title: Publications
   <p>Selected papers, research summaries, and artifacts across software engineering, security, and applied machine learning.</p>
 
   {% for year in pubs_by_year %}
+  {% assign is_latest_year = forloop.first %}
   <section class="academic-section publication-year-group" id="year-{{ year.name }}">
     <h2>{{ year.name }}</h2>
     <div class="academic-publication-list">
       {% for item in year.items %}
-        {% include widgets/publication_item.html item=item highlight=forloop.first %}
+        {% assign highlight_current_publication = false %}
+        {% if is_latest_year and forloop.first %}{% assign highlight_current_publication = true %}{% endif %}
+        {% include widgets/publication_item.html item=item highlight=highlight_current_publication %}
       {% endfor %}
     </div>
   </section>

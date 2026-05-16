@@ -6,7 +6,7 @@ navbar_title: Home
 
 <section class="academic-intro" aria-label="Profile introduction">
   <div class="academic-intro__copy">
-    <p class="academic-name">{{ site.data.profile.primary_name }}</p>
+    <h1 class="academic-name">{{ site.data.profile.primary_name }}</h1>
     <p>I'm a software engineer at <a href="{{ site.data.profile.current_company.url }}" target="_blank" rel="noopener noreferrer">{{ site.data.profile.current_company.name }}</a> and a software engineering researcher. I build tools for coding agents, healthcare backend systems, and research software for AI/ML security, LLM systems, and empirical software engineering.</p>
     <p>I completed my B.Sc. in Computer Science and Engineering at <a href="https://cse.buet.ac.bd" target="_blank" rel="noopener noreferrer">BUET</a>. I will start an M.Sc. in Computing Science at the <a href="https://www.ualberta.ca/en/computing-science/index.html" target="_blank" rel="noopener noreferrer">University of Alberta</a> in September 2026.</p>
     <p class="academic-link-row" aria-label="Profile links"><a href="mailto:{{ site.data.profile.email }}">Email</a><span aria-hidden="true">/</span><a href="/assets/pdf/cv.pdf" target="_blank" rel="noopener noreferrer">CV</a><span aria-hidden="true">/</span><a href="{{ 'about' | relative_url }}">Bio</a><span aria-hidden="true">/</span><a href="https://scholar.google.com/citations?user={{ site.data.profile.gscholar }}" target="_blank" rel="noopener noreferrer">Scholar</a><span aria-hidden="true">/</span><a href="https://github.com/{{ site.data.profile.github }}" target="_blank" rel="noopener noreferrer">Github</a><span aria-hidden="true">/</span><a href="https://www.linkedin.com/in/{{ site.data.profile.linkedin }}" target="_blank" rel="noopener noreferrer">LinkedIn</a></p>
@@ -117,6 +117,8 @@ navbar_title: Home
   {% for project in site.data.profile.projects limit:4 %}
   {% assign project_image = '' %}
   {% if project.title contains 'ctxpack' %}{% assign project_image = '/assets/images/projects/ctxpack-context-map.svg' %}{% endif %}
+  {% if project.title contains 'Go Container Runtime' %}{% assign project_image = '/assets/images/cards/go-database-card.svg' %}{% endif %}
+  {% if project.title contains 'Mini Deep Learning Framework' %}{% assign project_image = '/assets/images/cnn-architecture.png' %}{% endif %}
   {% if project.title contains 'Blockchain-Based Ticketing' %}{% assign project_image = '/assets/images/projects/blockchain-ticketing-banner.jpg' %}{% endif %}
   {% if project.title contains 'Image Captioning' %}{% assign project_image = '/assets/images/image-caption-generator.png' %}{% endif %}
   {% if project.title contains 'Eventfly' %}{% assign project_image = '/assets/images/eventfly.png' %}{% endif %}
