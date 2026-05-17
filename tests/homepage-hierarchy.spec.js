@@ -15,7 +15,8 @@ test.describe('homepage hierarchy', () => {
     await expect(page.locator('.academic-link-row').first()).toContainText('CV');
     await expect(page.locator('.academic-link-row').first()).toContainText('Scholar');
     await expect(page.locator('.academic-current')).toContainText('Current Focus');
-    await expect(page.locator('#site-navigation')).toContainText('Education');
+    await expect(page.locator('#site-navigation')).not.toContainText('Education');
+    await expect(page.locator('.academic-footer')).toContainText('Education');
     await expect(page.locator('#homepage-research-publications .academic-entry--selected')).toHaveCount(4);
     await expect(page.locator('#homepage-research-publications')).toContainText('See more research');
     await expect(page.locator('#homepage-education .academic-entry')).toHaveCount(3);

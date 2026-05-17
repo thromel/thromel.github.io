@@ -38,7 +38,7 @@
         {%- assign raw_is_external = false -%}
         {%- if raw_href contains '://' or raw_href contains 'mailto:' -%}{%- assign raw_is_external = true -%}{%- endif -%}
         {%- unless raw_href == primary_href -%}
-          {% if primary_href or forloop.index0 > 0 %}<span aria-hidden="true">/</span>{% endif %}<a href="{% if raw_is_external %}{{ raw_href }}{% else %}{{ raw_href | relative_url }}{% endif %}"{% if raw_is_external %} target="_blank" rel="noopener noreferrer"{% elsif raw_target %} target="{{ raw_target }}"{% endif %}>{{ link[0] }}</a>
+          <a href="{% if raw_is_external %}{{ raw_href }}{% else %}{{ raw_href | relative_url }}{% endif %}"{% if raw_is_external %} target="_blank" rel="noopener noreferrer"{% elsif raw_target %} target="{{ raw_target }}"{% endif %}>{{ link[0] }}</a>
         {%- endunless -%}
       {% endfor %}
     </p>

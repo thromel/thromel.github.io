@@ -46,12 +46,44 @@
 
 ### Jon Barron-Inspired Academic Theme
 
-- [x] **JB-01**: Visitor sees a narrow, text-first academic homepage with intro copy, circular portrait, and slash-separated identity links.
+- [x] **JB-01**: Visitor sees a narrow, text-first academic homepage with intro copy, circular portrait, and compact grouped identity links.
 - [x] **JB-02**: Visitor sees research and publication work as compact media/content rows rather than large cards or timelines.
 - [x] **JB-03**: Visitor can navigate core pages through minimal text links without competing app-like navbar, drawer, theme toggle, gradients, or floating controls.
 - [x] **JB-04**: Visitor can read secondary pages in the same narrow academic typography and spacing system.
 - [x] **JB-05**: Visitor still gets useful GitHub proof-of-work context when async data loads, fails, is empty, or is rate-limited.
 - [x] **JB-06**: Maintainer can run repeatable checks for the academic theme on desktop and mobile.
+
+## v1.1 Portfolio UX Polish Requirements
+
+### Navigation
+
+- [x] **NAV-01**: Visitor can scan the top navigation without it reading like a full sitemap.
+- [x] **NAV-02**: Visitor can still reach every existing major page through visible navigation, footer links, or contextual links.
+- [x] **NAV-03**: Active-page highlighting remains accurate after navigation changes.
+
+### Projects
+
+- [ ] **PROJ-01**: Visitor can distinguish featured systems/research projects from older archive work.
+- [ ] **PROJ-02**: Project entries stay compact on desktop and mobile, with stable image/media sizing.
+- [ ] **PROJ-03**: Project summaries and tags emphasize the strongest evidence instead of listing too many tools.
+
+### Open Source Contributions
+
+- [ ] **OSS2-01**: Visitor sees curated highlights for RefactoringMiner, EF Core, GenHTTP, deepagents, TypeScript, and other selected open-source work.
+- [ ] **OSS2-02**: Visitor still sees useful contribution context when GitHub API data is slow, empty, or rate-limited.
+- [ ] **OSS2-03**: Live GitHub activity remains available as supporting proof without overwhelming curated contribution highlights.
+
+### SEO and Social Preview
+
+- [ ] **SEO-01**: Core pages have page-specific descriptions suitable for search and social previews.
+- [ ] **SEO-02**: Shared layout emits reliable canonical, Open Graph, and Twitter preview metadata through existing Jekyll mechanisms.
+- [ ] **SEO-03**: Preview metadata uses a stable image and does not break on GitHub Pages paths.
+
+### Dark Mode and Verification
+
+- [ ] **DARK-01**: Dark mode keeps the academic tone while improving contrast for navigation, projects, tags, proof surfaces, and links.
+- [ ] **DARK-02**: Theme preference and toggle accessibility remain intact after styling changes.
+- [ ] **QUAL2-01**: Maintainer can verify navigation, projects, contributions, SEO metadata, and dark mode through repeatable local checks.
 
 ## v2 Requirements
 
@@ -97,12 +129,28 @@
 | PUB-02 | Phase 05.1 | Complete |
 | PUB-03 | Phase 05.1 | Complete |
 | PUB-04 | Phase 05.1 | Complete |
+| NAV-01 | Phase 7 | Complete |
+| NAV-02 | Phase 7 | Complete |
+| NAV-03 | Phase 7 | Complete |
+| PROJ-01 | Phase 8 | Pending |
+| PROJ-02 | Phase 8 | Pending |
+| PROJ-03 | Phase 8 | Pending |
+| OSS2-01 | Phase 9 | Pending |
+| OSS2-02 | Phase 9 | Pending |
+| OSS2-03 | Phase 9 | Pending |
+| SEO-01 | Phase 10 | Pending |
+| SEO-02 | Phase 10 | Pending |
+| SEO-03 | Phase 10 | Pending |
+| DARK-01 | Phase 11 | Pending |
+| DARK-02 | Phase 11 | Pending |
+| QUAL2-01 | Phase 11 | Pending |
 
 **Coverage:**
 - v1 requirements: 19 total
-- Mapped to phases: 19
+- v1.1 requirements: 15 total
+- Mapped to phases: 34
 - Unmapped: 0 ✓
 
 ---
 *Requirements defined: 2026-04-09*
-*Last updated: 2026-04-12 after Phase 05.1 planning kickoff*
+*Last updated: 2026-05-17 after v1.1 requirements definition*

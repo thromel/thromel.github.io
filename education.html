@@ -20,8 +20,8 @@ navbar_title: Education
         <h2 class="education-entry__degree">{{ edu.position }}</h2>
         <p class="education-entry__meta">
           {% if edu.url %}<a href="{{ edu.url }}" target="_blank" rel="noopener noreferrer">{{ edu.name }}</a>{% else %}{{ edu.name }}{% endif %}
-          <span aria-hidden="true">/</span>
-          <span>{{ edu.date }}</span>{% if edu.status %}<span aria-hidden="true">/</span><span>{{ edu.status }}</span>{% endif %}
+          <span aria-hidden="true">·</span>
+          <span>{{ edu.date }}</span>{% if edu.status %}<span aria-hidden="true">·</span><span>{{ edu.status }}</span>{% endif %}
         </p>
         <div class="education-entry__description">{{ edu.description }}</div>
         {% if edu.coursework %}

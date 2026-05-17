@@ -2,6 +2,7 @@
 layout: default
 title: Tanzim Hossain Romel
 navbar_title: Home
+description: Software engineer and researcher building coding-agent tools, healthcare backend systems, and research software for AI/ML security and LLM systems.
 ---
 
 <section class="academic-intro" aria-label="Profile introduction">
@@ -9,7 +10,7 @@ navbar_title: Home
     <h1 class="academic-name">{{ site.data.profile.primary_name }}</h1>
     <p>I'm a software engineer at <a href="{{ site.data.profile.current_company.url }}" target="_blank" rel="noopener noreferrer">{{ site.data.profile.current_company.name }}</a> and a software engineering researcher. I build tools for coding agents, healthcare backend systems, and research software for AI/ML security, LLM systems, and empirical software engineering.</p>
     <p>I completed my B.Sc. in Computer Science and Engineering at <a href="https://cse.buet.ac.bd" target="_blank" rel="noopener noreferrer">BUET</a>. I will start an M.Sc. in Computing Science at the <a href="https://www.ualberta.ca/en/computing-science/index.html" target="_blank" rel="noopener noreferrer">University of Alberta</a> in September 2026.</p>
-    <p class="academic-link-row" aria-label="Profile links"><a href="mailto:{{ site.data.profile.email }}">Email</a><span aria-hidden="true">/</span><a href="/assets/pdf/cv.pdf" target="_blank" rel="noopener noreferrer">CV</a><span aria-hidden="true">/</span><a href="{{ 'about' | relative_url }}">Bio</a><span aria-hidden="true">/</span><a href="https://scholar.google.com/citations?user={{ site.data.profile.gscholar }}" target="_blank" rel="noopener noreferrer">Scholar</a><span aria-hidden="true">/</span><a href="https://github.com/{{ site.data.profile.github }}" target="_blank" rel="noopener noreferrer">Github</a><span aria-hidden="true">/</span><a href="https://www.linkedin.com/in/{{ site.data.profile.linkedin }}" target="_blank" rel="noopener noreferrer">LinkedIn</a></p>
+    <p class="academic-link-row" aria-label="Profile links"><a href="mailto:{{ site.data.profile.email }}"><i class="fa-solid fa-envelope link-icon" aria-hidden="true"></i><span>Email</span></a><a href="/assets/pdf/cv.pdf" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-file-pdf link-icon" aria-hidden="true"></i><span>CV</span></a><a href="{{ 'about' | relative_url }}"><i class="fa-solid fa-user link-icon" aria-hidden="true"></i><span>Bio</span></a><a href="https://scholar.google.com/citations?user={{ site.data.profile.gscholar }}" target="_blank" rel="noopener noreferrer"><i class="ai ai-google-scholar link-icon" aria-hidden="true"></i><span>Scholar</span></a><a href="https://github.com/{{ site.data.profile.github }}" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github link-icon" aria-hidden="true"></i><span>Github</span></a><a href="https://www.linkedin.com/in/{{ site.data.profile.linkedin }}" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-linkedin link-icon" aria-hidden="true"></i><span>LinkedIn</span></a></p>
   </div>
   <div class="academic-portrait"><a href="{{ site.data.profile.portrait_url | relative_url }}"><img src="{{ site.data.profile.portrait_url | relative_url }}" alt="{{ site.data.profile.primary_name }} profile photo"></a></div>
 </section>
@@ -18,13 +19,13 @@ navbar_title: Home
   <h2 id="current-focus-title">Current Focus</h2>
   <p>{{ site.data.profile.current_focus.primary }}</p>
   <p>{{ site.data.profile.current_focus.open_source }}</p>
-  <p class="academic-link-row" aria-label="Homepage sections"><a href="#homepage-news">News</a><span aria-hidden="true">/</span><a href="#homepage-research-publications">Research &amp; Publications</a><span aria-hidden="true">/</span><a href="#homepage-education">Education</a><span aria-hidden="true">/</span><a href="#homepage-work">Work</a><span aria-hidden="true">/</span><a href="#homepage-projects">Projects</a><span aria-hidden="true">/</span><a href="#homepage-skills">Skills</a></p>
+  <p class="academic-link-row" aria-label="Homepage sections"><a href="#homepage-news"><i class="fa-solid fa-bullhorn link-icon" aria-hidden="true"></i><span>News</span></a><a href="#homepage-research-publications"><i class="fa-solid fa-microscope link-icon" aria-hidden="true"></i><span>Research &amp; Publications</span></a><a href="#homepage-education"><i class="fa-solid fa-graduation-cap link-icon" aria-hidden="true"></i><span>Education</span></a><a href="#homepage-work"><i class="fa-solid fa-briefcase link-icon" aria-hidden="true"></i><span>Work</span></a><a href="#homepage-projects"><i class="fa-solid fa-code link-icon" aria-hidden="true"></i><span>Projects</span></a><a href="#homepage-skills"><i class="fa-solid fa-screwdriver-wrench link-icon" aria-hidden="true"></i><span>Skills</span></a></p>
 </section>
 
 <div id="oss-summary" class="oss-inline proof-surface" data-github-user="{{ site.data.profile.github | default: 'thromel' }}" data-state="loading">
   <div class="proof-surface-header"><a href="{{ 'contributions' | relative_url }}" class="oss-badge">Open source activity</a></div>
   <div id="oss-summary-status" class="proof-state" data-state="loading" aria-live="polite"><span class="proof-state-copy"><span class="proof-state-label">GitHub activity</span>: <span id="oss-summary-text" class="proof-state-text">Loading recent merged pull requests...</span></span></div>
-  <div class="proof-links oss-repos" aria-label="Recent contribution targets"><span>Recent repositories:</span><a href="https://github.com/langchain-ai/deepagents/pulls?q=author%3Athromel" target="_blank" rel="noopener noreferrer">deepagents</a><span>/</span><a href="https://github.com/microsoft/typescript-go/pulls?q=author%3Athromel" target="_blank" rel="noopener noreferrer">typescript-go</a><span>/</span><a href="https://github.com/tsantalis/RefactoringMiner/pulls?q=author%3Athromel" target="_blank" rel="noopener noreferrer">RefactoringMiner</a></div>
+  <div class="proof-links oss-repos" aria-label="Recent contribution targets"><span><i class="fa-solid fa-code-branch link-icon" aria-hidden="true"></i>Recent repositories:</span><a href="https://github.com/langchain-ai/deepagents/pulls?q=author%3Athromel" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github link-icon" aria-hidden="true"></i><span>deepagents</span></a><a href="https://github.com/microsoft/typescript-go/pulls?q=author%3Athromel" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github link-icon" aria-hidden="true"></i><span>typescript-go</span></a><a href="https://github.com/tsantalis/RefactoringMiner/pulls?q=author%3Athromel" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github link-icon" aria-hidden="true"></i><span>RefactoringMiner</span></a></div>
 </div>
 <script src="{{ '/assets/js/github-proof.js' | relative_url }}" defer></script>
 
@@ -79,7 +80,7 @@ navbar_title: Home
     </article>
   </div>
 
-  <p class="academic-link-row"><a href="{{ 'research' | relative_url }}">See more research</a><span aria-hidden="true">/</span><a href="{{ 'publications' | relative_url }}">All publications</a></p>
+  <p class="academic-link-row"><a href="{{ 'research' | relative_url }}"><i class="fa-solid fa-arrow-right link-icon" aria-hidden="true"></i><span>See more research</span></a><a href="{{ 'publications' | relative_url }}"><i class="fa-solid fa-layer-group link-icon" aria-hidden="true"></i><span>All publications</span></a></p>
 </section>
 
 <section id="homepage-education" class="academic-section">

@@ -19,6 +19,11 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 5: Verification Hardening** - Lock in repeatable checks and guidance for future UI work (completed 2026-04-11)
 - [x] **Phase 05.1: Publications convergence and final UI polish** - Bring publications onto the canonical UI system and close the remaining near-miss polish gaps (completed 2026-04-12)
 - [x] **Phase 6: Jon Barron-Inspired Theme Migration** - Convert the site to a narrow, text-first academic theme while preserving content, URLs, and verification. (completed 2026-04-30)
+- [x] **Phase 7: Navigation and Metadata Foundation** - Simplify the academic shell navigation and set up page identity metadata. (completed 2026-05-17)
+- [ ] **Phase 8: Projects Page Polish** - Make project presentation compact, modern, and easier to scan.
+- [ ] **Phase 9: Open Source Contributions Page** - Add curated contribution highlights and keep live GitHub activity as support.
+- [ ] **Phase 10: SEO and Social Preview Completion** - Improve search/social previews through shared Jekyll metadata.
+- [ ] **Phase 11: Dark Mode and Verification Hardening** - Refine dark mode across real surfaces and expand verification.
 
 ## Phase Details
 
@@ -142,9 +147,101 @@ Plans:
 **Depends on**: Phase 05.1
 **UI hint**: yes
 **Success Criteria**:
-  1. Homepage uses narrow academic layout, intro plus circular portrait, slash-separated profile links, and compact sections.
+  1. Homepage uses narrow academic layout, intro plus circular portrait, compact grouped profile links, and compact sections.
   2. Publications and research surfaces use row-based media/content entries with stable links and readable metadata.
   3. Global shell is minimal and does not expose duplicate theme/nav/floating controls.
   4. Contributions and homepage GitHub proof surfaces retain deterministic loading, success, empty, and failure states.
   5. Full UI verification passes on desktop and mobile.
 **Plans**: 8/8 plans complete
+
+## Milestone v1.1: Portfolio UX Polish
+
+### Phase 7: Navigation and Metadata Foundation
+
+**Goal**: Make the academic shell easier to scan while preserving access to existing content and preparing page-level metadata.
+**Requirements**: NAV-01, NAV-02, NAV-03
+**Depends on**: Phase 6
+**UI hint**: yes
+**Success Criteria**:
+  1. Header navigation is shorter and readable in one pass on desktop and mobile.
+  2. Every current major page remains reachable through header, footer, or contextual links.
+  3. Active-page state still matches page front matter after navigation changes.
+  4. Core pages have a clear metadata source for later SEO/social work.
+**Plans**: 3/3 plans complete
+
+Plans:
+- [x] 07-01: Define navigation groups and page metadata sources
+- [x] 07-02: Render primary and secondary routes through the shared shell
+- [x] 07-03: Verify active states, route reachability, and metadata readiness
+
+### Phase 8: Projects Page Polish
+
+**Goal**: Make project entries compact, evidence-focused, and visually stable across desktop and mobile.
+**Requirements**: PROJ-01, PROJ-02, PROJ-03
+**Depends on**: Phase 7
+**UI hint**: yes
+**Success Criteria**:
+  1. Featured projects and archive projects read as distinct sections.
+  2. Project media and summaries do not create tall, narrow, or unstable cards.
+  3. Project tags are limited to the strongest technologies.
+  4. Learning capstones are framed as milestone/capstone builds, not course listings.
+**Plans**: 0/3 plans drafted
+
+Plans:
+- [ ] 08-01: Normalize project data and excerpts for compact display
+- [ ] 08-02: Refine projects page layout and responsive project components
+- [ ] 08-03: Verify project page readability and card sizing on desktop and mobile
+
+### Phase 9: Open Source Contributions Page
+
+**Goal**: Make open-source work understandable even before live GitHub data loads.
+**Requirements**: OSS2-01, OSS2-02, OSS2-03
+**Depends on**: Phase 8
+**UI hint**: yes
+**Success Criteria**:
+  1. RefactoringMiner, EF Core, GenHTTP, deepagents, and TypeScript are visible as curated contribution targets.
+  2. The page remains useful during GitHub loading, empty, error, and rate-limit states.
+  3. Live PR activity supports the curated highlights instead of dominating the page.
+  4. Homepage and contributions proof language stay consistent.
+**Plans**: 0/3 plans drafted
+
+Plans:
+- [ ] 09-01: Create curated contribution data and page structure
+- [ ] 09-02: Integrate curated highlights with live GitHub proof states
+- [ ] 09-03: Verify contributions success, empty, error, and rate-limit paths
+
+### Phase 10: SEO and Social Preview Completion
+
+**Goal**: Improve how the portfolio appears in search results, social links, and page previews.
+**Requirements**: SEO-01, SEO-02, SEO-03
+**Depends on**: Phase 9
+**UI hint**: no
+**Success Criteria**:
+  1. Core pages emit useful page-specific descriptions.
+  2. Shared layout produces reliable canonical, Open Graph, and Twitter metadata.
+  3. Social preview image paths resolve correctly on the built GitHub Pages site.
+  4. Generated HTML can be checked without hand-inspecting every page.
+**Plans**: 0/3 plans drafted
+
+Plans:
+- [ ] 10-01: Define metadata defaults and per-page descriptions
+- [ ] 10-02: Update shared layout/config for canonical and social previews
+- [ ] 10-03: Verify built HTML metadata for core pages
+
+### Phase 11: Dark Mode and Verification Hardening
+
+**Goal**: Refine dark mode across the real v1.1 surfaces and leave repeatable checks for the milestone.
+**Requirements**: DARK-01, DARK-02, QUAL2-01
+**Depends on**: Phase 10
+**UI hint**: yes
+**Success Criteria**:
+  1. Dark mode has readable contrast on navigation, projects, contributions, tags, links, and proof states.
+  2. Theme toggle behavior and saved preference still work.
+  3. Full verification covers desktop, mobile, SEO metadata, and GitHub-driven async states.
+  4. Screenshots or audit notes capture the final v1.1 visual state.
+**Plans**: 0/3 plans drafted
+
+Plans:
+- [ ] 11-01: Tune dark-mode tokens and component states across v1.1 surfaces
+- [ ] 11-02: Extend verification for navigation, projects, contributions, metadata, and theme behavior
+- [ ] 11-03: Run full verification and record final UI evidence

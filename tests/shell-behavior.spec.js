@@ -8,6 +8,8 @@ const PAGE_CASES = [
   { name: 'About', path: '/about' },
   { name: 'Learning', path: '/learning' },
   { name: 'Contributions', path: '/contributions' },
+  { name: 'Publications', path: '/publications' },
+  { name: 'CV', path: '/cv' },
 ];
 
 async function gotoShellPage(page, pageCase) {

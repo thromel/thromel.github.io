@@ -1,36 +1,36 @@
 ---
 gsd_state_version: 1.0
-milestone: v1.0
-milestone_name: milestone
-status: ready_to_complete
-stopped_at: Phase 6 complete
-last_updated: "2026-04-12T01:04:28+0600"
-last_activity: 2026-04-30 -- Jon Barron-inspired theme migration complete
+milestone: v1.1
+milestone_name: Portfolio UX Polish
+status: phase_complete
+stopped_at: Phase 7 complete
+last_updated: "2026-05-17T07:37:36+0600"
+last_activity: 2026-05-17 -- Phase 7 execution complete
 progress:
-  total_phases: 6
-  completed_phases: 6
-  total_plans: 18
-  completed_plans: 18
-  percent: 100
+  total_phases: 5
+  completed_phases: 1
+  total_plans: 15
+  completed_plans: 3
+  percent: 20
 ---
 
 # Project State
 
 ## Project Reference
 
-See: .planning/PROJECT.md (updated 2026-04-09)
+See: .planning/PROJECT.md (updated 2026-05-17)
 
 **Core value:** Visitors can quickly understand Romel's work through a credible, readable, and consistent portfolio experience.
-**Current focus:** Milestone audit and completion
+**Current focus:** v1.1 Portfolio UX Polish
 
 ## Current Position
 
-Phase: 6 (jon-barron-inspired-theme-migration) — COMPLETE
-Plan: 3 of 3
-Status: Milestone ready to complete
-Last activity: 2026-04-12 -- Phase 05.1 complete
+Phase: 7 (navigation-and-metadata-foundation) - COMPLETE
+Plan: 3 of 3 complete
+Status: Ready for Phase 8 planning or execution
+Last activity: 2026-05-17 -- Phase 7 navigation, metadata sources, and verification completed
 
-Progress: [██████████] 100%
+Progress: [██░░░░░░░░] 20%
 
 ## Performance Metrics
 
@@ -80,6 +80,7 @@ Progress: [██████████] 100%
 ### Roadmap Evolution
 
 - Phase 05.1 inserted after Phase 05: Publications convergence and final UI polish (URGENT)
+- v1.1 starts at Phase 7 and keeps the current academic UI direction while polishing navigation, projects, contributions, SEO/social previews, and dark mode.
 
 ### Decisions
 
@@ -108,6 +109,13 @@ Recent decisions affecting current work:
 - [Phase 05.1]: Homepage and publications now share section-intro framing and CTA vocabulary — The inserted polish phase needed the archive and preview surfaces to read as one system without adding a new hero or a second CTA cluster.
 - [Phase 05.1]: Homepage publication previews expose at most one secondary artifact link — The broader polish needed stronger publication affordances, but the Phase 2 hierarchy would regress if publication cards grew into another crowded action cluster.
 - [Phase 05.1]: Publications now run inside the canonical full verification path — The milestone cannot close credibly if publications remain outside verify-ui, because that is how the template-era regressions slipped through the first pass.
+- [v1.1]: Research found that the site should keep Jekyll collections/data, `overhaul.css`, `site-shell.js`, and existing GitHub proof scripts rather than adopting a new academic template.
+- [v1.1]: Live GitHub data should become supporting proof; curated contribution highlights should explain important open-source work even when API calls fail.
+- [v1.1]: Navigation cleanup should shorten the header while preserving route access through header, footer, or contextual links.
+- [Phase 7]: Planning will keep the header to Home, Research, Publications, Projects, Contributions, and CV, while moving About, Education, Work, Achievements, News, and Learning into a visible footer route row.
+- [Phase 7]: Metadata work is limited to page-specific `description` front matter; Phase 10 still owns Open Graph, Twitter, canonical, and preview-image output.
+- [Phase 7]: Slash-separated link groups were replaced with compact spaced links across the header, footer, homepage link rows, proof links, publication links, research shortcuts, and education metadata after visual review.
+- [Phase 7]: A small portrait-backed wordmark and restrained Font Awesome/Academicons labels now make navigation and link groups friendlier without adding a new UI framework.
 
 ### Pending Todos
 
@@ -117,6 +125,7 @@ None yet.
 
 - GitHub-driven proof surfaces depend on unauthenticated browser-side API calls
 - The repo still lacks a committed Playwright toolchain manifest, so local verification currently relies on `npm install --no-save @playwright/test`
+- `gsd-sdk` is not installed in this environment, so v1.1 planning artifacts were created with the documented manual fallback instead of SDK handlers.
 
 ## Session Continuity
 

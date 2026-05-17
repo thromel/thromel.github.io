@@ -34,7 +34,12 @@
       return;
     }
     var isDark = theme === 'dark';
-    toggle.textContent = isDark ? 'Light' : 'Dark';
+    var label = toggle.querySelector('.theme-toggle__label');
+    if (label) {
+      label.textContent = isDark ? 'Light' : 'Dark';
+    } else {
+      toggle.textContent = isDark ? 'Light' : 'Dark';
+    }
     toggle.setAttribute('aria-pressed', String(isDark));
     toggle.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
   }
