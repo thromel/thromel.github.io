@@ -19,15 +19,14 @@ Visitors can quickly understand Romel's work through a credible, readable, and c
 - ✓ Visitors can use a responsive site shell with desktop navigation, mobile drawer navigation, skip links, theme toggle, scroll progress, and back-to-top affordances — existing
 - ✓ Visitors can access downloadable CV and external identity links such as GitHub, LinkedIn, Google Scholar, and ORCID — existing
 - ✓ Visitors can see GitHub-backed open-source contribution signals on the homepage and contributions page when the API is available — existing
+- ✓ Visitors can distinguish current featured systems/research projects from capstone, build-narrative, and older archive work — v1.1 complete
+- ✓ Visitors can understand selected open-source work through curated contribution highlights before live GitHub data loads — v1.1 complete
+- ✓ Core pages emit page descriptions, canonical URLs, Open Graph metadata, Twitter metadata, and a stable preview image — v1.1 complete
+- ✓ Light and dark themes use one canonical evidence-first academic visual system verified on desktop and mobile — v1.1 complete
 
 ### Active
 
-- [ ] Unify shared pages and dynamic sections around the current shell and token system centered on `assets/css/overhaul.css` and `assets/js/site-shell.js`
-- [ ] Improve homepage hierarchy, especially on mobile, so the message leads before decorative elements and action density is reduced
-- [ ] Raise baseline typography and spacing for dense reading surfaces so news, timelines, and metadata-heavy sections are easier to scan
-- [ ] Stabilize GitHub-driven UI blocks with clearer loading, fallback, and token-consistent presentation
-- [ ] Retire, isolate, or replace legacy theme and navigation layers that conflict with the current shell
-- [ ] Establish repeatable regression checks for shell behavior, major responsive layouts, and key async states
+- [ ] Complete final milestone closeout if this work is accepted for publishing.
 
 ### Out of Scope
 
@@ -42,7 +41,9 @@ The site is a Jekyll codebase with shared layouts in `_layouts/`, reusable parti
 
 A fresh codebase map exists under `.planning/codebase/` and identifies the most important architectural tension: the repo contains a newer site shell using `data-theme`, `assets/js/site-shell.js`, and `assets/css/overhaul.css`, but older parallel layers still exist in `assets/js/theme-toggle.js`, `assets/js/app-navigation.js`, `assets/js/advanced-interactions.js`, `assets/css/developer-theme.css`, and `assets/css/custom.css`.
 
-A retroactive UI audit in `00-UI-REVIEW.md` scored the site `17/24` and identified three highest-impact gaps:
+A complete UI/UX audit and overhaul note now lives in `.planning/ui-reviews/2026-05-30-complete-ui-ux-audit.md`. The current direction is an evidence-first academic dossier: narrow and readable for faculty/research readers, but with stronger project hierarchy, curated open-source proof, social metadata, and verified light/dark theme behavior.
+
+A retroactive UI audit in `00-UI-REVIEW.md` scored the earlier site `17/24` and identified three highest-impact gaps:
 
 1. Dense reading surfaces are too small for comfortable scanning.
 2. The homepage hero is visually crowded and loses hierarchy on mobile.
@@ -68,6 +69,8 @@ The repo is already in active use and already has unrelated local changes, so pl
 | Skip separate domain research during initialization | The immediate scope is a targeted brownfield remediation with enough local evidence already gathered | — Pending |
 | Prioritize consistency, readability, and reliability before adding new portfolio features | The current bottlenecks are experience quality and maintainability, not missing surface area | — Pending |
 | Adopt a Jon Barron-inspired minimal academic theme for v2 | The portfolio now shifts from a modern card-heavy site to a narrow, text-first academic homepage that foregrounds research and publications | Complete |
+| Adopt an evidence-first academic dossier theme for v1.1 polish | The target audience needs fast proof of research direction, open-source credibility, project depth, and maintained metadata more than broad marketing polish | Complete |
+| Keep live GitHub activity as supporting proof behind curated contribution highlights | Unauthenticated GitHub API calls can be slow or rate-limited, while curated contribution context must remain visible | Complete |
 
 ## Evolution
 
@@ -87,4 +90,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-04-09 after initialization*
+*Last updated: 2026-05-30 after complete UI/UX overhaul*

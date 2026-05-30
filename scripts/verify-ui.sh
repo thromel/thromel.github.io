@@ -82,6 +82,7 @@ case "${MODE}" in
       "tests/homepage-selected-work.spec.js"
       "tests/navbar-layout.spec.js"
       "tests/shell-behavior.spec.js"
+      "tests/v11-overhaul.spec.js"
     )
     ;;
   *)

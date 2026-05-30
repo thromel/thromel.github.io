@@ -63,27 +63,27 @@
 
 ### Projects
 
-- [ ] **PROJ-01**: Visitor can distinguish featured systems/research projects from older archive work.
-- [ ] **PROJ-02**: Project entries stay compact on desktop and mobile, with stable image/media sizing.
-- [ ] **PROJ-03**: Project summaries and tags emphasize the strongest evidence instead of listing too many tools.
+- [x] **PROJ-01**: Visitor can distinguish featured systems/research projects from older archive work.
+- [x] **PROJ-02**: Project entries stay compact on desktop and mobile, with stable image/media sizing.
+- [x] **PROJ-03**: Project summaries and tags emphasize the strongest evidence instead of listing too many tools.
 
 ### Open Source Contributions
 
-- [ ] **OSS2-01**: Visitor sees curated highlights for RefactoringMiner, EF Core, GenHTTP, deepagents, TypeScript, and other selected open-source work.
-- [ ] **OSS2-02**: Visitor still sees useful contribution context when GitHub API data is slow, empty, or rate-limited.
-- [ ] **OSS2-03**: Live GitHub activity remains available as supporting proof without overwhelming curated contribution highlights.
+- [x] **OSS2-01**: Visitor sees curated highlights for RefactoringMiner, EF Core, GenHTTP, deepagents, TypeScript, and other selected open-source work.
+- [x] **OSS2-02**: Visitor still sees useful contribution context when GitHub API data is slow, empty, or rate-limited.
+- [x] **OSS2-03**: Live GitHub activity remains available as supporting proof without overwhelming curated contribution highlights.
 
 ### SEO and Social Preview
 
-- [ ] **SEO-01**: Core pages have page-specific descriptions suitable for search and social previews.
-- [ ] **SEO-02**: Shared layout emits reliable canonical, Open Graph, and Twitter preview metadata through existing Jekyll mechanisms.
-- [ ] **SEO-03**: Preview metadata uses a stable image and does not break on GitHub Pages paths.
+- [x] **SEO-01**: Core pages have page-specific descriptions suitable for search and social previews.
+- [x] **SEO-02**: Shared layout emits reliable canonical, Open Graph, and Twitter preview metadata through existing Jekyll mechanisms.
+- [x] **SEO-03**: Preview metadata uses a stable image and does not break on GitHub Pages paths.
 
 ### Dark Mode and Verification
 
-- [ ] **DARK-01**: Dark mode keeps the academic tone while improving contrast for navigation, projects, tags, proof surfaces, and links.
-- [ ] **DARK-02**: Theme preference and toggle accessibility remain intact after styling changes.
-- [ ] **QUAL2-01**: Maintainer can verify navigation, projects, contributions, SEO metadata, and dark mode through repeatable local checks.
+- [x] **DARK-01**: Dark mode keeps the academic tone while improving contrast for navigation, projects, tags, proof surfaces, and links.
+- [x] **DARK-02**: Theme preference and toggle accessibility remain intact after styling changes.
+- [x] **QUAL2-01**: Maintainer can verify navigation, projects, contributions, SEO metadata, and dark mode through repeatable local checks.
 
 ## v2 Requirements
 
@@ -132,18 +132,18 @@
 | NAV-01 | Phase 7 | Complete |
 | NAV-02 | Phase 7 | Complete |
 | NAV-03 | Phase 7 | Complete |
-| PROJ-01 | Phase 8 | Pending |
-| PROJ-02 | Phase 8 | Pending |
-| PROJ-03 | Phase 8 | Pending |
-| OSS2-01 | Phase 9 | Pending |
-| OSS2-02 | Phase 9 | Pending |
-| OSS2-03 | Phase 9 | Pending |
-| SEO-01 | Phase 10 | Pending |
-| SEO-02 | Phase 10 | Pending |
-| SEO-03 | Phase 10 | Pending |
-| DARK-01 | Phase 11 | Pending |
-| DARK-02 | Phase 11 | Pending |
-| QUAL2-01 | Phase 11 | Pending |
+| PROJ-01 | Phase 8 | Complete |
+| PROJ-02 | Phase 8 | Complete |
+| PROJ-03 | Phase 8 | Complete |
+| OSS2-01 | Phase 9 | Complete |
+| OSS2-02 | Phase 9 | Complete |
+| OSS2-03 | Phase 9 | Complete |
+| SEO-01 | Phase 10 | Complete |
+| SEO-02 | Phase 10 | Complete |
+| SEO-03 | Phase 10 | Complete |
+| DARK-01 | Phase 11 | Complete |
+| DARK-02 | Phase 11 | Complete |
+| QUAL2-01 | Phase 11 | Complete |
 
 **Coverage:**
 - v1 requirements: 19 total

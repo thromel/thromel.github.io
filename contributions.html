@@ -7,7 +7,32 @@ description: Open-source contribution activity and selected pull requests across
 
 <section class="academic-section">
   <h1 class="academic-page-title">Contributions</h1>
-  <p>Open-source contribution activity and selected pull requests.</p>
+  <p>Selected open-source contribution targets, with live GitHub activity as supporting evidence.</p>
+</section>
+
+<section class="academic-section contributions-curated" aria-labelledby="curated-contributions-title">
+  <div class="section-heading-row">
+    <div>
+      <p class="section-kicker">Curated contribution proof</p>
+      <h2 id="curated-contributions-title">Where the work lands</h2>
+    </div>
+    <span>Research tools, .NET infrastructure, agent frameworks, and language tooling</span>
+  </div>
+
+  <div class="contribution-highlight-grid">
+    {% for item in site.data.contributions.highlights %}
+    <article class="contribution-highlight">
+      <div class="contribution-highlight__header">
+        <p class="contribution-highlight__area">{{ item.area }}</p>
+        <h3><a href="{{ item.url }}" target="_blank" rel="noopener noreferrer">{{ item.name }}</a></h3>
+        <p class="contribution-highlight__repo"><i class="fa-brands fa-github link-icon" aria-hidden="true"></i>{{ item.repo }}</p>
+      </div>
+      <p>{{ item.summary }}</p>
+      <p class="contribution-highlight__evidence">{{ item.evidence }}</p>
+      <p class="academic-tags">{% for tag in item.tags limit:3 %}<span class="academic-tag">{{ tag }}</span>{% endfor %}</p>
+    </article>
+    {% endfor %}
+  </div>
 </section>
 
 <section class="academic-section proof-surface contributions-surface" id="contributions-proof" data-github-user="{{ site.data.profile.github | default: 'thromel' }}" data-state="loading">
@@ -44,11 +69,9 @@ description: Open-source contribution activity and selected pull requests across
 
   <div class="proof-links" aria-label="Repository links">
     <span><i class="fa-solid fa-code-branch link-icon" aria-hidden="true"></i>Repository links:</span>
-    <a href="https://github.com/langchain-ai/deepagents/pulls?q=author%3Athromel" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github link-icon" aria-hidden="true"></i><span>deepagents</span></a>
-    <a href="https://github.com/microsoft/typescript-go/pulls?q=author%3Athromel" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github link-icon" aria-hidden="true"></i><span>typescript-go</span></a>
-    <a href="https://github.com/tsantalis/RefactoringMiner/pulls?q=author%3Athromel" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github link-icon" aria-hidden="true"></i><span>RefactoringMiner</span></a>
-    <a href="https://github.com/dotnet/efcore/pulls?q=author%3Athromel" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github link-icon" aria-hidden="true"></i><span>EF Core</span></a>
-    <a href="https://github.com/langchain-ai/langchain/pulls?q=author%3Athromel" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github link-icon" aria-hidden="true"></i><span>LangChain</span></a>
+    {% for item in site.data.contributions.highlights limit:6 %}
+    <a href="{{ item.url }}" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github link-icon" aria-hidden="true"></i><span>{{ item.name }}</span></a>
+    {% endfor %}
   </div>
 </section>
 

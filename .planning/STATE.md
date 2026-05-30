@@ -2,16 +2,16 @@
 gsd_state_version: 1.0
 milestone: v1.1
 milestone_name: Portfolio UX Polish
-status: phase_complete
-stopped_at: Phase 7 complete
-last_updated: "2026-05-17T07:37:36+0600"
-last_activity: 2026-05-17 -- Phase 7 execution complete
+status: ready_to_complete
+stopped_at: Phase 11 complete
+last_updated: "2026-05-30T00:00:00+0600"
+last_activity: 2026-05-30 -- Complete UI/UX overhaul and Playwright verification pass
 progress:
   total_phases: 5
-  completed_phases: 1
+  completed_phases: 5
   total_plans: 15
-  completed_plans: 3
-  percent: 20
+  completed_plans: 15
+  percent: 100
 ---
 
 # Project State
@@ -25,18 +25,18 @@ See: .planning/PROJECT.md (updated 2026-05-17)
 
 ## Current Position
 
-Phase: 7 (navigation-and-metadata-foundation) - COMPLETE
+Phase: 11 (dark-mode-and-verification-hardening) - COMPLETE
 Plan: 3 of 3 complete
-Status: Ready for Phase 8 planning or execution
-Last activity: 2026-05-17 -- Phase 7 navigation, metadata sources, and verification completed
+Status: Milestone ready to complete
+Last activity: 2026-05-30 -- Evidence-first academic UI/UX overhaul completed with target-audience audit, screenshots, and Playwright coverage
 
-Progress: [██░░░░░░░░] 20%
+Progress: [██████████] 100%
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed: 18
+- Total plans completed: 33
 - Average duration: 2.6 min
 - Total execution time: 0.8 hours
 
@@ -50,10 +50,15 @@ Progress: [██░░░░░░░░] 20%
 | 04 | 3 | 10 min | 3.3 min |
 | 05 | 3 | 6 min | 2.0 min |
 | 05.1 | 3 | 5 min | 1.7 min |
+| 07 | 3 | recorded | recorded |
+| 08 | 3 | consolidated | consolidated |
+| 09 | 3 | consolidated | consolidated |
+| 10 | 3 | consolidated | consolidated |
+| 11 | 3 | consolidated | consolidated |
 
 **Recent Trend:**
 
-- Last 5 plans: Phase 05 P02, Phase 05 P03, Phase 05.1 P01, Phase 05.1 P02, Phase 05.1 P03
+- Last 5 plans: Phase 07 P03, Phase 08 P03, Phase 09 P03, Phase 10 P03, Phase 11 P03
 - Trend: Stable
 
 | Phase 01 P01 | 1 min | 2 tasks | 2 files |
@@ -116,6 +121,11 @@ Recent decisions affecting current work:
 - [Phase 7]: Metadata work is limited to page-specific `description` front matter; Phase 10 still owns Open Graph, Twitter, canonical, and preview-image output.
 - [Phase 7]: Slash-separated link groups were replaced with compact spaced links across the header, footer, homepage link rows, proof links, publication links, research shortcuts, and education metadata after visual review.
 - [Phase 7]: A small portrait-backed wordmark and restrained Font Awesome/Academicons labels now make navigation and link groups friendlier without adding a new UI framework.
+- [Phase 8]: Projects now separate featured evidence, capstone/build narratives, and compact archive records, with stable media sizing and capped tags verified on desktop and mobile.
+- [Phase 9]: Contributions now lead with curated proof for RefactoringMiner, EF Core, GenHTTP, deepagents, TypeScript, and LangChain before live GitHub activity renders.
+- [Phase 10]: The shared layout now emits canonical, Open Graph, and Twitter metadata using page descriptions and a stable preview image.
+- [Phase 11]: The theme moved from beige academic paper to a slate/blue/teal evidence-first palette with dark-mode contrast verified on contribution cards.
+- [Phase 11]: `tests/v11-overhaul.spec.js` and `scripts/verify-ui.sh full` cover project hierarchy, contributions fallback behavior, social metadata, and dark-mode readability.
 
 ### Pending Todos
 

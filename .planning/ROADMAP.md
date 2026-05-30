@@ -20,10 +20,10 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 05.1: Publications convergence and final UI polish** - Bring publications onto the canonical UI system and close the remaining near-miss polish gaps (completed 2026-04-12)
 - [x] **Phase 6: Jon Barron-Inspired Theme Migration** - Convert the site to a narrow, text-first academic theme while preserving content, URLs, and verification. (completed 2026-04-30)
 - [x] **Phase 7: Navigation and Metadata Foundation** - Simplify the academic shell navigation and set up page identity metadata. (completed 2026-05-17)
-- [ ] **Phase 8: Projects Page Polish** - Make project presentation compact, modern, and easier to scan.
-- [ ] **Phase 9: Open Source Contributions Page** - Add curated contribution highlights and keep live GitHub activity as support.
-- [ ] **Phase 10: SEO and Social Preview Completion** - Improve search/social previews through shared Jekyll metadata.
-- [ ] **Phase 11: Dark Mode and Verification Hardening** - Refine dark mode across real surfaces and expand verification.
+- [x] **Phase 8: Projects Page Polish** - Make project presentation compact, modern, and easier to scan. (completed 2026-05-30)
+- [x] **Phase 9: Open Source Contributions Page** - Add curated contribution highlights and keep live GitHub activity as support. (completed 2026-05-30)
+- [x] **Phase 10: SEO and Social Preview Completion** - Improve search/social previews through shared Jekyll metadata. (completed 2026-05-30)
+- [x] **Phase 11: Dark Mode and Verification Hardening** - Refine dark mode across real surfaces and expand verification. (completed 2026-05-30)
 
 ## Phase Details
 
@@ -120,6 +120,12 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 | 4. Proof Surfaces | 3/3 | Complete | 2026-04-11 |
 | 5. Verification Hardening | 3/3 | Complete | 2026-04-11 |
 | 05.1. Publications convergence and final UI polish | 3/3 | Complete   | 2026-04-12 |
+| 6. Jon Barron-Inspired Theme Migration | 8/8 | Complete | 2026-04-30 |
+| 7. Navigation and Metadata Foundation | 3/3 | Complete | 2026-05-17 |
+| 8. Projects Page Polish | 3/3 | Complete | 2026-05-30 |
+| 9. Open Source Contributions Page | 3/3 | Complete | 2026-05-30 |
+| 10. SEO and Social Preview Completion | 3/3 | Complete | 2026-05-30 |
+| 11. Dark Mode and Verification Hardening | 3/3 | Complete | 2026-05-30 |
 
 ### Phase 05.1: Publications convergence and final UI polish (INSERTED)
 
@@ -185,12 +191,12 @@ Plans:
   2. Project media and summaries do not create tall, narrow, or unstable cards.
   3. Project tags are limited to the strongest technologies.
   4. Learning capstones are framed as milestone/capstone builds, not course listings.
-**Plans**: 0/3 plans drafted
+**Plans**: 3/3 plans complete
 
 Plans:
-- [ ] 08-01: Normalize project data and excerpts for compact display
-- [ ] 08-02: Refine projects page layout and responsive project components
-- [ ] 08-03: Verify project page readability and card sizing on desktop and mobile
+- [x] 08-01: Normalize project hierarchy and excerpts for compact display
+- [x] 08-02: Refine projects page layout and responsive project components
+- [x] 08-03: Verify project page readability and card sizing on desktop and mobile
 
 ### Phase 9: Open Source Contributions Page
 
@@ -203,12 +209,12 @@ Plans:
   2. The page remains useful during GitHub loading, empty, error, and rate-limit states.
   3. Live PR activity supports the curated highlights instead of dominating the page.
   4. Homepage and contributions proof language stay consistent.
-**Plans**: 0/3 plans drafted
+**Plans**: 3/3 plans complete
 
 Plans:
-- [ ] 09-01: Create curated contribution data and page structure
-- [ ] 09-02: Integrate curated highlights with live GitHub proof states
-- [ ] 09-03: Verify contributions success, empty, error, and rate-limit paths
+- [x] 09-01: Create curated contribution data and page structure
+- [x] 09-02: Integrate curated highlights with live GitHub proof states
+- [x] 09-03: Verify contributions success, empty, error, and rate-limit paths
 
 ### Phase 10: SEO and Social Preview Completion
 
@@ -221,12 +227,12 @@ Plans:
   2. Shared layout produces reliable canonical, Open Graph, and Twitter metadata.
   3. Social preview image paths resolve correctly on the built GitHub Pages site.
   4. Generated HTML can be checked without hand-inspecting every page.
-**Plans**: 0/3 plans drafted
+**Plans**: 3/3 plans complete
 
 Plans:
-- [ ] 10-01: Define metadata defaults and per-page descriptions
-- [ ] 10-02: Update shared layout/config for canonical and social previews
-- [ ] 10-03: Verify built HTML metadata for core pages
+- [x] 10-01: Define metadata defaults and per-page descriptions
+- [x] 10-02: Update shared layout/config for canonical and social previews
+- [x] 10-03: Verify built HTML metadata for core pages
 
 ### Phase 11: Dark Mode and Verification Hardening
 
@@ -239,9 +245,9 @@ Plans:
   2. Theme toggle behavior and saved preference still work.
   3. Full verification covers desktop, mobile, SEO metadata, and GitHub-driven async states.
   4. Screenshots or audit notes capture the final v1.1 visual state.
-**Plans**: 0/3 plans drafted
+**Plans**: 3/3 plans complete
 
 Plans:
-- [ ] 11-01: Tune dark-mode tokens and component states across v1.1 surfaces
-- [ ] 11-02: Extend verification for navigation, projects, contributions, metadata, and theme behavior
-- [ ] 11-03: Run full verification and record final UI evidence
+- [x] 11-01: Tune dark-mode tokens and component states across v1.1 surfaces
+- [x] 11-02: Extend verification for navigation, projects, contributions, metadata, and theme behavior
+- [x] 11-03: Run full verification and record final UI evidence

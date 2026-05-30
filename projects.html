@@ -15,41 +15,80 @@ description: Selected software systems, research prototypes, coding-agent tools,
   </div>
 </section>
 
-<section class="academic-section project-feature-list">
+<section class="academic-section project-feature-list project-feature-list--selected" aria-labelledby="featured-projects-title">
   <div class="project-section-heading">
-    <h2>Featured Project Narratives</h2>
-    <span>Current and representative work</span>
+    <h2 id="featured-projects-title">Featured Evidence</h2>
+    <span>Current systems and research prototypes</span>
   </div>
   {% for project in showcase_projects %}
+    {% assign is_featured_evidence = false %}
+    {% if project.showcase_style == 'agent-tooling' or project.group == 'Research' or project.title contains 'Go Database' or project.title contains 'Blockchain Based Ticketing' %}
+      {% assign is_featured_evidence = true %}
+    {% endif %}
+    {% unless is_featured_evidence %}{% continue %}{% endunless %}
     {% assign project_image = project.card_image | default: project.thumbnail %}
-  <article class="academic-entry project-feature-entry{% if project.featured %} project-feature-entry--featured{% endif %}{% if project.showcase_style %} project-feature-entry--{{ project.showcase_style }}{% endif %}{% unless project_image %} project-feature-entry--text-only{% endunless %}">
+  <article class="academic-entry project-feature-entry project-feature-entry--primary{% if project.featured %} project-feature-entry--featured{% endif %}{% if project.showcase_style %} project-feature-entry--{{ project.showcase_style }}{% endif %}{% unless project_image %} project-feature-entry--text-only{% endunless %}">
     {% if project_image %}
     <a class="project-feature-entry__media" href="{{ project.url | relative_url }}" aria-label="{{ project.title }}">
       <img src="{{ project_image | relative_url }}" alt="{{ project.title }}">
     </a>
     {% endif %}
     <div class="project-feature-entry__body">
-      {% if project.project_type %}<p class="project-feature-entry__eyebrow">{{ project.project_type }}</p>{% endif %}
+      <div class="project-feature-entry__topline">
+        <p class="project-feature-entry__eyebrow">{{ project.project_type | default: project.group }}</p>
+        {% if project.showcase_style == 'agent-tooling' %}<span class="project-status-pill">Ongoing</span>{% endif %}
+      </div>
       <h3><a href="{{ project.url | relative_url }}">{{ project.title }}</a></h3>
       <p class="academic-entry__meta">{{ project.date | date: "%B %Y" }}{% if project.group %} · {{ project.group }}{% endif %}</p>
-      <p>{{ project.excerpt | default: project.content | strip_html | truncatewords: 40 }}</p>
-      {% if project.technologies %}<p class="academic-tags">{% for tech in project.technologies limit:8 %}<span class="academic-tag">{{ tech }}</span>{% endfor %}</p>{% endif %}
+      <p class="project-feature-entry__summary">{{ project.excerpt | default: project.content | strip_html | truncatewords: 34 }}</p>
+      {% if project.technologies %}<p class="academic-tags">{% for tech in project.technologies limit:5 %}<span class="academic-tag">{{ tech }}</span>{% endfor %}</p>{% endif %}
     </div>
   </article>
   {% endfor %}
 </section>
 
-<section class="academic-section project-archive">
+<section class="academic-section project-feature-list project-feature-list--archive" aria-labelledby="project-narratives-title">
   <div class="project-section-heading">
-    <h2>Project Archive</h2>
-    <span>Earlier systems and research builds</span>
+    <h2 id="project-narratives-title">Capstones and Build Narratives</h2>
+    <span>Earlier systems, learning builds, and course-rooted work</span>
+  </div>
+  {% for project in showcase_projects %}
+    {% assign is_featured_evidence = false %}
+    {% if project.showcase_style == 'agent-tooling' or project.group == 'Research' or project.title contains 'Go Database' or project.title contains 'Blockchain Based Ticketing' %}
+      {% assign is_featured_evidence = true %}
+    {% endif %}
+    {% if is_featured_evidence %}{% continue %}{% endif %}
+    {% assign project_image = project.card_image | default: project.thumbnail %}
+  <article class="academic-entry project-feature-entry{% if project.showcase_style %} project-feature-entry--{{ project.showcase_style }}{% endif %}{% unless project_image %} project-feature-entry--text-only{% endunless %}">
+    {% if project_image %}
+    <a class="project-feature-entry__media" href="{{ project.url | relative_url }}" aria-label="{{ project.title }}">
+      <img src="{{ project_image | relative_url }}" alt="{{ project.title }}">
+    </a>
+    {% endif %}
+    <div class="project-feature-entry__body">
+      <div class="project-feature-entry__topline">
+        <p class="project-feature-entry__eyebrow">{{ project.project_type | default: project.group }}</p>
+      </div>
+      <h3><a href="{{ project.url | relative_url }}">{{ project.title }}</a></h3>
+      <p class="academic-entry__meta">{{ project.date | date: "%B %Y" }}{% if project.group %} · {{ project.group }}{% endif %}</p>
+      <p class="project-feature-entry__summary">{{ project.excerpt | default: project.content | strip_html | truncatewords: 28 }}</p>
+      {% if project.technologies %}<p class="academic-tags">{% for tech in project.technologies limit:5 %}<span class="academic-tag">{{ tech }}</span>{% endfor %}</p>{% endif %}
+    </div>
+  </article>
+  {% endfor %}
+</section>
+
+<section class="academic-section project-archive" aria-labelledby="compact-project-index-title">
+  <div class="project-section-heading">
+    <h2 id="compact-project-index-title">Compact Project Index</h2>
+    <span>Older portfolio records</span>
   </div>
   {% for project in site.data.profile.projects %}
   <article class="academic-entry project-archive-entry">
     <h3>{% if project.link %}<a href="{{ project.link }}">{{ project.title }}</a>{% else %}{{ project.title }}{% endif %}</h3>
     <p class="academic-entry__meta">{{ project.date }}</p>
     <p>{{ project.description | strip_html }}</p>
-    {% if project.technologies %}<p class="academic-tags">{% for tech in project.technologies limit:8 %}<span class="academic-tag">{{ tech }}</span>{% endfor %}</p>{% endif %}
+    {% if project.technologies %}<p class="academic-tags">{% for tech in project.technologies limit:5 %}<span class="academic-tag">{{ tech }}</span>{% endfor %}</p>{% endif %}
   </article>
   {% endfor %}
 </section>

@@ -18,6 +18,7 @@ description: Personal Academic Homepage
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://thromel.github.io" # the base hostname & protocol
 lang: en
+social_preview_image: /assets/images/etc/preview.png
 
 permalink: /blog/:year/:month/:day/:title/
 paginate: 5
