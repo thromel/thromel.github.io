@@ -1,14 +1,18 @@
 <header class="academic-header">
-  <nav id="site-navigation" class="academic-nav" role="navigation" aria-label="Main navigation">
+  <div class="academic-shellbar">
     <a class="academic-brand" href="{{ '/' | relative_url }}" aria-label="{{ site.data.profile.primary_name }} homepage">
       <img class="academic-brand__avatar" src="{{ site.data.profile.portrait_url | relative_url }}" alt="" aria-hidden="true">
       <span class="academic-brand__name">Tanzim</span>
     </a>
-    {% assign nav_pages = site.data.navigation.primary_pages | default: site.data.navigation.pages %}
-    {% for item in nav_pages %}
-      {% assign item_label = item.label | default: item.name %}
-      <a href="{{ item.url | relative_url }}"{% if item.name == page.navbar_title or (item.name == 'Home' and page.navbar_title == nil) %} aria-current="page"{% endif %}>{% if item.icon %}<i class="{{ item.icon }} nav-icon" aria-hidden="true"></i>{% endif %}<span>{{ item_label }}</span></a>
-    {% endfor %}
-    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch theme" aria-pressed="false"><i class="fa-solid fa-circle-half-stroke theme-toggle__icon" aria-hidden="true"></i><span class="theme-toggle__label">Dark</span></button>
-  </nav>
+    <nav id="site-navigation" class="academic-nav" role="navigation" aria-label="Main navigation">
+      {% assign nav_pages = site.data.navigation.primary_pages | default: site.data.navigation.pages %}
+      {% for item in nav_pages %}
+        {% assign item_label = item.label | default: item.name %}
+        <a href="{{ item.url | relative_url }}"{% if item.name == page.navbar_title or (item.name == 'Home' and page.navbar_title == nil) %} aria-current="page"{% endif %}>{% if item.icon %}<i class="{{ item.icon }} nav-icon" aria-hidden="true"></i>{% endif %}<span>{{ item_label }}</span></a>
+      {% endfor %}
+    </nav>
+    <div class="academic-utility" role="group" aria-label="Display preference">
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch theme" aria-pressed="false"><i class="fa-solid fa-circle-half-stroke theme-toggle__icon" aria-hidden="true"></i><span class="theme-toggle__label">Dark</span></button>
+    </div>
+  </div>
 </header>

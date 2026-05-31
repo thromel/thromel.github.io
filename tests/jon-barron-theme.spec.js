@@ -30,6 +30,7 @@ test.describe('Jon Barron-inspired academic theme', () => {
     await expect(linkRow).toContainText('Github');
 
     await expect(page.locator('#site-navigation')).not.toContainText('Education');
+    await expect(page.locator('#site-navigation #themeToggle')).toHaveCount(0);
     await expect(page.locator('.academic-footer')).toContainText('Education');
     await expect(page.locator('#themeToggle.theme-toggle')).toHaveCount(1);
     await expect(page.locator('.back-to-top')).toHaveCount(0);

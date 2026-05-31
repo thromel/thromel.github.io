@@ -32,6 +32,7 @@ test.describe('academic shell landmarks', () => {
       await expect(page.locator('#main-content.academic-page')).toHaveCount(1);
       await expect(page.locator('#site-navigation.academic-nav')).toHaveCount(1);
       await expect(page.locator('#themeToggle.theme-toggle')).toHaveCount(1);
+      await expect(page.locator('#site-navigation #themeToggle')).toHaveCount(0);
       await expect(page.locator('.mobile-nav-drawer')).toHaveCount(0);
       await expect(page.locator('.back-to-top')).toHaveCount(0);
     });

@@ -52,6 +52,15 @@ test('academic navbar shows primary routes and leaves secondary routes to the fo
   }
 });
 
+test('theme control is separate from route navigation', async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 720 });
+  await page.goto(BASE_URL, { waitUntil: 'domcontentloaded' });
+
+  await expect(page.locator('.academic-shellbar')).toHaveCount(1);
+  await expect(page.locator('#site-navigation #themeToggle')).toHaveCount(0);
+  await expect(page.locator('.academic-utility #themeToggle.theme-toggle')).toHaveCount(1);
+});
+
 test('shared link groups avoid slash dividers', async ({ page }) => {
   await page.setViewportSize({ width: 1280, height: 720 });
 
