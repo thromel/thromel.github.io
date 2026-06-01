@@ -17,7 +17,7 @@ current_company:
 
 current_focus:
   primary: >-
-    Right now I am working on <span class="academic-highlight">The Choice Can Be the Attack</span>, ctxpack, VeriSchema,
+    Right now I am working on <span class="academic-highlight">The Choice Can Be the Attack</span>, ctxhelm, VeriSchema,
     RefactoringMiner, and reading <em>Designing Data-Intensive Applications</em>.
   open_source: >-
     I have also been contributing to RefactoringMiner, EF Core, GenHTTP, deepagents, and TypeScript.
@@ -530,11 +530,11 @@ research:
   - ECIES
 
 projects:
-- title: "ctxpack: Context Compiler"
-  link: https://github.com/thromel/ctxpack
+- title: "ctxhelm: Context Compiler"
+  link: https://github.com/thromel/ctxhelm
   date: May 2026 - Present
   description: >-
-    Ongoing Rust project for compiling useful repository context for coding agents. The v1.1.4 public release can inventory a repo, retrieve lexical
+    Ongoing Rust project for compiling useful repository context for coding agents. The v1.1.7 public release can inventory a repo, retrieve lexical
     and symbol matches, include dependency, graph, semantic-provider, memory, and git-history signals, build Markdown or JSON context packs, and
     expose them through MCP. Current release proof includes public archive-install verification, checksum/audit metadata, deterministic protocol
     smoke coverage, and Claude Code real-client evidence.

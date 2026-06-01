@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
-  <title id="title">ctxpack storage and contracts</title>
-  <desc id="desc">Diagram showing ctxpack contracts flowing into source-free local storage and then into plans, packs, inspector exports, health reports, and policy learning.</desc>
+  <title id="title">ctxhelm storage and contracts</title>
+  <desc id="desc">Diagram showing ctxhelm contracts flowing into source-free local storage and then into plans, packs, inspector exports, health reports, and policy learning.</desc>
   <defs>
     <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
       <path d="M 0 0 L 10 5 L 0 10 z" fill="#3f5f53"/>

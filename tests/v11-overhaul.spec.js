@@ -83,7 +83,7 @@ test('projects page remains compact and non-overflowing on mobile', async ({ pag
   const firstMediaWidth = await page.locator('.project-feature-entry__media').first().evaluate((node) => node.getBoundingClientRect().width);
   expect(firstMediaWidth).toBeGreaterThanOrEqual(300);
   expect(firstMediaWidth).toBeLessThanOrEqual(360);
-  await expect(page.locator('.project-feature-entry').first()).toContainText('ctxpack');
+  await expect(page.locator('.project-feature-entry').first()).toContainText('ctxhelm');
 });
 
 test('contributions page shows curated proof before live GitHub activity', async ({ page }) => {

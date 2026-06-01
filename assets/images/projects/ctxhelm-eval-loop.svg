@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
-  <title id="title">ctxpack evaluation loop</title>
-  <desc id="desc">Diagram showing historical commits, release gates, agent smokes, retrieval health, feedback, policy proposals, and documentation feeding back into ctxpack quality.</desc>
+  <title id="title">ctxhelm evaluation loop</title>
+  <desc id="desc">Diagram showing historical commits, release gates, agent smokes, retrieval health, feedback, policy proposals, and documentation feeding back into ctxhelm quality.</desc>
   <defs>
     <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
       <path d="M 0 0 L 10 5 L 0 10 z" fill="#3f5f53"/>
@@ -19,7 +19,7 @@
   </defs>
   <rect class="bg" width="1200" height="720"/>
   <text x="60" y="58" class="title">Evaluation as an engineering subsystem</text>
-  <text x="60" y="88" class="small">ctxpack treats context selection as something to measure: recall, precision, token cost, privacy, client compatibility, and release freshness.</text>
+  <text x="60" y="88" class="small">ctxhelm treats context selection as something to measure: recall, precision, token cost, privacy, client compatibility, and release freshness.</text>
 
   <rect x="90" y="160" width="205" height="74" class="box"/>
   <text x="120" y="190" class="text">Historical PRs</text>

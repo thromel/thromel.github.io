@@ -570,16 +570,16 @@ em { font-style: italic; }
   border: 1px solid var(--color-border);
 }
 
-.showcase-article--agent-tooling .showcase-content img[src*="ctxpack-context-map"] {
+.showcase-article--agent-tooling .showcase-content img[src*="ctxhelm-context-map"] {
   max-width: 720px;
   margin-top: 1rem;
   background: #ffffff;
 }
 
-.showcase-article--agent-tooling .showcase-content img[src*="ctxpack-system-architecture"],
-.showcase-article--agent-tooling .showcase-content img[src*="ctxpack-retrieval-pipeline"],
-.showcase-article--agent-tooling .showcase-content img[src*="ctxpack-storage-contracts"],
-.showcase-article--agent-tooling .showcase-content img[src*="ctxpack-eval-loop"] {
+.showcase-article--agent-tooling .showcase-content img[src*="ctxhelm-system-architecture"],
+.showcase-article--agent-tooling .showcase-content img[src*="ctxhelm-retrieval-pipeline"],
+.showcase-article--agent-tooling .showcase-content img[src*="ctxhelm-storage-contracts"],
+.showcase-article--agent-tooling .showcase-content img[src*="ctxhelm-eval-loop"] {
   max-width: 100%;
   margin: 1.4rem 0 1.7rem;
   background: #f7f5ef;

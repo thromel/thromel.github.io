@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
-  <title id="title">ctxpack retrieval pipeline</title>
+  <title id="title">ctxhelm retrieval pipeline</title>
   <desc id="desc">Pipeline diagram showing a user task being classified, expanded through multiple retrieval signals, fused, budgeted, and compiled into context plans and packs.</desc>
   <defs>
     <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
@@ -19,7 +19,7 @@
   </defs>
   <rect class="bg" width="1200" height="760"/>
   <text x="60" y="58" class="title">Task-conditioned retrieval pipeline</text>
-  <text x="60" y="88" class="small">ctxpack is not top-k RAG. It classifies the task, gathers typed evidence, fuses signals, and compiles a budgeted plan.</text>
+  <text x="60" y="88" class="small">ctxhelm is not top-k RAG. It classifies the task, gathers typed evidence, fuses signals, and compiles a budgeted plan.</text>
 
   <rect x="70" y="150" width="180" height="74" class="box"/>
   <text x="118" y="180" class="text">Task</text>

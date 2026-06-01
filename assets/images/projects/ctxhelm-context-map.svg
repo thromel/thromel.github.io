@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 420" role="img" aria-labelledby="title desc">
-  <title id="title">ctxpack context compiler flow</title>
+  <title id="title">ctxhelm context compiler flow</title>
   <desc id="desc">A compact diagram showing a software task moving through safe repository inventory, lexical and symbol search, test and git history signals, and then into a context plan for coding agents.</desc>
   <rect width="720" height="420" fill="#ffffff"/>
   <g fill="none" stroke="#d7d7d7" stroke-width="1">
@@ -8,7 +8,7 @@
     <path d="M80 326h560"/>
   </g>
   <g font-family="Lato, Verdana, Helvetica, sans-serif" fill="#111111">
-    <text x="58" y="50" font-size="28" font-weight="700">ctxpack</text>
+    <text x="58" y="50" font-size="28" font-weight="700">ctxhelm</text>
     <text x="58" y="76" font-size="14" fill="#555555">local context compiler for coding agents</text>
   </g>
   <g font-family="Lato, Verdana, Helvetica, sans-serif">
