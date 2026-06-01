@@ -80,6 +80,7 @@ case "${MODE}" in
       "tests/readability-hierarchy.spec.js"
       "tests/homepage-hierarchy.spec.js"
       "tests/homepage-selected-work.spec.js"
+      "tests/education-page.spec.js"
       "tests/navbar-layout.spec.js"
       "tests/shell-behavior.spec.js"
       "tests/v11-overhaul.spec.js"
