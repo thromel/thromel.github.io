@@ -37,3 +37,35 @@ test('homepage visual sections include available images and logos', async ({ pag
   await expect(page.locator('#homepage-work .homepage-entry-media img')).toHaveCount(2);
   await expect(page.locator('#homepage-projects .homepage-entry-media img')).toHaveCount(4);
 });
+
+test('homepage education and work logos are contained instead of cropped', async ({ page }) => {
+  await page.setViewportSize({ width: 1536, height: 864 });
+  await page.goto(`${BASE_URL}/#homepage-education`, { waitUntil: 'domcontentloaded' });
+  await page.locator('#homepage-education').scrollIntoViewIfNeeded();
+
+  const logoMetrics = await page.locator('#homepage-education .homepage-entry-media--logo, #homepage-work .homepage-entry-media--logo').evaluateAll((wrappers) =>
+    wrappers.map((wrapper) => {
+      const image = wrapper.querySelector('img');
+      const wrapperRect = wrapper.getBoundingClientRect();
+      const imageRect = image.getBoundingClientRect();
+      const imageStyle = getComputedStyle(image);
+
+      return {
+        objectFit: imageStyle.objectFit,
+        wrapperWidth: wrapperRect.width,
+        wrapperHeight: wrapperRect.height,
+        imageWidth: imageRect.width,
+        imageHeight: imageRect.height,
+      };
+    })
+  );
+
+  expect(logoMetrics.length).toBe(5);
+  for (const metric of logoMetrics) {
+    expect(metric.objectFit).toBe('contain');
+    expect(metric.wrapperWidth).toBeGreaterThanOrEqual(150);
+    expect(metric.wrapperHeight).toBeGreaterThanOrEqual(88);
+    expect(metric.imageWidth).toBeLessThanOrEqual(metric.wrapperWidth);
+    expect(metric.imageHeight).toBeLessThanOrEqual(metric.wrapperHeight);
+  }
+});
