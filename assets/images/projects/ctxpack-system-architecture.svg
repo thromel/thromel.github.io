@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">ctxpack system architecture</title>
+  <desc id="desc">Architecture diagram showing existing coding agents connecting through AGENTS.md, native rules, and MCP to the ctxpack broker, compiler, repository intelligence layer, and local source-free storage.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#3f5f53"/>
+    </marker>
+    <style>
+      .bg { fill: #f7f5ef; }
+      .band { fill: #ffffff; stroke: #d8d1c2; stroke-width: 1.5; }
+      .box { fill: #ffffff; stroke: #3f5f53; stroke-width: 2; rx: 10; }
+      .box2 { fill: #eef4ef; stroke: #3f5f53; stroke-width: 2; rx: 10; }
+      .box3 { fill: #fff7e8; stroke: #a56a2a; stroke-width: 2; rx: 10; }
+      .text { font-family: Inter, Arial, sans-serif; fill: #222222; font-size: 20px; }
+      .small { font-family: Inter, Arial, sans-serif; fill: #555555; font-size: 15px; }
+      .label { font-family: Inter, Arial, sans-serif; fill: #3f5f53; font-size: 15px; font-weight: 700; letter-spacing: 0; }
+      .title { font-family: Inter, Arial, sans-serif; fill: #1f2d27; font-size: 32px; font-weight: 700; letter-spacing: 0; }
+      .line { stroke: #3f5f53; stroke-width: 2.4; fill: none; marker-end: url(#arrow); }
+      .muted { stroke: #b6ab98; stroke-width: 1.4; fill: none; }
+    </style>
+  </defs>
+  <rect class="bg" width="1200" height="720"/>
+  <text x="60" y="58" class="title">ctxpack as an agent-native context broker</text>
+  <text x="60" y="88" class="small">The tool does not edit code. It compiles evidence so existing agents choose better files, tests, and constraints.</text>
+
+  <rect x="60" y="120" width="260" height="470" class="band"/>
+  <text x="88" y="155" class="label">Existing agents</text>
+  <rect x="92" y="180" width="196" height="50" class="box"/>
+  <text x="132" y="212" class="text">Codex</text>
+  <rect x="92" y="250" width="196" height="50" class="box"/>
+  <text x="115" y="282" class="text">Claude Code</text>
+  <rect x="92" y="320" width="196" height="50" class="box"/>
+  <text x="132" y="352" class="text">Cursor</text>
+  <rect x="92" y="390" width="196" height="50" class="box"/>
+  <text x="122" y="422" class="text">OpenCode</text>
+  <rect x="92" y="460" width="196" height="50" class="box"/>
+  <text x="107" y="492" class="text">Aider / others</text>
+  <text x="95" y="548" class="small">Agents keep their own</text>
+  <text x="95" y="568" class="small">read, edit, and shell tools.</text>
+
+  <rect x="390" y="120" width="250" height="470" class="band"/>
+  <text x="420" y="155" class="label">Integration surface</text>
+  <rect x="425" y="188" width="180" height="58" class="box2"/>
+  <text x="468" y="214" class="text">AGENTS.md</text>
+  <text x="459" y="234" class="small">static guidance</text>
+  <rect x="425" y="278" width="180" height="58" class="box2"/>
+  <text x="470" y="304" class="text">MCP server</text>
+  <text x="462" y="324" class="small">tools/resources</text>
+  <rect x="425" y="368" width="180" height="58" class="box2"/>
+  <text x="455" y="394" class="text">Native rules</text>
+  <text x="458" y="414" class="small">thin adapters</text>
+  <rect x="425" y="458" width="180" height="58" class="box2"/>
+  <text x="472" y="484" class="text">CLI</text>
+  <text x="450" y="504" class="small">setup and proof</text>
+
+  <rect x="710" y="120" width="210" height="470" class="band"/>
+  <text x="742" y="155" class="label">Context broker</text>
+  <rect x="740" y="190" width="150" height="58" class="box3"/>
+  <text x="760" y="224" class="text">Classifier</text>
+  <rect x="740" y="280" width="150" height="58" class="box3"/>
+  <text x="765" y="314" class="text">Retrieval</text>
+  <rect x="740" y="370" width="150" height="58" class="box3"/>
+  <text x="764" y="404" class="text">Compiler</text>
+  <rect x="740" y="460" width="150" height="58" class="box3"/>
+  <text x="770" y="494" class="text">Pack / URI</text>
+
+  <rect x="975" y="120" width="165" height="470" class="band"/>
+  <text x="1006" y="155" class="label">Repo intelligence</text>
+  <text x="1000" y="198" class="small">Safe inventory</text>
+  <text x="1000" y="230" class="small">Tree-sitter symbols</text>
+  <text x="1000" y="262" class="small">Lexical search</text>
+  <text x="1000" y="294" class="small">Graph edges</text>
+  <text x="1000" y="326" class="small">Related tests</text>
+  <text x="1000" y="358" class="small">Git history</text>
+  <text x="1000" y="390" class="small">Local semantic</text>
+  <text x="1000" y="422" class="small">Memory cards</text>
+  <text x="1000" y="454" class="small">Feedback traces</text>
+  <rect x="997" y="488" width="118" height="58" class="box2"/>
+  <text x="1024" y="514" class="text">SQLite</text>
+  <text x="1007" y="534" class="small">source-free state</text>
+
+  <path d="M 288 305 C 345 305, 365 305, 425 305" class="line"/>
+  <path d="M 605 305 C 660 305, 682 305, 740 305" class="line"/>
+  <path d="M 890 305 C 930 305, 950 305, 990 305" class="line"/>
+  <path d="M 740 490 C 660 618, 390 635, 190 590" class="line"/>
+  <text x="432" y="650" class="small">Agents receive a small plan first, then ask for brief, standard, or deep packs only when needed.</text>
+</svg>

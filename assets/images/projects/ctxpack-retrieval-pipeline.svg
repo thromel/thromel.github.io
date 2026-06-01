@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+  <title id="title">ctxpack retrieval pipeline</title>
+  <desc id="desc">Pipeline diagram showing a user task being classified, expanded through multiple retrieval signals, fused, budgeted, and compiled into context plans and packs.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#3f5f53"/>
+    </marker>
+    <style>
+      .bg { fill: #f7f5ef; }
+      .box { fill: #ffffff; stroke: #3f5f53; stroke-width: 2; rx: 10; }
+      .signal { fill: #eef4ef; stroke: #3f5f53; stroke-width: 1.8; rx: 10; }
+      .output { fill: #fff7e8; stroke: #a56a2a; stroke-width: 2; rx: 10; }
+      .title { font-family: Inter, Arial, sans-serif; fill: #1f2d27; font-size: 32px; font-weight: 700; letter-spacing: 0; }
+      .text { font-family: Inter, Arial, sans-serif; fill: #222222; font-size: 19px; }
+      .small { font-family: Inter, Arial, sans-serif; fill: #555555; font-size: 15px; }
+      .label { font-family: Inter, Arial, sans-serif; fill: #3f5f53; font-size: 15px; font-weight: 700; letter-spacing: 0; }
+      .line { stroke: #3f5f53; stroke-width: 2.2; fill: none; marker-end: url(#arrow); }
+    </style>
+  </defs>
+  <rect class="bg" width="1200" height="760"/>
+  <text x="60" y="58" class="title">Task-conditioned retrieval pipeline</text>
+  <text x="60" y="88" class="small">ctxpack is not top-k RAG. It classifies the task, gathers typed evidence, fuses signals, and compiles a budgeted plan.</text>
+
+  <rect x="70" y="150" width="180" height="74" class="box"/>
+  <text x="118" y="180" class="text">Task</text>
+  <text x="95" y="203" class="small">prompt, mode, repo</text>
+
+  <rect x="320" y="150" width="200" height="74" class="box"/>
+  <text x="350" y="180" class="text">Classifier</text>
+  <text x="340" y="203" class="small">bug, feature, review</text>
+
+  <rect x="590" y="100" width="190" height="54" class="signal"/>
+  <text x="638" y="133" class="text">Anchors</text>
+  <rect x="590" y="172" width="190" height="54" class="signal"/>
+  <text x="642" y="205" class="text">Lexical</text>
+  <rect x="590" y="244" width="190" height="54" class="signal"/>
+  <text x="643" y="277" class="text">Symbols</text>
+  <rect x="590" y="316" width="190" height="54" class="signal"/>
+  <text x="648" y="349" class="text">Graph</text>
+  <rect x="590" y="388" width="190" height="54" class="signal"/>
+  <text x="654" y="421" class="text">Tests</text>
+  <rect x="590" y="460" width="190" height="54" class="signal"/>
+  <text x="651" y="493" class="text">History</text>
+  <rect x="590" y="532" width="190" height="54" class="signal"/>
+  <text x="646" y="565" class="text">Memory</text>
+  <rect x="590" y="604" width="190" height="54" class="signal"/>
+  <text x="634" y="637" class="text">Semantic</text>
+
+  <rect x="865" y="260" width="180" height="78" class="box"/>
+  <text x="910" y="292" class="text">Fusion</text>
+  <text x="890" y="315" class="small">score, diversify</text>
+  <rect x="865" y="390" width="180" height="78" class="box"/>
+  <text x="900" y="422" class="text">Budgeting</text>
+  <text x="900" y="445" class="small">tiny to deep</text>
+
+  <rect x="990" y="555" width="150" height="60" class="output"/>
+  <text x="1010" y="580" class="text">ContextPlan</text>
+  <text x="1015" y="600" class="small">files, tests, risk</text>
+  <rect x="990" y="640" width="150" height="60" class="output"/>
+  <text x="1014" y="665" class="text">ContextPack</text>
+  <text x="1012" y="685" class="small">snippets, sections</text>
+
+  <path d="M 250 187 L 320 187" class="line"/>
+  <path d="M 520 187 C 555 187, 560 127, 590 127" class="line"/>
+  <path d="M 520 187 L 590 199" class="line"/>
+  <path d="M 520 187 C 555 187, 560 271, 590 271" class="line"/>
+  <path d="M 520 187 C 550 210, 555 343, 590 343" class="line"/>
+  <path d="M 520 187 C 545 240, 552 415, 590 415" class="line"/>
+  <path d="M 520 187 C 540 270, 550 487, 590 487" class="line"/>
+  <path d="M 520 187 C 535 300, 548 559, 590 559" class="line"/>
+  <path d="M 520 187 C 530 330, 545 631, 590 631" class="line"/>
+
+  <path d="M 780 127 C 830 127, 835 278, 865 294" class="line"/>
+  <path d="M 780 199 C 830 199, 835 286, 865 298" class="line"/>
+  <path d="M 780 271 L 865 298" class="line"/>
+  <path d="M 780 343 L 865 306" class="line"/>
+  <path d="M 780 415 C 830 415, 838 328, 865 315" class="line"/>
+  <path d="M 780 487 C 835 487, 838 338, 865 324" class="line"/>
+  <path d="M 780 559 C 840 545, 845 338, 865 330" class="line"/>
+  <path d="M 780 631 C 845 610, 848 342, 865 335" class="line"/>
+  <path d="M 955 338 L 955 390" class="line"/>
+  <path d="M 1010 468 C 1055 500, 1060 525, 1065 555" class="line"/>
+  <path d="M 1040 468 C 1090 520, 1100 588, 1065 640" class="line"/>
+
+  <text x="84" y="690" class="label">Selective retrieval rule</text>
+  <text x="84" y="716" class="small">Small current-file edits get small plans. Multi-file bugs, refactors, and architecture questions earn graph, history, memory, and deeper packs.</text>
+</svg>

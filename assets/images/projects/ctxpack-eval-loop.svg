@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">ctxpack evaluation loop</title>
+  <desc id="desc">Diagram showing historical commits, release gates, agent smokes, retrieval health, feedback, policy proposals, and documentation feeding back into ctxpack quality.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#3f5f53"/>
+    </marker>
+    <style>
+      .bg { fill: #f7f5ef; }
+      .box { fill: #ffffff; stroke: #3f5f53; stroke-width: 2; rx: 10; }
+      .gate { fill: #fff7e8; stroke: #a56a2a; stroke-width: 2.2; rx: 10; }
+      .title { font-family: Inter, Arial, sans-serif; fill: #1f2d27; font-size: 32px; font-weight: 700; letter-spacing: 0; }
+      .text { font-family: Inter, Arial, sans-serif; fill: #222222; font-size: 19px; }
+      .small { font-family: Inter, Arial, sans-serif; fill: #555555; font-size: 15px; }
+      .label { font-family: Inter, Arial, sans-serif; fill: #3f5f53; font-size: 15px; font-weight: 700; letter-spacing: 0; }
+      .line { stroke: #3f5f53; stroke-width: 2.2; fill: none; marker-end: url(#arrow); }
+      .soft { stroke: #b6ab98; stroke-width: 1.4; stroke-dasharray: 6 6; fill: none; marker-end: url(#arrow); }
+    </style>
+  </defs>
+  <rect class="bg" width="1200" height="720"/>
+  <text x="60" y="58" class="title">Evaluation as an engineering subsystem</text>
+  <text x="60" y="88" class="small">ctxpack treats context selection as something to measure: recall, precision, token cost, privacy, client compatibility, and release freshness.</text>
+
+  <rect x="90" y="160" width="205" height="74" class="box"/>
+  <text x="120" y="190" class="text">Historical PRs</text>
+  <text x="112" y="212" class="small">changed files as labels</text>
+  <rect x="90" y="290" width="205" height="74" class="box"/>
+  <text x="122" y="320" class="text">Fixed corpora</text>
+  <text x="118" y="342" class="small">multi-repo benchmarks</text>
+  <rect x="90" y="420" width="205" height="74" class="box"/>
+  <text x="116" y="450" class="text">Agent sessions</text>
+  <text x="118" y="472" class="small">source-free evidence</text>
+
+  <rect x="405" y="210" width="210" height="78" class="gate"/>
+  <text x="452" y="242" class="text">Eval runner</text>
+  <text x="435" y="264" class="small">recall, ablations, gaps</text>
+  <rect x="405" y="360" width="210" height="78" class="gate"/>
+  <text x="450" y="392" class="text">Release gate</text>
+  <text x="436" y="414" class="small">proof before publish</text>
+
+  <rect x="725" y="135" width="245" height="62" class="box"/>
+  <text x="770" y="161" class="text">Lexical baseline</text>
+  <text x="765" y="181" class="small">does hybrid beat grep?</text>
+  <rect x="725" y="225" width="245" height="62" class="box"/>
+  <text x="768" y="251" class="text">Signal ablations</text>
+  <text x="760" y="271" class="small">graph, history, memory</text>
+  <rect x="725" y="315" width="245" height="62" class="box"/>
+  <text x="760" y="341" class="text">Retrieval health</text>
+  <text x="765" y="361" class="small">gaps and diagnostics</text>
+  <rect x="725" y="405" width="245" height="62" class="box"/>
+  <text x="785" y="431" class="text">Client smokes</text>
+  <text x="752" y="451" class="small">MCP and real-client proof</text>
+  <rect x="725" y="495" width="245" height="62" class="box"/>
+  <text x="778" y="521" class="text">Policy proposal</text>
+  <text x="758" y="541" class="small">disabled until reviewed</text>
+
+  <rect x="430" y="590" width="390" height="64" class="gate"/>
+  <text x="482" y="616" class="text">Better retrieval weights and docs</text>
+  <text x="475" y="636" class="small">changes must improve evidence without leaking source</text>
+
+  <path d="M 295 197 C 348 200, 360 230, 405 240" class="line"/>
+  <path d="M 295 327 C 352 315, 362 265, 405 255" class="line"/>
+  <path d="M 295 457 C 355 450, 365 410, 405 400" class="line"/>
+  <path d="M 615 245 L 725 166" class="line"/>
+  <path d="M 615 255 L 725 256" class="line"/>
+  <path d="M 615 275 L 725 346" class="line"/>
+  <path d="M 615 400 L 725 436" class="line"/>
+  <path d="M 850 557 C 850 590, 825 604, 820 622" class="line"/>
+  <path d="M 430 622 C 330 620, 260 565, 192 494" class="soft"/>
+  <text x="880" y="628" class="label">Release rule</text>
+  <text x="880" y="652" class="small">No promotion without source-free proof.</text>
+</svg>

@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">ctxpack storage and contracts</title>
+  <desc id="desc">Diagram showing ctxpack contracts flowing into source-free local storage and then into plans, packs, inspector exports, health reports, and policy learning.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#3f5f53"/>
+    </marker>
+    <style>
+      .bg { fill: #f7f5ef; }
+      .box { fill: #ffffff; stroke: #3f5f53; stroke-width: 2; rx: 10; }
+      .store { fill: #fff7e8; stroke: #a56a2a; stroke-width: 2.3; rx: 12; }
+      .safe { fill: #eef4ef; stroke: #3f5f53; stroke-width: 2; rx: 10; }
+      .title { font-family: Inter, Arial, sans-serif; fill: #1f2d27; font-size: 32px; font-weight: 700; letter-spacing: 0; }
+      .text { font-family: Inter, Arial, sans-serif; fill: #222222; font-size: 19px; }
+      .small { font-family: Inter, Arial, sans-serif; fill: #555555; font-size: 15px; }
+      .label { font-family: Inter, Arial, sans-serif; fill: #3f5f53; font-size: 15px; font-weight: 700; letter-spacing: 0; }
+      .line { stroke: #3f5f53; stroke-width: 2.2; fill: none; marker-end: url(#arrow); }
+    </style>
+  </defs>
+  <rect class="bg" width="1200" height="720"/>
+  <text x="60" y="58" class="title">Data contracts and source-free local state</text>
+  <text x="60" y="88" class="small">The key boundary is separating source-bearing context packs from source-free evidence, diagnostics, and learning signals.</text>
+
+  <rect x="85" y="150" width="205" height="62" class="box"/>
+  <text x="126" y="176" class="text">FileRecord</text>
+  <text x="112" y="196" class="small">path, role, hash</text>
+  <rect x="85" y="240" width="205" height="62" class="box"/>
+  <text x="126" y="266" class="text">SymbolCard</text>
+  <text x="116" y="286" class="small">name, kind, lines</text>
+  <rect x="85" y="330" width="205" height="62" class="box"/>
+  <text x="106" y="356" class="text">ContextCandidate</text>
+  <text x="114" y="376" class="small">score, reason, evidence</text>
+  <rect x="85" y="420" width="205" height="62" class="box"/>
+  <text x="124" y="446" class="text">FeedbackEvent</text>
+  <text x="118" y="466" class="small">outcome metadata</text>
+
+  <rect x="405" y="205" width="255" height="250" class="store"/>
+  <text x="478" y="245" class="text">SQLite store</text>
+  <text x="442" y="282" class="small">files, symbols, chunks</text>
+  <text x="442" y="314" class="small">edges, tests, commits</text>
+  <text x="442" y="346" class="small">packs, memory, feedback</text>
+  <text x="442" y="378" class="small">workspace manifests</text>
+  <text x="442" y="410" class="small">policy/eval reports</text>
+
+  <rect x="780" y="130" width="250" height="62" class="safe"/>
+  <text x="838" y="156" class="text">ContextPlan</text>
+  <text x="814" y="176" class="small">targets, tests, commands</text>
+  <rect x="780" y="220" width="250" height="62" class="safe"/>
+  <text x="838" y="246" class="text">ContextPack</text>
+  <text x="810" y="266" class="small">budgeted source snippets</text>
+  <rect x="780" y="310" width="250" height="62" class="safe"/>
+  <text x="848" y="336" class="text">Inspector</text>
+  <text x="820" y="356" class="small">source-free decisions</text>
+  <rect x="780" y="400" width="250" height="62" class="safe"/>
+  <text x="826" y="426" class="text">Retrieval Health</text>
+  <text x="812" y="446" class="small">quality and gap summaries</text>
+  <rect x="780" y="490" width="250" height="62" class="safe"/>
+  <text x="838" y="516" class="text">Policy Profile</text>
+  <text x="808" y="536" class="small">disabled until reviewed</text>
+
+  <rect x="210" y="575" width="780" height="72" class="safe"/>
+  <text x="245" y="606" class="label">Privacy invariant</text>
+  <text x="245" y="630" class="small">Source text can appear in an explicit pack, but evals, inspector exports, feedback, memory metadata, and release proof remain source-free.</text>
+
+  <path d="M 290 181 C 345 181, 352 265, 405 265" class="line"/>
+  <path d="M 290 271 L 405 300" class="line"/>
+  <path d="M 290 361 L 405 360" class="line"/>
+  <path d="M 290 451 C 350 445, 355 405, 405 405" class="line"/>
+  <path d="M 660 260 C 720 240, 725 170, 780 160" class="line"/>
+  <path d="M 660 300 L 780 250" class="line"/>
+  <path d="M 660 340 L 780 340" class="line"/>
+  <path d="M 660 380 L 780 430" class="line"/>
+  <path d="M 660 420 C 725 445, 730 512, 780 520" class="line"/>
+</svg>

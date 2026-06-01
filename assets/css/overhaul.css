@@ -576,6 +576,15 @@ em { font-style: italic; }
   background: #ffffff;
 }
 
+.showcase-article--agent-tooling .showcase-content img[src*="ctxpack-system-architecture"],
+.showcase-article--agent-tooling .showcase-content img[src*="ctxpack-retrieval-pipeline"],
+.showcase-article--agent-tooling .showcase-content img[src*="ctxpack-storage-contracts"],
+.showcase-article--agent-tooling .showcase-content img[src*="ctxpack-eval-loop"] {
+  max-width: 100%;
+  margin: 1.4rem 0 1.7rem;
+  background: #f7f5ef;
+}
+
 .showcase-content table {
   width: 100%;
   margin: 1.25rem 0;

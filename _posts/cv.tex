@@ -263,12 +263,12 @@ AI for Software Engineering (AI4SE), Software Engineering for AI (SE4AI), Trustw
 
 \resumeProject
 {\href{https://github.com/thromel/ctxpack}{ctxpack: Repo Context Packer}}
-{Tools: Rust, MCP, CLI, Git, Symbol Indexing, Context Engineering, Evaluation}
+{Tools: Rust, MCP, CLI, Git, Hybrid Retrieval, Graph Signals, Empirical Evaluation}
 {May 2026 -- Present}
 {}
 \resumeItemListStart
-\item Building a local-first context compiler for AI coding agents with repository inventory, symbol retrieval, related-test detection, and git-history signals.
-\item Implemented budgeted Markdown/JSON context packs, MCP protocol tests, retrieval evals, and Codex CLI / Claude Code smoke checks.
+\item Designed and implemented a local-first context-retrieval engine for AI coding agents, combining safe repository inventory, lexical and symbol search, graph expansion, semantic-provider provenance, related-test mapping, git-history signals, and memory/feedback metadata.
+\item Built an empirical evaluation and release-validation harness with fixed-budget retrieval studies, lexical baselines, signal ablations, source-free proof artifacts, deterministic MCP protocol checks, and real-client Claude Code evidence for \texttt{prepare\_task} and \texttt{get\_pack}.
 \resumeItemListEnd
 
 \resumeProject
@@ -312,10 +312,11 @@ AI for Software Engineering (AI4SE), Software Engineering for AI (SE4AI), Trustw
 
 \resumeProject
   {Selected Upstream Contributions}
-  {Selected upstream contributions across program analysis, .NET, web servers, agent systems, and compilers}
+  {Selected upstream contributions across SRE benchmarks, program analysis, .NET, web servers, agent systems, and compilers}
   {2025 -- 2026}
   {\href{https://github.com/thromel?tab=pull_requests}{GitHub}}
 \resumeItemListStart
+  \item \textbf{\href{https://github.com/SREGym/SREGym}{SREGym}}: authored and hardened Kubernetes SRE benchmark work, including a scheduler priority-preemption cascade scenario for Hotel Reservation and a Calico route-reflector label-drift follow-up with RFC, fault/oracle design, validation checks, and reviewer-facing evidence.
   \item \textbf{\href{https://github.com/tsantalis/RefactoringMiner/pulls?q=author\%3Athromel}{RefactoringMiner}}: merged merge-parent-aware commit diffs, advanced assertion migration matching, and single-page PR viewed toggles; currently proposing a read-only local MCP server for refactoring analysis and intent validation.
   \item \textbf{\href{https://github.com/dotnet/efcore}{EF Core}}: merged runtime migration creation/application, \texttt{ON DELETE SET DEFAULT} support, and nullable complex-property reload handling.
   \item \textbf{\href{https://github.com/Kaliumhexacyanoferrat/GenHTTP}{GenHTTP}}: added automatic request decompression and binary-response support.
