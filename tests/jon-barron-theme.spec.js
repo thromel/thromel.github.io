@@ -9,19 +9,23 @@ async function expectNoHorizontalOverflow(page, label) {
   expect(dimensions.scrollWidth, `${label} should not overflow horizontally.`).toBeLessThanOrEqual(dimensions.width + 1);
 }
 
-test.describe('Jon Barron-inspired academic theme', () => {
-  test('homepage uses a narrow academic document and minimal identity row on desktop', async ({ page }) => {
+test.describe('Modern academic portfolio theme', () => {
+  test('homepage uses a wider research-lab document and minimal identity row on desktop', async ({ page }) => {
     await page.setViewportSize(DESKTOP);
     await page.goto(BASE_URL, { waitUntil: 'domcontentloaded' });
 
     const shell = page.locator('.academic-page');
     await expect(shell).toHaveCount(1);
     const maxWidth = await shell.evaluate((node) => Number.parseFloat(getComputedStyle(node).maxWidth));
-    expect(maxWidth).toBeLessThanOrEqual(820);
+    expect(maxWidth).toBeGreaterThanOrEqual(1000);
+    expect(maxWidth).toBeLessThanOrEqual(1120);
 
     await expect(page.locator('.academic-intro')).toHaveCount(1);
     await expect(page.locator('.academic-name')).toHaveText('Tanzim Hossain Romel');
-    await expect(page.locator('.academic-portrait img')).toHaveCSS('border-radius', /50%|9999px/);
+    await expect(page.locator('.academic-portrait img')).toHaveCSS('border-radius', /6px|8px/);
+    await expect(page.locator('.academic-proof-strip article')).toHaveCount(4);
+    await expect(page.locator('.academic-proof-strip')).toContainText('ML Security');
+    await expect(page.locator('.academic-proof-strip')).toContainText('Open Source');
 
     const linkRow = page.locator('.academic-link-row').first();
     await expect(linkRow).toContainText('Email');

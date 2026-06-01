@@ -67,3 +67,15 @@ test('academic shell dark mode toggle persists explicit choice', async ({ page }
   await page.reload({ waitUntil: 'domcontentloaded' });
   await expect(html).toHaveAttribute('data-theme', toggledTheme);
 });
+
+test('academic header gains scroll definition without layout overflow', async ({ page }) => {
+  await page.setViewportSize(DESKTOP_VIEWPORT);
+  await page.goto(BASE_URL, { waitUntil: 'domcontentloaded' });
+
+  const header = page.locator('.academic-header');
+  await expect(header).not.toHaveClass(/is-scrolled/);
+
+  await page.evaluate(() => window.scrollTo(0, 240));
+  await expect(header).toHaveClass(/is-scrolled/);
+  await expectNoHorizontalOverflow(page, 'Scrolled Home');
+});

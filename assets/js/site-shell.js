@@ -76,9 +76,32 @@
     });
   }
 
+  function initHeaderScrollState() {
+    var header = document.querySelector('.academic-header');
+    var ticking = false;
+
+    if (!header) {
+      return;
+    }
+
+    function syncHeaderState() {
+      header.classList.toggle('is-scrolled', window.scrollY > 16);
+      ticking = false;
+    }
+
+    syncHeaderState();
+    window.addEventListener('scroll', function () {
+      if (!ticking) {
+        window.requestAnimationFrame(syncHeaderState);
+        ticking = true;
+      }
+    }, { passive: true });
+  }
+
   function init() {
     initThemeToggle();
     initAcademicSectionNav();
+    initHeaderScrollState();
   }
 
   document.addEventListener('DOMContentLoaded', init);
