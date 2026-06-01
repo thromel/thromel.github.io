@@ -81,7 +81,8 @@ test('projects page remains compact and non-overflowing on mobile', async ({ pag
 
   await expectNoHorizontalOverflow(page, 'Projects mobile');
   const firstMediaWidth = await page.locator('.project-feature-entry__media').first().evaluate((node) => node.getBoundingClientRect().width);
-  expect(firstMediaWidth).toBeLessThanOrEqual(90);
+  expect(firstMediaWidth).toBeGreaterThanOrEqual(300);
+  expect(firstMediaWidth).toBeLessThanOrEqual(360);
   await expect(page.locator('.project-feature-entry').first()).toContainText('ctxpack');
 });
 

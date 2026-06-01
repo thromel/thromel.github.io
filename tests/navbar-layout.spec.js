@@ -61,7 +61,7 @@ test('theme control is separate from route navigation', async ({ page }) => {
   await expect(page.locator('.academic-utility #themeToggle.theme-toggle')).toHaveCount(1);
 });
 
-test('modern mobile navbar stays compact with an internal route rail', async ({ page }) => {
+test('modern mobile navbar exposes all primary routes without a horizontal rail', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto(BASE_URL, { waitUntil: 'domcontentloaded' });
 
@@ -80,10 +80,15 @@ test('modern mobile navbar stays compact with an internal route rail', async ({ 
     };
   });
 
-  expect(metrics.headerHeight).toBeLessThanOrEqual(80);
-  expect(metrics.shellHeight).toBeLessThanOrEqual(56);
+  expect(metrics.headerHeight).toBeLessThanOrEqual(142);
+  expect(metrics.shellHeight).toBeLessThanOrEqual(126);
   expect(metrics.scrollWidth).toBeLessThanOrEqual(metrics.viewportWidth + 1);
-  expect(metrics.navScrollWidth).toBeGreaterThan(metrics.navClientWidth);
+  expect(metrics.navScrollWidth).toBeLessThanOrEqual(metrics.navClientWidth + 1);
+
+  const nav = page.locator('#site-navigation.academic-nav');
+  for (const route of primaryRoutes) {
+    await expect(nav.getByRole('link', { name: route, exact: true })).toBeVisible();
+  }
 });
 
 test('shared link groups avoid slash dividers', async ({ page }) => {
