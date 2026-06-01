@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
   <title id="title">ctxpack system architecture</title>
-  <desc id="desc">Architecture diagram showing existing coding agents connecting through AGENTS.md, native rules, and MCP to the ctxpack broker, compiler, repository intelligence layer, and local source-free storage.</desc>
+  <desc id="desc">Architecture diagram showing existing coding agents connecting through AGENTS.md, native rules, and MCP to the ctxpack compiler, repository intelligence layer, and local source-free storage.</desc>
   <defs>
     <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
       <path d="M 0 0 L 10 5 L 0 10 z" fill="#3f5f53"/>
@@ -20,7 +20,7 @@
     </style>
   </defs>
   <rect class="bg" width="1200" height="720"/>
-  <text x="60" y="58" class="title">ctxpack as an agent-native context broker</text>
+  <text x="60" y="58" class="title">ctxpack as an agent-native context compiler</text>
   <text x="60" y="88" class="small">The tool does not edit code. It compiles evidence so existing agents choose better files, tests, and constraints.</text>
 
   <rect x="60" y="120" width="260" height="470" class="band"/>
@@ -54,7 +54,7 @@
   <text x="450" y="504" class="small">setup and proof</text>
 
   <rect x="710" y="120" width="210" height="470" class="band"/>
-  <text x="742" y="155" class="label">Context broker</text>
+  <text x="742" y="155" class="label">Context compiler</text>
   <rect x="740" y="190" width="150" height="58" class="box3"/>
   <text x="760" y="224" class="text">Classifier</text>
   <rect x="740" y="280" width="150" height="58" class="box3"/>
