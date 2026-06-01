@@ -1,6 +1,6 @@
 ---
 layout: showcase
-title: "ctxhelm: A Context Compiler for Coding Agents"
+title: "ctxhelm: agent-native context compiler"
 subtitle: "Local-first context plans, packs, and release proof for AI coding agents"
 category: projects
 group: Projects
@@ -24,7 +24,7 @@ technologies:
   - CLI
 ---
 
-# ctxhelm: A Context Compiler for Coding Agents
+# ctxhelm: engineering an agent-native context compiler
 
 ctxhelm solves a problem I kept running into while using coding agents: the agents were rarely blocked by editing. They were blocked by context. They would grep around, open plausible files, read too much, miss the one test that mattered, and then make a change that looked reasonable but had the wrong shape for the repository.
 
@@ -58,7 +58,7 @@ Risks:
 - redirect destination may be shared by login and session-expiry flows
 ```
 
-The `v1.1.7` release can scan a repository, build a safe inventory, extract symbols, combine lexical, graph, test, history, memory, feedback, and optional local semantic signals, then return a plan or a budgeted Markdown/JSON pack. It also exposes the same path through MCP.
+The `v1.1.10` release can scan a repository, build a safe inventory, extract symbols, combine lexical, graph, test, history, memory, feedback, and optional local semantic signals, then return a plan or a budgeted Markdown/JSON pack. It also exposes the same path through MCP.
 
 That sounds clean in hindsight. Building it was not. The hard part was not parsing files. The hard part was keeping the system honest: no source leakage in evals, no vague release claims, no pretending that every client integration worked when only some of them produced machine-checkable evidence.
 
@@ -250,7 +250,7 @@ ctxhelm uses historical tasks and source-free reports to check whether retrieval
 | Release gates | Archive, install, `doctor`, `--help`, first-pack behavior | No |
 | Client evidence | Claude Code `prepare_task` / `get_pack` proof | No raw prompts or source |
 
-In the `v1.1.7` README snapshot, the agent-evidence retrieval channel beats or matches lexical on every measured corpus, with an average Recall@10 delta of roughly `+0.194`. I would not generalize that too far. It means the measured release corpus improved. It does not mean every possible query improves.
+In the `v1.1.10` README snapshot, the agent-evidence retrieval channel beats or matches lexical on every measured corpus, with an average Recall@10 delta of roughly `+0.194`. I would not generalize that too far. It means the measured release corpus improved. It does not mean every possible query improves.
 
 That distinction matters. A tool like this should say when it helps, when it is neutral, and when it does not have enough evidence.
 
@@ -258,7 +258,7 @@ That distinction matters. A tool like this should say when it helps, when it is 
 
 Release proof is how I keep the project from making claims the archive cannot reproduce.
 
-The public `v1.1.7` release is archive-first. The release path verifies checksums, manifest and audit files, temporary install, `doctor`, `--help`, and first-pack behavior.
+The public `v1.1.10` release is archive-first. The release path verifies checksums, manifest and audit files, temporary install, `doctor`, `--help`, and first-pack behavior.
 
 The same release proof records:
 
