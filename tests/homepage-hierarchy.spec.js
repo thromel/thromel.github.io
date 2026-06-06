@@ -33,6 +33,10 @@ test.describe('homepage hierarchy', () => {
 
     await expect(page.locator('#homepage-work')).toContainText('IQVIA');
     await expect(page.locator('#homepage-work')).toContainText('Mindshare Bangladesh');
+    await expect(page.locator('#homepage-work')).toContainText('Remote Research Intern, UIUC');
+    await expect(page.locator('#homepage-work')).toContainText('UIUC++ Summer Research in Software Engineering (SRSE) 2026');
+    await expect(page.locator('#homepage-work a[href="https://tianyin.github.io/"]')).toHaveCount(1);
+    await expect(page.locator('#homepage-work img[alt="University of Illinois Urbana-Champaign Block I logo"]')).toHaveAttribute('src', /uiuc-block-i\.png/);
 
     await page.goto(`${BASE_URL}/education`, { waitUntil: 'domcontentloaded' });
     await expect(page.locator('.academic-page-title')).toHaveText('Education');

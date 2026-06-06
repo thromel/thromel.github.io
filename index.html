@@ -121,10 +121,10 @@ description: Software engineer and researcher building coding-agent tools, healt
 <section id="homepage-work" class="academic-section">
   <h2>Work</h2>
   {% for position in site.data.profile.positions %}
-  <article class="academic-entry homepage-media-entry">
-    {% if position.logo %}<div class="homepage-entry-media homepage-entry-media--logo"><img src="{{ position.logo | relative_url }}" alt="{{ position.name | split: ',' | first }} logo"></div>{% endif %}
+  <article class="academic-entry homepage-media-entry{% unless position.logo %} homepage-media-entry--text-only{% endunless %}">
+    {% if position.logo %}{% assign position_logo_alt = position.logo_alt %}{% unless position_logo_alt %}{% assign position_logo_alt = position.name | split: ',' | first | append: ' logo' %}{% endunless %}<div class="homepage-entry-media homepage-entry-media--logo"><img src="{{ position.logo | relative_url }}" alt="{{ position_logo_alt }}"></div>{% endif %}
     <div class="homepage-entry-body">
-      <h3>{{ position.name }}</h3>
+      <h3>{% if position.url %}<a href="{{ position.url }}" target="_blank" rel="noopener noreferrer">{{ position.name }}</a>{% else %}{{ position.name }}{% endif %}</h3>
       <p class="academic-entry__meta">{{ position.date }}</p>
       <p>{{ position.description | strip_html }}</p>
     </div>

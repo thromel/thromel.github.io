@@ -14,8 +14,8 @@ description: Professional software engineering experience, backend systems work,
   <h2>Experience</h2>
   {% for position in site.data.profile.positions %}
   <article class="academic-entry">
-    {% if position.logo %}<img class="academic-entry__media" src="{{ position.logo | relative_url }}" alt="{{ position.name | split: ',' | first }} logo">{% endif %}
-    <h3>{{ position.name }}</h3>
+    {% if position.logo %}{% assign position_logo_alt = position.logo_alt %}{% unless position_logo_alt %}{% assign position_logo_alt = position.name | split: ',' | first | append: ' logo' %}{% endunless %}<img class="academic-entry__media academic-entry__media--logo" src="{{ position.logo | relative_url }}" alt="{{ position_logo_alt }}">{% endif %}
+    <h3>{% if position.url %}<a href="{{ position.url }}" target="_blank" rel="noopener noreferrer">{{ position.name }}</a>{% else %}{{ position.name }}{% endif %}</h3>
     <p class="academic-entry__meta">{{ position.date }}</p>
     <p>{{ position.description | strip_html }}</p>
     {% if position.responsibilities %}<ul>{% for item in position.responsibilities %}<li>{{ item | strip_html }}</li>{% endfor %}</ul>{% endif %}

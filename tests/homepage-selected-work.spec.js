@@ -34,7 +34,7 @@ test('homepage visual sections include available images and logos', async ({ pag
   await page.goto(BASE_URL, { waitUntil: 'domcontentloaded' });
   await expect(page.locator('#homepage-research-publications .homepage-entry-media img')).toHaveCount(4);
   await expect(page.locator('#homepage-education .homepage-entry-media img')).toHaveCount(3);
-  await expect(page.locator('#homepage-work .homepage-entry-media img')).toHaveCount(2);
+  await expect(page.locator('#homepage-work .homepage-entry-media img')).toHaveCount(3);
   await expect(page.locator('#homepage-projects .homepage-entry-media img')).toHaveCount(4);
 });
 
@@ -60,7 +60,7 @@ test('homepage education and work logos are contained instead of cropped', async
     })
   );
 
-  expect(logoMetrics.length).toBe(5);
+  expect(logoMetrics.length).toBe(6);
   for (const metric of logoMetrics) {
     expect(metric.objectFit).toBe('contain');
     expect(metric.wrapperWidth).toBeGreaterThanOrEqual(150);
