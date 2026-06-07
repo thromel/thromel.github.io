@@ -1,5 +1,5 @@
 ---
-title: "An Empirical Study on Remote Code Execution in ML Model Hosting Ecosystems"
+title: "An Empirical Study on Remote Code Execution in Machine Learning Model Hosting Ecosystems"
 date: 2026-02-01 00:00:00 +0600
 pub: "ACM Transactions on Software Engineering and Methodology (TOSEM)"
 pub_pre: "Resubmitted to "
@@ -8,9 +8,11 @@ abstract: >-
   Large-scale cross-platform security study of roughly 45,000 repositories across five ML model hosting ecosystems, measuring unsafe deserialization, eval injection, malware signals, and recurring developer security misconceptions.
 cover: /assets/images/ml-rce.png
 authors:
+  - Mohammed Latif Siddiq
   - Tanzim Hossain Romel
-  - Mohammad Latif Siddiq
-  - Joanna C. Santos
+  - Natalie Sekerak
+  - Beatrice Casey
+  - Joanna C. S. Santos
 primary_link: /research/ml-remote-code-execution/
 primary_label: Research summary
 primary_external: false

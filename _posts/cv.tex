@@ -169,6 +169,11 @@
     \small{Uttara, Dhaka, Bangladesh}
 \end{center}
 
+\vspace{-3mm}
+\begin{center}
+    \small{\textit{Software engineer and researcher with 3+ years of backend and AI engineering experience, building reliable AI-agent, developer-tooling, and healthcare analytics systems.}}
+\end{center}
+
 \vspace{-4mm}
 
 \section{\textbf{Research Interests}}
@@ -184,79 +189,61 @@ AI for Software Engineering (AI4SE), Software Engineering for AI (SE4AI), Trustw
 
 \resumeSubheading
 {University of Alberta}{Edmonton, Canada}
-{Incoming M.Sc. in Computing Science}{Starting Sep 2026}
+{Incoming M.Sc. in Computing Science}{Sep 2026}
 \resumeItemListStart
-\item Incoming member of the \href{https://u-a-goose.github.io}{U-A-Goose} research group in the Department of Computing Science.
+\item Incoming thesis-based M.Sc. student in the \href{https://u-a-goose.github.io}{U-A-Goose} research group, supervised by \href{https://apps.ualberta.ca/directory/person/zy25}{Dr. Zhou Yang}, with affiliation to \href{https://www.amii.ca/}{Amii (Alberta Machine Intelligence Institute)}.
 \resumeItemListEnd
 
 \resumeSubheading
 {Bangladesh University of Engineering and Technology (BUET)}{Dhaka, Bangladesh}
 {B.Sc. in Computer Science and Engineering}{Mar 2018 - May 2023}
 \resumeItemListStart
-\item Thesis: Patient-Centric Blockchain Framework for Electronic Health Record Management
+\item Selected coursework: Machine Learning, Operating Systems, Computer Security, Fault-Tolerant Systems, and High-Performance Database Systems.
 \resumeItemListEnd
 
 \resumeSubHeadingListEnd
 \vspace{-6mm}
 
 
-\section{\textbf{Work Experience}}
-\vspace{-0.4mm}
-  \resumeSubHeadingListStart
-  \resumeSubheading
-      {\href{https://tianyin.github.io/}{University of Illinois Urbana-Champaign (UIUC)}}{Remote}
-      {Remote Research Intern}{June 2026 - August 2026}
-      \resumeItemListStart
-        \item Remote summer research internship through UIUC++ Summer Research in Software Engineering (SRSE) 2026 with Professor Tianyin Xu's group
-        \item Working on software and systems reliability research with emphasis on rigorous empirical evaluation and reproducible research artifacts
-      \resumeItemListEnd
-
-  \resumeSubheading
-      {{IQVIA}}{Dhaka, Bangladesh}
-      {Software Development Engineer}{June 2023 - June 2026}
-      \resumeItemListStart
-        \item Backend Engineer developing microservices-based healthcare applications handling millions of patient records using .NET Core, C\#, and AWS
-        \item Deployed multi-agent systems using LangGraph, MCP, and RAG for dashboard generation/modification, integrated with data exploration agents achieving 85\% reduction in setup time
-        \item Achieved 60\% reduction in query execution times through database optimization; implemented 40\% API response improvement via Redis caching
-        \item Contributed to browser automation testing methodology in .NET, simplifying regression testing and improving test coverage from 72\% to 95\%
-        \item Received IQVIA Impact Program – Silver award (May 2025) for outstanding performance
-      \resumeItemListEnd 
-  \resumeSubHeadingListEnd
-\vspace{-6mm}
-
-\section{\textbf{Research Experience (Selected)}}
+\section{\textbf{Research Experience}}
 \vspace{-0.4mm}
 \resumeSubHeadingListStart
 
 \resumeProject
-  {\href{https://arxiv.org/pdf/2601.14163}{An Empirical Study on Remote Code Execution in ML Model Hosting Ecosystems}}
-  {Tools: Python, Bandit, CodeQL, Semgrep, YARA, CWE Analysis | Submitted to TOSEM 2026}
-  {June 2025 - Oct 2025}
+  {University of Illinois Urbana-Champaign (UIUC)}
+  {Remote Research Intern through \href{https://uiuc-srse.github.io/}{UIUC++ SRSE 2026}; Professor \href{https://tianyin.github.io/}{Tianyin Xu's lab}}
+  {Jun 2026 - Aug 2026}
   {{}}
 \resumeItemListStart
-  \item Studied remote-code-execution risk across \textasciitilde45,000 ML model repositories with Mohammad Latif Siddiq and Joanna C. Santos.
-  \item Used Bandit, CodeQL, Semgrep, and YARA to find vulnerability patterns and explain 600+ related developer discussions.
+  \item Working on software and systems reliability research with emphasis on rigorous empirical evaluation and reproducible research artifacts.
+  \item Preparing research prototypes, benchmark artifacts, and evaluation evidence for agentic software engineering and reliability tasks.
+\resumeItemListEnd
+
+\vspace{0.5mm}\item
+  \textbf{\href{https://arxiv.org/abs/2601.14163}{An Empirical Study on Remote Code Execution in Machine Learning Model Hosting Ecosystems}}
+  \hfill \textit{\footnotesize{Jun 2025 - Oct 2025}}\\
+  \footnotesize{\textit{Tools: Python, Bandit, CodeQL, Semgrep, YARA | Manuscript under review at ACM TOSEM; preprint: \href{https://arxiv.org/abs/2601.14163}{arXiv:2601.14163}}}
+  \vspace{-2.4mm}
+\resumeItemListStart
+  \item Conducted a large-scale study of \textasciitilde45,000 ML model repositories across Hugging Face, ModelScope, OpenCSG, OpenMMLab, and PyTorch Hub.
+  \item Detected unsafe deserialization, eval-injection, malware-signature, and platform-safety risks using Bandit, CodeQL, Semgrep, YARA, and CWE-based classification.
+  \item Analyzed 600+ developer discussions to build a taxonomy of misconceptions around remote code execution, trust flags, and model-loading safety.
 \resumeItemListEnd
 
 \resumeProject
   {The Choice Can Be the Attack: Auditing Aligned Backdoors in LLM Agents}
   {Tools: Python, vLLM, PyTorch, pandas, NumPy}
-  {August 2025 -- Present}
+  {Aug 2025 - Present}
   {}
 \resumeItemListStart
   \item Studied a hidden backdoor risk where a trigger changes which valid option an LLM agent chooses while the final answer still appears correct.
-
   \item Built \textbf{SHIFT}, which reruns the same task with and without a known trigger, then checks whether the changed choice favors the attacker's target rather than normal reasons like price or rating.
 \resumeItemListEnd
-
-
-
-
 
 \resumeProject
   {Multi-Agent Framework for Generating Relational DB Schema \& ERD}
   {Tools: Python, LangGraph, StateGraph, Z3 Solver, SQLAlchemy, Text2Schema}
-  {July 2025 - Present}
+  {Jul 2025 - Present}
   {{}}
 \resumeItemListStart
   \item Extended SchemaAgent with Dr. Sukarna Barua (BUET) to turn natural-language requirements into relational schemas and ER diagrams.
@@ -265,24 +252,25 @@ AI for Software Engineering (AI4SE), Software Engineering for AI (SE4AI), Trustw
 
 \resumeSubHeadingListEnd
 
-\section{\textbf{Projects}}
+\section{\textbf{Selected Research Software and Systems Projects}}
 \vspace{-0.4mm}
 \resumeSubHeadingListStart
 
 \resumeProject
-{\href{https://github.com/thromel/ctxhelm}{ctxhelm: agent-native context compiler}}
-{Tools: Rust, MCP, CLI, Git, Hybrid Retrieval, Graph Signals, Empirical Evaluation}
-{May 2026 -- Present}
+{\href{https://github.com/thromel/ctxhelm}{ctxhelm + \href{https://github.com/thromel/helmbench}{HelmBench}: Context Compiler and Source-Free Agent Evaluation}}
+{Tools: Rust, MCP, CLI, Git, Hybrid Retrieval, Symbol Indexing, JSON Schema, Agent Tracing}
+{May 2026 - Present}
 {}
 \resumeItemListStart
-\item Designed and implemented a local-first context-retrieval engine for AI coding agents, combining safe repository inventory, lexical and symbol search, graph expansion, semantic-provider provenance, related-test mapping, git-history signals, and memory/feedback metadata.
-\item Built an empirical evaluation and release-validation harness with fixed-budget retrieval studies, lexical baselines, signal ablations, source-free proof artifacts, deterministic MCP protocol checks, and real-client Claude Code evidence for \texttt{prepare\_task} and \texttt{get\_pack}.
+\item Built a local-first, read-only context compiler for coding agents, combining lexical search, symbol search, dependency expansion, related-test mapping, git co-change hints, semantic metadata, and memory signals.
+\item Shipped ctxhelm releases with archive/Homebrew installation, checksum verification, doctor checks, MCP smoke tests, and source-free evaluation artifacts.
+\item Built HelmBench as active evaluation infrastructure with trace schemas, privacy checks, evidence bundles, matrix runs, and quality gates for comparing native and ctxhelm-guided agent runs without exposing source, prompts, transcripts, or terminal logs.
 \resumeItemListEnd
 
 \resumeProject
 {\href{https://github.com/thromel/Yet-Another-C-Compiler}{Yet Another C Compiler}}
-{Tools: C++17, CMake}
-{Jun-Aug 2021, Oct 2024}
+{Tools: C++17, Flex, Bison, CMake, x86-64 Assembly, SSA/IR Optimization}
+{Jun 2021 - Aug 2021; revised Oct 2024}
 {}
 \resumeItemListStart
 \item Built a C compiler with lexer/parser, semantic analysis, x86-64 code generation, and a linear-scan register allocator.
@@ -292,24 +280,12 @@ AI for Software Engineering (AI4SE), Software Engineering for AI (SE4AI), Trustw
 \resumeProject
 {\href{https://github.com/thromel/CSE-472-Machine-Learning}{Bangla Handwritten Digit Recognition}}
 {Tools: Python, NumPy, OpenCV, CNN from Scratch, NumtaDB}
-{Jan 2023 -- Feb 2023}
+{Jan 2023 - Feb 2023}
 {}
 \resumeItemListStart
 \item Implemented a NumPy CNN from scratch to recognize handwritten Bangla digits from the NumtaDB dataset.
 \item Built the preprocessing and training pipeline, reaching \textbf{95.9\% accuracy} and placing \textbf{2nd among 120 students}.
 \resumeItemListEnd
-
-\resumeProject
-  {\href{https://github.com/eventfly/Microservices}{Eventfly: End-to-end Event Management System}}
-  {Tools: TypeScript, Express.js, Next.js, Docker, Kubernetes, NATS, MongoDB}
-  {May 2022 - July 2022}
-  {}
-\resumeItemListStart
-  \item Designed microservices-based event management system
-  \item Led back-end architecture implementing newsfeed, payment, authentication, and event management services
-\resumeItemListEnd
-
-
 
 \resumeSubHeadingListEnd
 
@@ -321,7 +297,7 @@ AI for Software Engineering (AI4SE), Software Engineering for AI (SE4AI), Trustw
 \resumeProject
   {Selected Upstream Contributions}
   {Selected upstream contributions across SRE benchmarks, program analysis, .NET, web servers, agent systems, and compilers}
-  {2025 -- 2026}
+  {2025 - 2026}
   {\href{https://github.com/thromel?tab=pull_requests}{GitHub}}
 \resumeItemListStart
   \item \textbf{\href{https://github.com/SREGym/SREGym}{SREGym}}: authored and hardened Kubernetes SRE benchmark work, including a scheduler priority-preemption cascade scenario for Hotel Reservation and a Calico route-reflector label-drift follow-up with RFC, fault/oracle design, validation checks, and reviewer-facing evidence.
@@ -335,28 +311,39 @@ AI for Software Engineering (AI4SE), Software Engineering for AI (SE4AI), Trustw
 \resumeSubHeadingListEnd
 
 \vspace{-2mm}
+\section{\textbf{Professional Experience}}
+\vspace{-0.4mm}
+  \resumeSubHeadingListStart
+  \resumeSubheading
+      {{IQVIA}}{Dhaka, Bangladesh}
+      {Software Development Engineer}{Jun 2023 - Jun 2026}
+      \resumeItemListStart
+        \item Built and maintained KPI Library microservices in C\#/.NET and EF Core on AWS for healthcare analytics workflows over millions of patient records, including API, filtering, aggregation, and export paths used by global pharmaceutical clients.
+        \item Refactored complex healthcare-analytics filter logic into reusable query components, reducing duplicated business rules across services and improving filtering performance by 70\% while simplifying the codebase by 40\%.
+        \item Reworked high-latency analytics paths with PostgreSQL query planning, targeted indexing, materialized views, Redis caching, and MongoDB tuning, reducing complex query time by 60\% and API latency by 40\%.
+        \item Designed Playwright-backed export regression tests with multi-layer hashing to compare generated artifacts deterministically, raising export-workflow coverage from 72\% to 95\% and catching content-level regressions.
+        \item Added OpenTelemetry and Jaeger tracing around API, query, and cache paths, reducing troubleshooting time by 50\% by making latency and regression sources visible across distributed services.
+        \item Built LangGraph/LangChain agents with MCP, RAG, and \texttt{deepagents} to convert analyst prompts into structured dashboard actions, including chart creation, filter modification, drill-down analysis, and validated exports.
+        \item Optimized CI/CD build stages and parallel test execution, reducing deployment time by 35\%; led POC work, mentored junior developers, and received the IQVIA Impact Program Silver Award for essential feature delivery.
+      \resumeItemListEnd
+  \resumeSubHeadingListEnd
+
+\vspace{-2mm}
 \section{\textbf{Skills}}
 \vspace{-0.4mm}
-\resumeHeadingSkillStart
-  \resumeSubItem{Agentic AI \& LLM Tooling:}
-    {MCP, LangGraph, LangChain, RAG, vLLM, tool calling, LLM evaluation, context engineering}
-  \resumeSubItem{Backend \& Data Systems:}
-    {C\#/.NET, REST APIs, PostgreSQL, MongoDB, SQL Server, Redis, SQLAlchemy, Oracle/PLSQL}
-  \resumeSubItem{Research \& Security Tooling:}
-    {CodeQL, Semgrep, Bandit, YARA, Z3, RefactoringMiner, static analysis}
-  \resumeSubItem{Core Languages:}
-    {Rust, Python, C\#, TypeScript, C++, Go, Java, SQL, Solidity}
-  \resumeSubItem{Cloud \& Engineering Infrastructure:}
-    {AWS, Docker, Kubernetes, GitHub Actions, Terraform, OpenTelemetry, Jaeger, Linux, Git}
-\resumeHeadingSkillEnd
+\small{
+\textbf{Primary:} Python, C\#/.NET, Rust, TypeScript, Go, PostgreSQL, AWS, Docker, Kubernetes, LangGraph, MCP \\
+\textbf{Research and agent tooling:} CodeQL, Semgrep, Bandit, YARA, Z3, RefactoringMiner, deepagents, vLLM, JSON Schema, source-free tracing \\
+\textbf{Systems and ML tooling:} C++, Java, Flex, Bison, CMake, NS-3, NumPy, OpenCV, PyTorch, Linux namespaces \\
+\textbf{Backend and production tooling:} EF Core, SQLAlchemy, REST APIs, Redis, MongoDB, SQL Server, DynamoDB, OpenTelemetry, Jaeger, Playwright
+}
+\vspace{-2mm}
 
 
 \section{\textbf{Honors and Awards}}
 \vspace{-0.4mm}
 \resumeSubHeadingListStart
 
-\resumePOR{IQVIA Impact Program -- Silver Award}{: outstanding performance and essential feature delivery}{May 2025}
-\resumePOR{Finalist, Blockchain Olympiad Bangladesh}{: top 40 national team for blockchain-based ticketing}{2021}
 \resumePOR{\href{https://github.com/thromel/CSE-472-Machine-Learning}{2nd Place -- Bangla Handwritten Digits Recognition}}{: 95.9\% accuracy, BUET ML Lab contest}{2022}
 \resumePOR{Dean's List Award}{: academic performance, BUET Level 2}{}
 \resumePOR{National Science Olympiads}{: prize winner in Bangladesh Physics and Chemistry Olympiads}{2017}
@@ -368,16 +355,7 @@ AI for Software Engineering (AI4SE), Software Engineering for AI (SE4AI), Trustw
 
 \section{\textbf{References}}
 \vspace{-0.4mm}
-\small{
-\begin{tabularx}{\textwidth}{@{}L L@{}}
-\textbf{\href{https://cse.buet.ac.bd/faculty/faculty_detail/rakinhaider}{Dr. Chowdhury Md. Rakin Haider}} &
-\textbf{\href{https://apps.ualberta.ca/directory/person/zy25}{Dr. Zhou Yang}} \\
-Assistant Professor, CSE, BUET &
-Assistant Professor, Computing Science, University of Alberta; Amii Fellow \\
-\href{mailto:rakinhaider@cse.buet.ac.bd}{rakinhaider@cse.buet.ac.bd} &
-\href{mailto:zy25@ualberta.ca}{zy25@ualberta.ca}
-\end{tabularx}
-}
+\small{References available upon request.}
 \vspace{-4mm}
 
 \end{document}

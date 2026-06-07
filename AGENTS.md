@@ -11,6 +11,8 @@ You have superpowers. Superpowers teach you new skills and capabilities. RIGHT N
 - This repo is a brownfield GSD project for `thromel.github.io`.
 - Read [`.planning/PROJECT.md`](/Users/romel/Documents/GitHub/thromel.github.io/.planning/PROJECT.md), [`.planning/REQUIREMENTS.md`](/Users/romel/Documents/GitHub/thromel.github.io/.planning/REQUIREMENTS.md), [`.planning/ROADMAP.md`](/Users/romel/Documents/GitHub/thromel.github.io/.planning/ROADMAP.md), and [`.planning/STATE.md`](/Users/romel/Documents/GitHub/thromel.github.io/.planning/STATE.md) before substantial work.
 - The initial milestone is UI remediation and system convergence, not a platform rewrite.
+- Current ctxhelm content context, as of 2026-06-07: `ctxhelm` now has a companion benchmark project, HelmBench, for source-free coding-agent evaluation. HelmBench includes task-suite schemas, source-free traces/reports, direct-agent matrix runs, evidence bundles, launch-readiness checks, quality gates, and RefactoringMiner/Codex regression matrices. The latest work hardened commit-replay guidance so ctxhelm-guided agents treat public changed-path recommendations as a checklist instead of stopping after the first relevant code file. Do not claim HelmBench is launch-ready yet: the hardened 10-task Codex matrix was stopped at 19/20 traces, with one ctxhelm row still missing and no final quality-gate manifest.
+- If updating public ctxhelm project copy, frame HelmBench as active evaluation infrastructure and source-free proof work, not as a completed launch-grade benchmark. Keep the distinction between built harness, partial real-agent evidence, and pending launch-grade quality-gate proof.
 
 ## Canonical UI Layer
 

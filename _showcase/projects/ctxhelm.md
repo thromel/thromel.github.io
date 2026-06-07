@@ -1,13 +1,13 @@
 ---
 layout: showcase
 title: "ctxhelm: agent-native context compiler"
-subtitle: "Local-first context plans, packs, and release proof for AI coding agents"
+subtitle: "Local-first context plans, packs, release proof, and source-free agent evaluation"
 category: projects
 group: Projects
 show: true
 width: 8
 date: 2026-05-10 00:00:00 +0800
-excerpt: A technical write-up on ctxhelm, a Rust tool that helps coding agents look in the right place before editing by compiling task-specific files, tests, risks, validation commands, and optional context packs.
+excerpt: A technical write-up on ctxhelm, a Rust tool that helps coding agents look in the right place before editing. It also covers HelmBench, the benchmark I am building to check whether that context actually changes agent behavior.
 featured: true
 showcase_style: agent-tooling
 card_image: /assets/images/projects/ctxhelm-system-architecture.svg
@@ -21,6 +21,7 @@ technologies:
   - Evaluation
   - Privacy
   - Release Engineering
+  - HelmBench
   - CLI
 ---
 
@@ -58,7 +59,7 @@ Risks:
 - redirect destination may be shared by login and session-expiry flows
 ```
 
-The `v1.1.11` release can scan a repository, build a safe inventory, extract symbols, combine lexical, graph, test, history, memory, feedback, and optional local semantic signals, then return a plan or a budgeted Markdown/JSON pack. It also exposes the same path through MCP.
+The current release line can scan a repository, build a safe inventory, extract symbols, combine lexical, graph, test, history, memory, feedback, and optional local semantic signals, then return a plan or a budgeted Markdown/JSON pack. It also exposes the same path through MCP.
 
 That sounds clean in hindsight. Building it was not. The hard part was not parsing files. The hard part was keeping the system honest: no source leakage in evals, no vague release claims, no pretending that every client integration worked when only some of them produced machine-checkable evidence.
 
@@ -240,7 +241,7 @@ That detail is small, but it decides whether the tool works in a real agent sess
 
 I do not trust context tooling without evals. It is too easy to add a graph, embedding, or reranker and convince yourself it helped because the output looks smarter.
 
-ctxhelm uses historical tasks and source-free reports to check whether retrieval is actually improving. The eval stack includes fixed-budget historical retrieval, lexical baselines, signal ablations, protected-target miss accounting, retrieval-health reports, feedback summaries, deterministic MCP protocol tests, and release gates.
+ctxhelm uses historical tasks and source-free reports to check whether retrieval is getting better. The eval stack covers fixed-budget retrieval, lexical baselines, signal ablations, protected-target misses, retrieval-health reports, feedback summaries, MCP protocol tests, release gates, and HelmBench runs with real agents.
 
 | Evaluation area | What is checked | Source leakage? |
 | --- | --- | --- |
@@ -249,16 +250,19 @@ ctxhelm uses historical tasks and source-free reports to check whether retrieval
 | MCP protocol tests | Deterministic client/server behavior | No |
 | Release gates | Archive, install, `doctor`, `--help`, first-pack behavior | No |
 | Client evidence | Claude Code `prepare_task` / `get_pack` proof | No raw prompts or source |
+| HelmBench matrices | Native vs ctxhelm-guided coding-agent runs on public regression tasks | No raw prompts, transcripts, terminal logs, or source |
 
-In the `v1.1.11` README snapshot, the agent-evidence retrieval channel beats or matches lexical on every measured corpus, with an average Recall@10 delta of roughly `+0.194`. I would not generalize that too far. It means the measured release corpus improved. It does not mean every possible query improves.
+In the release proof snapshots, the agent-evidence retrieval channel beats or matches lexical on measured corpora. HelmBench asks a harder question: do those recommendations change what real agents read, edit, and validate?
 
-That distinction matters. A tool like this should say when it helps, when it is neutral, and when it does not have enough evidence.
+That distinction matters. A retrieval win is useful, but it is not the same as a coding-agent outcome win.
+
+The latest HelmBench slice is still unfinished. The harness works and stays source-free, but the current hardened agent matrix is partial. The partial run looked better on several rows that had been risky before. Still, I do not want to sell that as proof. I want the complete trace set, the manifest, the verifier, and the quality gate before calling it launch-grade.
 
 ## Release proof
 
 Release proof is how I keep the project from making claims the archive cannot reproduce.
 
-The public `v1.1.11` release is archive-first. The release path verifies checksums, manifest and audit files, temporary install, `doctor`, `--help`, and first-pack behavior.
+The public release path is archive-first. It verifies checksums, manifest and audit files, temporary install, `doctor`, `--help`, and first-pack behavior.
 
 The same release proof records:
 
@@ -268,8 +272,21 @@ The same release proof records:
 - crates package boundary checks
 - Claude Code real-client evidence for `prepare_task` and `get_pack`
 - Codex CLI optional skip status, because that client did not produce machine-checkable evidence
+- HelmBench launch-readiness reports that separate smoke proof, diagnostic matrices, and launch-grade gates
 
 I like this part because it prevents soft claims. If a client works, there should be evidence. If it does not produce evidence yet, the release notes should say that.
+
+## HelmBench
+
+HelmBench exists because retrieval metrics were not enough. I can make ctxhelm rank the right file and still lose if the agent ignores it, edits only half the changed paths, or skips the test that would have caught the mistake.
+
+So HelmBench runs agents in isolated workdirs. It records source-free read, edit, and validation events. It infers edited files from git state. It publishes reports without raw source, prompts, transcripts, terminal logs, or adapter commands.
+
+The first serious public suite uses regression-style coding tasks. It compares native agent runs with ctxhelm-guided runs on task success, validation coverage, recommendation recall, follow-through, context precision, edited-file recall, irrelevant reads, tool calls, and token estimates.
+
+The benchmark has already changed ctxhelm. One failed matrix showed that ctxhelm could point the agent at the right changed paths, but the agent still under-edited companion files: docs, Docker files, tests, helper classes. The fix was not a clever new ranking trick. It was clearer coverage guidance: treat recommended changed-path queues as checklists before deciding the edit set.
+
+I am not treating the benchmark as proof yet. It is a pressure test for whether context recommendations survive contact with real agent behavior.
 
 ## What works today
 

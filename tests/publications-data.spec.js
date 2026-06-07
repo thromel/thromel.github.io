@@ -4,7 +4,7 @@ const BASE_URL = process.env.PLAYWRIGHT_TEST_BASE_URL || 'http://127.0.0.1:4000'
 const DESKTOP_VIEWPORT = { width: 1280, height: 720 };
 
 const REAL_TITLES = [
-  'An Empirical Study on Remote Code Execution in ML Model Hosting Ecosystems',
+  'An Empirical Study on Remote Code Execution in Machine Learning Model Hosting Ecosystems',
   'Sentiment Analysis of Anonymous Crisis Reports in Bangladesh',
   'Patient-Centric Blockchain Framework for EHR Management',
 ];
@@ -16,7 +16,7 @@ const EXPECTED_PRIMARY_DESTINATIONS = [
 ];
 
 const HOMEPAGE_SELECTED_TITLES = [
-  'An Empirical Study on Remote Code Execution in ML Model Hosting Ecosystems',
+  'An Empirical Study on Remote Code Execution in Machine Learning Model Hosting Ecosystems',
   'The Choice Can Be the Attack: Auditing Aligned Backdoors in LLM Agents',
   'VeriSchema: Multi-Agent Framework for Generating Relational DB Schema & ERD',
   'Patient-Centric Blockchain Framework for EHR Management',

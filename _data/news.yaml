@@ -2,10 +2,10 @@
   description: "Started a remote summer research internship at the University of Illinois Urbana-Champaign through UIUC++ Summer Research in Software Engineering (SRSE) 2026 with Professor Tianyin Xu."
   date: 2026-06-01
 - title: "Paper submitted to TOSEM 2026"
-  description: "Resubmitted 'An Empirical Study on Remote Code Execution in ML Model Hosting Ecosystems' to ACM Transactions on Software Engineering and Methodology (TOSEM) 2026. Preprint available on arXiv."
+  description: "Resubmitted 'An Empirical Study on Remote Code Execution in Machine Learning Model Hosting Ecosystems' to ACM Transactions on Software Engineering and Methodology (TOSEM) 2026. Preprint available on arXiv."
   date: 2026-02-01
 - title: "Paper submitted to MSR 2026"
-  description: "Submitted 'An Empirical Study on Remote Code Execution in ML Model Hosting Ecosystems' to the Mining Software Repositories (MSR) 2026 conference. First large-scale cross-platform security study analyzing ~45,000 repositories across 5 major ML platforms."
+  description: "Submitted 'An Empirical Study on Remote Code Execution in Machine Learning Model Hosting Ecosystems' to the Mining Software Repositories (MSR) 2026 conference. First large-scale cross-platform security study analyzing ~45,000 repositories across 5 major ML platforms."
   date: 2025-10-15
 - title: "Received IQVIA Impact Program Silver Award"
   description: "Honored with the IQVIA Impact Program Silver Award for outstanding performance and contributions to the KPI Library team."

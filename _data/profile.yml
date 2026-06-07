@@ -17,7 +17,7 @@ current_company:
 
 current_focus:
   primary: >-
-    Right now I am working as a remote research intern at UIUC through UIUC++ SRSE 2026,
+    Right now I am working as a remote research intern at UIUC through <a href="https://uiuc-srse.github.io/" target="_blank" rel="noopener noreferrer">UIUC++ SRSE 2026</a>,
     <span class="academic-highlight">The Choice Can Be the Attack</span>, ctxhelm, VeriSchema,
     RefactoringMiner, and reading <em>Designing Data-Intensive Applications</em>.
   open_source: >-
@@ -203,7 +203,9 @@ education:
   description: >-
     Starting the <strong>M.Sc in Computing Science</strong> program in <strong>September 2026</strong>, with interests in
     software engineering research, trustworthy AI, distributed systems, and LLM systems. I will be joining the
-    <a href="https://u-a-goose.github.io/" target="_blank" rel="noopener noreferrer">U-A-Goose</a> software engineering group at the University of Alberta.
+    <a href="https://u-a-goose.github.io/" target="_blank" rel="noopener noreferrer">U-A-Goose</a> software engineering group at the University of Alberta, supervised by
+    <a href="https://apps.ualberta.ca/directory/person/zy25" target="_blank" rel="noopener noreferrer">Dr. Zhou Yang</a>, with affiliation to
+    <a href="https://www.amii.ca/" target="_blank" rel="noopener noreferrer">Amii (Alberta Machine Intelligence Institute)</a>.
   url: https://www.ualberta.ca/en/computing-science/index.html
   logo: /assets/images/education/ualberta-logo.svg
 - name: Bangladesh University of Engineering and Technology
@@ -445,18 +447,34 @@ professional_memberships:
   joined: 2024
 
 research:
-- title: "An Empirical Study on Remote Code Execution in ML Model Hosting Ecosystems"
+- title: "Remote Research Intern, University of Illinois Urbana-Champaign"
+  date: June 2026 - August 2026
+  link: https://uiuc-srse.github.io/
+  thumbnail: /assets/images/companies/uiuc-block-i.png
+  status: "UIUC++ SRSE 2026"
+  short_description: Remote software engineering research internship through UIUC++ SRSE 2026 with Professor Tianyin Xu's lab.
+  description: >-
+    Remote summer research internship through <a href="https://uiuc-srse.github.io/" target="_blank" rel="noopener noreferrer">UIUC++ Summer Research in Software Engineering (SRSE) 2026</a>
+    with Professor <a href="https://tianyin.github.io/" target="_blank" rel="noopener noreferrer">Tianyin Xu's lab</a>, focused on software and systems reliability research,
+    rigorous empirical evaluation, and reproducible research artifacts.
+  technologies:
+  - Software Engineering Research
+  - Systems Reliability
+  - Empirical Evaluation
+  - Reproducibility
+
+- title: "An Empirical Study on Remote Code Execution in Machine Learning Model Hosting Ecosystems"
   date: June 2025 - Oct 2025
   link: https://arxiv.org/pdf/2601.14163
   thumbnail: /assets/images/ml-rce.png
-  status: "Submitted to TOSEM 2026"
+  status: "Under review at ACM TOSEM"
   short_description: First large-scale cross-platform study analyzing ~45,000 repositories across 5 major ML platforms for security vulnerabilities.
   description: >-
     Cross-platform study of ~45,000 repositories across five ML platforms (Hugging Face, ModelScope, OpenCSG, OpenMMLab, PyTorch Hub)
-    with co-authors Mohammad Latif Siddiq and Joanna C. Santos. Detected security issues using static analyzers (Bandit, CodeQL, Semgrep)
+    with co-authors Mohammed Latif Siddiq, Natalie Sekerak, Beatrice Casey, and Joanna C. S. Santos. Detected security issues using static analyzers (Bandit, CodeQL, Semgrep)
     and YARA malware signatures: found CWE-502 (unsafe deserialization) in 74.54% and CWE-95 (eval injection) in 15.02% of affected
     repositories; 10.41% of Hugging Face repos contain security smells. Analyzed 600+ developer discussions to build a taxonomy of
-    security misconceptions; found 6.6% SafeTensors adoption and heavy trust_remote_code usage. <b>Submitted to TOSEM 2026.</b>
+    security misconceptions; found 6.6% SafeTensors adoption and heavy trust_remote_code usage. <b>Manuscript under review at ACM TOSEM.</b>
   technologies:
   - Python
   - Bandit
@@ -550,10 +568,10 @@ projects:
   link: https://github.com/thromel/ctxhelm
   date: May 2026 - Present
   description: >-
-    Ongoing Rust project for compiling useful repository context for coding agents. The v1.1.11 public release can inventory a repo, retrieve lexical
-    and symbol matches, include dependency, graph, semantic-provider, memory, and git-history signals, build Markdown or JSON context packs, and
-    expose them through MCP. Current release proof includes public archive-install verification, checksum/audit metadata, deterministic protocol
-    smoke coverage, and Claude Code real-client evidence.
+    Ongoing Rust project that helps coding agents inspect the right files before editing. ctxhelm builds a safe repository inventory, combines lexical,
+    symbol, graph, semantic-provider, memory, feedback, and git-history signals, and exposes task plans and context packs through CLI and MCP. I am also
+    building HelmBench to compare native and ctxhelm-guided agent runs without publishing raw source, prompts, transcripts, or terminal logs. The latest
+    agent matrix is still partial, so I am not treating it as proof yet.
   technologies:
   - Rust
   - MCP
@@ -562,6 +580,7 @@ projects:
   - Symbol Indexing
   - Graph Retrieval
   - Evaluation
+  - HelmBench
   - Release Engineering
   - Codex CLI
   - Claude Code
