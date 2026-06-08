@@ -61,6 +61,45 @@ Risks:
 
 The current public release, `v2.4.0`, can scan a repository, build a safe inventory, extract symbols, combine lexical, graph, related-test, history, memory, feedback, and optional local semantic signals, then return a plan or a budgeted Markdown/JSON pack. It also exposes the same path through MCP. You can install it from GitHub release archives or the public Apple Silicon Homebrew tap.
 
+<section class="ctxhelm-proof-board" aria-label="ctxhelm current proof summary">
+  <div class="ctxhelm-proof-board__header">
+    <p class="ctxhelm-proof-board__eyebrow">Current proof surface</p>
+    <p>What is shipped, measured, blocked, and deliberately not claimed.</p>
+  </div>
+  <div class="ctxhelm-proof-grid">
+    <article>
+      <span>Release</span>
+      <strong>v2.4.0</strong>
+      <p>GitHub archives, checksum proof, release gate, public archive install, and Homebrew formula verification.</p>
+    </article>
+    <article>
+      <span>Retrieval</span>
+      <strong>+0.1938</strong>
+      <p>Average Recall@10 lift for the agent-evidence channel over lexical on measured source-free corpora.</p>
+    </article>
+    <article>
+      <span>Codex reads</span>
+      <strong>1.00</strong>
+      <p>Retry-enabled ctxhelm lanes reached full target-read coverage versus baseline <code>0.7083333333333333</code>.</p>
+    </article>
+    <article>
+      <span>HelmBench</span>
+      <strong>10 tasks</strong>
+      <p>RefactoringMiner Codex matrix passed the quality gate with native and guided runs both at <code>100.0%</code> success.</p>
+    </article>
+    <article>
+      <span>Boundaries</span>
+      <strong>Read-only</strong>
+      <p>No editing, no hidden source in proof reports, no raw prompts, no transcripts, and no release claims from failed clients.</p>
+    </article>
+    <article>
+      <span>Still open</span>
+      <strong>Cross-agent</strong>
+      <p>Claude is availability-blocked, Cursor real-client proof is not claimed, and semantic remains opt-in.</p>
+    </article>
+  </div>
+</section>
+
 That sounds clean in hindsight. Building it was not. The hard part was not parsing files. The hard part was keeping the system honest: no source leakage in evals, no vague release claims, no pretending that every client integration worked when only some of them produced machine-checkable evidence.
 
 ## Current status after the latest R&D cycle

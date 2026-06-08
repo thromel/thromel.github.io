@@ -3938,3 +3938,128 @@ a:focus {
     max-height: 56px;
   }
 }
+
+/* ctxhelm project proof board: compact evidence before the long technical narrative. */
+.showcase-article--agent-tooling .ctxhelm-proof-board {
+  margin: 1.5rem 0 1.85rem;
+  padding: 16px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--color-surface) 94%, var(--color-bg) 6%);
+}
+
+.showcase-article--agent-tooling .ctxhelm-proof-board__header {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  gap: 14px;
+  align-items: baseline;
+  margin-bottom: 14px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.showcase-article--agent-tooling .ctxhelm-proof-board__header p {
+  margin: 0;
+  color: var(--color-text-secondary);
+  line-height: 1.45;
+}
+
+.showcase-article--agent-tooling .ctxhelm-proof-board__eyebrow {
+  color: var(--color-accent-secondary);
+  font-size: 12px;
+  font-weight: 850;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.showcase-article--agent-tooling .ctxhelm-proof-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  background: var(--color-border);
+  overflow: hidden;
+}
+
+.showcase-article--agent-tooling .ctxhelm-proof-grid article {
+  min-width: 0;
+  min-height: 154px;
+  padding: 13px;
+  background: var(--color-surface);
+}
+
+.showcase-article--agent-tooling .ctxhelm-proof-grid span {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--color-text-muted);
+  font-size: 12px;
+  font-weight: 760;
+}
+
+.showcase-article--agent-tooling .ctxhelm-proof-grid strong {
+  display: block;
+  margin-bottom: 7px;
+  color: var(--color-text-primary);
+  font-size: 22px;
+  font-weight: 720;
+  line-height: 1.1;
+  font-variant-numeric: tabular-nums;
+}
+
+.showcase-article--agent-tooling .ctxhelm-proof-grid p {
+  margin: 0;
+  color: var(--color-text-secondary);
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+[data-theme="dark"] .showcase-article--agent-tooling .ctxhelm-proof-board {
+  background: color-mix(in srgb, var(--color-surface) 90%, var(--color-bg) 10%);
+}
+
+[data-theme="dark"] .showcase-article--agent-tooling .ctxhelm-proof-grid article {
+  background: color-mix(in srgb, var(--color-surface) 94%, transparent);
+}
+
+@media (max-width: 760px) {
+  .showcase-article--agent-tooling .ctxhelm-proof-board {
+    padding: 13px;
+  }
+
+  .showcase-article--agent-tooling .ctxhelm-proof-board__header {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 6px;
+  }
+
+  .showcase-article--agent-tooling .ctxhelm-proof-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 480px) {
+  .showcase-article--agent-tooling .ctxhelm-proof-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .showcase-article--agent-tooling .ctxhelm-proof-grid article {
+    min-height: 0;
+  }
+}
+
+@media (max-width: 640px) {
+  .showcase-navigation__grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.85rem;
+  }
+
+  .showcase-navigation__previous,
+  .showcase-navigation__next {
+    min-width: 0;
+    text-align: left;
+  }
+
+  .showcase-navigation__link {
+    width: 100%;
+  }
+}
