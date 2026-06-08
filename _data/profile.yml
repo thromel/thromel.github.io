@@ -568,10 +568,11 @@ projects:
   link: https://github.com/thromel/ctxhelm
   date: May 2026 - Present
   description: >-
-    Ongoing Rust project that helps coding agents inspect the right files before editing. ctxhelm builds a safe repository inventory, combines lexical,
-    symbol, graph, semantic-provider, memory, feedback, and git-history signals, and exposes task plans and context packs through CLI and MCP. I am also
-    building HelmBench to compare native and ctxhelm-guided agent runs without publishing raw source, prompts, transcripts, or terminal logs. The latest
-    agent matrix is still partial, so I am not treating it as proof yet.
+    Rust project for helping coding agents inspect the right files before they edit. ctxhelm ships as v2.4.0 through GitHub release archives and
+    Homebrew, with checksum, archive, doctor, MCP, release-gate, and source-free proof checks. It combines lexical, symbol, graph, related-test,
+    git-history, semantic-metadata, memory, and feedback signals, then exposes task plans and packs through CLI and MCP. I am also building HelmBench,
+    a source-free benchmark for comparing native and ctxhelm-guided agent runs. The current Codex RefactoringMiner matrix keeps task success and
+    validation flat while improving recommendation recall, follow-through, context precision, edited-file recall, and irrelevant-read rate.
   technologies:
   - Rust
   - MCP

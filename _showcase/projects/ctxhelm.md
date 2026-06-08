@@ -1,13 +1,13 @@
 ---
 layout: showcase
 title: "ctxhelm: agent-native context compiler"
-subtitle: "Local-first context plans, packs, release proof, and source-free agent evaluation"
+subtitle: "Local-first context plans, release proof, and source-free agent evaluation"
 category: projects
 group: Projects
 show: true
 width: 8
 date: 2026-05-10 00:00:00 +0800
-excerpt: A technical write-up on ctxhelm, a Rust tool that helps coding agents look in the right place before editing. It also covers HelmBench, the benchmark I am building to check whether that context actually changes agent behavior.
+excerpt: A technical write-up on ctxhelm, a released Rust tool that helps coding agents inspect the right files before editing, and HelmBench, the source-free benchmark I am building to see whether that context changes real agent behavior.
 featured: true
 showcase_style: agent-tooling
 card_image: /assets/images/projects/ctxhelm-system-architecture.svg
@@ -59,9 +59,29 @@ Risks:
 - redirect destination may be shared by login and session-expiry flows
 ```
 
-The current release line can scan a repository, build a safe inventory, extract symbols, combine lexical, graph, test, history, memory, feedback, and optional local semantic signals, then return a plan or a budgeted Markdown/JSON pack. It also exposes the same path through MCP.
+The current public release, `v2.4.0`, can scan a repository, build a safe inventory, extract symbols, combine lexical, graph, related-test, history, memory, feedback, and optional local semantic signals, then return a plan or a budgeted Markdown/JSON pack. It also exposes the same path through MCP. You can install it from GitHub release archives or the public Apple Silicon Homebrew tap.
 
 That sounds clean in hindsight. Building it was not. The hard part was not parsing files. The hard part was keeping the system honest: no source leakage in evals, no vague release claims, no pretending that every client integration worked when only some of them produced machine-checkable evidence.
+
+## Current status after the latest R&D cycle
+
+ctxhelm is now public-release ready. I trust it for demos, pilots, and my own agent workflows. I do not think it is an enterprise code-search platform, and I do not want to dress it up as one.
+
+The parts I trust most:
+
+- `v2.4.0` is published with release archives, audit and manifest files, checksum verification, public archive install proof, Homebrew formula verification, and a clean release gate.
+- The four-repo product proof reports zero protected target misses across RefactoringMiner, ctxhelm, ReAgent, and VeriSchema.
+- The agent-evidence retrieval channel beats or matches lexical on measured corpora, with average Recall@10 delta `+0.19379663`.
+- Codex CLI real-client proof is current: retry-enabled ctxhelm lanes reached `1.00` average target-read coverage versus baseline `0.7083333333333333`, with no evidence misses, evidence-only targets, under-read targets, forbidden commands, client failures, or rate limits.
+- Memory reuse is guarded by source-free Codex outcome suites, including cases where memory improves target reads and reduces irrelevant reads.
+- Release-gate hygiene is now stricter: distribution metadata smoke writes to a temp path by default, and the release gate fails if validation leaves a dirty worktree.
+
+The parts I am still careful about:
+
+- Claude Code is not current retrieval-quality proof right now. The latest comparable suite is availability-blocked by rate limits and client failures.
+- Cursor real-client outcome proof is not claimed until local auth and machine-checkable tool-call evidence are stable.
+- Semantic retrieval remains diagnostic and opt-in. The R&D cycle rejected repeated semantic default-promotion attempts because they did not produce stable no-regress lift.
+- ctxhelm does not replace Sourcegraph, Cursor, Claude Code, Codex, or OpenCode. It focuses on local, source-free evidence routing and outcome measurement for those agents.
 
 ![ctxhelm system architecture](/assets/images/projects/ctxhelm-system-architecture.svg)
 
@@ -249,30 +269,32 @@ ctxhelm uses historical tasks and source-free reports to check whether retrieval
 | Signal ablations | Lexical vs graph vs feedback vs semantic channels | No |
 | MCP protocol tests | Deterministic client/server behavior | No |
 | Release gates | Archive, install, `doctor`, `--help`, first-pack behavior | No |
-| Client evidence | Claude Code `prepare_task` / `get_pack` proof | No raw prompts or source |
+| Client evidence | Codex real-client consumption proof, Claude availability status, Cursor/OpenCode setup proof | No raw prompts or source |
 | HelmBench matrices | Native vs ctxhelm-guided coding-agent runs on public regression tasks | No raw prompts, transcripts, terminal logs, or source |
 
-In the release proof snapshots, the agent-evidence retrieval channel beats or matches lexical on measured corpora. HelmBench asks a harder question: do those recommendations change what real agents read, edit, and validate?
+In the release proof snapshots, the agent-evidence retrieval channel beats or matches lexical on measured corpora. The latest Codex outcome suite asks the question I care about more: did the agent actually read the useful files? In the retry-enabled breadth suite, ctxhelm-guided lanes reached full target-read coverage while the baseline stayed below that level.
 
 That distinction matters. A retrieval win is useful, but it is not the same as a coding-agent outcome win.
 
-The latest HelmBench slice is still unfinished. The harness works and stays source-free, but the current hardened agent matrix is partial. The partial run looked better on several rows that had been risky before. Still, I do not want to sell that as proof. I want the complete trace set, the manifest, the verifier, and the quality gate before calling it launch-grade.
+HelmBench asks the next layer of the same question: after the agent reads the context, does it edit and validate better? The latest local HelmBench proof includes a completed, source-free 10-task RefactoringMiner Codex matrix with a passing quality gate. It is still a small public-suite proof, not a universal benchmark, but it is no longer just a partial matrix.
 
 ## Release proof
 
 Release proof is how I keep the project from making claims the archive cannot reproduce.
 
-The public release path is archive-first. It verifies checksums, manifest and audit files, temporary install, `doctor`, `--help`, and first-pack behavior.
+The public release path is archive-first. For `v2.4.0`, I verified checksums, manifest and audit files, temporary install, `doctor`, `--help`, first-pack behavior, GitHub release assets, and the public Homebrew formula.
 
 The same release proof records:
 
 - public release freshness
 - deterministic MCP protocol behavior
 - Homebrew formula renderability from the exact archive digest
+- public Homebrew tap install and `brew test`
 - crates package boundary checks
-- Claude Code real-client evidence for `prepare_task` and `get_pack`
-- Codex CLI optional skip status, because that client did not produce machine-checkable evidence
-- HelmBench launch-readiness reports that separate smoke proof, diagnostic matrices, and launch-grade gates
+- Codex real-client evidence for explicit-repo `prepare_task` and `get_pack`
+- Claude availability blockers when rate limits prevent comparable evidence
+- Cursor and OpenCode setup/MCP protocol proof without overstating real-client outcome proof
+- HelmBench launch-readiness reports that separate smoke proof, failed diagnostic matrices, and launch-grade gates
 
 I like this part because it prevents soft claims. If a client works, there should be evidence. If it does not produce evidence yet, the release notes should say that.
 
@@ -286,11 +308,13 @@ The first serious public suite uses regression-style coding tasks. It compares n
 
 The benchmark has already changed ctxhelm. One failed matrix showed that ctxhelm could point the agent at the right changed paths, but the agent still under-edited companion files: docs, Docker files, tests, helper classes. The fix was not a clever new ranking trick. It was clearer coverage guidance: treat recommended changed-path queues as checklists before deciding the edit set.
 
-I am not treating the benchmark as proof yet. It is a pressure test for whether context recommendations survive contact with real agent behavior.
+The current Codex RefactoringMiner matrix is the strongest HelmBench result so far. Across 10 tasks, Codex native and Codex plus `ctxhelm_mcp` both solved `100.0%` of tasks with `100.0%` validation coverage. The ctxhelm-guided row improved recommendation recall from `0.0%` to `97.5%`, recommendation follow-through from `70.0%` to `100.0%`, context precision from `71.1%` to `74.4%`, edited-file recall from `95.0%` to `100.0%`, and irrelevant reads from `33.8%` to `28.4%`.
+
+That is now launch-grade evidence for the harness and for Codex-guided navigation on this public suite. It is not a claim that ctxhelm always improves every agent. HelmBench also keeps failed and mixed runs visible. Earlier Claude and stricter-guidance matrices exposed outcome regressions, higher tool-call costs, and cases where lower read waste was not worth worse task success.
 
 ## What works today
 
-ctxhelm is useful when the task crosses file boundaries or when validation matters. It can produce a first-pass plan, recommend target files with reasons, surface related tests, build context packs, expose everything through MCP, and report retrieval quality without leaking source.
+ctxhelm is useful when the task crosses file boundaries or when validation matters. It can produce a first-pass plan, recommend target files with reasons, surface related tests, build context packs, expose everything through MCP, and report retrieval and real-agent consumption quality without leaking source.
 
 Good fit:
 
@@ -298,6 +322,7 @@ Good fit:
 - validation-heavy changes
 - tasks involving tests, routes, fixtures, or package boundaries
 - agent sessions where the first read matters
+- local teams that want source-free proof of what an agent was shown, read, edited, and validated
 
 Poor fit:
 
@@ -327,6 +352,6 @@ I keep coming back to one question:
 
 > What is the smallest evidence set that makes the agent more likely to make the right change?
 
-That is the real project. ctxhelm does not help agents write code. It helps them look in the right place before they write code.
+That is the real project. ctxhelm does not help agents write code. It helps them look in the right place before they write code. HelmBench then checks whether that guidance survived contact with real agent behavior.
 
-<p><a href="https://github.com/thromel/ctxhelm" target="_blank">View the public repository on GitHub</a></p>
+<p><a href="https://github.com/thromel/ctxhelm" target="_blank">View ctxhelm on GitHub</a> · <a href="https://github.com/thromel/helmbench" target="_blank">View HelmBench on GitHub</a></p>
