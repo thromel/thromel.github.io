@@ -217,6 +217,7 @@ AI for Software Engineering (AI4SE), Software Engineering for AI (SE4AI), Trustw
 \resumeItemListStart
   \item Working on software and systems reliability research with emphasis on rigorous empirical evaluation and reproducible research artifacts.
   \item Preparing research prototypes, benchmark artifacts, and evaluation evidence for agentic software engineering and reliability tasks.
+  \item Building SRE-style benchmark artifacts around fault injection, mitigation oracles, shortcut rejection, and lifecycle evidence for Kubernetes reliability scenarios.
 \resumeItemListEnd
 
 \vspace{0.5mm}\item
@@ -228,6 +229,7 @@ AI for Software Engineering (AI4SE), Software Engineering for AI (SE4AI), Trustw
   \item Conducted a large-scale study of \textasciitilde45,000 ML model repositories across Hugging Face, ModelScope, OpenCSG, OpenMMLab, and PyTorch Hub.
   \item Detected unsafe deserialization, eval-injection, malware-signature, and platform-safety risks using Bandit, CodeQL, Semgrep, YARA, and CWE-based classification.
   \item Analyzed 600+ developer discussions to build a taxonomy of misconceptions around remote code execution, trust flags, and model-loading safety.
+  \item Compared platform defenses such as warning systems, scanning, SafeTensors support, and \texttt{trust\_remote\_code} controls to connect repository-level findings with ecosystem-level mitigation gaps.
 \resumeItemListEnd
 
 \resumeProject
@@ -238,6 +240,7 @@ AI for Software Engineering (AI4SE), Software Engineering for AI (SE4AI), Trustw
 \resumeItemListStart
   \item Studied a hidden backdoor risk where a trigger changes which valid option an LLM agent chooses while the final answer still appears correct.
   \item Built \textbf{SHIFT}, which reruns the same task with and without a known trigger, then checks whether the changed choice favors the attacker's target rather than normal reasons like price or rating.
+  \item Instrumented structured choice tasks with valid-option sets, logged option features, and matched no-trigger/trigger endpoint runs so the audit does not require model weights, logits, or hidden states.
 \resumeItemListEnd
 
 \resumeProject
@@ -248,6 +251,7 @@ AI for Software Engineering (AI4SE), Software Engineering for AI (SE4AI), Trustw
 \resumeItemListStart
   \item Extended SchemaAgent with Dr. Sukarna Barua (BUET) to turn natural-language requirements into relational schemas and ER diagrams.
   \item Built a LangGraph pipeline for entity extraction, relationship detection, normalization checks, Z3 validation, and targeted retry.
+  \item Designed verification gates for entity/relation completeness, functional dependencies, normal-form compliance, key soundness, requirement coverage, and executable DDL repair.
 \resumeItemListEnd
 
 \resumeSubHeadingListEnd
@@ -264,7 +268,7 @@ AI for Software Engineering (AI4SE), Software Engineering for AI (SE4AI), Trustw
 \resumeItemListStart
 \item Built a local-first, read-only context compiler for coding agents, combining lexical search, symbol search, dependency expansion, related-test mapping, git co-change hints, semantic metadata, and memory signals.
 \item Shipped ctxhelm releases with archive/Homebrew installation, checksum verification, doctor checks, MCP smoke tests, and source-free evaluation artifacts.
-\item Built HelmBench as active evaluation infrastructure with trace schemas, privacy checks, evidence bundles, matrix runs, and quality gates for comparing native and ctxhelm-guided agent runs without exposing source, prompts, transcripts, or terminal logs.
+\item Built HelmBench as active evaluation infrastructure with trace schemas, privacy checks, evidence bundles, matrix runs, and quality gates that separate context-selection quality from downstream patch quality without exposing source, prompts, transcripts, or terminal logs.
 \resumeItemListEnd
 
 \resumeProject
@@ -300,10 +304,10 @@ AI for Software Engineering (AI4SE), Software Engineering for AI (SE4AI), Trustw
   {2025 - 2026}
   {\href{https://github.com/thromel?tab=pull_requests}{GitHub}}
 \resumeItemListStart
-  \item \textbf{\href{https://github.com/SREGym/SREGym}{SREGym}}: authored and hardened Kubernetes SRE benchmark work, including a scheduler priority-preemption cascade scenario for Hotel Reservation and a Calico route-reflector label-drift follow-up with RFC, fault/oracle design, validation checks, and reviewer-facing evidence.
-  \item \textbf{\href{https://github.com/tsantalis/RefactoringMiner/pulls?q=author\%3Athromel}{RefactoringMiner}}: merged merge-parent-aware commit diffs, advanced assertion migration matching, and single-page PR viewed toggles; currently proposing a read-only local MCP server for refactoring analysis and intent validation.
-  \item \textbf{\href{https://github.com/dotnet/efcore}{EF Core}}: merged runtime migration creation/application, \texttt{ON DELETE SET DEFAULT} support, and nullable complex-property reload handling.
-  \item \textbf{\href{https://github.com/Kaliumhexacyanoferrat/GenHTTP}{GenHTTP}}: added automatic request decompression and binary-response support.
+  \item \textbf{\href{https://github.com/SREGym/SREGym}{SREGym}}: authored and hardened Kubernetes SRE benchmark work, including scheduler priority-preemption and Calico route-reflector label-drift scenarios with fault/oracle design, validation checks, and reviewer-facing evidence.
+  \item \textbf{\href{https://github.com/tsantalis/RefactoringMiner/pulls?q=author\%3Athromel}{RefactoringMiner}}: merged local MCP tooling, WebDiff workflow support, merge-parent-aware commit diffs, assertion migration matching, and single-page PR viewed toggles for refactoring-analysis workflows.
+  \item \textbf{\href{https://github.com/dotnet/efcore}{EF Core}}: merged targeted data-stack changes for runtime migration creation/application, \texttt{ON DELETE SET DEFAULT} support, and nullable complex-property reload handling.
+  \item \textbf{\href{https://github.com/Kaliumhexacyanoferrat/GenHTTP}{GenHTTP}}: added automatic request-body decompression and binary-response support with focused framework behavior tests.
   \item \textbf{\href{https://github.com/langchain-ai/deepagents/pull/2396}{deepagents}}: merged a CLI fix that stops and clears \texttt{LoadingWidget} animation timers on stop and unmount, preventing interval leaks in long-running terminal sessions and adding regression coverage for both cleanup paths.
   \item \textbf{\href{https://github.com/microsoft/typescript-go/pull/3314}{TypeScript}}: merged an upstream-aligned declaration-emit alias-resolution fix that preserves imported type aliases for inferred exports across module boundaries in Microsoft's Go port of TypeScript.
 \resumeItemListEnd
@@ -318,12 +322,12 @@ AI for Software Engineering (AI4SE), Software Engineering for AI (SE4AI), Trustw
       {{IQVIA}}{Dhaka, Bangladesh}
       {Software Development Engineer}{Jun 2023 - Jun 2026}
       \resumeItemListStart
-        \item Built and maintained KPI Library microservices in C\#/.NET and EF Core on AWS for healthcare analytics workflows over millions of patient records, including API, filtering, aggregation, and export paths used by global pharmaceutical clients.
-        \item Refactored complex healthcare-analytics filter logic into reusable query components, reducing duplicated business rules across services and improving filtering performance by 70\% while simplifying the codebase by 40\%.
-        \item Reworked high-latency analytics paths with PostgreSQL query planning, targeted indexing, materialized views, Redis caching, and MongoDB tuning, reducing complex query time by 60\% and API latency by 40\%.
+        \item Built and maintained KPI Library microservices in C\#/.NET and EF Core on AWS for healthcare analytics workflows over patient-level datasets, including API, filtering, aggregation, and export paths used by global pharmaceutical clients.
+        \item Refactored a complex healthcare-analytics filter path into reusable query components, reducing duplicated business rules and improving filtering performance by 70\% in the targeted workflow.
+        \item Reworked selected high-latency analytics paths with PostgreSQL query planning, targeted indexing, materialized views, Redis caching, and MongoDB tuning, reducing complex query time by 60\% and API latency by 40\%.
         \item Designed Playwright-backed export regression tests with multi-layer hashing to compare generated artifacts deterministically, raising export-workflow coverage from 72\% to 95\% and catching content-level regressions.
-        \item Added OpenTelemetry and Jaeger tracing around API, query, and cache paths, reducing troubleshooting time by 50\% by making latency and regression sources visible across distributed services.
-        \item Built LangGraph/LangChain agents with MCP, RAG, and \texttt{deepagents} to convert analyst prompts into structured dashboard actions, including chart creation, filter modification, drill-down analysis, and validated exports.
+        \item Added OpenTelemetry and Jaeger tracing around API, query, and cache paths, making latency and regression sources visible across distributed services.
+        \item Built LangGraph/LangChain workflows with MCP, RAG, and \texttt{deepagents} to map analyst prompts into structured dashboard setup, modification, drill-down analysis, and validated export actions, reducing setup effort by 85\% in the targeted workflow.
         \item Optimized CI/CD build stages and parallel test execution, reducing deployment time by 35\%; led POC work, mentored junior developers, and received the IQVIA Impact Program Silver Award for essential feature delivery.
       \resumeItemListEnd
   \resumeSubHeadingListEnd

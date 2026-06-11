@@ -91,8 +91,8 @@ test('contributions page shows curated proof before live GitHub activity', async
   await mockGitHub(page, 200, { total_count: 1, items: [contributionItem] });
   await page.goto(`${BASE_URL}/contributions`, { waitUntil: 'domcontentloaded' });
 
-  await expect(page.locator('.contribution-highlight')).toHaveCount(6);
-  for (const label of ['RefactoringMiner', 'EF Core', 'GenHTTP', 'deepagents', 'TypeScript']) {
+  await expect(page.locator('.contribution-highlight')).toHaveCount(7);
+  for (const label of ['RefactoringMiner', 'SREGym', 'EF Core', 'GenHTTP', 'deepagents', 'TypeScript']) {
     await expect(page.locator('.contributions-curated')).toContainText(label);
   }
   await expect(page.locator('#contributions-proof')).toHaveAttribute('data-state', 'success');

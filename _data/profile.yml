@@ -5,8 +5,8 @@ navbar_name: "Tanzim Hossain Romel"
 about_snippet: >-
   Hi, I'm Tanzim. I'm a software engineer and researcher working on software engineering, LLM systems, and AI/ML security.
   I build developer tools for coding agents, research pipelines, and backend systems. At
-  <a href="https://www.iqvia.com" target="_blank">IQVIA</a>, I build microservices that handle millions of patient records
-  and add LLM features to healthcare analytics. I also work with researchers at
+  <a href="https://www.iqvia.com" target="_blank">IQVIA</a>, I work on healthcare analytics microservices for patient-level data workflows
+  and help integrate LLM/RAG features into dashboard tooling. I also work with researchers at
   <a href="https://eng.auburn.edu" target="_blank">Auburn University</a> and
   <a href="https://cse.buet.ac.bd" target="_blank">BUET</a> on ML security and blockchain systems.
 
@@ -43,16 +43,16 @@ positions:
   date: June 2023 - June 2026
   logo: "/assets/images/companies/iqvia-logo.png"
   description: >-
-    Backend engineer on the KPI Library team, building microservices-based healthcare applications that handle millions of patient records using .NET Core and C#. IQVIA (NYSE: IQV) provides analytics, technology solutions, and clinical research services to the life sciences industry, with 74,000+ employees across 100+ countries.
+    Backend engineer on the KPI Library team, building .NET/C# microservices for healthcare analytics workflows over large patient-level datasets. IQVIA (NYSE: IQV) provides analytics, technology solutions, and clinical research services to the life sciences industry, with 74,000+ employees across 100+ countries.
   responsibilities:
-  - Built and deployed cloud-native microservices with <b>C#/.NET Core</b> and <b>EF Core</b> on <b>AWS</b> (Lambda, EC2, S3, DynamoDB); shipped RESTful APIs used by global pharmaceutical clients
-  - Led design and refactoring of complex filter logic, simplifying the codebase by 40% and improving filtering performance by 70% across multiple microservices
-  - Built a multi-agent system with <b>LangGraph</b> and <b>LangChain</b> using MCP (Model Context Protocol) to generate real-time dashboards from natural language prompts; implemented <b>RAG</b> pipelines for document retrieval and context-aware responses
-  - Cut complex query execution time by 60% through <b>PostgreSQL</b> query planning, indexing, and materialized views
-  - Implemented <b>in-memory caching</b> in <b>.NET</b> services and tuned <b>MongoDB</b> performance, improving API response times by 40% across healthcare data pipelines
-  - Built a multi-layer hashing approach that enabled automated <b>Playwright</b> tests for export features; led export test suite development; raised code coverage from 72% to 95%
-  - Improved CI/CD pipelines with optimized build stages and parallel test execution, cutting deployment time by 35%; added distributed tracing with <b>Jaeger</b> to reduce troubleshooting time by 50%
-  - Led proof-of-concept projects, mentored junior developers, and collaborated with cross-functional teams across time zones
+  - Built and deployed cloud-native healthcare analytics services with <b>C#/.NET Core</b> and <b>EF Core</b> on <b>AWS</b> (Lambda, EC2, S3, DynamoDB); shipped RESTful APIs used by global pharmaceutical clients
+  - Refactored a complex healthcare-analytics filter path into reusable query components, reducing duplicated business rules and improving filtering performance by 70% in the targeted workflow
+  - Helped build a LangGraph/LangChain workflow using MCP and <b>RAG</b> to turn analyst prompts into structured dashboard setup, modification, analysis, and export actions
+  - Reduced selected complex query execution times by 60% through <b>PostgreSQL</b> query planning, indexing, and materialized views
+  - Implemented <b>in-memory caching</b> in <b>.NET</b> services and tuned <b>MongoDB</b> access patterns, improving selected API response times by 40%
+  - Built deterministic <b>Playwright</b> export regression tests with multi-layer hashing, raising export-workflow coverage from 72% to 95%
+  - Improved CI/CD build stages and parallel test execution, cutting deployment time by 35%; added distributed tracing with <b>Jaeger</b> to make latency regressions easier to diagnose
+  - Led and contributed to proof-of-concept projects, mentored junior developers, and collaborated with cross-functional teams across time zones
   - Received the <b>IQVIA Impact Program - Silver</b> award (May 2025) for performance and essential feature delivery
   technologies:
   - C#
@@ -171,7 +171,7 @@ short_bio: >-
   <br/><br/>
   During undergrad, our project "<a href="/projects/blockchain-ticketing" target="_blank">Blockchain Based Ticketing Platform</a>" was a finalist in the <b><a href="https://bcolbd.org/2021/teams" target="_blank">Blockchain Olympiad Bangladesh 2021 (BCOLBD 2021)</a></b>. I worked with <a href="https://fazledyn.github.io" target="_blank">Ataf Fazledin Ahamed</a> and <a href="https://www.linkedin.com/in/md-tanzim-azad-a879a51b7/" target="_blank">Md. Tanzim Azad Nishan</a> to build a decentralized solution that addressed ticket fraud and scalping through smart contracts.
   <br/><br/>
-  I work as a Software Development Engineer at <a href="https://www.iqvia.com/">IQVIA</a> (NYSE: IQV), a Fortune 500 company and healthcare data analytics provider that serves 90% of the top pharmaceutical companies worldwide. At IQVIA, I build microservices that handle millions of patient records, add observability for critical data pipelines, design cloud-native solutions on AWS, and integrate LLM capabilities into clinical analytics dashboards for natural language querying and report generation.
+  I work as a Software Development Engineer at <a href="https://www.iqvia.com/">IQVIA</a> (NYSE: IQV), a Fortune 500 company and healthcare data analytics provider that serves 90% of the top pharmaceutical companies worldwide. At IQVIA, I work on healthcare analytics microservices for patient-level data workflows, add observability for critical data pipelines, design cloud-native services on AWS, and help integrate LLM/RAG capabilities into dashboard setup, analysis, and export workflows.
   <br/><br/>
   In May 2025, I received the <a href='https://drive.google.com/file/d/1Vc4E2RoQEPmbfS56oLdUih-oJDBok9sP/view?usp=share_link' target='_blank'><b>IQVIA Impact Program - Silver</b></a> award for performance, critical issue resolution, and feature delivery.
   <br/><br/>
@@ -571,8 +571,8 @@ projects:
     Rust project for helping coding agents inspect the right files before they edit. ctxhelm ships as v2.4.0 through GitHub release archives and
     Homebrew, with checksum, archive, doctor, MCP, release-gate, and source-free proof checks. It combines lexical, symbol, graph, related-test,
     git-history, semantic-metadata, memory, and feedback signals, then exposes task plans and packs through CLI and MCP. I am also building HelmBench,
-    a source-free benchmark for comparing native and ctxhelm-guided agent runs. The current Codex RefactoringMiner matrix keeps task success and
-    validation flat while improving recommendation recall, follow-through, context precision, edited-file recall, and irrelevant-read rate.
+    a source-free benchmark for separating context-selection quality from downstream patch quality. The current Codex RefactoringMiner matrix keeps
+    task success and validation flat while improving recommendation recall, follow-through, context precision, edited-file recall, and irrelevant-read rate.
   technologies:
   - Rust
   - MCP
