@@ -137,6 +137,7 @@ description: Software engineer, UIUC++ SRSE remote research intern, and research
   <h2>Projects</h2>
   {% for project in site.data.profile.projects limit:4 %}
   {% assign project_image = '' %}
+  {% if project.title contains 'PatchSmith' %}{% assign project_image = '/assets/images/projects/patchsmith-repair-pipeline.svg' %}{% endif %}
   {% if project.title contains 'ctxhelm' %}{% assign project_image = '/assets/images/projects/ctxhelm-context-map.svg' %}{% endif %}
   {% if project.title contains 'Go Container Runtime' %}{% assign project_image = '/assets/images/cards/go-database-card.svg' %}{% endif %}
   {% if project.title contains 'Mini Deep Learning Framework' %}{% assign project_image = '/assets/images/cnn-architecture.png' %}{% endif %}

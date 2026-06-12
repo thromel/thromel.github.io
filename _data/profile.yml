@@ -564,6 +564,24 @@ research:
   - ECIES
 
 projects:
+- title: "PatchSmith: repair agents that leave receipts"
+  link: /showcase/projects/patchsmith/
+  date: Jun 2026 - Present
+  description: >-
+    Research platform for evaluating software-maintenance agents with reproducible repair runs, public issue tasks,
+    DeepAgents traces, sandbox validation, model token and cost metadata, failure reports, and readiness gates. The current
+    DeepAgents public issue smoke lane validates 3 of 3 focused pytest/Requests tasks while keeping the claim boundary visible.
+  technologies:
+  - Python
+  - DeepAgents
+  - OpenAI
+  - Software Repair
+  - Coding Agents
+  - Evaluation
+  - Docker
+  - Pytest
+  - Observability
+  - Release Engineering
 - title: "ctxhelm: agent-native context compiler"
   link: https://github.com/thromel/ctxhelm
   date: May 2026 - Present
