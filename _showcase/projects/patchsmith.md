@@ -1,17 +1,17 @@
 ---
 layout: showcase
-title: "PatchSmith: repair agents that leave receipts"
-subtitle: "DeepAgents repair runs, public issue evidence, and local quality gates"
+title: "PatchSmith: a harness for repair agents"
+subtitle: "System design notes for bounded patches, sandbox validation, and auditable repair runs"
 category: projects
 group: Projects
 show: true
 width: 8
 date: 2026-06-12 00:00:00 +0600
-excerpt: A technical write-up on PatchSmith, a research platform for measuring software-maintenance agents through reproducible repair runs, DeepAgents traces, sandbox validation, and evidence gates.
+excerpt: A system design write-up on PatchSmith, a local research harness for running software-repair agents without giving the model direct control over patching, validation, or evidence claims.
 featured: true
 showcase_style: agent-tooling
 project_type: Research platform
-card_image: /assets/images/projects/patchsmith-repair-pipeline.svg
+card_image: /assets/images/projects/patchsmith-component-architecture.svg
 technologies:
   - Python
   - DeepAgents
@@ -26,237 +26,258 @@ technologies:
   - Public Issue Benchmarks
 ---
 
-# PatchSmith: repair agents that leave receipts
+# PatchSmith: a harness for repair agents
 
-PatchSmith is the other half of the context work. ctxhelm asks whether an agent can find the right files before editing. PatchSmith asks a messier question:
+PatchSmith started from a fairly practical annoyance: coding agents can sound done long before the repair is actually inspectable.
 
-> After an agent reads, plans, edits, tests, retries, and writes artifacts, what can we honestly say happened?
+The agent reads a few files, writes a patch, maybe runs a test, and the conversation ends with a green check mark. That is fine for a quick local chore. It is a weak basis for repair research. I want to know what repository snapshot was used, which files were shown to the agent, what exact patch it proposed, what command validated it, where the logs are, and what failed when the patch did not work.
 
-I built it because most agent demos compress the interesting part into one green check mark. That is not enough for software maintenance. A repair run should leave behind the issue, the repository snapshot, the files the agent saw, the patch it proposed, the validation command, the failure if it failed, and the token and cost metadata if a live model was involved.
+So PatchSmith is not a repair agent. It is the harness around repair agents. The design is intentionally a little boring: clone or copy a repo, select context, ask a planner for a bounded patch, apply the patch through PatchSmith's own gate, run validation in a sandbox, and save the evidence.
 
-PatchSmith is a local research platform for that loop. It can run seeded repair tasks, materialized public issue tasks, DeepAgents-backed planners, OpenAI-backed planners, deterministic baselines, Docker smoke checks, quality gates, launch-readiness checks, and artifact indexing. The useful property is not that every run passes. The useful property is that failed and passing runs are both inspectable.
+The model gets to propose. PatchSmith owns the mutation.
 
-<section class="patchsmith-proof-board" aria-label="PatchSmith current proof summary">
-  <div class="patchsmith-proof-board__header">
-    <p class="patchsmith-proof-board__eyebrow">Current proof surface</p>
-    <p>What is working in the saved evidence, and what I am deliberately not claiming.</p>
-  </div>
-  <div class="patchsmith-proof-grid">
-    <article>
-      <span>Status</span>
-      <strong>ready</strong>
-      <p>Project status, launch blockers, release hygiene, environment readiness, and quality gate are all green in the latest saved reports.</p>
-    </article>
-    <article>
-      <span>Public repairs</span>
-      <strong>3 / 3</strong>
-      <p>DeepAgents validated the current focused public issue smoke lane for pytest and Requests tasks.</p>
-    </article>
-    <article>
-      <span>Live model</span>
-      <strong>89</strong>
-      <p>Saved live-provider runs exist, with DeepAgents and OpenAI provider rows separated from offline fake-model evidence.</p>
-    </article>
-    <article>
-      <span>DeepAgents</span>
-      <strong>170</strong>
-      <p>Package-backed DeepAgents runs are recorded, separate from compatibility-mode adapter evidence.</p>
-    </article>
-    <article>
-      <span>Canonical cost</span>
-      <strong>$0.261364</strong>
-      <p>The latest three-task DeepAgents public issue run used 924,137 tokens across four model calls.</p>
-    </article>
-    <article>
-      <span>Boundary</span>
-      <strong>focused</strong>
-      <p>This proves targeted validation on a small public smoke lane, not full upstream acceptance or arbitrary bug-fixing quality.</p>
-    </article>
-  </div>
-</section>
+## design goals
 
-![PatchSmith repair pipeline](/assets/images/projects/patchsmith-repair-pipeline.svg)
+The first design goal was to keep the model out of the parts that decide whether a run counts. A planner can inspect files and return a patch plan, but it cannot silently rewrite the checkout, choose a different validation command after the fact, or summarize away a failed test.
 
-## Why this exists
+The second goal was to make failed runs useful. A failed repair should still answer useful questions: did retrieval miss the right file, did the planner patch a symptom, did the sandbox reject the command, did the old span fail to apply, or did the focused test expose a real logic mistake?
 
-The basic failure mode is easy to recognize if you have used coding agents for real bug work. The agent sounds confident, writes a plausible patch, maybe runs a test, and then the conversation moves on. Later you realize the test was too narrow, the patch was not grounded in the actual failing path, or the run had no reproducible artifact.
+The third goal was adapter pressure. I wanted DeepAgents, OpenAI-backed planners, deterministic baselines, and future runtimes to fit behind the same contract. Otherwise every experiment becomes a custom demo, and custom demos are hard to compare.
 
-I wanted PatchSmith to be less theatrical:
+## system boundary
 
-- reproduce the failure before repair attempts count
-- keep setup warnings visible instead of burying them in prose
-- separate deterministic baselines from live model runs
-- store traces and diffs next to each run
-- report token use and estimated cost next to quality
-- make launch readiness depend on saved evidence, not vibes
+PatchSmith is CLI-first today. There is no hosted service, no queue, and no database required for the core loop. Runs write to local artifact directories. That keeps the research surface simple and makes the output easy to inspect in a repo checkout.
 
-That last part matters. A project status page saying `ready` should be backed by JSON and Markdown artifacts that can be regenerated.
+The boundary looks like this:
 
-## The object under test
+```text
+input task
+  -> controlled workspace
+  -> context broker
+  -> runtime planner
+  -> bounded patch gate
+  -> sandbox validation
+  -> artifacts and reports
+```
 
-PatchSmith does not try to be one repair agent. It is the harness around repair agents.
-
-The current system has several lanes:
-
-| Lane | What it checks |
-| --- | --- |
-| Seeded repair tasks | Whether deterministic and model planners can repair controlled local bugs. |
-| Public issue corpus | Whether curated real issues can be reproduced, repaired, and validated with focused commands. |
-| Runtime adapters | Whether LangGraph, DeepAgents, OpenAI Agents, fake-model, and heuristic modes fit the same repair contract. |
-| Artifact index | Whether saved runs, traces, metrics, failures, and reports are discoverable after the fact. |
-| Quality and release gates | Whether the repo compiles, tests, builds, passes Docker smoke, and has current readiness evidence. |
-
-The design rule is simple: every status line should point to a file.
-
-## Architecture, component by component
+The important part is ownership. The planner owns reasoning. PatchSmith owns state changes, validation, and the final claim.
 
 ![PatchSmith component architecture](/assets/images/projects/patchsmith-component-architecture.svg)
 
-The architecture is built around one control rule: the agent can propose a repair, but PatchSmith owns the experiment boundary. It owns the repository snapshot, context selection, patch application, validation command, saved artifacts, and the language used to describe the result. That separation is why the system can support DeepAgents without becoming just a DeepAgents demo.
+## core contracts
 
-The main components are:
+PatchSmith is held together by a few plain contracts.
 
-| Component | What it owns | Why it matters |
-| --- | --- | --- |
-| Run request | The immutable run inputs: repository, issue text, issue URL, commit or branch, test command, runtime, planner, context provider, sandbox mode, and optional reviewed context paths. | A repair result is not interpretable unless the exact task configuration is visible. |
-| Public issue and seeded task corpora | Curated tasks, reproduction expectations, setup policy, focused test commands, and materialized local workspaces. | This separates benchmark data from the agent runtime, so the same task can be run through several planners. |
-| Workspace ingest | Clone or copy the repository into `artifacts/runs/<run_id>/repo`, resolve a concrete snapshot, inspect package hints, and index the file tree. | The model never works against an ambiguous "latest checkout"; every run has a local snapshot. |
-| Context selector | Route the issue through native keyword, native hybrid, graph, `ctxhelm_cli`, or fallback context providers, then normalize the result into retrieved files and context metadata. | Retrieval can change without changing the repair runtime contract. This is where ctxhelm plugs in as a context broker, not as a patching engine. |
-| Runtime boundary | Convert the run into an `AgentTask` and require an `AgentResult` with status, summary, diff or patch candidate, and runtime trace. | Agentless, heuristic, fake-model, OpenAI-backed, DeepAgents, and future runtimes can be compared behind the same interface. |
-| DeepAgents planner | Build a native DeepAgents workspace with read-only virtual files, memory, repair skill text, source-hint manifests, retry-feedback manifests, failure-localizer and patch-reviewer subagents, and structured `PatchPlan` output. | DeepAgents contributes planning, decomposition, file inspection, and review behavior, but it does not get direct write access to the checkout. |
-| Patch gate | Apply one bounded old/new text replacement only after checking the repo-relative path, target existence, and exact replacement span. | The model's answer is treated as a proposal. PatchSmith performs the mutation and can reject unsafe or non-applicable edits. |
-| Sandbox runner | Execute the focused validation command in local or Docker mode with command-policy checks, timeouts, stdout/stderr capture, and per-attempt logs. | A patch without a reproducible validation command is just a story. The sandbox turns the story into evidence. |
-| Feedback retry loop | If a patch fails and the budget allows a retry, classify the failure, write a compact retry brief, restore the workspace, and give the planner the failed diff and sandbox signal. | The second attempt is not a blind re-prompt. It receives the exact failed evidence from the previous attempt. |
-| Artifact store | Persist `report.md`, `traces.jsonl`, `final.diff`, context artifacts, logs, feedback briefs, timing, token metadata, cost metadata, and indexed run summaries. | This is the receipt layer. Passing and failing runs both become auditable after the terminal session is gone. |
-| Portfolio and readiness reports | Compile saved evidence into quality gates, release hygiene, environment readiness, Docker smoke, launch blockers, demo readiness, calibration readiness, and final evaluation reports. | Public claims come from regenerated evidence, not from memory of a good demo run. |
+`RunRequest` is the envelope for a run: repository, issue text, optional issue URL, commit or branch, validation command, runtime, planner, context provider, sandbox mode, and reviewed context paths.
 
-The important part is that none of these components is allowed to blur into the others. The context selector does not patch. The planner does not run the final validation gate by itself. The sandbox does not decide whether a result is publishable. The readiness reports do not create new evidence; they summarize evidence that already exists.
+`ContextBundle` is the normalized context answer. It can come from native keyword search, native hybrid retrieval, graph retrieval, or a ctxhelm CLI call. The runtime does not need to know which provider won. It sees ranked files, related tests, validation hints, warnings, and diagnostics.
 
-That design gives PatchSmith three useful control planes.
+`AgentTask` is what the runtime receives. It contains the run id, workspace path, issue text, retrieved context, validation command, and runtime configuration.
 
-| Control plane | Mechanism | Question it answers |
-| --- | --- | --- |
-| Repair plane | `RepairRunner`, `RunRequest`, context selection, runtime execution, patch gate, sandbox attempt, final report. | Did this specific repair attempt produce a bounded patch and survive the configured validation command? |
-| Evaluation plane | Seeded suites, public issue materialization, retrieval/scaffold/repair runners, complex benchmark summaries. | How does a runtime, context mode, or retry policy behave across a suite instead of one example? |
-| Readiness plane | Quality gate, Docker smoke, release hygiene, environment readiness, launch blockers, artifact index. | Is the platform itself coherent enough to trust the evidence it is publishing? |
+`PatchPlan` is the model-facing repair contract. It is deliberately small:
 
-This is also why the system can be used for R&D without overstating the result. A public issue row can say "validated" because the focused command passed in the saved run. It cannot silently upgrade that into "merged upstream" or "full suite accepted" because the claim boundary is a separate component.
+```text
+path: repository-relative file path
+old: exact source text to replace
+new: replacement text
+summary: short explanation
+```
 
-## How a run moves through the system
+That shape is limiting on purpose. It rules out broad, model-driven workspace edits. If the old span is not present, the patch is rejected. If the path escapes the repo, the patch is rejected. If the target is not a file, the patch is rejected.
+
+`CommandResult` records validation: command, exit code, stdout, stderr, duration, timeout state, and command-policy decision. It is not a paragraph saying "tests passed." It is the thing a later reader can inspect.
+
+## run lifecycle
+
+The main loop lives in `RepairRunner`. It creates a run directory, clones or copies the repo, indexes the workspace, selects context, asks a runtime for a patch, validates the result, and writes reports.
 
 ![PatchSmith evidence loop](/assets/images/projects/patchsmith-evidence-loop.svg)
 
-A public issue task starts as a curated record: repository, issue URL, reproduction expectation, focused validation command, setup policy, and reviewed source hints. PatchSmith materializes that into a local task directory, checks that setup and validation are runnable, then records failing reproduction evidence before a repair attempt is allowed to count.
+A run directory ends up with a shape like this:
 
-The repair run then follows the same shape each time:
+```text
+artifacts/runs/<run_id>/
+  repo/
+  context/
+  feedback/
+  logs/
+  patches/
+  report.md
+  traces.jsonl
+  final.diff
+```
 
-1. Index the repository snapshot.
-2. Build native-hybrid context from retrieved files, tests, symbols, and reviewed hints.
-3. Ask the runtime planner for a bounded repair plan.
-4. Apply only the approved old/new replacement inside the target path.
-5. Run the focused validation command in the configured sandbox.
-6. Save the report, trace, final diff, validation output, token metadata, and failure category.
+That directory is the product. The terminal output is temporary. The run directory is what lets me come back later and ask, "What actually happened here?"
 
-The boring steps are the product. They are what make the result reviewable.
+## context selection
 
-## The DeepAgents part
+Context is a separate subsystem because repair failures often begin before the model writes any code. If the agent never sees the controlling file or the test that reproduces the bug, the rest of the run is mostly theater.
 
-DeepAgents became the most interesting runtime once I stopped treating it as a generic chat wrapper. PatchSmith gives DeepAgents a small, explicit workspace and asks it to operate inside a repair contract.
+PatchSmith has a native selector with keyword, hybrid, and graph-backed modes. It also has a ctxhelm adapter. The adapter shape matters: ctxhelm stays read-only and returns context evidence; PatchSmith still owns patching and validation.
+
+Reviewed context paths can also be promoted into the selected context. I added that because public issue work often has a small amount of human-reviewed reproduction evidence. If a repro points at a specific function, the harness should not force the model to rediscover that from scratch.
+
+The context layer writes its own artifacts and trace events. When a repair fails, I can inspect whether the right source was even available to the planner.
+
+## runtime boundary
+
+The runtime boundary is intentionally narrow. A runtime takes an `AgentTask` and returns an `AgentResult`.
+
+That result can come from a heuristic planner, a fake model used for deterministic tests, an OpenAI-backed planner, or DeepAgents. The rest of the workflow does not care. It still applies the patch through the same gate and runs the same sandbox validation.
+
+This is the part I care about most for benchmark work. If each runtime gets special privileges, the comparison becomes meaningless. PatchSmith tries to make the runtime swappable without hiding the differences in traces.
+
+## deepagents integration
+
+DeepAgents is the most interesting runtime so far because it already packages several patterns that coding agents need for longer work: planning, virtual files, memory, skills, subagents, permissions, and structured output. The LangChain docs describe it as an agent harness built on LangGraph, with the usual tool-calling loop plus extra scaffolding for multi-step tasks. That framing matches how PatchSmith uses it. I do not need DeepAgents to be the whole product. I need it to be a good planner inside a repair system.
 
 ![PatchSmith DeepAgents contract](/assets/images/projects/patchsmith-deepagents-contract.svg)
 
-The native planner uses `create_deep_agent` with a state-backed virtual filesystem. The files are read-only and bounded to the selected context. PatchSmith also provides memory text, a repair skill, and two named subagents:
+The native DeepAgents planner gets a state-backed virtual filesystem. The files are read-only and limited to the selected context. PatchSmith injects a small repair skill, a memory file, optional source hints, and optional retry feedback.
 
-| Piece | Role |
+There are two subagents:
+
+- `failure-localizer`, for finding the source path that actually controls the reproduced behavior
+- `patch-reviewer`, for checking ambiguous or multi-file repair plans before PatchSmith applies anything
+
+The final answer still has to be a `PatchPlan`. DeepAgents can reason, inspect, and review. It cannot directly edit the checkout.
+
+That constraint made the integration much more useful. Without it, DeepAgents is another powerful agent with a lot of freedom. With it, DeepAgents becomes a planner inside a repair harness.
+
+The integration roughly maps DeepAgents concepts to PatchSmith responsibilities like this:
+
+| DeepAgents concept | PatchSmith use |
 | --- | --- |
-| Read-only virtual filesystem | Lets the planner inspect retrieved source and fixtures without wandering through the whole repo. |
-| `failure-localizer` | Finds the controlling code path before a patch is drafted. |
-| `patch-reviewer` | Reviews ambiguous or multi-file repair plans before PatchSmith applies anything. |
-| `PatchPlan` schema | Forces a structured response with `path`, `old`, `new`, and `summary`. |
-| Safety gate | Applies one bounded replacement only if the target path and span checks pass. |
+| Todo planning | The planner has to keep a short repair plan before reading files or choosing an edit. |
+| Virtual filesystem | Retrieved source, fixtures, source hints, and retry feedback appear as bounded files. |
+| Skills | The repair contract is loaded as a small task-specific instruction set. |
+| Subagents | Failure localization and patch review are delegated without filling the main planner context. |
+| Structured output | The planner must return `PatchPlan`, not a free-form patch narrative. |
+| Permissions | The planner reads context, but PatchSmith applies the edit outside the agent. |
 
-This matters because the model is not allowed to write directly to the checkout. The model proposes. PatchSmith applies, tests, records, and rejects if the proposal does not satisfy the contract.
+I deliberately did not expose the full agent toolbox. DeepAgents can support shell-capable backends and richer filesystem operations, but PatchSmith keeps shell execution in its own sandbox runner. That is a product decision, not a missing feature. For repair evaluation, the validation command should be part of the harness, not something the model quietly changes when the first attempt fails.
 
-## What the latest public issue run proved
+## notes on building agents
 
-The current canonical public issue repair lane used the `deepagents` runtime with the `deepagents` planner, native-hybrid context, local sandbox mode, and one feedback retry allowed. The model provider was `deepagents_openai_chat`, using `gpt-5.4-mini-2026-03-17`.
+Most agent advice sounds obvious until you build one and watch it fail in boring ways. PatchSmith follows a few rules that came from reading the DeepAgents and OpenAI agent docs, then stress-testing those ideas against repair tasks.
 
-![PatchSmith latest run ledger](/assets/images/projects/patchsmith-run-ledger.svg)
+Start with one capable agent, then split only when the split buys something. OpenAI's agent guide makes this point directly: a single agent with clear tools is easier to evaluate and maintain, while multi-agent systems add coordination cost. PatchSmith uses one main DeepAgents planner and two narrow subagents. The subagents exist because they reduce context noise: one looks for the controlling failure path, the other reviews a proposed patch.
 
-| Task | Repository | Validation command | Result |
-| --- | --- | --- | --- |
-| `pytest_14552_moved_file_filename` | `pytest-dev/pytest` | `python3 -m pytest testing/test_issue_14552_repro.py` | validated after one retry |
-| `requests_7223_chardet_extra` | `psf/requests` | `python3 -m pytest tests/test_issue_7223_repro.py` | validated |
-| `requests_7341_chunked_encoding_docs` | `psf/requests` | `python3 -m pytest tests/test_issue_7341_repro.py` | validated |
+Treat tools as contracts, not conveniences. A tool should have a narrow job, clear input, and a reviewable output. PatchSmith's most important "tool" is not a glamorous LLM call; it is the old/new replacement gate. The model can be clever inside the plan, but the mutation surface stays plain.
 
-The run total was four model calls, 924,137 tokens, and an estimated `$0.261364`. The pytest task needed a feedback retry. The two Requests tasks validated on the first repair attempt. All three rows still carry the setup caveat that repair validation depends on Docker bridge networking.
+Keep untrusted text away from irreversible actions. Issue bodies, stack traces, docs, and test output can all contain instructions that should not control the harness. PatchSmith turns those inputs into structured fields, selected context, source-hint files, and retry-feedback files. The planner can read them, but it still cannot write arbitrary files or choose its own success condition.
 
-That is a real result, but it is a narrow result. It says PatchSmith can run a small, reviewed public issue smoke lane through DeepAgents and save enough evidence to inspect the result. It does not say the patches are upstream-ready, that the full upstream suites pass, or that this setup beats every other repair agent.
+Use subagents for context quarantine, not decoration. The LangChain subagent docs emphasize that subagents help keep the main agent's context clean. That is exactly the repair use case. A failure-localizer can inspect noisy evidence and return a concise judgment. The main planner does not need every intermediate read.
 
-## Readiness is also part of the system
+Make traces a first-class output. OpenAI's Agents SDK tracing docs frame traces as records of model generations, tool calls, handoffs, guardrails, and custom events. PatchSmith keeps its own local version of that idea in `traces.jsonl`. I want the same debugging affordance without depending on a hosted dashboard.
 
-The latest saved project status report, generated on June 12, 2026, says:
+Add guardrails where the state changes, not only where the text is generated. Output schemas are useful, but they are not enough. PatchSmith validates the proposed path and exact old span at patch time. It also keeps sandbox validation outside the planner. The guardrail is close to the thing it protects.
 
-| Surface | Latest saved status |
-| --- | --- |
-| MVP progress | `100.0%` complete |
-| Delivery audit | `ready_for_completion_review`, 21 of 21 passed |
-| Quality gate | passed, 4 of 4 checks |
-| Launch blockers | ready, 0 blockers and 0 warnings |
-| Release hygiene | ready, 13 of 13 checks |
-| Environment readiness | ready, 10 of 10 checks |
-| Docker smoke | passed |
-| Evidence freshness | fresh |
+## challenges we faced
 
-The quality gate is deliberately plain: compile Python sources, run `git diff --check`, run the pytest suite, and build the source distribution and wheel. This is not glamorous, but it prevents a demo-ready repair harness from quietly drifting into an unbuildable repo.
+The hardest challenge was not getting an agent to produce code. That part happens quickly. The hard part was deciding when the patch should count.
 
-## What failed along the way
+Public issue repair makes this uncomfortable. A focused reproduction test can pass while the patch is still not something I would send upstream. Setup can be fragile. Dependency installation can fail for reasons unrelated to the repair. Docker networking can matter. A task can be useful for calibration and still be too narrow for a broad claim. PatchSmith had to make those caveats visible instead of flattening everything into "passed" or "failed."
 
-The current page would be misleading if it only showed the final 3/3 row. Earlier DeepAgents public issue attempts failed on the pytest task and on a Requests task. Some runs produced no patch. Some generated patches failed the sandbox test. The demo readiness report still lists runs requiring attention, grouped into categories such as `no_patch_generated`, `run_failed`, `sandbox_test_failed`, and `test_failure_after_patch`.
+The second challenge was keeping DeepAgents powerful without letting it own the whole run. DeepAgents naturally wants tools, files, memory, subagents, and sometimes shell access. That is exactly why it is useful. It is also why the boundary matters. PatchSmith gives it read-only context and a structured repair contract, then keeps patch application and validation outside the agent. That took some iteration because the most obvious integration path is also the least auditable one: give the agent tools and let it work.
 
-That is not cleanup noise. It is the point of PatchSmith.
+The third challenge was retry design. A retry should learn from the failed attempt, but it should not inherit a half-broken workspace. The current loop writes a feedback brief, records the failed diff and sandbox signal, restores the checkout, and then asks the planner to try again. That sounds straightforward now. It was easy to get subtly wrong.
 
-Repair evaluation gets better when failure cases stay visible. A failed run tells me whether the context was wrong, the planner ignored a hint, the bounded replacement was too brittle, the validation command was too narrow, or the setup policy was not honest enough.
+The fourth challenge was context. Sometimes the issue text points directly at the right file. Sometimes it points at a symptom. Sometimes a validation fixture is the best clue. This is where ctxhelm and the native context selector both matter: the repair planner should start with the files most likely to explain the failure, but the harness still has to record what it showed the planner in case the run fails.
 
-## Benchmark design from here
+The last challenge was presentation. Early versions of the project page looked too much like a scoreboard. That was accurate in one sense, but it pulled attention away from the system design. PatchSmith is more interesting as an architecture for controlled repair experiments than as a row of numbers.
 
-The next benchmark work should stay small enough to audit, but varied enough to matter. I would rather have a 20-task suite with clean artifacts than a 2,000-task number that nobody can reproduce locally.
+## bounded patching
 
-The benchmark shape I want:
+PatchSmith applies patches with one operation: replace this exact old text in this exact repo-relative file with this new text.
 
-| Dimension | What to record |
-| --- | --- |
-| Task source | Public issue URL, repository snapshot, reproduction evidence, and curated validation command. |
-| Runtime | Heuristic, fake model, LangGraph, DeepAgents, OpenAI Agents, and future adapters. |
-| Context mode | Native hybrid, ctxhelm broker, source-hint variants, and ablations. |
-| Outcome | Patch generated, focused validation, retry count, final diff, and failure category. |
-| Cost | Model calls, input tokens, output tokens, total tokens, estimated cost, and wall time. |
-| Review boundary | Whether the result is targeted validation, full suite validation, upstream-ready patch, or only diagnostic evidence. |
+That sounds crude. It is also easy to audit. For early repair experiments, I prefer a patch gate that rejects too much over one that accepts clever, hard-to-review edits. A rejected patch is a clean failure. A broad silent rewrite is much harder to reason about.
 
-That last column is the one I care about most. It keeps a repair benchmark from turning into a scoreboard detached from what was actually checked.
+The gate checks that the path stays inside the repository, the target exists, the target is a file, and the old span appears in the file. Then it writes the replacement and records a unified diff.
 
-## How this connects to ctxhelm
+This is where PatchSmith draws the line between "the model suggested a patch" and "the workspace changed."
 
-ctxhelm and PatchSmith are deliberately different.
+## sandbox validation
 
-ctxhelm is read-only. It helps an agent choose what to inspect. It measures whether context guidance changes the files an agent reads and the validation it follows.
+Validation is also owned by PatchSmith. The run request provides the command, and the sandbox runner executes it under the configured policy.
 
-PatchSmith is the repair harness. It lets an agent propose a patch, but it keeps application, testing, cost accounting, artifact writing, and readiness gates under PatchSmith control.
+Local mode is useful for seeded tasks and fast development. Docker mode is useful when public issue tasks need more isolation or reproducible setup. Either way, the result is captured as data, not prose.
 
-Together, they make one research loop:
+The sandbox does not make a grand judgment about software quality. It answers a narrower question: did the configured validation command pass for this patched workspace?
 
-1. ctxhelm asks whether better context routing gets the agent to the right evidence.
-2. PatchSmith asks whether the repair attempt survives validation and leaves a credible trail.
-3. The benchmark asks whether the result generalizes beyond one nice demo.
+That distinction matters. A focused test can prove that one reproduced behavior now passes. It does not prove that the patch is upstream-ready.
 
-I do not think any of this proves that autonomous software repair is solved. I do think it gives me a better way to discuss repair agents without hand-waving over the part where the code actually changed.
+## feedback retries
 
-## What I trust today
+Retries are easy to get wrong. If a model fails, it is tempting to paste the test output back into a new prompt and hope for the best. PatchSmith makes that path explicit.
 
-I trust PatchSmith as an R&D harness for focused repair experiments. I trust the DeepAgents integration enough to keep testing it first. I trust the current readiness reports because they are generated from saved artifacts and executable gates.
+When a retry is allowed, the workflow writes a feedback brief. The brief includes the failed status, the sandbox signal, patch diagnostics, and the failed diff. Then PatchSmith restores the workspace before the next attempt.
 
-I do not yet trust it as a broad repair benchmark. The public issue lane is still small. Focused validation is useful, but it is not the same as full upstream validation. Cost numbers are model- and prompt-shape dependent. A stronger benchmark needs more repositories, more failure types, stronger baselines, and a stricter review story.
+The retry agent sees the failure, but it starts from a clean checkout. That keeps the second attempt from building on top of a broken first patch.
 
-That is a good place to be. The system is no longer just a scaffold. It repairs a small public lane with live model evidence, records what happened, and tells me where the next benchmark has to get harder.
+## artifacts and observability
+
+PatchSmith writes a trace event for each meaningful step: ingest, index, retrieval, context broker, runtime, patch application, sandbox, analysis, retry, restore, and report writing.
+
+The Markdown report is for humans. The JSONL trace is for debugging and later analysis. The diff is for code review. The logs are for validation. The context directory shows what the planner received.
+
+This is the part that makes the project feel less like a demo and more like a measurement tool. When a run fails, I do not have to reconstruct the story from a chat transcript.
+
+## evaluation lanes
+
+PatchSmith has two kinds of tasks.
+
+Seeded tasks are controlled bugs. They are good for development because the expected failure shape is known and the setup is cheap.
+
+Public issue tasks are closer to real maintenance work. They need more care: repository snapshots, setup policy, reproduction evidence, focused validation, and caveats about what the focused command proves.
+
+The benchmark direction is simple: keep tasks small enough to audit, but varied enough to expose different failure modes. I would rather have a small suite with clean artifacts than a large scoreboard nobody can reproduce.
+
+## readiness checks
+
+The platform also checks itself. A repair harness that cannot build, test, package, or regenerate its own reports is not a harness I want to trust.
+
+The readiness layer runs ordinary engineering checks: Python compile checks, pytest, source distribution and wheel builds, Docker smoke, release hygiene, environment readiness, and artifact indexing.
+
+Those checks are not exciting. They are there to keep the experiment machinery honest.
+
+## tradeoffs
+
+The bounded patch format is restrictive. It will struggle with large edits, file creation, generated code, and coordinated changes across many files. I am okay with that for now. The current goal is repair measurement, not maximum patch expressiveness.
+
+The local artifact model is plain. There is no database query UI. That makes exploration less slick, but it keeps the evidence portable. A run is a folder you can inspect, copy, diff, or archive.
+
+Focused validation is useful but narrow. It is the right first gate for public issue calibration, but it should not be confused with full upstream acceptance. PatchSmith keeps that boundary visible because repair benchmarks get misleading fast when they collapse every kind of validation into "solved."
+
+## where ctxhelm fits
+
+ctxhelm and PatchSmith solve adjacent problems.
+
+ctxhelm is read-only. It helps an agent choose what to inspect first and how it might validate a change.
+
+PatchSmith is the repair harness. It can use ctxhelm as a context broker, but PatchSmith still owns patch application, sandbox validation, artifacts, and claims.
+
+That split is useful. Context routing and repair validation can improve independently, and the benchmark can ask which part actually changed the outcome.
+
+## what I trust today
+
+I trust PatchSmith as an R&D harness for focused repair experiments. I trust the DeepAgents integration enough to keep testing it first. I do not trust it yet as a broad repair benchmark.
+
+That is not a bad place to be. The system has the shape I wanted: agents can propose repairs, the harness keeps them inside a contract, and every serious claim has to point back to files on disk.
+
+## references
+
+These are the online resources I used while shaping the DeepAgents and agent-building parts of the system:
+
+- [Deep Agents overview, LangChain docs](https://docs.langchain.com/oss/python/deepagents/overview): planning, virtual filesystems, subagents, memory, permissions, and the "agent harness" framing.
+- [Deep Agents customization, LangChain docs](https://docs.langchain.com/oss/python/deepagents/customization): `create_deep_agent` configuration, including model, tools, middleware, subagents, skills, memory, permissions, backend, and response format.
+- [Deep Agents subagents, LangChain docs](https://docs.langchain.com/oss/python/deepagents/subagents): context isolation, custom subagents, descriptions, model choice, and when not to delegate.
+- [langchain-ai/deepagents, GitHub](https://github.com/langchain-ai/deepagents): package-level feature list and relationship to LangGraph, LangChain, filesystem backends, skills, and human-in-the-loop controls.
+- [Building multi-agent applications with Deep Agents, LangChain blog](https://www.langchain.com/blog/building-multi-agent-applications-with-deep-agents): subagent patterns, context preservation, specialization, multi-model routing, and parallel work.
+- [OpenAI Agents SDK guide](https://developers.openai.com/api/docs/guides/agents): agent framing around planning, tool calls, specialist collaboration, orchestration, approvals, and state.
+- [OpenAI practical guide to building agents](https://openai.com/business/guides-and-resources/a-practical-guide-to-building-ai-agents/): starting simple, adding tools before splitting agents, using evals, and deciding when multi-agent orchestration is worth the cost.
+- [OpenAI Agents SDK tracing](https://openai.github.io/openai-agents-python/tracing/): trace and span concepts for debugging agent runs.
+- [OpenAI Agents SDK guardrails](https://openai.github.io/openai-agents-python/guardrails/): input, output, and tool guardrail patterns.
+- [OpenAI safety in building agents](https://developers.openai.com/api/docs/guides/agent-builder-safety): tool approvals, guardrails, trace graders, evals, and isolating untrusted data from agent actions.
 
 <p><a href="https://github.com/thromel/patchsmith" target="_blank">View PatchSmith on GitHub</a></p>
