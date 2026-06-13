@@ -108,6 +108,40 @@ The current system has several lanes:
 
 The design rule is simple: every status line should point to a file.
 
+## Architecture, component by component
+
+![PatchSmith component architecture](/assets/images/projects/patchsmith-component-architecture.svg)
+
+The architecture is built around one control rule: the agent can propose a repair, but PatchSmith owns the experiment boundary. It owns the repository snapshot, context selection, patch application, validation command, saved artifacts, and the language used to describe the result. That separation is why the system can support DeepAgents without becoming just a DeepAgents demo.
+
+The main components are:
+
+| Component | What it owns | Why it matters |
+| --- | --- | --- |
+| Run request | The immutable run inputs: repository, issue text, issue URL, commit or branch, test command, runtime, planner, context provider, sandbox mode, and optional reviewed context paths. | A repair result is not interpretable unless the exact task configuration is visible. |
+| Public issue and seeded task corpora | Curated tasks, reproduction expectations, setup policy, focused test commands, and materialized local workspaces. | This separates benchmark data from the agent runtime, so the same task can be run through several planners. |
+| Workspace ingest | Clone or copy the repository into `artifacts/runs/<run_id>/repo`, resolve a concrete snapshot, inspect package hints, and index the file tree. | The model never works against an ambiguous "latest checkout"; every run has a local snapshot. |
+| Context selector | Route the issue through native keyword, native hybrid, graph, `ctxhelm_cli`, or fallback context providers, then normalize the result into retrieved files and context metadata. | Retrieval can change without changing the repair runtime contract. This is where ctxhelm plugs in as a context broker, not as a patching engine. |
+| Runtime boundary | Convert the run into an `AgentTask` and require an `AgentResult` with status, summary, diff or patch candidate, and runtime trace. | Agentless, heuristic, fake-model, OpenAI-backed, DeepAgents, and future runtimes can be compared behind the same interface. |
+| DeepAgents planner | Build a native DeepAgents workspace with read-only virtual files, memory, repair skill text, source-hint manifests, retry-feedback manifests, failure-localizer and patch-reviewer subagents, and structured `PatchPlan` output. | DeepAgents contributes planning, decomposition, file inspection, and review behavior, but it does not get direct write access to the checkout. |
+| Patch gate | Apply one bounded old/new text replacement only after checking the repo-relative path, target existence, and exact replacement span. | The model's answer is treated as a proposal. PatchSmith performs the mutation and can reject unsafe or non-applicable edits. |
+| Sandbox runner | Execute the focused validation command in local or Docker mode with command-policy checks, timeouts, stdout/stderr capture, and per-attempt logs. | A patch without a reproducible validation command is just a story. The sandbox turns the story into evidence. |
+| Feedback retry loop | If a patch fails and the budget allows a retry, classify the failure, write a compact retry brief, restore the workspace, and give the planner the failed diff and sandbox signal. | The second attempt is not a blind re-prompt. It receives the exact failed evidence from the previous attempt. |
+| Artifact store | Persist `report.md`, `traces.jsonl`, `final.diff`, context artifacts, logs, feedback briefs, timing, token metadata, cost metadata, and indexed run summaries. | This is the receipt layer. Passing and failing runs both become auditable after the terminal session is gone. |
+| Portfolio and readiness reports | Compile saved evidence into quality gates, release hygiene, environment readiness, Docker smoke, launch blockers, demo readiness, calibration readiness, and final evaluation reports. | Public claims come from regenerated evidence, not from memory of a good demo run. |
+
+The important part is that none of these components is allowed to blur into the others. The context selector does not patch. The planner does not run the final validation gate by itself. The sandbox does not decide whether a result is publishable. The readiness reports do not create new evidence; they summarize evidence that already exists.
+
+That design gives PatchSmith three useful control planes.
+
+| Control plane | Mechanism | Question it answers |
+| --- | --- | --- |
+| Repair plane | `RepairRunner`, `RunRequest`, context selection, runtime execution, patch gate, sandbox attempt, final report. | Did this specific repair attempt produce a bounded patch and survive the configured validation command? |
+| Evaluation plane | Seeded suites, public issue materialization, retrieval/scaffold/repair runners, complex benchmark summaries. | How does a runtime, context mode, or retry policy behave across a suite instead of one example? |
+| Readiness plane | Quality gate, Docker smoke, release hygiene, environment readiness, launch blockers, artifact index. | Is the platform itself coherent enough to trust the evidence it is publishing? |
+
+This is also why the system can be used for R&D without overstating the result. A public issue row can say "validated" because the focused command passed in the saved run. It cannot silently upgrade that into "merged upstream" or "full suite accepted" because the claim boundary is a separate component.
+
 ## How a run moves through the system
 
 ![PatchSmith evidence loop](/assets/images/projects/patchsmith-evidence-loop.svg)

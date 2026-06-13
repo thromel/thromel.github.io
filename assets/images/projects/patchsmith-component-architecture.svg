@@ -1,0 +1,150 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1260" height="820" viewBox="0 0 1260 820" role="img" aria-labelledby="title desc">
+  <title id="title">PatchSmith component architecture</title>
+  <desc id="desc">Component map showing PatchSmith intake, workspace setup, context selection, runtime planning, DeepAgents planning, bounded patching, sandbox validation, artifacts, and readiness reports.</desc>
+  <defs>
+    <style>
+      .bg { fill: #f8fafc; }
+      .lane { fill: #ffffff; stroke: #cbd5e1; stroke-width: 1.4; }
+      .lane-soft { fill: #eef6f4; stroke: #8bbfb5; stroke-width: 1.4; }
+      .lane-blue { fill: #eef2ff; stroke: #93c5fd; stroke-width: 1.4; }
+      .lane-warn { fill: #fff7ed; stroke: #f59e0b; stroke-width: 1.4; }
+      .lane-danger { fill: #fef2f2; stroke: #fca5a5; stroke-width: 1.4; }
+      .title { font: 700 31px ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #0f172a; }
+      .subtitle { font: 500 15px ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #475569; }
+      .eyebrow { font: 700 11px ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #64748b; letter-spacing: .08em; }
+      .label { font: 700 16px ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #0f172a; }
+      .small { font: 500 13px ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #475569; }
+      .mono { font: 600 12px ui-monospace, SFMono-Regular, Menlo, monospace; fill: #334155; }
+      .line { fill: none; stroke: #64748b; stroke-width: 2; marker-end: url(#arrow); }
+      .line-soft { fill: none; stroke: #0f766e; stroke-width: 2; marker-end: url(#arrow-soft); }
+      .line-warn { fill: none; stroke: #b45309; stroke-width: 2; marker-end: url(#arrow-warn); }
+      .dash { stroke-dasharray: 7 7; }
+      .chip { fill: #0f172a; }
+      .chipText { font: 700 11px ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #ffffff; letter-spacing: .06em; }
+    </style>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#64748b" />
+    </marker>
+    <marker id="arrow-soft" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#0f766e" />
+    </marker>
+    <marker id="arrow-warn" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#b45309" />
+    </marker>
+  </defs>
+
+  <rect class="bg" width="1260" height="820" rx="26" />
+  <text x="58" y="62" class="title">PatchSmith component architecture</text>
+  <text x="58" y="91" class="subtitle">The model proposes repairs inside a narrow contract; PatchSmith owns setup, context, patching, validation, evidence, and claims.</text>
+
+  <rect x="58" y="132" width="178" height="134" rx="14" class="lane" />
+  <text x="80" y="162" class="eyebrow">INTAKE</text>
+  <text x="80" y="190" class="label">Run request</text>
+  <text x="80" y="216" class="small">repo, issue text,</text>
+  <text x="80" y="237" class="small">test command, runtime,</text>
+  <text x="80" y="258" class="small">planner, context mode</text>
+
+  <rect x="286" y="132" width="178" height="134" rx="14" class="lane-blue" />
+  <text x="308" y="162" class="eyebrow">SETUP</text>
+  <text x="308" y="190" class="label">Workspace</text>
+  <text x="308" y="216" class="small">clone or copy repo,</text>
+  <text x="308" y="237" class="small">resolve snapshot,</text>
+  <text x="308" y="258" class="small">index files</text>
+
+  <rect x="514" y="132" width="178" height="134" rx="14" class="lane-soft" />
+  <text x="536" y="162" class="eyebrow">CONTEXT</text>
+  <text x="536" y="190" class="label">Broker</text>
+  <text x="536" y="216" class="small">native, hybrid, graph,</text>
+  <text x="536" y="237" class="small">ctxhelm adapter,</text>
+  <text x="536" y="258" class="small">reviewed path hints</text>
+
+  <rect x="742" y="132" width="178" height="134" rx="14" class="lane" />
+  <text x="764" y="162" class="eyebrow">RUNTIME</text>
+  <text x="764" y="190" class="label">Agent boundary</text>
+  <text x="764" y="216" class="small">AgentTask in,</text>
+  <text x="764" y="237" class="small">AgentResult out,</text>
+  <text x="764" y="258" class="small">trace events attached</text>
+
+  <rect x="970" y="132" width="232" height="134" rx="14" class="lane-soft" />
+  <text x="992" y="162" class="eyebrow">PLANNER</text>
+  <text x="992" y="190" class="label">DeepAgents repair planner</text>
+  <text x="992" y="216" class="small">read-only virtual files, repair skill,</text>
+  <text x="992" y="237" class="small">memory, review subagents,</text>
+  <text x="992" y="258" class="small">structured PatchPlan response</text>
+
+  <path class="line" d="M236 199 H280" />
+  <path class="line" d="M464 199 H508" />
+  <path class="line" d="M692 199 H736" />
+  <path class="line" d="M920 199 H964" />
+
+  <rect x="106" y="352" width="210" height="132" rx="14" class="lane-warn" />
+  <text x="128" y="382" class="eyebrow">PATCH GATE</text>
+  <text x="128" y="410" class="label">Bounded replacement</text>
+  <text x="128" y="436" class="small">validate repo-relative path,</text>
+  <text x="128" y="457" class="small">find exact old text,</text>
+  <text x="128" y="478" class="small">write one controlled edit</text>
+
+  <rect x="384" y="352" width="210" height="132" rx="14" class="lane-soft" />
+  <text x="406" y="382" class="eyebrow">VALIDATION</text>
+  <text x="406" y="410" class="label">Sandbox runner</text>
+  <text x="406" y="436" class="small">local or Docker mode,</text>
+  <text x="406" y="457" class="small">command policy, timeouts,</text>
+  <text x="406" y="478" class="small">stdout and stderr capture</text>
+
+  <rect x="662" y="352" width="210" height="132" rx="14" class="lane-blue" />
+  <text x="684" y="382" class="eyebrow">RETRY</text>
+  <text x="684" y="410" class="label">Feedback loop</text>
+  <text x="684" y="436" class="small">classify test failure,</text>
+  <text x="684" y="457" class="small">restore clean workspace,</text>
+  <text x="684" y="478" class="small">inject retry brief</text>
+
+  <rect x="940" y="352" width="210" height="132" rx="14" class="lane" />
+  <text x="962" y="382" class="eyebrow">ARTIFACTS</text>
+  <text x="962" y="410" class="label">Run evidence</text>
+  <text x="962" y="436" class="small">report.md, traces.jsonl,</text>
+  <text x="962" y="457" class="small">final.diff, logs, context,</text>
+  <text x="962" y="478" class="small">token and cost metadata</text>
+
+  <path class="line-warn" d="M1086 266 C1086 316 211 306 211 346" />
+  <path class="line" d="M316 418 H378" />
+  <path class="line" d="M594 418 H656" />
+  <path class="line" d="M872 418 H934" />
+  <path class="line-soft dash" d="M767 352 C785 294 1010 294 1040 266" />
+
+  <rect x="116" y="595" width="254" height="132" rx="14" class="lane" />
+  <text x="138" y="625" class="eyebrow">CORPUS AND EVALS</text>
+  <text x="138" y="653" class="label">Benchmarks</text>
+  <text x="138" y="679" class="small">seeded bugs, public issues,</text>
+  <text x="138" y="700" class="small">retrieval/scaffold/repair runs,</text>
+  <text x="138" y="721" class="small">complex saved-artifact summaries</text>
+
+  <rect x="424" y="595" width="254" height="132" rx="14" class="lane-soft" />
+  <text x="446" y="625" class="eyebrow">READINESS</text>
+  <text x="446" y="653" class="label">Quality gates</text>
+  <text x="446" y="679" class="small">pytest, package build, diff check,</text>
+  <text x="446" y="700" class="small">Docker smoke, release hygiene,</text>
+  <text x="446" y="721" class="small">launch blocker reports</text>
+
+  <rect x="732" y="595" width="254" height="132" rx="14" class="lane-danger" />
+  <text x="754" y="625" class="eyebrow">CLAIMS</text>
+  <text x="754" y="653" class="label">Evidence boundary</text>
+  <text x="754" y="679" class="small">targeted validation means the</text>
+  <text x="754" y="700" class="small">focused command passed; it is</text>
+  <text x="754" y="721" class="small">not full upstream acceptance</text>
+
+  <rect x="1040" y="595" width="122" height="132" rx="14" class="lane-blue" />
+  <text x="1062" y="625" class="eyebrow">INDEX</text>
+  <text x="1062" y="653" class="label">Browse</text>
+  <text x="1062" y="679" class="small">Markdown,</text>
+  <text x="1062" y="700" class="small">JSON, HTML,</text>
+  <text x="1062" y="721" class="small">run details</text>
+
+  <path class="line" d="M1045 484 C1045 530 243 544 243 589" />
+  <path class="line-soft" d="M370 661 H418" />
+  <path class="line-warn" d="M678 661 H726" />
+  <path class="line" d="M986 661 H1034" />
+
+  <rect x="58" y="768" width="130" height="28" rx="14" class="chip" />
+  <text x="78" y="787" class="chipText">CORE RULE</text>
+  <text x="204" y="787" class="mono">The agent can suggest a repair, but PatchSmith owns mutation, validation, storage, and the final claim.</text>
+</svg>
