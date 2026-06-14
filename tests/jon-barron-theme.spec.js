@@ -25,7 +25,7 @@ test.describe('Modern academic portfolio theme', () => {
     await expect(page.locator('.academic-portrait img')).toHaveCSS('border-radius', /6px|8px/);
     await expect(page.locator('.academic-proof-strip article')).toHaveCount(4);
     await expect(page.locator('.academic-proof-strip')).toContainText('UIUC++ SRSE research intern');
-    await expect(page.locator('.academic-proof-strip')).toContainText('ctxhelm + HelmBench');
+    await expect(page.locator('.academic-proof-strip')).toContainText('ContextLedger, ctxhelm, HelmBench');
     await expect(page.locator('.academic-proof-strip')).toContainText('Open Source');
 
     const linkRow = page.locator('.academic-link-row').first();
