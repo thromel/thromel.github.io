@@ -1,13 +1,13 @@
 ---
 layout: showcase
 title: "PatchSmith: a harness for repair agents"
-subtitle: "System design notes for bounded patches, sandbox validation, and auditable repair runs"
+subtitle: "System design and R&D notes for bounded patches, sandbox validation, and auditable repair runs"
 category: projects
 group: Projects
 show: true
 width: 8
 date: 2026-06-12 00:00:00 +0600
-excerpt: A system design write-up on PatchSmith, a local research harness for running software-repair agents without giving the model direct control over patching, validation, or evidence claims.
+excerpt: A system design and R&D write-up on PatchSmith, a local research harness for running software-repair agents without giving the model direct control over patching, validation, or evidence claims.
 featured: true
 showcase_style: agent-tooling
 project_type: Research platform
@@ -43,6 +43,52 @@ The first design goal was to keep the model out of the parts that decide whether
 The second goal was to make failed runs useful. A failed repair should still answer useful questions: did retrieval miss the right file, did the planner patch a symptom, did the sandbox reject the command, did the old span fail to apply, or did the focused test expose a real logic mistake?
 
 The third goal was adapter pressure. I wanted DeepAgents, OpenAI-backed planners, deterministic baselines, and future runtimes to fit behind the same contract. Otherwise every experiment becomes a custom demo, and custom demos are hard to compare.
+
+## R&D path
+
+The research question was narrower than "can an agent fix code?"
+
+I wanted to know whether we could run coding agents on real repair tasks without letting the same agent control the setup, mutation, validation, retry story, and final grade. Most agent demos blur those jobs together. PatchSmith exists because I wanted them separated.
+
+The papers shaped the system more than the prompts did.
+
+| Paper | What I took from it | What PatchSmith did with that idea |
+| --- | --- | --- |
+| SWE-bench | Real repair tasks require repository understanding, executable validation, and careful task provenance. | PatchSmith uses public-issue-style tasks, focused validation commands, saved diffs, and explicit claim boundaries. |
+| SWE-agent | The interface around the model changes behavior. File navigation and tool design are part of the agent, not background plumbing. | PatchSmith gives the planner selected virtual files and asks for a structured patch plan instead of free-form repository access. |
+| Agentless | A simple localization, repair, and validation pipeline can be a serious baseline. Agent complexity has to earn its place. | PatchSmith kept deterministic planners and made DeepAgents one runtime behind the same repair contract. |
+| OpenHands | Useful software agents need sandboxing, traces, environment setup, and benchmark artifacts. | PatchSmith moved those concerns into the harness rather than trusting a chat transcript. |
+
+That led to a fairly plain R&D loop:
+
+```text
+read the literature
+  -> build the smallest repair loop
+  -> find the failure mode
+  -> add one contract or artifact
+  -> rerun the focused lane
+  -> widen the claim only if the evidence widened too
+```
+
+The result is not a giant agent. It is a controlled place to compare repair behavior.
+
+## what we built during R&D
+
+The project changed in concrete ways:
+
+- bounded `PatchPlan` output instead of free-form edits
+- native context selection plus a ctxhelm context-broker adapter
+- reviewed source hints for public issue tasks
+- safe public-issue fixture materialization in disposable workspaces
+- focused validation commands and reproduction checks
+- retry feedback briefs with workspace restore between attempts
+- DeepAgents as the main live planning runtime
+- target-localization and patch-review subagents
+- token and cost metadata for live provider runs
+- target-alignment, patch-quality, and cost outlier signals for benchmark reports
+- `--max-tasks` so live runs can stay cost-bounded
+
+The important part is that these are not separate features bolted around the agent. They are the measuring equipment. If retrieval misses the controlling file, if the model proposes a non-applicable patch, or if validation fails for environment reasons, the harness should say which failure happened.
 
 ## system boundary
 
@@ -668,9 +714,28 @@ I trust PatchSmith as an R&D harness for focused repair experiments. I trust the
 
 That is not a bad place to be. The system has the shape I wanted: agents can propose repairs, the harness keeps them inside a contract, and every serious claim has to point back to files on disk.
 
+## next experiments
+
+The next useful experiments are not complicated. They are just expensive enough that I want the benchmark shape right before running them.
+
+1. Expand the public issue suite beyond the curated smoke lane.
+2. Run the same tasks across deterministic, OpenAI-backed, DeepAgents, and ctxhelm-backed context variants.
+3. Add failure taxonomies to every report.
+4. Keep token and cost gates active before running larger suites.
+5. Compare focused validation with broader upstream-style validation.
+6. Add harder multi-file tasks where context quality should matter.
+7. Keep failed runs visible.
+
+The last item matters. Failed runs are where the system teaches you something. Hiding them makes the benchmark prettier and less useful.
+
 ## references
 
-These are the online resources I used while shaping the DeepAgents and agent-building parts of the system:
+These are the papers and online resources I used while shaping the repair harness, DeepAgents runtime, and benchmark design:
+
+- [SWE-bench: Can Language Models Resolve Real-World GitHub Issues?](https://arxiv.org/abs/2310.06770), Carlos E. Jimenez, John Yang, Alexander Wettig, Shunyu Yao, Kexin Pei, Ofir Press, and Karthik Narasimhan, 2023.
+- [SWE-agent: Agent-Computer Interfaces Enable Automated Software Engineering](https://arxiv.org/abs/2405.15793), John Yang, Carlos E. Jimenez, Alexander Wettig, Kilian Lieret, Shunyu Yao, Karthik Narasimhan, and Ofir Press, 2024.
+- [Agentless: Demystifying LLM-based Software Engineering Agents](https://arxiv.org/abs/2407.01489), Chunqiu Steven Xia, Yinlin Deng, Soren Dunn, and Lingming Zhang, 2024.
+- [OpenHands: An Open Platform for AI Software Developers as Generalist Agents](https://arxiv.org/abs/2407.16741), Xingyao Wang, Boxuan Li, Yufan Song, Frank F. Xu, Xiangru Tang, Mingchen Zhuge, Jiayi Pan, Yueqi Song, Bowen Li, Jaskirat Singh, Hoang H. Tran, Fuqiang Li, Ren Ma, Mingzhang Zheng, Bill Qian, Yanjun Shao, Niklas Muennighoff, Yizhe Zhang, Binyuan Hui, Junyang Lin, Robert Brennan, Hao Peng, Heng Ji, and Graham Neubig, 2024.
 
 - [Deep Agents overview, LangChain docs](https://docs.langchain.com/oss/python/deepagents/overview): planning, virtual filesystems, subagents, memory, permissions, and the "agent harness" framing.
 - [Deep Agents customization, LangChain docs](https://docs.langchain.com/oss/python/deepagents/customization): `create_deep_agent` configuration, including model, tools, middleware, subagents, skills, memory, permissions, backend, and response format.
