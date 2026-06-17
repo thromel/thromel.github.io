@@ -17,13 +17,16 @@ current_company:
 
 current_focus:
   primary: >-
-    Right now I am studying AI for SRE through <a href="https://uiuc-srse.github.io/" target="_blank" rel="noopener noreferrer">UIUC++ SRSE 2026</a>
+    Right now I am working on <a href="https://www.sregym.com/" target="_blank" rel="noopener noreferrer">SREGym</a>, an AI-native benchmark for
+    Site Reliability Engineering agents, through <a href="https://uiuc-srse.github.io/" target="_blank" rel="noopener noreferrer">UIUC++ SRSE 2026</a>
     with Professor <a href="https://tianyin.github.io/" target="_blank" rel="noopener noreferrer">Tianyin Xu's group</a>. I am also preparing the
-    <span class="academic-highlight">SHIFT</span> manuscript for TACL, building coding-agent systems around context, retrieval, and repair, and continuing
-    work on VeriSchema and RefactoringMiner.
+    <span class="academic-highlight">SHIFT</span> manuscript for TACL with <a href="https://cse.buet.ac.bd/faculty/faculty_detail/rakinhaider" target="_blank" rel="noopener noreferrer">Chowdhury Rakin Haider</a>,
+    building coding-agent systems around context, retrieval, and repair, and continuing work on VeriSchema and RefactoringMiner.
   open_source: >-
-    Open-source work is part of that research loop: I actively develop RefactoringMiner, helped build its MCP server for coding-agent integration,
-    and continue contributing to EF Core, GenHTTP, deepagents, and TypeScript when the work lines up with my tooling interests.
+    Open-source work is part of that research loop: I actively develop <a href="https://github.com/tsantalis/RefactoringMiner" target="_blank" rel="noopener noreferrer">RefactoringMiner</a>
+    with Professor <a href="https://users.encs.concordia.ca/~nikolaos/" target="_blank" rel="noopener noreferrer">Nikolaos Tsantalis</a>, helped build its MCP server for coding-agent integration,
+    and am involved in the <a href="https://www.jetbrains.com/" target="_blank" rel="noopener noreferrer">JetBrains</a> collaboration around developer-tool integration. I also continue contributing to EF Core, GenHTTP,
+    deepagents, and TypeScript when the work lines up with my tooling interests.
 
 research_statement:
   summary: >-
@@ -33,10 +36,11 @@ research_statement:
   lanes:
   - title: "AI for SRE"
     status: "SREGym / UIUC++ SRSE 2026"
-    link: https://uiuc-srse.github.io/
+    link: https://www.sregym.com/
     summary: >-
-      With Professor Tianyin Xu's group at UIUC, I am working on SREGym tasks for software and systems reliability. The focus is agents that
-      can diagnose incidents, choose safe mitigations, and pass business-level checks instead of only making pods look healthy.
+      With Professor <a href="https://tianyin.github.io/" target="_blank" rel="noopener noreferrer">Tianyin Xu's group</a> at UIUC, I am working on
+      <a href="https://www.sregym.com/" target="_blank" rel="noopener noreferrer">SREGym</a>, an AI-native benchmark that puts agents inside live
+      cloud-native failure scenarios. My focus is diagnosis, safe mitigation, and business-level checks, not just making the cluster look healthy.
     tags:
     - SREGym
     - AI for SRE
@@ -48,7 +52,7 @@ research_statement:
     summary: >-
       I am preparing a TACL manuscript on SHIFT, the Structured Hidden Influence Test for aligned backdoor attacks in LLM agents. SHIFT checks
       whether a trigger changes which valid option an agent chooses, then asks whether the movement favors the attacker's target rather than
-      ordinary option quality.
+      ordinary option quality. This work is in collaboration with <a href="https://cse.buet.ac.bd/faculty/faculty_detail/rakinhaider" target="_blank" rel="noopener noreferrer">Chowdhury Rakin Haider</a>.
     tags:
     - SHIFT
     - Aligned backdoors
@@ -62,11 +66,11 @@ research_statement:
       DeepAgents-based repair systems that leave testable evidence.
     points:
     - label: "Context management"
-      text: "ContextLedger turns long sessions into typed, provenance-carrying events for measurable compaction."
+      text: "<a href=\"/showcase/projects/contextledger/\">ContextLedger</a> turns long sessions into typed, provenance-carrying events for measurable compaction."
     - label: "Retrieval efficiency"
-      text: "ctxhelm and HelmBench test whether agents inspect the right files with less irrelevant reading."
+      text: "<a href=\"https://github.com/thromel/ctxhelm\" target=\"_blank\" rel=\"noopener noreferrer\">ctxhelm</a> and HelmBench test whether agents inspect the right files with less irrelevant reading."
     - label: "Repair agents"
-      text: "PatchSmith explores bounded DeepAgents repair runs with traces, sandbox validation, and readiness reports."
+      text: "<a href=\"/showcase/projects/patchsmith/\">PatchSmith</a> explores bounded DeepAgents repair runs with traces, sandbox validation, and readiness reports."
     tags:
     - ContextLedger
     - ctxhelm
@@ -76,7 +80,8 @@ research_statement:
     status: "Emerging research direction"
     summary: >-
       I am exploring how coding agents should use edit history, repository memory, and design intent when developers work through natural-language
-      programming loops. The question is how to keep the speed of vibe coding without losing architectural memory.
+      programming loops. This direction connects to my work with <a href="https://homepage.zhouyang.me/" target="_blank" rel="noopener noreferrer">Dr. Zhou Yang</a>
+      at the University of Alberta: keep the speed of vibe coding without losing architectural memory.
     tags:
     - Vibe coding
     - Edit history
@@ -94,11 +99,13 @@ research_statement:
     - Schema generation
     - Z3
   - title: "Software evolution tooling"
-    status: "RefactoringMiner"
-    link: https://github.com/tsantalis/RefactoringMiner/pulls?q=author%3Athromel
+    status: "RefactoringMiner / MCP / JetBrains collaboration"
+    link: https://github.com/tsantalis/RefactoringMiner
     summary: >-
-      I actively develop RefactoringMiner and helped build its MCP server so coding agents can reason about real refactorings through established
-      program-analysis tooling, not only raw diffs.
+      I actively develop <a href="https://github.com/tsantalis/RefactoringMiner" target="_blank" rel="noopener noreferrer">RefactoringMiner</a> with
+      Professor <a href="https://users.encs.concordia.ca/~nikolaos/" target="_blank" rel="noopener noreferrer">Nikolaos Tsantalis</a>. I helped build its MCP server
+      and am involved in the <a href="https://www.jetbrains.com/" target="_blank" rel="noopener noreferrer">JetBrains</a> collaboration so coding agents can reason
+      about real refactorings through program-analysis tooling, not only raw diffs.
     tags:
     - RefactoringMiner
     - MCP
@@ -257,9 +264,9 @@ short_bio: >-
   <br/><br/>
   In May 2025, I received the <a href='https://drive.google.com/file/d/1Vc4E2RoQEPmbfS56oLdUih-oJDBok9sP/view?usp=share_link' target='_blank'><b>IQVIA Impact Program - Silver</b></a> award for performance, critical issue resolution, and feature delivery.
   <br/><br/>
-  My current research is about agentic software systems under real engineering constraints. I am working on SREGym and AI for SRE with Professor <a href="https://tianyin.github.io/" target="_blank">Tianyin Xu's group</a> at UIUC, preparing the SHIFT manuscript for TACL on aligned backdoor attacks in LLM agents, and building coding-agent systems around <a href="/showcase/projects/contextledger/">ContextLedger</a>, ctxhelm, and PatchSmith.
+  My current research is about agentic software systems under real engineering constraints. I am working on <a href="https://www.sregym.com/" target="_blank" rel="noopener noreferrer">SREGym</a> and AI for SRE with Professor <a href="https://tianyin.github.io/" target="_blank">Tianyin Xu's group</a> at UIUC, preparing the SHIFT manuscript for TACL on aligned backdoor attacks in LLM agents with <a href="https://cse.buet.ac.bd/faculty/faculty_detail/rakinhaider" target="_blank" rel="noopener noreferrer">Chowdhury Rakin Haider</a>, and building coding-agent systems around <a href="/showcase/projects/contextledger/">ContextLedger</a>, <a href="https://github.com/thromel/ctxhelm" target="_blank" rel="noopener noreferrer">ctxhelm</a>, and <a href="/showcase/projects/patchsmith/">PatchSmith</a>.
   <br/><br/>
-  I also work on history-aware vibe coding, VeriSchema for multi-agent database schema generation, and RefactoringMiner, where I helped build the MCP server that connects refactoring analysis with coding agents. Earlier collaborations include <a href="https://akondrahman.github.io" target="_blank">Dr. Akond Rahman</a> (Auburn University, <a href="https://paser-group.github.io/" target="_blank">PASER group</a>) on LLM API contracts and <a href="https://cse.buet.ac.bd/faculty/faculty_detail/asmlatifulhoque" target="_blank">Professor ASM Latiful Hoque</a> (BUET), who supervised my undergraduate thesis, on blockchain technology.
+  I also work on history-aware vibe coding with <a href="https://homepage.zhouyang.me/" target="_blank" rel="noopener noreferrer">Dr. Zhou Yang</a>, VeriSchema for multi-agent database schema generation, and <a href="https://github.com/tsantalis/RefactoringMiner" target="_blank" rel="noopener noreferrer">RefactoringMiner</a>, where I collaborate with Professor <a href="https://users.encs.concordia.ca/~nikolaos/" target="_blank" rel="noopener noreferrer">Nikolaos Tsantalis</a>, helped build the MCP server that connects refactoring analysis with coding agents, and contribute to the <a href="https://www.jetbrains.com/" target="_blank" rel="noopener noreferrer">JetBrains</a> collaboration. Earlier collaborations include <a href="https://akondrahman.github.io" target="_blank">Dr. Akond Rahman</a> (Auburn University, <a href="https://paser-group.github.io/" target="_blank">PASER group</a>) on LLM API contracts and <a href="https://cse.buet.ac.bd/faculty/faculty_detail/asmlatifulhoque" target="_blank">Professor ASM Latiful Hoque</a> (BUET), who supervised my undergraduate thesis, on blockchain technology.
   <br/><br/>
   I worked with the <a href="https://ureporter.cse.buet.ac.bd/about_us" target="_blank">uReporter team</a> on Bangladesh's first anonymous online reporting system for citizens to report social issues. The project received coverage from BBC Bengali, Saudi Gazette, and Global Voices. Our research on this work is under review at the ACM CSCW conference.
   <br/><br/>
@@ -532,15 +539,18 @@ professional_memberships:
 research:
 - title: "SREGym: AI for SRE and Reliability-Agent Evaluation"
   date: June 2026 - August 2026
-  link: https://uiuc-srse.github.io/
+  link: https://www.sregym.com/
   thumbnail: /assets/images/companies/uiuc-block-i.png
   status: "UIUC++ SRSE 2026"
   short_description: AI for SRE research through UIUC++ SRSE 2026 with Professor Tianyin Xu's group.
   description: >-
     Through <a href="https://uiuc-srse.github.io/" target="_blank" rel="noopener noreferrer">UIUC++ Summer Research in Software Engineering (SRSE) 2026</a>
-    with Professor <a href="https://tianyin.github.io/" target="_blank" rel="noopener noreferrer">Tianyin Xu's group</a>, I am working on SREGym,
-    an evaluation setting for AI agents in software and systems reliability. My current focus is failure scenarios with realistic mitigation paths,
-    business-level oracles, and evidence that rejects shallow fixes.
+    with Professor <a href="https://tianyin.github.io/" target="_blank" rel="noopener noreferrer">Tianyin Xu's group</a>, I am working on
+    <a href="https://www.sregym.com/" target="_blank" rel="noopener noreferrer">SREGym</a>, an AI-native benchmark platform for evaluating SRE agents in
+    live software and systems reliability incidents. My current focus is failure scenarios with realistic mitigation paths, business-level oracles,
+    and evidence that rejects shallow fixes. The public code is on <a href="https://github.com/SREGym/SREGym" target="_blank" rel="noopener noreferrer">GitHub</a>.
+  collaborator: >-
+    Collaboration with Professor <a href="https://tianyin.github.io/" target="_blank" rel="noopener noreferrer">Tianyin Xu</a> and the UIUC systems reliability group.
   technologies:
   - SREGym
   - AI for SRE
@@ -556,7 +566,8 @@ research:
   short_description: Context management, retrieval efficiency, and DeepAgents-based repair work for coding agents.
   description: >-
     I am working on coding agents along three dimensions. <a href="/showcase/projects/contextledger/">ContextLedger</a> studies context
-    management by turning long sessions into typed, provenance-carrying events for measurable compaction. ctxhelm and HelmBench study retrieval
+    management by turning long sessions into typed, provenance-carrying events for measurable compaction. <a href="https://github.com/thromel/ctxhelm" target="_blank" rel="noopener noreferrer">ctxhelm</a>
+    and HelmBench study retrieval
     efficiency by testing whether agents inspect the right files with less irrelevant reading. <a href="/showcase/projects/patchsmith/">PatchSmith</a>
     studies DeepAgents-based repair runs with bounded workspaces, traces, sandbox validation, and readiness reports.
   technologies:
@@ -594,10 +605,13 @@ research:
   status: "TACL manuscript in preparation"
   short_description: SHIFT audit for aligned backdoor attacks where a trigger changes which valid option an LLM agent chooses.
   description: >-
-    I am preparing this manuscript for TACL. The paper studies aligned backdoor attacks in LLM agents: a trigger can leave the final task
+    I am preparing this manuscript for TACL with <a href="https://cse.buet.ac.bd/faculty/faculty_detail/rakinhaider" target="_blank" rel="noopener noreferrer">Chowdhury Rakin Haider</a>.
+    The paper studies aligned backdoor attacks in LLM agents: a trigger can leave the final task
     answer looking valid while quietly changing which acceptable option the agent chooses. SHIFT, the Structured Hidden Influence Test,
     reruns matched tasks with and without a known trigger, then checks whether the changed choice favors the attacker's target after accounting
     for ordinary option quality such as price or rating.
+  collaborator: >-
+    Collaboration with <a href="https://cse.buet.ac.bd/faculty/faculty_detail/rakinhaider" target="_blank" rel="noopener noreferrer">Chowdhury Rakin Haider</a>, Assistant Professor at BUET.
   technologies:
   - SHIFT
   - Structured Hidden Influence Test
@@ -605,6 +619,24 @@ research:
   - Aligned Backdoors
   - LLM Agents
   - Choice Auditing
+
+- title: "History-Aware Vibe Coding"
+  date: June 2026 - Present
+  status: "Emerging research direction"
+  short_description: Studying how natural-language coding loops should use edit history, repository memory, and design intent.
+  description: >-
+    I am studying how coding agents should use commit history, prior edits, repository memory, and design intent when developers work through
+    natural-language programming loops. The aim is simple: preserve the speed of vibe coding while keeping enough architectural memory to avoid
+    repeating old mistakes. This direction connects to my work with <a href="https://homepage.zhouyang.me/" target="_blank" rel="noopener noreferrer">Dr. Zhou Yang</a>
+    at the University of Alberta.
+  collaborator: >-
+    Research direction with <a href="https://homepage.zhouyang.me/" target="_blank" rel="noopener noreferrer">Dr. Zhou Yang</a>, University of Alberta and Amii.
+  technologies:
+  - Vibe Coding
+  - Coding Agents
+  - Repository History
+  - Agent Memory
+  - Software Engineering
 
 - title: "VeriSchema: Multi-Agent Framework for Generating Relational DB Schema & ERD"
   date: July 2025 - Present
@@ -625,6 +657,26 @@ research:
   - Z3 Solver
   - SQLAlchemy
   - Text2Schema
+
+- title: "RefactoringMiner MCP and Coding-Agent Integration"
+  date: June 2026 - Present
+  link: https://github.com/tsantalis/RefactoringMiner
+  status: "Open-source collaboration"
+  short_description: RefactoringMiner development and MCP integration for coding agents, including JetBrains collaboration work.
+  description: >-
+    I actively develop <a href="https://github.com/tsantalis/RefactoringMiner" target="_blank" rel="noopener noreferrer">RefactoringMiner</a>, a program-analysis tool
+    for detecting refactorings and AST diffs across software history. I helped build the MCP server so coding agents can inspect refactorings through
+    a stable analysis interface. This work is done with Professor <a href="https://users.encs.concordia.ca/~nikolaos/" target="_blank" rel="noopener noreferrer">Nikolaos Tsantalis</a>
+    and includes the <a href="https://www.jetbrains.com/" target="_blank" rel="noopener noreferrer">JetBrains</a> collaboration around developer-tool integration.
+  collaborator: >-
+    Collaboration with Professor <a href="https://users.encs.concordia.ca/~nikolaos/" target="_blank" rel="noopener noreferrer">Nikolaos Tsantalis</a> and <a href="https://www.jetbrains.com/" target="_blank" rel="noopener noreferrer">JetBrains</a>.
+  technologies:
+  - RefactoringMiner
+  - MCP
+  - Program Analysis
+  - AST Diff
+  - Refactoring Detection
+  - Coding Agents
 
 - title: "Sentiment Analysis of Anonymous Crisis Reports in Bangladesh"
   date: Sep 2024 - Nov 2024

@@ -50,10 +50,20 @@ description: Research statement and current work on AI for SRE, aligned backdoor
   {% for item in site.data.profile.research %}
   <article class="academic-entry">
     {% if item.thumbnail %}<img class="academic-entry__media" src="{{ item.thumbnail | relative_url }}" alt="{{ item.title }}">{% endif %}
-    <h3>{% if item.link %}<a href="{{ item.link }}">{{ item.title }}</a>{% else %}{{ item.title }}{% endif %}</h3>
+    <h3>
+      {% if item.link %}
+        {% if item.link contains '://' %}
+          <a href="{{ item.link }}" target="_blank" rel="noopener noreferrer">{{ item.title }}</a>
+        {% else %}
+          <a href="{{ item.link | relative_url }}">{{ item.title }}</a>
+        {% endif %}
+      {% else %}
+        {{ item.title }}
+      {% endif %}
+    </h3>
     <p class="academic-entry__meta">{{ item.date }}{% if item.status %} · {{ item.status }}{% endif %}</p>
-    <p>{{ item.description | strip_html }}</p>
-    {% if item.collaborator %}<p class="academic-entry__meta">{{ item.collaborator | strip_html }}</p>{% endif %}
+    <p>{{ item.description }}</p>
+    {% if item.collaborator %}<p class="academic-entry__meta">{{ item.collaborator }}</p>{% endif %}
     {% if item.technologies %}<p class="academic-tags">{% for tech in item.technologies %}<span class="academic-tag">{{ tech }}</span>{% endfor %}</p>{% endif %}
   </article>
   {% endfor %}
