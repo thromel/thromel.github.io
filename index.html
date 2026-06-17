@@ -9,71 +9,35 @@ description: Software engineer and researcher working on AI for SRE, aligned bac
   <div class="academic-intro__copy">
     <div class="academic-intro__eyebrow">AI for SRE · Coding Agents · Software Evolution</div>
     <h1 class="academic-name">{{ site.data.profile.primary_name }}</h1>
-    <p>I'm a software engineer at <a href="{{ site.data.profile.current_company.url }}" target="_blank" rel="noopener noreferrer">{{ site.data.profile.current_company.name }}</a> and a software engineering researcher. My current work is on AI for SRE, aligned backdoor audits in LLM agents, coding-agent systems, and software evolution tooling.</p>
+    <p>I'm a software engineer at <a href="{{ site.data.profile.current_company.url }}" target="_blank" rel="noopener noreferrer">{{ site.data.profile.current_company.name }}</a> and a software engineering researcher. I work on dependable agentic systems: AI for SRE, coding agents, agent security, and software-evolution tooling.</p>
     <p>I completed my B.Sc. in Computer Science and Engineering at <a href="https://cse.buet.ac.bd" target="_blank" rel="noopener noreferrer">BUET</a>. I will start an M.Sc. in Computing Science at the <a href="https://www.ualberta.ca/en/computing-science/index.html" target="_blank" rel="noopener noreferrer">University of Alberta</a> in September 2026.</p>
     <p class="academic-link-row" aria-label="Profile links"><a href="mailto:{{ site.data.profile.email }}"><i class="fa-solid fa-envelope link-icon" aria-hidden="true"></i><span>Email</span></a><a href="/assets/pdf/cv.pdf" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-file-pdf link-icon" aria-hidden="true"></i><span>CV</span></a><a href="{{ 'about' | relative_url }}"><i class="fa-solid fa-user link-icon" aria-hidden="true"></i><span>Bio</span></a><a href="https://scholar.google.com/citations?user={{ site.data.profile.gscholar }}" target="_blank" rel="noopener noreferrer"><i class="ai ai-google-scholar link-icon" aria-hidden="true"></i><span>Scholar</span></a><a href="https://github.com/{{ site.data.profile.github }}" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github link-icon" aria-hidden="true"></i><span>Github</span></a><a href="https://www.linkedin.com/in/{{ site.data.profile.linkedin }}" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-linkedin link-icon" aria-hidden="true"></i><span>LinkedIn</span></a></p>
   </div>
   <div class="academic-portrait"><a href="{{ site.data.profile.portrait_url | relative_url }}"><img src="{{ site.data.profile.portrait_url | relative_url }}" alt="{{ site.data.profile.primary_name }} profile photo"></a></div>
 </section>
 
-<section class="academic-proof-strip" aria-label="Current profile signals">
-  <article>
-    <span>Current role</span>
-    <strong>AI for SRE with UIUC</strong>
-  </article>
-  <article>
-    <span>Agent security</span>
-    <strong>SHIFT for aligned backdoors</strong>
-  </article>
-  <article>
-    <span>Coding agents</span>
-    <strong>ContextLedger, ctxhelm, PatchSmith</strong>
-  </article>
-  <article>
-    <span>Program analysis</span>
-    <strong>RefactoringMiner MCP integration</strong>
-  </article>
-</section>
-
-<section class="academic-section academic-current" aria-labelledby="current-focus-title">
-  <h2 id="current-focus-title">Current Focus</h2>
-  <p>{{ site.data.profile.current_focus.primary }}</p>
-  <p>{{ site.data.profile.current_focus.open_source }}</p>
-  <p class="academic-link-row" aria-label="Homepage sections"><a href="#homepage-research-map"><i class="fa-solid fa-diagram-project link-icon" aria-hidden="true"></i><span>Research map</span></a><a href="#homepage-news"><i class="fa-solid fa-bullhorn link-icon" aria-hidden="true"></i><span>News</span></a><a href="#homepage-research-publications"><i class="fa-solid fa-microscope link-icon" aria-hidden="true"></i><span>Research &amp; Publications</span></a><a href="#homepage-education"><i class="fa-solid fa-graduation-cap link-icon" aria-hidden="true"></i><span>Education</span></a><a href="#homepage-work"><i class="fa-solid fa-briefcase link-icon" aria-hidden="true"></i><span>Work</span></a><a href="#homepage-projects"><i class="fa-solid fa-code link-icon" aria-hidden="true"></i><span>Projects</span></a><a href="#homepage-skills"><i class="fa-solid fa-screwdriver-wrench link-icon" aria-hidden="true"></i><span>Skills</span></a></p>
-</section>
-
-<section id="homepage-research-map" class="academic-section research-statement-section" aria-labelledby="research-statement-title">
-  <h2 id="research-statement-title">Research Statement</h2>
-  <p class="research-statement">{{ site.data.profile.research_statement.summary }}</p>
-  <div class="research-lane-grid research-lane-grid--compact">
-    {% for lane in site.data.profile.research_statement.lanes %}
-    <article class="research-lane-card">
-      <p class="research-lane-card__status">{{ lane.status }}</p>
-      <h3>
-        {% if lane.link %}
-          {% if lane.link contains '://' %}
-            <a href="{{ lane.link }}" target="_blank" rel="noopener noreferrer">{{ lane.title }}</a>
-          {% else %}
-            <a href="{{ lane.link | relative_url }}">{{ lane.title }}</a>
-          {% endif %}
-        {% else %}
-          {{ lane.title }}
-        {% endif %}
-      </h3>
-      <p>{{ lane.summary }}</p>
-      {% if lane.points %}
-      <ul class="research-lane-points">
-        {% for point in lane.points %}
-        <li><strong>{{ point.label }}:</strong> {{ point.text }}</li>
-        {% endfor %}
-      </ul>
-      {% endif %}
-      {% if lane.tags %}
-      <p class="academic-tags">{% for tag in lane.tags %}<span class="academic-tag">{{ tag }}</span>{% endfor %}</p>
-      {% endif %}
-    </article>
-    {% endfor %}
+<section id="homepage-research-map" class="academic-section homepage-research-snapshot" aria-labelledby="research-snapshot-title">
+  <h2 id="research-snapshot-title">Research Snapshot</h2>
+  <p class="research-statement">I study how AI agents behave on real software systems: what context they read, which actions they choose, and what evidence they leave behind.</p>
+  <div class="homepage-snapshot-list" aria-label="Research snapshot">
+    <a class="homepage-snapshot-item" href="https://www.sregym.com/" target="_blank" rel="noopener noreferrer">
+      <span>AI for SRE</span>
+      <strong>SREGym with UIUC and Tianyin Xu's group</strong>
+    </a>
+    <a class="homepage-snapshot-item" href="{{ '/research/reagent-plus-plus/' | relative_url }}">
+      <span>Agent security</span>
+      <strong>SHIFT aligned-backdoor audit with Chowdhury Rakin Haider</strong>
+    </a>
+    <a class="homepage-snapshot-item" href="{{ '/projects#featured-projects-title' | relative_url }}">
+      <span>Coding agents</span>
+      <strong>ContextLedger, ctxhelm, PatchSmith, and history-aware coding</strong>
+    </a>
+    <a class="homepage-snapshot-item" href="https://github.com/tsantalis/RefactoringMiner" target="_blank" rel="noopener noreferrer">
+      <span>Software evolution</span>
+      <strong>RefactoringMiner MCP work with Nikolaos Tsantalis and JetBrains</strong>
+    </a>
   </div>
+  <p class="academic-link-row homepage-snapshot-actions" aria-label="Research links"><a href="{{ 'research' | relative_url }}"><i class="fa-solid fa-arrow-right link-icon" aria-hidden="true"></i><span>Full research statement</span></a><a href="#homepage-research-publications"><i class="fa-solid fa-layer-group link-icon" aria-hidden="true"></i><span>Selected work</span></a></p>
 </section>
 
 <div id="oss-summary" class="oss-inline proof-surface" data-github-user="{{ site.data.profile.github | default: 'thromel' }}" data-state="loading">
@@ -94,7 +58,7 @@ description: Software engineer and researcher working on AI for SRE, aligned bac
 
 <section id="homepage-research-publications" class="academic-section">
   <h2>Research &amp; Publications</h2>
-  <p>Selected papers and manuscripts. The research map above explains the current agenda; the archive links keep the older work easy to find.</p>
+  <p>Selected papers and manuscripts. The full research page has the current agenda and active collaborations.</p>
 
   <div class="academic-list selected-research-list">
     <article class="academic-entry academic-entry--selected homepage-media-entry">

@@ -14,8 +14,8 @@ test.describe('homepage hierarchy', () => {
     await expect(page.locator('.academic-intro')).toHaveCount(1);
     await expect(page.locator('.academic-link-row').first()).toContainText('CV');
     await expect(page.locator('.academic-link-row').first()).toContainText('Scholar');
-    await expect(page.locator('.academic-current')).toContainText('Current Focus');
-    await expect(page.locator('#homepage-research-map .research-lane-card')).toHaveCount(6);
+    await expect(page.locator('.academic-current')).toHaveCount(0);
+    await expect(page.locator('#homepage-research-map .homepage-snapshot-item')).toHaveCount(4);
     await expect(page.locator('#homepage-research-map')).toContainText('SREGym');
     await expect(page.locator('#homepage-research-map')).toContainText('SHIFT');
     await expect(page.locator('#homepage-research-map')).toContainText('ContextLedger');
@@ -49,7 +49,7 @@ test.describe('homepage hierarchy', () => {
     await expect(page.locator('a[href="https://u-a-goose.github.io/"]')).toHaveCount(1);
   });
 
-  test('mobile intro keeps text above portrait and section links update the hash', async ({ page }) => {
+  test('mobile intro keeps text above portrait and compact snapshot links update the hash', async ({ page }) => {
     await page.setViewportSize(MOBILE_VIEWPORT);
     await page.goto(BASE_URL, { waitUntil: 'domcontentloaded' });
 
@@ -60,7 +60,7 @@ test.describe('homepage hierarchy', () => {
     expect(portraitBox).not.toBeNull();
     expect(copyBox.y).toBeLessThan(portraitBox.y);
 
-    await page.locator('.academic-link-row a[href="#homepage-education"]').click();
-    await expect.poll(async () => page.evaluate(() => window.location.hash)).toBe('#homepage-education');
+    await page.locator('#homepage-research-map a[href="#homepage-research-publications"]').click();
+    await expect.poll(async () => page.evaluate(() => window.location.hash)).toBe('#homepage-research-publications');
   });
 });

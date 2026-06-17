@@ -23,10 +23,11 @@ test.describe('Modern academic portfolio theme', () => {
     await expect(page.locator('.academic-intro')).toHaveCount(1);
     await expect(page.locator('.academic-name')).toHaveText('Tanzim Hossain Romel');
     await expect(page.locator('.academic-portrait img')).toHaveCSS('border-radius', /6px|8px/);
-    await expect(page.locator('.academic-proof-strip article')).toHaveCount(4);
-    await expect(page.locator('.academic-proof-strip')).toContainText('AI for SRE with UIUC');
-    await expect(page.locator('.academic-proof-strip')).toContainText('ContextLedger, ctxhelm, PatchSmith');
-    await expect(page.locator('.academic-proof-strip')).toContainText('Program analysis');
+    await expect(page.locator('.academic-proof-strip')).toHaveCount(0);
+    await expect(page.locator('#homepage-research-map .homepage-snapshot-item')).toHaveCount(4);
+    await expect(page.locator('#homepage-research-map')).toContainText('SREGym with UIUC');
+    await expect(page.locator('#homepage-research-map')).toContainText('SHIFT aligned-backdoor audit');
+    await expect(page.locator('#homepage-research-map')).toContainText('RefactoringMiner MCP work');
 
     const linkRow = page.locator('.academic-link-row').first();
     await expect(linkRow).toContainText('Email');
