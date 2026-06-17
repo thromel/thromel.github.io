@@ -2,20 +2,47 @@
 layout: default
 title: Research
 navbar_title: Research
-description: Research projects and papers on software engineering, AI/ML security, LLM systems, blockchain, and empirical software engineering.
+description: Research statement and current work on AI for SRE, aligned backdoor audits, coding-agent systems, schema generation, and software evolution tooling.
 ---
 
 <section class="academic-section">
   <h1 class="academic-page-title">Research</h1>
-  <p>Research projects and papers across software engineering, security, blockchain, and applied machine learning.</p>
+  <p>Research statement, current directions, and selected papers across software engineering, agent security, and reliable AI systems.</p>
   <p class="academic-link-row"><a href="/assets/pdf/cv.pdf" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-file-pdf link-icon" aria-hidden="true"></i><span>CV</span></a><a href="https://scholar.google.com/citations?user={{ site.data.profile.gscholar }}" target="_blank" rel="noopener noreferrer"><i class="ai ai-google-scholar link-icon" aria-hidden="true"></i><span>Scholar profile</span></a><a href="{{ 'publications' | relative_url }}"><i class="fa-solid fa-layer-group link-icon" aria-hidden="true"></i><span>Publications</span></a></p>
 </section>
 
-<section class="academic-section">
-  <h2>Research Agenda</h2>
-  <p><strong>Trustworthy AI for software engineering.</strong> How can AI systems used by developers expose their assumptions, behave more predictably, and remain understandable enough to support real engineering workflows?</p>
-  <p><strong>Security and reliability of LLM-based systems.</strong> I study failure modes created when agentic systems, model hubs, and tool-integrated LLM applications meet unsafe defaults or weak contracts.</p>
-  <p><strong>Empirical software engineering.</strong> Repository mining, developer discussion analysis, and deployment-aware evidence gathering are central to how I frame and validate research questions.</p>
+<section class="academic-section research-statement-section" id="research-agenda">
+  <h2>Research Statement</h2>
+  <p class="research-statement">{{ site.data.profile.research_statement.summary }}</p>
+  <div class="research-lane-grid">
+    {% for lane in site.data.profile.research_statement.lanes %}
+    <article class="research-lane-card">
+      <p class="research-lane-card__status">{{ lane.status }}</p>
+      <h3>
+        {% if lane.link %}
+          {% if lane.link contains '://' %}
+            <a href="{{ lane.link }}" target="_blank" rel="noopener noreferrer">{{ lane.title }}</a>
+          {% else %}
+            <a href="{{ lane.link | relative_url }}">{{ lane.title }}</a>
+          {% endif %}
+        {% else %}
+          {{ lane.title }}
+        {% endif %}
+      </h3>
+      <p>{{ lane.summary }}</p>
+      {% if lane.points %}
+      <ul class="research-lane-points">
+        {% for point in lane.points %}
+        <li><strong>{{ point.label }}:</strong> {{ point.text }}</li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+      {% if lane.tags %}
+      <p class="academic-tags">{% for tag in lane.tags %}<span class="academic-tag">{{ tag }}</span>{% endfor %}</p>
+      {% endif %}
+    </article>
+    {% endfor %}
+  </div>
 </section>
 
 <section class="academic-section" id="research-projects">

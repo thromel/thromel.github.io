@@ -2,14 +2,14 @@
 layout: default
 title: Tanzim Hossain Romel
 navbar_title: Home
-description: Software engineer, UIUC++ SRSE remote research intern, and researcher building coding-agent tools, healthcare backend systems, and research software for AI/ML security and LLM systems.
+description: Software engineer and researcher working on AI for SRE, aligned backdoor audits, coding-agent systems, and software evolution tooling.
 ---
 
 <section class="academic-intro" aria-label="Profile introduction">
   <div class="academic-intro__copy">
-    <div class="academic-intro__eyebrow">AI4SE research · Open Source · Backend/Infra Engineering</div>
+    <div class="academic-intro__eyebrow">AI for SRE · Coding Agents · Software Evolution</div>
     <h1 class="academic-name">{{ site.data.profile.primary_name }}</h1>
-    <p>I'm a software engineer at <a href="{{ site.data.profile.current_company.url }}" target="_blank" rel="noopener noreferrer">{{ site.data.profile.current_company.name }}</a>, a remote UIUC++ SRSE research intern, and a software engineering researcher. I build tools for coding agents, healthcare backend systems, and research software for AI/ML security, LLM systems, and empirical software engineering.</p>
+    <p>I'm a software engineer at <a href="{{ site.data.profile.current_company.url }}" target="_blank" rel="noopener noreferrer">{{ site.data.profile.current_company.name }}</a> and a software engineering researcher. My current work is on AI for SRE, aligned backdoor audits in LLM agents, coding-agent systems, and software evolution tooling.</p>
     <p>I completed my B.Sc. in Computer Science and Engineering at <a href="https://cse.buet.ac.bd" target="_blank" rel="noopener noreferrer">BUET</a>. I will start an M.Sc. in Computing Science at the <a href="https://www.ualberta.ca/en/computing-science/index.html" target="_blank" rel="noopener noreferrer">University of Alberta</a> in September 2026.</p>
     <p class="academic-link-row" aria-label="Profile links"><a href="mailto:{{ site.data.profile.email }}"><i class="fa-solid fa-envelope link-icon" aria-hidden="true"></i><span>Email</span></a><a href="/assets/pdf/cv.pdf" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-file-pdf link-icon" aria-hidden="true"></i><span>CV</span></a><a href="{{ 'about' | relative_url }}"><i class="fa-solid fa-user link-icon" aria-hidden="true"></i><span>Bio</span></a><a href="https://scholar.google.com/citations?user={{ site.data.profile.gscholar }}" target="_blank" rel="noopener noreferrer"><i class="ai ai-google-scholar link-icon" aria-hidden="true"></i><span>Scholar</span></a><a href="https://github.com/{{ site.data.profile.github }}" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github link-icon" aria-hidden="true"></i><span>Github</span></a><a href="https://www.linkedin.com/in/{{ site.data.profile.linkedin }}" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-linkedin link-icon" aria-hidden="true"></i><span>LinkedIn</span></a></p>
   </div>
@@ -19,19 +19,19 @@ description: Software engineer, UIUC++ SRSE remote research intern, and research
 <section class="academic-proof-strip" aria-label="Current profile signals">
   <article>
     <span>Current role</span>
-    <strong>UIUC++ SRSE research intern</strong>
+    <strong>AI for SRE with UIUC</strong>
   </article>
   <article>
     <span>Agent security</span>
-    <strong>The Choice Can Be the Attack</strong>
+    <strong>SHIFT for aligned backdoors</strong>
   </article>
   <article>
-    <span>Agent context</span>
-    <strong>ContextLedger, ctxhelm, HelmBench</strong>
+    <span>Coding agents</span>
+    <strong>ContextLedger, ctxhelm, PatchSmith</strong>
   </article>
   <article>
-    <span>Open Source</span>
-    <strong>RefactoringMiner, EF Core, GenHTTP, deepagents</strong>
+    <span>Program analysis</span>
+    <strong>RefactoringMiner MCP integration</strong>
   </article>
 </section>
 
@@ -39,7 +39,41 @@ description: Software engineer, UIUC++ SRSE remote research intern, and research
   <h2 id="current-focus-title">Current Focus</h2>
   <p>{{ site.data.profile.current_focus.primary }}</p>
   <p>{{ site.data.profile.current_focus.open_source }}</p>
-  <p class="academic-link-row" aria-label="Homepage sections"><a href="#homepage-news"><i class="fa-solid fa-bullhorn link-icon" aria-hidden="true"></i><span>News</span></a><a href="#homepage-research-publications"><i class="fa-solid fa-microscope link-icon" aria-hidden="true"></i><span>Research &amp; Publications</span></a><a href="#homepage-education"><i class="fa-solid fa-graduation-cap link-icon" aria-hidden="true"></i><span>Education</span></a><a href="#homepage-work"><i class="fa-solid fa-briefcase link-icon" aria-hidden="true"></i><span>Work</span></a><a href="#homepage-projects"><i class="fa-solid fa-code link-icon" aria-hidden="true"></i><span>Projects</span></a><a href="#homepage-skills"><i class="fa-solid fa-screwdriver-wrench link-icon" aria-hidden="true"></i><span>Skills</span></a></p>
+  <p class="academic-link-row" aria-label="Homepage sections"><a href="#homepage-research-map"><i class="fa-solid fa-diagram-project link-icon" aria-hidden="true"></i><span>Research map</span></a><a href="#homepage-news"><i class="fa-solid fa-bullhorn link-icon" aria-hidden="true"></i><span>News</span></a><a href="#homepage-research-publications"><i class="fa-solid fa-microscope link-icon" aria-hidden="true"></i><span>Research &amp; Publications</span></a><a href="#homepage-education"><i class="fa-solid fa-graduation-cap link-icon" aria-hidden="true"></i><span>Education</span></a><a href="#homepage-work"><i class="fa-solid fa-briefcase link-icon" aria-hidden="true"></i><span>Work</span></a><a href="#homepage-projects"><i class="fa-solid fa-code link-icon" aria-hidden="true"></i><span>Projects</span></a><a href="#homepage-skills"><i class="fa-solid fa-screwdriver-wrench link-icon" aria-hidden="true"></i><span>Skills</span></a></p>
+</section>
+
+<section id="homepage-research-map" class="academic-section research-statement-section" aria-labelledby="research-statement-title">
+  <h2 id="research-statement-title">Research Statement</h2>
+  <p class="research-statement">{{ site.data.profile.research_statement.summary }}</p>
+  <div class="research-lane-grid research-lane-grid--compact">
+    {% for lane in site.data.profile.research_statement.lanes %}
+    <article class="research-lane-card">
+      <p class="research-lane-card__status">{{ lane.status }}</p>
+      <h3>
+        {% if lane.link %}
+          {% if lane.link contains '://' %}
+            <a href="{{ lane.link }}" target="_blank" rel="noopener noreferrer">{{ lane.title }}</a>
+          {% else %}
+            <a href="{{ lane.link | relative_url }}">{{ lane.title }}</a>
+          {% endif %}
+        {% else %}
+          {{ lane.title }}
+        {% endif %}
+      </h3>
+      <p>{{ lane.summary }}</p>
+      {% if lane.points %}
+      <ul class="research-lane-points">
+        {% for point in lane.points %}
+        <li><strong>{{ point.label }}:</strong> {{ point.text }}</li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+      {% if lane.tags %}
+      <p class="academic-tags">{% for tag in lane.tags %}<span class="academic-tag">{{ tag }}</span>{% endfor %}</p>
+      {% endif %}
+    </article>
+    {% endfor %}
+  </div>
 </section>
 
 <div id="oss-summary" class="oss-inline proof-surface" data-github-user="{{ site.data.profile.github | default: 'thromel' }}" data-state="loading">
@@ -60,7 +94,7 @@ description: Software engineer, UIUC++ SRSE remote research intern, and research
 
 <section id="homepage-research-publications" class="academic-section">
   <h2>Research &amp; Publications</h2>
-  <p>Selected work I want visitors to notice first. The full research profile and publication archive are linked below.</p>
+  <p>Selected papers and manuscripts. The research map above explains the current agenda; the archive links keep the older work easy to find.</p>
 
   <div class="academic-list selected-research-list">
     <article class="academic-entry academic-entry--selected homepage-media-entry">
@@ -76,8 +110,8 @@ description: Software engineer, UIUC++ SRSE remote research intern, and research
       <div class="homepage-entry-media"><img src="{{ '/assets/images/agentic_ai_architecture.png' | relative_url }}" alt="LLM agent auditing visual"></div>
       <div class="homepage-entry-body">
       <h3><a href="/research/reagent-plus-plus/">The Choice Can Be the Attack: Auditing Aligned Backdoors in LLM Agents</a></h3>
-      <p class="academic-entry__meta">In progress / LLM agents and aligned backdoors</p>
-      <p>Endpoint-black-box auditing framework for aligned backdoors in LLM agents using counterfactual environments and discrete-choice estimation.</p>
+      <p class="academic-entry__meta">TACL manuscript in preparation / SHIFT aligned backdoor audit</p>
+      <p>SHIFT checks whether a trigger changes which valid option an LLM agent chooses, then asks whether that movement favors the attacker's target rather than ordinary option quality.</p>
       </div>
     </article>
 

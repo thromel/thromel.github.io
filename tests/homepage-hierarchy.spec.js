@@ -3,7 +3,7 @@ const { test, expect } = require('@playwright/test');
 const BASE_URL = process.env.PLAYWRIGHT_TEST_BASE_URL || 'http://127.0.0.1:4000';
 const DESKTOP_VIEWPORT = { width: 1280, height: 720 };
 const MOBILE_VIEWPORT = { width: 390, height: 844 };
-const SECTION_IDS = ['homepage-news', 'homepage-research-publications', 'homepage-education', 'homepage-work', 'homepage-projects', 'homepage-skills'];
+const SECTION_IDS = ['homepage-research-map', 'homepage-news', 'homepage-research-publications', 'homepage-education', 'homepage-work', 'homepage-projects', 'homepage-skills'];
 
 test.describe('homepage hierarchy', () => {
   test('desktop homepage exposes academic intro and section targets', async ({ page }) => {
@@ -15,6 +15,11 @@ test.describe('homepage hierarchy', () => {
     await expect(page.locator('.academic-link-row').first()).toContainText('CV');
     await expect(page.locator('.academic-link-row').first()).toContainText('Scholar');
     await expect(page.locator('.academic-current')).toContainText('Current Focus');
+    await expect(page.locator('#homepage-research-map .research-lane-card')).toHaveCount(6);
+    await expect(page.locator('#homepage-research-map')).toContainText('SREGym');
+    await expect(page.locator('#homepage-research-map')).toContainText('SHIFT');
+    await expect(page.locator('#homepage-research-map')).toContainText('ContextLedger');
+    await expect(page.locator('#homepage-research-map')).toContainText('RefactoringMiner');
     await expect(page.locator('#site-navigation')).not.toContainText('Education');
     await expect(page.locator('.academic-footer')).toContainText('Education');
     await expect(page.locator('#homepage-research-publications .academic-entry--selected')).toHaveCount(4);

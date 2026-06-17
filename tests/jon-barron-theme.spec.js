@@ -24,9 +24,9 @@ test.describe('Modern academic portfolio theme', () => {
     await expect(page.locator('.academic-name')).toHaveText('Tanzim Hossain Romel');
     await expect(page.locator('.academic-portrait img')).toHaveCSS('border-radius', /6px|8px/);
     await expect(page.locator('.academic-proof-strip article')).toHaveCount(4);
-    await expect(page.locator('.academic-proof-strip')).toContainText('UIUC++ SRSE research intern');
-    await expect(page.locator('.academic-proof-strip')).toContainText('ContextLedger, ctxhelm, HelmBench');
-    await expect(page.locator('.academic-proof-strip')).toContainText('Open Source');
+    await expect(page.locator('.academic-proof-strip')).toContainText('AI for SRE with UIUC');
+    await expect(page.locator('.academic-proof-strip')).toContainText('ContextLedger, ctxhelm, PatchSmith');
+    await expect(page.locator('.academic-proof-strip')).toContainText('Program analysis');
 
     const linkRow = page.locator('.academic-link-row').first();
     await expect(linkRow).toContainText('Email');

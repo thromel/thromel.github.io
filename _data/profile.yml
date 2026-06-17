@@ -17,11 +17,93 @@ current_company:
 
 current_focus:
   primary: >-
-    Right now I am working as a remote research intern at UIUC through <a href="https://uiuc-srse.github.io/" target="_blank" rel="noopener noreferrer">UIUC++ SRSE 2026</a>,
-    <span class="academic-highlight">The Choice Can Be the Attack</span>, <a href="/showcase/projects/contextledger/">ContextLedger</a>, ctxhelm, VeriSchema,
-    RefactoringMiner, and reading <em>Designing Data-Intensive Applications</em>.
+    Right now I am studying AI for SRE through <a href="https://uiuc-srse.github.io/" target="_blank" rel="noopener noreferrer">UIUC++ SRSE 2026</a>
+    with Professor <a href="https://tianyin.github.io/" target="_blank" rel="noopener noreferrer">Tianyin Xu's group</a>. I am also preparing the
+    <span class="academic-highlight">SHIFT</span> manuscript for TACL, building coding-agent systems around context, retrieval, and repair, and continuing
+    work on VeriSchema and RefactoringMiner.
   open_source: >-
-    I have also been contributing to RefactoringMiner, EF Core, GenHTTP, deepagents, and TypeScript.
+    Open-source work is part of that research loop: I actively develop RefactoringMiner, helped build its MCP server for coding-agent integration,
+    and continue contributing to EF Core, GenHTTP, deepagents, and TypeScript when the work lines up with my tooling interests.
+
+research_statement:
+  summary: >-
+    I study how AI agents behave when they operate on real software systems: what context they read, which actions they choose, how they recover
+    from failures, and what evidence they leave behind. The goal is not to make agents look impressive in a demo. I want agentic systems that
+    can be inspected, evaluated, and trusted under messy engineering conditions.
+  lanes:
+  - title: "AI for SRE"
+    status: "SREGym / UIUC++ SRSE 2026"
+    link: https://uiuc-srse.github.io/
+    summary: >-
+      With Professor Tianyin Xu's group at UIUC, I am working on SREGym tasks for software and systems reliability. The focus is agents that
+      can diagnose incidents, choose safe mitigations, and pass business-level checks instead of only making pods look healthy.
+    tags:
+    - SREGym
+    - AI for SRE
+    - Kubernetes
+    - Incident response
+  - title: "Agent security"
+    status: "SHIFT / TACL manuscript"
+    link: /research/reagent-plus-plus/
+    summary: >-
+      I am preparing a TACL manuscript on SHIFT, the Structured Hidden Influence Test for aligned backdoor attacks in LLM agents. SHIFT checks
+      whether a trigger changes which valid option an agent chooses, then asks whether the movement favors the attacker's target rather than
+      ordinary option quality.
+    tags:
+    - SHIFT
+    - Aligned backdoors
+    - LLM agents
+    - Choice auditing
+  - title: "Coding-agent systems"
+    status: "ContextLedger / ctxhelm / PatchSmith"
+    link: /projects#featured-projects-title
+    summary: >-
+      I work on coding agents from three angles: preserving exact session facts, retrieving the right files before editing, and developing
+      DeepAgents-based repair systems that leave testable evidence.
+    points:
+    - label: "Context management"
+      text: "ContextLedger turns long sessions into typed, provenance-carrying events for measurable compaction."
+    - label: "Retrieval efficiency"
+      text: "ctxhelm and HelmBench test whether agents inspect the right files with less irrelevant reading."
+    - label: "Repair agents"
+      text: "PatchSmith explores bounded DeepAgents repair runs with traces, sandbox validation, and readiness reports."
+    tags:
+    - ContextLedger
+    - ctxhelm
+    - PatchSmith
+    - DeepAgents
+  - title: "History-aware vibe coding"
+    status: "Emerging research direction"
+    summary: >-
+      I am exploring how coding agents should use edit history, repository memory, and design intent when developers work through natural-language
+      programming loops. The question is how to keep the speed of vibe coding without losing architectural memory.
+    tags:
+    - Vibe coding
+    - Edit history
+    - Agent memory
+    - Developer tools
+  - title: "Verified schema generation"
+    status: "VeriSchema"
+    link: /research/multi-agent-db-schema/
+    summary: >-
+      VeriSchema studies multi-agent database-schema generation from natural-language requirements, with specialized agents, auto-repair, and
+      formal checks for relational consistency.
+    tags:
+    - VeriSchema
+    - Multi-agent systems
+    - Schema generation
+    - Z3
+  - title: "Software evolution tooling"
+    status: "RefactoringMiner"
+    link: https://github.com/tsantalis/RefactoringMiner/pulls?q=author%3Athromel
+    summary: >-
+      I actively develop RefactoringMiner and helped build its MCP server so coding agents can reason about real refactorings through established
+      program-analysis tooling, not only raw diffs.
+    tags:
+    - RefactoringMiner
+    - MCP
+    - Program analysis
+    - Refactoring
 
 positions:
 - name: Remote Research Intern, UIUC
@@ -175,9 +257,9 @@ short_bio: >-
   <br/><br/>
   In May 2025, I received the <a href='https://drive.google.com/file/d/1Vc4E2RoQEPmbfS56oLdUih-oJDBok9sP/view?usp=share_link' target='_blank'><b>IQVIA Impact Program - Silver</b></a> award for performance, critical issue resolution, and feature delivery.
   <br/><br/>
-  I'm currently working on <a href="/showcase/projects/contextledger/">ContextLedger</a>, a research prototype for context accounting in coding-agent harnesses, along with research projects related to <a href="/research#research-projects">Blockchain in Healthcare</a> and <a href="/research#research-projects">LLM API Contract Analysis</a>.
+  My current research is about agentic software systems under real engineering constraints. I am working on SREGym and AI for SRE with Professor <a href="https://tianyin.github.io/" target="_blank">Tianyin Xu's group</a> at UIUC, preparing the SHIFT manuscript for TACL on aligned backdoor attacks in LLM agents, and building coding-agent systems around <a href="/showcase/projects/contextledger/">ContextLedger</a>, ctxhelm, and PatchSmith.
   <br/><br/>
-  I collaborate with <a href="https://akondrahman.github.io" target="_blank">Dr. Akond Rahman</a> (Auburn University, <a href="https://paser-group.github.io/" target="_blank">PASER group</a>) on LLM API contracts and with <a href="https://cse.buet.ac.bd/faculty/faculty_detail/asmlatifulhoque" target="_blank">Professor ASM Latiful Hoque</a> (BUET), who supervised my undergraduate thesis, on blockchain technology.
+  I also work on history-aware vibe coding, VeriSchema for multi-agent database schema generation, and RefactoringMiner, where I helped build the MCP server that connects refactoring analysis with coding agents. Earlier collaborations include <a href="https://akondrahman.github.io" target="_blank">Dr. Akond Rahman</a> (Auburn University, <a href="https://paser-group.github.io/" target="_blank">PASER group</a>) on LLM API contracts and <a href="https://cse.buet.ac.bd/faculty/faculty_detail/asmlatifulhoque" target="_blank">Professor ASM Latiful Hoque</a> (BUET), who supervised my undergraduate thesis, on blockchain technology.
   <br/><br/>
   I worked with the <a href="https://ureporter.cse.buet.ac.bd/about_us" target="_blank">uReporter team</a> on Bangladesh's first anonymous online reporting system for citizens to report social issues. The project received coverage from BBC Bengali, Saudi Gazette, and Global Voices. Our research on this work is under review at the ACM CSCW conference.
   <br/><br/>
@@ -373,11 +455,12 @@ awards:
     <a href='https://drive.google.com/file/d/1Vc4E2RoQEPmbfS56oLdUih-oJDBok9sP/view?usp=share_link' target='_blank'>IQVIA Impact Program - Silver (Certificate)</a>
 
 research_interests:
-- AI4SE
-- SE4AI
-- Trustworthy AI
-- Software Security
-- LLM Security
+- AI for SRE
+- Coding Agents
+- Agent Security
+- Context Management
+- Program Analysis
+- Empirical Software Engineering
 
 technical_skills:
 - type: "Languages & Systems"
@@ -447,39 +530,42 @@ professional_memberships:
   joined: 2024
 
 research:
-- title: "Remote Research Intern, University of Illinois Urbana-Champaign"
+- title: "SREGym: AI for SRE and Reliability-Agent Evaluation"
   date: June 2026 - August 2026
   link: https://uiuc-srse.github.io/
   thumbnail: /assets/images/companies/uiuc-block-i.png
   status: "UIUC++ SRSE 2026"
-  short_description: Remote software engineering research internship through UIUC++ SRSE 2026 with Professor Tianyin Xu's lab.
+  short_description: AI for SRE research through UIUC++ SRSE 2026 with Professor Tianyin Xu's group.
   description: >-
-    Remote summer research internship through <a href="https://uiuc-srse.github.io/" target="_blank" rel="noopener noreferrer">UIUC++ Summer Research in Software Engineering (SRSE) 2026</a>
-    with Professor <a href="https://tianyin.github.io/" target="_blank" rel="noopener noreferrer">Tianyin Xu's lab</a>, focused on software and systems reliability research,
-    rigorous empirical evaluation, and reproducible research artifacts.
+    Through <a href="https://uiuc-srse.github.io/" target="_blank" rel="noopener noreferrer">UIUC++ Summer Research in Software Engineering (SRSE) 2026</a>
+    with Professor <a href="https://tianyin.github.io/" target="_blank" rel="noopener noreferrer">Tianyin Xu's group</a>, I am working on SREGym,
+    an evaluation setting for AI agents in software and systems reliability. My current focus is failure scenarios with realistic mitigation paths,
+    business-level oracles, and evidence that rejects shallow fixes.
   technologies:
-  - Software Engineering Research
+  - SREGym
+  - AI for SRE
+  - Kubernetes
   - Systems Reliability
-  - Empirical Evaluation
-  - Reproducibility
+  - Incident Mitigation
 
-- title: "ContextLedger: Context Accounting for Coding Agents"
+- title: "Coding-Agent Systems: ContextLedger, ctxhelm, and PatchSmith"
   date: June 2026 - Present
-  link: /showcase/projects/contextledger/
+  link: /projects#featured-projects-title
   thumbnail: /assets/images/projects/contextledger-pipeline.svg
   status: "In Progress"
-  short_description: Research prototype for preserving exact coding-session facts across OpenCode compaction with typed events, provenance, token cost, and live GPT-5.5 compaction tests.
+  short_description: Context management, retrieval efficiency, and DeepAgents-based repair work for coding agents.
   description: >-
-    Current research prototype inside an OpenCode fork. ContextLedger turns long-session history into typed, provenance-carrying context events,
-    then tests whether policy-based compaction can preserve exact facts without sending noisy old history back to the model. The first bounded
-    openai/gpt-5.5 noisy-compaction smoke kept full recall with <code>precision-frontier</code> replace mode while reducing compaction input
-    to 852 tokens on that fixture. I am treating this as promising compaction evidence, not downstream solve-rate proof yet.
+    I am working on coding agents along three dimensions. <a href="/showcase/projects/contextledger/">ContextLedger</a> studies context
+    management by turning long sessions into typed, provenance-carrying events for measurable compaction. ctxhelm and HelmBench study retrieval
+    efficiency by testing whether agents inspect the right files with less irrelevant reading. <a href="/showcase/projects/patchsmith/">PatchSmith</a>
+    studies DeepAgents-based repair runs with bounded workspaces, traces, sandbox validation, and readiness reports.
   technologies:
-  - OpenCode
-  - GPT-5.5
+  - ContextLedger
+  - ctxhelm
+  - HelmBench
+  - PatchSmith
+  - DeepAgents
   - Context Management
-  - Compaction
-  - Coding Agents
   - Benchmarking
 
 - title: "An Empirical Study on Remote Code Execution in Machine Learning Model Hosting Ecosystems"
@@ -505,32 +591,30 @@ research:
 - title: "The Choice Can Be the Attack: Auditing Aligned Backdoors in LLM Agents"
   date: August 2025 - Present
   link: /research/reagent-plus-plus/
-  status: "In Progress"
-  short_description: Endpoint-black-box auditing framework for aligned backdoors in LLM agents using counterfactual environments and discrete-choice estimation.
+  status: "TACL manuscript in preparation"
+  short_description: SHIFT audit for aligned backdoor attacks where a trigger changes which valid option an LLM agent chooses.
   description: >-
-    Agentic LLM systems are vulnerable to aligned backdoors: triggered behaviors that still satisfy the user's instruction but
-    systematically steer which acceptable option the agent selects. This ongoing work introduces CCA, an endpoint-black-box audit
-    with environment instrumentation, constraint-preserving randomized counterfactual environments, and pooled discrete-choice
-    estimation over eligible options. The current evaluation covers synthetic WebShop stress tests and a real 3B WebShop endpoint
-    case study to measure trigger-dependent steering, identify suspect-only effects, and clarify when counterfactual randomization
-    alone is sufficient versus when feature-controlled choice modeling is necessary.
+    I am preparing this manuscript for TACL. The paper studies aligned backdoor attacks in LLM agents: a trigger can leave the final task
+    answer looking valid while quietly changing which acceptable option the agent chooses. SHIFT, the Structured Hidden Influence Test,
+    reruns matched tasks with and without a known trigger, then checks whether the changed choice favors the attacker's target after accounting
+    for ordinary option quality such as price or rating.
   technologies:
-  - CCA
-  - CCIA
+  - SHIFT
+  - Structured Hidden Influence Test
   - WebShop
-  - Counterfactual Auditing
-  - Discrete Choice Modeling
+  - Aligned Backdoors
+  - LLM Agents
+  - Choice Auditing
 
 - title: "VeriSchema: Multi-Agent Framework for Generating Relational DB Schema & ERD"
   date: July 2025 - Present
   link: /research/multi-agent-db-schema/
   status: "Targeting PVLDB"
-  short_description: Extended SchemaAgent with LangGraph StateGraph architecture and 3-tier auto-repair system, reducing redundant LLM calls by 80%.
+  short_description: Multi-agent schema generation from natural-language requirements with verification and auto-repair.
   description: >-
-    Extended SchemaAgent with Dr. Sukarna Barua (BUET) using LangGraph StateGraph architecture with conditional routing and a three-tier
-    auto-repair system. Designed a six-stage pipeline with specialized agents for entity extraction, relationship mining, and
-    normalization with Z3 formal verification. Implemented component-level retry logic with violation analysis, reducing redundant LLM
-    calls by 80%.
+    Extended SchemaAgent with Dr. Sukarna Barua (BUET) into a multi-agent pipeline for generating relational database schemas and ER diagrams
+    from natural-language descriptions. The system uses specialized agents for entity extraction, relationship mining, normalization, and
+    repair, with Z3 checks for schema consistency and component-level retries to avoid wasteful full-pipeline reruns.
   collaborator: >-
     Collaborating with <a href="https://cse.buet.ac.bd/faculty/faculty_detail/sukarnabarua" target="_blank">Dr. Sukarna Barua</a>, Assistant Professor at BUET,
     who specializes in software engineering, data science, and machine learning applications.

@@ -2,27 +2,27 @@
 layout: default
 title: The Choice Can Be the Attack
 navbar_title: Research
+description: Abstract-level summary of SHIFT, a TACL manuscript in preparation on aligned backdoor attacks in LLM agents.
 ---
 
 <section class="section">
   <div class="section-header section-header--narrative">
     <h1 class="section-title">The Choice Can Be the Attack: Auditing Aligned Backdoors in LLM Agents</h1>
-    <p class="section-subtitle">Ongoing work. The manuscript is not public yet, so this page exposes only the abstract-level summary.</p>
+    <p class="section-subtitle">TACL manuscript in preparation. The manuscript is not public yet, so this page keeps to the abstract-level summary.</p>
   </div>
 
   <div class="narrative-panel">
     <div class="narrative-panel-copy">
       <p class="narrative-panel-kicker">Abstract</p>
       <p>
-        Agentic LLM systems are vulnerable to aligned backdoors: triggered behaviors that still satisfy the user's instruction but
-        systematically steer which acceptable option the agent selects, such as which brand, vendor, or tool the agent chooses.
-        This work introduces CCA, an endpoint-black-box auditing framework with environment instrumentation, constraint-preserving
-        randomized counterfactual environments, and pooled discrete-choice estimation over eligible options.
+        LLM agents can be backdoored without visibly failing the task. A trigger can make an agent prefer one valid option over another,
+        such as a brand, vendor, or tool, while the final answer still looks acceptable. SHIFT, the Structured Hidden Influence Test,
+        is a known-trigger audit for this kind of choice steering.
       </p>
       <p>
-        Across synthetic WebShop stress tests and a real 3B WebShop endpoint case study, the framework is used to measure
-        trigger-dependent steering, characterize when counterfactual randomization is sufficient, and identify when
-        feature-controlled choice modeling is necessary to separate suspect-only steering from benign quality effects.
+        SHIFT reruns matched tasks with and without the trigger, records the valid options and their features, and checks whether the
+        changed choice favors the attacker's target after accounting for ordinary option quality. The current draft positions SHIFT as
+        a practical validation audit for structured choice settings where the auditor can observe the options but not the model internals.
       </p>
     </div>
     <div class="narrative-panel-actions">
