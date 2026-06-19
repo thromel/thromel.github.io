@@ -1,0 +1,15 @@
+/* Keep long Rouge code lines inside post content on narrow screens. */
+.post-content .highlighter-rouge,
+.post-content .highlight,
+.post-content pre {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.post-content .highlight pre {
+  overflow-x: visible;
+}
+
+.post-content pre code {
+  white-space: pre;
+}

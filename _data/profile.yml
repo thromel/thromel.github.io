@@ -719,22 +719,6 @@ research:
   - ECIES
 
 projects:
-- title: "1BRC C#: full-size performance work on Apple Silicon"
-  link: /showcase/projects/1brc-csharp/
-  date: Jun 2026
-  description: >-
-    Standalone .NET 10 solver for the One Billion Row Challenge, built as a systems-performance project with a public research log.
-    The implementation uses byte parsing, integer-tenth aggregation, per-worker native hash tables, NativeAOT, and a size-aware
-    mmap versus macOS pread input strategy. Full-size local evidence moved the production path from mmap to pread for 8 GiB+ files
-    after page faults and system time dominated the 1B run.
-  technologies:
-  - C#
-  - .NET 10
-  - NativeAOT
-  - Apple Silicon
-  - mmap
-  - pread
-  - Benchmarking
 - title: "ContextLedger: context accounting for coding agents"
   link: /showcase/projects/contextledger/
   date: Jun 2026 - Present

@@ -22,7 +22,7 @@ description: Selected software systems, research prototypes, coding-agent tools,
   </div>
   {% for project in showcase_projects %}
     {% assign is_featured_evidence = false %}
-    {% if project.showcase_style == 'agent-tooling' or project.group == 'Research' or project.title contains 'Go Database' or project.title contains 'Blockchain Based Ticketing' %}
+    {% if project.showcase_style == 'agent-tooling' or project.group == 'Research' or project.group == 'Performance Engineering' or project.title contains 'Go Database' or project.title contains 'Blockchain Based Ticketing' %}
       {% assign is_featured_evidence = true %}
     {% endif %}
     {% unless is_featured_evidence %}{% continue %}{% endunless %}
@@ -54,7 +54,7 @@ description: Selected software systems, research prototypes, coding-agent tools,
   </div>
   {% for project in showcase_projects %}
     {% assign is_featured_evidence = false %}
-    {% if project.showcase_style == 'agent-tooling' or project.group == 'Research' or project.title contains 'Go Database' or project.title contains 'Blockchain Based Ticketing' %}
+    {% if project.showcase_style == 'agent-tooling' or project.group == 'Research' or project.group == 'Performance Engineering' or project.title contains 'Go Database' or project.title contains 'Blockchain Based Ticketing' %}
       {% assign is_featured_evidence = true %}
     {% endif %}
     {% if is_featured_evidence %}{% continue %}{% endif %}
