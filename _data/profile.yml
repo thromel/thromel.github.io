@@ -583,14 +583,14 @@ research:
   date: June 2025 - Oct 2025
   link: https://arxiv.org/pdf/2601.14163
   thumbnail: /assets/images/ml-rce.png
-  status: "Under review at ACM TOSEM"
+  status: "Submitted to ICSE 2027"
   short_description: First large-scale cross-platform study analyzing ~45,000 repositories across 5 major ML platforms for security vulnerabilities.
   description: >-
     Cross-platform study of ~45,000 repositories across five ML platforms (Hugging Face, ModelScope, OpenCSG, OpenMMLab, PyTorch Hub)
     with co-authors Mohammed Latif Siddiq, Natalie Sekerak, Beatrice Casey, and Joanna C. S. Santos. Detected security issues using static analyzers (Bandit, CodeQL, Semgrep)
     and YARA malware signatures: found CWE-502 (unsafe deserialization) in 74.54% and CWE-95 (eval injection) in 15.02% of affected
     repositories; 10.41% of Hugging Face repos contain security smells. Analyzed 600+ developer discussions to build a taxonomy of
-    security misconceptions; found 6.6% SafeTensors adoption and heavy trust_remote_code usage. <b>Manuscript under review at ACM TOSEM.</b>
+    security misconceptions; found 6.6% SafeTensors adoption and heavy trust_remote_code usage. <b>Submitted to ICSE 2027.</b>
   technologies:
   - Python
   - Bandit
