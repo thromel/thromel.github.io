@@ -2,7 +2,7 @@
 title: "An Empirical Study on Remote Code Execution in Machine Learning Model Hosting Ecosystems"
 date: 2026-02-01 00:00:00 +0600
 pub: "International Conference on Software Engineering (ICSE)"
-pub_pre: "Submitted to "
+pub_pre: "Under review at "
 pub_date: "2027"
 abstract: >-
   Large-scale cross-platform security study of roughly 45,000 repositories across five ML model hosting ecosystems, measuring unsafe deserialization, eval injection, malware signals, and recurring developer security misconceptions.
