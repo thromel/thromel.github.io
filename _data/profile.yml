@@ -19,8 +19,8 @@ current_focus:
   primary: >-
     Right now I am working on <a href="https://www.sregym.com/" target="_blank" rel="noopener noreferrer">SREGym</a>, an AI-native benchmark for
     Site Reliability Engineering agents, through <a href="https://uiuc-srse.github.io/" target="_blank" rel="noopener noreferrer">UIUC++ SRSE 2026</a>
-    with Professor <a href="https://tianyin.github.io/" target="_blank" rel="noopener noreferrer">Tianyin Xu's group</a>. I am also preparing the
-    <span class="academic-highlight">SHIFT</span> manuscript for TACL with <a href="https://cse.buet.ac.bd/faculty/faculty_detail/rakinhaider" target="_blank" rel="noopener noreferrer">Chowdhury Rakin Haider</a>,
+    with Professor <a href="https://tianyin.github.io/" target="_blank" rel="noopener noreferrer">Tianyin Xu's group</a>. I also submitted the
+    <span class="academic-highlight">SHIFT</span> manuscript to TACL 2026 with <a href="https://cse.buet.ac.bd/faculty/faculty_detail/rakinhaider" target="_blank" rel="noopener noreferrer">Chowdhury Rakin Haider</a>,
     building coding-agent systems around context, retrieval, and repair, and continuing work on VeriSchema and RefactoringMiner.
   open_source: >-
     Open-source work is part of that research loop: I actively develop <a href="https://github.com/tsantalis/RefactoringMiner" target="_blank" rel="noopener noreferrer">RefactoringMiner</a>
@@ -47,10 +47,10 @@ research_statement:
     - Kubernetes
     - Incident response
   - title: "Agent security"
-    status: "SHIFT / TACL manuscript"
+    status: "Submitted to TACL 2026"
     link: /research/reagent-plus-plus/
     summary: >-
-      I am preparing a TACL manuscript on SHIFT, the Structured Hidden Influence Test for aligned backdoor attacks in LLM agents. SHIFT checks
+      Submitted SHIFT, the Structured Hidden Influence Test for aligned backdoor attacks in LLM agents, to TACL 2026. SHIFT checks
       whether a trigger changes which valid option an agent chooses, then asks whether the movement favors the attacker's target rather than
       ordinary option quality. This work is in collaboration with <a href="https://cse.buet.ac.bd/faculty/faculty_detail/rakinhaider" target="_blank" rel="noopener noreferrer">Chowdhury Rakin Haider</a>.
     tags:
@@ -264,7 +264,7 @@ short_bio: >-
   <br/><br/>
   In May 2025, I received the <a href='https://drive.google.com/file/d/1Vc4E2RoQEPmbfS56oLdUih-oJDBok9sP/view?usp=share_link' target='_blank'><b>IQVIA Impact Program - Silver</b></a> award for performance, critical issue resolution, and feature delivery.
   <br/><br/>
-  My current research is about agentic software systems under real engineering constraints. I am working on <a href="https://www.sregym.com/" target="_blank" rel="noopener noreferrer">SREGym</a> and AI for SRE with Professor <a href="https://tianyin.github.io/" target="_blank">Tianyin Xu's group</a> at UIUC, preparing the SHIFT manuscript for TACL on aligned backdoor attacks in LLM agents with <a href="https://cse.buet.ac.bd/faculty/faculty_detail/rakinhaider" target="_blank" rel="noopener noreferrer">Chowdhury Rakin Haider</a>, and building coding-agent systems around <a href="/showcase/projects/contextledger/">ContextLedger</a>, <a href="https://github.com/thromel/ctxhelm" target="_blank" rel="noopener noreferrer">ctxhelm</a>, and <a href="/showcase/projects/patchsmith/">PatchSmith</a>.
+  My current research is about agentic software systems under real engineering constraints. I am working on <a href="https://www.sregym.com/" target="_blank" rel="noopener noreferrer">SREGym</a> and AI for SRE with Professor <a href="https://tianyin.github.io/" target="_blank">Tianyin Xu's group</a> at UIUC, submitted SHIFT to TACL 2026 on aligned backdoor attacks in LLM agents with <a href="https://cse.buet.ac.bd/faculty/faculty_detail/rakinhaider" target="_blank" rel="noopener noreferrer">Chowdhury Rakin Haider</a>, and building coding-agent systems around <a href="/showcase/projects/contextledger/">ContextLedger</a>, <a href="https://github.com/thromel/ctxhelm" target="_blank" rel="noopener noreferrer">ctxhelm</a>, and <a href="/showcase/projects/patchsmith/">PatchSmith</a>.
   <br/><br/>
   I also work on history-aware vibe coding with <a href="https://homepage.zhouyang.me/" target="_blank" rel="noopener noreferrer">Dr. Zhou Yang</a>, VeriSchema for multi-agent database schema generation, and <a href="https://github.com/tsantalis/RefactoringMiner" target="_blank" rel="noopener noreferrer">RefactoringMiner</a>, where I collaborate with Professor <a href="https://users.encs.concordia.ca/~nikolaos/" target="_blank" rel="noopener noreferrer">Nikolaos Tsantalis</a>, helped build the MCP server that connects refactoring analysis with coding agents, and contribute to the <a href="https://www.jetbrains.com/" target="_blank" rel="noopener noreferrer">JetBrains</a> collaboration. Earlier collaborations include <a href="https://akondrahman.github.io" target="_blank">Dr. Akond Rahman</a> (Auburn University, <a href="https://paser-group.github.io/" target="_blank">PASER group</a>) on LLM API contracts and <a href="https://cse.buet.ac.bd/faculty/faculty_detail/asmlatifulhoque" target="_blank">Professor ASM Latiful Hoque</a> (BUET), who supervised my undergraduate thesis, on blockchain technology.
   <br/><br/>
@@ -602,10 +602,10 @@ research:
 - title: "The Choice Can Be the Attack: Auditing Aligned Backdoors in LLM Agents"
   date: August 2025 - Present
   link: /research/reagent-plus-plus/
-  status: "TACL manuscript in preparation"
+  status: "Submitted to TACL 2026"
   short_description: SHIFT audit for aligned backdoor attacks where a trigger changes which valid option an LLM agent chooses.
   description: >-
-    I am preparing this manuscript for TACL with <a href="https://cse.buet.ac.bd/faculty/faculty_detail/rakinhaider" target="_blank" rel="noopener noreferrer">Chowdhury Rakin Haider</a>.
+    Submitted to TACL 2026 with <a href="https://cse.buet.ac.bd/faculty/faculty_detail/rakinhaider" target="_blank" rel="noopener noreferrer">Chowdhury Rakin Haider</a>.
     The paper studies aligned backdoor attacks in LLM agents: a trigger can leave the final task
     answer looking valid while quietly changing which acceptable option the agent chooses. SHIFT, the Structured Hidden Influence Test,
     reruns matched tasks with and without a known trigger, then checks whether the changed choice favors the attacker's target after accounting
