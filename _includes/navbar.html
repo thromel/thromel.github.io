@@ -9,7 +9,7 @@
       {% assign nav_pages = site.data.navigation.primary_pages | default: site.data.navigation.pages %}
       {% for item in nav_pages %}
         {% assign item_label = item.label | default: item.name %}
-        <a href="{{ item.url | relative_url }}"{% if item.name == page.navbar_title or (item.name == 'Home' and page.navbar_title == nil) %} aria-current="page"{% endif %}>{% if item.icon %}<i class="{{ item.icon }} nav-icon" aria-hidden="true"></i>{% endif %}<span>{{ item_label }}</span></a>
+        <a href="{{ item.url | relative_url }}"{% if item.name == page.navbar_title or (item.name == 'Home' and page.url == '/') %} aria-current="page"{% endif %}>{% if item.icon %}<i class="{{ item.icon }} nav-icon" aria-hidden="true"></i>{% endif %}<span>{{ item_label }}</span></a>
       {% endfor %}
     </nav>
     <div class="academic-utility" role="group" aria-label="Display preference">

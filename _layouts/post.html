@@ -2,45 +2,35 @@
 layout: default
 ---
 
-<div class="row mt-3">
-  <div class="col">
-    <div class="card card-interactive border-0">
-      <div class="card-body p-5">
-        <h1 class="post-title">{{ page.title }}</h1>
-        <p class="post-meta d-flex align-items-center">
-          <img src="/assets/images/icons/calendar.png" alt="Date" class="inline-badge mr-2" style="width: 18px; height: 18px;">
-          <span class="post-date">{{ page.date | date: "%B %d, %Y" }}</span>
-        </p>
+<article class="post-article">
+  <header>
+    <h1 class="post-title">{{ page.title }}</h1>
+    <p class="post-meta">
+      <span class="post-date">{{ page.date | date: "%B %d, %Y" }}</span>
+      {% if page.categories.size > 0 %}<span>{{ page.categories | join: ", " }}</span>{% endif %}
+    </p>
 
-        {% if page.tags.size > 0 %}
-        <div class="post-tags mb-4">
-          <img src="/assets/images/icons/tag.png" alt="tag" class="inline-badge mr-2" style="width: 16px; height: 16px; margin-top: 2px;">
-          {% for tag in page.tags %}
-          <span class="tech-tag">{{ tag }}</span>
-          {% endfor %}
-        </div>
-        {% endif %}
+    {% if page.tags.size > 0 %}
+    <p class="post-tags">
+      {% for tag in page.tags %}<span class="tech-tag">{{ tag }}</span>{% endfor %}
+    </p>
+    {% endif %}
+  </header>
 
-        <div class="post-content prose">
-          {{ content }}
-        </div>
-
-        <div class="post-navigation mt-5 pt-3 border-top">
-          <div class="row">
-            <div class="col-6 text-left">
-              {% if page.previous.url %}
-              <a href="{{ page.previous.url }}" class="previous"><i class="fas fa-angle-left mr-1" aria-hidden="true"></i>{{ page.previous.title }}</a>
-              {% endif %}
-            </div>
-            <div class="col-6 text-right">
-              {% if page.next.url %}
-              <a href="{{ page.next.url }}" class="next">{{ page.next.title }}<i class="fas fa-angle-right ml-1" aria-hidden="true"></i></a>
-              {% endif %}
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+  <div class="post-content prose">
+    {{ content }}
   </div>
-  
-</div>
+
+  <nav class="post-navigation" aria-label="Post navigation">
+    <div class="post-navigation__previous">
+      {% if page.previous.url %}
+      <a href="{{ page.previous.url | relative_url }}" rel="prev"><i class="fas fa-angle-left" aria-hidden="true"></i> {{ page.previous.title }}</a>
+      {% endif %}
+    </div>
+    <div class="post-navigation__next">
+      {% if page.next.url %}
+      <a href="{{ page.next.url | relative_url }}" rel="next">{{ page.next.title }} <i class="fas fa-angle-right" aria-hidden="true"></i></a>
+      {% endif %}
+    </div>
+  </nav>
+</article>
