@@ -1,3 +1,1 @@
-.oss-inline { padding: 16px 0; }
-.oss-badge { font-weight: 700; }
-.oss-repos span { color: var(--color-text-muted); }
+/* OSS summary styling is handled by the canonical proof-surface rules in overhaul.css. */
