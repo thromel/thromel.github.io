@@ -30,3 +30,17 @@ One single-pass "editorial research dossier" design system:
 - Two `v11-overhaul` project-count assertions were relaxed from an exact 7 to >=7 because an eighth featured project (1BRC) had been added to content on main before this overhaul; those two tests were already failing on the base branch.
 - The orphaned `tests/home-hero.spec.js` (referencing pre-v2 `.homepage-classic` markup, not part of verify-ui.sh) was removed.
 - Curated screenshot evidence lives in `output/playwright/overhaul-v2-evidence/`; the full light/dark x desktop/mobile matrix across home, projects, contributions, publications, research, education, blog, posts, showcase, CV, offline, and 404 can be regenerated with `scripts/capture-screens.js`.
+
+## Addendum 2026-07-07: Homepage v3 re-design
+
+The homepage was rebuilt end to end (`index.html` plus the homepage layer in `overhaul.css`) after feedback that the first pass kept too much of the old structure:
+
+- **Hero**: grid-paper backdrop, serif lede ("dependable agentic systems"), compact support copy, CTA chip row, live-status chips (now/IQVIA, UAlberta 2026, UIUC internship), and an offset-frame portrait.
+- **Stats strip**: four evidence numbers (45K+ repos analyzed, OSS ecosystems from `site.data.contributions.highlights | size`, systems built from `site.data.profile.projects | size`, 4 research lanes).
+- **Numbered sections** (01 Research → 08 Toolbox) with a shared `home-section-head` (kicker + heading + mono view-all link).
+- **Research focus**: 4 numbered hover cards (kept `.homepage-snapshot-item` contract and the exact collaboration strings tests assert).
+- **Selected work**: one full-width feature card (ICSE 2027 study with badge) + three vertical cards (kept `.academic-entry--selected` / `.homepage-entry-media` contracts).
+- **Open source**: new section with 3 curated highlight cards + the existing live `#oss-summary` proof surface.
+- **Experience/Education**: vertical timelines with accent nodes and 56px logo wells (kept `#homepage-work` / `#homepage-education` IDs and `.academic-entry` items; `homepage-selected-work.spec.js` logo thresholds updated for the smaller wells).
+- **Projects**: horizontal media cards; **News**: mono date ledger; **Skills**: category/chips table; new closing **contact CTA band** with a solid primary button.
+- `./scripts/verify-ui.sh full` still passes 61/61; homepage evidence lives in `output/playwright/home-v3-evidence/`.

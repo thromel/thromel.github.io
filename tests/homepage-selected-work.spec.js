@@ -63,8 +63,9 @@ test('homepage education and work logos are contained instead of cropped', async
   expect(logoMetrics.length).toBe(6);
   for (const metric of logoMetrics) {
     expect(metric.objectFit).toBe('contain');
-    expect(metric.wrapperWidth).toBeGreaterThanOrEqual(150);
-    expect(metric.wrapperHeight).toBeGreaterThanOrEqual(88);
+    expect(metric.wrapperWidth).toBeGreaterThanOrEqual(44);
+    expect(metric.wrapperHeight).toBeGreaterThanOrEqual(44);
+    expect(metric.wrapperHeight).toBeLessThanOrEqual(96);
     expect(metric.imageWidth).toBeLessThanOrEqual(metric.wrapperWidth);
     expect(metric.imageHeight).toBeLessThanOrEqual(metric.wrapperHeight);
   }
