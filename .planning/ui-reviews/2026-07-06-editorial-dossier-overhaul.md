@@ -44,3 +44,13 @@ The homepage was rebuilt end to end (`index.html` plus the homepage layer in `ov
 - **Experience/Education**: vertical timelines with accent nodes and 56px logo wells (kept `#homepage-work` / `#homepage-education` IDs and `.academic-entry` items; `homepage-selected-work.spec.js` logo thresholds updated for the smaller wells).
 - **Projects**: horizontal media cards; **News**: mono date ledger; **Skills**: category/chips table; new closing **contact CTA band** with a solid primary button.
 - `./scripts/verify-ui.sh full` still passes 61/61; homepage evidence lives in `output/playwright/home-v3-evidence/`.
+
+## Addendum 2026-07-07: Ship-safety, motion, and site-wide polish
+
+Follow-up pass after homepage v3 covered performance, motion, inner-page consistency, and footer closure:
+
+- **Ship-safety**: kill-switch `sw.js` clears legacy service-worker caches and only reloads when caches existed; registration is skipped when no legacy worker is present. Added `robots.txt`, static `sitemap.xml`, homepage JSON-LD `Person` schema, CDN `preconnect`, and `loading="lazy"` / `decoding="async"` / `fetchpriority="high"` on images.
+- **Motion**: scroll-reveal via `[data-reveal]` + `IntersectionObserver` in `site-shell.js`, staggered stats strip, hero entrance animation, card hover polish, and `prefers-reduced-motion` / no-JS guards.
+- **Inner pages**: shared `.page-hero` intro pattern on research, publications, and contributions; `data-reveal` on major sections.
+- **Footer**: closing band with tagline, status note, social links, secondary nav, and source link.
+- **Verification**: `scripts/verify-ui.sh` now builds with `JEKYLL_ENV=production`, clears `_site` before build, and frees the test port before serving — `./scripts/verify-ui.sh full` passes 61/61.

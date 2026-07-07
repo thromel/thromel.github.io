@@ -21,10 +21,10 @@ description: Software engineer and researcher working on AI for SRE, aligned bac
     </p>
   </div>
 
-  <div class="academic-portrait home-hero__portrait"><a href="{{ site.data.profile.portrait_url | relative_url }}"><img src="{{ site.data.profile.portrait_url | relative_url }}" alt="{{ site.data.profile.primary_name }} profile photo"></a></div>
+  <div class="academic-portrait home-hero__portrait"><a href="{{ site.data.profile.portrait_url | relative_url }}"><img src="{{ site.data.profile.portrait_url | relative_url }}" alt="{{ site.data.profile.primary_name }} profile photo" fetchpriority="high" decoding="async"></a></div>
 </section>
 
-<section class="home-stats" aria-label="Evidence at a glance">
+<section class="home-stats" aria-label="Evidence at a glance" data-reveal="stagger">
   <div class="home-stat">
     <strong>45K+</strong>
     <span>Repositories analyzed</span>
@@ -47,7 +47,7 @@ description: Software engineer and researcher working on AI for SRE, aligned bac
   </div>
 </section>
 
-<section id="homepage-research-map" class="academic-section home-focus" aria-labelledby="research-snapshot-title">
+<section id="homepage-research-map" class="academic-section home-focus" aria-labelledby="research-snapshot-title" data-reveal>
   <div class="home-section-head">
     <div>
       <p class="section-kicker">01 — Research</p>
@@ -92,7 +92,7 @@ description: Software engineer and researcher working on AI for SRE, aligned bac
   <p class="academic-link-row homepage-snapshot-actions" aria-label="Research links"><a href="{{ 'research' | relative_url }}"><i class="fa-solid fa-microscope link-icon" aria-hidden="true"></i><span>Full research statement</span></a><a href="#homepage-research-publications"><i class="fa-solid fa-layer-group link-icon" aria-hidden="true"></i><span>Selected work</span></a></p>
 </section>
 
-<section id="homepage-research-publications" class="academic-section home-work" aria-labelledby="selected-work-title">
+<section id="homepage-research-publications" class="academic-section home-work" aria-labelledby="selected-work-title" data-reveal>
   <div class="home-section-head">
     <div>
       <p class="section-kicker">02 — Selected Work</p>
@@ -103,7 +103,7 @@ description: Software engineer and researcher working on AI for SRE, aligned bac
 
   <div class="selected-research-list home-work-grid">
     <article class="academic-entry academic-entry--selected homepage-media-entry home-feature">
-      <div class="homepage-entry-media home-feature__media"><img src="{{ '/assets/images/ml-rce.png' | relative_url }}" alt="ML remote code execution research visual"></div>
+      <div class="homepage-entry-media home-feature__media"><img loading="lazy" decoding="async" src="{{ '/assets/images/ml-rce.png' | relative_url }}" alt="ML remote code execution research visual"></div>
       <div class="homepage-entry-body home-feature__body">
         <span class="home-feature__badge">Latest — Under review, ICSE 2027</span>
         <h3><a href="/research/ml-remote-code-execution/">An Empirical Study on Remote Code Execution in Machine Learning Model Hosting Ecosystems</a></h3>
@@ -113,7 +113,7 @@ description: Software engineer and researcher working on AI for SRE, aligned bac
     </article>
 
     <article class="academic-entry academic-entry--selected homepage-media-entry home-card">
-      <div class="homepage-entry-media home-card__media"><img src="{{ '/assets/images/agentic_ai_architecture.png' | relative_url }}" alt="LLM agent auditing visual"></div>
+      <div class="homepage-entry-media home-card__media"><img loading="lazy" decoding="async" src="{{ '/assets/images/agentic_ai_architecture.png' | relative_url }}" alt="LLM agent auditing visual"></div>
       <div class="homepage-entry-body home-card__body">
         <h3><a href="/research/reagent-plus-plus/">The Choice Can Be the Attack: Auditing Aligned Backdoors in LLM Agents</a></h3>
         <p class="academic-entry__meta">Submitted to TACL 2026 · SHIFT audit</p>
@@ -122,7 +122,7 @@ description: Software engineer and researcher working on AI for SRE, aligned bac
     </article>
 
     <article class="academic-entry academic-entry--selected homepage-media-entry home-card">
-      <div class="homepage-entry-media home-card__media"><img src="{{ '/assets/images/cards/llm-contract-card.svg' | relative_url }}" alt="VeriSchema research visual"></div>
+      <div class="homepage-entry-media home-card__media"><img loading="lazy" decoding="async" src="{{ '/assets/images/cards/llm-contract-card.svg' | relative_url }}" alt="VeriSchema research visual"></div>
       <div class="homepage-entry-body home-card__body">
         <h3><a href="/research/multi-agent-db-schema/">VeriSchema: Multi-Agent Framework for Generating Relational DB Schema &amp; ERD</a></h3>
         <p class="academic-entry__meta">Multi-agent verification · Schema generation</p>
@@ -131,7 +131,7 @@ description: Software engineer and researcher working on AI for SRE, aligned bac
     </article>
 
     <article class="academic-entry academic-entry--selected homepage-media-entry home-card">
-      <div class="homepage-entry-media home-card__media"><img src="{{ '/assets/images/blockchain/blockchain.png' | relative_url }}" alt="Blockchain healthcare research visual"></div>
+      <div class="homepage-entry-media home-card__media"><img loading="lazy" decoding="async" src="{{ '/assets/images/blockchain/blockchain.png' | relative_url }}" alt="Blockchain healthcare research visual"></div>
       <div class="homepage-entry-body home-card__body">
         <h3><a href="/research/blockchain-healthcare/">Patient-Centric Blockchain Framework for EHR Management</a></h3>
         <p class="academic-entry__meta">Undergraduate thesis · Blockchain healthcare</p>
@@ -143,7 +143,7 @@ description: Software engineer and researcher working on AI for SRE, aligned bac
   <p class="academic-link-row" aria-label="Publication links"><a href="{{ 'research' | relative_url }}"><i class="fa-solid fa-arrow-right link-icon" aria-hidden="true"></i><span>See more research</span></a><a href="{{ 'publications' | relative_url }}"><i class="fa-solid fa-layer-group link-icon" aria-hidden="true"></i><span>All publications</span></a></p>
 </section>
 
-<section id="homepage-oss" class="academic-section home-oss" aria-labelledby="oss-title">
+<section id="homepage-oss" class="academic-section home-oss" aria-labelledby="oss-title" data-reveal>
   <div class="home-section-head">
     <div>
       <p class="section-kicker">03 — Open Source</p>
@@ -170,7 +170,7 @@ description: Software engineer and researcher working on AI for SRE, aligned bac
 </section>
 <script src="{{ '/assets/js/github-proof.js' | relative_url }}" defer></script>
 
-<section id="homepage-work" class="academic-section home-timeline" aria-labelledby="work-title">
+<section id="homepage-work" class="academic-section home-timeline" aria-labelledby="work-title" data-reveal>
   <div class="home-section-head">
     <div>
       <p class="section-kicker">04 — Experience</p>
@@ -184,7 +184,7 @@ description: Software engineer and researcher working on AI for SRE, aligned bac
     <li>
       <article class="academic-entry home-timeline__item">
         {% if position.logo %}{% assign position_logo_alt = position.logo_alt %}{% unless position_logo_alt %}{% assign position_logo_alt = position.name | split: ',' | first | append: ' logo' %}{% endunless %}
-        <span class="homepage-entry-media homepage-entry-media--logo home-timeline__logo"><img src="{{ position.logo | relative_url }}" alt="{{ position_logo_alt }}"></span>
+        <span class="homepage-entry-media homepage-entry-media--logo home-timeline__logo"><img loading="lazy" decoding="async" src="{{ position.logo | relative_url }}" alt="{{ position_logo_alt }}"></span>
         {% else %}
         <span class="home-timeline__logo home-timeline__logo--empty" aria-hidden="true"><i class="fa-solid fa-briefcase"></i></span>
         {% endif %}
@@ -199,7 +199,7 @@ description: Software engineer and researcher working on AI for SRE, aligned bac
   </ol>
 </section>
 
-<section id="homepage-education" class="academic-section home-timeline" aria-labelledby="education-title">
+<section id="homepage-education" class="academic-section home-timeline" aria-labelledby="education-title" data-reveal>
   <div class="home-section-head">
     <div>
       <p class="section-kicker">05 — Education</p>
@@ -213,7 +213,7 @@ description: Software engineer and researcher working on AI for SRE, aligned bac
     <li>
       <article class="academic-entry home-timeline__item">
         {% if edu.logo %}
-        <span class="homepage-entry-media homepage-entry-media--logo home-timeline__logo"><img src="{{ edu.logo | relative_url }}" alt="{{ edu.name }} logo"></span>
+        <span class="homepage-entry-media homepage-entry-media--logo home-timeline__logo"><img loading="lazy" decoding="async" src="{{ edu.logo | relative_url }}" alt="{{ edu.name }} logo"></span>
         {% else %}
         <span class="home-timeline__logo home-timeline__logo--empty" aria-hidden="true"><i class="fa-solid fa-graduation-cap"></i></span>
         {% endif %}
@@ -228,7 +228,7 @@ description: Software engineer and researcher working on AI for SRE, aligned bac
   </ol>
 </section>
 
-<section id="homepage-projects" class="academic-section home-projects" aria-labelledby="projects-title">
+<section id="homepage-projects" class="academic-section home-projects" aria-labelledby="projects-title" data-reveal>
   <div class="home-section-head">
     <div>
       <p class="section-kicker">06 — Projects</p>
@@ -250,7 +250,7 @@ description: Software engineer and researcher working on AI for SRE, aligned bac
     {% if project.title contains 'Eventfly' %}{% assign project_image = '/assets/images/eventfly.png' %}{% endif %}
     {% if project.title contains 'Compiler' %}{% assign project_image = '/assets/images/projects/compiler-thumbnail.png' %}{% endif %}
     <article class="home-project-card">
-      {% if project_image != '' %}<div class="homepage-entry-media home-project-card__media"><img src="{{ project_image | relative_url }}" alt="{{ project.title }} visual"></div>{% endif %}
+      {% if project_image != '' %}<div class="homepage-entry-media home-project-card__media"><img loading="lazy" decoding="async" src="{{ project_image | relative_url }}" alt="{{ project.title }} visual"></div>{% endif %}
       <div class="home-project-card__body">
         <h3>{% if project.link %}<a href="{{ project.link }}">{{ project.title }}</a>{% else %}{{ project.title }}{% endif %}</h3>
         <p>{{ project.description | strip_html | truncatewords: 26 }}</p>
@@ -260,7 +260,7 @@ description: Software engineer and researcher working on AI for SRE, aligned bac
   </div>
 </section>
 
-<section id="homepage-news" class="academic-section home-news" aria-labelledby="news-title">
+<section id="homepage-news" class="academic-section home-news" aria-labelledby="news-title" data-reveal>
   <div class="home-section-head">
     <div>
       <p class="section-kicker">07 — News</p>
@@ -277,7 +277,7 @@ description: Software engineer and researcher working on AI for SRE, aligned bac
   </div>
 </section>
 
-<section id="homepage-skills" class="academic-section home-skills" aria-labelledby="skills-title">
+<section id="homepage-skills" class="academic-section home-skills" aria-labelledby="skills-title" data-reveal>
   <div class="home-section-head">
     <div>
       <p class="section-kicker">08 — Toolbox</p>
@@ -295,7 +295,7 @@ description: Software engineer and researcher working on AI for SRE, aligned bac
   </div>
 </section>
 
-<section class="academic-section home-cta" aria-label="Contact">
+<section class="academic-section home-cta" aria-label="Contact" data-reveal>
   <div class="home-cta__inner">
     <p class="section-kicker">Get in touch</p>
     <h2>Working on dependable agents, reliability, or software evolution tooling?</h2>

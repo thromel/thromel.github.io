@@ -15,7 +15,7 @@ description: Selected software systems, research prototypes, coding-agent tools,
   </div>
 </section>
 
-<section class="academic-section project-feature-list project-feature-list--selected" aria-labelledby="featured-projects-title">
+<section class="academic-section project-feature-list project-feature-list--selected" aria-labelledby="featured-projects-title" data-reveal>
   <div class="project-section-heading">
     <h2 id="featured-projects-title">Featured Evidence</h2>
     <span>Current systems and research prototypes</span>
@@ -30,7 +30,7 @@ description: Selected software systems, research prototypes, coding-agent tools,
   <article class="academic-entry project-feature-entry project-feature-entry--primary{% if project.featured %} project-feature-entry--featured{% endif %}{% if project.showcase_style %} project-feature-entry--{{ project.showcase_style }}{% endif %}{% unless project_image %} project-feature-entry--text-only{% endunless %}">
     {% if project_image %}
     <a class="project-feature-entry__media" href="{{ project.url | relative_url }}" aria-label="{{ project.title }}">
-      <img src="{{ project_image | relative_url }}" alt="{{ project.title }}">
+      <img loading="lazy" decoding="async" src="{{ project_image | relative_url }}" alt="{{ project.title }}">
     </a>
     {% endif %}
     <div class="project-feature-entry__body">
@@ -62,7 +62,7 @@ description: Selected software systems, research prototypes, coding-agent tools,
   <article class="academic-entry project-feature-entry{% if project.showcase_style %} project-feature-entry--{{ project.showcase_style }}{% endif %}{% unless project_image %} project-feature-entry--text-only{% endunless %}">
     {% if project_image %}
     <a class="project-feature-entry__media" href="{{ project.url | relative_url }}" aria-label="{{ project.title }}">
-      <img src="{{ project_image | relative_url }}" alt="{{ project.title }}">
+      <img loading="lazy" decoding="async" src="{{ project_image | relative_url }}" alt="{{ project.title }}">
     </a>
     {% endif %}
     <div class="project-feature-entry__body">

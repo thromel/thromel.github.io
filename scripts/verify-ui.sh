@@ -94,9 +94,16 @@ esac
 cd "${REPO_ROOT}"
 
 echo "verify-ui: building site for mode '${MODE}'..."
+rm -rf "${REPO_ROOT}/_site"
+export JEKYLL_ENV=production
 bundle exec jekyll build
 
 SERVER_LOG="$(mktemp -t verify-ui-server.XXXXXX.log)"
+if command -v fuser >/dev/null 2>&1; then
+  fuser -k "${PORT}/tcp" >/dev/null 2>&1 || true
+elif command -v lsof >/dev/null 2>&1; then
+  lsof -ti:"${PORT}" | xargs -r kill >/dev/null 2>&1 || true
+fi
 python3 -m http.server "${PORT}" -d "${REPO_ROOT}/_site" >"${SERVER_LOG}" 2>&1 &
 SERVER_PID=$!
 

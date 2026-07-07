@@ -13,7 +13,7 @@ navbar_title: Education
     <article class="education-entry{% if forloop.index <= 2 %} education-entry--featured{% endif %} timeline-item">
       {% if edu.logo %}
       <div class="education-entry__logo-wrap">
-        <img class="education-entry__logo{% if edu.name == 'Rajshahi College' %} education-entry__logo--rajshahi-college{% endif %}" src="{{ edu.logo | relative_url }}" alt="{{ edu.name }} logo">
+        <img class="education-entry__logo{% if edu.name == 'Rajshahi College' %} education-entry__logo--rajshahi-college{% endif %}" loading="lazy" decoding="async" src="{{ edu.logo | relative_url }}" alt="{{ edu.name }} logo">
       </div>
       {% endif %}
       <div class="education-entry__body">

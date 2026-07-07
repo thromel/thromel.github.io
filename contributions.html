@@ -6,11 +6,15 @@ description: Open-source contribution activity and selected pull requests across
 ---
 
 <section class="academic-section">
-  <h1 class="academic-page-title">Contributions</h1>
-  <p>Selected open-source contribution targets, with live GitHub activity as supporting evidence.</p>
+  <div class="page-hero">
+    <div class="section-kicker">Open source proof</div>
+    <h1 class="academic-page-title">Contributions</h1>
+    <p>Selected open-source contribution targets, with live GitHub activity as supporting evidence.</p>
+    <p class="academic-link-row"><a href="https://github.com/{{ site.data.profile.github }}" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github link-icon" aria-hidden="true"></i><span>GitHub profile</span></a><a href="{{ 'projects' | relative_url }}"><i class="fa-solid fa-code link-icon" aria-hidden="true"></i><span>Projects</span></a></p>
+  </div>
 </section>
 
-<section class="academic-section contributions-curated" aria-labelledby="curated-contributions-title">
+<section class="academic-section contributions-curated" aria-labelledby="curated-contributions-title" data-reveal>
   <div class="section-heading-row">
     <div>
       <p class="section-kicker">Curated contribution proof</p>
@@ -35,7 +39,7 @@ description: Open-source contribution activity and selected pull requests across
   </div>
 </section>
 
-<section class="academic-section proof-surface contributions-surface" id="contributions-proof" data-github-user="{{ site.data.profile.github | default: 'thromel' }}" data-state="loading">
+<section class="academic-section proof-surface contributions-surface" id="contributions-proof" data-github-user="{{ site.data.profile.github | default: 'thromel' }}" data-state="loading" data-reveal>
   <div class="proof-surface-header">
     <h2 class="contributions-proof-title">Live contribution activity</h2>
     <p><a href="https://github.com/{{ site.data.profile.github | default: 'thromel' }}" target="_blank" rel="noopener noreferrer">GitHub profile</a></p>

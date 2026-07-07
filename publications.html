@@ -9,12 +9,16 @@ description: Selected publications, research summaries, and artifacts across sof
 {% assign pubs_by_year = ordered_publications | group_by: "pub_date" %}
 
 <section class="academic-section academic-publications-page section-publications">
-  <h1 class="academic-page-title">Publications</h1>
-  <p>Selected papers, research summaries, and artifacts across software engineering, security, and applied machine learning.</p>
+  <div class="page-hero">
+    <div class="section-kicker">Research artifacts</div>
+    <h1 class="academic-page-title">Publications</h1>
+    <p>Selected papers, research summaries, and artifacts across software engineering, security, and applied machine learning.</p>
+    <p class="academic-link-row"><a href="{{ 'research' | relative_url }}"><i class="fa-solid fa-microscope link-icon" aria-hidden="true"></i><span>Research statement</span></a><a href="https://scholar.google.com/citations?user={{ site.data.profile.gscholar }}" target="_blank" rel="noopener noreferrer"><i class="ai ai-google-scholar link-icon" aria-hidden="true"></i><span>Scholar profile</span></a></p>
+  </div>
 
   {% for year in pubs_by_year %}
   {% assign is_latest_year = forloop.first %}
-  <section class="academic-section publication-year-group" id="year-{{ year.name }}">
+  <section class="academic-section publication-year-group" id="year-{{ year.name }}" data-reveal>
     <h2>{{ year.name }}</h2>
     <div class="academic-publication-list">
       {% for item in year.items %}

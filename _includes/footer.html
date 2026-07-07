@@ -1,9 +1,16 @@
-<footer class="academic-footer">
+<footer class="academic-footer" data-reveal>
+  <div class="academic-footer__band">
+    <p class="academic-footer__tagline">Dependable agentic systems — built with evidence.</p>
+    <p class="academic-footer__note">Software engineer at {{ site.data.profile.current_company.name }} · M.Sc. CS, University of Alberta (Sept 2026)</p>
+  </div>
+
   <p class="academic-footer__primary">
-    <span>&copy; {{ 'now' | date: '%Y' }} {{ site.data.profile.primary_name }}</span>
     <a href="mailto:{{ site.data.profile.email }}"><i class="fa-solid fa-envelope link-icon" aria-hidden="true"></i><span>Email</span></a>
     <a href="https://github.com/{{ site.data.profile.github }}" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github link-icon" aria-hidden="true"></i><span>Github</span></a>
+    <a href="https://scholar.google.com/citations?user={{ site.data.profile.gscholar }}" target="_blank" rel="noopener noreferrer"><i class="ai ai-google-scholar link-icon" aria-hidden="true"></i><span>Scholar</span></a>
+    <a href="https://www.linkedin.com/in/{{ site.data.profile.linkedin }}" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-linkedin link-icon" aria-hidden="true"></i><span>LinkedIn</span></a>
   </p>
+
   {% if site.data.navigation.secondary_pages %}
   <nav class="academic-footer__links academic-footer__secondary" aria-label="Secondary navigation">
     {% for item in site.data.navigation.secondary_pages %}
@@ -12,4 +19,10 @@
     {% endfor %}
   </nav>
   {% endif %}
+
+  <p class="academic-footer__legal">
+    <span>&copy; {{ 'now' | date: '%Y' }} {{ site.data.profile.primary_name }}</span>
+    <span aria-hidden="true">·</span>
+    <a href="https://github.com/{{ site.data.profile.github }}/thromel.github.io" target="_blank" rel="noopener noreferrer">Source</a>
+  </p>
 </footer>

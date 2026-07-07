@@ -6,12 +6,15 @@ description: Research statement and current work on AI for SRE, aligned backdoor
 ---
 
 <section class="academic-section">
-  <h1 class="academic-page-title">Research</h1>
-  <p>Research statement, current directions, and selected papers across software engineering, agent security, and reliable AI systems.</p>
-  <p class="academic-link-row"><a href="/assets/pdf/cv.pdf" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-file-pdf link-icon" aria-hidden="true"></i><span>CV</span></a><a href="https://scholar.google.com/citations?user={{ site.data.profile.gscholar }}" target="_blank" rel="noopener noreferrer"><i class="ai ai-google-scholar link-icon" aria-hidden="true"></i><span>Scholar profile</span></a><a href="{{ 'publications' | relative_url }}"><i class="fa-solid fa-layer-group link-icon" aria-hidden="true"></i><span>Publications</span></a></p>
+  <div class="page-hero">
+    <div class="section-kicker">Research dossier</div>
+    <h1 class="academic-page-title">Research</h1>
+    <p>Research statement, current directions, and selected papers across software engineering, agent security, and reliable AI systems.</p>
+    <p class="academic-link-row"><a href="/assets/pdf/cv.pdf" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-file-pdf link-icon" aria-hidden="true"></i><span>CV</span></a><a href="https://scholar.google.com/citations?user={{ site.data.profile.gscholar }}" target="_blank" rel="noopener noreferrer"><i class="ai ai-google-scholar link-icon" aria-hidden="true"></i><span>Scholar profile</span></a><a href="{{ 'publications' | relative_url }}"><i class="fa-solid fa-layer-group link-icon" aria-hidden="true"></i><span>Publications</span></a></p>
+  </div>
 </section>
 
-<section class="academic-section research-statement-section" id="research-agenda">
+<section class="academic-section research-statement-section" id="research-agenda" data-reveal>
   <h2>Research Statement</h2>
   <p class="research-statement">{{ site.data.profile.research_statement.summary }}</p>
   <div class="research-lane-grid">
@@ -45,11 +48,11 @@ description: Research statement and current work on AI for SRE, aligned backdoor
   </div>
 </section>
 
-<section class="academic-section" id="research-projects">
+<section class="academic-section" id="research-projects" data-reveal>
   <h2>Projects and Papers</h2>
   {% for item in site.data.profile.research %}
   <article class="academic-entry">
-    {% if item.thumbnail %}<img class="academic-entry__media" src="{{ item.thumbnail | relative_url }}" alt="{{ item.title }}">{% endif %}
+    {% if item.thumbnail %}<img class="academic-entry__media" loading="lazy" decoding="async" src="{{ item.thumbnail | relative_url }}" alt="{{ item.title }}">{% endif %}
     <h3>
       {% if item.link %}
         {% if item.link contains '://' %}

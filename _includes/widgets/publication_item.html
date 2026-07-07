@@ -18,7 +18,7 @@
 <article class="academic-publication{% if include.highlight or item.highlight %} academic-publication--highlight{% endif %}">
   <div class="academic-publication__media">
     {%- if item.cover -%}
-      <img src="{{ item.cover | relative_url }}" alt="{{ item.title }}">
+      <img loading="lazy" decoding="async" src="{{ item.cover | relative_url }}" alt="{{ item.title }}">
     {%- else -%}
       <svg class="bubble-visual-hash" data-bubble-visual-hash="{{ item.id | default: item.title | slugify }}" viewBox="0 0 300 200" aria-hidden="true"></svg>
     {%- endif -%}
