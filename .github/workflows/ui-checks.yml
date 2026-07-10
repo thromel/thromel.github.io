@@ -1,0 +1,32 @@
+name: UI checks
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.3'
+          bundler-cache: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+      - name: Install browser test tooling
+        run: npm ci
+      - name: Install Chromium
+        run: |
+          npm run test:ui:install
+          npx playwright install-deps chromium
+      - name: Run research-first UI checks
+        run: npm run test:ui

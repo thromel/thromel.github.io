@@ -4,8 +4,8 @@ milestone: v1.1
 milestone_name: Portfolio UX Polish
 status: ready_to_complete
 stopped_at: Phase 11 complete
-last_updated: "2026-05-30T00:00:00+0600"
-last_activity: 2026-05-30 -- Complete UI/UX overhaul and Playwright verification pass
+last_updated: "2026-07-10T00:00:00+0600"
+last_activity: 2026-07-10 -- Research-first scholarly-instrument redesign and release-quality verification
 progress:
   total_phases: 5
   completed_phases: 5
@@ -21,7 +21,9 @@ progress:
 See: .planning/PROJECT.md (updated 2026-05-17)
 
 **Core value:** Visitors can quickly understand Romel's work through a credible, readable, and consistent portfolio experience.
-**Current focus:** v1.1 Portfolio UX Polish
+**Current focus:** Research-first scholarly-instrument redesign
+
+> Historical-state notice: the Phase 7–11 material below records the completed v1.1 milestone. The 2026-07-10 research-first redesign supersedes its visual, navigation, proof-surface, and test contracts. Treat the current source, [`docs/ui-maintenance.md`](../docs/ui-maintenance.md), `package.json`, and the GitHub Actions workflows as the active maintenance record.
 
 ## Current Position
 
@@ -126,6 +128,8 @@ Recent decisions affecting current work:
 - [Phase 10]: The shared layout now emits canonical, Open Graph, and Twitter metadata using page descriptions and a stable preview image.
 - [Phase 11]: The theme moved from beige academic paper to a slate/blue/teal evidence-first palette with dark-mode contrast verified on contribution cards.
 - [Phase 11]: `tests/v11-overhaul.spec.js` and `scripts/verify-ui.sh full` cover project hierarchy, contributions fallback behavior, social metadata, and dark-mode readability.
+- [2026-07-10]: The research-first redesign replaces the v1.1 visual contract with a four-block research homepage, a five-route scholarly shell, static evidence records, a compact live GitHub count, and a currentness model based on ISO date ranges. — The active browser suite intentionally replaces retired v1.1 layout/proof tests rather than silently excluding them.
+- [2026-07-10]: A daily Pages rebuild keeps build-time current-role rendering fresh, while CI verifies the Jekyll build, browser behavior, accessibility, budgets, and mobile Lighthouse metrics. — This preserves static-site simplicity without presenting stale currentness as live data.
 
 ### Pending Todos
 

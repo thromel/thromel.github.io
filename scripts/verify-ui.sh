@@ -61,8 +61,14 @@ if [[ -d "/opt/homebrew/opt/ruby@3.3/bin" ]]; then
 fi
 
 command -v bundle >/dev/null 2>&1 || fail "bundle is not available in PATH."
+command -v node >/dev/null 2>&1 || fail "node is not available in PATH."
 command -v python3 >/dev/null 2>&1 || fail "python3 is not available in PATH."
 command -v curl >/dev/null 2>&1 || fail "curl is not available in PATH."
+
+NODE_MAJOR="$(node -p 'process.versions.node.split(".")[0]')"
+if (( NODE_MAJOR < 20 || NODE_MAJOR == 23 )); then
+  fail "Node ${NODE_MAJOR} is not supported by the Lighthouse gate. Use Node 20 through 22, or Node 24+ (CI uses Node 20)."
+fi
 
 case "${MODE}" in
   shell)
@@ -76,6 +82,7 @@ case "${MODE}" in
       "tests/research-dossier.spec.js"
       "tests/records-and-contributions.spec.js"
       "tests/secondary-routes.spec.js"
+      "tests/quality-gates.spec.js"
     )
     ;;
   *)

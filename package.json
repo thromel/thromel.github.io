@@ -8,11 +8,12 @@
     "test:ui:install": "playwright install chromium"
   },
   "engines": {
-    "node": ">=18",
+    "node": ">=20 <23 || >=24",
     "npm": ">=9"
   },
   "devDependencies": {
     "@axe-core/playwright": "4.12.1",
-    "@playwright/test": "1.61.1"
+    "@playwright/test": "1.61.1",
+    "lighthouse": "12.6.0"
   }
 }

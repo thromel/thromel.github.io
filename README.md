@@ -104,6 +104,7 @@ The portfolio implements a **Liquid Glass** design philosophy that combines:
 ├── _data/                  # Site configuration and content data
 │   ├── profile.yml        # Personal information and content
 │   ├── navigation.yml     # Site navigation structure
+│   ├── research.yml       # Research agenda, evidence anchors, and systems ledger
 │   └── display.yml        # Display preferences
 ├── _includes/             # Reusable template components
 │   ├── navbar.html        # Canonical shared navigation markup
@@ -115,13 +116,10 @@ The portfolio implements a **Liquid Glass** design philosophy that combines:
 ├── _showcase/            # Project showcases
 ├── assets/
 │   ├── css/              # Stylesheets
-│   │   ├── overhaul.css  # Canonical shared stylesheet and token layer
-│   │   ├── mobile-optimizations.css  # Mobile-first responsive overrides
-│   │   └── components/oss-summary.css  # Homepage OSS summary component styles
+│   │   └── overhaul.css  # Canonical shared stylesheet and token layer
 │   ├── js/               # JavaScript functionality
 │   │   ├── site-shell.js  # Canonical shared shell behavior
-│   │   ├── github-proof.js  # Shared async proof-state helpers
-│   │   └── contributions.js / oss-summary.js  # GitHub-driven proof surfaces
+│   │   └── contribution-count.js  # Compact live merged-PR count
 │   └── images/           # Static assets
 ├── docs/
 │   └── ui-maintenance.md  # Maintainer guide for shared-shell ownership
@@ -130,24 +128,21 @@ The portfolio implements a **Liquid Glass** design philosophy that combines:
 ```
 
 ### CSS Architecture
-- **overhaul.css** - Canonical shared stylesheet for tokens, typography, shell surfaces, and proof-state presentation
-- **mobile-optimizations.css** - Phone/tablet specific usability refinements and reduced-motion handling
-- **components/oss-summary.css** - Isolated styling for homepage open-source summary UI
-- Older layers such as `assets/css/developer-theme.css` and `assets/css/custom.css` still exist for brownfield compatibility and should not become the default path for new shared work
+- **overhaul.css** - Canonical scholarly-instrument stylesheet for tokens, editorial typography, responsive shell behavior, records, and reduced-motion handling
+- The retired parallel CSS and JavaScript layers were removed in the research-first redesign; add shared behavior only through the canonical shell and stylesheet.
 
 ### Component System
-- **Cards** - Consistent content containers with glass morphism effects
-- **Timeline** - Experience and education presentation with enhanced accessibility
-- **Tech Tags** - Skill and technology indicators with hover interactions
-- **Shared Shell** - Shared navigation, theme toggle, skip links, scroll progress, and back-to-top behavior owned by `assets/js/site-shell.js`
-- **Navigation** - Responsive navigation with complete ARIA support through `_includes/navbar.html`
+- **Evidence records** - Question, status, collaborator context, verification date, and direct artifacts for research claims
+- **Citation and project records** - Compact text-led archive layouts that avoid repeated portfolio cards
+- **Shared shell** - Theme preference, labelled mobile menu, and skip-link focus behavior owned by `assets/js/site-shell.js`
+- **Navigation** - Research, Publications, Projects, and CV in the primary shell; secondary routes remain in the footer
 
 ## Local Development
 
 ### Prerequisites
 - Homebrew Ruby 3.3 available at `/opt/homebrew/opt/ruby@3.3/bin`
 - Bundler for Jekyll dependencies
-- Node.js 18+ and npm 9+ for Playwright-based verification
+- Node.js 20–22 or 24+ and npm 9+ for Playwright- and Lighthouse-based verification (CI uses Node 20; Node 23 is excluded by the current Lighthouse CSP helper)
 - Git
 
 ### Setup
@@ -313,7 +308,7 @@ const debouncedHandler = debounce(expensiveFunction, 250);
    - Use `assets/css/overhaul.css` for shared styling and token changes
    - Use `assets/js/site-shell.js` for shared shell behavior
    - Treat `_layouts/default.html`, `_includes/navbar.html`, and `_includes/footer.html` as the shared shell markup path
-   - Avoid extending legacy layers such as `assets/js/theme-toggle.js`, `assets/js/app-navigation.js`, `assets/css/developer-theme.css`, or `assets/css/custom.css` unless the task is explicitly migrating or retiring them
+   - Keep new shared behavior in `assets/js/site-shell.js` or `assets/js/contribution-count.js`; do not reintroduce parallel theme or navigation layers
 
 3. **Test your changes**
    ```bash

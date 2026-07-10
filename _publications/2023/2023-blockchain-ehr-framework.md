@@ -5,7 +5,7 @@ pub: "B.Sc. Thesis, Bangladesh University of Engineering and Technology (BUET)"
 pub_date: "2023"
 abstract: >-
   Undergraduate thesis proposing a patient-centric blockchain framework for electronic health record sharing with encrypted IPFS storage, Ethereum-based access control, and signed permission delegation.
-cover: /assets/images/blockchain/blockchain.png
+cover: /assets/images/blockchain/blockchain.webp
 authors:
   - Tanzim Hossain Romel
 primary_link: /research/blockchain-healthcare/

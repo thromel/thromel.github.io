@@ -290,7 +290,7 @@ short_bio: >-
   
   
 
-portrait_url: /assets/images/photos/romel.png
+portrait_url: /assets/images/photos/romel.webp
 portrait_caption: Romel in Pahalgam, Kashmir in June, 2024.
 
 education:
@@ -591,7 +591,7 @@ research:
 - title: "An Empirical Study on Remote Code Execution in Machine Learning Model Hosting Ecosystems"
   date: June 2025 - Oct 2025
   link: https://arxiv.org/pdf/2601.14163
-  thumbnail: /assets/images/ml-rce.png
+  thumbnail: /assets/images/ml-rce.webp
   status: "Under review at ICSE 2027"
   short_description: First large-scale cross-platform study analyzing ~45,000 repositories across 5 major ML platforms for security vulnerabilities.
   description: >-
@@ -709,7 +709,7 @@ research:
 - title: "Patient-Centric Blockchain Framework for EHR Management"
   date: June 2022 - May 2023
   link: https://arxiv.org/pdf/2511.17464
-  thumbnail: /assets/images/blockchain/blockchain.png
+  thumbnail: /assets/images/blockchain/blockchain.webp
   short_description: Undergraduate thesis on blockchain framework for EHR management with encrypted off-chain IPFS storage and on-chain Ethereum access control.
   description: >-
     <b>Undergraduate Thesis.</b> Designed a blockchain framework with encrypted off-chain IPFS storage and on-chain Ethereum access control under

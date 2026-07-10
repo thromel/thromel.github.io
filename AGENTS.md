@@ -23,12 +23,12 @@ You have superpowers. Superpowers teach you new skills and capabilities. RIGHT N
 
 ## Brownfield Warnings
 
-- Legacy parallel UI layers still exist in `assets/js/theme-toggle.js`, `assets/js/app-navigation.js`, `assets/js/advanced-interactions.js`, `assets/css/developer-theme.css`, and `assets/css/custom.css`.
-- Do not reintroduce competing theme models, duplicate toggles, or `.navbar`-era assumptions unless explicitly removing or migrating them.
-- `contributions.html` and some other pages still contain inline style/script islands; reduce them when practical, but preserve behavior while migrating.
+- The research-first redesign retired the former parallel theme, navigation, reveal, and full-PR-feed layers. Do not reintroduce competing theme models, duplicate toggles, `.navbar`-era assumptions, or client-rendered contribution timelines.
+- Keep contribution behavior in `assets/js/contribution-count.js`; it intentionally makes one compact merged-PR count request with visible failure and retry states.
+- Preserve the ISO-range currentness model and the daily Pages refresh workflow when changing work-history or role data.
 
 ## Verification Focus
 
 - Verify desktop and mobile behavior for shared shell changes.
-- Verify async GitHub-driven states for the homepage OSS summary and [`contributions.html`](/Users/romel/Documents/GitHub/thromel.github.io/contributions.html).
+- Verify async GitHub-driven states for the compact count on [`contributions.html`](/Users/romel/Documents/GitHub/thromel.github.io/contributions.html).
 - Prefer repo-local planning artifacts and current source files over stale README-era assumptions.

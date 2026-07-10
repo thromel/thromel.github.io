@@ -1,135 +1,42 @@
 # UI Maintenance Guide
 
-## Canonical Shared Layer
+## Canonical shared layer
 
-Treat these files as the current shared UI foundation:
+- `assets/css/overhaul.css` — the single shared design system and responsive layout layer
+- `assets/js/site-shell.js` — theme preference, labelled mobile menu, and skip-link focus behavior
+- `assets/js/contribution-count.js` — compact, retryable GitHub merged-PR count
+- `_layouts/default.html`, `_includes/navbar.html`, `_includes/footer.html` — shared markup and first-paint theme setup
+- `_data/research.yml` — research agenda, three evidence anchors, supporting systems, and collaboration copy
+- `_includes/current-status.html` — ISO-range currentness rendered from `site.time`
 
-- `assets/css/overhaul.css` — canonical shared stylesheet and design-token layer
-- `assets/js/site-shell.js` — canonical shared shell behavior for theme, mobile nav, scroll progress, back-to-top, and homepage section pills
-- `_layouts/default.html` — shared page shell and script loading path
-- `_includes/navbar.html` — shared navigation markup and mobile drawer structure
-- `_includes/footer.html` — shared footer and back-to-top control
+Keep shared work in these files. The former parallel theme, navigation, reveal, and full-PR-feed layers were retired.
 
-If a UI change affects multiple pages, start here before touching page-local islands.
+## Evidence and currentness
 
-## Verification Commands
+- Each research anchor must retain a question, status, context, ISO `last_verified`, and direct artifact links.
+- SHIFT remains an abstract-level, non-public manuscript summary unless a public artifact is explicitly available.
+- Positions use `start_date`, `end_date_exclusive`, and `display_date`. The deployed date comes from the static build, so `.github/workflows/refresh-pages.yml` rebuilds Pages daily.
+- Contribution cards point to direct pull requests. The live count is supporting context only and must retain loading, success, empty, rate-limit, error, timeout, and refresh behavior.
 
-Use the repo-local runner for repeatable checks:
+## Verification
 
-- `bash scripts/verify-ui.sh shell` — shell-focused browser regressions
-- `bash scripts/verify-ui.sh full` — full UI regression suite, including publications
-- `npx playwright test tests/publications-data.spec.js tests/publications-surface.spec.js` — publication-only regression path
+Install the locked tooling once:
 
-Current prerequisites:
+```bash
+npm ci
+npm run test:ui:install
+```
 
-- `npm ci`, then `npm run test:ui:install` to install the locked Playwright and Chromium toolchain
-- Homebrew Ruby 3.3 available at `/opt/homebrew/opt/ruby@3.3/bin` for the Jekyll build path this repo currently relies on
+Then use:
 
-## Smoke Tooling
+```bash
+npm run test:ui:shell  # shared shell contract
+npm run test:ui        # complete browser, accessibility, performance, and release checks
+```
 
-Browser-console smoke lives in `browser-console-tests.js`.
+The full suite validates desktop/mobile behavior, JavaScript-off content, GitHub-count states, direct contribution proof, no serious/critical axe violations, gzip/image/homepage-transfer budgets, and workflow contracts.
 
-Recommended flow:
+## CI
 
-1. Run the Playwright path first with `bash scripts/verify-ui.sh shell` or `bash scripts/verify-ui.sh full`.
-2. Open the target page in a browser.
-3. Paste `browser-console-tests.js` into DevTools or run it as a saved browser snippet.
-4. Call `testSite.runAll()`.
-
-The console smoke should be used as a lightweight confirmation layer, not as a replacement for the Playwright suites.
-
-## Proof Surfaces
-
-The current GitHub-driven proof surfaces live in:
-
-- homepage OSS summary via `index.html` and `assets/js/oss-summary.js`
-- contributions proof surface via `contributions.html` and `assets/js/contributions.js`
-- shared proof-state helpers in `assets/js/github-proof.js`
-
-Key proof-surface anchors:
-
-- `#oss-summary`
-- `#oss-summary-status`
-- `#contributions-proof`
-- `#loading-state`
-- `#error-state`
-- `#empty-state`
-- `#contributions-section`
-
-When verifying proof surfaces, use:
-
-- `tests/proof-surfaces.spec.js`
-- the `Proof Surfaces` section in `manual-testing-script.md`
-- `testSite.runAll()` from `browser-console-tests.js`
-
-## Publications Surface
-
-The canonical publications surface currently spans:
-
-- `publications.html` — archive framing, year grouping, and page-level CTA
-- `_includes/widgets/publication_item.html` — canonical publication card markup
-- `index.html` — homepage publications preview and section-level archive CTA
-- `_publications/*.md` — publication source records and destination metadata
-- `_config.yml` — `publications.output: false` to avoid blank collection detail routes
-
-When a change touches publications, verify:
-
-- `tests/publications-data.spec.js`
-- `tests/publications-surface.spec.js`
-- `bash scripts/verify-ui.sh full`
-- the `Publications Surface` section in `manual-testing-script.md`
-- `testSite.runAll()` on `Home` and `Publications`
-
-Guardrail:
-
-- do not flip `publications.output` back to `true` unless the change also introduces real publication detail pages and corresponding verification
-
-## Brownfield Guardrails
-
-Do not casually extend or reintroduce the older parallel layers unless the task is explicitly about retiring or migrating them:
-
-- `assets/js/theme-toggle.js`
-- `assets/js/app-navigation.js`
-- `assets/js/advanced-interactions.js`
-- `assets/css/developer-theme.css`
-- `assets/css/custom.css`
-
-Why this matters:
-
-- these files use older theme/navigation assumptions that do not match the current `data-theme` model
-- several target `.navbar`-era selectors that do not match the canonical shared markup
-- they increase the chance of duplicate toggles, selector drift, and conflicting shell behavior
-
-## Practical Editing Rules
-
-- Prefer converging page behavior onto `assets/css/overhaul.css` and `assets/js/site-shell.js` rather than creating new cross-page layers.
-- Keep page-local styling and scripting islands contained unless the work is explicitly migrating them into shared assets.
-- Verify desktop and mobile behavior for any shared shell change.
-- Verify async GitHub states whenever a change touches the homepage OSS summary or `contributions.html`.
-
-## Maintainer Routing
-
-Use these files as the practical entrypoints:
-
-- `manual-testing-script.md` — step-by-step manual verification path
-- `browser-console-tests.js` — console smoke checks
-- `scripts/verify-ui.sh` — repo-local verification runner
-- `publications.html` and `_includes/widgets/publication_item.html` — canonical publications surface
-- `AGENTS.md` — project-specific guardrails for canonical shell ownership and brownfield warnings
-
-## Deferred follow-ups
-
-The items below are intentionally outside the v1 UI remediation milestone. Do not fold them into routine UI edits without opening a later milestone or explicit follow-up phase.
-
-- The committed Playwright and accessibility manifest is the local verification baseline. CI and performance-budget enforcement remain follow-up work until this redesign wires them in.
-- The current repo-local runner (`bash scripts/verify-ui.sh full`) is the canonical local path today, but CI-backed verification belongs in the later platform milestone rather than in ad hoc UI cleanup work.
-- legacy layers still need explicit retirement planning: `assets/js/theme-toggle.js`, `assets/js/app-navigation.js`, `assets/js/advanced-interactions.js`, `assets/css/developer-theme.css`, `assets/css/custom.css`, and remaining inline page islands should be removed or migrated in a dedicated pass.
-- artifact hygiene also remains deferred work: generated LaTeX outputs, duplicate PDFs, and stray filesystem artifacts should be cleaned up alongside a clear ignore/build policy instead of being mixed into unrelated UI fixes.
-- GitHub proof surfaces currently depend on unauthenticated browser-side API access. Any move toward cached, build-time, or server-assisted data architecture should be handled as explicit future work, not as a silent change inside shell maintenance.
-
-## Jon Barron-Inspired Academic Theme Guardrails
-
-- `assets/css/overhaul.css` remains the canonical stylesheet, but the active design target is now a narrow academic document: 800px max width, Lato typography, blue/orange links, compact publication rows, and minimal slash-separated navigation.
-- Do not reintroduce card-heavy homepage sections, floating theme toggles, mobile drawers, gradient backgrounds, or duplicate navigation systems unless the project explicitly changes direction again.
-- New research/publication surfaces should use `.academic-publication`; new secondary-page entries should use `.academic-entry`; new page wrappers should use `.academic-section` inside `.academic-page`.
-- GitHub-driven proof surfaces must preserve loading, success, empty, rate-limit, and failure states even when styled minimally.
+- `.github/workflows/ui-checks.yml` runs the locked Jekyll and Playwright suite on pull requests and `main`.
+- `.github/workflows/refresh-pages.yml` triggers the legacy GitHub Pages build daily and on demand. It requires the repository to keep its current branch-based Pages source.
