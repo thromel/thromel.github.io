@@ -1,0 +1,16 @@
+{% assign as_of = site.time | date: '%Y-%m-%d' %}
+{% assign current_position = nil %}
+{% for position in site.data.profile.positions %}
+  {% assign has_started = false %}
+  {% assign has_not_ended = true %}
+  {% if position.start_date <= as_of %}{% assign has_started = true %}{% endif %}
+  {% if position.end_date_exclusive and position.end_date_exclusive <= as_of %}{% assign has_not_ended = false %}{% endif %}
+  {% if current_position == nil and has_started and has_not_ended %}{% assign current_position = position %}{% endif %}
+{% endfor %}
+
+{% if current_position %}
+<div class="current-status"{% if include.with_data %} data-current-status data-as-of="{{ as_of }}" data-start-date="{{ current_position.start_date }}" data-end-date-exclusive="{{ current_position.end_date_exclusive }}"{% endif %}>
+  <p class="current-status__label">{{ include.label | default: 'Current role' }}</p>
+  <p class="current-status__value">{% if current_position.url %}<a href="{{ current_position.url }}" target="_blank" rel="noopener noreferrer">{{ current_position.name }}</a>{% else %}{{ current_position.name }}{% endif %}<span>{{ current_position.display_date }}</span></p>
+</div>
+{% endif %}

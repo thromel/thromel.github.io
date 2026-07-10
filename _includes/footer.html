@@ -1,28 +1,18 @@
-<footer class="academic-footer" data-reveal>
-  <div class="academic-footer__band">
-    <p class="academic-footer__tagline">Dependable agentic systems — built with evidence.</p>
-    <p class="academic-footer__note">Software engineer at {{ site.data.profile.current_company.name }} · M.Sc. CS, University of Alberta (Sept 2026)</p>
+<footer class="site-footer">
+  <div class="site-frame site-footer__frame">
+    <div>
+      <p class="site-footer__eyebrow">Research-first portfolio</p>
+      <p class="site-footer__statement">Inspectable agent behavior, credible artifacts, and software systems that can be evaluated.</p>
+      {% include current-status.html label="Current trajectory" %}
+    </div>
+    <div class="site-footer__links">
+      <nav aria-label="Secondary navigation">
+        {% for item in site.data.navigation.secondary_pages %}
+        <a href="{{ item.url | relative_url }}">{{ item.name }}</a>
+        {% endfor %}
+      </nav>
+      <p><a href="mailto:{{ site.data.profile.email }}">Email</a><a href="https://github.com/{{ site.data.profile.github }}" target="_blank" rel="noopener noreferrer">GitHub</a><a href="https://scholar.google.com/citations?user={{ site.data.profile.gscholar }}" target="_blank" rel="noopener noreferrer">Scholar</a></p>
+      <p class="site-footer__legal">© {{ 'now' | date: '%Y' }} {{ site.data.profile.primary_name }} · <a href="https://github.com/{{ site.data.profile.github }}/thromel.github.io" target="_blank" rel="noopener noreferrer">Source</a></p>
+    </div>
   </div>
-
-  <p class="academic-footer__primary">
-    <a href="mailto:{{ site.data.profile.email }}"><i class="fa-solid fa-envelope link-icon" aria-hidden="true"></i><span>Email</span></a>
-    <a href="https://github.com/{{ site.data.profile.github }}" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github link-icon" aria-hidden="true"></i><span>Github</span></a>
-    <a href="https://scholar.google.com/citations?user={{ site.data.profile.gscholar }}" target="_blank" rel="noopener noreferrer"><i class="ai ai-google-scholar link-icon" aria-hidden="true"></i><span>Scholar</span></a>
-    <a href="https://www.linkedin.com/in/{{ site.data.profile.linkedin }}" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-linkedin link-icon" aria-hidden="true"></i><span>LinkedIn</span></a>
-  </p>
-
-  {% if site.data.navigation.secondary_pages %}
-  <nav class="academic-footer__links academic-footer__secondary" aria-label="Secondary navigation">
-    {% for item in site.data.navigation.secondary_pages %}
-      {% assign item_label = item.label | default: item.name %}
-      <a href="{{ item.url | relative_url }}">{% if item.icon %}<i class="{{ item.icon }} link-icon" aria-hidden="true"></i>{% endif %}<span>{{ item_label }}</span></a>
-    {% endfor %}
-  </nav>
-  {% endif %}
-
-  <p class="academic-footer__legal">
-    <span>&copy; {{ 'now' | date: '%Y' }} {{ site.data.profile.primary_name }}</span>
-    <span aria-hidden="true">·</span>
-    <a href="https://github.com/{{ site.data.profile.github }}/thromel.github.io" target="_blank" rel="noopener noreferrer">Source</a>
-  </p>
 </footer>

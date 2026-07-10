@@ -68,23 +68,11 @@ case "${MODE}" in
   shell)
     SPECS=(
       "tests/research-first-shell.spec.js"
-      "tests/shell-behavior.spec.js"
-      "tests/navbar-layout.spec.js"
     )
     ;;
   full)
     SPECS=(
-      "tests/jon-barron-theme.spec.js"
-      "tests/publications-data.spec.js"
-      "tests/publications-surface.spec.js"
-      "tests/proof-surfaces.spec.js"
-      "tests/readability-hierarchy.spec.js"
-      "tests/homepage-hierarchy.spec.js"
-      "tests/homepage-selected-work.spec.js"
-      "tests/education-page.spec.js"
-      "tests/navbar-layout.spec.js"
-      "tests/shell-behavior.spec.js"
-      "tests/v11-overhaul.spec.js"
+      "tests/research-first-shell.spec.js"
     )
     ;;
   *)

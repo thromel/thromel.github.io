@@ -1,0 +1,79 @@
+agenda:
+  eyebrow: "Research dossier · software systems and AI agents"
+  thesis: >-
+    I study AI agents where software systems, security boundaries, and operational
+    evidence matter. The aim is to make agent behavior inspectable before it is trusted.
+  trajectory: >-
+    Current work combines reliability-agent evaluation, security audits for agent choices,
+    and developer tools that make context and software evolution easier to examine.
+  next_step: "M.Sc. in Computing Science at the University of Alberta, beginning September 2026."
+
+anchors:
+  - id: sregym
+    label: "Reliability-agent evaluation"
+    title: "SREGym: AI for SRE and reliability-agent evaluation"
+    question: "How can we evaluate an SRE agent in a live software environment without mistaking a shallow recovery for a reliable one?"
+    description: >-
+      Through UIUC++ SRSE 2026, I am working on SREGym, a benchmark for evaluating
+      SRE agents in live system environments and real-world reliability problems.
+    status: "Active research · UIUC++ SRSE 2026"
+    context: "June–August 2026 · Professor Tianyin Xu and the UIUC systems reliability group"
+    last_verified: "2026-07-10"
+    links:
+      - label: "SREGym project"
+        url: "https://www.sregym.com/"
+      - label: "Public repository"
+        url: "https://github.com/SREGym/SREGym"
+
+  - id: ml-hosting-rce
+    label: "ML ecosystem security"
+    title: "Remote Code Execution in ML model hosting ecosystems"
+    question: "What risks emerge when model-hosting platforms load community code and artifacts at ecosystem scale?"
+    description: >-
+      A cross-platform empirical study examines custom model-loading risk across five ML
+      hosting ecosystems, using static analysis, malware-signature scanning, and more than
+      600 developer discussions.
+    status: "Under review at ICSE 2027"
+    context: "With Mohammed Latif Siddiq, Natalie Sekerak, Beatrice Casey, and Joanna C. S. Santos"
+    last_verified: "2026-07-10"
+    links:
+      - label: "arXiv record"
+        url: "https://arxiv.org/abs/2601.14163"
+      - label: "Research summary"
+        url: "/research/ml-remote-code-execution/"
+
+  - id: shift
+    label: "Agent security"
+    title: "The Choice Can Be the Attack: auditing aligned backdoors in LLM agents"
+    question: "Can a trigger steer an agent toward an attacker’s preferred valid choice while its final answer still appears acceptable?"
+    description: >-
+      SHIFT compares matched tasks with and without a known trigger, then asks whether a
+      changed valid choice favors an attacker’s target after accounting for ordinary option quality.
+    status: "Submitted to TACL 2026 · manuscript not public"
+    context: "With Chowdhury Rakin Haider · abstract-level summary only"
+    last_verified: "2026-07-10"
+    links:
+      - label: "Abstract-level summary"
+        url: "/research/reagent-plus-plus/"
+      - label: "Collaborator profile"
+        url: "https://cse.buet.ac.bd/faculty/faculty_detail/rakinhaider"
+
+supporting_systems:
+  - name: "ContextLedger"
+    role: "Typed, provenance-carrying session facts for measuring context compaction."
+    status: "Research system"
+    url: "/showcase/projects/contextledger/"
+  - name: "ctxhelm and HelmBench"
+    role: "Guidance and evaluation for whether coding agents inspect the right files with less irrelevant reading."
+    status: "Open-source tooling"
+    url: "https://github.com/thromel/ctxhelm"
+  - name: "RefactoringMiner MCP"
+    role: "Program-analysis access that lets coding agents inspect refactorings and AST diffs beyond raw patches."
+    status: "Open-source collaboration"
+    url: "https://github.com/tsantalis/RefactoringMiner"
+
+contact:
+  heading: "Collaborate on reliable agent systems"
+  copy: >-
+    I welcome research conversations, artifact review, and collaborations around software
+    reliability, agent evaluation, security, and developer tools.
