@@ -1,0 +1,18 @@
+{
+  "name": "thromel-github-io",
+  "private": true,
+  "description": "Local browser-verification tooling for thromel.github.io",
+  "scripts": {
+    "test:ui": "bash scripts/verify-ui.sh full",
+    "test:ui:shell": "bash scripts/verify-ui.sh shell",
+    "test:ui:install": "playwright install chromium"
+  },
+  "engines": {
+    "node": ">=20",
+    "npm": ">=10"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "4.12.1",
+    "@playwright/test": "1.61.1"
+  }
+}
