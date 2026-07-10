@@ -2,6 +2,8 @@ const { test, expect } = require('@playwright/test');
 
 const BASE_URL = process.env.PLAYWRIGHT_TEST_BASE_URL || 'http://127.0.0.1:4000';
 const HOME_BLOCKS = ['agenda', 'evidence', 'systems', 'contact'];
+const CORE_ROUTES = ['Research', 'Publications', 'Projects', 'CV'];
+const OTHER_ROUTES = ['Contributions', 'About', 'Education', 'Work', 'Achievements', 'News', 'Learning'];
 
 async function visitHome(page) {
   await page.goto(BASE_URL, { waitUntil: 'domcontentloaded' });
@@ -37,24 +39,30 @@ test.describe('research-first shell contract', () => {
     expect(controls).toBeLessThanOrEqual(30);
   });
 
-  test('desktop navigation is visible and limited to the research core', async ({ page }) => {
+  test('desktop navigation keeps the research core visible and exposes every other page', async ({ page }) => {
     await page.setViewportSize({ width: 1280, height: 720 });
     await visitHome(page);
 
     const nav = page.locator('#site-navigation');
-    const labels = await nav.locator('a').allTextContents();
+    const labels = await nav.locator(':scope > a').allTextContents();
     expect(labels.map((label) => label.replace(/\s+/g, ' ').trim())).toEqual([
-      'Research',
-      'Publications',
-      'Projects',
-      'CV',
+      ...CORE_ROUTES,
     ]);
     for (const label of labels) {
       await expect(nav.getByRole('link', { name: label.trim(), exact: true })).toBeVisible();
     }
+
+    const more = nav.locator('[data-more-navigation]');
+    await expect(more).toHaveCount(1);
+    const moreSummary = more.locator('summary');
+    await expect(moreSummary).toHaveText('More');
+    await moreSummary.click();
+    for (const route of OTHER_ROUTES) {
+      await expect(more.getByRole('link', { name: route, exact: true })).toBeVisible();
+    }
   });
 
-  test('mobile menu has an accessible 44px control and exposes the core routes', async ({ page }) => {
+  test('mobile menu has an accessible 44px control and exposes the complete page directory', async ({ page }) => {
     await page.setViewportSize({ width: 320, height: 800 });
     await visitHome(page);
 
@@ -68,8 +76,15 @@ test.describe('research-first shell contract', () => {
 
     await menuToggle.click();
     await expect(menuToggle).toHaveAttribute('aria-expanded', 'true');
-    for (const route of ['Research', 'Publications', 'Projects', 'CV']) {
+    for (const route of CORE_ROUTES) {
       await expect(page.locator('#site-navigation').getByRole('link', { name: route, exact: true })).toBeVisible();
+    }
+    const more = page.locator('#site-navigation [data-more-navigation]');
+    const moreSummary = more.locator('summary');
+    await expect(moreSummary).toBeVisible();
+    await moreSummary.click();
+    for (const route of OTHER_ROUTES) {
+      await expect(more.getByRole('link', { name: route, exact: true })).toBeVisible();
     }
     await page.keyboard.press('Escape');
     await expect(menuToggle).toHaveAttribute('aria-expanded', 'false');
@@ -115,8 +130,15 @@ test.describe('research-first shell contract', () => {
     await expect(blocks).toHaveCount(4);
     await expect(page.locator('[data-home-block="agenda"] h1')).toBeVisible();
     await expect(page.locator('[data-home-block="evidence"] [data-research-anchor]').first()).toBeVisible();
-    for (const route of ['Research', 'Publications', 'Projects', 'CV']) {
+    for (const route of CORE_ROUTES) {
       await expect(page.locator('#site-navigation').getByRole('link', { name: route, exact: true })).toBeVisible();
+    }
+    const more = page.locator('#site-navigation [data-more-navigation]');
+    const moreSummary = more.locator('summary');
+    await expect(moreSummary).toBeVisible();
+    await moreSummary.click();
+    for (const route of OTHER_ROUTES) {
+      await expect(more.getByRole('link', { name: route, exact: true })).toBeVisible();
     }
     await context.close();
   });

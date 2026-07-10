@@ -204,6 +204,51 @@ button { cursor: pointer; }
 .site-navigation a[aria-current="page"],
 .site-navigation a:hover { border-color: var(--accent); color: var(--ink); }
 
+.site-more-navigation {
+  position: relative;
+  align-self: center;
+}
+
+.site-more-navigation summary {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  padding: 0.75rem 0.55rem;
+  color: var(--muted);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  list-style: none;
+}
+
+.site-more-navigation summary::-webkit-details-marker { display: none; }
+.site-more-navigation summary::after { margin-left: 0.35rem; content: "+"; font-family: var(--mono); }
+.site-more-navigation[open] summary,
+.site-more-navigation summary:hover { color: var(--ink); }
+.site-more-navigation[open] summary::after { content: "−"; }
+
+.site-more-navigation__menu {
+  position: absolute;
+  z-index: 12;
+  top: calc(100% + 0.35rem);
+  right: 0;
+  display: grid;
+  min-width: 13rem;
+  padding: 0.4rem;
+  border: 1px solid var(--rule);
+  background: var(--paper-elevated);
+  box-shadow: 0 0.8rem 2rem color-mix(in srgb, #000 18%, transparent);
+}
+
+.site-more-navigation__menu a {
+  min-height: 2.5rem;
+  padding: 0.55rem 0.7rem;
+  border: 0;
+}
+
+.site-more-navigation__menu a:hover,
+.site-more-navigation__menu a[aria-current="page"] { background: var(--accent-soft); }
+
 /* Base typography and generic long-form compatibility */
 .site-main { min-width: 0; }
 
@@ -586,6 +631,19 @@ pre { overflow-x: auto; padding: 1rem; border: 1px solid var(--faint); backgroun
     padding-bottom: 0.75rem;
   }
   .site-navigation a { justify-content: center; min-height: 2.75rem; border: 1px solid var(--faint); }
+  .site-more-navigation { grid-column: 1 / -1; width: 100%; }
+  .site-more-navigation summary { justify-content: center; width: 100%; border: 1px solid var(--faint); }
+  .site-more-navigation__menu {
+    position: static;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.3rem;
+    min-width: 0;
+    padding: 0.3rem 0 0;
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+  .site-more-navigation__menu a { border: 1px solid var(--faint); }
   html.js-enabled .site-navigation[data-menu-open="false"] { display: none; }
   .home-block { padding-block: clamp(3rem, 12vw, 5rem); }
   .home-agenda { padding-top: 3.5rem; }

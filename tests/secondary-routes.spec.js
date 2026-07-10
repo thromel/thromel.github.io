@@ -20,8 +20,10 @@ test.describe('secondary route convergence', () => {
       for (const width of [320, 1440]) {
         await page.setViewportSize({ width, height: 900 });
         await page.goto(`${BASE_URL}${path}`, { waitUntil: 'domcontentloaded' });
-        await expect(page.locator('#site-navigation')).toHaveCount(1);
-        await expect(page.locator('#site-navigation a')).toHaveCount(4);
+        const navigation = page.locator('#site-navigation');
+        await expect(navigation).toHaveCount(1);
+        await expect(navigation.locator(':scope > a')).toHaveCount(4);
+        await expect(navigation.locator('[data-more-navigation] a')).toHaveCount(7);
         await expect(page.locator('main h1')).toBeVisible();
         const dimensions = await page.evaluate(() => ({
           clientWidth: document.documentElement.clientWidth,
