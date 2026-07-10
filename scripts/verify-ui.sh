@@ -67,6 +67,7 @@ command -v curl >/dev/null 2>&1 || fail "curl is not available in PATH."
 case "${MODE}" in
   shell)
     SPECS=(
+      "tests/research-first-shell.spec.js"
       "tests/shell-behavior.spec.js"
       "tests/navbar-layout.spec.js"
     )
