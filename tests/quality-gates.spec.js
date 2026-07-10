@@ -85,6 +85,30 @@ test.describe('accessibility and release-quality gates', () => {
     expect(verificationScript).toContain('NODE_MAJOR');
   });
 
+  test('first-party CSS and JavaScript URLs share a build revision', async ({ page }) => {
+    const expectedByRoute = {
+      '/': ['/assets/css/overhaul.css', '/assets/js/site-shell.js'],
+      '/contributions': ['/assets/css/overhaul.css', '/assets/js/contribution-count.js', '/assets/js/site-shell.js'],
+    };
+    const revisions = [];
+
+    for (const [route, expectedPaths] of Object.entries(expectedByRoute)) {
+      await page.goto(`${BASE_URL}${route}`, { waitUntil: 'domcontentloaded' });
+      const assetUrls = await page.locator('link[rel="stylesheet"], script[src]').evaluateAll((elements) => elements
+        .map((element) => new URL(element.href || element.src, location.href))
+        .filter((url) => url.origin === location.origin && /\/assets\/(css|js)\//.test(url.pathname))
+        .map((url) => ({ pathname: url.pathname, revision: url.searchParams.get('v') })));
+
+      expect(assetUrls.map((asset) => asset.pathname).sort()).toEqual([...expectedPaths].sort());
+      for (const asset of assetUrls) {
+        expect(asset.revision, `${route} ${asset.pathname} must be cache-busted`).toBeTruthy();
+        revisions.push(asset.revision);
+      }
+    }
+
+    expect(new Set(revisions).size).toBe(1);
+  });
+
   test('mobile Lighthouse keeps LCP at or below 2.5 seconds and CLS at or below 0.1', async () => {
     test.setTimeout(60000);
     const lighthouse = (await import('lighthouse')).default;

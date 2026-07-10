@@ -25,4 +25,4 @@ description: Curated open-source contribution evidence across research infrastru
   <p class="contribution-count__note">Count query last reviewed {{ site.data.contributions.last_verified }}. Curated pull-request evidence above remains useful if GitHub is slow or unavailable.</p>
 </section>
 
-<script src="{{ '/assets/js/contribution-count.js' | relative_url }}" defer></script>
+<script src="{{ '/assets/js/contribution-count.js' | relative_url }}?v={{ site.time | date: '%s' }}" defer></script>
