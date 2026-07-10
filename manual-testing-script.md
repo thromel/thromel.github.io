@@ -1,7 +1,7 @@
 # Manual Testing Script
 
 ## Automated Command
-1. If the repo does not already have Playwright installed locally, run `npm install --no-save @playwright/test`.
+1. Run `npm ci`, then `npm run test:ui:install` if the locked local browser toolchain is not installed.
 2. Run `bash scripts/verify-ui.sh full` for the full UI regression path.
 3. Run `bash scripts/verify-ui.sh shell` for the shell-focused regression path.
 4. For proof-surface-only verification, run `npx playwright test tests/proof-surfaces.spec.js`.

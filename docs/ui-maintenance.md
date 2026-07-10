@@ -22,7 +22,7 @@ Use the repo-local runner for repeatable checks:
 
 Current prerequisites:
 
-- `npm install --no-save @playwright/test` if Playwright is not already present locally
+- `npm ci`, then `npm run test:ui:install` to install the locked Playwright and Chromium toolchain
 - Homebrew Ruby 3.3 available at `/opt/homebrew/opt/ruby@3.3/bin` for the Jekyll build path this repo currently relies on
 
 ## Smoke Tooling
@@ -121,7 +121,7 @@ Use these files as the practical entrypoints:
 
 The items below are intentionally outside the v1 UI remediation milestone. Do not fold them into routine UI edits without opening a later milestone or explicit follow-up phase.
 
-- `PLAT-01` in `.planning/REQUIREMENTS.md` is the place to formalize a committed toolchain manifest for Playwright, accessibility tooling, and performance tooling, then wire those checks into CI.
+- The committed Playwright and accessibility manifest is the local verification baseline. CI and performance-budget enforcement remain follow-up work until this redesign wires them in.
 - The current repo-local runner (`bash scripts/verify-ui.sh full`) is the canonical local path today, but CI-backed verification belongs in the later platform milestone rather than in ad hoc UI cleanup work.
 - legacy layers still need explicit retirement planning: `assets/js/theme-toggle.js`, `assets/js/app-navigation.js`, `assets/js/advanced-interactions.js`, `assets/css/developer-theme.css`, `assets/css/custom.css`, and remaining inline page islands should be removed or migrated in a dedicated pass.
 - artifact hygiene also remains deferred work: generated LaTeX outputs, duplicate PDFs, and stray filesystem artifacts should be cleaned up alongside a clear ignore/build policy instead of being mixed into unrelated UI fixes.

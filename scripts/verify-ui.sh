@@ -49,7 +49,7 @@ wait_for_server() {
 trap cleanup EXIT
 
 if [[ ! -d "${REPO_ROOT}/node_modules/@playwright/test" ]]; then
-  fail "missing @playwright/test. Run 'npm install --no-save @playwright/test' first."
+  fail "missing @playwright/test. Run 'npm ci' followed by 'npm run test:ui:install' first."
 fi
 
 if [[ ! -d "${REPO_ROOT}/_site" ]]; then

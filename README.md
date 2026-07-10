@@ -147,7 +147,7 @@ The portfolio implements a **Liquid Glass** design philosophy that combines:
 ### Prerequisites
 - Homebrew Ruby 3.3 available at `/opt/homebrew/opt/ruby@3.3/bin`
 - Bundler for Jekyll dependencies
-- Node.js 18+ for Playwright-based verification
+- Node.js 18+ and npm 9+ for Playwright-based verification
 - Git
 
 ### Setup
@@ -161,7 +161,8 @@ The portfolio implements a **Liquid Glass** design philosophy that combines:
    ```bash
    export PATH="/opt/homebrew/opt/ruby@3.3/bin:$PATH"
    bundle install
-   npm install --no-save @playwright/test
+   npm ci
+   npm run test:ui:install
    ```
 
 3. **Start the local Jekyll server**
@@ -193,7 +194,7 @@ bash scripts/verify-ui.sh shell
 # Open the page in DevTools and run testSite.runAll() from browser-console-tests.js
 ```
 
-The repository does not currently commit a Node toolchain manifest for Playwright or the broader audit tools. Treat `npm install --no-save @playwright/test` as the current lightweight local prerequisite and keep `bash scripts/verify-ui.sh full` as the canonical repeatable verification entrypoint.
+The repository commits a locked Node toolchain for browser and accessibility checks. After cloning, run `npm ci` and `npm run test:ui:install` once before using `bash scripts/verify-ui.sh full` as the canonical repeatable verification entrypoint.
 
 ## Accessibility Features
 

@@ -134,7 +134,7 @@ None yet.
 ### Blockers/Concerns
 
 - GitHub-driven proof surfaces depend on unauthenticated browser-side API calls
-- The repo still lacks a committed Playwright toolchain manifest, so local verification currently relies on `npm install --no-save @playwright/test`
+- The redesign branch now has a committed Playwright and accessibility toolchain; use `npm ci` followed by `npm run test:ui:install` before local browser verification
 - `gsd-sdk` is not installed in this environment, so v1.1 planning artifacts were created with the documented manual fallback instead of SDK handlers.
 
 ## Session Continuity
