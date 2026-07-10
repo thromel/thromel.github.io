@@ -20,6 +20,9 @@ anchors:
     status: "Active research · UIUC++ SRSE 2026"
     context: "June–August 2026 · Professor Tianyin Xu and the UIUC systems reliability group"
     last_verified: "2026-07-10"
+    image: "/assets/images/companies/uiuc-block-i.png"
+    image_alt: "University of Illinois Block I mark"
+    image_caption: "Research context · UIUC++ SRSE 2026"
     links:
       - label: "SREGym project"
         url: "https://www.sregym.com/"
@@ -38,6 +41,9 @@ anchors:
     status: "Under review at ICSE 2027"
     context: "With Mohammed Latif Siddiq, Natalie Sekerak, Beatrice Casey, and Joanna C. S. Santos"
     last_verified: "2026-07-10"
+    image: "/assets/images/ml-rce.webp"
+    image_alt: "Methodology overview for the study of remote code execution in machine learning model hosting ecosystems"
+    image_caption: "Study methodology · five hosting ecosystems"
     links:
       - label: "arXiv record"
         url: "https://arxiv.org/abs/2601.14163"
@@ -55,6 +61,9 @@ anchors:
     status: "Submitted to TACL 2026 · manuscript not public"
     context: "With Chowdhury Rakin Haider · abstract-level summary only"
     last_verified: "2026-07-10"
+    image: "/assets/images/agentic_ai_architecture.png"
+    image_alt: "Conceptual architecture of an agentic AI system with tools, memory, and orchestration"
+    image_caption: "System context · choices inside an agent workflow"
     links:
       - label: "Abstract-level summary"
         url: "/research/reagent-plus-plus/"

@@ -19,7 +19,8 @@ description: Selected research systems, developer tools, and software projects b
       {% assign is_research_system = false %}
       {% if project.showcase_style == 'agent-tooling' or project.group == 'Research' %}{% assign is_research_system = true %}{% endif %}
       {% unless is_research_system %}{% continue %}{% endunless %}
-      <li><article class="project-record" data-project-record data-project-title="{{ project.title }}"><p class="project-record__type">{{ project.project_type | default: project.group }}</p><div><h3><a href="{{ project.url | relative_url }}">{{ project.title }}</a></h3><p>{{ project.excerpt | default: project.content | strip_html | truncatewords: 34 }}</p><p class="project-record__meta">{{ project.date | date: '%B %Y' }}{% if project.technologies %} · {{ project.technologies | join: ', ' | truncatewords: 7 }}{% endif %}</p></div></article></li>
+      {% assign project_visual = project.card_image | default: project.thumbnail | default: project.image %}
+      <li><article class="project-record" data-project-record data-project-title="{{ project.title }}"><p class="project-record__type">{{ project.project_type | default: project.group }}</p>{% if project_visual %}<a class="project-record__visual" href="{{ project.url | relative_url }}"><img src="{{ project_visual | relative_url }}" alt="Preview of {{ project.title | escape }}" loading="lazy" decoding="async" data-project-visual></a>{% endif %}<div class="project-record__body{% unless project_visual %} project-record__body--wide{% endunless %}"><h3><a href="{{ project.url | relative_url }}">{{ project.title }}</a></h3><p>{{ project.excerpt | default: project.content | strip_html | truncatewords: 34 }}</p><p class="project-record__meta">{{ project.date | date: '%B %Y' }}{% if project.technologies %} · {{ project.technologies | join: ', ' | truncatewords: 7 }}{% endif %}</p></div></article></li>
       {% endfor %}
     </ol>
   </section>
@@ -31,7 +32,8 @@ description: Selected research systems, developer tools, and software projects b
       {% assign is_research_system = false %}
       {% if project.showcase_style == 'agent-tooling' or project.group == 'Research' %}{% assign is_research_system = true %}{% endif %}
       {% if is_research_system %}{% continue %}{% endif %}
-      <li><article class="project-record" data-project-record data-project-title="{{ project.title }}"><p class="project-record__type">{{ project.project_type | default: project.group }}</p><div><h3><a href="{{ project.url | relative_url }}">{{ project.title }}</a></h3><p>{{ project.excerpt | default: project.content | strip_html | truncatewords: 30 }}</p><p class="project-record__meta">{{ project.date | date: '%B %Y' }}{% if project.technologies %} · {{ project.technologies | join: ', ' | truncatewords: 7 }}{% endif %}</p></div></article></li>
+      {% assign project_visual = project.card_image | default: project.thumbnail | default: project.image %}
+      <li><article class="project-record" data-project-record data-project-title="{{ project.title }}"><p class="project-record__type">{{ project.project_type | default: project.group }}</p>{% if project_visual %}<a class="project-record__visual" href="{{ project.url | relative_url }}"><img src="{{ project_visual | relative_url }}" alt="Preview of {{ project.title | escape }}" loading="lazy" decoding="async" data-project-visual></a>{% endif %}<div class="project-record__body{% unless project_visual %} project-record__body--wide{% endunless %}"><h3><a href="{{ project.url | relative_url }}">{{ project.title }}</a></h3><p>{{ project.excerpt | default: project.content | strip_html | truncatewords: 30 }}</p><p class="project-record__meta">{{ project.date | date: '%B %Y' }}{% if project.technologies %} · {{ project.technologies | join: ', ' | truncatewords: 7 }}{% endif %}</p></div></article></li>
       {% endfor %}
     </ol>
   </section>

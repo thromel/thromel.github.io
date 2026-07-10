@@ -22,7 +22,13 @@ test.describe('research records and contribution proof', () => {
     expect(await records.count()).toBeGreaterThanOrEqual(3);
     await expect(records.first().locator('[data-publication-citation]')).toBeVisible();
     await expect(records.first().locator('h2, h3')).toBeVisible();
-    await expect(page.locator('[data-publication-archive] img')).toHaveCount(0);
+    const covers = page.locator('[data-publication-cover]');
+    await expect(covers).toHaveCount(2);
+    for (const cover of await covers.all()) {
+      await expect(cover).toHaveAttribute('alt', /\S+/);
+      await expect(cover).toHaveAttribute('loading', 'lazy');
+      expect(await cover.evaluate((image) => image.complete && image.naturalWidth > 0)).toBe(true);
+    }
   });
 
   test('project records render once and retain compact groups', async ({ page }) => {
@@ -35,6 +41,28 @@ test.describe('research records and contribution proof', () => {
     const titles = await records.evaluateAll((elements) => elements.map((element) => element.dataset.projectTitle));
     expect(new Set(titles).size).toBe(titles.length);
     await expect(page.locator('[data-project-group]')).toHaveCount(2);
+
+    const visuals = page.locator('[data-project-visual]');
+    expect(await visuals.count()).toBeGreaterThanOrEqual(8);
+    for (const visual of await visuals.all()) {
+      await expect(visual).toHaveAttribute('alt', /\S+/);
+      await expect(visual).toHaveAttribute('loading', 'lazy');
+      await visual.scrollIntoViewIfNeeded();
+      await expect.poll(() => visual.evaluate((image) => image.complete && image.naturalWidth > 0)).toBe(true);
+    }
+  });
+
+  test('research dossier pairs evidence anchors with relevant local visuals', async ({ page }) => {
+    await page.setViewportSize({ width: 1280, height: 900 });
+    await page.goto(`${BASE_URL}/research`, { waitUntil: 'domcontentloaded' });
+
+    const visuals = page.locator('[data-research-visual]');
+    await expect(visuals).toHaveCount(3);
+    for (const visual of await visuals.all()) {
+      await expect(visual).toHaveAttribute('alt', /\S+/);
+      await expect(visual).toHaveAttribute('loading', 'lazy');
+      expect(await visual.evaluate((image) => image.complete && image.naturalWidth > 0)).toBe(true);
+    }
   });
 
   test('curated contributions use direct PR evidence and no full client feed', async ({ page }) => {

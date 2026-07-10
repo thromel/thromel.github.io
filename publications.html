@@ -16,7 +16,12 @@ description: Citation-first record of publications and research artifacts across
     <li>
       <article class="publication-record" data-publication-record data-publication-title="{{ item.title }}">
         <p class="publication-record__year">{{ item.pub_date }}</p>
-        <div>
+        {% if item.cover %}
+        <figure class="publication-record__cover">
+          <img src="{{ item.cover | relative_url }}" alt="Cover image for {{ item.title | escape }}" loading="lazy" decoding="async" data-publication-cover>
+        </figure>
+        {% endif %}
+        <div class="publication-record__body{% unless item.cover %} publication-record__body--wide{% endunless %}">
           <h2>{{ item.title }}</h2>
           <p class="publication-record__citation" data-publication-citation><cite>{% if item.authors %}{{ item.authors | join: ', ' }}. {% endif %}<span class="publication-record__title">{{ item.title }}.</span> {% if item.pub_pre %}{{ item.pub_pre }}{% endif %}{{ item.pub }}{% if item.pub_date %}, {{ item.pub_date }}{% endif %}.</cite></p>
           <p>{{ item.abstract }}</p>

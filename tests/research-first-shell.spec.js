@@ -35,6 +35,12 @@ test.describe('research-first shell contract', () => {
     await expect(page.locator('[data-home-block="systems"]')).toContainText('Supporting systems');
     await expect(page.locator('[data-home-block="contact"]')).toContainText('Collaborate');
 
+    const portrait = page.locator('[data-home-portrait]');
+    await expect(portrait).toHaveCount(1);
+    await expect(portrait).toHaveAttribute('alt', /Tanzim Hossain Romel/i);
+    await expect(portrait).toHaveAttribute('fetchpriority', 'high');
+    expect(await portrait.evaluate((image) => image.complete && image.naturalWidth > 0)).toBe(true);
+
     const controls = await page.locator('main a, main button').count();
     expect(controls).toBeLessThanOrEqual(30);
   });

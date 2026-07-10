@@ -20,6 +20,12 @@ description: Research on reliable AI agents, SRE-agent evaluation, ML ecosystem 
     <li>
       <article class="evidence-record" data-research-anchor="{{ anchor.id }}" data-verified-on="{{ anchor.last_verified }}" data-publicity="{{ anchor.publicity | default: 'public' }}">
         <p class="evidence-record__index">0{{ forloop.index }} · {{ anchor.label }}</p>
+        {% if anchor.image %}
+        <figure class="evidence-record__visual">
+          <img src="{{ anchor.image | relative_url }}" alt="{{ anchor.image_alt }}" loading="lazy" decoding="async" data-research-visual>
+          {% if anchor.image_caption %}<figcaption>{{ anchor.image_caption }}</figcaption>{% endif %}
+        </figure>
+        {% endif %}
         <p class="evidence-record__question" data-research-question>{{ anchor.question }}</p>
         <h3>{{ anchor.title }}</h3>
         <p>{{ anchor.description }}</p>
