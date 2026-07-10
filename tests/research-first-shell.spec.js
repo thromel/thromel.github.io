@@ -45,6 +45,15 @@ test.describe('research-first shell contract', () => {
     expect(controls).toBeLessThanOrEqual(30);
   });
 
+  test('hero name stays subordinate to the research agenda on desktop and mobile', async ({ page }) => {
+    for (const [width, maximumSize] of [[1440, 58], [390, 42]]) {
+      await page.setViewportSize({ width, height: 900 });
+      await visitHome(page);
+      const fontSize = await page.locator('[data-home-block="agenda"] h1').evaluate((heading) => parseFloat(getComputedStyle(heading).fontSize));
+      expect(fontSize, `${width}px hero name`).toBeLessThanOrEqual(maximumSize);
+    }
+  });
+
   test('desktop navigation keeps the research core visible and exposes every other page', async ({ page }) => {
     await page.setViewportSize({ width: 1280, height: 720 });
     await visitHome(page);
