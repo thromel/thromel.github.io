@@ -1,32 +1,29 @@
 ---
 layout: default
-title : Publications
+title: Publications
 navbar_title: Publications
-description: Selected publications, research summaries, and artifacts across software engineering, security, and applied machine learning.
+description: Citation-first record of publications and research artifacts across software engineering, security, and applied machine learning.
 ---
 
-{% assign ordered_publications = site.publications | sort: "date" | reverse %}
-{% assign pubs_by_year = ordered_publications | group_by: "pub_date" %}
+{% assign ordered_publications = site.publications | sort: 'date' | reverse %}
 
-<section class="academic-section academic-publications-page section-publications">
-  <div class="page-hero">
-    <div class="section-kicker">Research artifacts</div>
-    <h1 class="academic-page-title">Publications</h1>
-    <p>Selected papers, research summaries, and artifacts across software engineering, security, and applied machine learning.</p>
-    <p class="academic-link-row"><a href="{{ 'research' | relative_url }}"><i class="fa-solid fa-microscope link-icon" aria-hidden="true"></i><span>Research statement</span></a><a href="https://scholar.google.com/citations?user={{ site.data.profile.gscholar }}" target="_blank" rel="noopener noreferrer"><i class="ai ai-google-scholar link-icon" aria-hidden="true"></i><span>Scholar profile</span></a></p>
-  </div>
-
-  {% for year in pubs_by_year %}
-  {% assign is_latest_year = forloop.first %}
-  <section class="academic-section publication-year-group" id="year-{{ year.name }}" data-reveal>
-    <h2>{{ year.name }}</h2>
-    <div class="academic-publication-list">
-      {% for item in year.items %}
-        {% assign highlight_current_publication = false %}
-        {% if is_latest_year and forloop.first %}{% assign highlight_current_publication = true %}{% endif %}
-        {% include widgets/publication_item.html item=item highlight=highlight_current_publication %}
-      {% endfor %}
-    </div>
-  </section>
-  {% endfor %}
+<section class="academic-section publication-archive" data-publication-archive aria-labelledby="publications-title">
+  <p class="eyebrow">Research record</p>
+  <h1 id="publications-title">Publications and research artifacts</h1>
+  <p class="publication-archive__intro">A citation-first record of papers, thesis work, and public artifacts. Status labels are kept explicit where work is under review.</p>
+  <ol class="publication-list">
+    {% for item in ordered_publications %}
+    <li>
+      <article class="publication-record" data-publication-record data-publication-title="{{ item.title }}">
+        <p class="publication-record__year">{{ item.pub_date }}</p>
+        <div>
+          <h2>{{ item.title }}</h2>
+          <p class="publication-record__citation" data-publication-citation><cite>{% if item.authors %}{{ item.authors | join: ', ' }}. {% endif %}<span class="publication-record__title">{{ item.title }}.</span> {% if item.pub_pre %}{{ item.pub_pre }}{% endif %}{{ item.pub }}{% if item.pub_date %}, {{ item.pub_date }}{% endif %}.</cite></p>
+          <p>{{ item.abstract }}</p>
+          <p class="record-links">{% if item.primary_link %}<a href="{{ item.primary_link | relative_url }}"{% if item.primary_external %} target="_blank" rel="noopener noreferrer"{% endif %}>{{ item.primary_label | default: 'Primary artifact' }}</a>{% endif %}{% for link in item.links %}<a href="{{ link[1] | relative_url }}"{% if link[1] contains '://' %} target="_blank" rel="noopener noreferrer"{% endif %}>{{ link[0] }}</a>{% endfor %}</p>
+        </div>
+      </article>
+    </li>
+    {% endfor %}
+  </ol>
 </section>

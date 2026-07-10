@@ -1,50 +1,38 @@
+last_verified: "2026-07-10"
 highlights:
   - name: RefactoringMiner
     repo: tsantalis/RefactoringMiner
-    url: https://github.com/tsantalis/RefactoringMiner/pulls?q=author%3Athromel
-    area: Software evolution research tooling
-    summary: Merged local MCP tooling, WebDiff workflow support, merge-parent-aware commit diffs, assertion-migration matching, and single-page PR review affordances.
-    evidence: Program-analysis tooling that makes coding-agent refactoring claims easier to inspect against concrete detector output.
-    tags: [Java, Refactoring, Research Tools]
+    area: Software evolution tooling
+    summary: Redesigned the MCP diff surface around source-parameterized analysis tools for coding agents.
+    proof_url: https://github.com/tsantalis/RefactoringMiner/pull/1087
+    proof_label: "PR #1087"
   - name: SREGym
     repo: SREGym/SREGym
-    url: https://github.com/SREGym/SREGym/pulls?q=author%3Athromel
     area: SRE benchmark infrastructure
-    summary: Added and hardened Kubernetes reliability benchmark problems, including priority-preemption cascade and Calico route-reflector label-drift scenarios.
-    evidence: Fault/oracle design, validation checks, mitigation-shortcut rejection, lifecycle evidence, and reviewer-facing benchmark documentation.
-    tags: [Kubernetes, SRE, Benchmarks]
+    summary: Added a Calico route-reflector label-drift problem for reliability-agent evaluation.
+    proof_url: https://github.com/SREGym/SREGym/pull/828
+    proof_label: "PR #828"
   - name: EF Core
     repo: dotnet/efcore
-    url: https://github.com/dotnet/efcore/pulls?q=author%3Athromel
     area: Data access infrastructure
-    summary: Merged targeted data-stack changes around runtime migration creation/application, ON DELETE SET DEFAULT behavior, and nullable complex-property reload handling.
-    evidence: Production-adjacent framework work with tests and maintainer review in a high-signal Microsoft repository.
-    tags: [C#, .NET, Databases]
+    summary: Fixed OriginalValues materialization for added entities with complex collections.
+    proof_url: https://github.com/dotnet/efcore/pull/38493
+    proof_label: "PR #38493"
   - name: GenHTTP
-    repo: KptnKMan/GenHTTP
-    url: https://github.com/KptnKMan/GenHTTP/pulls?q=author%3Athromel
+    repo: Kaliumhexacyanoferrat/GenHTTP
     area: .NET web infrastructure
-    summary: Added automatic request-body decompression and binary-response support for framework-level HTTP behavior.
-    evidence: Server-side framework contributions with focused behavior tests beyond application code.
-    tags: [C#, HTTP, Frameworks]
+    summary: Added automatic request-content decompression at the framework boundary.
+    proof_url: https://github.com/Kaliumhexacyanoferrat/GenHTTP/pull/771
+    proof_label: "PR #771"
   - name: deepagents
     repo: langchain-ai/deepagents
-    url: https://github.com/langchain-ai/deepagents/pulls?q=author%3Athromel
-    area: Agentic AI tooling
-    summary: Fixed a CLI loading-widget timer lifecycle leak by stopping and clearing animation timers on stop and unmount.
-    evidence: Regression-tested reliability fix in a fast-moving LangChain agent tooling repository.
-    tags: [Agents, Python, LLM Systems]
-  - name: TypeScript
+    area: Agent tooling
+    summary: Fixed a CLI loading-widget timer lifecycle leak with a regression-tested cleanup path.
+    proof_url: https://github.com/langchain-ai/deepagents/pull/2396
+    proof_label: "PR #2396"
+  - name: TypeScript Go port
     repo: microsoft/typescript-go
-    url: https://github.com/microsoft/typescript-go/pulls?q=author%3Athromel
     area: Compiler and language tooling
-    summary: Merged an upstream-aligned declaration-emit alias-resolution fix that preserves imported type aliases for inferred exports across module boundaries.
-    evidence: Targeted compiler-port contribution in a major language ecosystem, validated through baseline and Go test suites.
-    tags: [Go, TypeScript, Compilers]
-  - name: LangChain
-    repo: langchain-ai/langchain
-    url: https://github.com/langchain-ai/langchain/pulls?q=author%3Athromel
-    area: LLM application infrastructure
-    summary: Improved the error path for non-JSON-serializable tool schemas in the broader LangChain ecosystem.
-    evidence: Small, practical framework fix connected to applied LLM system building.
-    tags: [Python, LLM Apps, Tooling]
+    summary: Preserved imported type aliases for inferred exports across module boundaries.
+    proof_url: https://github.com/microsoft/typescript-go/pull/3314
+    proof_label: "PR #3314"

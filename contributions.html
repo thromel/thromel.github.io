@@ -2,82 +2,27 @@
 layout: default
 title: Open Source Contributions
 navbar_title: Contributions
-description: Open-source contribution activity and selected pull requests across developer tools, frameworks, and research infrastructure.
+description: Curated open-source contribution evidence across research infrastructure, frameworks, and language tooling.
 ---
 
-<section class="academic-section">
-  <div class="page-hero">
-    <div class="section-kicker">Open source proof</div>
-    <h1 class="academic-page-title">Contributions</h1>
-    <p>Selected open-source contribution targets, with live GitHub activity as supporting evidence.</p>
-    <p class="academic-link-row"><a href="https://github.com/{{ site.data.profile.github }}" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github link-icon" aria-hidden="true"></i><span>GitHub profile</span></a><a href="{{ 'projects' | relative_url }}"><i class="fa-solid fa-code link-icon" aria-hidden="true"></i><span>Projects</span></a></p>
-  </div>
-</section>
-
-<section class="academic-section contributions-curated" aria-labelledby="curated-contributions-title" data-reveal>
-  <div class="section-heading-row">
-    <div>
-      <p class="section-kicker">Curated contribution proof</p>
-      <h2 id="curated-contributions-title">Where the work lands</h2>
-    </div>
-    <span>Research tools, .NET infrastructure, agent frameworks, and language tooling</span>
-  </div>
-
-  <div class="contribution-highlight-grid">
+<section class="academic-section contributions-page" data-contributions-curated aria-labelledby="contributions-title">
+  <p class="eyebrow">Open-source contribution evidence</p>
+  <h1 id="contributions-title">Curated contributions, direct artifacts</h1>
+  <p class="contributions-page__intro">Selected contributions are linked to individual merged pull requests. The live count below is only a compact indicator, not a substitute for those artifacts.</p>
+  <ol class="contribution-record-list">
     {% for item in site.data.contributions.highlights %}
-    <article class="contribution-highlight">
-      <div class="contribution-highlight__header">
-        <p class="contribution-highlight__area">{{ item.area }}</p>
-        <h3><a href="{{ item.url }}" target="_blank" rel="noopener noreferrer">{{ item.name }}</a></h3>
-        <p class="contribution-highlight__repo"><i class="fa-brands fa-github link-icon" aria-hidden="true"></i>{{ item.repo }}</p>
-      </div>
-      <p>{{ item.summary }}</p>
-      <p class="contribution-highlight__evidence">{{ item.evidence }}</p>
-      <p class="academic-tags">{% for tag in item.tags limit:3 %}<span class="academic-tag">{{ tag }}</span>{% endfor %}</p>
-    </article>
+    <li><article class="contribution-record"><p class="contribution-record__area">{{ item.area }}</p><div><h2>{{ item.name }}</h2><p class="contribution-record__repo">{{ item.repo }}</p><p>{{ item.summary }}</p><p class="record-links"><a data-contribution-proof href="{{ item.proof_url }}" target="_blank" rel="noopener noreferrer">{{ item.proof_label }} · direct pull request</a></p></div></article></li>
     {% endfor %}
-  </div>
+  </ol>
 </section>
 
-<section class="academic-section proof-surface contributions-surface" id="contributions-proof" data-github-user="{{ site.data.profile.github | default: 'thromel' }}" data-state="loading" data-reveal>
-  <div class="proof-surface-header">
-    <h2 class="contributions-proof-title">Live contribution activity</h2>
-    <p><a href="https://github.com/{{ site.data.profile.github | default: 'thromel' }}" target="_blank" rel="noopener noreferrer">GitHub profile</a></p>
-  </div>
-
-  <div class="contributions-stats" id="contribution-stats">
-    <div class="contribution-stat"><span class="contribution-stat-value stat-number" id="merged-prs">-</span><span class="contribution-stat-label stat-label">Merged</span></div>
-    <div class="contribution-stat"><span class="contribution-stat-value stat-number" id="open-prs">-</span><span class="contribution-stat-label stat-label">Open</span></div>
-    <div class="contribution-stat"><span class="contribution-stat-value stat-number" id="repos-contributed">-</span><span class="contribution-stat-label stat-label">Repositories</span></div>
-  </div>
-
-  <div id="loading-state" class="proof-state" data-state="loading">
-    <span class="proof-state-label">GitHub activity</span>
-    <p class="proof-state-text">Fetching contributions from GitHub...</p>
-  </div>
-
-  <div id="error-state" class="proof-state" data-state="error" style="display: none;">
-    <span class="proof-state-label">GitHub activity</span>
-    <p id="error-state-message" class="proof-state-text">Unable to fetch contributions right now. Please try again later.</p>
-    <button id="retry-contributions" class="btn btn-secondary" type="button">Retry</button>
-  </div>
-
-  <div id="contributions-section" style="display: none;">
-    <div class="timeline academic-list" id="contributions-timeline"></div>
-  </div>
-
-  <div id="empty-state" class="proof-state" data-state="empty" style="display: none;">
-    <span class="proof-state-label">GitHub activity</span>
-    <p class="proof-state-text">No external contributions found yet.</p>
-  </div>
-
-  <div class="proof-links" aria-label="Repository links">
-    <span><i class="fa-solid fa-code-branch link-icon" aria-hidden="true"></i>Repository links:</span>
-    {% for item in site.data.contributions.highlights limit:6 %}
-    <a href="{{ item.url }}" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github link-icon" aria-hidden="true"></i><span>{{ item.name }}</span></a>
-    {% endfor %}
-  </div>
+<section class="academic-section contribution-count" data-contribution-count data-github-user="{{ site.data.profile.github }}" data-state="loading" aria-labelledby="contribution-count-title">
+  <p class="eyebrow">Live supporting signal</p>
+  <h2 id="contribution-count-title">Merged external pull requests</h2>
+  <p id="contribution-count-status" class="contribution-count__status" aria-live="polite">Loading the current GitHub count…</p>
+  <p class="contribution-count__number"><strong id="contribution-count-value">—</strong><span>merged pull requests to external repositories</span></p>
+  <button id="contribution-count-refresh" class="btn" type="button">Refresh count</button>
+  <p class="contribution-count__note">Count query last reviewed {{ site.data.contributions.last_verified }}. Curated pull-request evidence above remains useful if GitHub is slow or unavailable.</p>
 </section>
 
-<script src="{{ '/assets/js/github-proof.js' | relative_url }}" defer></script>
-<script src="{{ '/assets/js/contributions.js' | relative_url }}" defer></script>
+<script src="{{ '/assets/js/contribution-count.js' | relative_url }}" defer></script>

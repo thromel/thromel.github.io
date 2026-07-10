@@ -2,93 +2,37 @@
 layout: default
 title: Projects
 navbar_title: Projects
-description: Selected software systems, research prototypes, coding-agent tools, and learning capstones built by Tanzim Hossain Romel.
+description: Selected research systems, developer tools, and software projects built by Tanzim Hossain Romel.
 ---
 
-{% assign showcase_projects = site.showcase | where: "show", true | sort: "date" | reverse %}
+{% assign showcase_projects = site.showcase | where: 'show', true | sort: 'date' | reverse %}
 
-<section class="academic-section">
-  <div class="projects-hero">
-    <p class="projects-kicker">Selected build work</p>
-    <h1 class="academic-page-title">Projects</h1>
-    <p class="projects-intro">Software systems, research prototypes, and tools I built while trying to understand how the code actually behaves.</p>
-  </div>
-</section>
+<section class="academic-section project-archive" data-project-archive aria-labelledby="projects-title">
+  <p class="eyebrow">Software systems</p>
+  <h1 id="projects-title">Projects with inspectable outcomes</h1>
+  <p class="project-archive__intro">Research systems and selected build work, each listed once. Entries prioritize the problem, artifact, and evidence rather than a technology inventory.</p>
 
-<section class="academic-section project-feature-list project-feature-list--selected" aria-labelledby="featured-projects-title" data-reveal>
-  <div class="project-section-heading">
-    <h2 id="featured-projects-title">Featured Evidence</h2>
-    <span>Current systems and research prototypes</span>
-  </div>
-  {% for project in showcase_projects %}
-    {% assign is_featured_evidence = false %}
-    {% if project.showcase_style == 'agent-tooling' or project.group == 'Research' or project.group == 'Performance Engineering' or project.title contains 'Go Database' or project.title contains 'Blockchain Based Ticketing' %}
-      {% assign is_featured_evidence = true %}
-    {% endif %}
-    {% unless is_featured_evidence %}{% continue %}{% endunless %}
-    {% assign project_image = project.card_image | default: project.thumbnail %}
-  <article class="academic-entry project-feature-entry project-feature-entry--primary{% if project.featured %} project-feature-entry--featured{% endif %}{% if project.showcase_style %} project-feature-entry--{{ project.showcase_style }}{% endif %}{% unless project_image %} project-feature-entry--text-only{% endunless %}">
-    {% if project_image %}
-    <a class="project-feature-entry__media" href="{{ project.url | relative_url }}" aria-label="{{ project.title }}">
-      <img loading="lazy" decoding="async" src="{{ project_image | relative_url }}" alt="{{ project.title }}">
-    </a>
-    {% endif %}
-    <div class="project-feature-entry__body">
-      <div class="project-feature-entry__topline">
-        <p class="project-feature-entry__eyebrow">{{ project.project_type | default: project.group }}</p>
-        {% if project.showcase_style == 'agent-tooling' %}<span class="project-status-pill">Ongoing</span>{% endif %}
-      </div>
-      <h3><a href="{{ project.url | relative_url }}">{{ project.title }}</a></h3>
-      <p class="academic-entry__meta">{{ project.date | date: "%B %Y" }}{% if project.group %} · {{ project.group }}{% endif %}</p>
-      <p class="project-feature-entry__summary">{{ project.excerpt | default: project.content | strip_html | truncatewords: 34 }}</p>
-      {% if project.technologies %}<p class="academic-tags">{% for tech in project.technologies limit:5 %}<span class="academic-tag">{{ tech }}</span>{% endfor %}</p>{% endif %}
-    </div>
-  </article>
-  {% endfor %}
-</section>
+  <section class="project-group" data-project-group="research-systems" aria-labelledby="research-systems-title">
+    <div class="project-group__heading"><p class="eyebrow">Research systems</p><h2 id="research-systems-title">Agent, evaluation, and analysis tooling</h2></div>
+    <ol class="project-record-list">
+      {% for project in showcase_projects %}
+      {% assign is_research_system = false %}
+      {% if project.showcase_style == 'agent-tooling' or project.group == 'Research' %}{% assign is_research_system = true %}{% endif %}
+      {% unless is_research_system %}{% continue %}{% endunless %}
+      <li><article class="project-record" data-project-record data-project-title="{{ project.title }}"><p class="project-record__type">{{ project.project_type | default: project.group }}</p><div><h3><a href="{{ project.url | relative_url }}">{{ project.title }}</a></h3><p>{{ project.excerpt | default: project.content | strip_html | truncatewords: 34 }}</p><p class="project-record__meta">{{ project.date | date: '%B %Y' }}{% if project.technologies %} · {{ project.technologies | join: ', ' | truncatewords: 7 }}{% endif %}</p></div></article></li>
+      {% endfor %}
+    </ol>
+  </section>
 
-<section class="academic-section project-feature-list project-feature-list--archive" aria-labelledby="project-narratives-title">
-  <div class="project-section-heading">
-    <h2 id="project-narratives-title">Capstones and Build Narratives</h2>
-    <span>Earlier systems, learning builds, and course-rooted work</span>
-  </div>
-  {% for project in showcase_projects %}
-    {% assign is_featured_evidence = false %}
-    {% if project.showcase_style == 'agent-tooling' or project.group == 'Research' or project.group == 'Performance Engineering' or project.title contains 'Go Database' or project.title contains 'Blockchain Based Ticketing' %}
-      {% assign is_featured_evidence = true %}
-    {% endif %}
-    {% if is_featured_evidence %}{% continue %}{% endif %}
-    {% assign project_image = project.card_image | default: project.thumbnail %}
-  <article class="academic-entry project-feature-entry{% if project.showcase_style %} project-feature-entry--{{ project.showcase_style }}{% endif %}{% unless project_image %} project-feature-entry--text-only{% endunless %}">
-    {% if project_image %}
-    <a class="project-feature-entry__media" href="{{ project.url | relative_url }}" aria-label="{{ project.title }}">
-      <img loading="lazy" decoding="async" src="{{ project_image | relative_url }}" alt="{{ project.title }}">
-    </a>
-    {% endif %}
-    <div class="project-feature-entry__body">
-      <div class="project-feature-entry__topline">
-        <p class="project-feature-entry__eyebrow">{{ project.project_type | default: project.group }}</p>
-      </div>
-      <h3><a href="{{ project.url | relative_url }}">{{ project.title }}</a></h3>
-      <p class="academic-entry__meta">{{ project.date | date: "%B %Y" }}{% if project.group %} · {{ project.group }}{% endif %}</p>
-      <p class="project-feature-entry__summary">{{ project.excerpt | default: project.content | strip_html | truncatewords: 28 }}</p>
-      {% if project.technologies %}<p class="academic-tags">{% for tech in project.technologies limit:5 %}<span class="academic-tag">{{ tech }}</span>{% endfor %}</p>{% endif %}
-    </div>
-  </article>
-  {% endfor %}
-</section>
-
-<section class="academic-section project-archive" aria-labelledby="compact-project-index-title">
-  <div class="project-section-heading">
-    <h2 id="compact-project-index-title">Compact Project Index</h2>
-    <span>Older portfolio records</span>
-  </div>
-  {% for project in site.data.profile.projects %}
-  <article class="academic-entry project-archive-entry">
-    <h3>{% if project.link %}<a href="{{ project.link }}">{{ project.title }}</a>{% else %}{{ project.title }}{% endif %}</h3>
-    <p class="academic-entry__meta">{{ project.date }}</p>
-    <p>{{ project.description | strip_html }}</p>
-    {% if project.technologies %}<p class="academic-tags">{% for tech in project.technologies limit:5 %}<span class="academic-tag">{{ tech }}</span>{% endfor %}</p>{% endif %}
-  </article>
-  {% endfor %}
+  <section class="project-group" data-project-group="selected-builds" aria-labelledby="selected-builds-title">
+    <div class="project-group__heading"><p class="eyebrow">Selected build work</p><h2 id="selected-builds-title">Systems, capstones, and engineering narratives</h2></div>
+    <ol class="project-record-list">
+      {% for project in showcase_projects %}
+      {% assign is_research_system = false %}
+      {% if project.showcase_style == 'agent-tooling' or project.group == 'Research' %}{% assign is_research_system = true %}{% endif %}
+      {% if is_research_system %}{% continue %}{% endif %}
+      <li><article class="project-record" data-project-record data-project-title="{{ project.title }}"><p class="project-record__type">{{ project.project_type | default: project.group }}</p><div><h3><a href="{{ project.url | relative_url }}">{{ project.title }}</a></h3><p>{{ project.excerpt | default: project.content | strip_html | truncatewords: 30 }}</p><p class="project-record__meta">{{ project.date | date: '%B %Y' }}{% if project.technologies %} · {{ project.technologies | join: ', ' | truncatewords: 7 }}{% endif %}</p></div></article></li>
+      {% endfor %}
+    </ol>
+  </section>
 </section>

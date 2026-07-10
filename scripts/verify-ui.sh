@@ -74,6 +74,7 @@ case "${MODE}" in
     SPECS=(
       "tests/research-first-shell.spec.js"
       "tests/research-dossier.spec.js"
+      "tests/records-and-contributions.spec.js"
     )
     ;;
   *)
