@@ -73,6 +73,7 @@ case "${MODE}" in
   full)
     SPECS=(
       "tests/research-first-shell.spec.js"
+      "tests/research-dossier.spec.js"
     )
     ;;
   *)

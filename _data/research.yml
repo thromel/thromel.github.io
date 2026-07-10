@@ -10,6 +10,7 @@ agenda:
 
 anchors:
   - id: sregym
+    publicity: "public"
     label: "Reliability-agent evaluation"
     title: "SREGym: AI for SRE and reliability-agent evaluation"
     question: "How can we evaluate an SRE agent in a live software environment without mistaking a shallow recovery for a reliable one?"
@@ -26,6 +27,7 @@ anchors:
         url: "https://github.com/SREGym/SREGym"
 
   - id: ml-hosting-rce
+    publicity: "public"
     label: "ML ecosystem security"
     title: "Remote Code Execution in ML model hosting ecosystems"
     question: "What risks emerge when model-hosting platforms load community code and artifacts at ecosystem scale?"
@@ -43,6 +45,7 @@ anchors:
         url: "/research/ml-remote-code-execution/"
 
   - id: shift
+    publicity: "abstract-only"
     label: "Agent security"
     title: "The Choice Can Be the Attack: auditing aligned backdoors in LLM agents"
     question: "Can a trigger steer an agent toward an attacker’s preferred valid choice while its final answer still appears acceptable?"

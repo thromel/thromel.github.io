@@ -302,6 +302,15 @@ dd { overflow-wrap: anywhere; }
 .projects-intro,
 .academic-section > p:first-of-type { max-width: var(--reading); color: var(--muted); }
 
+.research-dossier { padding-top: var(--space-5); }
+.research-dossier > h1 { max-width: 15ch; margin-top: var(--space-1); }
+.research-dossier__intro { max-width: 48rem; margin-top: var(--space-3); color: var(--muted); font-family: var(--serif); font-size: 1.28rem; line-height: 1.48; }
+.research-dossier__section-heading { margin-top: var(--space-5); margin-bottom: var(--space-3); }
+.research-dossier__section-heading h2 { margin-top: var(--space-1); }
+.research-boundary { grid-column: 2; max-width: 48rem; margin: var(--space-2) 0 0; padding: 0.65rem 0.8rem; border-left: 3px solid var(--focus); background: var(--paper-elevated); font-size: 0.86rem; }
+.research-contact h2 { max-width: 28ch; margin-top: var(--space-1); }
+.research-contact > p:not(.eyebrow):not(.action-row) { max-width: 44rem; }
+
 .academic-entry,
 .education-entry,
 .blog-entry,
@@ -495,7 +504,8 @@ pre { overflow-x: auto; padding: 1rem; border: 1px solid var(--faint); backgroun
   .evidence-record h3,
   .evidence-record > p:not(.evidence-record__index):not(.evidence-record__question):not(.record-links),
   .evidence-record__meta,
-  .evidence-record .record-links { grid-column: 1; grid-row: auto; }
+  .evidence-record .record-links,
+  .research-boundary { grid-column: 1; grid-row: auto; }
   .evidence-record__index { margin-bottom: var(--space-2); }
   .evidence-record__meta { grid-template-columns: 1fr; }
   .systems-ledger a { grid-template-columns: 1fr; gap: 0.3rem; }
