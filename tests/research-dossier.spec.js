@@ -6,6 +6,9 @@ const ANCHORS = [
   { id: 'sregym', title: 'SREGym', directLink: 'https://github.com/SREGym/SREGym' },
   { id: 'ml-hosting-rce', title: 'Remote Code Execution', directLink: 'https://arxiv.org/abs/2601.14163' },
   { id: 'shift', title: 'Choice Can Be the Attack', directLink: '/research/reagent-plus-plus/' },
+  { id: 'coding-agent-systems', title: 'Context, retrieval', directLink: '/showcase/projects/contextledger/' },
+  { id: 'history-aware-vibe-coding', title: 'History-aware vibe coding', directLink: 'https://homepage.zhouyang.me/' },
+  { id: 'verified-schema-generation', title: 'VeriSchema', directLink: '/research/multi-agent-db-schema/' },
 ];
 
 async function visitResearch(page) {
@@ -13,12 +16,12 @@ async function visitResearch(page) {
 }
 
 test.describe('research dossier contract', () => {
-  test('research centers the three evidence anchors with questions, status, provenance, and direct artifacts', async ({ page }) => {
+  test('research presents six connected lanes with questions, status, provenance, and direct artifacts', async ({ page }) => {
     await page.setViewportSize({ width: 1280, height: 900 });
     await visitResearch(page);
 
     await expect(page.locator('[data-research-dossier]')).toHaveCount(1);
-    await expect(page.locator('[data-research-anchor]')).toHaveCount(3);
+    await expect(page.locator('[data-research-anchor]')).toHaveCount(6);
 
     for (const anchor of ANCHORS) {
       const record = page.locator(`[data-research-anchor="${anchor.id}"]`);

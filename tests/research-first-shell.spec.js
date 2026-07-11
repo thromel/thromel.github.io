@@ -59,6 +59,22 @@ test.describe('research-first shell contract', () => {
     }
   });
 
+  test('homepage media is meaningful, lazy below the fold, and decodes successfully', async ({ page }) => {
+    await page.setViewportSize({ width: 1280, height: 900 });
+    await visitHome(page);
+
+    const portrait = page.locator('[data-home-portrait]');
+    await expect(portrait).toHaveAttribute('fetchpriority', 'high');
+    const images = page.locator('[data-home-image]');
+    expect(await images.count()).toBeGreaterThanOrEqual(10);
+    for (const image of await images.all()) {
+      await expect(image).toHaveAttribute('alt', /\S+/);
+      await expect(image).toHaveAttribute('loading', 'lazy');
+      await image.scrollIntoViewIfNeeded();
+      await expect.poll(() => image.evaluate((node) => node.complete && node.naturalWidth > 0)).toBe(true);
+    }
+  });
+
   test('desktop navigation keeps the research core visible and exposes every other page', async ({ page }) => {
     await page.setViewportSize({ width: 1280, height: 720 });
     await visitHome(page);
