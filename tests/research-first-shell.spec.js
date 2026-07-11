@@ -50,13 +50,33 @@ test.describe('research-first shell contract', () => {
 
   });
 
-  test('hero name stays subordinate to the research agenda on desktop and mobile', async ({ page }) => {
-    for (const [width, maximumSize] of [[1440, 58], [390, 42]]) {
+  test('hero name stays on one compact line from desktop through narrow mobile', async ({ page }) => {
+    for (const width of [1440, 390, 320]) {
       await page.setViewportSize({ width, height: 900 });
       await visitHome(page);
-      const fontSize = await page.locator('[data-home-section="identity"] h1').evaluate((heading) => parseFloat(getComputedStyle(heading).fontSize));
-      expect(fontSize, `${width}px hero name`).toBeLessThanOrEqual(maximumSize);
+      const typography = await page.locator('[data-home-section="identity"] h1').evaluate((heading) => {
+        const style = getComputedStyle(heading);
+        return {
+          fontSize: parseFloat(style.fontSize),
+          lineHeight: parseFloat(style.lineHeight),
+          height: heading.getBoundingClientRect().height,
+          whiteSpace: style.whiteSpace,
+        };
+      });
+      expect(typography.fontSize, `${width}px hero name`).toBeLessThanOrEqual(48);
+      expect(typography.height, `${width}px hero name line count`).toBeLessThanOrEqual(typography.lineHeight * 1.15);
+      expect(typography.whiteSpace, `${width}px hero name wrapping`).toBe('nowrap');
     }
+  });
+
+  test('homepage uses the approved natural-language summaries', async ({ page }) => {
+    await visitHome(page);
+    const main = page.locator('main');
+    await expect(main).toContainText('I study AI agents in real software systems.');
+    await expect(main).toContainText('I learn by building');
+    await expect(main).toContainText('Recent changes to my research and academic plans.');
+    await expect(main).not.toContainText('A builder who wants claims to leave receipts');
+    await expect(main).not.toContainText('A compact currentness ledger');
   });
 
   test('homepage media is meaningful, lazy below the fold, and decodes successfully', async ({ page }) => {
@@ -65,6 +85,8 @@ test.describe('research-first shell contract', () => {
 
     const portrait = page.locator('[data-home-portrait]');
     await expect(portrait).toHaveAttribute('fetchpriority', 'high');
+    await expect(portrait).toHaveAttribute('alt', /seated outdoors/i);
+    expect(await portrait.evaluate((image) => [image.naturalWidth, image.naturalHeight])).toEqual([960, 1280]);
     const images = page.locator('[data-home-image]');
     expect(await images.count()).toBeGreaterThanOrEqual(10);
     for (const image of await images.all()) {

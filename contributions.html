@@ -7,8 +7,8 @@ description: Curated open-source contribution evidence across research infrastru
 
 <section class="academic-section contributions-page" data-contributions-curated aria-labelledby="contributions-title">
   <p class="eyebrow">Open-source contribution evidence</p>
-  <h1 id="contributions-title">Curated contributions, direct artifacts</h1>
-  <p class="contributions-page__intro">Selected contributions are linked to individual merged pull requests. The live count below is only a compact indicator, not a substitute for those artifacts.</p>
+  <h1 id="contributions-title">Open-source contributions</h1>
+  <p class="contributions-page__intro">Each selected contribution links to the merged pull request. The live count adds context, but the patches matter more.</p>
   <ol class="contribution-record-list">
     {% for item in site.data.contributions.highlights %}
     <li><article class="contribution-record"><p class="contribution-record__area">{{ item.area }}</p><div><h2>{{ item.name }}</h2><p class="contribution-record__repo">{{ item.repo }}</p><p>{{ item.summary }}</p><p class="record-links"><a data-contribution-proof href="{{ item.proof_url }}" target="_blank" rel="noopener noreferrer">{{ item.proof_label }} · direct pull request</a></p></div></article></li>

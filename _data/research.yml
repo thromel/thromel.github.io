@@ -11,11 +11,11 @@ agenda:
 identity:
   role_line: "Researcher · software engineer · open-source contributor"
   summary: >-
-    I study how AI agents behave in real software systems—what context they inspect,
-    which actions they choose, how they recover, and what evidence they leave behind.
+    I study AI agents in real software systems. I want to know what they read, which
+    actions they take, how they recover from failures, and whether their evidence holds up.
   bridge: >-
-    My work connects software reliability, agent security, empirical software engineering,
-    program analysis, developer tools, and production healthcare systems.
+    My work spans software reliability, agent security, empirical software engineering,
+    program analysis, developer tools, and healthcare systems.
   markers:
     - "UIUC++ SRSE 2026"
     - "Incoming Alberta M.Sc."
@@ -24,12 +24,11 @@ identity:
 
 about:
   - >-
-    I grew up in Rajshahi and now live in Dhaka. I enjoy moving between research
-    questions and concrete systems: reading a paper, tracing a failure, building an
-    evaluation harness, or turning a vague engineering claim into something measurable.
+    I grew up in Rajshahi and now live in Dhaka. I like work that starts with a research
+    question and ends with something I can run, test, or measure.
   - >-
-    I keep a daily learning routine and tend to learn by building. That habit connects
-    my research, open-source work, systems projects, and production engineering experience.
+    That usually means reading papers, tracing failures, building tools, and writing down
+    what actually happened.
 
 anchors:
   - id: sregym
@@ -261,5 +260,5 @@ milestones:
 contact:
   heading: "Collaborate on reliable agent systems"
   copy: >-
-    I welcome research conversations, artifact review, and collaborations around software
-    reliability, agent evaluation, security, and developer tools.
+    If you are working on software reliability, agent evaluation, security, or developer
+    tools, I would be glad to compare notes or review an artifact.

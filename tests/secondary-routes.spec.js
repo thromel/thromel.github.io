@@ -40,6 +40,24 @@ test.describe('secondary route convergence', () => {
     await expect(page.getByRole('link', { name: /download cv/i })).toHaveCount(1);
   });
 
+  test('shared page and record headings use the compact type scale', async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 1000 });
+
+    for (const path of ['/about', '/research', '/publications', '/projects', '/education', '/experience']) {
+      await page.goto(`${BASE_URL}${path}`, { waitUntil: 'domcontentloaded' });
+      const size = await page.locator('main h1').first().evaluate((heading) => parseFloat(getComputedStyle(heading).fontSize));
+      expect(size, `${path} h1`).toBeLessThanOrEqual(52);
+    }
+
+    await page.goto(`${BASE_URL}/education`, { waitUntil: 'domcontentloaded' });
+    const degreeSize = await page.locator('.education-entry__degree').first().evaluate((heading) => parseFloat(getComputedStyle(heading).fontSize));
+    expect(degreeSize, 'education degree heading').toBeLessThanOrEqual(36);
+
+    await page.goto(`${BASE_URL}/experience`, { waitUntil: 'domcontentloaded' });
+    const recordSize = await page.locator('.academic-entry h3').first().evaluate((heading) => parseFloat(getComputedStyle(heading).fontSize));
+    expect(recordSize, 'experience record heading').toBeLessThanOrEqual(23.2);
+  });
+
   test('ML hosting research URL remains a readable no-JavaScript artifact page', async ({ browser }) => {
     const context = await browser.newContext({ javaScriptEnabled: false, viewport: { width: 390, height: 844 } });
     const page = await context.newPage();

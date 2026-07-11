@@ -6,7 +6,7 @@ navbar_title: News
 
 <section class="academic-section">
   <h1 class="academic-page-title">News</h1>
-  <p>Recent updates about research, work, writing, and open source.</p>
+  <p>Recent research, work, writing, and open-source updates.</p>
 </section>
 
 {% assign news_by_year = site.data.news | sort: "date" | reverse | group_by_exp: "item", "item.date | date: '%Y'" %}

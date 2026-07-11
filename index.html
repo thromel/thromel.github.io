@@ -28,7 +28,7 @@ description: Researcher and software engineer studying inspectable AI agents for
     </div>
     <div class="home-dossier-identity__aside">
       <figure class="home-portrait">
-        <img src="{{ '/assets/images/photos/romel.webp' | relative_url }}" alt="Tanzim Hossain Romel in the Canadian Rockies" width="640" height="858" fetchpriority="high" decoding="async" data-home-portrait>
+        <img src="{{ '/assets/images/photos/romel.webp' | relative_url }}" alt="Tanzim Hossain Romel seated outdoors" width="960" height="1280" fetchpriority="high" decoding="async" data-home-portrait>
         <figcaption>Researcher · software engineer · systems builder</figcaption>
       </figure>
       <aside class="trajectory-note" aria-label="Next academic step">
@@ -42,14 +42,14 @@ description: Researcher and software engineer studying inspectable AI agents for
 
 <section class="home-dossier home-dossier-about" data-home-section="about" aria-labelledby="about-home-title">
   <div class="site-frame home-dossier-section-grid">
-    <div><p class="eyebrow">About</p><h2 id="about-home-title">A builder who wants claims to leave receipts</h2></div>
+    <div><p class="eyebrow">About</p><h2 id="about-home-title">I learn by building</h2></div>
     <div class="home-dossier-prose">{% for paragraph in site.data.research.about %}<p>{{ paragraph }}</p>{% endfor %}<p class="record-links"><a href="{{ '/about' | relative_url }}">More about me</a><a href="{{ '/learning' | relative_url }}">Learning practice</a></p></div>
   </div>
 </section>
 
 <section class="home-dossier home-dossier-research" data-home-section="research" aria-labelledby="research-home-title">
   <div class="site-frame">
-    <div class="home-dossier-section-heading"><div><p class="eyebrow">Research agenda</p><h2 id="research-home-title">Reliable agents in consequential software systems</h2></div><p>Six connected lanes cover live-system evaluation, hidden influence, context and repair, software evolution, and verification.</p></div>
+    <div class="home-dossier-section-heading"><div><p class="eyebrow">Research agenda</p><h2 id="research-home-title">Reliable agents in real software systems</h2></div><p>My current work falls into six related areas.</p></div>
     <ol class="home-research-grid">
       {% for anchor in site.data.research.anchors %}
       <li class="home-research-card{% if anchor.image %} home-research-card--primary{% endif %}">
@@ -71,7 +71,7 @@ description: Researcher and software engineer studying inspectable AI agents for
 
 <section class="home-dossier home-dossier-publications" data-home-section="publications" aria-labelledby="publications-home-title">
   <div class="site-frame">
-    <div class="home-dossier-section-heading"><div><p class="eyebrow">Publications and artifacts</p><h2 id="publications-home-title">Research record</h2></div><p>Complete status labels, contribution summaries, and direct public evidence where it exists.</p></div>
+    <div class="home-dossier-section-heading"><div><p class="eyebrow">Publications and artifacts</p><h2 id="publications-home-title">Research record</h2></div><p>Papers, submissions, and the public artifacts behind them.</p></div>
     <ol class="home-publication-list">
       {% for item in ordered_publications %}
       <li><article class="home-publication-record" data-home-publication>
@@ -91,7 +91,7 @@ description: Researcher and software engineer studying inspectable AI agents for
 
 <section class="home-dossier home-dossier-experience" data-home-section="experience" aria-labelledby="experience-home-title">
   <div class="site-frame">
-    <div class="home-dossier-section-heading"><div><p class="eyebrow">Experience</p><h2 id="experience-home-title">Research and production engineering</h2></div><p>Roles shown with representative responsibilities and measurable outcomes.</p></div>
+    <div class="home-dossier-section-heading"><div><p class="eyebrow">Experience</p><h2 id="experience-home-title">Research and production engineering</h2></div><p>A short account of the work I did and the outcomes I can support.</p></div>
     <ol class="home-experience-list">
       {% for position in site.data.profile.positions %}
       <li><article class="home-experience-record" data-home-experience>
@@ -108,7 +108,7 @@ description: Researcher and software engineer studying inspectable AI agents for
 
 <section class="home-dossier home-dossier-engineering" data-home-section="engineering" aria-labelledby="engineering-home-title">
   <div class="site-frame">
-    <div class="home-dossier-section-heading"><div><p class="eyebrow">Engineering and open source</p><h2 id="engineering-home-title">Research systems, developer tools, and selected builds</h2></div><p>Current agent tooling leads; broader systems and applied-ML work shows the engineering range behind it.</p></div>
+    <div class="home-dossier-section-heading"><div><p class="eyebrow">Engineering and open source</p><h2 id="engineering-home-title">Research systems, developer tools, and selected builds</h2></div><p>My current agent tools come first. The rest shows the systems and ML work that led to them.</p></div>
     <div class="home-engineering-ledger">
       {% for item in site.data.research.engineering %}<article data-home-engineering>
         {% if item.image %}<a class="home-engineering-ledger__visual" href="{{ item.url | relative_url }}"><img src="{{ item.image | relative_url }}" alt="Architecture preview for {{ item.name }}" loading="lazy" decoding="async" data-home-image></a>{% endif %}
@@ -121,7 +121,7 @@ description: Researcher and software engineer studying inspectable AI agents for
 
 <section class="home-dossier home-dossier-education" data-home-section="education" aria-labelledby="education-home-title">
   <div class="site-frame">
-    <div class="home-dossier-section-heading"><div><p class="eyebrow">Education</p><h2 id="education-home-title">Academic path and foundations</h2></div><p>Programs, supervisors, results, thesis work, and the recognitions that shaped the trajectory.</p></div>
+    <div class="home-dossier-section-heading"><div><p class="eyebrow">Education</p><h2 id="education-home-title">Education</h2></div><p>My academic path, from Rajshahi to BUET and Alberta.</p></div>
     <ol class="home-education-list">
       {% for edu in site.data.profile.education limit: 3 %}<li><article class="home-education-record" data-home-education>
         {% if edu.logo %}<div class="home-education-record__logo"><img src="{{ edu.logo | relative_url }}" alt="{{ edu.name }} logo" loading="lazy" decoding="async" data-home-image></div>{% endif %}
@@ -134,7 +134,7 @@ description: Researcher and software engineer studying inspectable AI agents for
 
 <section class="home-dossier home-dossier-recognition" data-home-section="recognition" aria-labelledby="recognition-home-title">
   <div class="site-frame">
-    <div class="home-dossier-section-heading"><div><p class="eyebrow">Recognition</p><h2 id="recognition-home-title">Awards and milestones</h2></div><p>Selected professional, academic, competition, and national recognition.</p></div>
+    <div class="home-dossier-section-heading"><div><p class="eyebrow">Recognition</p><h2 id="recognition-home-title">Awards and milestones</h2></div><p>A few awards and competition results.</p></div>
     <div class="home-recognition-grid">{% for item in site.data.research.recognition %}<article data-home-recognition><p class="home-recognition-grid__date">{{ item.date }}</p><h3>{{ item.title }}</h3><p>{{ item.summary }}</p></article>{% endfor %}</div>
     <p class="action-row"><a class="button-link" href="{{ '/achievements' | relative_url }}">All achievements</a></p>
   </div>
@@ -142,7 +142,7 @@ description: Researcher and software engineer studying inspectable AI agents for
 
 <section class="home-dossier home-dossier-milestones" data-home-section="milestones" aria-labelledby="milestones-home-title">
   <div class="site-frame">
-    <div class="home-dossier-section-heading"><div><p class="eyebrow">Recent milestones</p><h2 id="milestones-home-title">What changed recently</h2></div><p>A compact currentness ledger for research, education, and professional direction.</p></div>
+    <div class="home-dossier-section-heading"><div><p class="eyebrow">Recent milestones</p><h2 id="milestones-home-title">What changed recently</h2></div><p>Recent changes to my research and academic plans.</p></div>
     <ol class="home-milestone-list">{% for item in site.data.research.milestones %}<li><article data-home-milestone><time datetime="{{ item.date }}">{{ item.date | date: '%B %Y' }}</time><div><h3>{{ item.title }}</h3><p>{{ item.summary }}</p></div></article></li>{% endfor %}</ol>
     <p class="action-row"><a class="button-link" href="{{ '/news' | relative_url }}">All news</a></p>
   </div>
