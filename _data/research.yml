@@ -15,7 +15,9 @@ identity:
     actions they take, how they recover from failures, and whether their evidence holds up.
   bridge: >-
     My work spans software reliability, agent security, empirical software engineering,
-    program analysis, developer tools, and healthcare systems.
+    program analysis, and developer tools. I also have three years of software and AI
+    engineering experience, building backend services, cloud data workflows, and LLM/RAG
+    features for healthcare analytics.
   markers:
     - label: "UIUC++ SRSE 2026"
       affiliation: "UIUC"

@@ -82,6 +82,8 @@ test.describe('research-first shell contract', () => {
     await visitHome(page);
     const main = page.locator('main');
     await expect(main).toContainText('I study AI agents in real software systems.');
+    await expect(main).toContainText('three years of software and AI engineering experience');
+    await expect(main).toContainText('backend services, cloud data workflows, and LLM/RAG features for healthcare analytics');
     await expect(main).toContainText('I learn by building');
     await expect(main).toContainText('Recent changes to my research and academic plans.');
     await expect(main).not.toContainText('A builder who wants claims to leave receipts');
