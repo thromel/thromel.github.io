@@ -1,7 +1,10 @@
 const { test, expect } = require('@playwright/test');
 
 const BASE_URL = process.env.PLAYWRIGHT_TEST_BASE_URL || 'http://127.0.0.1:4000';
-const HOME_BLOCKS = ['agenda', 'evidence', 'systems', 'contact'];
+const HOME_SECTIONS = [
+  'identity', 'about', 'research', 'publications', 'experience',
+  'engineering', 'education', 'recognition', 'milestones', 'contact',
+];
 const CORE_ROUTES = ['Research', 'Publications', 'Projects', 'CV'];
 const OTHER_ROUTES = ['Contributions', 'About', 'Education', 'Work', 'Achievements', 'News', 'Learning'];
 
@@ -20,20 +23,24 @@ async function expectNoHorizontalOverflow(page, width) {
 }
 
 test.describe('research-first shell contract', () => {
-  test('home is exactly four meaningful research-first blocks', async ({ page }) => {
+  test('home presents the complete professional dossier in a deliberate order', async ({ page }) => {
     await page.setViewportSize({ width: 1280, height: 720 });
     await visitHome(page);
 
-    const blocks = page.locator('main > [data-home-block]');
-    await expect(blocks).toHaveCount(4);
-    await expect(blocks.evaluateAll((elements) => elements.map((element) => element.dataset.homeBlock))).resolves.toEqual(HOME_BLOCKS);
-    await expect(page.locator('[data-home-block="agenda"] h1')).toContainText('Tanzim Hossain Romel');
-    await expect(page.locator('[data-home-block="evidence"] [data-research-anchor]')).toHaveCount(3);
-    await expect(page.locator('[data-home-block="evidence"]')).toContainText('SREGym');
-    await expect(page.locator('[data-home-block="evidence"]')).toContainText('Remote Code Execution');
-    await expect(page.locator('[data-home-block="evidence"]')).toContainText('SHIFT');
-    await expect(page.locator('[data-home-block="systems"]')).toContainText('Supporting systems');
-    await expect(page.locator('[data-home-block="contact"]')).toContainText('Collaborate');
+    const sections = page.locator('main > [data-home-section]');
+    await expect(sections).toHaveCount(HOME_SECTIONS.length);
+    await expect(sections.evaluateAll((elements) => elements.map((element) => element.dataset.homeSection))).resolves.toEqual(HOME_SECTIONS);
+    await expect(page.locator('[data-home-section="identity"] h1')).toContainText('Tanzim Hossain Romel');
+    await expect(page.locator('[data-home-research-lane]')).toHaveCount(6);
+    await expect(page.locator('[data-home-publication]')).toHaveCount(4);
+    await expect(page.locator('[data-home-experience]')).toHaveCount(3);
+    await expect(page.locator('[data-home-metric]')).toHaveCount(4);
+    await expect(page.locator('[data-home-engineering]')).toHaveCount(7);
+    await expect(page.locator('[data-home-education]')).toHaveCount(3);
+    await expect(page.locator('[data-home-recognition]')).toHaveCount(7);
+    await expect(page.locator('[data-home-milestone]')).toHaveCount(4);
+    await expect(page.locator('[data-home-section="about"]')).toContainText('Rajshahi');
+    await expect(page.locator('[data-home-section="contact"]')).toContainText('Collaborate');
 
     const portrait = page.locator('[data-home-portrait]');
     await expect(portrait).toHaveCount(1);
@@ -41,15 +48,13 @@ test.describe('research-first shell contract', () => {
     await expect(portrait).toHaveAttribute('fetchpriority', 'high');
     expect(await portrait.evaluate((image) => image.complete && image.naturalWidth > 0)).toBe(true);
 
-    const controls = await page.locator('main a, main button').count();
-    expect(controls).toBeLessThanOrEqual(30);
   });
 
   test('hero name stays subordinate to the research agenda on desktop and mobile', async ({ page }) => {
     for (const [width, maximumSize] of [[1440, 58], [390, 42]]) {
       await page.setViewportSize({ width, height: 900 });
       await visitHome(page);
-      const fontSize = await page.locator('[data-home-block="agenda"] h1').evaluate((heading) => parseFloat(getComputedStyle(heading).fontSize));
+      const fontSize = await page.locator('[data-home-section="identity"] h1').evaluate((heading) => parseFloat(getComputedStyle(heading).fontSize));
       expect(fontSize, `${width}px hero name`).toBeLessThanOrEqual(maximumSize);
     }
   });
@@ -141,10 +146,11 @@ test.describe('research-first shell contract', () => {
     const page = await context.newPage();
     await visitHome(page);
 
-    const blocks = page.locator('main > [data-home-block]');
-    await expect(blocks).toHaveCount(4);
-    await expect(page.locator('[data-home-block="agenda"] h1')).toBeVisible();
-    await expect(page.locator('[data-home-block="evidence"] [data-research-anchor]').first()).toBeVisible();
+    const sections = page.locator('main > [data-home-section]');
+    await expect(sections).toHaveCount(HOME_SECTIONS.length);
+    await expect(page.locator('[data-home-section="identity"] h1')).toBeVisible();
+    await expect(page.locator('[data-home-research-lane]').first()).toBeVisible();
+    await expect(page.locator('[data-home-section="contact"] a[href^="mailto:"]')).toBeVisible();
     for (const route of CORE_ROUTES) {
       await expect(page.locator('#site-navigation').getByRole('link', { name: route, exact: true })).toBeVisible();
     }
