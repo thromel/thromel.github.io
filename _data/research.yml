@@ -17,10 +17,19 @@ identity:
     My work spans software reliability, agent security, empirical software engineering,
     program analysis, developer tools, and healthcare systems.
   markers:
-    - "UIUC++ SRSE 2026"
-    - "Incoming Alberta M.Sc."
-    - "BUET CSE"
-    - "Dhaka, Bangladesh"
+    - label: "UIUC++ SRSE 2026"
+      affiliation: "UIUC"
+      logo: "/assets/images/companies/uiuc-block-i.png"
+      logo_alt: "UIUC Block I logo"
+    - label: "Incoming Alberta M.Sc."
+      affiliation: "University of Alberta"
+      logo: "/assets/images/education/ualberta-logo.svg"
+      logo_alt: "University of Alberta crest"
+    - label: "BUET CSE"
+      affiliation: "BUET"
+      logo: "/assets/images/education/buet-logo.png"
+      logo_alt: "BUET logo"
+    - label: "Dhaka, Bangladesh"
 
 about:
   - >-
@@ -227,9 +236,6 @@ recognition:
   - title: "2nd place · Bangla handwritten digit recognition"
     date: "2022"
     summary: "Second among 120 students; a custom CNN from NumPy and OpenCV primitives reached 95.9% test accuracy."
-  - title: "Blockchain Olympiad Bangladesh finalist"
-    date: "2021"
-    summary: "A smart-contract ticketing platform targeting fraud, scalping, and secondary-market manipulation."
   - title: "BUET Dean's List"
     date: "Level 2"
     summary: "Academic recognition for sophomore-year performance."

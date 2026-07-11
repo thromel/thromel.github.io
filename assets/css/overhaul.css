@@ -589,7 +589,8 @@ pre { overflow-x: auto; padding: 1rem; border: 1px solid var(--faint); backgroun
 .home-dossier-identity__aside { display: grid; gap: var(--space-3); }
 .home-dossier-identity__next-meta { color: var(--muted); font-family: var(--mono); font-size: 0.7rem; }
 .home-dossier-markers { display: flex; flex-wrap: wrap; gap: 0.45rem; margin: var(--space-3) 0 0; padding: 0; list-style: none; }
-.home-dossier-markers li { padding: 0.45rem 0.6rem; background: var(--accent-soft); color: var(--ink); font-family: var(--mono); font-size: 0.68rem; font-weight: 600; }
+.home-dossier-markers li { display: inline-flex; align-items: center; gap: 0.45rem; min-height: 2.35rem; padding: 0.35rem 0.6rem; background: var(--accent-soft); color: var(--ink); font-family: var(--mono); font-size: 0.68rem; font-weight: 600; }
+.home-dossier-markers img { width: 1.5rem; height: 1.5rem; flex: 0 0 auto; object-fit: contain; }
 
 .home-dossier-section-grid,
 .home-dossier-section-heading { display: grid; grid-template-columns: minmax(14rem, 0.55fr) minmax(0, 1.45fr); gap: clamp(2rem, 6vw, 6rem); }

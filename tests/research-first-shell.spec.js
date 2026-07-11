@@ -32,15 +32,24 @@ test.describe('research-first shell contract', () => {
     await expect(sections.evaluateAll((elements) => elements.map((element) => element.dataset.homeSection))).resolves.toEqual(HOME_SECTIONS);
     await expect(page.locator('[data-home-section="identity"] h1')).toContainText('Tanzim Hossain Romel');
     await expect(page.locator('[data-home-research-lane]')).toHaveCount(6);
-    await expect(page.locator('[data-home-publication]')).toHaveCount(4);
+    await expect(page.locator('[data-home-publication]')).toHaveCount(2);
     await expect(page.locator('[data-home-experience]')).toHaveCount(3);
     await expect(page.locator('[data-home-metric]')).toHaveCount(4);
     await expect(page.locator('[data-home-engineering]')).toHaveCount(7);
     await expect(page.locator('[data-home-education]')).toHaveCount(3);
-    await expect(page.locator('[data-home-recognition]')).toHaveCount(7);
+    await expect(page.locator('[data-home-recognition]')).toHaveCount(6);
     await expect(page.locator('[data-home-milestone]')).toHaveCount(4);
     await expect(page.locator('[data-home-section="about"]')).toContainText('Rajshahi');
     await expect(page.locator('[data-home-section="contact"]')).toContainText('Collaborate');
+    await expect(page.locator('main')).not.toContainText('Sentiment Analysis of Anonymous Crisis Reports');
+    await expect(page.locator('main')).not.toContainText('Blockchain');
+
+    const affiliationLogos = page.locator('[data-home-affiliation-logo]');
+    await expect(affiliationLogos).toHaveCount(3);
+    await expect(page.locator('[data-home-affiliation="UIUC"] img')).toHaveAttribute('alt', /UIUC/i);
+    await expect(page.locator('[data-home-affiliation="University of Alberta"] img')).toHaveAttribute('alt', /University of Alberta/i);
+    await expect(page.locator('[data-home-affiliation="BUET"] img')).toHaveAttribute('alt', /BUET/i);
+    expect(await affiliationLogos.evaluateAll((images) => images.every((image) => image.complete && image.naturalWidth > 0))).toBe(true);
 
     const portrait = page.locator('[data-home-portrait]');
     await expect(portrait).toHaveCount(1);

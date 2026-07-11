@@ -15,7 +15,7 @@ description: Researcher and software engineer studying inspectable AI agents for
       <p class="home-dossier-identity__lead">{{ site.data.research.identity.summary }}</p>
       <p class="home-dossier-identity__bridge">{{ site.data.research.identity.bridge }}</p>
       <ul class="home-dossier-markers" aria-label="Current profile markers">
-        {% for marker in site.data.research.identity.markers %}<li>{{ marker }}</li>{% endfor %}
+        {% for marker in site.data.research.identity.markers %}<li{% if marker.affiliation %} data-home-affiliation="{{ marker.affiliation }}"{% endif %}>{% if marker.logo %}<img src="{{ marker.logo | relative_url }}" alt="{{ marker.logo_alt }}" width="28" height="28" decoding="async" data-home-affiliation-logo>{% endif %}<span>{{ marker.label }}</span></li>{% endfor %}
       </ul>
       {% include current-status.html with_data=true label="Current work" %}
       <p class="action-row">
@@ -74,6 +74,7 @@ description: Researcher and software engineer studying inspectable AI agents for
     <div class="home-dossier-section-heading"><div><p class="eyebrow">Publications and artifacts</p><h2 id="publications-home-title">Research record</h2></div><p>Papers, submissions, and the public artifacts behind them.</p></div>
     <ol class="home-publication-list">
       {% for item in ordered_publications %}
+      {% if item.homepage == false %}{% continue %}{% endif %}
       <li><article class="home-publication-record" data-home-publication>
         <p class="home-publication-record__year">{{ item.pub_date }}</p>
         {% if item.cover %}<figure class="home-publication-record__cover"><img src="{{ item.cover | relative_url }}" alt="Cover image for {{ item.title | escape }}" loading="lazy" decoding="async" data-home-image></figure>{% endif %}

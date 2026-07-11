@@ -1,5 +1,6 @@
 ---
 title: "Patient-Centric Blockchain Framework for EHR Management"
+homepage: false
 date: 2023-05-27 00:00:00 +0600
 pub: "B.Sc. Thesis, Bangladesh University of Engineering and Technology (BUET)"
 pub_date: "2023"
