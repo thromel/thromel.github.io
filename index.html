@@ -55,7 +55,7 @@ description: Researcher and software engineer studying inspectable AI agents for
       <li class="home-research-card{% if anchor.image %} home-research-card--primary{% endif %}">
         <article data-home-research-lane data-research-anchor="{{ anchor.id }}" data-publicity="{{ anchor.publicity }}">
           <p class="evidence-record__index">0{{ forloop.index }} · {{ anchor.label }}</p>
-          {% if anchor.image %}<figure class="home-research-card__visual"><img src="{{ anchor.image | relative_url }}" alt="{{ anchor.image_alt }}" loading="lazy" decoding="async" data-home-image>{% if anchor.image_caption %}<figcaption>{{ anchor.image_caption }}</figcaption>{% endif %}</figure>{% endif %}
+          {% if anchor.image %}<figure class="home-research-card__visual" data-home-record-visual><img src="{{ anchor.image | relative_url }}" alt="{{ anchor.image_alt }}" loading="lazy" decoding="async" data-home-image>{% if anchor.image_caption %}<figcaption>{{ anchor.image_caption }}</figcaption>{% endif %}</figure>{% else %}{% include home-material-thumbnail.html type="Research direction" icon="/assets/images/icons/open-book.png" class="home-research-card__visual home-material-thumbnail--research" %}{% endif %}
           <h3>{{ anchor.title }}</h3>
           <p class="home-research-card__question">{{ anchor.question }}</p>
           <p>{{ anchor.description }}</p>
@@ -77,13 +77,14 @@ description: Researcher and software engineer studying inspectable AI agents for
       {% if item.homepage == false %}{% continue %}{% endif %}
       <li><article class="home-publication-record" data-home-publication>
         <p class="home-publication-record__year">{{ item.pub_date }}</p>
-        {% if item.cover %}<figure class="home-publication-record__cover"><img src="{{ item.cover | relative_url }}" alt="Cover image for {{ item.title | escape }}" loading="lazy" decoding="async" data-home-image></figure>{% endif %}
-        <div class="home-publication-record__body{% unless item.cover %} home-publication-record__body--wide{% endunless %}"><h3>{{ item.title }}</h3><p class="home-publication-record__status">{% if item.pub_pre %}{{ item.pub_pre }}{% endif %}{{ item.pub }}</p><p>{{ item.abstract }}</p><p class="record-links">{% if item.primary_link %}<a href="{{ item.primary_link | relative_url }}">{{ item.primary_label | default: 'Research summary' }}</a>{% endif %}{% for link in item.links %}<a href="{{ link[1] | relative_url }}"{% if link[1] contains '://' %} target="_blank" rel="noopener noreferrer"{% endif %}>{{ link[0] }}</a>{% endfor %}</p></div>
+        {% if item.cover %}<figure class="home-publication-record__cover" data-home-record-visual><img src="{{ item.cover | relative_url }}" alt="Cover image for {{ item.title | escape }}" loading="lazy" decoding="async" data-home-image></figure>{% else %}{% include home-material-thumbnail.html type="Research paper" icon="/assets/images/icons/open-book.png" class="home-publication-record__cover home-material-thumbnail--portrait" %}{% endif %}
+        <div class="home-publication-record__body"><h3>{{ item.title }}</h3><p class="home-publication-record__status">{% if item.pub_pre %}{{ item.pub_pre }}{% endif %}{{ item.pub }}</p><p>{{ item.abstract }}</p><p class="record-links">{% if item.primary_link %}<a href="{{ item.primary_link | relative_url }}">{{ item.primary_label | default: 'Research summary' }}</a>{% endif %}{% for link in item.links %}<a href="{{ link[1] | relative_url }}"{% if link[1] contains '://' %} target="_blank" rel="noopener noreferrer"{% endif %}>{{ link[0] }}</a>{% endfor %}</p></div>
       </article></li>
       {% endfor %}
       <li><article class="home-publication-record" data-home-publication>
         <p class="home-publication-record__year">2026</p>
-        <div class="home-publication-record__body home-publication-record__body--wide"><h3>The Choice Can Be the Attack: Auditing Aligned Backdoors in LLM Agents</h3><p class="home-publication-record__status">Submitted to Transactions of the Association for Computational Linguistics (TACL)</p><p>SHIFT tests whether a known trigger changes which valid option an agent chooses, then asks whether that movement favors an attacker's target after accounting for ordinary option quality.</p><p class="record-links"><a href="{{ '/research/reagent-plus-plus/' | relative_url }}">Abstract-level summary</a></p></div>
+        {% include home-material-thumbnail.html type="Research paper" icon="/assets/images/icons/open-book.png" class="home-publication-record__cover home-material-thumbnail--portrait" %}
+        <div class="home-publication-record__body"><h3>The Choice Can Be the Attack: Auditing Aligned Backdoors in LLM Agents</h3><p class="home-publication-record__status">Submitted to Transactions of the Association for Computational Linguistics (TACL)</p><p>SHIFT tests whether a known trigger changes which valid option an agent chooses, then asks whether that movement favors an attacker's target after accounting for ordinary option quality.</p><p class="record-links"><a href="{{ '/research/reagent-plus-plus/' | relative_url }}">Abstract-level summary</a></p></div>
       </article></li>
     </ol>
     <p class="action-row"><a class="button-link" href="{{ '/publications' | relative_url }}">Full publication record</a></p>
@@ -96,27 +97,15 @@ description: Researcher and software engineer studying inspectable AI agents for
     <ol class="home-experience-list">
       {% for position in site.data.profile.positions %}
       <li><article class="home-experience-record" data-home-experience>
-        <div class="home-experience-record__heading"><div><h3>{{ position.name }}</h3><p>{{ position.description | strip_html }}</p></div><p class="home-experience-record__date">{{ position.display_date | default: position.date }}</p></div>
-        <ul>{% for responsibility in position.responsibilities limit: 4 %}<li>{{ responsibility }}</li>{% endfor %}</ul>
-        {% if position.name contains 'IQVIA' %}<div class="home-metrics" aria-label="Selected IQVIA outcomes">{% for metric in site.data.research.experience_metrics %}<div data-home-metric><strong>{{ metric.value }}</strong><span>{{ metric.label }}</span></div>{% endfor %}</div>{% endif %}
-        {% if position.technologies %}<p class="home-experience-record__tech">{{ position.technologies | join: ' · ' | truncatewords: 14 }}</p>{% endif %}
+        <div class="home-experience-record__logo">{% if position.logo %}<img src="{{ position.logo | relative_url }}" alt="{{ position.logo_alt }}" loading="lazy" decoding="async" data-home-image data-home-work-logo>{% else %}{% include home-material-thumbnail.html type="Work" icon="/assets/images/icons/suitcase.png" class="home-material-thumbnail--compact" %}{% endif %}</div>
+        <div class="home-experience-record__content"><div class="home-experience-record__heading"><div><h3>{{ position.name }}</h3><p>{{ position.description | strip_html }}</p></div><p class="home-experience-record__date">{{ position.display_date | default: position.date }}</p></div>
+          <ul>{% for responsibility in position.responsibilities limit: 4 %}<li>{{ responsibility }}</li>{% endfor %}</ul>
+          {% if position.name contains 'IQVIA' %}<div class="home-metrics" aria-label="Selected IQVIA outcomes">{% for metric in site.data.research.experience_metrics %}<div data-home-metric><strong>{{ metric.value }}</strong><span>{{ metric.label }}</span></div>{% endfor %}</div>{% endif %}
+          {% if position.technologies %}<p class="home-experience-record__tech">{{ position.technologies | join: ' · ' | truncatewords: 14 }}</p>{% endif %}</div>
       </article></li>
       {% endfor %}
     </ol>
     <p class="action-row"><a class="button-link" href="{{ '/experience' | relative_url }}">Complete experience</a></p>
-  </div>
-</section>
-
-<section class="home-dossier home-dossier-engineering" data-home-section="engineering" aria-labelledby="engineering-home-title">
-  <div class="site-frame">
-    <div class="home-dossier-section-heading"><div><p class="eyebrow">Engineering and open source</p><h2 id="engineering-home-title">Research systems, developer tools, and selected builds</h2></div><p>My current agent tools come first. The rest shows the systems and ML work that led to them.</p></div>
-    <div class="home-engineering-ledger">
-      {% for item in site.data.research.engineering %}<article data-home-engineering>
-        {% if item.image %}<a class="home-engineering-ledger__visual" href="{{ item.url | relative_url }}"><img src="{{ item.image | relative_url }}" alt="Architecture preview for {{ item.name }}" loading="lazy" decoding="async" data-home-image></a>{% endif %}
-        <div class="home-engineering-ledger__body{% unless item.image %} home-engineering-ledger__body--wide{% endunless %}"><h3><a href="{{ item.url | relative_url }}"{% if item.url contains '://' %} target="_blank" rel="noopener noreferrer"{% endif %}>{{ item.name }}</a></h3><p>{{ item.summary }}</p></div><p class="home-engineering-ledger__meta">{{ item.meta }}</p>
-      </article>{% endfor %}
-    </div>
-    <p class="action-row"><a class="button-link" href="{{ '/projects' | relative_url }}">All projects</a><a class="text-link" href="{{ '/contributions' | relative_url }}">Contribution evidence</a></p>
   </div>
 </section>
 
@@ -130,6 +119,19 @@ description: Researcher and software engineer studying inspectable AI agents for
       </article></li>{% endfor %}
     </ol>
     <p class="action-row"><a class="button-link" href="{{ '/education' | relative_url }}">Education details</a></p>
+  </div>
+</section>
+
+<section class="home-dossier home-dossier-engineering" data-home-section="engineering" aria-labelledby="engineering-home-title">
+  <div class="site-frame">
+    <div class="home-dossier-section-heading"><div><p class="eyebrow">Engineering and open source</p><h2 id="engineering-home-title">Research systems, developer tools, and selected builds</h2></div><p>My current agent tools come first. The rest shows the systems and ML work that led to them.</p></div>
+    <div class="home-engineering-ledger">
+      {% for item in site.data.research.engineering %}<article data-home-engineering>
+        {% if item.image %}<a class="home-engineering-ledger__visual" href="{{ item.url | relative_url }}" data-home-record-visual><img src="{{ item.image | relative_url }}" alt="Architecture preview for {{ item.name }}" loading="lazy" decoding="async" data-home-image></a>{% else %}{% include home-material-thumbnail.html type=item.material_type icon=item.material_icon class="home-engineering-ledger__visual home-material-thumbnail--engineering" %}{% endif %}
+        <div class="home-engineering-ledger__body"><h3><a href="{{ item.url | relative_url }}"{% if item.url contains '://' %} target="_blank" rel="noopener noreferrer"{% endif %}>{{ item.name }}</a></h3><p>{{ item.summary }}</p></div><p class="home-engineering-ledger__meta">{{ item.meta }}</p>
+      </article>{% endfor %}
+    </div>
+    <p class="action-row"><a class="button-link" href="{{ '/projects' | relative_url }}">All projects</a><a class="text-link" href="{{ '/contributions' | relative_url }}">Contribution evidence</a></p>
   </div>
 </section>
 

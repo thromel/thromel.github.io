@@ -632,12 +632,15 @@ pre { overflow-x: auto; padding: 1rem; border: 1px solid var(--faint); backgroun
 .home-publication-record__status { margin: 0.5rem 0; }
 .home-publication-record__body > p:not(.home-publication-record__status):not(.record-links) { font-size: 0.9rem; }
 
-.home-experience-record { padding: var(--space-4) 0; border-bottom: 1px solid var(--rule); }
+.home-experience-record { display: grid; grid-template-columns: 4.5rem minmax(0, 1fr); gap: var(--space-3); padding: var(--space-4) 0; border-bottom: 1px solid var(--rule); }
+.home-experience-record__logo { display: grid; place-items: center; width: 4.5rem; height: 4.5rem; border: 1px solid var(--faint); background: var(--paper-elevated); }
+.home-experience-record__logo > img { display: block; max-width: 3.35rem; max-height: 3.35rem; object-fit: contain; }
+.home-experience-record__content { min-width: 0; }
 .home-experience-record__heading { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: var(--space-3); }
 .home-experience-record__heading h3 { font-size: clamp(1.15rem, 1.6vw, 1.45rem); }
 .home-experience-record__heading p:not(.home-experience-record__date) { max-width: 48rem; color: var(--muted); }
 .home-experience-record__date { margin: 0; text-align: right; }
-.home-experience-record > ul { display: grid; gap: 0.5rem; max-width: 54rem; padding-left: 1.2rem; }
+.home-experience-record__content > ul { display: grid; gap: 0.5rem; max-width: 54rem; padding-left: 1.2rem; }
 .home-metrics { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0.5rem; margin-top: var(--space-3); }
 .home-metrics > div { padding: 0.8rem; background: var(--accent-soft); }
 .home-metrics strong { display: block; color: var(--accent); font-family: var(--serif); font-size: 1.8rem; line-height: 1; }
@@ -651,6 +654,16 @@ pre { overflow-x: auto; padding: 1rem; border: 1px solid var(--faint); backgroun
 .home-engineering-ledger h3 { font-size: clamp(1.15rem, 1.6vw, 1.45rem); }
 .home-engineering-ledger__body p { margin: 0.55rem 0 0; font-size: 0.88rem; }
 .home-engineering-ledger__meta { margin: 0; color: var(--muted); font-family: var(--mono); font-size: 0.7rem; line-height: 1.45; text-align: right; }
+
+.home-material-thumbnail { margin: 0; overflow: hidden; }
+.home-material-thumbnail__canvas { display: grid; place-items: center; align-content: center; gap: 0.65rem; width: 100%; min-height: 6rem; padding: 0.85rem; border: 1px solid var(--faint); background: linear-gradient(145deg, var(--paper-elevated), var(--accent-soft)); }
+.home-material-thumbnail .home-material-thumbnail__icon { display: block; width: 2.75rem; height: 2.75rem; aspect-ratio: auto; border: 0; background: transparent; object-fit: contain; }
+.home-material-thumbnail__canvas span { color: var(--muted); font-family: var(--mono); font-size: 0.62rem; font-weight: 600; letter-spacing: 0.06em; line-height: 1.25; text-align: center; text-transform: uppercase; }
+.home-material-thumbnail--research .home-material-thumbnail__canvas { min-height: 10rem; }
+.home-material-thumbnail--portrait .home-material-thumbnail__canvas { aspect-ratio: 4 / 5; }
+.home-material-thumbnail--engineering .home-material-thumbnail__canvas { aspect-ratio: 16 / 10; }
+.home-material-thumbnail--compact .home-material-thumbnail__canvas { width: 4.5rem; min-height: 4.5rem; padding: 0.5rem; }
+.home-material-thumbnail--compact .home-material-thumbnail__canvas span { display: none; }
 
 .home-education-record { display: grid; grid-template-columns: 4.5rem minmax(0, 1fr); gap: var(--space-3); padding: var(--space-3) 0; border-bottom: 1px solid var(--rule); }
 .home-education-record__logo { display: grid; place-items: center; width: 4.5rem; height: 4.5rem; border: 1px solid var(--faint); background: var(--paper-elevated); }
@@ -715,6 +728,7 @@ pre { overflow-x: auto; padding: 1rem; border: 1px solid var(--faint); backgroun
   .home-dossier-identity__aside { max-width: 28rem; }
   .home-research-grid { grid-template-columns: 1fr; }
   .home-publication-record,
+  .home-experience-record,
   .home-experience-record__heading,
   .home-engineering-ledger article,
   .home-milestone-list article { grid-template-columns: 1fr; }

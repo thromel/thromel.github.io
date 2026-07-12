@@ -1,0 +1,8 @@
+{% assign material_type = include.type | default: "Material" %}
+{% assign material_icon = include.icon | default: "/assets/images/icons/open-book.png" %}
+<figure class="home-material-thumbnail {{ include.class }}" role="img" aria-label="{{ material_type }} thumbnail" data-home-record-visual data-home-material-thumbnail data-material-type="{{ material_type }}">
+  <div class="home-material-thumbnail__canvas">
+    <img class="home-material-thumbnail__icon" src="{{ material_icon | relative_url }}" alt="" width="48" height="48" loading="lazy" decoding="async">
+    <span>{{ material_type }}</span>
+  </div>
+</figure>

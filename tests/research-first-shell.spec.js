@@ -3,7 +3,7 @@ const { test, expect } = require('@playwright/test');
 const BASE_URL = process.env.PLAYWRIGHT_TEST_BASE_URL || 'http://127.0.0.1:4000';
 const HOME_SECTIONS = [
   'identity', 'about', 'research', 'publications', 'experience',
-  'engineering', 'education', 'recognition', 'milestones', 'contact',
+  'education', 'engineering', 'recognition', 'milestones', 'contact',
 ];
 const CORE_ROUTES = ['Research', 'Publications', 'Projects', 'CV'];
 const OTHER_ROUTES = ['Contributions', 'About', 'Education', 'Work', 'Achievements', 'News', 'Learning'];
@@ -50,6 +50,26 @@ test.describe('research-first shell contract', () => {
     await expect(page.locator('[data-home-affiliation="University of Alberta"] img')).toHaveAttribute('alt', /University of Alberta/i);
     await expect(page.locator('[data-home-affiliation="BUET"] img')).toHaveAttribute('alt', /BUET/i);
     expect(await affiliationLogos.evaluateAll((images) => images.every((image) => image.complete && image.naturalWidth > 0))).toBe(true);
+
+    await expect(page.locator('[data-home-research-lane] [data-home-record-visual]')).toHaveCount(6);
+    await expect(page.locator('[data-home-publication] [data-home-record-visual]')).toHaveCount(2);
+    await expect(page.locator('[data-home-engineering] [data-home-record-visual]')).toHaveCount(7);
+    await expect(page.locator('[data-home-publication] [data-home-material-thumbnail][data-material-type="Research paper"]')).toHaveCount(1);
+
+    const fallbackThumbnails = page.locator('[data-home-material-thumbnail] img');
+    await expect(fallbackThumbnails).toHaveCount(8);
+    for (const image of await fallbackThumbnails.all()) {
+      await image.scrollIntoViewIfNeeded();
+      await expect.poll(() => image.evaluate((node) => node.complete && node.naturalWidth > 0)).toBe(true);
+    }
+
+    const workLogos = page.locator('[data-home-work-logo]');
+    await expect(workLogos).toHaveCount(3);
+    for (const image of await workLogos.all()) {
+      await expect(image).toHaveAttribute('alt', /\S+/);
+      await image.scrollIntoViewIfNeeded();
+      await expect.poll(() => image.evaluate((node) => node.complete && node.naturalWidth > 0)).toBe(true);
+    }
 
     const portrait = page.locator('[data-home-portrait]');
     await expect(portrait).toHaveCount(1);

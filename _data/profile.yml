@@ -137,6 +137,7 @@ positions:
   end_date_exclusive: "2026-07-01"
   display_date: "June 2023–June 2026"
   logo: "/assets/images/companies/iqvia-logo.png"
+  logo_alt: "IQVIA logo"
   description: >-
     Backend engineer on the KPI Library team, building .NET/C# microservices for healthcare analytics workflows over large patient-level datasets. IQVIA (NYSE: IQV) provides analytics, technology solutions, and clinical research services to the life sciences industry, with 74,000+ employees across 100+ countries.
   responsibilities:
@@ -171,6 +172,7 @@ positions:
   end_date_exclusive: "2021-12-01"
   display_date: "April–November 2021"
   logo: "/assets/images/companies/mindshare-logo.png"
+  logo_alt: "Mindshare Bangladesh logo"
   description: >-
     Built an e-commerce aggregator platform that let brands promote products by pulling listings from multiple e-commerce sites across Bangladesh.
   responsibilities:

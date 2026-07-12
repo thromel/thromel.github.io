@@ -180,6 +180,8 @@ experience_metrics:
 engineering:
   - id: refactoringminer
     name: "RefactoringMiner MCP"
+    material_type: "Open source"
+    material_icon: "/assets/images/icons/code.png"
     summary: >-
       Active RefactoringMiner development with Professor Nikolaos Tsantalis; I helped
       build MCP access for coding agents and contribute to the JetBrains integration collaboration.
@@ -211,6 +213,8 @@ engineering:
     image: "/assets/images/projects/patchsmith-component-architecture.svg"
   - id: contributions
     name: "Selected open-source contributions"
+    material_type: "Open source"
+    material_icon: "/assets/images/icons/code.png"
     summary: >-
       Curated contribution evidence across EF Core, GenHTTP, deepagents, TypeScript,
       LangChain, and other developer-tooling repositories.
@@ -218,6 +222,8 @@ engineering:
     url: "/contributions/"
   - id: systems-builds
     name: "Systems and performance builds"
+    material_type: "Systems build"
+    material_icon: "/assets/images/icons/programming.png"
     summary: >-
       1BRC C# on Apple Silicon, a Go database engine, a Go container runtime, a compiler,
       a ray tracer, TCP Vegas+, and the distributed EventFly platform.
@@ -225,6 +231,8 @@ engineering:
     url: "/projects/"
   - id: applied-ml
     name: "Applied ML and learning builds"
+    material_type: "Applied ML"
+    material_icon: "/assets/images/icons/idea.png"
     summary: >-
       Bangla digit recognition from NumPy and OpenCV primitives, BERT-context image
       captioning, and a mini deep-learning framework with autodiff and tensor operations.
