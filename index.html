@@ -40,6 +40,25 @@ description: Researcher and software engineer studying inspectable AI agents for
   </div>
 </section>
 
+<section class="home-dossier home-dossier-engineering-profile" data-home-section="engineering-profile" data-home-engineering-profile aria-labelledby="engineering-profile-title">
+  <div class="site-frame">
+    <div class="home-dossier-section-heading">
+      <div><p class="eyebrow">Engineering profile</p><h2 id="engineering-profile-title">What I build with</h2></div>
+      <p>{{ site.data.research.engineering_profile.intro }}</p>
+    </div>
+    <ol class="home-engineering-profile-grid">
+      {% for group in site.data.research.engineering_profile.groups %}
+      <li><article data-home-engineering-skill data-skill-group="{{ group.id }}">
+        <h3>{{ group.title }}</h3>
+        <p>{{ group.summary }}</p>
+        <p class="home-engineering-profile-grid__technologies">{{ group.technologies | join: ' · ' }}</p>
+      </article></li>
+      {% endfor %}
+    </ol>
+    <p class="record-links home-engineering-profile__links"><a href="{{ '/experience' | relative_url }}">Work experience</a><a href="{{ '/projects' | relative_url }}">Engineering projects</a></p>
+  </div>
+</section>
+
 <section class="home-dossier home-dossier-about" data-home-section="about" aria-labelledby="about-home-title">
   <div class="site-frame home-dossier-section-grid">
     <div><p class="eyebrow">About</p><h2 id="about-home-title">I learn by building</h2></div>

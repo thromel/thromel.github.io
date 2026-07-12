@@ -177,6 +177,48 @@ experience_metrics:
   - value: "35%"
     label: "deployment-time reduction"
 
+engineering_profile:
+  intro: >-
+    Three years of production software and AI engineering, alongside hands-on
+    systems and open-source work.
+  groups:
+    - id: backend-apis
+      title: "Backend and APIs"
+      summary: "Production services and data-heavy analytics workflows."
+      technologies:
+        - C#/.NET
+        - EF Core
+        - REST APIs
+        - Microservices
+    - id: ai-agent-systems
+      title: "AI and agent systems"
+      summary: "LLM/RAG workflows and research tools connected to real software systems."
+      technologies:
+        - Python
+        - LangGraph
+        - MCP
+        - RAG
+        - LLM evaluation
+    - id: systems-open-source
+      title: "Systems and open source"
+      summary: "Developer tools, program analysis, and multi-language open-source contributions."
+      technologies:
+        - Rust
+        - Go
+        - TypeScript
+        - Java
+        - C++
+    - id: cloud-data-reliability
+      title: "Cloud, data, and reliability"
+      summary: "Deploying, tuning, and observing cloud-native services and data stores."
+      technologies:
+        - AWS
+        - PostgreSQL
+        - MongoDB
+        - Docker
+        - Kubernetes
+        - OpenTelemetry
+
 engineering:
   - id: refactoringminer
     name: "RefactoringMiner MCP"

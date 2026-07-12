@@ -592,6 +592,15 @@ pre { overflow-x: auto; padding: 1rem; border: 1px solid var(--faint); backgroun
 .home-dossier-markers li { display: inline-flex; align-items: center; gap: 0.45rem; min-height: 2.35rem; padding: 0.35rem 0.6rem; background: var(--accent-soft); color: var(--ink); font-family: var(--mono); font-size: 0.68rem; font-weight: 600; }
 .home-dossier-markers img { width: 1.5rem; height: 1.5rem; flex: 0 0 auto; object-fit: contain; }
 
+.home-dossier-engineering-profile { padding-block: var(--space-4); }
+.home-engineering-profile-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--space-2); margin: 0; padding: 0; list-style: none; }
+.home-engineering-profile-grid li { min-width: 0; }
+.home-engineering-profile-grid article { height: 100%; padding: var(--space-3); border-top: 3px solid var(--accent); background: var(--paper-elevated); }
+.home-engineering-profile-grid h3 { font-size: clamp(1.05rem, 1.4vw, 1.3rem); }
+.home-engineering-profile-grid article > p:not(.home-engineering-profile-grid__technologies) { margin: 0.65rem 0 0; font-size: 0.86rem; }
+.home-engineering-profile-grid__technologies { margin: var(--space-2) 0 0; color: var(--muted); font-family: var(--mono); font-size: 0.67rem; line-height: 1.55; overflow-wrap: anywhere; }
+.home-engineering-profile__links { margin-top: var(--space-3); }
+
 .home-dossier-section-grid,
 .home-dossier-section-heading { display: grid; grid-template-columns: minmax(14rem, 0.55fr) minmax(0, 1.45fr); gap: clamp(2rem, 6vw, 6rem); }
 .home-dossier-section-grid h2,
@@ -726,6 +735,7 @@ pre { overflow-x: auto; padding: 1rem; border: 1px solid var(--faint); backgroun
   .home-dossier-contact__grid { grid-template-columns: 1fr; }
   .home-dossier-identity h1 { font-size: clamp(1.75rem, 3.4vw, 3rem); }
   .home-dossier-identity__aside { max-width: 28rem; }
+  .home-engineering-profile-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .home-research-grid { grid-template-columns: 1fr; }
   .home-publication-record,
   .home-experience-record,
@@ -796,6 +806,7 @@ pre { overflow-x: auto; padding: 1rem; border: 1px solid var(--faint); backgroun
   .home-agenda { padding-top: 3.5rem; }
   .home-agenda h1 { max-width: 15ch; font-size: clamp(2.25rem, 10vw, 2.5rem); }
   .home-agenda__thesis { font-size: 1.35rem; }
+  .home-engineering-profile-grid { grid-template-columns: 1fr; }
   .systems-ledger span { font-size: 1.2rem; }
   .project-feature-entry,
   .education-entry,

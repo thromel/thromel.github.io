@@ -2,8 +2,8 @@ const { test, expect } = require('@playwright/test');
 
 const BASE_URL = process.env.PLAYWRIGHT_TEST_BASE_URL || 'http://127.0.0.1:4000';
 const HOME_SECTIONS = [
-  'identity', 'about', 'research', 'publications', 'experience',
-  'education', 'engineering', 'recognition', 'milestones', 'contact',
+  'identity', 'engineering-profile', 'about', 'research', 'publications',
+  'experience', 'education', 'engineering', 'recognition', 'milestones', 'contact',
 ];
 const CORE_ROUTES = ['Research', 'Publications', 'Projects', 'CV'];
 const OTHER_ROUTES = ['Contributions', 'About', 'Education', 'Work', 'Achievements', 'News', 'Learning'];
@@ -43,6 +43,24 @@ test.describe('research-first shell contract', () => {
     await expect(page.locator('[data-home-section="contact"]')).toContainText('Collaborate');
     await expect(page.locator('main')).not.toContainText('Sentiment Analysis of Anonymous Crisis Reports');
     await expect(page.locator('main')).not.toContainText('Blockchain');
+
+    const engineeringProfile = page.locator('[data-home-engineering-profile]');
+    await expect(engineeringProfile).toHaveCount(1);
+    await expect(engineeringProfile.locator('[data-home-engineering-skill]')).toHaveCount(4);
+    await expect(engineeringProfile.locator('[data-home-engineering-skill] h3').allTextContents()).resolves.toEqual([
+      'Backend and APIs',
+      'AI and agent systems',
+      'Systems and open source',
+      'Cloud, data, and reliability',
+    ]);
+    await expect(engineeringProfile).toContainText('Three years of production software and AI engineering');
+    await expect(engineeringProfile).toContainText('C#/.NET · EF Core · REST APIs · Microservices');
+    await expect(engineeringProfile).toContainText('Python · LangGraph · MCP · RAG · LLM evaluation');
+    await expect(engineeringProfile).toContainText('Rust · Go · TypeScript · Java · C++');
+    await expect(engineeringProfile).toContainText('AWS · PostgreSQL · MongoDB · Docker · Kubernetes · OpenTelemetry');
+    await expect(engineeringProfile).not.toContainText(/Solidity|Web3/i);
+    await expect(engineeringProfile.getByRole('link', { name: 'Work experience' })).toHaveAttribute('href', '/experience');
+    await expect(engineeringProfile.getByRole('link', { name: 'Engineering projects' })).toHaveAttribute('href', '/projects');
 
     const affiliationLogos = page.locator('[data-home-affiliation-logo]');
     await expect(affiliationLogos).toHaveCount(3);
