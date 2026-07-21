@@ -139,28 +139,28 @@ positions:
   logo: "/assets/images/companies/iqvia-logo.png"
   logo_alt: "IQVIA logo"
   description: >-
-    Backend engineer on the KPI Library team, building .NET/C# microservices for healthcare analytics workflows over large patient-level datasets. IQVIA (NYSE: IQV) provides analytics, technology solutions, and clinical research services to the life sciences industry, with 74,000+ employees across 100+ countries.
+    Backend engineer on IQVIA's KPI Library platform, working across configuration, dashboard, and export workflows for healthcare analytics. Built and maintained C#/.NET services, data-access components, automated test infrastructure, and an internal AI-assisted workflow prototype using EF Core, SQL Server, MongoDB, and AWS S3.
   responsibilities:
-  - Built and deployed cloud-native healthcare analytics services with <b>C#/.NET Core</b> and <b>EF Core</b> on <b>AWS</b> (Lambda, EC2, S3, DynamoDB); shipped RESTful APIs used by global pharmaceutical clients
-  - Refactored a complex healthcare-analytics filter path into reusable query components, reducing duplicated business rules and improving filtering performance by 70% in the targeted workflow
-  - Helped build a LangGraph/LangChain workflow using MCP and <b>RAG</b> to turn analyst prompts into structured dashboard setup, modification, analysis, and export actions
-  - Reduced selected complex query execution times by 60% through <b>PostgreSQL</b> query planning, indexing, and materialized views
-  - Implemented <b>in-memory caching</b> in <b>.NET</b> services and tuned <b>MongoDB</b> access patterns, improving selected API response times by 40%
-  - Built deterministic <b>Playwright</b> export regression tests with multi-layer hashing, raising export-workflow coverage from 72% to 95%
-  - Improved CI/CD build stages and parallel test execution, cutting deployment time by 35%; added distributed tracing with <b>Jaeger</b> to make latency regressions easier to diagnose
-  - Led and contributed to proof-of-concept projects, mentored junior developers, and collaborated with cross-functional teams across time zones
-  - Received the <b>IQVIA Impact Program - Silver</b> award (May 2025) for performance and essential feature delivery
+  - Built and maintained <b>C#/.NET</b> services and shared components across KPI configuration, dashboard, export, and gateway workflows; used <b>EF Core</b> with <b>SQL Server</b> for configuration data, <b>MongoDB</b> for dashboard caching, and <b>AWS S3</b> in export workflows
+  - Refactored repeated filter-resolution logic into reusable query components, centralizing validation and business rules so new filter behavior could be implemented consistently; added regression scenarios for combined filters and edge cases
+  - Added in-memory caching to targeted .NET read paths and improved interaction with the MongoDB-backed dashboard cache, avoiding repeated datastore reads in the affected workflows
+  - Extended CSV and presentation export paths with regional-formatting and commentary support, improved batch-export error aggregation, and built deterministic <b>Playwright</b> regression tests by controlling fixtures, locale, and browser state and normalizing volatile file metadata before hashing stable content
+  - Implemented server-side axis-break resolution for KPI charts by computing adjacent gaps in ordered KPI values and translating qualifying intervals into <b>Highcharts yAxis.breaks</b>, keeping visualization behavior consistent across clients
+  - Reorganized CI build, test, and packaging stages, ran independent test suites in parallel, and reused build artifacts between stages to shorten pull-request feedback and isolate failing test groups
+  - Contributed <b>OpenTelemetry</b>/<b>Jaeger</b> instrumentation and correlation identifiers to selected dashboard, configuration, and export request paths, making cross-service calls and database latency visible during debugging
+  - Contributed to an internal <b>LangGraph</b>/<b>LangChain</b> prototype that converted analyst requests into typed dashboard operations, retrieved KPI definitions and product documentation through <b>RAG</b>, invoked restricted dashboard tools through <b>MCP</b>, and validated generated action payloads before execution
+  - Received the <b>IQVIA Impact Program - Silver</b> award in May 2025
   technologies:
   - C#
   - .NET Core
   - EF Core
-  - PostgreSQL
+  - SQL Server
   - MongoDB
-  - AWS
-  - Docker
-  - Kubernetes
+  - AWS S3
+  - Highcharts
   - LangGraph
   - LangChain
+  - MCP
   - RAG
   - Playwright
   - Jaeger
