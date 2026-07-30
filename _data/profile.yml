@@ -3,14 +3,20 @@ secondary_name: ""
 navbar_name: "Tanzim Hossain Romel"
 
 about_snippet: >-
-  Hi, I'm Tanzim. I'm a software engineer and researcher working on software engineering, LLM systems, and AI/ML security.
-  I build developer tools for coding agents, research pipelines, and backend systems. At
-  <a href="https://www.iqvia.com" target="_blank">IQVIA</a>, I work on healthcare analytics microservices for patient-level data workflows
-  and help integrate LLM/RAG features into dashboard tooling. I also work with researchers at
-  <a href="https://eng.auburn.edu" target="_blank">Auburn University</a> and
-  <a href="https://cse.buet.ac.bd" target="_blank">BUET</a> on ML security and blockchain systems.
+  At the <a href="https://www.ualberta.ca/en/computing-science/index.html" target="_blank" rel="noopener noreferrer">University of Alberta</a>,
+  I am an incoming M.Sc. student. My research interests are AI4SE, AI for SRE, LLM4Coding,
+  trustworthy AI, and long-horizon coding agents. I bring about three years of professional
+  software-engineering experience, most recently at
+  <a href="https://www.iqvia.com/" target="_blank" rel="noopener noreferrer">IQVIA</a>, where I worked on
+  <a href="https://www.iqvia.com/solutions/commercialization/commercial-analytics/orchestrated-analytics" target="_blank" rel="noopener noreferrer">Orchestrated Analytics</a>,
+  and graduated from <a href="https://cse.buet.ac.bd/" target="_blank" rel="noopener noreferrer">BUET CSE</a>.
 
-current_company:
+current_affiliation:
+  name: "University of Alberta"
+  logo: "/assets/images/education/ualberta-logo.svg"
+  url: "https://www.ualberta.ca/en/computing-science/index.html"
+
+former_company:
   name: "IQVIA"
   logo: "/assets/images/companies/iqvia-logo.png"
   url: "https://www.iqvia.com/"
@@ -68,7 +74,7 @@ research_statement:
     - label: "Context management"
       text: "<a href=\"/showcase/projects/contextledger/\">ContextLedger</a> turns long sessions into typed, provenance-carrying events for measurable compaction."
     - label: "Retrieval efficiency"
-      text: "<a href=\"https://github.com/thromel/ctxhelm\" target=\"_blank\" rel=\"noopener noreferrer\">ctxhelm</a> and HelmBench test whether agents inspect the right files with less irrelevant reading."
+      text: "<a href=\"https://github.com/thromel/ctxhelm\" target=\"_blank\" rel=\"noopener noreferrer\">ctxhelm</a> and <a href=\"https://github.com/thromel/helmbench\" target=\"_blank\" rel=\"noopener noreferrer\">HelmBench</a> test whether agents inspect the right files with less irrelevant reading."
     - label: "Repair agents"
       text: "<a href=\"/showcase/projects/patchsmith/\">PatchSmith</a> explores bounded DeepAgents repair runs with traces, sandbox validation, and readiness reports."
     tags:
@@ -78,6 +84,7 @@ research_statement:
     - DeepAgents
   - title: "History-aware vibe coding"
     status: "Emerging research direction"
+    link: https://u-a-goose.github.io/
     summary: >-
       I am exploring how coding agents should use edit history, repository memory, and design intent when developers work through natural-language
       programming loops. This direction connects to my work with <a href="https://homepage.zhouyang.me/" target="_blank" rel="noopener noreferrer">Dr. Zhou Yang</a>
@@ -113,6 +120,29 @@ research_statement:
     - Refactoring
 
 positions:
+- name: Graduate Teaching and Research Assistant (GTA · GRA · GRAF), University of Alberta
+  date: Starting September 1, 2026
+  start_date: "2026-09-01"
+  display_date: "Starting September 1, 2026"
+  logo: "/assets/images/education/ualberta-logo.svg"
+  logo_alt: "University of Alberta crest"
+  url: https://www.ualberta.ca/en/computing-science/index.html
+  description: >-
+    Incoming M.Sc. student in Computing Science with GTA, GRA, and GRAF appointments
+    supporting graduate teaching and research in software engineering and dependable AI.
+  responsibilities:
+  - Begin graduate research with the U-A-Goose software engineering group under Dr. Zhou Yang
+  - Support University of Alberta teaching and research through GTA and GRA appointments with GRAF funding
+  links:
+  - label: U-A-Goose
+    url: https://u-a-goose.github.io/
+  - label: Dr. Zhou Yang
+    url: https://apps.ualberta.ca/directory/person/zy25
+  technologies:
+  - Graduate Research
+  - Teaching
+  - Software Engineering
+  - Dependable AI
 - name: Remote Research Intern, UIUC
   date: June 2026 - August 2026
   start_date: "2026-06-01"
@@ -120,12 +150,17 @@ positions:
   display_date: "June–August 2026"
   logo: "/assets/images/companies/uiuc-block-i.png"
   logo_alt: "University of Illinois Urbana-Champaign Block I logo"
-  url: https://tianyin.github.io/
+  url: https://uiuc-srse.github.io/
   description: >-
     Remote summer research internship at the University of Illinois Urbana-Champaign through UIUC++ Summer Research in Software Engineering (SRSE) 2026 with Professor Tianyin Xu's group, focused on software and systems reliability research.
   responsibilities:
   - Working on software engineering research with an emphasis on reliable systems and rigorous empirical evaluation
   - Reading systems and software reliability literature, prototyping research ideas, and preparing artifacts for reproducible evaluation
+  links:
+  - label: SREGym
+    url: https://www.sregym.com/
+  - label: Professor Tianyin Xu
+    url: https://tianyin.github.io/
   technologies:
   - Software Engineering Research
   - Systems Reliability
@@ -138,8 +173,18 @@ positions:
   display_date: "June 2023–June 2026"
   logo: "/assets/images/companies/iqvia-logo.png"
   logo_alt: "IQVIA logo"
+  url: https://www.iqvia.com/
   description: >-
-    Backend engineer on IQVIA's KPI Library platform, working across configuration, dashboard, analysis, and export workflows for healthcare analytics. Built and maintained C#/.NET services, data-access components, automated test infrastructure, and a schema-grounded AI copilot with supporting evaluation, retrieval, security, and observability infrastructure.
+    Backend engineer on IQVIA's KPI Library, the dynamic reporting layer within
+    Orchestrated Analytics, working across configuration, dashboard, analysis, and export
+    workflows for healthcare analytics. Built and maintained C#/.NET services, data-access
+    components, automated test infrastructure, and a schema-grounded AI copilot with
+    supporting evaluation, retrieval, security, and observability infrastructure.
+  links:
+  - label: Orchestrated Analytics
+    url: https://www.iqvia.com/solutions/commercialization/commercial-analytics/orchestrated-analytics
+  - label: KPI Library
+    url: https://www.iqvia.com/library/fact-sheets/kpi-library
   responsibilities:
   - Built and maintained <b>C#/.NET</b> services and shared components across four KPI Library workflow areas—configuration, dashboard, export, and gateway; used <b>EF Core</b> with <b>SQL Server</b> for configuration data, <b>MongoDB</b> for dashboard caching, and <b>AWS S3</b> in export workflows
   - Refactored repeated filter-resolution logic into reusable query components, consolidating 6 duplicated implementations into 2 shared components; centralized validation and business rules and added regression scenarios for combined filters and edge cases
@@ -178,6 +223,7 @@ positions:
   display_date: "April–November 2021"
   logo: "/assets/images/companies/mindshare-logo.png"
   logo_alt: "Mindshare Bangladesh logo"
+  url: https://www.mindshareworld.com/offices
   description: >-
     Built an e-commerce aggregator platform that let brands promote products by pulling listings from multiple e-commerce sites across Bangladesh.
   responsibilities:
@@ -199,7 +245,7 @@ positions:
   - Data Aggregation
 
 email: "tanhromel@gmail.com"
-work_email: "tanzimhossain.romel@iqvia.com"
+work_email: "tanzimho@ualberta.ca"
 phone: "+88 01771 600158"
 location: "Uttara, Dhaka, Bangladesh"
 meeting_link: "https://calendar.app.google/TfJi4rtVVpSrhdv9A"
@@ -221,11 +267,11 @@ linkedin: thromel
 orcid: 0009-0009-2432-8960
 
 summary:
-- "I'm Tanzim Hossain Romel, a <b>Software Development Engineer at IQVIA</b> and a recent <b>BUET CSE graduate</b>, working at the intersection of industry practice and academic research"
-- "My research focuses on <b>AI and software engineering</b>, especially <b>software security, LLM systems safety, and empirical software engineering</b>"
+- "I'm Tanzim Hossain Romel, an incoming <b>M.Sc. student at the University of Alberta</b>, a former <b>Software Development Engineer at IQVIA</b>, and a <b>BUET CSE graduate</b>"
+- "My research interests are <b>AI4SE, AI for SRE, LLM4Coding, trustworthy AI, and long-horizon coding agents</b>"
 - "I study vulnerabilities in machine learning ecosystems, methods for detecting adversarial behavior, and ways to improve reliability and safety through verification and runtime monitoring"
 - "I collaborate with researchers at <b>Bangladesh University of Engineering and Technology</b> and <b>Auburn University</b> on projects that connect theory with real software engineering challenges"
-- "At IQVIA, I build healthcare microservices, design cloud-native solutions, and integrate AI capabilities into production systems. I received the <b>IQVIA Impact Silver Award</b> for performance and innovation"
+- "At IQVIA, I built healthcare microservices, designed cloud-native solutions, and integrated AI capabilities into production systems. I received the <b>IQVIA Impact Silver Award</b> for performance and innovation"
 - "I try to balance hands-on system building with rigorous research. See my <a href='/projects'>portfolio of projects</a> and <a href='/research'>research contributions</a> for examples"
 - "<b><a href='/assets/pdf/cv.pdf' target='_blank'>Complete curriculum vitae available here</a></b>"
 
@@ -268,15 +314,15 @@ skills:
       - Python-Selenium
 
 short_bio: >-
-  Hi I'm Tanzim. I'm a software engineer and aspiring researcher working on <b>AI/ML security, LLM systems, software engineering, and backend systems</b>. Most of my work sits between research and building: coding-agent tools, research software, microservices, and systems projects in <b>Rust, Python, C#/.NET, TypeScript, and C++</b>. I care about coding agents, trustworthy AI systems, software architecture, and empirical software engineering.
+  At the <b><a href="https://www.ualberta.ca/en/computing-science/index.html" target="_blank" rel="noopener noreferrer">University of Alberta</a></b>, I am an incoming M.Sc. student. My research interests are <b>AI4SE, AI for SRE, LLM4Coding, trustworthy AI, and long-horizon coding agents</b>. I bring about three years of professional software-engineering experience, most recently at <b><a href="https://www.iqvia.com/" target="_blank" rel="noopener noreferrer">IQVIA</a></b>, where I worked on <a href="https://www.iqvia.com/solutions/commercialization/commercial-analytics/orchestrated-analytics" target="_blank" rel="noopener noreferrer">Orchestrated Analytics</a>, and graduated from <a href="https://cse.buet.ac.bd/" target="_blank" rel="noopener noreferrer">BUET CSE</a>. Most of my work sits between research and building: coding-agent tools, research software, microservices, and systems projects in <b>Rust, Python, C#/.NET, TypeScript, and C++</b>.
   <br/><br/>
-  I keep a daily learning routine, maintain learning logs, and try to turn reading into small builds. That habit helps me balance research collaborations with my full-time engineering role.
+  I keep a daily learning routine, maintain learning logs, and try to turn reading into small builds. That habit helps me balance graduate research, teaching, and open-source engineering.
   <br/><br/>
-  I completed my B.Sc in Computer Science and Engineering from <b>Bangladesh University of Engineering and Technology</b> with a <b>CGPA of 3.53/4.0</b>. I earned a <span class="highlight-sessional"><b>3.86/4.0 GPA in Sessional Courses</b></span>, the lab and project-based core of BUET's curriculum. I received the <b>Dean's List Award</b> and placed <a href="https://tanzimhromel.com/projects/bangla_digit_recognition/" target="_blank">2nd in the Bangla Handwritten Digits Recognition contest</a>.
+  I completed my B.Sc in Computer Science and Engineering from <b><a href="https://cse.buet.ac.bd/" target="_blank" rel="noopener noreferrer">Bangladesh University of Engineering and Technology</a></b> with a <b>CGPA of 3.53/4.0</b>. I earned a <span class="highlight-sessional"><b>3.86/4.0 GPA in Sessional Courses</b></span>, the lab and project-based core of BUET's curriculum. I received the <b><a href="https://cse.buet.ac.bd/academics/fund" target="_blank" rel="noopener noreferrer">Dean's List Award</a></b> and placed <a href="https://tanzimhromel.com/projects/bangla_digit_recognition/" target="_blank">2nd in the Bangla Handwritten Digits Recognition contest</a>.
   <br/><br/>
-  During undergrad, our project "<a href="/projects/blockchain-ticketing" target="_blank">Blockchain Based Ticketing Platform</a>" was a finalist in the <b><a href="https://bcolbd.org/2021/teams" target="_blank">Blockchain Olympiad Bangladesh 2021 (BCOLBD 2021)</a></b>. I worked with <a href="https://fazledyn.github.io" target="_blank">Ataf Fazledin Ahamed</a> and <a href="https://www.linkedin.com/in/md-tanzim-azad-a879a51b7/" target="_blank">Md. Tanzim Azad Nishan</a> to build a decentralized solution that addressed ticket fraud and scalping through smart contracts.
+  During undergrad, our project "<a href="/showcase/projects/blockchain-ticketing/">Blockchain Based Ticketing Platform</a>" was a finalist in the <b><a href="https://bcolbd.org/2021/teams" target="_blank">Blockchain Olympiad Bangladesh 2021 (BCOLBD 2021)</a></b>. I worked with <a href="https://fazledyn.github.io" target="_blank">Ataf Fazledin Ahamed</a> and <a href="https://www.linkedin.com/in/md-tanzim-azad-a879a51b7/" target="_blank">Md. Tanzim Azad Nishan</a> to build a decentralized solution that addressed ticket fraud and scalping through smart contracts.
   <br/><br/>
-  I work as a Software Development Engineer at <a href="https://www.iqvia.com/">IQVIA</a> (NYSE: IQV), a Fortune 500 company and healthcare data analytics provider that serves 90% of the top pharmaceutical companies worldwide. At IQVIA, I work on healthcare analytics microservices for patient-level data workflows, add observability for critical data pipelines, design cloud-native services on AWS, and help integrate LLM/RAG capabilities into dashboard setup, analysis, and export workflows.
+  From June 2023 to June 2026, I worked as a Software Development Engineer at <a href="https://www.iqvia.com/" target="_blank" rel="noopener noreferrer">IQVIA</a> (NYSE: IQV), a healthcare data analytics company. I worked on <a href="https://www.iqvia.com/library/fact-sheets/kpi-library" target="_blank" rel="noopener noreferrer">KPI Library</a>, the dynamic reporting layer within <a href="https://www.iqvia.com/solutions/commercialization/commercial-analytics/orchestrated-analytics" target="_blank" rel="noopener noreferrer">Orchestrated Analytics</a>, spanning healthcare analytics microservices, observability for critical data pipelines, cloud services on AWS, and LLM/RAG capabilities for dashboard setup, analysis, and export workflows.
   <br/><br/>
   In May 2025, I received the <a href='https://drive.google.com/file/d/1Vc4E2RoQEPmbfS56oLdUih-oJDBok9sP/view?usp=share_link' target='_blank'><b>IQVIA Impact Program - Silver</b></a> award for performance, critical issue resolution, and feature delivery.
   <br/><br/>
@@ -306,8 +352,8 @@ education:
   date: Starting September 2026
   status: Incoming
   description: >-
-    Starting the <strong>M.Sc in Computing Science</strong> program in <strong>September 2026</strong>, with interests in
-    software engineering research, trustworthy AI, distributed systems, and LLM systems. I will be joining the
+    Starting the <strong>M.Sc in Computing Science</strong> program on <strong>September 1, 2026</strong>. My research interests are
+    AI4SE, AI for SRE, LLM4Coding, trustworthy AI, and long-horizon coding agents. I will be joining the
     <a href="https://u-a-goose.github.io/" target="_blank" rel="noopener noreferrer">U-A-Goose</a> software engineering group at the University of Alberta, supervised by
     <a href="https://apps.ualberta.ca/directory/person/zy25" target="_blank" rel="noopener noreferrer">Dr. Zhou Yang</a>, with affiliation to
     <a href="https://www.amii.ca/" target="_blank" rel="noopener noreferrer">Amii (Alberta Machine Intelligence Institute)</a>.
@@ -317,7 +363,7 @@ education:
   position: B.Sc in Computer Science and Engineering
   date: April 2018 - May 2023
   description: >-
-    <strong>Dean's List Award</strong> - Level 2 (outstanding academic performance)
+    <strong><a href="https://cse.buet.ac.bd/academics/fund" target="_blank" rel="noopener noreferrer">Dean's List Award</a></strong> - Level 2 (outstanding academic performance)
     <br/><br/>
     <strong>Notable Courses:</strong> Machine Learning, High Performance Database Systems, Fault Tolerant Systems, Data Structure and Algorithms,
     Operating Systems, Computer Security
@@ -407,12 +453,13 @@ awards:
     implementing every convolution, pooling, activation, and optimization step manually.
     <br/>
     <a href='https://tanzimhromel.com/projects/bangla_digit_recognition/' target='_blank'>View Project Details</a>
+  url: https://github.com/thromel/CSE-472-Machine-Learning
 - name: Finalist, Blockchain Olympiad Bangladesh 2021
   date: April 2021
   organization: Bangladesh Blockchain Olympiad
   type: Competition
   description: >-
-    Selected as one of the 40 finalists with our project "<a href="/projects/blockchain-ticketing" target="_blank">Blockchain Based Ticketing Platform</a>".
+    Selected as one of the 40 finalists with our project "<a href="/showcase/projects/blockchain-ticketing/">Blockchain Based Ticketing Platform</a>".
     Participated as part of the "Recursively Enumerable" team with <a href="https://fazledyn.github.io" target="_blank">Ataf Fazledin Ahamed</a> and <a href="https://www.linkedin.com/in/md-tanzim-azad-a879a51b7/" target="_blank">Md. Tanzim Azad Nishan</a>.
     <br/><br/>
     <strong>About the Competition:</strong> The Bangladesh Blockchain Olympiad (BCOLBD) is a national blockchain innovation contest that
@@ -422,6 +469,7 @@ awards:
     <strong>Our Project:</strong> We built a blockchain ticketing platform to reduce ticket fraud and scalping and improve transparency
     in event management. The system used smart contracts for ticket validation, immutable records, and dynamic pricing to limit secondary
     market manipulation.
+  url: https://bcolbd.org/2021/teams
 - name: Dean's List Award
   date: BUET Level-2
   organization: BUET
@@ -433,6 +481,7 @@ awards:
     <br/><br/>
     <strong>Notes:</strong> BUET is a top engineering university in Bangladesh. The Dean's List goes to the top-performing students in
     each level, typically less than 15% of the student body.
+  url: https://cse.buet.ac.bd/academics/fund
 - name: Bangladesh Physics Olympiad (BdPhO) National prize winner
   date: 2017
   organization: Bangladesh Physics Olympiad
@@ -476,14 +525,14 @@ awards:
     For completing key tasks, resolving critical issues, supporting team processes, and delivering features that improved the product.
     <br/>
     <a href='https://drive.google.com/file/d/1Vc4E2RoQEPmbfS56oLdUih-oJDBok9sP/view?usp=share_link' target='_blank'>IQVIA Impact Program - Silver (Certificate)</a>
+  url: https://drive.google.com/file/d/1Vc4E2RoQEPmbfS56oLdUih-oJDBok9sP/view?usp=share_link
 
 research_interests:
+- AI4SE
 - AI for SRE
-- Coding Agents
-- Agent Security
-- Context Management
-- Program Analysis
-- Empirical Software Engineering
+- LLM4Coding
+- Trustworthy AI
+- Long-horizon coding agents
 
 technical_skills:
 - type: "Languages & Systems"
@@ -583,7 +632,7 @@ research:
   description: >-
     I am working on coding agents along three dimensions. <a href="/showcase/projects/contextledger/">ContextLedger</a> studies context
     management by turning long sessions into typed, provenance-carrying events for measurable compaction. <a href="https://github.com/thromel/ctxhelm" target="_blank" rel="noopener noreferrer">ctxhelm</a>
-    and HelmBench study retrieval
+    and <a href="https://github.com/thromel/helmbench" target="_blank" rel="noopener noreferrer">HelmBench</a> study retrieval
     efficiency by testing whether agents inspect the right files with less irrelevant reading. <a href="/showcase/projects/patchsmith/">PatchSmith</a>
     studies DeepAgents-based repair runs with bounded workspaces, traces, sandbox validation, and readiness reports.
   technologies:
@@ -775,7 +824,8 @@ projects:
   description: >-
     Rust project for helping coding agents inspect the right files before they edit. ctxhelm ships as v2.4.0 through GitHub release archives and
     Homebrew, with checksum, archive, doctor, MCP, release-gate, and source-free proof checks. It combines lexical, symbol, graph, related-test,
-    git-history, semantic-metadata, memory, and feedback signals, then exposes task plans and packs through CLI and MCP. I am also building HelmBench,
+    git-history, semantic-metadata, memory, and feedback signals, then exposes task plans and packs through CLI and MCP. I am also building
+    <a href="https://github.com/thromel/helmbench" target="_blank" rel="noopener noreferrer">HelmBench</a>,
     a source-free benchmark for separating context-selection quality from downstream patch quality. The current Codex RefactoringMiner matrix keeps
     task success and validation flat while improving recommendation recall, follow-through, context precision, edited-file recall, and irrelevant-read rate.
   technologies:

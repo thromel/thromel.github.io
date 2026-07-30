@@ -33,7 +33,7 @@ test.describe('research-first shell contract', () => {
     await expect(page.locator('[data-home-section="identity"] h1')).toContainText('Tanzim Hossain Romel');
     await expect(page.locator('[data-home-research-lane]')).toHaveCount(6);
     await expect(page.locator('[data-home-publication]')).toHaveCount(2);
-    await expect(page.locator('[data-home-experience]')).toHaveCount(3);
+    await expect(page.locator('[data-home-experience]')).toHaveCount(4);
     await expect(page.locator('[data-home-metric]')).toHaveCount(4);
     await expect(page.locator('[data-home-engineering]')).toHaveCount(7);
     await expect(page.locator('[data-home-education]')).toHaveCount(3);
@@ -53,7 +53,7 @@ test.describe('research-first shell contract', () => {
       'Systems and open source',
       'Cloud, data, and reliability',
     ]);
-    await expect(engineeringProfile).toContainText('Three years of production software and AI engineering');
+    await expect(engineeringProfile).toContainText('About three years of professional software and AI engineering');
     await expect(engineeringProfile).toContainText('C#/.NET · EF Core · REST APIs · Microservices');
     await expect(engineeringProfile).toContainText('Python · LangGraph · MCP · RAG · LLM evaluation');
     await expect(engineeringProfile).toContainText('Rust · Go · TypeScript · Java · C++');
@@ -82,7 +82,7 @@ test.describe('research-first shell contract', () => {
     }
 
     const workLogos = page.locator('[data-home-work-logo]');
-    await expect(workLogos).toHaveCount(3);
+    await expect(workLogos).toHaveCount(4);
     for (const image of await workLogos.all()) {
       await expect(image).toHaveAttribute('alt', /\S+/);
       await image.scrollIntoViewIfNeeded();
@@ -119,9 +119,9 @@ test.describe('research-first shell contract', () => {
   test('homepage uses the approved natural-language summaries', async ({ page }) => {
     await visitHome(page);
     const main = page.locator('main');
-    await expect(main).toContainText('I study AI agents in real software systems.');
-    await expect(main).toContainText('three years of software and AI engineering experience');
-    await expect(main).toContainText('backend services, cloud data workflows, and LLM/RAG features for healthcare analytics');
+    await expect(main).toContainText('At the University of Alberta, I am an incoming M.Sc. student.');
+    await expect(main).toContainText('AI4SE, AI for SRE, LLM4Coding, trustworthy AI, and long-horizon coding agents.');
+    await expect(main).toContainText('about three years of professional software-engineering experience');
     await expect(main).toContainText('I learn by building');
     await expect(main).toContainText('Recent changes to my research and academic plans.');
     await expect(main).not.toContainText('A builder who wants claims to leave receipts');

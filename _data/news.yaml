@@ -1,27 +1,40 @@
+- title: "Starting M.Sc. study at the University of Alberta"
+  description: "Will begin graduate study in Computing Science at the University of Alberta on September 1, 2026."
+  date: 2026-09-01
+  url: https://www.ualberta.ca/en/computing-science/index.html
 - title: "Paper submitted to TACL 2026"
   description: "Submitted 'The Choice Can Be the Attack: Auditing Aligned Backdoors in LLM Agents' to the Transactions of the Association for Computational Linguistics (TACL) 2026 with Chowdhury Rakin Haider."
   date: 2026-06-30
+  url: /research/reagent-plus-plus/
 - title: "Paper under review at ICSE 2027"
   description: "'An Empirical Study on Remote Code Execution in Machine Learning Model Hosting Ecosystems' is under review at the International Conference on Software Engineering (ICSE) 2027. Preprint available on arXiv."
   date: 2026-06-30
+  url: https://arxiv.org/abs/2601.14163
 - title: "Started remote UIUC research internship"
   description: "Started a remote summer research internship at the University of Illinois Urbana-Champaign through UIUC++ Summer Research in Software Engineering (SRSE) 2026 with Professor Tianyin Xu."
   date: 2026-06-01
+  url: https://uiuc-srse.github.io/
 - title: "Paper submitted to TOSEM 2026"
   description: "Resubmitted 'An Empirical Study on Remote Code Execution in Machine Learning Model Hosting Ecosystems' to ACM Transactions on Software Engineering and Methodology (TOSEM) 2026. Preprint available on arXiv."
   date: 2026-02-01
+  url: https://arxiv.org/abs/2601.14163
 - title: "Paper submitted to MSR 2026"
   description: "Submitted 'An Empirical Study on Remote Code Execution in Machine Learning Model Hosting Ecosystems' to the Mining Software Repositories (MSR) 2026 conference. First large-scale cross-platform security study analyzing ~45,000 repositories across 5 major ML platforms."
   date: 2025-10-15
+  url: https://arxiv.org/abs/2601.14163
 - title: "Received IQVIA Impact Program Silver Award"
   description: "Honored with the IQVIA Impact Program Silver Award for outstanding performance and contributions to the KPI Library team."
   date: 2025-05-15
+  url: https://drive.google.com/file/d/1Vc4E2RoQEPmbfS56oLdUih-oJDBok9sP/view?usp=share_link
 - title: "Paper submitted to ACM CSCW"
   description: "Submitted 'Sentiment Analysis of Anonymous Crisis Reports in Bangladesh' to ACM CSCW 2025, analyzing crowd-sourced reports from Bangladesh's 2024 national crisis using transformer models."
   date: 2024-10-21
+  url: /research/ureporter/
 - title: "Started working as Software Development Engineer at IQVIA"
-  description: "Joined IQVIA as a Software Development Engineer, working on healthcare technology solutions and microservices-based applications handling millions of patient records."
+  description: "Joined IQVIA as a Software Development Engineer on KPI Library, the dynamic reporting layer within Orchestrated Analytics."
   date: 2023-06-01
+  url: https://www.iqvia.com/solutions/commercialization/commercial-analytics/orchestrated-analytics
 - title: "Graduated from BUET"
   description: "Completed B.Sc in Computer Science and Engineering from Bangladesh University of Engineering and Technology with a GPA of 3.53/4.00."
   date: 2023-05-27
+  url: https://cse.buet.ac.bd/academics/bsc

@@ -15,7 +15,7 @@ description: Researcher and software engineer studying inspectable AI agents for
       <p class="home-dossier-identity__lead">{{ site.data.research.identity.summary }}</p>
       <p class="home-dossier-identity__bridge">{{ site.data.research.identity.bridge }}</p>
       <ul class="home-dossier-markers" aria-label="Current profile markers">
-        {% for marker in site.data.research.identity.markers %}<li{% if marker.affiliation %} data-home-affiliation="{{ marker.affiliation }}"{% endif %}>{% if marker.logo %}<img src="{{ marker.logo | relative_url }}" alt="{{ marker.logo_alt }}" width="28" height="28" decoding="async" data-home-affiliation-logo>{% endif %}<span>{{ marker.label }}</span></li>{% endfor %}
+        {% for marker in site.data.research.identity.markers %}<li{% if marker.affiliation %} data-home-affiliation="{{ marker.affiliation }}"{% endif %}>{% if marker.logo %}<img src="{{ marker.logo | relative_url }}" alt="{{ marker.logo_alt }}" width="28" height="28" decoding="async" data-home-affiliation-logo>{% endif %}{% if marker.url %}<a href="{{ marker.url }}"{% if marker.url contains '://' %} target="_blank" rel="noopener noreferrer"{% endif %}>{{ marker.label }}</a>{% else %}<span>{{ marker.label }}</span>{% endif %}</li>{% endfor %}
       </ul>
       {% include current-status.html with_data=true label="Current work" %}
       <p class="action-row">
@@ -117,7 +117,8 @@ description: Researcher and software engineer studying inspectable AI agents for
       {% for position in site.data.profile.positions %}
       <li><article class="home-experience-record" data-home-experience>
         <div class="home-experience-record__logo">{% if position.logo %}<img src="{{ position.logo | relative_url }}" alt="{{ position.logo_alt }}" loading="lazy" decoding="async" data-home-image data-home-work-logo>{% else %}{% include home-material-thumbnail.html type="Work" icon="/assets/images/icons/suitcase.png" class="home-material-thumbnail--compact" %}{% endif %}</div>
-        <div class="home-experience-record__content"><div class="home-experience-record__heading"><div><h3>{{ position.name }}</h3><p>{{ position.description | strip_html }}</p></div><p class="home-experience-record__date">{{ position.display_date | default: position.date }}</p></div>
+        <div class="home-experience-record__content"><div class="home-experience-record__heading"><div><h3>{% if position.url %}<a href="{{ position.url }}" target="_blank" rel="noopener noreferrer">{{ position.name }}</a>{% else %}{{ position.name }}{% endif %}</h3><p>{{ position.description | strip_html }}</p></div><p class="home-experience-record__date">{{ position.display_date | default: position.date }}</p></div>
+          {% if position.links %}<nav class="academic-reference-links home-experience-record__links" aria-label="Related links for {{ position.name | escape }}">{% for link in position.links %}<a href="{{ link.url }}" target="_blank" rel="noopener noreferrer">{{ link.label }}<span aria-hidden="true">↗</span></a>{% endfor %}</nav>{% endif %}
           <ul>{% for responsibility in position.responsibilities limit: 4 %}<li>{{ responsibility }}</li>{% endfor %}</ul>
           {% if position.name contains 'IQVIA' %}<div class="home-metrics" aria-label="Selected IQVIA outcomes">{% for metric in site.data.research.experience_metrics %}<div data-home-metric><strong>{{ metric.value }}</strong><span>{{ metric.label }}</span></div>{% endfor %}</div>{% endif %}
           {% if position.technologies %}<p class="home-experience-record__tech">{{ position.technologies | join: ' · ' | truncatewords: 14 }}</p>{% endif %}</div>
@@ -157,7 +158,7 @@ description: Researcher and software engineer studying inspectable AI agents for
 <section class="home-dossier home-dossier-recognition" data-home-section="recognition" aria-labelledby="recognition-home-title">
   <div class="site-frame">
     <div class="home-dossier-section-heading"><div><p class="eyebrow">Recognition</p><h2 id="recognition-home-title">Awards and milestones</h2></div><p>A few awards and competition results.</p></div>
-    <div class="home-recognition-grid">{% for item in site.data.research.recognition %}<article data-home-recognition><p class="home-recognition-grid__date">{{ item.date }}</p><h3>{{ item.title }}</h3><p>{{ item.summary }}</p></article>{% endfor %}</div>
+    <div class="home-recognition-grid">{% for item in site.data.research.recognition %}<article data-home-recognition><p class="home-recognition-grid__date">{{ item.date }}</p><h3>{% if item.url %}<a href="{{ item.url }}"{% if item.url contains '://' %} target="_blank" rel="noopener noreferrer"{% endif %}>{{ item.title }}</a>{% else %}{{ item.title }}{% endif %}</h3><p>{{ item.summary }}</p></article>{% endfor %}</div>
     <p class="action-row"><a class="button-link" href="{{ '/achievements' | relative_url }}">All achievements</a></p>
   </div>
 </section>
@@ -165,7 +166,7 @@ description: Researcher and software engineer studying inspectable AI agents for
 <section class="home-dossier home-dossier-milestones" data-home-section="milestones" aria-labelledby="milestones-home-title">
   <div class="site-frame">
     <div class="home-dossier-section-heading"><div><p class="eyebrow">Recent milestones</p><h2 id="milestones-home-title">What changed recently</h2></div><p>Recent changes to my research and academic plans.</p></div>
-    <ol class="home-milestone-list">{% for item in site.data.research.milestones %}<li><article data-home-milestone><time datetime="{{ item.date }}">{{ item.date | date: '%B %Y' }}</time><div><h3>{{ item.title }}</h3><p>{{ item.summary }}</p></div></article></li>{% endfor %}</ol>
+    <ol class="home-milestone-list">{% for item in site.data.research.milestones %}<li><article data-home-milestone><time datetime="{{ item.date }}">{{ item.date | date: '%B %Y' }}</time><div><h3>{% if item.url %}<a href="{{ item.url | relative_url }}"{% if item.url contains '://' %} target="_blank" rel="noopener noreferrer"{% endif %}>{{ item.title }}</a>{% else %}{{ item.title }}{% endif %}</h3><p>{{ item.summary }}</p></div></article></li>{% endfor %}</ol>
     <p class="action-row"><a class="button-link" href="{{ '/news' | relative_url }}">All news</a></p>
   </div>
 </section>

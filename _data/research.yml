@@ -6,29 +6,36 @@ agenda:
   trajectory: >-
     Current work combines reliability-agent evaluation, security audits for agent choices,
     and developer tools that make context and software evolution easier to examine.
-  next_step: "M.Sc. in Computing Science at the University of Alberta, beginning September 2026."
+  next_step: >-
+    M.Sc. in Computing Science at the
+    <a href="https://www.ualberta.ca/en/computing-science/index.html" target="_blank" rel="noopener noreferrer">University of Alberta</a>,
+    beginning September 1, 2026.
 
 identity:
-  role_line: "Researcher · software engineer · open-source contributor"
+  role_line: "Incoming Alberta M.Sc. · software engineer · researcher"
   summary: >-
-    I study AI agents in real software systems. I want to know what they read, which
-    actions they take, how they recover from failures, and whether their evidence holds up.
+    At the <a href="https://www.ualberta.ca/en/computing-science/index.html" target="_blank" rel="noopener noreferrer">University of Alberta</a>,
+    I am an incoming M.Sc. student. My research interests are AI4SE, AI for SRE,
+    LLM4Coding, trustworthy AI, and long-horizon coding agents.
   bridge: >-
-    My work spans software reliability, agent security, empirical software engineering,
-    program analysis, and developer tools. I also have three years of software and AI
-    engineering experience, building backend services, cloud data workflows, and LLM/RAG
-    features for healthcare analytics.
+    I bring about three years of professional software-engineering experience, most
+    recently at <a href="https://www.iqvia.com/" target="_blank" rel="noopener noreferrer">IQVIA</a>,
+    where I worked on <a href="https://www.iqvia.com/solutions/commercialization/commercial-analytics/orchestrated-analytics" target="_blank" rel="noopener noreferrer">Orchestrated Analytics</a>,
+    and graduated from <a href="https://cse.buet.ac.bd/" target="_blank" rel="noopener noreferrer">BUET CSE</a>.
   markers:
     - label: "UIUC++ SRSE 2026"
       affiliation: "UIUC"
+      url: "https://uiuc-srse.github.io/"
       logo: "/assets/images/companies/uiuc-block-i.png"
       logo_alt: "UIUC Block I logo"
     - label: "Incoming Alberta M.Sc."
       affiliation: "University of Alberta"
+      url: "https://www.ualberta.ca/en/computing-science/index.html"
       logo: "/assets/images/education/ualberta-logo.svg"
       logo_alt: "University of Alberta crest"
     - label: "BUET CSE"
       affiliation: "BUET"
+      url: "https://cse.buet.ac.bd/"
       logo: "/assets/images/education/buet-logo.png"
       logo_alt: "BUET logo"
     - label: "Dhaka, Bangladesh"
@@ -179,7 +186,7 @@ experience_metrics:
 
 engineering_profile:
   intro: >-
-    Three years of production software and AI engineering, alongside hands-on
+    About three years of professional software and AI engineering, alongside hands-on
     systems and open-source work.
   groups:
     - id: backend-apis
@@ -285,12 +292,15 @@ recognition:
   - title: "IQVIA Impact Program — Silver"
     date: "2025"
     summary: "Performance, critical issue resolution, and essential feature delivery."
+    url: "https://drive.google.com/file/d/1Vc4E2RoQEPmbfS56oLdUih-oJDBok9sP/view?usp=share_link"
   - title: "2nd place · Bangla handwritten digit recognition"
     date: "2022"
     summary: "Second among 120 students; a custom CNN from NumPy and OpenCV primitives reached 95.9% test accuracy."
+    url: "https://github.com/thromel/CSE-472-Machine-Learning"
   - title: "BUET Dean's List"
     date: "Level 2"
     summary: "Academic recognition for sophomore-year performance."
+    url: "https://cse.buet.ac.bd/academics/fund"
   - title: "National Physics Olympiad prize"
     date: "2017"
     summary: "National recognition in theoretical and practical physics."
@@ -302,18 +312,22 @@ recognition:
     summary: "Merit scholarship after placing 15th in the Rajshahi Education Board."
 
 milestones:
+  - title: "Starting University of Alberta M.Sc."
+    date: "2026-09-01"
+    summary: "Beginning graduate study in Computing Science with the U-A-Goose group under Dr. Zhou Yang."
+    url: "https://www.ualberta.ca/en/computing-science/index.html"
   - title: "SHIFT submitted to TACL 2026"
     date: "2026-06-30"
     summary: "Aligned-backdoor auditing work submitted with Chowdhury Rakin Haider."
+    url: "/research/reagent-plus-plus/"
   - title: "ML hosting RCE under review at ICSE 2027"
     date: "2026-06-30"
     summary: "Cross-platform empirical security study with a public arXiv artifact."
+    url: "https://arxiv.org/abs/2601.14163"
   - title: "Started UIUC++ SRSE research internship"
     date: "2026-06-01"
     summary: "Summer research with Professor Tianyin Xu's systems reliability group."
-  - title: "Incoming University of Alberta M.Sc."
-    date: "2026-09-01"
-    summary: "Joining U-A-Goose and Amii under Dr. Zhou Yang."
+    url: "https://uiuc-srse.github.io/"
 
 contact:
   heading: "Collaborate on reliable agent systems"

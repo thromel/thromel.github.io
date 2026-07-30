@@ -18,6 +18,7 @@ description: Professional software engineering experience, backend systems work,
     <h3>{% if position.url %}<a href="{{ position.url }}" target="_blank" rel="noopener noreferrer">{{ position.name }}</a>{% else %}{{ position.name }}{% endif %}</h3>
     <p class="academic-entry__meta">{{ position.display_date | default: position.date }}</p>
     <p>{{ position.description | strip_html }}</p>
+    {% if position.links %}<nav class="academic-reference-links" aria-label="Related links for {{ position.name | escape }}">{% for link in position.links %}<a href="{{ link.url }}" target="_blank" rel="noopener noreferrer">{{ link.label }}<span aria-hidden="true">↗</span></a>{% endfor %}</nav>{% endif %}
     {% if position.responsibilities %}<ul>{% for item in position.responsibilities %}<li>{{ item | strip_html }}</li>{% endfor %}</ul>{% endif %}
     {% if position.technologies %}<p class="academic-tags">{% for tech in position.technologies limit:12 %}<span class="academic-tag">{{ tech }}</span>{% endfor %}</p>{% endif %}
   </article>

@@ -15,7 +15,7 @@ navbar_title: Achievements
   <h2>{{ type.name }}</h2>
   {% for item in type.items %}
   <article class="academic-entry">
-    <h3>{{ item.name }}</h3>
+    <h3>{% if item.url %}<a href="{{ item.url }}" target="_blank" rel="noopener noreferrer">{{ item.name }}</a>{% else %}{{ item.name }}{% endif %}</h3>
     <p class="academic-entry__meta">{{ item.organization }} · {{ item.date }}</p>
     {% if item.description %}<p>{{ item.description | strip_html }}</p>{% endif %}
   </article>

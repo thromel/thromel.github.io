@@ -7,6 +7,7 @@ REPO_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
 MODE="${1:-full}"
 PORT="${PORT:-4000}"
 BASE_URL="http://127.0.0.1:${PORT}"
+PLAYWRIGHT_WORKERS="${PLAYWRIGHT_WORKERS:-2}"
 SERVER_PID=""
 SERVER_LOG=""
 
@@ -82,6 +83,7 @@ case "${MODE}" in
       "tests/research-dossier.spec.js"
       "tests/records-and-contributions.spec.js"
       "tests/secondary-routes.spec.js"
+      "tests/profile-links.spec.js"
       "tests/quality-gates.spec.js"
     )
     ;;
@@ -109,4 +111,4 @@ SERVER_PID=$!
 wait_for_server || fail "local _site server did not become ready on ${BASE_URL}."
 
 echo "verify-ui: running Playwright suites for mode '${MODE}'..."
-PLAYWRIGHT_TEST_BASE_URL="${BASE_URL}" npx playwright test "${SPECS[@]}"
+PLAYWRIGHT_TEST_BASE_URL="${BASE_URL}" npx playwright test --workers="${PLAYWRIGHT_WORKERS}" "${SPECS[@]}"

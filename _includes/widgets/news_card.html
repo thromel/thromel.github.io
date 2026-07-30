@@ -15,7 +15,7 @@
                 {% for item in year.items %}
                 <div class="d-flex mb-3 pb-2 border-bottom">
                     <div class="news-title">
-                        <a href="news#year-{{ item.date | date: '%Y' }}" class="text-decoration-none">
+                        <a href="{% if item.url %}{{ item.url | relative_url }}{% else %}{{ 'news' | relative_url }}#year-{{ item.date | date: '%Y' }}{% endif %}"{% if item.url contains '://' %} target="_blank" rel="noopener noreferrer"{% endif %} class="text-decoration-none">
                             <div>{{ item.title }}</div>
                         </a>
                     </div>

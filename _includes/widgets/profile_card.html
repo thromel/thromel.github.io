@@ -21,16 +21,16 @@
                     <div class="text-muted small">{{ secondary_name }}</div>
                     {% endif %}
 
-                    {% if site.data.profile.current_company %}
+                    {% if site.data.profile.current_affiliation %}
                     <div class="d-flex align-items-center justify-content-center mt-2">
-                        {% if site.data.profile.current_company.logo %}
-                        <img src="{{ site.data.profile.current_company.logo }}" alt="{{ site.data.profile.current_company.name }}" style="height: 20px; width: auto; margin-right: 8px;">
+                        {% if site.data.profile.current_affiliation.logo %}
+                        <img src="{{ site.data.profile.current_affiliation.logo }}" alt="{{ site.data.profile.current_affiliation.name }}" style="height: 20px; width: auto; margin-right: 8px;">
                         {% endif %}
                         <span class="text-muted" style="font-size: 0.9rem;">
-                            {% if site.data.profile.current_company.url %}
-                            <a href="{{ site.data.profile.current_company.url }}" target="_blank" class="text-muted">{{ site.data.profile.current_company.name }}</a>
+                            {% if site.data.profile.current_affiliation.url %}
+                            <a href="{{ site.data.profile.current_affiliation.url }}" target="_blank" rel="noopener noreferrer" class="text-muted">{{ site.data.profile.current_affiliation.name }}</a>
                             {% else %}
-                            {{ site.data.profile.current_company.name }}
+                            {{ site.data.profile.current_affiliation.name }}
                             {% endif %}
                         </span>
                     </div>

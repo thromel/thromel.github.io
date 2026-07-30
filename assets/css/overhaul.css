@@ -6,16 +6,24 @@
 
 :root {
   color-scheme: light;
-  --paper: #f7f7f3;
-  --paper-elevated: #ffffff;
-  --ink: #17212b;
-  --muted: #5c6874;
-  --faint: #d6dcd9;
-  --rule: #b6c0bb;
-  --accent: #154c73;
+  --paper: #fbfaf6;
+  --paper-elevated: #fffefb;
+  --ink: #18272a;
+  --muted: #536466;
+  --faint: #d9ded8;
+  --rule: #bbc6c0;
+  --accent: #0f6963;
   --accent-contrast: #ffffff;
-  --accent-soft: #dbe8ed;
-  --focus: #a13918;
+  --accent-soft: #dceee9;
+  --focus: #a34d1b;
+  --page-gradient:
+    radial-gradient(circle at 12% 2%, rgb(194 128 65 / 8%), transparent 28rem),
+    radial-gradient(circle at 86% 0%, rgb(21 119 111 / 8%), transparent 34rem),
+    linear-gradient(145deg, #fffefb 0%, #f5f9f6 54%, #faf5ee 100%);
+  --hero-gradient:
+    radial-gradient(circle at 78% 12%, rgb(44 137 126 / 12%), transparent 30rem),
+    radial-gradient(circle at 14% 96%, rgb(210 139 69 / 10%), transparent 26rem),
+    linear-gradient(135deg, #fffdfa 0%, #f1f7f4 56%, #f8f2ea 100%);
   --serif: "Source Serif 4", Georgia, serif;
   --sans: "IBM Plex Sans", system-ui, sans-serif;
   --mono: "IBM Plex Mono", ui-monospace, monospace;
@@ -41,6 +49,14 @@ html[data-theme="dark"] {
   --accent-contrast: #10232e;
   --accent-soft: #203c4b;
   --focus: #ffd27d;
+  --page-gradient:
+    radial-gradient(circle at 14% 0%, rgb(219 145 76 / 11%), transparent 30rem),
+    radial-gradient(circle at 84% 2%, rgb(50 158 145 / 13%), transparent 36rem),
+    linear-gradient(145deg, #0a1115 0%, #0e1b20 56%, #101817 100%);
+  --hero-gradient:
+    radial-gradient(circle at 80% 10%, rgb(70 181 165 / 20%), transparent 30rem),
+    radial-gradient(circle at 12% 96%, rgb(229 155 83 / 15%), transparent 26rem),
+    linear-gradient(135deg, #071116 0%, #0c2228 56%, #111a19 100%);
 }
 
 * { box-sizing: border-box; }
@@ -55,7 +71,7 @@ body {
   margin: 0;
   overflow-x: hidden;
   color: var(--ink);
-  background: var(--paper);
+  background: var(--page-gradient);
   font-family: var(--sans);
   font-size: 16px;
   line-height: 1.65;
@@ -117,19 +133,14 @@ button { cursor: pointer; }
   z-index: 10;
   top: 0;
   border-bottom: 1px solid var(--rule);
-  background: color-mix(in srgb, var(--paper) 94%, transparent);
-  backdrop-filter: blur(10px);
-}
-
-@supports not (backdrop-filter: blur(1px)) {
-  .site-header { background: var(--paper); }
+  background: var(--paper-elevated);
 }
 
 .site-header__frame {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto auto;
   align-items: center;
-  min-height: 4.5rem;
+  min-height: 4rem;
   gap: var(--space-2);
 }
 
@@ -580,7 +591,7 @@ pre { overflow-x: auto; padding: 1rem; border: 1px solid var(--faint); backgroun
 /* Full-dossier homepage */
 .home-dossier { padding-block: var(--space-5); }
 .home-dossier + .home-dossier { border-top: 1px solid var(--rule); }
-.home-dossier-identity { padding-top: clamp(3.5rem, 9vw, 7.5rem); }
+.home-dossier-identity { padding-top: clamp(3.5rem, 9vw, 7.5rem); background: var(--hero-gradient); }
 .home-dossier-identity__grid { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(16rem, 0.58fr); gap: clamp(2.5rem, 7vw, 6.5rem); align-items: start; }
 .home-dossier-identity__copy { min-width: 0; }
 .home-dossier-identity h1 { max-width: none; margin-top: var(--space-2); font-size: clamp(1.75rem, 3.4vw, 3rem); letter-spacing: -0.035em; white-space: nowrap; }
@@ -591,6 +602,26 @@ pre { overflow-x: auto; padding: 1rem; border: 1px solid var(--faint); backgroun
 .home-dossier-markers { display: flex; flex-wrap: wrap; gap: 0.45rem; margin: var(--space-3) 0 0; padding: 0; list-style: none; }
 .home-dossier-markers li { display: inline-flex; align-items: center; gap: 0.45rem; min-height: 2.35rem; padding: 0.35rem 0.6rem; background: var(--accent-soft); color: var(--ink); font-family: var(--mono); font-size: 0.68rem; font-weight: 600; }
 .home-dossier-markers img { width: 1.5rem; height: 1.5rem; flex: 0 0 auto; object-fit: contain; }
+.home-dossier-markers a { color: inherit; text-decoration: none; }
+.home-dossier-markers a:hover { text-decoration: underline; }
+
+.academic-reference-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem 1rem;
+  margin: var(--space-2) 0 var(--space-3);
+}
+
+.academic-reference-links a {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.3rem;
+  font-size: 0.84rem;
+  font-weight: 600;
+}
+
+.academic-reference-links a span { font-family: var(--mono); font-size: 0.72rem; }
+.home-experience-record__links { margin-top: 0; }
 
 .home-dossier-engineering-profile { padding-block: var(--space-4); }
 .home-engineering-profile-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--space-2); margin: 0; padding: 0; list-style: none; }
