@@ -273,12 +273,12 @@ resources:
     link: "https://itrevolution.com/product/the-devops-handbook-second-edition/"
     description: "Practices for improving delivery agility, reliability, and security."
 
-  - title: "AWS Certified Solutions Architect Study Guide"
+  - title: "AWS Certified Solutions Architect Study Guide with 900 Practice Test Questions"
     author: "Ben Piper & David Clinton"
     type: "Book"
     category: "DevOps"
-    link: "https://www.wiley.com/en-us/AWS+Certified+Solutions+Architect+Study+Guide-p-9781119713081"
-    description: "Comprehensive preparation for AWS SAA certification."
+    link: "https://www.wiley.com/-p-9781119982623"
+    description: "Fourth-edition preparation for the AWS Solutions Architect Associate SAA-C03 exam."
 
   # Research & AI
   - title: "Hands-On Large Language Models"

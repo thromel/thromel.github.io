@@ -162,11 +162,14 @@ test.describe('research records and contribution proof', () => {
     await page.goto(`${BASE_URL}/contributions`, { waitUntil: 'domcontentloaded' });
 
     const count = page.locator('[data-contribution-count]');
+    await expect(count).toHaveAttribute('data-state', 'unavailable');
+    expect(calls).toBe(0);
+    await count.scrollIntoViewIfNeeded();
     await expect(count).toHaveAttribute('data-state', 'success');
     await expect(count).toContainText('47');
     await expect(count.locator('[aria-live="polite"]')).toBeVisible();
 
-    await page.getByRole('button', { name: 'Retry count' }).click();
+    await page.getByRole('button', { name: 'Refresh count' }).click();
     await expect(count).toContainText('48');
     expect(calls).toBe(2);
   });
@@ -185,6 +188,7 @@ test.describe('research records and contribution proof', () => {
         await route.fulfill({ status: testCase.response.status, contentType: 'application/json', body: JSON.stringify(testCase.response.body) });
       });
       await page.goto(`${BASE_URL}/contributions?state=${testCase.state}`, { waitUntil: 'domcontentloaded' });
+      await page.locator('[data-contribution-count]').scrollIntoViewIfNeeded();
       await expect(page.locator('[data-contribution-count]')).toHaveAttribute('data-state', testCase.state);
       if (testCase.state === 'incomplete') {
         await expect(page.locator('#contribution-count-value')).toHaveText('—');
@@ -198,6 +202,7 @@ test.describe('research records and contribution proof', () => {
       await route.fulfill({ contentType: 'application/json', body: JSON.stringify({ total_count: 1, items: [] }) }).catch(() => {});
     });
     await page.goto(`${BASE_URL}/contributions?state=timeout`, { waitUntil: 'domcontentloaded' });
+    await page.locator('[data-contribution-count]').scrollIntoViewIfNeeded();
     await expect(page.locator('[data-contribution-count]')).toHaveAttribute('data-state', 'timeout', { timeout: 7000 });
   });
 

@@ -14,7 +14,7 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 title: Tanzim Hossain Romel's Portfolio
-description: Personal Academic Homepage
+description: Academic and engineering portfolio of Tanzim Hossain Romel, focused on reliable AI agents, software engineering research, and developer tools.
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://tanzimhromel.com" # the canonical hostname & protocol
 lang: en
@@ -55,7 +55,6 @@ rouge:
 
 plugins:
   - jekyll-feed
-  - jekyll-seo-tag
   - jekyll-email-protect
   - jekyll-paginate
 
@@ -67,6 +66,7 @@ defaults:
       type: "posts"
     values:
       layout: "post"
+      article: true
   -
     scope:
       path: ""

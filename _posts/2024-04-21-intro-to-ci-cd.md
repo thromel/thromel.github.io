@@ -256,7 +256,7 @@ jobs:
 
 The service container pattern is powerful because it mirrors production architecture in your test environment. Your tests run against a real PostgreSQL instance, catching database-related issues early.
 
-> **Best Practice**: For more complex database testing patterns, see [Database Testing Best Practices](https://martinfowler.com/articles/database-testing.html) by Martin Fowler.
+> **Best Practice**: For more complex database testing patterns, see the database-integration guidance in [The Practical Test Pyramid](https://martinfowler.com/articles/practical-test-pyramid.html#DatabaseIntegration) on Martin Fowler's site.
 
 ## Chapter 2: Preparing for AWS Deployment
 
@@ -573,7 +573,7 @@ jobs:
 - **Auditability**: Every deployment is tracked with timestamps and commit hashes
 - **Rollback Capability**: Quick recovery if issues arise
 
-> **Deployment Patterns**: For more deployment strategies, see [Deployment Patterns](https://martinfowler.com/articles/deployment-pipeline.html) by Martin Fowler and the [AWS Deployment Best Practices](https://aws.amazon.com/builders-library/automating-safe-hands-off-deployments/) guide.
+> **Deployment Patterns**: For more deployment strategies, see Martin Fowler's [Deployment Pipeline](https://martinfowler.com/bliki/DeploymentPipeline.html) and the [AWS Deployment Best Practices](https://aws.amazon.com/builders-library/automating-safe-hands-off-deployments/) guide.
 
 ## Chapter 4: Advanced Patterns and Best Practices
 
@@ -1093,7 +1093,7 @@ Add automated dependency scanning to catch vulnerabilities:
 
 ### Secrets Scanning
 
-**Why Scan for Secrets?** Accidentally committed secrets are a major security risk. GitHub's [Secret Scanning study](https://github.blog/2022-03-25-secret-scanning-now-detects-and-revokes-leaked-github-tokens/) found thousands of secrets committed daily.
+**Why Scan for Secrets?** Accidentally committed secrets are a major security risk. GitHub's [secret scanning documentation](https://docs.github.com/en/code-security/concepts/secret-security/secret-scanning) explains how it searches repository history for hardcoded credentials so they can be secured before exploitation.
 
 Prevent accidental commits of secrets:
 
@@ -1125,7 +1125,7 @@ Prevent accidental commits of secrets:
 
 ### Container Scanning (if using Docker)
 
-**Why Container Scanning?** Base images often contain vulnerabilities. The [2020 State of Container Security Report](https://sysdig.com/resources/reports/2020-container-security-and-usage-report/) found that 58% of container images had known vulnerabilities.
+**Why Container Scanning?** Base images and their dependencies can introduce security risks. NIST's [Application Container Security Guide](https://csrc.nist.gov/pubs/sp/800/190/final) documents container-specific security concerns and recommendations for addressing them.
 
 If you're deploying containers, scan them for vulnerabilities:
 
@@ -1736,7 +1736,7 @@ As we wrap up this journey, let's consolidate the key best practices we've learn
 
 ### 1. Start Simple, Iterate Often
 
-Don't try to build the perfect pipeline from day one. **Why start simple?** As the [Lean Startup](http://theleanstartup.com/) methodology teaches, it's better to get something working quickly and improve it based on real experience.
+Don't try to build the perfect pipeline from day one. **Why start simple?** As the [Lean Startup](https://theleanstartup.com/) methodology teaches, it's better to get something working quickly and improve it based on real experience.
 
 **Implementation Strategy**:
 - Week 1: Basic CI with tests

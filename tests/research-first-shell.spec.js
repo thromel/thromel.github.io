@@ -60,7 +60,9 @@ test.describe('dual-audience selective homepage contract', () => {
     const main = page.locator('main');
     await expect(main).not.toContainText(/\bGTA\b|\bGRA\b|\bGRAF\b/);
     await expect(main).not.toContainText(/open-source program analysis/i);
-    await expect(page.locator('[data-home-affiliation-logo], [data-home-engineering-skill], [data-home-metric]')).toHaveCount(0);
+    await expect(page.locator('[data-home-affiliation-logo]')).toHaveCount(1);
+    await expect(page.locator('[data-home-work-logo]')).toHaveCount(2);
+    await expect(page.locator('[data-home-engineering-skill], [data-home-metric]')).toHaveCount(0);
   });
 
   test('first viewport starts with the Alberta status, exact positioning copy, paths, and portrait', async ({ page }) => {
@@ -81,10 +83,10 @@ test.describe('dual-audience selective homepage contract', () => {
 
     const paths = identity.locator('.home-identity__paths a');
     await expect(paths).toHaveCount(3);
-    await expect(paths.allTextContents()).resolves.toEqual(['Explore research', 'Review engineering work', 'Download CV']);
-    await expect(identity.getByRole('link', { name: 'Explore research', exact: true })).toHaveAttribute('href', '/research/');
-    await expect(identity.getByRole('link', { name: 'Review engineering work', exact: true })).toHaveAttribute('href', '/projects/');
-    await expect(identity.getByRole('link', { name: 'Download CV', exact: true })).toHaveAttribute('href', '/cv/');
+    await expect(paths.allTextContents()).resolves.toEqual(['Research', 'Engineering', 'CV']);
+    await expect(identity.getByRole('link', { name: 'Research', exact: true })).toHaveAttribute('href', '/research/');
+    await expect(identity.getByRole('link', { name: 'Engineering', exact: true })).toHaveAttribute('href', '/projects/');
+    await expect(identity.getByRole('link', { name: 'CV', exact: true })).toHaveAttribute('href', '/cv/');
 
     const orderedItems = identity.locator('[data-current-status], h1, .home-identity__thesis, .home-identity__bridge, .home-identity__interests, .home-identity__paths, [data-home-portrait]');
     const followsContractOrder = await identity.evaluate((root) => {
@@ -105,6 +107,8 @@ test.describe('dual-audience selective homepage contract', () => {
     await expect(portrait).toHaveAttribute('width', '960');
     await expect(portrait).toHaveAttribute('height', '1280');
     await expect(portrait).toHaveAttribute('fetchpriority', 'high');
+    await expect(portrait).toHaveAttribute('srcset', /romel-320\.webp 320w.*romel-640\.webp 640w.*romel\.webp 960w/);
+    await expect(portrait).toHaveAttribute('sizes', '(max-width: 719px) 240px, 288px');
     await expect(portrait).not.toHaveAttribute('loading', 'lazy');
     expect(await portrait.evaluate((image) => image.complete && image.naturalWidth > 0)).toBe(true);
   });
@@ -281,7 +285,9 @@ test.describe('dual-audience selective homepage contract', () => {
       await expect(record.locator('time[datetime]')).toHaveCount(1);
     }
 
-    await expect(page.locator('[data-home-evidence] [data-home-record-visual]')).toHaveCount(2);
+    await expect(page.locator('[data-home-evidence] [data-home-record-visual]')).toHaveCount(4);
+    await expect(page.locator('[data-home-image]')).toHaveCount(3);
+    await expect(page.locator('.evidence-record__visual--signal')).toHaveCount(1);
     await expect(page.locator('[data-home-contribution]')).toContainText(['Merged contribution', 'Merged contribution', 'Merged contribution']);
 
     for (const record of await page.locator('[data-home-experience]').all()) {
@@ -364,8 +370,7 @@ test.describe('dual-audience selective homepage contract', () => {
       await visitHome(page);
       await expect(page.locator('html')).toHaveAttribute('data-theme', systemTheme);
       await expect(page.locator('meta[name="theme-color"]')).toHaveAttribute('content', systemTheme === 'dark' ? '#0c1513' : '#f5f1e8');
-      const expectedAction = systemTheme === 'dark' ? 'Use light theme' : 'Use dark theme';
-      const toggle = page.getByRole('button', { name: expectedAction, exact: true });
+      const toggle = page.getByRole('button', { name: 'Dark theme', exact: true });
       await expect(toggle).toBeVisible();
       await expect(toggle).toHaveAttribute('aria-pressed', systemTheme === 'dark' ? 'true' : 'false');
       await context.close();
@@ -376,7 +381,7 @@ test.describe('dual-audience selective homepage contract', () => {
     await page.addInitScript(() => localStorage.setItem('theme', 'dark'));
     await visitHome(page);
     await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
-    const toggle = page.getByRole('button', { name: 'Use light theme', exact: true });
+    const toggle = page.getByRole('button', { name: 'Dark theme', exact: true });
     await toggle.click();
     await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
     await expect(page.locator('meta[name="theme-color"]')).toHaveAttribute('content', '#f5f1e8');

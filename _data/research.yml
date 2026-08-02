@@ -17,9 +17,17 @@ identity:
       start_date: "2026-06-01"
       end_date_exclusive: "2026-09-01"
       url: "https://www.ualberta.ca/en/computing-science/index.html"
+      logo: "/assets/images/education/ualberta-logo.svg"
+      logo_alt: "University of Alberta crest"
+      logo_width: 256
+      logo_height: 256
     - label: "University of Alberta · M.Sc. in Computing Science"
       start_date: "2026-09-01"
       url: "https://www.ualberta.ca/en/computing-science/index.html"
+      logo: "/assets/images/education/ualberta-logo.svg"
+      logo_alt: "University of Alberta crest"
+      logo_width: 256
+      logo_height: 256
   thesis: >-
     I study how AI agents behave in real software systems—and how to make their
     decisions inspectable, reliable, and trustworthy.
@@ -70,6 +78,14 @@ anchors:
     context: "With Mohammed Latif Siddiq, Natalie Sekerak, Beatrice Casey, and Joanna C. S. Santos"
     last_verified: "2026-07-10"
     image: "/assets/images/ml-rce.webp"
+    image_sources:
+      - path: "/assets/images/ml-rce-320.webp"
+        width: 320
+      - path: "/assets/images/ml-rce-640.webp"
+        width: 640
+      - path: "/assets/images/ml-rce.webp"
+        width: 960
+    image_sizes: "(max-width: 719px) calc(100vw - 32px), 320px"
     image_alt: "Methodology overview for the study of remote code execution in machine learning model hosting ecosystems"
     image_width: 960
     image_height: 1431
@@ -92,6 +108,14 @@ anchors:
     context: "With Chowdhury Rakin Haider · abstract-level summary only"
     last_verified: "2026-07-10"
     image: "/assets/images/agentic_ai_architecture.png"
+    image_sources:
+      - path: "/assets/images/agentic-ai-480.webp"
+        width: 480
+      - path: "/assets/images/agentic-ai-960.webp"
+        width: 960
+      - path: "/assets/images/agentic_ai_architecture.png"
+        width: 1661
+    image_sizes: "(max-width: 719px) calc(100vw - 32px), 320px"
     image_alt: "Conceptual architecture of an agentic AI system with tools, memory, and orchestration"
     image_width: 1661
     image_height: 352
@@ -180,6 +204,12 @@ homepage:
         - business-level oracles
       date: "2026-07-10"
       date_label: "July 10, 2026"
+      image: "/assets/images/companies/uiuc-block-i.png"
+      image_alt: "University of Illinois Block I mark representing the UIUC systems reliability research context"
+      image_width: 170
+      image_height: 171
+      image_kind: "mark"
+      image_caption: "Research context · UIUC++ SRSE 2026"
       links:
         - label: "SREGym project"
           url: "https://www.sregym.com/"
@@ -228,6 +258,14 @@ homepage:
       date: "2026-07-10"
       date_label: "July 10, 2026"
       image: "/assets/images/ml-rce.webp"
+      image_sources:
+        - path: "/assets/images/ml-rce-320.webp"
+          width: 320
+        - path: "/assets/images/ml-rce-640.webp"
+          width: 640
+        - path: "/assets/images/ml-rce.webp"
+          width: 960
+      image_sizes: "(max-width: 719px) calc(100vw - 32px), 320px"
       image_alt: "Methodology overview for the remote-code-execution study across machine-learning model hosting ecosystems"
       image_width: 960
       image_height: 1431
@@ -252,6 +290,8 @@ homepage:
         - refactoring detection
       date: "2026-06-14"
       date_label: "June 14, 2026"
+      media_kicker: "Structural analysis"
+      media_label: "Diff → AST → refactoring evidence"
       links:
         - label: "Merged PR #1087"
           url: "https://github.com/tsantalis/RefactoringMiner/pull/1087"
@@ -291,6 +331,10 @@ homepage:
     - id: iqvia
       organization: "IQVIA"
       organization_url: "https://www.iqvia.com/"
+      logo: "/assets/images/companies/iqvia-logo.png"
+      logo_alt: "IQVIA logo"
+      logo_width: 400
+      logo_height: 400
       role: "Software Development Engineer 1"
       start_date: "2023-06-01"
       start_label: "June 2023"
@@ -317,6 +361,10 @@ homepage:
     - id: mindshare
       organization: "Mindshare Bangladesh"
       organization_url: "https://www.mindshareworld.com/offices"
+      logo: "/assets/images/companies/mindshare-logo.png"
+      logo_alt: "Mindshare logo"
+      logo_width: 225
+      logo_height: 225
       role: "Full Stack Engineer · part-time"
       start_date: "2021-04-01"
       start_label: "April 2021"

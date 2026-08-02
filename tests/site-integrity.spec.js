@@ -161,12 +161,34 @@ test.describe('built-site integrity', () => {
       if (!route.startsWith('/blog/') && !route.startsWith('/showcase/projects/')) continue;
       const html = fs.readFileSync(file, 'utf8');
       const contentStart = html.search(/class=["'][^"']*(?:post-content|showcase-content)[^"']*["']/i);
+      if (contentStart < 0) continue;
       const mainEnd = contentStart >= 0 ? html.indexOf('</main>', contentStart) : -1;
       const content = contentStart >= 0 ? html.slice(contentStart, mainEnd >= 0 ? mainEnd : undefined) : '';
       for (const tag of content.match(/<img\b[^>]*>/gi) || []) {
         const missing = ['width', 'height', 'decoding'].filter((name) => !attribute(tag, name));
         if (missing.length) failures.push(`${route} -> image missing ${missing.join(', ')}: ${attribute(tag, 'src') || '(missing src)'}`);
       }
+    }
+    expect(failures, failures.join('\n')).toEqual([]);
+  });
+
+  test('long-form code blocks and article navigation expose keyboard-safe static markup', () => {
+    const failures = [];
+    for (const file of siteFiles('.html')) {
+      const route = routeForHtml(file);
+      if (!route.startsWith('/blog/') && !route.startsWith('/showcase/projects/')) continue;
+      const html = fs.readFileSync(file, 'utf8');
+      const contentStart = html.search(/class=["'][^"']*(?:post-content|showcase-content)[^"']*["']/i);
+      if (contentStart < 0) continue;
+      const mainEnd = contentStart >= 0 ? html.indexOf('</main>', contentStart) : -1;
+      const content = contentStart >= 0 ? html.slice(contentStart, mainEnd >= 0 ? mainEnd : undefined) : '';
+      for (const tag of content.match(/<pre\b[^>]*>/gi) || []) {
+        if (attribute(tag, 'tabindex') !== '0') failures.push(`${route} -> code block is not keyboard focusable`);
+      }
+      const h2Count = (content.match(/<h2\b/gi) || []).length;
+      const hasAuthoredToc = /Table of Contents/i.test(content);
+      if (h2Count >= 3 && !hasAuthoredToc && !html.includes('data-longform-toc')) failures.push(`${route} -> missing progressive contents navigation`);
+      if (route.startsWith('/blog/') && !html.includes('class="longform-summary"')) failures.push(`${route} -> missing reading-time summary`);
     }
     expect(failures, failures.join('\n')).toEqual([]);
   });
@@ -310,6 +332,38 @@ test.describe('built-site integrity', () => {
     expect(failures, failures.join('\n')).toEqual([]);
   });
 
+  test('published anchors avoid insecure and retired external destinations', () => {
+    const retiredTargets = [
+      'docs.docker.com/develop/best-practices/',
+      'docs.opencv.org/master/d2/d96/tutorial_py_table_of_contents_imgproc.html',
+      'github.blog/2022-03-25-secret-scanning-now-detects-and-revokes-leaked-github-tokens/',
+      'github.com/BengaliAI/numerals',
+      'github.com/romel/go-database',
+      'graphics.stanford.edu/courses/cs348b/papers/adaptive_sampling.pdf',
+      'web.stanford.edu/class/cs348b/slides/renderingequation_notes.pdf',
+      'kubernetes.io/blog/2018/05/29/introducing-kustomize-template-free-configuration-for-kubernetes/',
+      'martinfowler.com/articles/database-testing.html',
+      'martinfowler.com/articles/deployment-pipeline.html',
+      'martinfowler.com/articles/hexagonal-architecture.html',
+      'sysdig.com/resources/reports/2020-container-security-and-usage-report/',
+      'anthropic.com/constitutional-ai-anthropics-method',
+      'scratchapixel.com/lessons/3d-basic-rendering/3d-viewing-pinhole-camera.html',
+      'wiley.com/en-us/AWS+Certified+Solutions+Architect+Study+Guide-p-9781119713081',
+      'yann.lecun.com/exdb/lenet/',
+    ];
+    const failures = [];
+    for (const file of siteFiles('.html')) {
+      const route = routeForHtml(file);
+      const html = fs.readFileSync(file, 'utf8');
+      for (const tag of html.match(/<a\b[^>]*>/gi) || []) {
+        const href = decodeAttribute(attribute(tag, 'href') || '');
+        if (/^http:\/\//i.test(href)) failures.push(`${route} -> insecure external link: ${href}`);
+        if (retiredTargets.some((target) => href.includes(target))) failures.push(`${route} -> retired external link: ${href}`);
+      }
+    }
+    expect(failures, failures.join('\n')).toEqual([]);
+  });
+
   test('published prose avoids unsupported promotional superlatives', () => {
     const failures = [];
     const inflated = /\b(?:revolutionary|revolutionized|world-class|cutting-edge|game-changing|groundbreaking)\b/i;
@@ -379,13 +433,17 @@ test.describe('built-site integrity', () => {
     await page.goto(`${BASE_URL}/contributions/`, { waitUntil: 'domcontentloaded' });
 
     const count = page.locator('[data-contribution-count]');
-    const retry = page.getByRole('button', { name: 'Retry count' });
-    await expect(count).toHaveAttribute('aria-busy', 'true');
-    await expect(retry).toBeDisabled();
+    const load = page.getByRole('button', { name: 'Load current count' });
+    await expect(count).toHaveAttribute('aria-busy', 'false');
+    await expect(load).toBeEnabled();
+    expect(calls).toBe(0);
     await page.evaluate(() => {
       window.refreshContributionCount();
       window.refreshContributionCount();
     });
+    const retry = page.getByRole('button', { name: 'Refresh count' });
+    await expect(count).toHaveAttribute('aria-busy', 'true');
+    await expect(retry).toBeDisabled();
     expect(calls).toBe(1);
 
     release();
@@ -400,7 +458,7 @@ test.describe('built-site integrity', () => {
     await page.goto(`${BASE_URL}/contributions/`, { waitUntil: 'domcontentloaded' });
     await expect(page.locator('[data-contribution-proof]')).toHaveCount(6);
     await expect(page.getByText('Live count unavailable without JavaScript. Selected contribution evidence is shown above.')).toBeVisible();
-    await expect(page.getByRole('button', { name: 'Retry count' })).toHaveCount(0);
+    await expect(page.getByRole('button', { name: 'Load current count' })).toHaveCount(0);
     await context.close();
   });
 });

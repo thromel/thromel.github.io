@@ -12,8 +12,7 @@ problem: "Learn how storage, recovery, transactions, query execution, and indexi
 role: Independent implementer and technical author
 outcome: "Built and documented staged B+ tree, write-ahead log, transaction, concurrency, query, and indexing components as an educational prototype."
 status: Educational prototype; not a production database
-repository: https://github.com/romel/go-database
-repository_status: Public source repository
+repository_status: No public repository is currently linked
 featured: true
 technologies:
   - Go
@@ -26,13 +25,6 @@ technologies:
 ---
 
 ## 15-sprint implementation plan | Educational database engine | Systems programming
-
-<div class="text-end mb-3">
-    <a href="https://github.com/romel/go-database" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline-dark" aria-label="View the Go database project on GitHub (opens in a new tab)">
-        <i class="fab fa-github"></i> View on GitHub
-    </a>
-</div>
-
 
 ## Introduction
 

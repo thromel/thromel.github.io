@@ -41,7 +41,7 @@ At a basic level, ray tracing is a computational implementation of geometric opt
 
 Light exhibits a fascinating [wave-particle duality](https://www.britannica.com/science/wave-particle-duality). For ray tracing, we primarily leverage the particle perspective, modeling light as discrete rays (photons) that travel in straight paths. However, understanding that light is also an electromagnetic wave helps explain phenomena like color (wavelength) and polarization.
 
-While our implementation simplifies these aspects, commercial renderers often incorporate wave-based effects for more physically accurate results. For a deeper exploration of light's dual nature, [this Stanford lecture](https://web.stanford.edu/class/cs348b/slides/renderingequation_notes.pdf) provides excellent theoretical foundations.
+While our implementation simplifies these aspects, commercial renderers often incorporate wave-based effects for more physically accurate results. For deeper background on light transport, Stanford's [Light Transport and the Rendering Equation](https://graphics.stanford.edu/courses/cs348b-98/transport/transport.html) lecture provides useful theoretical foundations.
 
 ### Geometric Optics and Light Interaction
 
@@ -115,7 +115,7 @@ Vector3D calculateReflection(const Vector3D& incidentDir, const Vector3D& normal
 }
 ```
 
-For a comprehensive guide to vector mathematics in computer graphics, [Immersive Linear Algebra](http://immersivemath.com/ila/index.html) offers an interactive exploration.
+For a comprehensive guide to vector mathematics in computer graphics, [Immersive Linear Algebra](https://immersivemath.com/ila/index.html) offers an interactive exploration.
 
 ### Ray-Object Intersection: The Core Algorithm
 
@@ -379,7 +379,7 @@ Color samplePixel(int i, int j) {
 }
 ```
 
-For an in-depth exploration of anti-aliasing techniques in ray tracing, see [this article on adaptive sampling](https://graphics.stanford.edu/courses/cs348b/papers/adaptive_sampling.pdf).
+For an in-depth exploration of anti-aliasing techniques in ray tracing, see Stanford's lecture on [adaptive supersampling](https://graphics.stanford.edu/courses/cs348b-98/antialiasing/antialiasing2.html).
 
 ### 2. Global Illumination
 
@@ -498,7 +498,7 @@ This creates a virtual image plane at a specified distance from the eye point. M
 2. **Motion Blur**: By sampling ray origins at different points in time
 3. **Lens Distortions**: By warping the image plane according to lens characteristics
 
-For an in-depth exploration of camera models in graphics, see [Scratchapixel's lesson on cameras](https://www.scratchapixel.com/lessons/3d-basic-rendering/3d-viewing-pinhole-camera.html).
+For an in-depth exploration of camera models in graphics, see [Scratchapixel's pinhole-camera lesson](https://www.scratchapixel.com/lessons/3d-basic-rendering/3d-viewing-pinhole-camera/how-pinhole-camera-works-part-1.html).
 
 ## File Format and Scene Description
 

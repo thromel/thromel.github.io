@@ -876,7 +876,7 @@ EXPOSE 3002
 CMD ["node", "src/app.js"]
 ```
 
-> **Build Optimization**: For more advanced Docker optimization techniques, see the [Docker Best Practices Guide](https://docs.docker.com/develop/best-practices/) and Google's [Container Image Building Best Practices](https://cloud.google.com/architecture/best-practices-for-building-containers).
+> **Build Optimization**: For more advanced Docker optimization techniques, see the [Docker Build Best Practices Guide](https://docs.docker.com/build/building/best-practices/) and Google's [Container Image Building Best Practices](https://cloud.google.com/architecture/best-practices-for-building-containers).
 
 ## Core Kubernetes Resources for Microservices {#core-kubernetes-resources}
 

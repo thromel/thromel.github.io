@@ -68,7 +68,7 @@ We evaluated three main approaches:
 
 Our evaluation criteria focused on several key factors:
 
-**Vendor Independence** was crucial. We'd been burned before by vendor lock-in, and OpenTelemetry's vendor-neutral approach meant we could switch backends without rewriting instrumentation code. As Martin Fowler discusses in his article on [Hexagonal Architecture](https://martinfowler.com/articles/hexagonal-architecture.html), keeping infrastructure concerns at the edges of your system provides flexibility.
+**Vendor Independence** was crucial. We'd been burned before by vendor lock-in, and OpenTelemetry's vendor-neutral approach meant we could switch backends without rewriting instrumentation code. As Alistair Cockburn explains in the original [Hexagonal Architecture](https://alistair.cockburn.us/hexagonal-architecture) article, keeping infrastructure concerns at the edges of your system provides flexibility.
 
 **Language Support** mattered significantly given our polyglot architecture. OpenTelemetry provides first-class support for all our languages, with consistent APIs across platforms. This meant our Node.js developers and Java developers could speak the same observability language.
 

@@ -1574,7 +1574,7 @@ The journey toward reliable agentic AI is ongoing. As models become more capable
 - [Guardrails AI Framework](https://www.guardrailsai.com/) - Open-source framework for adding guardrails
 - [LangChain Safety Documentation](https://python.langchain.com/docs/guides/safety) - Safety features in LangChain
 - [HELM Benchmark](https://crfm.stanford.edu/helm/latest/) - Holistic evaluation of language models
-- [Anthropic's Constitutional AI](https://www.anthropic.com/constitutional-ai-anthropics-method) - Principled approach to AI safety
+- [Anthropic's Constitutional AI](https://www.anthropic.com/research/constitutional-ai-harmlessness-from-ai-feedback) - Principled approach to AI safety
 - [NeMo Guardrails](https://github.com/NVIDIA/NeMo-Guardrails) - NVIDIA's toolkit for LLM guardrails
 - [Great Expectations](https://greatexpectations.io/) - Data validation framework adaptable for AI outputs
 - [Microsoft's Guidance](https://github.com/microsoft/guidance) - Framework for controlling language models

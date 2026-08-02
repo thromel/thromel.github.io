@@ -4,6 +4,7 @@
   var TIMEOUT_MS = 5000;
   var activeRequest = null;
   var requestSequence = 0;
+  var hasRequested = false;
 
   function root() { return document.querySelector('[data-contribution-count]'); }
   function retryButton() { return document.getElementById('contribution-count-refresh'); }
@@ -36,6 +37,9 @@
     var container = root();
     if (!container) return;
     if (activeRequest) return activeRequest.promise;
+    hasRequested = true;
+    var button = retryButton();
+    if (button) button.textContent = 'Refresh count';
 
     var username = container.getAttribute('data-github-user');
     if (!username) {
@@ -108,10 +112,23 @@
 
   function initialize() {
     var button = retryButton();
-    if (button) button.textContent = 'Retry count';
+    var container = root();
+    if (!container) return;
+    if (button) {
+      button.disabled = false;
+      button.textContent = 'Load current count';
+    }
     if (button) button.addEventListener('click', refreshCount);
     window.refreshContributionCount = refreshCount;
-    refreshCount();
+
+    if ('IntersectionObserver' in window) {
+      var observer = new IntersectionObserver(function (entries) {
+        if (!entries.some(function (entry) { return entry.isIntersecting; }) || hasRequested) return;
+        observer.disconnect();
+        refreshCount();
+      }, { rootMargin: '240px 0px' });
+      observer.observe(container);
+    }
   }
 
   window.addEventListener('pagehide', cancelActiveRequest);

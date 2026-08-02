@@ -2,6 +2,11 @@
 layout: default
 ---
 
+{% capture accessible_content %}{{ content }}{% endcapture %}
+{% assign h2_count = accessible_content | split: '<h2' | size | minus: 1 %}
+{% assign has_authored_toc = false %}
+{% if accessible_content contains 'Table of Contents' %}{% assign has_authored_toc = true %}{% endif %}
+
 <header class="academic-section page-hero showcase-header{% if page.showcase_style %} showcase-header--{{ page.showcase_style }}{% endif %}">
   <p class="eyebrow">Engineering record</p>
   <h1 class="section-title showcase-title">{{ page.title }}</h1>
@@ -20,6 +25,13 @@ layout: default
   </div>
 </header>
 
+{% if h2_count >= 3 and has_authored_toc == false %}
+<details class="longform-toc" data-longform-toc data-longform-target="showcase-content">
+  <summary>On this page</summary>
+  <ol data-longform-toc-list></ol>
+</details>
+{% endif %}
+
 <!-- Technologies -->
 {% if page.technologies.size > 0 %}
 <div class="showcase-tags">
@@ -31,8 +43,8 @@ layout: default
 
 <!-- Content -->
 <article class="section showcase-article{% if page.showcase_style %} showcase-article--{{ page.showcase_style }}{% endif %}">
-  <div class="showcase-content">
-    {{ content }}
+  <div id="showcase-content" class="showcase-content" data-longform-content>
+    {{ accessible_content | replace: '<pre', '<pre tabindex="0"' }}
   </div>
 </article>
 

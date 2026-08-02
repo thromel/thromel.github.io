@@ -31,9 +31,8 @@
     var toggle = document.getElementById('theme-toggle');
     if (toggle) {
       var dark = theme === 'dark';
-      var label = dark ? 'Use light theme' : 'Use dark theme';
       toggle.setAttribute('aria-pressed', String(dark));
-      toggle.setAttribute('aria-label', label);
+      toggle.setAttribute('aria-label', 'Dark theme');
     }
   }
 
@@ -98,6 +97,47 @@
     });
   }
 
+  function initLongformToc() {
+    document.querySelectorAll('[data-longform-toc]').forEach(function (toc) {
+      var targetId = toc.getAttribute('data-longform-target');
+      var content = targetId ? document.getElementById(targetId) : null;
+      var list = toc.querySelector('[data-longform-toc-list]');
+      if (!content || !list) return;
+
+      var allHeadings = Array.from(content.querySelectorAll('h2'));
+      if (allHeadings.some(function (heading) { return heading.textContent.trim().toLowerCase() === 'table of contents'; })) return;
+      var headings = allHeadings;
+      if (headings.length < 3) return;
+
+      var usedIds = new Set(Array.from(document.querySelectorAll('[id]')).map(function (element) { return element.id; }));
+      headings.forEach(function (heading, index) {
+        if (!heading.id) {
+          var base = heading.textContent.trim().toLowerCase()
+            .replace(/[^a-z0-9\s-]/g, '')
+            .replace(/\s+/g, '-')
+            .replace(/-+/g, '-')
+            .replace(/^-|-$/g, '') || 'section-' + (index + 1);
+          var candidate = base;
+          var suffix = 2;
+          while (usedIds.has(candidate)) candidate = base + '-' + suffix++;
+          heading.id = candidate;
+          usedIds.add(candidate);
+        }
+
+        var item = document.createElement('li');
+        var link = document.createElement('a');
+        link.href = '#' + heading.id;
+        link.textContent = heading.textContent.trim();
+        item.appendChild(link);
+        list.appendChild(item);
+      });
+
+      var summary = toc.querySelector('summary');
+      if (summary) summary.textContent = 'On this page · ' + headings.length + ' sections';
+      toc.hidden = false;
+    });
+  }
+
   function markShellReady() {
     if (window.__portfolioShellFallback) {
       window.clearTimeout(window.__portfolioShellFallback);
@@ -153,6 +193,7 @@
     initTheme();
     initMenu();
     initSkipLinks();
+    initLongformToc();
     initInteractionMetrics();
   }
 

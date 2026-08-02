@@ -313,7 +313,7 @@ jobs:
         run: kubectl apply -f infra/k8s/dev
 ```
 
-This automation was crucial for our small team, as it freed us from manual deployment tasks and provided consistent quality checks. The article ["CI/CD for Microservices on Kubernetes"](https://kubernetes.io/blog/2018/05/29/introducing-kustomize-template-free-configuration-for-kubernetes/) helped us design this workflow.
+This automation was crucial for our small team, as it freed us from manual deployment tasks and provided consistent quality checks. Kubernetes' current [Kustomize documentation](https://kubernetes.io/docs/tasks/manage-kubernetes-objects/kustomization/) explains how to structure and apply environment-specific overlays used in workflows like this one.
 
 ## Challenges We Faced With Our Small Team
 

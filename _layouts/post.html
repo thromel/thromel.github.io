@@ -2,13 +2,24 @@
 layout: default
 ---
 
+{% capture accessible_content %}{{ content }}{% endcapture %}
+{% assign h2_count = accessible_content | split: '<h2' | size | minus: 1 %}
+{% assign has_authored_toc = false %}
+{% if accessible_content contains 'Table of Contents' %}{% assign has_authored_toc = true %}{% endif %}
+
 <article class="post-article">
+  {% assign word_count = content | number_of_words %}
+  {% assign reading_minutes = word_count | plus: 199 | divided_by: 200 %}
   <header>
     <p class="eyebrow">Technical note</p>
     <h1 class="post-title">{{ page.title }}</h1>
     <p class="post-meta">
       <time class="post-date" datetime="{{ page.date | date: '%Y-%m-%d' }}">{{ page.date | date: "%B %d, %Y" }}</time>
       {% if page.categories.size > 0 %}<span>{{ page.categories | join: ", " }}</span>{% endif %}
+    </p>
+    <p class="longform-summary" aria-label="Article length">
+      <span>{{ reading_minutes }} min read</span>
+      <span>{{ word_count }} words</span>
     </p>
 
     {% if page.tags.size > 0 %}
@@ -18,8 +29,15 @@ layout: default
     {% endif %}
   </header>
 
-  <div class="post-content prose">
-    {{ content }}
+  {% if h2_count >= 3 and has_authored_toc == false %}
+  <details class="longform-toc" data-longform-toc data-longform-target="post-content">
+    <summary>On this page</summary>
+    <ol data-longform-toc-list></ol>
+  </details>
+  {% endif %}
+
+  <div id="post-content" class="post-content prose" data-longform-content>
+    {{ accessible_content | replace: '<pre', '<pre tabindex="0"' }}
   </div>
 
   <nav class="post-navigation" aria-label="Post navigation">

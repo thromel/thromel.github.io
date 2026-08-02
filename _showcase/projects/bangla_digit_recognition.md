@@ -51,7 +51,7 @@ The project achieves an impressive 95.87% accuracy on the test dataset, demonstr
 
 ## Understanding the Dataset
 
-The project uses the NumtaDB dataset, which contains handwritten Bangla digit images. You can find more information about this dataset at [NumtaDB GitHub Repository](https://github.com/BengaliAI/numerals).
+The project uses the NumtaDB dataset, which contains handwritten Bangla digit images. You can find more information and access details on the [NumtaDB dataset page](https://www.kaggle.com/datasets/BengaliAI/numta).
 
 The dataset is organized into multiple partitions:
 - training-a
@@ -125,7 +125,7 @@ img = np.delete(img, col_drop, axis=1)
 img = cv2.resize(img, (28, 28), interpolation=cv2.INTER_AREA)
 ```
 
-This centering process helps the model focus on the actual digit and ignore irrelevant empty space. For a deeper understanding of these image preprocessing techniques, you can visit [OpenCV's documentation on image processing](https://docs.opencv.org/master/d2/d96/tutorial_py_table_of_contents_imgproc.html).
+This centering process helps the model focus on the actual digit and ignore irrelevant empty space. For a deeper understanding of these image preprocessing techniques, you can visit [OpenCV's documentation on image processing](https://docs.opencv.org/4.x/d2/d96/tutorial_py_table_of_contents_imgproc.html).
 
 ### Why These Preprocessing Steps Matter for Bangla Digits
 
@@ -170,7 +170,7 @@ The project implements two different CNN architectures:
 - Fully connected layer with 84 neurons and ReLU activation
 - Output layer with 10 neurons and Softmax activation
 
-The second architecture, which appears to be inspired by the classic LeNet-5 architecture, is the one used in the final implementation shown in the training code. You can learn more about the original LeNet architecture at [Yann LeCun's website](http://yann.lecun.com/exdb/lenet/).
+The second architecture, which appears to be inspired by the classic LeNet-5 architecture, is the one used in the final implementation shown in the training code. You can learn more in the original [LeNet-5 paper](https://doi.org/10.1109/5.726791).
 
 ### Why This Architecture Works Well for Bangla Digits
 
