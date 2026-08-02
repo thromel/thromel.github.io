@@ -5,10 +5,8 @@ date: 2024-11-05
 categories: [dotnet, testing, software-engineering, bdd, education]
 tags: [xunit, specflow, dotnet9, unit-testing, bdd, tdd, best-practices, ci-cd]
 ---
-# Mastering Unit Testing and BDD with xUnit and SpecFlow in .NET 9: A Comprehensive Guide
 
 
-# Mastering Unit Testing and BDD with xUnit and SpecFlow in .NET 9: A Comprehensive Guide
 
 ## Table of Contents
 1. [Introduction: Why Testing Saves Your Project](#introduction)

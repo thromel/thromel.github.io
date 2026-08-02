@@ -7,7 +7,6 @@ tags: [neural-networks, algorithms, deep-learning, reasoning, python, pytorch]
 ---
 
 
-# Neural Algorithmic Reasoning: Teaching Neural Networks to Think Like Algorithms
 
 ## Introduction: When Neural Networks Meet Classical Algorithms
 
@@ -17,7 +16,7 @@ This is the promise of Neural Algorithmic Reasoning (NAR) - a fascinating paradi
 
 ## The Big Picture: Why Neural Algorithmic Reasoning?
 
-Before we dive into code, let's understand why NAR is revolutionary. Traditional approaches to problem-solving fall into two camps:
+Before we dive into code, it helps to see what NAR changes. Traditional approaches to problem-solving fall into two camps:
 
 **Classical Algorithms**: These are like precise recipes. Given the same input, they always produce the same output. They're interpretable, provably correct, and efficient for their designed purpose. However, they're brittle - they can't adapt to noisy data or learn from experience.
 
@@ -143,7 +142,7 @@ We'll use a Processor Network architecture, which consists of three main compone
 2. **Processor**: Performs iterative reasoning (mimicking algorithm steps)
 3. **Decoder**: Extracts the final answer from neural representations
 
-<img src="{{ '/assets/images/nar_bellman_ford_architecture.png' | relative_url }}" class="img-fluid mb-4" alt="Neural Algorithmic Reasoning Architecture">
+<img src="{{ '/assets/images/nar_bellman_ford_architecture.png' | relative_url }}" class="img-fluid mb-4" alt="Neural Algorithmic Reasoning Architecture" width="2084" height="367" loading="lazy" decoding="async">
 
 Let's implement this step by step:
 
@@ -538,7 +537,7 @@ class AdaptiveAlgorithmicProcessor(MessagePassing):
 
 Let's build a complete example that shows the power of Neural Algorithmic Reasoning:
 
-<img src="{{ '/assets/images/nar_navigation_system.png' | relative_url }}" class="img-fluid mb-4" alt="Smart City Navigation System">
+<img src="{{ '/assets/images/nar_navigation_system.png' | relative_url }}" class="img-fluid mb-4" alt="Smart City Navigation System" width="2337" height="437" loading="lazy" decoding="async">
 
 ```python
 class SmartCityNavigationSystem:
@@ -814,6 +813,6 @@ For those eager to dive deeper into Neural Algorithmic Reasoning:
 
 5. **"Learning to Execute"** - Zaremba & Sutskever (2014): An early work showing neural networks can learn to execute simple programs.
 
-The code examples in this post provide a foundation for experimenting with NAR. You can find complete implementations and additional examples in the [GitHub repository](#) accompanying this post.
+The code examples in this post provide a foundation for experimenting with NAR. Start with the Bellman–Ford notebook above, then vary the graph distribution, supervision signal, and evaluation split while keeping the classical baseline visible.
 
 Remember, the journey of teaching machines to reason algorithmically has just begun. Your contributions and explorations could help shape this exciting field. Happy coding, and may your neural networks reason as elegantly as your algorithms!

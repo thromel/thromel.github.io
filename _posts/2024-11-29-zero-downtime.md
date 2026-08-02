@@ -7,7 +7,6 @@ tags: [kubernetes, zero-downtime, deployment, microservices, devops, rolling-upd
 image: /assets/images/projects/zero-downtime-deployments.png
 ---
 
-# Zero Downtime Deployments in Kubernetes: How We Keep Our Services Running While We Ship
 
 Picture this scenario. You're at your favorite online store, adding items to your cart. Suddenly, the site goes down with a "Under Maintenance" message. Frustrating, right? Now imagine if that was your company's service. That's exactly why we invested in zero downtime deployments, and today I'll share how we achieved this in our Kubernetes microservice architecture.
 

@@ -2,10 +2,17 @@
 layout: showcase
 show: true
 width: 8
-date: 2023-05-01 00:00:00 +0800
+date: 2023-05-01 00:00:00 +0600
 group: Research
 title: Blockchain in Healthcare 2.0
 excerpt: An advanced blockchain framework designed specifically for healthcare data management that incorporates sharding, Layer-2 solutions, and a Directed Acyclic Graph (DAG) ledger structure.
+problem: "Coordinate patient-approved EHR sharing across organizations while keeping sensitive records encrypted off-chain and access changes auditable."
+role: Designed and implemented the undergraduate-thesis prototype under Professor ASM Latiful Hoque
+outcome: "Evaluated encrypted IPFS storage and Ethereum access control on 10,000 synthetic patient records."
+status: Completed undergraduate thesis; public preprint available
+repository_status: No public repository linked
+proof_url: https://arxiv.org/abs/2511.17464
+proof_label: Public preprint
 technologies:
   - Hyperledger Fabric
   - Ethereum
@@ -30,7 +37,7 @@ and a Directed Acyclic Graph (DAG) ledger structure to address scalability, secu
                 <strong>Blockchain Healthcare Architecture</strong>
             </div>
             <div class="card-body text-center">
-                <img src="{{ 'assets/images/blockchain-healthcare.png' | relative_url }}" class="img-fluid mb-2" alt="Blockchain Healthcare Architecture">
+                <img src="{{ 'assets/images/blockchain/blockchain.webp' | relative_url }}" class="img-fluid mb-2" alt="Blockchain-based health-record project illustration" width="960" height="960" decoding="async">
                 <small class="text-muted">Multi-layered blockchain architecture for healthcare data with sharding and privacy-preserving computation</small>
             </div>
         </div>

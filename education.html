@@ -2,26 +2,36 @@
 layout: default
 title: Education
 navbar_title: Education
+description: Degree history, selected coursework, academic distinctions, and the transition from BUET to graduate study at the University of Alberta.
 ---
 
-<section class="academic-section section-education education-page">
-  <h1 class="academic-page-title page-intro-title">Education</h1>
-  <p>Degrees, coursework, and academic awards.</p>
+<section class="academic-section page-hero">
+  <p class="eyebrow">Education</p>
+  <h1 class="academic-page-title page-intro-title">From Rajshahi to Alberta</h1>
+  <p class="page-hero__intro">Degrees, academic context, and the next stage of my research trajectory.</p>
+</section>
 
+<section class="academic-section section-education education-page" aria-labelledby="education-record-title">
+  <div class="section-trace"><span aria-hidden="true">01</span><div><p class="eyebrow">Academic record</p><h2 id="education-record-title">Education</h2></div></div>
   <div class="education-list">
     {% for edu in site.data.profile.education %}
     <article class="education-entry{% if forloop.index <= 2 %} education-entry--featured{% endif %} timeline-item">
       {% if edu.logo %}
       <div class="education-entry__logo-wrap">
-        <img class="education-entry__logo{% if edu.name == 'Rajshahi College' %} education-entry__logo--rajshahi-college{% endif %}" loading="lazy" decoding="async" src="{{ edu.logo | relative_url }}" alt="{{ edu.name }} logo">
+        <img class="education-entry__logo{% if edu.name == 'Rajshahi College' %} education-entry__logo--rajshahi-college{% endif %}" loading="lazy" decoding="async" src="{{ edu.logo | relative_url }}" alt="{{ edu.name }} logo"{% case forloop.index %}{% when 1 %} width="256" height="256"{% when 2 %} width="80" height="80"{% when 3 %} width="64" height="64"{% when 4 %} width="265" height="239"{% endcase %}>
       </div>
       {% endif %}
       <div class="education-entry__body">
         <h2 class="education-entry__degree">{{ edu.position }}</h2>
         <p class="education-entry__meta">
-          {% if edu.url %}<a href="{{ edu.url }}" target="_blank" rel="noopener noreferrer">{{ edu.name }}</a>{% else %}{{ edu.name }}{% endif %}
+          {% if edu.url %}<a href="{{ edu.url }}" target="_blank" rel="noopener noreferrer" aria-label="{{ edu.name | escape }} (opens in a new tab)">{{ edu.name }}</a>{% else %}{{ edu.name }}{% endif %}
           <span aria-hidden="true">·</span>
-          <span>{{ edu.date }}</span>{% if edu.status %}<span aria-hidden="true">·</span><span>{{ edu.status }}</span>{% endif %}
+          {% case forloop.index %}
+          {% when 1 %}<time datetime="2026-09-01">{{ edu.date }}</time>
+          {% when 2 %}<time datetime="2018-04">April 2018</time>–<time datetime="2023-05">May 2023</time>
+          {% when 3 %}<time datetime="2015">2015</time>–<time datetime="2017">2017</time>
+          {% when 4 %}<time datetime="2007">2007</time>–<time datetime="2015">2015</time>
+          {% endcase %}{% if edu.status %}<span aria-hidden="true">·</span><span>{{ edu.status }}</span>{% endif %}
         </p>
         <div class="education-entry__description">{{ edu.description }}</div>
         {% if edu.coursework %}

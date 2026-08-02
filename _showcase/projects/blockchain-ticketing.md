@@ -7,14 +7,22 @@ date: 2021-04-01
 categories: project
 tags: [blockchain, ethereum, smart-contracts, NFT, ticketing, BCOLBD]
 image: /assets/images/projects/blockchain-ticketing-banner.jpg
+visual_width: 1257
+visual_height: 692
 featured: true
 group: "Projects"
 show: true
 technologies: ["Ethereum", "Solidity", "Smart Contracts", "Web3.js", "NFT", "ERC-1155", "ERC-721", "Polygon"]
 excerpt: "A blockchain ticketing prototype for fraud-resistant issuance, controlled resale, and verifiable entry. Built as a BCOLBD 2021 finalist project."
+problem: "Reduce ticket fraud and abusive resale while preserving verifiable ownership, controlled transfer, and venue entry."
+role: Co-developed the architecture and contract logic, focusing on lifecycle rules, transfer constraints, and validation flows
+outcome: "The team was selected as a Blockchain Olympiad Bangladesh 2021 finalist with a prototype covering ticket issuance, marketplace resale, and validation flows."
+status: Finalist prototype
+repository_status: Prototype repository not public
+proof_url: https://bcolbd.org/2021/teams
+proof_label: Official finalist listing
 ---
 
-# Blockchain ticketing platform: what we built for BCOLBD 2021
 
 The online event ticketing market is widely estimated to be in the tens of billions of USD annually (for example, one industry report estimates roughly USD 55.4B in 2022, with continued growth projected from that base ([Grand View Research](https://www.grandviewresearch.com/industry-analysis/online-event-ticketing-market))). The secondary market creates real consumer harm when fraud, opaque fees, and bot-driven bulk buying push buyers away from face-value pricing. At the same time, not all resale is exploitative: a meaningful share of secondary listings can be below face value. The goal, then, is not to ban resale outright, but to make resale verifiable, fair, and transparent.
 
@@ -67,7 +75,7 @@ In short, the system moves core ticket state from private database rows to an au
 The architecture has four layers and keeps responsibilities separate:
 
 <div class="text-center mb-4">
-  <img src="/assets/images/projects/blockchain-ticketing-architecture.png" alt="Blockchain Ticketing Platform Architecture" class="img-fluid rounded shadow-sm" style="max-width: 100%;">
+  <img src="/assets/images/projects/blockchain-ticketing-architecture.png" alt="Blockchain Ticketing Platform Architecture" class="img-fluid rounded shadow-sm" width="1257" height="692" loading="lazy" decoding="async">
   <p class="text-muted mt-2"><small>Blockchain Ticketing Platform Multi-layered Architecture</small></p>
 </div>
 
@@ -180,7 +188,7 @@ This model makes the ERC-1155 choice intentional: unique seats use `supply=1`, w
 Each ticket progresses through a defined lifecycle managed by smart contracts:
 
 <div class="text-center mb-4">
-  <img src="/assets/images/projects/ticket-states.png" alt="NFT Ticket Lifecycle State Machine" class="img-fluid rounded shadow-sm" style="max-width: 100%;">
+  <img src="/assets/images/projects/ticket-states.png" alt="NFT Ticket Lifecycle State Machine" class="img-fluid rounded shadow-sm" width="1415" height="159" loading="lazy" decoding="async">
   <p class="text-muted mt-2"><small>NFT Ticket Lifecycle State Machine</small></p>
 </div>
 
@@ -509,19 +517,3 @@ I still think the biggest differentiator is explicit rule enforcement. If you ma
 - [Polygon PoS docs (EVM-compatible PoS sidechain positioning)](https://docs.polygon.technology/pos/)
 - [Polygon PoS overview (throughput/fee positioning)](https://polygon.technology/polygon-pos)
 - [Grand View Research: online event ticketing market](https://www.grandviewresearch.com/industry-analysis/online-event-ticketing-market)
-
-<style>
-/* Ensure diagrams display well in both light and dark themes */
-:root.dark-theme .img-fluid {
-  background-color: white;
-  padding: 15px;
-  border-radius: 8px;
-}
-
-:root.light-theme .img-fluid {
-  background-color: white;
-  padding: 15px;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-</style>

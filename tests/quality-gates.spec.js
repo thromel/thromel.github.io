@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const zlib = require('zlib');
-const { test, expect, chromium } = require('@playwright/test');
+const { test, expect } = require('@playwright/test');
 const AxeBuilder = require('@axe-core/playwright').default;
 
 const ROOT = path.resolve(__dirname, '..');
@@ -25,17 +25,121 @@ async function mockGitHubCount(page) {
 }
 
 test.describe('accessibility and release-quality gates', () => {
-  test('core pages have no serious or critical axe violations at desktop and phone widths', async ({ page }) => {
-    for (const width of [390, 1280]) {
-      for (const route of ['/', '/research', '/publications', '/projects', '/contributions']) {
-        await page.setViewportSize({ width, height: 900 });
-        if (route === '/contributions') await mockGitHubCount(page);
-        await page.goto(`${BASE_URL}${route}`, { waitUntil: 'domcontentloaded' });
-        const results = await new AxeBuilder({ page }).analyze();
-        const blocking = results.violations.filter((violation) => ['serious', 'critical'].includes(violation.impact));
-        expect(blocking, `${route} at ${width}px: ${blocking.map((violation) => violation.id).join(', ')}`).toEqual([]);
+  test('core pages have no serious or critical axe violations in both themes and viewport classes', async ({ browser }) => {
+    for (const theme of ['light', 'dark']) {
+      for (const width of [390, 1280]) {
+        const context = await browser.newContext({ colorScheme: theme, viewport: { width, height: 900 } });
+        const page = await context.newPage();
+        for (const route of ['/', '/research', '/publications', '/projects', '/contributions', '/blog/']) {
+          if (route === '/contributions') await mockGitHubCount(page);
+          await page.goto(`${BASE_URL}${route}`, { waitUntil: 'domcontentloaded' });
+          await expect(page.locator('html')).toHaveAttribute('data-theme', theme);
+          const results = await new AxeBuilder({ page }).analyze();
+          const blocking = results.violations.filter((violation) => ['serious', 'critical'].includes(violation.impact));
+          expect(blocking, `${theme} ${route} at ${width}px: ${blocking.map((violation) => violation.id).join(', ')}`).toEqual([]);
+        }
+        await context.close();
       }
     }
+  });
+
+  test('dark active pagination keeps WCAG AA text contrast', async ({ browser }) => {
+    const context = await browser.newContext({ colorScheme: 'dark' });
+    const page = await context.newPage();
+    await page.goto(BASE_URL, { waitUntil: 'domcontentloaded' });
+    const contrast = await page.evaluate(() => {
+      const pagination = document.createElement('div');
+      pagination.className = 'blog-pagination';
+      const current = document.createElement('span');
+      current.className = 'is-active';
+      current.textContent = '1';
+      pagination.append(current);
+      document.body.append(pagination);
+
+      const parseRgb = (value) => value.match(/[\d.]+/g).slice(0, 3).map(Number);
+      const luminance = (value) => {
+        const channels = parseRgb(value).map((channel) => {
+          const normalized = channel / 255;
+          return normalized <= 0.04045 ? normalized / 12.92 : ((normalized + 0.055) / 1.055) ** 2.4;
+        });
+        return (0.2126 * channels[0]) + (0.7152 * channels[1]) + (0.0722 * channels[2]);
+      };
+      const style = getComputedStyle(current);
+      const foreground = luminance(style.color);
+      const background = luminance(style.backgroundColor);
+      current.remove();
+      return (Math.max(foreground, background) + 0.05) / (Math.min(foreground, background) + 0.05);
+    });
+    expect(contrast).toBeGreaterThanOrEqual(4.5);
+    await context.close();
+  });
+
+  test('primary controls produce a field-compatible INP candidate below 200ms', async ({ page }) => {
+    await page.setViewportSize({ width: 320, height: 800 });
+    await page.goto(BASE_URL, { waitUntil: 'domcontentloaded' });
+    await expect(page.locator('#site-menu-toggle')).toBeEnabled();
+    await expect(page.locator('#theme-toggle')).toBeEnabled();
+    await expect.poll(() => page.evaluate(() => window.siteVitals && window.siteVitals.supported)).toBe(true);
+
+    await page.locator('#site-menu-toggle').click();
+    await page.locator('#site-menu-toggle').click();
+    await page.locator('#theme-toggle').click();
+
+    await expect.poll(() => page.evaluate(() => window.siteVitals && window.siteVitals.interactions), { timeout: 3000 })
+      .toBeGreaterThan(0);
+    const metrics = await page.evaluate(() => ({ ...window.siteVitals, disconnect: undefined }));
+    expect(metrics.source).toBe('PerformanceEventTiming');
+    expect(metrics.inp, 'observed interaction-to-next-paint duration').toBeGreaterThan(0);
+    expect(metrics.inp, 'observed interaction-to-next-paint duration').toBeLessThanOrEqual(200);
+  });
+
+  test('core routes reflow at a 200% desktop-zoom equivalent', async ({ page }) => {
+    // Browser zoom from a 1280px desktop produces a 640 CSS-pixel layout viewport.
+    // Exercising that viewport verifies the same responsive reflow without relying
+    // on browser-specific UI automation for the zoom control.
+    await page.setViewportSize({ width: 640, height: 900 });
+    for (const route of ['/', '/research/', '/experience/', '/contributions/']) {
+      if (route === '/contributions/') await mockGitHubCount(page);
+      await page.goto(`${BASE_URL}${route}`, { waitUntil: 'domcontentloaded' });
+      const geometry = await page.evaluate(() => ({
+        clientWidth: document.documentElement.clientWidth,
+        scrollWidth: document.documentElement.scrollWidth,
+      }));
+      expect(geometry.scrollWidth, `${route} at the 200% zoom equivalent`).toBeLessThanOrEqual(geometry.clientWidth + 1);
+      await expect(page.locator('main h1')).toBeVisible();
+      await expect(page.locator('#site-menu-toggle')).toBeVisible();
+    }
+  });
+
+  test('component controls and text flow follow current web-interface guidance', async ({ page }) => {
+    await page.setViewportSize({ width: 1280, height: 900 });
+    await page.goto(BASE_URL, { waitUntil: 'domcontentloaded' });
+
+    const targetSelectors = [
+      '#theme-toggle',
+      '.home-identity__paths a',
+      '.home-contact .text-link',
+      '.site-footer__list a',
+    ];
+    for (const selector of targetSelectors) {
+      for (const target of await page.locator(selector).all()) {
+        const box = await target.boundingBox();
+        expect(box, `${selector} should render`).not.toBeNull();
+        expect(box.width, `${selector} width`).toBeGreaterThanOrEqual(44);
+        expect(box.height, `${selector} height`).toBeGreaterThanOrEqual(44);
+        expect(await target.evaluate((element) => getComputedStyle(element).touchAction)).toBe('manipulation');
+      }
+    }
+
+    const textFlow = await page.evaluate(() => ({
+      heading: getComputedStyle(document.querySelector('h1')).textWrap,
+      body: getComputedStyle(document.querySelector('.home-identity__bridge')).textWrap,
+      anchorOffset: parseFloat(getComputedStyle(document.querySelector('#selected-evidence-title')).scrollMarginTop),
+      headerHeight: parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--header-height')),
+    }));
+    expect(textFlow.heading).toBe('balance');
+    expect(textFlow.body).toBe('pretty');
+    expect(textFlow.anchorOffset).toBeGreaterThan(textFlow.headerHeight);
   });
 
   test('first-party style, script, image, and homepage-transfer budgets stay bounded', async ({ page }) => {
@@ -114,7 +218,6 @@ test.describe('accessibility and release-quality gates', () => {
     const lighthouse = (await import('lighthouse')).default;
     const { launch } = await import('chrome-launcher');
     const chrome = await launch({
-      chromePath: chromium.executablePath(),
       chromeFlags: ['--headless=new', '--no-sandbox', '--disable-dev-shm-usage'],
     });
     try {
@@ -126,8 +229,13 @@ test.describe('accessibility and release-quality gates', () => {
         throttlingMethod: 'provided',
         logLevel: 'error',
       });
-      expect(report.lhr.audits['largest-contentful-paint'].numericValue).toBeLessThanOrEqual(2500);
-      expect(report.lhr.audits['cumulative-layout-shift'].numericValue).toBeLessThanOrEqual(0.1);
+      const lcp = report.lhr.audits['largest-contentful-paint'].numericValue;
+      const cls = report.lhr.audits['cumulative-layout-shift'].numericValue;
+      expect(report.lhr.runtimeError, report.lhr.runtimeError?.message).toBeUndefined();
+      expect(Number.isFinite(lcp), 'Lighthouse should produce an LCP measurement').toBe(true);
+      expect(Number.isFinite(cls), 'Lighthouse should produce a CLS measurement').toBe(true);
+      expect(lcp).toBeLessThanOrEqual(2500);
+      expect(cls).toBeLessThanOrEqual(0.1);
     } finally {
       await chrome.kill();
     }

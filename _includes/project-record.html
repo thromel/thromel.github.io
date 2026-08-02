@@ -1,0 +1,23 @@
+{% assign project = include.project %}
+{% assign project_visual = project.card_image | default: project.thumbnail | default: project.image %}
+<article class="project-record" data-project-record data-project-title="{{ project.title | escape }}">
+  <p class="project-record__type">{{ project.project_type | default: project.group | default: 'Engineering project' }}</p>
+  {% if project_visual %}
+  <a class="project-record__visual" href="{{ project.url | relative_url }}">
+    <img src="{{ project_visual | relative_url }}" alt="Evidence preview for {{ project.title | escape }}"{% if project.visual_width and project.visual_height %} width="{{ project.visual_width }}" height="{{ project.visual_height }}"{% endif %} loading="lazy" decoding="async" data-project-visual>
+  </a>
+  {% endif %}
+  <div class="project-record__body{% unless project_visual %} project-record__body--wide{% endunless %}">
+    <h3><a href="{{ project.url | relative_url }}">{{ project.title }}</a></h3>
+    <p class="project-record__problem"><strong>Scope</strong><span>{{ project.problem | default: project.excerpt | default: project.content | strip_html | truncatewords: 34 }}</span></p>
+    <dl class="project-record__evidence">
+      {% if project.role %}<div><dt>Role</dt><dd>{{ project.role }}</dd></div>{% endif %}
+      {% if project.outcome %}<div><dt>Outcome</dt><dd>{{ project.outcome }}</dd></div>{% endif %}
+      {% if project.status %}<div><dt>Status</dt><dd>{{ project.status }}</dd></div>{% endif %}
+      {% unless project.repository %}{% if project.repository_status %}<div><dt>Repository</dt><dd>{{ project.repository_status }}</dd></div>{% endif %}{% endunless %}
+      <div><dt>Documented</dt><dd><time datetime="{{ project.date | date: '%Y-%m-%d' }}">{{ project.date | date: '%B %Y' }}</time></dd></div>
+    </dl>
+    {% if project.technologies %}<p class="project-record__methods"><strong>Methods</strong><span>{{ project.technologies | slice: 0, 5 | join: ' · ' }}</span></p>{% endif %}
+    <p class="record-links"><a href="{{ project.url | relative_url }}">Open evidence record</a>{% if project.repository %}<a href="{{ project.repository }}" target="_blank" rel="noopener noreferrer" aria-label="Repository for {{ project.title | escape }} (opens in a new tab)">Repository</a>{% elsif project.proof_url %}<a href="{{ project.proof_url | relative_url }}"{% if project.proof_url contains '://' %} target="_blank" rel="noopener noreferrer" aria-label="{{ project.proof_label | default: 'Primary evidence' | escape }} for {{ project.title | escape }} (opens in a new tab)"{% endif %}>{{ project.proof_label | default: 'Primary evidence' }}</a>{% endif %}</p>
+  </div>
+</article>

@@ -6,9 +6,17 @@ category: projects
 group: Projects
 show: true
 width: 8
-date: 2023-06-15 00:00:00 +0800
+date: 2023-06-15 00:00:00 +0600
 excerpt: A custom convolutional neural network implementation from scratch using only NumPy that achieves 95.87% accuracy on Bangla handwritten digit recognition, without relying on deep learning frameworks.
+problem: "Recognize Bangla handwritten digits with a CNN implemented directly in NumPy, without a deep-learning framework."
+role: Implemented the CNN, training pipeline, and evaluation; documented the architecture and results
+outcome: "Reached 95.87% test accuracy and placed second among 120 students in the BUET machine-learning lab competition."
+status: Completed BUET course competition project
+repository: https://github.com/thromel/CSE-472-Machine-Learning
+repository_status: Public course repository
 thumbnail: /assets/images/bangla-digit-recognition.png
+visual_width: 1192
+visual_height: 411
 featured: true
 technologies:
   - Python
@@ -21,14 +29,13 @@ technologies:
 ## 2nd Place Winner | 4-week Project | Image Recognition
 
 <div class="text-end mb-3">
-    <a href="https://github.com/thromel/CSE-472-Machine-Learning" target="_blank" class="btn btn-sm btn-outline-dark">
+    <a href="https://github.com/thromel/CSE-472-Machine-Learning" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline-dark" aria-label="View the Bangla digit-recognition project on GitHub (opens in a new tab)">
         <i class="fab fa-github"></i> View on GitHub
     </a>
 </div>
 
-# Building a Bangla Handwritten Digit Recognizer from Scratch: A Deep Dive into Custom CNN Implementation
 
-<img src="{{ '/assets/images/bangla-digit-recognition.png' | relative_url }}" class="img-fluid mb-4" alt="Bangla Digit Recognition">
+<img src="{{ '/assets/images/bangla-digit-recognition.png' | relative_url }}" class="img-fluid mb-4" alt="Bangla Digit Recognition" width="1192" height="411" decoding="async">
 
 ## Introduction
 
@@ -136,7 +143,7 @@ The preprocessing pipeline is particularly effective for Bangla digits because:
 
 ## CNN Architecture Details
 
-<img src="{{ '/assets/images/cnn-architecture.png' | relative_url }}" class="img-fluid mb-4 rounded shadow-sm" alt="CNN Architecture">
+<img src="{{ '/assets/images/cnn-architecture.png' | relative_url }}" class="img-fluid mb-4 rounded shadow-sm" alt="CNN Architecture" width="1648" height="373" loading="lazy" decoding="async">
 
 The project implements two different CNN architectures:
 

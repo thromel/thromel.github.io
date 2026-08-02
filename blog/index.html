@@ -5,18 +5,20 @@ navbar_title: Blog
 description: Technical writing on software engineering, distributed systems, network simulation, and research interests.
 ---
 
-<section class="academic-section blog-intro">
+<section class="academic-section page-hero blog-intro">
+  <p class="eyebrow">Notes</p>
   <h1 class="academic-page-title">Blog</h1>
-  <p>Thoughts and insights on software engineering, distributed systems, network simulation, and my research interests.</p>
+  <p class="page-hero__intro">Technical notes on software engineering, distributed systems, agent tooling, and what I learn while building.</p>
 </section>
 
-<section class="academic-section">
+<section class="academic-section" aria-labelledby="writing-index-title">
+  <div class="section-trace"><span aria-hidden="true">01</span><div><p class="eyebrow">Archive</p><h2 id="writing-index-title">Writing index</h2></div></div>
   <div class="blog-list">
     {% for post in paginator.posts %}
     <article class="blog-entry">
       <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
       <p class="blog-entry__meta">
-        <span>{{ post.date | date: "%B %d, %Y" }}</span>
+        <time datetime="{{ post.date | date: '%Y-%m-%d' }}">{{ post.date | date: "%B %d, %Y" }}</time>
         {% if post.categories.size > 0 %}<span>{{ post.categories | join: ", " }}</span>{% endif %}
       </p>
       <p class="blog-entry__excerpt">

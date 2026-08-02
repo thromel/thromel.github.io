@@ -8,45 +8,30 @@ agenda:
     and developer tools that make context and software evolution easier to examine.
   next_step: >-
     M.Sc. in Computing Science at the
-    <a href="https://www.ualberta.ca/en/computing-science/index.html" target="_blank" rel="noopener noreferrer">University of Alberta</a>,
+    <a href="https://www.ualberta.ca/en/computing-science/index.html" target="_blank" rel="noopener noreferrer" aria-label="University of Alberta (opens in a new tab)">University of Alberta</a>,
     beginning September 1, 2026.
 
 identity:
-  role_line: "Incoming Alberta M.Sc. · software engineer · researcher"
-  summary: >-
-    At the <a href="https://www.ualberta.ca/en/computing-science/index.html" target="_blank" rel="noopener noreferrer">University of Alberta</a>,
-    I am an incoming M.Sc. student. My research interests are AI4SE, AI for SRE,
-    LLM4Coding, trustworthy AI, and long-horizon coding agents.
-  bridge: >-
-    I bring about three years of professional software-engineering experience, most
-    recently at <a href="https://www.iqvia.com/" target="_blank" rel="noopener noreferrer">IQVIA</a>,
-    where I worked on <a href="https://www.iqvia.com/solutions/commercialization/commercial-analytics/orchestrated-analytics" target="_blank" rel="noopener noreferrer">Orchestrated Analytics</a>,
-    and graduated from <a href="https://cse.buet.ac.bd/" target="_blank" rel="noopener noreferrer">BUET CSE</a>.
-  markers:
-    - label: "UIUC++ SRSE 2026"
-      affiliation: "UIUC"
-      url: "https://uiuc-srse.github.io/"
-      logo: "/assets/images/companies/uiuc-block-i.png"
-      logo_alt: "UIUC Block I logo"
-    - label: "Incoming Alberta M.Sc."
-      affiliation: "University of Alberta"
+  statuses:
+    - label: "University of Alberta · Incoming M.Sc. in Computing Science"
+      start_date: "2026-06-01"
+      end_date_exclusive: "2026-09-01"
       url: "https://www.ualberta.ca/en/computing-science/index.html"
-      logo: "/assets/images/education/ualberta-logo.svg"
-      logo_alt: "University of Alberta crest"
-    - label: "BUET CSE"
-      affiliation: "BUET"
-      url: "https://cse.buet.ac.bd/"
-      logo: "/assets/images/education/buet-logo.png"
-      logo_alt: "BUET logo"
-    - label: "Dhaka, Bangladesh"
-
-about:
-  - >-
-    I grew up in Rajshahi and now live in Dhaka. I like work that starts with a research
-    question and ends with something I can run, test, or measure.
-  - >-
-    That usually means reading papers, tracing failures, building tools, and writing down
-    what actually happened.
+    - label: "University of Alberta · M.Sc. in Computing Science"
+      start_date: "2026-09-01"
+      url: "https://www.ualberta.ca/en/computing-science/index.html"
+  thesis: >-
+    I study how AI agents behave in real software systems—and how to make their
+    decisions inspectable, reliable, and trustworthy.
+  bridge: >-
+    About three years of professional software-engineering experience, formerly at
+    <a href="https://www.iqvia.com/" target="_blank" rel="noopener noreferrer" aria-label="IQVIA (opens in a new tab)">IQVIA</a>.
+  interests:
+    - AI4SE
+    - LLM4Coding
+    - Trustworthy AI
+    - long-horizon coding agents
+    - AI for SRE
 
 anchors:
   - id: sregym
@@ -62,6 +47,9 @@ anchors:
     last_verified: "2026-07-10"
     image: "/assets/images/companies/uiuc-block-i.png"
     image_alt: "University of Illinois Block I mark"
+    image_width: 170
+    image_height: 171
+    image_kind: "mark"
     image_caption: "Research context · UIUC++ SRSE 2026"
     links:
       - label: "SREGym project"
@@ -83,6 +71,8 @@ anchors:
     last_verified: "2026-07-10"
     image: "/assets/images/ml-rce.webp"
     image_alt: "Methodology overview for the study of remote code execution in machine learning model hosting ecosystems"
+    image_width: 960
+    image_height: 1431
     image_caption: "Study methodology · five hosting ecosystems"
     links:
       - label: "arXiv record"
@@ -103,6 +93,8 @@ anchors:
     last_verified: "2026-07-10"
     image: "/assets/images/agentic_ai_architecture.png"
     image_alt: "Conceptual architecture of an agentic AI system with tools, memory, and orchestration"
+    image_width: 1661
+    image_height: 352
     image_caption: "System context · choices inside an agent workflow"
     links:
       - label: "Abstract-level summary"
@@ -127,8 +119,6 @@ anchors:
         url: "/showcase/projects/contextledger/"
       - label: "ctxhelm"
         url: "https://github.com/thromel/ctxhelm"
-      - label: "PatchSmith"
-        url: "/showcase/projects/patchsmith/"
 
   - id: history-aware-vibe-coding
     publicity: "public"
@@ -174,163 +164,251 @@ supporting_systems:
     status: "Open-source collaboration"
     url: "https://github.com/tsantalis/RefactoringMiner"
 
-experience_metrics:
-  - value: "70%"
-    label: "targeted filtering improvement"
-  - value: "60%"
-    label: "selected query-time reduction"
-  - value: "95%"
-    label: "export workflow coverage"
-  - value: "35%"
-    label: "deployment-time reduction"
+homepage:
+  selected_evidence:
+    - id: sregym
+      type: Research
+      problem: "How do we know an SRE agent recovered a live system instead of applying a shallow fix?"
+      contribution: >-
+        As a UIUC++ SRSE research intern, I work on failure scenarios with realistic
+        mitigation paths, business-level oracles, and evidence that rejects shallow recovery.
+      status: "Active research · UIUC++ SRSE 2026"
+      methods:
+        - SREGym
+        - Kubernetes
+        - incident replay
+        - business-level oracles
+      date: "2026-07-10"
+      date_label: "July 10, 2026"
+      links:
+        - label: "SREGym project"
+          url: "https://www.sregym.com/"
+        - label: "Public repository"
+          url: "https://github.com/SREGym/SREGym"
 
-engineering_profile:
-  intro: >-
-    About three years of professional software and AI engineering, alongside hands-on
-    systems and open-source work.
-  groups:
-    - id: backend-apis
-      title: "Backend and APIs"
-      summary: "Production services and data-heavy analytics workflows."
-      technologies:
+    - id: ctxhelm
+      type: Engineering
+      problem: "How can coding agents inspect the right repository evidence before they edit?"
+      contribution: >-
+        I designed and built ctxhelm, a local read-only context compiler, and HelmBench,
+        its source-free evaluation harness for real coding-agent runs.
+      status: "Open-source tool · ctxhelm v2.4.0 released through GitHub archives and Homebrew"
+      methods:
+        - Rust
+        - MCP
+        - retrieval
+        - source-free evaluation
+        - release engineering
+      date: "2026-06-08"
+      date_label: "June 8, 2026"
+      image: "/assets/images/projects/ctxhelm-system-architecture.svg"
+      image_alt: "ctxhelm architecture connecting coding agents to its compiler, repository intelligence, and local source-free storage"
+      image_width: 1200
+      image_height: 720
+      image_caption: "ctxhelm system architecture"
+      links:
+        - label: "ctxhelm engineering case study"
+          url: "/showcase/projects/ctxhelm/"
+        - label: "GitHub repository"
+          url: "https://github.com/thromel/ctxhelm"
+
+    - id: ml-hosting-rce
+      type: Research
+      problem: "What security risks emerge when model-hosting platforms load community code and artifacts at ecosystem scale?"
+      contribution: >-
+        I co-authored a cross-platform empirical study spanning five ML hosting
+        ecosystems, static security analysis, malware signatures, and developer discussions.
+      status: "Under review at ICSE 2027"
+      methods:
+        - static analysis
+        - CodeQL
+        - Semgrep
+        - YARA
+        - qualitative analysis
+      date: "2026-07-10"
+      date_label: "July 10, 2026"
+      image: "/assets/images/ml-rce.webp"
+      image_alt: "Methodology overview for the remote-code-execution study across machine-learning model hosting ecosystems"
+      image_width: 960
+      image_height: 1431
+      image_caption: "Study methodology across five hosting ecosystems"
+      links:
+        - label: "arXiv record"
+          url: "https://arxiv.org/abs/2601.14163"
+        - label: "Research summary"
+          url: "/research/ml-remote-code-execution/"
+
+    - id: refactoringminer-mcp
+      type: Engineering
+      problem: "How can coding agents inspect structural software changes instead of relying only on raw diffs?"
+      contribution: >-
+        I redesigned RefactoringMiner's MCP diff surface around source-parameterized
+        analysis tools for coding agents.
+      status: "Merged contribution · RefactoringMiner PR #1087"
+      methods:
+        - Java
+        - MCP
+        - AST differencing
+        - refactoring detection
+      date: "2026-06-14"
+      date_label: "June 14, 2026"
+      links:
+        - label: "Merged PR #1087"
+          url: "https://github.com/tsantalis/RefactoringMiner/pull/1087"
+        - label: "RefactoringMiner repository"
+          url: "https://github.com/tsantalis/RefactoringMiner"
+
+  research_agenda:
+    - id: long-horizon-coding-agents
+      umbrella: "AI4SE · LLM4Coding"
+      question: "How can long-horizon coding agents preserve context, repository memory, and architectural intent as software evolves?"
+      rationale: >-
+        ContextLedger turns long sessions into typed, provenance-carrying events so
+        context compaction and recovery can be inspected instead of trusted by intuition.
+      status: "Research system"
+      link_label: "Inspect ContextLedger"
+      url: "/showcase/projects/contextledger/"
+    - id: ai-for-sre
+      umbrella: "AI4SE · AI for SRE"
+      question: "How should agents be evaluated when diagnosis and recovery happen inside live reliability conditions?"
+      rationale: >-
+        SREGym studies realistic failure lifecycles, safe mitigation, business-level
+        recovery checks, and the evidence needed to distinguish durable recovery from a shallow fix.
+      status: "Active research"
+      link_label: "Visit SREGym"
+      url: "https://www.sregym.com/"
+    - id: trustworthy-ai
+      umbrella: "Trustworthy AI · AI4SE"
+      question: "How can we inspect agent choices, security boundaries, and evidence when the final answer still looks acceptable?"
+      rationale: >-
+        SHIFT compares matched tasks with and without a known trigger to test whether a
+        changed valid choice systematically favors an attacker's target.
+      status: "Submitted to TACL 2026 · manuscript not public"
+      link_label: "Read the abstract-level summary"
+      url: "/research/reagent-plus-plus/"
+
+  engineering_experience:
+    - id: iqvia
+      organization: "IQVIA"
+      organization_url: "https://www.iqvia.com/"
+      role: "Software Development Engineer 1"
+      start_date: "2023-06-01"
+      start_label: "June 2023"
+      end_date: "2026-06-30"
+      end_label: "June 2026"
+      scope: >-
+        Backend engineer on KPI Library, the dynamic reporting layer within Orchestrated
+        Analytics, across configuration, dashboard, analysis, and export workflows.
+      outcomes:
+        - "Built and maintained C#/.NET services and shared components across four KPI Library workflow areas."
+        - "Consolidated six duplicated filter-resolution implementations into two shared query components with centralized validation and regression scenarios."
+        - "Extended CSV and presentation export paths with regional formatting, commentary support, and broader automated coverage."
+      methods:
         - C#/.NET
         - EF Core
-        - REST APIs
-        - Microservices
-    - id: ai-agent-systems
-      title: "AI and agent systems"
-      summary: "LLM/RAG workflows and research tools connected to real software systems."
-      technologies:
-        - Python
-        - LangGraph
-        - MCP
-        - RAG
-        - LLM evaluation
-    - id: systems-open-source
-      title: "Systems and open source"
-      summary: "Developer tools, program analysis, and multi-language open-source contributions."
-      technologies:
-        - Rust
-        - Go
-        - TypeScript
-        - Java
-        - C++
-    - id: cloud-data-reliability
-      title: "Cloud, data, and reliability"
-      summary: "Deploying, tuning, and observing cloud-native services and data stores."
-      technologies:
-        - AWS
-        - PostgreSQL
+        - SQL Server
         - MongoDB
-        - Docker
-        - Kubernetes
-        - OpenTelemetry
+        - AWS S3
+      links:
+        - label: "Orchestrated Analytics"
+          url: "https://www.iqvia.com/solutions/commercialization/commercial-analytics/orchestrated-analytics"
+        - label: "KPI Library"
+          url: "https://www.iqvia.com/library/fact-sheets/kpi-library"
+    - id: mindshare
+      organization: "Mindshare Bangladesh"
+      organization_url: "https://www.mindshareworld.com/offices"
+      role: "Full Stack Engineer · part-time"
+      start_date: "2021-04-01"
+      start_label: "April 2021"
+      end_date: "2021-11-30"
+      end_label: "November 2021"
+      scope: >-
+        Built an e-commerce aggregation system for brands working across major online
+        retail platforms in Bangladesh.
+      outcomes:
+        - "Built a Scrapy collection system covering about 20 e-commerce platforms."
+        - "Deployed the scraper as a ScrapyRT service on DigitalOcean for API-driven extraction."
+        - "Built Express.js and MongoDB APIs for product aggregation and brand promotion workflows."
+      methods:
+        - Python
+        - Scrapy
+        - Express.js
+        - MongoDB
+        - DigitalOcean
+      links:
+        - label: "Mindshare offices"
+          url: "https://www.mindshareworld.com/offices"
 
-engineering:
-  - id: refactoringminer
-    name: "RefactoringMiner MCP"
-    material_type: "Open source"
-    material_icon: "/assets/images/icons/code.png"
-    summary: >-
-      Active RefactoringMiner development with Professor Nikolaos Tsantalis; I helped
-      build MCP access for coding agents and contribute to the JetBrains integration collaboration.
-    meta: "Java · MCP · AST diffs · program analysis"
-    url: "https://github.com/tsantalis/RefactoringMiner"
-  - id: ctxhelm
-    name: "ctxhelm and HelmBench"
-    summary: >-
-      A released Rust context compiler and source-free evaluation harness for testing
-      whether coding agents inspect the right files with less irrelevant reading.
-    meta: "Rust · retrieval · agents · Homebrew release"
-    url: "/showcase/projects/ctxhelm/"
-    image: "/assets/images/projects/ctxhelm-system-architecture.svg"
-  - id: contextledger
-    name: "ContextLedger"
-    summary: >-
-      Typed, provenance-carrying session facts, exact token accounting, and measurable
-      context compaction for long coding-agent runs.
-    meta: "TypeScript · OpenCode · context management"
-    url: "/showcase/projects/contextledger/"
-    image: "/assets/images/projects/contextledger-pipeline.svg"
-  - id: patchsmith
-    name: "PatchSmith"
-    summary: >-
-      An auditable repair harness with bounded context, structured patch proposals,
-      sandbox validation, trace capture, and inspectable artifact directories.
-    meta: "Python · DeepAgents · software repair"
-    url: "/showcase/projects/patchsmith/"
-    image: "/assets/images/projects/patchsmith-component-architecture.svg"
-  - id: contributions
-    name: "Selected open-source contributions"
-    material_type: "Open source"
-    material_icon: "/assets/images/icons/code.png"
-    summary: >-
-      Curated contribution evidence across EF Core, GenHTTP, deepagents, TypeScript,
-      LangChain, and other developer-tooling repositories.
-    meta: "C# · TypeScript · Python · direct pull-request evidence"
-    url: "/contributions/"
-  - id: systems-builds
-    name: "Systems and performance builds"
-    material_type: "Systems build"
-    material_icon: "/assets/images/icons/programming.png"
-    summary: >-
-      1BRC C# on Apple Silicon, a Go database engine, a Go container runtime, a compiler,
-      a ray tracer, TCP Vegas+, and the distributed EventFly platform.
-    meta: "C# · Go · C/C++ · distributed systems"
-    url: "/projects/"
-  - id: applied-ml
-    name: "Applied ML and learning builds"
-    material_type: "Applied ML"
-    material_icon: "/assets/images/icons/idea.png"
-    summary: >-
-      Bangla digit recognition from NumPy and OpenCV primitives, BERT-context image
-      captioning, and a mini deep-learning framework with autodiff and tensor operations.
-    meta: "Python · NumPy · NLP · neural networks"
-    url: "/projects/"
+  research_outputs:
+    - id: ml-hosting-rce
+      title: "An Empirical Study on Remote Code Execution in Machine Learning Model Hosting Ecosystems"
+      citation: "Mohammed Latif Siddiq, Tanzim Hossain Romel, Natalie Sekerak, Beatrice Casey, and Joanna C. S. Santos."
+      status: "Under review at ICSE 2027"
+      contribution: >-
+        Co-authored the empirical study and its cross-platform security analysis; the
+        manuscript is publicly available on arXiv.
+      date: "2026-02-01"
+      date_label: "2026"
+      links:
+        - label: "arXiv paper"
+          url: "https://arxiv.org/abs/2601.14163"
+        - label: "Research summary"
+          url: "/research/ml-remote-code-execution/"
+    - id: shift
+      title: "The Choice Can Be the Attack: Auditing Aligned Backdoors in LLM Agents"
+      citation: "Tanzim Hossain Romel with Chowdhury Rakin Haider."
+      status: "Submitted to TACL 2026 · manuscript not public"
+      contribution: >-
+        Co-developed SHIFT, a matched-trigger audit for whether an agent's changed valid
+        choice favors an attacker's target after accounting for ordinary option quality.
+      date: "2026-06-30"
+      date_label: "June 2026"
+      links:
+        - label: "Abstract-level summary"
+          url: "/research/reagent-plus-plus/"
 
-recognition:
-  - title: "IQVIA Impact Program — Silver"
-    date: "2025"
-    summary: "Performance, critical issue resolution, and essential feature delivery."
-    url: "https://drive.google.com/file/d/1Vc4E2RoQEPmbfS56oLdUih-oJDBok9sP/view?usp=share_link"
-  - title: "2nd place · Bangla handwritten digit recognition"
-    date: "2022"
-    summary: "Second among 120 students; a custom CNN from NumPy and OpenCV primitives reached 95.9% test accuracy."
-    url: "https://github.com/thromel/CSE-472-Machine-Learning"
-  - title: "BUET Dean's List"
-    date: "Level 2"
-    summary: "Academic recognition for sophomore-year performance."
-    url: "https://cse.buet.ac.bd/academics/fund"
-  - title: "National Physics Olympiad prize"
-    date: "2017"
-    summary: "National recognition in theoretical and practical physics."
-  - title: "National Chemistry Olympiad prize"
-    date: "2017"
-    summary: "National recognition in chemistry alongside the physics award."
-  - title: "Talentpool HSC Scholarship"
-    date: "2017"
-    summary: "Merit scholarship after placing 15th in the Rajshahi Education Board."
+  open_source:
+    - repository: "tsantalis/RefactoringMiner"
+      repository_url: "https://github.com/tsantalis/RefactoringMiner"
+      contribution: "Redesigned the MCP diff surface around source-parameterized analysis tools for coding agents."
+      proof_label: "Merged PR #1087"
+      proof_url: "https://github.com/tsantalis/RefactoringMiner/pull/1087"
+      date: "2026-06-14"
+      date_label: "June 14, 2026"
+    - repository: "SREGym/SREGym"
+      repository_url: "https://github.com/SREGym/SREGym"
+      contribution: "Added a Calico route-reflector label-drift problem for reliability-agent evaluation."
+      proof_label: "Merged PR #828"
+      proof_url: "https://github.com/SREGym/SREGym/pull/828"
+      date: "2026-06-25"
+      date_label: "June 25, 2026"
+    - repository: "dotnet/efcore"
+      repository_url: "https://github.com/dotnet/efcore"
+      contribution: "Fixed OriginalValues materialization for added entities with complex collections."
+      proof_label: "Merged PR #38493"
+      proof_url: "https://github.com/dotnet/efcore/pull/38493"
+      date: "2026-06-27"
+      date_label: "June 27, 2026"
 
-milestones:
-  - title: "Starting University of Alberta M.Sc."
-    date: "2026-09-01"
-    summary: "Beginning graduate study in Computing Science with the U-A-Goose group under Dr. Zhou Yang."
-    url: "https://www.ualberta.ca/en/computing-science/index.html"
-  - title: "SHIFT submitted to TACL 2026"
-    date: "2026-06-30"
-    summary: "Aligned-backdoor auditing work submitted with Chowdhury Rakin Haider."
-    url: "/research/reagent-plus-plus/"
-  - title: "ML hosting RCE under review at ICSE 2027"
-    date: "2026-06-30"
-    summary: "Cross-platform empirical security study with a public arXiv artifact."
-    url: "https://arxiv.org/abs/2601.14163"
-  - title: "Started UIUC++ SRSE research internship"
-    date: "2026-06-01"
-    summary: "Summer research with Professor Tianyin Xu's systems reliability group."
-    url: "https://uiuc-srse.github.io/"
+  milestones:
+    - title: "Starting University of Alberta M.Sc."
+      date: "2026-09-01"
+      date_label: "September 1, 2026"
+      summary: "I will begin graduate study in Computing Science with the U-A-Goose group under Dr. Zhou Yang."
+      url: "https://www.ualberta.ca/en/computing-science/index.html"
+    - title: "ML hosting RCE study under review at ICSE 2027"
+      date: "2026-06-30"
+      date_label: "June 30, 2026"
+      summary: "Our cross-platform empirical security study is under review, with the manuscript available on arXiv."
+      url: "https://arxiv.org/abs/2601.14163"
+    - title: "Started UIUC++ SRSE research internship"
+      date: "2026-06-01"
+      date_label: "June 1, 2026"
+      summary: "I joined Professor Tianyin Xu's systems reliability group for summer research on SREGym and AI for SRE."
+      url: "https://uiuc-srse.github.io/"
 
 contact:
-  heading: "Collaborate on reliable agent systems"
+  heading: "Discuss reliable agent systems"
   copy: >-
-    If you are working on software reliability, agent evaluation, security, or developer
-    tools, I would be glad to compare notes or review an artifact.
+    If you are studying dependable AI agents or building reliable software systems, I
+    would be glad to compare research questions, evaluation evidence, or engineering tradeoffs.

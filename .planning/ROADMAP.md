@@ -24,6 +24,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 9: Open Source Contributions Page** - Add curated contribution highlights and keep live GitHub activity as support. (completed 2026-05-30)
 - [x] **Phase 10: SEO and Social Preview Completion** - Improve search/social previews through shared Jekyll metadata. (completed 2026-05-30)
 - [x] **Phase 11: Dark Mode and Verification Hardening** - Refine dark mode across real surfaces and expand verification. (completed 2026-05-30)
+- [x] **Phase 12: Dual-Audience Complete Overhaul** - Rebuild the visual system and homepage journey for professors and engineering recruiters while preserving one evidence-backed portfolio. (completed 2026-08-02)
 
 ## Phase Details
 
@@ -251,3 +252,21 @@ Plans:
 - [x] 11-01: Tune dark-mode tokens and component states across v1.1 surfaces
 - [x] 11-02: Extend verification for navigation, projects, contributions, metadata, and theme behavior
 - [x] 11-03: Run full verification and record final UI evidence
+
+### Phase 12: Dual-Audience Complete Overhaul
+
+**Goal**: Deliver a distinctive, evidence-first portfolio in which professors can evaluate research fit and recruiters can evaluate engineering depth quickly, without splitting the site into separate audience modes.
+**Requirements**: DUAL-01, DUAL-02, DUAL-03, DUAL-04, OVERHAUL-01, OVERHAUL-02, OVERHAUL-03, OVERHAUL-04, OVERHAUL-05, OVERHAUL-06, OVERHAUL-07
+**Depends on**: Phase 11
+**UI hint**: yes
+**Success Criteria**:
+  1. The first viewport starts with University of Alberta, states the research thesis and approximately three years of professional experience, and offers visible Research, Engineering, and CV paths.
+  2. Selected evidence records expose a problem or question, role, status or outcome, methods, date, and direct proof without visually equating ongoing work with peer-reviewed output.
+  3. The homepage is shorter and more selective, while every major route remains reachable and adopts the same visual grammar.
+  4. Light and dark themes pass the accessibility contract across desktop and 320px mobile layouts.
+  5. Full browser verification covers shell behavior, no-JavaScript usefulness, async proof states, accessibility, performance, and visual evidence.
+
+**Plans**: 1/1 accepted
+
+Plans:
+- [x] 12-01: Research, specify, implement, remediate the independent UI audit, and re-verify the complete dual-audience overhaul

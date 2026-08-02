@@ -7,7 +7,6 @@ tags: [memory-management, dotnet, garbage-collection, docker, performance-optimi
 image: /assets/images/projects/memory-management.png
 ---
 
-# Memory Management in Production: Avoiding the Silent Killers
 
 It's 2:47 AM when the alerts start flooding in. Your e-commerce platform - handling Black Friday traffic - begins throwing OutOfMemoryErrors. Orders are failing, customers are abandoning carts, and your revenue is hemorrhaging by the minute. The CPU usage looks normal, disk I/O is fine, but something is silently consuming memory until your applications crash.
 

@@ -5,6 +5,11 @@ subtitle: "A freelance learning project for Linux containers, networking, and Go
 category: projects
 group: Freelance Learning Capstones
 project_type: "Freelance learning project"
+problem: "Understand container isolation, filesystems, networking, lifecycle, and cleanup by building a deliberately small Docker-like runtime in Go."
+role: Independent learning build
+outcome: "The milestone sequence and failure cases are documented; implementation evidence has not yet been published."
+status: In progress
+repository_status: No public implementation artifact yet
 show: true
 width: 8
 date: 2026-01-05 00:00:00 +0600

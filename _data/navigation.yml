@@ -1,51 +1,74 @@
 primary_pages:
 - name: Research
-  url: /research
+  url: /research/
+  active_prefix: /research/
+- name: Engineering
+  url: /projects/
+  active_prefix: /showcase/projects/
 - name: Publications
-  url: /publications
-- name: Projects
-  url: /projects
-- name: CV
-  url: /cv
+  url: /publications/
+  active_prefix: /publications/
+- name: Experience
+  url: /experience/
 
-secondary_pages:
-- name: Contributions
-  url: /contributions
-- name: About
-  url: /about
-- name: Education
-  url: /education
-- name: Work
-  url: /experience
-- name: Achievements
-  url: /achievements
-- name: News
-  url: /news
-- name: Learning
-  url: /learning
+header_action:
+  name: CV
+  url: /cv/
+
+footer_groups:
+- label: Explore
+  items:
+  - name: Research
+    url: /research/
+  - name: Engineering
+    url: /projects/
+  - name: Publications
+    url: /publications/
+  - name: Experience
+    url: /experience/
+  - name: Contributions
+    url: /contributions/
+- label: Background
+  items:
+  - name: About
+    url: /about/
+  - name: Education
+    url: /education/
+  - name: Achievements
+    url: /achievements/
+  - name: News
+    url: /news/
+  - name: Learning
+    url: /learning/
+  - name: Posts
+    url: /blog/
+  - name: CV
+    url: /cv/
 
 pages:
 - name: Home
   url: /
 - name: About
-  url: /about
+  url: /about/
 - name: Education
-  url: /education
-- name: Work
-  url: /experience
+  url: /education/
+- name: Experience
+  url: /experience/
 - name: Research
-  url: /research
+  url: /research/
 - name: Publications
-  url: /publications
-- name: Projects
-  url: /projects
+  url: /publications/
+- name: Engineering
+  url: /projects/
 - name: Achievements
-  url: /achievements
+  url: /achievements/
 - name: News
-  url: /news
+  url: /news/
 - name: Contributions
-  url: /contributions
+  url: /contributions/
 - name: Learning
-  url: /learning
+  url: /learning/
+- name: Posts
+  url: /blog/
 - name: CV
-  url: /cv
+  url: /cv/

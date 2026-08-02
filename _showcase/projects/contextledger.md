@@ -7,11 +7,18 @@ group: Projects
 show: true
 width: 8
 date: 2026-06-15 00:00:00 +0600
-excerpt: A research-blog style write-up on ContextLedger, my current experiment in making coding-agent context management measurable instead of trusting long-session summaries by vibes.
+excerpt: A research-blog style write-up on ContextLedger, my current experiment in making coding-agent context management measurable instead of relying on opaque long-session summaries.
 featured: true
 showcase_style: agent-tooling
 project_type: Research notebook
+problem: "Measure which exact session facts survive coding-agent context compaction instead of treating memory loss as an opaque summarization problem."
+role: Designed and implemented the typed event schema, compaction policies, instrumentation, and bounded experiment harness in an OpenCode fork
+outcome: "On the first bounded GPT-5.5 noisy-compaction fixture, the precision-frontier policy kept full target recall with 852 compaction-input tokens; solve-rate evidence is not yet established."
+status: Active research prototype
+repository_status: Research fork not public
 card_image: /assets/images/projects/contextledger-pipeline.svg
+visual_width: 960
+visual_height: 540
 technologies:
   - TypeScript
   - OpenCode
@@ -25,7 +32,6 @@ technologies:
   - Evaluation
 ---
 
-# ContextLedger: context accounting for coding agents
 
 ContextLedger started from a small frustration that kept getting bigger.
 
@@ -76,7 +82,7 @@ Not every old message deserves to survive. But the facts that do survive should 
   </div>
 </section>
 
-![ContextLedger pipeline](/assets/images/projects/contextledger-pipeline.svg)
+<img src="/assets/images/projects/contextledger-pipeline.svg" alt="ContextLedger pipeline" width="960" height="540" loading="lazy" decoding="async">
 
 ## where this started
 

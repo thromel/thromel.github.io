@@ -31,6 +31,9 @@ wait_for_server() {
   local attempts=0
 
   while (( attempts < 50 )); do
+    if [[ -n "${SERVER_PID}" ]] && ! kill -0 "${SERVER_PID}" >/dev/null 2>&1; then
+      return 1
+    fi
     if curl --silent --fail "${BASE_URL}/" >/dev/null 2>&1; then
       return 0
     fi
@@ -85,6 +88,7 @@ case "${MODE}" in
       "tests/secondary-routes.spec.js"
       "tests/profile-links.spec.js"
       "tests/quality-gates.spec.js"
+      "tests/site-integrity.spec.js"
     )
     ;;
   *)
@@ -100,10 +104,13 @@ export JEKYLL_ENV=production
 bundle exec jekyll build
 
 SERVER_LOG="$(mktemp -t verify-ui-server.XXXXXX.log)"
-if command -v fuser >/dev/null 2>&1; then
+if command -v lsof >/dev/null 2>&1; then
+  EXISTING_SERVER_PIDS="$(lsof -ti:"${PORT}" 2>/dev/null || true)"
+  if [[ -n "${EXISTING_SERVER_PIDS}" ]]; then
+    kill ${EXISTING_SERVER_PIDS} >/dev/null 2>&1 || true
+  fi
+elif command -v fuser >/dev/null 2>&1; then
   fuser -k "${PORT}/tcp" >/dev/null 2>&1 || true
-elif command -v lsof >/dev/null 2>&1; then
-  lsof -ti:"${PORT}" | xargs -r kill >/dev/null 2>&1 || true
 fi
 python3 -m http.server "${PORT}" -d "${REPO_ROOT}/_site" >"${SERVER_LOG}" 2>&1 &
 SERVER_PID=$!

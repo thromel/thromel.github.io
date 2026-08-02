@@ -1,14 +1,12 @@
 ---
 layout: post
-title: "Leveraging AI Tools for Software Engineering and Research: A Practical Guide to 10x Productivity"
+title: "Leveraging AI Tools for Software Engineering and Research: A Practical Workflow"
 date: 2025-01-20
 categories: [software-engineering, artificial-intelligence, productivity]
 tags: [cursor, chatgpt, claude, ai-tools, software-development, research, productivity]
 ---
 
-# Leveraging AI Tools for Software Engineering and Research: A Practical Guide to 10x Productivity
 
-<img src="{{ '/assets/images/ai_tools_workflow.png' | relative_url }}" class="img-fluid mb-4" alt="AI Tools Workflow for Software Engineering">
 
 ## Introduction: The AI Revolution in Software Development
 
@@ -16,7 +14,7 @@ The landscape of software engineering has fundamentally shifted. What took hours
 
 This isn't about replacing human intelligence - it's about amplifying it. Think of AI tools as the evolution from manual labor to power tools in construction. A skilled carpenter doesn't become less valuable when using a power drill; they become exponentially more effective.
 
-In this guide, I'll walk you through the three AI tools that have revolutionized my workflow: **Cursor** for intelligent coding, **ChatGPT Plus** for research and complex reasoning, and **Claude Pro** for nuanced analysis and communication. More importantly, I'll show you how to integrate them strategically to create a cohesive, productivity-multiplying system.
+In this guide, I describe how I used three AI tools in my workflow: **Cursor** for coding, **ChatGPT Plus** for research and complex reasoning, and **Claude Pro** for analysis and communication. The focus is how the tools fit together and where each one is useful.
 
 ## The Foundation: Understanding AI Tool Synergy
 
@@ -687,7 +685,7 @@ project/
 3. **Implementation (Cursor)**: Data preprocessing, model training, and deployment code
 4. **Documentation (Claude)**: Model documentation and operational procedures
 
-**Results**: Production-ready ML pipeline with 95% accuracy and comprehensive monitoring.
+**Example result**: An ML pipeline with reported 95% validation accuracy and monitoring hooks; deployment readiness still depends on independent testing against the target environment.
 
 ## Measuring Your AI-Enhanced Productivity
 

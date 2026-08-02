@@ -2,21 +2,23 @@
 layout: default
 title: News and Updates
 navbar_title: News
+description: Dated updates on graduate study, research, engineering work, writing, releases, and open-source activity.
 ---
 
-<section class="academic-section">
+<section class="academic-section page-hero">
+  <p class="eyebrow">Updates</p>
   <h1 class="academic-page-title">News</h1>
-  <p>Recent research, work, writing, and open-source updates.</p>
+  <p class="page-hero__intro">Dated changes to my research, work, writing, and open-source activity.</p>
 </section>
 
 {% assign news_by_year = site.data.news | sort: "date" | reverse | group_by_exp: "item", "item.date | date: '%Y'" %}
 {% for year in news_by_year %}
 <section class="academic-section" id="year-{{ year.name }}">
-  <h2>{{ year.name }}</h2>
+  <div class="section-trace"><span aria-hidden="true">{{ forloop.index | prepend: '0' }}</span><div><p class="eyebrow">Year</p><h2>{{ year.name }}</h2></div></div>
   {% for item in year.items %}
   <article class="academic-entry">
-    <h3>{% if item.url %}<a href="{{ item.url | relative_url }}"{% if item.url contains '://' %} target="_blank" rel="noopener noreferrer"{% endif %}>{{ item.title }}</a>{% else %}{{ item.title }}{% endif %}</h3>
-    <p class="academic-entry__meta">{{ item.date | date: "%b %d, %Y" }}</p>
+    <h3>{% if item.url %}<a href="{{ item.url | relative_url }}"{% if item.url contains '://' %} target="_blank" rel="noopener noreferrer" aria-label="{{ item.title | escape }} (opens in a new tab)"{% endif %}>{{ item.title }}</a>{% else %}{{ item.title }}{% endif %}</h3>
+    <p class="academic-entry__meta"><time datetime="{{ item.date | date: '%Y-%m-%d' }}">{{ item.date | date: "%b %d, %Y" }}</time></p>
     {% if item.description %}<p>{{ item.description }}</p>{% endif %}
   </article>
   {% endfor %}

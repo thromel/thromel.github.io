@@ -2,11 +2,19 @@
 layout: showcase
 show: true
 width: 8
-date: 2023-01-15 00:00:00 +0800
+date: 2023-01-15 00:00:00 +0600
 group: Projects
 title: Image Caption Generation with BERT Context Vectors
 excerpt: Extended the "Show, Attend, and Tell" image captioning model with BERT to improve caption quality and reduce training time, achieving 36% improvement in CIDEr score and 43% improvement in BLEU-4.
+problem: "Improve image-caption generation by combining visual attention with contextual language representations and measuring the change against a baseline."
+role: Co-developed the model extension, experiment pipeline, and technical analysis
+outcome: "Reported 36% CIDEr and 43% BLEU-4 improvements over the project baseline."
+status: Completed machine-learning project
+repository: https://github.com/thromel/Image-Captioning-ML-Project
+repository_status: Public source repository
 thumbnail: /assets/images/image-caption-generator.png
+visual_width: 3553
+visual_height: 1174
 technologies:
   - PyTorch
   - BERT
@@ -18,22 +26,22 @@ technologies:
 ## Lead Researcher | 6-week Project | Image Understanding
 
 <div class="text-end mb-3">
-    <a href="https://github.com/thromel/Image-Captioning-ML-Project" target="_blank" class="btn btn-sm btn-outline-dark">
+    <a href="https://github.com/thromel/Image-Captioning-ML-Project" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline-dark" aria-label="View the image-captioning project on GitHub (opens in a new tab)">
         <i class="fab fa-github"></i> View on GitHub
     </a>
 </div>
 
 ### Project Snapshot
 
-A modular image captioning system that evolved from a classic "Show, Attend and Tell" architecture to a 
-cutting-edge system incorporating the latest advancements in computer vision and natural language processing.
+A modular image-captioning system that evolved from a classic "Show, Attend and Tell" architecture to a
+configurable set of vision encoders, language decoders, and alignment methods.
 The project demonstrates significant improvements in caption quality while improving computational efficiency.
 
 ## Evolution of Our Image Captioning Architecture: From Classic to Modern
 
 ### Introduction
 
-In the fast-paced world of AI research, staying current with the latest architectures and techniques is crucial for building state-of-the-art systems. Our image captioning project is a perfect example of this evolution. We began with a solid foundation based on the classic ["Show, Attend and Tell"](https://arxiv.org/abs/1502.03044) architecture and progressively transformed it into a modular, cutting-edge system incorporating the latest advancements in computer vision and natural language processing.
+We began with the classic ["Show, Attend and Tell"](https://arxiv.org/abs/1502.03044) architecture, then reorganized the implementation so that vision encoders, language decoders, and alignment methods could be evaluated as separate components.
 
 ### The Starting Point: Show, Attend and Tell
 
@@ -45,7 +53,7 @@ When we launched our image captioning journey, we documented our baseline approa
 - **Word Embeddings**: Simple embeddings with an option to use [BERT](https://arxiv.org/abs/1810.04805)
 - **Training**: Cross-entropy loss with attention regularization
 
-This architecture served us well for basic captioning tasks, achieving reasonable BLEU scores on the [MS-COCO dataset](https://cocodataset.org/). However, as transformer architectures revolutionized both computer vision and NLP, we recognized the need to incorporate these advances.
+This architecture served us well for basic captioning tasks, achieving reasonable BLEU scores on the [MS-COCO dataset](https://cocodataset.org/). As transformer architectures advanced both computer vision and NLP, we investigated how to incorporate contextual representations.
 
 ### The Transformation: Embracing Modern Architectures
 
@@ -98,7 +106,7 @@ Perhaps the most significant upgrade is in our training methodology:
 
 #### 6. Vision-Language Alignment
 
-We've incorporated cutting-edge alignment techniques:
+The implementation explores several alignment techniques:
 
 - **[Q-Former](https://arxiv.org/abs/2301.12597)**: BLIP-2 style query-based transformer for bridging vision and language
 - **[Contrastive Loss](https://arxiv.org/abs/1807.03748)**: Aligning visual and textual representations
@@ -211,7 +219,7 @@ Adding reinforcement learning with SCST produced significant gains:
         <strong>Modern Captioning Architecture</strong>
     </div>
     <div class="card-body text-center">
-        <img src="{{ 'assets/images/image-caption-generator.png' | relative_url }}" class="img-fluid mb-2" alt="Modern Image Captioning Architecture">
+        <img src="{{ 'assets/images/image-caption-generator.png' | relative_url }}" class="img-fluid mb-2" alt="Modern Image Captioning Architecture" width="3553" height="1174" loading="lazy" decoding="async">
         <small class="text-muted">Modular architecture with interchangeable vision encoders and language decoders</small>
     </div>
 </div>

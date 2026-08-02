@@ -2,13 +2,27 @@ const { test, expect } = require('@playwright/test');
 
 const BASE_URL = process.env.PLAYWRIGHT_TEST_BASE_URL || 'http://127.0.0.1:4000';
 const HOME_SECTIONS = [
-  'identity', 'engineering-profile', 'about', 'research', 'publications',
-  'experience', 'education', 'engineering', 'recognition', 'milestones', 'contact',
+  'identity',
+  'selected-evidence',
+  'research-agenda',
+  'engineering-experience',
+  'outputs-proof',
+  'recent-trajectory',
+  'contact',
 ];
-const CORE_ROUTES = ['Research', 'Publications', 'Projects', 'CV'];
-const OTHER_ROUTES = ['Contributions', 'About', 'Education', 'Work', 'Achievements', 'News', 'Learning'];
+const PRIMARY_ROUTES = [
+  { label: 'Research', href: '/research/' },
+  { label: 'Engineering', href: '/projects/' },
+  { label: 'Publications', href: '/publications/' },
+  { label: 'Experience', href: '/experience/' },
+  { label: 'CV', href: '/cv/' },
+];
 
 async function visitHome(page) {
+  if (!page.__portfolioExternalAssetsBlocked) {
+    await page.route(/^https:\/\/(fonts\.googleapis\.com|fonts\.gstatic\.com)\//, (route) => route.abort());
+    page.__portfolioExternalAssetsBlocked = true;
+  }
   await page.goto(BASE_URL, { waitUntil: 'domcontentloaded' });
 }
 
@@ -22,82 +36,260 @@ async function expectNoHorizontalOverflow(page, width) {
   expect(dimensions.scrollWidth, `${width}px viewport`).toBeLessThanOrEqual(dimensions.clientWidth + 1);
 }
 
-test.describe('research-first shell contract', () => {
-  test('home presents the complete professional dossier in a deliberate order', async ({ page }) => {
-    await page.setViewportSize({ width: 1280, height: 720 });
+test.describe('dual-audience selective homepage contract', () => {
+  test('home renders exactly seven selective regions in the approved order', async ({ page }) => {
+    await page.setViewportSize({ width: 1280, height: 900 });
     await visitHome(page);
 
     const sections = page.locator('main > [data-home-section]');
     await expect(sections).toHaveCount(HOME_SECTIONS.length);
     await expect(sections.evaluateAll((elements) => elements.map((element) => element.dataset.homeSection))).resolves.toEqual(HOME_SECTIONS);
-    await expect(page.locator('[data-home-section="identity"] h1')).toContainText('Tanzim Hossain Romel');
-    await expect(page.locator('[data-home-research-lane]')).toHaveCount(6);
+
+    await expect(page.locator('main h1')).toHaveCount(1);
+    await expect(page.locator('main h1')).toHaveText('Tanzim Hossain Romel');
+    await expect(page.locator('[data-home-evidence]')).toHaveCount(4);
+    await expect(page.locator('[data-home-agenda]')).toHaveCount(3);
+    await expect(page.locator('[data-home-experience]')).toHaveCount(2);
     await expect(page.locator('[data-home-publication]')).toHaveCount(2);
-    await expect(page.locator('[data-home-experience]')).toHaveCount(4);
-    await expect(page.locator('[data-home-metric]')).toHaveCount(4);
-    await expect(page.locator('[data-home-engineering]')).toHaveCount(7);
-    await expect(page.locator('[data-home-education]')).toHaveCount(3);
-    await expect(page.locator('[data-home-recognition]')).toHaveCount(6);
-    await expect(page.locator('[data-home-milestone]')).toHaveCount(4);
-    await expect(page.locator('[data-home-section="about"]')).toContainText('Rajshahi');
-    await expect(page.locator('[data-home-section="contact"]')).toContainText('Collaborate');
-    await expect(page.locator('main')).not.toContainText('Sentiment Analysis of Anonymous Crisis Reports');
-    await expect(page.locator('main')).not.toContainText('Blockchain');
+    await expect(page.locator('[data-home-contribution]')).toHaveCount(3);
+    await expect(page.locator('[data-home-milestone]')).toHaveCount(3);
 
-    const engineeringProfile = page.locator('[data-home-engineering-profile]');
-    await expect(engineeringProfile).toHaveCount(1);
-    await expect(engineeringProfile.locator('[data-home-engineering-skill]')).toHaveCount(4);
-    await expect(engineeringProfile.locator('[data-home-engineering-skill] h3').allTextContents()).resolves.toEqual([
-      'Backend and APIs',
-      'AI and agent systems',
-      'Systems and open source',
-      'Cloud, data, and reliability',
-    ]);
-    await expect(engineeringProfile).toContainText('About three years of professional software and AI engineering');
-    await expect(engineeringProfile).toContainText('C#/.NET · EF Core · REST APIs · Microservices');
-    await expect(engineeringProfile).toContainText('Python · LangGraph · MCP · RAG · LLM evaluation');
-    await expect(engineeringProfile).toContainText('Rust · Go · TypeScript · Java · C++');
-    await expect(engineeringProfile).toContainText('AWS · PostgreSQL · MongoDB · Docker · Kubernetes · OpenTelemetry');
-    await expect(engineeringProfile).not.toContainText(/Solidity|Web3/i);
-    await expect(engineeringProfile.getByRole('link', { name: 'Work experience' })).toHaveAttribute('href', '/experience');
-    await expect(engineeringProfile.getByRole('link', { name: 'Engineering projects' })).toHaveAttribute('href', '/projects');
+    const evidenceTypes = await page.locator('[data-home-evidence]').evaluateAll((records) => records.map((record) => record.dataset.homeEvidenceType));
+    expect(evidenceTypes).toEqual(['research', 'engineering', 'research', 'engineering']);
 
-    const affiliationLogos = page.locator('[data-home-affiliation-logo]');
-    await expect(affiliationLogos).toHaveCount(3);
-    await expect(page.locator('[data-home-affiliation="UIUC"] img')).toHaveAttribute('alt', /UIUC/i);
-    await expect(page.locator('[data-home-affiliation="University of Alberta"] img')).toHaveAttribute('alt', /University of Alberta/i);
-    await expect(page.locator('[data-home-affiliation="BUET"] img')).toHaveAttribute('alt', /BUET/i);
-    expect(await affiliationLogos.evaluateAll((images) => images.every((image) => image.complete && image.naturalWidth > 0))).toBe(true);
-
-    await expect(page.locator('[data-home-research-lane] [data-home-record-visual]')).toHaveCount(6);
-    await expect(page.locator('[data-home-publication] [data-home-record-visual]')).toHaveCount(2);
-    await expect(page.locator('[data-home-engineering] [data-home-record-visual]')).toHaveCount(7);
-    await expect(page.locator('[data-home-publication] [data-home-material-thumbnail][data-material-type="Research paper"]')).toHaveCount(1);
-
-    const fallbackThumbnails = page.locator('[data-home-material-thumbnail] img');
-    await expect(fallbackThumbnails).toHaveCount(8);
-    for (const image of await fallbackThumbnails.all()) {
-      await image.scrollIntoViewIfNeeded();
-      await expect.poll(() => image.evaluate((node) => node.complete && node.naturalWidth > 0)).toBe(true);
-    }
-
-    const workLogos = page.locator('[data-home-work-logo]');
-    await expect(workLogos).toHaveCount(4);
-    for (const image of await workLogos.all()) {
-      await expect(image).toHaveAttribute('alt', /\S+/);
-      await image.scrollIntoViewIfNeeded();
-      await expect.poll(() => image.evaluate((node) => node.complete && node.naturalWidth > 0)).toBe(true);
-    }
-
-    const portrait = page.locator('[data-home-portrait]');
-    await expect(portrait).toHaveCount(1);
-    await expect(portrait).toHaveAttribute('alt', /Tanzim Hossain Romel/i);
-    await expect(portrait).toHaveAttribute('fetchpriority', 'high');
-    expect(await portrait.evaluate((image) => image.complete && image.naturalWidth > 0)).toBe(true);
-
+    const main = page.locator('main');
+    await expect(main).not.toContainText(/\bGTA\b|\bGRA\b|\bGRAF\b/);
+    await expect(main).not.toContainText(/open-source program analysis/i);
+    await expect(page.locator('[data-home-affiliation-logo], [data-home-engineering-skill], [data-home-metric]')).toHaveCount(0);
   });
 
-  test('hero name stays on one compact line from desktop through narrow mobile', async ({ page }) => {
+  test('first viewport starts with the Alberta status, exact positioning copy, paths, and portrait', async ({ page }) => {
+    await page.setViewportSize({ width: 1280, height: 900 });
+    await visitHome(page);
+
+    const identity = page.locator('[data-home-section="identity"]');
+    const status = identity.locator('[data-current-status]');
+    const asOf = await status.getAttribute('data-as-of');
+    if (asOf < '2026-09-01') {
+      await expect(status).toContainText('University of Alberta · Incoming M.Sc. in Computing Science');
+    } else {
+      await expect(status).toContainText('University of Alberta · M.Sc. in Computing Science');
+    }
+    await expect(identity.locator('.home-identity__thesis')).toHaveText('I study how AI agents behave in real software systems—and how to make their decisions inspectable, reliable, and trustworthy.');
+    await expect(identity.locator('.home-identity__bridge')).toHaveText('About three years of professional software-engineering experience, formerly at IQVIA.');
+    await expect(identity.locator('.home-identity__interests')).toHaveText('AI4SE · LLM4Coding · Trustworthy AI · long-horizon coding agents · AI for SRE');
+
+    const paths = identity.locator('.home-identity__paths a');
+    await expect(paths).toHaveCount(3);
+    await expect(paths.allTextContents()).resolves.toEqual(['Explore research', 'Review engineering work', 'Download CV']);
+    await expect(identity.getByRole('link', { name: 'Explore research', exact: true })).toHaveAttribute('href', '/research/');
+    await expect(identity.getByRole('link', { name: 'Review engineering work', exact: true })).toHaveAttribute('href', '/projects/');
+    await expect(identity.getByRole('link', { name: 'Download CV', exact: true })).toHaveAttribute('href', '/cv/');
+
+    const orderedItems = identity.locator('[data-current-status], h1, .home-identity__thesis, .home-identity__bridge, .home-identity__interests, .home-identity__paths, [data-home-portrait]');
+    const followsContractOrder = await identity.evaluate((root) => {
+      const selectors = ['[data-current-status]', 'h1', '.home-identity__thesis', '.home-identity__bridge', '.home-identity__interests', '.home-identity__paths', '[data-home-portrait]'];
+      const elements = selectors.map((selector) => root.querySelector(selector));
+      return elements.every(Boolean) && elements.slice(0, -1).every((element, index) => (
+        element.compareDocumentPosition(elements[index + 1]) & Node.DOCUMENT_POSITION_FOLLOWING
+      ));
+    });
+    expect(followsContractOrder).toBe(true);
+    for (const item of await orderedItems.all()) {
+      const box = await item.boundingBox();
+      expect(box, 'first-view identity item should render').not.toBeNull();
+      expect(box.y, 'first-view identity item should begin within the viewport').toBeLessThan(900);
+    }
+
+    const portrait = identity.locator('[data-home-portrait]');
+    await expect(portrait).toHaveAttribute('width', '960');
+    await expect(portrait).toHaveAttribute('height', '1280');
+    await expect(portrait).toHaveAttribute('fetchpriority', 'high');
+    await expect(portrait).not.toHaveAttribute('loading', 'lazy');
+    expect(await portrait.evaluate((image) => image.complete && image.naturalWidth > 0)).toBe(true);
+  });
+
+  test('the closed 320px shell and all three audience paths fit in the first 800px', async ({ page }) => {
+    await page.setViewportSize({ width: 320, height: 800 });
+    await visitHome(page);
+
+    const headerBox = await page.locator('.site-header').boundingBox();
+    expect(headerBox, 'closed mobile header should render').not.toBeNull();
+    expect(headerBox.height).toBe(64);
+
+    const brandBox = await page.locator('.site-brand').boundingBox();
+    expect(brandBox, 'home wordmark should render').not.toBeNull();
+    expect(brandBox.height).toBeGreaterThanOrEqual(44);
+
+    const paths = page.locator('.home-identity__paths a');
+    await expect(paths).toHaveCount(3);
+    for (const path of await paths.all()) {
+      const box = await path.boundingBox();
+      expect(box, 'audience path should render').not.toBeNull();
+      expect(box.y + box.height, 'audience path should end inside the first screen').toBeLessThanOrEqual(800);
+    }
+
+    const register = await page.locator('.home-identity__copy').evaluate((copy) => {
+      const style = getComputedStyle(copy, '::before');
+      const copyStyle = getComputedStyle(copy);
+      return {
+        content: style.content,
+        display: style.display,
+        borderLeftWidth: parseFloat(copyStyle.borderLeftWidth),
+      };
+    });
+    expect(register.display).toBe('none');
+    expect(register.content).toBe('none');
+    expect(register.borderLeftWidth).toBe(0);
+  });
+
+  test('mobile navigation fails open when the shared shell script is unavailable', async ({ page }) => {
+    await page.setViewportSize({ width: 320, height: 800 });
+    await page.route('**/assets/js/site-shell.js*', (route) => route.abort());
+    await page.goto(BASE_URL, { waitUntil: 'domcontentloaded' });
+
+    await expect.poll(() => page.locator('html').getAttribute('class'))
+      .toContain('shell-failed');
+    await expect(page.locator('html')).not.toHaveClass(/js-enabled|shell-ready/);
+    await expect(page.locator('.site-header__controls')).toBeHidden();
+
+    const navigation = page.locator('#site-navigation');
+    await expect(navigation).toBeVisible();
+    await expect(navigation.getByRole('link', { name: 'Research', exact: true })).toBeVisible();
+    await expect(navigation.getByRole('link', { name: 'Engineering', exact: true })).toBeVisible();
+    await expect(navigation.getByRole('link', { name: 'CV', exact: true })).toBeVisible();
+
+    const geometry = await page.evaluate(() => ({
+      clientWidth: document.documentElement.clientWidth,
+      scrollWidth: document.documentElement.scrollWidth,
+    }));
+    expect(geometry.scrollWidth).toBeLessThanOrEqual(geometry.clientWidth + 1);
+  });
+
+  test('hero gutters and section traces follow desktop and tablet geometry', async ({ page }) => {
+    await page.setViewportSize({ width: 1280, height: 900 });
+    await visitHome(page);
+    expect(await page.locator('.home-identity__grid').evaluate((grid) => parseFloat(getComputedStyle(grid).columnGap))).toBe(32);
+
+    for (const width of [720, 768, 1280]) {
+      await page.setViewportSize({ width, height: 900 });
+      await visitHome(page);
+      expect(
+        await page.locator('.home-identity__copy').evaluate((copy) => parseFloat(getComputedStyle(copy).borderLeftWidth)),
+        `${width}px notebook margin`,
+      ).toBe(1);
+    }
+
+    await page.setViewportSize({ width: 768, height: 900 });
+    await visitHome(page);
+    const tabletHero = await page.locator('.home-identity__grid').evaluate((grid) => {
+      const style = getComputedStyle(grid);
+      const columns = style.gridTemplateColumns.split(' ').map((value) => parseFloat(value));
+      return { columnGap: parseFloat(style.columnGap), columns };
+    });
+    expect(tabletHero.columnGap).toBe(24);
+    expect(tabletHero.columns).toHaveLength(2);
+    expect(Math.abs(tabletHero.columns[0] - tabletHero.columns[1])).toBeLessThanOrEqual(1);
+
+    const trace = page.locator('[data-home-section="selected-evidence"] .section-trace');
+    const traceGeometry = await trace.evaluate((element) => {
+      const index = element.firstElementChild.getBoundingClientRect();
+      const content = element.lastElementChild.getBoundingClientRect();
+      return {
+        columns: getComputedStyle(element).gridTemplateColumns.split(' ').length,
+        indexBottom: index.bottom,
+        contentTop: content.top,
+      };
+    });
+    expect(traceGeometry.columns).toBe(1);
+    expect(traceGeometry.indexBottom).toBeLessThanOrEqual(traceGeometry.contentTop);
+  });
+
+  test('homepage surfaces, accent roles, and prose typography stay restrained', async ({ page }) => {
+    await page.setViewportSize({ width: 1280, height: 900 });
+    await visitHome(page);
+
+    const roles = await page.evaluate(() => {
+      const probe = document.createElement('span');
+      probe.style.color = 'var(--accent)';
+      document.body.append(probe);
+      const accent = getComputedStyle(probe).color;
+      probe.remove();
+
+      const regions = [...document.querySelectorAll('.home-region:not(.home-identity)')];
+      const elevatedRegions = regions
+        .filter((region) => getComputedStyle(region).backgroundColor !== 'rgba(0, 0, 0, 0)')
+        .map((region) => region.dataset.homeSection);
+      const interests = getComputedStyle(document.querySelector('.home-identity__interests'));
+      const engineeringIndex = getComputedStyle(document.querySelector('.evidence-record--engineering .evidence-record__index'));
+      const proofHeading = getComputedStyle(document.querySelector('.proof-ledger--open-source > h3'));
+
+      return {
+        accent,
+        elevatedRegions,
+        interestsFont: interests.fontFamily,
+        bodyFont: getComputedStyle(document.body).fontFamily,
+        interestsSize: parseFloat(interests.fontSize),
+        interestsTransform: interests.textTransform,
+        engineeringIndexColor: engineeringIndex.color,
+        proofHeadingRule: proofHeading.borderBottomColor,
+      };
+    });
+
+    expect(roles.elevatedRegions).toEqual(['selected-evidence']);
+    expect(roles.interestsFont).toBe(roles.bodyFont);
+    expect(roles.interestsSize).toBe(16);
+    expect(roles.interestsTransform).toBe('none');
+    expect(roles.engineeringIndexColor).toBe(roles.accent);
+    expect(roles.proofHeadingRule).toBe(roles.accent);
+  });
+
+  test('record padding and grid gutters follow desktop, tablet, and mobile tokens', async ({ page }) => {
+    const cases = [
+      { width: 1280, gap: 32 },
+      { width: 768, gap: 24 },
+      { width: 320, gap: 24 },
+    ];
+
+    for (const contract of cases) {
+      await page.setViewportSize({ width: contract.width, height: 900 });
+      await visitHome(page);
+      const geometry = await page.locator('[data-home-evidence]').first().evaluate((record) => {
+        const style = getComputedStyle(record);
+        return {
+          columnGap: parseFloat(style.columnGap),
+          paddingBlockStart: parseFloat(style.paddingBlockStart),
+          paddingBlockEnd: parseFloat(style.paddingBlockEnd),
+        };
+      });
+      expect(geometry.columnGap, `${contract.width}px record gutter`).toBe(contract.gap);
+      expect(geometry.paddingBlockStart, `${contract.width}px record start padding`).toBe(24);
+      expect(geometry.paddingBlockEnd, `${contract.width}px record end padding`).toBe(24);
+    }
+  });
+
+  test('selected evidence and proof ledgers keep their semantic limits', async ({ page }) => {
+    await visitHome(page);
+
+    for (const record of await page.locator('[data-home-evidence]').all()) {
+      await expect(record.locator('h3')).toHaveCount(1);
+      await expect(record.locator('dt')).toHaveText(['Contribution', 'Evidence', 'Methods', 'Verified']);
+      const methodCount = await record.locator('[data-home-method]').count();
+      expect(methodCount).toBeGreaterThan(0);
+      expect(methodCount).toBeLessThanOrEqual(5);
+      expect(await record.locator('.record-links a').count()).toBeLessThanOrEqual(2);
+      await expect(record.locator('time[datetime]')).toHaveCount(1);
+    }
+
+    await expect(page.locator('[data-home-evidence] [data-home-record-visual]')).toHaveCount(2);
+    await expect(page.locator('[data-home-contribution]')).toContainText(['Merged contribution', 'Merged contribution', 'Merged contribution']);
+
+    for (const record of await page.locator('[data-home-experience]').all()) {
+      await expect(record.locator('.engineering-outcome-row__outcomes > li')).toHaveCount(3);
+    }
+  });
+
+  test('the hero name uses the display scale without widening narrow screens', async ({ page }) => {
     for (const width of [1440, 390, 320]) {
       await page.setViewportSize({ width, height: 900 });
       await visitHome(page);
@@ -107,75 +299,46 @@ test.describe('research-first shell contract', () => {
           fontSize: parseFloat(style.fontSize),
           lineHeight: parseFloat(style.lineHeight),
           height: heading.getBoundingClientRect().height,
-          whiteSpace: style.whiteSpace,
+          width: heading.getBoundingClientRect().width,
+          parentWidth: heading.parentElement.getBoundingClientRect().width,
         };
       });
-      expect(typography.fontSize, `${width}px hero name`).toBeLessThanOrEqual(48);
-      expect(typography.height, `${width}px hero name line count`).toBeLessThanOrEqual(typography.lineHeight * 1.15);
-      expect(typography.whiteSpace, `${width}px hero name wrapping`).toBe('nowrap');
+      expect(typography.fontSize, `${width}px hero display size`).toBeGreaterThanOrEqual(40);
+      expect(typography.fontSize, `${width}px hero display size`).toBeLessThanOrEqual(56);
+      expect(typography.height, `${width}px hero line count`).toBeLessThanOrEqual(typography.lineHeight * 3.1);
+      expect(typography.width, `${width}px hero containment`).toBeLessThanOrEqual(typography.parentWidth + 1);
     }
   });
 
-  test('homepage uses the approved natural-language summaries', async ({ page }) => {
-    await visitHome(page);
-    const main = page.locator('main');
-    await expect(main).toContainText('At the University of Alberta, I am an incoming M.Sc. student.');
-    await expect(main).toContainText('AI4SE, AI for SRE, LLM4Coding, trustworthy AI, and long-horizon coding agents.');
-    await expect(main).toContainText('about three years of professional software-engineering experience');
-    await expect(main).toContainText('I learn by building');
-    await expect(main).toContainText('Recent changes to my research and academic plans.');
-    await expect(main).not.toContainText('A builder who wants claims to leave receipts');
-    await expect(main).not.toContainText('A compact currentness ledger');
-  });
-
-  test('homepage media is meaningful, lazy below the fold, and decodes successfully', async ({ page }) => {
+  test('Research, Engineering, and CV remain permanent routes in header, hero, and footer', async ({ page }) => {
     await page.setViewportSize({ width: 1280, height: 900 });
     await visitHome(page);
 
-    const portrait = page.locator('[data-home-portrait]');
-    await expect(portrait).toHaveAttribute('fetchpriority', 'high');
-    await expect(portrait).toHaveAttribute('alt', /seated outdoors/i);
-    expect(await portrait.evaluate((image) => [image.naturalWidth, image.naturalHeight])).toEqual([960, 1280]);
-    const images = page.locator('[data-home-image]');
-    expect(await images.count()).toBeGreaterThanOrEqual(10);
-    for (const image of await images.all()) {
-      await expect(image).toHaveAttribute('alt', /\S+/);
-      await expect(image).toHaveAttribute('loading', 'lazy');
-      await image.scrollIntoViewIfNeeded();
-      await expect.poll(() => image.evaluate((node) => node.complete && node.naturalWidth > 0)).toBe(true);
+    const header = page.locator('#site-navigation');
+    for (const route of PRIMARY_ROUTES) {
+      const link = header.getByRole('link', { name: route.label, exact: true });
+      await expect(link).toHaveAttribute('href', route.href);
+      await expect(link).toBeVisible();
     }
+
+    for (const route of PRIMARY_ROUTES.filter(({ label }) => ['Research', 'Engineering', 'CV'].includes(label))) {
+      await expect(page.locator('footer').getByRole('link', { name: route.label, exact: true })).toHaveAttribute('href', route.href);
+    }
+
+    await expect(page.locator('.home-identity__paths a[href="/research/"]')).toHaveCount(1);
+    await expect(page.locator('.home-identity__paths a[href="/projects/"]')).toHaveCount(1);
+    await expect(page.locator('.home-identity__paths a[href="/cv/"]')).toHaveCount(1);
   });
 
-  test('desktop navigation keeps the research core visible and exposes every other page', async ({ page }) => {
-    await page.setViewportSize({ width: 1280, height: 720 });
-    await visitHome(page);
-
-    const nav = page.locator('#site-navigation');
-    const labels = await nav.locator(':scope > a').allTextContents();
-    expect(labels.map((label) => label.replace(/\s+/g, ' ').trim())).toEqual([
-      ...CORE_ROUTES,
-    ]);
-    for (const label of labels) {
-      await expect(nav.getByRole('link', { name: label.trim(), exact: true })).toBeVisible();
-    }
-
-    const more = nav.locator('[data-more-navigation]');
-    await expect(more).toHaveCount(1);
-    const moreSummary = more.locator('summary');
-    await expect(moreSummary).toHaveText('More');
-    await moreSummary.click();
-    for (const route of OTHER_ROUTES) {
-      await expect(more.getByRole('link', { name: route, exact: true })).toBeVisible();
-    }
-  });
-
-  test('mobile menu has an accessible 44px control and exposes the complete page directory', async ({ page }) => {
+  test('mobile menu uses a 44px labelled disclosure, closes on Escape, and restores focus', async ({ page }) => {
     await page.setViewportSize({ width: 320, height: 800 });
     await visitHome(page);
 
-    const menuToggle = page.getByRole('button', { name: /menu/i });
+    const menuToggle = page.locator('#site-menu-toggle');
     await expect(menuToggle).toHaveAttribute('id', 'site-menu-toggle');
+    await expect(menuToggle).toHaveAccessibleName('Open navigation menu');
     await expect(menuToggle).toHaveAttribute('aria-expanded', 'false');
+    await expect(menuToggle).toHaveText('Menu');
     const bounds = await menuToggle.boundingBox();
     expect(bounds).not.toBeNull();
     expect(bounds.width).toBeGreaterThanOrEqual(44);
@@ -183,37 +346,28 @@ test.describe('research-first shell contract', () => {
 
     await menuToggle.click();
     await expect(menuToggle).toHaveAttribute('aria-expanded', 'true');
-    for (const route of CORE_ROUTES) {
-      await expect(page.locator('#site-navigation').getByRole('link', { name: route, exact: true })).toBeVisible();
+    await expect(menuToggle).toHaveAccessibleName('Close navigation menu');
+    await expect(menuToggle).toHaveText('Close');
+    for (const route of PRIMARY_ROUTES) {
+      await expect(page.locator('#site-navigation').getByRole('link', { name: route.label, exact: true })).toBeVisible();
     }
-    const more = page.locator('#site-navigation [data-more-navigation]');
-    const moreSummary = more.locator('summary');
-    await expect(moreSummary).toBeVisible();
-    await moreSummary.click();
-    for (const route of OTHER_ROUTES) {
-      await expect(more.getByRole('link', { name: route, exact: true })).toBeVisible();
-    }
+
     await page.keyboard.press('Escape');
     await expect(menuToggle).toHaveAttribute('aria-expanded', 'false');
+    await expect(menuToggle).toBeFocused();
   });
 
-  test('theme follows the first-paint system preference until storage overrides it', async ({ browser }) => {
+  test('theme follows the first-paint preference, exposes its action, and persists an override', async ({ browser }) => {
     for (const systemTheme of ['light', 'dark']) {
       const context = await browser.newContext({ colorScheme: systemTheme });
       const page = await context.newPage();
-      await page.addInitScript(() => {
-        window.__themeAssignments = [];
-        const originalSetAttribute = Element.prototype.setAttribute;
-        Element.prototype.setAttribute = function (name, value) {
-          if (name === 'data-theme' && this === document.documentElement) {
-            window.__themeAssignments.push(value);
-          }
-          return originalSetAttribute.call(this, name, value);
-        };
-      });
       await visitHome(page);
       await expect(page.locator('html')).toHaveAttribute('data-theme', systemTheme);
-      await expect.poll(() => page.evaluate(() => window.__themeAssignments[0])).toBe(systemTheme);
+      await expect(page.locator('meta[name="theme-color"]')).toHaveAttribute('content', systemTheme === 'dark' ? '#0c1513' : '#f5f1e8');
+      const expectedAction = systemTheme === 'dark' ? 'Use light theme' : 'Use dark theme';
+      const toggle = page.getByRole('button', { name: expectedAction, exact: true });
+      await expect(toggle).toBeVisible();
+      await expect(toggle).toHaveAttribute('aria-pressed', systemTheme === 'dark' ? 'true' : 'false');
       await context.close();
     }
 
@@ -222,10 +376,15 @@ test.describe('research-first shell contract', () => {
     await page.addInitScript(() => localStorage.setItem('theme', 'dark'));
     await visitHome(page);
     await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
+    const toggle = page.getByRole('button', { name: 'Use light theme', exact: true });
+    await toggle.click();
+    await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
+    await expect(page.locator('meta[name="theme-color"]')).toHaveAttribute('content', '#f5f1e8');
+    await expect.poll(() => page.evaluate(() => localStorage.getItem('theme'))).toBe('light');
     await context.close();
   });
 
-  test('home and mobile navigation remain useful without JavaScript', async ({ browser }) => {
+  test('homepage and permanent audience routes remain useful without JavaScript', async ({ browser }) => {
     const context = await browser.newContext({
       javaScriptEnabled: false,
       viewport: { width: 320, height: 800 },
@@ -233,20 +392,13 @@ test.describe('research-first shell contract', () => {
     const page = await context.newPage();
     await visitHome(page);
 
-    const sections = page.locator('main > [data-home-section]');
-    await expect(sections).toHaveCount(HOME_SECTIONS.length);
+    await expect(page.locator('main > [data-home-section]')).toHaveCount(HOME_SECTIONS.length);
     await expect(page.locator('[data-home-section="identity"] h1')).toBeVisible();
-    await expect(page.locator('[data-home-research-lane]').first()).toBeVisible();
+    await expect(page.locator('[data-home-evidence]').first()).toBeVisible();
     await expect(page.locator('[data-home-section="contact"] a[href^="mailto:"]')).toBeVisible();
-    for (const route of CORE_ROUTES) {
-      await expect(page.locator('#site-navigation').getByRole('link', { name: route, exact: true })).toBeVisible();
-    }
-    const more = page.locator('#site-navigation [data-more-navigation]');
-    const moreSummary = more.locator('summary');
-    await expect(moreSummary).toBeVisible();
-    await moreSummary.click();
-    for (const route of OTHER_ROUTES) {
-      await expect(more.getByRole('link', { name: route, exact: true })).toBeVisible();
+    await expect(page.locator('#site-menu-toggle')).toBeHidden();
+    for (const route of PRIMARY_ROUTES) {
+      await expect(page.locator('#site-navigation').getByRole('link', { name: route.label, exact: true })).toBeVisible();
     }
     await context.close();
   });
@@ -258,7 +410,14 @@ test.describe('research-first shell contract', () => {
     await page.keyboard.press('Tab');
     await expect(page.getByRole('link', { name: 'Skip to main content', exact: true })).toBeFocused();
     await page.keyboard.press('Enter');
-    await expect(page.locator('main')).toBeFocused();
+    const main = page.locator('main');
+    await expect(main).toBeFocused();
+    const focusStyle = await main.evaluate((element) => {
+      const style = getComputedStyle(element);
+      return { outlineStyle: style.outlineStyle, outlineWidth: parseFloat(style.outlineWidth) };
+    });
+    expect(focusStyle.outlineStyle).not.toBe('none');
+    expect(focusStyle.outlineWidth).toBeGreaterThanOrEqual(3);
   });
 
   test('home never overflows horizontally from 320px through 1440px', async ({ page }) => {
@@ -267,8 +426,7 @@ test.describe('research-first shell contract', () => {
     }
   });
 
-  test('current status is inside its rendered ISO range', async ({ page }) => {
-    await page.setViewportSize({ width: 1280, height: 720 });
+  test('Alberta status is selected from its rendered ISO range', async ({ page }) => {
     await visitHome(page);
 
     const status = page.locator('[data-current-status]');
@@ -279,12 +437,14 @@ test.describe('research-first shell contract', () => {
     ]);
     expect(asOf).toMatch(/^\d{4}-\d{2}-\d{2}$/);
     expect(starts).toMatch(/^\d{4}-\d{2}-\d{2}$/);
-    expect(ends).toMatch(/^\d{4}-\d{2}-\d{2}$/);
-    expect(starts <= asOf && asOf < ends).toBe(true);
+    expect(starts <= asOf).toBe(true);
+    if (ends) expect(asOf < ends).toBe(true);
 
-    if (asOf >= '2026-06-01' && asOf < '2026-09-01') {
-      await expect(status).toContainText('UIUC');
-      await expect(status).not.toContainText('IQVIA');
+    if (asOf < '2026-09-01') {
+      await expect(status).toContainText('Incoming M.Sc. in Computing Science');
+    } else {
+      await expect(status).toContainText('M.Sc. in Computing Science');
+      await expect(status).not.toContainText('Incoming');
     }
   });
 });

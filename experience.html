@@ -1,31 +1,60 @@
 ---
 layout: default
 title: Work Experience
-navbar_title: Work
+navbar_title: Experience
 description: Professional software engineering experience, backend systems work, cloud development, and selected responsibilities.
 ---
 
-<section class="academic-section">
-  <h1 class="academic-page-title">Work</h1>
-  <p>The teams I worked with, what I built, and the responsibilities I held.</p>
+<section class="academic-section page-hero" aria-labelledby="experience-title">
+  <p class="eyebrow">Experience</p>
+  <h1 id="experience-title">Research appointments and professional engineering</h1>
+  <p class="page-hero__intro">A dated record of where I worked, the systems I owned, and the outcomes I can support.</p>
 </section>
 
-<section class="academic-section">
-  <h2>Experience</h2>
+{% assign as_of = site.time | date: '%Y-%m-%d' %}
+
+<section class="academic-section experience-group" aria-labelledby="research-appointments-title">
+  <div class="section-trace"><span aria-hidden="true">01</span><div><p class="eyebrow">Academic trajectory</p><h2 id="research-appointments-title">Research and graduate appointments</h2></div></div>
   {% for position in site.data.profile.positions %}
-  <article class="academic-entry">
-    {% if position.logo %}{% assign position_logo_alt = position.logo_alt %}{% unless position_logo_alt %}{% assign position_logo_alt = position.name | split: ',' | first | append: ' logo' %}{% endunless %}<img class="academic-entry__media academic-entry__media--logo" loading="lazy" decoding="async" src="{{ position.logo | relative_url }}" alt="{{ position_logo_alt }}">{% endif %}
-    <h3>{% if position.url %}<a href="{{ position.url }}" target="_blank" rel="noopener noreferrer">{{ position.name }}</a>{% else %}{{ position.name }}{% endif %}</h3>
-    <p class="academic-entry__meta">{{ position.display_date | default: position.date }}</p>
+  {% unless position.name contains 'University of Alberta' or position.name contains 'UIUC' %}{% continue %}{% endunless %}
+  <article class="experience-record" data-experience-record>
+    <div class="experience-record__mark">{% if position.logo %}<img loading="lazy" decoding="async" src="{{ position.logo | relative_url }}" alt="{{ position.logo_alt }}" width="48" height="48">{% endif %}</div>
+    <div class="experience-record__body">
+    <p class="experience-record__kind">{% if position.start_date > as_of %}Upcoming appointment{% else %}Research appointment{% endif %}</p>
+    <h3>{% if position.url %}<a href="{{ position.url }}" target="_blank" rel="noopener noreferrer" aria-label="{{ position.name | escape }} (opens in a new tab)">{{ position.name }}</a>{% else %}{{ position.name }}{% endif %}</h3>
+    <p class="experience-record__meta">{% if position.start_date %}{% include experience-date.html position=position %}{% else %}{{ position.display_date | default: position.date }}{% endif %}</p>
     <p>{{ position.description | strip_html }}</p>
-    {% if position.links %}<nav class="academic-reference-links" aria-label="Related links for {{ position.name | escape }}">{% for link in position.links %}<a href="{{ link.url }}" target="_blank" rel="noopener noreferrer">{{ link.label }}<span aria-hidden="true">↗</span></a>{% endfor %}</nav>{% endif %}
-    {% if position.responsibilities %}<ul>{% for item in position.responsibilities %}<li>{{ item | strip_html }}</li>{% endfor %}</ul>{% endif %}
-    {% if position.technologies %}<p class="academic-tags">{% for tech in position.technologies limit:12 %}<span class="academic-tag">{{ tech }}</span>{% endfor %}</p>{% endif %}
+    {% if position.links %}<nav class="academic-reference-links" aria-label="Related links for {{ position.name | escape }}">{% for link in position.links %}<a href="{{ link.url }}" target="_blank" rel="noopener noreferrer" aria-label="{{ link.label | escape }} (opens in a new tab)">{{ link.label }}<span aria-hidden="true">↗</span></a>{% endfor %}</nav>{% endif %}
+    {% if position.responsibilities %}<ul class="experience-record__outcomes">{% for item in position.responsibilities limit:3 %}<li>{{ item | strip_html }}</li>{% endfor %}</ul>{% endif %}
+    {% if position.technologies %}<p class="experience-record__methods">{{ position.technologies | join: ' · ' }}</p>{% endif %}
+    </div>
   </article>
   {% endfor %}
 </section>
 
-<section class="academic-section">
-  <h2>Technical Skills</h2>
-  {% for category in site.data.profile.technical_skills %}<p><strong>{{ category.type }}:</strong> {{ category.names | join: ", " }}</p>{% endfor %}
+<section class="academic-section experience-group" aria-labelledby="professional-engineering-title">
+  <div class="section-trace"><span aria-hidden="true">02</span><div><p class="eyebrow">Professional engineering</p><h2 id="professional-engineering-title">About three years building software systems</h2></div></div>
+  {% for position in site.data.profile.positions %}
+  {% if position.name contains 'University of Alberta' or position.name contains 'UIUC' %}{% continue %}{% endif %}
+  <article class="experience-record" data-experience-record>
+    <div class="experience-record__mark">{% if position.logo %}<img loading="lazy" decoding="async" src="{{ position.logo | relative_url }}" alt="{{ position.logo_alt }}" width="48" height="48">{% endif %}</div>
+    <div class="experience-record__body">
+      <p class="experience-record__kind">Professional role</p>
+      <h3>{% if position.url %}<a href="{{ position.url }}" target="_blank" rel="noopener noreferrer" aria-label="{{ position.name | escape }} (opens in a new tab)">{{ position.name }}</a>{% else %}{{ position.name }}{% endif %}</h3>
+      <p class="experience-record__meta">{% include experience-date.html position=position %}</p>
+      <p>{{ position.description | strip_html }}</p>
+      {% if position.links %}<nav class="academic-reference-links" aria-label="Related links for {{ position.name | escape }}">{% for link in position.links %}<a href="{{ link.url }}" target="_blank" rel="noopener noreferrer" aria-label="{{ link.label | escape }} (opens in a new tab)">{{ link.label }}<span aria-hidden="true">↗</span></a>{% endfor %}</nav>{% endif %}
+      {% if position.responsibilities %}
+      <ul class="experience-record__outcomes">{% for item in position.responsibilities limit:3 %}<li>{{ item | strip_html }}</li>{% endfor %}</ul>
+      {% if position.responsibilities.size > 3 %}<details class="experience-record__details"><summary>Additional responsibilities and evidence</summary><ul>{% for item in position.responsibilities offset:3 %}<li>{{ item | strip_html }}</li>{% endfor %}</ul></details>{% endif %}
+      {% endif %}
+      {% if position.technologies %}<p class="experience-record__methods">{{ position.technologies | join: ' · ' }}</p>{% endif %}
+    </div>
+  </article>
+  {% endfor %}
+</section>
+
+<section class="academic-section skills-ledger" aria-labelledby="skills-title">
+  <div class="section-trace"><span aria-hidden="true">03</span><div><p class="eyebrow">Selected working set</p><h2 id="skills-title">Tools used across the evidence above</h2></div></div>
+  <div class="skills-ledger__list">{% for category in site.data.profile.selected_working_set %}<p><strong>{{ category.type }}</strong><span>{{ category.names | join: ' · ' }}</span></p>{% endfor %}</div>
 </section>

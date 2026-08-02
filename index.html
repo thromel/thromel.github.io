@@ -2,85 +2,76 @@
 layout: default
 title: Tanzim Hossain Romel
 navbar_title: Home
-description: Researcher and software engineer studying inspectable AI agents for reliability, security, and developer tools.
+description: Researcher and software engineer studying inspectable, reliable, and trustworthy AI agents in real software systems.
 ---
 
-{% assign ordered_publications = site.publications | sort: 'date' | reverse %}
+{% assign as_of = site.time | date: '%Y-%m-%d' %}
+{% assign academic_status = nil %}
+{% for status in site.data.research.identity.statuses %}
+  {% assign status_started = false %}
+  {% assign status_active = true %}
+  {% if status.start_date <= as_of %}{% assign status_started = true %}{% endif %}
+  {% if status.end_date_exclusive and status.end_date_exclusive <= as_of %}{% assign status_active = false %}{% endif %}
+  {% if academic_status == nil and status_started and status_active %}{% assign academic_status = status %}{% endif %}
+{% endfor %}
 
-<section class="home-dossier home-dossier-identity" data-home-section="identity" aria-labelledby="home-title">
-  <div class="site-frame home-dossier-identity__grid">
-    <div class="home-dossier-identity__copy">
-      <p class="eyebrow">{{ site.data.research.identity.role_line }}</p>
-      <h1 id="home-title">{{ site.data.profile.primary_name }}</h1>
-      <p class="home-dossier-identity__lead">{{ site.data.research.identity.summary }}</p>
-      <p class="home-dossier-identity__bridge">{{ site.data.research.identity.bridge }}</p>
-      <ul class="home-dossier-markers" aria-label="Current profile markers">
-        {% for marker in site.data.research.identity.markers %}<li{% if marker.affiliation %} data-home-affiliation="{{ marker.affiliation }}"{% endif %}>{% if marker.logo %}<img src="{{ marker.logo | relative_url }}" alt="{{ marker.logo_alt }}" width="28" height="28" decoding="async" data-home-affiliation-logo>{% endif %}{% if marker.url %}<a href="{{ marker.url }}"{% if marker.url contains '://' %} target="_blank" rel="noopener noreferrer"{% endif %}>{{ marker.label }}</a>{% else %}<span>{{ marker.label }}</span>{% endif %}</li>{% endfor %}
-      </ul>
-      {% include current-status.html with_data=true label="Current work" %}
-      <p class="action-row">
-        <a class="button-link" href="{{ '/research' | relative_url }}">Research</a>
-        <a class="text-link" href="{{ '/assets/pdf/cv.pdf' | relative_url }}" target="_blank" rel="noopener noreferrer">CV</a>
-        <a class="text-link" href="mailto:{{ site.data.profile.email }}">Email</a>
-        <a class="text-link" href="https://github.com/{{ site.data.profile.github }}" target="_blank" rel="noopener noreferrer">GitHub</a>
-        <a class="text-link" href="https://scholar.google.com/citations?user={{ site.data.profile.gscholar }}" target="_blank" rel="noopener noreferrer">Scholar</a>
+<section class="home-region home-identity" data-home-section="identity" aria-labelledby="home-title">
+  <div class="site-frame home-identity__grid">
+    <div class="home-identity__copy">
+      {% if academic_status %}
+      <p class="home-identity__status" data-current-status data-as-of="{{ as_of }}" data-start-date="{{ academic_status.start_date }}"{% if academic_status.end_date_exclusive %} data-end-date-exclusive="{{ academic_status.end_date_exclusive }}"{% endif %}>
+        <a href="{{ academic_status.url }}" target="_blank" rel="noopener noreferrer" aria-label="{{ academic_status.label }} (opens in a new tab)">{{ academic_status.label }}</a>
       </p>
+      {% endif %}
+      <h1 id="home-title">{{ site.data.profile.primary_name }}</h1>
+      <p class="home-identity__thesis">{{ site.data.research.identity.thesis }}</p>
+      <p class="home-identity__bridge">{{ site.data.research.identity.bridge }}</p>
+      <p class="home-identity__interests" aria-label="Research interests">{{ site.data.research.identity.interests | join: ' · ' }}</p>
+      <nav class="action-row home-identity__paths" aria-label="Choose a portfolio path">
+        <a class="button-link" href="{{ '/research/' | relative_url }}">Explore research</a>
+        <a class="text-link" href="{{ '/projects/' | relative_url }}">Review engineering work</a>
+        <a class="text-link" href="{{ '/cv/' | relative_url }}">Download CV</a>
+      </nav>
     </div>
-    <div class="home-dossier-identity__aside">
-      <figure class="home-portrait">
-        <img src="{{ '/assets/images/photos/romel.webp' | relative_url }}" alt="Tanzim Hossain Romel seated outdoors" width="960" height="1280" fetchpriority="high" decoding="async" data-home-portrait>
-        <figcaption>Researcher · software engineer · systems builder</figcaption>
-      </figure>
-      <aside class="trajectory-note" aria-label="Next academic step">
-        <p class="eyebrow">Next step</p>
-        <p>{{ site.data.research.agenda.next_step }}</p>
-        <p class="home-dossier-identity__next-meta">U-A-Goose · Dr. Zhou Yang · Amii</p>
-      </aside>
-    </div>
+    <figure class="home-portrait home-identity__portrait">
+      <img src="{{ '/assets/images/photos/romel.webp' | relative_url }}" alt="Tanzim Hossain Romel seated outdoors" width="960" height="1280" fetchpriority="high" decoding="async" data-home-portrait>
+    </figure>
   </div>
 </section>
 
-<section class="home-dossier home-dossier-engineering-profile" data-home-section="engineering-profile" data-home-engineering-profile aria-labelledby="engineering-profile-title">
+<section class="home-region home-evidence" data-home-section="selected-evidence" aria-labelledby="selected-evidence-title">
   <div class="site-frame">
-    <div class="home-dossier-section-heading">
-      <div><p class="eyebrow">Engineering profile</p><h2 id="engineering-profile-title">What I build with</h2></div>
-      <p>{{ site.data.research.engineering_profile.intro }}</p>
-    </div>
-    <ol class="home-engineering-profile-grid">
-      {% for group in site.data.research.engineering_profile.groups %}
-      <li><article data-home-engineering-skill data-skill-group="{{ group.id }}">
-        <h3>{{ group.title }}</h3>
-        <p>{{ group.summary }}</p>
-        <p class="home-engineering-profile-grid__technologies">{{ group.technologies | join: ' · ' }}</p>
-      </article></li>
-      {% endfor %}
-    </ol>
-    <p class="record-links home-engineering-profile__links"><a href="{{ '/experience' | relative_url }}">Work experience</a><a href="{{ '/projects' | relative_url }}">Engineering projects</a></p>
-  </div>
-</section>
-
-<section class="home-dossier home-dossier-about" data-home-section="about" aria-labelledby="about-home-title">
-  <div class="site-frame home-dossier-section-grid">
-    <div><p class="eyebrow">About</p><h2 id="about-home-title">I learn by building</h2></div>
-    <div class="home-dossier-prose">{% for paragraph in site.data.research.about %}<p>{{ paragraph }}</p>{% endfor %}<p class="record-links"><a href="{{ '/about' | relative_url }}">More about me</a><a href="{{ '/learning' | relative_url }}">Learning practice</a></p></div>
-  </div>
-</section>
-
-<section class="home-dossier home-dossier-research" data-home-section="research" aria-labelledby="research-home-title">
-  <div class="site-frame">
-    <div class="home-dossier-section-heading"><div><p class="eyebrow">Research agenda</p><h2 id="research-home-title">Reliable agents in real software systems</h2></div><p>My current work falls into six related areas.</p></div>
-    <ol class="home-research-grid">
-      {% for anchor in site.data.research.anchors %}
-      <li class="home-research-card{% if anchor.image %} home-research-card--primary{% endif %}">
-        <article data-home-research-lane data-research-anchor="{{ anchor.id }}" data-publicity="{{ anchor.publicity }}">
-          <p class="evidence-record__index">0{{ forloop.index }} · {{ anchor.label }}</p>
-          {% if anchor.image %}<figure class="home-research-card__visual" data-home-record-visual><img src="{{ anchor.image | relative_url }}" alt="{{ anchor.image_alt }}" loading="lazy" decoding="async" data-home-image>{% if anchor.image_caption %}<figcaption>{{ anchor.image_caption }}</figcaption>{% endif %}</figure>{% else %}{% include home-material-thumbnail.html type="Research direction" icon="/assets/images/icons/open-book.png" class="home-research-card__visual home-material-thumbnail--research" %}{% endif %}
-          <h3>{{ anchor.title }}</h3>
-          <p class="home-research-card__question">{{ anchor.question }}</p>
-          <p>{{ anchor.description }}</p>
-          <dl class="home-research-card__meta"><div><dt>Status</dt><dd>{{ anchor.status }}</dd></div><div><dt>Context</dt><dd>{{ anchor.context }}</dd></div><div><dt>Verified</dt><dd><time datetime="{{ anchor.last_verified }}">{{ anchor.last_verified }}</time></dd></div></dl>
-          {% if anchor.publicity == 'abstract-only' %}<p class="research-boundary">The manuscript is not public; this is an abstract-level summary.</p>{% endif %}
-          <p class="record-links">{% for link in anchor.links %}<a href="{{ link.url | relative_url }}"{% if link.url contains '://' %} target="_blank" rel="noopener noreferrer"{% endif %}>{{ link.label }}</a>{% endfor %}</p>
+    <header class="section-trace">
+      <span aria-hidden="true">02</span>
+      <div>
+        <p class="eyebrow">Selected evidence</p>
+        <h2 id="selected-evidence-title">Questions, systems, and proof</h2>
+        <p>Four records connect the research questions I ask to the software and evidence I produce.</p>
+      </div>
+    </header>
+    <ol class="evidence-ledger home-evidence__ledger">
+      {% for item in site.data.research.homepage.selected_evidence %}
+      <li>
+        <article class="evidence-record evidence-record--{{ item.type | downcase }}" data-home-evidence data-home-evidence-type="{{ item.type | downcase }}">
+          <div class="evidence-record__header">
+            <p class="evidence-record__index">0{{ forloop.index }} · {{ item.type }}</p>
+            <h3>{{ item.problem }}</h3>
+          </div>
+          {% if item.image %}
+          <figure class="evidence-record__visual" data-home-record-visual>
+            <img src="{{ item.image | relative_url }}" alt="{{ item.image_alt }}" width="{{ item.image_width }}" height="{{ item.image_height }}" loading="lazy" decoding="async" data-home-image>
+            {% if item.image_caption %}<figcaption>{{ item.image_caption }}</figcaption>{% endif %}
+          </figure>
+          {% endif %}
+          <dl class="evidence-record__meta">
+            <div><dt>Contribution</dt><dd>{{ item.contribution }}</dd></div>
+            <div><dt>Evidence</dt><dd>{{ item.status }}</dd></div>
+            <div><dt>Methods</dt><dd><ul class="method-list" aria-label="Methods used">{% for method in item.methods %}<li data-home-method>{{ method }}</li>{% endfor %}</ul></dd></div>
+            <div><dt>Verified</dt><dd><time datetime="{{ item.date }}">{{ item.date_label }}</time></dd></div>
+          </dl>
+          <p class="record-links">
+            {% for link in item.links %}<a href="{{ link.url | relative_url }}"{% if link.url contains '://' %} target="_blank" rel="noopener noreferrer" aria-label="{{ link.label }} (opens in a new tab)"{% endif %}>{{ link.label }}</a>{% endfor %}
+          </p>
         </article>
       </li>
       {% endfor %}
@@ -88,89 +79,155 @@ description: Researcher and software engineer studying inspectable AI agents for
   </div>
 </section>
 
-<section class="home-dossier home-dossier-publications" data-home-section="publications" aria-labelledby="publications-home-title">
+<section class="home-region home-agenda" data-home-section="research-agenda" aria-labelledby="research-agenda-title">
   <div class="site-frame">
-    <div class="home-dossier-section-heading"><div><p class="eyebrow">Publications and artifacts</p><h2 id="publications-home-title">Research record</h2></div><p>Papers, submissions, and the public artifacts behind them.</p></div>
-    <ol class="home-publication-list">
-      {% for item in ordered_publications %}
-      {% if item.homepage == false %}{% continue %}{% endif %}
-      <li><article class="home-publication-record" data-home-publication>
-        <p class="home-publication-record__year">{{ item.pub_date }}</p>
-        {% if item.cover %}<figure class="home-publication-record__cover" data-home-record-visual><img src="{{ item.cover | relative_url }}" alt="Cover image for {{ item.title | escape }}" loading="lazy" decoding="async" data-home-image></figure>{% else %}{% include home-material-thumbnail.html type="Research paper" icon="/assets/images/icons/open-book.png" class="home-publication-record__cover home-material-thumbnail--portrait" %}{% endif %}
-        <div class="home-publication-record__body"><h3>{{ item.title }}</h3><p class="home-publication-record__status">{% if item.pub_pre %}{{ item.pub_pre }}{% endif %}{{ item.pub }}</p><p>{{ item.abstract }}</p><p class="record-links">{% if item.primary_link %}<a href="{{ item.primary_link | relative_url }}">{{ item.primary_label | default: 'Research summary' }}</a>{% endif %}{% for link in item.links %}<a href="{{ link[1] | relative_url }}"{% if link[1] contains '://' %} target="_blank" rel="noopener noreferrer"{% endif %}>{{ link[0] }}</a>{% endfor %}</p></div>
-      </article></li>
-      {% endfor %}
-      <li><article class="home-publication-record" data-home-publication>
-        <p class="home-publication-record__year">2026</p>
-        {% include home-material-thumbnail.html type="Research paper" icon="/assets/images/icons/open-book.png" class="home-publication-record__cover home-material-thumbnail--portrait" %}
-        <div class="home-publication-record__body"><h3>The Choice Can Be the Attack: Auditing Aligned Backdoors in LLM Agents</h3><p class="home-publication-record__status">Submitted to Transactions of the Association for Computational Linguistics (TACL)</p><p>SHIFT tests whether a known trigger changes which valid option an agent chooses, then asks whether that movement favors an attacker's target after accounting for ordinary option quality.</p><p class="record-links"><a href="{{ '/research/reagent-plus-plus/' | relative_url }}">Abstract-level summary</a></p></div>
-      </article></li>
-    </ol>
-    <p class="action-row"><a class="button-link" href="{{ '/publications' | relative_url }}">Full publication record</a></p>
-  </div>
-</section>
-
-<section class="home-dossier home-dossier-experience" data-home-section="experience" aria-labelledby="experience-home-title">
-  <div class="site-frame">
-    <div class="home-dossier-section-heading"><div><p class="eyebrow">Experience</p><h2 id="experience-home-title">Research and production engineering</h2></div><p>A short account of the work I did and the outcomes I can support.</p></div>
-    <ol class="home-experience-list">
-      {% for position in site.data.profile.positions %}
-      <li><article class="home-experience-record" data-home-experience>
-        <div class="home-experience-record__logo">{% if position.logo %}<img src="{{ position.logo | relative_url }}" alt="{{ position.logo_alt }}" loading="lazy" decoding="async" data-home-image data-home-work-logo>{% else %}{% include home-material-thumbnail.html type="Work" icon="/assets/images/icons/suitcase.png" class="home-material-thumbnail--compact" %}{% endif %}</div>
-        <div class="home-experience-record__content"><div class="home-experience-record__heading"><div><h3>{% if position.url %}<a href="{{ position.url }}" target="_blank" rel="noopener noreferrer">{{ position.name }}</a>{% else %}{{ position.name }}{% endif %}</h3><p>{{ position.description | strip_html }}</p></div><p class="home-experience-record__date">{{ position.display_date | default: position.date }}</p></div>
-          {% if position.links %}<nav class="academic-reference-links home-experience-record__links" aria-label="Related links for {{ position.name | escape }}">{% for link in position.links %}<a href="{{ link.url }}" target="_blank" rel="noopener noreferrer">{{ link.label }}<span aria-hidden="true">↗</span></a>{% endfor %}</nav>{% endif %}
-          <ul>{% for responsibility in position.responsibilities limit: 4 %}<li>{{ responsibility }}</li>{% endfor %}</ul>
-          {% if position.name contains 'IQVIA' %}<div class="home-metrics" aria-label="Selected IQVIA outcomes">{% for metric in site.data.research.experience_metrics %}<div data-home-metric><strong>{{ metric.value }}</strong><span>{{ metric.label }}</span></div>{% endfor %}</div>{% endif %}
-          {% if position.technologies %}<p class="home-experience-record__tech">{{ position.technologies | join: ' · ' | truncatewords: 14 }}</p>{% endif %}</div>
-      </article></li>
+    <header class="section-trace">
+      <span aria-hidden="true">03</span>
+      <div>
+        <p class="eyebrow">Research agenda</p>
+        <h2 id="research-agenda-title">Reliable agents in evolving systems</h2>
+        <p>Three connected questions organize my work across software engineering, reliability, and agent security.</p>
+      </div>
+    </header>
+    <ol class="research-agenda-ledger">
+      {% for item in site.data.research.homepage.research_agenda %}
+      <li>
+        <article class="research-question-row" data-home-agenda>
+          <p class="research-question-row__umbrella">{{ item.umbrella }}</p>
+          <h3>{{ item.question }}</h3>
+          <p>{{ item.rationale }}</p>
+          <p class="research-question-row__status"><span>Status</span> {{ item.status }}</p>
+          <p class="record-links"><a href="{{ item.url | relative_url }}"{% if item.url contains '://' %} target="_blank" rel="noopener noreferrer" aria-label="{{ item.link_label }} (opens in a new tab)"{% endif %}>{{ item.link_label }}</a></p>
+        </article>
+      </li>
       {% endfor %}
     </ol>
-    <p class="action-row"><a class="button-link" href="{{ '/experience' | relative_url }}">Complete experience</a></p>
+    <p class="action-row"><a class="button-link" href="{{ '/research/' | relative_url }}">View the full research agenda</a></p>
   </div>
 </section>
 
-<section class="home-dossier home-dossier-education" data-home-section="education" aria-labelledby="education-home-title">
+<section class="home-region home-experience" data-home-section="engineering-experience" aria-labelledby="engineering-experience-title">
   <div class="site-frame">
-    <div class="home-dossier-section-heading"><div><p class="eyebrow">Education</p><h2 id="education-home-title">Education</h2></div><p>My academic path, from Rajshahi to BUET and Alberta.</p></div>
-    <ol class="home-education-list">
-      {% for edu in site.data.profile.education limit: 3 %}<li><article class="home-education-record" data-home-education>
-        {% if edu.logo %}<div class="home-education-record__logo"><img src="{{ edu.logo | relative_url }}" alt="{{ edu.name }} logo" loading="lazy" decoding="async" data-home-image></div>{% endif %}
-        <div><p class="home-education-record__date">{{ edu.date }}{% if edu.status %} · {{ edu.status }}{% endif %}</p><h3>{{ edu.position }}</h3><p class="home-education-record__school">{% if edu.url %}<a href="{{ edu.url }}" target="_blank" rel="noopener noreferrer">{{ edu.name }}</a>{% else %}{{ edu.name }}{% endif %}</p><div class="home-education-record__description">{{ edu.description }}</div></div>
-      </article></li>{% endfor %}
+    <header class="section-trace">
+      <span aria-hidden="true">04</span>
+      <div>
+        <p class="eyebrow">Engineering experience</p>
+        <h2 id="engineering-experience-title">About three years in software engineering</h2>
+        <p>Selected roles show the systems I owned, the changes I made, and the evidence behind them.</p>
+      </div>
+    </header>
+    <ol class="experience-ledger">
+      {% for item in site.data.research.homepage.engineering_experience %}
+      <li>
+        <article class="engineering-outcome-row" data-home-experience>
+          <div class="engineering-outcome-row__heading">
+            <p><time datetime="{{ item.start_date }}">{{ item.start_label }}</time>–<time datetime="{{ item.end_date }}">{{ item.end_label }}</time></p>
+            <h3>{{ item.role }}</h3>
+            <p><a href="{{ item.organization_url }}" target="_blank" rel="noopener noreferrer" aria-label="{{ item.organization }} (opens in a new tab)">{{ item.organization }}</a></p>
+          </div>
+          <p class="engineering-outcome-row__scope">{{ item.scope }}</p>
+          <ul class="engineering-outcome-row__outcomes" aria-label="Selected outcomes">
+            {% for outcome in item.outcomes %}<li>{{ outcome }}</li>{% endfor %}
+          </ul>
+          <p class="engineering-outcome-row__methods"><span>Methods</span> {{ item.methods | join: ' · ' }}</p>
+          <p class="record-links">
+            {% for link in item.links %}<a href="{{ link.url }}" target="_blank" rel="noopener noreferrer" aria-label="{{ link.label }} (opens in a new tab)">{{ link.label }}</a>{% endfor %}
+          </p>
+        </article>
+      </li>
+      {% endfor %}
     </ol>
-    <p class="action-row"><a class="button-link" href="{{ '/education' | relative_url }}">Education details</a></p>
+    <p class="action-row"><a class="button-link" href="{{ '/experience/' | relative_url }}">View complete experience</a><a class="text-link" href="{{ '/projects/' | relative_url }}">Browse engineering projects</a></p>
   </div>
 </section>
 
-<section class="home-dossier home-dossier-engineering" data-home-section="engineering" aria-labelledby="engineering-home-title">
+<section class="home-region home-proof" data-home-section="outputs-proof" aria-labelledby="outputs-proof-title">
   <div class="site-frame">
-    <div class="home-dossier-section-heading"><div><p class="eyebrow">Engineering and open source</p><h2 id="engineering-home-title">Research systems, developer tools, and selected builds</h2></div><p>My current agent tools come first. The rest shows the systems and ML work that led to them.</p></div>
-    <div class="home-engineering-ledger">
-      {% for item in site.data.research.engineering %}<article data-home-engineering>
-        {% if item.image %}<a class="home-engineering-ledger__visual" href="{{ item.url | relative_url }}" data-home-record-visual><img src="{{ item.image | relative_url }}" alt="Architecture preview for {{ item.name }}" loading="lazy" decoding="async" data-home-image></a>{% else %}{% include home-material-thumbnail.html type=item.material_type icon=item.material_icon class="home-engineering-ledger__visual home-material-thumbnail--engineering" %}{% endif %}
-        <div class="home-engineering-ledger__body"><h3><a href="{{ item.url | relative_url }}"{% if item.url contains '://' %} target="_blank" rel="noopener noreferrer"{% endif %}>{{ item.name }}</a></h3><p>{{ item.summary }}</p></div><p class="home-engineering-ledger__meta">{{ item.meta }}</p>
-      </article>{% endfor %}
+    <header class="section-trace">
+      <span aria-hidden="true">05</span>
+      <div>
+        <p class="eyebrow">Publications and open source</p>
+        <h2 id="outputs-proof-title">Outputs with direct evidence</h2>
+        <p>Research status and merged engineering work remain separate so each claim keeps its proper boundary.</p>
+      </div>
+    </header>
+    <div class="proof-ledgers">
+      <section class="proof-ledger proof-ledger--research" aria-labelledby="research-outputs-title">
+        <h3 id="research-outputs-title">Research outputs</h3>
+        <ol>
+          {% for item in site.data.research.homepage.research_outputs %}
+          <li><article class="publication-row" data-home-publication>
+            <p class="publication-row__date"><time datetime="{{ item.date }}">{{ item.date_label }}</time></p>
+            <h4>{{ item.title }}</h4>
+            <p class="publication-row__citation">{{ item.citation }}</p>
+            <p class="publication-row__status">{{ item.status }}</p>
+            <p>{{ item.contribution }}</p>
+            <p class="record-links">{% for link in item.links %}<a href="{{ link.url | relative_url }}"{% if link.url contains '://' %} target="_blank" rel="noopener noreferrer" aria-label="{{ link.label }} (opens in a new tab)"{% endif %}>{{ link.label }}</a>{% endfor %}</p>
+          </article></li>
+          {% endfor %}
+        </ol>
+        <p class="ledger-route"><a href="{{ '/publications/' | relative_url }}">View the publication record</a></p>
+      </section>
+      <section class="proof-ledger proof-ledger--open-source" aria-labelledby="open-source-proof-title">
+        <h3 id="open-source-proof-title">Open-source proof</h3>
+        <ol>
+          {% for item in site.data.research.homepage.open_source %}
+          <li><article class="contribution-row" data-home-contribution>
+            <p class="contribution-row__date"><time datetime="{{ item.date }}">{{ item.date_label }}</time></p>
+            <h4><a href="{{ item.repository_url }}" target="_blank" rel="noopener noreferrer" aria-label="{{ item.repository }} repository (opens in a new tab)">{{ item.repository }}</a></h4>
+            <p>{{ item.contribution }}</p>
+            <p class="contribution-row__status">Merged contribution</p>
+            <p class="record-links"><a href="{{ item.proof_url }}" target="_blank" rel="noopener noreferrer" aria-label="{{ item.proof_label }} (opens in a new tab)">{{ item.proof_label }}</a></p>
+          </article></li>
+          {% endfor %}
+        </ol>
+        <p class="ledger-route"><a href="{{ '/contributions/' | relative_url }}">Review curated contribution evidence</a></p>
+      </section>
     </div>
-    <p class="action-row"><a class="button-link" href="{{ '/projects' | relative_url }}">All projects</a><a class="text-link" href="{{ '/contributions' | relative_url }}">Contribution evidence</a></p>
   </div>
 </section>
 
-<section class="home-dossier home-dossier-recognition" data-home-section="recognition" aria-labelledby="recognition-home-title">
+<section class="home-region home-trajectory" data-home-section="recent-trajectory" aria-labelledby="recent-trajectory-title">
   <div class="site-frame">
-    <div class="home-dossier-section-heading"><div><p class="eyebrow">Recognition</p><h2 id="recognition-home-title">Awards and milestones</h2></div><p>A few awards and competition results.</p></div>
-    <div class="home-recognition-grid">{% for item in site.data.research.recognition %}<article data-home-recognition><p class="home-recognition-grid__date">{{ item.date }}</p><h3>{% if item.url %}<a href="{{ item.url }}"{% if item.url contains '://' %} target="_blank" rel="noopener noreferrer"{% endif %}>{{ item.title }}</a>{% else %}{{ item.title }}{% endif %}</h3><p>{{ item.summary }}</p></article>{% endfor %}</div>
-    <p class="action-row"><a class="button-link" href="{{ '/achievements' | relative_url }}">All achievements</a></p>
+    <header class="section-trace">
+      <span aria-hidden="true">06</span>
+      <div>
+        <p class="eyebrow">News and education</p>
+        <h2 id="recent-trajectory-title">Recent trajectory</h2>
+        <p>Three dated milestones connect current research work to the next academic step.</p>
+      </div>
+    </header>
+    <ol class="timeline-list home-trajectory__list">
+      {% for item in site.data.research.homepage.milestones %}
+      <li><article class="timeline-row" data-home-milestone>
+        <time datetime="{{ item.date }}">{{ item.date_label }}</time>
+        <div>
+          <h3>{% if item.url contains '://' %}<a href="{{ item.url }}" target="_blank" rel="noopener noreferrer" aria-label="{{ item.title }} (opens in a new tab)">{{ item.title }}</a>{% else %}<a href="{{ item.url | relative_url }}">{{ item.title }}</a>{% endif %}</h3>
+          <p>{{ item.summary }}</p>
+        </div>
+      </article></li>
+      {% endfor %}
+    </ol>
+    <p class="action-row"><a class="button-link" href="{{ '/news/' | relative_url }}">View all news</a><a class="text-link" href="{{ '/education/' | relative_url }}">Review education</a></p>
   </div>
 </section>
 
-<section class="home-dossier home-dossier-milestones" data-home-section="milestones" aria-labelledby="milestones-home-title">
-  <div class="site-frame">
-    <div class="home-dossier-section-heading"><div><p class="eyebrow">Recent milestones</p><h2 id="milestones-home-title">What changed recently</h2></div><p>Recent changes to my research and academic plans.</p></div>
-    <ol class="home-milestone-list">{% for item in site.data.research.milestones %}<li><article data-home-milestone><time datetime="{{ item.date }}">{{ item.date | date: '%B %Y' }}</time><div><h3>{% if item.url %}<a href="{{ item.url | relative_url }}"{% if item.url contains '://' %} target="_blank" rel="noopener noreferrer"{% endif %}>{{ item.title }}</a>{% else %}{{ item.title }}{% endif %}</h3><p>{{ item.summary }}</p></div></article></li>{% endfor %}</ol>
-    <p class="action-row"><a class="button-link" href="{{ '/news' | relative_url }}">All news</a></p>
+<section class="home-region home-contact" data-home-section="contact" aria-labelledby="contact-home-title">
+  <div class="site-frame home-contact__grid">
+    <header class="section-trace">
+      <span aria-hidden="true">07</span>
+      <div><p class="eyebrow">Collaboration</p><h2 id="contact-home-title">Discuss reliable agent systems</h2></div>
+    </header>
+    <div>
+      <p>{{ site.data.research.contact.copy }}</p>
+      <nav class="action-row" aria-label="Contact and profiles">
+        <a class="button-link" href="mailto:{{ site.data.profile.email }}">Email Tanzim</a>
+        <a class="text-link" href="https://github.com/{{ site.data.profile.github }}" target="_blank" rel="noopener noreferrer" aria-label="GitHub profile (opens in a new tab)">GitHub</a>
+        <a class="text-link" href="https://scholar.google.com/citations?user={{ site.data.profile.gscholar }}" target="_blank" rel="noopener noreferrer" aria-label="Google Scholar profile (opens in a new tab)">Scholar</a>
+        <a class="text-link" href="https://www.linkedin.com/in/{{ site.data.profile.linkedin }}" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile (opens in a new tab)">LinkedIn</a>
+        <a class="text-link" href="https://orcid.org/{{ site.data.profile.orcid }}" target="_blank" rel="noopener noreferrer" aria-label="ORCID profile (opens in a new tab)">ORCID</a>
+        <a class="text-link" href="{{ '/cv/' | relative_url }}">CV</a>
+      </nav>
+    </div>
   </div>
-</section>
-
-<section class="home-dossier home-dossier-contact" data-home-section="contact" aria-labelledby="contact-home-title">
-  <div class="site-frame home-dossier-contact__grid"><div><p class="eyebrow">Collaboration</p><h2 id="contact-home-title">Collaborate on reliable agent systems</h2><p>{{ site.data.research.contact.copy }}</p></div><p class="action-row"><a class="button-link" href="mailto:{{ site.data.profile.email }}">Email Tanzim</a><a class="text-link" href="https://github.com/{{ site.data.profile.github }}" target="_blank" rel="noopener noreferrer">GitHub</a><a class="text-link" href="https://scholar.google.com/citations?user={{ site.data.profile.gscholar }}" target="_blank" rel="noopener noreferrer">Scholar</a><a class="text-link" href="https://www.linkedin.com/in/{{ site.data.profile.linkedin }}" target="_blank" rel="noopener noreferrer">LinkedIn</a><a class="text-link" href="https://orcid.org/{{ site.data.profile.orcid }}" target="_blank" rel="noopener noreferrer">ORCID</a><a class="text-link" href="{{ '/assets/pdf/cv.pdf' | relative_url }}" target="_blank" rel="noopener noreferrer">CV</a></p></div>
 </section>

@@ -1,14 +1,19 @@
 ---
 layout: default
 title: Multi-Agent DB Schema Research
+navbar_title: Research
+description: Research summary for VeriSchema, a verified multi-agent pipeline for relational schema and ERD generation.
 ---
 
-<script>
-  window.location.href = "{{ site.baseurl }}/research#multi-agent-db-schema";
-</script>
-
-<div class="section">
-  <h1>VeriSchema: Multi-Agent Framework for Generating Relational DB Schema & ERD from Requirements</h1>
-  <p>Redirecting to research page...</p>
-  <p>If you are not redirected automatically, <a href="{{ site.baseurl }}/research#multi-agent-db-schema">click here</a>.</p>
-</div>
+<section class="academic-section research-detail" aria-labelledby="verischema-title">
+  <p class="eyebrow">Multi-agent verification · active research</p>
+  <h1 id="verischema-title">VeriSchema: verified database-schema generation</h1>
+  <p class="research-detail__intro">How can specialized agents generate relational schemas from natural-language requirements while formal checks and targeted repair keep the result consistent?</p>
+  <dl class="research-detail__meta">
+    <div><dt>Status</dt><dd>Active research · targeting PVLDB</dd></div>
+    <div><dt>Collaborator</dt><dd>Dr. Sukarna Barua · BUET</dd></div>
+    <div><dt>Last verified</dt><dd><time datetime="2026-07-10">July 10, 2026</time></dd></div>
+  </dl>
+  <p>VeriSchema assigns entity extraction, relationship mining, normalization, and repair to specialized agents. Z3 consistency checks and component-level retries provide an explicit verification boundary instead of rerunning the complete pipeline after every failure.</p>
+  <p class="action-row"><a class="button-link" href="{{ '/research/#verified-schema-generation' | relative_url }}">View the evidence record</a><a class="text-link" href="{{ '/research/' | relative_url }}">Research dossier</a></p>
+</section>

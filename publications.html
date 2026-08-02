@@ -6,29 +6,23 @@ description: Citation-first record of publications and research artifacts across
 ---
 
 {% assign ordered_publications = site.publications | sort: 'date' | reverse %}
+{% assign review_publications = ordered_publications | where: 'status_family', 'review' %}
+{% assign other_publications = ordered_publications | where: 'status_family', 'other' %}
 
-<section class="academic-section publication-archive" data-publication-archive aria-labelledby="publications-title">
+<section class="academic-section page-hero publication-archive" data-publication-archive aria-labelledby="publications-title">
   <p class="eyebrow">Research record</p>
   <h1 id="publications-title">Publications and research artifacts</h1>
-  <p class="publication-archive__intro">Papers, thesis work, and public artifacts. I keep submission and review status explicit.</p>
-  <ol class="publication-list">
-    {% for item in ordered_publications %}
-    <li>
-      <article class="publication-record" data-publication-record data-publication-title="{{ item.title }}">
-        <p class="publication-record__year">{{ item.pub_date }}</p>
-        {% if item.cover %}
-        <figure class="publication-record__cover">
-          <img src="{{ item.cover | relative_url }}" alt="Cover image for {{ item.title | escape }}" loading="lazy" decoding="async" data-publication-cover>
-        </figure>
-        {% endif %}
-        <div class="publication-record__body{% unless item.cover %} publication-record__body--wide{% endunless %}">
-          <h2>{{ item.title }}</h2>
-          <p class="publication-record__citation" data-publication-citation><cite>{% if item.authors %}{{ item.authors | join: ', ' }}. {% endif %}<span class="publication-record__title">{{ item.title }}.</span> {% if item.pub_pre %}{{ item.pub_pre }}{% endif %}{{ item.pub }}{% if item.pub_date %}, {{ item.pub_date }}{% endif %}.</cite></p>
-          <p>{{ item.abstract }}</p>
-          <p class="record-links">{% if item.primary_link %}<a href="{{ item.primary_link | relative_url }}"{% if item.primary_external %} target="_blank" rel="noopener noreferrer"{% endif %}>{{ item.primary_label | default: 'Primary artifact' }}</a>{% endif %}{% for link in item.links %}<a href="{{ link[1] | relative_url }}"{% if link[1] contains '://' %} target="_blank" rel="noopener noreferrer"{% endif %}>{{ link[0] }}</a>{% endfor %}</p>
-        </div>
-      </article>
-    </li>
-    {% endfor %}
-  </ol>
+  <p class="page-hero__intro">Papers, thesis work, and public artifacts. Submission, review, and publication status remain explicit.</p>
+  {% if review_publications.size > 0 %}
+  <section class="publication-group" data-publication-group="review" aria-labelledby="review-publications-title">
+    <div class="section-trace"><span aria-hidden="true">01</span><div><p class="eyebrow">Active review record</p><h2 id="review-publications-title">Submitted and under review</h2></div></div>
+    <ol class="publication-list">{% for item in review_publications %}<li>{% include publication-record.html item=item %}</li>{% endfor %}</ol>
+  </section>
+  {% endif %}
+  {% if other_publications.size > 0 %}
+  <section class="publication-group" data-publication-group="other" aria-labelledby="other-publications-title">
+    <div class="section-trace"><span aria-hidden="true">02</span><div><p class="eyebrow">Other research artifacts</p><h2 id="other-publications-title">Theses and public manuscripts</h2></div></div>
+    <ol class="publication-list">{% for item in other_publications %}<li>{% include publication-record.html item=item %}</li>{% endfor %}</ol>
+  </section>
+  {% endif %}
 </section>

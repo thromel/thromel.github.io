@@ -2,10 +2,16 @@
 layout: showcase
 show: true
 width: 8
-date: 2022-07-01 00:00:00 +0800
+date: 2022-07-01 00:00:00 +0600
 group: Projects
 title: EventFly – Distributed Microservices Event Platform
-excerpt: A comprehensive microservices-based event management platform engineered for scalability, resilience, and rapid feature delivery, supporting end-to-end workflows for event creation, promotion, participant engagement, and monetization.
+excerpt: A six-person BUET course project for event creation, ticketing, announcements, participant engagement, analytics, and payments, implemented with Node.js, React, NATS, Kubernetes, MongoDB, Redis, and Stripe.
+problem: "Coordinate event creation, participation, payments, announcements, and analytics across independently deployable services."
+role: Lead architect; backend and DevOps contributor
+outcome: "Built a working event-management course project with a six-person team during a two-month BUET software-development lab."
+status: Completed BUET course project
+repository: https://github.com/eventfly/Microservices
+repository_status: Public team repository
 technologies:
   - TypeScript
   - Node.js
@@ -23,22 +29,23 @@ technologies:
   - Docker
   - GitHub Actions
 thumbnail: /assets/images/eventfly.png
+visual_width: 2375
+visual_height: 1580
 ---
 
 ## Lead Architect & Developer | May 2022 - July 2022
 
 <div class="text-end mb-3">
-    <a href="https://github.com/eventfly/Microservices" target="_blank" class="btn btn-sm btn-outline-dark">
+    <a href="https://github.com/eventfly/Microservices" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline-dark" aria-label="View the EventFly repository on GitHub (opens in a new tab)">
         <i class="fab fa-github"></i> View on GitHub
     </a>
-    <a href="https://docs.google.com/presentation/d/16TGaHVFcs2hX8-8C9ajktorYIgw4xa6C/edit?usp=sharing&ouid=105896456680904202887&rtpof=true&sd=true" target="_blank" class="btn btn-sm btn-outline-primary ml-2">
+    <a href="https://docs.google.com/presentation/d/16TGaHVFcs2hX8-8C9ajktorYIgw4xa6C/edit?usp=sharing&ouid=105896456680904202887&rtpof=true&sd=true" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline-primary ml-2" aria-label="View the EventFly presentation (opens in a new tab)">
         <i class="fas fa-presentation"></i> Project Demonstration
     </a>
 </div>
 
-<img src="{{ '/assets/images/eventfly.png' | relative_url }}" class="img-fluid mb-4" alt="EventFly Platform">
+<img src="{{ '/assets/images/eventfly.png' | relative_url }}" class="img-fluid mb-4" alt="EventFly Platform" width="2375" height="1580" decoding="async">
 
-# Building EventFly: Our Journey to Creating an Event Management Platform with Microservices
 
 ## Introduction
 
@@ -138,7 +145,7 @@ For more on Domain-Driven Design, I recommend the article ["Domain-Driven Design
 
 Based on our DDD analysis, we divided EventFly into seven core services:
 
-<img src="{{ '/assets/images/eventfly-architecture.png' | relative_url }}" class="img-fluid mb-4" alt="EventFly System Architecture">
+<img src="{{ '/assets/images/eventfly-architecture.png' | relative_url }}" class="img-fluid mb-4" alt="EventFly System Architecture" width="2375" height="1580" loading="lazy" decoding="async">
 
 1. **Auth Service**: Handles user authentication, authorization, and profile management
 2. **Organization Service**: Manages organization profiles, staff, and subscription packages
@@ -162,7 +169,7 @@ Let me share some of the more interesting technical aspects of our implementatio
 
 Our deployment architecture was designed for scalability and resilience, utilizing Kubernetes for orchestration:
 
-<img src="{{ '/assets/images/eventfly-deployment-architecture.png' | relative_url }}" class="img-fluid mb-4" alt="EventFly Deployment Architecture">
+<img src="{{ '/assets/images/eventfly-deployment-architecture.png' | relative_url }}" class="img-fluid mb-4" alt="EventFly Deployment Architecture" width="3315" height="1907" loading="lazy" decoding="async">
 
 ### Service Independence with Docker
 
@@ -197,7 +204,7 @@ services:
   # Other services followed the same pattern
 ```
 
-For a deeper understanding of containerization in microservices, the article ["Production-Ready Docker Packaging"](https://www.docker.com/blog/production-ready-docker-packaging/) was very helpful to us.
+For additional container-packaging guidance, we consulted [Docker's packaging article](https://www.docker.com/blog/production-ready-docker-packaging/).
 
 ### Event-Driven Communication
 
@@ -441,7 +448,7 @@ Completing EventFly as part of our Software Development Lab at BUET provided bot
 
 **Advantages:**
 - Access to professors with expertise in distributed systems
-- Freedom to experiment with cutting-edge architecture
+- Freedom to compare different architectural approaches
 - Opportunity to apply theoretical concepts in a practical project
 
 **Constraints:**

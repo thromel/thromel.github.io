@@ -1,18 +1,29 @@
 <footer class="site-footer">
   <div class="site-frame site-footer__frame">
-    <div>
-      <p class="site-footer__eyebrow">Research-first portfolio</p>
-      <p class="site-footer__statement">Inspectable agent behavior, credible artifacts, and software systems that can be evaluated.</p>
-      {% include current-status.html label="Current trajectory" %}
-    </div>
-    <div class="site-footer__links">
-      <nav aria-label="Secondary navigation">
-        {% for item in site.data.navigation.secondary_pages %}
-        <a href="{{ item.url | relative_url }}">{{ item.name }}</a>
-        {% endfor %}
+    {% for group in site.data.navigation.footer_groups %}
+      <nav class="site-footer__group" aria-labelledby="footer-{{ group.label | slugify }}">
+        <h2 id="footer-{{ group.label | slugify }}" class="site-footer__heading">{{ group.label }}</h2>
+        <ul class="site-footer__list">
+          {% for item in group.items %}
+          <li><a href="{{ item.url | relative_url }}">{{ item.name }}</a></li>
+          {% endfor %}
+        </ul>
       </nav>
-      <p><a href="mailto:{{ site.data.profile.email }}">Email</a><a href="https://github.com/{{ site.data.profile.github }}" target="_blank" rel="noopener noreferrer">GitHub</a><a href="https://scholar.google.com/citations?user={{ site.data.profile.gscholar }}" target="_blank" rel="noopener noreferrer">Scholar</a></p>
-      <p class="site-footer__legal">© {{ 'now' | date: '%Y' }} {{ site.data.profile.primary_name }} · <a href="https://github.com/{{ site.data.profile.github }}/thromel.github.io" target="_blank" rel="noopener noreferrer">Source</a></p>
-    </div>
+    {% endfor %}
+
+    <nav class="site-footer__group" aria-labelledby="footer-profiles">
+      <h2 id="footer-profiles" class="site-footer__heading">Profiles</h2>
+      <ul class="site-footer__list">
+        <li><a href="mailto:{{ site.data.profile.email }}">Email</a></li>
+        <li><a href="https://github.com/{{ site.data.profile.github }}" target="_blank" rel="noopener noreferrer" aria-label="GitHub (opens in a new tab)">GitHub</a></li>
+        <li><a href="https://scholar.google.com/citations?user={{ site.data.profile.gscholar }}" target="_blank" rel="noopener noreferrer" aria-label="Google Scholar (opens in a new tab)">Scholar</a></li>
+        <li><a href="https://www.linkedin.com/in/{{ site.data.profile.linkedin }}" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn (opens in a new tab)">LinkedIn</a></li>
+        <li><a href="https://orcid.org/{{ site.data.profile.orcid }}" target="_blank" rel="noopener noreferrer" aria-label="ORCID (opens in a new tab)">ORCID</a></li>
+        <li><a href="https://github.com/{{ site.data.profile.github }}/thromel.github.io" target="_blank" rel="noopener noreferrer" aria-label="Website source (opens in a new tab)">Source</a></li>
+      </ul>
+    </nav>
+  </div>
+  <div class="site-frame site-footer__legal">
+    <p>© {{ 'now' | date: '%Y' }} {{ site.data.profile.primary_name }}</p>
   </div>
 </footer>

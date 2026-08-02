@@ -1,27 +1,29 @@
 <header class="site-header">
   <div class="site-frame site-header__frame">
-    <a class="site-brand" href="{{ '/' | relative_url }}" aria-label="{{ site.data.profile.primary_name }} homepage">
-      <span class="site-brand__initials" aria-hidden="true">TR</span>
-      <span>{{ site.data.profile.primary_name }}</span>
+    <a class="site-brand" href="{{ '/' | relative_url }}" aria-label="{{ site.data.profile.primary_name }} home"{% if page.url == '/' %} aria-current="page"{% endif %}>
+      <span class="site-brand__name">Tanzim Romel</span>
     </a>
 
-    <div class="site-header__controls">
-      <button id="site-menu-toggle" class="site-menu-toggle" type="button" aria-controls="site-navigation" aria-expanded="false" aria-label="Open navigation menu">Menu</button>
-      <button id="theme-toggle" class="theme-toggle" type="button" aria-pressed="false" aria-label="Switch to dark mode">Theme</button>
-    </div>
-
-    <nav id="site-navigation" class="site-navigation" aria-label="Primary navigation" data-menu-open="false">
+    <nav id="site-navigation" class="site-navigation" aria-label="Primary" data-menu-open="false">
       {% for item in site.data.navigation.primary_pages %}
-        <a href="{{ item.url | relative_url }}"{% if item.name == page.navbar_title %} aria-current="page"{% endif %}>{{ item.name }}</a>
+        {% assign item_is_current = false %}
+        {% if item.name == page.navbar_title or item.url == page.url %}
+          {% assign item_is_current = true %}
+        {% elsif item.active_prefix and page.url contains item.active_prefix %}
+          {% assign item_is_current = true %}
+        {% endif %}
+        <a href="{{ item.url | relative_url }}"{% if item_is_current %} aria-current="page"{% endif %}>{{ item.name }}</a>
       {% endfor %}
-      <details class="site-more-navigation" data-more-navigation>
-        <summary>More</summary>
-        <div class="site-more-navigation__menu">
-          {% for item in site.data.navigation.secondary_pages %}
-          <a href="{{ item.url | relative_url }}"{% if item.name == page.navbar_title %} aria-current="page"{% endif %}>{{ item.name }}</a>
-          {% endfor %}
-        </div>
-      </details>
+      {% assign cv_is_current = false %}
+      {% if site.data.navigation.header_action.name == page.navbar_title or site.data.navigation.header_action.url == page.url %}
+        {% assign cv_is_current = true %}
+      {% endif %}
+      <a class="site-navigation__action" href="{{ site.data.navigation.header_action.url | relative_url }}"{% if cv_is_current %} aria-current="page"{% endif %}>{{ site.data.navigation.header_action.name }}</a>
     </nav>
+
+    <div class="site-header__controls">
+      <button id="site-menu-toggle" class="site-menu-toggle" type="button" aria-controls="site-navigation" aria-expanded="false" aria-label="Open navigation menu" aria-disabled="true" disabled>Menu</button>
+      <button id="theme-toggle" class="theme-toggle" type="button" aria-pressed="false" aria-label="Use dark theme" aria-disabled="true" disabled><span class="theme-toggle__action theme-toggle__action--dark" aria-hidden="true">Dark</span><span class="theme-toggle__action theme-toggle__action--light" aria-hidden="true">Light</span><span class="theme-toggle__suffix" aria-hidden="true">&nbsp;theme</span></button>
+    </div>
   </div>
 </header>

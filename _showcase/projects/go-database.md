@@ -1,15 +1,19 @@
 ---
 layout: showcase
 title: "Building a Go Database Engine from Scratch"
-subtitle: "A Production-Ready ACID-Compliant Database with Advanced Features"
+subtitle: "An educational ACID-oriented database engine with advanced features"
 category: projects
 group: Systems Programming
 show: true
 width: 12
-date: 2024-12-25 00:00:00 +0800
-excerpt: A comprehensive implementation of a custom database engine in Go featuring ACID compliance, B+ tree storage, MVCC concurrency control, adaptive indexing, and ML-enhanced query optimization - built entirely from scratch without external database libraries.
-thumbnail: /assets/images/go-database-engine.png
-card_image: /assets/images/cards/go-database-card.svg
+date: 2024-12-25 00:00:00 +0600
+excerpt: A staged educational Go database-engine implementation covering B+ tree storage, write-ahead logging, transaction and concurrency primitives, query execution, and later adaptive-indexing experiments.
+problem: "Learn how storage, recovery, transactions, query execution, and indexing fit together by implementing a small database engine in Go."
+role: Independent implementer and technical author
+outcome: "Built and documented staged B+ tree, write-ahead log, transaction, concurrency, query, and indexing components as an educational prototype."
+status: Educational prototype; not a production database
+repository: https://github.com/romel/go-database
+repository_status: Public source repository
 featured: true
 technologies:
   - Go
@@ -21,39 +25,36 @@ technologies:
   - Performance Optimization
 ---
 
-## 15-Sprint Project | Production-Ready Database Engine | Advanced Systems Programming
+## 15-sprint implementation plan | Educational database engine | Systems programming
 
 <div class="text-end mb-3">
-    <a href="https://github.com/romel/go-database" target="_blank" class="btn btn-sm btn-outline-dark">
+    <a href="https://github.com/romel/go-database" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline-dark" aria-label="View the Go database project on GitHub (opens in a new tab)">
         <i class="fab fa-github"></i> View on GitHub
     </a>
 </div>
 
-# Building a Go Database Engine from Scratch: A Deep Dive into Database Internals
-
-<img src="{{ '/assets/images/go-database-architecture.png' | relative_url }}" class="img-fluid mb-4" alt="Go Database Engine Architecture">
 
 ## Introduction
 
 Database engines are among the most complex and critical pieces of software infrastructure, powering everything from simple applications to massive distributed systems. While there are many excellent database solutions available, building one from scratch provides unparalleled insight into the fundamental concepts that drive modern data systems.
 
-In this comprehensive project, I'm implementing a full-featured database engine in Go that combines educational depth with production readiness. The goal is to create a SQLite-like embedded database that leverages Go's strengths in concurrent programming while incorporating cutting-edge features like adaptive indexing and machine learning-enhanced query optimization.
+This project is a staged implementation of an embedded database engine in Go. The plan uses database internals as the learning objective: page storage, indexing, transactions, recovery, query execution, and experiments with adaptive indexing and learned query-cost estimates.
 
 ## Project Vision and Goals
 
 ### Educational Excellence
 This project is a comprehensive learning platform for understanding database internals. Rather than simply using existing database libraries, every component - from page management to query optimization - is implemented from scratch, providing deep insights into how databases actually work.
 
-### Production Readiness
-While educational in nature, this database engine is designed to be production-ready, featuring:
-- **Full ACID compliance** with configurable isolation levels
-- **Crash recovery** with write-ahead logging
-- **High performance** optimized for modern hardware
-- **Concurrent access** supporting thousands of simultaneous transactions
-- **Comprehensive monitoring** and observability
+### Production-oriented design goals
+This is an educational system, not a deployment-ready database. Its implementation plan includes:
+- **ACID semantics** evaluated with focused transaction tests
+- **Crash recovery** experiments using write-ahead logging
+- **Performance measurement** against declared local workloads
+- **Concurrent access** with explicit correctness and contention tests
+- **Monitoring hooks** for inspecting storage and transaction behavior
 
-### Innovation Focus
-The project incorporates several cutting-edge database research areas:
+### Research extensions
+The project explores several research-informed database ideas:
 - **Adaptive indexing** that automatically optimizes based on query patterns
 - **Time-travel queries** enabling historical data access
 - **ML-enhanced optimization** using machine learning for query planning
@@ -61,7 +62,6 @@ The project incorporates several cutting-edge database research areas:
 
 ## Technical Architecture
 
-<img src="{{ '/assets/images/database-layers.png' | relative_url }}" class="img-fluid mb-4 rounded shadow-sm" alt="Database Engine Layers">
 
 The database engine follows a strict layered architecture, ensuring clean separation of concerns and modularity:
 
@@ -144,7 +144,7 @@ Implementing a complete SQL engine with optimization:
 - Parallel query execution using Go goroutines
 
 ### Phase 4: Advanced Features (Sprints 10-12)
-Incorporating cutting-edge database research:
+Exploring research-informed database techniques:
 
 **Sprint 10: MVCC & Time-Travel**
 - Multi-Version Concurrency Control for enhanced read performance
@@ -161,8 +161,8 @@ Incorporating cutting-edge database research:
 - Learned cost models improving query optimization
 - Automated database tuning based on workload patterns
 
-### Phase 5: Production Ready (Sprints 13-15)
-Finalizing the system for production deployment:
+### Phase 5: Hardening and evaluation (Sprints 13-15)
+Adding security, measurement, and operational documentation:
 
 **Sprint 13: Performance Optimization**
 - Critical path optimization and SIMD utilization
@@ -499,7 +499,7 @@ The project provides a foundation for exploring advanced database research:
 
 ## Conclusion
 
-Building a database engine from scratch is one of the most challenging and rewarding projects in systems programming. This implementation demonstrates that with careful design, systematic development, and attention to detail, it's possible to create a production-quality database that incorporates both time-tested algorithms and cutting-edge research.
+Building a database engine from scratch exposes the interaction between storage, transactions, recovery, and query execution. This staged implementation is an educational record of those tradeoffs, including where research-oriented ideas require additional evidence before they can be treated as reliable features.
 
 The project shows expertise in:
 - **Low-level systems programming** with Go

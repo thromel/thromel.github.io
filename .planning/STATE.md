@@ -1,16 +1,16 @@
 ---
 gsd_state_version: 1.0
-milestone: v1.1
-milestone_name: Portfolio UX Polish
+milestone: v2
+milestone_name: Dual-Audience Portfolio Overhaul
 status: ready_to_complete
-stopped_at: Phase 11 complete
-last_updated: "2026-07-10T00:00:00+0600"
-last_activity: 2026-07-10 -- Research-first scholarly-instrument redesign and release-quality verification
+stopped_at: Phase 12 accepted
+last_updated: "2026-08-02T07:30:18Z"
+last_activity: 2026-08-02 -- Final 64-check verification and second independent UI audit accepted the overhaul at 24/24 with no findings
 progress:
-  total_phases: 5
-  completed_phases: 5
-  total_plans: 15
-  completed_plans: 15
+  total_phases: 13
+  completed_phases: 13
+  total_plans: 19
+  completed_plans: 19
   percent: 100
 ---
 
@@ -21,16 +21,16 @@ progress:
 See: .planning/PROJECT.md (updated 2026-05-17)
 
 **Core value:** Visitors can quickly understand Romel's work through a credible, readable, and consistent portfolio experience.
-**Current focus:** Research-first scholarly-instrument redesign
+**Current focus:** Phase 12 is accepted; the isolated overhaul branch is ready for user review and a later commit/push decision
 
 > Historical-state notice: the Phase 7–11 material below records the completed v1.1 milestone. The 2026-07-10 research-first redesign supersedes its visual, navigation, proof-surface, and test contracts. Treat the current source, [`docs/ui-maintenance.md`](../docs/ui-maintenance.md), `package.json`, and the GitHub Actions workflows as the active maintenance record.
 
 ## Current Position
 
-Phase: 11 (dark-mode-and-verification-hardening) - COMPLETE
-Plan: 3 of 3 complete
-Status: Milestone ready to complete
-Last activity: 2026-05-30 -- Evidence-first academic UI/UX overhaul completed with target-audience audit, screenshots, and Playwright coverage
+Phase: 12 (dual-audience-overhaul) - COMPLETE
+Plan: 1 of 1 complete
+Status: Accepted by final verification and second independent UI audit
+Last activity: 2026-08-02 -- 64/64 checks and 24/24 UI review passed with zero blockers or warnings
 
 Progress: [██████████] 100%
 
@@ -88,6 +88,7 @@ Progress: [██████████] 100%
 
 - Phase 05.1 inserted after Phase 05: Publications convergence and final UI polish (URGENT)
 - v1.1 starts at Phase 7 and keeps the current academic UI direction while polishing navigation, projects, contributions, SEO/social previews, and dark mode.
+- v2 closes with Phase 12, replacing the long dossier homepage and parallel legacy styling with one selective evidence-ledger system for faculty and recruiter review.
 
 ### Decisions
 
@@ -130,6 +131,10 @@ Recent decisions affecting current work:
 - [Phase 11]: `tests/v11-overhaul.spec.js` and `scripts/verify-ui.sh full` cover project hierarchy, contributions fallback behavior, social metadata, and dark-mode readability.
 - [2026-07-10]: The research-first redesign replaces the v1.1 visual contract with a four-block research homepage, a five-route scholarly shell, static evidence records, a compact live GitHub count, and a currentness model based on ISO date ranges. — The active browser suite intentionally replaces retired v1.1 layout/proof tests rather than silently excluding them.
 - [2026-07-10]: A daily Pages rebuild keeps build-time current-role rendering fresh, while CI verifies the Jekyll build, browser behavior, accessibility, budgets, and mobile Lighthouse metrics. — This preserves static-site simplicity without presenting stale currentness as live data.
+- [Phase 12]: Research and Engineering are permanent paths through one site; the homepage stays selective while research, project, publication, experience, and contribution routes retain deeper evidence.
+- [Phase 12]: The light palette uses warm paper, mineral ink, spruce links, and restrained copper signals; dark mode is independently tuned rather than inverted.
+- [Phase 12]: The mobile shell starts closed only when JavaScript is available and remains open without JavaScript, eliminating the first-paint layout shift while preserving progressive enhancement.
+- [Phase 12]: Dead parallel stylesheets, widget includes, display data, and an unlinked manifest were removed after reference and build checks.
 
 ### Pending Todos
 
@@ -143,6 +148,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-04-12T01:04:28+0600
-Stopped at: Phase 05.1 complete
+Last session: 2026-08-02T07:30:18Z
+Stopped at: Phase 12 accepted
 Resume file: None

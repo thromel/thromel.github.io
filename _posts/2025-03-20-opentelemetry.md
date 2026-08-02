@@ -6,7 +6,6 @@ categories: [observability, microservices, devops]
 tags: [opentelemetry, distributed-tracing, monitoring, observability, microservices]
 ---
 
-# OpenTelemetry in Microservices: How We Transformed Our Observability Strategy
 
 ## Introduction: The Observability Challenge We Faced
 
@@ -28,7 +27,7 @@ The framework emerged from the merger of two earlier projects: OpenTracing and O
 
 **3. Logs** capture the detailed narrative, the "what happened and when" that helps you understand system behavior.
 
-![OpenTelemetry Pipeline Architecture](/assets/images/opentelemetry/diagram1_otel_pipeline.png)
+<img src="/assets/images/opentelemetry/diagram1_otel_pipeline.png" alt="OpenTelemetry pipeline architecture" width="1356" height="203" decoding="async">
 *OpenTelemetry Pipeline: How traces, metrics, and logs flow from application code through the SDK to observability backends*
 
 ## Our Architecture: Before the Transformation
@@ -46,7 +45,7 @@ To understand why OpenTelemetry was an important shift for us, you need to see w
 
 Each service had evolved independently, resulting in a Tower of Babel situation for observability:
 
-![Before OpenTelemetry Architecture](/assets/images/opentelemetry/diagram2_before_otel.png)
+<img src="/assets/images/opentelemetry/diagram2_before_otel.png" alt="Microservice architecture before OpenTelemetry" width="719" height="665" loading="lazy" decoding="async">
 *Our heterogeneous observability landscape before OpenTelemetry: Each service used different logging, metrics, and tracing approaches*
 
 This heterogeneous landscape created several pain points:
@@ -451,7 +450,7 @@ The Go implementation highlighted OpenTelemetry's consistency across languages â
 
 As we instrumented more services, we evolved our observability infrastructure to handle the increased telemetry volume:
 
-![Infrastructure Evolution](/assets/images/opentelemetry/diagram3_infra_evolution.png)
+<img src="/assets/images/opentelemetry/diagram3_infra_evolution.png" alt="Observability infrastructure evolution" width="1551" height="636" loading="lazy" decoding="async">
 *Our evolved observability infrastructure: Microservices send telemetry through load-balanced OpenTelemetry Collector pools to centralized storage and visualization*
 
 Key infrastructure decisions included:
@@ -602,7 +601,7 @@ After six months of implementation, the results spoke for themselves:
 
 Here's a before-and-after view of investigating a typical production issue:
 
-![Incident Response Flow](/assets/images/opentelemetry/diagram4_incident_flow.png)
+<img src="/assets/images/opentelemetry/diagram4_incident_flow.png" alt="Incident response flow with trace context" width="1940" height="291" loading="lazy" decoding="async">
 *Incident response transformation: From manual correlation across multiple systems to unified observability with distributed tracing*
 
 ## Best Practices and Lessons Learned

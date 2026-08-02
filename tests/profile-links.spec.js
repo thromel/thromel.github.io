@@ -18,29 +18,28 @@ test('homepage links the institutions, employers, programs, and products named i
   await page.goto(BASE_URL, { waitUntil: 'domcontentloaded' });
 
   const identity = page.locator('[data-home-section="identity"]');
-  await expect(identity.locator(`a[href="${URLS.ualberta}"]`).first()).toHaveText('University of Alberta');
+  await expect(identity.locator(`a[href="${URLS.ualberta}"]`)).toContainText('University of Alberta');
   await expect(identity.locator(`a[href="${URLS.iqvia}"]`)).toHaveText('IQVIA');
-  await expect(identity.locator(`a[href="${URLS.orchestratedAnalytics}"]`)).toHaveText('Orchestrated Analytics');
-  await expect(identity.locator(`a[href="${URLS.buetCse}"]`).first()).toHaveText('BUET CSE');
-  await expect(identity.locator(`[aria-label="Current profile markers"] a[href="${URLS.srse}"]`)).toHaveCount(1);
 
-  const iqviaEntry = page.locator('[data-home-experience]').filter({ hasText: 'Software Development Engineer 1, IQVIA' });
-  await expect(iqviaEntry.locator(`h3 a[href="${URLS.iqvia}"]`)).toHaveCount(1);
+  const iqviaEntry = page.locator('[data-home-experience]').filter({ hasText: 'Software Development Engineer 1' });
+  await expect(iqviaEntry.locator(`a[href="${URLS.iqvia}"]`)).toHaveCount(1);
   await expect(iqviaEntry.locator(`a[href="${URLS.orchestratedAnalytics}"]`)).toHaveCount(1);
   await expect(iqviaEntry.locator(`a[href="${URLS.kpiLibrary}"]`)).toHaveCount(1);
-  await expect(page.locator(`[data-home-experience] h3 a[href="${URLS.mindshare}"]`)).toContainText('Mindshare Bangladesh');
+  const mindshareEntry = page.locator('[data-home-experience]').filter({ hasText: 'Full Stack Engineer' });
+  await expect(mindshareEntry.locator(`a[href="${URLS.mindshare}"]`, { hasText: 'Mindshare Bangladesh' })).toHaveCount(1);
+  await expect(page.locator(`[data-home-milestone] a[href="${URLS.srse}"]`)).toHaveCount(1);
 });
 
 test('experience page exposes future Alberta appointments and authoritative related links without mobile overflow', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto(`${BASE_URL}/experience`, { waitUntil: 'domcontentloaded' });
 
-  const albertaEntry = page.locator('.academic-entry').filter({ hasText: 'Graduate Teaching and Research Assistant' });
+  const albertaEntry = page.locator('.experience-record').filter({ hasText: 'Graduate Teaching and Research Assistant' });
   await expect(albertaEntry).toContainText('GTA, GRA, and GRAF');
   await expect(albertaEntry).toContainText('Starting September 1, 2026');
   await expect(albertaEntry.locator(`h3 a[href="${URLS.ualberta}"]`)).toHaveCount(1);
 
-  const iqviaEntry = page.locator('.academic-entry').filter({ hasText: 'Software Development Engineer 1, IQVIA' });
+  const iqviaEntry = page.locator('.experience-record').filter({ hasText: 'Software Development Engineer 1, IQVIA' });
   await expect(iqviaEntry).toContainText('KPI Library, the dynamic reporting layer within Orchestrated Analytics');
   await expect(iqviaEntry.locator(`a[href="${URLS.orchestratedAnalytics}"]`)).toHaveCount(1);
   await expect(iqviaEntry.locator(`a[href="${URLS.kpiLibrary}"]`)).toHaveCount(1);
@@ -70,18 +69,21 @@ test('light theme uses the warm gradient and an opaque compact header', async ({
 
   const styles = await page.evaluate(() => {
     const body = getComputedStyle(document.body);
+    const hero = getComputedStyle(document.querySelector('.home-identity'));
     const header = getComputedStyle(document.querySelector('.site-header'));
     const frame = document.querySelector('.site-header__frame').getBoundingClientRect();
     return {
-      bodyBackground: body.backgroundImage,
+      bodyBackground: body.backgroundColor,
+      heroBackground: hero.backgroundImage,
       headerBackground: header.backgroundColor,
       backdropFilter: header.backdropFilter,
       headerHeight: frame.height,
     };
   });
 
-  expect(styles.bodyBackground).toContain('radial-gradient');
-  expect(styles.headerBackground).toBe('rgb(255, 254, 251)');
+  expect(styles.bodyBackground).toBe('rgb(245, 241, 232)');
+  expect(styles.heroBackground).toContain('radial-gradient');
+  expect(styles.headerBackground).toBe('rgb(255, 252, 245)');
   expect(styles.backdropFilter).toBe('none');
   expect(styles.headerHeight).toBeLessThanOrEqual(64);
 });

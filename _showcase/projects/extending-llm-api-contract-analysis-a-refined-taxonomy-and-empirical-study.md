@@ -6,10 +6,14 @@ category: projects
 group: Research
 show: true
 width: 8
-date: 2025-01-15 00:00:00 +0800
+date: 2025-01-15 00:00:00 +0600
 excerpt: An in-depth exploration of applying "Design by Contract" principles to Large Language Models, offering a comprehensive taxonomy, detection methods, and enforcement strategies to make AI systems more reliable and predictable.
-thumbnail: /assets/images/llm-api-taxonomy.png
-card_image: /assets/images/cards/llm-contract-card.svg
+problem: "Express and check behavioral expectations for LLM-backed APIs whose outputs are probabilistic and context-dependent."
+role: Research collaborator and author of the taxonomy, enforcement analysis, and implementation examples
+outcome: "Documented input, output, temporal, and extended contract classes with discovery and enforcement patterns; wider empirical validation remains ongoing."
+status: Ongoing research synthesis
+repository: https://github.com/thromel/llm-contracts-research
+repository_status: Public research repository
 featured: true
 technologies:
   - LLM Systems
@@ -19,9 +23,6 @@ technologies:
   - Python
 ---
 
-# Making AI Reliable: Design by Contract for Large Language Models
-
-<img src="{{ 'assets/images/llm-api-taxonomy.png' | relative_url }}" class="img-fluid mb-4 rounded shadow-sm" alt="LLM API Taxonomy">
 
 In the world of traditional software development, engineers have long relied on a methodology called "Design by Contract" to build reliable systems. This approach clearly defines what a software component expects (preconditions), what it guarantees (postconditions), and what remains true throughout its execution (invariants). But what happens when we apply these time-tested principles to the newer, more dynamic world of Large Language Models (LLMs)?
 
@@ -92,7 +93,6 @@ The second paper extends this taxonomy to include:
 - **Performance Contracts**: Specifying latency and quality requirements (e.g., "response time ≤ 2 seconds for 95% of requests")
 - **Security Contracts**: Preventing prompt injections and ensuring safe tool usage
 
-<img src="{{ 'assets/images/llm-contracts-hierarchy.png' | relative_url }}" class="img-fluid mb-4 rounded shadow-sm" alt="Hierarchy of LLM Contract Types">
 
 ## How to Discover LLM Contracts
 
@@ -178,7 +178,6 @@ For a programming helper, contracts:
 - Ensured generated code was syntactically valid and compilable
 - Enforced style guidelines and best practices
 
-<img src="{{ 'assets/images/llm-contract-enforcement.png' | relative_url }}" class="img-fluid mb-4 rounded shadow-sm" alt="LLM Contract Enforcement Architecture">
 
 ## Empirical Findings
 
@@ -269,7 +268,7 @@ As AI becomes increasingly embedded in our software ecosystem, approaches like t
 ## Research Collaborator | Ongoing Research | Software Engineering
 
 <div class="text-end mb-3">
-    <a href="https://github.com/thromel/llm-contracts-research" target="_blank" class="btn btn-sm btn-outline-dark">
+    <a href="https://github.com/thromel/llm-contracts-research" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline-dark" aria-label="View the LLM-contract analysis repository on GitHub (opens in a new tab)">
         <i class="fab fa-github"></i> View on GitHub
     </a>
 </div>

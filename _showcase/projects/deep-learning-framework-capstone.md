@@ -5,6 +5,11 @@ subtitle: "A freelance learning project for tensors, autograd, and neural-networ
 category: projects
 group: Freelance Learning Capstones
 project_type: "Freelance learning project"
+problem: "Understand tensors, automatic differentiation, neural-network layers, and training loops by rebuilding their core mechanics in a small Python framework."
+role: Independent learning build
+outcome: "The milestone sequence and intended interfaces are documented; implementation evidence has not yet been published."
+status: In progress
+repository_status: No public implementation artifact yet
 show: true
 width: 8
 date: 2025-12-15 00:00:00 +0600

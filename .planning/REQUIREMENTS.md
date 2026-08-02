@@ -87,6 +87,28 @@
 
 ## v2 Requirements
 
+## Complete Dual-Audience Overhaul Requirements
+
+### Audience and Information Architecture
+
+- [x] **DUAL-01**: A professor can identify the University of Alberta trajectory, research thesis, research interests, and strongest scholarly evidence from the first screen and first two homepage sections
+- [x] **DUAL-02**: An engineering recruiter can identify approximately three years of professional experience, former IQVIA work, engineering strengths, and strongest shipped-system evidence without reading the complete academic record
+- [x] **DUAL-03**: Research and engineering are permanent, visible paths through one coherent site; no audience toggle hides or duplicates content
+- [x] **DUAL-04**: The homepage is a selective website abstract rather than a reproduction of the full CV, with deeper routes retaining the complete record
+
+### Visual System and Interaction
+
+- [x] **OVERHAUL-01**: Every maintained route uses one distinctive editorial evidence-ledger system through `assets/css/overhaul.css`, `assets/js/site-shell.js`, and the shared Jekyll shell
+- [x] **OVERHAUL-02**: Light and dark themes are independently designed, readable, and free of low-contrast text over decorative gradients
+- [x] **OVERHAUL-03**: The horizontal header, mobile menu, CV action, links, evidence states, and keyboard focus form one predictable interaction system
+- [x] **OVERHAUL-04**: Research, publications, projects, experience, education, contributions, news, about, achievements, learning, CV, posts, and status pages share the new hierarchy without becoming visually identical
+
+### Quality
+
+- [x] **OVERHAUL-05**: Core routes meet WCAG 2.2 AA contrast, focus, target-size, and 320px reflow expectations and remain useful without JavaScript
+- [x] **OVERHAUL-06**: The static site keeps its current Jekyll architecture, stable URLs, explicit evidence/status boundaries, graceful GitHub fallbacks, and bounded CSS, JavaScript, image, LCP, and CLS budgets
+- [x] **OVERHAUL-07**: Repeatable browser checks cover desktop, mobile, light, dark, responsive navigation, audience paths, evidence links, async states, accessibility, and performance
+
 ### Content Evolution
 
 - **CONT-01**: Maintainer can refresh site positioning or rewrite major sections of copy as a separate editorial pass
@@ -144,13 +166,25 @@
 | DARK-01 | Phase 11 | Complete |
 | DARK-02 | Phase 11 | Complete |
 | QUAL2-01 | Phase 11 | Complete |
+| DUAL-01 | Phase 12 | Complete |
+| DUAL-02 | Phase 12 | Complete |
+| DUAL-03 | Phase 12 | Complete |
+| DUAL-04 | Phase 12 | Complete |
+| OVERHAUL-01 | Phase 12 | Complete |
+| OVERHAUL-02 | Phase 12 | Complete |
+| OVERHAUL-03 | Phase 12 | Complete |
+| OVERHAUL-04 | Phase 12 | Complete |
+| OVERHAUL-05 | Phase 12 | Complete |
+| OVERHAUL-06 | Phase 12 | Complete |
+| OVERHAUL-07 | Phase 12 | Complete |
 
 **Coverage:**
 - v1 requirements: 19 total
 - v1.1 requirements: 15 total
-- Mapped to phases: 34
+- v2 requirements: 11 total
+- Mapped to phases: 45
 - Unmapped: 0 ✓
 
 ---
 *Requirements defined: 2026-04-09*
-*Last updated: 2026-05-17 after v1.1 requirements definition*
+*Last updated: 2026-08-02 after Phase 12 independent acceptance*

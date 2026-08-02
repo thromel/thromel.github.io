@@ -2,42 +2,17 @@
 layout: default
 title: You're Offline
 navbar_title: Offline
-description: Offline fallback page with cached content shortcuts and connection status.
+description: Connection recovery page with shortcuts to the primary portfolio routes.
 ---
 
 <section class="academic-section status-page">
-  <p class="status-page__code" aria-hidden="true"><i class="fa-solid fa-wifi" aria-hidden="true"></i></p>
-  <h1>You're Currently Offline</h1>
-  <p>It looks like you've lost your internet connection. You can still browse pages that have been cached on a previous visit.</p>
-  <p><strong>Connection status:</strong> <span id="connection-status">Checking...</span></p>
+  <p class="status-page__code" aria-hidden="true">OFFLINE</p>
+  <h1>You appear to be offline</h1>
+  <p>This site does not promise offline storage. Reconnect, retry this page, or continue to a route your browser may already have available.</p>
 
   <p class="academic-link-row" aria-label="Offline navigation">
-    <a href="{{ '/' | relative_url }}"><i class="fa-solid fa-house link-icon" aria-hidden="true"></i><span>Homepage</span></a>
-    <a href="{{ '/projects' | relative_url }}"><i class="fa-solid fa-code link-icon" aria-hidden="true"></i><span>Projects</span></a>
-    <a href="javascript:window.location.reload()"><i class="fa-solid fa-rotate-right link-icon" aria-hidden="true"></i><span>Try Again</span></a>
+    <a href="{{ '/' | relative_url }}">Home</a>
+    <a href="{{ '/research' | relative_url }}">Research</a>
+    <a href="{{ '/projects' | relative_url }}">Engineering</a>
   </p>
 </section>
-
-<script>
-  (function () {
-    function updateConnectionStatus() {
-      var statusElement = document.getElementById('connection-status');
-      if (!statusElement) return;
-
-      if (navigator.onLine) {
-        statusElement.textContent = 'Connected - refreshing...';
-        fetch('/manifest.json', { method: 'HEAD', cache: 'no-cache' })
-          .then(function () { setTimeout(function () { window.location.reload(); }, 1500); })
-          .catch(function () { statusElement.textContent = 'Offline'; });
-      } else {
-        statusElement.textContent = 'Offline';
-      }
-    }
-
-    document.addEventListener('DOMContentLoaded', function () {
-      updateConnectionStatus();
-      window.addEventListener('online', updateConnectionStatus);
-      window.addEventListener('offline', updateConnectionStatus);
-    });
-  })();
-</script>

@@ -6,9 +6,8 @@ categories: [ci-cd, software-engineering, devops, education]
 tags: [github, ci-cd, aws, deployment, story, automation, devops, cloud]
 ---
 
-# Setting Up GitHub Actions CI/CD with AWS: A Practical Journey
 
-<img src="{{ '/assets/images/github_aws_cicd_pipeline.png' | relative_url }}" class="img-fluid mb-4" alt="GitHub Actions CI/CD Pipeline with AWS">
+<img src="{{ '/assets/images/github_aws_cicd_pipeline.png' | relative_url }}" class="img-fluid mb-4" alt="GitHub Actions CI/CD Pipeline with AWS" width="3166" height="304" decoding="async">
 
 ## Introduction: Why This Matters
 
@@ -16,7 +15,7 @@ Picture this: it's Friday afternoon, and your team needs to deploy a critical bu
 
 **The Real Cost of Manual Deployments**: According to the [2021 State of DevOps Report](https://cloud.google.com/devops/state-of-devops/), organizations with mature CI/CD practices deploy 208 times more frequently and have 106 times faster lead times than low performers. More importantly, they have 7 times lower change failure rates and recover from incidents 2,604 times faster.
 
-This guide will take you through my journey of setting up a production-ready CI/CD pipeline for a Node.js application. We'll start from scratch and build up to a fully automated deployment system. By the end, you'll understand not just the "how" but also the "why" behind each decision.
+This guide walks through a deployment-oriented CI/CD pipeline for a Node.js application. We'll start from scratch and build up to an automated deployment system, explaining both the implementation and the reasoning behind each decision.
 
 > **Learning Path**: If you're new to DevOps concepts, I recommend starting with the [DevOps Handbook](https://itrevolution.com/the-devops-handbook/) for foundational principles, then diving into practical implementation with this guide.
 
@@ -82,7 +81,7 @@ GitHub Actions is GitHub's native CI/CD solution. It allows you to automate work
 
 **Why This Architecture?** GitHub Actions works on a simple principle that mirrors real-world workflows: **Events trigger Workflows, which contain Jobs, which contain Steps**. This hierarchical structure provides flexibility while maintaining clarity.
 
-<img src="{{ '/assets/images/github_actions_workflow_anatomy.png' | relative_url }}" class="img-fluid mb-4" alt="GitHub Actions Workflow Anatomy">
+<img src="{{ '/assets/images/github_actions_workflow_anatomy.png' | relative_url }}" class="img-fluid mb-4" alt="GitHub Actions Workflow Anatomy" width="944" height="970" loading="lazy" decoding="async">
 
 Let me break this down with real-world analogies:
 
@@ -1801,7 +1800,7 @@ Your CI/CD pipeline is critical infrastructure. **Why test infrastructure?** Jus
 
 ## Conclusion and Next Steps
 
-Congratulations! You've built a production-ready CI/CD pipeline that automatically tests and deploys your application. **The Impact**: This pipeline will save countless hours and reduce deployment anxiety significantly. More importantly, it enables the rapid, reliable delivery that modern software development demands.
+You now have a CI/CD pipeline that automatically tests and deploys the application. Its value should be evaluated through deployment frequency, failure rate, recovery time, and the maintenance cost of the pipeline itself.
 
 **What You've Accomplished**:
 - ✅ Automated testing on every code change

@@ -2,25 +2,23 @@
 layout: default
 ---
 
-<!-- Page Header -->
-<div class="section-header showcase-header{% if page.showcase_style %} showcase-header--{{ page.showcase_style }}{% endif %}">
+<header class="academic-section page-hero showcase-header{% if page.showcase_style %} showcase-header--{{ page.showcase_style }}{% endif %}">
+  <p class="eyebrow">Engineering record</p>
   <h1 class="section-title showcase-title">{{ page.title }}</h1>
   <div class="showcase-meta">
-    <span class="timeline-date">{{ page.date | date: "%B %d, %Y" }}</span>
+    <time class="timeline-date" datetime="{{ page.date | date: '%Y-%m-%d' }}">{{ page.date | date: "%B %d, %Y" }}</time>
     {% if page.group %}
     <span class="showcase-group">
-      <i class="fa-solid fa-folder"></i>
       {{ page.group }}
     </span>
     {% endif %}
     {% if page.project_type %}
     <span class="showcase-group">
-      <i class="fa-solid fa-briefcase"></i>
       {{ page.project_type }}
     </span>
     {% endif %}
   </div>
-</div>
+</header>
 
 <!-- Technologies -->
 {% if page.technologies.size > 0 %}
@@ -54,8 +52,7 @@ layout: default
         {% assign prev_index = item_index | minus: 1 %}
         {% assign prev_item = same_group_items[prev_index] %}
         <a href="{{ prev_item.url }}" class="btn btn-text showcase-navigation__link">
-          <i class="fas fa-arrow-left"></i>
-          <span>{{ prev_item.title }}</span>
+          <span aria-hidden="true">←</span><span>{{ prev_item.title }}</span>
         </a>
       {% endif %}
     </div>
@@ -66,8 +63,7 @@ layout: default
         {% assign next_index = item_index | plus: 1 %}
         {% assign next_item = same_group_items[next_index] %}
         <a href="{{ next_item.url }}" class="btn btn-text showcase-navigation__link">
-          <span>{{ next_item.title }}</span>
-          <i class="fas fa-arrow-right"></i>
+          <span>{{ next_item.title }}</span><span aria-hidden="true">→</span>
         </a>
       {% endif %}
     </div>
@@ -75,7 +71,7 @@ layout: default
 
   <div class="showcase-navigation__back">
     <a href="{{ 'projects' | relative_url }}" class="btn btn-text">
-      <i class="fas fa-arrow-left"></i> Back to All Projects
+      <span aria-hidden="true">←</span> Back to engineering work
     </a>
   </div>
 </div>

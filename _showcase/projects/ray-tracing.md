@@ -6,9 +6,17 @@ category: projects
 group: Projects
 show: true
 width: 8
-date: 2024-05-15 00:00:00 +0800
+date: 2024-05-15 00:00:00 +0600
 excerpt: A deep dive into ray tracing implementation, exploring the physics of light transport, rendering equations, and practical optimization techniques for creating photorealistic 3D graphics.
+problem: "Render 3D scenes from first principles while making ray intersections, lighting, cameras, materials, and scene parsing inspectable in C++."
+role: Implemented and documented the C++ ray-tracing course project
+outcome: "The repository and case record cover ray-object intersection, lighting, camera control, scene description, and extension paths for acceleration and advanced materials."
+status: Completed BUET computer-graphics course project
+repository: https://github.com/thromel/CSE-410-Computer-Graphics-Sessional
+repository_status: Public course repository
 thumbnail: /assets/images/projects/ray-tracing.png
+visual_width: 300
+visual_height: 225
 featured: true
 technologies:
   - C++
@@ -18,9 +26,8 @@ technologies:
   - Ray Tracing
 ---
 
-<img src="{{ '/assets/images/projects/ray-tracing.png' | relative_url }}" class="img-fluid mb-4" alt="Ray Tracing Render">
+<img src="{{ '/assets/images/projects/ray-tracing.png' | relative_url }}" class="img-fluid mb-4" alt="Ray Tracing Render" width="300" height="225" decoding="async">
 
-# Ray Tracing from Scratch: A Comprehensive Guide to 3D Rendering Physics and Implementation
 
 ## Introduction: The Magic of Ray Tracing
 
@@ -562,7 +569,7 @@ The journey from understanding the physics of light to implementing a ray tracer
 ## Graphics Engineer | 10-week Project | Computer Graphics
 
 <div class="text-end mb-3">
-    <a href="https://github.com/thromel/CSE-410-Computer-Graphics-Sessional" target="_blank" class="btn btn-sm btn-outline-dark">
+    <a href="https://github.com/thromel/CSE-410-Computer-Graphics-Sessional" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline-dark" aria-label="View the ray-tracing project on GitHub (opens in a new tab)">
         <i class="fab fa-github"></i> View on GitHub
     </a>
 </div>

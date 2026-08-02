@@ -2,21 +2,24 @@
 layout: default
 title: Achievements
 navbar_title: Achievements
+description: Competition results, academic honors, scholarships, and workplace recognition, with direct evidence where it is available.
 ---
 
-<section class="academic-section">
+<section class="academic-section page-hero">
+  <p class="eyebrow">Recognition</p>
   <h1 class="academic-page-title">Achievements</h1>
-  <p>Awards, competition results, and academic honors.</p>
+  <p class="page-hero__intro">Awards, competition results, and academic honors with direct evidence where available.</p>
 </section>
 
 {% assign achievements_by_type = site.data.profile.awards | group_by: "type" %}
 {% for type in achievements_by_type %}
-<section class="academic-section">
-  <h2>{{ type.name }}</h2>
+<section class="academic-section achievement-group">
+  <div class="section-trace"><span aria-hidden="true">0{{ forloop.index }}</span><div><p class="eyebrow">Recognition group</p><h2>{{ type.name }}</h2></div></div>
   {% for item in type.items %}
   <article class="academic-entry">
-    <h3>{% if item.url %}<a href="{{ item.url }}" target="_blank" rel="noopener noreferrer">{{ item.name }}</a>{% else %}{{ item.name }}{% endif %}</h3>
-    <p class="academic-entry__meta">{{ item.organization }} · {{ item.date }}</p>
+    <h3>{% if item.url %}<a href="{{ item.url }}" target="_blank" rel="noopener noreferrer" aria-label="{{ item.name | escape }} (opens in a new tab)">{{ item.name }}</a>{% else %}{{ item.name }}{% endif %}</h3>
+    {% assign award_date_text = item.date | append: '' %}
+    <p class="academic-entry__meta">{{ item.organization }} · {% if award_date_text contains 'Level' %}<span>{{ award_date_text }}</span>{% elsif award_date_text.size == 4 %}<time datetime="{{ award_date_text }}">{{ award_date_text }}</time>{% else %}<time datetime="{{ item.date | date: '%Y-%m' }}">{{ award_date_text }}</time>{% endif %}</p>
     {% if item.description %}<p>{{ item.description | strip_html }}</p>{% endif %}
   </article>
   {% endfor %}

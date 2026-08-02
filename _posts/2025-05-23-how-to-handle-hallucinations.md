@@ -7,9 +7,8 @@ tags: [hallucinations, ai-safety, guardrails, llm, agentic-ai, machine-learning]
 image: /assets/images/projects/ai-hallucinations.png
 ---
 
-# Taming the Imagination: A Comprehensive Guide to Handling Hallucinations and Implementing Guardrails in Agentic AI
 
-<img src="{{ '/assets/images/projects/ai-hallucinations.png' | relative_url }}" class="img-fluid mb-4" alt="AI Hallucinations and Guardrails Illustration">
+<img src="{{ '/assets/images/projects/ai-hallucinations.png' | relative_url }}" class="img-fluid mb-4" alt="AI Hallucinations and Guardrails Illustration" width="2368" height="968" decoding="async">
 
 ## The $2 Million Hallucination: Why This Matters
 
@@ -1258,7 +1257,7 @@ Deploying hallucination detection in production requires careful consideration:
 
 ```python
 class ProductionHallucinationSystem:
-    """Production-ready hallucination detection and mitigation"""
+    """Hallucination detection and mitigation pipeline"""
     
     def __init__(self, config: Dict):
         self.config = config

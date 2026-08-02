@@ -4,9 +4,10 @@ layout: default
 
 <article class="post-article">
   <header>
+    <p class="eyebrow">Technical note</p>
     <h1 class="post-title">{{ page.title }}</h1>
     <p class="post-meta">
-      <span class="post-date">{{ page.date | date: "%B %d, %Y" }}</span>
+      <time class="post-date" datetime="{{ page.date | date: '%Y-%m-%d' }}">{{ page.date | date: "%B %d, %Y" }}</time>
       {% if page.categories.size > 0 %}<span>{{ page.categories | join: ", " }}</span>{% endif %}
     </p>
 
@@ -24,12 +25,12 @@ layout: default
   <nav class="post-navigation" aria-label="Post navigation">
     <div class="post-navigation__previous">
       {% if page.previous.url %}
-      <a href="{{ page.previous.url | relative_url }}" rel="prev"><i class="fas fa-angle-left" aria-hidden="true"></i> {{ page.previous.title }}</a>
+      <a href="{{ page.previous.url | relative_url }}" rel="prev"><span aria-hidden="true">←</span> {{ page.previous.title }}</a>
       {% endif %}
     </div>
     <div class="post-navigation__next">
       {% if page.next.url %}
-      <a href="{{ page.next.url | relative_url }}" rel="next">{{ page.next.title }} <i class="fas fa-angle-right" aria-hidden="true"></i></a>
+      <a href="{{ page.next.url | relative_url }}" rel="next">{{ page.next.title }} <span aria-hidden="true">→</span></a>
       {% endif %}
     </div>
   </nav>

@@ -7,7 +7,6 @@ tags: [xv6, operating-systems, c, kernel, unix, mit, systems-programming, comput
 image: /assets/images/projects/xv6-os.png
 ---
 
-# Understanding xv6: A Practical Introduction to Operating Systems
 
 Operating systems form the foundation of modern computing, yet their inner workings often remain mysterious to many computer science students. If you're embarking on your journey into operating systems through xv6, you're about to explore one of the most elegant teaching tools in computer science education. This post will guide you through xv6's architecture, connecting fundamental OS concepts with concrete implementation details you can examine and modify yourself.
 

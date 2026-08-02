@@ -10,7 +10,15 @@ date: 2026-06-18 00:00:00 +0600
 excerpt: "A C#/.NET 10 systems-performance project for the One Billion Row Challenge. The promoted solver keeps smaller inputs on mmap, but switches full-size macOS runs to pread after paired 1B measurements showed the mmap fault path dominating wall time."
 featured: true
 project_type: Systems performance case study
+problem: "Process one billion temperature records correctly on Apple Silicon while avoiding the mmap fault path that dominated full-size runs."
+role: Sole implementer and benchmark author
+outcome: "Passed 12 official fixtures and matched generated 100M, high-cardinality 10M, and full 1B outputs; the promoted full-size path won all five paired warm wall-time runs on the stated Apple Silicon machine."
+status: Validated local performance case study
+repository: https://github.com/thromel/1brc-csharp
+repository_status: Public source repository
 card_image: /assets/images/projects/1brc-csharp-architecture.svg
+visual_width: 1260
+visual_height: 760
 technologies:
   - C#
   - .NET 10
@@ -24,13 +32,12 @@ technologies:
   - Benchmarking
 ---
 
-# 1BRC C# on Apple Silicon
 
 I built a standalone C# solver for the [One Billion Row Challenge](https://github.com/gunnarmorling/1brc), then treated every improvement as something that had to survive correctness checks and paired timings. The full 1B file changed the bottleneck.
 
 For bounded 100M data, the memory-mapped parser stayed better. For the full 13 GiB canonical file on my 10-core Apple Silicon machine, warm `mmap` runs spent so much time in system work and page faults that a native macOS `pread` path won decisively. The current solver is size-aware instead of treating that result as a universal rule.
 
-![1BRC C# solver architecture](/assets/images/projects/1brc-csharp-architecture.svg)
+<img src="/assets/images/projects/1brc-csharp-architecture.svg" alt="1BRC C# solver architecture" width="1260" height="760" decoding="async">
 
 ## at a glance
 

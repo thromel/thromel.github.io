@@ -7,7 +7,6 @@ tags: [clique-partition, graph-algorithms, np-complete, social-networks, cluster
 image: /assets/images/projects/clique-partition.png
 ---
 
-# The Clique Partition Problem: Dividing Networks into Perfect Communities
 
 Imagine you're analyzing a social network where people are connected based on mutual friendships. You want to divide this network into groups where everyone within each group knows everyone else - perfect communities where all members are mutually connected. This is the essence of the **Clique Partition Problem**: finding the minimum number of cliques needed to cover all vertices in a graph.
 
@@ -1887,4 +1886,4 @@ The clique partition problem is an excellent introduction to the world of combin
 
 ---
 
-*This post provides a comprehensive introduction to the clique partition problem suitable for undergraduate students. The field continues to evolve with new algorithmic approaches and applications. For current research developments, consult recent proceedings of conferences like SODA, ICALP, and specialized graph theory journals.* 
+*This post provides a comprehensive introduction to the clique partition problem suitable for undergraduate students. The field continues to evolve with new algorithmic approaches and applications. For current research developments, consult recent proceedings of conferences like SODA, ICALP, and specialized graph theory journals.*

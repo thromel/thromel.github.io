@@ -7,7 +7,6 @@ tags: [llm, vibe-coding, software-engineering, ai-assisted-development, career-g
 image: /assets/images/projects/vibe-coding.png
 ---
 
-# Growing as a Software Engineer in the Age of LLMs and Vibe Coding
 
 *A Software Engineer's Perspective on Thriving in the AI-Assisted Development Era*
 
@@ -29,7 +28,7 @@ This post is my attempt to make sense of where we are and where we're heading. I
 
 If you haven't heard the term "vibe coding" yet, you will soon. It's the practice of developing software through natural language conversations with AI, describing what you want in plain English (or any language) and iterating on the results. It's coding by feel rather than syntax, by intention rather than implementation.
 
-At first, I dismissed it as a fad. "Real programmers write real code," I thought. But then I watched as developers started shipping production-quality features faster than ever before. They weren't just copying and pasting; they were having sophisticated technical conversations with AI, reviewing generated code with expert eyes, and building systems that actually worked.
+At first, I dismissed it as a fad. "Real programmers write real code," I thought. But then I watched developers use the tools to move more quickly from an idea to code they could review and test. They weren't just copying and pasting; they were discussing technical choices with AI, inspecting the generated code, and checking whether it worked in the surrounding system.
 
 The key insight? Vibe coding isn't about abandoning programming knowledge. It's about applying that knowledge differently. It's the difference between being a craftsman who hand-carves every piece and being an architect who directs sophisticated machinery to realize their vision.
 

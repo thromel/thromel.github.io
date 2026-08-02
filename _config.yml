@@ -18,6 +18,7 @@ description: Personal Academic Homepage
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://tanzimhromel.com" # the canonical hostname & protocol
 lang: en
+timezone: Asia/Dhaka
 social_preview_image: /assets/images/etc/preview.png
 
 permalink: /blog/:year/:month/:day/:title/
@@ -26,12 +27,11 @@ paginate_path: "/blog/page:num/"
 
 collections:
   news:
-    output: true
-    permalink: /news/:path/
+    output: false
   posts:
     output: true
   publications:
-    output: true
+    output: false
   showcase:
     output: true
 
@@ -73,6 +73,18 @@ defaults:
       type: "showcase"
     values:
       layout: "showcase"
+  -
+    scope:
+      path: "_showcase/cats"
+      type: "showcase"
+    values:
+      published: false
+  -
+    scope:
+      path: "_showcase/default"
+      type: "showcase"
+    values:
+      published: false
 
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list
@@ -89,5 +101,20 @@ exclude:
   - .git/
   - .gitignore
   - README.md
-
-# timezone: Asia/Shanghai
+  - debug.html
+  - AGENTS.md
+  - browser-console-tests.js
+  - docs/
+  - figures/
+  - files/
+  - learning.html.backup
+  - manual-testing-script.md
+  - output/
+  - package-lock.json
+  - package.json
+  - playwright-report/
+  - scripts/
+  - test-results/
+  - tests/
+  - validate-latex.py
+  - "*.csv"

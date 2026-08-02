@@ -7,7 +7,6 @@ tags: [dotnet, csharp, microservices, performance-optimization, backend-engineer
 image: /assets/images/projects/dotnet-performance.png
 ---
 
-# The Performance Crisis: How We Rescued a .NET 8 Microservice from 10 Critical Bottlenecks
 
 Imagine this: It's Monday morning, you've just joined your first job as a backend engineer, and the Slack alerts are exploding. Your company's core product - a healthcare analytics platform built with .NET 8 microservices - is crawling under load. Response times that should be 200ms are hitting 8+ seconds. Users are abandoning the application, and the business is losing money by the hour.
 

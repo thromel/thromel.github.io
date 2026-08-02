@@ -1,409 +1,175 @@
-# Tanzim Hossain Romel - Personal Website
+# Tanzim Hossain Romel — Portfolio
 
-[![Accessibility](https://img.shields.io/badge/Accessibility-WCAG%202.1%20AA-brightgreen)](https://www.w3.org/WAI/WCAG21/quickref/)
-[![Performance](https://img.shields.io/badge/Performance-Optimized-blue)](https://web.dev/vitals/)
-[![Responsive](https://img.shields.io/badge/Responsive-Mobile%20First-orange)](https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/Responsive/responsive_design_building_blocks)
+[![Accessibility](https://img.shields.io/badge/Accessibility-WCAG%202.2%20AA-0B6B57)](https://www.w3.org/TR/WCAG22/)
+[![Performance](https://img.shields.io/badge/Core%20Web%20Vitals-Budgeted-0B6B57)](https://web.dev/articles/vitals)
+[![Responsive](https://img.shields.io/badge/Reflow-320px-0B6B57)](https://www.w3.org/WAI/WCAG22/Understanding/reflow.html)
 
-This repository contains the source code for my personal academic and professional website. Visit the live site at [thromel.github.io](https://thromel.github.io).
+Source for [tanzimhromel.com](https://tanzimhromel.com), an evidence-first research and engineering portfolio built with Jekyll and GitHub Pages.
 
-## Table of Contents
+The site presents one coherent profile for two audiences:
 
-- [About](#about)
-- [Features](#features)
-- [UI/UX Design System](#uiux-design-system)
-- [Architecture](#architecture)
-- [Local Development](#local-development)
-- [Accessibility Features](#accessibility-features)
-- [Performance Optimization](#performance-optimization)
-- [Contributing](#contributing)
-- [Contact](#contact)
+- Professors can quickly assess the University of Alberta trajectory, research questions, publications, collaborations, and direct artifacts.
+- Engineering recruiters can quickly assess about three years of professional software-engineering experience, former IQVIA work, selected systems, outcomes, and open-source proof.
 
-## About
+The public research focus is AI4SE, LLM4Coding, Trustworthy AI, long-horizon coding agents, and AI for SRE.
 
-This website showcases my professional experience, research projects, publications, and technical skills as a Software Development Engineer at IQVIA and researcher in the fields of Blockchain Technology and LLM Systems.
+## Experience design
 
-## Features
+The visual direction is “Alberta field notebook × systems evidence ledger”: warm editorial paper, mineral ink, spruce actions, restrained copper signals, fine rules, and dated evidence records. Light and dark modes are independently tuned.
 
-### Core Features
-- 🎯 **Professional Portfolio** - Comprehensive showcase of experience and skills
-- 📚 **Research & Publications** - Academic work and research projects
-- 💼 **Project Gallery** - Detailed project showcases with technology stacks
-- 🎨 **Liquid Glass Design** - Modern, responsive design with dual themes
-- ♿ **Accessibility Focused** - WCAG 2.1 AA compliant design
-- 📱 **Mobile Optimized** - Mobile-first responsive design
-- 🌙 **Dark/Light Themes** - Seamless theme switching with user preference detection
+The homepage is deliberately selective. It acts as a website abstract and routes visitors to deeper Research, Engineering, Publications, Experience, and CV records instead of reproducing the complete CV.
 
-### Technical Features
-- ⚡ **Performance Optimized** - Fast loading with optimized assets
-- 🔍 **SEO Optimized** - Structured data and meta optimization
-- 🎨 **CSS Custom Properties** - Maintainable design system
-- 📐 **Semantic HTML** - Proper document structure and landmarks
-- 🎯 **Focus Management** - Keyboard navigation support
-- 🎭 **Smooth Animations** - Performance-optimized micro-interactions
+Key interaction contracts:
 
-## UI/UX Design System
-
-### Design Philosophy
-The portfolio implements a **Liquid Glass** design philosophy that combines:
-- **Translucent surfaces** with subtle backdrop effects
-- **Smooth micro-interactions** that provide user feedback
-- **Consistent spacing** using a mathematical scale
-- **Accessible color palettes** meeting WCAG standards
-- **Typography hierarchy** optimized for readability
-
-### Color Palette
-
-#### Light Theme
-```css
---bg-primary: #f8fafb;           /* Main background */
---bg-secondary: rgba(255, 255, 255, 0.7);  /* Card backgrounds */
---text-primary: #1a202c;         /* High contrast text (WCAG AA) */
---text-secondary: #2d3748;       /* Body text (WCAG AA) */
---accent-primary: #0284c7;       /* Primary brand color (WCAG AA) */
---accent-secondary: #4f46e5;     /* Secondary accent (WCAG AA) */
-```
-
-#### Dark Theme
-```css
---bg-primary: #0f172a;           /* Main background */
---bg-secondary: rgba(15, 23, 42, 0.7);  /* Card backgrounds */
---text-primary: #ffffff;         /* Maximum contrast text */
---text-secondary: #f1f5f9;       /* High contrast secondary text */
---accent-primary: #38bdf8;       /* Primary brand color */
---accent-secondary: #818cf8;     /* Secondary accent */
-```
-
-### Typography Scale
-```css
---font-size-xs: 0.75rem;     /* 12px */
---font-size-sm: 0.875rem;    /* 14px */
---font-size-base: 1rem;      /* 16px */
---font-size-lg: 1.125rem;    /* 18px */
---font-size-xl: 1.25rem;     /* 20px */
---font-size-2xl: 1.5rem;     /* 24px */
---font-size-3xl: 1.875rem;   /* 30px */
---font-size-4xl: 2.25rem;    /* 36px */
-```
-
-### Spacing System
-```css
---space-1: 0.25rem;   /* 4px */
---space-2: 0.5rem;    /* 8px */
---space-3: 0.75rem;   /* 12px */
---space-4: 1rem;      /* 16px */
---space-6: 1.5rem;    /* 24px */
---space-8: 2rem;      /* 32px */
---space-12: 3rem;     /* 48px */
---space-16: 4rem;     /* 64px */
-```
+- One horizontal header with permanent Research and Engineering paths.
+- An in-flow mobile menu that remains usable without JavaScript and fails open if the shared shell cannot load.
+- A labelled, persistent theme control with a stable first paint.
+- Semantic evidence records that separate active work, submissions, publications, and merged engineering contributions.
+- Curated contribution proof that remains useful when GitHub is slow, rate-limited, or unavailable.
 
 ## Architecture
 
-### File Structure
-```
-├── _data/                  # Site configuration and content data
-│   ├── profile.yml        # Personal information and content
-│   ├── navigation.yml     # Site navigation structure
-│   ├── research.yml       # Research agenda, evidence anchors, and systems ledger
-│   └── display.yml        # Display preferences
-├── _includes/             # Reusable template components
-│   ├── navbar.html        # Canonical shared navigation markup
-│   ├── footer.html        # Canonical shared footer markup
-│   └── widgets/          # Page-local UI components
-├── _layouts/              # Page layouts
-│   └── default.html       # Canonical shared shell
-├── _posts/               # Blog posts and articles
-├── _showcase/            # Project showcases
+```text
+├── _data/
+│   ├── profile.yml              # Background, experience, education, and links
+│   ├── navigation.yml           # Header and footer information architecture
+│   ├── research.yml             # Research agenda and selective homepage records
+│   └── contributions.yml        # Curated open-source evidence
+├── _includes/
+│   ├── navbar.html              # Canonical header
+│   ├── footer.html              # Canonical footer directory
+│   ├── current-status.html      # Build-time currentness helper
+│   ├── experience-date.html     # Semantic start/end date ranges
+│   ├── publication-record.html  # Citation/status evidence record
+│   └── project-record.html      # Scope/role/outcome project record
+├── _layouts/
+│   ├── default.html             # Metadata, first-paint theme, and shared shell
+│   ├── post.html                # Writing layout
+│   └── showcase.html            # Engineering case-study layout
+├── _showcase/                   # Project and systems narratives
 ├── assets/
-│   ├── css/              # Stylesheets
-│   │   └── overhaul.css  # Canonical shared stylesheet and token layer
-│   ├── js/               # JavaScript functionality
-│   │   ├── site-shell.js  # Canonical shared shell behavior
-│   │   └── contribution-count.js  # Compact live merged-PR count
-│   └── images/           # Static assets
-├── docs/
-│   └── ui-maintenance.md  # Maintainer guide for shared-shell ownership
-└── scripts/
-    └── verify-ui.sh       # Repo-local browser verification runner
+│   ├── css/overhaul.css         # Canonical tokens, components, and responsive rules
+│   ├── js/site-shell.js         # Theme, mobile menu, and skip-link behavior
+│   ├── js/contribution-count.js # Bounded GitHub count enhancement
+│   └── images/                  # Local visual evidence and optimized media
+├── tests/                       # Playwright, Axe, integrity, and quality gates
+├── scripts/verify-ui.sh         # Canonical local verification entry point
+└── .planning/                   # GSD project context and design contracts
 ```
 
-### CSS Architecture
-- **overhaul.css** - Canonical scholarly-instrument stylesheet for tokens, editorial typography, responsive shell behavior, records, and reduced-motion handling
-- The retired parallel CSS and JavaScript layers were removed in the research-first redesign; add shared behavior only through the canonical shell and stylesheet.
+Shared presentation belongs in [`assets/css/overhaul.css`](assets/css/overhaul.css). Shared shell behavior belongs in [`assets/js/site-shell.js`](assets/js/site-shell.js). Do not add a parallel theme, navigation layer, page framework, or client-side audience mode.
 
-### Component System
-- **Evidence records** - Question, status, collaborator context, verification date, and direct artifacts for research claims
-- **Citation and project records** - Compact text-led archive layouts that avoid repeated portfolio cards
-- **Shared shell** - Theme preference, labelled mobile menu, and skip-link focus behavior owned by `assets/js/site-shell.js`
-- **Navigation** - Research, Publications, Projects, and CV in the primary shell; secondary routes remain in the footer
-
-## Local Development
+## Local development
 
 ### Prerequisites
-- Homebrew Ruby 3.3 available at `/opt/homebrew/opt/ruby@3.3/bin`
-- Bundler for Jekyll dependencies
-- Node.js 20–22 or 24+ and npm 9+ for Playwright- and Lighthouse-based verification (CI uses Node 20; Node 23 is excluded by the current Lighthouse CSP helper)
-- Git
+
+- Ruby and Bundler for Jekyll
+- Node.js 20–22 or 24+ and npm for browser verification
+- A Playwright-supported Chromium installation
 
 ### Setup
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/thromel/thromel.github.io.git
-   cd thromel.github.io
-   ```
 
-2. **Install dependencies**
-   ```bash
-   export PATH="/opt/homebrew/opt/ruby@3.3/bin:$PATH"
-   bundle install
-   npm ci
-   npm run test:ui:install
-   ```
-
-3. **Start the local Jekyll server**
-   ```bash
-   PATH="/opt/homebrew/opt/ruby@3.3/bin:$PATH" bundle exec jekyll serve --livereload
-   ```
-
-4. **View the site**
-   Open `http://localhost:4000` in your browser
-
-5. **Use the maintainer guide for shared UI work**
-   Review `docs/ui-maintenance.md` before touching shared shell behavior, proof surfaces, or legacy theme/navigation files.
-
-### Development Commands
 ```bash
-# Development with live reload
-PATH="/opt/homebrew/opt/ruby@3.3/bin:$PATH" bundle exec jekyll serve --livereload
+git clone https://github.com/thromel/thromel.github.io.git
+cd thromel.github.io
+bundle install
+npm ci
+npm run test:ui:install
+```
 
-# Build for production
-PATH="/opt/homebrew/opt/ruby@3.3/bin:$PATH" bundle exec jekyll build
+Start the development server:
 
-# Full UI regression suite
+```bash
+bundle exec jekyll serve --livereload
+```
+
+Open `http://127.0.0.1:4000`.
+
+## Verification
+
+Run the complete production-build and browser suite:
+
+```bash
 bash scripts/verify-ui.sh full
-
-# Shell-focused regression suite
-bash scripts/verify-ui.sh shell
-
-# Browser-console smoke follow-up
-# Open the page in DevTools and run testSite.runAll() from browser-console-tests.js
 ```
 
-The repository commits a locked Node toolchain for browser and accessibility checks. After cloning, run `npm ci` and `npm run test:ui:install` once before using `bash scripts/verify-ui.sh full` as the canonical repeatable verification entrypoint.
+Run the faster shell contract when working only on navigation or theme behavior:
 
-## Accessibility Features
-
-### WCAG 2.1 AA Compliance
-
-#### ✅ Implemented Features
-- **Color Contrast**: All text meets 4.5:1 contrast ratio for normal text, 3:1 for large text
-- **Keyboard Navigation**: Complete keyboard accessibility with visible focus indicators
-- **Screen Reader Support**: Semantic HTML structure with proper ARIA labels
-- **Skip Links**: Navigation shortcuts for keyboard and screen reader users
-- **Responsive Design**: Works across all screen sizes and zoom levels up to 200%
-- **Theme Support**: Dark and light themes with system preference detection
-
-#### Key Accessibility Implementations
-
-**Skip Links for Keyboard Users**
-```html
-<div class="skip-links">
-  <a href="#main-content" class="skip-link">Skip to main content</a>
-  <a href="#navigation" class="skip-link">Skip to navigation</a>
-  <a href="#footer" class="skip-link">Skip to footer</a>
-</div>
-```
-
-**Enhanced Focus Indicators**
-```css
-*:focus-visible {
-  outline: 3px solid var(--accent-primary);
-  outline-offset: 2px;
-  box-shadow: 0 0 0 6px rgba(var(--accent-primary-rgb), 0.2);
-}
-```
-
-**Semantic Section Structure**
-```html
-<main role="main" aria-label="Main content">
-  <section aria-labelledby="education-heading">
-    <h3 id="education-heading">Education</h3>
-    <!-- Content with proper heading hierarchy -->
-  </section>
-</main>
-```
-
-### Testing Tools & Commands
 ```bash
-# Install accessibility testing tools
-npm install --save-dev @axe-core/cli pa11y lighthouse
-
-# Run accessibility audits
-npx axe-core --tags wcag21aa https://thromel.github.io
-npx pa11y --standard WCAG2AA https://thromel.github.io
-npx lighthouse --only=accessibility --output=html https://thromel.github.io
+bash scripts/verify-ui.sh shell
 ```
 
-## Performance Optimization
+The full gate covers:
 
-### Current Performance Metrics
-- **Performance Score**: 95+ (Lighthouse)
-- **Accessibility Score**: 98+ (Lighthouse)
-- **Best Practices**: 95+ (Lighthouse)
-- **SEO Score**: 95+ (Lighthouse)
+- Desktop and phone layouts, including 320px reflow and horizontal-overflow checks.
+- Research, Engineering, CV, footer, mobile-menu, keyboard, and theme paths.
+- JavaScript-off usefulness and GitHub success, incomplete, empty, rate-limit, error, timeout, and retry states.
+- Serious and critical Axe findings across core routes in both themes.
+- Exactly one H1 per built page, semantic dates, intrinsic image dimensions, and accessible new-tab names.
+- Internal links, fragments, placeholder links, local assets, canonical metadata, sitemap, robots, and safe new-tab attributes.
+- CSS, JavaScript, raster-image, homepage-transfer, LCP, CLS, and a PerformanceEventTiming-based INP candidate from trusted browser interactions.
 
-### Core Web Vitals Targets
-- **Largest Contentful Paint (LCP)**: < 2.5s
-- **First Input Delay (FID)**: < 100ms
-- **Cumulative Layout Shift (CLS)**: < 0.1
+Current implementation budgets are defined in [the Phase 12 UI specification](.planning/phases/12-dual-audience-overhaul/12-UI-SPEC.md):
 
-### Optimization Strategies
+- Canonical CSS: at most 25KB gzip.
+- Initial first-party JavaScript: at most 20KB gzip.
+- First-view portrait: at most 120KB.
+- Any raster image: at most 500KB.
+- Initial mobile homepage transfer: at most 1.5MB.
+- LCP: at most 2.5 seconds.
+- CLS: at most 0.1.
+- INP candidate: at most 200 milliseconds.
 
-#### CSS Optimization
-```css
-/* GPU-accelerated animations */
-.card {
-  transform: translateZ(0);
-  transition: transform 0.25s ease-out, box-shadow 0.25s ease-out;
-}
+## Accessibility
 
-/* Efficient hover effects */
-.card:hover {
-  transform: translateZ(0) translateY(-4px);
-}
-```
+The maintained contract targets WCAG 2.2 AA and includes:
 
-#### Image Optimization
-```html
-<!-- Responsive images with WebP support -->
-<picture>
-  <source srcset="image.webp" type="image/webp">
-  <source srcset="image.jpg" type="image/jpeg">
-  <img src="image.jpg" 
-       alt="Description"
-       loading="lazy"
-       width="300" 
-       height="200">
-</picture>
-```
+- Contrast-safe light and dark palettes.
+- Visible keyboard focus and a skip link to the main landmark.
+- Semantic headings, landmarks, lists, definitions, dates, and labelled controls.
+- Practical 44px primary controls.
+- Lossless reflow at 320 CSS pixels and useful layouts at 200% zoom.
+- Reduced-motion handling and content that does not depend on animation.
+- Intrinsic image dimensions and stable loading behavior.
 
-#### JavaScript Performance
-```javascript
-// Passive event listeners
-document.addEventListener('scroll', handler, { passive: true });
+Automated checks support review but do not replace screen-reader and cross-browser testing for high-risk changes.
 
-// Debounced operations
-const debouncedHandler = debounce(expensiveFunction, 250);
-```
+## Content and evidence rules
+
+- Link named institutions, employers, programs, products, papers, repositories, and direct proof to authoritative destinations.
+- State the author’s contribution, status or outcome, methods, verification date, and evidence boundary when those facts are public and supportable.
+- Do not present submissions, active research, or systems prototypes as peer-reviewed publications.
+- Do not invent metrics, affiliations, funding, technologies, deployments, or outcomes to fill a layout.
+- Preserve existing routes and redirects when restructuring a page.
 
 ## Contributing
 
-### Development Workflow
-1. **Create a feature branch**
-   ```bash
-   git checkout -b feature/improvement-name
-   ```
+1. Create a focused branch.
+2. Read [`docs/ui-maintenance.md`](docs/ui-maintenance.md) and the active Phase 12 design contract.
+3. Make shared UI changes through the canonical CSS, JavaScript, and shell files.
+4. Run `bash scripts/verify-ui.sh full`.
+5. Include screenshots and the verification result with visual pull requests.
 
-2. **Start from the canonical shared shell**
-   - Use `assets/css/overhaul.css` for shared styling and token changes
-   - Use `assets/js/site-shell.js` for shared shell behavior
-   - Treat `_layouts/default.html`, `_includes/navbar.html`, and `_includes/footer.html` as the shared shell markup path
-   - Keep new shared behavior in `assets/js/site-shell.js` or `assets/js/contribution-count.js`; do not reintroduce parallel theme or navigation layers
+## Technology
 
-3. **Test your changes**
-   ```bash
-   # Canonical full verification path
-   bash scripts/verify-ui.sh full
-
-   # Faster shared-shell regression path
-   bash scripts/verify-ui.sh shell
-   ```
-   - Use `manual-testing-script.md` for manual checks
-   - Use `browser-console-tests.js` as a browser-side smoke layer after the Playwright run
-   - Use `docs/ui-maintenance.md` when the change touches proof surfaces, shell ownership, or brownfield guardrails
-
-4. **Submit a pull request**
-   - Include description of changes
-   - Add screenshots for visual changes
-   - Include the verification commands you ran
-
-### Code Style Guidelines
-- **CSS**: Use CSS custom properties for consistent theming
-- **HTML**: Follow semantic HTML5 structure with proper ARIA labels
-- **JavaScript**: Use modern ES6+ syntax with accessibility considerations
-- **Performance**: Optimize for Core Web Vitals and mobile experience
-
-### Testing Requirements
-- [ ] Accessibility testing with screen readers
-- [ ] Keyboard navigation validation
-- [ ] Cross-browser compatibility testing
-- [ ] Mobile responsiveness verification
-- [ ] Performance metric validation
-- [ ] Color contrast verification
-
-## Technologies Used
-
-### Core Technologies
-- **Jekyll** - Static site generator with Liquid templating
-- **GitHub Pages** - Hosting and deployment
-- **Sass/SCSS** - CSS preprocessing with variables and mixins
-- **JavaScript ES6+** - Modern JavaScript with accessibility features
-
-### Development Tools
-- **Bundler** - Ruby dependency management
-- **Jekyll LiveReload** - Development server with hot reloading
-- **GitHub Actions** - CI/CD pipeline for automated deployment
-
-### Performance & Monitoring
-- **Lighthouse** - Performance and accessibility auditing
-- **axe-core** - Automated accessibility testing
-- **pa11y** - Command-line accessibility testing
-- **HTML Validate** - HTML structure validation
-
-### Design System
-- **CSS Custom Properties** - Maintainable theming system
-- **CSS Grid & Flexbox** - Modern layout techniques
-- **Intersection Observer** - Efficient scroll-based animations
-- **Prefers-reduced-motion** - Accessibility-conscious animations
-
-## Project Achievements
-
-### Recent Improvements (Phase 1 - Foundation)
-- ✅ **Complete WCAG 2.1 AA compliance** with proper color contrast and keyboard navigation
-- ✅ **Enhanced semantic HTML** structure with comprehensive ARIA labeling
-- ✅ **Improved typography system** with responsive scaling and consistent hierarchy
-- ✅ **Performance optimizations** achieving 95+ Lighthouse scores
-- ✅ **Modern design system** with CSS custom properties and liquid glass aesthetics
-
-### Future Enhancements (Roadmap)
-- **Phase 2**: Advanced interactions, content filtering, and mobile experience enhancements
-- **Phase 3**: Progressive Web App features, advanced micro-interactions
-- **Phase 4**: Performance monitoring, analytics integration, and user experience optimizations
+- Jekyll and Liquid
+- Semantic HTML and token-driven CSS
+- Small progressive-enhancement JavaScript modules
+- GitHub Pages and GitHub Actions
+- Playwright, Axe, and Lighthouse
 
 ## Contact
 
-For any inquiries, feel free to contact me at:
-- 📧 **Email**: tanhromel@gmail.com
-- 💼 **LinkedIn**: [thromel](https://www.linkedin.com/in/thromel)
-- 🐙 **GitHub**: [thromel](https://github.com/thromel)
-- 🌐 **Website**: [thromel.github.io](https://thromel.github.io)
+- [Email](mailto:tanhromel@gmail.com)
+- [LinkedIn](https://www.linkedin.com/in/thromel)
+- [GitHub](https://github.com/thromel)
+- [Google Scholar](https://scholar.google.com/citations?user=zHV4EU8AAAAJ)
+- [ORCID](https://orcid.org/0009-0009-2432-8960)
 
 ## Acknowledgements
 
-This website is based on the [academic-homepage](https://github.com/luost26/academic-homepage) Jekyll template by Tianyu Lou, enhanced with modern UI/UX principles, comprehensive accessibility features, and performance optimizations.
-
-### Design Inspiration
-- **Liquid Glass Design** - Modern translucent UI design principles
-- **Material Design** - Google's design system for interaction patterns
-- **Apple Human Interface Guidelines** - Accessibility and usability standards
-- **WCAG 2.1** - Web Content Accessibility Guidelines for inclusive design
-
----
+The repository began from Tianyu Lou’s [academic-homepage](https://github.com/luost26/academic-homepage) Jekyll template. Its current information architecture, visual system, shell, evidence records, and verification contracts are project-specific.
 
 ## License
 
-This project is open source and available under the [MIT License](LICENSE).
-
----
-
-**Last Updated**: January 2025 | **Version**: 2.1.0 | **Accessibility**: WCAG 2.1 AA Compliant
+[MIT](LICENSE)

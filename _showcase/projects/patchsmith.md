@@ -11,7 +11,15 @@ excerpt: "PatchSmith is an auditable repair harness for coding agents: it gives 
 featured: true
 showcase_style: agent-tooling
 project_type: Research platform
+problem: "Evaluate coding-agent repairs with bounded context, sandbox validation, and retained evidence instead of accepting a plausible patch at face value."
+role: Designer and implementer of the repair harness, task adapters, validation flow, artifact schema, and readiness gates
+outcome: "The current DeepAgents public-issue smoke lane validates three of three focused pytest/Requests tasks while retaining traces, validation output, and failure reports."
+status: Active research and development platform
+repository: https://github.com/thromel/patchsmith
+repository_status: Public source repository
 card_image: /assets/images/projects/patchsmith-component-architecture.svg
+visual_width: 1260
+visual_height: 820
 technologies:
   - Python
   - DeepAgents
@@ -26,7 +34,6 @@ technologies:
   - Public Issue Benchmarks
 ---
 
-# PatchSmith: a harness for repair agents
 
 Coding agents often end with a confident little green check mark.
 
@@ -141,7 +148,7 @@ propose -> apply -> validate
 The planner owns reasoning. PatchSmith owns state changes, validation, artifacts,
 and the final claim.
 
-![PatchSmith repair pipeline](/assets/images/projects/patchsmith-repair-pipeline.svg)
+<img src="/assets/images/projects/patchsmith-repair-pipeline.svg" alt="PatchSmith repair pipeline" width="1180" height="620" loading="lazy" decoding="async">
 
 That boundary prevents a common agent benchmark problem. If the same system
 chooses context, edits the repository, changes the validation command, retries
@@ -166,7 +173,7 @@ inspect after the terminal window is gone.
 PatchSmith is CLI-first and file-artifact-first. There is no hosted service, no
 queue, and no database required for the core loop.
 
-![PatchSmith component architecture](/assets/images/projects/patchsmith-component-architecture.svg)
+<img src="/assets/images/projects/patchsmith-component-architecture.svg" alt="PatchSmith component architecture" width="1260" height="820" loading="lazy" decoding="async">
 
 The main loop is:
 
@@ -211,7 +218,7 @@ applied, the run is not a success. Each outcome gets a different failure class.
 
 The evidence loop is the part that makes PatchSmith more than a prompt wrapper.
 
-![PatchSmith evidence loop](/assets/images/projects/patchsmith-evidence-loop.svg)
+<img src="/assets/images/projects/patchsmith-evidence-loop.svg" alt="PatchSmith evidence loop" width="1180" height="620" loading="lazy" decoding="async">
 
 A run should let a later reader answer practical questions:
 
@@ -242,7 +249,7 @@ memory, subagents, permissions, and structured output.
 PatchSmith does not use DeepAgents as the whole product. It uses DeepAgents as a
 planner inside a repair harness.
 
-![PatchSmith DeepAgents contract](/assets/images/projects/patchsmith-deepagents-contract.svg)
+<img src="/assets/images/projects/patchsmith-deepagents-contract.svg" alt="PatchSmith DeepAgents contract" width="1180" height="620" loading="lazy" decoding="async">
 
 The integration gives DeepAgents a read-only virtual workspace:
 
@@ -341,7 +348,7 @@ Environment failures suggest benchmark setup work.
 That is why the run directory matters. It lets a failed attempt become an
 engineering signal instead of a vanished chat transcript.
 
-![PatchSmith run ledger](/assets/images/projects/patchsmith-run-ledger.svg)
+<img src="/assets/images/projects/patchsmith-run-ledger.svg" alt="PatchSmith run ledger" width="1180" height="620" loading="lazy" decoding="async">
 
 ## Next experiments
 
@@ -368,4 +375,4 @@ evidence visible sooner.
 - [PatchSmith artifact gallery](https://github.com/thromel/patchsmith/blob/main/docs/artifact_gallery.md)
 - [PatchSmith failure taxonomy](https://github.com/thromel/patchsmith/blob/main/docs/failure_taxonomy.md)
 
-<p><a href="https://github.com/thromel/patchsmith" target="_blank">View PatchSmith on GitHub</a></p>
+<p><a href="https://github.com/thromel/patchsmith" target="_blank" rel="noopener noreferrer" aria-label="View PatchSmith on GitHub (opens in a new tab)">View PatchSmith on GitHub</a></p>

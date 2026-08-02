@@ -123,6 +123,8 @@ positions:
 - name: Graduate Teaching and Research Assistant (GTA · GRA · GRAF), University of Alberta
   date: Starting September 1, 2026
   start_date: "2026-09-01"
+  start_label: "September 1, 2026"
+  date_prefix: "Starting"
   display_date: "Starting September 1, 2026"
   logo: "/assets/images/education/ualberta-logo.svg"
   logo_alt: "University of Alberta crest"
@@ -146,6 +148,9 @@ positions:
 - name: Remote Research Intern, UIUC
   date: June 2026 - August 2026
   start_date: "2026-06-01"
+  start_label: "June 2026"
+  end_date: "2026-08"
+  end_label: "August 2026"
   end_date_exclusive: "2026-09-01"
   display_date: "June–August 2026"
   logo: "/assets/images/companies/uiuc-block-i.png"
@@ -169,6 +174,9 @@ positions:
 - name: Software Development Engineer 1, IQVIA
   date: June 2023 - June 2026
   start_date: "2023-06-01"
+  start_label: "June 2023"
+  end_date: "2026-06"
+  end_label: "June 2026"
   end_date_exclusive: "2026-07-01"
   display_date: "June 2023–June 2026"
   logo: "/assets/images/companies/iqvia-logo.png"
@@ -219,6 +227,9 @@ positions:
 - name: Full Stack Engineer, Mindshare Bangladesh (Part-time)
   date: Apr 2021 - Nov 2021
   start_date: "2021-04-01"
+  start_label: "April 2021"
+  end_date: "2021-11"
+  end_label: "November 2021"
   end_date_exclusive: "2021-12-01"
   display_date: "April–November 2021"
   logo: "/assets/images/companies/mindshare-logo.png"
@@ -354,16 +365,16 @@ education:
   description: >-
     Starting the <strong>M.Sc in Computing Science</strong> program on <strong>September 1, 2026</strong>. My research interests are
     AI4SE, AI for SRE, LLM4Coding, trustworthy AI, and long-horizon coding agents. I will be joining the
-    <a href="https://u-a-goose.github.io/" target="_blank" rel="noopener noreferrer">U-A-Goose</a> software engineering group at the University of Alberta, supervised by
-    <a href="https://apps.ualberta.ca/directory/person/zy25" target="_blank" rel="noopener noreferrer">Dr. Zhou Yang</a>, with affiliation to
-    <a href="https://www.amii.ca/" target="_blank" rel="noopener noreferrer">Amii (Alberta Machine Intelligence Institute)</a>.
+    <a href="https://u-a-goose.github.io/" target="_blank" rel="noopener noreferrer" aria-label="U-A-Goose (opens in a new tab)">U-A-Goose</a> software engineering group at the University of Alberta, supervised by
+    <a href="https://apps.ualberta.ca/directory/person/zy25" target="_blank" rel="noopener noreferrer" aria-label="Dr. Zhou Yang (opens in a new tab)">Dr. Zhou Yang</a>, with affiliation to
+    <a href="https://www.amii.ca/" target="_blank" rel="noopener noreferrer" aria-label="Amii (opens in a new tab)">Amii (Alberta Machine Intelligence Institute)</a>.
   url: https://www.ualberta.ca/en/computing-science/index.html
   logo: /assets/images/education/ualberta-logo.svg
 - name: Bangladesh University of Engineering and Technology
   position: B.Sc in Computer Science and Engineering
   date: April 2018 - May 2023
   description: >-
-    <strong><a href="https://cse.buet.ac.bd/academics/fund" target="_blank" rel="noopener noreferrer">Dean's List Award</a></strong> - Level 2 (outstanding academic performance)
+    <strong><a href="https://cse.buet.ac.bd/academics/fund" target="_blank" rel="noopener noreferrer" aria-label="Dean's List Award (opens in a new tab)">Dean's List Award</a></strong> - Level 2 (outstanding academic performance)
     <br/><br/>
     <strong>Notable Courses:</strong> Machine Learning, High Performance Database Systems, Fault Tolerant Systems, Data Structure and Algorithms,
     Operating Systems, Computer Security
@@ -533,6 +544,31 @@ research_interests:
 - LLM4Coding
 - Trustworthy AI
 - Long-horizon coding agents
+
+selected_working_set:
+- type: "Systems and backend"
+  names:
+  - C#/.NET
+  - Python
+  - Go
+  - TypeScript
+- type: "AI and agent systems"
+  names:
+  - LLM evaluation
+  - RAG
+  - MCP
+  - LangGraph
+- type: "Data and cloud"
+  names:
+  - SQL Server
+  - MongoDB
+  - AWS S3
+- type: "Delivery and reliability"
+  names:
+  - Docker
+  - Kubernetes
+  - OpenTelemetry
+  - Playwright
 
 technical_skills:
 - type: "Languages & Systems"

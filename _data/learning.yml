@@ -271,7 +271,7 @@ resources:
     type: "Book"
     category: "DevOps"
     link: "https://itrevolution.com/product/the-devops-handbook-second-edition/"
-    description: "Creating world-class agility, reliability, and security."
+    description: "Practices for improving delivery agility, reliability, and security."
 
   - title: "AWS Certified Solutions Architect Study Guide"
     author: "Ben Piper & David Clinton"

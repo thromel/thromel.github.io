@@ -6,10 +6,14 @@ category: projects
 group: Projects
 show: true
 width: 8
-date: 2022-05-15 00:00:00 +0800
+date: 2022-05-15 00:00:00 +0600
 excerpt: Modified TCP Vegas implementation with dynamic aggressiveness to address fairness issues when competing with TCP Reno, achieving near-perfect fairness while preserving Vegas' efficiency advantages.
-thumbnail: /assets/images/projects/tcp-vegas-plus.png
-card_image: /assets/images/cards/tcp-vegas-card.svg
+problem: "Improve TCP Vegas fairness when it competes with Reno without discarding Vegas's delay-sensitive behavior."
+role: Co-implemented the Vegas+ modification and evaluated it in ns-3 simulations
+outcome: "The recorded experiments report Jain's fairness improving from 0.68 to 0.93 and throughput reaching 97% of Reno's result in the stated setup."
+status: Completed BUET networking course project
+repository: https://github.com/thromel/CSE-322-Computer-Networks-Sessional
+repository_status: Public course repository
 featured: true
 technologies:
   - C++
@@ -19,7 +23,6 @@ technologies:
   - Protocol Design
 ---
 
-# Enhancing TCP Fairness: Implementing and Evaluating TCP Vegas+ in NS3
 
 ## Introduction
 
@@ -229,7 +232,7 @@ The complete project code and documentation is available on [GitHub](https://git
 ## Network Researcher | 8-week Project | Protocol Implementation
 
 <div class="text-end mb-3">
-    <a href="https://github.com/thromel/CSE-322-Computer-Networks-Sessional" target="_blank" class="btn btn-sm btn-outline-dark">
+    <a href="https://github.com/thromel/CSE-322-Computer-Networks-Sessional" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline-dark" aria-label="View the TCP Vegas+ project on GitHub (opens in a new tab)">
         <i class="fab fa-github"></i> View on GitHub
     </a>
 </div> 

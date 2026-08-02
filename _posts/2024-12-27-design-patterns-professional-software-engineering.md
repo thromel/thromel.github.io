@@ -7,7 +7,6 @@ tags: [design-patterns, java, object-oriented, programming, software-engineering
 image: /assets/images/projects/design-patterns.png
 ---
 
-# Design Patterns: Your First Step Toward Professional Software Engineering
 
 Picture this scenario: You're building a messaging app for your software engineering class. At first, everything seems straightforward - users can send messages to each other, and you store everything in a simple database. But then requirements start piling up. Users want group chats, message reactions, read receipts, typing indicators, and the ability to share files. Suddenly, your neat little program becomes a tangled web of if-else statements and copy-pasted code. Sound familiar?
 

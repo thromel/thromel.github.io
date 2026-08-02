@@ -6,11 +6,20 @@ category: projects
 group: Projects
 show: true
 width: 8
-date: 2026-05-10 00:00:00 +0800
+date: 2026-05-10 00:00:00 +0600
 excerpt: A technical write-up on ctxhelm, a released Rust tool that helps coding agents inspect the right files before editing, and HelmBench, the source-free benchmark I am building to see whether that context changes real agent behavior.
 featured: true
 showcase_style: agent-tooling
+project_type: Open-source developer tool and evaluation system
+problem: "Help coding agents identify the repository evidence they need before editing, then measure whether that guidance improves real target-file reading."
+role: Creator and maintainer of ctxhelm; designer of the companion HelmBench evaluation harness
+outcome: "Released ctxhelm v2.4.0 through GitHub archives and Homebrew; a completed 10-task RefactoringMiner Codex matrix preserved solve and validation rates while improving retrieval-oriented measures."
+status: Released open-source tool; active evaluation work
+repository: https://github.com/thromel/ctxhelm
+repository_status: Public source repository
 card_image: /assets/images/projects/ctxhelm-system-architecture.svg
+visual_width: 1200
+visual_height: 720
 technologies:
   - Rust
   - MCP
@@ -25,7 +34,6 @@ technologies:
   - CLI
 ---
 
-# ctxhelm: engineering an agent-native context compiler
 
 ctxhelm solves a problem I kept running into while using coding agents: the agents were rarely blocked by editing. They were blocked by context. They would grep around, open plausible files, read too much, miss the one test that mattered, and then make a change that looked reasonable but had the wrong shape for the repository.
 
@@ -80,7 +88,7 @@ The current public release, `v2.4.0`, can scan a repository, build a safe invent
     <article>
       <span>Codex reads</span>
       <strong>1.00</strong>
-      <p>Retry-enabled ctxhelm lanes reached full target-read coverage versus baseline <code>0.7083333333333333</code>.</p>
+      <p>Retry-enabled ctxhelm lanes reached full target-read coverage versus a <code>70.8%</code> baseline.</p>
     </article>
     <article>
       <span>HelmBench</span>
@@ -111,7 +119,7 @@ The parts I trust most:
 - `v2.4.0` is published with release archives, audit and manifest files, checksum verification, public archive install proof, Homebrew formula verification, and a clean release gate.
 - The four-repo product proof reports zero protected target misses across RefactoringMiner, ctxhelm, ReAgent, and VeriSchema.
 - The agent-evidence retrieval channel beats or matches lexical on measured corpora, with average Recall@10 delta `+0.19379663`.
-- Codex CLI real-client proof is current: retry-enabled ctxhelm lanes reached `1.00` average target-read coverage versus baseline `0.7083333333333333`, with no evidence misses, evidence-only targets, under-read targets, forbidden commands, client failures, or rate limits.
+- Codex CLI real-client proof is current: retry-enabled ctxhelm lanes reached `1.00` average target-read coverage versus a `70.8%` baseline, with no evidence misses, evidence-only targets, under-read targets, forbidden commands, client failures, or rate limits.
 - Memory reuse is guarded by source-free Codex outcome suites, including cases where memory improves target reads and reduces irrelevant reads.
 - Release-gate hygiene is now stricter: distribution metadata smoke writes to a temp path by default, and the release gate fails if validation leaves a dirty worktree.
 
@@ -122,7 +130,7 @@ The parts I am still careful about:
 - Semantic retrieval remains diagnostic and opt-in. The R&D cycle rejected repeated semantic default-promotion attempts because they did not produce stable no-regress lift.
 - ctxhelm does not replace Sourcegraph, Cursor, Claude Code, Codex, or OpenCode. It focuses on local, source-free evidence routing and outcome measurement for those agents.
 
-![ctxhelm system architecture](/assets/images/projects/ctxhelm-system-architecture.svg)
+<img src="/assets/images/projects/ctxhelm-system-architecture.svg" alt="ctxhelm system architecture" width="1200" height="720" loading="lazy" decoding="async">
 
 ## The actual problem
 
@@ -172,7 +180,7 @@ The user-facing consequence is simple: the agent starts with the files and tests
 
 ## Retrieval pipeline
 
-![ctxhelm retrieval pipeline](/assets/images/projects/ctxhelm-retrieval-pipeline.svg)
+<img src="/assets/images/projects/ctxhelm-retrieval-pipeline.svg" alt="ctxhelm retrieval pipeline" width="1200" height="760" loading="lazy" decoding="async">
 
 The pipeline begins with task classification. A bug fix, refactor, review, test-writing task, and architecture question need different evidence.
 
@@ -246,7 +254,7 @@ ctxhelm has a few core contract types.
 
 ## Storage and privacy
 
-![ctxhelm storage and contracts](/assets/images/projects/ctxhelm-storage-contracts.svg)
+<img src="/assets/images/projects/ctxhelm-storage-contracts.svg" alt="ctxhelm storage and contracts" width="1200" height="720" loading="lazy" decoding="async">
 
 The storage design is intentionally plain: local metadata, local reports, local state. This is not a hosted index.
 
@@ -296,7 +304,7 @@ That detail is small, but it decides whether the tool works in a real agent sess
 
 ## Evaluation
 
-![ctxhelm evaluation loop](/assets/images/projects/ctxhelm-eval-loop.svg)
+<img src="/assets/images/projects/ctxhelm-eval-loop.svg" alt="ctxhelm evaluation loop" width="1200" height="720" loading="lazy" decoding="async">
 
 I do not trust context tooling without evals. It is too easy to add a graph, embedding, or reranker and convince yourself it helped because the output looks smarter.
 
@@ -393,4 +401,4 @@ I keep coming back to one question:
 
 That is the real project. ctxhelm does not help agents write code. It helps them look in the right place before they write code. HelmBench then checks whether that guidance survived contact with real agent behavior.
 
-<p><a href="https://github.com/thromel/ctxhelm" target="_blank">View ctxhelm on GitHub</a> · <a href="https://github.com/thromel/helmbench" target="_blank">View HelmBench on GitHub</a></p>
+<p><a href="https://github.com/thromel/ctxhelm" target="_blank" rel="noopener noreferrer" aria-label="View ctxhelm on GitHub (opens in a new tab)">View ctxhelm on GitHub</a> · <a href="https://github.com/thromel/helmbench" target="_blank" rel="noopener noreferrer" aria-label="View HelmBench on GitHub (opens in a new tab)">View HelmBench on GitHub</a></p>

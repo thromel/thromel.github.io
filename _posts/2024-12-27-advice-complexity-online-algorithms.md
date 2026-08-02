@@ -7,7 +7,6 @@ tags: [online-algorithms, advice-complexity, competitive-analysis, algorithm-eng
 image: /assets/images/projects/online-algorithms.png
 ---
 
-# Advice Complexity in Online Algorithms: When Knowing the Future Makes All the Difference
 
 Picture this scenario: You're managing a cache for a web server, and requests are coming in real-time. You have limited memory and must decide which pages to keep cached and which to evict, but you have no idea what the next request will be. This is the essence of an **online algorithm** - making decisions with incomplete information while being judged against an optimal solution that knows the entire future.
 
@@ -1416,4 +1415,4 @@ Remember: every online algorithm you'll encounter in practice - from cache repla
 
 ---
 
-*This post provides an introduction to advice complexity suitable for undergraduate students. The field continues to evolve rapidly, with new results appearing regularly in theoretical computer science conferences. For the most current research, consult recent proceedings of ICALP, STOC, FOCS, and other top-tier venues.* 
+*This post provides an introduction to advice complexity suitable for undergraduate students. The field continues to evolve rapidly, with new results appearing regularly in theoretical computer science conferences. For the most current research, consult recent proceedings of ICALP, STOC, FOCS, and other top-tier venues.*

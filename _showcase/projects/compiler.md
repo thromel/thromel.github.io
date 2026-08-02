@@ -6,9 +6,17 @@ category: projects
 group: Projects
 show: true
 width: 8
-date: 2022-04-15 00:00:00 +0800
+date: 2022-04-15 00:00:00 +0600
 excerpt: A sophisticated multi-pass compiler for a subset of C programming language, featuring lexical analysis, syntax analysis, semantic analysis, intermediate code generation, and assembly optimization.
+problem: "Translate a practical subset of C through a complete, inspectable compiler pipeline with useful diagnostics and generated assembly."
+role: Implemented the multi-pass compiler pipeline, symbol-table handling, validation, and technical documentation
+outcome: "Completed lexical, syntax, and semantic analysis, intermediate-code generation, assembly output, and optimization stages."
+status: Completed BUET compiler course project
+repository: https://github.com/thromel/Yet-Another-C-Compiler
+repository_status: Public course repository
 thumbnail: /assets/images/projects/compiler-thumbnail.png
+visual_width: 1836
+visual_height: 135
 featured: true
 technologies:
   - C++
@@ -18,7 +26,6 @@ technologies:
   - Compiler Design
 ---
 
-# Building a C Compiler: A Comprehensive Guide to Intermediate Code Generation
 
 ## Introduction to Compiler Design
 
@@ -982,7 +989,7 @@ These resources provide deeper explorations of compiler theory and practice, fro
 ## Lead Developer | 12-week Project | Systems Programming
 
 <div class="text-end mb-3">
-    <a href="https://github.com/thromel/Yet-Another-C-Compiler" target="_blank" class="btn btn-sm btn-outline-dark">
+    <a href="https://github.com/thromel/Yet-Another-C-Compiler" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline-dark" aria-label="View the compiler project on GitHub (opens in a new tab)">
         <i class="fab fa-github"></i> View on GitHub
     </a>
 </div>

@@ -1,0 +1,19 @@
+{% assign item = include.item %}
+<article class="publication-record" data-publication-record data-publication-title="{{ item.title | escape }}">
+  <p class="publication-record__year"><time datetime="{{ item.pub_date }}">{{ item.pub_date }}</time></p>
+  {% if item.cover %}
+  <figure class="publication-record__cover">
+    <img src="{{ item.cover | relative_url }}" alt="Cover image for {{ item.title | escape }}" width="{{ item.cover_width }}" height="{{ item.cover_height }}" loading="lazy" decoding="async" data-publication-cover>
+  </figure>
+  {% endif %}
+  <div class="publication-record__body{% unless item.cover %} publication-record__body--wide{% endunless %}">
+    <p class="publication-record__status">{{ item.status_label }}{% if item.status_updated %} · verified <time datetime="{{ item.status_updated }}">{{ item.status_updated | date: '%B %-d, %Y' }}</time>{% endif %}</p>
+    <h3>{{ item.title }}</h3>
+    <p class="publication-record__citation" data-publication-citation><cite>{% if item.authors %}{{ item.authors | join: ', ' }}. {% endif %}<span class="publication-record__title">{{ item.title }}.</span> {% if item.pub_pre %}{{ item.pub_pre }}{% endif %}{{ item.pub }}{% if item.pub_date %}, {{ item.pub_date }}{% endif %}.</cite></p>
+    <p>{{ item.abstract }}</p>
+    <p class="record-links">
+      {% if item.primary_link %}<a href="{{ item.primary_link | relative_url }}"{% if item.primary_external %} target="_blank" rel="noopener noreferrer" aria-label="{{ item.primary_label | default: 'Primary artifact' | escape }} for {{ item.title | escape }} (opens in a new tab)"{% endif %}>{{ item.primary_label | default: 'Primary artifact' }}</a>{% endif %}
+      {% for link in item.links %}<a href="{{ link[1] | relative_url }}"{% if link[1] contains '://' %} target="_blank" rel="noopener noreferrer" aria-label="{{ link[0] | escape }} for {{ item.title | escape }} (opens in a new tab)"{% endif %}>{{ link[0] }}</a>{% endfor %}
+    </p>
+  </div>
+</article>

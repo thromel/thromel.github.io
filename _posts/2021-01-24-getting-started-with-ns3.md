@@ -7,9 +7,8 @@ tags: [ns3, network-simulation, cpp, networking, tutorial, campus-network]
 image: /assets/images/projects/ns3-simulation.png
 ---
 
-# Getting Started with NS3: A Hands-On Guide to Network Simulation
 
-<img src="{{ '/assets/images/ns3_campus_network_topology.png' | relative_url }}" class="img-fluid mb-4" alt="NS3 Campus Network Topology">
+<img src="{{ '/assets/images/ns3_campus_network_topology.png' | relative_url }}" class="img-fluid mb-4" alt="NS3 Campus Network Topology" width="1096" height="992" decoding="async">
 
 ## What We're Building Today
 
@@ -52,7 +51,7 @@ NS3 works like digital LEGO blocks. Each module represents a different networkin
 - **Protocol Stack Module**: The software that handles networking (like TCP/IP)
 - **Application Module**: Programs that generate network traffic (video servers, web browsers)
 
-<img src="{{ '/assets/images/ns3_building_blocks.png' | relative_url }}" class="img-fluid mb-4" alt="NS3 Building Blocks Architecture">
+<img src="{{ '/assets/images/ns3_building_blocks.png' | relative_url }}" class="img-fluid mb-4" alt="NS3 Building Blocks Architecture" width="911" height="528" loading="lazy" decoding="async">
 
 Let's see how these pieces fit together by building our campus network simulation.
 
