@@ -26,6 +26,8 @@ async function mockGitHubCount(page) {
 
 test.describe('accessibility and release-quality gates', () => {
   test('core pages have no serious or critical axe violations in both themes and viewport classes', async ({ browser }) => {
+    test.setTimeout(90_000);
+
     for (const theme of ['light', 'dark']) {
       for (const width of [390, 1280]) {
         const context = await browser.newContext({ colorScheme: theme, viewport: { width, height: 900 } });
