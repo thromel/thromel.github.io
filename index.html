@@ -77,8 +77,12 @@ description: Researcher and software engineer studying inspectable, reliable, an
           </dl>
           <p class="record-links">
             {% for link in item.links %}<a href="{{ link.url | relative_url }}"{% if link.url contains '://' %} target="_blank" rel="noopener noreferrer" aria-label="{{ link.label }} (opens in a new tab)"{% endif %}>{{ link.label }}</a>{% endfor %}
+          </p>
+          {% if item.related_evidence %}
+          <p class="related-evidence" aria-label="Related evidence">
             {% for link in item.related_evidence %}<a class="related-evidence-link" data-related-evidence href="{{ link.url | relative_url }}"{% if link.url contains '://' %} target="_blank" rel="noopener noreferrer" aria-label="{{ link.label }} (opens in a new tab)"{% endif %}>{{ link.label }}</a>{% endfor %}
           </p>
+          {% endif %}
         </article>
       </li>
       {% endfor %}

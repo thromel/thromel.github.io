@@ -628,7 +628,7 @@ summary {
   object-position: center 32%;
 }
 
-.home-evidence { background: transparent; }
+.home-evidence { background: var(--paper-elevated); }
 
 .evidence-ledger,
 .research-agenda-ledger,
@@ -1221,7 +1221,19 @@ summary {
   color: var(--muted);
 }
 .secondary-record__outcome { color: var(--ink); }
-.secondary-record .record-links { margin-top: var(--s-3); }
+
+.related-evidence {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2) var(--s-3);
+  margin-top: var(--s-2);
+}
+
+.related-evidence a {
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+}
 
 .case-study-summary,
 .research-detail-summary {
@@ -1821,11 +1833,9 @@ summary {
 
 @keyframes ledger-enter {
   from {
-    opacity: 0;
     transform: translateY(8px);
   }
   to {
-    opacity: 1;
     transform: none;
   }
 }
