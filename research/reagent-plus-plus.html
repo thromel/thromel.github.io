@@ -5,15 +5,13 @@ navbar_title: Research
 description: Abstract-level summary of SHIFT, submitted to TACL 2026 on aligned backdoor attacks in LLM agents.
 ---
 
+{% assign detail = site.data.research.detail_pages.shift %}
+
 <section class="academic-section research-detail" aria-labelledby="shift-title">
   <p class="eyebrow">Agent security · abstract-level summary</p>
   <h1 id="shift-title">The Choice Can Be the Attack: Auditing Aligned Backdoors in LLM Agents</h1>
   <p class="research-detail__intro">Submitted to TACL 2026 with <a href="https://cse.buet.ac.bd/faculty/faculty_detail/rakinhaider" target="_blank" rel="noopener noreferrer" aria-label="Chowdhury Rakin Haider (opens in a new tab)">Chowdhury Rakin Haider</a>. The manuscript is not public, so this record is deliberately limited to an abstract-level summary.</p>
-  <dl class="research-detail__meta">
-    <div><dt>Status</dt><dd>Submitted to TACL 2026</dd></div>
-    <div><dt>Public boundary</dt><dd>Abstract-level summary · manuscript not public</dd></div>
-    <div><dt>Last verified</dt><dd><time datetime="2026-07-10">July 10, 2026</time></dd></div>
-  </dl>
+  {% include research-detail-summary.html detail=detail %}
   <div class="research-detail__body">
       <p>
         LLM agents can be backdoored without visibly failing the task. A trigger can make an agent prefer one valid option over another,

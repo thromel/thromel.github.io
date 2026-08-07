@@ -86,6 +86,7 @@ case "${MODE}" in
       "tests/research-dossier.spec.js"
       "tests/records-and-contributions.spec.js"
       "tests/secondary-routes.spec.js"
+      "tests/depth-continuity.spec.js"
       "tests/profile-links.spec.js"
       "tests/quality-gates.spec.js"
       "tests/seo-completeness.spec.js"

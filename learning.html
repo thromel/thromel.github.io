@@ -13,36 +13,43 @@ description: Current books, selected university courses, lecture series, and tec
 
 <section class="academic-section">
   <div class="section-trace"><span aria-hidden="true">01</span><div><p class="eyebrow">Current</p><h2>Currently learning</h2></div></div>
-  {% for item in site.data.learning.currently_learning %}
-  <article class="academic-entry">
-    <h3>{{ item.title }}</h3>
-    <p class="academic-entry__meta">{{ item.type }} · {{ item.category }} · {{ item.progress }}% complete</p>
-  </article>
-  {% endfor %}
+  <ol class="secondary-record-list">
+    {% for item in site.data.learning.currently_learning %}
+    <li>
+      {% assign learning_context = item.type | append: ' · ' | append: item.category %}
+      {% assign learning_outcome = item.progress | append: '% complete' %}
+      {% include secondary-record.html title=item.title context=learning_context outcome=learning_outcome eyebrow="In progress" %}
+    </li>
+    {% endfor %}
+  </ol>
 </section>
 
 <section class="academic-section">
   <div class="section-trace"><span aria-hidden="true">02</span><div><p class="eyebrow">Courses</p><h2>Selected courses and academic playlists</h2></div></div>
   <p>A compact list of university courses, lecture series, and academic playlists I revisit regularly.</p>
-  {% for group in site.data.learning.selected_courses %}
-  <article class="academic-entry">
-    <h3>{{ group.provider }}</h3>
-    <ul class="learning-link-list">
+  <ol class="secondary-record-list">
+    {% for group in site.data.learning.selected_courses %}
       {% for item in group.items %}
-      <li class="learning-link-item"><a href="{{ item.link }}" target="_blank" rel="noopener noreferrer" aria-label="{{ item.title | escape }} (opens in a new tab)">{{ item.title }}</a> <span class="academic-entry__meta">{{ item.type }} · {{ item.focus }}</span></li>
+      <li>
+        {% assign course_context = group.provider | append: ' · ' | append: item.type | append: ' · ' | append: item.focus %}
+        {% assign course_outcome = item.description | default: item.focus %}
+        {% include secondary-record.html title=item.title context=course_context outcome=course_outcome proof_url=item.link proof_label="Open course" eyebrow="Course" %}
+      </li>
       {% endfor %}
-    </ul>
-  </article>
-  {% endfor %}
+    {% endfor %}
+  </ol>
 </section>
 
 <section class="academic-section">
   <div class="section-trace"><span aria-hidden="true">03</span><div><p class="eyebrow">References</p><h2>Recommended resources</h2></div></div>
-  {% for resource in site.data.learning.resources %}
-  <article class="academic-entry">
-    <h3><a href="{{ resource.link }}" target="_blank" rel="noopener noreferrer" aria-label="{{ resource.title | escape }} (opens in a new tab)">{{ resource.title }}</a></h3>
-    <p class="academic-entry__meta">{{ resource.type }}{% if resource.author %} · {{ resource.author }}{% endif %} · {{ resource.category }}</p>
-    <p>{{ resource.description }}</p>
-  </article>
-  {% endfor %}
+  <ol class="secondary-record-list">
+    {% for resource in site.data.learning.resources %}
+    <li>
+      {% assign resource_context = resource.type %}
+      {% if resource.author %}{% assign resource_context = resource_context | append: ' · ' | append: resource.author %}{% endif %}
+      {% assign resource_context = resource_context | append: ' · ' | append: resource.category %}
+      {% include secondary-record.html title=resource.title context=resource_context outcome=resource.description proof_url=resource.link proof_label="Open resource" eyebrow="Reference" %}
+    </li>
+    {% endfor %}
+  </ol>
 </section>

@@ -215,6 +215,11 @@ homepage:
           url: "https://www.sregym.com/"
         - label: "Public repository"
           url: "https://github.com/SREGym/SREGym"
+      related_evidence:
+        - label: "Research dossier"
+          url: "/research/"
+        - label: "Experience record"
+          url: "/experience/"
 
     - id: ctxhelm
       type: Engineering
@@ -241,6 +246,11 @@ homepage:
           url: "/showcase/projects/ctxhelm/"
         - label: "GitHub repository"
           url: "https://github.com/thromel/ctxhelm"
+      related_evidence:
+        - label: "Related · ContextLedger"
+          url: "/showcase/projects/contextledger/"
+        - label: "Open-source contributions"
+          url: "/contributions/"
 
     - id: ml-hosting-rce
       type: Research
@@ -275,6 +285,11 @@ homepage:
           url: "https://arxiv.org/abs/2601.14163"
         - label: "Research summary"
           url: "/research/ml-remote-code-execution/"
+      related_evidence:
+        - label: "Publication record"
+          url: "/publications/"
+        - label: "Research dossier"
+          url: "/research/"
 
     - id: refactoringminer-mcp
       type: Engineering
@@ -297,6 +312,11 @@ homepage:
           url: "https://github.com/tsantalis/RefactoringMiner/pull/1087"
         - label: "RefactoringMiner repository"
           url: "https://github.com/tsantalis/RefactoringMiner"
+      related_evidence:
+        - label: "Curated contributions"
+          url: "/contributions/"
+        - label: "Engineering projects"
+          url: "/projects/"
 
   research_agenda:
     - id: long-horizon-coding-agents
@@ -460,3 +480,41 @@ contact:
   copy: >-
     If you are studying dependable AI agents or building reliable software systems, I
     would be glad to compare research questions, evaluation evidence, or engineering tradeoffs.
+
+detail_pages:
+  ml_hosting_rce:
+    status: "Under review at ICSE 2027"
+    publicity: "Public arXiv artifact"
+    methods:
+      - static analysis
+      - CodeQL
+      - Semgrep
+      - YARA
+      - qualitative analysis
+    last_verified: "2026-07-10"
+    artifacts:
+      - label: "arXiv record"
+        url: "https://arxiv.org/abs/2601.14163"
+      - label: "PDF"
+        url: "https://arxiv.org/pdf/2601.14163"
+    related_engineering:
+      - label: "Engineering projects"
+        url: "/projects/"
+      - label: "Publication record"
+        url: "/publications/"
+  shift:
+    status: "Submitted to TACL 2026"
+    publicity: "Abstract-level summary · manuscript not public"
+    methods:
+      - known-trigger audit
+      - matched task pairs
+      - choice-feature accounting
+    last_verified: "2026-07-10"
+    artifacts:
+      - label: "Evidence record"
+        url: "/research/#shift"
+    related_engineering:
+      - label: "ctxhelm case study"
+        url: "/showcase/projects/ctxhelm/"
+      - label: "Research dossier"
+        url: "/research/"

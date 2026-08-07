@@ -1,0 +1,15 @@
+{% assign detail = include.detail %}
+<aside class="research-detail-summary" data-research-detail-summary aria-label="Research evidence summary">
+  <dl class="research-detail__meta">
+    {% if detail.status %}<div><dt>Status</dt><dd>{{ detail.status }}</dd></div>{% endif %}
+    {% if detail.publicity %}<div><dt>Public boundary</dt><dd>{{ detail.publicity }}</dd></div>{% endif %}
+    {% if detail.methods %}<div><dt>Methods</dt><dd>{{ detail.methods | join: ' · ' }}</dd></div>{% endif %}
+    {% if detail.last_verified %}<div><dt>Last verified</dt><dd><time datetime="{{ detail.last_verified }}">{{ detail.last_verified }}</time></dd></div>{% endif %}
+  </dl>
+  {% if detail.artifacts or detail.related_engineering %}
+  <p class="record-links">
+    {% for link in detail.artifacts %}<a href="{{ link.url | relative_url }}"{% if link.url contains '://' %} target="_blank" rel="noopener noreferrer" aria-label="{{ link.label | escape }} (opens in a new tab)"{% endif %}>{{ link.label }}</a>{% endfor %}
+    {% for link in detail.related_engineering %}<a href="{{ link.url | relative_url }}"{% if link.url contains '://' %} target="_blank" rel="noopener noreferrer" aria-label="{{ link.label | escape }} (opens in a new tab)"{% endif %}>{{ link.label }}</a>{% endfor %}
+  </p>
+  {% endif %}
+</aside>

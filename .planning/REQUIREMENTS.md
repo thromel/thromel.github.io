@@ -111,13 +111,13 @@
 
 ### Content Evolution
 
-- **CONT-01**: Maintainer can refresh site positioning or rewrite major sections of copy as a separate editorial pass
-- **CONT-02**: Maintainer can expand portfolio storytelling with new case-study or research-detail formats
+- [x] **CONT-01**: Maintainer can refresh site positioning or rewrite major sections of copy as a separate editorial pass
+- [x] **CONT-02**: Maintainer can expand portfolio storytelling with new case-study or research-detail formats
 
 ### Platform Improvements
 
-- **PLAT-01**: Maintainer can formalize CI-backed browser, accessibility, and performance checks with a committed toolchain manifest
-- **PLAT-02**: Maintainer can revisit offline/PWA capabilities if they become part of the site's core value
+- [x] **PLAT-01**: Maintainer can formalize CI-backed browser, accessibility, and performance checks with a committed toolchain manifest
+- **PLAT-02**: Maintainer can revisit offline/PWA capabilities if they become part of the site's core value — deferred; `sw.js` remains an unregister kill-switch and no manifest is shipped
 
 ## Out of Scope
 
@@ -177,14 +177,19 @@
 | OVERHAUL-05 | Phase 12 | Complete |
 | OVERHAUL-06 | Phase 12 | Complete |
 | OVERHAUL-07 | Phase 12 | Complete |
+| CONT-01 | Phase 16 | Complete |
+| CONT-02 | Phase 14 | Complete |
+| PLAT-01 | Phase 17 | Complete |
+| PLAT-02 | Phase 17 | Deferred |
 
 **Coverage:**
 - v1 requirements: 19 total
 - v1.1 requirements: 15 total
 - v2 requirements: 11 total
-- Mapped to phases: 45
+- v2.1 content/platform: 4 total (3 complete, 1 deferred)
+- Mapped to phases: 49
 - Unmapped: 0 ✓
 
 ---
 *Requirements defined: 2026-04-09*
-*Last updated: 2026-08-02 after Phase 12 independent acceptance*
+*Last updated: 2026-08-07 after Depth & Continuity milestone*

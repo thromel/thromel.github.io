@@ -361,7 +361,11 @@ education:
 - name: University of Alberta
   position: M.Sc in Computing Science
   date: Starting September 2026
+  start_date: "2026-09-01"
+  start_label: Starting September 2026
   status: Incoming
+  logo_width: 256
+  logo_height: 256
   description: >-
     Starting the <strong>M.Sc in Computing Science</strong> program on <strong>September 1, 2026</strong>. My research interests are
     AI4SE, AI for SRE, LLM4Coding, trustworthy AI, and long-horizon coding agents. I will be joining the
@@ -373,6 +377,12 @@ education:
 - name: Bangladesh University of Engineering and Technology
   position: B.Sc in Computer Science and Engineering
   date: April 2018 - May 2023
+  start_date: "2018-04"
+  end_date: "2023-05"
+  start_label: April 2018
+  end_label: May 2023
+  logo_width: 80
+  logo_height: 80
   description: >-
     <strong><a href="https://cse.buet.ac.bd/academics/fund" target="_blank" rel="noopener noreferrer" aria-label="Dean's List Award (opens in a new tab)">Dean's List Award</a></strong> - Level 2 (outstanding academic performance)
     <br/><br/>
@@ -441,12 +451,24 @@ education:
 - name: Rajshahi College
   position: Higher Secondary Certificate (HSC)
   date: 2015 - 2017
+  start_date: "2015"
+  end_date: "2017"
+  start_label: "2015"
+  end_label: "2017"
+  logo_width: 64
+  logo_height: 64
   description: Placed 15th in Rajshahi Board, received Talentpool Scholarship, A+ in all subjects with 96.5% marks in Physics, Chemistry, and Higher Mathematics
   url: https://rc.edu.bd
   logo: /assets/images/education/rajshahi-college-logo-cropped.png
 - name: Rajshahi Collegiate School
   position: Secondary School Certificate (SSC)
   date: 2007 - 2015
+  start_date: "2007"
+  end_date: "2015"
+  start_label: "2007"
+  end_label: "2015"
+  logo_width: 265
+  logo_height: 239
   description: A+ in all subjects, received General Scholarship
   url: https://rcs.edu.bd
   logo: /assets/images/education/rajshahi-collegiate-school-logo.png
@@ -456,8 +478,11 @@ education:
 awards:
 - name: 2nd place, Bangla Handwritten Digits Recognition contest
   date: November 2022
+  datetime: "2022-11"
   organization: BUET (Department of CSE)
   type: Competition
+  outcome: Placed 2nd of 120 students with a from-scratch NumPy CNN at 95.9% NumtaDB test accuracy.
+  proof_label: Repository evidence
   description: >-
     Placed 2nd among 120 students in the CSE 472 Machine Learning Lab competition at BUET, building a custom CNN for Bangla
     digits recognition from scratch using only NumPy and OpenCV. Achieved 95.9% test accuracy on the NumtaDB benchmark by
@@ -467,8 +492,11 @@ awards:
   url: https://github.com/thromel/CSE-472-Machine-Learning
 - name: Finalist, Blockchain Olympiad Bangladesh 2021
   date: April 2021
+  datetime: "2021-04"
   organization: Bangladesh Blockchain Olympiad
   type: Competition
+  outcome: Selected among 40 national finalists for a blockchain ticketing platform with smart-contract validation.
+  proof_label: Competition record
   description: >-
     Selected as one of the 40 finalists with our project "<a href="/showcase/projects/blockchain-ticketing/">Blockchain Based Ticketing Platform</a>".
     Participated as part of the "Recursively Enumerable" team with <a href="https://fazledyn.github.io" target="_blank">Ataf Fazledin Ahamed</a> and <a href="https://www.linkedin.com/in/md-tanzim-azad-a879a51b7/" target="_blank">Md. Tanzim Azad Nishan</a>.
@@ -485,6 +513,8 @@ awards:
   date: BUET Level-2
   organization: BUET
   type: Honors & Awards
+  outcome: Recognized for Level-2 cumulative GPA of 3.75 or higher out of 4.0.
+  proof_label: Dean's List notice
   description: >-
     Received the Dean's List for academic performance during Level-2 (sophomore year) at Bangladesh University of Engineering and
     Technology (BUET). The Dean's List is awarded to undergraduates who earn a cumulative GPA of 3.75 or higher out of 4.0 in an
@@ -495,8 +525,10 @@ awards:
   url: https://cse.buet.ac.bd/academics/fund
 - name: Bangladesh Physics Olympiad (BdPhO) National prize winner
   date: 2017
+  datetime: "2017"
   organization: Bangladesh Physics Olympiad
   type: Competition
+  outcome: National prize in the BdPhO selection path for the International Physics Olympiad.
   description: >-
     Earned national recognition in the Bangladesh Physics Olympiad (BdPhO) 2017.
     <br/><br/>
@@ -507,8 +539,10 @@ awards:
     electromagnetism, thermodynamics, optics, and modern physics.
 - name: Bangladesh Chemistry Olympiad National prize winner
   date: 2017
+  datetime: "2017"
   organization: Bangladesh Chemistry Olympiad
   type: Competition
+  outcome: National prize in the Bangladesh Chemistry Olympiad selection path for IChO.
   description: >-
     Achieved national recognition in the Bangladesh Chemistry Olympiad 2017.
     <br/><br/>
@@ -520,8 +554,10 @@ awards:
     for studying Computer Science and Engineering and supported my BUET admission.
 - name: Talentpool HSC Scholarship
   date: 2017
+  datetime: "2017"
   organization: Rajshahi Education Board
   type: Honors & Awards
+  outcome: Merit scholarship for placing 15th in the Rajshahi Board HSC results.
   description: >-
     Received the Talentpool Scholarship from the Rajshahi Education Board for HSC performance, placing 15th in the Rajshahi Board with
     95.6% marks in Physics, Chemistry, and Higher Mathematics.
@@ -530,8 +566,11 @@ awards:
     across Bangladesh based on academic results.
 - name: IQVIA Impact Program - Silver
   date: May 2025
+  datetime: "2025-05"
   organization: IQVIA
   type: Recognition
+  outcome: Silver recognition for delivery on critical KPI Library work and product improvements.
+  proof_label: Certificate
   description: >-
     For completing key tasks, resolving critical issues, supporting team processes, and delivering features that improved the product.
     <br/>

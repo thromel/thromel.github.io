@@ -1,0 +1,21 @@
+{% if page.case_study or page.problem %}
+<aside class="case-study-summary" data-case-study-summary aria-labelledby="case-study-summary-title">
+  <p class="eyebrow" id="case-study-summary-title">Evidence summary</p>
+  <dl class="case-study-summary__meta">
+    {% if page.problem %}<div><dt>Problem</dt><dd>{{ page.problem }}</dd></div>{% endif %}
+    {% if page.role %}<div><dt>Role</dt><dd>{{ page.role }}</dd></div>{% endif %}
+    {% if page.constraints %}<div><dt>Constraints</dt><dd>{{ page.constraints }}</dd></div>{% endif %}
+    {% if page.approach %}<div><dt>Approach</dt><dd>{{ page.approach }}</dd></div>{% endif %}
+    {% if page.outcome %}<div><dt>Outcome</dt><dd>{{ page.outcome }}</dd></div>{% endif %}
+    {% if page.status %}<div><dt>Status</dt><dd>{{ page.status }}</dd></div>{% endif %}
+    {% if page.last_verified %}<div><dt>Verified</dt><dd><time datetime="{{ page.last_verified }}">{{ page.last_verified }}</time></dd></div>{% endif %}
+  </dl>
+  {% if page.proof_links or page.repository or page.related_evidence %}
+  <p class="record-links">
+    {% if page.repository %}<a href="{{ page.repository }}" target="_blank" rel="noopener noreferrer" aria-label="Repository for {{ page.title | escape }} (opens in a new tab)">Repository</a>{% endif %}
+    {% for link in page.proof_links %}<a href="{{ link.url | relative_url }}"{% if link.url contains '://' %} target="_blank" rel="noopener noreferrer" aria-label="{{ link.label | escape }} (opens in a new tab)"{% endif %}>{{ link.label }}</a>{% endfor %}
+    {% for link in page.related_evidence %}<a href="{{ link.url | relative_url }}"{% if link.url contains '://' %} target="_blank" rel="noopener noreferrer" aria-label="{{ link.label | escape }} (opens in a new tab)"{% endif %}>{{ link.label }}</a>{% endfor %}
+  </p>
+  {% endif %}
+</aside>
+{% endif %}

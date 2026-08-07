@@ -15,12 +15,14 @@ description: Dated updates on graduate study, research, engineering work, writin
 {% for year in news_by_year %}
 <section class="academic-section" id="year-{{ year.name }}">
   <div class="section-trace"><span aria-hidden="true">{{ forloop.index | prepend: '0' }}</span><div><p class="eyebrow">Year</p><h2>{{ year.name }}</h2></div></div>
-  {% for item in year.items %}
-  <article class="academic-entry">
-    <h3>{% if item.url %}<a href="{{ item.url | relative_url }}"{% if item.url contains '://' %} target="_blank" rel="noopener noreferrer" aria-label="{{ item.title | escape }} (opens in a new tab)"{% endif %}>{{ item.title }}</a>{% else %}{{ item.title }}{% endif %}</h3>
-    <p class="academic-entry__meta"><time datetime="{{ item.date | date: '%Y-%m-%d' }}">{{ item.date | date: "%b %d, %Y" }}</time></p>
-    {% if item.description %}<p>{{ item.description }}</p>{% endif %}
-  </article>
-  {% endfor %}
+  <ol class="secondary-record-list">
+    {% for item in year.items %}
+    <li>
+      {% assign news_date_label = item.date | date: "%b %d, %Y" %}
+      {% assign news_datetime = item.date | date: "%Y-%m-%d" %}
+      {% include secondary-record.html title=item.title context="Update" date=news_date_label datetime=news_datetime outcome=item.description proof_url=item.url proof_label="Open update" eyebrow="News" %}
+    </li>
+    {% endfor %}
+  </ol>
 </section>
 {% endfor %}

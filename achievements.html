@@ -15,13 +15,21 @@ description: Competition results, academic honors, scholarships, and workplace r
 {% for type in achievements_by_type %}
 <section class="academic-section achievement-group">
   <div class="section-trace"><span aria-hidden="true">0{{ forloop.index }}</span><div><p class="eyebrow">Recognition group</p><h2>{{ type.name }}</h2></div></div>
-  {% for item in type.items %}
-  <article class="academic-entry">
-    <h3>{% if item.url %}<a href="{{ item.url }}" target="_blank" rel="noopener noreferrer" aria-label="{{ item.name | escape }} (opens in a new tab)">{{ item.name }}</a>{% else %}{{ item.name }}{% endif %}</h3>
-    {% assign award_date_text = item.date | append: '' %}
-    <p class="academic-entry__meta">{{ item.organization }} · {% if award_date_text contains 'Level' %}<span>{{ award_date_text }}</span>{% elsif award_date_text.size == 4 %}<time datetime="{{ award_date_text }}">{{ award_date_text }}</time>{% else %}<time datetime="{{ item.date | date: '%Y-%m' }}">{{ award_date_text }}</time>{% endif %}</p>
-    {% if item.description %}<p>{{ item.description | strip_html }}</p>{% endif %}
-  </article>
-  {% endfor %}
+  <ol class="secondary-record-list">
+    {% for item in type.items %}
+    <li>
+      {% assign award_outcome = item.outcome %}
+      {% unless award_outcome %}{% assign award_outcome = item.description | strip_html | truncatewords: 28 %}{% endunless %}
+      {% assign award_datetime = item.datetime %}
+      {% unless award_datetime %}
+        {% assign award_date_text = item.date | append: '' %}
+        {% if award_date_text.size == 4 %}{% assign award_datetime = award_date_text %}
+        {% elsif award_date_text contains '-' %}{% assign award_datetime = item.date | date: '%Y-%m' %}
+        {% endif %}
+      {% endunless %}
+      {% include secondary-record.html title=item.name context=item.organization date=item.date datetime=award_datetime outcome=award_outcome proof_url=item.url proof_label=item.proof_label eyebrow=item.type %}
+    </li>
+    {% endfor %}
+  </ol>
 </section>
 {% endfor %}

@@ -1,16 +1,16 @@
 ---
 gsd_state_version: 1.0
-milestone: v2
-milestone_name: Dual-Audience Portfolio Overhaul
-status: ready_to_complete
-stopped_at: Phase 12 accepted
-last_updated: "2026-08-02T07:30:18Z"
-last_activity: 2026-08-02 -- Final 64-check verification and second independent UI audit accepted the overhaul at 24/24 with no findings
+milestone: v2.1
+milestone_name: Depth and Continuity
+status: complete
+stopped_at: Phase 17 complete
+last_updated: "2026-08-07T12:00:00Z"
+last_activity: 2026-08-07 -- Depth & Continuity phases 13–17 implemented with secondary records, case-study formats, discovery links, editorial pass, and platform closeout
 progress:
-  total_phases: 13
-  completed_phases: 13
-  total_plans: 19
-  completed_plans: 19
+  total_phases: 18
+  completed_phases: 18
+  total_plans: 24
+  completed_plans: 24
   percent: 100
 ---
 
@@ -18,123 +18,29 @@ progress:
 
 ## Project Reference
 
-See: .planning/PROJECT.md (updated 2026-05-17)
+See: .planning/PROJECT.md
 
 **Core value:** Visitors can quickly understand Romel's work through a credible, readable, and consistent portfolio experience.
-**Current focus:** Phase 12 is accepted; the isolated overhaul branch is ready for user review and a later commit/push decision
-
-> Historical-state notice: the Phase 7–11 material below records the completed v1.1 milestone. The 2026-07-10 research-first redesign supersedes its visual, navigation, proof-surface, and test contracts. Treat the current source, [`docs/ui-maintenance.md`](../docs/ui-maintenance.md), `package.json`, and the GitHub Actions workflows as the active maintenance record.
+**Current focus:** v2.1 Depth & Continuity is implemented on top of the accepted Phase 12 evidence-ledger system
 
 ## Current Position
 
-Phase: 12 (dual-audience-overhaul) - COMPLETE
-Plan: 1 of 1 complete
-Status: Accepted by final verification and second independent UI audit
-Last activity: 2026-08-02 -- 64/64 checks and 24/24 UI review passed with zero blockers or warnings
+Phase: 17 (motion-polish-platform-closeout) - COMPLETE
+Status: Secondary surfaces, case-study/research-detail formats, discovery, editorial, and platform closeout landed
+Last activity: 2026-08-07 -- Depth & Continuity implementation
 
 Progress: [██████████] 100%
 
-## Performance Metrics
-
-**Velocity:**
-
-- Total plans completed: 33
-- Average duration: 2.6 min
-- Total execution time: 0.8 hours
-
-**By Phase:**
-
-| Phase | Plans | Total | Avg/Plan |
-|-------|-------|-------|----------|
-| 01 | 3 | 8 min | 2.7 min |
-| 02 | 3 | 10 min | 3.3 min |
-| 03 | 3 | 6 min | 2.0 min |
-| 04 | 3 | 10 min | 3.3 min |
-| 05 | 3 | 6 min | 2.0 min |
-| 05.1 | 3 | 5 min | 1.7 min |
-| 07 | 3 | recorded | recorded |
-| 08 | 3 | consolidated | consolidated |
-| 09 | 3 | consolidated | consolidated |
-| 10 | 3 | consolidated | consolidated |
-| 11 | 3 | consolidated | consolidated |
-
-**Recent Trend:**
-
-- Last 5 plans: Phase 07 P03, Phase 08 P03, Phase 09 P03, Phase 10 P03, Phase 11 P03
-- Trend: Stable
-
-| Phase 01 P01 | 1 min | 2 tasks | 2 files |
-| Phase 01 P02 | 1 min | 3 tasks | 3 files |
-| Phase 01 P03 | 6 min | 2 tasks | 4 files |
-| Phase 02 P01 | 6 min | 2 tasks | 3 files |
-| Phase 02 P02 | 4 min | 2 tasks | 3 files |
-| Phase 02 P03 | 4 min | 2 tasks | 2 files |
-| Phase 03 P01 | 2 min | 2 tasks | 2 files |
-| Phase 03 P02 | 1 min | 2 tasks | 3 files |
-| Phase 03 P03 | 3 min | 2 tasks | 2 files |
-| Phase 04 P01 | 3 min | 2 tasks | 3 files |
-| Phase 04 P02 | 4 min | 2 tasks | 5 files |
-| Phase 04 P03 | 3 min | 2 tasks | 2 files |
-| Phase 05 P01 | 2 min | 2 tasks | 2 files |
-| Phase 05 P02 | 3 min | 2 tasks | 3 files |
-| Phase 05 P03 | 1 min | 2 tasks | 2 files |
-| Phase 05.1 P01 | 1 min | 2 tasks | 8 files |
-| Phase 05.1 P02 | 2 min | 2 tasks | 5 files |
-| Phase 05.1 P03 | 2 min | 2 tasks | 6 files |
-
 ## Accumulated Context
-
-### Roadmap Evolution
-
-- Phase 05.1 inserted after Phase 05: Publications convergence and final UI polish (URGENT)
-- v1.1 starts at Phase 7 and keeps the current academic UI direction while polishing navigation, projects, contributions, SEO/social previews, and dark mode.
-- v2 closes with Phase 12, replacing the long dossier homepage and parallel legacy styling with one selective evidence-ledger system for faculty and recruiter review.
 
 ### Decisions
 
-Decisions are logged in PROJECT.md Key Decisions table.
-Recent decisions affecting current work:
-
-- [Init]: Treat `assets/css/overhaul.css` and `assets/js/site-shell.js` as the canonical shared layer
-- [Init]: Use the codebase map and UI audit as the brownfield brief
-- [Init]: Skip separate initialization-time research and move straight to scoped remediation planning
-- [Phase 01]: The first-paint shell theme now resolves from stored override or prefers-color-scheme instead of forcing dark mode. — This keeps initial render aligned with the canonical data-theme model without writing a default override.
-- [Phase 01]: About and Contributions now read shared shell theme from <html data-theme> and use the canonical token vocabulary. — This removes the remaining top-level root-class and undefined-token dependencies without changing page structure or data flow.
-- [Phase 01]: Dormant critical shell CSS now uses the canonical shell selector vocabulary. — If the include is ever re-used, it will not silently restore .navbar-era layout assumptions or competing root theme classes.
-- [Phase 01]: Phase 1 shell regression coverage now asserts one canonical theme toggle and mobile drawer flow on Home, About, and Contributions. — This gives the canonical shell a representative browser safety net before later page redesign phases start moving content around.
-- [Phase 01]: Manual shell smoke guidance now documents the verified local Playwright setup instead of assuming a committed Node toolchain. — The repo can run shell regressions today while phase 5 still owns any broader test-toolchain formalization.
-- [Phase 02]: Homepage hero now leads with copy, `Research`, and `CV`, while email and profile exits live in a quieter secondary contact row. — This removes the old flat action cluster without discarding the existing destinations.
-- [Phase 02]: Homepage support surfaces now flow through current focus, section-pill wayfinding, OSS proof, and news before the longer content sections. — This gives the homepage a calmer transition from intro to detail.
-- [Phase 02]: Homepage publications now source from `site.publications`, and homepage hierarchy regressions are covered in Playwright on desktop and mobile. — This keeps the new section pills backed by real rendered targets and leaves the phase with repeatable evidence.
-- [Phase 03]: Shared reading tokens now use a 14px/15px/16px floor and preserve that floor down to the smallest-phone breakpoint. — This fixes the audit's metadata-sized dense copy without adding a second typography system.
-- [Phase 03]: About and Contributions page-local typography now follow the same title/body/metadata hierarchy as the shared shell. — This keeps dense content readable while leaving async GitHub behavior untouched for Phase 4.
-- [Phase 03]: Readability regressions now have dedicated Playwright coverage across Home, About, Learning, and Contributions, with mocked GitHub contribution data for deterministic async-state hierarchy checks. — This leaves the phase with browser evidence instead of CSS-only assumptions.
-- [Phase 04]: Homepage OSS summary and Contributions now render through one shared proof-surface language instead of hiding or diverging when GitHub slows down, empties out, or fails. — This makes proof-of-work surfaces stable and keeps repository context visible even during API problems.
-- [Phase 04]: Proof-surface regressions now have dedicated Playwright coverage for success, slow, empty, rate-limit, and generic failure paths. — This gives future UI work deterministic browser evidence without depending on live GitHub uptime.
-- [Phase 05]: UI verification now runs through `scripts/verify-ui.sh`, which rebuilds `_site`, serves it locally, and executes shell or full Playwright suites through one repo-local entrypoint. — This makes browser verification repeatable without adding a committed Node manifest in v1.
-- [Phase 05]: Maintainer-facing docs now point future UI work toward `assets/css/overhaul.css`, `assets/js/site-shell.js`, and the shared proof-surface checks, while recording CI, toolchain manifest, legacy-retirement, and artifact-hygiene work as explicit post-v1 follow-ups. — This keeps the v1 boundary clear and prevents brownfield drift.
-- [Phase 05.1]: Publication destinations now come from primary_link metadata — Homepage and publications surfaces can point to meaningful research summaries without relying on blank collection URLs or page-specific branching.
-- [Phase 05.1]: Homepage and publications now share section-intro framing and CTA vocabulary — The inserted polish phase needed the archive and preview surfaces to read as one system without adding a new hero or a second CTA cluster.
-- [Phase 05.1]: Homepage publication previews expose at most one secondary artifact link — The broader polish needed stronger publication affordances, but the Phase 2 hierarchy would regress if publication cards grew into another crowded action cluster.
-- [Phase 05.1]: Publications now run inside the canonical full verification path — The milestone cannot close credibly if publications remain outside verify-ui, because that is how the template-era regressions slipped through the first pass.
-- [v1.1]: Research found that the site should keep Jekyll collections/data, `overhaul.css`, `site-shell.js`, and existing GitHub proof scripts rather than adopting a new academic template.
-- [v1.1]: Live GitHub data should become supporting proof; curated contribution highlights should explain important open-source work even when API calls fail.
-- [v1.1]: Navigation cleanup should shorten the header while preserving route access through header, footer, or contextual links.
-- [Phase 7]: Planning will keep the header to Home, Research, Publications, Projects, Contributions, and CV, while moving About, Education, Work, Achievements, News, and Learning into a visible footer route row.
-- [Phase 7]: Metadata work is limited to page-specific `description` front matter; Phase 10 still owns Open Graph, Twitter, canonical, and preview-image output.
-- [Phase 7]: Slash-separated link groups were replaced with compact spaced links across the header, footer, homepage link rows, proof links, publication links, research shortcuts, and education metadata after visual review.
-- [Phase 7]: A small portrait-backed wordmark and restrained Font Awesome/Academicons labels now make navigation and link groups friendlier without adding a new UI framework.
-- [Phase 8]: Projects now separate featured evidence, capstone/build narratives, and compact archive records, with stable media sizing and capped tags verified on desktop and mobile.
-- [Phase 9]: Contributions now lead with curated proof for RefactoringMiner, EF Core, GenHTTP, deepagents, TypeScript, and LangChain before live GitHub activity renders.
-- [Phase 10]: The shared layout now emits canonical, Open Graph, and Twitter metadata using page descriptions and a stable preview image.
-- [Phase 11]: The theme moved from beige academic paper to a slate/blue/teal evidence-first palette with dark-mode contrast verified on contribution cards.
-- [Phase 11]: `tests/v11-overhaul.spec.js` and `scripts/verify-ui.sh full` cover project hierarchy, contributions fallback behavior, social metadata, and dark-mode readability.
-- [2026-07-10]: The research-first redesign replaces the v1.1 visual contract with a four-block research homepage, a five-route scholarly shell, static evidence records, a compact live GitHub count, and a currentness model based on ISO date ranges. — The active browser suite intentionally replaces retired v1.1 layout/proof tests rather than silently excluding them.
-- [2026-07-10]: A daily Pages rebuild keeps build-time current-role rendering fresh, while CI verifies the Jekyll build, browser behavior, accessibility, budgets, and mobile Lighthouse metrics. — This preserves static-site simplicity without presenting stale currentness as live data.
-- [Phase 12]: Research and Engineering are permanent paths through one site; the homepage stays selective while research, project, publication, experience, and contribution routes retain deeper evidence.
-- [Phase 12]: The light palette uses warm paper, mineral ink, spruce links, and restrained copper signals; dark mode is independently tuned rather than inverted.
-- [Phase 12]: The mobile shell starts closed only when JavaScript is available and remains open without JavaScript, eliminating the first-paint layout shift while preserving progressive enhancement.
-- [Phase 12]: Dead parallel stylesheets, widget includes, display data, and an unlinked manifest were removed after reference and build checks.
+- Treat `assets/css/overhaul.css` and `assets/js/site-shell.js` as the canonical shared layer
+- Phase 12 dual-audience evidence ledger remains the visual baseline; v2.1 deepens secondary pages and storytelling without a shell redesign
+- Secondary indexes use `_includes/secondary-record.html` open ledger rows
+- Featured engineering records may declare `case_study: true` for `_includes/case-study-summary.html`
+- Research detail pages may source methods/artifacts/related engineering from `_data/research.yml` `detail_pages`
+- PLAT-01 is complete via committed npm toolchain and `ui-checks.yml`; PLAT-02 stays deferred
 
 ### Pending Todos
 
@@ -142,12 +48,5 @@ None yet.
 
 ### Blockers/Concerns
 
-- GitHub-driven proof surfaces depend on unauthenticated browser-side API calls
-- The redesign branch now has a committed Playwright and accessibility toolchain; use `npm ci` followed by `npm run test:ui:install` before local browser verification
-- `gsd-sdk` is not installed in this environment, so v1.1 planning artifacts were created with the documented manual fallback instead of SDK handlers.
-
-## Session Continuity
-
-Last session: 2026-08-02T07:30:18Z
-Stopped at: Phase 12 accepted
-Resume file: None
+- GitHub-driven contribution count still depends on unauthenticated browser-side Search API calls
+- Use `npm ci` followed by `npm run test:ui:install` before local browser verification

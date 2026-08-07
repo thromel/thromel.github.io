@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Leveraging AI Tools for Software Engineering and Research: A Practical Workflow"
+title: "Using AI Tools in Software Engineering and Research Workflows"
 date: 2025-01-20
 categories: [software-engineering, artificial-intelligence, productivity]
 tags: [cursor, chatgpt, claude, ai-tools, software-development, research, productivity]
@@ -8,11 +8,11 @@ tags: [cursor, chatgpt, claude, ai-tools, software-development, research, produc
 
 
 
-## Introduction: The AI Revolution in Software Development
+## Introduction: AI tools in a practical workflow
 
-The landscape of software engineering has fundamentally shifted. What took hours of documentation diving, stack overflow searching, and trial-and-error coding can now be accomplished in minutes with the right AI tools. As someone who has integrated AI into every aspect of my development and research workflow, I've witnessed firsthand how these tools can transform not just productivity, but the entire approach to problem-solving.
+Documentation lookup, debugging, and first-draft coding that once took hours can often be completed faster with a focused AI toolchain. After integrating these tools into development and research work, the useful change is not magical productivity—it is clearer problem framing, faster iteration, and tighter review loops.
 
-This isn't about replacing human intelligence - it's about amplifying it. Think of AI tools as the evolution from manual labor to power tools in construction. A skilled carpenter doesn't become less valuable when using a power drill; they become exponentially more effective.
+This is amplification, not replacement. The goal is to keep judgment, verification, and system understanding with the engineer while using tools where they reduce search and boilerplate cost.
 
 In this guide, I describe how I used three AI tools in my workflow: **Cursor** for coding, **ChatGPT Plus** for research and complex reasoning, and **Claude Pro** for analysis and communication. The focus is how the tools fit together and where each one is useful.
 

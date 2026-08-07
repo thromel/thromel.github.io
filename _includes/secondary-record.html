@@ -1,0 +1,33 @@
+{% assign record_title = include.title %}
+{% assign record_context = include.context %}
+{% assign record_outcome = include.outcome %}
+{% assign record_date = include.date %}
+{% assign record_datetime = include.datetime %}
+{% assign proof_url = include.proof_url %}
+{% assign proof_label = include.proof_label | default: 'Evidence' %}
+{% assign eyebrow = include.eyebrow %}
+<article class="secondary-record" data-secondary-record{% if eyebrow %} data-secondary-kind="{{ eyebrow | slugify }}"{% endif %}>
+  {% if eyebrow %}<p class="secondary-record__eyebrow">{{ eyebrow }}</p>{% endif %}
+  <div class="secondary-record__body">
+    <h3>
+      {% if proof_url %}
+      <a href="{{ proof_url | relative_url }}"{% if proof_url contains '://' %} target="_blank" rel="noopener noreferrer" aria-label="{{ record_title | escape }} (opens in a new tab)"{% endif %}>{{ record_title }}</a>
+      {% else %}
+      {{ record_title }}
+      {% endif %}
+    </h3>
+    <p class="secondary-record__meta">
+      {% if record_context %}<span>{{ record_context }}</span>{% endif %}
+      {% if record_context and record_date %}<span aria-hidden="true">·</span>{% endif %}
+      {% if record_date %}
+        {% if record_datetime %}
+        <time datetime="{{ record_datetime }}">{{ record_date }}</time>
+        {% else %}
+        <span>{{ record_date }}</span>
+        {% endif %}
+      {% endif %}
+    </p>
+    {% if record_outcome %}<p class="secondary-record__outcome">{{ record_outcome }}</p>{% endif %}
+    {% if proof_url %}<p class="record-links"><a href="{{ proof_url | relative_url }}"{% if proof_url contains '://' %} target="_blank" rel="noopener noreferrer" aria-label="{{ proof_label | escape }} for {{ record_title | escape }} (opens in a new tab)"{% endif %}>{{ proof_label }}</a></p>{% endif %}
+  </div>
+</article>

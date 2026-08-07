@@ -25,6 +25,11 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 10: SEO and Social Preview Completion** - Improve search/social previews through shared Jekyll metadata. (completed 2026-05-30)
 - [x] **Phase 11: Dark Mode and Verification Hardening** - Refine dark mode across real surfaces and expand verification. (completed 2026-05-30)
 - [x] **Phase 12: Dual-Audience Complete Overhaul** - Rebuild the visual system and homepage journey for professors and engineering recruiters while preserving one evidence-backed portfolio. (completed 2026-08-02)
+- [x] **Phase 13: Secondary Surface Continuity** - Raise About, News, Achievements, Learning, and Education onto shared secondary-record ledger anatomy. (completed 2026-08-07)
+- [x] **Phase 14: Case-Study and Research-Detail Formats** - Add evidence summary strips and research-detail summaries for selected deep records. (completed 2026-08-07)
+- [x] **Phase 15: Journey and Discovery Polish** - Add related-evidence and Contributions discovery without expanding primary nav. (completed 2026-08-07)
+- [x] **Phase 16: Editorial Language Pass** - Replace remaining vague promotional phrasing with observable claims. (completed 2026-08-07)
+- [x] **Phase 17: Motion, Polish, and Platform Closeout** - Ship reduced-motion-safe presence, mark PLAT-01 complete, defer PLAT-02, and extend verification. (completed 2026-08-07)
 
 ## Phase Details
 

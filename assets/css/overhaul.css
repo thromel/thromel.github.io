@@ -628,7 +628,7 @@ summary {
   object-position: center 32%;
 }
 
-.home-evidence { background: var(--paper-elevated); }
+.home-evidence { background: transparent; }
 
 .evidence-ledger,
 .research-agenda-ledger,
@@ -1189,6 +1189,74 @@ summary {
 .blog-entry > p { margin-top: var(--s-2); }
 .academic-entry > ul { display: grid; gap: var(--s-2); padding-left: var(--s-4); }
 
+.secondary-record-list {
+  margin: var(--s-5) 0 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--rule);
+}
+
+.secondary-record {
+  display: grid;
+  grid-template-columns: minmax(120px, 2fr) minmax(0, 8fr);
+  gap: var(--s-5);
+  padding-block: var(--s-4);
+  border-bottom: 1px solid var(--rule);
+}
+
+.secondary-record__eyebrow {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.secondary-record__body { min-width: 0; max-width: var(--reading); }
+.secondary-record__meta,
+.secondary-record__outcome { margin-top: var(--s-2); }
+.secondary-record__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-1) var(--s-2);
+  color: var(--muted);
+}
+.secondary-record__outcome { color: var(--ink); }
+.secondary-record .record-links { margin-top: var(--s-3); }
+
+.case-study-summary,
+.research-detail-summary {
+  max-width: var(--reading);
+  margin-block: var(--s-5);
+  padding-block: var(--s-4);
+  border-block: 1px solid var(--rule);
+}
+
+.case-study-summary__meta,
+.research-detail__meta {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--s-4);
+  margin-top: var(--s-3);
+}
+
+.case-study-summary__meta div,
+.research-detail__meta div { min-width: 0; }
+
+.case-study-summary__meta dt,
+.research-detail__meta dt {
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.case-study-summary__meta dd,
+.research-detail__meta dd { margin-top: var(--s-1); }
+
+.case-study-summary .record-links,
+.research-detail-summary .record-links { margin-top: var(--s-4); }
+
 .academic-tags,
 .post-tags,
 .showcase-tags {
@@ -1585,7 +1653,10 @@ summary {
   .education-entry,
   .skills-ledger__list p,
   .systems-ledger a,
-  .home-contact__grid {
+  .home-contact__grid,
+  .secondary-record,
+  .case-study-summary__meta,
+  .research-detail__meta {
     grid-template-columns: 1fr;
     gap: var(--s-4);
   }
@@ -1713,6 +1784,49 @@ summary {
     transition-duration: 0.01ms !important;
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
+  }
+
+  .shell-ready .section-trace,
+  .shell-ready .evidence-ledger > li,
+  .shell-ready .secondary-record,
+  .shell-ready .case-study-summary {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .site-menu-toggle,
+  .theme-toggle,
+  .button-link,
+  .text-link,
+  .record-links a {
+    transition: color 160ms ease, border-color 160ms ease, background-color 160ms ease;
+  }
+
+  .shell-ready .section-trace,
+  .shell-ready .evidence-ledger > li,
+  .shell-ready .secondary-record,
+  .shell-ready .case-study-summary {
+    animation: ledger-enter 420ms ease both;
+  }
+
+  .shell-ready .evidence-ledger > li:nth-child(2),
+  .shell-ready .secondary-record-list > li:nth-child(2) { animation-delay: 40ms; }
+  .shell-ready .evidence-ledger > li:nth-child(3),
+  .shell-ready .secondary-record-list > li:nth-child(3) { animation-delay: 80ms; }
+  .shell-ready .evidence-ledger > li:nth-child(4),
+  .shell-ready .secondary-record-list > li:nth-child(4) { animation-delay: 120ms; }
+}
+
+@keyframes ledger-enter {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
   }
 }
 

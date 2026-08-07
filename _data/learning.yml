@@ -264,7 +264,7 @@ resources:
     type: "Book"
     category: "DevOps"
     link: "https://www.oreilly.com/library/view/kubernetes-up-and/9781098110192/"
-    description: "Dive into the future of infrastructure with Kubernetes."
+    description: "Operational guide to Kubernetes concepts, workloads, and cluster administration."
 
   - title: "The DevOps Handbook"
     author: "Gene Kim et al."

@@ -11,11 +11,20 @@ excerpt: A research-blog style write-up on ContextLedger, my current experiment 
 featured: true
 showcase_style: agent-tooling
 project_type: Research notebook
+case_study: true
 problem: "Measure which exact session facts survive coding-agent context compaction instead of treating memory loss as an opaque summarization problem."
 role: Designed and implemented the typed event schema, compaction policies, instrumentation, and bounded experiment harness in an OpenCode fork
+constraints: "Research fork remains private; claims are limited to bounded fixtures and do not assert production solve-rate improvements."
+approach: "Treat context as typed, provenance-carrying events; compare compaction policies under noisy long-session fixtures with token accounting."
 outcome: "On the first bounded GPT-5.5 noisy-compaction fixture, the precision-frontier policy kept full target recall with 852 compaction-input tokens; solve-rate evidence is not yet established."
 status: Active research prototype
+last_verified: "2026-06-15"
 repository_status: Research fork not public
+related_evidence:
+  - label: "ctxhelm engineering case study"
+    url: "/showcase/projects/ctxhelm/"
+  - label: "Research dossier"
+    url: "/research/"
 card_image: /assets/images/projects/contextledger-pipeline.svg
 visual_width: 960
 visual_height: 540

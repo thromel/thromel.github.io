@@ -57,4 +57,5 @@ description: Professional software engineering experience, backend systems work,
 <section class="academic-section skills-ledger" aria-labelledby="skills-title">
   <div class="section-trace"><span aria-hidden="true">03</span><div><p class="eyebrow">Selected working set</p><h2 id="skills-title">Tools used across the evidence above</h2></div></div>
   <div class="skills-ledger__list">{% for category in site.data.profile.selected_working_set %}<p><strong>{{ category.type }}</strong><span>{{ category.names | join: ' · ' }}</span></p>{% endfor %}</div>
+  <p class="action-row"><a class="button-link" href="{{ '/projects/' | relative_url }}">Engineering projects</a><a class="text-link" href="{{ '/contributions/' | relative_url }}">Curated open-source evidence</a></p>
 </section>

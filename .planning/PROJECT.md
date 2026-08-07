@@ -26,7 +26,7 @@ Visitors can quickly understand Romel's work through a credible, readable, and c
 
 ### Active
 
-- [ ] Complete final milestone closeout if this work is accepted for publishing.
+- [ ] None — v2.1 Depth & Continuity is ready for review and publishing.
 
 ### Out of Scope
 
@@ -39,17 +39,9 @@ Visitors can quickly understand Romel's work through a credible, readable, and c
 
 The site is a Jekyll codebase with shared layouts in `_layouts/`, reusable partials in `_includes/`, structured content in `_data/`, authored content in `_posts/` and `_showcase/`, and page-specific entry points such as `index.html`, `projects.html`, `research.html`, and `contributions.html`.
 
-A fresh codebase map exists under `.planning/codebase/` and identifies the most important architectural tension: the repo contains a newer site shell using `data-theme`, `assets/js/site-shell.js`, and `assets/css/overhaul.css`, but older parallel layers still exist in `assets/js/theme-toggle.js`, `assets/js/app-navigation.js`, `assets/js/advanced-interactions.js`, `assets/css/developer-theme.css`, and `assets/css/custom.css`.
+The canonical shared UI layer is `assets/css/overhaul.css`, `assets/js/site-shell.js`, and `assets/js/contribution-count.js`. Parallel theme, navigation, reveal, widget, and full-PR-feed layers were retired during the research-first redesign and Phase 12 overhaul. Prefer repo-local source and [`docs/ui-maintenance.md`](../docs/ui-maintenance.md) over older codebase-map prose that still mentions retired files.
 
-A complete UI/UX audit and overhaul note now lives in `.planning/ui-reviews/2026-05-30-complete-ui-ux-audit.md`. The current direction is an evidence-first academic dossier: narrow and readable for faculty/research readers, but with stronger project hierarchy, curated open-source proof, social metadata, and verified light/dark theme behavior.
-
-A retroactive UI audit in `00-UI-REVIEW.md` scored the earlier site `17/24` and identified three highest-impact gaps:
-
-1. Dense reading surfaces are too small for comfortable scanning.
-2. The homepage hero is visually crowded and loses hierarchy on mobile.
-3. GitHub-driven sections, especially `contributions.html`, do not fully align with the current design system.
-
-The repo is already in active use and already has unrelated local changes, so planning and execution must avoid destructive cleanup or broad resets.
+Phase 12 delivered the dual-audience evidence-ledger system at 24/24. v2.1 Depth & Continuity raises secondary routes onto shared record anatomy, adds case-study and research-detail summary formats, improves Contributions/related-evidence discovery, completes an editorial language pass, and closes PLAT-01 while explicitly deferring PLAT-02.
 
 ## Constraints
 

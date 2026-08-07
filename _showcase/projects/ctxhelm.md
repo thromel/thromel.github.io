@@ -11,12 +11,26 @@ excerpt: A technical write-up on ctxhelm, a released Rust tool that helps coding
 featured: true
 showcase_style: agent-tooling
 project_type: Open-source developer tool and evaluation system
+case_study: true
 problem: "Help coding agents identify the repository evidence they need before editing, then measure whether that guidance improves real target-file reading."
 role: Creator and maintainer of ctxhelm; designer of the companion HelmBench evaluation harness
+constraints: "Local-first and read-only; no editing, no source leakage in evaluation reports, and no release claims without machine-checkable proof."
+approach: "Compile inspectable context plans from lexical, graph, related-test, and history signals; evaluate with source-free HelmBench matrices on real coding-agent runs."
 outcome: "Released ctxhelm v2.4.0 through GitHub archives and Homebrew; a completed 10-task RefactoringMiner Codex matrix preserved solve and validation rates while improving retrieval-oriented measures."
 status: Released open-source tool; active evaluation work
+last_verified: "2026-06-08"
 repository: https://github.com/thromel/ctxhelm
 repository_status: Public source repository
+proof_links:
+  - label: "Release v2.4.0"
+    url: "https://github.com/thromel/ctxhelm/releases/tag/v2.4.0"
+related_evidence:
+  - label: "Research agenda · long-horizon agents"
+    url: "/research/"
+  - label: "ContextLedger research notebook"
+    url: "/showcase/projects/contextledger/"
+  - label: "Curated contributions"
+    url: "/contributions/"
 card_image: /assets/images/projects/ctxhelm-system-architecture.svg
 visual_width: 1200
 visual_height: 720

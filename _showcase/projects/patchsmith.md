@@ -11,12 +11,21 @@ excerpt: "PatchSmith is an auditable repair harness for coding agents: it gives 
 featured: true
 showcase_style: agent-tooling
 project_type: Research platform
+case_study: true
 problem: "Evaluate coding-agent repairs with bounded context, sandbox validation, and retained evidence instead of accepting a plausible patch at face value."
 role: Designer and implementer of the repair harness, task adapters, validation flow, artifact schema, and readiness gates
+constraints: "Agent proposes; harness owns mutation. Validation must retain traces, logs, and failure reports for later inspection."
+approach: "Bound the agent context, accept a structured patch proposal, validate in a sandbox, and retain an auditable artifact directory."
 outcome: "The current DeepAgents public-issue smoke lane validates three of three focused pytest/Requests tasks while retaining traces, validation output, and failure reports."
 status: Active research and development platform
+last_verified: "2026-06-12"
 repository: https://github.com/thromel/patchsmith
 repository_status: Public source repository
+related_evidence:
+  - label: "ctxhelm engineering case study"
+    url: "/showcase/projects/ctxhelm/"
+  - label: "Open-source contributions"
+    url: "/contributions/"
 card_image: /assets/images/projects/patchsmith-component-architecture.svg
 visual_width: 1260
 visual_height: 820
