@@ -1266,6 +1266,13 @@ summary {
 .case-study-summary__meta dd,
 .research-detail__meta dd { margin-top: var(--s-1); }
 
+.case-study-summary .record-links a,
+.research-detail-summary .record-links a {
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+}
+
 .case-study-summary .record-links,
 .research-detail-summary .record-links { margin-top: var(--s-4); }
 
