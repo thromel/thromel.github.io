@@ -101,7 +101,7 @@ The homepage is a website abstract, not a complete dossier. It contains exactly 
 
 The first viewport must contain, in this order:
 
-- Current Alberta status, sourced from structured currentness data. On 2026-08-02 it renders as `University of Alberta · Incoming M.Sc. in Computing Science`; the state must update when the underlying ISO range changes.
+- Current Alberta status, sourced from structured currentness data. As of 2026-08-28 it renders as `University of Alberta · M.Sc. in Computing Science`; the state must update when the underlying ISO range changes.
 - `Tanzim Hossain Romel` as the only page H1.
 - Thesis: `I study how AI agents behave in real software systems—and how to make their decisions inspectable, reliable, and trustworthy.`
 - Bridge: `About three years of professional software-engineering experience, formerly at IQVIA.` The linked University of Alberta, IQVIA, and IQVIA product names use authoritative destinations.
@@ -350,7 +350,7 @@ The retry label is `Retry count`. Do not use animated skeletons or spinners that
 
 | Element | Copy |
 |---------|------|
-| Alberta eyebrow | `University of Alberta · Incoming M.Sc. in Computing Science` (ISO-current as of 2026-08-02) |
+| Alberta eyebrow | `University of Alberta · M.Sc. in Computing Science` (ISO-current as of 2026-08-28) |
 | Research thesis | `I study how AI agents behave in real software systems—and how to make their decisions inspectable, reliable, and trustworthy.` |
 | Experience bridge | `About three years of professional software-engineering experience, formerly at IQVIA.` |
 | Interest line | `AI4SE · LLM4Coding · Trustworthy AI · long-horizon coding agents · AI for SRE` |

@@ -573,7 +573,7 @@ Replace the opening `.homepage-classic` and `.hero-section` block in `index.html
       I'm a software engineer at <a href="{{ site.data.profile.current_company.url }}" target="_blank" rel="noopener noreferrer">{{ site.data.profile.current_company.name }}</a> and a software engineering researcher. I work on AI/ML security, LLM systems, empirical software engineering, and production backend systems.
     </p>
     <p>
-      I completed my B.Sc. in Computer Science and Engineering at <a href="https://cse.buet.ac.bd" target="_blank" rel="noopener noreferrer">BUET</a>. I will start an M.Sc. in Computing Science at the <a href="https://www.ualberta.ca/en/computing-science/index.html" target="_blank" rel="noopener noreferrer">University of Alberta</a> in September 2026.
+      I completed my B.Sc. in Computer Science and Engineering at <a href="https://cse.buet.ac.bd" target="_blank" rel="noopener noreferrer">BUET</a>. I am an M.Sc. student in Computing Science at the <a href="https://www.ualberta.ca/en/computing-science/index.html" target="_blank" rel="noopener noreferrer">University of Alberta</a>.
     </p>
     <p class="academic-link-row" aria-label="Profile links">
       <a href="mailto:{{ site.data.profile.email }}">Email</a><span aria-hidden="true">/</span>

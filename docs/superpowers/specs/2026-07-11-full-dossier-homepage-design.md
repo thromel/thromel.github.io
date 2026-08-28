@@ -42,9 +42,9 @@ The opening section contains:
 
 - Name and role line: researcher, software engineer, and open-source contributor.
 - A two-paragraph summary connecting reliable agent systems, software engineering, program analysis, and production experience.
-- Current markers for UIUC++ SRSE 2026, incoming University of Alberta M.Sc., BUET CSE, and Dhaka.
+- Current markers for UIUC++ SRSE 2026, the University of Alberta M.Sc., BUET CSE, and Dhaka.
 - Existing portrait with meaningful alt text.
-- A concise next-step note covering the University of Alberta, U-A-Goose, Amii, and September 2026 start.
+- A concise current-program note covering the University of Alberta, U-A-Goose, and Amii.
 - Direct links to Research, CV, email, GitHub, Scholar, and LinkedIn.
 
 The section must preserve the mobile reading order: identity and summary before the portrait.
@@ -121,7 +121,7 @@ Current research systems receive detailed records with existing diagrams or thum
 
 Show all three education records with meaningful context:
 
-- University of Alberta M.Sc. — incoming September 2026, U-A-Goose, Dr. Zhou Yang, and Amii.
+- University of Alberta M.Sc. — current, with U-A-Goose, Dr. Zhou Yang, and Amii.
 - BUET B.Sc. in CSE — CGPA 3.53/4.00, sessional GPA 3.86/4.00, thesis context, Dean's List, ML contest result, and Blockchain Olympiad finalist status.
 - Rajshahi College HSC — 15th in Rajshahi Board, Talentpool Scholarship, A+ results, and 96.5% across Physics, Chemistry, and Higher Mathematics.
 
@@ -148,7 +148,6 @@ Show a small maintained ledger sourced from current structured news data. Priori
 - SHIFT submission to TACL 2026.
 - ML hosting RCE review status at ICSE 2027.
 - UIUC++ SRSE internship start.
-- Incoming University of Alberta M.Sc.
 - IQVIA Impact Silver recognition when space allows.
 
 This is a static, build-time section. It must not become a client-side feed.

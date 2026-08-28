@@ -4,7 +4,7 @@ navbar_name: "Tanzim Hossain Romel"
 
 about_snippet: >-
   At the <a href="https://www.ualberta.ca/en/computing-science/index.html" target="_blank" rel="noopener noreferrer">University of Alberta</a>,
-  I am an incoming M.Sc. student. My research interests are AI4SE, AI for SRE, LLM4Coding,
+  I am an M.Sc. student. My research interests are AI4SE, AI for SRE, LLM4Coding,
   trustworthy AI, and long-horizon coding agents. I bring about three years of professional
   software-engineering experience, most recently at
   <a href="https://www.iqvia.com/" target="_blank" rel="noopener noreferrer">IQVIA</a>, where I worked on
@@ -121,19 +121,19 @@ research_statement:
 
 positions:
 - name: Graduate Teaching and Research Assistant (GTA · GRA · GRAF), University of Alberta
-  date: Starting September 1, 2026
-  start_date: "2026-09-01"
-  start_label: "September 1, 2026"
-  date_prefix: "Starting"
-  display_date: "Starting September 1, 2026"
+  date: 2026 - Present
+  start_date: "2026"
+  start_label: "2026"
+  ongoing: true
+  display_date: "2026–Present"
   logo: "/assets/images/education/ualberta-logo.svg"
   logo_alt: "University of Alberta crest"
   url: https://www.ualberta.ca/en/computing-science/index.html
   description: >-
-    Incoming M.Sc. student in Computing Science with GTA, GRA, and GRAF appointments
+    M.Sc. student in Computing Science with GTA, GRA, and GRAF appointments
     supporting graduate teaching and research in software engineering and dependable AI.
   responsibilities:
-  - Begin graduate research with the U-A-Goose software engineering group under Dr. Zhou Yang
+  - Conduct graduate research with the U-A-Goose software engineering group under Dr. Zhou Yang
   - Support University of Alberta teaching and research through GTA and GRA appointments with GRAF funding
   links:
   - label: U-A-Goose
@@ -278,7 +278,7 @@ linkedin: thromel
 orcid: 0009-0009-2432-8960
 
 summary:
-- "I'm Tanzim Hossain Romel, an incoming <b>M.Sc. student at the University of Alberta</b>, a former <b>Software Development Engineer at IQVIA</b>, and a <b>BUET CSE graduate</b>"
+- "I'm Tanzim Hossain Romel, an <b>M.Sc. student at the University of Alberta</b>, a former <b>Software Development Engineer at IQVIA</b>, and a <b>BUET CSE graduate</b>"
 - "My research interests are <b>AI4SE, AI for SRE, LLM4Coding, trustworthy AI, and long-horizon coding agents</b>"
 - "I study vulnerabilities in machine learning ecosystems, methods for detecting adversarial behavior, and ways to improve reliability and safety through verification and runtime monitoring"
 - "I collaborate with researchers at <b>Bangladesh University of Engineering and Technology</b> and <b>Auburn University</b> on projects that connect theory with real software engineering challenges"
@@ -325,7 +325,7 @@ skills:
       - Python-Selenium
 
 short_bio: >-
-  At the <b><a href="https://www.ualberta.ca/en/computing-science/index.html" target="_blank" rel="noopener noreferrer">University of Alberta</a></b>, I am an incoming M.Sc. student. My research interests are <b>AI4SE, AI for SRE, LLM4Coding, trustworthy AI, and long-horizon coding agents</b>. I bring about three years of professional software-engineering experience, most recently at <b><a href="https://www.iqvia.com/" target="_blank" rel="noopener noreferrer">IQVIA</a></b>, where I worked on <a href="https://www.iqvia.com/solutions/commercialization/commercial-analytics/orchestrated-analytics" target="_blank" rel="noopener noreferrer">Orchestrated Analytics</a>, and graduated from <a href="https://cse.buet.ac.bd/" target="_blank" rel="noopener noreferrer">BUET CSE</a>. Most of my work sits between research and building: coding-agent tools, research software, microservices, and systems projects in <b>Rust, Python, C#/.NET, TypeScript, and C++</b>.
+  At the <b><a href="https://www.ualberta.ca/en/computing-science/index.html" target="_blank" rel="noopener noreferrer">University of Alberta</a></b>, I am an M.Sc. student. My research interests are <b>AI4SE, AI for SRE, LLM4Coding, trustworthy AI, and long-horizon coding agents</b>. I bring about three years of professional software-engineering experience, most recently at <b><a href="https://www.iqvia.com/" target="_blank" rel="noopener noreferrer">IQVIA</a></b>, where I worked on <a href="https://www.iqvia.com/solutions/commercialization/commercial-analytics/orchestrated-analytics" target="_blank" rel="noopener noreferrer">Orchestrated Analytics</a>, and graduated from <a href="https://cse.buet.ac.bd/" target="_blank" rel="noopener noreferrer">BUET CSE</a>. Most of my work sits between research and building: coding-agent tools, research software, microservices, and systems projects in <b>Rust, Python, C#/.NET, TypeScript, and C++</b>.
   <br/><br/>
   I keep a daily learning routine, maintain learning logs, and try to turn reading into small builds. That habit helps me balance graduate research, teaching, and open-source engineering.
   <br/><br/>
@@ -359,17 +359,17 @@ portrait_caption: Tanzim Hossain Romel seated outdoors.
 
 education:
 - name: University of Alberta
-  position: M.Sc in Computing Science
-  date: Starting September 2026
-  start_date: "2026-09-01"
-  start_label: Starting September 2026
-  status: Incoming
+  position: M.Sc. in Computing Science
+  date: 2026 - Present
+  start_date: "2026"
+  start_label: "2026"
+  status: Current
   logo_width: 256
   logo_height: 256
   description: >-
-    Starting the <strong>M.Sc in Computing Science</strong> program on <strong>September 1, 2026</strong>. My research interests are
-    AI4SE, AI for SRE, LLM4Coding, trustworthy AI, and long-horizon coding agents. I will be joining the
-    <a href="https://u-a-goose.github.io/" target="_blank" rel="noopener noreferrer" aria-label="U-A-Goose (opens in a new tab)">U-A-Goose</a> software engineering group at the University of Alberta, supervised by
+    I am pursuing a thesis-based <strong>M.Sc. in Computing Science</strong>. My research interests are
+    AI4SE, AI for SRE, LLM4Coding, trustworthy AI, and long-horizon coding agents. I work with the
+    <a href="https://u-a-goose.github.io/" target="_blank" rel="noopener noreferrer" aria-label="U-A-Goose (opens in a new tab)">U-A-Goose</a> software engineering group at the University of Alberta under the supervision of
     <a href="https://apps.ualberta.ca/directory/person/zy25" target="_blank" rel="noopener noreferrer" aria-label="Dr. Zhou Yang (opens in a new tab)">Dr. Zhou Yang</a>, with affiliation to
     <a href="https://www.amii.ca/" target="_blank" rel="noopener noreferrer" aria-label="Amii (opens in a new tab)">Amii (Alberta Machine Intelligence Institute)</a>.
   url: https://www.ualberta.ca/en/computing-science/index.html

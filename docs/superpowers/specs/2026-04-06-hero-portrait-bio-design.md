@@ -65,7 +65,7 @@ The new copy should be:
 ### Replace the main bio with
 
 ```html
-<strong>Software engineer and researcher</strong> with a CS degree from <a href="https://cse.buet.ac.bd" target="_blank">BUET</a>. I work on backend healthcare systems at <a href="{{ site.data.profile.current_company.url }}" target="_blank">{{ site.data.profile.current_company.name }}</a> and study how AI is changing software engineering, especially around developer tools, reliability, and security. I am starting an <strong>M.Sc in Computing Science</strong> at the <a href="https://www.ualberta.ca/en/computing-science/index.html" target="_blank">University of Alberta</a> in September 2026.
+<strong>Software engineer and researcher</strong> with a CS degree from <a href="https://cse.buet.ac.bd" target="_blank">BUET</a>. I worked on backend healthcare systems at IQVIA and study how AI is changing software engineering, especially around developer tools, reliability, and security. I am an <strong>M.Sc. student in Computing Science</strong> at the <a href="https://www.ualberta.ca/en/computing-science/index.html" target="_blank">University of Alberta</a>.
 ```
 
 ### Replace the personal bio with

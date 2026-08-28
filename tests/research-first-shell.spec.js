@@ -52,7 +52,7 @@ test.describe('dual-audience selective homepage contract', () => {
     await expect(page.locator('[data-home-experience]')).toHaveCount(2);
     await expect(page.locator('[data-home-publication]')).toHaveCount(2);
     await expect(page.locator('[data-home-contribution]')).toHaveCount(3);
-    await expect(page.locator('[data-home-milestone]')).toHaveCount(3);
+    await expect(page.locator('[data-home-milestone]')).toHaveCount(2);
 
     const evidenceTypes = await page.locator('[data-home-evidence]').evaluateAll((records) => records.map((record) => record.dataset.homeEvidenceType));
     expect(evidenceTypes).toEqual(['research', 'engineering', 'research', 'engineering']);
@@ -71,12 +71,8 @@ test.describe('dual-audience selective homepage contract', () => {
 
     const identity = page.locator('[data-home-section="identity"]');
     const status = identity.locator('[data-current-status]');
-    const asOf = await status.getAttribute('data-as-of');
-    if (asOf < '2026-09-01') {
-      await expect(status).toContainText('University of Alberta · Incoming M.Sc. in Computing Science');
-    } else {
-      await expect(status).toContainText('University of Alberta · M.Sc. in Computing Science');
-    }
+    await expect(status).toContainText('University of Alberta · M.Sc. in Computing Science');
+    await expect(status).not.toContainText('Incoming');
     await expect(identity.locator('.home-identity__thesis')).toHaveText('I study how AI agents behave in real software systems—and how to make their decisions inspectable, reliable, and trustworthy.');
     await expect(identity.locator('.home-identity__bridge')).toHaveText('About three years of professional software-engineering experience, formerly at IQVIA.');
     await expect(identity.locator('.home-identity__interests')).toHaveText('AI4SE · LLM4Coding · Trustworthy AI · long-horizon coding agents · AI for SRE');
@@ -441,15 +437,11 @@ test.describe('dual-audience selective homepage contract', () => {
       status.getAttribute('data-end-date-exclusive'),
     ]);
     expect(asOf).toMatch(/^\d{4}-\d{2}-\d{2}$/);
-    expect(starts).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+    expect(starts).toMatch(/^\d{4}(?:-\d{2}(?:-\d{2})?)?$/);
     expect(starts <= asOf).toBe(true);
     if (ends) expect(asOf < ends).toBe(true);
 
-    if (asOf < '2026-09-01') {
-      await expect(status).toContainText('Incoming M.Sc. in Computing Science');
-    } else {
-      await expect(status).toContainText('M.Sc. in Computing Science');
-      await expect(status).not.toContainText('Incoming');
-    }
+    await expect(status).toContainText('M.Sc. in Computing Science');
+    await expect(status).not.toContainText('Incoming');
   });
 });

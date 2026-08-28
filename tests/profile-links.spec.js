@@ -30,13 +30,13 @@ test('homepage links the institutions, employers, programs, and products named i
   await expect(page.locator(`[data-home-milestone] a[href="${URLS.srse}"]`)).toHaveCount(1);
 });
 
-test('experience page exposes future Alberta appointments and authoritative related links without mobile overflow', async ({ page }) => {
+test('experience page exposes current Alberta appointments and authoritative related links without mobile overflow', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto(`${BASE_URL}/experience`, { waitUntil: 'domcontentloaded' });
 
   const albertaEntry = page.locator('.experience-record').filter({ hasText: 'Graduate Teaching and Research Assistant' });
   await expect(albertaEntry).toContainText('GTA, GRA, and GRAF');
-  await expect(albertaEntry).toContainText('Starting September 1, 2026');
+  await expect(albertaEntry).toContainText('2026–Present');
   await expect(albertaEntry.locator(`h3 a[href="${URLS.ualberta}"]`)).toHaveCount(1);
 
   const iqviaEntry = page.locator('.experience-record').filter({ hasText: 'Software Development Engineer 1, IQVIA' });
@@ -55,7 +55,7 @@ test('news titles resolve to their supporting institution, program, product, or 
   await page.goto(`${BASE_URL}/news`, { waitUntil: 'domcontentloaded' });
 
   await expect(page.locator('#year-2026')).toHaveCount(1);
-  await expect(page.getByRole('link', { name: 'Starting M.Sc. study at the University of Alberta' })).toHaveAttribute('href', URLS.ualberta);
+  await expect(page.locator('main')).not.toContainText(/incoming M\.Sc|starting M\.Sc|will begin graduate study/i);
   await expect(page.getByRole('link', { name: 'Paper submitted to TACL 2026' })).toHaveAttribute('href', '/research/reagent-plus-plus/');
   await expect(page.getByRole('link', { name: 'Paper under review at ICSE 2027' })).toHaveAttribute('href', 'https://arxiv.org/abs/2601.14163');
   await expect(page.getByRole('link', { name: 'Started remote UIUC research internship' })).toHaveAttribute('href', URLS.srse);
@@ -95,6 +95,9 @@ test('achievements and CV source expose high-value evidence links', async ({ pag
 
   const cvSource = fs.readFileSync(path.join(__dirname, '..', '_posts', 'cv.tex'), 'utf8');
   expect(cvSource).toContain('\\href{https://www.ualberta.ca/en/computing-science/index.html}{University of Alberta}');
+  expect(cvSource).toContain('{M.Sc. in Computing Science}{2026 -- Present}');
+  expect(cvSource).toContain('{Graduate Teaching and Research Assistant (GTA, GRA, GRAF)}{2026 -- Present}');
+  expect(cvSource).not.toMatch(/\bIncoming\b/i);
   expect(cvSource).toContain('\\href{https://cse.buet.ac.bd/academics/bsc}{Bangladesh University of Engineering and Technology (BUET)}');
   expect(cvSource).toContain('\\href{https://www.iqvia.com/library/fact-sheets/kpi-library}{KPI Library}');
   expect(cvSource).toContain('\\href{https://www.iqvia.com/solutions/commercialization/commercial-analytics/orchestrated-analytics}{IQVIA Orchestrated Analytics}');

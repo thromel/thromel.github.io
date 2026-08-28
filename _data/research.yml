@@ -7,22 +7,14 @@ agenda:
     Current work combines reliability-agent evaluation, security audits for agent choices,
     and developer tools that make context and software evolution easier to examine.
   next_step: >-
-    M.Sc. in Computing Science at the
+    I am pursuing an M.Sc. in Computing Science at the
     <a href="https://www.ualberta.ca/en/computing-science/index.html" target="_blank" rel="noopener noreferrer" aria-label="University of Alberta (opens in a new tab)">University of Alberta</a>,
-    beginning September 1, 2026.
+    where I work with the U-A-Goose group under Dr. Zhou Yang.
 
 identity:
   statuses:
-    - label: "University of Alberta · Incoming M.Sc. in Computing Science"
-      start_date: "2026-06-01"
-      end_date_exclusive: "2026-09-01"
-      url: "https://www.ualberta.ca/en/computing-science/index.html"
-      logo: "/assets/images/education/ualberta-logo.svg"
-      logo_alt: "University of Alberta crest"
-      logo_width: 256
-      logo_height: 256
     - label: "University of Alberta · M.Sc. in Computing Science"
-      start_date: "2026-09-01"
+      start_date: "2026"
       url: "https://www.ualberta.ca/en/computing-science/index.html"
       logo: "/assets/images/education/ualberta-logo.svg"
       logo_alt: "University of Alberta crest"
@@ -459,11 +451,6 @@ homepage:
       date_label: "June 27, 2026"
 
   milestones:
-    - title: "Starting University of Alberta M.Sc."
-      date: "2026-09-01"
-      date_label: "September 1, 2026"
-      summary: "I will begin graduate study in Computing Science with the U-A-Goose group under Dr. Zhou Yang."
-      url: "https://www.ualberta.ca/en/computing-science/index.html"
     - title: "ML hosting RCE study under review at ICSE 2027"
       date: "2026-06-30"
       date_label: "June 30, 2026"

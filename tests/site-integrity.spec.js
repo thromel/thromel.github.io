@@ -223,7 +223,7 @@ test.describe('built-site integrity', () => {
     const experience = htmlForRoute('/experience/');
     expect(experience).toContain('<time datetime="2026-06-01">June 2026</time>–<time datetime="2026-08">August 2026</time>');
     expect(experience).toContain('<time datetime="2023-06-01">June 2023</time>–<time datetime="2026-06">June 2026</time>');
-    expect(experience).toContain('Starting <time datetime="2026-09-01">September 1, 2026</time>');
+    expect(experience).toContain('<time datetime="2026">2026</time>–Present');
   });
 
   test('secondary indexes publish route-specific descriptions', () => {

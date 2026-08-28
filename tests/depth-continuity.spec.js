@@ -19,7 +19,7 @@ test.describe('depth and continuity', () => {
     await page.goto(`${BASE_URL}/education/`, { waitUntil: 'domcontentloaded' });
     const times = page.locator('.education-entry__meta time[datetime]');
     await expect(times).toHaveCount(7);
-    await expect(times.first()).toHaveAttribute('datetime', '2026-09-01');
+    await expect(times.first()).toHaveAttribute('datetime', '2026');
   });
 
   test('case-study summary strip appears on pilot engineering records', async ({ page }) => {
