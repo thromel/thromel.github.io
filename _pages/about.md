@@ -31,4 +31,6 @@ I bring about three years of professional software-engineering experience, forme
 
 My research interests are AI4SE, LLM4Coding, trustworthy AI, long-horizon coding agents, and AI for SRE.
 
+I care about focused, sustained work. Here is [how I think about work ethic]({% post_url 2026-09-29-focused-work-and-deliberate-rest %}).
+
 I live in Edmonton, Alberta. Fun fact: Edmonton's North Saskatchewan River Valley is one of the largest stretches of connected urban parkland in North America.
