@@ -27,7 +27,7 @@ $ripple-tile: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' 
   --global-footer-text-color: #c9e4e2;
   --global-footer-link-color: #ffffff;
   --global-divider-color: rgba(7, 90, 100, 0.26);
-  --global-card-bg-color: rgba(255, 255, 255, 0.78);
+  --global-card-bg-color: rgba(255, 255, 255, 0.88);
   --global-highlight-color: #923615;
   --global-newsletter-bg-color: #ffffff;
   --global-newsletter-text-color: #0b2428;
@@ -39,7 +39,7 @@ $ripple-tile: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' 
 
   --scrim: rgba(246, 253, 253, 0.8);
   --page-base: linear-gradient(180deg, #eaf8f7, #eaf8f7);
-  --nav-bg: rgba(226, 246, 246, 0.86);
+  --nav-bg: rgba(226, 246, 246, 0.94);
   --card-border: rgba(7, 90, 100, 0.22);
   --card-shadow: 0 1px 3px rgba(11, 36, 40, 0.06), 0 8px 22px rgba(20, 150, 160, 0.1);
   --far-layer: #{$glacier-scene};
@@ -60,7 +60,7 @@ html[data-theme="dark"] {
   --global-footer-text-color: #b3c2d6;
   --global-footer-link-color: #86efac;
   --global-divider-color: rgba(139, 92, 246, 0.3);
-  --global-card-bg-color: rgba(9, 14, 30, 0.62);
+  --global-card-bg-color: rgba(9, 14, 30, 0.78);
   --global-highlight-color: #f9a8d4;
   --global-newsletter-bg-color: #0d1424;
   --global-newsletter-text-color: #e3ebf6;
@@ -69,7 +69,7 @@ html[data-theme="dark"] {
 
   --scrim: rgba(3, 6, 13, 0.7);
   --page-base: linear-gradient(180deg, #060c1c 0%, #04070f 45vh, #03050b 100%);
-  --nav-bg: rgba(4, 7, 15, 0.72);
+  --nav-bg: rgba(4, 7, 15, 0.9);
   --card-border: rgba(139, 92, 246, 0.3);
   --card-shadow: 0 1px 3px rgba(0, 0, 0, 0.5), 0 8px 26px rgba(52, 211, 153, 0.05);
   --far-layer:
@@ -204,7 +204,6 @@ html[data-theme="dark"] body::after {
   top: -6vh;
   height: 84vh;
   z-index: -2;
-  filter: blur(2px);
   -webkit-mask-image: var(--streak-a), var(--fade-v);
   mask-image: var(--streak-a), var(--fade-v);
   -webkit-mask-composite: source-in;
@@ -291,8 +290,6 @@ html[data-theme="dark"] body::after {
 .navbar {
   background-color: var(--nav-bg);
   opacity: 1;
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
 }
 
 /* Links */
@@ -305,8 +302,6 @@ a {
 .card {
   border: 1px solid var(--card-border);
   box-shadow: var(--card-shadow);
-  -webkit-backdrop-filter: blur(8px);
-  backdrop-filter: blur(8px);
 }
 
 html[data-theme="dark"] .card {
