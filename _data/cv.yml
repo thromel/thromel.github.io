@@ -3,10 +3,10 @@ cv:
   name: Tanzim Hossain Romel
   label: ''
   email: tanhromel@gmail.com
-  location: Uttara, Dhaka, Bangladesh
+  location: Edmonton, Alberta, Canada
   address:
-    city: Uttara, Dhaka
-    region: Bangladesh
+    city: Edmonton
+    region: Alberta
   website: https://tanzimhromel.com
   summary: |-
     - I'm Tanzim Hossain Romel, an **M.Sc. student at the University of Alberta**, a former **Software Development Engineer at IQVIA**, and a **BUET CSE graduate**
@@ -43,8 +43,9 @@ cv:
       end_date: 2026-08
       summary: June–August 2026. Remote summer research internship at the University of Illinois Urbana-Champaign through UIUC++ Summer Research in Software Engineering (SRSE) 2026 with Professor Tianyin Xu's group, focused on software and systems reliability research.
       highlights:
-      - Working on software engineering research with an emphasis on reliable systems and rigorous empirical evaluation
-      - Reading systems and software reliability literature, prototyping research ideas, and preparing artifacts for reproducible evaluation
+      - Curated real-world postmortem reports into reproducible SRE benchmark problems on [SREGym](https://sregym.com/blog/postmortems-to-sre-benchmarks), weighing realism, reproducibility, cost, and utility
+      - Worked on software engineering research with an emphasis on reliable systems and rigorous empirical evaluation
+      - Read systems and software reliability literature, prototyped research ideas, and prepared artifacts for reproducible evaluation
       - 'Technologies: Software Engineering Research, Systems Reliability, Empirical Evaluation, Reproducibility'
     - position: Software Development Engineer 1
       company: IQVIA
