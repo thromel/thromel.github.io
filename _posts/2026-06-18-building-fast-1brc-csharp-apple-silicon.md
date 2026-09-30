@@ -8,7 +8,7 @@ tags: [csharp, dotnet, nativeaot, 1brc, performance, arm64, macos]
 
 This is a long write-up about building a C# solver for the One Billion Row Challenge on Apple Silicon. I am going to start from the boring version, explain why it falls apart, then rebuild the system one layer at a time.
 
-The final code is here: [thromel/1brc-csharp](https://github.com/thromel/1brc-csharp). The shorter case-study page is here: [1BRC C# on Apple Silicon](/showcase/projects/1brc-csharp/).
+The final code is here: [thromel/1brc-csharp](https://github.com/thromel/1brc-csharp). The shorter case-study page is here: [1BRC C# on Apple Silicon](/projects/1brc-csharp/).
 
 The result is not a generic "make C# fast" story. It is more specific than that. It is about reading a 13 GiB text file, parsing one billion rows, aggregating station statistics, and finding out that the big win on my machine was not the parser trick I expected. It was changing the file input path.
 

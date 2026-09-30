@@ -1,0 +1,210 @@
+---
+cv:
+  name: Tanzim Hossain Romel
+  label: ''
+  email: tanhromel@gmail.com
+  location: Uttara, Dhaka, Bangladesh
+  address:
+    city: Uttara, Dhaka
+    region: Bangladesh
+  website: https://tanzimhromel.com
+  summary: |-
+    - I'm Tanzim Hossain Romel, an **M.Sc. student at the University of Alberta**, a former **Software Development Engineer at IQVIA**, and a **BUET CSE graduate**
+    - My research interests are **AI4SE, AI for SRE, LLM4Coding, trustworthy AI, and long-horizon coding agents**
+    - I study vulnerabilities in machine learning ecosystems, methods for detecting adversarial behavior, and ways to improve reliability and safety through verification and runtime monitoring
+    - I collaborate with researchers at **Bangladesh University of Engineering and Technology** and **Auburn University** on projects that connect theory with real software engineering challenges
+    - At IQVIA, I built healthcare microservices, designed cloud-native solutions, and integrated AI capabilities into production systems. I received the **IQVIA Impact Silver Award** for performance and innovation
+    - I try to balance hands-on system building with rigorous research. See my [portfolio of projects](/projects/) and [research contributions](/research/) for examples
+    - **[Complete curriculum vitae available here](/assets/pdf/cv.pdf)**
+  social_networks: []
+  sections:
+    Experience:
+    - position: Graduate Teaching and Research Assistant (GTA · GRA · GRAF)
+      company: University of Alberta
+      url: https://www.ualberta.ca/en/computing-science/index.html
+      date: '2026-09-01'
+      summary: Since September 1, 2026. M.Sc. student in Computing Science with GTA, GRA, and GRAF appointments supporting graduate teaching and research in software engineering and dependable AI. Teaching assistant for CMPUT 174.
+      highlights:
+      - Teaching assistant for CMPUT 174
+      - Begin graduate research with the U-A-Goose software engineering group under Dr. Zhou Yang
+      - Support University of Alberta teaching and research through GTA and GRA appointments with GRAF funding
+      - 'Technologies: Graduate Research, Teaching, Software Engineering, Dependable AI'
+    - position: Remote Research Intern
+      company: UIUC
+      url: https://uiuc-srse.github.io/
+      start_date: 2026-06
+      end_date: 2026-08
+      summary: June–August 2026. Remote summer research internship at the University of Illinois Urbana-Champaign through UIUC++ Summer Research in Software Engineering (SRSE) 2026 with Professor Tianyin Xu's group, focused on software and systems reliability research.
+      highlights:
+      - Working on software engineering research with an emphasis on reliable systems and rigorous empirical evaluation
+      - Reading systems and software reliability literature, prototyping research ideas, and preparing artifacts for reproducible evaluation
+      - 'Technologies: Software Engineering Research, Systems Reliability, Empirical Evaluation, Reproducibility'
+    - position: Software Development Engineer 1
+      company: IQVIA
+      url: https://www.iqvia.com/
+      start_date: 2023-06
+      end_date: 2026-06
+      summary: June 2023–June 2026. Backend engineer on IQVIA's KPI Library, the dynamic reporting layer within Orchestrated Analytics, working across configuration, dashboard, analysis, and export workflows for healthcare analytics. Built and maintained C#/.NET services, data-access components, automated test infrastructure, and a schema-grounded AI copilot with supporting evaluation, retrieval, security, and observability infrastructure.
+      highlights:
+      - Built and maintained <b>C#/.NET</b> services and shared components across four KPI Library workflow areas—configuration, dashboard, export, and gateway; used <b>EF Core</b> with <b>SQL Server</b> for configuration data, <b>MongoDB</b> for dashboard caching, and <b>AWS S3</b> in export workflows
+      - Refactored repeated filter-resolution logic into reusable query components, consolidating 6 duplicated implementations into 2 shared components; centralized validation and business rules and added regression scenarios for combined filters and edge cases
+      - Added in-memory caching to targeted .NET read paths and improved interaction with the MongoDB-backed dashboard cache, reducing MongoDB reads per warm request from 4 to 1 and p95 latency from 420 ms to 340 ms across 500 equivalent warm requests per benchmark run
+      - Extended two export paths—CSV and presentation exports—with regional-formatting and commentary support; increased automated high-risk export scenarios from 28 to 46 and reduced pipelines requiring a flaky rerun from 12 of 100 to 4 of 100 comparable export-test runs by controlling fixtures, locale, and browser state and normalizing volatile file metadata before hashing stable content
+      - Implemented server-side axis-break resolution for KPI charts by computing adjacent gaps in ordered KPI values and translating qualifying intervals into <b>Highcharts yAxis.breaks</b>, keeping visualization behavior consistent across clients
+      - Reorganized three CI stages, build, test, and packaging; ran independent test suites in parallel and reused build artifacts between stages, reducing median successful-pipeline duration from 24.5 to 20.3 minutes across 25 comparable runs before and 25 after the change
+      - Contributed <b>OpenTelemetry</b>/<b>Jaeger</b> instrumentation and correlation identifiers across 8 named API, database, and cache operations in three workflow areas—dashboard, configuration, and export—making cross-service calls and database latency visible during debugging
+      - Designed a schema-grounded dashboard copilot that compiled analyst requests into versioned, permission-scoped operations for KPI selection, filtering, comparison, visualization, commentary, and export; validated and previewed each plan before approval, executed it idempotently with concurrency and rollback safeguards, then verified the final state and recorded an audit trail, improving exact requested-state completion from 65% to 87% and reducing invalid committed changes from 8.1% to 0.9% on a 350-workflow held-out subset of the agent benchmark
+      - Built a 400-workflow agent evaluation platform with trace replay, deterministic state and business-rule graders, numerical and export assertions, human-calibrated narrative scoring, multi-trial execution, and CI release gates; caught more than 20 prompt, model, retrieval, and tool-schema regressions before rollout and reduced candidate-model qualification from five days to one
+      - Developed an evidence-grounded KPI investigation assistant combining deterministic calculations, anomaly detection, hierarchical driver analysis, and source-linked narratives; increased numerical claims matching computed evidence from 91% to 98.7%, reduced unsupported analytical statements from 12% to 3%, and cut median investigation time from 13 to 7 minutes on an expert-reviewed task set
+      - Built a policy-enforcing execution gateway with capability-scoped authorization, tenant and market propagation, sensitive-data redaction, approval workflows, untrusted-content isolation, and immutable provenance; observed zero unauthorized executions across 5,000 adversarial cases while keeping benign-task false blocks below 2%
+      - Developed tenant-, permission-, and version-aware hybrid retrieval over KPI definitions, calculation rules, dashboard templates, and operational knowledge using lexical and embedding retrieval, reranking, effective-date filters, structured lookups, versioned citations, and calibrated abstention; improved Recall@5 from 0.76 to 0.93, citation precision from 84% to 97%, and reduced stale KPI explanations from 12% to 3% on a held-out retrieval evaluation
+      - Built an observable, provider-neutral model gateway with versioned prompts and models, complexity-aware routing, scoped caching, cost budgets, bounded retries, circuit breakers, fallbacks, shadow evaluation, and end-to-end AI traces; reduced p95 validated-response latency from 17 to 9 seconds and cost per successful workflow by 42%, while keeping candidate-model task success within one percentage point of the baseline model
+      - Received the <b>IQVIA Impact Program - Silver</b> award in May 2025
+      - 'Technologies: C#, .NET Core, EF Core, SQL Server, MongoDB, AWS S3, Highcharts, LangGraph, LangChain, MCP, RAG, Playwright, Jaeger, OpenTelemetry, GitLab CI'
+    - position: Full Stack Engineer
+      company: Mindshare Bangladesh (Part-time)
+      url: https://www.mindshareworld.com/offices
+      start_date: 2021-04
+      end_date: 2021-11
+      summary: April–November 2021. Built an e-commerce aggregator platform that let brands promote products by pulling listings from multiple e-commerce sites across Bangladesh.
+      highlights:
+      - Built a web scraping system with Scrapy that collected product data from about 20 major e-commerce platforms in Bangladesh
+      - Deployed and maintained the scraper as a ScrapyRT server on DigitalOcean, enabling real-time extraction via API endpoints
+      - Built the backend with Express.js and MongoDB to manage, process, and aggregate product data from the scraper
+      - Created APIs for brands to host ads and integrate with the aggregated data
+      - Optimized database queries and caching to handle large volumes of product data
+      - 'Technologies: Python, Scrapy, ScrapyRT, Express.js, Node.js, MongoDB, DigitalOcean, REST APIs, Web Scraping, Data Aggregation'
+    Education:
+    - institution: University of Alberta
+      studyType: M.Sc in Computing Science
+      url: https://www.ualberta.ca/en/computing-science/index.html
+      date: '2026-09-01'
+      highlights:
+      - Starting September 2026 (Incoming)
+      - Starting the **M.Sc in Computing Science** program on **September 1, 2026**. My research interests are AI4SE, AI for SRE, LLM4Coding, trustworthy AI, and long-horizon coding agents. I will be joining the [U-A-Goose](https://u-a-goose.github.io/) software engineering group at the University of Alberta, supervised by [Dr. Zhou Yang](https://apps.ualberta.ca/directory/person/zy25), with affiliation to [Amii (Alberta Machine Intelligence Institute)](https://www.amii.ca/).
+    - institution: Bangladesh University of Engineering and Technology
+      studyType: B.Sc in Computer Science and Engineering
+      url: https://cse.buet.ac.bd
+      start_date: 2018-04
+      end_date: 2023-05
+      highlights:
+      - April 2018 - May 2023
+      - "**[Dean's List Award](https://cse.buet.ac.bd/academics/fund)** - Level 2 (outstanding academic performance). **Notable Courses:** Machine Learning, High Performance Database Systems, Fault Tolerant Systems, Data Structure and Algorithms, Operating Systems, Computer Security"
+    - institution: Rajshahi College
+      studyType: Higher Secondary Certificate (HSC)
+      url: https://rc.edu.bd
+      start_date: '2015'
+      end_date: '2017'
+      highlights:
+      - 2015 - 2017
+      - Placed 15th in Rajshahi Board, received Talentpool Scholarship, A+ in all subjects with 96.5% marks in Physics, Chemistry, and Higher Mathematics
+    - institution: Rajshahi Collegiate School
+      studyType: Secondary School Certificate (SSC)
+      url: https://rcs.edu.bd
+      start_date: '2007'
+      end_date: '2015'
+      highlights:
+      - 2007 - 2015
+      - A+ in all subjects, received General Scholarship
+    Awards:
+    - title: 2nd place, Bangla Handwritten Digits Recognition contest
+      awarder: BUET (Department of CSE)
+      url: https://github.com/thromel/CSE-472-Machine-Learning
+      date: 2022-11
+      summary: November 2022. Placed 2nd of 120 students with a from-scratch NumPy CNN at 95.9% NumtaDB test accuracy.
+    - title: Finalist, Blockchain Olympiad Bangladesh 2021
+      awarder: Bangladesh Blockchain Olympiad
+      url: https://bcolbd.org/2021/teams
+      date: 2021-04
+      summary: April 2021. Selected among 40 national finalists for a blockchain ticketing platform with smart-contract validation.
+    - title: Dean's List Award
+      awarder: BUET
+      url: https://cse.buet.ac.bd/academics/fund
+      summary: BUET Level-2. Recognized for Level-2 cumulative GPA of 3.75 or higher out of 4.0.
+    - title: Bangladesh Physics Olympiad (BdPhO) National prize winner
+      awarder: Bangladesh Physics Olympiad
+      date: '2017'
+      summary: 2017. National prize in the BdPhO selection path for the International Physics Olympiad.
+    - title: Bangladesh Chemistry Olympiad National prize winner
+      awarder: Bangladesh Chemistry Olympiad
+      date: '2017'
+      summary: 2017. National prize in the Bangladesh Chemistry Olympiad selection path for IChO.
+    - title: Talentpool HSC Scholarship
+      awarder: Rajshahi Education Board
+      date: '2017'
+      summary: 2017. Merit scholarship for placing 15th in the Rajshahi Board HSC results.
+    - title: IQVIA Impact Program - Silver
+      awarder: IQVIA
+      url: https://drive.google.com/file/d/1Vc4E2RoQEPmbfS56oLdUih-oJDBok9sP/view?usp=share_link
+      date: 2025-05
+      summary: May 2025. Silver recognition for delivery on critical KPI Library work and product improvements.
+    Skills:
+    - name: Languages & Systems
+      keywords:
+      - Rust
+      - C#/.NET Core
+      - C++
+      - Go
+      - Java
+      - Shell
+    - name: AI & Agents
+      keywords:
+      - Python
+      - LangGraph
+      - MCP
+      - RAG
+      - PyTorch
+      - LLM Evaluation
+    - name: Web & Backend
+      keywords:
+      - TypeScript
+      - Node.js/Express
+      - React/Next.js
+      - Microservices
+      - REST APIs
+      - EF Core
+    - name: Data & Storage
+      keywords:
+      - PostgreSQL
+      - MongoDB
+      - SQL Server
+      - Oracle/PLSQL
+      - DynamoDB
+      - SQLAlchemy
+    - name: Cloud & DevOps
+      keywords:
+      - AWS
+      - Docker
+      - Kubernetes
+      - Terraform
+      - GitHub Actions
+    - name: Security & Research Tooling
+      keywords:
+      - CodeQL
+      - Semgrep
+      - Bandit
+      - YARA
+      - Z3
+      - Solidity/Web3
+    - name: Soft Skills
+      keywords:
+      - Team Leadership & Mentorship
+      - Strategic Problem-solving & Critical Thinking
+      - Technical Communication & Documentation
+      - Cross-functional Collaboration
+      - Proactive Initiative & Ownership
+      - Continuous Learning & Adaptability
+      - Performance-driven Mindset
+      - Research Methodology & Analysis
+      - Time Management & Prioritization
+      - Quality Assurance & Attention to Detail
+    Certificates:
+    - name: TOEFL iBT
+      issuer: 'Score: 103/120 - Listening - 29, Reading - 29, Writing - 22, Speaking - 23'
+      url: https://www.ets.org/toefl.html
+    - name: Certified Kubernetes Application Developer (CKAD)
+      issuer: In preparation
+      url: https://www.cncf.io/certification/ckad/
+    - name: AWS Solution Architect Associate
+      issuer: In preparation
+      url: https://aws.amazon.com/certification/certified-solutions-architect-associate/

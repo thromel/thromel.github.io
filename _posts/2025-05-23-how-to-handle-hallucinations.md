@@ -4,11 +4,11 @@ title: "Taming the Imagination: A Comprehensive Guide to Handling Hallucinations
 date: 2025-05-23
 categories: [artificial-intelligence, machine-learning, software-engineering]
 tags: [hallucinations, ai-safety, guardrails, llm, agentic-ai, machine-learning]
-image: /assets/images/projects/ai-hallucinations.png
+thumbnail: /assets/img/blog-projects-ai-hallucinations.png
 ---
 
 
-<img src="{{ '/assets/images/projects/ai-hallucinations.png' | relative_url }}" class="img-fluid mb-4" alt="AI Hallucinations and Guardrails Illustration" width="2368" height="968" decoding="async">
+<img src="/assets/img/blog-projects-ai-hallucinations.png" class="img-fluid rounded z-depth-1 mb-4" alt="AI Hallucinations and Guardrails Illustration" width="2368" height="968" decoding="async">
 
 ## The $2 Million Hallucination: Why This Matters
 

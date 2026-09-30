@@ -4,7 +4,6 @@ title: "The Clique Partition Problem: Dividing Networks into Perfect Communities
 date: 2023-01-27
 categories: [algorithms, graph-theory, computer-science]
 tags: [clique-partition, graph-algorithms, np-complete, social-networks, clustering, combinatorial-optimization]
-image: /assets/images/projects/clique-partition.png
 ---
 
 

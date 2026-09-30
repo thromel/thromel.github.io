@@ -4,7 +4,6 @@ title: "Advice Complexity in Online Algorithms: When Knowing the Future Makes Al
 date: 2023-01-05
 categories: [algorithms, computer-science, theory]
 tags: [online-algorithms, advice-complexity, competitive-analysis, algorithm-engineering, theoretical-computer-science, optimization]
-image: /assets/images/projects/online-algorithms.png
 ---
 
 

@@ -4,7 +4,6 @@ title: "Growing as a Software Engineer in the Age of LLMs and Vibe Coding"
 date: 2025-05-28
 categories: [software-engineering, artificial-intelligence, career-development]
 tags: [llm, vibe-coding, software-engineering, ai-assisted-development, career-growth, programming]
-image: /assets/images/projects/vibe-coding.png
 ---
 
 

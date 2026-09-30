@@ -6,9 +6,8 @@ author: "Tanzim Hossain Romel"
 date: 2022-08-23
 categories: [tutorial, kubernetes, microservices]
 tags: [kubernetes, microservices, docker, devops, orchestration, containers]
-image: /assets/images/kubernetes-microservices-banner.jpg
 featured: true
-excerpt: "A practical Kubernetes guide covering microservice deployment, service-mesh integration, observability, and the operational checks needed before production use."
+description: "A practical Kubernetes guide covering microservice deployment, service-mesh integration, observability, and the operational checks needed before production use."
 ---
 
 

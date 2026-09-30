@@ -17,14 +17,14 @@ identity:
       start_date: "2026-06-01"
       end_date_exclusive: "2026-09-01"
       url: "https://www.ualberta.ca/en/computing-science/index.html"
-      logo: "/assets/images/education/ualberta-logo.svg"
+      logo: "/assets/img/companies/ualberta-logo.svg"
       logo_alt: "University of Alberta crest"
       logo_width: 256
       logo_height: 256
     - label: "University of Alberta · M.Sc. in Computing Science"
       start_date: "2026-09-01"
       url: "https://www.ualberta.ca/en/computing-science/index.html"
-      logo: "/assets/images/education/ualberta-logo.svg"
+      logo: "/assets/img/companies/ualberta-logo.svg"
       logo_alt: "University of Alberta crest"
       logo_width: 256
       logo_height: 256
@@ -53,7 +53,7 @@ anchors:
     status: "Active research · UIUC++ SRSE 2026"
     context: "June–August 2026 · Professor Tianyin Xu and the UIUC systems reliability group"
     last_verified: "2026-07-10"
-    image: "/assets/images/companies/uiuc-block-i.png"
+    image: "/assets/img/companies/uiuc-block-i.png"
     image_alt: "University of Illinois Block I mark"
     image_width: 170
     image_height: 171
@@ -77,13 +77,13 @@ anchors:
     status: "Under review at ICSE 2027"
     context: "With Mohammed Latif Siddiq, Natalie Sekerak, Beatrice Casey, and Joanna C. S. Santos"
     last_verified: "2026-07-10"
-    image: "/assets/images/ml-rce.webp"
+    image: "/assets/img/research/ml-rce.webp"
     image_sources:
-      - path: "/assets/images/ml-rce-320.webp"
+      - path: "/assets/img/research/ml-rce-320.webp"
         width: 320
-      - path: "/assets/images/ml-rce-640.webp"
+      - path: "/assets/img/research/ml-rce-640.webp"
         width: 640
-      - path: "/assets/images/ml-rce.webp"
+      - path: "/assets/img/research/ml-rce.webp"
         width: 960
     image_sizes: "(max-width: 719px) calc(100vw - 32px), 320px"
     image_alt: "Methodology overview for the study of remote code execution in machine learning model hosting ecosystems"
@@ -94,7 +94,7 @@ anchors:
       - label: "arXiv record"
         url: "https://arxiv.org/abs/2601.14163"
       - label: "Research summary"
-        url: "/research/ml-remote-code-execution/"
+        url: "/projects/research-ml-remote-code-execution/"
 
   - id: shift
     publicity: "abstract-only"
@@ -107,13 +107,13 @@ anchors:
     status: "Submitted to TACL 2026 · manuscript not public"
     context: "With Chowdhury Rakin Haider · abstract-level summary only"
     last_verified: "2026-07-10"
-    image: "/assets/images/agentic_ai_architecture.png"
+    image: "/assets/img/research/agentic_ai_architecture.png"
     image_sources:
-      - path: "/assets/images/agentic-ai-480.webp"
+      - path: "/assets/img/research/agentic-ai-480.webp"
         width: 480
-      - path: "/assets/images/agentic-ai-960.webp"
+      - path: "/assets/img/research/agentic-ai-960.webp"
         width: 960
-      - path: "/assets/images/agentic_ai_architecture.png"
+      - path: "/assets/img/research/agentic_ai_architecture.png"
         width: 1661
     image_sizes: "(max-width: 719px) calc(100vw - 32px), 320px"
     image_alt: "Conceptual architecture of an agentic AI system with tools, memory, and orchestration"
@@ -122,7 +122,7 @@ anchors:
     image_caption: "System context · choices inside an agent workflow"
     links:
       - label: "Abstract-level summary"
-        url: "/research/reagent-plus-plus/"
+        url: "/projects/research-reagent-plus-plus/"
       - label: "Collaborator profile"
         url: "https://cse.buet.ac.bd/faculty/faculty_detail/rakinhaider"
 
@@ -140,7 +140,7 @@ anchors:
     last_verified: "2026-07-10"
     links:
       - label: "ContextLedger"
-        url: "/showcase/projects/contextledger/"
+        url: "/projects/contextledger/"
       - label: "ctxhelm"
         url: "https://github.com/thromel/ctxhelm"
 
@@ -172,13 +172,13 @@ anchors:
     last_verified: "2026-07-10"
     links:
       - label: "Research summary"
-        url: "/research/multi-agent-db-schema/"
+        url: "/projects/research-multi-agent-db-schema/"
 
 supporting_systems:
   - name: "ContextLedger"
     role: "Typed, provenance-carrying session facts for measuring context compaction."
     status: "Research system"
-    url: "/showcase/projects/contextledger/"
+    url: "/projects/contextledger/"
   - name: "ctxhelm and HelmBench"
     role: "Guidance and evaluation for whether coding agents inspect the right files with less irrelevant reading."
     status: "Open-source tooling"
@@ -204,7 +204,7 @@ homepage:
         - business-level oracles
       date: "2026-07-10"
       date_label: "July 10, 2026"
-      image: "/assets/images/companies/uiuc-block-i.png"
+      image: "/assets/img/companies/uiuc-block-i.png"
       image_alt: "University of Illinois Block I mark representing the UIUC systems reliability research context"
       image_width: 170
       image_height: 171
@@ -236,19 +236,19 @@ homepage:
         - release engineering
       date: "2026-06-08"
       date_label: "June 8, 2026"
-      image: "/assets/images/projects/ctxhelm-system-architecture.svg"
+      image: "/assets/img/projects/ctxhelm-system-architecture.svg"
       image_alt: "ctxhelm architecture connecting coding agents to its compiler, repository intelligence, and local source-free storage"
       image_width: 1200
       image_height: 720
       image_caption: "ctxhelm system architecture"
       links:
         - label: "ctxhelm engineering case study"
-          url: "/showcase/projects/ctxhelm/"
+          url: "/projects/ctxhelm/"
         - label: "GitHub repository"
           url: "https://github.com/thromel/ctxhelm"
       related_evidence:
         - label: "Related · ContextLedger"
-          url: "/showcase/projects/contextledger/"
+          url: "/projects/contextledger/"
         - label: "Open-source contributions"
           url: "/contributions/"
 
@@ -267,13 +267,13 @@ homepage:
         - qualitative analysis
       date: "2026-07-10"
       date_label: "July 10, 2026"
-      image: "/assets/images/ml-rce.webp"
+      image: "/assets/img/research/ml-rce.webp"
       image_sources:
-        - path: "/assets/images/ml-rce-320.webp"
+        - path: "/assets/img/research/ml-rce-320.webp"
           width: 320
-        - path: "/assets/images/ml-rce-640.webp"
+        - path: "/assets/img/research/ml-rce-640.webp"
           width: 640
-        - path: "/assets/images/ml-rce.webp"
+        - path: "/assets/img/research/ml-rce.webp"
           width: 960
       image_sizes: "(max-width: 719px) calc(100vw - 32px), 320px"
       image_alt: "Methodology overview for the remote-code-execution study across machine-learning model hosting ecosystems"
@@ -284,7 +284,7 @@ homepage:
         - label: "arXiv record"
           url: "https://arxiv.org/abs/2601.14163"
         - label: "Research summary"
-          url: "/research/ml-remote-code-execution/"
+          url: "/projects/research-ml-remote-code-execution/"
       related_evidence:
         - label: "Publication record"
           url: "/publications/"
@@ -327,7 +327,7 @@ homepage:
         context compaction and recovery can be inspected instead of trusted by intuition.
       status: "Research system"
       link_label: "Inspect ContextLedger"
-      url: "/showcase/projects/contextledger/"
+      url: "/projects/contextledger/"
     - id: ai-for-sre
       umbrella: "AI4SE · AI for SRE"
       question: "How should agents be evaluated when diagnosis and recovery happen inside live reliability conditions?"
@@ -345,13 +345,13 @@ homepage:
         changed valid choice systematically favors an attacker's target.
       status: "Submitted to TACL 2026 · manuscript not public"
       link_label: "Read the abstract-level summary"
-      url: "/research/reagent-plus-plus/"
+      url: "/projects/research-reagent-plus-plus/"
 
   engineering_experience:
     - id: iqvia
       organization: "IQVIA"
       organization_url: "https://www.iqvia.com/"
-      logo: "/assets/images/companies/iqvia-logo.png"
+      logo: "/assets/img/companies/iqvia-logo.png"
       logo_alt: "IQVIA logo"
       logo_width: 400
       logo_height: 400
@@ -381,7 +381,7 @@ homepage:
     - id: mindshare
       organization: "Mindshare Bangladesh"
       organization_url: "https://www.mindshareworld.com/offices"
-      logo: "/assets/images/companies/mindshare-logo.png"
+      logo: "/assets/img/companies/mindshare-logo.png"
       logo_alt: "Mindshare logo"
       logo_width: 225
       logo_height: 225
@@ -421,7 +421,7 @@ homepage:
         - label: "arXiv paper"
           url: "https://arxiv.org/abs/2601.14163"
         - label: "Research summary"
-          url: "/research/ml-remote-code-execution/"
+          url: "/projects/research-ml-remote-code-execution/"
     - id: shift
       title: "The Choice Can Be the Attack: Auditing Aligned Backdoors in LLM Agents"
       citation: "Tanzim Hossain Romel with Chowdhury Rakin Haider."
@@ -433,7 +433,7 @@ homepage:
       date_label: "June 2026"
       links:
         - label: "Abstract-level summary"
-          url: "/research/reagent-plus-plus/"
+          url: "/projects/research-reagent-plus-plus/"
 
   open_source:
     - repository: "tsantalis/RefactoringMiner"
@@ -512,6 +512,6 @@ detail_pages:
     last_verified: "2026-07-10"
     related_engineering:
       - label: "ctxhelm case study"
-        url: "/showcase/projects/ctxhelm/"
+        url: "/projects/ctxhelm/"
       - label: "Research dossier"
         url: "/research/"

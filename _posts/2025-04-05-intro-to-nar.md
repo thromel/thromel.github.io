@@ -142,7 +142,7 @@ We'll use a Processor Network architecture, which consists of three main compone
 2. **Processor**: Performs iterative reasoning (mimicking algorithm steps)
 3. **Decoder**: Extracts the final answer from neural representations
 
-<img src="{{ '/assets/images/nar_bellman_ford_architecture.png' | relative_url }}" class="img-fluid mb-4" alt="Neural Algorithmic Reasoning Architecture" width="2084" height="367" loading="lazy" decoding="async">
+<img src="/assets/img/blog-nar_bellman_ford_architecture.png" class="img-fluid rounded z-depth-1 mb-4" alt="Neural Algorithmic Reasoning Architecture" width="2084" height="367" loading="lazy" decoding="async">
 
 Let's implement this step by step:
 
@@ -537,7 +537,7 @@ class AdaptiveAlgorithmicProcessor(MessagePassing):
 
 Let's build a complete example that shows the power of Neural Algorithmic Reasoning:
 
-<img src="{{ '/assets/images/nar_navigation_system.png' | relative_url }}" class="img-fluid mb-4" alt="Smart City Navigation System" width="2337" height="437" loading="lazy" decoding="async">
+<img src="/assets/img/blog-nar_navigation_system.png" class="img-fluid rounded z-depth-1 mb-4" alt="Smart City Navigation System" width="2337" height="437" loading="lazy" decoding="async">
 
 ```python
 class SmartCityNavigationSystem:

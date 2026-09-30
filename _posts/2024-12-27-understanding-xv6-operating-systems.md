@@ -4,7 +4,6 @@ title: "Understanding xv6: A Practical Introduction to Operating Systems"
 date: 2022-04-21
 categories: [operating-systems, programming, education]
 tags: [xv6, operating-systems, c, kernel, unix, mit, systems-programming, computer-science]
-image: /assets/images/projects/xv6-os.png
 ---
 
 

@@ -4,7 +4,6 @@ title: "The Performance Crisis: How We Rescued a .NET 8 Microservice from 10 Cri
 date: 2024-12-27
 categories: [backend-engineering, performance, microservices]
 tags: [dotnet, csharp, microservices, performance-optimization, backend-engineering, system-design, database-optimization, caching]
-image: /assets/images/projects/dotnet-performance.png
 ---
 
 

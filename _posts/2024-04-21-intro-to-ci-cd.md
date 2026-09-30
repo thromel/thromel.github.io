@@ -7,7 +7,7 @@ tags: [github, ci-cd, aws, deployment, story, automation, devops, cloud]
 ---
 
 
-<img src="{{ '/assets/images/github_aws_cicd_pipeline.png' | relative_url }}" class="img-fluid mb-4" alt="GitHub Actions CI/CD Pipeline with AWS" width="3166" height="304" decoding="async">
+<img src="/assets/img/blog-github_aws_cicd_pipeline.png" class="img-fluid rounded z-depth-1 mb-4" alt="GitHub Actions CI/CD Pipeline with AWS" width="3166" height="304" decoding="async">
 
 ## Introduction: Why This Matters
 
@@ -81,7 +81,7 @@ GitHub Actions is GitHub's native CI/CD solution. It allows you to automate work
 
 **Why This Architecture?** GitHub Actions works on a simple principle that mirrors real-world workflows: **Events trigger Workflows, which contain Jobs, which contain Steps**. This hierarchical structure provides flexibility while maintaining clarity.
 
-<img src="{{ '/assets/images/github_actions_workflow_anatomy.png' | relative_url }}" class="img-fluid mb-4" alt="GitHub Actions Workflow Anatomy" width="944" height="970" loading="lazy" decoding="async">
+<img src="/assets/img/blog-github_actions_workflow_anatomy.png" class="img-fluid rounded z-depth-1 mb-4" alt="GitHub Actions Workflow Anatomy" width="944" height="970" loading="lazy" decoding="async">
 
 Let me break this down with real-world analogies:
 

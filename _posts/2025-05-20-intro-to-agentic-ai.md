@@ -6,7 +6,7 @@ categories: [artificial-intelligence, machine-learning, data-science]
 tags: [langchain, langgraph, llama, ai, analytics, llm, fine-tuning, python]
 ---
 
-<img src="{{ '/assets/images/agentic_ai_architecture.png' | relative_url }}" class="img-fluid mb-4" alt="Agentic AI Architecture" width="1661" height="352" decoding="async">
+<img src="/assets/img/blog-agentic_ai_architecture.png" class="img-fluid rounded z-depth-1 mb-4" alt="Agentic AI Architecture" width="1661" height="352" decoding="async">
 
 
 ## Introduction: Why We Needed More Than Just a Chatbot

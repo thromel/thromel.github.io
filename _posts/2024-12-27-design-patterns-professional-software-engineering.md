@@ -4,7 +4,6 @@ title: "Design Patterns: Your First Step Toward Professional Software Engineerin
 date: 2024-05-22
 categories: [programming, software-engineering, education]
 tags: [design-patterns, java, object-oriented, programming, software-engineering, singleton, strategy, observer, decorator]
-image: /assets/images/projects/design-patterns.png
 ---
 
 

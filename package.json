@@ -1,19 +1,15 @@
 {
-  "name": "thromel-github-io",
-  "private": true,
-  "description": "Local browser-verification tooling for thromel.github.io",
   "scripts": {
-    "test:ui": "bash scripts/verify-ui.sh full",
-    "test:ui:shell": "bash scripts/verify-ui.sh shell",
-    "test:ui:install": "playwright install chromium"
-  },
-  "engines": {
-    "node": ">=20 <23 || >=24",
-    "npm": ">=9"
+    "lint:prettier": "prettier . --check",
+    "lint:style-contract": "node test/style_contract.js",
+    "test:visual": "playwright test --config test/visual/playwright.config.js",
+    "test:visual:update": "playwright test --config test/visual/playwright.config.js --update-snapshots"
   },
   "devDependencies": {
-    "@axe-core/playwright": "4.12.1",
-    "@playwright/test": "1.61.1",
-    "lighthouse": "12.6.0"
+    "@playwright/test": "^1.56.1",
+    "@shopify/prettier-plugin-liquid": "^1.10.0",
+    "pixelmatch": "^7.1.0",
+    "pngjs": "^7.0.0",
+    "prettier": "^3.8.0"
   }
 }

@@ -4,7 +4,6 @@ title: "Zero Downtime Deployments in Kubernetes: How We Keep Our Services Runnin
 date: 2024-11-29
 categories: [kubernetes, devops, microservices]
 tags: [kubernetes, zero-downtime, deployment, microservices, devops, rolling-updates]
-image: /assets/images/projects/zero-downtime-deployments.png
 ---
 
 
