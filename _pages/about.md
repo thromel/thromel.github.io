@@ -10,6 +10,8 @@ profile:
   image_circular: false
   more_info: >
     <p><em>Me in front of Lake Minnewanka, Banff National Park, September 2026.</em></p>
+    <p><a href="mailto:%74%61%6E%7A%69%6D%68%6F@%75%61%6C%62%65%72%74%61.%63%61">tanzimho@ualberta.ca</a></p>
+    <p><a href="mailto:%74%61%6E%68%72%6F%6D%65%6C@%67%6D%61%69%6C.%63%6F%6D">tanhromel@gmail.com</a></p>
 
 selected_papers: true # includes papers marked selected={true} in the bib
 social: true
@@ -24,8 +26,6 @@ latest_posts:
   scrollable: true
   limit: 3
 ---
-
-**Contact:** <a href="mailto:{{ 'tanzimho@ualberta.ca' | encode_email }}">tanzimho@ualberta.ca</a> &middot; <a href="mailto:{{ 'tanhromel@gmail.com' | encode_email }}">tanhromel@gmail.com</a>
 
 I study how AI agents behave in real software systems, and how to make their decisions inspectable, reliable, and trustworthy.
 
