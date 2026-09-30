@@ -25,8 +25,6 @@ latest_posts:
   limit: 3
 ---
 
-I am currently a Graduate Teaching Assistant (GTA) and Graduate Research Assistant (GRA) at the University of Alberta, and I am a teaching assistant for CMPUT 174.
-
 I study how AI agents behave in real software systems, and how to make their decisions inspectable, reliable, and trustworthy.
 
 I bring about three years of professional software-engineering experience, formerly at <a href="https://www.iqvia.com/" target="_blank" rel="noopener noreferrer">IQVIA</a>.

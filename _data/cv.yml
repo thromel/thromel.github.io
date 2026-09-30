@@ -19,16 +19,23 @@ cv:
   social_networks: []
   sections:
     Experience:
-    - position: Graduate Teaching and Research Assistant (GTA · GRA · GRAF)
+    - position: Graduate Teaching Assistant (GTA)
       company: University of Alberta
       url: https://www.ualberta.ca/en/computing-science/index.html
       date: '2026-09-01'
-      summary: Since September 1, 2026. M.Sc. student in Computing Science with GTA, GRA, and GRAF appointments supporting graduate teaching and research in software engineering and dependable AI. Teaching assistant for CMPUT 174.
+      summary: Since September 1, 2026. Department of Computing Science.
       highlights:
       - Teaching assistant for CMPUT 174
-      - Begin graduate research with the U-A-Goose software engineering group under Dr. Zhou Yang
-      - Support University of Alberta teaching and research through GTA and GRA appointments with GRAF funding
-      - 'Technologies: Graduate Research, Teaching, Software Engineering, Dependable AI'
+      - Support University of Alberta teaching through a GTA appointment
+    - position: Graduate Research Assistant (GRA · GRAF)
+      company: University of Alberta
+      url: https://www.ualberta.ca/en/computing-science/index.html
+      date: '2026-09-01'
+      summary: Since September 1, 2026. M.Sc. student in Computing Science supporting graduate research in software engineering and dependable AI.
+      highlights:
+      - Graduate research with the U-A-Goose software engineering group under Dr. Zhou Yang
+      - Support University of Alberta research through a GRA appointment with GRAF funding
+      - 'Technologies: Graduate Research, Software Engineering, Dependable AI'
     - position: Remote Research Intern
       company: UIUC
       url: https://uiuc-srse.github.io/
