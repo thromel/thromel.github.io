@@ -1,0 +1,664 @@
+<!DOCTYPE html> <html lang="en"> <head> <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <title> Zero Downtime Deployments in Kubernetes: How We Keep Our Services Running While We Ship | Tanzim Hossain Romel </title> <meta name="author" content="Tanzim Hossain Romel"> <meta name="description" content="Academic and engineering portfolio of Tanzim Hossain Romel, focused on reliable AI agents, software engineering research, and developer tools."> <meta name="keywords" content=""> <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https:; style-src 'self' 'unsafe-inline' https:; img-src 'self' data: https:; font-src 'self' data: https:; media-src 'self' https:; frame-src 'self' https:; connect-src 'self' https:;"> <style>
+  :root {
+    --max-content-width: 930px;
+  }
+</style> <link rel="stylesheet" href="/assets/css/tailwind.css?v=50c64c15cbb9fd1ce6056fdb8bcb4b62"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.2.0/css/all.min.css" integrity="sha256-MVopmdyC2tYTiJ8wlktf0uh0v4NgT+vNdyVFepi7Q0c=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.5/css/academicons.min.css" integrity="sha256-SzrCOBJbGVFMahewkgjwnApaV2+av1DwMAA+/QGLyZw=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/scholar-icons@1.0.3/css/scholar-icons.css" integrity="sha256-VY3hHVj/hNX3fYG6wtbA6TcKJQl7+FthzGSyIB64klY=" crossorigin="anonymous"> <link defer rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons&amp;display=swap"> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-github.css?v=591dab5a4e56573bf4ef7fd332894c99" media="" id="highlight_theme_light"> <link rel="shortcut icon" href="data:image/svg+xml,&lt;svg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20100%20100%22&gt;&lt;text%20y=%22.9em%22%20font-size=%2290%22&gt;%E2%9A%9B%EF%B8%8F&lt;/text&gt;&lt;/svg&gt;"> <link rel="stylesheet" href="/assets/css/main.css?v=3116ba77db9ee1581d05bb3e86fbf7f1"> <link rel="canonical" href="https://tanzimhromel.com/blog/2024/zero-downtime/"> <script src="/assets/js/theme.js?v=5286c3e4c334d0ecb8fc0c40ff4fa7ec"></script> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-native.css?v=5847e5ed4a4568527aa6cfab446049ca" media="none" id="highlight_theme_dark"> <script>
+    initTheme();
+  </script> </head> <body class="fixed-top-nav "> <header> <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top" role="navigation"> <div class="container"> <a class="navbar-brand title font-weight-lighter" href="/"> Tanzim Hossain Romel </a> <button class="navbar-toggler collapsed navbar-toggler-main" type="button" data-nav-toggle="navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar top-bar"></span> <span class="icon-bar middle-bar"></span> <span class="icon-bar bottom-bar"></span> </button> <div class="collapse navbar-collapse navbar-collapse-main" id="navbarNav"> <ul class="navbar-nav navbar-menu-list flex-nowrap"> <li class="nav-item "> <a class="nav-link" href="/">about </a> </li> <li class="nav-item active"> <a class="nav-link" href="/blog/">blog </a> </li> <li class="nav-item "> <a class="nav-link" href="/publications/">publications </a> </li> <li class="nav-item "> <a class="nav-link" href="/research/">research </a> </li> <li class="nav-item "> <a class="nav-link" href="/projects/">projects </a> </li> <li class="nav-item "> <a class="nav-link" href="/cv/">CV </a> </li> <li class="nav-item "> <a class="nav-link" href="/contributions/">contributions </a> </li> <li class="nav-item"> <button id="search-toggle" type="button" title="Search" aria-label="Open search"> <span class="nav-link">ctrl k <i class="fa-solid fa-magnifying-glass"></i></span> </button> </li> <li class="toggle-container"> <button id="light-toggle" type="button" title="Change theme" aria-label="Change color theme"> <i class="fa-half-sun-moon" id="light-toggle-system"></i> <i class="fa-solid fa-moon" id="light-toggle-dark"></i> <i class="fa-solid fa-sun" id="light-toggle-light"></i> </button> </li> </ul> </div> </div> </nav> <progress id="progress" value="0"> <div class="progress-container"> <span class="progress-bar"></span> </div> </progress> </header> <div class="container mt-5" role="main"> <div class="post"> <header class="post-header"> <h1 class="post-title">Zero Downtime Deployments in Kubernetes: How We Keep Our Services Running While We Ship</h1> <p class="post-meta"> Created on November 29, 2024 </p> <p class="post-tags"> <a href="/blog/2024"> <i class="fa-solid fa-calendar fa-sm"></i> 2024 </a>   ·   <a href="/blog/tag/kubernetes"> <i class="fa-solid fa-hashtag fa-sm"></i> kubernetes</a>   <a href="/blog/tag/zero-downtime"> <i class="fa-solid fa-hashtag fa-sm"></i> zero-downtime</a>   <a href="/blog/tag/deployment"> <i class="fa-solid fa-hashtag fa-sm"></i> deployment</a>   <a href="/blog/tag/microservices"> <i class="fa-solid fa-hashtag fa-sm"></i> microservices</a>   <a href="/blog/tag/devops"> <i class="fa-solid fa-hashtag fa-sm"></i> devops</a>   <a href="/blog/tag/rolling-updates"> <i class="fa-solid fa-hashtag fa-sm"></i> rolling-updates</a>   ·   <a href="/blog/category/kubernetes"> <i class="fa-solid fa-tag fa-sm"></i> kubernetes</a>   <a href="/blog/category/devops"> <i class="fa-solid fa-tag fa-sm"></i> devops</a>   <a href="/blog/category/microservices"> <i class="fa-solid fa-tag fa-sm"></i> microservices</a> </p> </header> <article class="post-content"> <div id="markdown-content"> <p>Picture this scenario. You’re at your favorite online store, adding items to your cart. Suddenly, the site goes down with a “Under Maintenance” message. Frustrating, right? Now imagine if that was your company’s service. That’s exactly why we invested in zero downtime deployments, and today I’ll share how we achieved this in our Kubernetes microservice architecture.</p> <h2 id="what-are-zero-downtime-deployments">What Are Zero Downtime Deployments?</h2> <p>Let’s start with the basics. Zero downtime deployment means updating your application without your users ever noticing. Think of it like renovating a store while keeping it open. Customers can still shop while workers quietly update things in the background.</p> <p>In the world of microservices running on Kubernetes, this becomes both more complex and more achievable. Complex because you have many services to coordinate. Achievable because Kubernetes gives us powerful tools to make it happen.</p> <h2 id="why-this-matters-more-than-ever">Why This Matters More Than Ever</h2> <p>When we started our microservices journey three years ago, we had 12 services. Today, we have over 50. Each service might deploy multiple times per day. Without zero downtime deployments, we’d be showing maintenance pages constantly. Our users would hate us, and rightfully so.</p> <h2 id="the-foundation-understanding-how-kubernetes-updates-work">The Foundation: Understanding How Kubernetes Updates Work</h2> <p>Before diving into our implementation, let’s understand how Kubernetes handles updates. Kubernetes uses a concept called “rolling updates” by default. Imagine you have three copies of your application running. Kubernetes doesn’t update all three at once. Instead, it updates them one by one, like changing tires on a moving car.</p> <p>Here’s what happens during a typical update:</p> <ol> <li>Kubernetes creates a new pod with your updated code</li> <li>It waits for the new pod to be ready</li> <li>It starts sending traffic to the new pod</li> <li>It removes an old pod</li> <li>It repeats until all pods are updated</li> </ol> <p>This sounds simple, but the devil is in the details. Let’s explore how we made this process truly seamless.</p> <h2 id="our-implementation-journey-the-building-blocks">Our Implementation Journey: The Building Blocks</h2> <h3 id="step-1-getting-health-checks-right">Step 1: Getting Health Checks Right</h3> <p>The first thing we learned? Kubernetes needs to know when your application is ready. We use three types of health checks, and understanding the difference is crucial.</p> <p><strong>Startup Probes</strong>: These tell Kubernetes when your application has finished starting up. Think of it like waiting for your computer to boot before trying to open programs.</p> <p><strong>Liveness Probes</strong>: These check if your application is still alive. If it fails, Kubernetes restarts the pod. It’s like checking someone’s pulse.</p> <p><strong>Readiness Probes</strong>: These determine if your pod can handle traffic. Just because your application is alive doesn’t mean it’s ready to serve customers.</p> <p>Here’s how we implement these in our services:</p> <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">apps/v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">Deployment</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">order-service</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">replicas</span><span class="pi">:</span> <span class="m">3</span>
+  <span class="na">template</span><span class="pi">:</span>
+    <span class="na">spec</span><span class="pi">:</span>
+      <span class="na">containers</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">order-service</span>
+        <span class="na">image</span><span class="pi">:</span> <span class="s">mycompany/order-service:v2.1.0</span>
+        <span class="na">ports</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="na">containerPort</span><span class="pi">:</span> <span class="m">8080</span>
+        
+        <span class="c1"># Startup probe - gives the app time to initialize</span>
+        <span class="na">startupProbe</span><span class="pi">:</span>
+          <span class="na">httpGet</span><span class="pi">:</span>
+            <span class="na">path</span><span class="pi">:</span> <span class="s">/health/startup</span>
+            <span class="na">port</span><span class="pi">:</span> <span class="m">8080</span>
+          <span class="na">initialDelaySeconds</span><span class="pi">:</span> <span class="m">10</span>
+          <span class="na">periodSeconds</span><span class="pi">:</span> <span class="m">5</span>
+          <span class="na">failureThreshold</span><span class="pi">:</span> <span class="m">30</span>  <span class="c1"># Allows up to 150 seconds for startup</span>
+        
+        <span class="c1"># Liveness probe - restarts if the app crashes</span>
+        <span class="na">livenessProbe</span><span class="pi">:</span>
+          <span class="na">httpGet</span><span class="pi">:</span>
+            <span class="na">path</span><span class="pi">:</span> <span class="s">/health/live</span>
+            <span class="na">port</span><span class="pi">:</span> <span class="m">8080</span>
+          <span class="na">initialDelaySeconds</span><span class="pi">:</span> <span class="m">0</span>
+          <span class="na">periodSeconds</span><span class="pi">:</span> <span class="m">10</span>
+          <span class="na">failureThreshold</span><span class="pi">:</span> <span class="m">3</span>
+        
+        <span class="c1"># Readiness probe - controls traffic routing</span>
+        <span class="na">readinessProbe</span><span class="pi">:</span>
+          <span class="na">httpGet</span><span class="pi">:</span>
+            <span class="na">path</span><span class="pi">:</span> <span class="s">/health/ready</span>
+            <span class="na">port</span><span class="pi">:</span> <span class="m">8080</span>
+          <span class="na">initialDelaySeconds</span><span class="pi">:</span> <span class="m">0</span>
+          <span class="na">periodSeconds</span><span class="pi">:</span> <span class="m">5</span>
+          <span class="na">failureThreshold</span><span class="pi">:</span> <span class="m">3</span>
+</code></pre></div></div> <p>The magic happens in how we implement these endpoints. Our <code class="language-plaintext highlighter-rouge">/health/ready</code> endpoint doesn’t just return “OK”. It actually checks:</p> <ul> <li>Database connections are established</li> <li>Cache is warmed up</li> <li>All dependent services are reachable</li> <li>Initial data is loaded</li> </ul> <p>This ensures we only receive traffic when we’re truly ready to handle it.</p> <h3 id="step-2-graceful-shutdowns---the-art-of-saying-goodbye">Step 2: Graceful Shutdowns - The Art of Saying Goodbye</h3> <p>When Kubernetes decides to remove a pod, it doesn’t just pull the plug. It sends a SIGTERM signal, which is like politely asking your application to shut down. Here’s where many teams stumble.</p> <p>We implemented a shutdown handler that:</p> <ol> <li>Stops accepting new requests</li> <li>Waits for ongoing requests to complete</li> <li>Closes database connections cleanly</li> <li>Then exits</li> </ol> <p>Here’s a simplified version of our Go implementation:</p> <div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">package</span> <span class="n">main</span>
+
+<span class="k">import</span> <span class="p">(</span>
+    <span class="s">"context"</span>
+    <span class="s">"log"</span>
+    <span class="s">"net/http"</span>
+    <span class="s">"os"</span>
+    <span class="s">"os/signal"</span>
+    <span class="s">"syscall"</span>
+    <span class="s">"time"</span>
+<span class="p">)</span>
+
+<span class="k">func</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c">// Create our HTTP server</span>
+    <span class="n">srv</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="n">http</span><span class="o">.</span><span class="n">Server</span><span class="p">{</span><span class="n">Addr</span><span class="o">:</span> <span class="s">":8080"</span><span class="p">}</span>
+    
+    <span class="c">// Handle our routes</span>
+    <span class="n">http</span><span class="o">.</span><span class="n">HandleFunc</span><span class="p">(</span><span class="s">"/api/orders"</span><span class="p">,</span> <span class="n">handleOrders</span><span class="p">)</span>
+    
+    <span class="c">// Start server in a goroutine</span>
+    <span class="k">go</span> <span class="k">func</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="n">err</span> <span class="o">:=</span> <span class="n">srv</span><span class="o">.</span><span class="n">ListenAndServe</span><span class="p">();</span> <span class="n">err</span> <span class="o">!=</span> <span class="n">http</span><span class="o">.</span><span class="n">ErrServerClosed</span> <span class="p">{</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">Fatalf</span><span class="p">(</span><span class="s">"ListenAndServe(): %v"</span><span class="p">,</span> <span class="n">err</span><span class="p">)</span>
+        <span class="p">}</span>
+    <span class="p">}()</span>
+    
+    <span class="c">// Wait for interrupt signal</span>
+    <span class="n">sigterm</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">(</span><span class="k">chan</span> <span class="n">os</span><span class="o">.</span><span class="n">Signal</span><span class="p">,</span> <span class="m">1</span><span class="p">)</span>
+    <span class="n">signal</span><span class="o">.</span><span class="n">Notify</span><span class="p">(</span><span class="n">sigterm</span><span class="p">,</span> <span class="n">syscall</span><span class="o">.</span><span class="n">SIGTERM</span><span class="p">,</span> <span class="n">syscall</span><span class="o">.</span><span class="n">SIGINT</span><span class="p">)</span>
+    <span class="o">&lt;-</span><span class="n">sigterm</span>
+    
+    <span class="n">log</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="s">"Shutdown signal received, draining requests..."</span><span class="p">)</span>
+    
+    <span class="c">// Give ongoing requests 30 seconds to complete</span>
+    <span class="n">ctx</span><span class="p">,</span> <span class="n">cancel</span> <span class="o">:=</span> <span class="n">context</span><span class="o">.</span><span class="n">WithTimeout</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">Background</span><span class="p">(),</span> <span class="m">30</span><span class="o">*</span><span class="n">time</span><span class="o">.</span><span class="n">Second</span><span class="p">)</span>
+    <span class="k">defer</span> <span class="n">cancel</span><span class="p">()</span>
+    
+    <span class="c">// Stop accepting new requests and wait for existing ones</span>
+    <span class="k">if</span> <span class="n">err</span> <span class="o">:=</span> <span class="n">srv</span><span class="o">.</span><span class="n">Shutdown</span><span class="p">(</span><span class="n">ctx</span><span class="p">);</span> <span class="n">err</span> <span class="o">!=</span> <span class="no">nil</span> <span class="p">{</span>
+        <span class="n">log</span><span class="o">.</span><span class="n">Printf</span><span class="p">(</span><span class="s">"HTTP server Shutdown error: %v"</span><span class="p">,</span> <span class="n">err</span><span class="p">)</span>
+    <span class="p">}</span>
+    
+    <span class="n">log</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="s">"Graceful shutdown complete"</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></div> <p>We also configure Kubernetes to give us enough time for this graceful shutdown:</p> <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">spec</span><span class="pi">:</span>
+  <span class="na">terminationGracePeriodSeconds</span><span class="pi">:</span> <span class="m">60</span>  <span class="c1"># Gives us 60 seconds to shut down cleanly</span>
+</code></pre></div></div> <h3 id="step-3-the-service-mesh-safety-net">Step 3: The Service Mesh Safety Net</h3> <p>Even with perfect health checks and graceful shutdowns, we discovered edge cases. Sometimes, a pod would be marked for deletion, but load balancers would still send it traffic for a few seconds. This created errors.</p> <p>Enter Istio, our service mesh. Think of a service mesh as a smart traffic controller that sits between all your services. It knows exactly which pods are healthy and routes traffic accordingly.</p> <p>With Istio, we gained:</p> <ul> <li>Automatic retries for failed requests</li> <li>Circuit breaking to prevent cascade failures</li> <li>Fine-grained traffic control during deployments</li> </ul> <p>Here’s how we configure Istio for zero downtime deployments:</p> <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">networking.istio.io/v1beta1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">DestinationRule</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">order-service</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">host</span><span class="pi">:</span> <span class="s">order-service</span>
+  <span class="na">trafficPolicy</span><span class="pi">:</span>
+    <span class="na">connectionPool</span><span class="pi">:</span>
+      <span class="na">tcp</span><span class="pi">:</span>
+        <span class="na">maxConnections</span><span class="pi">:</span> <span class="m">100</span>
+      <span class="na">http</span><span class="pi">:</span>
+        <span class="na">http1MaxPendingRequests</span><span class="pi">:</span> <span class="m">50</span>
+        <span class="na">http2MaxRequests</span><span class="pi">:</span> <span class="m">100</span>
+    <span class="na">loadBalancer</span><span class="pi">:</span>
+      <span class="na">simple</span><span class="pi">:</span> <span class="s">ROUND_ROBIN</span>
+    <span class="na">outlierDetection</span><span class="pi">:</span>
+      <span class="c1"># Remove unhealthy instances from load balancing</span>
+      <span class="na">consecutiveErrors</span><span class="pi">:</span> <span class="m">5</span>
+      <span class="na">interval</span><span class="pi">:</span> <span class="s">30s</span>
+      <span class="na">baseEjectionTime</span><span class="pi">:</span> <span class="s">30s</span>
+      <span class="na">maxEjectionPercent</span><span class="pi">:</span> <span class="m">50</span>
+      <span class="na">minHealthPercent</span><span class="pi">:</span> <span class="m">50</span>
+</code></pre></div></div> <h3 id="step-4-testing-in-production-with-canary-deployments">Step 4: Testing in Production with Canary Deployments</h3> <p>Here’s where things get interesting. Instead of updating all pods at once, we deploy to a small percentage first. If something goes wrong, only a few users are affected.</p> <p>We use Flagger, which automates canary deployments. It gradually shifts traffic to the new version while monitoring metrics. If errors spike, it automatically rolls back.</p> <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">flagger.app/v1beta1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">Canary</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">order-service</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">targetRef</span><span class="pi">:</span>
+    <span class="na">apiVersion</span><span class="pi">:</span> <span class="s">apps/v1</span>
+    <span class="na">kind</span><span class="pi">:</span> <span class="s">Deployment</span>
+    <span class="na">name</span><span class="pi">:</span> <span class="s">order-service</span>
+  <span class="na">service</span><span class="pi">:</span>
+    <span class="na">port</span><span class="pi">:</span> <span class="m">80</span>
+  <span class="na">analysis</span><span class="pi">:</span>
+    <span class="c1"># Check every 30 seconds</span>
+    <span class="na">interval</span><span class="pi">:</span> <span class="s">30s</span>
+    <span class="c1"># Number of iterations before promotion</span>
+    <span class="na">iterations</span><span class="pi">:</span> <span class="m">10</span>
+    <span class="c1"># Max traffic percentage routed to canary</span>
+    <span class="na">maxWeight</span><span class="pi">:</span> <span class="m">50</span>
+    <span class="c1"># Incremental traffic increase</span>
+    <span class="na">stepWeight</span><span class="pi">:</span> <span class="m">5</span>
+    <span class="na">metrics</span><span class="pi">:</span>
+    <span class="c1"># Check success rate</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">success-rate</span>
+      <span class="na">thresholdRange</span><span class="pi">:</span>
+        <span class="na">min</span><span class="pi">:</span> <span class="m">99</span>
+      <span class="na">interval</span><span class="pi">:</span> <span class="s">1m</span>
+    <span class="c1"># Check response time</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">latency</span>
+      <span class="na">thresholdRange</span><span class="pi">:</span>
+        <span class="na">max</span><span class="pi">:</span> <span class="m">500</span>
+      <span class="na">interval</span><span class="pi">:</span> <span class="s">30s</span>
+</code></pre></div></div> <p>This configuration slowly increases traffic to the new version from 0% to 50% in 5% increments. If the success rate drops below 99% or latency exceeds 500ms, it rolls back automatically.</p> <h3 id="step-5-database-migrations---the-trickiest-part">Step 5: Database Migrations - The Trickiest Part</h3> <p>Updating code is one thing. Updating databases during zero downtime deployments? That’s where things get really interesting.</p> <p>We follow a pattern called “expand and contract”:</p> <ol> <li> <strong>Expand</strong>: Add new columns or tables without removing old ones</li> <li> <strong>Migrate</strong>: Deploy new code that writes to both old and new schemas</li> <li> <strong>Backfill</strong>: Copy data from old format to new</li> <li> <strong>Switch</strong>: Deploy code that reads from new schema but still writes to both</li> <li> <strong>Contract</strong>: Remove old schema once we’re confident</li> </ol> <p>Here’s a real example from when we added a <code class="language-plaintext highlighter-rouge">customer_email</code> field to our orders table:</p> <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">-- Step 1: Expand - Add new column (non-breaking change)</span>
+<span class="k">ALTER</span> <span class="k">TABLE</span> <span class="n">orders</span> <span class="k">ADD</span> <span class="k">COLUMN</span> <span class="n">customer_email</span> <span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">255</span><span class="p">);</span>
+
+<span class="c1">-- Step 2: Backfill existing data</span>
+<span class="k">UPDATE</span> <span class="n">orders</span> <span class="n">o</span>
+<span class="k">SET</span> <span class="n">customer_email</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="k">SELECT</span> <span class="n">email</span> <span class="k">FROM</span> <span class="n">customers</span> <span class="k">c</span> 
+    <span class="k">WHERE</span> <span class="k">c</span><span class="p">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">o</span><span class="p">.</span><span class="n">customer_id</span>
+<span class="p">)</span>
+<span class="k">WHERE</span> <span class="n">customer_email</span> <span class="k">IS</span> <span class="k">NULL</span><span class="p">;</span>
+
+<span class="c1">-- Step 3: After new code is deployed and stable, make it required</span>
+<span class="k">ALTER</span> <span class="k">TABLE</span> <span class="n">orders</span> <span class="k">ALTER</span> <span class="k">COLUMN</span> <span class="n">customer_email</span> <span class="k">SET</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">;</span>
+</code></pre></div></div> <p>The key insight? Every database change must be backward compatible with the previous version of your code.</p> <h2 id="real-world-challenges-we-faced">Real-World Challenges We Faced</h2> <h3 id="challenge-1-the-thundering-herd">Challenge 1: The Thundering Herd</h3> <p>When we first implemented health checks, we made them too simple. All pods would become ready at the same moment, causing a traffic spike. We solved this by adding jitter (random delays) to our readiness checks.</p> <h3 id="challenge-2-long-running-requests">Challenge 2: Long-Running Requests</h3> <p>Some of our API endpoints process large data exports that take minutes. Our initial 30-second grace period wasn’t enough. We had to:</p> <ul> <li>Increase the grace period for specific services</li> <li>Implement request deadlines</li> <li>Move long operations to background jobs</li> </ul> <h3 id="challenge-3-dependency-coordination">Challenge 3: Dependency Coordination</h3> <p>Microservices don’t live in isolation. When service A depends on service B, deploying B requires careful coordination. We solved this with:</p> <ul> <li>API versioning</li> <li>Feature flags</li> <li>Backward compatibility requirements</li> </ul> <h2 id="monitoring-how-we-know-its-working">Monitoring: How We Know It’s Working</h2> <p>You can’t improve what you don’t measure. We track several metrics:</p> <p><strong>Deployment Success Rate</strong>: Percentage of deployments that complete without rollback. Our target is 99%.</p> <p><strong>Error Rate During Deployments</strong>: We graph error rates with deployment events overlaid. Any spike during deployment gets investigated.</p> <p><strong>Pod Restart Count</strong>: Frequent restarts indicate problems with our health checks or application stability.</p> <p><strong>User-Facing Availability</strong>: The ultimate metric. We maintain 99.95% availability.</p> <p>Here’s a Prometheus query we use to track errors during deployments:</p> <pre><code class="language-promql"># Error rate in the last 5 minutes
+sum(rate(http_requests_total{status=~"5.."}[5m])) 
+/ 
+sum(rate(http_requests_total[5m]))
+</code></pre> <h2 id="practical-exercise-try-it-yourself">Practical Exercise: Try It Yourself</h2> <p>Want to see zero downtime deployment in action? Here’s a simple exercise:</p> <ol> <li>Deploy a basic web service to Kubernetes:</li> </ol> <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">apps/v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">Deployment</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">hello-world</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">replicas</span><span class="pi">:</span> <span class="m">3</span>
+  <span class="na">strategy</span><span class="pi">:</span>
+    <span class="na">type</span><span class="pi">:</span> <span class="s">RollingUpdate</span>
+    <span class="na">rollingUpdate</span><span class="pi">:</span>
+      <span class="na">maxSurge</span><span class="pi">:</span> <span class="m">1</span>
+      <span class="na">maxUnavailable</span><span class="pi">:</span> <span class="m">0</span>  <span class="c1"># This ensures zero downtime</span>
+  <span class="na">selector</span><span class="pi">:</span>
+    <span class="na">matchLabels</span><span class="pi">:</span>
+      <span class="na">app</span><span class="pi">:</span> <span class="s">hello-world</span>
+  <span class="na">template</span><span class="pi">:</span>
+    <span class="na">metadata</span><span class="pi">:</span>
+      <span class="na">labels</span><span class="pi">:</span>
+        <span class="na">app</span><span class="pi">:</span> <span class="s">hello-world</span>
+    <span class="na">spec</span><span class="pi">:</span>
+      <span class="na">containers</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">hello-world</span>
+        <span class="na">image</span><span class="pi">:</span> <span class="s">nginxdemos/hello:0.2</span>
+        <span class="na">ports</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="na">containerPort</span><span class="pi">:</span> <span class="m">80</span>
+        <span class="na">readinessProbe</span><span class="pi">:</span>
+          <span class="na">httpGet</span><span class="pi">:</span>
+            <span class="na">path</span><span class="pi">:</span> <span class="s">/</span>
+            <span class="na">port</span><span class="pi">:</span> <span class="m">80</span>
+          <span class="na">initialDelaySeconds</span><span class="pi">:</span> <span class="m">5</span>
+          <span class="na">periodSeconds</span><span class="pi">:</span> <span class="m">2</span>
+<span class="nn">---</span>
+<span class="na">apiVersion</span><span class="pi">:</span> <span class="s">v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">Service</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">hello-world</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">selector</span><span class="pi">:</span>
+    <span class="na">app</span><span class="pi">:</span> <span class="s">hello-world</span>
+  <span class="na">ports</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">port</span><span class="pi">:</span> <span class="m">80</span>
+    <span class="na">targetPort</span><span class="pi">:</span> <span class="m">80</span>
+</code></pre></div></div> <ol> <li>In another terminal, continuously curl the service:</li> </ol> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">while </span><span class="nb">true</span><span class="p">;</span> <span class="k">do 
+  </span>curl <span class="nt">-s</span> http://hello-world | <span class="nb">grep</span> <span class="nt">-o</span> <span class="s2">"Server address: [^&lt;]*"</span>
+  <span class="nb">sleep </span>0.5
+<span class="k">done</span>
+</code></pre></div></div> <ol> <li>Update the deployment to a new version:</li> </ol> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl <span class="nb">set </span>image deployment/hello-world hello-world<span class="o">=</span>nginxdemos/hello:0.3
+</code></pre></div></div> <p>Watch the output. You’ll see the server addresses change gradually, but no failed requests!</p> <h2 id="lessons-learned-our-key-takeaways">Lessons Learned: Our Key Takeaways</h2> <p>After three years of refining our approach, here’s what we wish we knew from the start:</p> <p><strong>Start Simple</strong>: Don’t try to implement everything at once. Get basic health checks working first, then add sophistication.</p> <p><strong>Test Failure Scenarios</strong>: Regular “chaos engineering” sessions where we deliberately break things have been invaluable. We’ve found issues we never would have imagined.</p> <p><strong>Communication Is Key</strong>: Every team needs to understand these patterns. We run monthly workshops and maintain a deployment playbook.</p> <p><strong>Automation Is Essential</strong>: Manual deployments don’t scale. Invest in CI/CD pipelines early.</p> <p><strong>Monitor Everything</strong>: You need data to improve. Start collecting metrics from day one.</p> <h2 id="the-business-impact">The Business Impact</h2> <p>Since implementing zero downtime deployments, we’ve seen remarkable improvements:</p> <ul> <li>Deployment frequency increased from weekly to multiple times daily</li> <li>Customer complaints about downtime dropped to zero</li> <li>Developer confidence in deployments skyrocketed</li> <li>We can push critical fixes any time, not just during “maintenance windows”</li> </ul> <h2 id="looking-forward-whats-next">Looking Forward: What’s Next?</h2> <p>Our zero downtime deployment journey doesn’t end here. We’re currently exploring:</p> <p><strong>Progressive Delivery</strong>: Going beyond canary deployments to feature-flag-driven releases</p> <p><strong>Multi-Region Deployments</strong>: Ensuring zero downtime even when updating across geographic regions</p> <p><strong>GitOps</strong>: Using Git as the single source of truth for our deployments</p> <p><strong>Service Preview Environments</strong>: Letting developers test service interactions before merging</p> <h2 id="your-turn-getting-started">Your Turn: Getting Started</h2> <p>Ready to implement zero downtime deployments in your organization? Here’s your roadmap:</p> <ol> <li> <strong>Week 1-2</strong>: Implement proper health checks for one service</li> <li> <strong>Week 3-4</strong>: Add graceful shutdown handling</li> <li> <strong>Week 5-6</strong>: Set up monitoring and alerts</li> <li> <strong>Week 7-8</strong>: Implement your first canary deployment</li> <li> <strong>Week 9-10</strong>: Document patterns and train your team</li> <li> <strong>Week 11-12</strong>: Expand to additional services</li> </ol> <p>Remember, this is a journey, not a destination. Each service might need slightly different approaches. The key is to start somewhere and iterate.</p> <h2 id="conclusion-why-this-matters">Conclusion: Why This Matters</h2> <p>Zero downtime deployment isn’t just a technical achievement. It’s about respecting your users’ time and trust. Every maintenance window is a broken promise to someone trying to use your service.</p> <p>By implementing these patterns, we’ve transformed deployments from scary events to routine operations. Our developers deploy with confidence. Our users never see maintenance pages. Our business can iterate and improve continuously.</p> <p>The techniques I’ve shared aren’t theoretical. They’re battle-tested patterns we use every day. Start small, measure everything, and gradually build your confidence. Before you know it, you’ll wonder how you ever lived with deployment downtime.</p> <p>Remember: your users don’t care about your deployment process. They just want your service to work. Zero downtime deployments ensure it always does.</p> <p>Happy deploying!</p> <hr> <p><em>Have questions about implementing zero downtime deployments? Found a pattern that works well for your team? We’d love to hear from you. Drop us a line at engineering@yourcompany.com or find us on our engineering blog.</em></p> </div> </article> <br> <hr> <br> <h2 class="text-3xl font-semibold mb-4 mt-12">Enjoy Reading This Article?</h2> <p class="mb-2">Here are some more articles you might like to read next:</p> <ul class="list-disc pl-7 my-3 space-y-2 marker:text-[var(--global-theme-color)]"> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2026/building-fast-1brc-csharp-apple-silicon/">Building a fast 1BRC solver in C# on Apple Silicon</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2025/memory-management-production-silent-killers/">Memory Management in Production: Avoiding the Silent Killers</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2025/vibe-coding/">Growing as a Software Engineer in the Age of LLMs and Vibe Coding</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2025/how-to-handle-hallucinations/">Taming the Imagination: A Comprehensive Guide to Handling Hallucinations and Implementing Guardrails in Agentic AI</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2025/intro-to-agentic-ai/">Building an Agentic AI Analytics Dashboard: A Deep Dive with LangChain, LangGraph, and Fine-tuned LLAMA</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2025/intro-to-nar/">Neural Algorithmic Reasoning: Teaching Neural Networks to Think Like Algorithms</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2025/opentelemetry/">OpenTelemetry in Microservices: How We Transformed Our Observability Strategy</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2025/leveraging-ai-tools-software-engineering/">Using AI Tools in Software Engineering and Research Workflows</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2024/optimizing-dotnet-microservices-performance/">The Performance Crisis: How We Rescued a .NET 8 Microservice from 10 Critical Bottlenecks</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2024/dotnet-tests/">Mastering Unit Testing and BDD with xUnit and SpecFlow in .NET 9: A Comprehensive Guide</a> </li> </ul> </div> </div> <footer class="fixed-bottom" role="contentinfo"> <div class="container mt-0"> © Copyright 2026 Tanzim Hossain Romel. © Tanzim Hossain Romel. Powered by <a href="https://jekyllrb.com/" target="_blank" rel="external nofollow noopener">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio" rel="external nofollow noopener" target="_blank">al-folio</a> theme. </div> </footer> <script>
+  window.alFolio = {
+    compatBootstrap: false
+  };
+</script> <script src="/assets/js/nav-toggle.js?v=141bd79a73ebc0f0b6ea58e440ae79fc"></script> <script defer src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script> <script defer src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script> <script defer src="/assets/js/masonry.js?v=e49affc7bd2646f6acdad1dbe02c2359" type="text/javascript"></script> <script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js" integrity="sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI=" crossorigin="anonymous"></script> <script src="/assets/al_math/js/mathjax-setup.js"></script> <script src="/assets/js/tooltips-setup.js?v=fe487e99db6c43751e6e7bdb2d6a0611"></script> <script src="/assets/js/no_defer.js?v=53b1b1a645525975c963ce8bf8bfefcf"></script> <script defer src="/assets/js/common.js?v=87baac90f765f2f3362dcf6aaf312a8a"></script> <script defer src="/assets/js/copy_code.js?v=c8a01c11a92744d44b093fc3bda915df" type="text/javascript"></script> <script defer src="/assets/js/jupyter_new_tab.js?v=896d254890d9b47f0281f63bfccf0dee"></script> <script async src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script> <script async src="https://badge.dimensions.ai/badge.js"></script> <script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script> <script defer src="/assets/al_img_tools/js/zoom.js"></script> <script defer src="/assets/js/progress-bar.js?v=499464c5c63ced6cf7ad62509f1e2610" type="text/javascript"></script> <script src="https://cdn.jsdelivr.net/npm/vanilla-back-to-top@7.2.1/dist/vanilla-back-to-top.min.js" integrity="sha256-uMJJ3EoTyfRBoTbR+lrfu1uRQ87RZG8AR3cVNuQVeFg=" crossorigin="anonymous"></script> <script>
+    addBackToTop();
+  </script> <script type="module" src="/assets/al_search/js/search/ninja-keys.min.js"></script> <ninja-keys hidebreadcrumbs noautoloadmdicons placeholder="Type to start searching"></ninja-keys> <script src="/assets/al_search/js/search-setup.js"></script> <script>
+// get the ninja-keys element
+const ninja = document.querySelector('ninja-keys');
+
+// add the home and posts menu items
+ninja.data = [{
+    id: "nav-about",
+    title: "about",
+    section: "Navigation",
+    handler: () => {
+      window.location.href = "/";
+    },
+  },{id: "nav-blog",
+          title: "blog",
+          description: "",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/blog/";
+          },
+        },{id: "nav-publications",
+          title: "publications",
+          description: "Publications.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/publications/";
+          },
+        },{id: "nav-research",
+          title: "research",
+          description: "Research on reliable AI agents, SRE-agent evaluation, ML ecosystem security, agent-choice auditing, and developer tools.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/research/";
+          },
+        },{id: "nav-projects",
+          title: "projects",
+          description: "Research and engineering projects.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/projects/";
+          },
+        },{id: "nav-cv",
+          title: "CV",
+          description: "Curriculum vitae.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/cv/";
+          },
+        },{id: "nav-contributions",
+          title: "contributions",
+          description: "Curated open-source contribution evidence across research infrastructure, frameworks, and language tooling.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/contributions/";
+          },
+        },{id: "post-building-a-fast-1brc-solver-in-c-on-apple-silicon",
+        
+          title: "Building a fast 1BRC solver in C# on Apple Silicon",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/building-fast-1brc-csharp-apple-silicon/";
+          
+        },
+      },{id: "post-memory-management-in-production-avoiding-the-silent-killers",
+        
+          title: "Memory Management in Production: Avoiding the Silent Killers",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/memory-management-production-silent-killers/";
+          
+        },
+      },{id: "post-growing-as-a-software-engineer-in-the-age-of-llms-and-vibe-coding",
+        
+          title: "Growing as a Software Engineer in the Age of LLMs and Vibe Coding...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/vibe-coding/";
+          
+        },
+      },{id: "post-taming-the-imagination-a-comprehensive-guide-to-handling-hallucinations-and-implementing-guardrails-in-agentic-ai",
+        
+          title: "Taming the Imagination: A Comprehensive Guide to Handling Hallucinations and Implementing Guardrails in...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/how-to-handle-hallucinations/";
+          
+        },
+      },{id: "post-building-an-agentic-ai-analytics-dashboard-a-deep-dive-with-langchain-langgraph-and-fine-tuned-llama",
+        
+          title: "Building an Agentic AI Analytics Dashboard: A Deep Dive with LangChain, LangGraph, and...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/intro-to-agentic-ai/";
+          
+        },
+      },{id: "post-neural-algorithmic-reasoning-teaching-neural-networks-to-think-like-algorithms",
+        
+          title: "Neural Algorithmic Reasoning: Teaching Neural Networks to Think Like Algorithms",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/intro-to-nar/";
+          
+        },
+      },{id: "post-opentelemetry-in-microservices-how-we-transformed-our-observability-strategy",
+        
+          title: "OpenTelemetry in Microservices: How We Transformed Our Observability Strategy",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/opentelemetry/";
+          
+        },
+      },{id: "post-using-ai-tools-in-software-engineering-and-research-workflows",
+        
+          title: "Using AI Tools in Software Engineering and Research Workflows",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/leveraging-ai-tools-software-engineering/";
+          
+        },
+      },{id: "post-the-performance-crisis-how-we-rescued-a-net-8-microservice-from-10-critical-bottlenecks",
+        
+          title: "The Performance Crisis: How We Rescued a .NET 8 Microservice from 10 Critical...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2024/optimizing-dotnet-microservices-performance/";
+          
+        },
+      },{id: "post-zero-downtime-deployments-in-kubernetes-how-we-keep-our-services-running-while-we-ship",
+        
+          title: "Zero Downtime Deployments in Kubernetes: How We Keep Our Services Running While We...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2024/zero-downtime/";
+          
+        },
+      },{id: "post-mastering-unit-testing-and-bdd-with-xunit-and-specflow-in-net-9-a-comprehensive-guide",
+        
+          title: "Mastering Unit Testing and BDD with xUnit and SpecFlow in .NET 9: A...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2024/dotnet-tests/";
+          
+        },
+      },{id: "post-design-patterns-your-first-step-toward-professional-software-engineering",
+        
+          title: "Design Patterns: Your First Step Toward Professional Software Engineering",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2024/design-patterns-professional-software-engineering/";
+          
+        },
+      },{id: "post-setting-up-github-actions-ci-cd-with-aws-a-practical-journey",
+        
+          title: "Setting Up GitHub Actions CI/CD with AWS: A Practical Journey",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2024/intro-to-ci-cd/";
+          
+        },
+      },{id: "post-the-clique-partition-problem-dividing-networks-into-perfect-communities",
+        
+          title: "The Clique Partition Problem: Dividing Networks into Perfect Communities",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2023/clique-partition-problem-graph-theory/";
+          
+        },
+      },{id: "post-advice-complexity-in-online-algorithms-when-knowing-the-future-makes-all-the-difference",
+        
+          title: "Advice Complexity in Online Algorithms: When Knowing the Future Makes All the Difference...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2023/advice-complexity-online-algorithms/";
+          
+        },
+      },{id: "post-getting-started-with-kubernetes-deploying-microservice-architectures-at-scale",
+        
+          title: "Getting Started with Kubernetes: Deploying Microservice Architectures at Scale",
+        
+        description: "A practical Kubernetes guide covering microservice deployment, service-mesh integration, observability, and the operational checks needed before production use.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2022/getting-started-with-kubernetes-microservices/";
+          
+        },
+      },{id: "post-understanding-xv6-a-practical-introduction-to-operating-systems",
+        
+          title: "Understanding xv6: A Practical Introduction to Operating Systems",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2022/understanding-xv6-operating-systems/";
+          
+        },
+      },{id: "post-getting-started-with-ns3-a-hands-on-guide-to-network-simulation",
+        
+          title: "Getting Started with NS3: A Hands-On Guide to Network Simulation",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2021/getting-started-with-ns3/";
+          
+        },
+      },{id: "news-completed-b-sc-in-computer-science-and-engineering-from-bangladesh-university-of-engineering-and-technology-with-a-gpa-of-3-53-4-00-link-https-cse-buet-ac-bd-academics-bsc",
+          title: 'Completed B.Sc in Computer Science and Engineering from Bangladesh University of Engineering and...',
+          description: "",
+          section: "News",},{id: "news-joined-iqvia-as-a-software-development-engineer-on-kpi-library-the-dynamic-reporting-layer-within-orchestrated-analytics-link-https-www-iqvia-com-solutions-commercialization-commercial-analytics-orchestrated-analytics",
+          title: 'Joined IQVIA as a Software Development Engineer on KPI Library, the dynamic reporting...',
+          description: "",
+          section: "News",},{id: "news-submitted-39-sentiment-analysis-of-anonymous-crisis-reports-in-bangladesh-39-to-acm-cscw-2025-analyzing-crowd-sourced-reports-from-bangladesh-39-s-2024-national-crisis-using-transformer-models-link-projects-research-ureporter",
+          title: 'Submitted &amp;#39;Sentiment Analysis of Anonymous Crisis Reports in Bangladesh&amp;#39; to ACM CSCW 2025,...',
+          description: "",
+          section: "News",},{id: "news-honored-with-the-iqvia-impact-program-silver-award-for-outstanding-performance-and-contributions-to-the-kpi-library-team-link-https-drive-google-com-file-d-1vc4e2roqepmbfs56olduih-ojdbok9sp-view-usp-share-link",
+          title: 'Honored with the IQVIA Impact Program Silver Award for outstanding performance and contributions...',
+          description: "",
+          section: "News",},{id: "news-submitted-39-an-empirical-study-on-remote-code-execution-in-machine-learning-model-hosting-ecosystems-39-to-the-mining-software-repositories-msr-2026-conference-first-large-scale-cross-platform-security-study-analyzing-45-000-repositories-across-5-major-ml-platforms-link-https-arxiv-org-abs-2601-14163",
+          title: 'Submitted &amp;#39;An Empirical Study on Remote Code Execution in Machine Learning Model Hosting...',
+          description: "",
+          section: "News",},{id: "news-resubmitted-39-an-empirical-study-on-remote-code-execution-in-machine-learning-model-hosting-ecosystems-39-to-acm-transactions-on-software-engineering-and-methodology-tosem-2026-preprint-available-on-arxiv-link-https-arxiv-org-abs-2601-14163",
+          title: 'Resubmitted &amp;#39;An Empirical Study on Remote Code Execution in Machine Learning Model Hosting...',
+          description: "",
+          section: "News",},{id: "news-started-a-remote-summer-research-internship-at-the-university-of-illinois-urbana-champaign-through-uiuc-summer-research-in-software-engineering-srse-2026-with-professor-tianyin-xu-link-https-uiuc-srse-github-io",
+          title: 'Started a remote summer research internship at the University of Illinois Urbana-Champaign through...',
+          description: "",
+          section: "News",},{id: "news-submitted-39-the-choice-can-be-the-attack-auditing-aligned-backdoors-in-llm-agents-39-to-the-transactions-of-the-association-for-computational-linguistics-tacl-2026-with-chowdhury-rakin-haider-link-projects-research-reagent-plus-plus",
+          title: 'Submitted &amp;#39;The Choice Can Be the Attack: Auditing Aligned Backdoors in LLM Agents&amp;#39;...',
+          description: "",
+          section: "News",},{id: "news-39-an-empirical-study-on-remote-code-execution-in-machine-learning-model-hosting-ecosystems-39-is-under-review-at-the-international-conference-on-software-engineering-icse-2027-preprint-available-on-arxiv-link-https-arxiv-org-abs-2601-14163",
+          title: '&amp;#39;An Empirical Study on Remote Code Execution in Machine Learning Model Hosting Ecosystems&amp;#39;...',
+          description: "",
+          section: "News",},{id: "news-will-begin-graduate-study-in-computing-science-at-the-university-of-alberta-on-september-1-2026-link-https-www-ualberta-ca-en-computing-science-index-html",
+          title: 'Will begin graduate study in Computing Science at the University of Alberta on...',
+          description: "",
+          section: "News",},{id: "projects-1brc-c-on-apple-silicon",
+          title: '1BRC C# on Apple Silicon',
+          description: "A .NET 10 NativeAOT performance case study: byte parsing, native aggregation, ARM64 tuning, and a size-aware macOS pread path",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/1brc-csharp/";
+            },},{id: "projects-building-a-bangla-handwritten-digit-recognizer-from-scratch",
+          title: 'Building a Bangla Handwritten Digit Recognizer from Scratch',
+          description: "A Deep Dive into Custom CNN Implementation",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/bangla-digit-recognition/";
+            },},{id: "projects-blockchain-based-ticketing-platform",
+          title: 'Blockchain Based Ticketing Platform',
+          description: "A practical approach to reducing ticket fraud and abusive resale",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/blockchain-ticketing/";
+            },},{id: "projects-yet-another-c-compiler",
+          title: 'Yet Another C Compiler',
+          description: "A complete multi-pass compiler for a subset of C",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/compiler/";
+            },},{id: "projects-contextledger-context-accounting-for-coding-agents",
+          title: 'ContextLedger: context accounting for coding agents',
+          description: "A research notebook on OpenCode compaction, provenance, and live GPT-5.5 experiments",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/contextledger/";
+            },},{id: "projects-ctxhelm-agent-native-context-compiler",
+          title: 'ctxhelm: agent-native context compiler',
+          description: "Local-first context plans, release proof, and source-free agent evaluation",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/ctxhelm/";
+            },},{id: "projects-mini-deep-learning-framework-pytorch-from-scratch",
+          title: 'Mini Deep Learning Framework: PyTorch from Scratch',
+          description: "A freelance learning project for tensors, autograd, and neural-network internals",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/deep-learning-framework-capstone/";
+            },},{id: "projects-go-container-runtime-docker-from-scratch",
+          title: 'Go Container Runtime: Docker from Scratch',
+          description: "A freelance learning project for Linux containers, networking, and Go systems programming",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/docker-from-scratch-go/";
+            },},{id: "projects-eventfly-distributed-microservices-event-platform",
+          title: 'EventFly – Distributed Microservices Event Platform',
+          description: "A six-person BUET course project for event creation, ticketing, announcements, participant engagement, analytics, and payments, implemented with Node.js, React, NATS, Kubernetes, MongoDB, Redis, and Stripe.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/eventfly-an-end-to-end-event-management-system/";
+            },},{id: "projects-building-a-go-database-engine-from-scratch",
+          title: 'Building a Go Database Engine from Scratch',
+          description: "An educational ACID-oriented database engine with advanced features",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/go-database/";
+            },},{id: "projects-image-caption-generation-with-bert-context-vectors",
+          title: 'Image Caption Generation with BERT Context Vectors',
+          description: "Extended the &quot;Show, Attend, and Tell&quot; image captioning model with BERT to improve caption quality and reduce training time, achieving 36% improvement in CIDEr score and 43% improvement in BLEU-4.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/image-caption-generator/";
+            },},{id: "projects-patchsmith-a-harness-for-repair-agents",
+          title: 'PatchSmith: a harness for repair agents',
+          description: "System design and R&amp;D notes for bounded patches, sandbox validation, and auditable repair runs",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/patchsmith/";
+            },},{id: "projects-ray-tracing-from-scratch-a-comprehensive-guide-to-3d-rendering-physics-and-implementation",
+          title: 'Ray Tracing from Scratch: A Comprehensive Guide to 3D Rendering Physics and Implementation...',
+          description: "Implementing physically-based rendering with C++",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/ray-tracing/";
+            },},{id: "projects-an-empirical-study-on-remote-code-execution-in-machine-learning-model-hosting-ecosystems",
+          title: 'An Empirical Study on Remote Code Execution in Machine Learning Model Hosting Ecosystems...',
+          description: "A cross-platform study of model-loading risk across five ML hosting ecosystems, using static analysis, malware-signature scanning, and analysis of more than 600 developer discussions.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/research-ml-remote-code-execution/";
+            },},{id: "projects-verischema-verified-database-schema-generation",
+          title: 'VeriSchema: verified database-schema generation',
+          description: "How can specialized agents generate relational schemas from natural-language requirements while formal checks and targeted repair keep the result consistent?",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/research-multi-agent-db-schema/";
+            },},{id: "projects-the-choice-can-be-the-attack-auditing-aligned-backdoors-in-llm-agents",
+          title: 'The Choice Can Be the Attack: Auditing Aligned Backdoors in LLM Agents',
+          description: "Abstract-level summary of SHIFT, submitted to TACL 2026 on aligned backdoor attacks in LLM agents.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/research-reagent-plus-plus/";
+            },},{id: "projects-sentiment-analysis-of-anonymous-crisis-reports-in-bangladesh",
+          title: 'Sentiment Analysis of Anonymous Crisis Reports in Bangladesh',
+          description: "A multilingual analysis of anonymous, crowd-sourced reports from Bangladesh&#39;s 2024 national crisis.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/research-ureporter/";
+            },},{id: "projects-enhancing-tcp-fairness-tcp-vegas-implementation",
+          title: 'Enhancing TCP Fairness: TCP Vegas+ Implementation',
+          description: "A dual-mode solution for TCP Vegas fairness issues",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/tcp-vegas-plus/";
+            },},{
+        id: 'social-email',
+        title: 'email',
+        section: 'Socials',
+        handler: () => {
+          window.open("mailto:%74%61%6E%68%72%6F%6D%65%6C@%67%6D%61%69%6C.%63%6F%6D", "_blank");
+        },
+      },{
+        id: 'social-github',
+        title: 'GitHub',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://github.com/thromel", "_blank");
+        },
+      },{
+        id: 'social-scholar',
+        title: 'Google Scholar',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://scholar.google.com/citations?user=zHV4EU8AAAAJ", "_blank");
+        },
+      },{
+        id: 'social-linkedin',
+        title: 'LinkedIn',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://www.linkedin.com/in/thromel", "_blank");
+        },
+      },{
+        id: 'social-orcid',
+        title: 'ORCID',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://orcid.org/0009-0009-2432-8960", "_blank");
+        },
+      },{
+        id: 'social-rss',
+        title: 'RSS Feed',
+        section: 'Socials',
+        handler: () => {
+          window.open("/feed.xml", "_blank");
+        },
+      },{
+        id: 'social-x',
+        title: 'X',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://twitter.com/tanzimhromel", "_blank");
+        },
+      },{
+      id: 'light-theme',
+      title: 'Change theme to light',
+      description: 'Change the theme of the site to Light',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("light");
+      },
+    },
+    {
+      id: 'dark-theme',
+      title: 'Change theme to dark',
+      description: 'Change the theme of the site to Dark',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("dark");
+      },
+    },
+    {
+      id: 'system-theme',
+      title: 'Use system default theme',
+      description: 'Change the theme of the site to System Default',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("system");
+      },
+    },];
+
+</script> <script src="/assets/al_search/js/shortcut-key.js"></script> </body> </html>

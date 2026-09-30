@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1180" height="620" viewBox="0 0 1180 620" role="img" aria-labelledby="title desc">
+  <title id="title">PatchSmith DeepAgents contract</title>
+  <desc id="desc">Diagram showing DeepAgents planning constrained by a read-only virtual filesystem, memory, skills, subagents, and a required PatchPlan schema.</desc>
+  <defs>
+    <style>
+      .bg { fill: #fbfcfd; }
+      .hub { fill: #0f766e; }
+      .hub-text { font: 800 22px ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #ffffff; }
+      .card { fill: #ffffff; stroke: #cbd5e1; stroke-width: 1.4; }
+      .card-green { fill: #eef6f4; stroke: #99c7bd; stroke-width: 1.4; }
+      .card-blue { fill: #eff6ff; stroke: #93c5fd; stroke-width: 1.4; }
+      .card-orange { fill: #fff7ed; stroke: #fdba74; stroke-width: 1.4; }
+      .title { font: 700 30px ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #0f172a; }
+      .subtitle { font: 500 15px ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #475569; }
+      .label { font: 800 16px ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #0f172a; }
+      .small { font: 500 13px ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #475569; }
+      .mono { font: 650 12px ui-monospace, SFMono-Regular, Menlo, monospace; fill: #334155; }
+      .line { stroke: #64748b; stroke-width: 2; fill: none; }
+      .line-green { stroke: #0f766e; stroke-width: 2; fill: none; }
+    </style>
+  </defs>
+  <rect class="bg" width="1180" height="620" rx="24" />
+  <text x="58" y="62" class="title">DeepAgents is allowed to think, not wander</text>
+  <text x="58" y="90" class="subtitle">PatchSmith gives the model a small workspace and asks for one structured repair plan.</text>
+
+  <circle cx="590" cy="310" r="96" class="hub" />
+  <text x="520" y="296" class="hub-text">DeepAgents</text>
+  <text x="532" y="326" class="hub-text">repair planner</text>
+
+  <rect x="70" y="150" width="260" height="112" rx="14" class="card-blue" />
+  <text x="96" y="183" class="label">read-only virtual files</text>
+  <text x="96" y="211" class="small">Only retrieved files and PatchSmith</text>
+  <text x="96" y="233" class="small">agent instructions are readable.</text>
+  <text x="96" y="252" class="mono">denied paths: /**</text>
+
+  <rect x="70" y="360" width="260" height="112" rx="14" class="card" />
+  <text x="96" y="393" class="label">memory and skill text</text>
+  <text x="96" y="421" class="small">The planner receives a local repair</text>
+  <text x="96" y="443" class="small">contract and task-specific guidance.</text>
+  <text x="96" y="462" class="mono">/.patchsmith/AGENTS.md</text>
+
+  <rect x="850" y="150" width="260" height="112" rx="14" class="card-green" />
+  <text x="876" y="183" class="label">subagents</text>
+  <text x="876" y="211" class="small">failure-localizer for controlling paths</text>
+  <text x="876" y="233" class="small">patch-reviewer for ambiguous edits</text>
+  <text x="876" y="252" class="mono">two named reviewers</text>
+
+  <rect x="850" y="360" width="260" height="112" rx="14" class="card-orange" />
+  <text x="876" y="393" class="label">PatchPlan response</text>
+  <text x="876" y="421" class="small">The output must be one bounded old/new</text>
+  <text x="876" y="443" class="small">replacement with a summary.</text>
+  <text x="876" y="462" class="mono">path, old, new, summary</text>
+
+  <path class="line" d="M330 206 C420 206 444 246 500 286" />
+  <path class="line" d="M330 416 C420 416 444 374 500 334" />
+  <path class="line-green" d="M680 286 C736 246 760 206 850 206" />
+  <path class="line-green" d="M680 334 C736 374 760 416 850 416" />
+
+  <rect x="402" y="492" width="376" height="58" rx="12" class="card" />
+  <text x="426" y="526" class="small">PatchSmith then applies the edit through its own path and span safety gate before sandbox validation.</text>
+</svg>

@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1180" height="620" viewBox="0 0 1180 620" role="img" aria-labelledby="title desc">
+  <title id="title">PatchSmith repair pipeline</title>
+  <desc id="desc">Pipeline showing public issue evidence flowing through context routing, DeepAgents planning, bounded patch application, sandbox validation, and saved evidence reports.</desc>
+  <defs>
+    <style>
+      .bg { fill: #f8fafc; }
+      .panel { fill: #ffffff; stroke: #cbd5e1; stroke-width: 1.4; }
+      .panel-soft { fill: #eef6f4; stroke: #8bbfb5; stroke-width: 1.4; }
+      .panel-warn { fill: #fff7ed; stroke: #f59e0b; stroke-width: 1.4; }
+      .title { font: 700 30px ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #0f172a; }
+      .subtitle { font: 500 15px ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #475569; }
+      .label { font: 700 16px ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #0f172a; }
+      .small { font: 500 13px ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #475569; }
+      .tiny { font: 700 11px ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #64748b; letter-spacing: .08em; }
+      .mono { font: 600 12px ui-monospace, SFMono-Regular, Menlo, monospace; fill: #334155; }
+      .line { fill: none; stroke: #64748b; stroke-width: 2; marker-end: url(#arrow); }
+      .line-soft { fill: none; stroke: #0f766e; stroke-width: 2; marker-end: url(#arrow-soft); }
+      .dot { fill: #0f766e; }
+      .accent { fill: #2563eb; }
+      .orange { fill: #f97316; }
+    </style>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#64748b" />
+    </marker>
+    <marker id="arrow-soft" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#0f766e" />
+    </marker>
+  </defs>
+  <rect class="bg" width="1180" height="620" rx="24" />
+  <text x="58" y="62" class="title">PatchSmith repair evidence loop</text>
+  <text x="58" y="90" class="subtitle">The agent is useful only if the run leaves enough evidence to audit what happened.</text>
+
+  <rect x="58" y="135" width="188" height="132" rx="14" class="panel" />
+  <text x="80" y="166" class="tiny">INPUT</text>
+  <text x="80" y="194" class="label">public issue task</text>
+  <text x="80" y="221" class="small">repository snapshot</text>
+  <text x="80" y="243" class="small">issue text and repro</text>
+
+  <rect x="298" y="135" width="188" height="132" rx="14" class="panel" />
+  <text x="320" y="166" class="tiny">CONTEXT</text>
+  <text x="320" y="194" class="label">native hybrid broker</text>
+  <text x="320" y="221" class="small">paths, tests, hints</text>
+  <text x="320" y="243" class="small">bounded file set</text>
+
+  <rect x="538" y="135" width="188" height="132" rx="14" class="panel-soft" />
+  <text x="560" y="166" class="tiny">PLANNER</text>
+  <text x="560" y="194" class="label">DeepAgents</text>
+  <text x="560" y="221" class="small">todos, subagents</text>
+  <text x="560" y="243" class="small">read-only virtual FS</text>
+
+  <rect x="778" y="135" width="188" height="132" rx="14" class="panel-warn" />
+  <text x="800" y="166" class="tiny">PATCH</text>
+  <text x="800" y="194" class="label">one bounded edit</text>
+  <text x="800" y="221" class="small">old/new replacement</text>
+  <text x="800" y="243" class="small">path safety gate</text>
+
+  <rect x="1018" y="135" width="104" height="132" rx="14" class="panel-soft" />
+  <text x="1038" y="166" class="tiny">TEST</text>
+  <text x="1038" y="194" class="label">sandbox</text>
+  <text x="1038" y="221" class="small">focused</text>
+  <text x="1038" y="243" class="small">pytest</text>
+
+  <path class="line" d="M246 201 H292" />
+  <path class="line" d="M486 201 H532" />
+  <path class="line" d="M726 201 H772" />
+  <path class="line" d="M966 201 H1012" />
+
+  <rect x="90" y="340" width="232" height="122" rx="14" class="panel" />
+  <text x="114" y="371" class="tiny">RUN ARTIFACTS</text>
+  <text x="114" y="399" class="label">report, traces, diff</text>
+  <text x="114" y="425" class="small">what was read, planned, edited,</text>
+  <text x="114" y="447" class="small">validated, retried, and priced</text>
+
+  <rect x="382" y="340" width="232" height="122" rx="14" class="panel-soft" />
+  <text x="406" y="371" class="tiny">EVIDENCE GATES</text>
+  <text x="406" y="399" class="label">quality and release</text>
+  <text x="406" y="425" class="small">compile, pytest, build, Docker,</text>
+  <text x="406" y="447" class="small">readiness, launch blockers</text>
+
+  <rect x="674" y="340" width="232" height="122" rx="14" class="panel" />
+  <text x="698" y="371" class="tiny">CLAIM BOUNDARY</text>
+  <text x="698" y="399" class="label">targeted validation</text>
+  <text x="698" y="425" class="small">not full upstream acceptance,</text>
+  <text x="698" y="447" class="small">not arbitrary repair proof</text>
+
+  <rect x="966" y="340" width="156" height="122" rx="14" class="panel-soft" />
+  <text x="990" y="371" class="tiny">LATEST</text>
+  <text x="990" y="399" class="label">3 / 3</text>
+  <text x="990" y="425" class="small">public issue</text>
+  <text x="990" y="447" class="small">tasks validated</text>
+
+  <path class="line-soft" d="M1070 267 C1070 298 1044 302 1044 334" />
+  <path class="line-soft" d="M966 401 H912" />
+  <path class="line-soft" d="M674 401 H620" />
+  <path class="line-soft" d="M382 401 H328" />
+
+  <circle cx="90" cy="525" r="8" class="dot" />
+  <text x="110" y="530" class="mono">gpt-5.4-mini-2026-03-17 via deepagents_openai_chat</text>
+  <circle cx="496" cy="525" r="8" class="accent" />
+  <text x="516" y="530" class="mono">924,137 tokens, $0.261364 for the canonical 3-task run</text>
+  <circle cx="928" cy="525" r="8" class="orange" />
+  <text x="948" y="530" class="mono">saved locally with reports and traces</text>
+</svg>

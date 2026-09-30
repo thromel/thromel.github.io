@@ -1,0 +1,865 @@
+<!DOCTYPE html> <html lang="en"> <head> <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <title> Understanding xv6: A Practical Introduction to Operating Systems | Tanzim Hossain Romel </title> <meta name="author" content="Tanzim Hossain Romel"> <meta name="description" content="Academic and engineering portfolio of Tanzim Hossain Romel, focused on reliable AI agents, software engineering research, and developer tools."> <meta name="keywords" content=""> <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https:; style-src 'self' 'unsafe-inline' https:; img-src 'self' data: https:; font-src 'self' data: https:; media-src 'self' https:; frame-src 'self' https:; connect-src 'self' https:;"> <style>
+  :root {
+    --max-content-width: 930px;
+  }
+</style> <link rel="stylesheet" href="/assets/css/tailwind.css?v=50c64c15cbb9fd1ce6056fdb8bcb4b62"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.2.0/css/all.min.css" integrity="sha256-MVopmdyC2tYTiJ8wlktf0uh0v4NgT+vNdyVFepi7Q0c=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.5/css/academicons.min.css" integrity="sha256-SzrCOBJbGVFMahewkgjwnApaV2+av1DwMAA+/QGLyZw=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/scholar-icons@1.0.3/css/scholar-icons.css" integrity="sha256-VY3hHVj/hNX3fYG6wtbA6TcKJQl7+FthzGSyIB64klY=" crossorigin="anonymous"> <link defer rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons&amp;display=swap"> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-github.css?v=591dab5a4e56573bf4ef7fd332894c99" media="" id="highlight_theme_light"> <link rel="shortcut icon" href="data:image/svg+xml,&lt;svg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20100%20100%22&gt;&lt;text%20y=%22.9em%22%20font-size=%2290%22&gt;%E2%9A%9B%EF%B8%8F&lt;/text&gt;&lt;/svg&gt;"> <link rel="stylesheet" href="/assets/css/main.css?v=3116ba77db9ee1581d05bb3e86fbf7f1"> <link rel="canonical" href="https://tanzimhromel.com/blog/2022/understanding-xv6-operating-systems/"> <script src="/assets/js/theme.js?v=5286c3e4c334d0ecb8fc0c40ff4fa7ec"></script> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-native.css?v=5847e5ed4a4568527aa6cfab446049ca" media="none" id="highlight_theme_dark"> <script>
+    initTheme();
+  </script> </head> <body class="fixed-top-nav "> <header> <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top" role="navigation"> <div class="container"> <a class="navbar-brand title font-weight-lighter" href="/"> Tanzim Hossain Romel </a> <button class="navbar-toggler collapsed navbar-toggler-main" type="button" data-nav-toggle="navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar top-bar"></span> <span class="icon-bar middle-bar"></span> <span class="icon-bar bottom-bar"></span> </button> <div class="collapse navbar-collapse navbar-collapse-main" id="navbarNav"> <ul class="navbar-nav navbar-menu-list flex-nowrap"> <li class="nav-item "> <a class="nav-link" href="/">about </a> </li> <li class="nav-item active"> <a class="nav-link" href="/blog/">blog </a> </li> <li class="nav-item "> <a class="nav-link" href="/publications/">publications </a> </li> <li class="nav-item "> <a class="nav-link" href="/research/">research </a> </li> <li class="nav-item "> <a class="nav-link" href="/projects/">projects </a> </li> <li class="nav-item "> <a class="nav-link" href="/cv/">CV </a> </li> <li class="nav-item "> <a class="nav-link" href="/contributions/">contributions </a> </li> <li class="nav-item"> <button id="search-toggle" type="button" title="Search" aria-label="Open search"> <span class="nav-link">ctrl k <i class="fa-solid fa-magnifying-glass"></i></span> </button> </li> <li class="toggle-container"> <button id="light-toggle" type="button" title="Change theme" aria-label="Change color theme"> <i class="fa-half-sun-moon" id="light-toggle-system"></i> <i class="fa-solid fa-moon" id="light-toggle-dark"></i> <i class="fa-solid fa-sun" id="light-toggle-light"></i> </button> </li> </ul> </div> </div> </nav> <progress id="progress" value="0"> <div class="progress-container"> <span class="progress-bar"></span> </div> </progress> </header> <div class="container mt-5" role="main"> <div class="post"> <header class="post-header"> <h1 class="post-title">Understanding xv6: A Practical Introduction to Operating Systems</h1> <p class="post-meta"> Created on April 21, 2022 </p> <p class="post-tags"> <a href="/blog/2022"> <i class="fa-solid fa-calendar fa-sm"></i> 2022 </a>   ·   <a href="/blog/tag/xv6"> <i class="fa-solid fa-hashtag fa-sm"></i> xv6</a>   <a href="/blog/tag/operating-systems"> <i class="fa-solid fa-hashtag fa-sm"></i> operating-systems</a>   <a href="/blog/tag/c"> <i class="fa-solid fa-hashtag fa-sm"></i> c</a>   <a href="/blog/tag/kernel"> <i class="fa-solid fa-hashtag fa-sm"></i> kernel</a>   <a href="/blog/tag/unix"> <i class="fa-solid fa-hashtag fa-sm"></i> unix</a>   <a href="/blog/tag/mit"> <i class="fa-solid fa-hashtag fa-sm"></i> mit</a>   <a href="/blog/tag/systems-programming"> <i class="fa-solid fa-hashtag fa-sm"></i> systems-programming</a>   <a href="/blog/tag/computer-science"> <i class="fa-solid fa-hashtag fa-sm"></i> computer-science</a>   ·   <a href="/blog/category/operating-systems"> <i class="fa-solid fa-tag fa-sm"></i> operating-systems</a>   <a href="/blog/category/programming"> <i class="fa-solid fa-tag fa-sm"></i> programming</a>   <a href="/blog/category/education"> <i class="fa-solid fa-tag fa-sm"></i> education</a> </p> </header> <article class="post-content"> <div id="markdown-content"> <p>Operating systems form the foundation of modern computing, yet their inner workings often remain mysterious to many computer science students. If you’re embarking on your journey into operating systems through xv6, you’re about to explore one of the most elegant teaching tools in computer science education. This post will guide you through xv6’s architecture, connecting fundamental OS concepts with concrete implementation details you can examine and modify yourself.</p> <h2 id="what-makes-xv6-special">What Makes xv6 Special</h2> <p>xv6 is a teaching operating system developed at MIT, inspired by Unix Version 6. Unlike production operating systems with millions of lines of code, xv6 contains roughly 15,000 lines of well-commented C code and assembly. This deliberate simplicity means you can understand the entire system, from boot sequence to system calls, in a single semester.</p> <p>The genius of xv6 lies in its completeness despite its simplicity. It implements all the fundamental concepts you need to understand: process management, virtual memory, file systems, and device drivers. Each component is stripped to its essential elements, making the underlying principles clear without getting lost in optimization details or edge cases.</p> <h2 id="the-boot-process-where-everything-begins">The Boot Process: Where Everything Begins</h2> <p>When you power on a computer running xv6, a carefully choreographed sequence unfolds. Understanding this boot process reveals how an operating system transforms raw hardware into a managed computing environment.</p> <p>The journey begins in the file <code class="language-plaintext highlighter-rouge">bootasm.S</code>, where the BIOS loads the boot sector into memory at address 0x7c00. At this point, the processor runs in 16-bit real mode, a legacy from the original 8086 processor. The bootloader’s first task is switching to 32-bit protected mode, which provides access to more memory and better protection mechanisms.</p> <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// In bootmain.c - simplified version</span>
+<span class="kt">void</span> <span class="nf">bootmain</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">struct</span> <span class="n">elfhdr</span> <span class="o">*</span><span class="n">elf</span><span class="p">;</span>
+    <span class="k">struct</span> <span class="n">proghdr</span> <span class="o">*</span><span class="n">ph</span><span class="p">,</span> <span class="o">*</span><span class="n">eph</span><span class="p">;</span>
+    <span class="kt">void</span> <span class="p">(</span><span class="o">*</span><span class="n">entry</span><span class="p">)(</span><span class="kt">void</span><span class="p">);</span>
+    
+    <span class="c1">// Read first page of kernel from disk</span>
+    <span class="n">readseg</span><span class="p">((</span><span class="n">uchar</span><span class="o">*</span><span class="p">)</span><span class="n">elf</span><span class="p">,</span> <span class="mi">4096</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+    
+    <span class="c1">// Check if this is an ELF file</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">elf</span><span class="o">-&gt;</span><span class="n">magic</span> <span class="o">!=</span> <span class="n">ELF_MAGIC</span><span class="p">)</span>
+        <span class="k">return</span><span class="p">;</span>  <span class="c1">// Not a valid kernel</span>
+    
+    <span class="c1">// Load each program segment</span>
+    <span class="n">ph</span> <span class="o">=</span> <span class="p">(</span><span class="k">struct</span> <span class="n">proghdr</span><span class="o">*</span><span class="p">)((</span><span class="n">uchar</span><span class="o">*</span><span class="p">)</span><span class="n">elf</span> <span class="o">+</span> <span class="n">elf</span><span class="o">-&gt;</span><span class="n">phoff</span><span class="p">);</span>
+    <span class="n">eph</span> <span class="o">=</span> <span class="n">ph</span> <span class="o">+</span> <span class="n">elf</span><span class="o">-&gt;</span><span class="n">phnum</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(;</span> <span class="n">ph</span> <span class="o">&lt;</span> <span class="n">eph</span><span class="p">;</span> <span class="n">ph</span><span class="o">++</span><span class="p">){</span>
+        <span class="n">readseg</span><span class="p">(</span><span class="n">ph</span><span class="o">-&gt;</span><span class="n">paddr</span><span class="p">,</span> <span class="n">ph</span><span class="o">-&gt;</span><span class="n">memsz</span><span class="p">,</span> <span class="n">ph</span><span class="o">-&gt;</span><span class="n">offset</span><span class="p">);</span>
+    <span class="p">}</span>
+    
+    <span class="c1">// Transfer control to kernel</span>
+    <span class="n">entry</span> <span class="o">=</span> <span class="p">(</span><span class="kt">void</span><span class="p">(</span><span class="o">*</span><span class="p">)(</span><span class="kt">void</span><span class="p">))(</span><span class="n">elf</span><span class="o">-&gt;</span><span class="n">entry</span><span class="p">);</span>
+    <span class="n">entry</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div></div> <p>This boot process teaches several crucial concepts. First, it demonstrates how software and hardware interact at the lowest level. Second, it shows how an operating system bootstraps itself from nothing to a fully functional system. The transition from real mode to protected mode illustrates how modern processors maintain backward compatibility while providing advanced features.</p> <h2 id="process-management-the-illusion-of-simultaneity">Process Management: The Illusion of Simultaneity</h2> <p>At the heart of any operating system lies process management. xv6 implements processes with elegant simplicity, yet the implementation contains all the essential elements found in production systems.</p> <p>In xv6, each process is represented by a <code class="language-plaintext highlighter-rouge">struct proc</code> defined in <code class="language-plaintext highlighter-rouge">proc.h</code>. This structure contains everything the kernel needs to know about a process: its state, memory mappings, open files, and saved register values. The process table, a fixed-size array of these structures, limits xv6 to 64 concurrent processes - a reasonable constraint for a teaching system.</p> <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Simplified proc structure from proc.h</span>
+<span class="k">struct</span> <span class="n">proc</span> <span class="p">{</span>
+    <span class="n">uint</span> <span class="n">sz</span><span class="p">;</span>                     <span class="c1">// Size of process memory (bytes)</span>
+    <span class="n">pde_t</span><span class="o">*</span> <span class="n">pgdir</span><span class="p">;</span>               <span class="c1">// Page table</span>
+    <span class="kt">char</span> <span class="o">*</span><span class="n">kstack</span><span class="p">;</span>               <span class="c1">// Bottom of kernel stack</span>
+    <span class="k">enum</span> <span class="n">procstate</span> <span class="n">state</span><span class="p">;</span>       <span class="c1">// Process state</span>
+    <span class="kt">int</span> <span class="n">pid</span><span class="p">;</span>                    <span class="c1">// Process ID</span>
+    <span class="k">struct</span> <span class="n">proc</span> <span class="o">*</span><span class="n">parent</span><span class="p">;</span>        <span class="c1">// Parent process</span>
+    <span class="k">struct</span> <span class="n">trapframe</span> <span class="o">*</span><span class="n">tf</span><span class="p">;</span>       <span class="c1">// Trap frame for current syscall</span>
+    <span class="k">struct</span> <span class="n">context</span> <span class="o">*</span><span class="n">context</span><span class="p">;</span>    <span class="c1">// Switch here to run process</span>
+    <span class="kt">void</span> <span class="o">*</span><span class="n">chan</span><span class="p">;</span>                 <span class="c1">// If non-zero, sleeping on chan</span>
+    <span class="kt">int</span> <span class="n">killed</span><span class="p">;</span>                 <span class="c1">// If non-zero, have been killed</span>
+    <span class="k">struct</span> <span class="n">file</span> <span class="o">*</span><span class="n">ofile</span><span class="p">[</span><span class="n">NOFILE</span><span class="p">];</span> <span class="c1">// Open files</span>
+    <span class="k">struct</span> <span class="n">inode</span> <span class="o">*</span><span class="n">cwd</span><span class="p">;</span>          <span class="c1">// Current directory</span>
+    <span class="kt">char</span> <span class="n">name</span><span class="p">[</span><span class="mi">16</span><span class="p">];</span>              <span class="c1">// Process name (debugging)</span>
+<span class="p">};</span>
+</code></pre></div></div> <p>Process creation in xv6 follows the Unix model through the <code class="language-plaintext highlighter-rouge">fork()</code> system call. When a process calls fork, xv6 creates an exact copy of the calling process, including its memory, open files, and register state. The implementation in <code class="language-plaintext highlighter-rouge">proc.c</code> reveals the complexity hidden behind this simple interface:</p> <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Simplified fork implementation</span>
+<span class="kt">int</span> <span class="nf">fork</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="n">pid</span><span class="p">;</span>
+    <span class="k">struct</span> <span class="n">proc</span> <span class="o">*</span><span class="n">np</span><span class="p">;</span>
+    
+    <span class="c1">// Allocate new process structure</span>
+    <span class="k">if</span><span class="p">((</span><span class="n">np</span> <span class="o">=</span> <span class="n">allocproc</span><span class="p">())</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    
+    <span class="c1">// Copy process state from parent</span>
+    <span class="k">if</span><span class="p">((</span><span class="n">np</span><span class="o">-&gt;</span><span class="n">pgdir</span> <span class="o">=</span> <span class="n">copyuvm</span><span class="p">(</span><span class="n">proc</span><span class="o">-&gt;</span><span class="n">pgdir</span><span class="p">,</span> <span class="n">proc</span><span class="o">-&gt;</span><span class="n">sz</span><span class="p">))</span> <span class="o">==</span> <span class="mi">0</span><span class="p">){</span>
+        <span class="n">kfree</span><span class="p">(</span><span class="n">np</span><span class="o">-&gt;</span><span class="n">kstack</span><span class="p">);</span>
+        <span class="n">np</span><span class="o">-&gt;</span><span class="n">kstack</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="n">np</span><span class="o">-&gt;</span><span class="n">state</span> <span class="o">=</span> <span class="n">UNUSED</span><span class="p">;</span>
+        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">np</span><span class="o">-&gt;</span><span class="n">sz</span> <span class="o">=</span> <span class="n">proc</span><span class="o">-&gt;</span><span class="n">sz</span><span class="p">;</span>
+    <span class="n">np</span><span class="o">-&gt;</span><span class="n">parent</span> <span class="o">=</span> <span class="n">proc</span><span class="p">;</span>
+    <span class="o">*</span><span class="n">np</span><span class="o">-&gt;</span><span class="n">tf</span> <span class="o">=</span> <span class="o">*</span><span class="n">proc</span><span class="o">-&gt;</span><span class="n">tf</span><span class="p">;</span>
+    
+    <span class="c1">// Clear %eax so that fork returns 0 in child</span>
+    <span class="n">np</span><span class="o">-&gt;</span><span class="n">tf</span><span class="o">-&gt;</span><span class="n">eax</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    
+    <span class="c1">// Copy file descriptors</span>
+    <span class="k">for</span><span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">NOFILE</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">proc</span><span class="o">-&gt;</span><span class="n">ofile</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+            <span class="n">np</span><span class="o">-&gt;</span><span class="n">ofile</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">filedup</span><span class="p">(</span><span class="n">proc</span><span class="o">-&gt;</span><span class="n">ofile</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+    <span class="n">np</span><span class="o">-&gt;</span><span class="n">cwd</span> <span class="o">=</span> <span class="n">idup</span><span class="p">(</span><span class="n">proc</span><span class="o">-&gt;</span><span class="n">cwd</span><span class="p">);</span>
+    
+    <span class="n">safestrcpy</span><span class="p">(</span><span class="n">np</span><span class="o">-&gt;</span><span class="n">name</span><span class="p">,</span> <span class="n">proc</span><span class="o">-&gt;</span><span class="n">name</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">proc</span><span class="o">-&gt;</span><span class="n">name</span><span class="p">));</span>
+    <span class="n">pid</span> <span class="o">=</span> <span class="n">np</span><span class="o">-&gt;</span><span class="n">pid</span><span class="p">;</span>
+    
+    <span class="c1">// Set child runnable</span>
+    <span class="n">acquire</span><span class="p">(</span><span class="o">&amp;</span><span class="n">ptable</span><span class="p">.</span><span class="n">lock</span><span class="p">);</span>
+    <span class="n">np</span><span class="o">-&gt;</span><span class="n">state</span> <span class="o">=</span> <span class="n">RUNNABLE</span><span class="p">;</span>
+    <span class="n">release</span><span class="p">(</span><span class="o">&amp;</span><span class="n">ptable</span><span class="p">.</span><span class="n">lock</span><span class="p">);</span>
+    
+    <span class="k">return</span> <span class="n">pid</span><span class="p">;</span>  <span class="c1">// Return child's PID to parent</span>
+<span class="p">}</span>
+</code></pre></div></div> <p>This implementation teaches several fundamental concepts. The distinction between parent and child processes after fork, identified only by the return value, demonstrates how operating systems create new execution contexts. The careful copying of process state shows what makes each process independent, while the sharing of certain resources (like the current directory) illustrates how processes can communicate.</p> <h2 id="memory-management-creating-virtual-worlds">Memory Management: Creating Virtual Worlds</h2> <p>Memory management in xv6 demonstrates how operating systems create the illusion that each process has its own private memory space. This virtual memory system, though simpler than those in production systems, contains all the essential elements.</p> <p>xv6 uses a two-level page table structure on x86. Each process has its own page directory, which points to page tables, which in turn map virtual addresses to physical addresses. This hierarchical structure allows efficient memory usage - unmapped regions don’t require page table entries.</p> <p>The virtual memory layout in xv6 is straightforward. Each process sees a virtual address space from 0 to 2GB. The kernel maps itself at high virtual addresses (above 2GB), allowing it to access process memory directly while remaining protected from user code.</p> <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Virtual address to physical address translation</span>
+<span class="k">static</span> <span class="n">pte_t</span><span class="o">*</span> <span class="nf">walkpgdir</span><span class="p">(</span><span class="n">pde_t</span> <span class="o">*</span><span class="n">pgdir</span><span class="p">,</span> <span class="k">const</span> <span class="kt">void</span> <span class="o">*</span><span class="n">va</span><span class="p">,</span> <span class="kt">int</span> <span class="n">alloc</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">pde_t</span> <span class="o">*</span><span class="n">pde</span><span class="p">;</span>
+    <span class="n">pte_t</span> <span class="o">*</span><span class="n">pgtab</span><span class="p">;</span>
+    
+    <span class="c1">// Extract page directory index from virtual address</span>
+    <span class="n">pde</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">pgdir</span><span class="p">[</span><span class="n">PDX</span><span class="p">(</span><span class="n">va</span><span class="p">)];</span>
+    
+    <span class="k">if</span><span class="p">(</span><span class="o">*</span><span class="n">pde</span> <span class="o">&amp;</span> <span class="n">PTE_P</span><span class="p">){</span>
+        <span class="c1">// Page table exists</span>
+        <span class="n">pgtab</span> <span class="o">=</span> <span class="p">(</span><span class="n">pte_t</span><span class="o">*</span><span class="p">)</span><span class="n">P2V</span><span class="p">(</span><span class="n">PTE_ADDR</span><span class="p">(</span><span class="o">*</span><span class="n">pde</span><span class="p">));</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="c1">// Need to allocate page table</span>
+        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">alloc</span> <span class="o">||</span> <span class="p">(</span><span class="n">pgtab</span> <span class="o">=</span> <span class="p">(</span><span class="n">pte_t</span><span class="o">*</span><span class="p">)</span><span class="n">kalloc</span><span class="p">())</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+            <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="n">memset</span><span class="p">(</span><span class="n">pgtab</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">PGSIZE</span><span class="p">);</span>
+        <span class="o">*</span><span class="n">pde</span> <span class="o">=</span> <span class="n">V2P</span><span class="p">(</span><span class="n">pgtab</span><span class="p">)</span> <span class="o">|</span> <span class="n">PTE_P</span> <span class="o">|</span> <span class="n">PTE_W</span> <span class="o">|</span> <span class="n">PTE_U</span><span class="p">;</span>
+    <span class="p">}</span>
+    
+    <span class="c1">// Return pointer to page table entry</span>
+    <span class="k">return</span> <span class="o">&amp;</span><span class="n">pgtab</span><span class="p">[</span><span class="n">PTX</span><span class="p">(</span><span class="n">va</span><span class="p">)];</span>
+<span class="p">}</span>
+</code></pre></div></div> <p>The memory allocator in xv6 (<code class="language-plaintext highlighter-rouge">kalloc.c</code>) manages physical memory with a simple free list. Each free page contains a pointer to the next free page, creating a linked list of available memory. This design, while not optimal for performance, clearly illustrates memory allocation concepts:</p> <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Allocate one 4096-byte page of physical memory</span>
+<span class="kt">char</span><span class="o">*</span> <span class="nf">kalloc</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">struct</span> <span class="n">run</span> <span class="o">*</span><span class="n">r</span><span class="p">;</span>
+    
+    <span class="n">acquire</span><span class="p">(</span><span class="o">&amp;</span><span class="n">kmem</span><span class="p">.</span><span class="n">lock</span><span class="p">);</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">kmem</span><span class="p">.</span><span class="n">freelist</span><span class="p">;</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+        <span class="n">kmem</span><span class="p">.</span><span class="n">freelist</span> <span class="o">=</span> <span class="n">r</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+    <span class="n">release</span><span class="p">(</span><span class="o">&amp;</span><span class="n">kmem</span><span class="p">.</span><span class="n">lock</span><span class="p">);</span>
+    
+    <span class="k">if</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+        <span class="n">memset</span><span class="p">((</span><span class="kt">char</span><span class="o">*</span><span class="p">)</span><span class="n">r</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">PGSIZE</span><span class="p">);</span> <span class="c1">// Fill with junk</span>
+    <span class="k">return</span> <span class="p">(</span><span class="kt">char</span><span class="o">*</span><span class="p">)</span><span class="n">r</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div> <p>This implementation teaches how operating systems manage the finite resource of physical memory. The use of a free list demonstrates a fundamental data structure in systems programming, while the lock protection introduces the concept of synchronization in kernel code.</p> <h2 id="the-file-system-persistence-and-organization">The File System: Persistence and Organization</h2> <p>The xv6 file system provides a complete implementation of hierarchical file storage. Built in layers, each level adds functionality while hiding complexity from the layers above. This design exemplifies good systems architecture.</p> <p>At the lowest level, the buffer cache (<code class="language-plaintext highlighter-rouge">bio.c</code>) manages disk blocks in memory. This cache serves two purposes: improving performance by avoiding disk reads and providing synchronization for disk blocks. The buffer cache ensures that only one kernel thread modifies a disk block at a time.</p> <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Buffer cache structure</span>
+<span class="k">struct</span> <span class="n">buf</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">flags</span><span class="p">;</span>
+    <span class="n">uint</span> <span class="n">dev</span><span class="p">;</span>
+    <span class="n">uint</span> <span class="n">blockno</span><span class="p">;</span>
+    <span class="k">struct</span> <span class="n">sleeplock</span> <span class="n">lock</span><span class="p">;</span>
+    <span class="n">uint</span> <span class="n">refcnt</span><span class="p">;</span>
+    <span class="k">struct</span> <span class="n">buf</span> <span class="o">*</span><span class="n">prev</span><span class="p">;</span>
+    <span class="k">struct</span> <span class="n">buf</span> <span class="o">*</span><span class="n">next</span><span class="p">;</span>
+    <span class="k">struct</span> <span class="n">buf</span> <span class="o">*</span><span class="n">qnext</span><span class="p">;</span>
+    <span class="n">uchar</span> <span class="n">data</span><span class="p">[</span><span class="n">BSIZE</span><span class="p">];</span>
+<span class="p">};</span>
+</code></pre></div></div> <p>Above the buffer cache, the logging layer (<code class="language-plaintext highlighter-rouge">log.c</code>) provides crash recovery. xv6 uses a write-ahead log to ensure file system consistency. All file system modifications first go to the log, then to their final locations. If the system crashes, the log can replay or discard incomplete operations.</p> <p>The block allocator manages free disk blocks using a bitmap. Each bit represents one disk block - 1 for free, 0 for allocated. This simple scheme allows quick allocation and deallocation:</p> <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Allocate a disk block</span>
+<span class="k">static</span> <span class="n">uint</span> <span class="nf">balloc</span><span class="p">(</span><span class="n">uint</span> <span class="n">dev</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">b</span><span class="p">,</span> <span class="n">bi</span><span class="p">,</span> <span class="n">m</span><span class="p">;</span>
+    <span class="k">struct</span> <span class="n">buf</span> <span class="o">*</span><span class="n">bp</span><span class="p">;</span>
+    
+    <span class="n">bp</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="n">b</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">b</span> <span class="o">&lt;</span> <span class="n">sb</span><span class="p">.</span><span class="n">size</span><span class="p">;</span> <span class="n">b</span> <span class="o">+=</span> <span class="n">BPB</span><span class="p">){</span>
+        <span class="n">bp</span> <span class="o">=</span> <span class="n">bread</span><span class="p">(</span><span class="n">dev</span><span class="p">,</span> <span class="n">BBLOCK</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">sb</span><span class="p">));</span>
+        <span class="k">for</span><span class="p">(</span><span class="n">bi</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">bi</span> <span class="o">&lt;</span> <span class="n">BPB</span> <span class="o">&amp;&amp;</span> <span class="n">b</span> <span class="o">+</span> <span class="n">bi</span> <span class="o">&lt;</span> <span class="n">sb</span><span class="p">.</span><span class="n">size</span><span class="p">;</span> <span class="n">bi</span><span class="o">++</span><span class="p">){</span>
+            <span class="n">m</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="n">bi</span> <span class="o">%</span> <span class="mi">8</span><span class="p">);</span>
+            <span class="k">if</span><span class="p">((</span><span class="n">bp</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">[</span><span class="n">bi</span><span class="o">/</span><span class="mi">8</span><span class="p">]</span> <span class="o">&amp;</span> <span class="n">m</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">){</span>  <span class="c1">// Is block free?</span>
+                <span class="n">bp</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">[</span><span class="n">bi</span><span class="o">/</span><span class="mi">8</span><span class="p">]</span> <span class="o">|=</span> <span class="n">m</span><span class="p">;</span>  <span class="c1">// Mark block in use</span>
+                <span class="n">log_write</span><span class="p">(</span><span class="n">bp</span><span class="p">);</span>
+                <span class="n">brelse</span><span class="p">(</span><span class="n">bp</span><span class="p">);</span>
+                <span class="n">bzero</span><span class="p">(</span><span class="n">dev</span><span class="p">,</span> <span class="n">b</span> <span class="o">+</span> <span class="n">bi</span><span class="p">);</span>
+                <span class="k">return</span> <span class="n">b</span> <span class="o">+</span> <span class="n">bi</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="n">brelse</span><span class="p">(</span><span class="n">bp</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="n">panic</span><span class="p">(</span><span class="s">"balloc: out of blocks"</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div> <p>The inode layer implements files and directories. Each inode contains metadata about a file (size, type, link count) and pointers to data blocks. xv6 uses a Unix-like structure with direct blocks and one indirect block:</p> <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// On-disk inode structure</span>
+<span class="k">struct</span> <span class="n">dinode</span> <span class="p">{</span>
+    <span class="kt">short</span> <span class="n">type</span><span class="p">;</span>           <span class="c1">// File type</span>
+    <span class="kt">short</span> <span class="n">major</span><span class="p">;</span>          <span class="c1">// Major device number</span>
+    <span class="kt">short</span> <span class="n">minor</span><span class="p">;</span>          <span class="c1">// Minor device number</span>
+    <span class="kt">short</span> <span class="n">nlink</span><span class="p">;</span>          <span class="c1">// Number of links to inode</span>
+    <span class="n">uint</span> <span class="n">size</span><span class="p">;</span>            <span class="c1">// Size of file (bytes)</span>
+    <span class="n">uint</span> <span class="n">addrs</span><span class="p">[</span><span class="n">NDIRECT</span><span class="o">+</span><span class="mi">1</span><span class="p">];</span>   <span class="c1">// Data block addresses</span>
+<span class="p">};</span>
+</code></pre></div></div> <p>This design allows small files to be accessed efficiently (through direct blocks) while still supporting larger files (through the indirect block). The implementation demonstrates the trade-offs in file system design between simplicity, performance, and maximum file size.</p> <h2 id="system-calls-the-kernel-interface">System Calls: The Kernel Interface</h2> <p>System calls form the boundary between user programs and the kernel. In xv6, this interface consists of about 20 calls that provide all necessary functionality. Understanding how system calls work reveals the fundamental separation between user and kernel mode.</p> <p>When a user program invokes a system call, several steps occur. First, the program executes an <code class="language-plaintext highlighter-rouge">int</code> instruction, which triggers a processor interrupt. The processor switches to kernel mode, saves the user state, and jumps to the interrupt handler. The kernel examines the system call number, executes the appropriate function, and returns the result.</p> <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// User-side system call stub (usys.S)</span>
+<span class="p">.</span><span class="n">globl</span> <span class="n">fork</span>
+<span class="n">fork</span><span class="o">:</span>
+    <span class="n">movl</span> <span class="err">$</span><span class="n">SYS_fork</span><span class="p">,</span> <span class="o">%</span><span class="n">eax</span>
+    <span class="kt">int</span> <span class="err">$</span><span class="n">T_SYSCALL</span>
+    <span class="n">ret</span>
+
+<span class="c1">// Kernel-side system call handler (syscall.c)</span>
+<span class="kt">void</span> <span class="nf">syscall</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">num</span><span class="p">;</span>
+    
+    <span class="n">num</span> <span class="o">=</span> <span class="n">proc</span><span class="o">-&gt;</span><span class="n">tf</span><span class="o">-&gt;</span><span class="n">eax</span><span class="p">;</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">num</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">num</span> <span class="o">&lt;</span> <span class="n">NELEM</span><span class="p">(</span><span class="n">syscalls</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="n">syscalls</span><span class="p">[</span><span class="n">num</span><span class="p">])</span> <span class="p">{</span>
+        <span class="n">proc</span><span class="o">-&gt;</span><span class="n">tf</span><span class="o">-&gt;</span><span class="n">eax</span> <span class="o">=</span> <span class="n">syscalls</span><span class="p">[</span><span class="n">num</span><span class="p">]();</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="n">cprintf</span><span class="p">(</span><span class="s">"%d %s: unknown sys call %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span>
+                <span class="n">proc</span><span class="o">-&gt;</span><span class="n">pid</span><span class="p">,</span> <span class="n">proc</span><span class="o">-&gt;</span><span class="n">name</span><span class="p">,</span> <span class="n">num</span><span class="p">);</span>
+        <span class="n">proc</span><span class="o">-&gt;</span><span class="n">tf</span><span class="o">-&gt;</span><span class="n">eax</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div> <p>This mechanism teaches several crucial concepts. The transition from user to kernel mode demonstrates hardware protection mechanisms. The careful saving and restoring of state shows how the kernel maintains process isolation. The system call table illustrates how operating systems provide a stable interface while allowing internal implementation changes.</p> <h2 id="synchronization-coordinating-concurrent-activities">Synchronization: Coordinating Concurrent Activities</h2> <p>Synchronization in xv6 centers on two primitives: spinlocks and sleep locks. These mechanisms prevent race conditions when multiple processors or processes access shared data.</p> <p>Spinlocks provide mutual exclusion for short critical sections. A processor acquiring a spinlock disables interrupts and spins in a loop until the lock becomes available:</p> <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Acquire a spinlock</span>
+<span class="kt">void</span> <span class="nf">acquire</span><span class="p">(</span><span class="k">struct</span> <span class="n">spinlock</span> <span class="o">*</span><span class="n">lk</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">pushcli</span><span class="p">();</span> <span class="c1">// disable interrupts</span>
+    
+    <span class="c1">// The xchg is atomic</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">xchg</span><span class="p">(</span><span class="o">&amp;</span><span class="n">lk</span><span class="o">-&gt;</span><span class="n">locked</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="p">;</span>
+    
+    <span class="c1">// Record info about lock acquisition for debugging</span>
+    <span class="n">lk</span><span class="o">-&gt;</span><span class="n">cpu</span> <span class="o">=</span> <span class="n">cpu</span><span class="p">;</span>
+    <span class="n">getcallerpcs</span><span class="p">(</span><span class="o">&amp;</span><span class="n">lk</span><span class="p">,</span> <span class="n">lk</span><span class="o">-&gt;</span><span class="n">pcs</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// Release a spinlock</span>
+<span class="kt">void</span> <span class="nf">release</span><span class="p">(</span><span class="k">struct</span> <span class="n">spinlock</span> <span class="o">*</span><span class="n">lk</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">lk</span><span class="o">-&gt;</span><span class="n">pcs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">lk</span><span class="o">-&gt;</span><span class="n">cpu</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    
+    <span class="c1">// The xchg instruction is atomic</span>
+    <span class="n">xchg</span><span class="p">(</span><span class="o">&amp;</span><span class="n">lk</span><span class="o">-&gt;</span><span class="n">locked</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+    
+    <span class="n">popcli</span><span class="p">();</span> <span class="c1">// enable interrupts</span>
+<span class="p">}</span>
+</code></pre></div></div> <p>The implementation uses the x86 <code class="language-plaintext highlighter-rouge">xchg</code> instruction, which atomically swaps a register with a memory location. This hardware support ensures that only one processor can acquire the lock at a time, even in multiprocessor systems.</p> <p>Sleep locks allow processes to sleep while waiting for a lock, making them suitable for longer critical sections:</p> <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Sleep waiting for a condition</span>
+<span class="kt">void</span> <span class="nf">sleep</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">chan</span><span class="p">,</span> <span class="k">struct</span> <span class="n">spinlock</span> <span class="o">*</span><span class="n">lk</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">proc</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">panic</span><span class="p">(</span><span class="s">"sleep"</span><span class="p">);</span>
+    
+    <span class="k">if</span><span class="p">(</span><span class="n">lk</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">panic</span><span class="p">(</span><span class="s">"sleep without lk"</span><span class="p">);</span>
+    
+    <span class="c1">// Must acquire ptable.lock to change proc-&gt;state</span>
+    <span class="c1">// and then release lk</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">lk</span> <span class="o">!=</span> <span class="o">&amp;</span><span class="n">ptable</span><span class="p">.</span><span class="n">lock</span><span class="p">){</span>
+        <span class="n">acquire</span><span class="p">(</span><span class="o">&amp;</span><span class="n">ptable</span><span class="p">.</span><span class="n">lock</span><span class="p">);</span>
+        <span class="n">release</span><span class="p">(</span><span class="n">lk</span><span class="p">);</span>
+    <span class="p">}</span>
+    
+    <span class="c1">// Go to sleep</span>
+    <span class="n">proc</span><span class="o">-&gt;</span><span class="n">chan</span> <span class="o">=</span> <span class="n">chan</span><span class="p">;</span>
+    <span class="n">proc</span><span class="o">-&gt;</span><span class="n">state</span> <span class="o">=</span> <span class="n">SLEEPING</span><span class="p">;</span>
+    <span class="n">sched</span><span class="p">();</span>
+    
+    <span class="c1">// Tidy up</span>
+    <span class="n">proc</span><span class="o">-&gt;</span><span class="n">chan</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    
+    <span class="c1">// Reacquire original lock</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">lk</span> <span class="o">!=</span> <span class="o">&amp;</span><span class="n">ptable</span><span class="p">.</span><span class="n">lock</span><span class="p">){</span>
+        <span class="n">release</span><span class="p">(</span><span class="o">&amp;</span><span class="n">ptable</span><span class="p">.</span><span class="n">lock</span><span class="p">);</span>
+        <span class="n">acquire</span><span class="p">(</span><span class="n">lk</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div> <p>This implementation demonstrates a subtle but crucial aspect of operating systems: avoiding lost wakeups. The careful dance of acquiring one lock before releasing another ensures that wakeup signals aren’t missed.</p> <h2 id="scheduling-sharing-the-cpu">Scheduling: Sharing the CPU</h2> <p>The xv6 scheduler implements a simple round-robin policy. Each processor continuously loops through the process table, running each RUNNABLE process for one timer interrupt (about 10ms). While basic, this scheduler illustrates fundamental scheduling concepts.</p> <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Per-CPU scheduler loop</span>
+<span class="kt">void</span> <span class="nf">scheduler</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">struct</span> <span class="n">proc</span> <span class="o">*</span><span class="n">p</span><span class="p">;</span>
+    
+    <span class="k">for</span><span class="p">(;;){</span>
+        <span class="c1">// Enable interrupts on this processor</span>
+        <span class="n">sti</span><span class="p">();</span>
+        
+        <span class="c1">// Loop over process table looking for process to run</span>
+        <span class="n">acquire</span><span class="p">(</span><span class="o">&amp;</span><span class="n">ptable</span><span class="p">.</span><span class="n">lock</span><span class="p">);</span>
+        <span class="k">for</span><span class="p">(</span><span class="n">p</span> <span class="o">=</span> <span class="n">ptable</span><span class="p">.</span><span class="n">proc</span><span class="p">;</span> <span class="n">p</span> <span class="o">&lt;</span> <span class="o">&amp;</span><span class="n">ptable</span><span class="p">.</span><span class="n">proc</span><span class="p">[</span><span class="n">NPROC</span><span class="p">];</span> <span class="n">p</span><span class="o">++</span><span class="p">){</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">state</span> <span class="o">!=</span> <span class="n">RUNNABLE</span><span class="p">)</span>
+                <span class="k">continue</span><span class="p">;</span>
+            
+            <span class="c1">// Switch to chosen process</span>
+            <span class="n">proc</span> <span class="o">=</span> <span class="n">p</span><span class="p">;</span>
+            <span class="n">switchuvm</span><span class="p">(</span><span class="n">p</span><span class="p">);</span>
+            <span class="n">p</span><span class="o">-&gt;</span><span class="n">state</span> <span class="o">=</span> <span class="n">RUNNING</span><span class="p">;</span>
+            <span class="n">swtch</span><span class="p">(</span><span class="o">&amp;</span><span class="n">cpu</span><span class="o">-&gt;</span><span class="n">scheduler</span><span class="p">,</span> <span class="n">p</span><span class="o">-&gt;</span><span class="n">context</span><span class="p">);</span>
+            <span class="n">switchkvm</span><span class="p">();</span>
+            
+            <span class="c1">// Process is done running for now</span>
+            <span class="n">proc</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="n">release</span><span class="p">(</span><span class="o">&amp;</span><span class="n">ptable</span><span class="p">.</span><span class="n">lock</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div> <p>The context switch, implemented in <code class="language-plaintext highlighter-rouge">swtch.S</code>, saves the current register state and loads the saved state of the next process. This assembly code must carefully preserve the stack and registers to maintain the illusion that each process runs continuously:</p> <pre><code class="language-assembly"># Context switch
+#   void swtch(struct context **old, struct context *new);
+# Save current register context in old
+# and then load register context from new.
+
+.globl swtch
+swtch:
+    movl 4(%esp), %eax
+    movl 8(%esp), %edx
+    
+    # Save old callee-save registers
+    pushl %ebp
+    pushl %ebx
+    pushl %esi
+    pushl %edi
+    
+    # Switch stacks
+    movl %esp, (%eax)
+    movl %edx, %esp
+    
+    # Load new callee-save registers
+    popl %edi
+    popl %esi
+    popl %ebx
+    popl %ebp
+    ret
+</code></pre> <p>This implementation teaches how operating systems create the illusion of concurrent execution on limited hardware. The round-robin policy, while not optimal for all workloads, provides fairness and prevents starvation.</p> <h2 id="device-drivers-bridging-software-and-hardware">Device Drivers: Bridging Software and Hardware</h2> <p>Device drivers in xv6 demonstrate how operating systems interact with hardware. The console driver provides a good example, handling both keyboard input and screen output.</p> <p>The keyboard driver responds to hardware interrupts. When a key is pressed, the keyboard controller triggers interrupt 33, causing the processor to execute the keyboard interrupt handler:</p> <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Keyboard interrupt handler</span>
+<span class="kt">void</span> <span class="nf">kbdintr</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">consoleintr</span><span class="p">(</span><span class="n">kbdgetc</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// Get data from keyboard controller</span>
+<span class="k">static</span> <span class="kt">int</span> <span class="nf">kbdgetc</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">static</span> <span class="n">uint</span> <span class="n">shift</span><span class="p">;</span>
+    <span class="k">static</span> <span class="n">uchar</span> <span class="o">*</span><span class="n">charcode</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="n">normalmap</span><span class="p">,</span> <span class="n">shiftmap</span><span class="p">,</span> <span class="n">ctlmap</span><span class="p">,</span> <span class="n">ctlmap</span>
+    <span class="p">};</span>
+    <span class="n">uint</span> <span class="n">st</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">c</span><span class="p">;</span>
+    
+    <span class="n">st</span> <span class="o">=</span> <span class="n">inb</span><span class="p">(</span><span class="n">KBSTATP</span><span class="p">);</span>
+    <span class="k">if</span><span class="p">((</span><span class="n">st</span> <span class="o">&amp;</span> <span class="n">KBS_DIB</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">inb</span><span class="p">(</span><span class="n">KBDATAP</span><span class="p">);</span>
+    
+    <span class="k">if</span><span class="p">(</span><span class="n">data</span> <span class="o">==</span> <span class="mh">0xE0</span><span class="p">){</span>
+        <span class="n">shift</span> <span class="o">|=</span> <span class="n">E0ESC</span><span class="p">;</span>
+        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">data</span> <span class="o">&amp;</span> <span class="mh">0x80</span><span class="p">){</span>
+        <span class="c1">// Key released</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="p">(</span><span class="n">shift</span> <span class="o">&amp;</span> <span class="n">E0ESC</span> <span class="o">?</span> <span class="n">data</span> <span class="o">:</span> <span class="n">data</span> <span class="o">&amp;</span> <span class="mh">0x7F</span><span class="p">);</span>
+        <span class="n">shift</span> <span class="o">&amp;=</span> <span class="o">~</span><span class="p">(</span><span class="n">shiftcode</span><span class="p">[</span><span class="n">data</span><span class="p">]</span> <span class="o">|</span> <span class="n">E0ESC</span><span class="p">);</span>
+        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">shift</span> <span class="o">&amp;</span> <span class="n">E0ESC</span><span class="p">){</span>
+        <span class="c1">// Last character was an E0 escape; or with 0x80</span>
+        <span class="n">data</span> <span class="o">|=</span> <span class="mh">0x80</span><span class="p">;</span>
+        <span class="n">shift</span> <span class="o">&amp;=</span> <span class="o">~</span><span class="n">E0ESC</span><span class="p">;</span>
+    <span class="p">}</span>
+    
+    <span class="n">shift</span> <span class="o">|=</span> <span class="n">shiftcode</span><span class="p">[</span><span class="n">data</span><span class="p">];</span>
+    <span class="n">shift</span> <span class="o">^=</span> <span class="n">togglecode</span><span class="p">[</span><span class="n">data</span><span class="p">];</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">charcode</span><span class="p">[</span><span class="n">shift</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">CTL</span> <span class="o">|</span> <span class="n">SHIFT</span><span class="p">)][</span><span class="n">data</span><span class="p">];</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">shift</span> <span class="o">&amp;</span> <span class="n">CAPSLOCK</span><span class="p">){</span>
+        <span class="k">if</span><span class="p">(</span><span class="sc">'a'</span> <span class="o">&lt;=</span> <span class="n">c</span> <span class="o">&amp;&amp;</span> <span class="n">c</span> <span class="o">&lt;=</span> <span class="sc">'z'</span><span class="p">)</span>
+            <span class="n">c</span> <span class="o">+=</span> <span class="sc">'A'</span> <span class="o">-</span> <span class="sc">'a'</span><span class="p">;</span>
+        <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="sc">'A'</span> <span class="o">&lt;=</span> <span class="n">c</span> <span class="o">&amp;&amp;</span> <span class="n">c</span> <span class="o">&lt;=</span> <span class="sc">'Z'</span><span class="p">)</span>
+            <span class="n">c</span> <span class="o">+=</span> <span class="sc">'a'</span> <span class="o">-</span> <span class="sc">'A'</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">c</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div> <p>This code demonstrates several important concepts. The use of I/O ports (<code class="language-plaintext highlighter-rouge">inb</code> and <code class="language-plaintext highlighter-rouge">outb</code>) shows how software communicates with hardware. The handling of special keys (shift, control) illustrates state management in device drivers. The interrupt-driven design demonstrates how operating systems respond to external events efficiently.</p> <h2 id="the-shell-bringing-it-all-together">The Shell: Bringing It All Together</h2> <p>The xv6 shell (<code class="language-plaintext highlighter-rouge">sh.c</code>) is both a user interface and a demonstration of how system calls work together. Though simple, it implements core shell features: command execution, I/O redirection, and pipes.</p> <p>The shell’s main loop reads commands, parses them, and executes them:</p> <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Simplified shell main loop</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">static</span> <span class="kt">char</span> <span class="n">buf</span><span class="p">[</span><span class="mi">100</span><span class="p">];</span>
+    <span class="kt">int</span> <span class="n">fd</span><span class="p">;</span>
+    
+    <span class="c1">// Ensure three file descriptors are open</span>
+    <span class="k">while</span><span class="p">((</span><span class="n">fd</span> <span class="o">=</span> <span class="n">open</span><span class="p">(</span><span class="s">"console"</span><span class="p">,</span> <span class="n">O_RDWR</span><span class="p">))</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">){</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">fd</span> <span class="o">&gt;=</span> <span class="mi">3</span><span class="p">){</span>
+            <span class="n">close</span><span class="p">(</span><span class="n">fd</span><span class="p">);</span>
+            <span class="k">break</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    
+    <span class="c1">// Read and run input commands</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">getcmd</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">buf</span><span class="p">))</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">){</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">buf</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="sc">'c'</span> <span class="o">&amp;&amp;</span> <span class="n">buf</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="sc">'d'</span> <span class="o">&amp;&amp;</span> <span class="n">buf</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="sc">' '</span><span class="p">){</span>
+            <span class="c1">// Chdir must be called by the parent, not the child</span>
+            <span class="n">buf</span><span class="p">[</span><span class="n">strlen</span><span class="p">(</span><span class="n">buf</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>  <span class="c1">// chop \n</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">chdir</span><span class="p">(</span><span class="n">buf</span><span class="o">+</span><span class="mi">3</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
+                <span class="n">printf</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s">"cannot cd %s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">buf</span><span class="o">+</span><span class="mi">3</span><span class="p">);</span>
+            <span class="k">continue</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">fork1</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+            <span class="n">runcmd</span><span class="p">(</span><span class="n">parsecmd</span><span class="p">(</span><span class="n">buf</span><span class="p">));</span>
+        <span class="n">wait</span><span class="p">();</span>
+    <span class="p">}</span>
+    <span class="n">exit</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div></div> <p>The implementation of pipes demonstrates the power of Unix abstractions:</p> <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Execute pipe command</span>
+<span class="k">case</span> <span class="n">PIPE</span><span class="p">:</span>
+    <span class="n">pcmd</span> <span class="o">=</span> <span class="p">(</span><span class="k">struct</span> <span class="n">pipecmd</span><span class="o">*</span><span class="p">)</span><span class="n">cmd</span><span class="p">;</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">pipe</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">panic</span><span class="p">(</span><span class="s">"pipe"</span><span class="p">);</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">fork1</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">){</span>
+        <span class="n">close</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+        <span class="n">dup</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+        <span class="n">close</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+        <span class="n">close</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+        <span class="n">runcmd</span><span class="p">(</span><span class="n">pcmd</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">fork1</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">){</span>
+        <span class="n">close</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+        <span class="n">dup</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+        <span class="n">close</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+        <span class="n">close</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+        <span class="n">runcmd</span><span class="p">(</span><span class="n">pcmd</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="n">close</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+    <span class="n">close</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+    <span class="n">wait</span><span class="p">();</span>
+    <span class="n">wait</span><span class="p">();</span>
+    <span class="k">break</span><span class="p">;</span>
+</code></pre></div></div> <p>This code teaches how simple primitives (fork, pipe, dup) combine to create powerful abstractions. The careful manipulation of file descriptors shows how Unix achieves I/O redirection without special kernel support.</p> <h2 id="practical-exercises-learning-by-doing">Practical Exercises: Learning by Doing</h2> <p>To truly understand xv6, you must experiment with it. Here are exercises that reinforce key concepts:</p> <p><strong>Exercise 1: Adding a System Call</strong> Implement a <code class="language-plaintext highlighter-rouge">getproccount()</code> system call that returns the number of active processes. This exercise teaches the entire system call path:</p> <ol> <li>Add the system call number to <code class="language-plaintext highlighter-rouge">syscall.h</code> </li> <li>Add the function prototype to <code class="language-plaintext highlighter-rouge">user.h</code> </li> <li>Add the implementation to <code class="language-plaintext highlighter-rouge">sysproc.c</code> </li> <li>Add the entry to the system call table in <code class="language-plaintext highlighter-rouge">syscall.c</code> </li> <li>Add the user-space stub to <code class="language-plaintext highlighter-rouge">usys.S</code> </li> </ol> <p><strong>Exercise 2: Implementing Priority Scheduling</strong> Replace the round-robin scheduler with a priority-based scheduler. This requires:</p> <ol> <li>Adding a priority field to <code class="language-plaintext highlighter-rouge">struct proc</code> </li> <li>Modifying <code class="language-plaintext highlighter-rouge">fork()</code> to initialize priority</li> <li>Adding a <code class="language-plaintext highlighter-rouge">setpriority()</code> system call</li> <li>Modifying the scheduler to select the highest-priority process</li> </ol> <p><strong>Exercise 3: Extending the File System</strong> Add support for symbolic links. This involves:</p> <ol> <li>Adding a new file type <code class="language-plaintext highlighter-rouge">T_SYMLINK</code> </li> <li>Implementing <code class="language-plaintext highlighter-rouge">symlink()</code> and updating <code class="language-plaintext highlighter-rouge">open()</code> to follow links</li> <li>Handling link loops and permissions</li> </ol> <p>These exercises demonstrate that xv6, despite its simplicity, is a real operating system that you can extend and modify.</p> <h2 id="debugging-xv6-tools-and-techniques">Debugging xv6: Tools and Techniques</h2> <p>Debugging operating system code presents unique challenges. When your code runs in kernel mode, traditional debugging tools often don’t work. xv6 provides several techniques for debugging:</p> <p>The <code class="language-plaintext highlighter-rouge">cprintf()</code> function works like <code class="language-plaintext highlighter-rouge">printf()</code> but outputs to the console even from interrupt handlers:</p> <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">cprintf</span><span class="p">(</span><span class="s">"proc %d (%s) allocating page at %x</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> 
+        <span class="n">proc</span><span class="o">-&gt;</span><span class="n">pid</span><span class="p">,</span> <span class="n">proc</span><span class="o">-&gt;</span><span class="n">name</span><span class="p">,</span> <span class="n">a</span><span class="p">);</span>
+</code></pre></div></div> <p>QEMU’s monitor (accessed with Ctrl-a c) provides powerful debugging features. You can examine registers, memory, and control execution:</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(qemu) info registers
+(qemu) x/10x 0x80100000  
+(qemu) stop
+(qemu) cont
+</code></pre></div></div> <p>GDB can debug xv6 when QEMU runs with the <code class="language-plaintext highlighter-rouge">-s</code> flag. This allows source-level debugging of kernel code:</p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>gdb kernel
+<span class="o">(</span>gdb<span class="o">)</span> target remote localhost:26000
+<span class="o">(</span>gdb<span class="o">)</span> <span class="nb">break </span>fork
+<span class="o">(</span>gdb<span class="o">)</span> <span class="k">continue</span>
+</code></pre></div></div> <p>The <code class="language-plaintext highlighter-rouge">panic()</code> function helps debug kernel errors by printing a message and halting:</p> <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span><span class="p">(</span><span class="n">np</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">panic</span><span class="p">(</span><span class="s">"fork: no free processes"</span><span class="p">);</span>
+</code></pre></div></div> <h2 id="common-pitfalls-and-how-to-avoid-them">Common Pitfalls and How to Avoid Them</h2> <p>Working with xv6, students often encounter similar challenges. Understanding these pitfalls helps avoid frustration:</p> <p><strong>Race Conditions</strong>: Forgetting to acquire locks before accessing shared data leads to mysterious bugs that appear randomly. Always identify shared data and protect it with appropriate locks.</p> <p><strong>Stack Overflow</strong>: The kernel stack is small (4KB). Avoid large local variables or deep recursion in kernel code.</p> <p><strong>Memory Leaks</strong>: Forgetting to free allocated memory eventually exhausts the system. Match every <code class="language-plaintext highlighter-rouge">kalloc()</code> with <code class="language-plaintext highlighter-rouge">kfree()</code>.</p> <p><strong>Deadlocks</strong>: Acquiring locks in different orders in different code paths causes deadlock. Establish a consistent locking order throughout the kernel.</p> <p><strong>User/Kernel Confusion</strong>: Remember that kernel code cannot directly access user memory. Use <code class="language-plaintext highlighter-rouge">copyin()</code> and <code class="language-plaintext highlighter-rouge">copyout()</code> to transfer data safely.</p> <h2 id="beyond-xv6-connections-to-modern-systems">Beyond xv6: Connections to Modern Systems</h2> <p>While xv6 simplifies many aspects of operating systems, its concepts directly relate to modern systems. Linux uses similar process structures, though with hundreds of fields instead of dozens. Windows implements threads within processes, but the basic scheduling concepts remain the same.</p> <p>Modern file systems like ext4 or NTFS add features like journaling, extents, and B-trees, but build on the same inode concept. Virtual memory systems now support huge pages, NUMA awareness, and complex sharing schemes, but still use page tables for address translation.</p> <p>Understanding xv6 provides the foundation to explore these advanced topics. The simplicity that makes xv6 approachable also makes it an ideal starting point for understanding complex production systems.</p> <h2 id="moving-forward-with-xv6">Moving Forward with xv6</h2> <p>Your journey with xv6 has just begun. As you work with the code, you’ll discover layers of subtlety in its seemingly simple implementation. Each reading reveals new insights about the careful design decisions that make operating systems work.</p> <p>Start by reading the xv6 book alongside the source code. Run xv6 in QEMU, try the exercises, and don’t hesitate to add debug prints when confused. Join the community of students and educators using xv6 - their insights and questions will deepen your understanding.</p> <p>Remember that xv6 is a teaching tool. Its goal isn’t to be fast or feature-complete, but to be understandable. Every line of code exists for a reason, usually to illustrate an important concept. When something seems unnecessarily complex, ask yourself what it teaches about operating system design.</p> <p>Operating systems remain one of the most challenging and rewarding areas of computer science. Through xv6, you’re joining a tradition stretching back to the original Unix pioneers. The concepts you learn here - processes, virtual memory, file systems, and synchronization - form the foundation of all modern computing.</p> <p>Take time to appreciate the elegance of xv6’s design. Notice how simple abstractions like files and processes combine to create a complete system. Observe how careful coding prevents race conditions and maintains invariants. These lessons extend far beyond operating systems to all systems programming.</p> <p>Your understanding will deepen with each pass through the code. What seems complex today will become clear with practice. The investment you make in understanding xv6 will pay dividends throughout your career in computer science.</p> <h2 id="whats-next-continuing-your-operating-systems-journey">What’s Next: Continuing Your Operating Systems Journey</h2> <p>Now that you’ve grasped the fundamentals of xv6, you’re ready to explore deeper waters. The resources below will help you expand your understanding, whether you want to master xv6, explore other teaching operating systems, or dive into production OS code.</p> <h3 id="essential-xv6-resources">Essential xv6 Resources</h3> <p><strong>xv6 Book and Source Code</strong></p> <ul> <li>Official xv6 book: https://pdos.csail.mit.edu/6.828/2018/xv6/book-rev11.pdf</li> <li>xv6 source with line numbers: https://pdos.csail.mit.edu/6.828/2018/xv6/xv6-rev11.pdf</li> <li>MIT’s xv6 repository: https://github.com/mit-pdos/xv6-public</li> <li>RISC-V version: https://github.com/mit-pdos/xv6-riscv</li> </ul> <p><strong>Video Lectures and Courses</strong></p> <ul> <li>MIT 6.828 Operating System Engineering: https://pdos.csail.mit.edu/6.828/2018/schedule.html</li> <li>Frans Kaashoek’s lectures: https://www.youtube.com/playlist?list=PLfciLKR3SgqNJKKIKUliWoNBBH1VHL3AP</li> <li>CS 537 (Wisconsin) videos: https://pages.cs.wisc.edu/~remzi/Classes/537/Spring2018/</li> </ul> <h3 id="classic-operating-systems-texts">Classic Operating Systems Texts</h3> <p><strong>Foundational Books</strong></p> <ul> <li> <p>“Operating Systems: Three Easy Pieces” by Remzi and Andrea Arpaci-Dusseau<br> Free online: https://pages.cs.wisc.edu/~remzi/OSTEP/<br> The modern standard for OS education, with clear explanations and practical examples</p> </li> <li> <p>“The Design and Implementation of the FreeBSD Operating System” by McKusick et al.<br> Bridges the gap between teaching systems and production code</p> </li> <li> <p>“Linux Kernel Development” by Robert Love<br> A readable introduction to how Linux actually works</p> </li> <li> <p>“Modern Operating Systems” by Andrew Tanenbaum<br> Comprehensive coverage of OS concepts with real-world examples</p> </li> </ul> <h3 id="other-teaching-operating-systems">Other Teaching Operating Systems</h3> <p><strong>Pintos</strong> (Stanford)<br> https://web.stanford.edu/class/cs140/projects/pintos/pintos.html<br> More feature-complete than xv6, with threading, virtual memory, and file system projects</p> <p><strong>OS/161</strong> (Harvard)<br> http://os161.eecs.harvard.edu/<br> Designed for synchronization and virtual memory assignments</p> <p><strong>Minix 3</strong> (Vrije Universiteit)<br> https://www.minix3.org/<br> Microkernel architecture, self-healing capabilities</p> <p><strong>GeekOS</strong> (Maryland)<br> https://geekos.sourceforge.io/<br> Focus on x86 architecture details</p> <h3 id="research-papers-that-shaped-operating-systems">Research Papers That Shaped Operating Systems</h3> <p><strong>Unix and Plan 9</strong></p> <ul> <li>“The UNIX Time-Sharing System” by Ritchie &amp; Thompson (1974)<br> https://people.eecs.berkeley.edu/~brewer/cs262/unix.pdf</li> <li>“Plan 9 from Bell Labs” by Pike et al.<br> https://9p.io/sys/doc/9.pdf</li> </ul> <p><strong>Virtual Memory</strong></p> <ul> <li>“The Multics Virtual Memory: Concepts and Design” (1972)<br> https://multicians.org/multics-vm.pdf</li> <li>“The Working Set Model for Program Behavior” by Denning (1968)<br> https://denninginstitute.com/pjd/PUBS/WSModel_1968.pdf</li> </ul> <p><strong>File Systems</strong></p> <ul> <li>“A Fast File System for UNIX” by McKusick et al. (1984)<br> https://people.eecs.berkeley.edu/~brewer/cs262/FFS.pdf</li> <li>“The Google File System” by Ghemawat et al. (2003)<br> https://static.googleusercontent.com/media/research.google.com/en//archive/gfs-sosp2003.pdf</li> </ul> <p><strong>Scheduling and Synchronization</strong></p> <ul> <li>“Lottery Scheduling” by Waldspurger &amp; Weihl (1994)<br> https://www.usenix.org/legacy/publications/library/proceedings/osdi/full_papers/waldspurger.pdf -</li> </ul> </div> </article> <br> <hr> <br> <h2 class="text-3xl font-semibold mb-4 mt-12">Enjoy Reading This Article?</h2> <p class="mb-2">Here are some more articles you might like to read next:</p> <ul class="list-disc pl-7 my-3 space-y-2 marker:text-[var(--global-theme-color)]"> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2026/building-fast-1brc-csharp-apple-silicon/">Building a fast 1BRC solver in C# on Apple Silicon</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2025/memory-management-production-silent-killers/">Memory Management in Production: Avoiding the Silent Killers</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2025/vibe-coding/">Growing as a Software Engineer in the Age of LLMs and Vibe Coding</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2025/how-to-handle-hallucinations/">Taming the Imagination: A Comprehensive Guide to Handling Hallucinations and Implementing Guardrails in Agentic AI</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2025/intro-to-agentic-ai/">Building an Agentic AI Analytics Dashboard: A Deep Dive with LangChain, LangGraph, and Fine-tuned LLAMA</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2025/intro-to-nar/">Neural Algorithmic Reasoning: Teaching Neural Networks to Think Like Algorithms</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2025/opentelemetry/">OpenTelemetry in Microservices: How We Transformed Our Observability Strategy</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2025/leveraging-ai-tools-software-engineering/">Using AI Tools in Software Engineering and Research Workflows</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2024/optimizing-dotnet-microservices-performance/">The Performance Crisis: How We Rescued a .NET 8 Microservice from 10 Critical Bottlenecks</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2024/zero-downtime/">Zero Downtime Deployments in Kubernetes: How We Keep Our Services Running While We Ship</a> </li> </ul> </div> </div> <footer class="fixed-bottom" role="contentinfo"> <div class="container mt-0"> © Copyright 2026 Tanzim Hossain Romel. © Tanzim Hossain Romel. Powered by <a href="https://jekyllrb.com/" target="_blank" rel="external nofollow noopener">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio" rel="external nofollow noopener" target="_blank">al-folio</a> theme. </div> </footer> <script>
+  window.alFolio = {
+    compatBootstrap: false
+  };
+</script> <script src="/assets/js/nav-toggle.js?v=141bd79a73ebc0f0b6ea58e440ae79fc"></script> <script defer src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script> <script defer src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script> <script defer src="/assets/js/masonry.js?v=e49affc7bd2646f6acdad1dbe02c2359" type="text/javascript"></script> <script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js" integrity="sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI=" crossorigin="anonymous"></script> <script src="/assets/al_math/js/mathjax-setup.js"></script> <script src="/assets/js/tooltips-setup.js?v=fe487e99db6c43751e6e7bdb2d6a0611"></script> <script src="/assets/js/no_defer.js?v=53b1b1a645525975c963ce8bf8bfefcf"></script> <script defer src="/assets/js/common.js?v=87baac90f765f2f3362dcf6aaf312a8a"></script> <script defer src="/assets/js/copy_code.js?v=c8a01c11a92744d44b093fc3bda915df" type="text/javascript"></script> <script defer src="/assets/js/jupyter_new_tab.js?v=896d254890d9b47f0281f63bfccf0dee"></script> <script async src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script> <script async src="https://badge.dimensions.ai/badge.js"></script> <script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script> <script defer src="/assets/al_img_tools/js/zoom.js"></script> <script defer src="/assets/js/progress-bar.js?v=499464c5c63ced6cf7ad62509f1e2610" type="text/javascript"></script> <script src="https://cdn.jsdelivr.net/npm/vanilla-back-to-top@7.2.1/dist/vanilla-back-to-top.min.js" integrity="sha256-uMJJ3EoTyfRBoTbR+lrfu1uRQ87RZG8AR3cVNuQVeFg=" crossorigin="anonymous"></script> <script>
+    addBackToTop();
+  </script> <script type="module" src="/assets/al_search/js/search/ninja-keys.min.js"></script> <ninja-keys hidebreadcrumbs noautoloadmdicons placeholder="Type to start searching"></ninja-keys> <script src="/assets/al_search/js/search-setup.js"></script> <script>
+// get the ninja-keys element
+const ninja = document.querySelector('ninja-keys');
+
+// add the home and posts menu items
+ninja.data = [{
+    id: "nav-about",
+    title: "about",
+    section: "Navigation",
+    handler: () => {
+      window.location.href = "/";
+    },
+  },{id: "nav-blog",
+          title: "blog",
+          description: "",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/blog/";
+          },
+        },{id: "nav-publications",
+          title: "publications",
+          description: "Publications.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/publications/";
+          },
+        },{id: "nav-research",
+          title: "research",
+          description: "Research on reliable AI agents, SRE-agent evaluation, ML ecosystem security, agent-choice auditing, and developer tools.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/research/";
+          },
+        },{id: "nav-projects",
+          title: "projects",
+          description: "Research and engineering projects.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/projects/";
+          },
+        },{id: "nav-cv",
+          title: "CV",
+          description: "Curriculum vitae.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/cv/";
+          },
+        },{id: "nav-contributions",
+          title: "contributions",
+          description: "Curated open-source contribution evidence across research infrastructure, frameworks, and language tooling.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/contributions/";
+          },
+        },{id: "post-building-a-fast-1brc-solver-in-c-on-apple-silicon",
+        
+          title: "Building a fast 1BRC solver in C# on Apple Silicon",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/building-fast-1brc-csharp-apple-silicon/";
+          
+        },
+      },{id: "post-memory-management-in-production-avoiding-the-silent-killers",
+        
+          title: "Memory Management in Production: Avoiding the Silent Killers",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/memory-management-production-silent-killers/";
+          
+        },
+      },{id: "post-growing-as-a-software-engineer-in-the-age-of-llms-and-vibe-coding",
+        
+          title: "Growing as a Software Engineer in the Age of LLMs and Vibe Coding...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/vibe-coding/";
+          
+        },
+      },{id: "post-taming-the-imagination-a-comprehensive-guide-to-handling-hallucinations-and-implementing-guardrails-in-agentic-ai",
+        
+          title: "Taming the Imagination: A Comprehensive Guide to Handling Hallucinations and Implementing Guardrails in...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/how-to-handle-hallucinations/";
+          
+        },
+      },{id: "post-building-an-agentic-ai-analytics-dashboard-a-deep-dive-with-langchain-langgraph-and-fine-tuned-llama",
+        
+          title: "Building an Agentic AI Analytics Dashboard: A Deep Dive with LangChain, LangGraph, and...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/intro-to-agentic-ai/";
+          
+        },
+      },{id: "post-neural-algorithmic-reasoning-teaching-neural-networks-to-think-like-algorithms",
+        
+          title: "Neural Algorithmic Reasoning: Teaching Neural Networks to Think Like Algorithms",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/intro-to-nar/";
+          
+        },
+      },{id: "post-opentelemetry-in-microservices-how-we-transformed-our-observability-strategy",
+        
+          title: "OpenTelemetry in Microservices: How We Transformed Our Observability Strategy",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/opentelemetry/";
+          
+        },
+      },{id: "post-using-ai-tools-in-software-engineering-and-research-workflows",
+        
+          title: "Using AI Tools in Software Engineering and Research Workflows",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/leveraging-ai-tools-software-engineering/";
+          
+        },
+      },{id: "post-the-performance-crisis-how-we-rescued-a-net-8-microservice-from-10-critical-bottlenecks",
+        
+          title: "The Performance Crisis: How We Rescued a .NET 8 Microservice from 10 Critical...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2024/optimizing-dotnet-microservices-performance/";
+          
+        },
+      },{id: "post-zero-downtime-deployments-in-kubernetes-how-we-keep-our-services-running-while-we-ship",
+        
+          title: "Zero Downtime Deployments in Kubernetes: How We Keep Our Services Running While We...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2024/zero-downtime/";
+          
+        },
+      },{id: "post-mastering-unit-testing-and-bdd-with-xunit-and-specflow-in-net-9-a-comprehensive-guide",
+        
+          title: "Mastering Unit Testing and BDD with xUnit and SpecFlow in .NET 9: A...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2024/dotnet-tests/";
+          
+        },
+      },{id: "post-design-patterns-your-first-step-toward-professional-software-engineering",
+        
+          title: "Design Patterns: Your First Step Toward Professional Software Engineering",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2024/design-patterns-professional-software-engineering/";
+          
+        },
+      },{id: "post-setting-up-github-actions-ci-cd-with-aws-a-practical-journey",
+        
+          title: "Setting Up GitHub Actions CI/CD with AWS: A Practical Journey",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2024/intro-to-ci-cd/";
+          
+        },
+      },{id: "post-the-clique-partition-problem-dividing-networks-into-perfect-communities",
+        
+          title: "The Clique Partition Problem: Dividing Networks into Perfect Communities",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2023/clique-partition-problem-graph-theory/";
+          
+        },
+      },{id: "post-advice-complexity-in-online-algorithms-when-knowing-the-future-makes-all-the-difference",
+        
+          title: "Advice Complexity in Online Algorithms: When Knowing the Future Makes All the Difference...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2023/advice-complexity-online-algorithms/";
+          
+        },
+      },{id: "post-getting-started-with-kubernetes-deploying-microservice-architectures-at-scale",
+        
+          title: "Getting Started with Kubernetes: Deploying Microservice Architectures at Scale",
+        
+        description: "A practical Kubernetes guide covering microservice deployment, service-mesh integration, observability, and the operational checks needed before production use.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2022/getting-started-with-kubernetes-microservices/";
+          
+        },
+      },{id: "post-understanding-xv6-a-practical-introduction-to-operating-systems",
+        
+          title: "Understanding xv6: A Practical Introduction to Operating Systems",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2022/understanding-xv6-operating-systems/";
+          
+        },
+      },{id: "post-getting-started-with-ns3-a-hands-on-guide-to-network-simulation",
+        
+          title: "Getting Started with NS3: A Hands-On Guide to Network Simulation",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2021/getting-started-with-ns3/";
+          
+        },
+      },{id: "news-completed-b-sc-in-computer-science-and-engineering-from-bangladesh-university-of-engineering-and-technology-with-a-gpa-of-3-53-4-00-link-https-cse-buet-ac-bd-academics-bsc",
+          title: 'Completed B.Sc in Computer Science and Engineering from Bangladesh University of Engineering and...',
+          description: "",
+          section: "News",},{id: "news-joined-iqvia-as-a-software-development-engineer-on-kpi-library-the-dynamic-reporting-layer-within-orchestrated-analytics-link-https-www-iqvia-com-solutions-commercialization-commercial-analytics-orchestrated-analytics",
+          title: 'Joined IQVIA as a Software Development Engineer on KPI Library, the dynamic reporting...',
+          description: "",
+          section: "News",},{id: "news-submitted-39-sentiment-analysis-of-anonymous-crisis-reports-in-bangladesh-39-to-acm-cscw-2025-analyzing-crowd-sourced-reports-from-bangladesh-39-s-2024-national-crisis-using-transformer-models-link-projects-research-ureporter",
+          title: 'Submitted &amp;#39;Sentiment Analysis of Anonymous Crisis Reports in Bangladesh&amp;#39; to ACM CSCW 2025,...',
+          description: "",
+          section: "News",},{id: "news-honored-with-the-iqvia-impact-program-silver-award-for-outstanding-performance-and-contributions-to-the-kpi-library-team-link-https-drive-google-com-file-d-1vc4e2roqepmbfs56olduih-ojdbok9sp-view-usp-share-link",
+          title: 'Honored with the IQVIA Impact Program Silver Award for outstanding performance and contributions...',
+          description: "",
+          section: "News",},{id: "news-submitted-39-an-empirical-study-on-remote-code-execution-in-machine-learning-model-hosting-ecosystems-39-to-the-mining-software-repositories-msr-2026-conference-first-large-scale-cross-platform-security-study-analyzing-45-000-repositories-across-5-major-ml-platforms-link-https-arxiv-org-abs-2601-14163",
+          title: 'Submitted &amp;#39;An Empirical Study on Remote Code Execution in Machine Learning Model Hosting...',
+          description: "",
+          section: "News",},{id: "news-resubmitted-39-an-empirical-study-on-remote-code-execution-in-machine-learning-model-hosting-ecosystems-39-to-acm-transactions-on-software-engineering-and-methodology-tosem-2026-preprint-available-on-arxiv-link-https-arxiv-org-abs-2601-14163",
+          title: 'Resubmitted &amp;#39;An Empirical Study on Remote Code Execution in Machine Learning Model Hosting...',
+          description: "",
+          section: "News",},{id: "news-started-a-remote-summer-research-internship-at-the-university-of-illinois-urbana-champaign-through-uiuc-summer-research-in-software-engineering-srse-2026-with-professor-tianyin-xu-link-https-uiuc-srse-github-io",
+          title: 'Started a remote summer research internship at the University of Illinois Urbana-Champaign through...',
+          description: "",
+          section: "News",},{id: "news-submitted-39-the-choice-can-be-the-attack-auditing-aligned-backdoors-in-llm-agents-39-to-the-transactions-of-the-association-for-computational-linguistics-tacl-2026-with-chowdhury-rakin-haider-link-projects-research-reagent-plus-plus",
+          title: 'Submitted &amp;#39;The Choice Can Be the Attack: Auditing Aligned Backdoors in LLM Agents&amp;#39;...',
+          description: "",
+          section: "News",},{id: "news-39-an-empirical-study-on-remote-code-execution-in-machine-learning-model-hosting-ecosystems-39-is-under-review-at-the-international-conference-on-software-engineering-icse-2027-preprint-available-on-arxiv-link-https-arxiv-org-abs-2601-14163",
+          title: '&amp;#39;An Empirical Study on Remote Code Execution in Machine Learning Model Hosting Ecosystems&amp;#39;...',
+          description: "",
+          section: "News",},{id: "news-will-begin-graduate-study-in-computing-science-at-the-university-of-alberta-on-september-1-2026-link-https-www-ualberta-ca-en-computing-science-index-html",
+          title: 'Will begin graduate study in Computing Science at the University of Alberta on...',
+          description: "",
+          section: "News",},{id: "projects-1brc-c-on-apple-silicon",
+          title: '1BRC C# on Apple Silicon',
+          description: "A .NET 10 NativeAOT performance case study: byte parsing, native aggregation, ARM64 tuning, and a size-aware macOS pread path",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/1brc-csharp/";
+            },},{id: "projects-building-a-bangla-handwritten-digit-recognizer-from-scratch",
+          title: 'Building a Bangla Handwritten Digit Recognizer from Scratch',
+          description: "A Deep Dive into Custom CNN Implementation",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/bangla-digit-recognition/";
+            },},{id: "projects-blockchain-based-ticketing-platform",
+          title: 'Blockchain Based Ticketing Platform',
+          description: "A practical approach to reducing ticket fraud and abusive resale",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/blockchain-ticketing/";
+            },},{id: "projects-yet-another-c-compiler",
+          title: 'Yet Another C Compiler',
+          description: "A complete multi-pass compiler for a subset of C",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/compiler/";
+            },},{id: "projects-contextledger-context-accounting-for-coding-agents",
+          title: 'ContextLedger: context accounting for coding agents',
+          description: "A research notebook on OpenCode compaction, provenance, and live GPT-5.5 experiments",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/contextledger/";
+            },},{id: "projects-ctxhelm-agent-native-context-compiler",
+          title: 'ctxhelm: agent-native context compiler',
+          description: "Local-first context plans, release proof, and source-free agent evaluation",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/ctxhelm/";
+            },},{id: "projects-mini-deep-learning-framework-pytorch-from-scratch",
+          title: 'Mini Deep Learning Framework: PyTorch from Scratch',
+          description: "A freelance learning project for tensors, autograd, and neural-network internals",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/deep-learning-framework-capstone/";
+            },},{id: "projects-go-container-runtime-docker-from-scratch",
+          title: 'Go Container Runtime: Docker from Scratch',
+          description: "A freelance learning project for Linux containers, networking, and Go systems programming",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/docker-from-scratch-go/";
+            },},{id: "projects-eventfly-distributed-microservices-event-platform",
+          title: 'EventFly – Distributed Microservices Event Platform',
+          description: "A six-person BUET course project for event creation, ticketing, announcements, participant engagement, analytics, and payments, implemented with Node.js, React, NATS, Kubernetes, MongoDB, Redis, and Stripe.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/eventfly-an-end-to-end-event-management-system/";
+            },},{id: "projects-building-a-go-database-engine-from-scratch",
+          title: 'Building a Go Database Engine from Scratch',
+          description: "An educational ACID-oriented database engine with advanced features",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/go-database/";
+            },},{id: "projects-image-caption-generation-with-bert-context-vectors",
+          title: 'Image Caption Generation with BERT Context Vectors',
+          description: "Extended the &quot;Show, Attend, and Tell&quot; image captioning model with BERT to improve caption quality and reduce training time, achieving 36% improvement in CIDEr score and 43% improvement in BLEU-4.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/image-caption-generator/";
+            },},{id: "projects-patchsmith-a-harness-for-repair-agents",
+          title: 'PatchSmith: a harness for repair agents',
+          description: "System design and R&amp;D notes for bounded patches, sandbox validation, and auditable repair runs",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/patchsmith/";
+            },},{id: "projects-ray-tracing-from-scratch-a-comprehensive-guide-to-3d-rendering-physics-and-implementation",
+          title: 'Ray Tracing from Scratch: A Comprehensive Guide to 3D Rendering Physics and Implementation...',
+          description: "Implementing physically-based rendering with C++",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/ray-tracing/";
+            },},{id: "projects-an-empirical-study-on-remote-code-execution-in-machine-learning-model-hosting-ecosystems",
+          title: 'An Empirical Study on Remote Code Execution in Machine Learning Model Hosting Ecosystems...',
+          description: "A cross-platform study of model-loading risk across five ML hosting ecosystems, using static analysis, malware-signature scanning, and analysis of more than 600 developer discussions.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/research-ml-remote-code-execution/";
+            },},{id: "projects-verischema-verified-database-schema-generation",
+          title: 'VeriSchema: verified database-schema generation',
+          description: "How can specialized agents generate relational schemas from natural-language requirements while formal checks and targeted repair keep the result consistent?",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/research-multi-agent-db-schema/";
+            },},{id: "projects-the-choice-can-be-the-attack-auditing-aligned-backdoors-in-llm-agents",
+          title: 'The Choice Can Be the Attack: Auditing Aligned Backdoors in LLM Agents',
+          description: "Abstract-level summary of SHIFT, submitted to TACL 2026 on aligned backdoor attacks in LLM agents.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/research-reagent-plus-plus/";
+            },},{id: "projects-sentiment-analysis-of-anonymous-crisis-reports-in-bangladesh",
+          title: 'Sentiment Analysis of Anonymous Crisis Reports in Bangladesh',
+          description: "A multilingual analysis of anonymous, crowd-sourced reports from Bangladesh&#39;s 2024 national crisis.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/research-ureporter/";
+            },},{id: "projects-enhancing-tcp-fairness-tcp-vegas-implementation",
+          title: 'Enhancing TCP Fairness: TCP Vegas+ Implementation',
+          description: "A dual-mode solution for TCP Vegas fairness issues",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/tcp-vegas-plus/";
+            },},{
+        id: 'social-email',
+        title: 'email',
+        section: 'Socials',
+        handler: () => {
+          window.open("mailto:%74%61%6E%68%72%6F%6D%65%6C@%67%6D%61%69%6C.%63%6F%6D", "_blank");
+        },
+      },{
+        id: 'social-github',
+        title: 'GitHub',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://github.com/thromel", "_blank");
+        },
+      },{
+        id: 'social-scholar',
+        title: 'Google Scholar',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://scholar.google.com/citations?user=zHV4EU8AAAAJ", "_blank");
+        },
+      },{
+        id: 'social-linkedin',
+        title: 'LinkedIn',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://www.linkedin.com/in/thromel", "_blank");
+        },
+      },{
+        id: 'social-orcid',
+        title: 'ORCID',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://orcid.org/0009-0009-2432-8960", "_blank");
+        },
+      },{
+        id: 'social-rss',
+        title: 'RSS Feed',
+        section: 'Socials',
+        handler: () => {
+          window.open("/feed.xml", "_blank");
+        },
+      },{
+        id: 'social-x',
+        title: 'X',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://twitter.com/tanzimhromel", "_blank");
+        },
+      },{
+      id: 'light-theme',
+      title: 'Change theme to light',
+      description: 'Change the theme of the site to Light',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("light");
+      },
+    },
+    {
+      id: 'dark-theme',
+      title: 'Change theme to dark',
+      description: 'Change the theme of the site to Dark',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("dark");
+      },
+    },
+    {
+      id: 'system-theme',
+      title: 'Use system default theme',
+      description: 'Change the theme of the site to System Default',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("system");
+      },
+    },];
+
+</script> <script src="/assets/al_search/js/shortcut-key.js"></script> </body> </html>

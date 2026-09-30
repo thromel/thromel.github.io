@@ -1,0 +1,1141 @@
+<!DOCTYPE html> <html lang="en"> <head> <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <title> Building an Agentic AI Analytics Dashboard: A Deep Dive with LangChain, LangGraph, and Fine-tuned LLAMA | Tanzim Hossain Romel </title> <meta name="author" content="Tanzim Hossain Romel"> <meta name="description" content="Academic and engineering portfolio of Tanzim Hossain Romel, focused on reliable AI agents, software engineering research, and developer tools."> <meta name="keywords" content=""> <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https:; style-src 'self' 'unsafe-inline' https:; img-src 'self' data: https:; font-src 'self' data: https:; media-src 'self' https:; frame-src 'self' https:; connect-src 'self' https:;"> <style>
+  :root {
+    --max-content-width: 930px;
+  }
+</style> <link rel="stylesheet" href="/assets/css/tailwind.css?v=50c64c15cbb9fd1ce6056fdb8bcb4b62"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.2.0/css/all.min.css" integrity="sha256-MVopmdyC2tYTiJ8wlktf0uh0v4NgT+vNdyVFepi7Q0c=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.5/css/academicons.min.css" integrity="sha256-SzrCOBJbGVFMahewkgjwnApaV2+av1DwMAA+/QGLyZw=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/scholar-icons@1.0.3/css/scholar-icons.css" integrity="sha256-VY3hHVj/hNX3fYG6wtbA6TcKJQl7+FthzGSyIB64klY=" crossorigin="anonymous"> <link defer rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons&amp;display=swap"> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-github.css?v=591dab5a4e56573bf4ef7fd332894c99" media="" id="highlight_theme_light"> <link rel="shortcut icon" href="data:image/svg+xml,&lt;svg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20100%20100%22&gt;&lt;text%20y=%22.9em%22%20font-size=%2290%22&gt;%E2%9A%9B%EF%B8%8F&lt;/text&gt;&lt;/svg&gt;"> <link rel="stylesheet" href="/assets/css/main.css?v=3116ba77db9ee1581d05bb3e86fbf7f1"> <link rel="canonical" href="https://tanzimhromel.com/blog/2025/intro-to-agentic-ai/"> <script src="/assets/js/theme.js?v=5286c3e4c334d0ecb8fc0c40ff4fa7ec"></script> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-native.css?v=5847e5ed4a4568527aa6cfab446049ca" media="none" id="highlight_theme_dark"> <script>
+    initTheme();
+  </script> </head> <body class="fixed-top-nav "> <header> <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top" role="navigation"> <div class="container"> <a class="navbar-brand title font-weight-lighter" href="/"> Tanzim Hossain Romel </a> <button class="navbar-toggler collapsed navbar-toggler-main" type="button" data-nav-toggle="navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar top-bar"></span> <span class="icon-bar middle-bar"></span> <span class="icon-bar bottom-bar"></span> </button> <div class="collapse navbar-collapse navbar-collapse-main" id="navbarNav"> <ul class="navbar-nav navbar-menu-list flex-nowrap"> <li class="nav-item "> <a class="nav-link" href="/">about </a> </li> <li class="nav-item active"> <a class="nav-link" href="/blog/">blog </a> </li> <li class="nav-item "> <a class="nav-link" href="/publications/">publications </a> </li> <li class="nav-item "> <a class="nav-link" href="/research/">research </a> </li> <li class="nav-item "> <a class="nav-link" href="/projects/">projects </a> </li> <li class="nav-item "> <a class="nav-link" href="/cv/">CV </a> </li> <li class="nav-item "> <a class="nav-link" href="/contributions/">contributions </a> </li> <li class="nav-item"> <button id="search-toggle" type="button" title="Search" aria-label="Open search"> <span class="nav-link">ctrl k <i class="fa-solid fa-magnifying-glass"></i></span> </button> </li> <li class="toggle-container"> <button id="light-toggle" type="button" title="Change theme" aria-label="Change color theme"> <i class="fa-half-sun-moon" id="light-toggle-system"></i> <i class="fa-solid fa-moon" id="light-toggle-dark"></i> <i class="fa-solid fa-sun" id="light-toggle-light"></i> </button> </li> </ul> </div> </div> </nav> <progress id="progress" value="0"> <div class="progress-container"> <span class="progress-bar"></span> </div> </progress> </header> <div class="container mt-5" role="main"> <div class="post"> <header class="post-header"> <h1 class="post-title">Building an Agentic AI Analytics Dashboard: A Deep Dive with LangChain, LangGraph, and Fine-tuned LLAMA</h1> <p class="post-meta"> Created on May 20, 2025 </p> <p class="post-tags"> <a href="/blog/2025"> <i class="fa-solid fa-calendar fa-sm"></i> 2025 </a>   ·   <a href="/blog/tag/langchain"> <i class="fa-solid fa-hashtag fa-sm"></i> langchain</a>   <a href="/blog/tag/langgraph"> <i class="fa-solid fa-hashtag fa-sm"></i> langgraph</a>   <a href="/blog/tag/llama"> <i class="fa-solid fa-hashtag fa-sm"></i> llama</a>   <a href="/blog/tag/ai"> <i class="fa-solid fa-hashtag fa-sm"></i> ai</a>   <a href="/blog/tag/analytics"> <i class="fa-solid fa-hashtag fa-sm"></i> analytics</a>   <a href="/blog/tag/llm"> <i class="fa-solid fa-hashtag fa-sm"></i> llm</a>   <a href="/blog/tag/fine-tuning"> <i class="fa-solid fa-hashtag fa-sm"></i> fine-tuning</a>   <a href="/blog/tag/python"> <i class="fa-solid fa-hashtag fa-sm"></i> python</a>   ·   <a href="/blog/category/artificial-intelligence"> <i class="fa-solid fa-tag fa-sm"></i> artificial-intelligence</a>   <a href="/blog/category/machine-learning"> <i class="fa-solid fa-tag fa-sm"></i> machine-learning</a>   <a href="/blog/category/data-science"> <i class="fa-solid fa-tag fa-sm"></i> data-science</a> </p> </header> <article class="post-content"> <div id="markdown-content"> <p><img src="/assets/img/blog-agentic_ai_architecture.png" class="img-fluid rounded z-depth-1 mb-4" alt="Agentic AI Architecture" width="1661" height="352" decoding="async"></p> <h2 id="introduction-why-we-needed-more-than-just-a-chatbot">Introduction: Why We Needed More Than Just a Chatbot</h2> <p>Picture this: You’re a data analyst at 9 PM, staring at your company’s analytics dashboard. You need to understand why customer churn spiked last quarter, correlate it with marketing campaigns, and prepare a report for tomorrow’s board meeting. Traditional dashboards show you the numbers, but they don’t help you connect the dots or suggest next steps.</p> <p>This is where our journey began. We wanted more than a chat interface in our analytics dashboard. We wanted an intelligent agent that could reason about data, execute multi-step analyses, and provide actionable insights. An agent that answers questions and actively helps users explore their data.</p> <h2 id="understanding-agentic-ai-beyond-simple-question-answering">Understanding Agentic AI: Beyond Simple Question-Answering</h2> <p>Before diving into our implementation, let’s establish what makes AI “agentic.” Think of the difference between a calculator and a mathematician. A calculator responds to inputs with outputs. A mathematician, however, can:</p> <ul> <li>Break down complex problems into steps</li> <li>Choose appropriate tools for each step</li> <li>Reflect on intermediate results</li> <li>Adjust their approach based on what they discover</li> <li>Explain their reasoning</li> </ul> <p>Agentic AI systems embody these mathematician-like qualities. They process queries, plan, execute, observe, and adapt. In the context of our analytics dashboard, this means our AI retrieves data, formulates hypotheses, runs analyses, and iterates based on findings.</p> <h2 id="the-architecture-stack-why-langchain-langgraph-and-fine-tuned-llama">The Architecture Stack: Why LangChain, LangGraph, and Fine-tuned LLAMA?</h2> <h3 id="langchain-the-foundation">LangChain: The Foundation</h3> <p>LangChain provides the building blocks for LLM applications. Think of it as a well-organized toolbox where each tool has a specific purpose. At a basic level, LangChain helps us:</p> <ol> <li> <strong>Chain Operations</strong>: Connect LLM calls with data retrievals, API calls, and computations</li> <li> <strong>Manage Prompts</strong>: Structure and version our prompts systematically</li> <li> <strong>Handle Memory</strong>: Maintain context across interactions</li> <li> <strong>Integrate Tools</strong>: Connect to databases, APIs, and computation engines</li> </ol> <p>Here’s a simple example to build intuition:</p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">langchain.chains</span> <span class="kn">import</span> <span class="n">LLMChain</span>
+<span class="kn">from</span> <span class="n">langchain.prompts</span> <span class="kn">import</span> <span class="n">PromptTemplate</span>
+<span class="kn">from</span> <span class="n">langchain.llms</span> <span class="kn">import</span> <span class="n">LlamaCpp</span>
+
+<span class="c1"># Without LangChain - manual string formatting, no structure
+</span><span class="k">def</span> <span class="nf">analyze_data_manual</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">question</span><span class="p">):</span>
+    <span class="n">prompt</span> <span class="o">=</span> <span class="sa">f</span><span class="sh">"</span><span class="s">Given this data: </span><span class="si">{</span><span class="n">data</span><span class="si">}</span><span class="s">, answer: </span><span class="si">{</span><span class="n">question</span><span class="si">}</span><span class="sh">"</span>
+    <span class="c1"># Manual API call, error handling, parsing...
+</span>    
+<span class="c1"># With LangChain - structured, reusable, maintainable
+</span><span class="n">prompt_template</span> <span class="o">=</span> <span class="nc">PromptTemplate</span><span class="p">(</span>
+    <span class="n">input_variables</span><span class="o">=</span><span class="p">[</span><span class="sh">"</span><span class="s">data</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">question</span><span class="sh">"</span><span class="p">],</span>
+    <span class="n">template</span><span class="o">=</span><span class="sh">"""</span><span class="s">You are a data analyst. 
+    
+    Data: {data}
+    Question: {question}
+    
+    Provide a detailed analysis with reasoning steps.</span><span class="sh">"""</span>
+<span class="p">)</span>
+
+<span class="n">llm</span> <span class="o">=</span> <span class="nc">LlamaCpp</span><span class="p">(</span><span class="n">model_path</span><span class="o">=</span><span class="sh">"</span><span class="s">path/to/model</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">chain</span> <span class="o">=</span> <span class="nc">LLMChain</span><span class="p">(</span><span class="n">llm</span><span class="o">=</span><span class="n">llm</span><span class="p">,</span> <span class="n">prompt</span><span class="o">=</span><span class="n">prompt_template</span><span class="p">)</span>
+
+<span class="c1"># Clean, reusable interface
+</span><span class="n">result</span> <span class="o">=</span> <span class="n">chain</span><span class="p">.</span><span class="nf">run</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">sales_data</span><span class="p">,</span> <span class="n">question</span><span class="o">=</span><span class="sh">"</span><span class="s">What drives revenue?</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div> <h3 id="langgraph-orchestrating-complex-workflows">LangGraph: Orchestrating Complex Workflows</h3> <p>While LangChain excels at linear chains of operations, real-world analytics often requires conditional logic, loops, and parallel processing. Enter LangGraph.</p> <p>LangGraph models your AI workflow as a graph where:</p> <ul> <li> <strong>Nodes</strong> represent actions (LLM calls, tool uses, computations)</li> <li> <strong>Edges</strong> represent transitions based on conditions</li> <li> <strong>State</strong> flows through the graph, accumulating context</li> </ul> <p>Imagine you’re planning a road trip. LangChain would be like following a predetermined route. LangGraph is like having a GPS that can reroute based on traffic, suggest detours to interesting spots, and even change the destination based on new information.</p> <p>Here’s how we structure an analytical workflow:</p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">langgraph.graph</span> <span class="kn">import</span> <span class="n">StateGraph</span><span class="p">,</span> <span class="n">END</span>
+<span class="kn">from</span> <span class="n">typing</span> <span class="kn">import</span> <span class="n">TypedDict</span><span class="p">,</span> <span class="n">List</span>
+
+<span class="k">class</span> <span class="nc">AnalyticsState</span><span class="p">(</span><span class="n">TypedDict</span><span class="p">):</span>
+    <span class="n">query</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">data_sources</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+    <span class="n">findings</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+    <span class="n">hypotheses</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+    <span class="n">final_report</span><span class="p">:</span> <span class="nb">str</span>
+
+<span class="c1"># Define our workflow graph
+</span><span class="n">workflow</span> <span class="o">=</span> <span class="nc">StateGraph</span><span class="p">(</span><span class="n">AnalyticsState</span><span class="p">)</span>
+
+<span class="c1"># Add nodes for different analytical steps
+</span><span class="n">workflow</span><span class="p">.</span><span class="nf">add_node</span><span class="p">(</span><span class="sh">"</span><span class="s">understand_query</span><span class="sh">"</span><span class="p">,</span> <span class="n">understand_user_query</span><span class="p">)</span>
+<span class="n">workflow</span><span class="p">.</span><span class="nf">add_node</span><span class="p">(</span><span class="sh">"</span><span class="s">identify_data</span><span class="sh">"</span><span class="p">,</span> <span class="n">identify_relevant_data</span><span class="p">)</span>
+<span class="n">workflow</span><span class="p">.</span><span class="nf">add_node</span><span class="p">(</span><span class="sh">"</span><span class="s">generate_hypotheses</span><span class="sh">"</span><span class="p">,</span> <span class="n">create_hypotheses</span><span class="p">)</span>
+<span class="n">workflow</span><span class="p">.</span><span class="nf">add_node</span><span class="p">(</span><span class="sh">"</span><span class="s">test_hypothesis</span><span class="sh">"</span><span class="p">,</span> <span class="n">run_analysis</span><span class="p">)</span>
+<span class="n">workflow</span><span class="p">.</span><span class="nf">add_node</span><span class="p">(</span><span class="sh">"</span><span class="s">synthesize</span><span class="sh">"</span><span class="p">,</span> <span class="n">create_report</span><span class="p">)</span>
+
+<span class="c1"># Add conditional edges
+</span><span class="n">workflow</span><span class="p">.</span><span class="nf">add_conditional_edges</span><span class="p">(</span>
+    <span class="sh">"</span><span class="s">test_hypothesis</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">should_continue_testing</span><span class="p">,</span>
+    <span class="p">{</span>
+        <span class="sh">"</span><span class="s">continue</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">generate_hypotheses</span><span class="sh">"</span><span class="p">,</span>
+        <span class="sh">"</span><span class="s">done</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">synthesize</span><span class="sh">"</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+</code></pre></div></div> <h3 id="fine-tuned-llama-the-domain-expert">Fine-tuned LLAMA: The Domain Expert</h3> <p>Generic language models are like talented generalists – they know a bit about everything but might not excel at your specific domain. Fine-tuning LLAMA on our analytics domain made it more like hiring a specialist who understands our business context, metrics, and analytical patterns.</p> <h2 id="the-fine-tuning-journey-creating-our-analytics-expert">The Fine-tuning Journey: Creating Our Analytics Expert</h2> <p>Fine-tuning is not about making the model broadly “better.” It is about making it better for your use case. Here’s how we approached it:</p> <h3 id="step-1-data-collection-and-curation">Step 1: Data Collection and Curation</h3> <p>We gathered three types of training data:</p> <ol> <li> <strong>Historical Analytics Conversations</strong>: Real interactions between analysts and our data</li> <li> <strong>Domain Documentation</strong>: Our metrics definitions, business logic, and best practices</li> <li> <strong>Synthetic Examples</strong>: Generated scenarios covering edge cases</li> </ol> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Example of our training data structure
+</span><span class="n">training_example</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="sh">"</span><span class="s">instruction</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">Analyze the customer churn rate for Q3 2023</span><span class="sh">"</span><span class="p">,</span>
+    <span class="sh">"</span><span class="s">context</span><span class="sh">"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="sh">"</span><span class="s">available_metrics</span><span class="sh">"</span><span class="p">:</span> <span class="p">[</span><span class="sh">"</span><span class="s">churn_rate</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">customer_lifetime_value</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">nps_score</span><span class="sh">"</span><span class="p">],</span>
+        <span class="sh">"</span><span class="s">time_period</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">Q3 2023</span><span class="sh">"</span><span class="p">,</span>
+        <span class="sh">"</span><span class="s">previous_period</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">Q2 2023</span><span class="sh">"</span>
+    <span class="p">},</span>
+    <span class="sh">"</span><span class="s">response</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"""</span><span class="s">I</span><span class="sh">'</span><span class="s">ll analyze the customer churn rate for Q3 2023.
+
+First, let me retrieve the churn data:
+- Q3 2023 churn rate: 5.2%
+- Q2 2023 churn rate: 3.8%
+
+This represents a 1.4 percentage point increase. Let me investigate potential causes:
+
+1. Examining cohort behavior...
+2. Checking for product changes...
+3. Analyzing customer feedback...
+
+[Detailed analysis continues...]</span><span class="sh">"""</span>
+<span class="p">}</span>
+</code></pre></div></div> <h3 id="step-2-implementing-qlora-for-efficient-fine-tuning">Step 2: Implementing QLoRA for Efficient Fine-tuning</h3> <p>We used QLoRA (Quantized Low-Rank Adaptation) to fine-tune LLAMA efficiently. Think of it as teaching someone to specialize without making them forget their general knowledge.</p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">transformers</span> <span class="kn">import</span> <span class="n">AutoModelForCausalLM</span><span class="p">,</span> <span class="n">AutoTokenizer</span>
+<span class="kn">from</span> <span class="n">peft</span> <span class="kn">import</span> <span class="n">LoraConfig</span><span class="p">,</span> <span class="n">get_peft_model</span><span class="p">,</span> <span class="n">prepare_model_for_kbit_training</span>
+<span class="kn">from</span> <span class="n">transformers</span> <span class="kn">import</span> <span class="n">BitsAndBytesConfig</span>
+<span class="kn">import</span> <span class="n">torch</span>
+
+<span class="c1"># Configure 4-bit quantization
+</span><span class="n">bnb_config</span> <span class="o">=</span> <span class="nc">BitsAndBytesConfig</span><span class="p">(</span>
+    <span class="n">load_in_4bit</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+    <span class="n">bnb_4bit_quant_type</span><span class="o">=</span><span class="sh">"</span><span class="s">nf4</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">bnb_4bit_compute_dtype</span><span class="o">=</span><span class="n">torch</span><span class="p">.</span><span class="n">bfloat16</span><span class="p">,</span>
+    <span class="n">bnb_4bit_use_double_quant</span><span class="o">=</span><span class="bp">True</span>
+<span class="p">)</span>
+
+<span class="c1"># Load base model with quantization
+</span><span class="n">model</span> <span class="o">=</span> <span class="n">AutoModelForCausalLM</span><span class="p">.</span><span class="nf">from_pretrained</span><span class="p">(</span>
+    <span class="sh">"</span><span class="s">meta-llama/Llama-2-7b-hf</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">quantization_config</span><span class="o">=</span><span class="n">bnb_config</span><span class="p">,</span>
+    <span class="n">device_map</span><span class="o">=</span><span class="sh">"</span><span class="s">auto</span><span class="sh">"</span>
+<span class="p">)</span>
+
+<span class="c1"># Prepare for training
+</span><span class="n">model</span> <span class="o">=</span> <span class="nf">prepare_model_for_kbit_training</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+
+<span class="c1"># Configure LoRA
+</span><span class="n">peft_config</span> <span class="o">=</span> <span class="nc">LoraConfig</span><span class="p">(</span>
+    <span class="n">r</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span>  <span class="c1"># Rank - think of this as the "capacity" for new knowledge
+</span>    <span class="n">lora_alpha</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span>  <span class="c1"># Scaling parameter
+</span>    <span class="n">target_modules</span><span class="o">=</span><span class="p">[</span><span class="sh">"</span><span class="s">q_proj</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">v_proj</span><span class="sh">"</span><span class="p">],</span>  <span class="c1"># Which parts of the model to adapt
+</span>    <span class="n">lora_dropout</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+    <span class="n">bias</span><span class="o">=</span><span class="sh">"</span><span class="s">none</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">task_type</span><span class="o">=</span><span class="sh">"</span><span class="s">CAUSAL_LM</span><span class="sh">"</span>
+<span class="p">)</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="nf">get_peft_model</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">peft_config</span><span class="p">)</span>
+</code></pre></div></div> <p>The key insight here: We’re not retraining the entire model. We’re adding small, trainable matrices (LoRA adapters) that specialize the model’s behavior. It’s like adding specialized lenses to a camera rather than rebuilding the entire optical system.</p> <h3 id="step-3-training-process-and-optimization">Step 3: Training Process and Optimization</h3> <p>Our training process focused on three objectives:</p> <ol> <li> <strong>Accuracy</strong>: Correctly interpreting analytical queries</li> <li> <strong>Reasoning</strong>: Showing clear analytical thinking</li> <li> <strong>Tool Usage</strong>: Knowing when and how to use our analytics tools</li> </ol> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">transformers</span> <span class="kn">import</span> <span class="n">TrainingArguments</span><span class="p">,</span> <span class="n">Trainer</span>
+<span class="kn">from</span> <span class="n">datasets</span> <span class="kn">import</span> <span class="n">Dataset</span>
+
+<span class="c1"># Prepare dataset
+</span><span class="k">def</span> <span class="nf">prepare_dataset</span><span class="p">(</span><span class="n">examples</span><span class="p">):</span>
+    <span class="c1"># Format examples for instruction tuning
+</span>    <span class="n">formatted</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">ex</span> <span class="ow">in</span> <span class="n">examples</span><span class="p">:</span>
+        <span class="n">text</span> <span class="o">=</span> <span class="sa">f</span><span class="sh">"""</span><span class="s">### Instruction: </span><span class="si">{</span><span class="n">ex</span><span class="p">[</span><span class="sh">'</span><span class="s">instruction</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="s">
+### Context: </span><span class="si">{</span><span class="n">json</span><span class="p">.</span><span class="nf">dumps</span><span class="p">(</span><span class="n">ex</span><span class="p">[</span><span class="sh">'</span><span class="s">context</span><span class="sh">'</span><span class="p">])</span><span class="si">}</span><span class="s">
+### Response: </span><span class="si">{</span><span class="n">ex</span><span class="p">[</span><span class="sh">'</span><span class="s">response</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="sh">"""</span>
+        <span class="n">formatted</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">formatted</span>
+
+<span class="c1"># Training configuration
+</span><span class="n">training_args</span> <span class="o">=</span> <span class="nc">TrainingArguments</span><span class="p">(</span>
+    <span class="n">output_dir</span><span class="o">=</span><span class="sh">"</span><span class="s">./analytics-llama-ft</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">num_train_epochs</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+    <span class="n">per_device_train_batch_size</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+    <span class="n">gradient_accumulation_steps</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>  <span class="c1"># Effective batch size = 16
+</span>    <span class="n">warmup_steps</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+    <span class="n">logging_steps</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span>
+    <span class="n">save_strategy</span><span class="o">=</span><span class="sh">"</span><span class="s">epoch</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">evaluation_strategy</span><span class="o">=</span><span class="sh">"</span><span class="s">epoch</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">learning_rate</span><span class="o">=</span><span class="mf">2e-4</span><span class="p">,</span>
+    <span class="n">bf16</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>  <span class="c1"># Use bfloat16 for training
+</span>    <span class="n">gradient_checkpointing</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>  <span class="c1"># Save memory
+</span>    <span class="n">max_grad_norm</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span>  <span class="c1"># Gradient clipping
+</span><span class="p">)</span>
+
+<span class="c1"># Custom trainer with analytics-specific metrics
+</span><span class="k">class</span> <span class="nc">AnalyticsTrainer</span><span class="p">(</span><span class="n">Trainer</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">compute_loss</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">return_outputs</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="c1"># Custom loss that weighs analytical reasoning higher
+</span>        <span class="n">outputs</span> <span class="o">=</span> <span class="nf">model</span><span class="p">(</span><span class="o">**</span><span class="n">inputs</span><span class="p">)</span>
+        <span class="n">loss</span> <span class="o">=</span> <span class="n">outputs</span><span class="p">.</span><span class="n">loss</span>
+        
+        <span class="c1"># Add custom penalties/rewards based on output structure
+</span>        <span class="c1"># (e.g., penalize responses without reasoning steps)
+</span>        
+        <span class="nf">return </span><span class="p">(</span><span class="n">loss</span><span class="p">,</span> <span class="n">outputs</span><span class="p">)</span> <span class="k">if</span> <span class="n">return_outputs</span> <span class="k">else</span> <span class="n">loss</span>
+</code></pre></div></div> <h2 id="building-the-analytics-agent-from-concept-to-implementation">Building the Analytics Agent: From Concept to Implementation</h2> <p>Now let’s build our agentic analytics system step by step.</p> <h3 id="core-agent-architecture">Core Agent Architecture</h3> <p>Our agent consists of five main components:</p> <ol> <li> <strong>Query Understanding Module</strong>: Interprets user intent</li> <li> <strong>Data Discovery Engine</strong>: Finds relevant data sources</li> <li> <strong>Hypothesis Generator</strong>: Creates testable theories</li> <li> <strong>Analysis Executor</strong>: Runs statistical tests and queries</li> <li> <strong>Insight Synthesizer</strong>: Combines findings into actionable insights</li> </ol> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">langgraph.graph</span> <span class="kn">import</span> <span class="n">StateGraph</span><span class="p">,</span> <span class="n">END</span>
+<span class="kn">from</span> <span class="n">langchain.tools</span> <span class="kn">import</span> <span class="n">Tool</span>
+<span class="kn">from</span> <span class="n">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Any</span>
+
+<span class="c1"># Define our tools
+</span><span class="n">sql_tool</span> <span class="o">=</span> <span class="nc">Tool</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="sh">"</span><span class="s">execute_sql</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">description</span><span class="o">=</span><span class="sh">"</span><span class="s">Execute SQL queries against the data warehouse</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">func</span><span class="o">=</span><span class="n">execute_sql_query</span>
+<span class="p">)</span>
+
+<span class="n">stats_tool</span> <span class="o">=</span> <span class="nc">Tool</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="sh">"</span><span class="s">statistical_analysis</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">description</span><span class="o">=</span><span class="sh">"</span><span class="s">Run statistical tests (correlation, regression, etc.)</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">func</span><span class="o">=</span><span class="n">run_statistical_analysis</span>
+<span class="p">)</span>
+
+<span class="n">viz_tool</span> <span class="o">=</span> <span class="nc">Tool</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="sh">"</span><span class="s">create_visualization</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">description</span><span class="o">=</span><span class="sh">"</span><span class="s">Generate charts and graphs</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">func</span><span class="o">=</span><span class="n">create_visualization</span>
+<span class="p">)</span>
+
+<span class="c1"># Agent state definition
+</span><span class="k">class</span> <span class="nc">AgentState</span><span class="p">(</span><span class="n">TypedDict</span><span class="p">):</span>
+    <span class="n">user_query</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">parsed_intent</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
+    <span class="n">relevant_tables</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+    <span class="n">hypotheses</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+    <span class="n">analysis_results</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">]</span>
+    <span class="n">visualizations</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+    <span class="n">final_insights</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">reasoning_trace</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+
+<span class="c1"># Node implementations
+</span><span class="k">async</span> <span class="k">def</span> <span class="nf">understand_query</span><span class="p">(</span><span class="n">state</span><span class="p">:</span> <span class="n">AgentState</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AgentState</span><span class="p">:</span>
+    <span class="sh">"""</span><span class="s">Parse user query and extract analytical intent</span><span class="sh">"""</span>
+    
+    <span class="n">prompt</span> <span class="o">=</span> <span class="sa">f</span><span class="sh">"""</span><span class="s">Analyze this analytics query and extract:
+    1. Primary metric of interest
+    2. Time period
+    3. Comparison dimensions
+    4. Analytical depth required (exploratory vs. specific)
+    
+    Query: </span><span class="si">{</span><span class="n">state</span><span class="p">[</span><span class="sh">'</span><span class="s">user_query</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="s">
+    </span><span class="sh">"""</span>
+    
+    <span class="n">response</span> <span class="o">=</span> <span class="k">await</span> <span class="n">llm</span><span class="p">.</span><span class="nf">ainvoke</span><span class="p">(</span><span class="n">prompt</span><span class="p">)</span>
+    <span class="n">state</span><span class="p">[</span><span class="sh">'</span><span class="s">parsed_intent</span><span class="sh">'</span><span class="p">]</span> <span class="o">=</span> <span class="nf">parse_llm_response</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+    <span class="n">state</span><span class="p">[</span><span class="sh">'</span><span class="s">reasoning_trace</span><span class="sh">'</span><span class="p">].</span><span class="nf">append</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">Understood query: </span><span class="si">{</span><span class="n">state</span><span class="p">[</span><span class="sh">'</span><span class="s">parsed_intent</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">state</span>
+
+<span class="k">async</span> <span class="k">def</span> <span class="nf">discover_data</span><span class="p">(</span><span class="n">state</span><span class="p">:</span> <span class="n">AgentState</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AgentState</span><span class="p">:</span>
+    <span class="sh">"""</span><span class="s">Find relevant data sources based on parsed intent</span><span class="sh">"""</span>
+    
+    <span class="c1"># Use our fine-tuned model's knowledge of the data schema
+</span>    <span class="n">prompt</span> <span class="o">=</span> <span class="sa">f</span><span class="sh">"""</span><span class="s">Given this analytical intent: </span><span class="si">{</span><span class="n">state</span><span class="p">[</span><span class="sh">'</span><span class="s">parsed_intent</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="s">
+    
+    List all relevant tables and columns from our data warehouse.
+    Consider joining patterns and data freshness.
+    </span><span class="sh">"""</span>
+    
+    <span class="n">response</span> <span class="o">=</span> <span class="k">await</span> <span class="n">llm</span><span class="p">.</span><span class="nf">ainvoke</span><span class="p">(</span><span class="n">prompt</span><span class="p">)</span>
+    <span class="n">state</span><span class="p">[</span><span class="sh">'</span><span class="s">relevant_tables</span><span class="sh">'</span><span class="p">]</span> <span class="o">=</span> <span class="nf">extract_tables</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+    
+    <span class="c1"># Verify tables exist and user has access
+</span>    <span class="n">verified_tables</span> <span class="o">=</span> <span class="k">await</span> <span class="nf">verify_table_access</span><span class="p">(</span><span class="n">state</span><span class="p">[</span><span class="sh">'</span><span class="s">relevant_tables</span><span class="sh">'</span><span class="p">])</span>
+    <span class="n">state</span><span class="p">[</span><span class="sh">'</span><span class="s">relevant_tables</span><span class="sh">'</span><span class="p">]</span> <span class="o">=</span> <span class="n">verified_tables</span>
+    
+    <span class="k">return</span> <span class="n">state</span>
+</code></pre></div></div> <h3 id="the-hypothesis-driven-analysis-loop">The Hypothesis-Driven Analysis Loop</h3> <p>The key innovation in our approach is the hypothesis-driven analysis loop. Instead of just running queries, our agent:</p> <ol> <li>Generates hypotheses based on the question</li> <li>Designs tests for each hypothesis</li> <li>Executes analyses</li> <li>Interprets results</li> <li>Generates new hypotheses if needed</li> </ol> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">async</span> <span class="k">def</span> <span class="nf">generate_hypotheses</span><span class="p">(</span><span class="n">state</span><span class="p">:</span> <span class="n">AgentState</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AgentState</span><span class="p">:</span>
+    <span class="sh">"""</span><span class="s">Generate testable hypotheses based on the query and available data</span><span class="sh">"""</span>
+    
+    <span class="n">prompt</span> <span class="o">=</span> <span class="sa">f</span><span class="sh">"""</span><span class="s">Based on this analytics question: </span><span class="si">{</span><span class="n">state</span><span class="p">[</span><span class="sh">'</span><span class="s">user_query</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="s">
+    And available data: </span><span class="si">{</span><span class="n">state</span><span class="p">[</span><span class="sh">'</span><span class="s">relevant_tables</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="s">
+    
+    Generate 3-5 testable hypotheses. Each hypothesis should:
+    1. Be specific and measurable
+    2. Include the expected relationship
+    3. Specify how to test it
+    
+    Example format:
+    Hypothesis: </span><span class="sh">"</span><span class="s">Customer churn is positively correlated with support ticket volume</span><span class="sh">"</span><span class="s">
+    Test: </span><span class="sh">"</span><span class="s">Calculate correlation between monthly churn rate and average tickets per customer</span><span class="sh">"</span><span class="s">
+    </span><span class="sh">"""</span>
+    
+    <span class="n">response</span> <span class="o">=</span> <span class="k">await</span> <span class="n">llm</span><span class="p">.</span><span class="nf">ainvoke</span><span class="p">(</span><span class="n">prompt</span><span class="p">)</span>
+    <span class="n">state</span><span class="p">[</span><span class="sh">'</span><span class="s">hypotheses</span><span class="sh">'</span><span class="p">]</span> <span class="o">=</span> <span class="nf">parse_hypotheses</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">state</span>
+
+<span class="k">async</span> <span class="k">def</span> <span class="nf">test_hypothesis</span><span class="p">(</span><span class="n">state</span><span class="p">:</span> <span class="n">AgentState</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AgentState</span><span class="p">:</span>
+    <span class="sh">"""</span><span class="s">Execute analysis for each hypothesis</span><span class="sh">"""</span>
+    
+    <span class="k">for</span> <span class="n">hypothesis</span> <span class="ow">in</span> <span class="n">state</span><span class="p">[</span><span class="sh">'</span><span class="s">hypotheses</span><span class="sh">'</span><span class="p">]:</span>
+        <span class="c1"># Design the analysis
+</span>        <span class="n">analysis_plan</span> <span class="o">=</span> <span class="k">await</span> <span class="nf">design_analysis</span><span class="p">(</span><span class="n">hypothesis</span><span class="p">,</span> <span class="n">state</span><span class="p">[</span><span class="sh">'</span><span class="s">relevant_tables</span><span class="sh">'</span><span class="p">])</span>
+        
+        <span class="c1"># Execute queries and statistical tests
+</span>        <span class="k">if</span> <span class="n">analysis_plan</span><span class="p">[</span><span class="sh">'</span><span class="s">type</span><span class="sh">'</span><span class="p">]</span> <span class="o">==</span> <span class="sh">'</span><span class="s">sql</span><span class="sh">'</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">sql_tool</span><span class="p">.</span><span class="nf">arun</span><span class="p">(</span><span class="n">analysis_plan</span><span class="p">[</span><span class="sh">'</span><span class="s">query</span><span class="sh">'</span><span class="p">])</span>
+        <span class="k">elif</span> <span class="n">analysis_plan</span><span class="p">[</span><span class="sh">'</span><span class="s">type</span><span class="sh">'</span><span class="p">]</span> <span class="o">==</span> <span class="sh">'</span><span class="s">statistical</span><span class="sh">'</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">stats_tool</span><span class="p">.</span><span class="nf">arun</span><span class="p">(</span><span class="n">analysis_plan</span><span class="p">[</span><span class="sh">'</span><span class="s">params</span><span class="sh">'</span><span class="p">])</span>
+        
+        <span class="c1"># Interpret results
+</span>        <span class="n">interpretation</span> <span class="o">=</span> <span class="k">await</span> <span class="nf">interpret_results</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">hypothesis</span><span class="p">)</span>
+        
+        <span class="n">state</span><span class="p">[</span><span class="sh">'</span><span class="s">analysis_results</span><span class="sh">'</span><span class="p">].</span><span class="nf">append</span><span class="p">({</span>
+            <span class="sh">'</span><span class="s">hypothesis</span><span class="sh">'</span><span class="p">:</span> <span class="n">hypothesis</span><span class="p">,</span>
+            <span class="sh">'</span><span class="s">result</span><span class="sh">'</span><span class="p">:</span> <span class="n">result</span><span class="p">,</span>
+            <span class="sh">'</span><span class="s">interpretation</span><span class="sh">'</span><span class="p">:</span> <span class="n">interpretation</span><span class="p">,</span>
+            <span class="sh">'</span><span class="s">confidence</span><span class="sh">'</span><span class="p">:</span> <span class="nf">calculate_confidence</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+        <span class="p">})</span>
+        
+        <span class="c1"># Create visualization if appropriate
+</span>        <span class="k">if</span> <span class="nf">should_visualize</span><span class="p">(</span><span class="n">result</span><span class="p">):</span>
+            <span class="n">viz</span> <span class="o">=</span> <span class="k">await</span> <span class="n">viz_tool</span><span class="p">.</span><span class="nf">arun</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+            <span class="n">state</span><span class="p">[</span><span class="sh">'</span><span class="s">visualizations</span><span class="sh">'</span><span class="p">].</span><span class="nf">append</span><span class="p">(</span><span class="n">viz</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">state</span>
+</code></pre></div></div> <h3 id="implementing-reflection-and-self-correction">Implementing Reflection and Self-Correction</h3> <p>One hallmark of agentic systems is their ability to reflect on their work and self-correct. We implemented this through a reflection node:</p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">async</span> <span class="k">def</span> <span class="nf">reflect_on_analysis</span><span class="p">(</span><span class="n">state</span><span class="p">:</span> <span class="n">AgentState</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AgentState</span><span class="p">:</span>
+    <span class="sh">"""</span><span class="s">Reflect on analysis completeness and quality</span><span class="sh">"""</span>
+    
+    <span class="n">reflection_prompt</span> <span class="o">=</span> <span class="sa">f</span><span class="sh">"""</span><span class="s">Review this analysis:
+    Query: </span><span class="si">{</span><span class="n">state</span><span class="p">[</span><span class="sh">'</span><span class="s">user_query</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="s">
+    Hypotheses tested: </span><span class="si">{</span><span class="nf">len</span><span class="p">(</span><span class="n">state</span><span class="p">[</span><span class="sh">'</span><span class="s">hypotheses</span><span class="sh">'</span><span class="p">])</span><span class="si">}</span><span class="s">
+    Results: </span><span class="si">{</span><span class="nf">summarize_results</span><span class="p">(</span><span class="n">state</span><span class="p">[</span><span class="sh">'</span><span class="s">analysis_results</span><span class="sh">'</span><span class="p">])</span><span class="si">}</span><span class="s">
+    
+    Consider:
+    1. Did we fully answer the original question?
+    2. Are there unexplored angles?
+    3. Do the results make business sense?
+    4. Should we dig deeper into any findings?
+    
+    Provide a reflection and recommendation.
+    </span><span class="sh">"""</span>
+    
+    <span class="n">reflection</span> <span class="o">=</span> <span class="k">await</span> <span class="n">llm</span><span class="p">.</span><span class="nf">ainvoke</span><span class="p">(</span><span class="n">reflection_prompt</span><span class="p">)</span>
+    
+    <span class="c1"># Decide next action based on reflection
+</span>    <span class="k">if</span> <span class="nf">should_continue_analysis</span><span class="p">(</span><span class="n">reflection</span><span class="p">):</span>
+        <span class="c1"># Generate follow-up hypotheses
+</span>        <span class="n">state</span><span class="p">[</span><span class="sh">'</span><span class="s">hypotheses</span><span class="sh">'</span><span class="p">]</span> <span class="o">=</span> <span class="k">await</span> <span class="nf">generate_followup_hypotheses</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">state</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># Proceed to synthesis
+</span>        <span class="k">return</span> <span class="n">state</span>
+
+<span class="c1"># Conditional edge function
+</span><span class="k">def</span> <span class="nf">should_continue_analysis</span><span class="p">(</span><span class="n">state</span><span class="p">:</span> <span class="n">AgentState</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sh">"""</span><span class="s">Decide whether to continue analysis or synthesize results</span><span class="sh">"""</span>
+    
+    <span class="c1"># Check iteration count
+</span>    <span class="k">if</span> <span class="n">state</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="sh">'</span><span class="s">iteration_count</span><span class="sh">'</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="k">return</span> <span class="sh">"</span><span class="s">synthesize</span><span class="sh">"</span>
+    
+    <span class="c1"># Check if reflection suggests more analysis
+</span>    <span class="k">if</span> <span class="n">state</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="sh">'</span><span class="s">needs_deeper_analysis</span><span class="sh">'</span><span class="p">,</span> <span class="bp">False</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sh">"</span><span class="s">generate_hypotheses</span><span class="sh">"</span>
+    
+    <span class="k">return</span> <span class="sh">"</span><span class="s">synthesize</span><span class="sh">"</span>
+</code></pre></div></div> <h3 id="memory-and-context-management">Memory and Context Management</h3> <p>Analytics queries often build on previous interactions. We implemented a sophisticated memory system:</p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">langchain.memory</span> <span class="kn">import</span> <span class="n">ConversationSummaryBufferMemory</span>
+<span class="kn">from</span> <span class="n">langchain.schema</span> <span class="kn">import</span> <span class="n">BaseMessage</span>
+<span class="kn">import</span> <span class="n">chromadb</span>
+
+<span class="k">class</span> <span class="nc">AnalyticsMemory</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="c1"># Short-term memory for current session
+</span>        <span class="n">self</span><span class="p">.</span><span class="n">session_memory</span> <span class="o">=</span> <span class="nc">ConversationSummaryBufferMemory</span><span class="p">(</span>
+            <span class="n">llm</span><span class="o">=</span><span class="n">llm</span><span class="p">,</span>
+            <span class="n">max_token_limit</span><span class="o">=</span><span class="mi">2000</span>
+        <span class="p">)</span>
+        
+        <span class="c1"># Long-term memory for insights and patterns
+</span>        <span class="n">self</span><span class="p">.</span><span class="n">vector_store</span> <span class="o">=</span> <span class="n">chromadb</span><span class="p">.</span><span class="nc">Client</span><span class="p">()</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">insights_collection</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">vector_store</span><span class="p">.</span><span class="nf">create_collection</span><span class="p">(</span>
+            <span class="sh">"</span><span class="s">analytics_insights</span><span class="sh">"</span>
+        <span class="p">)</span>
+        
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">remember_insight</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">insight</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]):</span>
+        <span class="sh">"""</span><span class="s">Store important findings for future reference</span><span class="sh">"""</span>
+        
+        <span class="c1"># Create embedding of the insight
+</span>        <span class="n">embedding</span> <span class="o">=</span> <span class="k">await</span> <span class="nf">create_embedding</span><span class="p">(</span><span class="n">insight</span><span class="p">[</span><span class="sh">'</span><span class="s">summary</span><span class="sh">'</span><span class="p">])</span>
+        
+        <span class="c1"># Store with metadata
+</span>        <span class="n">self</span><span class="p">.</span><span class="n">insights_collection</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span>
+            <span class="n">embeddings</span><span class="o">=</span><span class="p">[</span><span class="n">embedding</span><span class="p">],</span>
+            <span class="n">documents</span><span class="o">=</span><span class="p">[</span><span class="n">insight</span><span class="p">[</span><span class="sh">'</span><span class="s">detailed_finding</span><span class="sh">'</span><span class="p">]],</span>
+            <span class="n">metadatas</span><span class="o">=</span><span class="p">[{</span>
+                <span class="sh">'</span><span class="s">query</span><span class="sh">'</span><span class="p">:</span> <span class="n">insight</span><span class="p">[</span><span class="sh">'</span><span class="s">original_query</span><span class="sh">'</span><span class="p">],</span>
+                <span class="sh">'</span><span class="s">timestamp</span><span class="sh">'</span><span class="p">:</span> <span class="n">insight</span><span class="p">[</span><span class="sh">'</span><span class="s">timestamp</span><span class="sh">'</span><span class="p">],</span>
+                <span class="sh">'</span><span class="s">confidence</span><span class="sh">'</span><span class="p">:</span> <span class="n">insight</span><span class="p">[</span><span class="sh">'</span><span class="s">confidence</span><span class="sh">'</span><span class="p">],</span>
+                <span class="sh">'</span><span class="s">related_metrics</span><span class="sh">'</span><span class="p">:</span> <span class="n">insight</span><span class="p">[</span><span class="sh">'</span><span class="s">metrics</span><span class="sh">'</span><span class="p">]</span>
+            <span class="p">}],</span>
+            <span class="n">ids</span><span class="o">=</span><span class="p">[</span><span class="n">insight</span><span class="p">[</span><span class="sh">'</span><span class="s">id</span><span class="sh">'</span><span class="p">]]</span>
+        <span class="p">)</span>
+    
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">recall_relevant_insights</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">query</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">n_results</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">Retrieve relevant past insights</span><span class="sh">"""</span>
+        
+        <span class="n">query_embedding</span> <span class="o">=</span> <span class="k">await</span> <span class="nf">create_embedding</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+        
+        <span class="n">results</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">insights_collection</span><span class="p">.</span><span class="nf">query</span><span class="p">(</span>
+            <span class="n">query_embeddings</span><span class="o">=</span><span class="p">[</span><span class="n">query_embedding</span><span class="p">],</span>
+            <span class="n">n_results</span><span class="o">=</span><span class="n">n_results</span>
+        <span class="p">)</span>
+        
+        <span class="k">return</span> <span class="n">results</span>
+</code></pre></div></div> <h2 id="real-world-implementation-a-complete-example">Real-World Implementation: A Complete Example</h2> <p>Let’s walk through a real scenario: analyzing customer churn with multiple contributing factors.</p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Complete agent setup
+</span><span class="k">class</span> <span class="nc">AnalyticsAgent</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">llm</span><span class="p">,</span> <span class="n">tools</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">llm</span> <span class="o">=</span> <span class="n">llm</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">tools</span> <span class="o">=</span> <span class="n">tools</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">memory</span> <span class="o">=</span> <span class="nc">AnalyticsMemory</span><span class="p">()</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">workflow</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">_build_workflow</span><span class="p">()</span>
+        
+    <span class="k">def</span> <span class="nf">_build_workflow</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="n">workflow</span> <span class="o">=</span> <span class="nc">StateGraph</span><span class="p">(</span><span class="n">AgentState</span><span class="p">)</span>
+        
+        <span class="c1"># Add all nodes
+</span>        <span class="n">workflow</span><span class="p">.</span><span class="nf">add_node</span><span class="p">(</span><span class="sh">"</span><span class="s">understand</span><span class="sh">"</span><span class="p">,</span> <span class="n">understand_query</span><span class="p">)</span>
+        <span class="n">workflow</span><span class="p">.</span><span class="nf">add_node</span><span class="p">(</span><span class="sh">"</span><span class="s">discover</span><span class="sh">"</span><span class="p">,</span> <span class="n">discover_data</span><span class="p">)</span>
+        <span class="n">workflow</span><span class="p">.</span><span class="nf">add_node</span><span class="p">(</span><span class="sh">"</span><span class="s">hypothesize</span><span class="sh">"</span><span class="p">,</span> <span class="n">generate_hypotheses</span><span class="p">)</span>
+        <span class="n">workflow</span><span class="p">.</span><span class="nf">add_node</span><span class="p">(</span><span class="sh">"</span><span class="s">analyze</span><span class="sh">"</span><span class="p">,</span> <span class="n">test_hypothesis</span><span class="p">)</span>
+        <span class="n">workflow</span><span class="p">.</span><span class="nf">add_node</span><span class="p">(</span><span class="sh">"</span><span class="s">reflect</span><span class="sh">"</span><span class="p">,</span> <span class="n">reflect_on_analysis</span><span class="p">)</span>
+        <span class="n">workflow</span><span class="p">.</span><span class="nf">add_node</span><span class="p">(</span><span class="sh">"</span><span class="s">synthesize</span><span class="sh">"</span><span class="p">,</span> <span class="n">create_final_report</span><span class="p">)</span>
+        
+        <span class="c1"># Define flow
+</span>        <span class="n">workflow</span><span class="p">.</span><span class="nf">set_entry_point</span><span class="p">(</span><span class="sh">"</span><span class="s">understand</span><span class="sh">"</span><span class="p">)</span>
+        <span class="n">workflow</span><span class="p">.</span><span class="nf">add_edge</span><span class="p">(</span><span class="sh">"</span><span class="s">understand</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">discover</span><span class="sh">"</span><span class="p">)</span>
+        <span class="n">workflow</span><span class="p">.</span><span class="nf">add_edge</span><span class="p">(</span><span class="sh">"</span><span class="s">discover</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">hypothesize</span><span class="sh">"</span><span class="p">)</span>
+        <span class="n">workflow</span><span class="p">.</span><span class="nf">add_edge</span><span class="p">(</span><span class="sh">"</span><span class="s">hypothesize</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">analyze</span><span class="sh">"</span><span class="p">)</span>
+        <span class="n">workflow</span><span class="p">.</span><span class="nf">add_edge</span><span class="p">(</span><span class="sh">"</span><span class="s">analyze</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">reflect</span><span class="sh">"</span><span class="p">)</span>
+        
+        <span class="c1"># Conditional edge from reflect
+</span>        <span class="n">workflow</span><span class="p">.</span><span class="nf">add_conditional_edges</span><span class="p">(</span>
+            <span class="sh">"</span><span class="s">reflect</span><span class="sh">"</span><span class="p">,</span>
+            <span class="n">should_continue_analysis</span><span class="p">,</span>
+            <span class="p">{</span>
+                <span class="sh">"</span><span class="s">generate_hypotheses</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">hypothesize</span><span class="sh">"</span><span class="p">,</span>
+                <span class="sh">"</span><span class="s">synthesize</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">synthesize</span><span class="sh">"</span>
+            <span class="p">}</span>
+        <span class="p">)</span>
+        
+        <span class="n">workflow</span><span class="p">.</span><span class="nf">add_edge</span><span class="p">(</span><span class="sh">"</span><span class="s">synthesize</span><span class="sh">"</span><span class="p">,</span> <span class="n">END</span><span class="p">)</span>
+        
+        <span class="k">return</span> <span class="n">workflow</span><span class="p">.</span><span class="nf">compile</span><span class="p">()</span>
+    
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">analyze</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">query</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+        <span class="sh">"""</span><span class="s">Run complete analysis for a query</span><span class="sh">"""</span>
+        
+        <span class="c1"># Check for relevant past insights
+</span>        <span class="n">past_insights</span> <span class="o">=</span> <span class="k">await</span> <span class="n">self</span><span class="p">.</span><span class="n">memory</span><span class="p">.</span><span class="nf">recall_relevant_insights</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+        
+        <span class="c1"># Initialize state
+</span>        <span class="n">initial_state</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="sh">"</span><span class="s">user_query</span><span class="sh">"</span><span class="p">:</span> <span class="n">query</span><span class="p">,</span>
+            <span class="sh">"</span><span class="s">reasoning_trace</span><span class="sh">"</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="sh">"</span><span class="s">past_insights</span><span class="sh">"</span><span class="p">:</span> <span class="n">past_insights</span><span class="p">,</span>
+            <span class="sh">"</span><span class="s">iteration_count</span><span class="sh">"</span><span class="p">:</span> <span class="mi">0</span>
+        <span class="p">}</span>
+        
+        <span class="c1"># Run workflow
+</span>        <span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">self</span><span class="p">.</span><span class="n">workflow</span><span class="p">.</span><span class="nf">ainvoke</span><span class="p">(</span><span class="n">initial_state</span><span class="p">)</span>
+        
+        <span class="c1"># Store valuable insights
+</span>        <span class="k">if</span> <span class="n">result</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="sh">'</span><span class="s">valuable_insights</span><span class="sh">'</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">insight</span> <span class="ow">in</span> <span class="n">result</span><span class="p">[</span><span class="sh">'</span><span class="s">valuable_insights</span><span class="sh">'</span><span class="p">]:</span>
+                <span class="k">await</span> <span class="n">self</span><span class="p">.</span><span class="n">memory</span><span class="p">.</span><span class="nf">remember_insight</span><span class="p">(</span><span class="n">insight</span><span class="p">)</span>
+        
+        <span class="k">return</span> <span class="n">result</span>
+
+<span class="c1"># Usage example
+</span><span class="n">agent</span> <span class="o">=</span> <span class="nc">AnalyticsAgent</span><span class="p">(</span><span class="n">llm</span><span class="o">=</span><span class="n">fine_tuned_llama</span><span class="p">,</span> <span class="n">tools</span><span class="o">=</span><span class="p">[</span><span class="n">sql_tool</span><span class="p">,</span> <span class="n">stats_tool</span><span class="p">,</span> <span class="n">viz_tool</span><span class="p">])</span>
+
+<span class="c1"># Complex multi-faceted query
+</span><span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">agent</span><span class="p">.</span><span class="nf">analyze</span><span class="p">(</span><span class="sh">"""</span><span class="s">
+    Why did customer churn increase by 40% last quarter? 
+    I need to understand the root causes and predict if this trend will continue.
+    Also suggest interventions to reduce churn.
+</span><span class="sh">"""</span><span class="p">)</span>
+
+<span class="c1"># The agent will:
+# 1. Break down the question into components
+# 2. Discover relevant data (customer tables, product usage, support tickets, etc.)
+# 3. Generate hypotheses like:
+#    - "Price increase led to churn"
+#    - "Product quality issues increased complaints"
+#    - "Competitor launched new feature"
+# 4. Test each hypothesis with data
+# 5. Reflect on findings and dig deeper where needed
+# 6. Synthesize a comprehensive report with visualizations
+</span></code></pre></div></div> <h2 id="handling-edge-cases-and-errors">Handling Edge Cases and Errors</h2> <p>Robust error handling is crucial for production systems. Here’s how we handle common scenarios:</p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">SafeAnalyticsExecutor</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">timeout</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">300</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">timeout</span> <span class="o">=</span> <span class="n">timeout</span>
+        
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">execute_with_fallback</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">func</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">Execute function with timeout and fallback strategies</span><span class="sh">"""</span>
+        
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c1"># Primary execution with timeout
+</span>            <span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">asyncio</span><span class="p">.</span><span class="nf">wait_for</span><span class="p">(</span>
+                <span class="nf">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">),</span> 
+                <span class="n">timeout</span><span class="o">=</span><span class="n">self</span><span class="p">.</span><span class="n">timeout</span>
+            <span class="p">)</span>
+            <span class="k">return</span> <span class="n">result</span>
+            
+        <span class="k">except</span> <span class="n">asyncio</span><span class="p">.</span><span class="nb">TimeoutError</span><span class="p">:</span>
+            <span class="c1"># Fallback to simpler analysis
+</span>            <span class="n">logger</span><span class="p">.</span><span class="nf">warning</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">Analysis timeout for </span><span class="si">{</span><span class="n">func</span><span class="p">.</span><span class="n">__name__</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+            <span class="k">return</span> <span class="k">await</span> <span class="n">self</span><span class="p">.</span><span class="nf">simplified_analysis</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+            
+        <span class="k">except</span> <span class="n">DatabaseConnectionError</span><span class="p">:</span>
+            <span class="c1"># Try cached results
+</span>            <span class="k">return</span> <span class="k">await</span> <span class="n">self</span><span class="p">.</span><span class="nf">get_cached_analysis</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+            
+        <span class="k">except</span> <span class="n">InsufficientDataError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="c1"># Provide partial analysis with caveats
+</span>            <span class="k">return</span> <span class="p">{</span>
+                <span class="sh">"</span><span class="s">status</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">partial</span><span class="sh">"</span><span class="p">,</span>
+                <span class="sh">"</span><span class="s">message</span><span class="sh">"</span><span class="p">:</span> <span class="sa">f</span><span class="sh">"</span><span class="s">Limited analysis due to: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="sh">"</span><span class="p">,</span>
+                <span class="sh">"</span><span class="s">results</span><span class="sh">"</span><span class="p">:</span> <span class="k">await</span> <span class="n">self</span><span class="p">.</span><span class="nf">partial_analysis</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="p">}</span>
+    
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">validate_sql_safety</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">query</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sh">"""</span><span class="s">Ensure SQL queries are safe to execute</span><span class="sh">"""</span>
+        
+        <span class="n">dangerous_patterns</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="sa">r</span><span class="sh">'</span><span class="s">\bDROP\b</span><span class="sh">'</span><span class="p">,</span> <span class="sa">r</span><span class="sh">'</span><span class="s">\bDELETE\b</span><span class="sh">'</span><span class="p">,</span> <span class="sa">r</span><span class="sh">'</span><span class="s">\bUPDATE\b</span><span class="sh">'</span><span class="p">,</span> 
+            <span class="sa">r</span><span class="sh">'</span><span class="s">\bINSERT\b</span><span class="sh">'</span><span class="p">,</span> <span class="sa">r</span><span class="sh">'</span><span class="s">\bCREATE\b</span><span class="sh">'</span><span class="p">,</span> <span class="sa">r</span><span class="sh">'</span><span class="s">\bALTER\b</span><span class="sh">'</span>
+        <span class="p">]</span>
+        
+        <span class="k">for</span> <span class="n">pattern</span> <span class="ow">in</span> <span class="n">dangerous_patterns</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">re</span><span class="p">.</span><span class="nf">search</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="n">query</span><span class="p">,</span> <span class="n">re</span><span class="p">.</span><span class="n">IGNORECASE</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="nc">SecurityError</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">Unsafe SQL pattern detected: </span><span class="si">{</span><span class="n">pattern</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+        
+        <span class="c1"># Additional checks for query complexity
+</span>        <span class="k">if</span> <span class="n">query</span><span class="p">.</span><span class="nf">count</span><span class="p">(</span><span class="sh">'</span><span class="s">JOIN</span><span class="sh">'</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">5</span><span class="p">:</span>
+            <span class="n">logger</span><span class="p">.</span><span class="nf">warning</span><span class="p">(</span><span class="sh">"</span><span class="s">Complex query with many JOINs, may be slow</span><span class="sh">"</span><span class="p">)</span>
+        
+        <span class="k">return</span> <span class="bp">True</span>
+</code></pre></div></div> <h2 id="performance-optimization-strategies">Performance Optimization Strategies</h2> <p>As our system scaled, we implemented several optimization strategies:</p> <h3 id="1-query-result-caching">1. Query Result Caching</h3> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">functools</span> <span class="kn">import</span> <span class="n">lru_cache</span>
+<span class="kn">import</span> <span class="n">hashlib</span>
+
+<span class="k">class</span> <span class="nc">QueryCache</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">redis_client</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">redis</span> <span class="o">=</span> <span class="n">redis_client</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">ttl</span> <span class="o">=</span> <span class="mi">3600</span>  <span class="c1"># 1 hour default
+</span>        
+    <span class="k">def</span> <span class="nf">cache_key</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">query</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="n">Dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sh">"""</span><span class="s">Generate deterministic cache key</span><span class="sh">"""</span>
+        <span class="n">content</span> <span class="o">=</span> <span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">query</span><span class="si">}</span><span class="s">:</span><span class="si">{</span><span class="n">json</span><span class="p">.</span><span class="nf">dumps</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">sort_keys</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span>
+        <span class="k">return</span> <span class="n">hashlib</span><span class="p">.</span><span class="nf">sha256</span><span class="p">(</span><span class="n">content</span><span class="p">.</span><span class="nf">encode</span><span class="p">()).</span><span class="nf">hexdigest</span><span class="p">()</span>
+    
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">get_or_compute</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">query</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">compute_func</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">Try cache first, compute if miss</span><span class="sh">"""</span>
+        
+        <span class="n">key</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">cache_key</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
+        
+        <span class="c1"># Check cache
+</span>        <span class="n">cached</span> <span class="o">=</span> <span class="k">await</span> <span class="n">self</span><span class="p">.</span><span class="n">redis</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">cached</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">json</span><span class="p">.</span><span class="nf">loads</span><span class="p">(</span><span class="n">cached</span><span class="p">)</span>
+        
+        <span class="c1"># Compute and cache
+</span>        <span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="nf">compute_func</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
+        <span class="k">await</span> <span class="n">self</span><span class="p">.</span><span class="n">redis</span><span class="p">.</span><span class="nf">setex</span><span class="p">(</span>
+            <span class="n">key</span><span class="p">,</span> 
+            <span class="n">self</span><span class="p">.</span><span class="n">ttl</span><span class="p">,</span> 
+            <span class="n">json</span><span class="p">.</span><span class="nf">dumps</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+        <span class="p">)</span>
+        
+        <span class="k">return</span> <span class="n">result</span>
+</code></pre></div></div> <h3 id="2-parallel-hypothesis-testing">2. Parallel Hypothesis Testing</h3> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">async</span> <span class="k">def</span> <span class="nf">test_hypotheses_parallel</span><span class="p">(</span><span class="n">hypotheses</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">]:</span>
+    <span class="sh">"""</span><span class="s">Test multiple hypotheses in parallel</span><span class="sh">"""</span>
+    
+    <span class="c1"># Group by data requirements to optimize queries
+</span>    <span class="n">grouped</span> <span class="o">=</span> <span class="nf">group_by_data_needs</span><span class="p">(</span><span class="n">hypotheses</span><span class="p">)</span>
+    
+    <span class="n">tasks</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">group</span><span class="p">,</span> <span class="n">hyps</span> <span class="ow">in</span> <span class="n">grouped</span><span class="p">.</span><span class="nf">items</span><span class="p">():</span>
+        <span class="c1"># Fetch data once for the group
+</span>        <span class="n">task</span> <span class="o">=</span> <span class="nf">test_hypothesis_group</span><span class="p">(</span><span class="n">group</span><span class="p">,</span> <span class="n">hyps</span><span class="p">)</span>
+        <span class="n">tasks</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">task</span><span class="p">)</span>
+    
+    <span class="c1"># Execute in parallel with concurrency limit
+</span>    <span class="n">semaphore</span> <span class="o">=</span> <span class="n">asyncio</span><span class="p">.</span><span class="nc">Semaphore</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>  <span class="c1"># Max 5 concurrent analyses
+</span>    
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">bounded_task</span><span class="p">(</span><span class="n">task</span><span class="p">):</span>
+        <span class="k">async</span> <span class="k">with</span> <span class="n">semaphore</span><span class="p">:</span>
+            <span class="k">return</span> <span class="k">await</span> <span class="n">task</span>
+    
+    <span class="n">results</span> <span class="o">=</span> <span class="k">await</span> <span class="n">asyncio</span><span class="p">.</span><span class="nf">gather</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="nf">bounded_task</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">tasks</span><span class="p">])</span>
+    
+    <span class="k">return</span> <span class="nf">flatten_results</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
+</code></pre></div></div> <h3 id="3-streaming-responses">3. Streaming Responses</h3> <p>For better user experience, we stream results as they become available:</p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">async</span> <span class="k">def</span> <span class="nf">stream_analysis</span><span class="p">(</span><span class="n">query</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">Stream analysis results as they</span><span class="sh">'</span><span class="s">re generated</span><span class="sh">"""</span>
+    
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">generate</span><span class="p">():</span>
+        <span class="c1"># Initial understanding
+</span>        <span class="k">yield</span> <span class="p">{</span><span class="sh">"</span><span class="s">type</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">status</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">message</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">Understanding your query...</span><span class="sh">"</span><span class="p">}</span>
+        <span class="n">intent</span> <span class="o">=</span> <span class="k">await</span> <span class="nf">understand_query</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+        <span class="k">yield</span> <span class="p">{</span><span class="sh">"</span><span class="s">type</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">intent</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">data</span><span class="sh">"</span><span class="p">:</span> <span class="n">intent</span><span class="p">}</span>
+        
+        <span class="c1"># Data discovery
+</span>        <span class="k">yield</span> <span class="p">{</span><span class="sh">"</span><span class="s">type</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">status</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">message</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">Finding relevant data...</span><span class="sh">"</span><span class="p">}</span>
+        <span class="n">tables</span> <span class="o">=</span> <span class="k">await</span> <span class="nf">discover_data</span><span class="p">(</span><span class="n">intent</span><span class="p">)</span>
+        <span class="k">yield</span> <span class="p">{</span><span class="sh">"</span><span class="s">type</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">data_sources</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">data</span><span class="sh">"</span><span class="p">:</span> <span class="n">tables</span><span class="p">}</span>
+        
+        <span class="c1"># Hypotheses
+</span>        <span class="k">yield</span> <span class="p">{</span><span class="sh">"</span><span class="s">type</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">status</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">message</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">Generating hypotheses...</span><span class="sh">"</span><span class="p">}</span>
+        <span class="n">hypotheses</span> <span class="o">=</span> <span class="k">await</span> <span class="nf">generate_hypotheses</span><span class="p">(</span><span class="n">intent</span><span class="p">,</span> <span class="n">tables</span><span class="p">)</span>
+        
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">hyp</span> <span class="ow">in</span> <span class="nf">enumerate</span><span class="p">(</span><span class="n">hypotheses</span><span class="p">):</span>
+            <span class="k">yield</span> <span class="p">{</span><span class="sh">"</span><span class="s">type</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">hypothesis</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">index</span><span class="sh">"</span><span class="p">:</span> <span class="n">i</span><span class="p">,</span> <span class="sh">"</span><span class="s">data</span><span class="sh">"</span><span class="p">:</span> <span class="n">hyp</span><span class="p">}</span>
+            
+            <span class="c1"># Test and stream result
+</span>            <span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="nf">test_hypothesis</span><span class="p">(</span><span class="n">hyp</span><span class="p">)</span>
+            <span class="k">yield</span> <span class="p">{</span><span class="sh">"</span><span class="s">type</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">result</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">index</span><span class="sh">"</span><span class="p">:</span> <span class="n">i</span><span class="p">,</span> <span class="sh">"</span><span class="s">data</span><span class="sh">"</span><span class="p">:</span> <span class="n">result</span><span class="p">}</span>
+            
+            <span class="c1"># Generate visualization if applicable
+</span>            <span class="k">if</span> <span class="n">result</span><span class="p">[</span><span class="sh">'</span><span class="s">visualizable</span><span class="sh">'</span><span class="p">]:</span>
+                <span class="n">viz</span> <span class="o">=</span> <span class="k">await</span> <span class="nf">create_visualization</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+                <span class="k">yield</span> <span class="p">{</span><span class="sh">"</span><span class="s">type</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">visualization</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">index</span><span class="sh">"</span><span class="p">:</span> <span class="n">i</span><span class="p">,</span> <span class="sh">"</span><span class="s">data</span><span class="sh">"</span><span class="p">:</span> <span class="n">viz</span><span class="p">}</span>
+        
+        <span class="c1"># Final synthesis
+</span>        <span class="k">yield</span> <span class="p">{</span><span class="sh">"</span><span class="s">type</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">status</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">message</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">Synthesizing insights...</span><span class="sh">"</span><span class="p">}</span>
+        <span class="n">synthesis</span> <span class="o">=</span> <span class="k">await</span> <span class="nf">synthesize_results</span><span class="p">(</span><span class="n">all_results</span><span class="p">)</span>
+        <span class="k">yield</span> <span class="p">{</span><span class="sh">"</span><span class="s">type</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">final_report</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">data</span><span class="sh">"</span><span class="p">:</span> <span class="n">synthesis</span><span class="p">}</span>
+    
+    <span class="k">return</span> <span class="nf">generate</span><span class="p">()</span>
+</code></pre></div></div> <h2 id="lessons-learned-and-best-practices">Lessons Learned and Best Practices</h2> <p>After six months in production, here are our key learnings:</p> <h3 id="1-fine-tuning-quality-matters-more-than-quantity">1. Fine-tuning Quality Matters More Than Quantity</h3> <p>We found that 1,000 high-quality, diverse examples produced better results than 10,000 repetitive ones. Focus on:</p> <ul> <li>Edge cases and complex scenarios</li> <li>Examples that demonstrate reasoning steps</li> <li>Diverse query patterns and data types</li> </ul> <h3 id="2-agent-behavior-should-be-observable">2. Agent Behavior Should Be Observable</h3> <p>Implement comprehensive logging and tracing:</p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">opentelemetry</span> <span class="kn">import</span> <span class="n">trace</span>
+
+<span class="n">tracer</span> <span class="o">=</span> <span class="n">trace</span><span class="p">.</span><span class="nf">get_tracer</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
+
+<span class="k">async</span> <span class="k">def</span> <span class="nf">traced_node</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">Decorator for tracing node execution</span><span class="sh">"""</span>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
+        <span class="k">with</span> <span class="n">tracer</span><span class="p">.</span><span class="nf">start_as_current_span</span><span class="p">(</span><span class="n">func</span><span class="p">.</span><span class="n">__name__</span><span class="p">)</span> <span class="k">as</span> <span class="n">span</span><span class="p">:</span>
+            <span class="n">span</span><span class="p">.</span><span class="nf">set_attribute</span><span class="p">(</span><span class="sh">"</span><span class="s">state.query</span><span class="sh">"</span><span class="p">,</span> <span class="n">state</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="sh">"</span><span class="s">user_query</span><span class="sh">"</span><span class="p">,</span> <span class="sh">""</span><span class="p">))</span>
+            <span class="n">span</span><span class="p">.</span><span class="nf">set_attribute</span><span class="p">(</span><span class="sh">"</span><span class="s">state.iteration</span><span class="sh">"</span><span class="p">,</span> <span class="n">state</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="sh">"</span><span class="s">iteration_count</span><span class="sh">"</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+            
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="nf">func</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+                <span class="n">span</span><span class="p">.</span><span class="nf">set_attribute</span><span class="p">(</span><span class="sh">"</span><span class="s">success</span><span class="sh">"</span><span class="p">,</span> <span class="bp">True</span><span class="p">)</span>
+                <span class="k">return</span> <span class="n">result</span>
+            <span class="k">except</span> <span class="nb">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="n">span</span><span class="p">.</span><span class="nf">set_attribute</span><span class="p">(</span><span class="sh">"</span><span class="s">success</span><span class="sh">"</span><span class="p">,</span> <span class="bp">False</span><span class="p">)</span>
+                <span class="n">span</span><span class="p">.</span><span class="nf">set_attribute</span><span class="p">(</span><span class="sh">"</span><span class="s">error</span><span class="sh">"</span><span class="p">,</span> <span class="nf">str</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
+                <span class="k">raise</span>
+    
+    <span class="k">return</span> <span class="n">wrapper</span>
+</code></pre></div></div> <h3 id="3-graceful-degradation-is-essential">3. Graceful Degradation Is Essential</h3> <p>Not every query needs the full agent treatment:</p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">classify_query_complexity</span><span class="p">(</span><span class="n">query</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sh">"""</span><span class="s">Classify query complexity to route appropriately</span><span class="sh">"""</span>
+    
+    <span class="n">simple_patterns</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="sa">r</span><span class="sh">"</span><span class="s">what is the .+ for .+</span><span class="sh">"</span><span class="p">,</span>
+        <span class="sa">r</span><span class="sh">"</span><span class="s">show me .+ from last .+</span><span class="sh">"</span><span class="p">,</span>
+        <span class="sa">r</span><span class="sh">"</span><span class="s">how many .+ in .+</span><span class="sh">"</span>
+    <span class="p">]</span>
+    
+    <span class="n">complex_indicators</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="sh">"</span><span class="s">why</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">root cause</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">correlation</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">predict</span><span class="sh">"</span><span class="p">,</span>
+        <span class="sh">"</span><span class="s">trend</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">anomaly</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">compare</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">impact</span><span class="sh">"</span>
+    <span class="p">]</span>
+    
+    <span class="k">if</span> <span class="nf">any</span><span class="p">(</span><span class="n">re</span><span class="p">.</span><span class="nf">match</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="n">query</span><span class="p">.</span><span class="nf">lower</span><span class="p">())</span> <span class="k">for</span> <span class="n">pattern</span> <span class="ow">in</span> <span class="n">simple_patterns</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sh">"</span><span class="s">simple</span><span class="sh">"</span>
+    <span class="k">elif</span> <span class="nf">any</span><span class="p">(</span><span class="n">indicator</span> <span class="ow">in</span> <span class="n">query</span><span class="p">.</span><span class="nf">lower</span><span class="p">()</span> <span class="k">for</span> <span class="n">indicator</span> <span class="ow">in</span> <span class="n">complex_indicators</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sh">"</span><span class="s">complex</span><span class="sh">"</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="sh">"</span><span class="s">medium</span><span class="sh">"</span>
+
+<span class="c1"># Route based on complexity
+</span><span class="n">complexity</span> <span class="o">=</span> <span class="nf">classify_query_complexity</span><span class="p">(</span><span class="n">user_query</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">complexity</span> <span class="o">==</span> <span class="sh">"</span><span class="s">simple</span><span class="sh">"</span><span class="p">:</span>
+    <span class="c1"># Direct SQL query
+</span>    <span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="nf">execute_simple_query</span><span class="p">(</span><span class="n">user_query</span><span class="p">)</span>
+<span class="k">elif</span> <span class="n">complexity</span> <span class="o">==</span> <span class="sh">"</span><span class="s">medium</span><span class="sh">"</span><span class="p">:</span>
+    <span class="c1"># Use LangChain without full agent
+</span>    <span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="nf">run_analytics_chain</span><span class="p">(</span><span class="n">user_query</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="c1"># Full agent workflow
+</span>    <span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">agent</span><span class="p">.</span><span class="nf">analyze</span><span class="p">(</span><span class="n">user_query</span><span class="p">)</span>
+</code></pre></div></div> <h3 id="4-user-feedback-loops-improve-the-system">4. User Feedback Loops Improve the System</h3> <p>Implement mechanisms to learn from user interactions:</p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">FeedbackCollector</span><span class="p">:</span>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">collect_feedback</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">session_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">result</span><span class="p">:</span> <span class="n">Dict</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">Collect user feedback on analysis quality</span><span class="sh">"""</span>
+        
+        <span class="n">feedback</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="sh">"</span><span class="s">session_id</span><span class="sh">"</span><span class="p">:</span> <span class="n">session_id</span><span class="p">,</span>
+            <span class="sh">"</span><span class="s">result_helpful</span><span class="sh">"</span><span class="p">:</span> <span class="bp">None</span><span class="p">,</span>  <span class="c1"># User rates
+</span>            <span class="sh">"</span><span class="s">missing_aspects</span><span class="sh">"</span><span class="p">:</span> <span class="p">[],</span>    <span class="c1"># What was missed
+</span>            <span class="sh">"</span><span class="s">unnecessary_parts</span><span class="sh">"</span><span class="p">:</span> <span class="p">[],</span>  <span class="c1"># What was superfluous
+</span>            <span class="sh">"</span><span class="s">followed_up</span><span class="sh">"</span><span class="p">:</span> <span class="bp">False</span>      <span class="c1"># Did user ask follow-up
+</span>        <span class="p">}</span>
+        
+        <span class="c1"># Store for future fine-tuning
+</span>        <span class="k">await</span> <span class="n">self</span><span class="p">.</span><span class="nf">store_feedback</span><span class="p">(</span><span class="n">feedback</span><span class="p">)</span>
+        
+        <span class="c1"># If consistently poor feedback, flag for review
+</span>        <span class="k">if</span> <span class="k">await</span> <span class="n">self</span><span class="p">.</span><span class="nf">check_feedback_pattern</span><span class="p">(</span><span class="n">session_id</span><span class="p">):</span>
+            <span class="k">await</span> <span class="n">self</span><span class="p">.</span><span class="nf">alert_improvement_needed</span><span class="p">(</span><span class="n">session_id</span><span class="p">)</span>
+</code></pre></div></div> <h2 id="integration-with-existing-systems">Integration with Existing Systems</h2> <p>Here’s how we integrated with our existing analytics infrastructure:</p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">AnalyticsDashboardIntegration</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">agent</span><span class="p">,</span> <span class="n">dashboard_api</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">agent</span> <span class="o">=</span> <span class="n">agent</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">dashboard</span> <span class="o">=</span> <span class="n">dashboard_api</span>
+        
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">handle_dashboard_interaction</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="n">Dict</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">Handle interactions from the dashboard</span><span class="sh">"""</span>
+        
+        <span class="k">if</span> <span class="n">event</span><span class="p">[</span><span class="sh">'</span><span class="s">type</span><span class="sh">'</span><span class="p">]</span> <span class="o">==</span> <span class="sh">'</span><span class="s">chart_click</span><span class="sh">'</span><span class="p">:</span>
+            <span class="c1"># Generate contextual analysis based on what user clicked
+</span>            <span class="n">context</span> <span class="o">=</span> <span class="k">await</span> <span class="n">self</span><span class="p">.</span><span class="nf">get_chart_context</span><span class="p">(</span><span class="n">event</span><span class="p">[</span><span class="sh">'</span><span class="s">chart_id</span><span class="sh">'</span><span class="p">])</span>
+            <span class="n">query</span> <span class="o">=</span> <span class="sa">f</span><span class="sh">"</span><span class="s">Explain the </span><span class="si">{</span><span class="n">event</span><span class="p">[</span><span class="sh">'</span><span class="s">data_point</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="s"> in </span><span class="si">{</span><span class="n">context</span><span class="p">[</span><span class="sh">'</span><span class="s">metric</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="sh">"</span>
+            
+        <span class="k">elif</span> <span class="n">event</span><span class="p">[</span><span class="sh">'</span><span class="s">type</span><span class="sh">'</span><span class="p">]</span> <span class="o">==</span> <span class="sh">'</span><span class="s">anomaly_detected</span><span class="sh">'</span><span class="p">:</span>
+            <span class="c1"># Proactive analysis of anomalies
+</span>            <span class="n">query</span> <span class="o">=</span> <span class="sa">f</span><span class="sh">"</span><span class="s">Investigate the anomaly in </span><span class="si">{</span><span class="n">event</span><span class="p">[</span><span class="sh">'</span><span class="s">metric</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="s"> at </span><span class="si">{</span><span class="n">event</span><span class="p">[</span><span class="sh">'</span><span class="s">timestamp</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="sh">"</span>
+            
+        <span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">self</span><span class="p">.</span><span class="n">agent</span><span class="p">.</span><span class="nf">analyze</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+        
+        <span class="c1"># Update dashboard with insights
+</span>        <span class="k">await</span> <span class="n">self</span><span class="p">.</span><span class="n">dashboard</span><span class="p">.</span><span class="nf">add_insight_panel</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+        
+        <span class="k">return</span> <span class="n">result</span>
+</code></pre></div></div> <h2 id="moving-forward-advanced-techniques">Moving Forward: Advanced Techniques</h2> <p>For those ready to go deeper, consider exploring:</p> <ol> <li> <strong>Multi-Agent Systems</strong>: Multiple specialized agents collaborating <ul> <li><a href="https://github.com/microsoft/autogen" rel="external nofollow noopener" target="_blank">Microsoft’s AutoGen framework</a></li> </ul> </li> <li> <strong>Retrieval Augmented Generation (RAG)</strong> for documentation and historical reports <ul> <li><a href="https://python.langchain.com/docs/use_cases/question_answering/" rel="external nofollow noopener" target="_blank">LangChain’s RAG guide</a></li> </ul> </li> <li> <strong>Advanced Prompt Engineering</strong>: Few-shot learning and chain-of-thought <ul> <li><a href="https://www.promptingguide.ai/" rel="external nofollow noopener" target="_blank">Prompt Engineering Guide</a></li> </ul> </li> <li> <strong>Production Deployment</strong>: Scaling and monitoring <ul> <li><a href="https://docs.smith.langchain.com/" rel="external nofollow noopener" target="_blank">LangSmith for LLM observability</a></li> </ul> </li> </ol> <h2 id="conclusion-the-journey-continues">Conclusion: The Journey Continues</h2> <p>Building an agentic AI analytics system is not a destination but a journey. Our system continues to evolve as we:</p> <ul> <li>Gather more domain-specific training data</li> <li>Refine our agent’s reasoning capabilities</li> <li>Integrate new data sources and analytical tools</li> <li>Learn from user interactions</li> </ul> <p>The key insight from our journey: successful agentic AI isn’t about having the most powerful model or the most complex architecture. It’s about thoughtfully combining the right tools, carefully fine-tuning for your domain, and building systems that can reason, reflect, and improve.</p> <p>Start small, iterate based on real usage, and keep the end user’s analytical needs at the center of your design. The future of analytics is not only dashboards showing data; it is also intelligent systems that help us understand what the data means and what to do about it.</p> <h2 id="code-repository-and-resources">Code Repository and Resources</h2> <p>The complete implementation, including training scripts and example notebooks, is available at: []</p> <p>Additional resources:</p> <ul> <li><a href="https://python.langchain.com/docs/get_started/introduction" rel="external nofollow noopener" target="_blank">LangChain Documentation</a></li> <li><a href="https://langchain-ai.github.io/langgraph/" rel="external nofollow noopener" target="_blank">LangGraph Tutorial</a></li> <li><a href="https://github.com/facebookresearch/llama-recipes" rel="external nofollow noopener" target="_blank">LLAMA Fine-tuning Guide</a></li> </ul> <p>Remember: the best way to learn is by doing. Start with a simple analytics question, build a basic agent, and gradually add sophistication as you understand your users’ needs better.</p> <p>Happy building!</p> </div> </article> <br> <hr> <br> <h2 class="text-3xl font-semibold mb-4 mt-12">Enjoy Reading This Article?</h2> <p class="mb-2">Here are some more articles you might like to read next:</p> <ul class="list-disc pl-7 my-3 space-y-2 marker:text-[var(--global-theme-color)]"> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2026/building-fast-1brc-csharp-apple-silicon/">Building a fast 1BRC solver in C# on Apple Silicon</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2025/memory-management-production-silent-killers/">Memory Management in Production: Avoiding the Silent Killers</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2025/vibe-coding/">Growing as a Software Engineer in the Age of LLMs and Vibe Coding</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2025/how-to-handle-hallucinations/">Taming the Imagination: A Comprehensive Guide to Handling Hallucinations and Implementing Guardrails in Agentic AI</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2025/intro-to-nar/">Neural Algorithmic Reasoning: Teaching Neural Networks to Think Like Algorithms</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2025/opentelemetry/">OpenTelemetry in Microservices: How We Transformed Our Observability Strategy</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2025/leveraging-ai-tools-software-engineering/">Using AI Tools in Software Engineering and Research Workflows</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2024/optimizing-dotnet-microservices-performance/">The Performance Crisis: How We Rescued a .NET 8 Microservice from 10 Critical Bottlenecks</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2024/zero-downtime/">Zero Downtime Deployments in Kubernetes: How We Keep Our Services Running While We Ship</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2024/dotnet-tests/">Mastering Unit Testing and BDD with xUnit and SpecFlow in .NET 9: A Comprehensive Guide</a> </li> </ul> </div> </div> <footer class="fixed-bottom" role="contentinfo"> <div class="container mt-0"> © Copyright 2026 Tanzim Hossain Romel. © Tanzim Hossain Romel. Powered by <a href="https://jekyllrb.com/" target="_blank" rel="external nofollow noopener">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio" rel="external nofollow noopener" target="_blank">al-folio</a> theme. </div> </footer> <script>
+  window.alFolio = {
+    compatBootstrap: false
+  };
+</script> <script src="/assets/js/nav-toggle.js?v=141bd79a73ebc0f0b6ea58e440ae79fc"></script> <script defer src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script> <script defer src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script> <script defer src="/assets/js/masonry.js?v=e49affc7bd2646f6acdad1dbe02c2359" type="text/javascript"></script> <script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js" integrity="sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI=" crossorigin="anonymous"></script> <script src="/assets/al_math/js/mathjax-setup.js"></script> <script src="/assets/js/tooltips-setup.js?v=fe487e99db6c43751e6e7bdb2d6a0611"></script> <script src="/assets/js/no_defer.js?v=53b1b1a645525975c963ce8bf8bfefcf"></script> <script defer src="/assets/js/common.js?v=87baac90f765f2f3362dcf6aaf312a8a"></script> <script defer src="/assets/js/copy_code.js?v=c8a01c11a92744d44b093fc3bda915df" type="text/javascript"></script> <script defer src="/assets/js/jupyter_new_tab.js?v=896d254890d9b47f0281f63bfccf0dee"></script> <script async src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script> <script async src="https://badge.dimensions.ai/badge.js"></script> <script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script> <script defer src="/assets/al_img_tools/js/zoom.js"></script> <script defer src="/assets/js/progress-bar.js?v=499464c5c63ced6cf7ad62509f1e2610" type="text/javascript"></script> <script src="https://cdn.jsdelivr.net/npm/vanilla-back-to-top@7.2.1/dist/vanilla-back-to-top.min.js" integrity="sha256-uMJJ3EoTyfRBoTbR+lrfu1uRQ87RZG8AR3cVNuQVeFg=" crossorigin="anonymous"></script> <script>
+    addBackToTop();
+  </script> <script type="module" src="/assets/al_search/js/search/ninja-keys.min.js"></script> <ninja-keys hidebreadcrumbs noautoloadmdicons placeholder="Type to start searching"></ninja-keys> <script src="/assets/al_search/js/search-setup.js"></script> <script>
+// get the ninja-keys element
+const ninja = document.querySelector('ninja-keys');
+
+// add the home and posts menu items
+ninja.data = [{
+    id: "nav-about",
+    title: "about",
+    section: "Navigation",
+    handler: () => {
+      window.location.href = "/";
+    },
+  },{id: "nav-blog",
+          title: "blog",
+          description: "",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/blog/";
+          },
+        },{id: "nav-publications",
+          title: "publications",
+          description: "Publications.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/publications/";
+          },
+        },{id: "nav-research",
+          title: "research",
+          description: "Research on reliable AI agents, SRE-agent evaluation, ML ecosystem security, agent-choice auditing, and developer tools.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/research/";
+          },
+        },{id: "nav-projects",
+          title: "projects",
+          description: "Research and engineering projects.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/projects/";
+          },
+        },{id: "nav-cv",
+          title: "CV",
+          description: "Curriculum vitae.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/cv/";
+          },
+        },{id: "nav-contributions",
+          title: "contributions",
+          description: "Curated open-source contribution evidence across research infrastructure, frameworks, and language tooling.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/contributions/";
+          },
+        },{id: "post-building-a-fast-1brc-solver-in-c-on-apple-silicon",
+        
+          title: "Building a fast 1BRC solver in C# on Apple Silicon",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/building-fast-1brc-csharp-apple-silicon/";
+          
+        },
+      },{id: "post-memory-management-in-production-avoiding-the-silent-killers",
+        
+          title: "Memory Management in Production: Avoiding the Silent Killers",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/memory-management-production-silent-killers/";
+          
+        },
+      },{id: "post-growing-as-a-software-engineer-in-the-age-of-llms-and-vibe-coding",
+        
+          title: "Growing as a Software Engineer in the Age of LLMs and Vibe Coding...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/vibe-coding/";
+          
+        },
+      },{id: "post-taming-the-imagination-a-comprehensive-guide-to-handling-hallucinations-and-implementing-guardrails-in-agentic-ai",
+        
+          title: "Taming the Imagination: A Comprehensive Guide to Handling Hallucinations and Implementing Guardrails in...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/how-to-handle-hallucinations/";
+          
+        },
+      },{id: "post-building-an-agentic-ai-analytics-dashboard-a-deep-dive-with-langchain-langgraph-and-fine-tuned-llama",
+        
+          title: "Building an Agentic AI Analytics Dashboard: A Deep Dive with LangChain, LangGraph, and...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/intro-to-agentic-ai/";
+          
+        },
+      },{id: "post-neural-algorithmic-reasoning-teaching-neural-networks-to-think-like-algorithms",
+        
+          title: "Neural Algorithmic Reasoning: Teaching Neural Networks to Think Like Algorithms",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/intro-to-nar/";
+          
+        },
+      },{id: "post-opentelemetry-in-microservices-how-we-transformed-our-observability-strategy",
+        
+          title: "OpenTelemetry in Microservices: How We Transformed Our Observability Strategy",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/opentelemetry/";
+          
+        },
+      },{id: "post-using-ai-tools-in-software-engineering-and-research-workflows",
+        
+          title: "Using AI Tools in Software Engineering and Research Workflows",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/leveraging-ai-tools-software-engineering/";
+          
+        },
+      },{id: "post-the-performance-crisis-how-we-rescued-a-net-8-microservice-from-10-critical-bottlenecks",
+        
+          title: "The Performance Crisis: How We Rescued a .NET 8 Microservice from 10 Critical...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2024/optimizing-dotnet-microservices-performance/";
+          
+        },
+      },{id: "post-zero-downtime-deployments-in-kubernetes-how-we-keep-our-services-running-while-we-ship",
+        
+          title: "Zero Downtime Deployments in Kubernetes: How We Keep Our Services Running While We...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2024/zero-downtime/";
+          
+        },
+      },{id: "post-mastering-unit-testing-and-bdd-with-xunit-and-specflow-in-net-9-a-comprehensive-guide",
+        
+          title: "Mastering Unit Testing and BDD with xUnit and SpecFlow in .NET 9: A...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2024/dotnet-tests/";
+          
+        },
+      },{id: "post-design-patterns-your-first-step-toward-professional-software-engineering",
+        
+          title: "Design Patterns: Your First Step Toward Professional Software Engineering",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2024/design-patterns-professional-software-engineering/";
+          
+        },
+      },{id: "post-setting-up-github-actions-ci-cd-with-aws-a-practical-journey",
+        
+          title: "Setting Up GitHub Actions CI/CD with AWS: A Practical Journey",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2024/intro-to-ci-cd/";
+          
+        },
+      },{id: "post-the-clique-partition-problem-dividing-networks-into-perfect-communities",
+        
+          title: "The Clique Partition Problem: Dividing Networks into Perfect Communities",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2023/clique-partition-problem-graph-theory/";
+          
+        },
+      },{id: "post-advice-complexity-in-online-algorithms-when-knowing-the-future-makes-all-the-difference",
+        
+          title: "Advice Complexity in Online Algorithms: When Knowing the Future Makes All the Difference...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2023/advice-complexity-online-algorithms/";
+          
+        },
+      },{id: "post-getting-started-with-kubernetes-deploying-microservice-architectures-at-scale",
+        
+          title: "Getting Started with Kubernetes: Deploying Microservice Architectures at Scale",
+        
+        description: "A practical Kubernetes guide covering microservice deployment, service-mesh integration, observability, and the operational checks needed before production use.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2022/getting-started-with-kubernetes-microservices/";
+          
+        },
+      },{id: "post-understanding-xv6-a-practical-introduction-to-operating-systems",
+        
+          title: "Understanding xv6: A Practical Introduction to Operating Systems",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2022/understanding-xv6-operating-systems/";
+          
+        },
+      },{id: "post-getting-started-with-ns3-a-hands-on-guide-to-network-simulation",
+        
+          title: "Getting Started with NS3: A Hands-On Guide to Network Simulation",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2021/getting-started-with-ns3/";
+          
+        },
+      },{id: "news-completed-b-sc-in-computer-science-and-engineering-from-bangladesh-university-of-engineering-and-technology-with-a-gpa-of-3-53-4-00-link-https-cse-buet-ac-bd-academics-bsc",
+          title: 'Completed B.Sc in Computer Science and Engineering from Bangladesh University of Engineering and...',
+          description: "",
+          section: "News",},{id: "news-joined-iqvia-as-a-software-development-engineer-on-kpi-library-the-dynamic-reporting-layer-within-orchestrated-analytics-link-https-www-iqvia-com-solutions-commercialization-commercial-analytics-orchestrated-analytics",
+          title: 'Joined IQVIA as a Software Development Engineer on KPI Library, the dynamic reporting...',
+          description: "",
+          section: "News",},{id: "news-submitted-39-sentiment-analysis-of-anonymous-crisis-reports-in-bangladesh-39-to-acm-cscw-2025-analyzing-crowd-sourced-reports-from-bangladesh-39-s-2024-national-crisis-using-transformer-models-link-projects-research-ureporter",
+          title: 'Submitted &amp;#39;Sentiment Analysis of Anonymous Crisis Reports in Bangladesh&amp;#39; to ACM CSCW 2025,...',
+          description: "",
+          section: "News",},{id: "news-honored-with-the-iqvia-impact-program-silver-award-for-outstanding-performance-and-contributions-to-the-kpi-library-team-link-https-drive-google-com-file-d-1vc4e2roqepmbfs56olduih-ojdbok9sp-view-usp-share-link",
+          title: 'Honored with the IQVIA Impact Program Silver Award for outstanding performance and contributions...',
+          description: "",
+          section: "News",},{id: "news-submitted-39-an-empirical-study-on-remote-code-execution-in-machine-learning-model-hosting-ecosystems-39-to-the-mining-software-repositories-msr-2026-conference-first-large-scale-cross-platform-security-study-analyzing-45-000-repositories-across-5-major-ml-platforms-link-https-arxiv-org-abs-2601-14163",
+          title: 'Submitted &amp;#39;An Empirical Study on Remote Code Execution in Machine Learning Model Hosting...',
+          description: "",
+          section: "News",},{id: "news-resubmitted-39-an-empirical-study-on-remote-code-execution-in-machine-learning-model-hosting-ecosystems-39-to-acm-transactions-on-software-engineering-and-methodology-tosem-2026-preprint-available-on-arxiv-link-https-arxiv-org-abs-2601-14163",
+          title: 'Resubmitted &amp;#39;An Empirical Study on Remote Code Execution in Machine Learning Model Hosting...',
+          description: "",
+          section: "News",},{id: "news-started-a-remote-summer-research-internship-at-the-university-of-illinois-urbana-champaign-through-uiuc-summer-research-in-software-engineering-srse-2026-with-professor-tianyin-xu-link-https-uiuc-srse-github-io",
+          title: 'Started a remote summer research internship at the University of Illinois Urbana-Champaign through...',
+          description: "",
+          section: "News",},{id: "news-submitted-39-the-choice-can-be-the-attack-auditing-aligned-backdoors-in-llm-agents-39-to-the-transactions-of-the-association-for-computational-linguistics-tacl-2026-with-chowdhury-rakin-haider-link-projects-research-reagent-plus-plus",
+          title: 'Submitted &amp;#39;The Choice Can Be the Attack: Auditing Aligned Backdoors in LLM Agents&amp;#39;...',
+          description: "",
+          section: "News",},{id: "news-39-an-empirical-study-on-remote-code-execution-in-machine-learning-model-hosting-ecosystems-39-is-under-review-at-the-international-conference-on-software-engineering-icse-2027-preprint-available-on-arxiv-link-https-arxiv-org-abs-2601-14163",
+          title: '&amp;#39;An Empirical Study on Remote Code Execution in Machine Learning Model Hosting Ecosystems&amp;#39;...',
+          description: "",
+          section: "News",},{id: "news-will-begin-graduate-study-in-computing-science-at-the-university-of-alberta-on-september-1-2026-link-https-www-ualberta-ca-en-computing-science-index-html",
+          title: 'Will begin graduate study in Computing Science at the University of Alberta on...',
+          description: "",
+          section: "News",},{id: "projects-1brc-c-on-apple-silicon",
+          title: '1BRC C# on Apple Silicon',
+          description: "A .NET 10 NativeAOT performance case study: byte parsing, native aggregation, ARM64 tuning, and a size-aware macOS pread path",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/1brc-csharp/";
+            },},{id: "projects-building-a-bangla-handwritten-digit-recognizer-from-scratch",
+          title: 'Building a Bangla Handwritten Digit Recognizer from Scratch',
+          description: "A Deep Dive into Custom CNN Implementation",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/bangla-digit-recognition/";
+            },},{id: "projects-blockchain-based-ticketing-platform",
+          title: 'Blockchain Based Ticketing Platform',
+          description: "A practical approach to reducing ticket fraud and abusive resale",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/blockchain-ticketing/";
+            },},{id: "projects-yet-another-c-compiler",
+          title: 'Yet Another C Compiler',
+          description: "A complete multi-pass compiler for a subset of C",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/compiler/";
+            },},{id: "projects-contextledger-context-accounting-for-coding-agents",
+          title: 'ContextLedger: context accounting for coding agents',
+          description: "A research notebook on OpenCode compaction, provenance, and live GPT-5.5 experiments",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/contextledger/";
+            },},{id: "projects-ctxhelm-agent-native-context-compiler",
+          title: 'ctxhelm: agent-native context compiler',
+          description: "Local-first context plans, release proof, and source-free agent evaluation",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/ctxhelm/";
+            },},{id: "projects-mini-deep-learning-framework-pytorch-from-scratch",
+          title: 'Mini Deep Learning Framework: PyTorch from Scratch',
+          description: "A freelance learning project for tensors, autograd, and neural-network internals",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/deep-learning-framework-capstone/";
+            },},{id: "projects-go-container-runtime-docker-from-scratch",
+          title: 'Go Container Runtime: Docker from Scratch',
+          description: "A freelance learning project for Linux containers, networking, and Go systems programming",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/docker-from-scratch-go/";
+            },},{id: "projects-eventfly-distributed-microservices-event-platform",
+          title: 'EventFly – Distributed Microservices Event Platform',
+          description: "A six-person BUET course project for event creation, ticketing, announcements, participant engagement, analytics, and payments, implemented with Node.js, React, NATS, Kubernetes, MongoDB, Redis, and Stripe.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/eventfly-an-end-to-end-event-management-system/";
+            },},{id: "projects-building-a-go-database-engine-from-scratch",
+          title: 'Building a Go Database Engine from Scratch',
+          description: "An educational ACID-oriented database engine with advanced features",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/go-database/";
+            },},{id: "projects-image-caption-generation-with-bert-context-vectors",
+          title: 'Image Caption Generation with BERT Context Vectors',
+          description: "Extended the &quot;Show, Attend, and Tell&quot; image captioning model with BERT to improve caption quality and reduce training time, achieving 36% improvement in CIDEr score and 43% improvement in BLEU-4.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/image-caption-generator/";
+            },},{id: "projects-patchsmith-a-harness-for-repair-agents",
+          title: 'PatchSmith: a harness for repair agents',
+          description: "System design and R&amp;D notes for bounded patches, sandbox validation, and auditable repair runs",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/patchsmith/";
+            },},{id: "projects-ray-tracing-from-scratch-a-comprehensive-guide-to-3d-rendering-physics-and-implementation",
+          title: 'Ray Tracing from Scratch: A Comprehensive Guide to 3D Rendering Physics and Implementation...',
+          description: "Implementing physically-based rendering with C++",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/ray-tracing/";
+            },},{id: "projects-an-empirical-study-on-remote-code-execution-in-machine-learning-model-hosting-ecosystems",
+          title: 'An Empirical Study on Remote Code Execution in Machine Learning Model Hosting Ecosystems...',
+          description: "A cross-platform study of model-loading risk across five ML hosting ecosystems, using static analysis, malware-signature scanning, and analysis of more than 600 developer discussions.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/research-ml-remote-code-execution/";
+            },},{id: "projects-verischema-verified-database-schema-generation",
+          title: 'VeriSchema: verified database-schema generation',
+          description: "How can specialized agents generate relational schemas from natural-language requirements while formal checks and targeted repair keep the result consistent?",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/research-multi-agent-db-schema/";
+            },},{id: "projects-the-choice-can-be-the-attack-auditing-aligned-backdoors-in-llm-agents",
+          title: 'The Choice Can Be the Attack: Auditing Aligned Backdoors in LLM Agents',
+          description: "Abstract-level summary of SHIFT, submitted to TACL 2026 on aligned backdoor attacks in LLM agents.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/research-reagent-plus-plus/";
+            },},{id: "projects-sentiment-analysis-of-anonymous-crisis-reports-in-bangladesh",
+          title: 'Sentiment Analysis of Anonymous Crisis Reports in Bangladesh',
+          description: "A multilingual analysis of anonymous, crowd-sourced reports from Bangladesh&#39;s 2024 national crisis.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/research-ureporter/";
+            },},{id: "projects-enhancing-tcp-fairness-tcp-vegas-implementation",
+          title: 'Enhancing TCP Fairness: TCP Vegas+ Implementation',
+          description: "A dual-mode solution for TCP Vegas fairness issues",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/tcp-vegas-plus/";
+            },},{
+        id: 'social-email',
+        title: 'email',
+        section: 'Socials',
+        handler: () => {
+          window.open("mailto:%74%61%6E%68%72%6F%6D%65%6C@%67%6D%61%69%6C.%63%6F%6D", "_blank");
+        },
+      },{
+        id: 'social-github',
+        title: 'GitHub',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://github.com/thromel", "_blank");
+        },
+      },{
+        id: 'social-scholar',
+        title: 'Google Scholar',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://scholar.google.com/citations?user=zHV4EU8AAAAJ", "_blank");
+        },
+      },{
+        id: 'social-linkedin',
+        title: 'LinkedIn',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://www.linkedin.com/in/thromel", "_blank");
+        },
+      },{
+        id: 'social-orcid',
+        title: 'ORCID',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://orcid.org/0009-0009-2432-8960", "_blank");
+        },
+      },{
+        id: 'social-rss',
+        title: 'RSS Feed',
+        section: 'Socials',
+        handler: () => {
+          window.open("/feed.xml", "_blank");
+        },
+      },{
+        id: 'social-x',
+        title: 'X',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://twitter.com/tanzimhromel", "_blank");
+        },
+      },{
+      id: 'light-theme',
+      title: 'Change theme to light',
+      description: 'Change the theme of the site to Light',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("light");
+      },
+    },
+    {
+      id: 'dark-theme',
+      title: 'Change theme to dark',
+      description: 'Change the theme of the site to Dark',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("dark");
+      },
+    },
+    {
+      id: 'system-theme',
+      title: 'Use system default theme',
+      description: 'Change the theme of the site to System Default',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("system");
+      },
+    },];
+
+</script> <script src="/assets/al_search/js/shortcut-key.js"></script> </body> </html>

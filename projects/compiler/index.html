@@ -1,0 +1,1052 @@
+<!DOCTYPE html> <html lang="en"> <head> <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <title> Yet Another C Compiler | Tanzim Hossain Romel </title> <meta name="author" content="Tanzim Hossain Romel"> <meta name="description" content="A complete multi-pass compiler for a subset of C"> <meta name="keywords" content=""> <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https:; style-src 'self' 'unsafe-inline' https:; img-src 'self' data: https:; font-src 'self' data: https:; media-src 'self' https:; frame-src 'self' https:; connect-src 'self' https:;"> <style>
+  :root {
+    --max-content-width: 930px;
+  }
+</style> <link rel="stylesheet" href="/assets/css/tailwind.css?v=50c64c15cbb9fd1ce6056fdb8bcb4b62"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.2.0/css/all.min.css" integrity="sha256-MVopmdyC2tYTiJ8wlktf0uh0v4NgT+vNdyVFepi7Q0c=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.5/css/academicons.min.css" integrity="sha256-SzrCOBJbGVFMahewkgjwnApaV2+av1DwMAA+/QGLyZw=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/scholar-icons@1.0.3/css/scholar-icons.css" integrity="sha256-VY3hHVj/hNX3fYG6wtbA6TcKJQl7+FthzGSyIB64klY=" crossorigin="anonymous"> <link defer rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons&amp;display=swap"> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-github.css?v=591dab5a4e56573bf4ef7fd332894c99" media="" id="highlight_theme_light"> <link rel="shortcut icon" href="data:image/svg+xml,&lt;svg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20100%20100%22&gt;&lt;text%20y=%22.9em%22%20font-size=%2290%22&gt;%E2%9A%9B%EF%B8%8F&lt;/text&gt;&lt;/svg&gt;"> <link rel="stylesheet" href="/assets/css/main.css?v=3116ba77db9ee1581d05bb3e86fbf7f1"> <link rel="canonical" href="https://tanzimhromel.com/projects/compiler/"> <script src="/assets/js/theme.js?v=5286c3e4c334d0ecb8fc0c40ff4fa7ec"></script> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-native.css?v=5847e5ed4a4568527aa6cfab446049ca" media="none" id="highlight_theme_dark"> <script>
+    initTheme();
+  </script> </head> <body class="fixed-top-nav "> <header> <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top" role="navigation"> <div class="container"> <a class="navbar-brand title font-weight-lighter" href="/"> Tanzim Hossain Romel </a> <button class="navbar-toggler collapsed navbar-toggler-main" type="button" data-nav-toggle="navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar top-bar"></span> <span class="icon-bar middle-bar"></span> <span class="icon-bar bottom-bar"></span> </button> <div class="collapse navbar-collapse navbar-collapse-main" id="navbarNav"> <ul class="navbar-nav navbar-menu-list flex-nowrap"> <li class="nav-item "> <a class="nav-link" href="/">about </a> </li> <li class="nav-item "> <a class="nav-link" href="/blog/">blog </a> </li> <li class="nav-item "> <a class="nav-link" href="/publications/">publications </a> </li> <li class="nav-item "> <a class="nav-link" href="/research/">research </a> </li> <li class="nav-item active"> <a class="nav-link" href="/projects/">projects <span class="sr-only">(current)</span> </a> </li> <li class="nav-item "> <a class="nav-link" href="/cv/">CV </a> </li> <li class="nav-item "> <a class="nav-link" href="/contributions/">contributions </a> </li> <li class="nav-item"> <button id="search-toggle" type="button" title="Search" aria-label="Open search"> <span class="nav-link">ctrl k <i class="fa-solid fa-magnifying-glass"></i></span> </button> </li> <li class="toggle-container"> <button id="light-toggle" type="button" title="Change theme" aria-label="Change color theme"> <i class="fa-half-sun-moon" id="light-toggle-system"></i> <i class="fa-solid fa-moon" id="light-toggle-dark"></i> <i class="fa-solid fa-sun" id="light-toggle-light"></i> </button> </li> </ul> </div> </div> </nav> <progress id="progress" value="0"> <div class="progress-container"> <span class="progress-bar"></span> </div> </progress> </header> <div class="container mt-5" role="main"> <div class="post"> <header class="post-header"> <h1 class="post-title">Yet Another C Compiler</h1> <p class="post-description">A complete multi-pass compiler for a subset of C</p> </header> <article> <p>A sophisticated multi-pass compiler for a subset of C programming language, featuring lexical analysis, syntax analysis, semantic analysis, intermediate code generation, and assembly optimization.</p> <h2 id="at-a-glance">At a glance</h2> <ul> <li> <strong>Status:</strong> Completed BUET compiler course project</li> <li> <strong>Problem:</strong> Translate a practical subset of C through a complete, inspectable compiler pipeline with useful diagnostics and generated assembly.</li> <li> <strong>Role:</strong> Implemented the multi-pass compiler pipeline, symbol-table handling, validation, and technical documentation</li> <li> <strong>Outcome:</strong> Completed lexical, syntax, and semantic analysis, intermediate-code generation, assembly output, and optimization stages.</li> <li> <strong>Technologies:</strong> C++, Flex, Bison, Assembly, Compiler Design</li> <li> <strong>Repository:</strong> Public course repository</li> </ul> <p><a href="https://github.com/thromel/Yet-Another-C-Compiler" target="_blank" rel="noopener noreferrer">View on GitHub</a></p> <h2 id="introduction-to-compiler-design">Introduction to Compiler Design</h2> <p>A compiler transforms source code written in a high-level programming language (like C) into executable machine code that can be directly understood by the computer’s processor. This transformation is complex and involves multiple stages, each with its own theoretical foundations and practical implementations.</p> <p>Before diving into the specific components of our compiler project, let’s establish some foundational concepts.</p> <h3 id="the-compilation-process">The Compilation Process</h3> <p>A typical compiler operates in several phases:</p> <ol> <li> <strong>Lexical Analysis</strong>: Breaking down the source code into tokens (identifiers, keywords, operators, etc.)</li> <li> <strong>Syntax Analysis</strong>: Organizing these tokens into a hierarchical structure that represents the grammatical structure of the program</li> <li> <strong>Semantic Analysis</strong>: Checking if the program makes logical sense (type checking, scope checking, etc.)</li> <li> <strong>Intermediate Code Generation</strong>: Creating a representation that’s closer to machine code but still independent of specific hardware</li> <li> <strong>Code Optimization</strong>: Improving the intermediate code to make it more efficient</li> <li> <strong>Code Generation</strong>: Translating the optimized intermediate code into machine code</li> </ol> <p>Now, let’s explore each component of our compiler in detail.</p> <h2 id="lexical-analysis-tokenizing-the-source-code">Lexical Analysis: Tokenizing the Source Code</h2> <h3 id="theoretical-background">Theoretical Background</h3> <p>Lexical analysis is based on the theory of <strong>regular languages</strong> and <strong>finite automata</strong>. Regular expressions define patterns for tokens, and these patterns are converted into finite state machines that can efficiently recognize tokens in the input stream.</p> <p>The lexical analyzer (or scanner) reads the source code character by character and groups them into meaningful units called tokens. Each token has:</p> <ul> <li>A <strong>type</strong> (e.g., identifier, keyword, operator)</li> <li>A <strong>value</strong> (the actual text)</li> <li>Often, position information (line number, column number)</li> </ul> <h3 id="implementation-with-flex">Implementation with Flex</h3> <p>Our project uses Flex (a modern version of the classic Lex tool) to generate the lexical analyzer. Here’s an in-depth look at how we define tokens:</p> <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">%</span><span class="n">option</span> <span class="n">noyywrap</span>
+
+<span class="o">%</span><span class="p">{</span>
+<span class="cp">#include</span> <span class="cpf">"LexUtils.h"</span><span class="cp">
+#include</span><span class="cpf">&lt;iostream&gt;</span><span class="cp">
+#include</span><span class="cpf">&lt;string.h&gt;</span><span class="cp">
+#include</span><span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span><span class="n">using</span> <span class="n">namespace</span> <span class="n">std</span><span class="p">;</span>
+
+<span class="kt">FILE</span> <span class="o">*</span><span class="n">input</span><span class="p">;</span>
+<span class="o">%</span><span class="p">}</span>
+
+<span class="n">NEWLINE</span> <span class="err">\</span><span class="n">r</span><span class="o">?</span><span class="err">\</span><span class="n">n</span>
+<span class="nf">NOT_NEWLINE</span> <span class="p">([</span><span class="o">^</span><span class="err">\</span><span class="n">r</span><span class="err">\</span><span class="n">n</span><span class="p">])</span>
+<span class="n">WHITESPACE</span> <span class="p">[</span> <span class="err">\</span><span class="n">t</span><span class="err">\</span><span class="n">f</span><span class="err">\</span><span class="n">r</span><span class="err">\</span><span class="n">v</span><span class="p">]</span><span class="o">+</span>
+
+<span class="n">LETTER</span> <span class="p">[</span><span class="n">a</span><span class="o">-</span><span class="n">zA</span><span class="o">-</span><span class="n">Z</span><span class="p">]</span>
+<span class="n">DIGIT</span> <span class="p">[</span><span class="mi">0</span><span class="o">-</span><span class="mi">9</span><span class="p">]</span>
+
+<span class="n">ALPHABET</span> <span class="p">{</span><span class="n">LETTER</span><span class="p">}</span><span class="o">|</span><span class="n">_</span>
+<span class="n">ALPHANUM</span> <span class="p">{</span><span class="n">ALPHABET</span><span class="p">}</span><span class="o">|</span><span class="p">{</span><span class="n">DIGIT</span><span class="p">}</span>
+
+<span class="n">ID</span> <span class="p">{</span><span class="n">ALPHABET</span><span class="p">}({</span><span class="n">ALPHANUM</span><span class="p">})</span><span class="o">*</span>
+<span class="n">INTEGER</span> <span class="p">{</span><span class="n">DIGITS</span><span class="p">}</span>
+<span class="n">FLOAT</span> <span class="p">({</span><span class="n">INTEGER</span><span class="p">})</span><span class="o">?</span><span class="p">(</span><span class="err">\</span><span class="p">.</span><span class="o">?</span><span class="p">{</span><span class="n">DIGITS</span><span class="p">}</span><span class="o">*</span><span class="p">)([</span><span class="n">Ee</span><span class="p">][</span><span class="o">+-</span><span class="p">]</span><span class="o">?</span><span class="p">{</span><span class="n">INTEGER</span><span class="p">})</span><span class="o">?</span>
+
+<span class="o">%%</span>
+
+<span class="p">{</span><span class="n">COMMENT</span><span class="p">}</span> <span class="o">|</span>
+<span class="p">{</span><span class="n">STAR_COMMENT</span><span class="p">}</span> <span class="p">{</span><span class="n">handle_comment</span><span class="p">(</span><span class="n">yytext</span><span class="p">);</span><span class="err">}</span>
+
+<span class="s">"if"</span> <span class="p">{</span><span class="k">return</span> <span class="n">IF</span><span class="p">;}</span>
+<span class="s">"else"</span> <span class="p">{</span><span class="k">return</span> <span class="n">ELSE</span><span class="p">;}</span>
+<span class="s">"for"</span> <span class="p">{</span><span class="k">return</span> <span class="n">FOR</span><span class="p">;}</span>
+<span class="c1">// More keywords...</span>
+
+<span class="p">{</span><span class="n">INTEGER</span><span class="p">}</span> <span class="p">{</span><span class="n">handle_const_int</span><span class="p">(</span><span class="n">yytext</span><span class="p">);</span> <span class="k">return</span> <span class="n">CONST_INT</span><span class="p">;}</span>
+<span class="p">{</span><span class="n">FLOAT</span><span class="p">}</span> <span class="p">{</span><span class="n">handle_const_float</span><span class="p">(</span><span class="n">yytext</span><span class="p">);</span> <span class="k">return</span> <span class="n">CONST_FLOAT</span><span class="p">;}</span>
+<span class="p">{</span><span class="n">ID</span><span class="p">}</span> <span class="p">{</span><span class="n">handle_id</span><span class="p">(</span><span class="n">yytext</span><span class="p">);</span> <span class="k">return</span> <span class="n">ID</span><span class="p">;}</span>
+
+<span class="p">{</span><span class="n">ADDOP</span><span class="p">}</span> <span class="p">{</span><span class="n">handle_operator</span><span class="p">(</span><span class="n">yytext</span><span class="p">,</span> <span class="s">"ADDOP"</span><span class="p">);</span> <span class="k">return</span> <span class="n">ADDOP</span><span class="p">;}</span>
+<span class="c1">// More operators...</span>
+
+<span class="p">{</span><span class="n">NEWLINE</span><span class="p">}</span> <span class="p">{</span><span class="n">line_count</span><span class="o">++</span><span class="p">;}</span>
+<span class="p">{</span><span class="n">WHITESPACE</span><span class="p">}</span> <span class="p">{}</span>
+<span class="p">.</span> <span class="p">{</span><span class="n">handle_error</span><span class="p">(</span><span class="n">yytext</span><span class="p">,</span> <span class="s">"Unrecognized character"</span><span class="p">);}</span>
+<span class="o">%%</span>
+</code></pre></div></div> <p>Let’s break down what’s happening here:</p> <ol> <li>The <code class="language-plaintext highlighter-rouge">%{...%}</code> section contains C/C++ code that will be included in the generated scanner.</li> <li>Definitions like <code class="language-plaintext highlighter-rouge">LETTER [a-zA-Z]</code> create named patterns.</li> <li>In the rules section (<code class="language-plaintext highlighter-rouge">%%</code>), we define what action to take when a pattern is matched.</li> </ol> <p>For example, when the scanner encounters “if”, it returns the token IF to the parser. When it finds an identifier that matches the pattern <code class="language-plaintext highlighter-rouge">{ID}</code>, it calls <code class="language-plaintext highlighter-rouge">handle_id(yytext)</code> and returns ID.</p> <p>The functions like <code class="language-plaintext highlighter-rouge">handle_const_int()</code> and <code class="language-plaintext highlighter-rouge">handle_id()</code> create SymbolInfo objects for the tokens and set their attributes. These objects are then passed to the parser.</p> <h3 id="token-processing">Token Processing</h3> <p>When the scanner recognizes a token, it creates a SymbolInfo object with the token’s attributes:</p> <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">handle_const_int</span><span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="n">str</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">string</span> <span class="n">s</span><span class="p">(</span><span class="n">str</span><span class="p">);</span>
+    <span class="n">assignSymbol</span><span class="p">(</span><span class="s">"CONST_INT"</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">assignSymbol</span><span class="p">(</span><span class="n">string</span> <span class="n">type</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">yylval</span><span class="p">.</span><span class="n">symbol</span> <span class="o">=</span> <span class="n">new</span> <span class="n">SymbolInfo</span><span class="p">((</span><span class="n">string</span><span class="p">)</span><span class="n">yytext</span><span class="p">,</span> <span class="n">type</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div> <p>This creates a new SymbolInfo object with the token’s text and type, and assigns it to <code class="language-plaintext highlighter-rouge">yylval.symbol</code>, which the parser will access.</p> <h2 id="parsing-building-the-syntax-tree">Parsing: Building the Syntax Tree</h2> <h3 id="theoretical-background-1">Theoretical Background</h3> <p>Parsing is based on the theory of <strong>context-free grammars</strong> (CFGs) and <strong>pushdown automata</strong>. A CFG consists of:</p> <ul> <li>Terminal symbols (tokens)</li> <li>Non-terminal symbols (syntactic categories)</li> <li>Production rules (defining how non-terminals can be expanded)</li> <li>A start symbol</li> </ul> <p>The parser uses these rules to determine if the input sequence of tokens forms a valid program according to the grammar, and if so, to build a parse tree or abstract syntax tree (AST).</p> <p>There are two main parsing approaches:</p> <ul> <li> <strong>Top-down parsing</strong>: Start from the root (start symbol) and try to derive the input (e.g., LL parsing)</li> <li> <strong>Bottom-up parsing</strong>: Start from the input and try to reduce it to the start symbol (e.g., LR parsing)</li> </ul> <h3 id="implementation-with-bison">Implementation with Bison</h3> <p>Our project uses Bison (a modern version of the classic Yacc tool) to generate the parser. Bison generates LALR(1) parsers, which are a type of bottom-up parser.</p> <p>Here’s a detailed look at our grammar definition:</p> <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">%</span><span class="p">{</span>
+<span class="cp">#ifndef PARSER
+#define PARSER
+#include</span> <span class="cpf">"ParserUtils.h"</span><span class="cp">
+#endif
+</span>
+<span class="kt">int</span> <span class="n">yyparse</span><span class="p">(</span><span class="kt">void</span><span class="p">);</span>
+<span class="kt">int</span> <span class="n">yylex</span><span class="p">(</span><span class="kt">void</span><span class="p">);</span>
+<span class="k">extern</span> <span class="kt">FILE</span> <span class="o">*</span><span class="n">yyin</span><span class="p">;</span>
+<span class="k">extern</span> <span class="n">SymbolTable</span> <span class="n">st</span><span class="p">;</span>
+<span class="o">%</span><span class="p">}</span>
+
+<span class="o">%</span><span class="k">union</span><span class="p">{</span>
+<span class="n">SymbolInfo</span><span class="o">*</span> <span class="n">symbol</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="o">%</span><span class="n">token</span> <span class="n">IF</span> <span class="n">FOR</span> <span class="n">DO</span> <span class="n">INT</span> <span class="n">FLOAT</span> <span class="n">VOID</span> <span class="n">SWITCH</span> <span class="n">DEFAULT</span> <span class="n">ELSE</span> <span class="n">WHILE</span> <span class="n">BREAK</span> <span class="n">CHAR</span> <span class="n">DOUBLE</span> <span class="n">RETURN</span> <span class="n">CASE</span> <span class="n">CONTINUE</span>
+<span class="o">%</span><span class="n">token</span> <span class="n">INCOP</span> <span class="n">DECOP</span> <span class="n">NOT</span>
+<span class="o">%</span><span class="n">token</span> <span class="n">LPAREN</span> <span class="n">RPAREN</span> <span class="n">LCURL</span> <span class="n">RCURL</span> <span class="n">LTHIRD</span> <span class="n">RTHIRD</span> <span class="n">COMMA</span> <span class="n">SEMICOLON</span>
+<span class="o">%</span><span class="n">token</span> <span class="n">PRINTLN</span>
+<span class="o">%</span><span class="n">token</span> <span class="n">STRING</span>
+
+<span class="o">%</span><span class="n">token</span> <span class="o">&lt;</span><span class="n">symbol</span><span class="o">&gt;</span> <span class="n">ID</span>
+<span class="o">%</span><span class="n">token</span> <span class="o">&lt;</span><span class="n">symbol</span><span class="o">&gt;</span> <span class="n">CONST_INT</span>
+<span class="o">%</span><span class="n">token</span> <span class="o">&lt;</span><span class="n">symbol</span><span class="o">&gt;</span> <span class="n">CONST_FLOAT</span>
+<span class="o">%</span><span class="n">token</span> <span class="o">&lt;</span><span class="n">symbol</span><span class="o">&gt;</span> <span class="n">CONST_CHAR</span>
+<span class="o">%</span><span class="n">token</span> <span class="o">&lt;</span><span class="n">symbol</span><span class="o">&gt;</span> <span class="n">ADDOP</span>
+<span class="o">%</span><span class="n">token</span> <span class="o">&lt;</span><span class="n">symbol</span><span class="o">&gt;</span> <span class="n">MULOP</span>
+<span class="o">%</span><span class="n">token</span> <span class="o">&lt;</span><span class="n">symbol</span><span class="o">&gt;</span> <span class="n">LOGICOP</span>
+<span class="o">%</span><span class="n">token</span> <span class="o">&lt;</span><span class="n">symbol</span><span class="o">&gt;</span> <span class="n">RELOP</span>
+<span class="o">%</span><span class="n">token</span> <span class="o">&lt;</span><span class="n">symbol</span><span class="o">&gt;</span> <span class="n">BITOP</span>
+<span class="o">%</span><span class="n">token</span> <span class="o">&lt;</span><span class="n">symbol</span><span class="o">&gt;</span> <span class="n">ASSIGNOP</span>
+
+<span class="o">%</span><span class="n">type</span> <span class="o">&lt;</span><span class="n">symbol</span><span class="o">&gt;</span> <span class="n">program</span>
+<span class="o">%</span><span class="n">type</span> <span class="o">&lt;</span><span class="n">symbol</span><span class="o">&gt;</span> <span class="n">unit</span>
+<span class="c1">// More non-terminal types...</span>
+
+<span class="o">%</span><span class="n">nonassoc</span> <span class="n">second_prec</span>
+<span class="o">%</span><span class="n">nonassoc</span> <span class="n">ELSE</span>
+
+<span class="o">%%</span>
+
+<span class="n">start</span> <span class="o">:</span> <span class="n">program</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">error_count</span><span class="p">){</span>
+            <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">"No error, generating assembly code"</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
+            <span class="n">addDataSegment</span><span class="p">();</span>
+            <span class="n">startCodeSegment</span><span class="p">();</span>
+            <span class="n">printCode</span><span class="p">(</span><span class="err">$$</span><span class="p">);</span>
+            <span class="n">addPrintFunc</span><span class="p">();</span>
+            <span class="n">endCodeSegment</span><span class="p">();</span>
+            <span class="n">optimize</span><span class="p">();</span>
+        <span class="p">}</span>    
+    <span class="p">}</span>
+    <span class="p">;</span>
+
+<span class="n">program</span> <span class="o">:</span> <span class="n">program</span> <span class="n">unit</span> 
+    <span class="p">{</span>
+        <span class="err">$$</span> <span class="o">=</span> <span class="n">new</span> <span class="n">SymbolInfo</span><span class="p">(</span><span class="err">$</span><span class="mi">1</span><span class="o">-&gt;</span><span class="n">getName</span><span class="p">()</span> <span class="o">+</span> <span class="s">"</span><span class="se">\n</span><span class="s">"</span> <span class="o">+</span> <span class="err">$</span><span class="mi">2</span><span class="o">-&gt;</span><span class="n">getName</span><span class="p">(),</span> <span class="s">"NON_TERMINAL"</span><span class="p">);</span>
+        <span class="err">$$</span><span class="o">-&gt;</span><span class="n">setCode</span><span class="p">(</span><span class="err">$</span><span class="mi">1</span><span class="o">-&gt;</span><span class="n">getCode</span><span class="p">()</span> <span class="o">+</span> <span class="s">"</span><span class="se">\n</span><span class="s">"</span> <span class="o">+</span><span class="err">$</span><span class="mi">2</span><span class="o">-&gt;</span><span class="n">getCode</span><span class="p">());</span>
+        <span class="n">printRule</span><span class="p">(</span><span class="s">"program : program unit"</span><span class="p">);</span>
+        <span class="n">printSymbol</span><span class="p">(</span><span class="err">$$</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="o">|</span> <span class="n">unit</span>
+    <span class="p">{</span>
+        <span class="err">$$</span> <span class="o">=</span> <span class="err">$</span><span class="mi">1</span><span class="p">;</span>
+        <span class="err">$$</span><span class="o">-&gt;</span><span class="n">setCode</span><span class="p">(</span><span class="err">$</span><span class="mi">1</span><span class="o">-&gt;</span><span class="n">getCode</span><span class="p">());</span>
+        <span class="n">printRule</span><span class="p">(</span><span class="s">"program : unit"</span><span class="p">);</span>
+        <span class="n">printSymbol</span><span class="p">(</span><span class="err">$$</span><span class="p">);</span>
+        <span class="n">st</span><span class="p">.</span><span class="n">printAll</span><span class="p">();</span>
+    <span class="p">}</span>
+    <span class="p">;</span>
+    
+<span class="c1">// More grammar rules...</span>
+<span class="o">%%</span>
+</code></pre></div></div> <p>Let’s examine what’s happening here:</p> <ol> <li>The <code class="language-plaintext highlighter-rouge">%{...%}</code> section contains C/C++ code that will be included in the generated parser.</li> <li>The <code class="language-plaintext highlighter-rouge">%union</code> declaration specifies the type of semantic values (in our case, SymbolInfo pointers).</li> <li>The <code class="language-plaintext highlighter-rouge">%token</code> and <code class="language-plaintext highlighter-rouge">%type</code> declarations specify the types of tokens and non-terminals.</li> <li>The <code class="language-plaintext highlighter-rouge">%%</code> section contains the grammar rules, with semantic actions enclosed in braces.</li> </ol> <h3 id="grammar-rules-and-semantic-actions">Grammar Rules and Semantic Actions</h3> <p>Let’s look at a more complex rule, the if-statement:</p> <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">statement</span> <span class="o">:</span> <span class="n">IF</span> <span class="n">LPAREN</span> <span class="n">expression</span> <span class="n">RPAREN</span> <span class="n">statement</span> <span class="o">%</span><span class="n">prec</span> <span class="n">second_prec</span>
+        <span class="p">{</span>
+            <span class="err">$$</span> <span class="o">=</span> <span class="n">handle_if</span><span class="p">(</span><span class="err">$</span><span class="mi">3</span><span class="p">,</span> <span class="err">$</span><span class="mi">5</span><span class="p">);</span>
+            <span class="n">printRule</span><span class="p">(</span><span class="s">"IF LPAREN expression RPAREN statement"</span><span class="p">);</span>
+            <span class="n">printSymbol</span><span class="p">(</span><span class="err">$$</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="o">|</span> <span class="n">IF</span> <span class="n">LPAREN</span> <span class="n">expression</span> <span class="n">RPAREN</span> <span class="n">statement</span> <span class="n">ELSE</span> <span class="n">statement</span>
+        <span class="p">{</span>
+            <span class="err">$$</span> <span class="o">=</span> <span class="n">handle_if_else</span><span class="p">(</span><span class="err">$</span><span class="mi">3</span><span class="p">,</span> <span class="err">$</span><span class="mi">5</span><span class="p">,</span> <span class="err">$</span><span class="mi">7</span><span class="p">);</span>
+            <span class="n">printRule</span><span class="p">(</span><span class="s">"IF LPAREN expression RPAREN statement ELSE statement"</span><span class="p">);</span>
+            <span class="n">printSymbol</span><span class="p">(</span><span class="err">$$</span><span class="p">);</span>
+        <span class="p">}</span>
+</code></pre></div></div> <p>This rule says that a statement can be an if-statement without an else clause (<code class="language-plaintext highlighter-rouge">IF LPAREN expression RPAREN statement</code>) or an if-else statement (<code class="language-plaintext highlighter-rouge">IF LPAREN expression RPAREN statement ELSE statement</code>).</p> <p>The <code class="language-plaintext highlighter-rouge">%prec second_prec</code> part resolves the classic “dangling else” ambiguity by specifying that this rule has lower precedence than the ELSE token.</p> <p>The semantic actions (code in braces) create a new SymbolInfo object for the statement, generate code for it, and log the rule application for debugging.</p> <h3 id="parse-tree-construction">Parse Tree Construction</h3> <p>As the parser recognizes grammatical constructs, it builds a parse tree (implicitly, through the semantic values). Each node in the tree is a SymbolInfo object that contains:</p> <ul> <li>The textual representation of the construct</li> <li>Its type (e.g., “NON_TERMINAL”)</li> <li>The generated code for that construct</li> <li>Other attributes specific to the construct</li> </ul> <h2 id="symbol-table-managing-identifiers-and-scopes">Symbol Table: Managing Identifiers and Scopes</h2> <h3 id="theoretical-background-2">Theoretical Background</h3> <p>A symbol table is a data structure used by compilers to keep track of identifiers (variables, functions, etc.) and their attributes (type, scope, etc.). It must support operations like:</p> <ul> <li>Insert a symbol with its attributes</li> <li>Look up a symbol to retrieve its attributes</li> <li>Handle scopes (blocks of code with their own local symbols)</li> <li>Check if a symbol is already defined in the current scope</li> </ul> <p>Symbol tables can be implemented using various data structures like hash tables, trees, or lists, with hash tables being the most common due to their efficiency.</p> <h3 id="implementation">Implementation</h3> <p>Our project uses a sophisticated symbol table that supports multiple scopes and has specialized handling for different types of symbols:</p> <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">class</span> <span class="n">SymbolTable</span> <span class="p">{</span>
+    <span class="n">ScopeTable</span> <span class="o">*</span><span class="n">current</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+    <span class="n">ofstream</span> <span class="o">*</span><span class="n">log</span><span class="p">;</span>
+
+<span class="nl">public:</span>
+    <span class="n">SymbolTable</span><span class="p">(</span><span class="n">ofstream</span> <span class="o">*</span><span class="n">log</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">this</span><span class="o">-&gt;</span><span class="n">log</span> <span class="o">=</span> <span class="n">log</span><span class="p">;</span>
+        <span class="n">enterScope</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="kt">void</span> <span class="n">enterScope</span><span class="p">(</span><span class="kt">int</span> <span class="n">buckets</span> <span class="o">=</span> <span class="n">SYMBOL_TABLE_SIZE</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">ScopeTable</span> <span class="o">*</span><span class="n">st</span> <span class="o">=</span> <span class="n">new</span> <span class="n">ScopeTable</span><span class="p">(</span><span class="n">buckets</span><span class="p">,</span> <span class="n">current</span><span class="p">,</span> <span class="n">log</span><span class="p">);</span>
+        <span class="n">current</span> <span class="o">=</span> <span class="n">st</span><span class="p">;</span>
+        <span class="o">*</span><span class="n">log</span> <span class="o">&lt;&lt;</span> <span class="s">"</span><span class="se">\n</span><span class="s">New ScopeTable #"</span> <span class="o">&lt;&lt;</span> <span class="n">st</span><span class="o">-&gt;</span><span class="n">getID</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">" created"</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kt">void</span> <span class="n">exitScope</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">current</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="n">ScopeTable</span> <span class="o">*</span><span class="n">temp</span> <span class="o">=</span> <span class="n">current</span><span class="p">;</span>
+        <span class="n">current</span> <span class="o">=</span> <span class="n">current</span><span class="o">-&gt;</span><span class="n">getParentScope</span><span class="p">();</span>
+        <span class="n">delete</span> <span class="n">temp</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="n">bool</span> <span class="n">insertSymbol</span><span class="p">(</span><span class="n">string</span> <span class="n">name</span><span class="p">,</span> <span class="n">string</span> <span class="n">type</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">current</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">current</span><span class="o">-&gt;</span><span class="n">insertSymbol</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">type</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="n">bool</span> <span class="n">insertSymbol</span><span class="p">(</span><span class="n">SymbolInfo</span><span class="o">*</span> <span class="n">symbol</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">symbol</span><span class="o">-&gt;</span><span class="n">getIdType</span><span class="p">()</span> <span class="o">==</span> <span class="s">"VARIABLE"</span> <span class="o">||</span> <span class="n">symbol</span><span class="o">-&gt;</span><span class="n">getIdType</span><span class="p">()</span> <span class="o">==</span> <span class="s">"ARRAY"</span><span class="p">)</span> 
+            <span class="n">symbol</span><span class="o">-&gt;</span><span class="n">setAsmVar</span><span class="p">(</span><span class="n">symbol</span><span class="o">-&gt;</span><span class="n">getName</span><span class="p">()</span><span class="o">+</span><span class="n">current</span><span class="o">-&gt;</span><span class="n">getID</span><span class="p">());</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">current</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">){</span>
+            <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">current</span><span class="o">-&gt;</span><span class="n">insertSymbol</span><span class="p">(</span><span class="n">symbol</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="n">SymbolInfo</span> <span class="o">*</span><span class="n">lookup</span><span class="p">(</span><span class="n">string</span> <span class="n">name</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">current</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="n">ScopeTable</span> <span class="o">*</span><span class="n">temp</span> <span class="o">=</span> <span class="n">current</span><span class="p">;</span>
+        <span class="n">SymbolInfo</span> <span class="o">*</span><span class="n">symbol</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+
+        <span class="k">while</span> <span class="p">(</span><span class="n">temp</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">symbol</span> <span class="o">=</span> <span class="n">temp</span><span class="o">-&gt;</span><span class="n">lookUp</span><span class="p">(</span><span class="n">name</span><span class="p">);</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">symbol</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">return</span> <span class="n">symbol</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="n">temp</span> <span class="o">=</span> <span class="n">temp</span><span class="o">-&gt;</span><span class="n">getParentScope</span><span class="p">();</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// More methods...</span>
+<span class="p">};</span>
+</code></pre></div></div> <h3 id="scope-management">Scope Management</h3> <p>A key aspect of the symbol table is scope management. When the parser enters a new block (e.g., a function body or a compound statement), it creates a new scope table:</p> <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kr">inline</span> <span class="kt">void</span> <span class="nf">enterScope</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">st</span><span class="p">.</span><span class="n">enterScope</span><span class="p">();</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">currentFunction</span> <span class="o">!=</span> <span class="s">""</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">SymbolInfo</span> <span class="o">*</span><span class="n">funcVal</span> <span class="o">=</span> <span class="n">st</span><span class="p">.</span><span class="n">lookup</span><span class="p">(</span><span class="n">currentFunction</span><span class="p">);</span>
+        <span class="k">for</span> <span class="p">(</span><span class="n">param</span> <span class="n">p</span> <span class="o">:</span> <span class="n">paramList</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">SymbolInfo</span> <span class="o">*</span><span class="n">sym</span> <span class="o">=</span> <span class="n">new</span> <span class="n">SymbolInfo</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">name</span><span class="p">,</span> <span class="s">"ID"</span><span class="p">);</span>
+            <span class="n">sym</span><span class="o">-&gt;</span><span class="n">setIdType</span><span class="p">(</span><span class="s">"VARIABLE"</span><span class="p">);</span>
+            <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="o">&amp;</span><span class="n">c</span> <span class="o">:</span> <span class="n">p</span><span class="p">.</span><span class="n">type</span><span class="p">)</span>
+                <span class="n">c</span> <span class="o">=</span> <span class="n">toupper</span><span class="p">(</span><span class="n">c</span><span class="p">);</span>
+            <span class="n">sym</span><span class="o">-&gt;</span><span class="n">setVarType</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">type</span><span class="p">);</span>
+            <span class="n">insertSymbol</span><span class="p">(</span><span class="n">sym</span><span class="p">);</span>
+            <span class="n">asmVarList</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">sym</span><span class="o">-&gt;</span><span class="n">getAsmVar</span><span class="p">());</span>
+            <span class="n">funcVal</span><span class="o">-&gt;</span><span class="n">paramSymList</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">sym</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">currentFunction</span> <span class="o">!=</span> <span class="s">"main"</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">// Set up function prologue and epilogue</span>
+            <span class="n">funcVal</span><span class="o">-&gt;</span><span class="n">setFuncStart</span><span class="p">(</span><span class="n">funcVal</span><span class="o">-&gt;</span><span class="n">getName</span><span class="p">()</span> <span class="o">+</span> <span class="s">" PROC</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+            <span class="n">funcVal</span><span class="o">-&gt;</span><span class="n">setFuncStart</span><span class="p">(</span><span class="n">funcVal</span><span class="o">-&gt;</span><span class="n">getFuncStart</span><span class="p">()</span> <span class="o">+</span> <span class="s">"</span><span class="se">\n</span><span class="s">"</span> <span class="o">+</span> <span class="s">"POP return_loc"</span><span class="p">);</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">funcVal</span><span class="o">-&gt;</span><span class="n">paramSymList</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">;</span> <span class="o">--</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">funcVal</span><span class="o">-&gt;</span><span class="n">setFuncStart</span><span class="p">(</span><span class="n">funcVal</span><span class="o">-&gt;</span><span class="n">getFuncStart</span><span class="p">()</span> <span class="o">+</span> <span class="s">"</span><span class="se">\n</span><span class="s">POP "</span> <span class="o">+</span>
+                                    <span class="n">funcVal</span><span class="o">-&gt;</span><span class="n">paramSymList</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">getAsmVar</span><span class="p">());</span>
+            <span class="p">}</span>
+            <span class="n">funcVal</span><span class="o">-&gt;</span><span class="n">setFuncStart</span><span class="p">(</span><span class="n">funcVal</span><span class="o">-&gt;</span><span class="n">getFuncStart</span><span class="p">()</span> <span class="o">+</span> <span class="s">"</span><span class="se">\n</span><span class="s">PUSH BX</span><span class="se">\n</span><span class="s">PUSH DX</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+            <span class="n">funcVal</span><span class="o">-&gt;</span><span class="n">setFuncEnd</span><span class="p">(</span><span class="n">funcVal</span><span class="o">-&gt;</span><span class="n">funcEndLabel</span> <span class="o">+</span> <span class="s">": </span><span class="se">\n</span><span class="s">"</span> <span class="o">+</span>
+                                <span class="s">"POP DX</span><span class="se">\n</span><span class="s">POP BX</span><span class="se">\n</span><span class="s">PUSH return_loc</span><span class="se">\n</span><span class="s">RET</span><span class="se">\n</span><span class="s">"</span> <span class="o">+</span>
+                                <span class="n">funcVal</span><span class="o">-&gt;</span><span class="n">getName</span><span class="p">()</span> <span class="o">+</span> <span class="s">" ENDP</span><span class="se">\n\n</span><span class="s">"</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="n">paramList</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div> <p>When it exits a block, it removes the current scope table:</p> <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kr">inline</span> <span class="kt">void</span> <span class="nf">exitScope</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">st</span><span class="p">.</span><span class="n">printAll</span><span class="p">();</span>
+    <span class="n">st</span><span class="p">.</span><span class="n">exitScope</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div></div> <h3 id="symbol-information">Symbol Information</h3> <p>Each symbol in the table is represented by a SymbolInfo object, which contains detailed information about the symbol:</p> <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">class</span> <span class="n">SymbolInfo</span> <span class="p">{</span>
+    <span class="n">string</span> <span class="n">name</span> <span class="o">=</span> <span class="s">""</span><span class="p">;</span>
+    <span class="n">string</span> <span class="n">type</span> <span class="o">=</span> <span class="s">""</span><span class="p">;</span>
+    <span class="n">string</span> <span class="n">idType</span> <span class="o">=</span> <span class="s">""</span><span class="p">;</span>  <span class="c1">// FUNCTION, VARIABLE, ARRAY</span>
+    <span class="n">string</span> <span class="n">varType</span> <span class="o">=</span> <span class="s">""</span><span class="p">;</span> <span class="c1">// INT, FLOAT, VOID</span>
+    <span class="n">string</span> <span class="n">returnType</span> <span class="o">=</span> <span class="s">""</span><span class="p">;</span> <span class="c1">// INT, FLOAT, VOID</span>
+    <span class="n">bool</span> <span class="n">funcDefined</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">arrSize</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">arrIndex</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">defaultInt</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="kt">float</span> <span class="n">defaultFloat</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">.</span><span class="mi">0</span><span class="p">;</span>
+    <span class="n">SymbolInfo</span> <span class="o">*</span><span class="n">next</span><span class="p">;</span>
+    <span class="n">string</span> <span class="n">code</span> <span class="o">=</span> <span class="s">" "</span><span class="p">;</span>
+    <span class="n">string</span> <span class="n">asmVar</span> <span class="o">=</span> <span class="s">""</span><span class="p">;</span>
+    <span class="n">bool</span> <span class="n">isConst</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+    <span class="n">string</span> <span class="n">funcStart</span><span class="p">;</span>
+    <span class="n">string</span> <span class="n">funcEnd</span><span class="p">;</span>
+    <span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">asmVarList</span><span class="p">;</span>
+
+<span class="nl">public:</span>
+    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">intData</span><span class="p">;</span>
+    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span> <span class="n">floatData</span><span class="p">;</span>
+    <span class="n">bool</span> <span class="n">isDummy</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+    <span class="n">SymbolInfo</span> <span class="o">*</span><span class="n">real</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+    <span class="n">vector</span><span class="o">&lt;</span><span class="n">SymbolInfo</span> <span class="o">*&gt;</span> <span class="n">paramSymList</span><span class="p">;</span>
+    <span class="n">vector</span><span class="o">&lt;</span><span class="n">SymbolInfo</span> <span class="o">*&gt;</span> <span class="n">varList</span><span class="p">;</span>
+    <span class="n">string</span> <span class="n">funcEndLabel</span> <span class="o">=</span> <span class="s">""</span><span class="p">;</span>
+    <span class="n">string</span> <span class="n">arrAsmVar</span> <span class="o">=</span> <span class="s">""</span><span class="p">;</span>
+    <span class="n">bool</span> <span class="n">isFunctionCall</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+
+    <span class="c1">// Methods...</span>
+<span class="p">};</span>
+</code></pre></div></div> <p>This rich structure allows the compiler to handle complex language features like arrays, functions with parameters, and type checking.</p> <h2 id="type-checking-and-semantic-analysis">Type Checking and Semantic Analysis</h2> <h3 id="theoretical-background-3">Theoretical Background</h3> <p>Type checking ensures that operations are applied to compatible operands. For example, you can’t add a string to a number or call a non-function. Type systems can be:</p> <ul> <li> <strong>Static</strong> (checked at compile time) vs. <strong>dynamic</strong> (checked at runtime)</li> <li> <strong>Strong</strong> (few implicit conversions) vs. <strong>weak</strong> (many implicit conversions)</li> <li> <strong>Nominal</strong> (type names matter) vs. <strong>structural</strong> (structure matters)</li> </ul> <p>C has a static, relatively weak, nominal type system.</p> <h3 id="implementation-1">Implementation</h3> <p>Our compiler performs type checking during parsing. For example, when handling binary operations:</p> <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kr">inline</span> <span class="n">SymbolInfo</span> <span class="o">*</span><span class="nf">handleADDOP</span><span class="p">(</span><span class="n">SymbolInfo</span> <span class="o">*</span><span class="n">sym1</span><span class="p">,</span> <span class="n">SymbolInfo</span> <span class="o">*</span><span class="n">op</span><span class="p">,</span> <span class="n">SymbolInfo</span> <span class="o">*</span><span class="n">sym2</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">SymbolInfo</span> <span class="o">*</span><span class="n">result</span> <span class="o">=</span> <span class="n">new</span> <span class="n">SymbolInfo</span><span class="p">(</span><span class="s">""</span><span class="p">,</span> <span class="s">""</span><span class="p">);</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">sym1</span><span class="o">-&gt;</span><span class="n">getVarType</span><span class="p">()</span> <span class="o">==</span> <span class="s">"VOID"</span> <span class="o">||</span> <span class="n">sym2</span><span class="o">-&gt;</span><span class="n">getVarType</span><span class="p">()</span> <span class="o">==</span> <span class="s">"VOID"</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">printError</span><span class="p">(</span><span class="s">"Operand of void type"</span><span class="p">);</span>
+        <span class="k">return</span> <span class="n">nullSym</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">sym1</span><span class="o">-&gt;</span><span class="n">getVarType</span><span class="p">()</span> <span class="o">==</span> <span class="s">"FLOAT"</span> <span class="o">||</span> <span class="n">sym2</span><span class="o">-&gt;</span><span class="n">getVarType</span><span class="p">()</span> <span class="o">==</span> <span class="s">"FLOAT"</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">result</span><span class="o">-&gt;</span><span class="n">setVarType</span><span class="p">(</span><span class="s">"FLOAT"</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="n">result</span><span class="o">-&gt;</span><span class="n">setVarType</span><span class="p">(</span><span class="s">"INT"</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="n">result</span><span class="o">-&gt;</span><span class="n">setIdType</span><span class="p">(</span><span class="s">"VARIABLE"</span><span class="p">);</span>
+
+    <span class="c1">// Code generation...</span>
+    
+    <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div> <p>This function checks that neither operand is void, determines the result type based on the operand types, and generates appropriate code.</p> <h2 id="intermediate-code-generation">Intermediate Code Generation</h2> <h3 id="theoretical-background-4">Theoretical Background</h3> <p>Intermediate code is a representation of the program that’s lower-level than the source code but higher-level than machine code. Common forms include:</p> <ul> <li> <strong>Three-address code</strong>: Operations with at most three operands per instruction</li> <li> <strong>Static single assignment (SSA)</strong>: Each variable is assigned exactly once</li> <li> <strong>Abstract syntax tree (AST)</strong>: A tree representation of the program</li> <li> <strong>Control flow graph (CFG)</strong>: A graph showing the flow of control</li> </ul> <p>Our compiler generates a form of three-address code, which is then translated to x86 assembly.</p> <h3 id="register-allocation">Register Allocation</h3> <p>An important aspect of code generation is register allocation: deciding which values to keep in registers and which to store in memory. Our compiler uses a simple approach where temporary values are assigned to registers or memory locations:</p> <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">class</span> <span class="n">VarManager</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">size</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">stack</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">free</span><span class="p">;</span>
+
+<span class="nl">public:</span>
+    <span class="n">string</span> <span class="n">getTempVar</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">string</span> <span class="n">tempVar</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">free</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span> <span class="p">{</span>
+            <span class="n">tempVar</span> <span class="o">=</span> <span class="s">"temp"</span> <span class="o">+</span> <span class="n">to_string</span><span class="p">(</span><span class="n">size</span><span class="p">);</span>
+            <span class="n">size</span><span class="o">++</span><span class="p">;</span>
+            <span class="n">asmVarList</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">tempVar</span><span class="p">);</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="n">tempVar</span> <span class="o">=</span> <span class="n">free</span><span class="p">.</span><span class="n">top</span><span class="p">();</span>
+            <span class="n">free</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">tempVar</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kt">void</span> <span class="n">freeTempVar</span><span class="p">(</span><span class="n">string</span> <span class="n">tempVar</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">tempVar</span><span class="p">.</span><span class="n">substr</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span> <span class="o">==</span> <span class="s">"temp"</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">free</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">tempVar</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="kt">int</span> <span class="n">getSize</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="n">size</span><span class="p">;</span> <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div></div> <p>This class manages temporary variables, reusing them when possible to minimize memory usage.</p> <h3 id="code-generation-for-different-constructs">Code Generation for Different Constructs</h3> <p>Let’s look at how our compiler generates code for various language constructs:</p> <h4 id="variables-and-array-accesses">Variables and Array Accesses</h4> <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kr">inline</span> <span class="n">SymbolInfo</span> <span class="o">*</span><span class="nf">getArrayIndexVar</span><span class="p">(</span><span class="n">SymbolInfo</span> <span class="o">*</span><span class="n">arr</span><span class="p">,</span> <span class="n">SymbolInfo</span> <span class="o">*</span><span class="n">index</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">SymbolInfo</span> <span class="o">*</span><span class="n">arrIdxVar</span> <span class="o">=</span> <span class="n">st</span><span class="p">.</span><span class="n">lookup</span><span class="p">(</span><span class="n">arr</span><span class="o">-&gt;</span><span class="n">getName</span><span class="p">());</span>
+    <span class="n">SymbolInfo</span> <span class="o">*</span><span class="n">var</span><span class="p">;</span>
+    
+    <span class="c1">// Error checking...</span>
+    
+    <span class="n">var</span> <span class="o">=</span> <span class="n">new</span> <span class="n">SymbolInfo</span><span class="p">(</span><span class="o">*</span><span class="n">arrIdxVar</span><span class="p">);</span>
+    <span class="n">var</span><span class="o">-&gt;</span><span class="n">setArrIndex</span><span class="p">(</span><span class="n">index</span><span class="o">-&gt;</span><span class="n">getIntValue</span><span class="p">());</span>
+    <span class="n">var</span><span class="o">-&gt;</span><span class="n">setName</span><span class="p">(</span><span class="n">arr</span><span class="o">-&gt;</span><span class="n">getName</span><span class="p">()</span> <span class="o">+</span> <span class="s">"["</span> <span class="o">+</span> <span class="n">to_string</span><span class="p">(</span><span class="n">index</span><span class="o">-&gt;</span><span class="n">getIntValue</span><span class="p">())</span> <span class="o">+</span> <span class="s">"]"</span><span class="p">);</span>
+    <span class="n">var</span><span class="o">-&gt;</span><span class="n">setReal</span><span class="p">(</span><span class="n">arrIdxVar</span><span class="p">);</span>
+
+    <span class="n">var</span><span class="o">-&gt;</span><span class="n">addCode</span><span class="p">(</span><span class="n">index</span><span class="o">-&gt;</span><span class="n">getCode</span><span class="p">());</span>
+    <span class="n">var</span><span class="o">-&gt;</span><span class="n">addCode</span><span class="p">(</span><span class="s">"MOV BX, "</span> <span class="o">+</span> <span class="n">index</span><span class="o">-&gt;</span><span class="n">getAsmVar</span><span class="p">());</span>
+    <span class="n">var</span><span class="o">-&gt;</span><span class="n">addCode</span><span class="p">(</span><span class="s">"SHL BX, 1"</span><span class="p">);</span>  <span class="c1">// Multiply by 2 (size of int)</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">SIorBX</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">var</span><span class="o">-&gt;</span><span class="n">addCode</span><span class="p">(</span><span class="s">"MOV SI, BX"</span><span class="p">);</span>
+        <span class="n">var</span><span class="o">-&gt;</span><span class="n">setAsmVar</span><span class="p">(</span><span class="n">arrIdxVar</span><span class="o">-&gt;</span><span class="n">getAsmVar</span><span class="p">()</span> <span class="o">+</span> <span class="s">"[SI]"</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="n">var</span><span class="o">-&gt;</span><span class="n">setAsmVar</span><span class="p">(</span><span class="n">arrIdxVar</span><span class="o">-&gt;</span><span class="n">getAsmVar</span><span class="p">()</span> <span class="o">+</span> <span class="s">"[BX]"</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="n">vm</span><span class="p">.</span><span class="n">freeTempVar</span><span class="p">(</span><span class="n">index</span><span class="o">-&gt;</span><span class="n">getAsmVar</span><span class="p">());</span>
+    <span class="n">var</span><span class="o">-&gt;</span><span class="n">arrAsmVar</span> <span class="o">=</span> <span class="n">var</span><span class="o">-&gt;</span><span class="n">getAsmVar</span><span class="p">();</span>
+
+    <span class="n">SIorBX</span> <span class="o">=</span> <span class="o">!</span><span class="n">SIorBX</span><span class="p">;</span>  <span class="c1">// Alternate between BX and SI for nested array accesses</span>
+    
+    <span class="k">return</span> <span class="n">var</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div> <p>This function generates code to access an array element. It computes the byte offset (<code class="language-plaintext highlighter-rouge">SHL BX, 1</code> multiplies by 2 since each int is 2 bytes) and uses either BX or SI as the index register to allow for nested array accesses.</p> <h4 id="assignment">Assignment</h4> <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kr">inline</span> <span class="n">SymbolInfo</span> <span class="o">*</span><span class="nf">handle_assign</span><span class="p">(</span><span class="n">SymbolInfo</span> <span class="o">*</span><span class="n">sym1</span><span class="p">,</span> <span class="n">SymbolInfo</span> <span class="o">*</span><span class="n">sym2</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">SymbolInfo</span> <span class="o">*</span><span class="n">result</span><span class="p">;</span>
+
+    <span class="c1">// Type checking...</span>
+
+    <span class="n">result</span> <span class="o">=</span> <span class="n">new</span> <span class="n">SymbolInfo</span><span class="p">(</span><span class="o">*</span><span class="n">sym1</span><span class="p">);</span>
+    <span class="n">result</span><span class="o">-&gt;</span><span class="n">setName</span><span class="p">(</span><span class="n">sym1</span><span class="o">-&gt;</span><span class="n">getName</span><span class="p">()</span> <span class="o">+</span> <span class="s">"="</span> <span class="o">+</span> <span class="n">sym2</span><span class="o">-&gt;</span><span class="n">getName</span><span class="p">());</span>
+    <span class="n">result</span><span class="o">-&gt;</span><span class="n">setIdType</span><span class="p">(</span><span class="s">"VARIABLE"</span><span class="p">);</span>
+
+    <span class="c1">// Generate code</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">sym2</span><span class="o">-&gt;</span><span class="n">getIsConst</span><span class="p">())</span> <span class="p">{</span>
+        <span class="n">result</span><span class="o">-&gt;</span><span class="n">setCode</span><span class="p">(</span><span class="n">sym1</span><span class="o">-&gt;</span><span class="n">getCode</span><span class="p">()</span> <span class="o">+</span> <span class="s">"</span><span class="se">\n</span><span class="s">"</span> <span class="o">+</span> <span class="n">sym2</span><span class="o">-&gt;</span><span class="n">getCode</span><span class="p">()</span> <span class="o">+</span> <span class="s">"</span><span class="se">\n</span><span class="s">"</span> <span class="o">+</span>
+                        <span class="n">constToMem</span><span class="p">(</span><span class="n">sym1</span><span class="p">,</span> <span class="n">sym2</span><span class="p">));</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">sym1</span><span class="o">-&gt;</span><span class="n">isArray</span><span class="p">())</span> <span class="p">{</span>
+        <span class="n">result</span><span class="o">-&gt;</span><span class="n">setCode</span><span class="p">(</span><span class="n">sym2</span><span class="o">-&gt;</span><span class="n">getCode</span><span class="p">());</span>
+        <span class="n">result</span><span class="o">-&gt;</span><span class="n">addCode</span><span class="p">(</span><span class="n">sym1</span><span class="o">-&gt;</span><span class="n">getCode</span><span class="p">());</span>
+        <span class="n">result</span><span class="o">-&gt;</span><span class="n">addCode</span><span class="p">(</span><span class="s">"MOV AX, "</span> <span class="o">+</span> <span class="n">sym2</span><span class="o">-&gt;</span><span class="n">getAsmVar</span><span class="p">());</span>
+        <span class="n">result</span><span class="o">-&gt;</span><span class="n">addCode</span><span class="p">(</span><span class="s">"MOV "</span> <span class="o">+</span> <span class="n">sym1</span><span class="o">-&gt;</span><span class="n">arrAsmVar</span> <span class="o">+</span> <span class="s">", AX"</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="n">result</span><span class="o">-&gt;</span><span class="n">setCode</span><span class="p">(</span><span class="n">sym1</span><span class="o">-&gt;</span><span class="n">getCode</span><span class="p">()</span> <span class="o">+</span> <span class="s">"</span><span class="se">\n</span><span class="s">"</span> <span class="o">+</span> <span class="n">sym2</span><span class="o">-&gt;</span><span class="n">getCode</span><span class="p">()</span> <span class="o">+</span> <span class="s">"</span><span class="se">\n</span><span class="s">"</span> <span class="o">+</span>
+                        <span class="n">memToMem</span><span class="p">(</span><span class="n">sym1</span><span class="p">,</span> <span class="n">sym2</span><span class="p">));</span>
+    <span class="p">}</span>
+
+    <span class="n">result</span><span class="o">-&gt;</span><span class="n">setAsmVar</span><span class="p">(</span><span class="n">sym1</span><span class="o">-&gt;</span><span class="n">getAsmVar</span><span class="p">());</span>
+    <span class="n">vm</span><span class="p">.</span><span class="n">freeTempVar</span><span class="p">(</span><span class="n">sym2</span><span class="o">-&gt;</span><span class="n">getAsmVar</span><span class="p">());</span>
+    
+    <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div> <p>This function generates code for assignment statements. It handles different cases (constant values, arrays, variables) and generates appropriate MOV instructions.</p> <h4 id="if-else-statements">If-Else Statements</h4> <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kr">inline</span> <span class="n">SymbolInfo</span> <span class="o">*</span><span class="nf">handle_if_else</span><span class="p">(</span><span class="n">SymbolInfo</span> <span class="o">*</span><span class="n">exp</span><span class="p">,</span> <span class="n">SymbolInfo</span> <span class="o">*</span><span class="n">ifstmnt</span><span class="p">,</span> <span class="n">SymbolInfo</span> <span class="o">*</span><span class="n">elsestmnt</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">SymbolInfo</span> <span class="o">*</span><span class="n">result</span> <span class="o">=</span>
+        <span class="n">new</span> <span class="n">SymbolInfo</span><span class="p">(</span><span class="s">"if("</span> <span class="o">+</span> <span class="n">exp</span><span class="o">-&gt;</span><span class="n">getName</span><span class="p">()</span> <span class="o">+</span> <span class="s">")"</span> <span class="o">+</span> <span class="n">ifstmnt</span><span class="o">-&gt;</span><span class="n">getName</span><span class="p">()</span> <span class="o">+</span>
+                        <span class="s">"else "</span> <span class="o">+</span> <span class="n">elsestmnt</span><span class="o">-&gt;</span><span class="n">getName</span><span class="p">(),</span>
+                    <span class="s">"NON_TERMINAL"</span><span class="p">);</span>
+
+    <span class="n">string</span> <span class="n">label1</span> <span class="o">=</span> <span class="n">newLabel</span><span class="p">();</span>  <span class="c1">// Label for else part</span>
+    <span class="n">string</span> <span class="n">label2</span> <span class="o">=</span> <span class="n">newLabel</span><span class="p">();</span>  <span class="c1">// Label for end of if-else</span>
+
+    <span class="n">result</span><span class="o">-&gt;</span><span class="n">setCode</span><span class="p">(</span><span class="n">exp</span><span class="o">-&gt;</span><span class="n">getCode</span><span class="p">());</span>
+    <span class="n">result</span><span class="o">-&gt;</span><span class="n">addCode</span><span class="p">(</span><span class="s">"MOV AX, "</span> <span class="o">+</span> <span class="n">exp</span><span class="o">-&gt;</span><span class="n">getAsmVar</span><span class="p">());</span>
+    <span class="n">result</span><span class="o">-&gt;</span><span class="n">addCode</span><span class="p">(</span><span class="s">"CMP AX, 1"</span><span class="p">);</span>
+    <span class="n">result</span><span class="o">-&gt;</span><span class="n">addCode</span><span class="p">(</span><span class="s">"JNE "</span> <span class="o">+</span> <span class="n">label1</span><span class="p">);</span>  <span class="c1">// Jump to else if condition is false</span>
+    <span class="n">result</span><span class="o">-&gt;</span><span class="n">addCode</span><span class="p">(</span><span class="n">ifstmnt</span><span class="o">-&gt;</span><span class="n">getCode</span><span class="p">());</span>
+    <span class="n">result</span><span class="o">-&gt;</span><span class="n">addCode</span><span class="p">(</span><span class="s">"JMP "</span> <span class="o">+</span> <span class="n">label2</span><span class="p">);</span>  <span class="c1">// Skip else part</span>
+    <span class="n">result</span><span class="o">-&gt;</span><span class="n">addCode</span><span class="p">(</span><span class="n">label1</span> <span class="o">+</span> <span class="s">":"</span><span class="p">);</span>      <span class="c1">// Start of else part</span>
+    <span class="n">result</span><span class="o">-&gt;</span><span class="n">addCode</span><span class="p">(</span><span class="n">elsestmnt</span><span class="o">-&gt;</span><span class="n">getCode</span><span class="p">());</span>
+    <span class="n">result</span><span class="o">-&gt;</span><span class="n">addCode</span><span class="p">(</span><span class="n">label2</span> <span class="o">+</span> <span class="s">":</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>    <span class="c1">// End of if-else</span>
+    <span class="n">vm</span><span class="p">.</span><span class="n">freeTempVar</span><span class="p">(</span><span class="n">exp</span><span class="o">-&gt;</span><span class="n">getAsmVar</span><span class="p">());</span>
+
+    <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div> <p>This function generates code for if-else statements. It creates two labels (one for the else part, one for the end), generates code to evaluate the condition and jump accordingly, and includes the code for both branches.</p> <h4 id="for-loops">For Loops</h4> <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kr">inline</span> <span class="n">SymbolInfo</span> <span class="o">*</span><span class="nf">handle_for</span><span class="p">(</span><span class="n">SymbolInfo</span> <span class="o">*</span><span class="n">init</span><span class="p">,</span> <span class="n">SymbolInfo</span> <span class="o">*</span><span class="n">termimation</span><span class="p">,</span> <span class="n">SymbolInfo</span> <span class="o">*</span><span class="n">inc</span><span class="p">,</span> <span class="n">SymbolInfo</span> <span class="o">*</span><span class="n">statement</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">SymbolInfo</span> <span class="o">*</span><span class="n">result</span> <span class="o">=</span>
+        <span class="n">new</span> <span class="n">SymbolInfo</span><span class="p">(</span><span class="s">"for("</span> <span class="o">+</span> <span class="n">init</span><span class="o">-&gt;</span><span class="n">getName</span><span class="p">()</span> <span class="o">+</span> <span class="n">termimation</span><span class="o">-&gt;</span><span class="n">getName</span><span class="p">()</span> <span class="o">+</span>
+                        <span class="n">inc</span><span class="o">-&gt;</span><span class="n">getName</span><span class="p">()</span> <span class="o">+</span> <span class="s">")"</span> <span class="o">+</span> <span class="n">statement</span><span class="o">-&gt;</span><span class="n">getName</span><span class="p">(),</span>
+                    <span class="s">"NON_TERMINAL"</span><span class="p">);</span>
+
+    <span class="n">string</span> <span class="n">loop</span> <span class="o">=</span> <span class="n">newLabel</span><span class="p">();</span>      <span class="c1">// Start of loop</span>
+    <span class="n">string</span> <span class="n">loopExit</span> <span class="o">=</span> <span class="n">newLabel</span><span class="p">();</span>  <span class="c1">// End of loop</span>
+
+    <span class="n">result</span><span class="o">-&gt;</span><span class="n">addCode</span><span class="p">(</span><span class="s">";for loop start"</span><span class="p">);</span>
+    <span class="n">result</span><span class="o">-&gt;</span><span class="n">addCode</span><span class="p">(</span><span class="n">init</span><span class="o">-&gt;</span><span class="n">getCode</span><span class="p">());</span>     <span class="c1">// Initialization</span>
+    <span class="n">result</span><span class="o">-&gt;</span><span class="n">addCode</span><span class="p">(</span><span class="n">loop</span> <span class="o">+</span> <span class="s">":"</span><span class="p">);</span>          <span class="c1">// Loop start label</span>
+    <span class="n">result</span><span class="o">-&gt;</span><span class="n">addCode</span><span class="p">(</span><span class="n">termimation</span><span class="o">-&gt;</span><span class="n">getCode</span><span class="p">());</span> <span class="c1">// Condition</span>
+    <span class="n">result</span><span class="o">-&gt;</span><span class="n">addCode</span><span class="p">(</span><span class="s">"MOV AX, "</span> <span class="o">+</span> <span class="n">termimation</span><span class="o">-&gt;</span><span class="n">getAsmVar</span><span class="p">());</span>
+    <span class="n">result</span><span class="o">-&gt;</span><span class="n">addCode</span><span class="p">(</span><span class="s">"CMP AX, 0"</span><span class="p">);</span>
+    <span class="n">result</span><span class="o">-&gt;</span><span class="n">addCode</span><span class="p">(</span><span class="s">"JE "</span> <span class="o">+</span> <span class="n">loopExit</span><span class="p">);</span>    <span class="c1">// Exit if condition is false</span>
+    <span class="n">result</span><span class="o">-&gt;</span><span class="n">addCode</span><span class="p">(</span><span class="n">statement</span><span class="o">-&gt;</span><span class="n">getCode</span><span class="p">());</span> <span class="c1">// Loop body</span>
+    <span class="n">result</span><span class="o">-&gt;</span><span class="n">addCode</span><span class="p">(</span><span class="n">inc</span><span class="o">-&gt;</span><span class="n">getCode</span><span class="p">());</span>      <span class="c1">// Increment</span>
+    <span class="n">result</span><span class="o">-&gt;</span><span class="n">addCode</span><span class="p">(</span><span class="s">"JMP "</span> <span class="o">+</span> <span class="n">loop</span><span class="p">);</span>       <span class="c1">// Jump back to start</span>
+    <span class="n">result</span><span class="o">-&gt;</span><span class="n">addCode</span><span class="p">(</span><span class="n">loopExit</span> <span class="o">+</span> <span class="s">":"</span><span class="p">);</span>      <span class="c1">// Loop exit label</span>
+    <span class="n">result</span><span class="o">-&gt;</span><span class="n">addCode</span><span class="p">(</span><span class="s">";for loop end"</span><span class="p">);</span>
+    
+    <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div> <p>This function generates code for for-loops. It creates two labels (loop start and loop exit), generates code for initialization, condition checking, loop body, and increment, and adds jumps to create the loop structure.</p> <h4 id="function-calls">Function Calls</h4> <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kr">inline</span> <span class="n">SymbolInfo</span> <span class="o">*</span><span class="nf">handle_function</span><span class="p">(</span><span class="n">SymbolInfo</span> <span class="o">*</span><span class="n">funcVal</span><span class="p">,</span> <span class="n">SymbolInfo</span> <span class="o">*</span><span class="n">argList</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">SymbolInfo</span> <span class="o">*</span><span class="n">func</span> <span class="o">=</span> <span class="n">st</span><span class="p">.</span><span class="n">lookup</span><span class="p">(</span><span class="n">funcVal</span><span class="o">-&gt;</span><span class="n">getName</span><span class="p">());</span>
+    <span class="n">SymbolInfo</span> <span class="o">*</span><span class="n">sym</span> <span class="o">=</span> <span class="n">new</span> <span class="n">SymbolInfo</span><span class="p">(</span>
+        <span class="n">funcVal</span><span class="o">-&gt;</span><span class="n">getName</span><span class="p">()</span> <span class="o">+</span> <span class="s">"("</span> <span class="o">+</span> <span class="n">argList</span><span class="o">-&gt;</span><span class="n">getName</span><span class="p">()</span> <span class="o">+</span> <span class="s">")"</span><span class="p">,</span> <span class="s">"NON_TERMINAL"</span><span class="p">);</span>
+
+    <span class="c1">// Error checking...</span>
+
+    <span class="n">sym</span><span class="o">-&gt;</span><span class="n">addCode</span><span class="p">(</span><span class="n">argList</span><span class="o">-&gt;</span><span class="n">getCode</span><span class="p">());</span>
+
+    <span class="c1">// Save state for recursive calls</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">func</span><span class="o">-&gt;</span><span class="n">paramSymList</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">sym</span><span class="o">-&gt;</span><span class="n">addCode</span><span class="p">(</span><span class="s">"PUSH "</span> <span class="o">+</span> <span class="n">func</span><span class="o">-&gt;</span><span class="n">paramSymList</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">getAsmVar</span><span class="p">());</span>
+    <span class="p">}</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">func</span><span class="o">-&gt;</span><span class="n">varList</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">sym</span><span class="o">-&gt;</span><span class="n">addCode</span><span class="p">(</span><span class="s">"PUSH "</span> <span class="o">+</span> <span class="n">func</span><span class="o">-&gt;</span><span class="n">varList</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">getAsmVar</span><span class="p">());</span>
+    <span class="p">}</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">vm</span><span class="p">.</span><span class="n">getSize</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">sym</span><span class="o">-&gt;</span><span class="n">addCode</span><span class="p">(</span><span class="s">"PUSH temp"</span> <span class="o">+</span> <span class="n">to_string</span><span class="p">(</span><span class="n">i</span><span class="p">));</span>
+    <span class="p">}</span>
+
+    <span class="c1">// Push return address and arguments</span>
+    <span class="n">sym</span><span class="o">-&gt;</span><span class="n">addCode</span><span class="p">(</span><span class="s">"PUSH return_loc"</span><span class="p">);</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">func</span><span class="o">-&gt;</span><span class="n">paramSymList</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">sym</span><span class="o">-&gt;</span><span class="n">addCode</span><span class="p">(</span><span class="s">"PUSH "</span> <span class="o">+</span> <span class="n">asmArgList</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+        <span class="n">vm</span><span class="p">.</span><span class="n">freeTempVar</span><span class="p">(</span><span class="n">asmArgList</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+    <span class="p">}</span>
+    <span class="n">asmArgList</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span>
+
+    <span class="c1">// Call function</span>
+    <span class="n">sym</span><span class="o">-&gt;</span><span class="n">addCode</span><span class="p">(</span><span class="s">"CALL "</span> <span class="o">+</span> <span class="n">funcVal</span><span class="o">-&gt;</span><span class="n">getName</span><span class="p">());</span>
+    <span class="n">sym</span><span class="o">-&gt;</span><span class="n">addCode</span><span class="p">(</span><span class="s">"POP return_loc"</span><span class="p">);</span>
+
+    <span class="c1">// Restore saved state</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">vm</span><span class="p">.</span><span class="n">getSize</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">sym</span><span class="o">-&gt;</span><span class="n">addCode</span><span class="p">(</span><span class="s">"POP temp"</span> <span class="o">+</span> <span class="n">to_string</span><span class="p">(</span><span class="n">i</span><span class="p">));</span>
+    <span class="p">}</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">func</span><span class="o">-&gt;</span><span class="n">varList</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">sym</span><span class="o">-&gt;</span><span class="n">addCode</span><span class="p">(</span><span class="s">"POP "</span> <span class="o">+</span> <span class="n">func</span><span class="o">-&gt;</span><span class="n">varList</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">getAsmVar</span><span class="p">());</span>
+    <span class="p">}</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">func</span><span class="o">-&gt;</span><span class="n">paramSymList</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">sym</span><span class="o">-&gt;</span><span class="n">addCode</span><span class="p">(</span><span class="s">"POP "</span> <span class="o">+</span> <span class="n">func</span><span class="o">-&gt;</span><span class="n">paramSymList</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">getAsmVar</span><span class="p">());</span>
+    <span class="p">}</span>
+
+    <span class="n">sym</span><span class="o">-&gt;</span><span class="n">isFunctionCall</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+    <span class="n">sym</span><span class="o">-&gt;</span><span class="n">setAsmVar</span><span class="p">(</span><span class="s">"CX"</span><span class="p">);</span>  <span class="c1">// Return value in CX</span>
+    <span class="n">sym</span><span class="o">-&gt;</span><span class="n">setIdType</span><span class="p">(</span><span class="s">"VARIABLE"</span><span class="p">);</span>
+    <span class="n">sym</span><span class="o">-&gt;</span><span class="n">setVarType</span><span class="p">(</span><span class="s">"INT"</span><span class="p">);</span>
+    
+    <span class="k">return</span> <span class="n">sym</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div> <p>This function generates code for function calls. It saves the current state (for recursive calls), pushes arguments and the return address, calls the function, and restores the state afterward. The function’s return value is placed in the CX register.</p> <h2 id="assembly-code-generation-and-optimization">Assembly Code Generation and Optimization</h2> <h3 id="x86-assembly-basics">x86 Assembly Basics</h3> <p>x86 assembly language is a low-level programming language specific to the x86 family of processors. It uses:</p> <ul> <li> <strong>Registers</strong>: Small, fast storage locations in the CPU (AX, BX, CX, DX, SI, DI, BP, SP, etc.)</li> <li> <strong>Memory operands</strong>: Addresses in memory, often with complex addressing modes</li> <li> <strong>Instructions</strong>: Operations like MOV, ADD, SUB, MUL, DIV, JMP, CALL, etc.</li> <li> <strong>Directives</strong>: Instructions to the assembler, like .DATA, .CODE, PROC, ENDP, etc.</li> </ul> <h3 id="data-segment">Data Segment</h3> <p>The data segment contains all variables and constants. Our compiler generates it like this:</p> <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kr">inline</span> <span class="kt">void</span> <span class="nf">addDataSegment</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">code</span> <span class="o">&lt;&lt;</span> <span class="s">".MODEL MEDIUM </span><span class="se">\n</span><span class="s">.STACK 100H </span><span class="se">\n</span><span class="s">.DATA"</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+
+    <span class="n">asmVarList</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="s">"return_loc"</span><span class="p">);</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">string</span> <span class="n">s</span> <span class="o">:</span> <span class="n">asmVarList</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">code</span> <span class="o">&lt;&lt;</span> <span class="n">s</span> <span class="o">&lt;&lt;</span> <span class="s">" DW ?"</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="n">p</span> <span class="o">:</span> <span class="n">asmArrList</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">code</span> <span class="o">&lt;&lt;</span> <span class="n">p</span><span class="p">.</span><span class="n">first</span> <span class="o">&lt;&lt;</span> <span class="s">" DW "</span> <span class="o">&lt;&lt;</span> <span class="n">p</span><span class="p">.</span><span class="n">second</span> <span class="o">&lt;&lt;</span> <span class="s">" DUP (?)"</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div> <p>This creates a <code class="language-plaintext highlighter-rouge">.DATA</code> section with all variables (<code class="language-plaintext highlighter-rouge">DW ?</code> for uninitialized words) and arrays (<code class="language-plaintext highlighter-rouge">DUP (?)</code> for arrays of uninitialized words).</p> <h3 id="code-segment">Code Segment</h3> <p>The code segment contains the executable instructions. Our compiler generates it like this:</p> <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kr">inline</span> <span class="kt">void</span> <span class="nf">startCodeSegment</span><span class="p">()</span> <span class="p">{</span> <span class="n">code</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span> <span class="o">&lt;&lt;</span> <span class="s">".CODE"</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span> <span class="p">}</span>
+
+<span class="kr">inline</span> <span class="kt">void</span> <span class="nf">endCodeSegment</span><span class="p">()</span> <span class="p">{</span> <span class="n">code</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span> <span class="o">&lt;&lt;</span> <span class="s">"END MAIN</span><span class="se">\n</span><span class="s">"</span><span class="p">;</span> <span class="p">}</span>
+</code></pre></div></div> <p>The <code class="language-plaintext highlighter-rouge">.CODE</code> directive starts the code segment, and <code class="language-plaintext highlighter-rouge">END MAIN</code> marks the end of the program, with MAIN as the entry point.</p> <h3 id="function-prologue-and-epilogue">Function Prologue and Epilogue</h3> <p>Each function needs setup and cleanup code:</p> <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Function prologue</span>
+<span class="n">funcVal</span><span class="o">-&gt;</span><span class="n">setFuncStart</span><span class="p">(</span><span class="n">funcVal</span><span class="o">-&gt;</span><span class="n">getName</span><span class="p">()</span> <span class="o">+</span> <span class="s">" PROC</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+<span class="n">funcVal</span><span class="o">-&gt;</span><span class="n">setFuncStart</span><span class="p">(</span><span class="n">funcVal</span><span class="o">-&gt;</span><span class="n">getFuncStart</span><span class="p">()</span> <span class="o">+</span> <span class="s">"</span><span class="se">\n</span><span class="s">"</span> <span class="o">+</span> <span class="s">"POP return_loc"</span><span class="p">);</span>
+<span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">funcVal</span><span class="o">-&gt;</span><span class="n">paramSymList</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">;</span> <span class="o">--</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">funcVal</span><span class="o">-&gt;</span><span class="n">setFuncStart</span><span class="p">(</span><span class="n">funcVal</span><span class="o">-&gt;</span><span class="n">getFuncStart</span><span class="p">()</span> <span class="o">+</span> <span class="s">"</span><span class="se">\n</span><span class="s">POP "</span> <span class="o">+</span>
+                        <span class="n">funcVal</span><span class="o">-&gt;</span><span class="n">paramSymList</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">getAsmVar</span><span class="p">());</span>
+<span class="p">}</span>
+<span class="n">funcVal</span><span class="o">-&gt;</span><span class="n">setFuncStart</span><span class="p">(</span><span class="n">funcVal</span><span class="o">-&gt;</span><span class="n">getFuncStart</span><span class="p">()</span> <span class="o">+</span> <span class="s">"</span><span class="se">\n</span><span class="s">PUSH BX</span><span class="se">\n</span><span class="s">PUSH DX</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+
+<span class="c1">// Function epilogue</span>
+<span class="n">funcVal</span><span class="o">-&gt;</span><span class="n">setFuncEnd</span><span class="p">(</span><span class="n">funcVal</span><span class="o">-&gt;</span><span class="n">funcEndLabel</span> <span class="o">+</span> <span class="s">": </span><span class="se">\n</span><span class="s">"</span> <span class="o">+</span>
+                    <span class="s">"POP DX</span><span class="se">\n</span><span class="s">POP BX</span><span class="se">\n</span><span class="s">PUSH return_loc</span><span class="se">\n</span><span class="s">RET</span><span class="se">\n</span><span class="s">"</span> <span class="o">+</span>
+                    <span class="n">funcVal</span><span class="o">-&gt;</span><span class="n">getName</span><span class="p">()</span> <span class="o">+</span> <span class="s">" ENDP</span><span class="se">\n\n</span><span class="s">"</span><span class="p">);</span>
+</code></pre></div></div> <p>The prologue pops the return address and parameters from the stack, and saves registers BX and DX. The epilogue restores the registers, pushes the return address back onto the stack, and returns.</p> <h3 id="optimization">Optimization</h3> <p>After generating assembly code, our compiler performs several optimizations:</p> <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kr">inline</span> <span class="n">bool</span> <span class="nf">optimize_mov</span><span class="p">(</span><span class="n">string</span> <span class="n">inst</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">inst</span><span class="p">.</span><span class="n">erase</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">remove</span><span class="p">(</span><span class="n">inst</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">inst</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span> <span class="sc">','</span><span class="p">),</span> <span class="n">inst</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
+    <span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">tokens</span> <span class="o">=</span> <span class="n">split</span><span class="p">(</span><span class="n">inst</span><span class="p">,</span> <span class="s">" "</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">tokens</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">==</span> <span class="mi">3</span> <span class="o">&amp;&amp;</span> <span class="n">tokens</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s">"MOV"</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">string</span> <span class="n">movLhs</span> <span class="o">=</span> <span class="n">tokens</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+        <span class="n">string</span> <span class="n">movRhs</span> <span class="o">=</span> <span class="n">tokens</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">movLhs</span> <span class="o">==</span> <span class="n">prevMovRhs</span> <span class="o">&amp;&amp;</span> <span class="n">movRhs</span> <span class="o">==</span> <span class="n">prevMovLhs</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>  <span class="c1">// Remove redundant MOVs like "MOV AX, BX" followed by "MOV BX, AX"</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">movLhs</span> <span class="o">==</span> <span class="s">"BX"</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">BXval</span> <span class="o">=</span> <span class="n">movRhs</span><span class="p">;</span>  <span class="c1">// Track BX value for arithmetic optimizations</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">movLhs</span> <span class="o">==</span> <span class="n">movRhs</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>  <span class="c1">// Remove MOVs with same source and destination</span>
+        <span class="p">}</span>
+
+        <span class="n">prevMovLhs</span> <span class="o">=</span> <span class="n">movLhs</span><span class="p">;</span>
+        <span class="n">prevMovRhs</span> <span class="o">=</span> <span class="n">movRhs</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kr">inline</span> <span class="n">bool</span> <span class="nf">optimize_arithmetic</span><span class="p">(</span><span class="n">string</span> <span class="n">inst</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">inst</span><span class="p">.</span><span class="n">erase</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">remove</span><span class="p">(</span><span class="n">inst</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">inst</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span> <span class="sc">','</span><span class="p">),</span> <span class="n">inst</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
+    <span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">tokens</span> <span class="o">=</span> <span class="n">split</span><span class="p">(</span><span class="n">inst</span><span class="p">,</span> <span class="s">" "</span><span class="p">);</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">tokens</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">==</span> <span class="mi">3</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">tokens</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s">"ADD"</span> <span class="o">||</span> <span class="n">tokens</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s">"SUB"</span><span class="p">)</span> <span class="o">&amp;&amp;</span>
+        <span class="n">tokens</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="s">"0"</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>  <span class="c1">// Remove ADDs and SUBs with 0</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">tokens</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">==</span> <span class="mi">2</span> <span class="o">&amp;&amp;</span>
+                <span class="p">(</span><span class="n">tokens</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s">"IMUL"</span> <span class="o">||</span> <span class="n">tokens</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s">"IDIV"</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="n">BXval</span> <span class="o">==</span> <span class="s">"1"</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>  <span class="c1">// Remove MULs and DIVs by 1</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kr">inline</span> <span class="kt">void</span> <span class="nf">optimize</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">ifstream</span> <span class="n">srcFile</span><span class="p">(</span><span class="s">"code.asm"</span><span class="p">);</span>
+    <span class="n">string</span> <span class="n">line</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">line_count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">line_removed</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">lines</span><span class="p">;</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">getline</span><span class="p">(</span><span class="n">srcFile</span><span class="p">,</span> <span class="n">line</span><span class="p">,</span> <span class="sc">'\n'</span><span class="p">))</span> <span class="p">{</span>
+        <span class="n">lines</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">line</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="n">log</span> <span class="o">&lt;&lt;</span> <span class="s">"-------------------------------------"</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="n">log</span> <span class="o">&lt;&lt;</span> <span class="s">"Optimizer log: "</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="n">string</span> <span class="n">s</span> <span class="o">:</span> <span class="n">lines</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">line_count</span><span class="o">++</span><span class="p">;</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">substr</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="s">"L"</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">// Clear tracking when entering a new label</span>
+            <span class="n">prevMovLhs</span> <span class="o">=</span> <span class="s">""</span><span class="p">;</span>
+            <span class="n">prevMovRhs</span> <span class="o">=</span> <span class="s">""</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">s</span> <span class="o">==</span> <span class="s">" "</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">log</span> <span class="o">&lt;&lt;</span> <span class="s">"Removed blank line : "</span> <span class="o">&lt;&lt;</span> <span class="n">line_count</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+            <span class="n">line_removed</span><span class="o">++</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">optimize_mov</span><span class="p">(</span><span class="n">s</span><span class="p">))</span> <span class="p">{</span>
+            <span class="n">log</span> <span class="o">&lt;&lt;</span> <span class="s">"Optimized redundant MOV operation: "</span> <span class="o">&lt;&lt;</span> <span class="n">line_count</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+            <span class="n">line_removed</span><span class="o">++</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">optimize_arithmetic</span><span class="p">(</span><span class="n">s</span><span class="p">))</span> <span class="p">{</span>
+            <span class="n">log</span> <span class="o">&lt;&lt;</span> <span class="s">"Optimized redundant arithmetic operation : "</span> <span class="o">&lt;&lt;</span> <span class="n">line_count</span>
+                <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+            <span class="n">line_removed</span><span class="o">++</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="n">optimized</span> <span class="o">&lt;&lt;</span> <span class="n">s</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="n">log</span> <span class="o">&lt;&lt;</span> <span class="s">"Line removed:"</span> <span class="o">&lt;&lt;</span> <span class="n">line_removed</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="n">log</span> <span class="o">&lt;&lt;</span> <span class="s">"-------------------------------------"</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="n">optimized</span> <span class="o">&lt;&lt;</span> <span class="s">"END MAIN"</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="n">srcFile</span><span class="p">.</span><span class="n">close</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div></div> <p>These functions identify and remove:</p> <ul> <li>Redundant MOV instructions</li> <li>Arithmetic operations with identity values (adding 0, multiplying by 1)</li> <li>Blank lines</li> </ul> <h2 id="testing-with-example-programs">Testing with Example Programs</h2> <p>Let’s examine how our compiler handles a more complex example: a recursive function to calculate Fibonacci numbers.</p> <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="nf">fib</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">n</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">n</span><span class="p">;</span>
+  <span class="k">return</span> <span class="n">fib</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">fib</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">2</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kt">int</span> <span class="n">x</span><span class="p">;</span>
+  <span class="n">x</span> <span class="o">=</span> <span class="n">fib</span><span class="p">(</span><span class="mi">7</span><span class="p">);</span>
+  <span class="n">println</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div> <p>The compiler will:</p> <ol> <li>Parse the function declarations and definitions</li> <li>Generate code for the <code class="language-plaintext highlighter-rouge">fib</code> function: <ul> <li>Evaluate <code class="language-plaintext highlighter-rouge">n &lt;= 1</code> </li> <li>If true, return n</li> <li>If false, compute <code class="language-plaintext highlighter-rouge">n - 1</code> and call <code class="language-plaintext highlighter-rouge">fib</code> recursively</li> <li>Compute <code class="language-plaintext highlighter-rouge">n - 2</code> and call <code class="language-plaintext highlighter-rouge">fib</code> recursively</li> <li>Add the results and return</li> </ul> </li> <li>Generate code for the <code class="language-plaintext highlighter-rouge">main</code> function: <ul> <li>Declare <code class="language-plaintext highlighter-rouge">x</code> </li> <li>Call <code class="language-plaintext highlighter-rouge">fib(7)</code> </li> <li>Assign the result to <code class="language-plaintext highlighter-rouge">x</code> </li> <li>Print <code class="language-plaintext highlighter-rouge">x</code> </li> </ul> </li> </ol> <p>The recursive calls are particularly challenging because they require saving and restoring the state of the function for each call. Our compiler handles this by:</p> <ul> <li>Pushing all local variables and parameters onto the stack before each call</li> <li>Popping them off the stack after each call returns</li> <li>Passing parameters by pushing them onto the stack</li> <li>Returning values in the CX register</li> </ul> <h2 id="challenges-and-best-practices">Challenges and Best Practices</h2> <p>Building a compiler is a complex task with many challenges:</p> <h3 id="challenge-error-handling">Challenge: Error Handling</h3> <p>Compilers must detect and report errors in the source code. Our compiler checks for:</p> <ul> <li>Lexical errors (invalid tokens)</li> <li>Syntax errors (invalid grammar)</li> <li>Semantic errors (invalid types, undeclared variables, etc.)</li> </ul> <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kr">inline</span> <span class="kt">void</span> <span class="nf">printError</span><span class="p">(</span><span class="n">string</span> <span class="n">msg</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">error</span> <span class="o">&lt;&lt;</span> <span class="s">"Error at line no: "</span> <span class="o">&lt;&lt;</span> <span class="n">line_count</span> <span class="o">&lt;&lt;</span> <span class="s">" - "</span> <span class="o">&lt;&lt;</span> <span class="n">msg</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="n">log</span> <span class="o">&lt;&lt;</span> <span class="s">"Error at line no: "</span> <span class="o">&lt;&lt;</span> <span class="n">line_count</span> <span class="o">&lt;&lt;</span> <span class="s">" - "</span> <span class="o">&lt;&lt;</span> <span class="n">msg</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="n">error_count</span><span class="o">++</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kr">inline</span> <span class="kt">void</span> <span class="nf">yyerror</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">s</span><span class="p">)</span> <span class="p">{</span> <span class="n">printError</span><span class="p">(</span><span class="n">s</span><span class="p">);</span> <span class="p">}</span>
+</code></pre></div></div> <h3 id="challenge-memory-management">Challenge: Memory Management</h3> <p>Compilers create many temporary objects during compilation, which can lead to memory leaks if not properly managed. Our compiler uses a VarManager class to reuse temporary variables and functions to free resources when they’re no longer needed.</p> <h3 id="challenge-code-generation-complexity">Challenge: Code Generation Complexity</h3> <p>Generating efficient code requires careful consideration of register allocation, control flow, and optimization. Our compiler uses a fairly simple approach, but more advanced compilers might use techniques like:</p> <ul> <li>Register allocation based on liveness analysis</li> <li>Instruction scheduling to minimize stalls</li> <li>Peephole optimization to improve instruction sequences</li> <li>Loop optimization to reduce iteration overhead</li> <li>Inline expansion to eliminate function call overhead</li> </ul> <h3 id="best-practice-modular-design">Best Practice: Modular Design</h3> <p>Our compiler is designed with clear separation of concerns:</p> <ul> <li>Lexical analysis is handled by Flex and LexUtils</li> <li>Parsing is handled by Bison and ParserUtils</li> <li>Symbol management is handled by SymbolTable and SymbolInfo</li> <li>Code generation is integrated into the parser actions</li> <li>Optimization is a separate pass after code generation</li> </ul> <p>This modular approach makes the code easier to understand, maintain, and extend.</p> <h2 id="conclusion">Conclusion</h2> <p>Building a compiler is a challenging but rewarding endeavor that requires deep understanding of programming languages, data structures, algorithms, and computer architecture. Our compiler demonstrates the essential components of a modern compiler:</p> <ol> <li> <strong>Lexical analysis</strong> with Flex to break the source code into tokens</li> <li> <strong>Parsing</strong> with Bison to verify the grammar and build a parse tree</li> <li> <strong>Symbol table management</strong> to track variables, functions, and their attributes</li> <li> <strong>Type checking</strong> to ensure operations are applied to compatible operands</li> <li> <strong>Intermediate code generation</strong> to create x86 assembly code</li> <li> <strong>Optimization</strong> to improve the generated code</li> </ol> <p>While our compiler only implements a subset of C, the principles and techniques apply to more complex languages as well. Understanding how compilers work provides invaluable insight into programming languages and computer systems.</p> <h2 id="further-resources">Further Resources</h2> <p>If you’re interested in learning more about compilers, here are some excellent resources:</p> <ul> <li> <strong>“Compilers: Principles, Techniques, and Tools”</strong> by Alfred V. Aho, Monica S. Lam, Ravi Sethi, and Jeffrey D. Ullman (also known as the “Dragon Book”)</li> <li> <strong>“Engineering a Compiler”</strong> by Keith D. Cooper and Linda Torczon</li> <li> <strong>“Modern Compiler Implementation in C”</strong> by Andrew W. Appel</li> <li> <strong>“Advanced Compiler Design and Implementation”</strong> by Steven S. Muchnick</li> <li>The <strong>LLVM</strong> project: <a href="https://llvm.org/" rel="external nofollow noopener" target="_blank">llvm.org</a> </li> </ul> <p>These resources provide deeper explorations of compiler theory and practice, from basic concepts to advanced techniques used in modern production compilers.</p> <h2 id="lead-developer--12-week-project--systems-programming">Lead Developer | 12-week Project | Systems Programming</h2> </article> </div> </div> <footer class="fixed-bottom" role="contentinfo"> <div class="container mt-0"> © Copyright 2026 Tanzim Hossain Romel. © Tanzim Hossain Romel. Powered by <a href="https://jekyllrb.com/" target="_blank" rel="external nofollow noopener">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio" rel="external nofollow noopener" target="_blank">al-folio</a> theme. </div> </footer> <script>
+  window.alFolio = {
+    compatBootstrap: false
+  };
+</script> <script src="/assets/js/nav-toggle.js?v=141bd79a73ebc0f0b6ea58e440ae79fc"></script> <script defer src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script> <script defer src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script> <script defer src="/assets/js/masonry.js?v=e49affc7bd2646f6acdad1dbe02c2359" type="text/javascript"></script> <script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js" integrity="sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI=" crossorigin="anonymous"></script> <script src="/assets/al_math/js/mathjax-setup.js"></script> <script src="/assets/js/tooltips-setup.js?v=fe487e99db6c43751e6e7bdb2d6a0611"></script> <script src="/assets/js/no_defer.js?v=53b1b1a645525975c963ce8bf8bfefcf"></script> <script defer src="/assets/js/common.js?v=87baac90f765f2f3362dcf6aaf312a8a"></script> <script defer src="/assets/js/copy_code.js?v=c8a01c11a92744d44b093fc3bda915df" type="text/javascript"></script> <script defer src="/assets/js/jupyter_new_tab.js?v=896d254890d9b47f0281f63bfccf0dee"></script> <script async src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script> <script async src="https://badge.dimensions.ai/badge.js"></script> <script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script> <script defer src="/assets/al_img_tools/js/zoom.js"></script> <script defer src="/assets/js/progress-bar.js?v=499464c5c63ced6cf7ad62509f1e2610" type="text/javascript"></script> <script src="https://cdn.jsdelivr.net/npm/vanilla-back-to-top@7.2.1/dist/vanilla-back-to-top.min.js" integrity="sha256-uMJJ3EoTyfRBoTbR+lrfu1uRQ87RZG8AR3cVNuQVeFg=" crossorigin="anonymous"></script> <script>
+    addBackToTop();
+  </script> <script type="module" src="/assets/al_search/js/search/ninja-keys.min.js"></script> <ninja-keys hidebreadcrumbs noautoloadmdicons placeholder="Type to start searching"></ninja-keys> <script src="/assets/al_search/js/search-setup.js"></script> <script>
+// get the ninja-keys element
+const ninja = document.querySelector('ninja-keys');
+
+// add the home and posts menu items
+ninja.data = [{
+    id: "nav-about",
+    title: "about",
+    section: "Navigation",
+    handler: () => {
+      window.location.href = "/";
+    },
+  },{id: "nav-blog",
+          title: "blog",
+          description: "",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/blog/";
+          },
+        },{id: "nav-publications",
+          title: "publications",
+          description: "Publications.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/publications/";
+          },
+        },{id: "nav-research",
+          title: "research",
+          description: "Research on reliable AI agents, SRE-agent evaluation, ML ecosystem security, agent-choice auditing, and developer tools.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/research/";
+          },
+        },{id: "nav-projects",
+          title: "projects",
+          description: "Research and engineering projects.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/projects/";
+          },
+        },{id: "nav-cv",
+          title: "CV",
+          description: "Curriculum vitae.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/cv/";
+          },
+        },{id: "nav-contributions",
+          title: "contributions",
+          description: "Curated open-source contribution evidence across research infrastructure, frameworks, and language tooling.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/contributions/";
+          },
+        },{id: "post-building-a-fast-1brc-solver-in-c-on-apple-silicon",
+        
+          title: "Building a fast 1BRC solver in C# on Apple Silicon",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/building-fast-1brc-csharp-apple-silicon/";
+          
+        },
+      },{id: "post-memory-management-in-production-avoiding-the-silent-killers",
+        
+          title: "Memory Management in Production: Avoiding the Silent Killers",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/memory-management-production-silent-killers/";
+          
+        },
+      },{id: "post-growing-as-a-software-engineer-in-the-age-of-llms-and-vibe-coding",
+        
+          title: "Growing as a Software Engineer in the Age of LLMs and Vibe Coding...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/vibe-coding/";
+          
+        },
+      },{id: "post-taming-the-imagination-a-comprehensive-guide-to-handling-hallucinations-and-implementing-guardrails-in-agentic-ai",
+        
+          title: "Taming the Imagination: A Comprehensive Guide to Handling Hallucinations and Implementing Guardrails in...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/how-to-handle-hallucinations/";
+          
+        },
+      },{id: "post-building-an-agentic-ai-analytics-dashboard-a-deep-dive-with-langchain-langgraph-and-fine-tuned-llama",
+        
+          title: "Building an Agentic AI Analytics Dashboard: A Deep Dive with LangChain, LangGraph, and...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/intro-to-agentic-ai/";
+          
+        },
+      },{id: "post-neural-algorithmic-reasoning-teaching-neural-networks-to-think-like-algorithms",
+        
+          title: "Neural Algorithmic Reasoning: Teaching Neural Networks to Think Like Algorithms",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/intro-to-nar/";
+          
+        },
+      },{id: "post-opentelemetry-in-microservices-how-we-transformed-our-observability-strategy",
+        
+          title: "OpenTelemetry in Microservices: How We Transformed Our Observability Strategy",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/opentelemetry/";
+          
+        },
+      },{id: "post-using-ai-tools-in-software-engineering-and-research-workflows",
+        
+          title: "Using AI Tools in Software Engineering and Research Workflows",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/leveraging-ai-tools-software-engineering/";
+          
+        },
+      },{id: "post-the-performance-crisis-how-we-rescued-a-net-8-microservice-from-10-critical-bottlenecks",
+        
+          title: "The Performance Crisis: How We Rescued a .NET 8 Microservice from 10 Critical...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2024/optimizing-dotnet-microservices-performance/";
+          
+        },
+      },{id: "post-zero-downtime-deployments-in-kubernetes-how-we-keep-our-services-running-while-we-ship",
+        
+          title: "Zero Downtime Deployments in Kubernetes: How We Keep Our Services Running While We...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2024/zero-downtime/";
+          
+        },
+      },{id: "post-mastering-unit-testing-and-bdd-with-xunit-and-specflow-in-net-9-a-comprehensive-guide",
+        
+          title: "Mastering Unit Testing and BDD with xUnit and SpecFlow in .NET 9: A...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2024/dotnet-tests/";
+          
+        },
+      },{id: "post-design-patterns-your-first-step-toward-professional-software-engineering",
+        
+          title: "Design Patterns: Your First Step Toward Professional Software Engineering",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2024/design-patterns-professional-software-engineering/";
+          
+        },
+      },{id: "post-setting-up-github-actions-ci-cd-with-aws-a-practical-journey",
+        
+          title: "Setting Up GitHub Actions CI/CD with AWS: A Practical Journey",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2024/intro-to-ci-cd/";
+          
+        },
+      },{id: "post-the-clique-partition-problem-dividing-networks-into-perfect-communities",
+        
+          title: "The Clique Partition Problem: Dividing Networks into Perfect Communities",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2023/clique-partition-problem-graph-theory/";
+          
+        },
+      },{id: "post-advice-complexity-in-online-algorithms-when-knowing-the-future-makes-all-the-difference",
+        
+          title: "Advice Complexity in Online Algorithms: When Knowing the Future Makes All the Difference...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2023/advice-complexity-online-algorithms/";
+          
+        },
+      },{id: "post-getting-started-with-kubernetes-deploying-microservice-architectures-at-scale",
+        
+          title: "Getting Started with Kubernetes: Deploying Microservice Architectures at Scale",
+        
+        description: "A practical Kubernetes guide covering microservice deployment, service-mesh integration, observability, and the operational checks needed before production use.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2022/getting-started-with-kubernetes-microservices/";
+          
+        },
+      },{id: "post-understanding-xv6-a-practical-introduction-to-operating-systems",
+        
+          title: "Understanding xv6: A Practical Introduction to Operating Systems",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2022/understanding-xv6-operating-systems/";
+          
+        },
+      },{id: "post-getting-started-with-ns3-a-hands-on-guide-to-network-simulation",
+        
+          title: "Getting Started with NS3: A Hands-On Guide to Network Simulation",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2021/getting-started-with-ns3/";
+          
+        },
+      },{id: "news-completed-b-sc-in-computer-science-and-engineering-from-bangladesh-university-of-engineering-and-technology-with-a-gpa-of-3-53-4-00-link",
+          title: 'Completed B.Sc in Computer Science and Engineering from Bangladesh University of Engineering and...',
+          description: "",
+          section: "News",},{id: "news-joined-iqvia-as-a-software-development-engineer-on-kpi-library-the-dynamic-reporting-layer-within-orchestrated-analytics-link",
+          title: 'Joined IQVIA as a Software Development Engineer on KPI Library, the dynamic reporting...',
+          description: "",
+          section: "News",},{id: "news-submitted-sentiment-analysis-of-anonymous-crisis-reports-in-bangladesh-to-acm-cscw-2025-analyzing-crowd-sourced-reports-from-bangladesh-s-2024-national-crisis-using-transformer-models-link",
+          title: 'Submitted ‘Sentiment Analysis of Anonymous Crisis Reports in Bangladesh’ to ACM CSCW 2025,...',
+          description: "",
+          section: "News",},{id: "news-honored-with-the-iqvia-impact-program-silver-award-for-outstanding-performance-and-contributions-to-the-kpi-library-team-link",
+          title: 'Honored with the IQVIA Impact Program Silver Award for outstanding performance and contributions...',
+          description: "",
+          section: "News",},{id: "news-submitted-an-empirical-study-on-remote-code-execution-in-machine-learning-model-hosting-ecosystems-to-the-mining-software-repositories-msr-2026-conference-first-large-scale-cross-platform-security-study-analyzing-45-000-repositories-across-5-major-ml-platforms-link",
+          title: 'Submitted ‘An Empirical Study on Remote Code Execution in Machine Learning Model Hosting...',
+          description: "",
+          section: "News",},{id: "news-resubmitted-an-empirical-study-on-remote-code-execution-in-machine-learning-model-hosting-ecosystems-to-acm-transactions-on-software-engineering-and-methodology-tosem-2026-preprint-available-on-arxiv-link",
+          title: 'Resubmitted ‘An Empirical Study on Remote Code Execution in Machine Learning Model Hosting...',
+          description: "",
+          section: "News",},{id: "news-started-a-remote-summer-research-internship-at-the-university-of-illinois-urbana-champaign-through-uiuc-summer-research-in-software-engineering-srse-2026-with-professor-tianyin-xu-link",
+          title: 'Started a remote summer research internship at the University of Illinois Urbana-Champaign through...',
+          description: "",
+          section: "News",},{id: "news-submitted-the-choice-can-be-the-attack-auditing-aligned-backdoors-in-llm-agents-to-the-transactions-of-the-association-for-computational-linguistics-tacl-2026-with-chowdhury-rakin-haider-link",
+          title: 'Submitted ‘The Choice Can Be the Attack: Auditing Aligned Backdoors in LLM Agents’...',
+          description: "",
+          section: "News",},{id: "news-an-empirical-study-on-remote-code-execution-in-machine-learning-model-hosting-ecosystems-is-under-review-at-the-international-conference-on-software-engineering-icse-2027-preprint-available-on-arxiv-link",
+          title: '‘An Empirical Study on Remote Code Execution in Machine Learning Model Hosting Ecosystems’...',
+          description: "",
+          section: "News",},{id: "news-will-begin-graduate-study-in-computing-science-at-the-university-of-alberta-on-september-1-2026-link",
+          title: 'Will begin graduate study in Computing Science at the University of Alberta on...',
+          description: "",
+          section: "News",},{id: "projects-1brc-c-on-apple-silicon",
+          title: '1BRC C# on Apple Silicon',
+          description: "A .NET 10 NativeAOT performance case study: byte parsing, native aggregation, ARM64 tuning, and a size-aware macOS pread path",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/1brc-csharp/";
+            },},{id: "projects-building-a-bangla-handwritten-digit-recognizer-from-scratch",
+          title: 'Building a Bangla Handwritten Digit Recognizer from Scratch',
+          description: "A Deep Dive into Custom CNN Implementation",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/bangla-digit-recognition/";
+            },},{id: "projects-blockchain-based-ticketing-platform",
+          title: 'Blockchain Based Ticketing Platform',
+          description: "A practical approach to reducing ticket fraud and abusive resale",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/blockchain-ticketing/";
+            },},{id: "projects-yet-another-c-compiler",
+          title: 'Yet Another C Compiler',
+          description: "A complete multi-pass compiler for a subset of C",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/compiler/";
+            },},{id: "projects-contextledger-context-accounting-for-coding-agents",
+          title: 'ContextLedger: context accounting for coding agents',
+          description: "A research notebook on OpenCode compaction, provenance, and live GPT-5.5 experiments",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/contextledger/";
+            },},{id: "projects-ctxhelm-agent-native-context-compiler",
+          title: 'ctxhelm: agent-native context compiler',
+          description: "Local-first context plans, release proof, and source-free agent evaluation",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/ctxhelm/";
+            },},{id: "projects-mini-deep-learning-framework-pytorch-from-scratch",
+          title: 'Mini Deep Learning Framework: PyTorch from Scratch',
+          description: "A freelance learning project for tensors, autograd, and neural-network internals",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/deep-learning-framework-capstone/";
+            },},{id: "projects-go-container-runtime-docker-from-scratch",
+          title: 'Go Container Runtime: Docker from Scratch',
+          description: "A freelance learning project for Linux containers, networking, and Go systems programming",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/docker-from-scratch-go/";
+            },},{id: "projects-eventfly-distributed-microservices-event-platform",
+          title: 'EventFly – Distributed Microservices Event Platform',
+          description: "A six-person BUET course project for event creation, ticketing, announcements, participant engagement, analytics, and payments, implemented with Node.js, React, NATS, Kubernetes, MongoDB, Redis, and Stripe.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/eventfly-an-end-to-end-event-management-system/";
+            },},{id: "projects-building-a-go-database-engine-from-scratch",
+          title: 'Building a Go Database Engine from Scratch',
+          description: "An educational ACID-oriented database engine with advanced features",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/go-database/";
+            },},{id: "projects-image-caption-generation-with-bert-context-vectors",
+          title: 'Image Caption Generation with BERT Context Vectors',
+          description: "Extended the &quot;Show, Attend, and Tell&quot; image captioning model with BERT to improve caption quality and reduce training time, achieving 36% improvement in CIDEr score and 43% improvement in BLEU-4.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/image-caption-generator/";
+            },},{id: "projects-patchsmith-a-harness-for-repair-agents",
+          title: 'PatchSmith: a harness for repair agents',
+          description: "System design and R&amp;D notes for bounded patches, sandbox validation, and auditable repair runs",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/patchsmith/";
+            },},{id: "projects-ray-tracing-from-scratch-a-comprehensive-guide-to-3d-rendering-physics-and-implementation",
+          title: 'Ray Tracing from Scratch: A Comprehensive Guide to 3D Rendering Physics and Implementation...',
+          description: "Implementing physically-based rendering with C++",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/ray-tracing/";
+            },},{id: "projects-an-empirical-study-on-remote-code-execution-in-machine-learning-model-hosting-ecosystems",
+          title: 'An Empirical Study on Remote Code Execution in Machine Learning Model Hosting Ecosystems...',
+          description: "A cross-platform study of model-loading risk across five ML hosting ecosystems, using static analysis, malware-signature scanning, and analysis of more than 600 developer discussions.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/research-ml-remote-code-execution/";
+            },},{id: "projects-verischema-verified-database-schema-generation",
+          title: 'VeriSchema: verified database-schema generation',
+          description: "How can specialized agents generate relational schemas from natural-language requirements while formal checks and targeted repair keep the result consistent?",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/research-multi-agent-db-schema/";
+            },},{id: "projects-the-choice-can-be-the-attack-auditing-aligned-backdoors-in-llm-agents",
+          title: 'The Choice Can Be the Attack: Auditing Aligned Backdoors in LLM Agents',
+          description: "Abstract-level summary of SHIFT, submitted to TACL 2026 on aligned backdoor attacks in LLM agents.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/research-reagent-plus-plus/";
+            },},{id: "projects-sentiment-analysis-of-anonymous-crisis-reports-in-bangladesh",
+          title: 'Sentiment Analysis of Anonymous Crisis Reports in Bangladesh',
+          description: "A multilingual analysis of anonymous, crowd-sourced reports from Bangladesh&#39;s 2024 national crisis.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/research-ureporter/";
+            },},{id: "projects-enhancing-tcp-fairness-tcp-vegas-implementation",
+          title: 'Enhancing TCP Fairness: TCP Vegas+ Implementation',
+          description: "A dual-mode solution for TCP Vegas fairness issues",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/tcp-vegas-plus/";
+            },},{
+        id: 'social-email',
+        title: 'email',
+        section: 'Socials',
+        handler: () => {
+          window.open("mailto:%74%61%6E%68%72%6F%6D%65%6C@%67%6D%61%69%6C.%63%6F%6D", "_blank");
+        },
+      },{
+        id: 'social-github',
+        title: 'GitHub',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://github.com/thromel", "_blank");
+        },
+      },{
+        id: 'social-scholar',
+        title: 'Google Scholar',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://scholar.google.com/citations?user=zHV4EU8AAAAJ", "_blank");
+        },
+      },{
+        id: 'social-linkedin',
+        title: 'LinkedIn',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://www.linkedin.com/in/thromel", "_blank");
+        },
+      },{
+        id: 'social-orcid',
+        title: 'ORCID',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://orcid.org/0009-0009-2432-8960", "_blank");
+        },
+      },{
+        id: 'social-rss',
+        title: 'RSS Feed',
+        section: 'Socials',
+        handler: () => {
+          window.open("/feed.xml", "_blank");
+        },
+      },{
+        id: 'social-x',
+        title: 'X',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://twitter.com/tanzimhromel", "_blank");
+        },
+      },{
+      id: 'light-theme',
+      title: 'Change theme to light',
+      description: 'Change the theme of the site to Light',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("light");
+      },
+    },
+    {
+      id: 'dark-theme',
+      title: 'Change theme to dark',
+      description: 'Change the theme of the site to Dark',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("dark");
+      },
+    },
+    {
+      id: 'system-theme',
+      title: 'Use system default theme',
+      description: 'Change the theme of the site to System Default',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("system");
+      },
+    },];
+
+</script> <script src="/assets/al_search/js/shortcut-key.js"></script> </body> </html>

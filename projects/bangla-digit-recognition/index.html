@@ -1,0 +1,606 @@
+<!DOCTYPE html> <html lang="en"> <head> <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <title> Building a Bangla Handwritten Digit Recognizer from Scratch | Tanzim Hossain Romel </title> <meta name="author" content="Tanzim Hossain Romel"> <meta name="description" content="A Deep Dive into Custom CNN Implementation"> <meta name="keywords" content=""> <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https:; style-src 'self' 'unsafe-inline' https:; img-src 'self' data: https:; font-src 'self' data: https:; media-src 'self' https:; frame-src 'self' https:; connect-src 'self' https:;"> <style>
+  :root {
+    --max-content-width: 930px;
+  }
+</style> <link rel="stylesheet" href="/assets/css/tailwind.css?v=50c64c15cbb9fd1ce6056fdb8bcb4b62"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.2.0/css/all.min.css" integrity="sha256-MVopmdyC2tYTiJ8wlktf0uh0v4NgT+vNdyVFepi7Q0c=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.5/css/academicons.min.css" integrity="sha256-SzrCOBJbGVFMahewkgjwnApaV2+av1DwMAA+/QGLyZw=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/scholar-icons@1.0.3/css/scholar-icons.css" integrity="sha256-VY3hHVj/hNX3fYG6wtbA6TcKJQl7+FthzGSyIB64klY=" crossorigin="anonymous"> <link defer rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons&amp;display=swap"> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-github.css?v=591dab5a4e56573bf4ef7fd332894c99" media="" id="highlight_theme_light"> <link rel="shortcut icon" href="data:image/svg+xml,&lt;svg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20100%20100%22&gt;&lt;text%20y=%22.9em%22%20font-size=%2290%22&gt;%E2%9A%9B%EF%B8%8F&lt;/text&gt;&lt;/svg&gt;"> <link rel="stylesheet" href="/assets/css/main.css?v=3116ba77db9ee1581d05bb3e86fbf7f1"> <link rel="canonical" href="https://tanzimhromel.com/projects/bangla-digit-recognition/"> <script src="/assets/js/theme.js?v=5286c3e4c334d0ecb8fc0c40ff4fa7ec"></script> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-native.css?v=5847e5ed4a4568527aa6cfab446049ca" media="none" id="highlight_theme_dark"> <script>
+    initTheme();
+  </script> </head> <body class="fixed-top-nav "> <header> <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top" role="navigation"> <div class="container"> <a class="navbar-brand title font-weight-lighter" href="/"> Tanzim Hossain Romel </a> <button class="navbar-toggler collapsed navbar-toggler-main" type="button" data-nav-toggle="navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar top-bar"></span> <span class="icon-bar middle-bar"></span> <span class="icon-bar bottom-bar"></span> </button> <div class="collapse navbar-collapse navbar-collapse-main" id="navbarNav"> <ul class="navbar-nav navbar-menu-list flex-nowrap"> <li class="nav-item "> <a class="nav-link" href="/">about </a> </li> <li class="nav-item "> <a class="nav-link" href="/blog/">blog </a> </li> <li class="nav-item "> <a class="nav-link" href="/publications/">publications </a> </li> <li class="nav-item "> <a class="nav-link" href="/research/">research </a> </li> <li class="nav-item active"> <a class="nav-link" href="/projects/">projects <span class="sr-only">(current)</span> </a> </li> <li class="nav-item "> <a class="nav-link" href="/cv/">CV </a> </li> <li class="nav-item "> <a class="nav-link" href="/contributions/">contributions </a> </li> <li class="nav-item"> <button id="search-toggle" type="button" title="Search" aria-label="Open search"> <span class="nav-link">ctrl k <i class="fa-solid fa-magnifying-glass"></i></span> </button> </li> <li class="toggle-container"> <button id="light-toggle" type="button" title="Change theme" aria-label="Change color theme"> <i class="fa-half-sun-moon" id="light-toggle-system"></i> <i class="fa-solid fa-moon" id="light-toggle-dark"></i> <i class="fa-solid fa-sun" id="light-toggle-light"></i> </button> </li> </ul> </div> </div> </nav> <progress id="progress" value="0"> <div class="progress-container"> <span class="progress-bar"></span> </div> </progress> </header> <div class="container mt-5" role="main"> <div class="post"> <header class="post-header"> <h1 class="post-title">Building a Bangla Handwritten Digit Recognizer from Scratch</h1> <p class="post-description">A Deep Dive into Custom CNN Implementation</p> </header> <article> <p>A custom convolutional neural network implementation from scratch using only NumPy that achieves 95.87% accuracy on Bangla handwritten digit recognition, without relying on deep learning frameworks.</p> <h2 id="at-a-glance">At a glance</h2> <ul> <li> <strong>Status:</strong> Completed BUET course competition project</li> <li> <strong>Problem:</strong> Recognize Bangla handwritten digits with a CNN implemented directly in NumPy, without a deep-learning framework.</li> <li> <strong>Role:</strong> Implemented the CNN, training pipeline, and evaluation; documented the architecture and results</li> <li> <strong>Outcome:</strong> Reached 95.87% test accuracy and placed second among 120 students in the BUET machine-learning lab competition.</li> <li> <strong>Technologies:</strong> Python, NumPy, Computer Vision, Neural Networks, Deep Learning</li> <li> <strong>Repository:</strong> Public course repository</li> </ul> <p><a href="https://github.com/thromel/CSE-472-Machine-Learning" target="_blank" rel="noopener noreferrer">View on GitHub</a></p> <h2 id="2nd-place-winner--4-week-project--image-recognition">2nd Place Winner | 4-week Project | Image Recognition</h2> <p><img src="/assets/img/projects/bangla-digit-recognition.png" class="img-fluid mb-4" alt="Bangla Digit Recognition" width="1192" height="411" decoding="async"></p> <h2 id="introduction">Introduction</h2> <p>Handwritten digit recognition is a fundamental challenge in computer vision that has applications ranging from digitizing historical documents to automating postal services. While Latin digit recognition has been thoroughly explored, Bangla (Bengali) digit recognition presents unique challenges due to the script’s distinctive features and the relative scarcity of large, standardized datasets.</p> <p>In this blog post, we’ll explore a fascinating project that implements a Convolutional Neural Network (CNN) from scratch - without relying on deep learning frameworks - to recognize handwritten Bangla digits. We’ll delve into the neural network architecture, the mathematics behind it, the implementation details, and the results achieved.</p> <h2 id="project-overview">Project Overview</h2> <p>The primary goal of this project is to build a convolutional neural network from the ground up that can accurately recognize handwritten Bangla digits. What makes this project particularly interesting is that it doesn’t use standard deep learning libraries like TensorFlow or PyTorch for the core neural network implementation. Instead, it constructs the entire CNN architecture using only NumPy, providing valuable insights into the inner workings of neural networks.</p> <p>The project achieves an impressive 95.87% accuracy on the test dataset, demonstrating the effectiveness of the custom implementation.</p> <h2 id="understanding-the-dataset">Understanding the Dataset</h2> <p>The project uses the NumtaDB dataset, which contains handwritten Bangla digit images. You can find more information and access details on the <a href="https://www.kaggle.com/datasets/BengaliAI/numta" rel="external nofollow noopener" target="_blank">NumtaDB dataset page</a>.</p> <p>The dataset is organized into multiple partitions:</p> <ul> <li>training-a</li> <li>training-b</li> <li>training-c</li> <li>training-d</li> <li>training-e</li> </ul> <p>These partitions are combined and split into training and validation sets during the development process, with training-d often reserved for testing.</p> <p>Each image in the dataset is a grayscale representation of a handwritten Bangla digit, and the corresponding labels are stored in CSV files that match the image filenames with their digit values (0-9).</p> <h3 id="unique-characteristics-of-bangla-digits">Unique Characteristics of Bangla Digits</h3> <p>Bangla digits have distinct visual properties compared to Latin digits:</p> <ol> <li>More complex curved shapes and loops</li> <li>Higher variation in writing styles across the population</li> <li>Certain digits (like ১ and ৭) that can be easily confused</li> <li>More intricate details that require careful feature extraction</li> </ol> <p>These characteristics make Bangla digit recognition a more challenging task that benefits from robust preprocessing and well-designed neural network architectures.</p> <h2 id="image-preprocessing">Image Preprocessing</h2> <p>Before feeding images into the neural network, several preprocessing steps are applied to enhance the model’s performance:</p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Convert to grayscale
+</span><span class="n">img</span> <span class="o">=</span> <span class="n">cv2</span><span class="p">.</span><span class="nf">cvtColor</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">cv2</span><span class="p">.</span><span class="n">COLOR_BGR2GRAY</span><span class="p">)</span>
+
+<span class="c1"># Convert the image to binary using Otsu's thresholding
+</span><span class="n">img</span> <span class="o">=</span> <span class="n">cv2</span><span class="p">.</span><span class="nf">threshold</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="n">cv2</span><span class="p">.</span><span class="n">THRESH_BINARY</span> <span class="o">+</span> <span class="n">cv2</span><span class="p">.</span><span class="n">THRESH_OTSU</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="c1"># Check if the background is black or white
+# If the background is white, then invert the image
+</span><span class="k">if</span> <span class="n">np</span><span class="p">.</span><span class="nf">mean</span><span class="p">(</span><span class="n">img</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">128</span><span class="p">:</span>
+    <span class="n">img</span> <span class="o">=</span> <span class="mi">255</span> <span class="o">-</span> <span class="n">img</span>
+
+<span class="c1"># Dilate and erode to remove noise
+</span><span class="n">kernel</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">ones</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">np</span><span class="p">.</span><span class="n">uint8</span><span class="p">)</span>
+<span class="n">img</span> <span class="o">=</span> <span class="n">cv2</span><span class="p">.</span><span class="nf">dilate</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">kernel</span><span class="p">,</span> <span class="n">iterations</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">img</span> <span class="o">=</span> <span class="n">cv2</span><span class="p">.</span><span class="nf">erode</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">kernel</span><span class="p">,</span> <span class="n">iterations</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</code></pre></div></div> <p>These operations ensure that:</p> <ol> <li>All images are in grayscale format</li> <li>Thresholding converts grayscale images to binary (black and white)</li> <li>All images have a consistent background (black) and foreground (white) format</li> <li>Noise is reduced through morphological operations (dilation and erosion)</li> </ol> <p>The code also removes empty rows and columns around the digit (where pixel intensity is near zero) and then resizes the image back to 28×28 pixels:</p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Drop rows and columns with very low pixel values
+</span><span class="n">row_drop</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">img</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+    <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">np</span><span class="p">.</span><span class="nf">mean</span><span class="p">(</span><span class="n">img</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:])</span> <span class="o">&lt;=</span> <span class="mi">5</span><span class="p">:</span>
+        <span class="n">row_drop</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+
+<span class="n">col_drop</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">img</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+    <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">np</span><span class="p">.</span><span class="nf">mean</span><span class="p">(</span><span class="n">img</span><span class="p">[:,</span> <span class="n">i</span><span class="p">])</span> <span class="o">&lt;=</span> <span class="mi">5</span><span class="p">:</span>
+        <span class="n">col_drop</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+
+<span class="c1"># Drop the rows and columns
+</span><span class="n">img</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">delete</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">row_drop</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">img</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">delete</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">col_drop</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Resize the image back to 28x28
+</span><span class="n">img</span> <span class="o">=</span> <span class="n">cv2</span><span class="p">.</span><span class="nf">resize</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="p">(</span><span class="mi">28</span><span class="p">,</span> <span class="mi">28</span><span class="p">),</span> <span class="n">interpolation</span><span class="o">=</span><span class="n">cv2</span><span class="p">.</span><span class="n">INTER_AREA</span><span class="p">)</span>
+</code></pre></div></div> <p>This centering process helps the model focus on the actual digit and ignore irrelevant empty space. For a deeper understanding of these image preprocessing techniques, you can visit <a href="https://docs.opencv.org/4.x/d2/d96/tutorial_py_table_of_contents_imgproc.html" rel="external nofollow noopener" target="_blank">OpenCV’s documentation on image processing</a>.</p> <h3 id="why-these-preprocessing-steps-matter-for-bangla-digits">Why These Preprocessing Steps Matter for Bangla Digits</h3> <p>The preprocessing pipeline is particularly effective for Bangla digits because:</p> <ol> <li> <p><strong>Binarization with Otsu’s thresholding</strong> automatically determines the optimal threshold value, which is crucial for handling the varying stroke widths common in Bangla handwriting.</p> </li> <li> <p><strong>Background normalization</strong> ensures all digits have a consistent representation (white digits on black background), addressing the common inconsistency in how people write Bangla digits.</p> </li> <li> <p><strong>Morphological operations</strong> (dilation followed by erosion) help close small gaps in strokes that might otherwise break the connectivity of Bangla digits, which often contain delicate curves and connections.</p> </li> <li> <p><strong>Empty space removal</strong> centers the digit and maximizes its size within the frame, enhancing the model’s ability to detect the distinctive features of each Bangla numeral.</p> </li> <li> <p><strong>Final resizing to 28×28</strong> standardizes all inputs while preserving the aspect ratio of the digit, which is critical for maintaining the proportional relationships in Bangla numerals.</p> </li> </ol> <h2 id="cnn-architecture-details">CNN Architecture Details</h2> <p><img src="/assets/img/projects/cnn-architecture.png" class="img-fluid mb-4 rounded shadow-sm" alt="CNN Architecture" width="1648" height="373" loading="lazy" decoding="async"></p> <p>The project implements two different CNN architectures:</p> <h3 id="architecture-1">Architecture 1</h3> <ul> <li>Input: 28×28×1 (grayscale images)</li> <li>Convolutional layer with 8 filters, followed by ReLU activation</li> <li>Max pooling layer</li> <li>Convolutional layer with 16 filters, followed by ReLU activation</li> <li>Max pooling layer</li> <li>Convolutional layer with 32 filters, followed by ReLU activation</li> <li>Max pooling layer</li> <li>Flatten layer</li> <li>Fully connected layer with 64 neurons and ReLU activation</li> <li>Output layer with 10 neurons and Softmax activation</li> </ul> <h3 id="architecture-2-lenet-inspired">Architecture 2 (LeNet-inspired)</h3> <ul> <li>Input: 28×28×1 (grayscale images)</li> <li>Convolutional layer with 6 filters (5×5), followed by ReLU activation</li> <li>Max pooling layer (2×2, stride 2)</li> <li>Convolutional layer with 16 filters (5×5), followed by ReLU activation</li> <li>Max pooling layer (2×2, stride 2)</li> <li>Flatten layer</li> <li>Fully connected layer with 120 neurons and ReLU activation</li> <li>Fully connected layer with 84 neurons and ReLU activation</li> <li>Output layer with 10 neurons and Softmax activation</li> </ul> <p>The second architecture, which appears to be inspired by the classic LeNet-5 architecture, is the one used in the final implementation shown in the training code. You can learn more in the original <a href="https://doi.org/10.1109/5.726791" rel="external nofollow noopener" target="_blank">LeNet-5 paper</a>.</p> <h3 id="why-this-architecture-works-well-for-bangla-digits">Why This Architecture Works Well for Bangla Digits</h3> <p>The LeNet-inspired architecture is particularly suitable for Bangla digit recognition for several reasons:</p> <ol> <li> <p><strong>Hierarchical Feature Extraction</strong>: The gradual increase in filter numbers (6 → 16) allows the network to capture increasingly complex patterns, which is essential for Bangla digits that contain intricate shapes and curves.</p> </li> <li> <p><strong>Appropriate Field of View</strong>: The 5×5 convolution kernels provide a sufficient receptive field to capture the distinctive strokes and curves of Bangla digits without missing important details or including too much irrelevant information.</p> </li> <li> <p><strong>Dimensionality Reduction</strong>: The max pooling layers progressively reduce the spatial dimensions while preserving the most important features, making the model more computationally efficient and helping it focus on the most discriminative aspects of each digit.</p> </li> <li> <p><strong>Multi-stage Fully Connected Layers</strong>: The sequence of fully connected layers (120 → 84 → 10) provides sufficient complexity to learn the mapping from abstract features to specific digit classes, handling the subtleties that distinguish similar-looking Bangla digits.</p> </li> <li> <p><strong>Balanced Capacity</strong>: With approximately 61,706 trainable parameters (much smaller than modern deep networks), this architecture strikes a good balance between having enough capacity to learn complex patterns and avoiding overfitting on the limited dataset size.</p> </li> </ol> <h2 id="implementation-from-scratch">Implementation from Scratch</h2> <p>The heart of this project is the implementation of the CNN from scratch using only NumPy. Let’s explore the key components:</p> <h3 id="activation-functions">Activation Functions</h3> <p>The project implements two activation functions:</p> <p><strong>ReLU (Rectified Linear Unit)</strong>:</p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">ReLU</span><span class="p">():</span>
+    <span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">np</span><span class="p">.</span><span class="nf">maximum</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">df</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">cached_y</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">np</span><span class="p">.</span><span class="nf">where</span><span class="p">(</span><span class="n">x</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</code></pre></div></div> <p>ReLU passes positive values unchanged and sets negative values to zero, allowing for efficient training of deep networks while mitigating the vanishing gradient problem. For a deeper mathematical understanding of activation functions, check out <a href="https://cs231n.github.io/neural-networks-1/#actfun" rel="external nofollow noopener" target="_blank">CS231n’s notes on activation functions</a>.</p> <p><strong>Softmax</strong>:</p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">SoftMax</span><span class="p">():</span>
+    <span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">exp</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">np</span><span class="p">.</span><span class="nf">max</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="bp">True</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">y</span> <span class="o">/</span> <span class="n">np</span><span class="p">.</span><span class="nf">sum</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">df</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">cached_y</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">np</span><span class="p">.</span><span class="nf">where</span><span class="p">(</span><span class="n">x</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</code></pre></div></div> <p>The Softmax function converts a vector of real numbers into a probability distribution, making it ideal for the output layer in classification tasks. Note that subtracting the maximum value before taking the exponential is a numerical stability trick to prevent overflow.</p> <h3 id="cost-function">Cost Function</h3> <p>The project uses the Softmax Cross-Entropy cost function:</p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">SoftmaxCrossEntropy</span><span class="p">():</span>
+    <span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">a_last</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+        <span class="n">batch_size</span> <span class="o">=</span> <span class="n">y</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">cost</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span> <span class="o">/</span> <span class="n">batch_size</span> <span class="o">*</span> <span class="p">(</span><span class="n">y</span> <span class="o">*</span> <span class="n">np</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="nf">clip</span><span class="p">(</span><span class="n">a_last</span><span class="p">,</span> <span class="n">epsilon</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">))).</span><span class="nf">sum</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">cost</span>
+
+    <span class="k">def</span> <span class="nf">grad</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">a_last</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+        <span class="k">return</span> <span class="o">-</span> <span class="n">np</span><span class="p">.</span><span class="nf">divide</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">np</span><span class="p">.</span><span class="nf">clip</span><span class="p">(</span><span class="n">a_last</span><span class="p">,</span> <span class="n">epsilon</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">))</span>
+</code></pre></div></div> <p>This function computes the cross-entropy loss between the predicted probabilities and the true labels. The <code class="language-plaintext highlighter-rouge">np.clip</code> function prevents numerical instability by avoiding taking the logarithm of very small numbers. For more on cross-entropy loss, see <a href="https://gombru.github.io/2018/05/23/cross_entropy_loss/" rel="external nofollow noopener" target="_blank">Understanding Categorical Cross-Entropy Loss</a>.</p> <h3 id="optimization-algorithms">Optimization Algorithms</h3> <p>Two optimization algorithms are implemented:</p> <p><strong>Gradient Descent</strong>:</p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">GradientDescent</span><span class="p">():</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">trainable_layers</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">trainable_layers</span> <span class="o">=</span> <span class="n">trainable_layers</span>
+
+    <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">learning_rate</span><span class="p">,</span> <span class="n">w_grads</span><span class="p">,</span> <span class="n">b_grads</span><span class="p">,</span> <span class="n">step</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">layer</span> <span class="ow">in</span> <span class="n">self</span><span class="p">.</span><span class="n">trainable_layers</span><span class="p">:</span>
+            <span class="n">layer</span><span class="p">.</span><span class="nf">update_params</span><span class="p">(</span><span class="n">dw</span><span class="o">=</span><span class="n">learning_rate</span> <span class="o">*</span> <span class="n">w_grads</span><span class="p">[</span><span class="n">layer</span><span class="p">],</span>
+                                <span class="n">db</span><span class="o">=</span><span class="n">learning_rate</span> <span class="o">*</span> <span class="n">b_grads</span><span class="p">[</span><span class="n">layer</span><span class="p">])</span>
+</code></pre></div></div> <p>This is the simplest optimization algorithm that updates weights by moving in the direction of the negative gradient scaled by the learning rate. Learn more about gradient descent at <a href="https://ruder.io/optimizing-gradient-descent/" rel="external nofollow noopener" target="_blank">Sebastian Ruder’s optimization overview</a>.</p> <p><strong>Adam (Adaptive Moment Estimation)</strong>:</p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Adam</span><span class="p">():</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">trainable_layers</span><span class="p">,</span> <span class="n">beta1</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span> <span class="n">beta2</span><span class="o">=</span><span class="mf">0.999</span><span class="p">,</span> <span class="n">epsilon</span><span class="o">=</span><span class="mf">1e-8</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">trainable_layers</span> <span class="o">=</span> <span class="n">trainable_layers</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">v</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">s</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">beta1</span> <span class="o">=</span> <span class="n">beta1</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">beta2</span> <span class="o">=</span> <span class="n">beta2</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">epsilon</span> <span class="o">=</span> <span class="n">epsilon</span>
+        
+    <span class="c1"># ... (initialization and update methods)
+</span></code></pre></div></div> <p>Adam is a more sophisticated algorithm that adapts the learning rate for each parameter based on estimates of first and second moments of the gradients. It’s generally more efficient than standard gradient descent. For an in-depth explanation of the Adam optimizer, check out the <a href="https://arxiv.org/abs/1412.6980" rel="external nofollow noopener" target="_blank">original paper by Kingma and Ba</a>.</p> <h3 id="the-convolutional-layer-implementation">The Convolutional Layer Implementation</h3> <p>The most complex part of this project is the custom implementation of the convolutional layer:</p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Conv</span><span class="p">():</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">kernel_size</span><span class="p">,</span> <span class="n">stride</span><span class="p">,</span> <span class="n">n_c</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="sh">'</span><span class="s">valid</span><span class="sh">'</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="n">relu</span><span class="p">):</span>
+        <span class="c1"># ... initialization code ...
+</span>        
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">a_prev</span><span class="p">,</span> <span class="n">training</span><span class="p">):</span>
+        <span class="n">batch_size</span> <span class="o">=</span> <span class="n">a_prev</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">a_prev_padded</span> <span class="o">=</span> <span class="n">Conv</span><span class="p">.</span><span class="nf">zero_pad</span><span class="p">(</span><span class="n">a_prev</span><span class="p">,</span> <span class="n">self</span><span class="p">.</span><span class="n">pad</span><span class="p">)</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">zeros</span><span class="p">((</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">self</span><span class="p">.</span><span class="n">n_h</span><span class="p">,</span> <span class="n">self</span><span class="p">.</span><span class="n">n_w</span><span class="p">,</span> <span class="n">self</span><span class="p">.</span><span class="n">n_c</span><span class="p">))</span>
+
+        <span class="c1"># Convolve
+</span>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">n_h</span><span class="p">):</span>
+            <span class="n">v_start</span> <span class="o">=</span> <span class="n">i</span> <span class="o">*</span> <span class="n">self</span><span class="p">.</span><span class="n">stride</span>
+            <span class="n">v_end</span> <span class="o">=</span> <span class="n">v_start</span> <span class="o">+</span> <span class="n">self</span><span class="p">.</span><span class="n">kernel_size</span>
+
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">n_w</span><span class="p">):</span>
+                <span class="n">h_start</span> <span class="o">=</span> <span class="n">j</span> <span class="o">*</span> <span class="n">self</span><span class="p">.</span><span class="n">stride</span>
+                <span class="n">h_end</span> <span class="o">=</span> <span class="n">h_start</span> <span class="o">+</span> <span class="n">self</span><span class="p">.</span><span class="n">kernel_size</span>
+
+                <span class="n">out</span><span class="p">[:,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">sum</span><span class="p">(</span><span class="n">a_prev_padded</span><span class="p">[:,</span> <span class="n">v_start</span><span class="p">:</span><span class="n">v_end</span><span class="p">,</span> <span class="n">h_start</span><span class="p">:</span><span class="n">h_end</span><span class="p">,</span> <span class="p">:,</span> <span class="n">np</span><span class="p">.</span><span class="n">newaxis</span><span class="p">]</span> <span class="o">*</span>
+                                         <span class="n">self</span><span class="p">.</span><span class="n">w</span><span class="p">[</span><span class="n">np</span><span class="p">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:,</span> <span class="p">:],</span> <span class="n">axis</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+
+        <span class="n">z</span> <span class="o">=</span> <span class="n">out</span> <span class="o">+</span> <span class="n">self</span><span class="p">.</span><span class="n">b</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">activation</span><span class="p">.</span><span class="nf">f</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
+        
+        <span class="c1"># ... caching for backward pass ...
+</span>        
+        <span class="k">return</span> <span class="n">a</span>
+</code></pre></div></div> <p>This implementation:</p> <ol> <li>Pads the input based on the padding strategy (‘valid’ or ‘same’)</li> <li>Initializes an output volume of appropriate dimensions</li> <li>Uses nested loops to slide the kernel across the input volume</li> <li>Computes the dot product between the kernel and each patch of the input</li> <li>Adds the bias term and applies the activation function</li> </ol> <p>Why this custom implementation is particularly effective:</p> <ol> <li> <p><strong>Direct Control</strong>: By implementing the convolution operation directly, the code has complete control over how features are extracted, which allows for custom optimizations specific to Bangla digits.</p> </li> <li> <p><strong>Transparency</strong>: The explicit loop-based implementation makes it clear exactly how the convolution operates, without any “magic” happening inside library functions.</p> </li> <li> <p><strong>Educational Value</strong>: This approach forces a deep understanding of how CNNs work, which can lead to more thoughtful architecture design.</p> </li> <li> <p><strong>Flexibility</strong>: The implementation can be easily modified to handle specific challenges of Bangla digit recognition if needed.</p> </li> </ol> <h3 id="backpropagation-through-the-convolutional-layer">Backpropagation Through the Convolutional Layer</h3> <p>The backward pass through the convolutional layer is equally important:</p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">backward</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">da</span><span class="p">):</span>
+    <span class="n">batch_size</span> <span class="o">=</span> <span class="n">da</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">a_prev</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">a</span> <span class="o">=</span> <span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">cache</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="p">(</span><span class="sh">'</span><span class="s">a_prev</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">z</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">a</span><span class="sh">'</span><span class="p">))</span>
+    <span class="n">a_prev_pad</span> <span class="o">=</span> <span class="n">Conv</span><span class="p">.</span><span class="nf">zero_pad</span><span class="p">(</span><span class="n">a_prev</span><span class="p">,</span> <span class="n">self</span><span class="p">.</span><span class="n">pad</span><span class="p">)</span> <span class="k">if</span> <span class="n">self</span><span class="p">.</span><span class="n">pad</span> <span class="o">!=</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">a_prev</span>
+
+    <span class="n">da_prev</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">zeros</span><span class="p">((</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">self</span><span class="p">.</span><span class="n">n_h_prev</span><span class="p">,</span> <span class="n">self</span><span class="p">.</span><span class="n">n_w_prev</span><span class="p">,</span> <span class="n">self</span><span class="p">.</span><span class="n">n_c_prev</span><span class="p">))</span>
+    <span class="n">da_prev_pad</span> <span class="o">=</span> <span class="n">Conv</span><span class="p">.</span><span class="nf">zero_pad</span><span class="p">(</span><span class="n">da_prev</span><span class="p">,</span> <span class="n">self</span><span class="p">.</span><span class="n">pad</span><span class="p">)</span> <span class="k">if</span> <span class="n">self</span><span class="p">.</span><span class="n">pad</span> <span class="o">!=</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">da_prev</span>
+
+    <span class="n">dz</span> <span class="o">=</span> <span class="n">da</span> <span class="o">*</span> <span class="n">self</span><span class="p">.</span><span class="n">activation</span><span class="p">.</span><span class="nf">df</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">cached_y</span><span class="o">=</span><span class="n">a</span><span class="p">)</span>
+    <span class="n">db</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">batch_size</span> <span class="o">*</span> <span class="n">dz</span><span class="p">.</span><span class="nf">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+    <span class="n">dw</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">zeros</span><span class="p">((</span><span class="n">self</span><span class="p">.</span><span class="n">kernel_size</span><span class="p">,</span> <span class="n">self</span><span class="p">.</span><span class="n">kernel_size</span><span class="p">,</span> <span class="n">self</span><span class="p">.</span><span class="n">n_c_prev</span><span class="p">,</span> <span class="n">self</span><span class="p">.</span><span class="n">n_c</span><span class="p">))</span>
+
+    <span class="c1"># 'Convolve' back
+</span>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">n_h</span><span class="p">):</span>
+        <span class="n">v_start</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">stride</span> <span class="o">*</span> <span class="n">i</span>
+        <span class="n">v_end</span> <span class="o">=</span> <span class="n">v_start</span> <span class="o">+</span> <span class="n">self</span><span class="p">.</span><span class="n">kernel_size</span>
+
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">n_w</span><span class="p">):</span>
+            <span class="n">h_start</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">stride</span> <span class="o">*</span> <span class="n">j</span>
+            <span class="n">h_end</span> <span class="o">=</span> <span class="n">h_start</span> <span class="o">+</span> <span class="n">self</span><span class="p">.</span><span class="n">kernel_size</span>
+
+            <span class="n">da_prev_pad</span><span class="p">[:,</span> <span class="n">v_start</span><span class="p">:</span><span class="n">v_end</span><span class="p">,</span> <span class="n">h_start</span><span class="p">:</span><span class="n">h_end</span><span class="p">,</span> <span class="p">:]</span> <span class="o">+=</span> \
+                <span class="n">np</span><span class="p">.</span><span class="nf">sum</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">w</span><span class="p">[</span><span class="n">np</span><span class="p">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:,</span> <span class="p">:,</span> <span class="p">:]</span> <span class="o">*</span>
+                       <span class="n">dz</span><span class="p">[:,</span> <span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="p">:</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">np</span><span class="p">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="p">:],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+
+            <span class="n">dw</span> <span class="o">+=</span> <span class="n">np</span><span class="p">.</span><span class="nf">sum</span><span class="p">(</span><span class="n">a_prev_pad</span><span class="p">[:,</span> <span class="n">v_start</span><span class="p">:</span><span class="n">v_end</span><span class="p">,</span> <span class="n">h_start</span><span class="p">:</span><span class="n">h_end</span><span class="p">,</span> <span class="p">:,</span> <span class="n">np</span><span class="p">.</span><span class="n">newaxis</span><span class="p">]</span> <span class="o">*</span>
+                         <span class="n">dz</span><span class="p">[:,</span> <span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="p">:</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">np</span><span class="p">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="p">:],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="n">dw</span> <span class="o">/=</span> <span class="n">batch_size</span>
+    
+    <span class="c1"># ... handle padding for da_prev ...
+</span>    
+    <span class="k">return</span> <span class="n">da_prev</span><span class="p">,</span> <span class="n">dw</span><span class="p">,</span> <span class="n">db</span>
+</code></pre></div></div> <p>This implementation:</p> <ol> <li>Computes the gradient of the loss with respect to the pre-activation (<code class="language-plaintext highlighter-rouge">dz</code>)</li> <li>Calculates the gradient with respect to the weights (<code class="language-plaintext highlighter-rouge">dw</code>) and biases (<code class="language-plaintext highlighter-rouge">db</code>)</li> <li>Computes the gradient flowing back to the previous layer (<code class="language-plaintext highlighter-rouge">da_prev</code>)</li> <li>Handles padding appropriately to ensure dimensions match</li> </ol> <p>For a more detailed explanation of backpropagation in CNNs, see <a href="https://cs231n.github.io/optimization-2/" rel="external nofollow noopener" target="_blank">CS231n’s notes on backpropagation</a>.</p> <h2 id="why-this-implementation-works-so-well">Why This Implementation Works So Well</h2> <p>The custom CNN implementation achieves an impressive 95.87% accuracy on Bangla digit recognition for several key reasons:</p> <h3 id="1-appropriate-architecture-design">1. Appropriate Architecture Design</h3> <p>The LeNet-inspired architecture used in this project is particularly well-suited for digit recognition tasks. Originally designed for handwritten digit recognition (albeit for Latin digits), LeNet’s structure provides an excellent starting point for Bangla digits as well. The sequence of convolutional layers, pooling layers, and fully connected layers creates a hierarchical feature extraction process that can identify the distinctive patterns in Bangla numerals.</p> <h3 id="2-effective-preprocessing-pipeline">2. Effective Preprocessing Pipeline</h3> <p>The preprocessing steps are carefully designed to enhance the quality of the input images:</p> <ul> <li> <strong>Binarization</strong>: Converting the images to binary format reduces noise and focuses on the essential structure of the digits.</li> <li> <strong>Standardization</strong>: Ensuring all digits have consistent foreground/background representation eliminates one source of variation that the model doesn’t need to learn.</li> <li> <strong>Morphological operations</strong>: Dilation and erosion help repair broken strokes and remove small noise artifacts, which is particularly important for Bangla digits with their complex structures.</li> <li> <strong>Empty space removal and centering</strong>: This helps the network focus on the actual digit content rather than wasting capacity learning to ignore empty regions.</li> </ul> <h3 id="3-numerical-stability-techniques">3. Numerical Stability Techniques</h3> <p>The implementation incorporates several techniques to ensure numerical stability:</p> <ul> <li> <strong>Subtracting the maximum value in Softmax</strong>: This prevents overflow when computing exponentials.</li> <li> <strong>Clipping small values in the cross-entropy calculation</strong>: This avoids taking logarithms of values very close to zero.</li> <li> <strong>Proper weight initialization</strong>: Using the He initialization method (scaled by sqrt(2/n)) helps ensure proper gradient flow during the initial phases of training.</li> </ul> <h3 id="4-batch-normalization-through-mini-batches">4. Batch Normalization Through Mini-Batches</h3> <p>The use of mini-batch training (with a batch size of 200) provides a form of regularization and helps the model generalize better. It also allows for more frequent weight updates, which can lead to faster convergence.</p> <h3 id="5-careful-hyperparameter-selection">5. Careful Hyperparameter Selection</h3> <p>The learning rate (0.005) and number of epochs (30) have been carefully chosen to balance training speed with accuracy. The relatively small learning rate ensures stable training, while the number of epochs provides sufficient time for the model to converge without overfitting.</p> <h3 id="6-robust-evaluation-metrics">6. Robust Evaluation Metrics</h3> <p>Using multiple evaluation metrics (accuracy, F1 score, and confusion matrix) provides a comprehensive view of the model’s performance, helping to identify and address potential issues with specific digits.</p> <h2 id="performance-optimization-techniques">Performance Optimization Techniques</h2> <p>The implementation employs several techniques to optimize performance:</p> <h3 id="1-weight-initialization">1. Weight Initialization</h3> <p>The weights are initialized using the He initialization method, which is particularly well-suited for ReLU activations:</p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">self</span><span class="p">.</span><span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="nf">randn</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">kernel_size</span><span class="p">,</span> <span class="n">self</span><span class="p">.</span><span class="n">kernel_size</span><span class="p">,</span> <span class="n">self</span><span class="p">.</span><span class="n">n_c_prev</span><span class="p">,</span> <span class="n">self</span><span class="p">.</span><span class="n">n_c</span><span class="p">)</span> <span class="o">*</span> \
+    <span class="n">np</span><span class="p">.</span><span class="nf">sqrt</span><span class="p">(</span><span class="mi">2</span> <span class="o">/</span> <span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">kernel_size</span> <span class="o">*</span> <span class="n">self</span><span class="p">.</span><span class="n">kernel_size</span> <span class="o">*</span> <span class="n">self</span><span class="p">.</span><span class="n">n_c_prev</span><span class="p">))</span>
+</code></pre></div></div> <p>This initialization strategy helps ensure that activations neither vanish nor explode at the beginning of training, allowing for faster convergence. For more on weight initialization strategies, see <a href="https://prateekvishnu.medium.com/xavier-and-he-normal-he-et-al-initialization-8e3d7a087528" rel="external nofollow noopener" target="_blank">Understanding Xavier Initialization in Deep Neural Networks</a>.</p> <h3 id="2-mini-batch-training">2. Mini-Batch Training</h3> <p>The model is trained using mini-batches rather than full-batch or stochastic gradient descent:</p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">cnn</span><span class="p">.</span><span class="nf">train</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span>
+          <span class="n">mini_batch_size</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span>
+          <span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.005</span><span class="p">,</span>
+          <span class="n">num_epochs</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span>
+          <span class="n">validation_data</span><span class="o">=</span><span class="p">(</span><span class="n">x_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">))</span>
+</code></pre></div></div> <p>Mini-batch training strikes a balance between computational efficiency and update stability. It also introduces a form of regularization that can help the model generalize better.</p> <h3 id="3-learning-rate-selection">3. Learning Rate Selection</h3> <p>The learning rate (0.005) has been carefully chosen to be:</p> <ul> <li>Small enough to ensure stable convergence without overshooting minima</li> <li>Large enough to allow the model to make meaningful progress in a reasonable number of epochs</li> </ul> <h3 id="4-caching-during-forward-pass">4. Caching During Forward Pass</h3> <p>To improve the efficiency of backpropagation, the implementation caches activations and intermediate values during the forward pass:</p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="n">training</span><span class="p">:</span>
+    <span class="c1"># Cache for backward pass
+</span>    <span class="n">self</span><span class="p">.</span><span class="n">cache</span><span class="p">.</span><span class="nf">update</span><span class="p">({</span><span class="sh">'</span><span class="s">a_prev</span><span class="sh">'</span><span class="p">:</span> <span class="n">a_prev</span><span class="p">,</span> <span class="sh">'</span><span class="s">z</span><span class="sh">'</span><span class="p">:</span> <span class="n">z</span><span class="p">,</span> <span class="sh">'</span><span class="s">a</span><span class="sh">'</span><span class="p">:</span> <span class="n">a</span><span class="p">})</span>
+</code></pre></div></div> <p>This eliminates the need to recompute these values during the backward pass, significantly improving computational efficiency.</p> <h2 id="applications-and-future-directions">Applications and Future Directions</h2> <p>This Bangla handwritten digit recognition system has numerous practical applications:</p> <h3 id="immediate-applications">Immediate Applications</h3> <ol> <li> <p><strong>Document Digitization</strong>: Converting handwritten Bangla documents into digital text, preserving cultural and historical materials.</p> </li> <li> <p><strong>Postal Automation</strong>: Automating the sorting and routing of mail based on handwritten Bangla postal codes and addresses.</p> </li> <li> <p><strong>Educational Tools</strong>: Creating interactive learning systems to help students practice writing Bangla numerals with real-time feedback.</p> </li> <li> <p><strong>Banking Systems</strong>: Processing handwritten Bangla digits on checks, forms, and other financial documents.</p> </li> <li> <p><strong>Form Processing</strong>: Automating the entry of handwritten numerical data from forms in government offices, healthcare facilities, and businesses.</p> </li> </ol> <h3 id="future-directions">Future Directions</h3> <ol> <li> <p><strong>Extending to Bangla Characters</strong>: The system could be extended to recognize full Bangla script, not just digits.</p> </li> <li> <p><strong>Real-time Recognition</strong>: Optimizing the implementation for real-time recognition on mobile devices or embedded systems.</p> </li> <li> <p><strong>Multi-script Recognition</strong>: Developing a system that can handle multiple scripts (Bangla, Latin, Devanagari, etc.) simultaneously.</p> </li> <li> <p><strong>Integration with OCR Systems</strong>: Incorporating this digit recognition system into a full Optical Character Recognition pipeline for Bangla documents.</p> </li> <li> <p><strong>Transfer Learning Approaches</strong>: Exploring how pre-trained models on Latin digits could be adapted for Bangla digits with minimal retraining.</p> </li> </ol> <h2 id="conclusion">Conclusion</h2> <p>This project demonstrates that it’s possible to build a highly effective neural network from scratch using only NumPy, without relying on deep learning frameworks. By achieving an accuracy of 95.87% on Bangla handwritten digit recognition, it shows that a well-designed architecture with appropriate preprocessing can perform exceptionally well even without the advanced optimizations provided by modern deep learning libraries.</p> <p>The implementation provides valuable insights into the inner workings of convolutional neural networks, including forward and backward propagation, various layer types, and optimization algorithms. It is both a practical solution for Bangla digit recognition and an educational resource for those wanting to understand the fundamentals of neural networks.</p> <p>As AI applications continue to expand globally, projects like this that focus on languages beyond English make technology more inclusive and accessible to diverse populations. The techniques and insights from this project can inspire similar efforts for other scripts and languages, contributing to a more equitable technological landscape.</p> </article> </div> </div> <footer class="fixed-bottom" role="contentinfo"> <div class="container mt-0"> © Copyright 2026 Tanzim Hossain Romel. © Tanzim Hossain Romel. Powered by <a href="https://jekyllrb.com/" target="_blank" rel="external nofollow noopener">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio" rel="external nofollow noopener" target="_blank">al-folio</a> theme. </div> </footer> <script>
+  window.alFolio = {
+    compatBootstrap: false
+  };
+</script> <script src="/assets/js/nav-toggle.js?v=141bd79a73ebc0f0b6ea58e440ae79fc"></script> <script defer src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script> <script defer src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script> <script defer src="/assets/js/masonry.js?v=e49affc7bd2646f6acdad1dbe02c2359" type="text/javascript"></script> <script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js" integrity="sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI=" crossorigin="anonymous"></script> <script src="/assets/al_math/js/mathjax-setup.js"></script> <script src="/assets/js/tooltips-setup.js?v=fe487e99db6c43751e6e7bdb2d6a0611"></script> <script src="/assets/js/no_defer.js?v=53b1b1a645525975c963ce8bf8bfefcf"></script> <script defer src="/assets/js/common.js?v=87baac90f765f2f3362dcf6aaf312a8a"></script> <script defer src="/assets/js/copy_code.js?v=c8a01c11a92744d44b093fc3bda915df" type="text/javascript"></script> <script defer src="/assets/js/jupyter_new_tab.js?v=896d254890d9b47f0281f63bfccf0dee"></script> <script async src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script> <script async src="https://badge.dimensions.ai/badge.js"></script> <script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script> <script defer src="/assets/al_img_tools/js/zoom.js"></script> <script defer src="/assets/js/progress-bar.js?v=499464c5c63ced6cf7ad62509f1e2610" type="text/javascript"></script> <script src="https://cdn.jsdelivr.net/npm/vanilla-back-to-top@7.2.1/dist/vanilla-back-to-top.min.js" integrity="sha256-uMJJ3EoTyfRBoTbR+lrfu1uRQ87RZG8AR3cVNuQVeFg=" crossorigin="anonymous"></script> <script>
+    addBackToTop();
+  </script> <script type="module" src="/assets/al_search/js/search/ninja-keys.min.js"></script> <ninja-keys hidebreadcrumbs noautoloadmdicons placeholder="Type to start searching"></ninja-keys> <script src="/assets/al_search/js/search-setup.js"></script> <script>
+// get the ninja-keys element
+const ninja = document.querySelector('ninja-keys');
+
+// add the home and posts menu items
+ninja.data = [{
+    id: "nav-about",
+    title: "about",
+    section: "Navigation",
+    handler: () => {
+      window.location.href = "/";
+    },
+  },{id: "nav-blog",
+          title: "blog",
+          description: "",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/blog/";
+          },
+        },{id: "nav-publications",
+          title: "publications",
+          description: "Publications.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/publications/";
+          },
+        },{id: "nav-research",
+          title: "research",
+          description: "Research on reliable AI agents, SRE-agent evaluation, ML ecosystem security, agent-choice auditing, and developer tools.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/research/";
+          },
+        },{id: "nav-projects",
+          title: "projects",
+          description: "Research and engineering projects.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/projects/";
+          },
+        },{id: "nav-cv",
+          title: "CV",
+          description: "Curriculum vitae.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/cv/";
+          },
+        },{id: "nav-contributions",
+          title: "contributions",
+          description: "Curated open-source contribution evidence across research infrastructure, frameworks, and language tooling.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/contributions/";
+          },
+        },{id: "post-building-a-fast-1brc-solver-in-c-on-apple-silicon",
+        
+          title: "Building a fast 1BRC solver in C# on Apple Silicon",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/building-fast-1brc-csharp-apple-silicon/";
+          
+        },
+      },{id: "post-memory-management-in-production-avoiding-the-silent-killers",
+        
+          title: "Memory Management in Production: Avoiding the Silent Killers",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/memory-management-production-silent-killers/";
+          
+        },
+      },{id: "post-growing-as-a-software-engineer-in-the-age-of-llms-and-vibe-coding",
+        
+          title: "Growing as a Software Engineer in the Age of LLMs and Vibe Coding...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/vibe-coding/";
+          
+        },
+      },{id: "post-taming-the-imagination-a-comprehensive-guide-to-handling-hallucinations-and-implementing-guardrails-in-agentic-ai",
+        
+          title: "Taming the Imagination: A Comprehensive Guide to Handling Hallucinations and Implementing Guardrails in...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/how-to-handle-hallucinations/";
+          
+        },
+      },{id: "post-building-an-agentic-ai-analytics-dashboard-a-deep-dive-with-langchain-langgraph-and-fine-tuned-llama",
+        
+          title: "Building an Agentic AI Analytics Dashboard: A Deep Dive with LangChain, LangGraph, and...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/intro-to-agentic-ai/";
+          
+        },
+      },{id: "post-neural-algorithmic-reasoning-teaching-neural-networks-to-think-like-algorithms",
+        
+          title: "Neural Algorithmic Reasoning: Teaching Neural Networks to Think Like Algorithms",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/intro-to-nar/";
+          
+        },
+      },{id: "post-opentelemetry-in-microservices-how-we-transformed-our-observability-strategy",
+        
+          title: "OpenTelemetry in Microservices: How We Transformed Our Observability Strategy",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/opentelemetry/";
+          
+        },
+      },{id: "post-using-ai-tools-in-software-engineering-and-research-workflows",
+        
+          title: "Using AI Tools in Software Engineering and Research Workflows",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/leveraging-ai-tools-software-engineering/";
+          
+        },
+      },{id: "post-the-performance-crisis-how-we-rescued-a-net-8-microservice-from-10-critical-bottlenecks",
+        
+          title: "The Performance Crisis: How We Rescued a .NET 8 Microservice from 10 Critical...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2024/optimizing-dotnet-microservices-performance/";
+          
+        },
+      },{id: "post-zero-downtime-deployments-in-kubernetes-how-we-keep-our-services-running-while-we-ship",
+        
+          title: "Zero Downtime Deployments in Kubernetes: How We Keep Our Services Running While We...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2024/zero-downtime/";
+          
+        },
+      },{id: "post-mastering-unit-testing-and-bdd-with-xunit-and-specflow-in-net-9-a-comprehensive-guide",
+        
+          title: "Mastering Unit Testing and BDD with xUnit and SpecFlow in .NET 9: A...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2024/dotnet-tests/";
+          
+        },
+      },{id: "post-design-patterns-your-first-step-toward-professional-software-engineering",
+        
+          title: "Design Patterns: Your First Step Toward Professional Software Engineering",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2024/design-patterns-professional-software-engineering/";
+          
+        },
+      },{id: "post-setting-up-github-actions-ci-cd-with-aws-a-practical-journey",
+        
+          title: "Setting Up GitHub Actions CI/CD with AWS: A Practical Journey",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2024/intro-to-ci-cd/";
+          
+        },
+      },{id: "post-the-clique-partition-problem-dividing-networks-into-perfect-communities",
+        
+          title: "The Clique Partition Problem: Dividing Networks into Perfect Communities",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2023/clique-partition-problem-graph-theory/";
+          
+        },
+      },{id: "post-advice-complexity-in-online-algorithms-when-knowing-the-future-makes-all-the-difference",
+        
+          title: "Advice Complexity in Online Algorithms: When Knowing the Future Makes All the Difference...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2023/advice-complexity-online-algorithms/";
+          
+        },
+      },{id: "post-getting-started-with-kubernetes-deploying-microservice-architectures-at-scale",
+        
+          title: "Getting Started with Kubernetes: Deploying Microservice Architectures at Scale",
+        
+        description: "A practical Kubernetes guide covering microservice deployment, service-mesh integration, observability, and the operational checks needed before production use.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2022/getting-started-with-kubernetes-microservices/";
+          
+        },
+      },{id: "post-understanding-xv6-a-practical-introduction-to-operating-systems",
+        
+          title: "Understanding xv6: A Practical Introduction to Operating Systems",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2022/understanding-xv6-operating-systems/";
+          
+        },
+      },{id: "post-getting-started-with-ns3-a-hands-on-guide-to-network-simulation",
+        
+          title: "Getting Started with NS3: A Hands-On Guide to Network Simulation",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2021/getting-started-with-ns3/";
+          
+        },
+      },{id: "news-completed-b-sc-in-computer-science-and-engineering-from-bangladesh-university-of-engineering-and-technology-with-a-gpa-of-3-53-4-00-link",
+          title: 'Completed B.Sc in Computer Science and Engineering from Bangladesh University of Engineering and...',
+          description: "",
+          section: "News",},{id: "news-joined-iqvia-as-a-software-development-engineer-on-kpi-library-the-dynamic-reporting-layer-within-orchestrated-analytics-link",
+          title: 'Joined IQVIA as a Software Development Engineer on KPI Library, the dynamic reporting...',
+          description: "",
+          section: "News",},{id: "news-submitted-sentiment-analysis-of-anonymous-crisis-reports-in-bangladesh-to-acm-cscw-2025-analyzing-crowd-sourced-reports-from-bangladesh-s-2024-national-crisis-using-transformer-models-link",
+          title: 'Submitted ‘Sentiment Analysis of Anonymous Crisis Reports in Bangladesh’ to ACM CSCW 2025,...',
+          description: "",
+          section: "News",},{id: "news-honored-with-the-iqvia-impact-program-silver-award-for-outstanding-performance-and-contributions-to-the-kpi-library-team-link",
+          title: 'Honored with the IQVIA Impact Program Silver Award for outstanding performance and contributions...',
+          description: "",
+          section: "News",},{id: "news-submitted-an-empirical-study-on-remote-code-execution-in-machine-learning-model-hosting-ecosystems-to-the-mining-software-repositories-msr-2026-conference-first-large-scale-cross-platform-security-study-analyzing-45-000-repositories-across-5-major-ml-platforms-link",
+          title: 'Submitted ‘An Empirical Study on Remote Code Execution in Machine Learning Model Hosting...',
+          description: "",
+          section: "News",},{id: "news-resubmitted-an-empirical-study-on-remote-code-execution-in-machine-learning-model-hosting-ecosystems-to-acm-transactions-on-software-engineering-and-methodology-tosem-2026-preprint-available-on-arxiv-link",
+          title: 'Resubmitted ‘An Empirical Study on Remote Code Execution in Machine Learning Model Hosting...',
+          description: "",
+          section: "News",},{id: "news-started-a-remote-summer-research-internship-at-the-university-of-illinois-urbana-champaign-through-uiuc-summer-research-in-software-engineering-srse-2026-with-professor-tianyin-xu-link",
+          title: 'Started a remote summer research internship at the University of Illinois Urbana-Champaign through...',
+          description: "",
+          section: "News",},{id: "news-submitted-the-choice-can-be-the-attack-auditing-aligned-backdoors-in-llm-agents-to-the-transactions-of-the-association-for-computational-linguistics-tacl-2026-with-chowdhury-rakin-haider-link",
+          title: 'Submitted ‘The Choice Can Be the Attack: Auditing Aligned Backdoors in LLM Agents’...',
+          description: "",
+          section: "News",},{id: "news-an-empirical-study-on-remote-code-execution-in-machine-learning-model-hosting-ecosystems-is-under-review-at-the-international-conference-on-software-engineering-icse-2027-preprint-available-on-arxiv-link",
+          title: '‘An Empirical Study on Remote Code Execution in Machine Learning Model Hosting Ecosystems’...',
+          description: "",
+          section: "News",},{id: "news-will-begin-graduate-study-in-computing-science-at-the-university-of-alberta-on-september-1-2026-link",
+          title: 'Will begin graduate study in Computing Science at the University of Alberta on...',
+          description: "",
+          section: "News",},{id: "projects-1brc-c-on-apple-silicon",
+          title: '1BRC C# on Apple Silicon',
+          description: "A .NET 10 NativeAOT performance case study: byte parsing, native aggregation, ARM64 tuning, and a size-aware macOS pread path",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/1brc-csharp/";
+            },},{id: "projects-building-a-bangla-handwritten-digit-recognizer-from-scratch",
+          title: 'Building a Bangla Handwritten Digit Recognizer from Scratch',
+          description: "A Deep Dive into Custom CNN Implementation",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/bangla-digit-recognition/";
+            },},{id: "projects-blockchain-based-ticketing-platform",
+          title: 'Blockchain Based Ticketing Platform',
+          description: "A practical approach to reducing ticket fraud and abusive resale",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/blockchain-ticketing/";
+            },},{id: "projects-yet-another-c-compiler",
+          title: 'Yet Another C Compiler',
+          description: "A complete multi-pass compiler for a subset of C",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/compiler/";
+            },},{id: "projects-contextledger-context-accounting-for-coding-agents",
+          title: 'ContextLedger: context accounting for coding agents',
+          description: "A research notebook on OpenCode compaction, provenance, and live GPT-5.5 experiments",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/contextledger/";
+            },},{id: "projects-ctxhelm-agent-native-context-compiler",
+          title: 'ctxhelm: agent-native context compiler',
+          description: "Local-first context plans, release proof, and source-free agent evaluation",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/ctxhelm/";
+            },},{id: "projects-mini-deep-learning-framework-pytorch-from-scratch",
+          title: 'Mini Deep Learning Framework: PyTorch from Scratch',
+          description: "A freelance learning project for tensors, autograd, and neural-network internals",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/deep-learning-framework-capstone/";
+            },},{id: "projects-go-container-runtime-docker-from-scratch",
+          title: 'Go Container Runtime: Docker from Scratch',
+          description: "A freelance learning project for Linux containers, networking, and Go systems programming",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/docker-from-scratch-go/";
+            },},{id: "projects-eventfly-distributed-microservices-event-platform",
+          title: 'EventFly – Distributed Microservices Event Platform',
+          description: "A six-person BUET course project for event creation, ticketing, announcements, participant engagement, analytics, and payments, implemented with Node.js, React, NATS, Kubernetes, MongoDB, Redis, and Stripe.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/eventfly-an-end-to-end-event-management-system/";
+            },},{id: "projects-building-a-go-database-engine-from-scratch",
+          title: 'Building a Go Database Engine from Scratch',
+          description: "An educational ACID-oriented database engine with advanced features",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/go-database/";
+            },},{id: "projects-image-caption-generation-with-bert-context-vectors",
+          title: 'Image Caption Generation with BERT Context Vectors',
+          description: "Extended the &quot;Show, Attend, and Tell&quot; image captioning model with BERT to improve caption quality and reduce training time, achieving 36% improvement in CIDEr score and 43% improvement in BLEU-4.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/image-caption-generator/";
+            },},{id: "projects-patchsmith-a-harness-for-repair-agents",
+          title: 'PatchSmith: a harness for repair agents',
+          description: "System design and R&amp;D notes for bounded patches, sandbox validation, and auditable repair runs",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/patchsmith/";
+            },},{id: "projects-ray-tracing-from-scratch-a-comprehensive-guide-to-3d-rendering-physics-and-implementation",
+          title: 'Ray Tracing from Scratch: A Comprehensive Guide to 3D Rendering Physics and Implementation...',
+          description: "Implementing physically-based rendering with C++",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/ray-tracing/";
+            },},{id: "projects-an-empirical-study-on-remote-code-execution-in-machine-learning-model-hosting-ecosystems",
+          title: 'An Empirical Study on Remote Code Execution in Machine Learning Model Hosting Ecosystems...',
+          description: "A cross-platform study of model-loading risk across five ML hosting ecosystems, using static analysis, malware-signature scanning, and analysis of more than 600 developer discussions.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/research-ml-remote-code-execution/";
+            },},{id: "projects-verischema-verified-database-schema-generation",
+          title: 'VeriSchema: verified database-schema generation',
+          description: "How can specialized agents generate relational schemas from natural-language requirements while formal checks and targeted repair keep the result consistent?",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/research-multi-agent-db-schema/";
+            },},{id: "projects-the-choice-can-be-the-attack-auditing-aligned-backdoors-in-llm-agents",
+          title: 'The Choice Can Be the Attack: Auditing Aligned Backdoors in LLM Agents',
+          description: "Abstract-level summary of SHIFT, submitted to TACL 2026 on aligned backdoor attacks in LLM agents.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/research-reagent-plus-plus/";
+            },},{id: "projects-sentiment-analysis-of-anonymous-crisis-reports-in-bangladesh",
+          title: 'Sentiment Analysis of Anonymous Crisis Reports in Bangladesh',
+          description: "A multilingual analysis of anonymous, crowd-sourced reports from Bangladesh&#39;s 2024 national crisis.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/research-ureporter/";
+            },},{id: "projects-enhancing-tcp-fairness-tcp-vegas-implementation",
+          title: 'Enhancing TCP Fairness: TCP Vegas+ Implementation',
+          description: "A dual-mode solution for TCP Vegas fairness issues",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/tcp-vegas-plus/";
+            },},{
+        id: 'social-email',
+        title: 'email',
+        section: 'Socials',
+        handler: () => {
+          window.open("mailto:%74%61%6E%68%72%6F%6D%65%6C@%67%6D%61%69%6C.%63%6F%6D", "_blank");
+        },
+      },{
+        id: 'social-github',
+        title: 'GitHub',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://github.com/thromel", "_blank");
+        },
+      },{
+        id: 'social-scholar',
+        title: 'Google Scholar',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://scholar.google.com/citations?user=zHV4EU8AAAAJ", "_blank");
+        },
+      },{
+        id: 'social-linkedin',
+        title: 'LinkedIn',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://www.linkedin.com/in/thromel", "_blank");
+        },
+      },{
+        id: 'social-orcid',
+        title: 'ORCID',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://orcid.org/0009-0009-2432-8960", "_blank");
+        },
+      },{
+        id: 'social-rss',
+        title: 'RSS Feed',
+        section: 'Socials',
+        handler: () => {
+          window.open("/feed.xml", "_blank");
+        },
+      },{
+        id: 'social-x',
+        title: 'X',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://twitter.com/tanzimhromel", "_blank");
+        },
+      },{
+      id: 'light-theme',
+      title: 'Change theme to light',
+      description: 'Change the theme of the site to Light',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("light");
+      },
+    },
+    {
+      id: 'dark-theme',
+      title: 'Change theme to dark',
+      description: 'Change the theme of the site to Dark',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("dark");
+      },
+    },
+    {
+      id: 'system-theme',
+      title: 'Use system default theme',
+      description: 'Change the theme of the site to System Default',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("system");
+      },
+    },];
+
+</script> <script src="/assets/al_search/js/shortcut-key.js"></script> </body> </html>

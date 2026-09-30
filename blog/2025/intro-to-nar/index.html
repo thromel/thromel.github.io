@@ -1,0 +1,1097 @@
+<!DOCTYPE html> <html lang="en"> <head> <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <title> Neural Algorithmic Reasoning: Teaching Neural Networks to Think Like Algorithms | Tanzim Hossain Romel </title> <meta name="author" content="Tanzim Hossain Romel"> <meta name="description" content="Academic and engineering portfolio of Tanzim Hossain Romel, focused on reliable AI agents, software engineering research, and developer tools."> <meta name="keywords" content=""> <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https:; style-src 'self' 'unsafe-inline' https:; img-src 'self' data: https:; font-src 'self' data: https:; media-src 'self' https:; frame-src 'self' https:; connect-src 'self' https:;"> <style>
+  :root {
+    --max-content-width: 930px;
+  }
+</style> <link rel="stylesheet" href="/assets/css/tailwind.css?v=50c64c15cbb9fd1ce6056fdb8bcb4b62"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.2.0/css/all.min.css" integrity="sha256-MVopmdyC2tYTiJ8wlktf0uh0v4NgT+vNdyVFepi7Q0c=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.5/css/academicons.min.css" integrity="sha256-SzrCOBJbGVFMahewkgjwnApaV2+av1DwMAA+/QGLyZw=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/scholar-icons@1.0.3/css/scholar-icons.css" integrity="sha256-VY3hHVj/hNX3fYG6wtbA6TcKJQl7+FthzGSyIB64klY=" crossorigin="anonymous"> <link defer rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons&amp;display=swap"> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-github.css?v=591dab5a4e56573bf4ef7fd332894c99" media="" id="highlight_theme_light"> <link rel="shortcut icon" href="data:image/svg+xml,&lt;svg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20100%20100%22&gt;&lt;text%20y=%22.9em%22%20font-size=%2290%22&gt;%E2%9A%9B%EF%B8%8F&lt;/text&gt;&lt;/svg&gt;"> <link rel="stylesheet" href="/assets/css/main.css?v=3116ba77db9ee1581d05bb3e86fbf7f1"> <link rel="canonical" href="https://tanzimhromel.com/blog/2025/intro-to-nar/"> <script src="/assets/js/theme.js?v=5286c3e4c334d0ecb8fc0c40ff4fa7ec"></script> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-native.css?v=5847e5ed4a4568527aa6cfab446049ca" media="none" id="highlight_theme_dark"> <script>
+    initTheme();
+  </script> </head> <body class="fixed-top-nav "> <header> <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top" role="navigation"> <div class="container"> <a class="navbar-brand title font-weight-lighter" href="/"> Tanzim Hossain Romel </a> <button class="navbar-toggler collapsed navbar-toggler-main" type="button" data-nav-toggle="navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar top-bar"></span> <span class="icon-bar middle-bar"></span> <span class="icon-bar bottom-bar"></span> </button> <div class="collapse navbar-collapse navbar-collapse-main" id="navbarNav"> <ul class="navbar-nav navbar-menu-list flex-nowrap"> <li class="nav-item "> <a class="nav-link" href="/">about </a> </li> <li class="nav-item active"> <a class="nav-link" href="/blog/">blog </a> </li> <li class="nav-item "> <a class="nav-link" href="/publications/">publications </a> </li> <li class="nav-item "> <a class="nav-link" href="/research/">research </a> </li> <li class="nav-item "> <a class="nav-link" href="/projects/">projects </a> </li> <li class="nav-item "> <a class="nav-link" href="/cv/">CV </a> </li> <li class="nav-item "> <a class="nav-link" href="/contributions/">contributions </a> </li> <li class="nav-item"> <button id="search-toggle" type="button" title="Search" aria-label="Open search"> <span class="nav-link">ctrl k <i class="fa-solid fa-magnifying-glass"></i></span> </button> </li> <li class="toggle-container"> <button id="light-toggle" type="button" title="Change theme" aria-label="Change color theme"> <i class="fa-half-sun-moon" id="light-toggle-system"></i> <i class="fa-solid fa-moon" id="light-toggle-dark"></i> <i class="fa-solid fa-sun" id="light-toggle-light"></i> </button> </li> </ul> </div> </div> </nav> <progress id="progress" value="0"> <div class="progress-container"> <span class="progress-bar"></span> </div> </progress> </header> <div class="container mt-5" role="main"> <div class="post"> <header class="post-header"> <h1 class="post-title">Neural Algorithmic Reasoning: Teaching Neural Networks to Think Like Algorithms</h1> <p class="post-meta"> Created on April 05, 2025 </p> <p class="post-tags"> <a href="/blog/2025"> <i class="fa-solid fa-calendar fa-sm"></i> 2025 </a>   ·   <a href="/blog/tag/neural-networks"> <i class="fa-solid fa-hashtag fa-sm"></i> neural-networks</a>   <a href="/blog/tag/algorithms"> <i class="fa-solid fa-hashtag fa-sm"></i> algorithms</a>   <a href="/blog/tag/deep-learning"> <i class="fa-solid fa-hashtag fa-sm"></i> deep-learning</a>   <a href="/blog/tag/reasoning"> <i class="fa-solid fa-hashtag fa-sm"></i> reasoning</a>   <a href="/blog/tag/python"> <i class="fa-solid fa-hashtag fa-sm"></i> python</a>   <a href="/blog/tag/pytorch"> <i class="fa-solid fa-hashtag fa-sm"></i> pytorch</a>   ·   <a href="/blog/category/artificial-intelligence"> <i class="fa-solid fa-tag fa-sm"></i> artificial-intelligence</a>   <a href="/blog/category/machine-learning"> <i class="fa-solid fa-tag fa-sm"></i> machine-learning</a>   <a href="/blog/category/algorithms"> <i class="fa-solid fa-tag fa-sm"></i> algorithms</a> </p> </header> <article class="post-content"> <div id="markdown-content"> <h2 id="introduction-when-neural-networks-meet-classical-algorithms">Introduction: When Neural Networks Meet Classical Algorithms</h2> <p>Imagine you’re planning a road trip across the country. You pull up your favorite navigation app, type in your destination, and within seconds, you have the optimal route. Behind this seemingly simple task lies decades of algorithmic research - Dijkstra’s algorithm, A* search, and countless optimizations. But what if I told you that we could teach a neural network to not just memorize routes, but to actually <em>reason</em> like these classical algorithms?</p> <p>This is the promise of Neural Algorithmic Reasoning (NAR) - a fascinating paradigm that bridges the gap between the rigid precision of classical algorithms and the flexible learning capabilities of neural networks. In this post, we’ll explore this exciting field through a hands-on example, building intuition about how neural networks can learn to execute algorithms, and why this matters for the future of AI.</p> <h2 id="the-big-picture-why-neural-algorithmic-reasoning">The Big Picture: Why Neural Algorithmic Reasoning?</h2> <p>Before we dive into code, it helps to see what NAR changes. Traditional approaches to problem-solving fall into two camps:</p> <p><strong>Classical Algorithms</strong>: These are like precise recipes. Given the same input, they always produce the same output. They’re interpretable, provably correct, and efficient for their designed purpose. However, they’re brittle - they can’t adapt to noisy data or learn from experience.</p> <p><strong>Neural Networks</strong>: These are like talented improvisers. They excel at pattern recognition, can handle messy real-world data, and improve with experience. But they’re often black boxes, and we can’t guarantee they’ll always give the correct answer.</p> <p>Neural Algorithmic Reasoning asks: <em>What if we could have the best of both worlds?</em> What if we could teach neural networks to mimic the step-by-step reasoning of algorithms while retaining their ability to handle noise and generalize beyond their training data?</p> <h2 id="our-real-world-challenge-smart-city-navigation">Our Real-World Challenge: Smart City Navigation</h2> <p>Let’s ground our exploration in a concrete problem. Imagine you’re designing a navigation system for a smart city that needs to:</p> <ol> <li>Find shortest paths between locations (classic algorithmic task)</li> <li>Adapt to real-time traffic conditions (requires flexibility)</li> <li>Handle incomplete or noisy sensor data (real-world messiness)</li> <li>Learn from historical patterns (machine learning strength)</li> </ol> <p>We’ll build a neural network that learns to execute the Bellman-Ford algorithm - a classic shortest path algorithm - while being robust to the challenges of real-world data.</p> <h2 id="understanding-the-bellman-ford-algorithm">Understanding the Bellman-Ford Algorithm</h2> <p>Before teaching a neural network to reason algorithmically, we need to understand the algorithm ourselves. The Bellman-Ford algorithm finds shortest paths from a source node to all other nodes in a weighted graph, even when edges have negative weights.</p> <p>Here’s the key insight: The algorithm works by repeatedly “relaxing” edges. If we find a shorter path to a node through a neighbor, we update our distance estimate. After enough iterations, we’re guaranteed to find the shortest paths.</p> <p>Let’s implement it in Python:</p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">import</span> <span class="n">networkx</span> <span class="k">as</span> <span class="n">nx</span>
+<span class="kn">import</span> <span class="n">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">from</span> <span class="n">typing</span> <span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Optional</span>
+
+<span class="k">def</span> <span class="nf">bellman_ford</span><span class="p">(</span><span class="n">graph</span><span class="p">:</span> <span class="n">nx</span><span class="p">.</span><span class="n">DiGraph</span><span class="p">,</span> <span class="n">source</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">],</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]]]:</span>
+    <span class="sh">"""</span><span class="s">
+    Classic Bellman-Ford algorithm implementation.
+    
+    Args:
+        graph: Directed graph with edge weights
+        source: Starting node
+        
+    Returns:
+        distances: Shortest distances from source to all nodes
+        predecessors: Previous node in shortest path
+    </span><span class="sh">"""</span>
+    <span class="c1"># Initialize distances to infinity, except source
+</span>    <span class="n">distances</span> <span class="o">=</span> <span class="p">{</span><span class="n">node</span><span class="p">:</span> <span class="nf">float</span><span class="p">(</span><span class="sh">'</span><span class="s">inf</span><span class="sh">'</span><span class="p">)</span> <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">graph</span><span class="p">.</span><span class="nf">nodes</span><span class="p">()}</span>
+    <span class="n">distances</span><span class="p">[</span><span class="n">source</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">predecessors</span> <span class="o">=</span> <span class="p">{</span><span class="n">node</span><span class="p">:</span> <span class="bp">None</span> <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">graph</span><span class="p">.</span><span class="nf">nodes</span><span class="p">()}</span>
+    
+    <span class="c1"># Relax edges repeatedly
+</span>    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="n">graph</span><span class="p">.</span><span class="nf">nodes</span><span class="p">())</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">weight</span> <span class="ow">in</span> <span class="n">graph</span><span class="p">.</span><span class="nf">edges</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="sh">'</span><span class="s">weight</span><span class="sh">'</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">distances</span><span class="p">[</span><span class="n">u</span><span class="p">]</span> <span class="o">+</span> <span class="n">weight</span> <span class="o">&lt;</span> <span class="n">distances</span><span class="p">[</span><span class="n">v</span><span class="p">]:</span>
+                <span class="n">distances</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="n">distances</span><span class="p">[</span><span class="n">u</span><span class="p">]</span> <span class="o">+</span> <span class="n">weight</span>
+                <span class="n">predecessors</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="n">u</span>
+    
+    <span class="c1"># Check for negative cycles (optional)
+</span>    <span class="k">for</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">weight</span> <span class="ow">in</span> <span class="n">graph</span><span class="p">.</span><span class="nf">edges</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="sh">'</span><span class="s">weight</span><span class="sh">'</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">distances</span><span class="p">[</span><span class="n">u</span><span class="p">]</span> <span class="o">+</span> <span class="n">weight</span> <span class="o">&lt;</span> <span class="n">distances</span><span class="p">[</span><span class="n">v</span><span class="p">]:</span>
+            <span class="k">raise</span> <span class="nc">ValueError</span><span class="p">(</span><span class="sh">"</span><span class="s">Graph contains negative cycle</span><span class="sh">"</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">distances</span><span class="p">,</span> <span class="n">predecessors</span>
+
+<span class="c1"># Let's create a simple city network
+</span><span class="k">def</span> <span class="nf">create_city_graph</span><span class="p">():</span>
+    <span class="sh">"""</span><span class="s">Create a graph representing city intersections and roads.</span><span class="sh">"""</span>
+    <span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="p">.</span><span class="nc">DiGraph</span><span class="p">()</span>
+    
+    <span class="c1"># Add intersections (nodes)
+</span>    <span class="n">intersections</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="sh">"</span><span class="s">Downtown</span><span class="sh">"</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="sh">"</span><span class="s">University</span><span class="sh">"</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="sh">"</span><span class="s">Shopping District</span><span class="sh">"</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="sh">"</span><span class="s">Residential North</span><span class="sh">"</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="sh">"</span><span class="s">Industrial Park</span><span class="sh">"</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="sh">"</span><span class="s">Residential South</span><span class="sh">"</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="sh">"</span><span class="s">Airport</span><span class="sh">"</span><span class="p">)</span>
+    <span class="p">]</span>
+    
+    <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">intersections</span><span class="p">:</span>
+        <span class="n">G</span><span class="p">.</span><span class="nf">add_node</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
+    
+    <span class="c1"># Add roads (edges) with travel times
+</span>    <span class="n">roads</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>   <span class="c1"># Downtown to University: 5 minutes
+</span>        <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span>  <span class="c1"># Downtown to Shopping: 10 minutes
+</span>        <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span>   <span class="c1"># University to Residential North: 7 minutes
+</span>        <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>   <span class="c1"># University to Industrial: 3 minutes
+</span>        <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>   <span class="c1"># Shopping to University: 2 minutes
+</span>        <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span>   <span class="c1"># Shopping to Residential South: 8 minutes
+</span>        <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">12</span><span class="p">),</span>  <span class="c1"># Residential North to Airport: 12 minutes
+</span>        <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">15</span><span class="p">),</span>  <span class="c1"># Industrial to Airport: 15 minutes
+</span>        <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span>   <span class="c1"># Residential South to Airport: 6 minutes
+</span>        <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>    <span class="c1"># Residential South to Industrial: 4 minutes
+</span>    <span class="p">]</span>
+    
+    <span class="k">for</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">weight</span> <span class="ow">in</span> <span class="n">roads</span><span class="p">:</span>
+        <span class="n">G</span><span class="p">.</span><span class="nf">add_edge</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="n">weight</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">G</span>
+
+<span class="c1"># Visualize our city network
+</span><span class="n">city_graph</span> <span class="o">=</span> <span class="nf">create_city_graph</span><span class="p">()</span>
+<span class="n">distances</span><span class="p">,</span> <span class="n">predecessors</span> <span class="o">=</span> <span class="nf">bellman_ford</span><span class="p">(</span><span class="n">city_graph</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">Shortest distances from Downtown:</span><span class="sh">"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">node</span><span class="p">,</span> <span class="n">dist</span> <span class="ow">in</span> <span class="n">distances</span><span class="p">.</span><span class="nf">items</span><span class="p">():</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">city_graph</span><span class="p">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">node</span><span class="p">][</span><span class="sh">'</span><span class="s">name</span><span class="sh">'</span><span class="p">]</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  To </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s">: </span><span class="si">{</span><span class="n">dist</span><span class="si">}</span><span class="s"> minutes</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div> <h2 id="the-neural-algorithmic-reasoning-approach">The Neural Algorithmic Reasoning Approach</h2> <p>Now comes the exciting part. Instead of hard-coding the Bellman-Ford algorithm, we’ll train a neural network to learn its behavior. But here’s the crucial insight: we won’t just train it on input-output pairs. We’ll teach it to mimic the <em>intermediate steps</em> of the algorithm.</p> <p>This is like teaching someone to solve math problems by showing them not just the final answer, but every step of the working. The network learns the algorithmic reasoning process, not just memorizes solutions.</p> <h3 id="architecture-processor-networks">Architecture: Processor Networks</h3> <p>We’ll use a Processor Network architecture, which consists of three main components:</p> <ol> <li> <strong>Encoder</strong>: Transforms the input graph into neural representations</li> <li> <strong>Processor</strong>: Performs iterative reasoning (mimicking algorithm steps)</li> <li> <strong>Decoder</strong>: Extracts the final answer from neural representations</li> </ol> <p><img src="/assets/img/blog-nar_bellman_ford_architecture.png" class="img-fluid rounded z-depth-1 mb-4" alt="Neural Algorithmic Reasoning Architecture" width="2084" height="367" loading="lazy" decoding="async"></p> <p>Let’s implement this step by step:</p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">torch</span>
+<span class="kn">import</span> <span class="n">torch.nn</span> <span class="k">as</span> <span class="n">nn</span>
+<span class="kn">import</span> <span class="n">torch.nn.functional</span> <span class="k">as</span> <span class="n">F</span>
+<span class="kn">from</span> <span class="n">torch_geometric.nn</span> <span class="kn">import</span> <span class="n">MessagePassing</span>
+<span class="kn">from</span> <span class="n">torch_geometric.data</span> <span class="kn">import</span> <span class="n">Data</span>
+
+<span class="k">class</span> <span class="nc">GraphEncoder</span><span class="p">(</span><span class="n">nn</span><span class="p">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">Encode graph structure and features into neural representations.</span><span class="sh">"""</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">node_features</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">edge_features</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">hidden_dim</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="nf">super</span><span class="p">().</span><span class="nf">__init__</span><span class="p">()</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">node_encoder</span> <span class="o">=</span> <span class="n">nn</span><span class="p">.</span><span class="nc">Linear</span><span class="p">(</span><span class="n">node_features</span><span class="p">,</span> <span class="n">hidden_dim</span><span class="p">)</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">edge_encoder</span> <span class="o">=</span> <span class="n">nn</span><span class="p">.</span><span class="nc">Linear</span><span class="p">(</span><span class="n">edge_features</span><span class="p">,</span> <span class="n">hidden_dim</span><span class="p">)</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">hidden_dim</span> <span class="o">=</span> <span class="n">hidden_dim</span>
+        
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">node_features</span><span class="p">:</span> <span class="n">torch</span><span class="p">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">edge_features</span><span class="p">:</span> <span class="n">torch</span><span class="p">.</span><span class="n">Tensor</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">
+        Encode nodes and edges into hidden representations.
+        
+        This is like translating the problem into a language the neural network understands.
+        </span><span class="sh">"""</span>
+        <span class="n">node_hidden</span> <span class="o">=</span> <span class="n">F</span><span class="p">.</span><span class="nf">relu</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="nf">node_encoder</span><span class="p">(</span><span class="n">node_features</span><span class="p">))</span>
+        <span class="n">edge_hidden</span> <span class="o">=</span> <span class="n">F</span><span class="p">.</span><span class="nf">relu</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="nf">edge_encoder</span><span class="p">(</span><span class="n">edge_features</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">node_hidden</span><span class="p">,</span> <span class="n">edge_hidden</span>
+
+<span class="k">class</span> <span class="nc">AlgorithmicProcessor</span><span class="p">(</span><span class="n">MessagePassing</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">
+    The heart of NAR: a neural network that mimics algorithmic steps.
+    
+    This uses message passing to simulate how algorithms propagate information
+    through a graph structure.
+    </span><span class="sh">"""</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">hidden_dim</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="nf">super</span><span class="p">().</span><span class="nf">__init__</span><span class="p">(</span><span class="n">aggr</span><span class="o">=</span><span class="sh">'</span><span class="s">min</span><span class="sh">'</span><span class="p">)</span>  <span class="c1"># Min aggregation mimics Bellman-Ford's relaxation
+</span>        <span class="n">self</span><span class="p">.</span><span class="n">hidden_dim</span> <span class="o">=</span> <span class="n">hidden_dim</span>
+        
+        <span class="c1"># Neural network components for processing messages
+</span>        <span class="n">self</span><span class="p">.</span><span class="n">message_mlp</span> <span class="o">=</span> <span class="n">nn</span><span class="p">.</span><span class="nc">Sequential</span><span class="p">(</span>
+            <span class="n">nn</span><span class="p">.</span><span class="nc">Linear</span><span class="p">(</span><span class="mi">3</span> <span class="o">*</span> <span class="n">hidden_dim</span><span class="p">,</span> <span class="n">hidden_dim</span><span class="p">),</span>
+            <span class="n">nn</span><span class="p">.</span><span class="nc">ReLU</span><span class="p">(),</span>
+            <span class="n">nn</span><span class="p">.</span><span class="nc">Linear</span><span class="p">(</span><span class="n">hidden_dim</span><span class="p">,</span> <span class="n">hidden_dim</span><span class="p">)</span>
+        <span class="p">)</span>
+        
+        <span class="n">self</span><span class="p">.</span><span class="n">update_mlp</span> <span class="o">=</span> <span class="n">nn</span><span class="p">.</span><span class="nc">Sequential</span><span class="p">(</span>
+            <span class="n">nn</span><span class="p">.</span><span class="nc">Linear</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">hidden_dim</span><span class="p">,</span> <span class="n">hidden_dim</span><span class="p">),</span>
+            <span class="n">nn</span><span class="p">.</span><span class="nc">ReLU</span><span class="p">(),</span>
+            <span class="n">nn</span><span class="p">.</span><span class="nc">Linear</span><span class="p">(</span><span class="n">hidden_dim</span><span class="p">,</span> <span class="n">hidden_dim</span><span class="p">)</span>
+        <span class="p">)</span>
+        
+        <span class="c1"># Gating mechanism for selective updates (mimics conditional logic)
+</span>        <span class="n">self</span><span class="p">.</span><span class="n">gate</span> <span class="o">=</span> <span class="n">nn</span><span class="p">.</span><span class="nc">Sequential</span><span class="p">(</span>
+            <span class="n">nn</span><span class="p">.</span><span class="nc">Linear</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">hidden_dim</span><span class="p">,</span> <span class="n">hidden_dim</span><span class="p">),</span>
+            <span class="n">nn</span><span class="p">.</span><span class="nc">ReLU</span><span class="p">(),</span>
+            <span class="n">nn</span><span class="p">.</span><span class="nc">Linear</span><span class="p">(</span><span class="n">hidden_dim</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+            <span class="n">nn</span><span class="p">.</span><span class="nc">Sigmoid</span><span class="p">()</span>
+        <span class="p">)</span>
+        
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">torch</span><span class="p">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">edge_index</span><span class="p">:</span> <span class="n">torch</span><span class="p">.</span><span class="n">Tensor</span><span class="p">,</span> 
+                <span class="n">edge_attr</span><span class="p">:</span> <span class="n">torch</span><span class="p">.</span><span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">torch</span><span class="p">.</span><span class="n">Tensor</span><span class="p">:</span>
+        <span class="sh">"""</span><span class="s">
+        Perform one step of algorithmic reasoning.
+        
+        This is analogous to one iteration of the Bellman-Ford algorithm.
+        </span><span class="sh">"""</span>
+        <span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="nf">propagate</span><span class="p">(</span><span class="n">edge_index</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">edge_attr</span><span class="o">=</span><span class="n">edge_attr</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">message</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">x_i</span><span class="p">:</span> <span class="n">torch</span><span class="p">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">x_j</span><span class="p">:</span> <span class="n">torch</span><span class="p">.</span><span class="n">Tensor</span><span class="p">,</span> 
+                <span class="n">edge_attr</span><span class="p">:</span> <span class="n">torch</span><span class="p">.</span><span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">torch</span><span class="p">.</span><span class="n">Tensor</span><span class="p">:</span>
+        <span class="sh">"""</span><span class="s">
+        Compute messages between nodes.
+        
+        In Bellman-Ford, this would be: distance[u] + weight(u,v)
+        </span><span class="sh">"""</span>
+        <span class="c1"># Concatenate source node, destination node, and edge features
+</span>        <span class="n">combined</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="nf">cat</span><span class="p">([</span><span class="n">x_i</span><span class="p">,</span> <span class="n">x_j</span><span class="p">,</span> <span class="n">edge_attr</span><span class="p">],</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="nf">message_mlp</span><span class="p">(</span><span class="n">combined</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">aggr_out</span><span class="p">:</span> <span class="n">torch</span><span class="p">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">torch</span><span class="p">.</span><span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">torch</span><span class="p">.</span><span class="n">Tensor</span><span class="p">:</span>
+        <span class="sh">"""</span><span class="s">
+        Update node representations based on aggregated messages.
+        
+        This mimics the relaxation step: if new_dist &lt; current_dist, update
+        </span><span class="sh">"""</span>
+        <span class="c1"># Compute gate values (should we update?)
+</span>        <span class="n">gate_input</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="nf">cat</span><span class="p">([</span><span class="n">aggr_out</span><span class="p">,</span> <span class="n">x</span><span class="p">],</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">gate_values</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">gate</span><span class="p">(</span><span class="n">gate_input</span><span class="p">)</span>
+        
+        <span class="c1"># Compute potential new values
+</span>        <span class="n">update_input</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="nf">cat</span><span class="p">([</span><span class="n">aggr_out</span><span class="p">,</span> <span class="n">x</span><span class="p">],</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">new_values</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">update_mlp</span><span class="p">(</span><span class="n">update_input</span><span class="p">)</span>
+        
+        <span class="c1"># Selectively update (gating mechanism)
+</span>        <span class="k">return</span> <span class="n">gate_values</span> <span class="o">*</span> <span class="n">new_values</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">gate_values</span><span class="p">)</span> <span class="o">*</span> <span class="n">x</span>
+
+<span class="k">class</span> <span class="nc">NeuralBellmanFord</span><span class="p">(</span><span class="n">nn</span><span class="p">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">
+    Complete Neural Algorithmic Reasoning model for shortest path computation.
+    </span><span class="sh">"""</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">node_features</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">edge_features</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">hidden_dim</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> 
+                 <span class="n">num_iterations</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="nf">super</span><span class="p">().</span><span class="nf">__init__</span><span class="p">()</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">encoder</span> <span class="o">=</span> <span class="nc">GraphEncoder</span><span class="p">(</span><span class="n">node_features</span><span class="p">,</span> <span class="n">edge_features</span><span class="p">,</span> <span class="n">hidden_dim</span><span class="p">)</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">processor</span> <span class="o">=</span> <span class="nc">AlgorithmicProcessor</span><span class="p">(</span><span class="n">hidden_dim</span><span class="p">)</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">decoder</span> <span class="o">=</span> <span class="n">nn</span><span class="p">.</span><span class="nc">Linear</span><span class="p">(</span><span class="n">hidden_dim</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># Output: distance value
+</span>        <span class="n">self</span><span class="p">.</span><span class="n">num_iterations</span> <span class="o">=</span> <span class="n">num_iterations</span>
+        
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Data</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">torch</span><span class="p">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">torch</span><span class="p">.</span><span class="n">Tensor</span><span class="p">]]:</span>
+        <span class="sh">"""</span><span class="s">
+        Execute neural algorithmic reasoning.
+        
+        Returns both final distances and intermediate steps for interpretability.
+        </span><span class="sh">"""</span>
+        <span class="c1"># Encode input
+</span>        <span class="n">node_hidden</span><span class="p">,</span> <span class="n">edge_hidden</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">encoder</span><span class="p">(</span><span class="n">data</span><span class="p">.</span><span class="n">x</span><span class="p">,</span> <span class="n">data</span><span class="p">.</span><span class="n">edge_attr</span><span class="p">)</span>
+        
+        <span class="c1"># Store intermediate steps (for visualization and learning)
+</span>        <span class="n">intermediate_distances</span> <span class="o">=</span> <span class="p">[]</span>
+        
+        <span class="c1"># Iterative processing (mimicking algorithm iterations)
+</span>        <span class="n">current_hidden</span> <span class="o">=</span> <span class="n">node_hidden</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">num_iterations</span><span class="p">):</span>
+            <span class="n">current_hidden</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">processor</span><span class="p">(</span><span class="n">current_hidden</span><span class="p">,</span> <span class="n">data</span><span class="p">.</span><span class="n">edge_index</span><span class="p">,</span> <span class="n">edge_hidden</span><span class="p">)</span>
+            
+            <span class="c1"># Decode current distances
+</span>            <span class="n">current_distances</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">decoder</span><span class="p">(</span><span class="n">current_hidden</span><span class="p">)</span>
+            <span class="n">intermediate_distances</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">current_distances</span><span class="p">)</span>
+        
+        <span class="n">final_distances</span> <span class="o">=</span> <span class="n">intermediate_distances</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">final_distances</span><span class="p">,</span> <span class="n">intermediate_distances</span>
+</code></pre></div></div> <h2 id="training-the-neural-algorithmic-reasoner">Training the Neural Algorithmic Reasoner</h2> <p>The key to NAR is supervision at every step. We don’t just show the network the final shortest paths - we show it how distances evolve at each iteration of the algorithm. This teaches the network the reasoning process, not just the answer.</p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">generate_training_data</span><span class="p">(</span><span class="n">num_graphs</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">min_nodes</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="n">max_nodes</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">15</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">
+    Generate random graphs with ground truth Bellman-Ford executions.
+    
+    This creates our curriculum: from simple graphs to complex ones.
+    </span><span class="sh">"""</span>
+    <span class="n">training_data</span> <span class="o">=</span> <span class="p">[]</span>
+    
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">num_graphs</span><span class="p">):</span>
+        <span class="c1"># Create random graph
+</span>        <span class="n">num_nodes</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="nf">randint</span><span class="p">(</span><span class="n">min_nodes</span><span class="p">,</span> <span class="n">max_nodes</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="p">.</span><span class="nf">erdos_renyi_graph</span><span class="p">(</span><span class="n">num_nodes</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="n">directed</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+        
+        <span class="c1"># Add weights (including some negative ones for interesting cases)
+</span>        <span class="nf">for </span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span> <span class="ow">in</span> <span class="n">G</span><span class="p">.</span><span class="nf">edges</span><span class="p">():</span>
+            <span class="n">weight</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="nf">uniform</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+            <span class="n">G</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="n">v</span><span class="p">][</span><span class="sh">'</span><span class="s">weight</span><span class="sh">'</span><span class="p">]</span> <span class="o">=</span> <span class="n">weight</span>
+        
+        <span class="c1"># Choose random source
+</span>        <span class="n">source</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="nf">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">num_nodes</span><span class="p">)</span>
+        
+        <span class="c1"># Execute Bellman-Ford and record all intermediate steps
+</span>        <span class="n">distances_history</span> <span class="o">=</span> <span class="nf">execute_bellman_ford_with_history</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">source</span><span class="p">)</span>
+        
+        <span class="c1"># Convert to PyTorch geometric data
+</span>        <span class="n">data</span> <span class="o">=</span> <span class="nf">graph_to_pytorch_geometric</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">source</span><span class="p">,</span> <span class="n">distances_history</span><span class="p">)</span>
+        <span class="n">training_data</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">training_data</span>
+
+<span class="k">def</span> <span class="nf">execute_bellman_ford_with_history</span><span class="p">(</span><span class="n">graph</span><span class="p">:</span> <span class="n">nx</span><span class="p">.</span><span class="n">DiGraph</span><span class="p">,</span> <span class="n">source</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">]]:</span>
+    <span class="sh">"""</span><span class="s">
+    Execute Bellman-Ford while recording state at each iteration.
+    
+    This gives us the step-by-step supervision signal.
+    </span><span class="sh">"""</span>
+    <span class="n">distances</span> <span class="o">=</span> <span class="p">{</span><span class="n">node</span><span class="p">:</span> <span class="nf">float</span><span class="p">(</span><span class="sh">'</span><span class="s">inf</span><span class="sh">'</span><span class="p">)</span> <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">graph</span><span class="p">.</span><span class="nf">nodes</span><span class="p">()}</span>
+    <span class="n">distances</span><span class="p">[</span><span class="n">source</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">history</span> <span class="o">=</span> <span class="p">[</span><span class="n">distances</span><span class="p">.</span><span class="nf">copy</span><span class="p">()]</span>
+    
+    <span class="k">for</span> <span class="n">iteration</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="n">graph</span><span class="p">.</span><span class="nf">nodes</span><span class="p">())</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">updated</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="k">for</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">weight</span> <span class="ow">in</span> <span class="n">graph</span><span class="p">.</span><span class="nf">edges</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="sh">'</span><span class="s">weight</span><span class="sh">'</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">distances</span><span class="p">[</span><span class="n">u</span><span class="p">]</span> <span class="o">+</span> <span class="n">weight</span> <span class="o">&lt;</span> <span class="n">distances</span><span class="p">[</span><span class="n">v</span><span class="p">]:</span>
+                <span class="n">distances</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="n">distances</span><span class="p">[</span><span class="n">u</span><span class="p">]</span> <span class="o">+</span> <span class="n">weight</span>
+                <span class="n">updated</span> <span class="o">=</span> <span class="bp">True</span>
+        
+        <span class="n">history</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">distances</span><span class="p">.</span><span class="nf">copy</span><span class="p">())</span>
+        
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">updated</span><span class="p">:</span>  <span class="c1"># Early stopping if converged
+</span>            <span class="k">break</span>
+    
+    <span class="k">return</span> <span class="n">history</span>
+
+<span class="k">def</span> <span class="nf">train_neural_bellman_ford</span><span class="p">(</span><span class="n">model</span><span class="p">:</span> <span class="n">NeuralBellmanFord</span><span class="p">,</span> <span class="n">train_data</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Data</span><span class="p">],</span> 
+                            <span class="n">num_epochs</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">lr</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.01</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">
+    Train the neural network to mimic Bellman-Ford execution.
+    
+    Key insight: We supervise at every algorithmic step, not just the final output.
+    </span><span class="sh">"""</span>
+    <span class="n">optimizer</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">optim</span><span class="p">.</span><span class="nc">Adam</span><span class="p">(</span><span class="n">model</span><span class="p">.</span><span class="nf">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="n">lr</span><span class="p">)</span>
+    
+    <span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">num_epochs</span><span class="p">):</span>
+        <span class="n">total_loss</span> <span class="o">=</span> <span class="mi">0</span>
+        
+        <span class="k">for</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">train_data</span><span class="p">:</span>
+            <span class="n">optimizer</span><span class="p">.</span><span class="nf">zero_grad</span><span class="p">()</span>
+            
+            <span class="c1"># Forward pass
+</span>            <span class="n">final_distances</span><span class="p">,</span> <span class="n">intermediate_distances</span> <span class="o">=</span> <span class="nf">model</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+            
+            <span class="c1"># Compute loss at each step (algorithmic supervision)
+</span>            <span class="n">loss</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">for</span> <span class="n">step</span><span class="p">,</span> <span class="n">pred_distances</span> <span class="ow">in</span> <span class="nf">enumerate</span><span class="p">(</span><span class="n">intermediate_distances</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">step</span> <span class="o">&lt;</span> <span class="nf">len</span><span class="p">(</span><span class="n">data</span><span class="p">.</span><span class="n">y_history</span><span class="p">):</span>
+                    <span class="n">target_distances</span> <span class="o">=</span> <span class="n">data</span><span class="p">.</span><span class="n">y_history</span><span class="p">[</span><span class="n">step</span><span class="p">]</span>
+                    
+                    <span class="c1"># Use Huber loss (robust to outliers)
+</span>                    <span class="n">step_loss</span> <span class="o">=</span> <span class="n">F</span><span class="p">.</span><span class="nf">huber_loss</span><span class="p">(</span><span class="n">pred_distances</span><span class="p">,</span> <span class="n">target_distances</span><span class="p">)</span>
+                    
+                    <span class="c1"># Weight later steps more (they're harder to predict)
+</span>                    <span class="n">weight</span> <span class="o">=</span> <span class="p">(</span><span class="n">step</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="nf">len</span><span class="p">(</span><span class="n">intermediate_distances</span><span class="p">)</span>
+                    <span class="n">loss</span> <span class="o">+=</span> <span class="n">weight</span> <span class="o">*</span> <span class="n">step_loss</span>
+            
+            <span class="c1"># Backward pass
+</span>            <span class="n">loss</span><span class="p">.</span><span class="nf">backward</span><span class="p">()</span>
+            <span class="n">optimizer</span><span class="p">.</span><span class="nf">step</span><span class="p">()</span>
+            
+            <span class="n">total_loss</span> <span class="o">+=</span> <span class="n">loss</span><span class="p">.</span><span class="nf">item</span><span class="p">()</span>
+        
+        <span class="k">if</span> <span class="n">epoch</span> <span class="o">%</span> <span class="mi">10</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">Epoch </span><span class="si">{</span><span class="n">epoch</span><span class="si">}</span><span class="s">, Average Loss: </span><span class="si">{</span><span class="n">total_loss</span> <span class="o">/</span> <span class="nf">len</span><span class="p">(</span><span class="n">train_data</span><span class="p">)</span><span class="si">:</span><span class="p">.</span><span class="mi">4</span><span class="n">f</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">model</span>
+
+<span class="c1"># Let's see it in action!
+</span><span class="k">def</span> <span class="nf">visualize_neural_reasoning</span><span class="p">(</span><span class="n">model</span><span class="p">:</span> <span class="n">NeuralBellmanFord</span><span class="p">,</span> <span class="n">test_graph</span><span class="p">:</span> <span class="n">nx</span><span class="p">.</span><span class="n">DiGraph</span><span class="p">,</span> 
+                              <span class="n">source</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">
+    Visualize how the neural network reasons through the problem.
+    
+    This shows the learned algorithmic behavior.
+    </span><span class="sh">"""</span>
+    <span class="c1"># Convert graph to model input
+</span>    <span class="n">data</span> <span class="o">=</span> <span class="nf">graph_to_pytorch_geometric</span><span class="p">(</span><span class="n">test_graph</span><span class="p">,</span> <span class="n">source</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+    
+    <span class="c1"># Get predictions
+</span>    <span class="k">with</span> <span class="n">torch</span><span class="p">.</span><span class="nf">no_grad</span><span class="p">():</span>
+        <span class="n">final_distances</span><span class="p">,</span> <span class="n">intermediate_distances</span> <span class="o">=</span> <span class="nf">model</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    
+    <span class="c1"># Create visualization
+</span>    <span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="p">.</span><span class="nf">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+    <span class="n">axes</span> <span class="o">=</span> <span class="n">axes</span><span class="p">.</span><span class="nf">flatten</span><span class="p">()</span>
+    
+    <span class="c1"># Show first few iterations
+</span>    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">distances</span><span class="p">)</span> <span class="ow">in</span> <span class="nf">enumerate</span><span class="p">(</span><span class="nf">zip</span><span class="p">(</span><span class="n">axes</span><span class="p">,</span> <span class="n">intermediate_distances</span><span class="p">[:</span><span class="mi">6</span><span class="p">])):</span>
+        <span class="c1"># Convert predictions to numpy
+</span>        <span class="n">pred_distances</span> <span class="o">=</span> <span class="n">distances</span><span class="p">.</span><span class="nf">numpy</span><span class="p">().</span><span class="nf">flatten</span><span class="p">()</span>
+        
+        <span class="c1"># Create node colors based on distances
+</span>        <span class="n">node_colors</span> <span class="o">=</span> <span class="n">plt</span><span class="p">.</span><span class="n">cm</span><span class="p">.</span><span class="nf">viridis</span><span class="p">(</span><span class="n">pred_distances</span> <span class="o">/</span> <span class="n">pred_distances</span><span class="p">.</span><span class="nf">max</span><span class="p">())</span>
+        
+        <span class="c1"># Draw graph
+</span>        <span class="n">pos</span> <span class="o">=</span> <span class="n">nx</span><span class="p">.</span><span class="nf">spring_layout</span><span class="p">(</span><span class="n">test_graph</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+        <span class="n">nx</span><span class="p">.</span><span class="nf">draw</span><span class="p">(</span><span class="n">test_graph</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">node_color</span><span class="o">=</span><span class="n">node_colors</span><span class="p">,</span> 
+                <span class="n">with_labels</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">node_size</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
+        
+        <span class="n">ax</span><span class="p">.</span><span class="nf">set_title</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">Iteration </span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    
+    <span class="n">plt</span><span class="p">.</span><span class="nf">tight_layout</span><span class="p">()</span>
+    <span class="n">plt</span><span class="p">.</span><span class="nf">show</span><span class="p">()</span>
+</code></pre></div></div> <h2 id="beyond-simple-paths-handling-real-world-complexity">Beyond Simple Paths: Handling Real-World Complexity</h2> <p>Now let’s make our system more realistic. Real city navigation must handle:</p> <ol> <li><strong>Dynamic traffic conditions</strong></li> <li><strong>Road closures and construction</strong></li> <li> <strong>Multiple optimization criteria</strong> (time, distance, fuel efficiency)</li> <li><strong>Uncertainty in travel times</strong></li> </ol> <p>Here’s how NAR shines in these scenarios:</p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">RobustNeuralNavigator</span><span class="p">(</span><span class="n">nn</span><span class="p">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">
+    Enhanced NAR model that handles real-world navigation challenges.
+    </span><span class="sh">"""</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">hidden_dim</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">num_iterations</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="nf">super</span><span class="p">().</span><span class="nf">__init__</span><span class="p">()</span>
+        
+        <span class="c1"># Multiple encoders for different input modalities
+</span>        <span class="n">self</span><span class="p">.</span><span class="n">static_encoder</span> <span class="o">=</span> <span class="nc">GraphEncoder</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">hidden_dim</span><span class="p">)</span>  <span class="c1"># Road network
+</span>        <span class="n">self</span><span class="p">.</span><span class="n">dynamic_encoder</span> <span class="o">=</span> <span class="n">nn</span><span class="p">.</span><span class="nc">LSTM</span><span class="p">(</span><span class="n">hidden_dim</span><span class="p">,</span> <span class="n">hidden_dim</span><span class="p">,</span> <span class="n">batch_first</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>  <span class="c1"># Traffic patterns
+</span>        <span class="n">self</span><span class="p">.</span><span class="n">uncertainty_encoder</span> <span class="o">=</span> <span class="n">nn</span><span class="p">.</span><span class="nc">Linear</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">hidden_dim</span><span class="p">)</span>  <span class="c1"># Mean and variance
+</span>        
+        <span class="c1"># Adaptive processor that adjusts to conditions
+</span>        <span class="n">self</span><span class="p">.</span><span class="n">processor</span> <span class="o">=</span> <span class="nc">AdaptiveAlgorithmicProcessor</span><span class="p">(</span><span class="n">hidden_dim</span><span class="p">)</span>
+        
+        <span class="c1"># Multi-objective decoder
+</span>        <span class="n">self</span><span class="p">.</span><span class="n">time_decoder</span> <span class="o">=</span> <span class="n">nn</span><span class="p">.</span><span class="nc">Linear</span><span class="p">(</span><span class="n">hidden_dim</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">distance_decoder</span> <span class="o">=</span> <span class="n">nn</span><span class="p">.</span><span class="nc">Linear</span><span class="p">(</span><span class="n">hidden_dim</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">reliability_decoder</span> <span class="o">=</span> <span class="n">nn</span><span class="p">.</span><span class="nc">Linear</span><span class="p">(</span><span class="n">hidden_dim</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        
+        <span class="n">self</span><span class="p">.</span><span class="n">num_iterations</span> <span class="o">=</span> <span class="n">num_iterations</span>
+        
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">static_graph</span><span class="p">:</span> <span class="n">Data</span><span class="p">,</span> <span class="n">traffic_sequence</span><span class="p">:</span> <span class="n">torch</span><span class="p">.</span><span class="n">Tensor</span><span class="p">,</span>
+                <span class="n">uncertainty_estimates</span><span class="p">:</span> <span class="n">torch</span><span class="p">.</span><span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">torch</span><span class="p">.</span><span class="n">Tensor</span><span class="p">]:</span>
+        <span class="sh">"""</span><span class="s">
+        Compute routes considering multiple factors.
+        </span><span class="sh">"""</span>
+        <span class="c1"># Encode static road network
+</span>        <span class="n">node_hidden</span><span class="p">,</span> <span class="n">edge_hidden</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">static_encoder</span><span class="p">(</span>
+            <span class="n">static_graph</span><span class="p">.</span><span class="n">x</span><span class="p">,</span> <span class="n">static_graph</span><span class="p">.</span><span class="n">edge_attr</span>
+        <span class="p">)</span>
+        
+        <span class="c1"># Encode dynamic traffic patterns
+</span>        <span class="n">_</span><span class="p">,</span> <span class="p">(</span><span class="n">traffic_hidden</span><span class="p">,</span> <span class="n">_</span><span class="p">)</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">dynamic_encoder</span><span class="p">(</span><span class="n">traffic_sequence</span><span class="p">)</span>
+        <span class="n">traffic_hidden</span> <span class="o">=</span> <span class="n">traffic_hidden</span><span class="p">.</span><span class="nf">squeeze</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        
+        <span class="c1"># Encode uncertainty
+</span>        <span class="n">uncertainty_hidden</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">uncertainty_encoder</span><span class="p">(</span><span class="n">uncertainty_estimates</span><span class="p">)</span>
+        
+        <span class="c1"># Combine all information
+</span>        <span class="n">combined_node_features</span> <span class="o">=</span> <span class="n">node_hidden</span> <span class="o">+</span> <span class="n">traffic_hidden</span> <span class="o">+</span> <span class="n">uncertainty_hidden</span>
+        
+        <span class="c1"># Run adaptive algorithmic reasoning
+</span>        <span class="n">current_hidden</span> <span class="o">=</span> <span class="n">combined_node_features</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">num_iterations</span><span class="p">):</span>
+            <span class="c1"># Adjust processing based on uncertainty
+</span>            <span class="n">adaptation_factor</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="nf">sigmoid</span><span class="p">(</span><span class="n">uncertainty_estimates</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">].</span><span class="nf">mean</span><span class="p">())</span>
+            <span class="n">current_hidden</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">processor</span><span class="p">(</span>
+                <span class="n">current_hidden</span><span class="p">,</span> <span class="n">static_graph</span><span class="p">.</span><span class="n">edge_index</span><span class="p">,</span> <span class="n">edge_hidden</span><span class="p">,</span>
+                <span class="n">adaptation_factor</span>
+            <span class="p">)</span>
+        
+        <span class="c1"># Decode multiple objectives
+</span>        <span class="k">return</span> <span class="p">{</span>
+            <span class="sh">'</span><span class="s">time</span><span class="sh">'</span><span class="p">:</span> <span class="n">self</span><span class="p">.</span><span class="nf">time_decoder</span><span class="p">(</span><span class="n">current_hidden</span><span class="p">),</span>
+            <span class="sh">'</span><span class="s">distance</span><span class="sh">'</span><span class="p">:</span> <span class="n">self</span><span class="p">.</span><span class="nf">distance_decoder</span><span class="p">(</span><span class="n">current_hidden</span><span class="p">),</span>
+            <span class="sh">'</span><span class="s">reliability</span><span class="sh">'</span><span class="p">:</span> <span class="n">self</span><span class="p">.</span><span class="nf">reliability_decoder</span><span class="p">(</span><span class="n">current_hidden</span><span class="p">)</span>
+        <span class="p">}</span>
+
+<span class="k">class</span> <span class="nc">AdaptiveAlgorithmicProcessor</span><span class="p">(</span><span class="n">MessagePassing</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">
+    Processor that adapts its behavior based on uncertainty and conditions.
+    
+    This goes beyond standard algorithms by adjusting to real-world messiness.
+    </span><span class="sh">"""</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">hidden_dim</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="nf">super</span><span class="p">().</span><span class="nf">__init__</span><span class="p">(</span><span class="n">aggr</span><span class="o">=</span><span class="sh">'</span><span class="s">add</span><span class="sh">'</span><span class="p">)</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">hidden_dim</span> <span class="o">=</span> <span class="n">hidden_dim</span>
+        
+        <span class="c1"># Learnable algorithm components
+</span>        <span class="n">self</span><span class="p">.</span><span class="n">deterministic_processor</span> <span class="o">=</span> <span class="nc">AlgorithmicProcessor</span><span class="p">(</span><span class="n">hidden_dim</span><span class="p">)</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">stochastic_processor</span> <span class="o">=</span> <span class="n">nn</span><span class="p">.</span><span class="nc">GRUCell</span><span class="p">(</span><span class="n">hidden_dim</span><span class="p">,</span> <span class="n">hidden_dim</span><span class="p">)</span>
+        
+        <span class="c1"># Adaptation network
+</span>        <span class="n">self</span><span class="p">.</span><span class="n">adaptation_mlp</span> <span class="o">=</span> <span class="n">nn</span><span class="p">.</span><span class="nc">Sequential</span><span class="p">(</span>
+            <span class="n">nn</span><span class="p">.</span><span class="nc">Linear</span><span class="p">(</span><span class="n">hidden_dim</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">hidden_dim</span><span class="p">),</span>
+            <span class="n">nn</span><span class="p">.</span><span class="nc">ReLU</span><span class="p">(),</span>
+            <span class="n">nn</span><span class="p">.</span><span class="nc">Linear</span><span class="p">(</span><span class="n">hidden_dim</span><span class="p">,</span> <span class="n">hidden_dim</span><span class="p">),</span>
+            <span class="n">nn</span><span class="p">.</span><span class="nc">Sigmoid</span><span class="p">()</span>
+        <span class="p">)</span>
+        
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">torch</span><span class="p">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">edge_index</span><span class="p">:</span> <span class="n">torch</span><span class="p">.</span><span class="n">Tensor</span><span class="p">,</span>
+                <span class="n">edge_attr</span><span class="p">:</span> <span class="n">torch</span><span class="p">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">adaptation_factor</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">torch</span><span class="p">.</span><span class="n">Tensor</span><span class="p">:</span>
+        <span class="sh">"""</span><span class="s">
+        Blend deterministic and stochastic processing based on conditions.
+        </span><span class="sh">"""</span>
+        <span class="c1"># Deterministic processing (standard algorithm)
+</span>        <span class="n">deterministic_output</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">deterministic_processor</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">edge_index</span><span class="p">,</span> <span class="n">edge_attr</span><span class="p">)</span>
+        
+        <span class="c1"># Stochastic processing (handles uncertainty)
+</span>        <span class="n">stochastic_output</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">stochastic_processor</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">deterministic_output</span><span class="p">)</span>
+        
+        <span class="c1"># Adaptive blending
+</span>        <span class="n">adaptation_weights</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">adaptation_mlp</span><span class="p">(</span>
+            <span class="n">torch</span><span class="p">.</span><span class="nf">cat</span><span class="p">([</span><span class="n">x</span><span class="p">,</span> <span class="n">adaptation_factor</span><span class="p">.</span><span class="nf">unsqueeze</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">).</span><span class="nf">expand</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)],</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="p">)</span>
+        
+        <span class="k">return</span> <span class="n">adaptation_weights</span> <span class="o">*</span> <span class="n">stochastic_output</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">adaptation_weights</span><span class="p">)</span> <span class="o">*</span> <span class="n">deterministic_output</span>
+</code></pre></div></div> <h2 id="putting-it-all-together-a-complete-navigation-system">Putting It All Together: A Complete Navigation System</h2> <p>Let’s build a complete example that shows the power of Neural Algorithmic Reasoning:</p> <p><img src="/assets/img/blog-nar_navigation_system.png" class="img-fluid rounded z-depth-1 mb-4" alt="Smart City Navigation System" width="2337" height="437" loading="lazy" decoding="async"></p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">SmartCityNavigationSystem</span><span class="p">:</span>
+    <span class="sh">"""</span><span class="s">
+    Complete navigation system using Neural Algorithmic Reasoning.
+    </span><span class="sh">"""</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">city_graph</span><span class="p">:</span> <span class="n">nx</span><span class="p">.</span><span class="n">DiGraph</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">city_graph</span> <span class="o">=</span> <span class="n">city_graph</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">model</span> <span class="o">=</span> <span class="nc">RobustNeuralNavigator</span><span class="p">(</span><span class="n">hidden_dim</span><span class="o">=</span><span class="mi">64</span><span class="p">,</span> <span class="n">num_iterations</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">traffic_history</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">model_trained</span> <span class="o">=</span> <span class="bp">False</span>
+        
+    <span class="k">def</span> <span class="nf">collect_traffic_data</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">num_days</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">30</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">
+        Simulate collecting real-world traffic data.
+        </span><span class="sh">"""</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">Collecting traffic patterns...</span><span class="sh">"</span><span class="p">)</span>
+        
+        <span class="k">for</span> <span class="n">day</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">num_days</span><span class="p">):</span>
+            <span class="n">daily_traffic</span> <span class="o">=</span> <span class="p">{}</span>
+            
+            <span class="k">for</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">self</span><span class="p">.</span><span class="n">city_graph</span><span class="p">.</span><span class="nf">edges</span><span class="p">():</span>
+                <span class="n">base_time</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">city_graph</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="n">v</span><span class="p">][</span><span class="sh">'</span><span class="s">weight</span><span class="sh">'</span><span class="p">]</span>
+                
+                <span class="c1"># Morning rush hour
+</span>                <span class="n">morning_factor</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="nf">normal</span><span class="p">(</span><span class="mf">1.5</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">)</span> <span class="k">if</span> <span class="mi">7</span> <span class="o">&lt;=</span> <span class="p">(</span><span class="n">day</span> <span class="o">%</span> <span class="mi">24</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">9</span> <span class="k">else</span> <span class="mf">1.0</span>
+                
+                <span class="c1"># Evening rush hour  
+</span>                <span class="n">evening_factor</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="nf">normal</span><span class="p">(</span><span class="mf">1.8</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">)</span> <span class="k">if</span> <span class="mi">17</span> <span class="o">&lt;=</span> <span class="p">(</span><span class="n">day</span> <span class="o">%</span> <span class="mi">24</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">19</span> <span class="k">else</span> <span class="mf">1.0</span>
+                
+                <span class="c1"># Random events (accidents, construction)
+</span>                <span class="n">random_event</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="nf">exponential</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span> <span class="k">if</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="nf">random</span><span class="p">()</span> <span class="o">&lt;</span> <span class="mf">0.05</span> <span class="k">else</span> <span class="mi">0</span>
+                
+                <span class="n">actual_time</span> <span class="o">=</span> <span class="n">base_time</span> <span class="o">*</span> <span class="nf">max</span><span class="p">(</span><span class="n">morning_factor</span><span class="p">,</span> <span class="n">evening_factor</span><span class="p">)</span> <span class="o">+</span> <span class="n">random_event</span>
+                <span class="n">uncertainty</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="nf">gamma</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>
+                
+                <span class="n">daily_traffic</span><span class="p">[(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">)]</span> <span class="o">=</span> <span class="p">{</span>
+                    <span class="sh">'</span><span class="s">time</span><span class="sh">'</span><span class="p">:</span> <span class="n">actual_time</span><span class="p">,</span>
+                    <span class="sh">'</span><span class="s">uncertainty</span><span class="sh">'</span><span class="p">:</span> <span class="n">uncertainty</span>
+                <span class="p">}</span>
+            
+            <span class="n">self</span><span class="p">.</span><span class="n">traffic_history</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">daily_traffic</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">train_navigation_model</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">
+        Train the neural reasoner on collected data.
+        </span><span class="sh">"""</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">Training neural navigation model...</span><span class="sh">"</span><span class="p">)</span>
+        
+        <span class="c1"># Generate training examples
+</span>        <span class="n">training_data</span> <span class="o">=</span> <span class="p">[]</span>
+        
+        <span class="k">for</span> <span class="n">traffic_snapshot</span> <span class="ow">in</span> <span class="n">self</span><span class="p">.</span><span class="n">traffic_history</span><span class="p">:</span>
+            <span class="c1"># Update graph with current traffic
+</span>            <span class="nf">for </span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">),</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">traffic_snapshot</span><span class="p">.</span><span class="nf">items</span><span class="p">():</span>
+                <span class="n">self</span><span class="p">.</span><span class="n">city_graph</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="n">v</span><span class="p">][</span><span class="sh">'</span><span class="s">current_weight</span><span class="sh">'</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="sh">'</span><span class="s">time</span><span class="sh">'</span><span class="p">]</span>
+                <span class="n">self</span><span class="p">.</span><span class="n">city_graph</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="n">v</span><span class="p">][</span><span class="sh">'</span><span class="s">uncertainty</span><span class="sh">'</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="sh">'</span><span class="s">uncertainty</span><span class="sh">'</span><span class="p">]</span>
+            
+            <span class="c1"># Generate multiple source-destination pairs
+</span>            <span class="k">for</span> <span class="n">source</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">city_graph</span><span class="p">.</span><span class="nf">nodes</span><span class="p">())):</span>
+                <span class="c1"># Run classical algorithm for ground truth
+</span>                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">distances</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="nf">bellman_ford</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">city_graph</span><span class="p">,</span> <span class="n">source</span><span class="p">)</span>
+                    
+                    <span class="c1"># Create training example
+</span>                    <span class="n">example</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">create_training_example</span><span class="p">(</span>
+                        <span class="n">self</span><span class="p">.</span><span class="n">city_graph</span><span class="p">,</span> <span class="n">source</span><span class="p">,</span> <span class="n">distances</span><span class="p">,</span> <span class="n">traffic_snapshot</span>
+                    <span class="p">)</span>
+                    <span class="n">training_data</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">example</span><span class="p">)</span>
+                <span class="k">except</span> <span class="nb">ValueError</span><span class="p">:</span>
+                    <span class="k">continue</span>  <span class="c1"># Skip if negative cycle
+</span>        
+        <span class="c1"># Train model
+</span>        <span class="n">self</span><span class="p">.</span><span class="n">model</span> <span class="o">=</span> <span class="nf">train_neural_bellman_ford</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">model</span><span class="p">,</span> <span class="n">training_data</span><span class="p">)</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">model_trained</span> <span class="o">=</span> <span class="bp">True</span>
+        
+    <span class="k">def</span> <span class="nf">find_route</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">start</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">destination</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> 
+                   <span class="n">preferences</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">any</span><span class="p">]:</span>
+        <span class="sh">"""</span><span class="s">
+        Find optimal route using trained neural reasoner.
+        </span><span class="sh">"""</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">self</span><span class="p">.</span><span class="n">model_trained</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="nc">RuntimeError</span><span class="p">(</span><span class="sh">"</span><span class="s">Model must be trained before routing</span><span class="sh">"</span><span class="p">)</span>
+        
+        <span class="c1"># Default preferences
+</span>        <span class="k">if</span> <span class="n">preferences</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">preferences</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="sh">'</span><span class="s">time</span><span class="sh">'</span><span class="p">:</span> <span class="mf">0.6</span><span class="p">,</span>
+                <span class="sh">'</span><span class="s">distance</span><span class="sh">'</span><span class="p">:</span> <span class="mf">0.2</span><span class="p">,</span>
+                <span class="sh">'</span><span class="s">reliability</span><span class="sh">'</span><span class="p">:</span> <span class="mf">0.2</span>
+            <span class="p">}</span>
+        
+        <span class="c1"># Convert location names to node indices
+</span>        <span class="n">node_names</span> <span class="o">=</span> <span class="n">nx</span><span class="p">.</span><span class="nf">get_node_attributes</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">city_graph</span><span class="p">,</span> <span class="sh">'</span><span class="s">name</span><span class="sh">'</span><span class="p">)</span>
+        <span class="n">name_to_node</span> <span class="o">=</span> <span class="p">{</span><span class="n">v</span><span class="p">:</span> <span class="n">k</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">node_names</span><span class="p">.</span><span class="nf">items</span><span class="p">()}</span>
+        
+        <span class="n">start_node</span> <span class="o">=</span> <span class="n">name_to_node</span><span class="p">[</span><span class="n">start</span><span class="p">]</span>
+        <span class="n">dest_node</span> <span class="o">=</span> <span class="n">name_to_node</span><span class="p">[</span><span class="n">destination</span><span class="p">]</span>
+        
+        <span class="c1"># Prepare current traffic data
+</span>        <span class="n">current_traffic</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">get_current_traffic</span><span class="p">()</span>
+        
+        <span class="c1"># Run neural reasoner
+</span>        <span class="k">with</span> <span class="n">torch</span><span class="p">.</span><span class="nf">no_grad</span><span class="p">():</span>
+            <span class="n">predictions</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">model</span><span class="p">(</span>
+                <span class="nf">graph_to_pytorch_geometric</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">city_graph</span><span class="p">,</span> <span class="n">start_node</span><span class="p">,</span> <span class="bp">None</span><span class="p">),</span>
+                <span class="n">current_traffic</span><span class="p">[</span><span class="sh">'</span><span class="s">sequence</span><span class="sh">'</span><span class="p">],</span>
+                <span class="n">current_traffic</span><span class="p">[</span><span class="sh">'</span><span class="s">uncertainty</span><span class="sh">'</span><span class="p">]</span>
+            <span class="p">)</span>
+        
+        <span class="c1"># Combine objectives based on preferences
+</span>        <span class="n">combined_score</span> <span class="o">=</span> <span class="nf">sum</span><span class="p">(</span>
+            <span class="n">preferences</span><span class="p">[</span><span class="n">obj</span><span class="p">]</span> <span class="o">*</span> <span class="n">predictions</span><span class="p">[</span><span class="n">obj</span><span class="p">]</span> 
+            <span class="k">for</span> <span class="n">obj</span> <span class="ow">in</span> <span class="p">[</span><span class="sh">'</span><span class="s">time</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">distance</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">reliability</span><span class="sh">'</span><span class="p">]</span>
+        <span class="p">)</span>
+        
+        <span class="c1"># Extract path using learned representations
+</span>        <span class="n">path</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">extract_path</span><span class="p">(</span><span class="n">start_node</span><span class="p">,</span> <span class="n">dest_node</span><span class="p">,</span> <span class="n">combined_score</span><span class="p">)</span>
+        
+        <span class="c1"># Calculate route statistics
+</span>        <span class="n">total_time</span> <span class="o">=</span> <span class="nf">sum</span><span class="p">(</span>
+            <span class="n">self</span><span class="p">.</span><span class="n">city_graph</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="n">v</span><span class="p">].</span><span class="nf">get</span><span class="p">(</span><span class="sh">'</span><span class="s">current_weight</span><span class="sh">'</span><span class="p">,</span> <span class="n">self</span><span class="p">.</span><span class="n">city_graph</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="n">v</span><span class="p">][</span><span class="sh">'</span><span class="s">weight</span><span class="sh">'</span><span class="p">])</span>
+            <span class="k">for</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nf">zip</span><span class="p">(</span><span class="n">path</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">path</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+        <span class="p">)</span>
+        
+        <span class="n">reliability</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">mean</span><span class="p">([</span>
+            <span class="mf">1.0</span> <span class="o">/</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">+</span> <span class="n">self</span><span class="p">.</span><span class="n">city_graph</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="n">v</span><span class="p">].</span><span class="nf">get</span><span class="p">(</span><span class="sh">'</span><span class="s">uncertainty</span><span class="sh">'</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">))</span>
+            <span class="k">for</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nf">zip</span><span class="p">(</span><span class="n">path</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">path</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+        <span class="p">])</span>
+        
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="sh">'</span><span class="s">path</span><span class="sh">'</span><span class="p">:</span> <span class="p">[</span><span class="n">node_names</span><span class="p">[</span><span class="n">node</span><span class="p">]</span> <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">path</span><span class="p">],</span>
+            <span class="sh">'</span><span class="s">estimated_time</span><span class="sh">'</span><span class="p">:</span> <span class="n">total_time</span><span class="p">,</span>
+            <span class="sh">'</span><span class="s">reliability</span><span class="sh">'</span><span class="p">:</span> <span class="n">reliability</span><span class="p">,</span>
+            <span class="sh">'</span><span class="s">alternative_routes</span><span class="sh">'</span><span class="p">:</span> <span class="n">self</span><span class="p">.</span><span class="nf">find_alternative_routes</span><span class="p">(</span>
+                <span class="n">start_node</span><span class="p">,</span> <span class="n">dest_node</span><span class="p">,</span> <span class="n">path</span>
+            <span class="p">)</span>
+        <span class="p">}</span>
+
+<span class="c1"># Let's test our system!
+</span><span class="k">def</span> <span class="nf">demo_smart_navigation</span><span class="p">():</span>
+    <span class="sh">"""</span><span class="s">
+    Demonstrate the complete navigation system in action.
+    </span><span class="sh">"""</span>
+    <span class="c1"># Create city network
+</span>    <span class="n">city</span> <span class="o">=</span> <span class="nf">create_city_graph</span><span class="p">()</span>
+    
+    <span class="c1"># Initialize navigation system
+</span>    <span class="n">nav_system</span> <span class="o">=</span> <span class="nc">SmartCityNavigationSystem</span><span class="p">(</span><span class="n">city</span><span class="p">)</span>
+    
+    <span class="c1"># Collect traffic data
+</span>    <span class="n">nav_system</span><span class="p">.</span><span class="nf">collect_traffic_data</span><span class="p">(</span><span class="n">num_days</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+    
+    <span class="c1"># Train neural reasoner
+</span>    <span class="n">nav_system</span><span class="p">.</span><span class="nf">train_navigation_model</span><span class="p">()</span>
+    
+    <span class="c1"># Find routes with different preferences
+</span>    <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="se">\n</span><span class="s">=== Route Planning Demo ===</span><span class="se">\n</span><span class="sh">"</span><span class="p">)</span>
+    
+    <span class="c1"># Fastest route
+</span>    <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">1. Fastest Route (Time-optimized):</span><span class="sh">"</span><span class="p">)</span>
+    <span class="n">route1</span> <span class="o">=</span> <span class="n">nav_system</span><span class="p">.</span><span class="nf">find_route</span><span class="p">(</span>
+        <span class="sh">"</span><span class="s">Downtown</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">Airport</span><span class="sh">"</span><span class="p">,</span>
+        <span class="n">preferences</span><span class="o">=</span><span class="p">{</span><span class="sh">'</span><span class="s">time</span><span class="sh">'</span><span class="p">:</span> <span class="mf">0.8</span><span class="p">,</span> <span class="sh">'</span><span class="s">distance</span><span class="sh">'</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span> <span class="sh">'</span><span class="s">reliability</span><span class="sh">'</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">}</span>
+    <span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">   Path: </span><span class="si">{</span><span class="sh">'</span><span class="s"> -&gt; </span><span class="sh">'</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="n">route1</span><span class="p">[</span><span class="sh">'</span><span class="s">path</span><span class="sh">'</span><span class="p">])</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">   Estimated time: </span><span class="si">{</span><span class="n">route1</span><span class="p">[</span><span class="sh">'</span><span class="s">estimated_time</span><span class="sh">'</span><span class="p">]</span><span class="si">:</span><span class="p">.</span><span class="mi">1</span><span class="n">f</span><span class="si">}</span><span class="s"> minutes</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">   Reliability: </span><span class="si">{</span><span class="n">route1</span><span class="p">[</span><span class="sh">'</span><span class="s">reliability</span><span class="sh">'</span><span class="p">]</span><span class="si">:</span><span class="p">.</span><span class="mi">2</span><span class="o">%</span><span class="si">}</span><span class="se">\n</span><span class="sh">"</span><span class="p">)</span>
+    
+    <span class="c1"># Most reliable route
+</span>    <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">2. Most Reliable Route (Consistency-optimized):</span><span class="sh">"</span><span class="p">)</span>
+    <span class="n">route2</span> <span class="o">=</span> <span class="n">nav_system</span><span class="p">.</span><span class="nf">find_route</span><span class="p">(</span>
+        <span class="sh">"</span><span class="s">Downtown</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">Airport</span><span class="sh">"</span><span class="p">,</span> 
+        <span class="n">preferences</span><span class="o">=</span><span class="p">{</span><span class="sh">'</span><span class="s">time</span><span class="sh">'</span><span class="p">:</span> <span class="mf">0.2</span><span class="p">,</span> <span class="sh">'</span><span class="s">distance</span><span class="sh">'</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span> <span class="sh">'</span><span class="s">reliability</span><span class="sh">'</span><span class="p">:</span> <span class="mf">0.7</span><span class="p">}</span>
+    <span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">   Path: </span><span class="si">{</span><span class="sh">'</span><span class="s"> -&gt; </span><span class="sh">'</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="n">route2</span><span class="p">[</span><span class="sh">'</span><span class="s">path</span><span class="sh">'</span><span class="p">])</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">   Estimated time: </span><span class="si">{</span><span class="n">route2</span><span class="p">[</span><span class="sh">'</span><span class="s">estimated_time</span><span class="sh">'</span><span class="p">]</span><span class="si">:</span><span class="p">.</span><span class="mi">1</span><span class="n">f</span><span class="si">}</span><span class="s"> minutes</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">   Reliability: </span><span class="si">{</span><span class="n">route2</span><span class="p">[</span><span class="sh">'</span><span class="s">reliability</span><span class="sh">'</span><span class="p">]</span><span class="si">:</span><span class="p">.</span><span class="mi">2</span><span class="o">%</span><span class="si">}</span><span class="se">\n</span><span class="sh">"</span><span class="p">)</span>
+    
+    <span class="c1"># Balanced route
+</span>    <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">3. Balanced Route:</span><span class="sh">"</span><span class="p">)</span>
+    <span class="n">route3</span> <span class="o">=</span> <span class="n">nav_system</span><span class="p">.</span><span class="nf">find_route</span><span class="p">(</span><span class="sh">"</span><span class="s">Downtown</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">Airport</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">   Path: </span><span class="si">{</span><span class="sh">'</span><span class="s"> -&gt; </span><span class="sh">'</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="n">route3</span><span class="p">[</span><span class="sh">'</span><span class="s">path</span><span class="sh">'</span><span class="p">])</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">   Estimated time: </span><span class="si">{</span><span class="n">route3</span><span class="p">[</span><span class="sh">'</span><span class="s">estimated_time</span><span class="sh">'</span><span class="p">]</span><span class="si">:</span><span class="p">.</span><span class="mi">1</span><span class="n">f</span><span class="si">}</span><span class="s"> minutes</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">   Reliability: </span><span class="si">{</span><span class="n">route3</span><span class="p">[</span><span class="sh">'</span><span class="s">reliability</span><span class="sh">'</span><span class="p">]</span><span class="si">:</span><span class="p">.</span><span class="mi">2</span><span class="o">%</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">nav_system</span>
+
+<span class="c1"># Run the demo
+</span><span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="sh">"</span><span class="s">__main__</span><span class="sh">"</span><span class="p">:</span>
+    <span class="n">nav_system</span> <span class="o">=</span> <span class="nf">demo_smart_navigation</span><span class="p">()</span>
+</code></pre></div></div> <h2 id="key-insights-and-takeaways">Key Insights and Takeaways</h2> <p>Through our journey building a neural navigation system, we’ve discovered several key insights about Neural Algorithmic Reasoning:</p> <h3 id="1-interpretability-through-process">1. <strong>Interpretability Through Process</strong> </h3> <p>Unlike black-box neural networks, NAR models learn interpretable reasoning steps. We can inspect intermediate computations and understand how the model arrives at its decisions - just like tracing through algorithm execution.</p> <h3 id="2-robustness-to-real-world-messiness">2. <strong>Robustness to Real-World Messiness</strong> </h3> <p>Classical algorithms assume perfect inputs. Our neural reasoner gracefully handles:</p> <ul> <li>Noisy sensor data</li> <li>Missing information</li> <li>Dynamic conditions</li> <li>Multiple competing objectives</li> </ul> <h3 id="3-generalization-beyond-training">3. <strong>Generalization Beyond Training</strong> </h3> <p>Because the model learns algorithmic <em>principles</em> rather than memorizing solutions, it can generalize to:</p> <ul> <li>Larger graphs than seen during training</li> <li>Different graph structures</li> <li>Novel combinations of conditions</li> </ul> <h3 id="4-efficient-learning-through-algorithmic-supervision">4. <strong>Efficient Learning Through Algorithmic Supervision</strong> </h3> <p>By supervising intermediate steps, not just final outputs, the model learns much more efficiently than end-to-end approaches. This is like learning math by seeing worked examples versus just answers.</p> <h2 id="advanced-topics-and-future-directions">Advanced Topics and Future Directions</h2> <p>Neural Algorithmic Reasoning opens doors to exciting possibilities:</p> <h3 id="learning-unknown-algorithms"><strong>Learning Unknown Algorithms</strong></h3> <p>What if we could discover new algorithms by training neural networks on problem instances alone? Researchers are exploring how NAR can help us find novel algorithmic solutions to classical problems.</p> <h3 id="compositional-reasoning"><strong>Compositional Reasoning</strong></h3> <p>Just as we compose simple algorithms into complex systems, we can compose neural reasoners. Imagine combining shortest-path reasoning with constraint satisfaction for complex logistics planning.</p> <h3 id="continuous-relaxations-of-discrete-algorithms"><strong>Continuous Relaxations of Discrete Algorithms</strong></h3> <p>Many algorithms operate on discrete structures. NAR naturally creates continuous relaxations that can be optimized with gradient descent while maintaining algorithmic structure.</p> <h3 id="meta-learning-algorithmic-strategies"><strong>Meta-Learning Algorithmic Strategies</strong></h3> <p>Instead of learning a single algorithm, models could learn to select and adapt different algorithmic strategies based on problem characteristics - like an expert programmer choosing the right tool for the job.</p> <h2 id="practical-implementation-tips">Practical Implementation Tips</h2> <p>If you’re inspired to implement NAR in your own projects, here are some practical tips:</p> <ol> <li> <p><strong>Start Simple</strong>: Begin with well-understood algorithms like sorting or graph traversal before tackling complex problems.</p> </li> <li> <p><strong>Supervise Generously</strong>: The more intermediate supervision you provide, the better the model learns algorithmic reasoning.</p> </li> <li> <p><strong>Use Appropriate Architectures</strong>: Graph Neural Networks are natural for graph algorithms, while Transformers excel at sequence-based algorithms.</p> </li> <li> <p><strong>Curriculum Learning</strong>: Train on simple instances first, gradually increasing complexity. This mirrors how humans learn algorithms.</p> </li> <li> <p><strong>Combine Classical and Neural</strong>: Use NAR to handle messy real-world aspects while preserving classical algorithmic guarantees where needed.</p> </li> </ol> <h2 id="conclusion-the-best-of-both-worlds">Conclusion: The Best of Both Worlds</h2> <p>Neural Algorithmic Reasoning represents a paradigm shift in how we think about combining symbolic reasoning with neural learning. By teaching neural networks to think algorithmically, we get systems that are both principled and flexible, interpretable and adaptive.</p> <p>In our navigation example, we saw how NAR can take a classical algorithm (Bellman-Ford) and enhance it with:</p> <ul> <li>Robustness to noise and uncertainty</li> <li>Ability to balance multiple objectives</li> <li>Adaptation to dynamic conditions</li> <li>Learning from historical patterns</li> </ul> <p>This is just the beginning. As we develop better techniques for algorithmic supervision and more sophisticated neural architectures, we’ll unlock new possibilities for AI systems that truly reason - not just recognize patterns, but follow logical steps to solve complex problems.</p> <p>The future of AI isn’t about choosing between neural networks or classical algorithms. It’s about teaching neural networks to think algorithmically, combining the best of human-designed algorithms with the adaptability of learned systems. And that future is already here, waiting for you to explore it.</p> <h2 id="references-and-further-reading">References and Further Reading</h2> <p>For those eager to dive deeper into Neural Algorithmic Reasoning:</p> <ol> <li> <p><strong>“Neural Algorithmic Reasoning”</strong> - Veličković et al. (2021): The foundational paper that formally introduced the NAR paradigm.</p> </li> <li> <p><strong>“Pointer Graph Networks”</strong> - Veličković et al. (2020): Demonstrates how neural networks can learn to execute classical graph algorithms.</p> </li> <li> <p><strong>“The CLRS Algorithmic Reasoning Benchmark”</strong> - Veličković et al. (2022): A comprehensive benchmark for evaluating NAR approaches.</p> </li> <li> <p><strong>“What can transformers learn in-context? A case study of simple function classes”</strong> - Garg et al. (2022): Explores how transformer models can learn to execute algorithms.</p> </li> <li> <p><strong>“Learning to Execute”</strong> - Zaremba &amp; Sutskever (2014): An early work showing neural networks can learn to execute simple programs.</p> </li> </ol> <p>The code examples in this post provide a foundation for experimenting with NAR. Start with the Bellman–Ford notebook above, then vary the graph distribution, supervision signal, and evaluation split while keeping the classical baseline visible.</p> <p>Remember, the journey of teaching machines to reason algorithmically has just begun. Your contributions and explorations could help shape this exciting field. Happy coding, and may your neural networks reason as elegantly as your algorithms!</p> </div> </article> <br> <hr> <br> <h2 class="text-3xl font-semibold mb-4 mt-12">Enjoy Reading This Article?</h2> <p class="mb-2">Here are some more articles you might like to read next:</p> <ul class="list-disc pl-7 my-3 space-y-2 marker:text-[var(--global-theme-color)]"> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2026/building-fast-1brc-csharp-apple-silicon/">Building a fast 1BRC solver in C# on Apple Silicon</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2025/memory-management-production-silent-killers/">Memory Management in Production: Avoiding the Silent Killers</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2025/vibe-coding/">Growing as a Software Engineer in the Age of LLMs and Vibe Coding</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2025/how-to-handle-hallucinations/">Taming the Imagination: A Comprehensive Guide to Handling Hallucinations and Implementing Guardrails in Agentic AI</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2025/intro-to-agentic-ai/">Building an Agentic AI Analytics Dashboard: A Deep Dive with LangChain, LangGraph, and Fine-tuned LLAMA</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2025/opentelemetry/">OpenTelemetry in Microservices: How We Transformed Our Observability Strategy</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2025/leveraging-ai-tools-software-engineering/">Using AI Tools in Software Engineering and Research Workflows</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2024/optimizing-dotnet-microservices-performance/">The Performance Crisis: How We Rescued a .NET 8 Microservice from 10 Critical Bottlenecks</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2024/zero-downtime/">Zero Downtime Deployments in Kubernetes: How We Keep Our Services Running While We Ship</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2024/dotnet-tests/">Mastering Unit Testing and BDD with xUnit and SpecFlow in .NET 9: A Comprehensive Guide</a> </li> </ul> </div> </div> <footer class="fixed-bottom" role="contentinfo"> <div class="container mt-0"> © Copyright 2026 Tanzim Hossain Romel. © Tanzim Hossain Romel. Powered by <a href="https://jekyllrb.com/" target="_blank" rel="external nofollow noopener">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio" rel="external nofollow noopener" target="_blank">al-folio</a> theme. </div> </footer> <script>
+  window.alFolio = {
+    compatBootstrap: false
+  };
+</script> <script src="/assets/js/nav-toggle.js?v=141bd79a73ebc0f0b6ea58e440ae79fc"></script> <script defer src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script> <script defer src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script> <script defer src="/assets/js/masonry.js?v=e49affc7bd2646f6acdad1dbe02c2359" type="text/javascript"></script> <script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js" integrity="sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI=" crossorigin="anonymous"></script> <script src="/assets/al_math/js/mathjax-setup.js"></script> <script src="/assets/js/tooltips-setup.js?v=fe487e99db6c43751e6e7bdb2d6a0611"></script> <script src="/assets/js/no_defer.js?v=53b1b1a645525975c963ce8bf8bfefcf"></script> <script defer src="/assets/js/common.js?v=87baac90f765f2f3362dcf6aaf312a8a"></script> <script defer src="/assets/js/copy_code.js?v=c8a01c11a92744d44b093fc3bda915df" type="text/javascript"></script> <script defer src="/assets/js/jupyter_new_tab.js?v=896d254890d9b47f0281f63bfccf0dee"></script> <script async src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script> <script async src="https://badge.dimensions.ai/badge.js"></script> <script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script> <script defer src="/assets/al_img_tools/js/zoom.js"></script> <script defer src="/assets/js/progress-bar.js?v=499464c5c63ced6cf7ad62509f1e2610" type="text/javascript"></script> <script src="https://cdn.jsdelivr.net/npm/vanilla-back-to-top@7.2.1/dist/vanilla-back-to-top.min.js" integrity="sha256-uMJJ3EoTyfRBoTbR+lrfu1uRQ87RZG8AR3cVNuQVeFg=" crossorigin="anonymous"></script> <script>
+    addBackToTop();
+  </script> <script type="module" src="/assets/al_search/js/search/ninja-keys.min.js"></script> <ninja-keys hidebreadcrumbs noautoloadmdicons placeholder="Type to start searching"></ninja-keys> <script src="/assets/al_search/js/search-setup.js"></script> <script>
+// get the ninja-keys element
+const ninja = document.querySelector('ninja-keys');
+
+// add the home and posts menu items
+ninja.data = [{
+    id: "nav-about",
+    title: "about",
+    section: "Navigation",
+    handler: () => {
+      window.location.href = "/";
+    },
+  },{id: "nav-blog",
+          title: "blog",
+          description: "",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/blog/";
+          },
+        },{id: "nav-publications",
+          title: "publications",
+          description: "Publications.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/publications/";
+          },
+        },{id: "nav-research",
+          title: "research",
+          description: "Research on reliable AI agents, SRE-agent evaluation, ML ecosystem security, agent-choice auditing, and developer tools.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/research/";
+          },
+        },{id: "nav-projects",
+          title: "projects",
+          description: "Research and engineering projects.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/projects/";
+          },
+        },{id: "nav-cv",
+          title: "CV",
+          description: "Curriculum vitae.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/cv/";
+          },
+        },{id: "nav-contributions",
+          title: "contributions",
+          description: "Curated open-source contribution evidence across research infrastructure, frameworks, and language tooling.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/contributions/";
+          },
+        },{id: "post-building-a-fast-1brc-solver-in-c-on-apple-silicon",
+        
+          title: "Building a fast 1BRC solver in C# on Apple Silicon",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/building-fast-1brc-csharp-apple-silicon/";
+          
+        },
+      },{id: "post-memory-management-in-production-avoiding-the-silent-killers",
+        
+          title: "Memory Management in Production: Avoiding the Silent Killers",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/memory-management-production-silent-killers/";
+          
+        },
+      },{id: "post-growing-as-a-software-engineer-in-the-age-of-llms-and-vibe-coding",
+        
+          title: "Growing as a Software Engineer in the Age of LLMs and Vibe Coding...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/vibe-coding/";
+          
+        },
+      },{id: "post-taming-the-imagination-a-comprehensive-guide-to-handling-hallucinations-and-implementing-guardrails-in-agentic-ai",
+        
+          title: "Taming the Imagination: A Comprehensive Guide to Handling Hallucinations and Implementing Guardrails in...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/how-to-handle-hallucinations/";
+          
+        },
+      },{id: "post-building-an-agentic-ai-analytics-dashboard-a-deep-dive-with-langchain-langgraph-and-fine-tuned-llama",
+        
+          title: "Building an Agentic AI Analytics Dashboard: A Deep Dive with LangChain, LangGraph, and...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/intro-to-agentic-ai/";
+          
+        },
+      },{id: "post-neural-algorithmic-reasoning-teaching-neural-networks-to-think-like-algorithms",
+        
+          title: "Neural Algorithmic Reasoning: Teaching Neural Networks to Think Like Algorithms",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/intro-to-nar/";
+          
+        },
+      },{id: "post-opentelemetry-in-microservices-how-we-transformed-our-observability-strategy",
+        
+          title: "OpenTelemetry in Microservices: How We Transformed Our Observability Strategy",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/opentelemetry/";
+          
+        },
+      },{id: "post-using-ai-tools-in-software-engineering-and-research-workflows",
+        
+          title: "Using AI Tools in Software Engineering and Research Workflows",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/leveraging-ai-tools-software-engineering/";
+          
+        },
+      },{id: "post-the-performance-crisis-how-we-rescued-a-net-8-microservice-from-10-critical-bottlenecks",
+        
+          title: "The Performance Crisis: How We Rescued a .NET 8 Microservice from 10 Critical...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2024/optimizing-dotnet-microservices-performance/";
+          
+        },
+      },{id: "post-zero-downtime-deployments-in-kubernetes-how-we-keep-our-services-running-while-we-ship",
+        
+          title: "Zero Downtime Deployments in Kubernetes: How We Keep Our Services Running While We...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2024/zero-downtime/";
+          
+        },
+      },{id: "post-mastering-unit-testing-and-bdd-with-xunit-and-specflow-in-net-9-a-comprehensive-guide",
+        
+          title: "Mastering Unit Testing and BDD with xUnit and SpecFlow in .NET 9: A...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2024/dotnet-tests/";
+          
+        },
+      },{id: "post-design-patterns-your-first-step-toward-professional-software-engineering",
+        
+          title: "Design Patterns: Your First Step Toward Professional Software Engineering",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2024/design-patterns-professional-software-engineering/";
+          
+        },
+      },{id: "post-setting-up-github-actions-ci-cd-with-aws-a-practical-journey",
+        
+          title: "Setting Up GitHub Actions CI/CD with AWS: A Practical Journey",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2024/intro-to-ci-cd/";
+          
+        },
+      },{id: "post-the-clique-partition-problem-dividing-networks-into-perfect-communities",
+        
+          title: "The Clique Partition Problem: Dividing Networks into Perfect Communities",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2023/clique-partition-problem-graph-theory/";
+          
+        },
+      },{id: "post-advice-complexity-in-online-algorithms-when-knowing-the-future-makes-all-the-difference",
+        
+          title: "Advice Complexity in Online Algorithms: When Knowing the Future Makes All the Difference...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2023/advice-complexity-online-algorithms/";
+          
+        },
+      },{id: "post-getting-started-with-kubernetes-deploying-microservice-architectures-at-scale",
+        
+          title: "Getting Started with Kubernetes: Deploying Microservice Architectures at Scale",
+        
+        description: "A practical Kubernetes guide covering microservice deployment, service-mesh integration, observability, and the operational checks needed before production use.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2022/getting-started-with-kubernetes-microservices/";
+          
+        },
+      },{id: "post-understanding-xv6-a-practical-introduction-to-operating-systems",
+        
+          title: "Understanding xv6: A Practical Introduction to Operating Systems",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2022/understanding-xv6-operating-systems/";
+          
+        },
+      },{id: "post-getting-started-with-ns3-a-hands-on-guide-to-network-simulation",
+        
+          title: "Getting Started with NS3: A Hands-On Guide to Network Simulation",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2021/getting-started-with-ns3/";
+          
+        },
+      },{id: "news-completed-b-sc-in-computer-science-and-engineering-from-bangladesh-university-of-engineering-and-technology-with-a-gpa-of-3-53-4-00-link-https-cse-buet-ac-bd-academics-bsc",
+          title: 'Completed B.Sc in Computer Science and Engineering from Bangladesh University of Engineering and...',
+          description: "",
+          section: "News",},{id: "news-joined-iqvia-as-a-software-development-engineer-on-kpi-library-the-dynamic-reporting-layer-within-orchestrated-analytics-link-https-www-iqvia-com-solutions-commercialization-commercial-analytics-orchestrated-analytics",
+          title: 'Joined IQVIA as a Software Development Engineer on KPI Library, the dynamic reporting...',
+          description: "",
+          section: "News",},{id: "news-submitted-39-sentiment-analysis-of-anonymous-crisis-reports-in-bangladesh-39-to-acm-cscw-2025-analyzing-crowd-sourced-reports-from-bangladesh-39-s-2024-national-crisis-using-transformer-models-link-projects-research-ureporter",
+          title: 'Submitted &amp;#39;Sentiment Analysis of Anonymous Crisis Reports in Bangladesh&amp;#39; to ACM CSCW 2025,...',
+          description: "",
+          section: "News",},{id: "news-honored-with-the-iqvia-impact-program-silver-award-for-outstanding-performance-and-contributions-to-the-kpi-library-team-link-https-drive-google-com-file-d-1vc4e2roqepmbfs56olduih-ojdbok9sp-view-usp-share-link",
+          title: 'Honored with the IQVIA Impact Program Silver Award for outstanding performance and contributions...',
+          description: "",
+          section: "News",},{id: "news-submitted-39-an-empirical-study-on-remote-code-execution-in-machine-learning-model-hosting-ecosystems-39-to-the-mining-software-repositories-msr-2026-conference-first-large-scale-cross-platform-security-study-analyzing-45-000-repositories-across-5-major-ml-platforms-link-https-arxiv-org-abs-2601-14163",
+          title: 'Submitted &amp;#39;An Empirical Study on Remote Code Execution in Machine Learning Model Hosting...',
+          description: "",
+          section: "News",},{id: "news-resubmitted-39-an-empirical-study-on-remote-code-execution-in-machine-learning-model-hosting-ecosystems-39-to-acm-transactions-on-software-engineering-and-methodology-tosem-2026-preprint-available-on-arxiv-link-https-arxiv-org-abs-2601-14163",
+          title: 'Resubmitted &amp;#39;An Empirical Study on Remote Code Execution in Machine Learning Model Hosting...',
+          description: "",
+          section: "News",},{id: "news-started-a-remote-summer-research-internship-at-the-university-of-illinois-urbana-champaign-through-uiuc-summer-research-in-software-engineering-srse-2026-with-professor-tianyin-xu-link-https-uiuc-srse-github-io",
+          title: 'Started a remote summer research internship at the University of Illinois Urbana-Champaign through...',
+          description: "",
+          section: "News",},{id: "news-submitted-39-the-choice-can-be-the-attack-auditing-aligned-backdoors-in-llm-agents-39-to-the-transactions-of-the-association-for-computational-linguistics-tacl-2026-with-chowdhury-rakin-haider-link-projects-research-reagent-plus-plus",
+          title: 'Submitted &amp;#39;The Choice Can Be the Attack: Auditing Aligned Backdoors in LLM Agents&amp;#39;...',
+          description: "",
+          section: "News",},{id: "news-39-an-empirical-study-on-remote-code-execution-in-machine-learning-model-hosting-ecosystems-39-is-under-review-at-the-international-conference-on-software-engineering-icse-2027-preprint-available-on-arxiv-link-https-arxiv-org-abs-2601-14163",
+          title: '&amp;#39;An Empirical Study on Remote Code Execution in Machine Learning Model Hosting Ecosystems&amp;#39;...',
+          description: "",
+          section: "News",},{id: "news-will-begin-graduate-study-in-computing-science-at-the-university-of-alberta-on-september-1-2026-link-https-www-ualberta-ca-en-computing-science-index-html",
+          title: 'Will begin graduate study in Computing Science at the University of Alberta on...',
+          description: "",
+          section: "News",},{id: "projects-1brc-c-on-apple-silicon",
+          title: '1BRC C# on Apple Silicon',
+          description: "A .NET 10 NativeAOT performance case study: byte parsing, native aggregation, ARM64 tuning, and a size-aware macOS pread path",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/1brc-csharp/";
+            },},{id: "projects-building-a-bangla-handwritten-digit-recognizer-from-scratch",
+          title: 'Building a Bangla Handwritten Digit Recognizer from Scratch',
+          description: "A Deep Dive into Custom CNN Implementation",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/bangla-digit-recognition/";
+            },},{id: "projects-blockchain-based-ticketing-platform",
+          title: 'Blockchain Based Ticketing Platform',
+          description: "A practical approach to reducing ticket fraud and abusive resale",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/blockchain-ticketing/";
+            },},{id: "projects-yet-another-c-compiler",
+          title: 'Yet Another C Compiler',
+          description: "A complete multi-pass compiler for a subset of C",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/compiler/";
+            },},{id: "projects-contextledger-context-accounting-for-coding-agents",
+          title: 'ContextLedger: context accounting for coding agents',
+          description: "A research notebook on OpenCode compaction, provenance, and live GPT-5.5 experiments",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/contextledger/";
+            },},{id: "projects-ctxhelm-agent-native-context-compiler",
+          title: 'ctxhelm: agent-native context compiler',
+          description: "Local-first context plans, release proof, and source-free agent evaluation",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/ctxhelm/";
+            },},{id: "projects-mini-deep-learning-framework-pytorch-from-scratch",
+          title: 'Mini Deep Learning Framework: PyTorch from Scratch',
+          description: "A freelance learning project for tensors, autograd, and neural-network internals",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/deep-learning-framework-capstone/";
+            },},{id: "projects-go-container-runtime-docker-from-scratch",
+          title: 'Go Container Runtime: Docker from Scratch',
+          description: "A freelance learning project for Linux containers, networking, and Go systems programming",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/docker-from-scratch-go/";
+            },},{id: "projects-eventfly-distributed-microservices-event-platform",
+          title: 'EventFly – Distributed Microservices Event Platform',
+          description: "A six-person BUET course project for event creation, ticketing, announcements, participant engagement, analytics, and payments, implemented with Node.js, React, NATS, Kubernetes, MongoDB, Redis, and Stripe.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/eventfly-an-end-to-end-event-management-system/";
+            },},{id: "projects-building-a-go-database-engine-from-scratch",
+          title: 'Building a Go Database Engine from Scratch',
+          description: "An educational ACID-oriented database engine with advanced features",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/go-database/";
+            },},{id: "projects-image-caption-generation-with-bert-context-vectors",
+          title: 'Image Caption Generation with BERT Context Vectors',
+          description: "Extended the &quot;Show, Attend, and Tell&quot; image captioning model with BERT to improve caption quality and reduce training time, achieving 36% improvement in CIDEr score and 43% improvement in BLEU-4.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/image-caption-generator/";
+            },},{id: "projects-patchsmith-a-harness-for-repair-agents",
+          title: 'PatchSmith: a harness for repair agents',
+          description: "System design and R&amp;D notes for bounded patches, sandbox validation, and auditable repair runs",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/patchsmith/";
+            },},{id: "projects-ray-tracing-from-scratch-a-comprehensive-guide-to-3d-rendering-physics-and-implementation",
+          title: 'Ray Tracing from Scratch: A Comprehensive Guide to 3D Rendering Physics and Implementation...',
+          description: "Implementing physically-based rendering with C++",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/ray-tracing/";
+            },},{id: "projects-an-empirical-study-on-remote-code-execution-in-machine-learning-model-hosting-ecosystems",
+          title: 'An Empirical Study on Remote Code Execution in Machine Learning Model Hosting Ecosystems...',
+          description: "A cross-platform study of model-loading risk across five ML hosting ecosystems, using static analysis, malware-signature scanning, and analysis of more than 600 developer discussions.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/research-ml-remote-code-execution/";
+            },},{id: "projects-verischema-verified-database-schema-generation",
+          title: 'VeriSchema: verified database-schema generation',
+          description: "How can specialized agents generate relational schemas from natural-language requirements while formal checks and targeted repair keep the result consistent?",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/research-multi-agent-db-schema/";
+            },},{id: "projects-the-choice-can-be-the-attack-auditing-aligned-backdoors-in-llm-agents",
+          title: 'The Choice Can Be the Attack: Auditing Aligned Backdoors in LLM Agents',
+          description: "Abstract-level summary of SHIFT, submitted to TACL 2026 on aligned backdoor attacks in LLM agents.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/research-reagent-plus-plus/";
+            },},{id: "projects-sentiment-analysis-of-anonymous-crisis-reports-in-bangladesh",
+          title: 'Sentiment Analysis of Anonymous Crisis Reports in Bangladesh',
+          description: "A multilingual analysis of anonymous, crowd-sourced reports from Bangladesh&#39;s 2024 national crisis.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/research-ureporter/";
+            },},{id: "projects-enhancing-tcp-fairness-tcp-vegas-implementation",
+          title: 'Enhancing TCP Fairness: TCP Vegas+ Implementation',
+          description: "A dual-mode solution for TCP Vegas fairness issues",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/tcp-vegas-plus/";
+            },},{
+        id: 'social-email',
+        title: 'email',
+        section: 'Socials',
+        handler: () => {
+          window.open("mailto:%74%61%6E%68%72%6F%6D%65%6C@%67%6D%61%69%6C.%63%6F%6D", "_blank");
+        },
+      },{
+        id: 'social-github',
+        title: 'GitHub',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://github.com/thromel", "_blank");
+        },
+      },{
+        id: 'social-scholar',
+        title: 'Google Scholar',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://scholar.google.com/citations?user=zHV4EU8AAAAJ", "_blank");
+        },
+      },{
+        id: 'social-linkedin',
+        title: 'LinkedIn',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://www.linkedin.com/in/thromel", "_blank");
+        },
+      },{
+        id: 'social-orcid',
+        title: 'ORCID',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://orcid.org/0009-0009-2432-8960", "_blank");
+        },
+      },{
+        id: 'social-rss',
+        title: 'RSS Feed',
+        section: 'Socials',
+        handler: () => {
+          window.open("/feed.xml", "_blank");
+        },
+      },{
+        id: 'social-x',
+        title: 'X',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://twitter.com/tanzimhromel", "_blank");
+        },
+      },{
+      id: 'light-theme',
+      title: 'Change theme to light',
+      description: 'Change the theme of the site to Light',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("light");
+      },
+    },
+    {
+      id: 'dark-theme',
+      title: 'Change theme to dark',
+      description: 'Change the theme of the site to Dark',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("dark");
+      },
+    },
+    {
+      id: 'system-theme',
+      title: 'Use system default theme',
+      description: 'Change the theme of the site to System Default',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("system");
+      },
+    },];
+
+</script> <script src="/assets/al_search/js/shortcut-key.js"></script> </body> </html>

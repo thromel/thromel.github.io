@@ -1,0 +1,508 @@
+<!DOCTYPE html> <html lang="en"> <head> <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <title> PatchSmith: a harness for repair agents | Tanzim Hossain Romel </title> <meta name="author" content="Tanzim Hossain Romel"> <meta name="description" content="System design and R&amp;D notes for bounded patches, sandbox validation, and auditable repair runs"> <meta name="keywords" content=""> <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https:; style-src 'self' 'unsafe-inline' https:; img-src 'self' data: https:; font-src 'self' data: https:; media-src 'self' https:; frame-src 'self' https:; connect-src 'self' https:;"> <style>
+  :root {
+    --max-content-width: 930px;
+  }
+</style> <link rel="stylesheet" href="/assets/css/tailwind.css?v=50c64c15cbb9fd1ce6056fdb8bcb4b62"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.2.0/css/all.min.css" integrity="sha256-MVopmdyC2tYTiJ8wlktf0uh0v4NgT+vNdyVFepi7Q0c=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.5/css/academicons.min.css" integrity="sha256-SzrCOBJbGVFMahewkgjwnApaV2+av1DwMAA+/QGLyZw=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/scholar-icons@1.0.3/css/scholar-icons.css" integrity="sha256-VY3hHVj/hNX3fYG6wtbA6TcKJQl7+FthzGSyIB64klY=" crossorigin="anonymous"> <link defer rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons&amp;display=swap"> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-github.css?v=591dab5a4e56573bf4ef7fd332894c99" media="" id="highlight_theme_light"> <link rel="shortcut icon" href="data:image/svg+xml,&lt;svg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20100%20100%22&gt;&lt;text%20y=%22.9em%22%20font-size=%2290%22&gt;%E2%9A%9B%EF%B8%8F&lt;/text&gt;&lt;/svg&gt;"> <link rel="stylesheet" href="/assets/css/main.css?v=3116ba77db9ee1581d05bb3e86fbf7f1"> <link rel="canonical" href="https://tanzimhromel.com/projects/patchsmith/"> <script src="/assets/js/theme.js?v=5286c3e4c334d0ecb8fc0c40ff4fa7ec"></script> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-native.css?v=5847e5ed4a4568527aa6cfab446049ca" media="none" id="highlight_theme_dark"> <script>
+    initTheme();
+  </script> </head> <body class="fixed-top-nav "> <header> <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top" role="navigation"> <div class="container"> <a class="navbar-brand title font-weight-lighter" href="/"> Tanzim Hossain Romel </a> <button class="navbar-toggler collapsed navbar-toggler-main" type="button" data-nav-toggle="navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar top-bar"></span> <span class="icon-bar middle-bar"></span> <span class="icon-bar bottom-bar"></span> </button> <div class="collapse navbar-collapse navbar-collapse-main" id="navbarNav"> <ul class="navbar-nav navbar-menu-list flex-nowrap"> <li class="nav-item "> <a class="nav-link" href="/">about </a> </li> <li class="nav-item "> <a class="nav-link" href="/blog/">blog </a> </li> <li class="nav-item "> <a class="nav-link" href="/publications/">publications </a> </li> <li class="nav-item "> <a class="nav-link" href="/research/">research </a> </li> <li class="nav-item active"> <a class="nav-link" href="/projects/">projects <span class="sr-only">(current)</span> </a> </li> <li class="nav-item "> <a class="nav-link" href="/cv/">CV </a> </li> <li class="nav-item "> <a class="nav-link" href="/contributions/">contributions </a> </li> <li class="nav-item"> <button id="search-toggle" type="button" title="Search" aria-label="Open search"> <span class="nav-link">ctrl k <i class="fa-solid fa-magnifying-glass"></i></span> </button> </li> <li class="toggle-container"> <button id="light-toggle" type="button" title="Change theme" aria-label="Change color theme"> <i class="fa-half-sun-moon" id="light-toggle-system"></i> <i class="fa-solid fa-moon" id="light-toggle-dark"></i> <i class="fa-solid fa-sun" id="light-toggle-light"></i> </button> </li> </ul> </div> </div> </nav> <progress id="progress" value="0"> <div class="progress-container"> <span class="progress-bar"></span> </div> </progress> </header> <div class="container mt-5" role="main"> <div class="post"> <header class="post-header"> <h1 class="post-title">PatchSmith: a harness for repair agents</h1> <p class="post-description">System design and R&amp;D notes for bounded patches, sandbox validation, and auditable repair runs</p> </header> <article> <p>PatchSmith is an auditable repair harness for coding agents: it gives an agent bounded context, accepts a structured patch proposal, validates it in a sandbox, and saves the evidence needed to inspect the repair claim later.</p> <h2 id="at-a-glance">At a glance</h2> <ul> <li> <strong>Type:</strong> Research platform</li> <li> <strong>Status:</strong> Active research and development platform</li> <li> <strong>Problem:</strong> Evaluate coding-agent repairs with bounded context, sandbox validation, and retained evidence instead of accepting a plausible patch at face value.</li> <li> <strong>Role:</strong> Designer and implementer of the repair harness, task adapters, validation flow, artifact schema, and readiness gates</li> <li> <strong>Approach:</strong> Bound the agent context, accept a structured patch proposal, validate in a sandbox, and retain an auditable artifact directory.</li> <li> <strong>Constraints:</strong> Agent proposes; harness owns mutation. Validation must retain traces, logs, and failure reports for later inspection.</li> <li> <strong>Outcome:</strong> The current DeepAgents public-issue smoke lane validates three of three focused pytest/Requests tasks while retaining traces, validation output, and failure reports.</li> <li> <strong>Technologies:</strong> Python, DeepAgents, OpenAI, Coding Agents, Software Repair, Evaluation, Docker, Pytest, Observability, Release Engineering, Public Issue Benchmarks</li> <li> <strong>Repository:</strong> Public source repository</li> <li> <strong>Last verified:</strong> 2026-06-12</li> <li> <strong>Links:</strong> <a href="/projects/ctxhelm/">ctxhelm engineering case study</a> </li> </ul> <p><a href="https://github.com/thromel/patchsmith" target="_blank" rel="noopener noreferrer">View on GitHub</a></p> <p>Coding agents often end with a confident little green check mark.</p> <p>That is fine when the task is a local chore. It is not enough for repair research. For a real repair attempt, I want to know the repository snapshot, the files shown to the model, the exact patch proposed, the validation command, the logs, the diff, the retry history, and the reason a failed attempt failed.</p> <p>PatchSmith is the harness around repair agents. The agent proposes a bounded patch. PatchSmith applies it through its own gate. A sandbox runs validation. The result is not a chat transcript; it is an artifact directory someone else can inspect.</p> <p><strong>The model gets to propose. PatchSmith owns the mutation.</strong></p> <p>For repair agents, the artifact directory matters more than the chat transcript.</p> <p><strong>Core claim.</strong> PatchSmith turns a repair attempt into inspectable evidence: context, patch, validation, traces, logs, cost, and claim boundary.</p> <ul> <li> <strong>Agent: proposes.</strong> Reads bounded context and returns a structured patch plan.</li> <li> <strong>Harness: applies.</strong> Checks paths and exact source spans before mutating the workspace.</li> <li> <strong>Sandbox: validates.</strong> Runs the configured command and records stdout, stderr, exit code, and timing.</li> </ul> <h2 id="a-repair-attempt-end-to-end">A repair attempt, end to end</h2> <p>The smallest useful demo is a seeded logic bug:</p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>patchsmith demo seeded-logic-bug
+patchsmith inspect artifacts/demo/seeded_logic_bug/runs/&lt;run_id&gt;
+</code></pre></div></div> <p>The run is intentionally small. The issue says <code class="language-plaintext highlighter-rouge">add(2, 3)</code> should return <code class="language-plaintext highlighter-rouge">5</code>. The broken source subtracts instead of adding. PatchSmith selects the relevant source and test, asks the runtime for a bounded replacement, applies the patch, and runs focused validation.</p> <p>The output is not just “passed.” It is a directory:</p> <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>artifacts/demo/seeded_logic_bug/runs/&lt;run_id&gt;/
+  artifact_index.md
+  context/selected_files.json
+  final.diff
+  logs/stderr.txt
+  logs/stdout.txt
+  metadata.json
+  report.md
+  traces.jsonl
+</code></pre></div></div> <p>A compact sample row looks like this:</p> <table> <thead> <tr> <th>Field</th> <th>Value</th> </tr> </thead> <tbody> <tr> <td>Task</td> <td><code class="language-plaintext highlighter-rouge">seeded_bugs_v1/task_001_logic_bug</code></td> </tr> <tr> <td>Runtime</td> <td> <code class="language-plaintext highlighter-rouge">heuristic</code> demo path, with the same outer contract used by model runtimes</td> </tr> <tr> <td>Context provider</td> <td><code class="language-plaintext highlighter-rouge">native_hybrid</code></td> </tr> <tr> <td>Validation</td> <td><code class="language-plaintext highlighter-rouge">python3 -m pytest</code></td> </tr> <tr> <td>Outcome</td> <td><code class="language-plaintext highlighter-rouge">patch_validated</code></td> </tr> <tr> <td>Claim boundary</td> <td><code class="language-plaintext highlighter-rouge">focused_validation_only</code></td> </tr> </tbody> </table> <p>The diff is deliberately boring:</p> <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/src/simple_calc.py
+</span><span class="gi">+++ b/src/simple_calc.py
+</span><span class="p">@@ -1,5 +1,5 @@</span>
+ def add(left: int, right: int) -&gt; int:
+<span class="gd">-    return left - right
+</span><span class="gi">+    return left + right
+</span></code></pre></div></div> <p>That is the point. The demo is not trying to impress with a hard bug. It is there so the repair contract is visible in five minutes.</p> <p>Static sample artifacts live in the repository:</p> <ul> <li><a href="https://github.com/thromel/patchsmith/tree/main/docs/sample_artifacts/seeded_logic_bug" rel="external nofollow noopener" target="_blank">validated seeded run</a></li> <li><a href="https://github.com/thromel/patchsmith/tree/main/docs/sample_artifacts/empty_diff_blocked" rel="external nofollow noopener" target="_blank">empty diff blocked</a></li> <li><a href="https://github.com/thromel/patchsmith/tree/main/docs/sample_artifacts/failed_validation" rel="external nofollow noopener" target="_blank">failed validation</a></li> </ul> <p>Those three rows show the shape I care about: success is inspectable, rejection is inspectable, and failure is inspectable.</p> <h2 id="the-harness-boundary">The harness boundary</h2> <p>PatchSmith has one simple rule:</p> <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>propose -&gt; apply -&gt; validate
+</code></pre></div></div> <p>The planner owns reasoning. PatchSmith owns state changes, validation, artifacts, and the final claim.</p> <p><img src="/assets/img/projects/patchsmith-repair-pipeline.svg" alt="PatchSmith repair pipeline" width="1180" height="620" loading="lazy" decoding="async"></p> <p>That boundary prevents a common agent benchmark problem. If the same system chooses context, edits the repository, changes the validation command, retries silently, and declares success, the result is hard to audit. The benchmark starts comparing privileges rather than repair behavior.</p> <p>PatchSmith keeps the risky verbs separate:</p> <table> <thead> <tr> <th>Step</th> <th>Owner</th> <th>Artifact</th> </tr> </thead> <tbody> <tr> <td>Select context</td> <td>Context broker</td> <td>selected files, diagnostics, warnings</td> </tr> <tr> <td>Propose patch</td> <td>Runtime planner</td> <td> <code class="language-plaintext highlighter-rouge">PatchPlan</code>, runtime traces, model metadata</td> </tr> <tr> <td>Apply patch</td> <td>PatchSmith patch gate</td> <td> <code class="language-plaintext highlighter-rouge">final.diff</code>, patch diagnostics</td> </tr> <tr> <td>Validate</td> <td>Sandbox runner</td> <td>stdout, stderr, exit code, duration</td> </tr> <tr> <td>Explain outcome</td> <td>Analysis/reporting layer</td> <td> <code class="language-plaintext highlighter-rouge">report.md</code>, <code class="language-plaintext highlighter-rouge">metadata.json</code>, <code class="language-plaintext highlighter-rouge">traces.jsonl</code> </td> </tr> </tbody> </table> <p>This does not make agents magically correct. It makes their claims easier to inspect after the terminal window is gone.</p> <h2 id="architecture">Architecture</h2> <p>PatchSmith is CLI-first and file-artifact-first. There is no hosted service, no queue, and no database required for the core loop.</p> <p><img src="/assets/img/projects/patchsmith-component-architecture.svg" alt="PatchSmith component architecture" width="1260" height="820" loading="lazy" decoding="async"></p> <p>The main loop is:</p> <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>task manifest
+  -&gt; controlled workspace
+  -&gt; context broker
+  -&gt; AgentTask
+  -&gt; runtime planner
+  -&gt; bounded PatchPlan
+  -&gt; patch gate
+  -&gt; sandbox validation
+  -&gt; artifact directory
+</code></pre></div></div> <p>The most important contracts are small:</p> <table> <thead> <tr> <th>Contract</th> <th>Purpose</th> </tr> </thead> <tbody> <tr> <td><code class="language-plaintext highlighter-rouge">RunRequest</code></td> <td>Repository, issue text, validation command, runtime, planner, sandbox mode, and context settings.</td> </tr> <tr> <td><code class="language-plaintext highlighter-rouge">ContextBundle</code></td> <td>Ranked files, related tests, warnings, diagnostics, and source hints.</td> </tr> <tr> <td><code class="language-plaintext highlighter-rouge">AgentTask</code></td> <td>The normalized task given to a runtime.</td> </tr> <tr> <td><code class="language-plaintext highlighter-rouge">PatchPlan</code></td> <td>A bounded edit: path, exact old span, replacement span, summary, and localization rationale.</td> </tr> <tr> <td><code class="language-plaintext highlighter-rouge">CommandResult</code></td> <td>Validation command, exit code, stdout, stderr, duration, and timeout state.</td> </tr> </tbody> </table> <p>The <code class="language-plaintext highlighter-rouge">PatchPlan</code> shape is intentionally restrictive:</p> <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>path: repository-relative file path
+old: exact source text to replace
+new: replacement text
+summary: short explanation
+failure_mechanism: why the behavior failed
+target_rationale: why this span controls the failure
+</code></pre></div></div> <p>If the path escapes the repository, the patch is rejected. If the old span is not present exactly, the patch is rejected. If the test fails after the patch is applied, the run is not a success. Each outcome gets a different failure class.</p> <h2 id="the-run-directory-is-the-product">The run directory is the product</h2> <p>The evidence loop is the part that makes PatchSmith more than a prompt wrapper.</p> <p><img src="/assets/img/projects/patchsmith-evidence-loop.svg" alt="PatchSmith evidence loop" width="1180" height="620" loading="lazy" decoding="async"></p> <p>A run should let a later reader answer practical questions:</p> <ul> <li>What source did the planner see?</li> <li>What did the planner propose?</li> <li>Did the patch apply cleanly?</li> <li>What validation command ran?</li> <li>Did the focused command pass?</li> <li>If it failed, was that retrieval, planning, patch application, sandbox setup, or validation?</li> <li>What claim is allowed by this evidence?</li> </ul> <p>PatchSmith now treats failure categories as first-class report data. Examples include <code class="language-plaintext highlighter-rouge">no_patch_generated</code>, <code class="language-plaintext highlighter-rouge">empty_diff</code>, <code class="language-plaintext highlighter-rouge">malformed_patch_plan</code>, <code class="language-plaintext highlighter-rouge">old_span_not_found</code>, <code class="language-plaintext highlighter-rouge">unsafe_path_rejected</code>, <code class="language-plaintext highlighter-rouge">test_failure_after_patch</code>, <code class="language-plaintext highlighter-rouge">test_environment_policy_blocked</code>, <code class="language-plaintext highlighter-rouge">timeout</code>, and <code class="language-plaintext highlighter-rouge">validated</code>.</p> <p>That taxonomy matters because a failed run is still data. A setup failure should not be counted as a model hallucination. A missing old span should not be counted as a test failure. A focused test pass should not be inflated into upstream acceptance.</p> <h2 id="deepagents-as-planner-not-product">DeepAgents as planner, not product</h2> <p>DeepAgents is the most promising runtime so far because it packages several things coding agents need for longer work: planning, virtual files, skills, memory, subagents, permissions, and structured output.</p> <p>PatchSmith does not use DeepAgents as the whole product. It uses DeepAgents as a planner inside a repair harness.</p> <p><img src="/assets/img/projects/patchsmith-deepagents-contract.svg" alt="PatchSmith DeepAgents contract" width="1180" height="620" loading="lazy" decoding="async"></p> <p>The integration gives DeepAgents a read-only virtual workspace:</p> <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/.patchsmith/AGENTS.md
+/.patchsmith/skills/patchsmith-repair/SKILL.md
+/.patchsmith/source-hints.md
+/.patchsmith/retry-feedback.md
+/repo/&lt;selected source files&gt;
+</code></pre></div></div> <p>The main planner can use two narrow subagents:</p> <table> <thead> <tr> <th>Subagent</th> <th>Job</th> </tr> </thead> <tbody> <tr> <td><code class="language-plaintext highlighter-rouge">failure-localizer</code></td> <td>Identify the file or function that controls the reproduced behavior.</td> </tr> <tr> <td><code class="language-plaintext highlighter-rouge">patch-reviewer</code></td> <td>Check that a proposed bounded replacement is minimal, in scope, and likely to satisfy the focused validation.</td> </tr> </tbody> </table> <p>The final output still has to be a <code class="language-plaintext highlighter-rouge">PatchPlan</code>. DeepAgents can reason, inspect, delegate, and review. It cannot directly mutate the checkout or decide how it passed.</p> <p>That is the contribution of DeepAgents here: it gives the planner a richer working environment while PatchSmith keeps the repair claim auditable.</p> <h2 id="context-is-part-of-the-experiment">Context is part of the experiment</h2> <p>Many repair failures begin before code generation. If the planner never sees the controlling file, the rest of the run may look polished while still being wrong.</p> <p>PatchSmith keeps context selection outside the runtime. The same task can be run with native keyword search, native hybrid retrieval, graph retrieval, or a ctxhelm context-broker adapter. The runtime receives a normalized <code class="language-plaintext highlighter-rouge">ContextBundle</code>; the run directory records where that context came from.</p> <p>That separation lets the benchmark ask cleaner questions:</p> <ul> <li>Did ctxhelm route better context than the native selector?</li> <li>Did DeepAgents use the selected context better than a baseline planner?</li> <li>Did a retry fail because the planner repeated the same bad patch, or because context still missed the relevant file?</li> <li>Did a source hint change the result, and was that hint recorded?</li> </ul> <p>Retrieval is not prompt decoration. It is part of the experiment.</p> <h2 id="what-patchsmith-is-not">What PatchSmith is not</h2> <p>PatchSmith is not an autonomous GitHub issue fixer. It is not a hosted repair service. It is not proof that a focused test pass equals an upstream-ready patch. It is not a leaderboard claim that one agent beats another.</p> <p>It is an auditable repair harness.</p> <p>That positioning matters. SWE-agent, OpenHands, Agentless-style pipelines, and plain prompt scripts are all useful comparison points. PatchSmith’s emphasis is different: preserve enough evidence to inspect the repair claim later, and keep runtime privileges comparable when running experiments.</p> <h2 id="current-status">Current status</h2> <p>The current state is useful, but bounded.</p> <table> <thead> <tr> <th>Lane</th> <th>What it proves</th> <th>What it does not prove</th> </tr> </thead> <tbody> <tr> <td>Seeded bug lane</td> <td>PatchSmith can retrieve context, generate or accept a bounded patch, apply it, validate it, and write artifacts on controlled tasks.</td> <td>Real public issue repair quality.</td> </tr> <tr> <td>Public issue smoke lane</td> <td>The setup, reproduction, and validation workflow can be calibrated with task-level caveats.</td> <td>Broad GitHub issue solving.</td> </tr> <tr> <td>DeepAgents seeded runs</td> <td>A live planner can run through the PatchSmith contract and leave saved evidence.</td> <td>General superiority over other coding agents.</td> </tr> <tr> <td>Static artifact gallery</td> <td>Success, rejection, and failure can be reviewed without rerunning anything.</td> <td>A benchmark score.</td> </tr> </tbody> </table> <p>I trust PatchSmith today as an R&amp;D harness for focused repair experiments. I do not trust it yet as a broad claim that it can fix arbitrary public issues.</p> <p>That restraint is part of the project. The harness should make overclaiming harder, not easier.</p> <h2 id="what-failed-runs-teach">What failed runs teach</h2> <p>The strongest version of PatchSmith is not a prettier success counter. It is a failure microscope.</p> <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>repair attempt
+  -&gt; no patch?
+  -&gt; malformed plan?
+  -&gt; unsafe path?
+  -&gt; old span missing?
+  -&gt; validation failed?
+  -&gt; setup failed?
+  -&gt; focused validation passed?
+</code></pre></div></div> <p>Those outcomes need different fixes. Retrieval misses suggest context work. Malformed patch plans suggest runtime or schema work. Old-span misses suggest patch formatting or stale context. Test failures suggest a wrong repair. Environment failures suggest benchmark setup work.</p> <p>That is why the run directory matters. It lets a failed attempt become an engineering signal instead of a vanished chat transcript.</p> <p><img src="/assets/img/projects/patchsmith-run-ledger.svg" alt="PatchSmith run ledger" width="1180" height="620" loading="lazy" decoding="async"></p> <h2 id="next-experiments">Next experiments</h2> <p>The next useful work is concrete:</p> <ol> <li>Expand the public issue suite with benchmark manifests that record repository snapshot, issue provenance, reproduction command, focused validation, reviewed context, runtime, retry budget, cost, and claim boundary.</li> <li>Run the same tasks across deterministic, OpenAI-backed, DeepAgents, and ctxhelm-backed context variants.</li> <li>Add runtime fairness checks that enforce the same <code class="language-plaintext highlighter-rouge">AgentTask</code>, context bundle, validation command, retry budget, and mutation boundary across runtimes.</li> <li>Keep token and cost gates active before running larger live-model suites.</li> <li>Add richer but still bounded patch formats for multi-file edits once the single-replacement path is boringly reliable.</li> <li>Publish more sample artifact bundles, especially rejected and failed runs.</li> </ol> <p>The goal is not to make the blog sound more confident. The goal is to make the evidence visible sooner.</p> <h2 id="references">References</h2> <ul> <li><a href="https://arxiv.org/abs/2310.06770" rel="external nofollow noopener" target="_blank">SWE-bench: Can Language Models Resolve Real-World GitHub Issues?</a></li> <li><a href="https://arxiv.org/abs/2405.15793" rel="external nofollow noopener" target="_blank">SWE-agent: Agent-Computer Interfaces Enable Automated Software Engineering</a></li> <li><a href="https://arxiv.org/abs/2407.01489" rel="external nofollow noopener" target="_blank">Agentless: Demystifying LLM-based Software Engineering Agents</a></li> <li><a href="https://arxiv.org/abs/2407.16741" rel="external nofollow noopener" target="_blank">OpenHands: An Open Platform for AI Software Developers as Generalist Agents</a></li> <li><a href="https://docs.langchain.com/oss/python/deepagents/overview" rel="external nofollow noopener" target="_blank">DeepAgents documentation</a></li> <li><a href="https://github.com/thromel/patchsmith" rel="external nofollow noopener" target="_blank">PatchSmith repository</a></li> <li><a href="https://github.com/thromel/patchsmith/blob/main/docs/artifact_gallery.md" rel="external nofollow noopener" target="_blank">PatchSmith artifact gallery</a></li> <li><a href="https://github.com/thromel/patchsmith/blob/main/docs/failure_taxonomy.md" rel="external nofollow noopener" target="_blank">PatchSmith failure taxonomy</a></li> </ul> <p><a href="https://github.com/thromel/patchsmith" target="_blank" rel="noopener noreferrer" aria-label="View PatchSmith on GitHub (opens in a new tab)">View PatchSmith on GitHub</a></p> </article> </div> </div> <footer class="fixed-bottom" role="contentinfo"> <div class="container mt-0"> © Copyright 2026 Tanzim Hossain Romel. © Tanzim Hossain Romel. Powered by <a href="https://jekyllrb.com/" target="_blank" rel="external nofollow noopener">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio" rel="external nofollow noopener" target="_blank">al-folio</a> theme. </div> </footer> <script>
+  window.alFolio = {
+    compatBootstrap: false
+  };
+</script> <script src="/assets/js/nav-toggle.js?v=141bd79a73ebc0f0b6ea58e440ae79fc"></script> <script defer src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script> <script defer src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script> <script defer src="/assets/js/masonry.js?v=e49affc7bd2646f6acdad1dbe02c2359" type="text/javascript"></script> <script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js" integrity="sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI=" crossorigin="anonymous"></script> <script src="/assets/al_math/js/mathjax-setup.js"></script> <script src="/assets/js/tooltips-setup.js?v=fe487e99db6c43751e6e7bdb2d6a0611"></script> <script src="/assets/js/no_defer.js?v=53b1b1a645525975c963ce8bf8bfefcf"></script> <script defer src="/assets/js/common.js?v=87baac90f765f2f3362dcf6aaf312a8a"></script> <script defer src="/assets/js/copy_code.js?v=c8a01c11a92744d44b093fc3bda915df" type="text/javascript"></script> <script defer src="/assets/js/jupyter_new_tab.js?v=896d254890d9b47f0281f63bfccf0dee"></script> <script async src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script> <script async src="https://badge.dimensions.ai/badge.js"></script> <script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script> <script defer src="/assets/al_img_tools/js/zoom.js"></script> <script defer src="/assets/js/progress-bar.js?v=499464c5c63ced6cf7ad62509f1e2610" type="text/javascript"></script> <script src="https://cdn.jsdelivr.net/npm/vanilla-back-to-top@7.2.1/dist/vanilla-back-to-top.min.js" integrity="sha256-uMJJ3EoTyfRBoTbR+lrfu1uRQ87RZG8AR3cVNuQVeFg=" crossorigin="anonymous"></script> <script>
+    addBackToTop();
+  </script> <script type="module" src="/assets/al_search/js/search/ninja-keys.min.js"></script> <ninja-keys hidebreadcrumbs noautoloadmdicons placeholder="Type to start searching"></ninja-keys> <script src="/assets/al_search/js/search-setup.js"></script> <script>
+// get the ninja-keys element
+const ninja = document.querySelector('ninja-keys');
+
+// add the home and posts menu items
+ninja.data = [{
+    id: "nav-about",
+    title: "about",
+    section: "Navigation",
+    handler: () => {
+      window.location.href = "/";
+    },
+  },{id: "nav-blog",
+          title: "blog",
+          description: "",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/blog/";
+          },
+        },{id: "nav-publications",
+          title: "publications",
+          description: "Publications.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/publications/";
+          },
+        },{id: "nav-research",
+          title: "research",
+          description: "Research on reliable AI agents, SRE-agent evaluation, ML ecosystem security, agent-choice auditing, and developer tools.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/research/";
+          },
+        },{id: "nav-projects",
+          title: "projects",
+          description: "Research and engineering projects.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/projects/";
+          },
+        },{id: "nav-cv",
+          title: "CV",
+          description: "Curriculum vitae.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/cv/";
+          },
+        },{id: "nav-contributions",
+          title: "contributions",
+          description: "Curated open-source contribution evidence across research infrastructure, frameworks, and language tooling.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/contributions/";
+          },
+        },{id: "post-building-a-fast-1brc-solver-in-c-on-apple-silicon",
+        
+          title: "Building a fast 1BRC solver in C# on Apple Silicon",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/building-fast-1brc-csharp-apple-silicon/";
+          
+        },
+      },{id: "post-memory-management-in-production-avoiding-the-silent-killers",
+        
+          title: "Memory Management in Production: Avoiding the Silent Killers",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/memory-management-production-silent-killers/";
+          
+        },
+      },{id: "post-growing-as-a-software-engineer-in-the-age-of-llms-and-vibe-coding",
+        
+          title: "Growing as a Software Engineer in the Age of LLMs and Vibe Coding...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/vibe-coding/";
+          
+        },
+      },{id: "post-taming-the-imagination-a-comprehensive-guide-to-handling-hallucinations-and-implementing-guardrails-in-agentic-ai",
+        
+          title: "Taming the Imagination: A Comprehensive Guide to Handling Hallucinations and Implementing Guardrails in...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/how-to-handle-hallucinations/";
+          
+        },
+      },{id: "post-building-an-agentic-ai-analytics-dashboard-a-deep-dive-with-langchain-langgraph-and-fine-tuned-llama",
+        
+          title: "Building an Agentic AI Analytics Dashboard: A Deep Dive with LangChain, LangGraph, and...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/intro-to-agentic-ai/";
+          
+        },
+      },{id: "post-neural-algorithmic-reasoning-teaching-neural-networks-to-think-like-algorithms",
+        
+          title: "Neural Algorithmic Reasoning: Teaching Neural Networks to Think Like Algorithms",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/intro-to-nar/";
+          
+        },
+      },{id: "post-opentelemetry-in-microservices-how-we-transformed-our-observability-strategy",
+        
+          title: "OpenTelemetry in Microservices: How We Transformed Our Observability Strategy",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/opentelemetry/";
+          
+        },
+      },{id: "post-using-ai-tools-in-software-engineering-and-research-workflows",
+        
+          title: "Using AI Tools in Software Engineering and Research Workflows",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/leveraging-ai-tools-software-engineering/";
+          
+        },
+      },{id: "post-the-performance-crisis-how-we-rescued-a-net-8-microservice-from-10-critical-bottlenecks",
+        
+          title: "The Performance Crisis: How We Rescued a .NET 8 Microservice from 10 Critical...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2024/optimizing-dotnet-microservices-performance/";
+          
+        },
+      },{id: "post-zero-downtime-deployments-in-kubernetes-how-we-keep-our-services-running-while-we-ship",
+        
+          title: "Zero Downtime Deployments in Kubernetes: How We Keep Our Services Running While We...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2024/zero-downtime/";
+          
+        },
+      },{id: "post-mastering-unit-testing-and-bdd-with-xunit-and-specflow-in-net-9-a-comprehensive-guide",
+        
+          title: "Mastering Unit Testing and BDD with xUnit and SpecFlow in .NET 9: A...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2024/dotnet-tests/";
+          
+        },
+      },{id: "post-design-patterns-your-first-step-toward-professional-software-engineering",
+        
+          title: "Design Patterns: Your First Step Toward Professional Software Engineering",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2024/design-patterns-professional-software-engineering/";
+          
+        },
+      },{id: "post-setting-up-github-actions-ci-cd-with-aws-a-practical-journey",
+        
+          title: "Setting Up GitHub Actions CI/CD with AWS: A Practical Journey",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2024/intro-to-ci-cd/";
+          
+        },
+      },{id: "post-the-clique-partition-problem-dividing-networks-into-perfect-communities",
+        
+          title: "The Clique Partition Problem: Dividing Networks into Perfect Communities",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2023/clique-partition-problem-graph-theory/";
+          
+        },
+      },{id: "post-advice-complexity-in-online-algorithms-when-knowing-the-future-makes-all-the-difference",
+        
+          title: "Advice Complexity in Online Algorithms: When Knowing the Future Makes All the Difference...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2023/advice-complexity-online-algorithms/";
+          
+        },
+      },{id: "post-getting-started-with-kubernetes-deploying-microservice-architectures-at-scale",
+        
+          title: "Getting Started with Kubernetes: Deploying Microservice Architectures at Scale",
+        
+        description: "A practical Kubernetes guide covering microservice deployment, service-mesh integration, observability, and the operational checks needed before production use.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2022/getting-started-with-kubernetes-microservices/";
+          
+        },
+      },{id: "post-understanding-xv6-a-practical-introduction-to-operating-systems",
+        
+          title: "Understanding xv6: A Practical Introduction to Operating Systems",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2022/understanding-xv6-operating-systems/";
+          
+        },
+      },{id: "post-getting-started-with-ns3-a-hands-on-guide-to-network-simulation",
+        
+          title: "Getting Started with NS3: A Hands-On Guide to Network Simulation",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2021/getting-started-with-ns3/";
+          
+        },
+      },{id: "news-completed-b-sc-in-computer-science-and-engineering-from-bangladesh-university-of-engineering-and-technology-with-a-gpa-of-3-53-4-00-link",
+          title: 'Completed B.Sc in Computer Science and Engineering from Bangladesh University of Engineering and...',
+          description: "",
+          section: "News",},{id: "news-joined-iqvia-as-a-software-development-engineer-on-kpi-library-the-dynamic-reporting-layer-within-orchestrated-analytics-link",
+          title: 'Joined IQVIA as a Software Development Engineer on KPI Library, the dynamic reporting...',
+          description: "",
+          section: "News",},{id: "news-submitted-sentiment-analysis-of-anonymous-crisis-reports-in-bangladesh-to-acm-cscw-2025-analyzing-crowd-sourced-reports-from-bangladesh-s-2024-national-crisis-using-transformer-models-link",
+          title: 'Submitted ‘Sentiment Analysis of Anonymous Crisis Reports in Bangladesh’ to ACM CSCW 2025,...',
+          description: "",
+          section: "News",},{id: "news-honored-with-the-iqvia-impact-program-silver-award-for-outstanding-performance-and-contributions-to-the-kpi-library-team-link",
+          title: 'Honored with the IQVIA Impact Program Silver Award for outstanding performance and contributions...',
+          description: "",
+          section: "News",},{id: "news-submitted-an-empirical-study-on-remote-code-execution-in-machine-learning-model-hosting-ecosystems-to-the-mining-software-repositories-msr-2026-conference-first-large-scale-cross-platform-security-study-analyzing-45-000-repositories-across-5-major-ml-platforms-link",
+          title: 'Submitted ‘An Empirical Study on Remote Code Execution in Machine Learning Model Hosting...',
+          description: "",
+          section: "News",},{id: "news-resubmitted-an-empirical-study-on-remote-code-execution-in-machine-learning-model-hosting-ecosystems-to-acm-transactions-on-software-engineering-and-methodology-tosem-2026-preprint-available-on-arxiv-link",
+          title: 'Resubmitted ‘An Empirical Study on Remote Code Execution in Machine Learning Model Hosting...',
+          description: "",
+          section: "News",},{id: "news-started-a-remote-summer-research-internship-at-the-university-of-illinois-urbana-champaign-through-uiuc-summer-research-in-software-engineering-srse-2026-with-professor-tianyin-xu-link",
+          title: 'Started a remote summer research internship at the University of Illinois Urbana-Champaign through...',
+          description: "",
+          section: "News",},{id: "news-submitted-the-choice-can-be-the-attack-auditing-aligned-backdoors-in-llm-agents-to-the-transactions-of-the-association-for-computational-linguistics-tacl-2026-with-chowdhury-rakin-haider-link",
+          title: 'Submitted ‘The Choice Can Be the Attack: Auditing Aligned Backdoors in LLM Agents’...',
+          description: "",
+          section: "News",},{id: "news-an-empirical-study-on-remote-code-execution-in-machine-learning-model-hosting-ecosystems-is-under-review-at-the-international-conference-on-software-engineering-icse-2027-preprint-available-on-arxiv-link",
+          title: '‘An Empirical Study on Remote Code Execution in Machine Learning Model Hosting Ecosystems’...',
+          description: "",
+          section: "News",},{id: "news-will-begin-graduate-study-in-computing-science-at-the-university-of-alberta-on-september-1-2026-link",
+          title: 'Will begin graduate study in Computing Science at the University of Alberta on...',
+          description: "",
+          section: "News",},{id: "projects-1brc-c-on-apple-silicon",
+          title: '1BRC C# on Apple Silicon',
+          description: "A .NET 10 NativeAOT performance case study: byte parsing, native aggregation, ARM64 tuning, and a size-aware macOS pread path",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/1brc-csharp/";
+            },},{id: "projects-building-a-bangla-handwritten-digit-recognizer-from-scratch",
+          title: 'Building a Bangla Handwritten Digit Recognizer from Scratch',
+          description: "A Deep Dive into Custom CNN Implementation",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/bangla-digit-recognition/";
+            },},{id: "projects-blockchain-based-ticketing-platform",
+          title: 'Blockchain Based Ticketing Platform',
+          description: "A practical approach to reducing ticket fraud and abusive resale",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/blockchain-ticketing/";
+            },},{id: "projects-yet-another-c-compiler",
+          title: 'Yet Another C Compiler',
+          description: "A complete multi-pass compiler for a subset of C",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/compiler/";
+            },},{id: "projects-contextledger-context-accounting-for-coding-agents",
+          title: 'ContextLedger: context accounting for coding agents',
+          description: "A research notebook on OpenCode compaction, provenance, and live GPT-5.5 experiments",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/contextledger/";
+            },},{id: "projects-ctxhelm-agent-native-context-compiler",
+          title: 'ctxhelm: agent-native context compiler',
+          description: "Local-first context plans, release proof, and source-free agent evaluation",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/ctxhelm/";
+            },},{id: "projects-mini-deep-learning-framework-pytorch-from-scratch",
+          title: 'Mini Deep Learning Framework: PyTorch from Scratch',
+          description: "A freelance learning project for tensors, autograd, and neural-network internals",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/deep-learning-framework-capstone/";
+            },},{id: "projects-go-container-runtime-docker-from-scratch",
+          title: 'Go Container Runtime: Docker from Scratch',
+          description: "A freelance learning project for Linux containers, networking, and Go systems programming",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/docker-from-scratch-go/";
+            },},{id: "projects-eventfly-distributed-microservices-event-platform",
+          title: 'EventFly – Distributed Microservices Event Platform',
+          description: "A six-person BUET course project for event creation, ticketing, announcements, participant engagement, analytics, and payments, implemented with Node.js, React, NATS, Kubernetes, MongoDB, Redis, and Stripe.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/eventfly-an-end-to-end-event-management-system/";
+            },},{id: "projects-building-a-go-database-engine-from-scratch",
+          title: 'Building a Go Database Engine from Scratch',
+          description: "An educational ACID-oriented database engine with advanced features",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/go-database/";
+            },},{id: "projects-image-caption-generation-with-bert-context-vectors",
+          title: 'Image Caption Generation with BERT Context Vectors',
+          description: "Extended the &quot;Show, Attend, and Tell&quot; image captioning model with BERT to improve caption quality and reduce training time, achieving 36% improvement in CIDEr score and 43% improvement in BLEU-4.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/image-caption-generator/";
+            },},{id: "projects-patchsmith-a-harness-for-repair-agents",
+          title: 'PatchSmith: a harness for repair agents',
+          description: "System design and R&amp;D notes for bounded patches, sandbox validation, and auditable repair runs",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/patchsmith/";
+            },},{id: "projects-ray-tracing-from-scratch-a-comprehensive-guide-to-3d-rendering-physics-and-implementation",
+          title: 'Ray Tracing from Scratch: A Comprehensive Guide to 3D Rendering Physics and Implementation...',
+          description: "Implementing physically-based rendering with C++",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/ray-tracing/";
+            },},{id: "projects-an-empirical-study-on-remote-code-execution-in-machine-learning-model-hosting-ecosystems",
+          title: 'An Empirical Study on Remote Code Execution in Machine Learning Model Hosting Ecosystems...',
+          description: "A cross-platform study of model-loading risk across five ML hosting ecosystems, using static analysis, malware-signature scanning, and analysis of more than 600 developer discussions.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/research-ml-remote-code-execution/";
+            },},{id: "projects-verischema-verified-database-schema-generation",
+          title: 'VeriSchema: verified database-schema generation',
+          description: "How can specialized agents generate relational schemas from natural-language requirements while formal checks and targeted repair keep the result consistent?",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/research-multi-agent-db-schema/";
+            },},{id: "projects-the-choice-can-be-the-attack-auditing-aligned-backdoors-in-llm-agents",
+          title: 'The Choice Can Be the Attack: Auditing Aligned Backdoors in LLM Agents',
+          description: "Abstract-level summary of SHIFT, submitted to TACL 2026 on aligned backdoor attacks in LLM agents.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/research-reagent-plus-plus/";
+            },},{id: "projects-sentiment-analysis-of-anonymous-crisis-reports-in-bangladesh",
+          title: 'Sentiment Analysis of Anonymous Crisis Reports in Bangladesh',
+          description: "A multilingual analysis of anonymous, crowd-sourced reports from Bangladesh&#39;s 2024 national crisis.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/research-ureporter/";
+            },},{id: "projects-enhancing-tcp-fairness-tcp-vegas-implementation",
+          title: 'Enhancing TCP Fairness: TCP Vegas+ Implementation',
+          description: "A dual-mode solution for TCP Vegas fairness issues",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/tcp-vegas-plus/";
+            },},{
+        id: 'social-email',
+        title: 'email',
+        section: 'Socials',
+        handler: () => {
+          window.open("mailto:%74%61%6E%68%72%6F%6D%65%6C@%67%6D%61%69%6C.%63%6F%6D", "_blank");
+        },
+      },{
+        id: 'social-github',
+        title: 'GitHub',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://github.com/thromel", "_blank");
+        },
+      },{
+        id: 'social-scholar',
+        title: 'Google Scholar',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://scholar.google.com/citations?user=zHV4EU8AAAAJ", "_blank");
+        },
+      },{
+        id: 'social-linkedin',
+        title: 'LinkedIn',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://www.linkedin.com/in/thromel", "_blank");
+        },
+      },{
+        id: 'social-orcid',
+        title: 'ORCID',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://orcid.org/0009-0009-2432-8960", "_blank");
+        },
+      },{
+        id: 'social-rss',
+        title: 'RSS Feed',
+        section: 'Socials',
+        handler: () => {
+          window.open("/feed.xml", "_blank");
+        },
+      },{
+        id: 'social-x',
+        title: 'X',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://twitter.com/tanzimhromel", "_blank");
+        },
+      },{
+      id: 'light-theme',
+      title: 'Change theme to light',
+      description: 'Change the theme of the site to Light',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("light");
+      },
+    },
+    {
+      id: 'dark-theme',
+      title: 'Change theme to dark',
+      description: 'Change the theme of the site to Dark',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("dark");
+      },
+    },
+    {
+      id: 'system-theme',
+      title: 'Use system default theme',
+      description: 'Change the theme of the site to System Default',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("system");
+      },
+    },];
+
+</script> <script src="/assets/al_search/js/shortcut-key.js"></script> </body> </html>

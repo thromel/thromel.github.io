@@ -1,0 +1,765 @@
+<!DOCTYPE html> <html lang="en"> <head> <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <title> Getting Started with NS3: A Hands-On Guide to Network Simulation | Tanzim Hossain Romel </title> <meta name="author" content="Tanzim Hossain Romel"> <meta name="description" content="Academic and engineering portfolio of Tanzim Hossain Romel, focused on reliable AI agents, software engineering research, and developer tools."> <meta name="keywords" content=""> <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https:; style-src 'self' 'unsafe-inline' https:; img-src 'self' data: https:; font-src 'self' data: https:; media-src 'self' https:; frame-src 'self' https:; connect-src 'self' https:;"> <style>
+  :root {
+    --max-content-width: 930px;
+  }
+</style> <link rel="stylesheet" href="/assets/css/tailwind.css?v=50c64c15cbb9fd1ce6056fdb8bcb4b62"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.2.0/css/all.min.css" integrity="sha256-MVopmdyC2tYTiJ8wlktf0uh0v4NgT+vNdyVFepi7Q0c=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.5/css/academicons.min.css" integrity="sha256-SzrCOBJbGVFMahewkgjwnApaV2+av1DwMAA+/QGLyZw=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/scholar-icons@1.0.3/css/scholar-icons.css" integrity="sha256-VY3hHVj/hNX3fYG6wtbA6TcKJQl7+FthzGSyIB64klY=" crossorigin="anonymous"> <link defer rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons&amp;display=swap"> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-github.css?v=591dab5a4e56573bf4ef7fd332894c99" media="" id="highlight_theme_light"> <link rel="shortcut icon" href="data:image/svg+xml,&lt;svg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20100%20100%22&gt;&lt;text%20y=%22.9em%22%20font-size=%2290%22&gt;%E2%9A%9B%EF%B8%8F&lt;/text&gt;&lt;/svg&gt;"> <link rel="stylesheet" href="/assets/css/main.css?v=3116ba77db9ee1581d05bb3e86fbf7f1"> <link rel="canonical" href="https://tanzimhromel.com/blog/2021/getting-started-with-ns3/"> <script src="/assets/js/theme.js?v=5286c3e4c334d0ecb8fc0c40ff4fa7ec"></script> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-native.css?v=5847e5ed4a4568527aa6cfab446049ca" media="none" id="highlight_theme_dark"> <script>
+    initTheme();
+  </script> </head> <body class="fixed-top-nav "> <header> <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top" role="navigation"> <div class="container"> <a class="navbar-brand title font-weight-lighter" href="/"> Tanzim Hossain Romel </a> <button class="navbar-toggler collapsed navbar-toggler-main" type="button" data-nav-toggle="navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar top-bar"></span> <span class="icon-bar middle-bar"></span> <span class="icon-bar bottom-bar"></span> </button> <div class="collapse navbar-collapse navbar-collapse-main" id="navbarNav"> <ul class="navbar-nav navbar-menu-list flex-nowrap"> <li class="nav-item "> <a class="nav-link" href="/">about </a> </li> <li class="nav-item active"> <a class="nav-link" href="/blog/">blog </a> </li> <li class="nav-item "> <a class="nav-link" href="/publications/">publications </a> </li> <li class="nav-item "> <a class="nav-link" href="/research/">research </a> </li> <li class="nav-item "> <a class="nav-link" href="/projects/">projects </a> </li> <li class="nav-item "> <a class="nav-link" href="/cv/">CV </a> </li> <li class="nav-item "> <a class="nav-link" href="/contributions/">contributions </a> </li> <li class="nav-item"> <button id="search-toggle" type="button" title="Search" aria-label="Open search"> <span class="nav-link">ctrl k <i class="fa-solid fa-magnifying-glass"></i></span> </button> </li> <li class="toggle-container"> <button id="light-toggle" type="button" title="Change theme" aria-label="Change color theme"> <i class="fa-half-sun-moon" id="light-toggle-system"></i> <i class="fa-solid fa-moon" id="light-toggle-dark"></i> <i class="fa-solid fa-sun" id="light-toggle-light"></i> </button> </li> </ul> </div> </div> </nav> <progress id="progress" value="0"> <div class="progress-container"> <span class="progress-bar"></span> </div> </progress> </header> <div class="container mt-5" role="main"> <div class="post"> <header class="post-header"> <h1 class="post-title">Getting Started with NS3: A Hands-On Guide to Network Simulation</h1> <p class="post-meta"> Created on December 27, 2021 </p> <p class="post-tags"> <a href="/blog/2021"> <i class="fa-solid fa-calendar fa-sm"></i> 2021 </a>   ·   <a href="/blog/tag/ns3"> <i class="fa-solid fa-hashtag fa-sm"></i> ns3</a>   <a href="/blog/tag/network-simulation"> <i class="fa-solid fa-hashtag fa-sm"></i> network-simulation</a>   <a href="/blog/tag/cpp"> <i class="fa-solid fa-hashtag fa-sm"></i> cpp</a>   <a href="/blog/tag/networking"> <i class="fa-solid fa-hashtag fa-sm"></i> networking</a>   <a href="/blog/tag/tutorial"> <i class="fa-solid fa-hashtag fa-sm"></i> tutorial</a>   <a href="/blog/tag/campus-network"> <i class="fa-solid fa-hashtag fa-sm"></i> campus-network</a>   ·   <a href="/blog/category/networking"> <i class="fa-solid fa-tag fa-sm"></i> networking</a>   <a href="/blog/category/simulation"> <i class="fa-solid fa-tag fa-sm"></i> simulation</a>   <a href="/blog/category/programming"> <i class="fa-solid fa-tag fa-sm"></i> programming</a> </p> </header> <article class="post-content"> <div id="markdown-content"> <p><img src="/assets/img/blog-ns3_campus_network_topology.png" class="img-fluid rounded z-depth-1 mb-4" alt="NS3 Campus Network Topology" width="1096" height="992" decoding="async"></p> <h2 id="what-were-building-today">What We’re Building Today</h2> <p>Picture this: You’re tasked with designing a campus network where students stream videos from a media server. Some students connect via WiFi in the library, others use Ethernet in computer labs, and everyone wants smooth playback without buffering. How do you test if your network design will actually work before spending thousands on equipment?</p> <p>This is exactly where NS3 shines. Today, we’ll build this very simulation together, learning NS3’s essential modules along the way. By the end of this guide, you’ll understand how to create nodes, connect them with different technologies, run applications, and analyze whether your network can handle the load.</p> <h2 id="setting-up-your-ns3-environment">Setting Up Your NS3 Environment</h2> <p>Before we dive into coding, let’s get NS3 installed. On Ubuntu (which I recommend for beginners), you’ll need these prerequisites:</p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt-get update
+<span class="nb">sudo </span>apt-get <span class="nb">install </span>g++ python3 python3-dev cmake git
+<span class="nb">sudo </span>apt-get <span class="nb">install </span>python3-setuptools qtbase5-dev qtchooser qt5-qmake qtbase5-dev-tools
+</code></pre></div></div> <p>Now, let’s download and build NS3:</p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Download NS3 (using version 3.39 as an example)</span>
+wget https://www.nsnam.org/releases/ns-allinone-3.39.tar.bz2
+<span class="nb">tar </span>xjf ns-allinone-3.39.tar.bz2
+<span class="nb">cd </span>ns-allinone-3.39/ns-3.39
+
+<span class="c"># Configure and build</span>
+./ns3 configure <span class="nt">--enable-examples</span> <span class="nt">--enable-tests</span>
+./ns3 build
+</code></pre></div></div> <p>The build process takes about 10-15 minutes. While it compiles, let’s understand what we’re about to create.</p> <h2 id="understanding-ns3s-building-blocks">Understanding NS3’s Building Blocks</h2> <p>NS3 works like digital LEGO blocks. Each module represents a different networking component:</p> <ul> <li> <strong>Node Module</strong>: Think of nodes as computers, phones, or any device in your network</li> <li> <strong>NetDevice Module</strong>: These are like network cards (WiFi adapters, Ethernet ports)</li> <li> <strong>Channel Module</strong>: The medium connecting devices (air for WiFi, cables for Ethernet)</li> <li> <strong>Protocol Stack Module</strong>: The software that handles networking (like TCP/IP)</li> <li> <strong>Application Module</strong>: Programs that generate network traffic (video servers, web browsers)</li> </ul> <p><img src="/assets/img/blog-ns3_building_blocks.png" class="img-fluid rounded z-depth-1 mb-4" alt="NS3 Building Blocks Architecture" width="911" height="528" loading="lazy" decoding="async"></p> <p>Let’s see how these pieces fit together by building our campus network simulation.</p> <h2 id="creating-our-first-simulation-the-campus-network">Creating Our First Simulation: The Campus Network</h2> <p>Create a new file called <code class="language-plaintext highlighter-rouge">campus-network.cc</code> in the <code class="language-plaintext highlighter-rouge">scratch</code> directory of your NS3 installation:</p> <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">"ns3/core-module.h"</span><span class="cp">
+#include</span> <span class="cpf">"ns3/network-module.h"</span><span class="cp">
+#include</span> <span class="cpf">"ns3/internet-module.h"</span><span class="cp">
+#include</span> <span class="cpf">"ns3/point-to-point-module.h"</span><span class="cp">
+#include</span> <span class="cpf">"ns3/wifi-module.h"</span><span class="cp">
+#include</span> <span class="cpf">"ns3/mobility-module.h"</span><span class="cp">
+#include</span> <span class="cpf">"ns3/applications-module.h"</span><span class="cp">
+#include</span> <span class="cpf">"ns3/flow-monitor-module.h"</span><span class="cp">
+</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">ns3</span><span class="p">;</span>
+
+<span class="c1">// This gives us logging capabilities - super useful for debugging!</span>
+<span class="n">NS_LOG_COMPONENT_DEFINE</span><span class="p">(</span><span class="s">"CampusNetworkSimulation"</span><span class="p">);</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span>
+<span class="p">{</span>
+    <span class="c1">// Enable logging so we can see what's happening</span>
+    <span class="n">LogComponentEnable</span><span class="p">(</span><span class="s">"CampusNetworkSimulation"</span><span class="p">,</span> <span class="n">LOG_LEVEL_INFO</span><span class="p">);</span>
+    
+    <span class="n">NS_LOG_INFO</span><span class="p">(</span><span class="s">"Creating our campus network simulation"</span><span class="p">);</span>
+    
+    <span class="c1">// Let's start building!</span>
+<span class="p">}</span>
+</code></pre></div></div> <p>This basic structure imports all the modules we’ll need. The logging component helps us debug by printing messages during simulation. Think of <code class="language-plaintext highlighter-rouge">NS_LOG_INFO</code> as a sophisticated <code class="language-plaintext highlighter-rouge">printf</code> that you can turn on or off.</p> <h2 id="step-1-creating-nodes-the-network-devices">Step 1: Creating Nodes (The Network Devices)</h2> <p>Let’s add our network devices. In our campus scenario, we have:</p> <ul> <li>1 media server</li> <li>1 router (connecting everything)</li> <li>3 Ethernet-connected lab computers</li> <li>5 WiFi-connected student laptops</li> </ul> <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span>
+<span class="p">{</span>
+    <span class="n">LogComponentEnable</span><span class="p">(</span><span class="s">"CampusNetworkSimulation"</span><span class="p">,</span> <span class="n">LOG_LEVEL_INFO</span><span class="p">);</span>
+    
+    <span class="c1">// Create the media server</span>
+    <span class="n">NS_LOG_INFO</span><span class="p">(</span><span class="s">"Creating media server"</span><span class="p">);</span>
+    <span class="n">NodeContainer</span> <span class="n">mediaServer</span><span class="p">;</span>
+    <span class="n">mediaServer</span><span class="p">.</span><span class="n">Create</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>  <span class="c1">// Just one server</span>
+    
+    <span class="c1">// Create the router that connects everything</span>
+    <span class="n">NS_LOG_INFO</span><span class="p">(</span><span class="s">"Creating router"</span><span class="p">);</span>
+    <span class="n">NodeContainer</span> <span class="n">router</span><span class="p">;</span>
+    <span class="n">router</span><span class="p">.</span><span class="n">Create</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+    
+    <span class="c1">// Create lab computers (connected via Ethernet)</span>
+    <span class="n">NS_LOG_INFO</span><span class="p">(</span><span class="s">"Creating lab computers"</span><span class="p">);</span>
+    <span class="n">NodeContainer</span> <span class="n">labComputers</span><span class="p">;</span>
+    <span class="n">labComputers</span><span class="p">.</span><span class="n">Create</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+    
+    <span class="c1">// Create student laptops (connected via WiFi)</span>
+    <span class="n">NS_LOG_INFO</span><span class="p">(</span><span class="s">"Creating student laptops"</span><span class="p">);</span>
+    <span class="n">NodeContainer</span> <span class="n">wifiStudents</span><span class="p">;</span>
+    <span class="n">wifiStudents</span><span class="p">.</span><span class="n">Create</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
+    
+    <span class="c1">// The router will also act as the WiFi access point</span>
+    <span class="n">NodeContainer</span> <span class="n">wifiAP</span> <span class="o">=</span> <span class="n">router</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div> <p>Notice how we use <code class="language-plaintext highlighter-rouge">NodeContainer</code> to group similar nodes. This makes it easier to configure multiple nodes at once. Think of it like creating a list of devices that share similar properties.</p> <h2 id="step-2-setting-up-the-point-to-point-connection-server-to-router">Step 2: Setting Up the Point-to-Point Connection (Server to Router)</h2> <p>Our media server connects to the router with a high-speed link. The <code class="language-plaintext highlighter-rouge">PointToPointHelper</code> module makes this easy:</p> <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="c1">// Configure the point-to-point link between server and router</span>
+    <span class="n">NS_LOG_INFO</span><span class="p">(</span><span class="s">"Configuring server-to-router link"</span><span class="p">);</span>
+    <span class="n">PointToPointHelper</span> <span class="n">serverLink</span><span class="p">;</span>
+    
+    <span class="c1">// Set link properties: 1 Gbps bandwidth, 1ms delay</span>
+    <span class="c1">// Think of this as a fiber optic connection</span>
+    <span class="n">serverLink</span><span class="p">.</span><span class="n">SetDeviceAttribute</span><span class="p">(</span><span class="s">"DataRate"</span><span class="p">,</span> <span class="n">StringValue</span><span class="p">(</span><span class="s">"1Gbps"</span><span class="p">));</span>
+    <span class="n">serverLink</span><span class="p">.</span><span class="n">SetChannelAttribute</span><span class="p">(</span><span class="s">"Delay"</span><span class="p">,</span> <span class="n">StringValue</span><span class="p">(</span><span class="s">"1ms"</span><span class="p">));</span>
+    
+    <span class="c1">// Install the link on both devices</span>
+    <span class="n">NetDeviceContainer</span> <span class="n">serverDevices</span><span class="p">;</span>
+    <span class="n">serverDevices</span> <span class="o">=</span> <span class="n">serverLink</span><span class="p">.</span><span class="n">Install</span><span class="p">(</span><span class="n">mediaServer</span><span class="p">.</span><span class="n">Get</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">router</span><span class="p">.</span><span class="n">Get</span><span class="p">(</span><span class="mi">0</span><span class="p">));</span>
+</code></pre></div></div> <p>The <code class="language-plaintext highlighter-rouge">DataRate</code> is how fast data can flow (like the width of a pipe), while <code class="language-plaintext highlighter-rouge">Delay</code> is how long it takes for data to travel through the link (like the length of the pipe). These parameters directly affect application performance!</p> <h2 id="step-3-configuring-ethernet-for-lab-computers">Step 3: Configuring Ethernet for Lab Computers</h2> <p>Lab computers connect via Ethernet. We’ll use the CSMA (Carrier Sense Multiple Access) module, which simulates Ethernet behavior:</p> <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="c1">// Configure Ethernet for lab computers</span>
+    <span class="n">NS_LOG_INFO</span><span class="p">(</span><span class="s">"Setting up Ethernet for lab computers"</span><span class="p">);</span>
+    <span class="n">CsmaHelper</span> <span class="n">csma</span><span class="p">;</span>
+    
+    <span class="c1">// 100 Mbps Ethernet with 2 microsecond delay</span>
+    <span class="n">csma</span><span class="p">.</span><span class="n">SetChannelAttribute</span><span class="p">(</span><span class="s">"DataRate"</span><span class="p">,</span> <span class="n">StringValue</span><span class="p">(</span><span class="s">"100Mbps"</span><span class="p">));</span>
+    <span class="n">csma</span><span class="p">.</span><span class="n">SetChannelAttribute</span><span class="p">(</span><span class="s">"Delay"</span><span class="p">,</span> <span class="n">TimeValue</span><span class="p">(</span><span class="n">NanoSeconds</span><span class="p">(</span><span class="mi">2000</span><span class="p">)));</span>
+    
+    <span class="c1">// Connect all lab computers and the router to the same Ethernet</span>
+    <span class="n">NodeContainer</span> <span class="n">csmaNodes</span><span class="p">;</span>
+    <span class="n">csmaNodes</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">router</span><span class="p">.</span><span class="n">Get</span><span class="p">(</span><span class="mi">0</span><span class="p">));</span>  <span class="c1">// Router first</span>
+    <span class="n">csmaNodes</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">labComputers</span><span class="p">);</span>   <span class="c1">// Then all lab computers</span>
+    
+    <span class="n">NetDeviceContainer</span> <span class="n">csmaDevices</span><span class="p">;</span>
+    <span class="n">csmaDevices</span> <span class="o">=</span> <span class="n">csma</span><span class="p">.</span><span class="n">Install</span><span class="p">(</span><span class="n">csmaNodes</span><span class="p">);</span>
+</code></pre></div></div> <p>CSMA is interesting because all devices share the same medium (like multiple computers on the same switch). They have to take turns transmitting, which NS3 simulates realistically.</p> <h2 id="step-4-creating-the-wifi-network">Step 4: Creating the WiFi Network</h2> <p>WiFi is more complex because wireless signals can interfere and nodes can move. Let’s set it up:</p> <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="c1">// Configure WiFi for student laptops</span>
+    <span class="n">NS_LOG_INFO</span><span class="p">(</span><span class="s">"Setting up WiFi network"</span><span class="p">);</span>
+    
+    <span class="c1">// The PHY layer (physical layer) handles radio transmission</span>
+    <span class="n">YansWifiPhyHelper</span> <span class="n">wifiPhy</span><span class="p">;</span>
+    <span class="n">YansWifiChannelHelper</span> <span class="n">wifiChannel</span> <span class="o">=</span> <span class="n">YansWifiChannelHelper</span><span class="o">::</span><span class="n">Default</span><span class="p">();</span>
+    <span class="n">wifiPhy</span><span class="p">.</span><span class="n">SetChannel</span><span class="p">(</span><span class="n">wifiChannel</span><span class="p">.</span><span class="n">Create</span><span class="p">());</span>
+    
+    <span class="c1">// The MAC layer handles when devices can transmit</span>
+    <span class="n">WifiMacHelper</span> <span class="n">wifiMac</span><span class="p">;</span>
+    <span class="n">WifiHelper</span> <span class="n">wifi</span><span class="p">;</span>
+    
+    <span class="c1">// Use 802.11n (common in campuses)</span>
+    <span class="n">wifi</span><span class="p">.</span><span class="n">SetStandard</span><span class="p">(</span><span class="n">WIFI_STANDARD_80211n</span><span class="p">);</span>
+    
+    <span class="c1">// Configure the access point (router)</span>
+    <span class="n">Ssid</span> <span class="n">ssid</span> <span class="o">=</span> <span class="n">Ssid</span><span class="p">(</span><span class="s">"CampusWiFi"</span><span class="p">);</span>
+    <span class="n">wifiMac</span><span class="p">.</span><span class="n">SetType</span><span class="p">(</span><span class="s">"ns3::ApWifiMac"</span><span class="p">,</span>
+                    <span class="s">"Ssid"</span><span class="p">,</span> <span class="n">SsidValue</span><span class="p">(</span><span class="n">ssid</span><span class="p">));</span>
+    
+    <span class="n">NetDeviceContainer</span> <span class="n">apDevice</span><span class="p">;</span>
+    <span class="n">apDevice</span> <span class="o">=</span> <span class="n">wifi</span><span class="p">.</span><span class="n">Install</span><span class="p">(</span><span class="n">wifiPhy</span><span class="p">,</span> <span class="n">wifiMac</span><span class="p">,</span> <span class="n">wifiAP</span><span class="p">);</span>
+    
+    <span class="c1">// Configure the student devices</span>
+    <span class="n">wifiMac</span><span class="p">.</span><span class="n">SetType</span><span class="p">(</span><span class="s">"ns3::StaWifiMac"</span><span class="p">,</span>
+                    <span class="s">"Ssid"</span><span class="p">,</span> <span class="n">SsidValue</span><span class="p">(</span><span class="n">ssid</span><span class="p">),</span>
+                    <span class="s">"ActiveProbing"</span><span class="p">,</span> <span class="n">BooleanValue</span><span class="p">(</span><span class="nb">false</span><span class="p">));</span>
+    
+    <span class="n">NetDeviceContainer</span> <span class="n">staDevices</span><span class="p">;</span>
+    <span class="n">staDevices</span> <span class="o">=</span> <span class="n">wifi</span><span class="p">.</span><span class="n">Install</span><span class="p">(</span><span class="n">wifiPhy</span><span class="p">,</span> <span class="n">wifiMac</span><span class="p">,</span> <span class="n">wifiStudents</span><span class="p">);</span>
+</code></pre></div></div> <p>The WiFi setup involves two layers:</p> <ul> <li> <strong>PHY (Physical)</strong>: Handles radio waves, signal strength, interference</li> <li> <strong>MAC (Media Access Control)</strong>: Manages who talks when to avoid collisions</li> </ul> <p>We configure one node as an Access Point (AP) and others as Stations (STA) that connect to it.</p> <h2 id="step-5-positioning-wifi-nodes">Step 5: Positioning WiFi Nodes</h2> <p>Wireless nodes need positions because signal strength depends on distance:</p> <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="c1">// Set up mobility (positions) for WiFi nodes</span>
+    <span class="n">NS_LOG_INFO</span><span class="p">(</span><span class="s">"Positioning WiFi nodes"</span><span class="p">);</span>
+    <span class="n">MobilityHelper</span> <span class="n">mobility</span><span class="p">;</span>
+    
+    <span class="c1">// Access point is stationary at the origin</span>
+    <span class="n">mobility</span><span class="p">.</span><span class="n">SetMobilityModel</span><span class="p">(</span><span class="s">"ns3::ConstantPositionMobilityModel"</span><span class="p">);</span>
+    <span class="n">mobility</span><span class="p">.</span><span class="n">Install</span><span class="p">(</span><span class="n">wifiAP</span><span class="p">);</span>
+    
+    <span class="c1">// Students are scattered around the library</span>
+    <span class="n">mobility</span><span class="p">.</span><span class="n">SetPositionAllocator</span><span class="p">(</span><span class="s">"ns3::RandomRectanglePositionAllocator"</span><span class="p">,</span>
+                                  <span class="s">"X"</span><span class="p">,</span> <span class="n">StringValue</span><span class="p">(</span><span class="s">"ns3::UniformRandomVariable[Min=0.0|Max=30.0]"</span><span class="p">),</span>
+                                  <span class="s">"Y"</span><span class="p">,</span> <span class="n">StringValue</span><span class="p">(</span><span class="s">"ns3::UniformRandomVariable[Min=0.0|Max=30.0]"</span><span class="p">));</span>
+    
+    <span class="c1">// Students might move around slowly (studying, getting coffee)</span>
+    <span class="n">mobility</span><span class="p">.</span><span class="n">SetMobilityModel</span><span class="p">(</span><span class="s">"ns3::RandomWalk2dMobilityModel"</span><span class="p">,</span>
+                              <span class="s">"Bounds"</span><span class="p">,</span> <span class="n">RectangleValue</span><span class="p">(</span><span class="n">Rectangle</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">30</span><span class="p">)),</span>
+                              <span class="s">"Speed"</span><span class="p">,</span> <span class="n">StringValue</span><span class="p">(</span><span class="s">"ns3::ConstantRandomVariable[Constant=1.0]"</span><span class="p">));</span>
+    
+    <span class="n">mobility</span><span class="p">.</span><span class="n">Install</span><span class="p">(</span><span class="n">wifiStudents</span><span class="p">);</span>
+</code></pre></div></div> <p>The <code class="language-plaintext highlighter-rouge">MobilityHelper</code> module controls node positions and movement. Fixed nodes use <code class="language-plaintext highlighter-rouge">ConstantPositionMobilityModel</code>, while mobile nodes can use various movement patterns. Here, students wander randomly within a 30x30 meter area.</p> <h2 id="step-6-installing-the-internet-stack">Step 6: Installing the Internet Stack</h2> <p>Now we need to give our nodes the ability to speak Internet protocols:</p> <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="c1">// Install Internet stack on all nodes</span>
+    <span class="n">NS_LOG_INFO</span><span class="p">(</span><span class="s">"Installing Internet stack"</span><span class="p">);</span>
+    <span class="n">InternetStackHelper</span> <span class="n">internet</span><span class="p">;</span>
+    <span class="n">internet</span><span class="p">.</span><span class="n">Install</span><span class="p">(</span><span class="n">mediaServer</span><span class="p">);</span>
+    <span class="n">internet</span><span class="p">.</span><span class="n">Install</span><span class="p">(</span><span class="n">router</span><span class="p">);</span>
+    <span class="n">internet</span><span class="p">.</span><span class="n">Install</span><span class="p">(</span><span class="n">labComputers</span><span class="p">);</span>
+    <span class="n">internet</span><span class="p">.</span><span class="n">Install</span><span class="p">(</span><span class="n">wifiStudents</span><span class="p">);</span>
+</code></pre></div></div> <p>This installs TCP/IP on each node. Without this, nodes can send raw frames but can’t use IP addresses or run typical Internet applications.</p> <h2 id="step-7-assigning-ip-addresses">Step 7: Assigning IP Addresses</h2> <p>Each network segment needs its own IP address range:</p> <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="c1">// Assign IP addresses to each network segment</span>
+    <span class="n">NS_LOG_INFO</span><span class="p">(</span><span class="s">"Assigning IP addresses"</span><span class="p">);</span>
+    <span class="n">Ipv4AddressHelper</span> <span class="n">address</span><span class="p">;</span>
+    
+    <span class="c1">// Server-to-router link: 10.1.1.0/30</span>
+    <span class="n">address</span><span class="p">.</span><span class="n">SetBase</span><span class="p">(</span><span class="s">"10.1.1.0"</span><span class="p">,</span> <span class="s">"255.255.255.252"</span><span class="p">);</span>
+    <span class="n">Ipv4InterfaceContainer</span> <span class="n">serverInterfaces</span><span class="p">;</span>
+    <span class="n">serverInterfaces</span> <span class="o">=</span> <span class="n">address</span><span class="p">.</span><span class="n">Assign</span><span class="p">(</span><span class="n">serverDevices</span><span class="p">);</span>
+    
+    <span class="c1">// Ethernet network: 10.1.2.0/24</span>
+    <span class="n">address</span><span class="p">.</span><span class="n">SetBase</span><span class="p">(</span><span class="s">"10.1.2.0"</span><span class="p">,</span> <span class="s">"255.255.255.0"</span><span class="p">);</span>
+    <span class="n">Ipv4InterfaceContainer</span> <span class="n">csmaInterfaces</span><span class="p">;</span>
+    <span class="n">csmaInterfaces</span> <span class="o">=</span> <span class="n">address</span><span class="p">.</span><span class="n">Assign</span><span class="p">(</span><span class="n">csmaDevices</span><span class="p">);</span>
+    
+    <span class="c1">// WiFi network: 10.1.3.0/24</span>
+    <span class="n">address</span><span class="p">.</span><span class="n">SetBase</span><span class="p">(</span><span class="s">"10.1.3.0"</span><span class="p">,</span> <span class="s">"255.255.255.0"</span><span class="p">);</span>
+    <span class="n">Ipv4InterfaceContainer</span> <span class="n">apInterface</span><span class="p">;</span>
+    <span class="n">apInterface</span> <span class="o">=</span> <span class="n">address</span><span class="p">.</span><span class="n">Assign</span><span class="p">(</span><span class="n">apDevice</span><span class="p">);</span>
+    <span class="n">Ipv4InterfaceContainer</span> <span class="n">staInterfaces</span><span class="p">;</span>
+    <span class="n">staInterfaces</span> <span class="o">=</span> <span class="n">address</span><span class="p">.</span><span class="n">Assign</span><span class="p">(</span><span class="n">staDevices</span><span class="p">);</span>
+    
+    <span class="c1">// Enable routing</span>
+    <span class="n">Ipv4GlobalRoutingHelper</span><span class="o">::</span><span class="n">PopulateRoutingTables</span><span class="p">();</span>
+</code></pre></div></div> <p>Each <code class="language-plaintext highlighter-rouge">SetBase</code> call defines a new subnet. The router connects all three subnets, and <code class="language-plaintext highlighter-rouge">PopulateRoutingTables()</code> automatically configures routing between them.</p> <h2 id="step-8-creating-the-video-streaming-application">Step 8: Creating the Video Streaming Application</h2> <p>Now for the fun part - actually using the network! We’ll create a video streaming server and clients:</p> <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="c1">// Create video streaming server on the media server</span>
+    <span class="n">NS_LOG_INFO</span><span class="p">(</span><span class="s">"Creating video streaming application"</span><span class="p">);</span>
+    <span class="kt">uint16_t</span> <span class="n">videoPort</span> <span class="o">=</span> <span class="mi">5000</span><span class="p">;</span>
+    
+    <span class="c1">// Server application - sends video data</span>
+    <span class="n">OnOffHelper</span> <span class="nf">videoServer</span><span class="p">(</span><span class="s">"ns3::UdpSocketFactory"</span><span class="p">,</span>
+                            <span class="n">InetSocketAddress</span><span class="p">(</span><span class="n">Ipv4Address</span><span class="o">::</span><span class="n">GetAny</span><span class="p">(),</span> <span class="n">videoPort</span><span class="p">));</span>
+    
+    <span class="c1">// Configure to simulate 4K video streaming (25 Mbps)</span>
+    <span class="n">videoServer</span><span class="p">.</span><span class="n">SetAttribute</span><span class="p">(</span><span class="s">"DataRate"</span><span class="p">,</span> <span class="n">StringValue</span><span class="p">(</span><span class="s">"25Mbps"</span><span class="p">));</span>
+    <span class="n">videoServer</span><span class="p">.</span><span class="n">SetAttribute</span><span class="p">(</span><span class="s">"PacketSize"</span><span class="p">,</span> <span class="n">UintegerValue</span><span class="p">(</span><span class="mi">1400</span><span class="p">));</span>
+    
+    <span class="c1">// Install server app on media server</span>
+    <span class="n">ApplicationContainer</span> <span class="n">serverApp</span> <span class="o">=</span> <span class="n">videoServer</span><span class="p">.</span><span class="n">Install</span><span class="p">(</span><span class="n">mediaServer</span><span class="p">.</span><span class="n">Get</span><span class="p">(</span><span class="mi">0</span><span class="p">));</span>
+    <span class="n">serverApp</span><span class="p">.</span><span class="n">Start</span><span class="p">(</span><span class="n">Seconds</span><span class="p">(</span><span class="mf">0.0</span><span class="p">));</span>
+    <span class="n">serverApp</span><span class="p">.</span><span class="n">Stop</span><span class="p">(</span><span class="n">Seconds</span><span class="p">(</span><span class="mf">30.0</span><span class="p">));</span>
+    
+    <span class="c1">// Create video clients on all student devices</span>
+    <span class="n">PacketSinkHelper</span> <span class="nf">videoClient</span><span class="p">(</span><span class="s">"ns3::UdpSocketFactory"</span><span class="p">,</span>
+                                 <span class="n">InetSocketAddress</span><span class="p">(</span><span class="n">Ipv4Address</span><span class="o">::</span><span class="n">GetAny</span><span class="p">(),</span> <span class="n">videoPort</span><span class="p">));</span>
+    
+    <span class="c1">// Install on lab computers</span>
+    <span class="n">ApplicationContainer</span> <span class="n">labClientApps</span> <span class="o">=</span> <span class="n">videoClient</span><span class="p">.</span><span class="n">Install</span><span class="p">(</span><span class="n">labComputers</span><span class="p">);</span>
+    <span class="n">labClientApps</span><span class="p">.</span><span class="n">Start</span><span class="p">(</span><span class="n">Seconds</span><span class="p">(</span><span class="mf">1.0</span><span class="p">));</span>
+    <span class="n">labClientApps</span><span class="p">.</span><span class="n">Stop</span><span class="p">(</span><span class="n">Seconds</span><span class="p">(</span><span class="mf">30.0</span><span class="p">));</span>
+    
+    <span class="c1">// Install on WiFi students</span>
+    <span class="n">ApplicationContainer</span> <span class="n">wifiClientApps</span> <span class="o">=</span> <span class="n">videoClient</span><span class="p">.</span><span class="n">Install</span><span class="p">(</span><span class="n">wifiStudents</span><span class="p">);</span>
+    <span class="n">wifiClientApps</span><span class="p">.</span><span class="n">Start</span><span class="p">(</span><span class="n">Seconds</span><span class="p">(</span><span class="mf">1.0</span><span class="p">));</span>
+    <span class="n">wifiClientApps</span><span class="p">.</span><span class="n">Stop</span><span class="p">(</span><span class="n">Seconds</span><span class="p">(</span><span class="mf">30.0</span><span class="p">));</span>
+    
+    <span class="c1">// Configure the server to send to all clients</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">uint32_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">labComputers</span><span class="p">.</span><span class="n">GetN</span><span class="p">();</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">videoServer</span><span class="p">.</span><span class="n">SetAttribute</span><span class="p">(</span><span class="s">"Remote"</span><span class="p">,</span> 
+            <span class="n">AddressValue</span><span class="p">(</span><span class="n">InetSocketAddress</span><span class="p">(</span><span class="n">csmaInterfaces</span><span class="p">.</span><span class="n">GetAddress</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="n">videoPort</span><span class="p">)));</span>
+        <span class="n">serverApp</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">videoServer</span><span class="p">.</span><span class="n">Install</span><span class="p">(</span><span class="n">mediaServer</span><span class="p">.</span><span class="n">Get</span><span class="p">(</span><span class="mi">0</span><span class="p">)));</span>
+    <span class="p">}</span>
+    
+    <span class="k">for</span> <span class="p">(</span><span class="kt">uint32_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">wifiStudents</span><span class="p">.</span><span class="n">GetN</span><span class="p">();</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">videoServer</span><span class="p">.</span><span class="n">SetAttribute</span><span class="p">(</span><span class="s">"Remote"</span><span class="p">,</span>
+            <span class="n">AddressValue</span><span class="p">(</span><span class="n">InetSocketAddress</span><span class="p">(</span><span class="n">staInterfaces</span><span class="p">.</span><span class="n">GetAddress</span><span class="p">(</span><span class="n">i</span><span class="p">),</span> <span class="n">videoPort</span><span class="p">)));</span>
+        <span class="n">serverApp</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">videoServer</span><span class="p">.</span><span class="n">Install</span><span class="p">(</span><span class="n">mediaServer</span><span class="p">.</span><span class="n">Get</span><span class="p">(</span><span class="mi">0</span><span class="p">)));</span>
+    <span class="p">}</span>
+</code></pre></div></div> <p>The <code class="language-plaintext highlighter-rouge">OnOffHelper</code> creates an application that alternates between sending data (On) and being quiet (Off). This mimics real video streaming behavior. The <code class="language-plaintext highlighter-rouge">PacketSinkHelper</code> creates applications that receive and consume data.</p> <h2 id="step-9-monitoring-network-performance">Step 9: Monitoring Network Performance</h2> <p>How do we know if our network design works? Let’s add monitoring:</p> <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="c1">// Set up flow monitor to track performance</span>
+    <span class="n">NS_LOG_INFO</span><span class="p">(</span><span class="s">"Setting up performance monitoring"</span><span class="p">);</span>
+    <span class="n">FlowMonitorHelper</span> <span class="n">flowHelper</span><span class="p">;</span>
+    <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">FlowMonitor</span><span class="o">&gt;</span> <span class="n">flowMonitor</span> <span class="o">=</span> <span class="n">flowHelper</span><span class="p">.</span><span class="n">InstallAll</span><span class="p">();</span>
+    
+    <span class="c1">// Also enable pcap tracing for detailed packet analysis</span>
+    <span class="n">serverLink</span><span class="p">.</span><span class="n">EnablePcap</span><span class="p">(</span><span class="s">"campus-server"</span><span class="p">,</span> <span class="n">serverDevices</span><span class="p">.</span><span class="n">Get</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="nb">true</span><span class="p">);</span>
+    <span class="n">csma</span><span class="p">.</span><span class="n">EnablePcap</span><span class="p">(</span><span class="s">"campus-ethernet"</span><span class="p">,</span> <span class="n">csmaDevices</span><span class="p">.</span><span class="n">Get</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="nb">true</span><span class="p">);</span>
+    <span class="n">wifiPhy</span><span class="p">.</span><span class="n">EnablePcap</span><span class="p">(</span><span class="s">"campus-wifi"</span><span class="p">,</span> <span class="n">apDevice</span><span class="p">.</span><span class="n">Get</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="nb">true</span><span class="p">);</span>
+</code></pre></div></div> <p>The <code class="language-plaintext highlighter-rouge">FlowMonitor</code> tracks every flow (stream of packets between two endpoints) and collects statistics like throughput, delay, and packet loss. PCAP files can be opened in Wireshark for detailed analysis.</p> <h2 id="step-10-running-the-simulation-and-analyzing-results">Step 10: Running the Simulation and Analyzing Results</h2> <p>Finally, let’s run the simulation and print results:</p> <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="c1">// Run the simulation</span>
+    <span class="n">NS_LOG_INFO</span><span class="p">(</span><span class="s">"Starting simulation"</span><span class="p">);</span>
+    <span class="n">Simulator</span><span class="o">::</span><span class="n">Stop</span><span class="p">(</span><span class="n">Seconds</span><span class="p">(</span><span class="mf">31.0</span><span class="p">));</span>
+    <span class="n">Simulator</span><span class="o">::</span><span class="n">Run</span><span class="p">();</span>
+    
+    <span class="c1">// Print flow statistics</span>
+    <span class="n">flowMonitor</span><span class="o">-&gt;</span><span class="n">CheckForLostPackets</span><span class="p">();</span>
+    <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Ipv4FlowClassifier</span><span class="o">&gt;</span> <span class="n">classifier</span> <span class="o">=</span> <span class="n">DynamicCast</span><span class="o">&lt;</span><span class="n">Ipv4FlowClassifier</span><span class="o">&gt;</span>
+        <span class="p">(</span><span class="n">flowHelper</span><span class="p">.</span><span class="n">GetClassifier</span><span class="p">());</span>
+    
+    <span class="n">FlowMonitor</span><span class="o">::</span><span class="n">FlowStatsContainer</span> <span class="n">stats</span> <span class="o">=</span> <span class="n">flowMonitor</span><span class="o">-&gt;</span><span class="n">GetFlowStats</span><span class="p">();</span>
+    
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"</span><span class="se">\n</span><span class="s">=== Flow Statistics ==="</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="n">iter</span> <span class="o">=</span> <span class="n">stats</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span> <span class="n">iter</span> <span class="o">!=</span> <span class="n">stats</span><span class="p">.</span><span class="n">end</span><span class="p">();</span> <span class="o">++</span><span class="n">iter</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">Ipv4FlowClassifier</span><span class="o">::</span><span class="n">FiveTuple</span> <span class="n">t</span> <span class="o">=</span> <span class="n">classifier</span><span class="o">-&gt;</span><span class="n">FindFlow</span><span class="p">(</span><span class="n">iter</span><span class="o">-&gt;</span><span class="n">first</span><span class="p">);</span>
+        
+        <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Flow "</span> <span class="o">&lt;&lt;</span> <span class="n">iter</span><span class="o">-&gt;</span><span class="n">first</span> <span class="o">&lt;&lt;</span> <span class="s">" ("</span>
+                  <span class="o">&lt;&lt;</span> <span class="n">t</span><span class="p">.</span><span class="n">sourceAddress</span> <span class="o">&lt;&lt;</span> <span class="s">":"</span> <span class="o">&lt;&lt;</span> <span class="n">t</span><span class="p">.</span><span class="n">sourcePort</span> <span class="o">&lt;&lt;</span> <span class="s">" -&gt; "</span>
+                  <span class="o">&lt;&lt;</span> <span class="n">t</span><span class="p">.</span><span class="n">destinationAddress</span> <span class="o">&lt;&lt;</span> <span class="s">":"</span> <span class="o">&lt;&lt;</span> <span class="n">t</span><span class="p">.</span><span class="n">destinationPort</span> <span class="o">&lt;&lt;</span> <span class="s">")"</span>
+                  <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+        
+        <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"  Tx Packets: "</span> <span class="o">&lt;&lt;</span> <span class="n">iter</span><span class="o">-&gt;</span><span class="n">second</span><span class="p">.</span><span class="n">txPackets</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"  Rx Packets: "</span> <span class="o">&lt;&lt;</span> <span class="n">iter</span><span class="o">-&gt;</span><span class="n">second</span><span class="p">.</span><span class="n">rxPackets</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"  Throughput: "</span> 
+                  <span class="o">&lt;&lt;</span> <span class="n">iter</span><span class="o">-&gt;</span><span class="n">second</span><span class="p">.</span><span class="n">rxBytes</span> <span class="o">*</span> <span class="mf">8.0</span> <span class="o">/</span> <span class="mf">30.0</span> <span class="o">/</span> <span class="mf">1000000.0</span> 
+                  <span class="o">&lt;&lt;</span> <span class="s">" Mbps"</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"  Mean Delay: "</span> <span class="o">&lt;&lt;</span> <span class="n">iter</span><span class="o">-&gt;</span><span class="n">second</span><span class="p">.</span><span class="n">delaySum</span><span class="p">.</span><span class="n">GetSeconds</span><span class="p">()</span> <span class="o">/</span> 
+                     <span class="n">iter</span><span class="o">-&gt;</span><span class="n">second</span><span class="p">.</span><span class="n">rxPackets</span> <span class="o">&lt;&lt;</span> <span class="s">" s"</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"  Packet Loss: "</span> 
+                  <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="n">iter</span><span class="o">-&gt;</span><span class="n">second</span><span class="p">.</span><span class="n">txPackets</span> <span class="o">-</span> <span class="n">iter</span><span class="o">-&gt;</span><span class="n">second</span><span class="p">.</span><span class="n">rxPackets</span><span class="p">)</span> <span class="o">*</span> <span class="mf">100.0</span> <span class="o">/</span> 
+                     <span class="n">iter</span><span class="o">-&gt;</span><span class="n">second</span><span class="p">.</span><span class="n">txPackets</span> <span class="o">&lt;&lt;</span> <span class="s">" %"</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="p">}</span>
+    
+    <span class="c1">// Clean up</span>
+    <span class="n">Simulator</span><span class="o">::</span><span class="n">Destroy</span><span class="p">();</span>
+    
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div> <h2 id="compiling-and-running-your-simulation">Compiling and Running Your Simulation</h2> <p>Save your file and compile it:</p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd</span> ~/ns-allinone-3.39/ns-3.39
+./ns3 build
+</code></pre></div></div> <p>Run the simulation:</p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./ns3 run campus-network
+</code></pre></div></div> <p>You’ll see output showing each flow’s performance. Look for:</p> <ul> <li> <strong>Throughput</strong>: Is it close to 25 Mbps per stream?</li> <li> <strong>Packet Loss</strong>: Should be near 0% for good video quality</li> <li> <strong>Delay</strong>: Lower is better for real-time applications</li> </ul> <h2 id="understanding-what-just-happened">Understanding What Just Happened</h2> <p>Our simulation revealed several important insights:</p> <ol> <li> <strong>Wired connections perform better</strong>: Lab computers likely show consistent 25 Mbps throughput with minimal loss</li> <li> <strong>WiFi varies with distance</strong>: Students farther from the access point may experience lower throughput</li> <li> <strong>Shared medium effects</strong>: Multiple WiFi users compete for airtime, potentially reducing individual throughput</li> </ol> <p>This is exactly what you’d see in a real campus network!</p> <h2 id="key-modules-deep-dive">Key Modules Deep Dive</h2> <p>Let’s explore the modules we used more deeply:</p> <h3 id="the-application-module">The Application Module</h3> <p>NS3 includes several application models:</p> <ul> <li> <strong>OnOffApplication</strong>: Generates traffic in bursts (perfect for video)</li> <li> <strong>BulkSendApplication</strong>: Sends data as fast as possible (good for file transfers)</li> <li> <strong>UdpEchoClient/Server</strong>: Simple request-response (useful for testing)</li> <li> <strong>PacketSink</strong>: Receives and discards packets (simulates consumers)</li> </ul> <h3 id="the-mobility-module">The Mobility Module</h3> <p>Controls node movement with models like:</p> <ul> <li> <strong>ConstantPositionMobilityModel</strong>: Nodes don’t move</li> <li> <strong>RandomWalk2dMobilityModel</strong>: Random movement in 2D</li> <li> <strong>GaussMarkovMobilityModel</strong>: Smooth, realistic movement</li> <li> <strong>WaypointMobilityModel</strong>: Movement between specific points</li> </ul> <h3 id="the-energy-module-not-used-above-but-important">The Energy Module (Not used above, but important)</h3> <p>Simulates battery-powered devices:</p> <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Example: Adding battery to a WiFi node</span>
+<span class="n">BasicEnergySourceHelper</span> <span class="n">energyHelper</span><span class="p">;</span>
+<span class="n">energyHelper</span><span class="p">.</span><span class="n">Set</span><span class="p">(</span><span class="s">"BasicEnergySourceInitialEnergyJ"</span><span class="p">,</span> <span class="n">DoubleValue</span><span class="p">(</span><span class="mf">100.0</span><span class="p">));</span>
+<span class="n">EnergySourceContainer</span> <span class="n">sources</span> <span class="o">=</span> <span class="n">energyHelper</span><span class="p">.</span><span class="n">Install</span><span class="p">(</span><span class="n">wifiStudents</span><span class="p">);</span>
+
+<span class="n">WifiRadioEnergyModelHelper</span> <span class="n">radioEnergyHelper</span><span class="p">;</span>
+<span class="n">DeviceEnergyModelContainer</span> <span class="n">deviceModels</span> <span class="o">=</span> 
+    <span class="n">radioEnergyHelper</span><span class="p">.</span><span class="n">Install</span><span class="p">(</span><span class="n">staDevices</span><span class="p">,</span> <span class="n">sources</span><span class="p">);</span>
+</code></pre></div></div> <h2 id="experimenting-and-learning-more">Experimenting and Learning More</h2> <p>Now that you have a working simulation, try these experiments:</p> <ol> <li> <strong>Increase WiFi users</strong>: What happens with 20 students instead of 5?</li> <li> <strong>Change video bitrate</strong>: Try 4K (25 Mbps) vs HD (5 Mbps)</li> <li> <strong>Add movement</strong>: Make students move faster - does it affect quality?</li> <li> <strong>Test different WiFi standards</strong>: Try 802.11g vs 802.11n vs 802.11ac</li> </ol> <p>Each experiment teaches you something about network behavior!</p> <h2 id="common-pitfalls-and-debugging-tips">Common Pitfalls and Debugging Tips</h2> <p>When things go wrong (and they will!), here’s how to debug:</p> <ol> <li> <strong>Enable logging for specific modules</strong>: <div class="language-cpp highlighter-rouge"> <div class="highlight"><pre class="highlight"><code><span class="n">LogComponentEnable</span><span class="p">(</span><span class="s">"OnOffApplication"</span><span class="p">,</span> <span class="n">LOG_LEVEL_ALL</span><span class="p">);</span>
+<span class="n">LogComponentEnable</span><span class="p">(</span><span class="s">"PacketSink"</span><span class="p">,</span> <span class="n">LOG_LEVEL_INFO</span><span class="p">);</span>
+</code></pre></div> </div> </li> <li> <strong>Use NS_ASSERT for sanity checks</strong>: <div class="language-cpp highlighter-rouge"> <div class="highlight"><pre class="highlight"><code><span class="n">NS_ASSERT_MSG</span><span class="p">(</span><span class="n">nodes</span><span class="p">.</span><span class="n">GetN</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="s">"Must create at least one node!"</span><span class="p">);</span>
+</code></pre></div> </div> </li> <li> <strong>Check your addressing</strong>: IP conflicts cause silent failures</li> <li> <strong>Verify timing</strong>: Applications must start after network setup</li> <li> <strong>Use visualization</strong>: <code class="language-plaintext highlighter-rouge">./ns3 run campus-network --vis</code> shows animation (requires PyViz)</li> </ol> <h2 id="next-steps-in-your-ns3-journey">Next Steps in Your NS3 Journey</h2> <p>You’ve just built a complete network simulation! Here’s where to go next:</p> <ol> <li> <strong>Explore more modules</strong>: Try LTE, 5G, or IoT protocols</li> <li> <strong>Implement custom protocols</strong>: Create your own transport or routing protocol</li> <li> <strong>Scale up</strong>: Simulate hundreds or thousands of nodes</li> <li> <strong>Integrate with real code</strong>: Use DCE to run real Linux applications</li> <li> <strong>Contribute</strong>: Fix bugs or add features to NS3</li> </ol> <p>Remember, every expert started exactly where you are now. The key is to experiment, break things, and learn from what happens. NS3 is forgiving - you can’t break real equipment, so experiment freely!</p> <h2 id="quick-reference-essential-ns3-patterns">Quick Reference: Essential NS3 Patterns</h2> <p>Here are the patterns you’ll use repeatedly:</p> <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Creating nodes</span>
+<span class="n">NodeContainer</span> <span class="n">nodes</span><span class="p">;</span>
+<span class="n">nodes</span><span class="p">.</span><span class="n">Create</span><span class="p">(</span><span class="n">n</span><span class="p">);</span>
+
+<span class="c1">// Connecting nodes</span>
+<span class="n">HelperClass</span> <span class="n">helper</span><span class="p">;</span>
+<span class="n">helper</span><span class="p">.</span><span class="n">SetAttribute</span><span class="p">(</span><span class="s">"Name"</span><span class="p">,</span> <span class="n">Value</span><span class="p">(</span><span class="n">value</span><span class="p">));</span>
+<span class="n">NetDeviceContainer</span> <span class="n">devices</span> <span class="o">=</span> <span class="n">helper</span><span class="p">.</span><span class="n">Install</span><span class="p">(</span><span class="n">nodes</span><span class="p">);</span>
+
+<span class="c1">// Adding protocols</span>
+<span class="n">InternetStackHelper</span> <span class="n">stack</span><span class="p">;</span>
+<span class="n">stack</span><span class="p">.</span><span class="n">Install</span><span class="p">(</span><span class="n">nodes</span><span class="p">);</span>
+
+<span class="c1">// Assigning addresses</span>
+<span class="n">Ipv4AddressHelper</span> <span class="n">address</span><span class="p">;</span>
+<span class="n">address</span><span class="p">.</span><span class="n">SetBase</span><span class="p">(</span><span class="s">"10.1.1.0"</span><span class="p">,</span> <span class="s">"255.255.255.0"</span><span class="p">);</span>
+<span class="n">Ipv4InterfaceContainer</span> <span class="n">interfaces</span> <span class="o">=</span> <span class="n">address</span><span class="p">.</span><span class="n">Assign</span><span class="p">(</span><span class="n">devices</span><span class="p">);</span>
+
+<span class="c1">// Creating applications</span>
+<span class="n">ApplicationHelper</span> <span class="nf">appHelper</span><span class="p">(...);</span>
+<span class="n">ApplicationContainer</span> <span class="n">apps</span> <span class="o">=</span> <span class="n">appHelper</span><span class="p">.</span><span class="n">Install</span><span class="p">(</span><span class="n">nodes</span><span class="p">);</span>
+<span class="n">apps</span><span class="p">.</span><span class="n">Start</span><span class="p">(</span><span class="n">Seconds</span><span class="p">(</span><span class="mf">1.0</span><span class="p">));</span>
+<span class="n">apps</span><span class="p">.</span><span class="n">Stop</span><span class="p">(</span><span class="n">Seconds</span><span class="p">(</span><span class="mf">10.0</span><span class="p">));</span>
+
+<span class="c1">// Running simulation</span>
+<span class="n">Simulator</span><span class="o">::</span><span class="n">Stop</span><span class="p">(</span><span class="n">Seconds</span><span class="p">(</span><span class="n">duration</span><span class="p">));</span>
+<span class="n">Simulator</span><span class="o">::</span><span class="n">Run</span><span class="p">();</span>
+<span class="n">Simulator</span><span class="o">::</span><span class="n">Destroy</span><span class="p">();</span>
+</code></pre></div></div> <p>These patterns form the backbone of every NS3 simulation. Master them, and you’ll be building complex networks in no time!</p> <p>Happy simulating! Remember, the best way to learn NS3 is by doing. Start with this example, modify it, break it, fix it, and most importantly, have fun exploring the fascinating world of network simulation!</p> </div> </article> <br> <hr> <br> <h2 class="text-3xl font-semibold mb-4 mt-12">Enjoy Reading This Article?</h2> <p class="mb-2">Here are some more articles you might like to read next:</p> <ul class="list-disc pl-7 my-3 space-y-2 marker:text-[var(--global-theme-color)]"> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2026/building-fast-1brc-csharp-apple-silicon/">Building a fast 1BRC solver in C# on Apple Silicon</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2025/memory-management-production-silent-killers/">Memory Management in Production: Avoiding the Silent Killers</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2025/vibe-coding/">Growing as a Software Engineer in the Age of LLMs and Vibe Coding</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2025/how-to-handle-hallucinations/">Taming the Imagination: A Comprehensive Guide to Handling Hallucinations and Implementing Guardrails in Agentic AI</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2025/intro-to-agentic-ai/">Building an Agentic AI Analytics Dashboard: A Deep Dive with LangChain, LangGraph, and Fine-tuned LLAMA</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2025/intro-to-nar/">Neural Algorithmic Reasoning: Teaching Neural Networks to Think Like Algorithms</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2025/opentelemetry/">OpenTelemetry in Microservices: How We Transformed Our Observability Strategy</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2025/leveraging-ai-tools-software-engineering/">Using AI Tools in Software Engineering and Research Workflows</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2024/optimizing-dotnet-microservices-performance/">The Performance Crisis: How We Rescued a .NET 8 Microservice from 10 Critical Bottlenecks</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2024/zero-downtime/">Zero Downtime Deployments in Kubernetes: How We Keep Our Services Running While We Ship</a> </li> </ul> </div> </div> <footer class="fixed-bottom" role="contentinfo"> <div class="container mt-0"> © Copyright 2026 Tanzim Hossain Romel. © Tanzim Hossain Romel. Powered by <a href="https://jekyllrb.com/" target="_blank" rel="external nofollow noopener">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio" rel="external nofollow noopener" target="_blank">al-folio</a> theme. </div> </footer> <script>
+  window.alFolio = {
+    compatBootstrap: false
+  };
+</script> <script src="/assets/js/nav-toggle.js?v=141bd79a73ebc0f0b6ea58e440ae79fc"></script> <script defer src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script> <script defer src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script> <script defer src="/assets/js/masonry.js?v=e49affc7bd2646f6acdad1dbe02c2359" type="text/javascript"></script> <script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js" integrity="sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI=" crossorigin="anonymous"></script> <script src="/assets/al_math/js/mathjax-setup.js"></script> <script src="/assets/js/tooltips-setup.js?v=fe487e99db6c43751e6e7bdb2d6a0611"></script> <script src="/assets/js/no_defer.js?v=53b1b1a645525975c963ce8bf8bfefcf"></script> <script defer src="/assets/js/common.js?v=87baac90f765f2f3362dcf6aaf312a8a"></script> <script defer src="/assets/js/copy_code.js?v=c8a01c11a92744d44b093fc3bda915df" type="text/javascript"></script> <script defer src="/assets/js/jupyter_new_tab.js?v=896d254890d9b47f0281f63bfccf0dee"></script> <script async src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script> <script async src="https://badge.dimensions.ai/badge.js"></script> <script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script> <script defer src="/assets/al_img_tools/js/zoom.js"></script> <script defer src="/assets/js/progress-bar.js?v=499464c5c63ced6cf7ad62509f1e2610" type="text/javascript"></script> <script src="https://cdn.jsdelivr.net/npm/vanilla-back-to-top@7.2.1/dist/vanilla-back-to-top.min.js" integrity="sha256-uMJJ3EoTyfRBoTbR+lrfu1uRQ87RZG8AR3cVNuQVeFg=" crossorigin="anonymous"></script> <script>
+    addBackToTop();
+  </script> <script type="module" src="/assets/al_search/js/search/ninja-keys.min.js"></script> <ninja-keys hidebreadcrumbs noautoloadmdicons placeholder="Type to start searching"></ninja-keys> <script src="/assets/al_search/js/search-setup.js"></script> <script>
+// get the ninja-keys element
+const ninja = document.querySelector('ninja-keys');
+
+// add the home and posts menu items
+ninja.data = [{
+    id: "nav-about",
+    title: "about",
+    section: "Navigation",
+    handler: () => {
+      window.location.href = "/";
+    },
+  },{id: "nav-blog",
+          title: "blog",
+          description: "",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/blog/";
+          },
+        },{id: "nav-publications",
+          title: "publications",
+          description: "Publications.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/publications/";
+          },
+        },{id: "nav-research",
+          title: "research",
+          description: "Research on reliable AI agents, SRE-agent evaluation, ML ecosystem security, agent-choice auditing, and developer tools.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/research/";
+          },
+        },{id: "nav-projects",
+          title: "projects",
+          description: "Research and engineering projects.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/projects/";
+          },
+        },{id: "nav-cv",
+          title: "CV",
+          description: "Curriculum vitae.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/cv/";
+          },
+        },{id: "nav-contributions",
+          title: "contributions",
+          description: "Curated open-source contribution evidence across research infrastructure, frameworks, and language tooling.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/contributions/";
+          },
+        },{id: "post-building-a-fast-1brc-solver-in-c-on-apple-silicon",
+        
+          title: "Building a fast 1BRC solver in C# on Apple Silicon",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/building-fast-1brc-csharp-apple-silicon/";
+          
+        },
+      },{id: "post-memory-management-in-production-avoiding-the-silent-killers",
+        
+          title: "Memory Management in Production: Avoiding the Silent Killers",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/memory-management-production-silent-killers/";
+          
+        },
+      },{id: "post-growing-as-a-software-engineer-in-the-age-of-llms-and-vibe-coding",
+        
+          title: "Growing as a Software Engineer in the Age of LLMs and Vibe Coding...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/vibe-coding/";
+          
+        },
+      },{id: "post-taming-the-imagination-a-comprehensive-guide-to-handling-hallucinations-and-implementing-guardrails-in-agentic-ai",
+        
+          title: "Taming the Imagination: A Comprehensive Guide to Handling Hallucinations and Implementing Guardrails in...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/how-to-handle-hallucinations/";
+          
+        },
+      },{id: "post-building-an-agentic-ai-analytics-dashboard-a-deep-dive-with-langchain-langgraph-and-fine-tuned-llama",
+        
+          title: "Building an Agentic AI Analytics Dashboard: A Deep Dive with LangChain, LangGraph, and...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/intro-to-agentic-ai/";
+          
+        },
+      },{id: "post-neural-algorithmic-reasoning-teaching-neural-networks-to-think-like-algorithms",
+        
+          title: "Neural Algorithmic Reasoning: Teaching Neural Networks to Think Like Algorithms",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/intro-to-nar/";
+          
+        },
+      },{id: "post-opentelemetry-in-microservices-how-we-transformed-our-observability-strategy",
+        
+          title: "OpenTelemetry in Microservices: How We Transformed Our Observability Strategy",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/opentelemetry/";
+          
+        },
+      },{id: "post-using-ai-tools-in-software-engineering-and-research-workflows",
+        
+          title: "Using AI Tools in Software Engineering and Research Workflows",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/leveraging-ai-tools-software-engineering/";
+          
+        },
+      },{id: "post-the-performance-crisis-how-we-rescued-a-net-8-microservice-from-10-critical-bottlenecks",
+        
+          title: "The Performance Crisis: How We Rescued a .NET 8 Microservice from 10 Critical...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2024/optimizing-dotnet-microservices-performance/";
+          
+        },
+      },{id: "post-zero-downtime-deployments-in-kubernetes-how-we-keep-our-services-running-while-we-ship",
+        
+          title: "Zero Downtime Deployments in Kubernetes: How We Keep Our Services Running While We...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2024/zero-downtime/";
+          
+        },
+      },{id: "post-mastering-unit-testing-and-bdd-with-xunit-and-specflow-in-net-9-a-comprehensive-guide",
+        
+          title: "Mastering Unit Testing and BDD with xUnit and SpecFlow in .NET 9: A...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2024/dotnet-tests/";
+          
+        },
+      },{id: "post-design-patterns-your-first-step-toward-professional-software-engineering",
+        
+          title: "Design Patterns: Your First Step Toward Professional Software Engineering",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2024/design-patterns-professional-software-engineering/";
+          
+        },
+      },{id: "post-setting-up-github-actions-ci-cd-with-aws-a-practical-journey",
+        
+          title: "Setting Up GitHub Actions CI/CD with AWS: A Practical Journey",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2024/intro-to-ci-cd/";
+          
+        },
+      },{id: "post-the-clique-partition-problem-dividing-networks-into-perfect-communities",
+        
+          title: "The Clique Partition Problem: Dividing Networks into Perfect Communities",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2023/clique-partition-problem-graph-theory/";
+          
+        },
+      },{id: "post-advice-complexity-in-online-algorithms-when-knowing-the-future-makes-all-the-difference",
+        
+          title: "Advice Complexity in Online Algorithms: When Knowing the Future Makes All the Difference...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2023/advice-complexity-online-algorithms/";
+          
+        },
+      },{id: "post-getting-started-with-kubernetes-deploying-microservice-architectures-at-scale",
+        
+          title: "Getting Started with Kubernetes: Deploying Microservice Architectures at Scale",
+        
+        description: "A practical Kubernetes guide covering microservice deployment, service-mesh integration, observability, and the operational checks needed before production use.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2022/getting-started-with-kubernetes-microservices/";
+          
+        },
+      },{id: "post-understanding-xv6-a-practical-introduction-to-operating-systems",
+        
+          title: "Understanding xv6: A Practical Introduction to Operating Systems",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2022/understanding-xv6-operating-systems/";
+          
+        },
+      },{id: "post-getting-started-with-ns3-a-hands-on-guide-to-network-simulation",
+        
+          title: "Getting Started with NS3: A Hands-On Guide to Network Simulation",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2021/getting-started-with-ns3/";
+          
+        },
+      },{id: "news-completed-b-sc-in-computer-science-and-engineering-from-bangladesh-university-of-engineering-and-technology-with-a-gpa-of-3-53-4-00-link-https-cse-buet-ac-bd-academics-bsc",
+          title: 'Completed B.Sc in Computer Science and Engineering from Bangladesh University of Engineering and...',
+          description: "",
+          section: "News",},{id: "news-joined-iqvia-as-a-software-development-engineer-on-kpi-library-the-dynamic-reporting-layer-within-orchestrated-analytics-link-https-www-iqvia-com-solutions-commercialization-commercial-analytics-orchestrated-analytics",
+          title: 'Joined IQVIA as a Software Development Engineer on KPI Library, the dynamic reporting...',
+          description: "",
+          section: "News",},{id: "news-submitted-39-sentiment-analysis-of-anonymous-crisis-reports-in-bangladesh-39-to-acm-cscw-2025-analyzing-crowd-sourced-reports-from-bangladesh-39-s-2024-national-crisis-using-transformer-models-link-projects-research-ureporter",
+          title: 'Submitted &amp;#39;Sentiment Analysis of Anonymous Crisis Reports in Bangladesh&amp;#39; to ACM CSCW 2025,...',
+          description: "",
+          section: "News",},{id: "news-honored-with-the-iqvia-impact-program-silver-award-for-outstanding-performance-and-contributions-to-the-kpi-library-team-link-https-drive-google-com-file-d-1vc4e2roqepmbfs56olduih-ojdbok9sp-view-usp-share-link",
+          title: 'Honored with the IQVIA Impact Program Silver Award for outstanding performance and contributions...',
+          description: "",
+          section: "News",},{id: "news-submitted-39-an-empirical-study-on-remote-code-execution-in-machine-learning-model-hosting-ecosystems-39-to-the-mining-software-repositories-msr-2026-conference-first-large-scale-cross-platform-security-study-analyzing-45-000-repositories-across-5-major-ml-platforms-link-https-arxiv-org-abs-2601-14163",
+          title: 'Submitted &amp;#39;An Empirical Study on Remote Code Execution in Machine Learning Model Hosting...',
+          description: "",
+          section: "News",},{id: "news-resubmitted-39-an-empirical-study-on-remote-code-execution-in-machine-learning-model-hosting-ecosystems-39-to-acm-transactions-on-software-engineering-and-methodology-tosem-2026-preprint-available-on-arxiv-link-https-arxiv-org-abs-2601-14163",
+          title: 'Resubmitted &amp;#39;An Empirical Study on Remote Code Execution in Machine Learning Model Hosting...',
+          description: "",
+          section: "News",},{id: "news-started-a-remote-summer-research-internship-at-the-university-of-illinois-urbana-champaign-through-uiuc-summer-research-in-software-engineering-srse-2026-with-professor-tianyin-xu-link-https-uiuc-srse-github-io",
+          title: 'Started a remote summer research internship at the University of Illinois Urbana-Champaign through...',
+          description: "",
+          section: "News",},{id: "news-submitted-39-the-choice-can-be-the-attack-auditing-aligned-backdoors-in-llm-agents-39-to-the-transactions-of-the-association-for-computational-linguistics-tacl-2026-with-chowdhury-rakin-haider-link-projects-research-reagent-plus-plus",
+          title: 'Submitted &amp;#39;The Choice Can Be the Attack: Auditing Aligned Backdoors in LLM Agents&amp;#39;...',
+          description: "",
+          section: "News",},{id: "news-39-an-empirical-study-on-remote-code-execution-in-machine-learning-model-hosting-ecosystems-39-is-under-review-at-the-international-conference-on-software-engineering-icse-2027-preprint-available-on-arxiv-link-https-arxiv-org-abs-2601-14163",
+          title: '&amp;#39;An Empirical Study on Remote Code Execution in Machine Learning Model Hosting Ecosystems&amp;#39;...',
+          description: "",
+          section: "News",},{id: "news-will-begin-graduate-study-in-computing-science-at-the-university-of-alberta-on-september-1-2026-link-https-www-ualberta-ca-en-computing-science-index-html",
+          title: 'Will begin graduate study in Computing Science at the University of Alberta on...',
+          description: "",
+          section: "News",},{id: "projects-1brc-c-on-apple-silicon",
+          title: '1BRC C# on Apple Silicon',
+          description: "A .NET 10 NativeAOT performance case study: byte parsing, native aggregation, ARM64 tuning, and a size-aware macOS pread path",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/1brc-csharp/";
+            },},{id: "projects-building-a-bangla-handwritten-digit-recognizer-from-scratch",
+          title: 'Building a Bangla Handwritten Digit Recognizer from Scratch',
+          description: "A Deep Dive into Custom CNN Implementation",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/bangla-digit-recognition/";
+            },},{id: "projects-blockchain-based-ticketing-platform",
+          title: 'Blockchain Based Ticketing Platform',
+          description: "A practical approach to reducing ticket fraud and abusive resale",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/blockchain-ticketing/";
+            },},{id: "projects-yet-another-c-compiler",
+          title: 'Yet Another C Compiler',
+          description: "A complete multi-pass compiler for a subset of C",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/compiler/";
+            },},{id: "projects-contextledger-context-accounting-for-coding-agents",
+          title: 'ContextLedger: context accounting for coding agents',
+          description: "A research notebook on OpenCode compaction, provenance, and live GPT-5.5 experiments",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/contextledger/";
+            },},{id: "projects-ctxhelm-agent-native-context-compiler",
+          title: 'ctxhelm: agent-native context compiler',
+          description: "Local-first context plans, release proof, and source-free agent evaluation",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/ctxhelm/";
+            },},{id: "projects-mini-deep-learning-framework-pytorch-from-scratch",
+          title: 'Mini Deep Learning Framework: PyTorch from Scratch',
+          description: "A freelance learning project for tensors, autograd, and neural-network internals",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/deep-learning-framework-capstone/";
+            },},{id: "projects-go-container-runtime-docker-from-scratch",
+          title: 'Go Container Runtime: Docker from Scratch',
+          description: "A freelance learning project for Linux containers, networking, and Go systems programming",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/docker-from-scratch-go/";
+            },},{id: "projects-eventfly-distributed-microservices-event-platform",
+          title: 'EventFly – Distributed Microservices Event Platform',
+          description: "A six-person BUET course project for event creation, ticketing, announcements, participant engagement, analytics, and payments, implemented with Node.js, React, NATS, Kubernetes, MongoDB, Redis, and Stripe.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/eventfly-an-end-to-end-event-management-system/";
+            },},{id: "projects-building-a-go-database-engine-from-scratch",
+          title: 'Building a Go Database Engine from Scratch',
+          description: "An educational ACID-oriented database engine with advanced features",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/go-database/";
+            },},{id: "projects-image-caption-generation-with-bert-context-vectors",
+          title: 'Image Caption Generation with BERT Context Vectors',
+          description: "Extended the &quot;Show, Attend, and Tell&quot; image captioning model with BERT to improve caption quality and reduce training time, achieving 36% improvement in CIDEr score and 43% improvement in BLEU-4.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/image-caption-generator/";
+            },},{id: "projects-patchsmith-a-harness-for-repair-agents",
+          title: 'PatchSmith: a harness for repair agents',
+          description: "System design and R&amp;D notes for bounded patches, sandbox validation, and auditable repair runs",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/patchsmith/";
+            },},{id: "projects-ray-tracing-from-scratch-a-comprehensive-guide-to-3d-rendering-physics-and-implementation",
+          title: 'Ray Tracing from Scratch: A Comprehensive Guide to 3D Rendering Physics and Implementation...',
+          description: "Implementing physically-based rendering with C++",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/ray-tracing/";
+            },},{id: "projects-an-empirical-study-on-remote-code-execution-in-machine-learning-model-hosting-ecosystems",
+          title: 'An Empirical Study on Remote Code Execution in Machine Learning Model Hosting Ecosystems...',
+          description: "A cross-platform study of model-loading risk across five ML hosting ecosystems, using static analysis, malware-signature scanning, and analysis of more than 600 developer discussions.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/research-ml-remote-code-execution/";
+            },},{id: "projects-verischema-verified-database-schema-generation",
+          title: 'VeriSchema: verified database-schema generation',
+          description: "How can specialized agents generate relational schemas from natural-language requirements while formal checks and targeted repair keep the result consistent?",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/research-multi-agent-db-schema/";
+            },},{id: "projects-the-choice-can-be-the-attack-auditing-aligned-backdoors-in-llm-agents",
+          title: 'The Choice Can Be the Attack: Auditing Aligned Backdoors in LLM Agents',
+          description: "Abstract-level summary of SHIFT, submitted to TACL 2026 on aligned backdoor attacks in LLM agents.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/research-reagent-plus-plus/";
+            },},{id: "projects-sentiment-analysis-of-anonymous-crisis-reports-in-bangladesh",
+          title: 'Sentiment Analysis of Anonymous Crisis Reports in Bangladesh',
+          description: "A multilingual analysis of anonymous, crowd-sourced reports from Bangladesh&#39;s 2024 national crisis.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/research-ureporter/";
+            },},{id: "projects-enhancing-tcp-fairness-tcp-vegas-implementation",
+          title: 'Enhancing TCP Fairness: TCP Vegas+ Implementation',
+          description: "A dual-mode solution for TCP Vegas fairness issues",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/tcp-vegas-plus/";
+            },},{
+        id: 'social-email',
+        title: 'email',
+        section: 'Socials',
+        handler: () => {
+          window.open("mailto:%74%61%6E%68%72%6F%6D%65%6C@%67%6D%61%69%6C.%63%6F%6D", "_blank");
+        },
+      },{
+        id: 'social-github',
+        title: 'GitHub',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://github.com/thromel", "_blank");
+        },
+      },{
+        id: 'social-scholar',
+        title: 'Google Scholar',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://scholar.google.com/citations?user=zHV4EU8AAAAJ", "_blank");
+        },
+      },{
+        id: 'social-linkedin',
+        title: 'LinkedIn',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://www.linkedin.com/in/thromel", "_blank");
+        },
+      },{
+        id: 'social-orcid',
+        title: 'ORCID',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://orcid.org/0009-0009-2432-8960", "_blank");
+        },
+      },{
+        id: 'social-rss',
+        title: 'RSS Feed',
+        section: 'Socials',
+        handler: () => {
+          window.open("/feed.xml", "_blank");
+        },
+      },{
+        id: 'social-x',
+        title: 'X',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://twitter.com/tanzimhromel", "_blank");
+        },
+      },{
+      id: 'light-theme',
+      title: 'Change theme to light',
+      description: 'Change the theme of the site to Light',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("light");
+      },
+    },
+    {
+      id: 'dark-theme',
+      title: 'Change theme to dark',
+      description: 'Change the theme of the site to Dark',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("dark");
+      },
+    },
+    {
+      id: 'system-theme',
+      title: 'Use system default theme',
+      description: 'Change the theme of the site to System Default',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("system");
+      },
+    },];
+
+</script> <script src="/assets/al_search/js/shortcut-key.js"></script> </body> </html>

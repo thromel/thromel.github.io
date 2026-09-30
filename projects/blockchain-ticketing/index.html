@@ -1,0 +1,488 @@
+<!DOCTYPE html> <html lang="en"> <head> <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <title> Blockchain Based Ticketing Platform | Tanzim Hossain Romel </title> <meta name="author" content="Tanzim Hossain Romel"> <meta name="description" content="A practical approach to reducing ticket fraud and abusive resale"> <meta name="keywords" content=""> <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https:; style-src 'self' 'unsafe-inline' https:; img-src 'self' data: https:; font-src 'self' data: https:; media-src 'self' https:; frame-src 'self' https:; connect-src 'self' https:;"> <style>
+  :root {
+    --max-content-width: 930px;
+  }
+</style> <link rel="stylesheet" href="/assets/css/tailwind.css?v=50c64c15cbb9fd1ce6056fdb8bcb4b62"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.2.0/css/all.min.css" integrity="sha256-MVopmdyC2tYTiJ8wlktf0uh0v4NgT+vNdyVFepi7Q0c=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.5/css/academicons.min.css" integrity="sha256-SzrCOBJbGVFMahewkgjwnApaV2+av1DwMAA+/QGLyZw=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/scholar-icons@1.0.3/css/scholar-icons.css" integrity="sha256-VY3hHVj/hNX3fYG6wtbA6TcKJQl7+FthzGSyIB64klY=" crossorigin="anonymous"> <link defer rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons&amp;display=swap"> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-github.css?v=591dab5a4e56573bf4ef7fd332894c99" media="" id="highlight_theme_light"> <link rel="shortcut icon" href="data:image/svg+xml,&lt;svg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20100%20100%22&gt;&lt;text%20y=%22.9em%22%20font-size=%2290%22&gt;%E2%9A%9B%EF%B8%8F&lt;/text&gt;&lt;/svg&gt;"> <link rel="stylesheet" href="/assets/css/main.css?v=3116ba77db9ee1581d05bb3e86fbf7f1"> <link rel="canonical" href="https://tanzimhromel.com/projects/blockchain-ticketing/"> <script src="/assets/js/theme.js?v=5286c3e4c334d0ecb8fc0c40ff4fa7ec"></script> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-native.css?v=5847e5ed4a4568527aa6cfab446049ca" media="none" id="highlight_theme_dark"> <script>
+    initTheme();
+  </script> </head> <body class="fixed-top-nav "> <header> <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top" role="navigation"> <div class="container"> <a class="navbar-brand title font-weight-lighter" href="/"> Tanzim Hossain Romel </a> <button class="navbar-toggler collapsed navbar-toggler-main" type="button" data-nav-toggle="navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar top-bar"></span> <span class="icon-bar middle-bar"></span> <span class="icon-bar bottom-bar"></span> </button> <div class="collapse navbar-collapse navbar-collapse-main" id="navbarNav"> <ul class="navbar-nav navbar-menu-list flex-nowrap"> <li class="nav-item "> <a class="nav-link" href="/">about </a> </li> <li class="nav-item "> <a class="nav-link" href="/blog/">blog </a> </li> <li class="nav-item "> <a class="nav-link" href="/publications/">publications </a> </li> <li class="nav-item "> <a class="nav-link" href="/research/">research </a> </li> <li class="nav-item active"> <a class="nav-link" href="/projects/">projects <span class="sr-only">(current)</span> </a> </li> <li class="nav-item "> <a class="nav-link" href="/cv/">CV </a> </li> <li class="nav-item "> <a class="nav-link" href="/contributions/">contributions </a> </li> <li class="nav-item"> <button id="search-toggle" type="button" title="Search" aria-label="Open search"> <span class="nav-link">ctrl k <i class="fa-solid fa-magnifying-glass"></i></span> </button> </li> <li class="toggle-container"> <button id="light-toggle" type="button" title="Change theme" aria-label="Change color theme"> <i class="fa-half-sun-moon" id="light-toggle-system"></i> <i class="fa-solid fa-moon" id="light-toggle-dark"></i> <i class="fa-solid fa-sun" id="light-toggle-light"></i> </button> </li> </ul> </div> </div> </nav> <progress id="progress" value="0"> <div class="progress-container"> <span class="progress-bar"></span> </div> </progress> </header> <div class="container mt-5" role="main"> <div class="post"> <header class="post-header"> <h1 class="post-title">Blockchain Based Ticketing Platform</h1> <p class="post-description">A practical approach to reducing ticket fraud and abusive resale</p> </header> <article> <p>A blockchain ticketing prototype for fraud-resistant issuance, controlled resale, and verifiable entry. Built as a BCOLBD 2021 finalist project.</p> <h2 id="at-a-glance">At a glance</h2> <ul> <li> <strong>Status:</strong> Finalist prototype</li> <li> <strong>Problem:</strong> Reduce ticket fraud and abusive resale while preserving verifiable ownership, controlled transfer, and venue entry.</li> <li> <strong>Role:</strong> Co-developed the architecture and contract logic, focusing on lifecycle rules, transfer constraints, and validation flows</li> <li> <strong>Outcome:</strong> The team was selected as a Blockchain Olympiad Bangladesh 2021 finalist with a prototype covering ticket issuance, marketplace resale, and validation flows.</li> <li> <strong>Technologies:</strong> Ethereum, Solidity, Smart Contracts, Web3.js, NFT, ERC-1155, ERC-721, Polygon</li> <li> <strong>Repository:</strong> Prototype repository not public</li> <li> <strong>Links:</strong> <a href="https://bcolbd.org/2021/teams" target="_blank" rel="noopener noreferrer">Official finalist listing</a> </li> </ul> <p>The online event ticketing market is widely estimated to be in the tens of billions of USD annually (for example, one industry report estimates roughly USD 55.4B in 2022, with continued growth projected from that base (<a href="https://www.grandviewresearch.com/industry-analysis/online-event-ticketing-market" rel="external nofollow noopener" target="_blank">Grand View Research</a>)). The secondary market creates real consumer harm when fraud, opaque fees, and bot-driven bulk buying push buyers away from face-value pricing. At the same time, not all resale is exploitative: a meaningful share of secondary listings can be below face value. The goal, then, is not to ban resale outright, but to make resale verifiable, fair, and transparent.</p> <p>This post summarizes a blockchain-based ticketing platform design developed for Blockchain Olympiad Bangladesh (BCOLBD) 2021, where our team “Recursively Enumerable” was selected as a finalist. The core idea is to represent tickets as on-chain assets and enforce key market rules (validity, transfer constraints, and resale policy) using smart contracts while preserving a familiar ticketing-app user experience.</p> <h2 id="project-at-a-glance">Project at a glance</h2> <ul> <li> <strong>Goal:</strong> Reduce counterfeit tickets, abusive resale behavior, and opaque fee structures.</li> <li> <strong>Core primitives:</strong> NFT tickets, role-based scanner redemption, marketplace escrow, dynamic ownership proofs, and auditable transfer history.</li> <li> <strong>Stack:</strong> Solidity smart contracts (ERC-1155-centric), Ethereum-compatible infrastructure, Polygon PoS for lower-cost throughput, Web3.js, and mobile wallet UX.</li> <li> <strong>My contributions:</strong> Co-developed the architecture and contract logic, with focus on ticket lifecycle rules, transfer constraints, and validation flow design.</li> <li> <strong>Status:</strong> Finalist project/prototype for <a href="https://bcolbd.org/2021/teams" rel="external nofollow noopener" target="_blank">Blockchain Olympiad Bangladesh 2021</a>.</li> </ul> <h2 id="what-we-implemented-vs-proposed">What we implemented vs proposed</h2> <ul> <li> <strong>Implemented in prototype:</strong> Core ERC-1155 ticket lifecycle, role-based redemption, marketplace-based resale flows, and dynamic ticket validation UX.</li> <li> <strong>Designed/proposed:</strong> DID/VC identity integration, advanced privacy patterns (including ZKP-based flows), and governance-token-driven policy updates.</li> <li> <strong>Future work:</strong> Full production security hardening (formal verification + external audits), richer offline scanner synchronization, and account-abstraction-native wallet recovery.</li> </ul> <h2 id="understanding-the-ticketing-problems">Understanding the ticketing problems</h2> <p>This design started from a practical question: where do traditional ticketing systems fail most often?</p> <p><strong>Counterfeit tickets:</strong> In conventional systems, ticket validation relies on easily reproducible barcodes or QR codes. Once a legitimate ticket is purchased, its barcode can be copied and distributed to multiple people. When fans arrive at an event with these duplicated tickets, only the first person to scan the barcode gains entry, leaving others stranded despite having paid. This issue is particularly rampant for high-demand events where fans are desperate for tickets.</p> <p><strong>Scalping and price manipulation:</strong> When tickets are released for popular events, automated bots deployed by professional scalpers can purchase large quantities within seconds. Resale outcomes vary, but empirical work shows significant markup risk: a <a href="https://www.gao.gov/assets/gao-18-347.pdf" rel="external nofollow noopener" target="_blank">US GAO study</a> found average markups around 74% on reviewed resale listings, with some white-label sites averaging around 180%. At the same time, a <a href="https://www.nysenate.gov/sites/default/files/article/attachment/nys_senate_igo_committee_report_-_live_event_ticketing_practices.pdf" rel="external nofollow noopener" target="_blank">NY Senate investigative report</a> noted that a large share of secondary listings can also be below face value. This mix is exactly why transparent, policy-constrained resale design matters.</p> <p><strong>Opaque and fragmented markets:</strong> The secondary ticket market operates with little transparency. Buyers often cannot verify a ticket’s authenticity or origin. Ticketing platforms charge substantial “service fees” that are only revealed late in the purchase process. This fragmentation creates information asymmetry where buyers cannot make fully informed decisions.</p> <p><strong>Anonymous attendee problem:</strong> Event organizers typically lose visibility of who actually attends their events once tickets enter the secondary market. When a ticket changes hands multiple times, the final attendee remains unknown to the organizer until they arrive at the venue. This prevents direct communication with actual attendees and limits possibilities for building fan relationships, offering related products, or ensuring security.</p> <p>The result is predictable: fans overpay, organizers lose control of the attendee graph, and trust drops.</p> <h2 id="why-blockchain-fits-this-use-case">Why blockchain fits this use case</h2> <p>Blockchain is useful here for a narrow reason: it gives a shared, tamper-resistant record of ownership and transfer history.</p> <p><strong>Immutable record-keeping:</strong> At a basic level, a blockchain is a distributed ledger - a database maintained across multiple computers (nodes) that contains an unalterable, time-stamped record of transactions. Once information is recorded on the blockchain, it cannot be modified without consensus from the network, making it extremely difficult to forge or alter ticket records. This stands in stark contrast to centralized databases where a single authority controls and can potentially modify records.</p> <p><strong>Ownership through cryptographic proof:</strong> Blockchain uses public and private key cryptography to establish ownership. When you own a ticket on a blockchain, you control it through a private key (similar to a complex password) that mathematically proves your ownership. No one can transfer or use your ticket without access to this key, creating significantly stronger security than traditional ticketing systems where possession of a printed barcode or PDF is sufficient.</p> <p><strong>Non-fungible tokens (NFTs) as perfect ticket representations:</strong> NFTs are unique digital assets that exist on a blockchain. Unlike cryptocurrencies such as Bitcoin, where each unit is identical and interchangeable (fungible), each NFT has unique properties and identification codes that distinguish it from every other token. This uniqueness makes NFTs ideal for representing tickets, as each ticket must be distinguishable from others, even within the same event.</p> <p><strong>Smart contracts for programmable rules:</strong> Smart contracts are self-executing programs stored on the blockchain that run when predetermined conditions are met. In ticketing, they can encode rules such as “this ticket cannot be resold for more than 150% of its original price” or “10% of any resale value goes to the original artist.” Enforcement is automatic when transfers are routed through the platform’s marketplace contract (for example, escrow-based listings and atomic settlement). If tickets are freely transferable off-platform, those rules become policy intent rather than strict enforcement.</p> <p>In short, the system moves core ticket state from private database rows to an auditable ledger while keeping UX off-chain where speed matters.</p> <h2 id="architecture-how-the-platform-works">Architecture: how the platform works</h2> <p>The architecture has four layers and keeps responsibilities separate:</p> <div class="text-center mb-4"> <img src="/assets/img/projects/blockchain-ticketing-architecture.png" alt="Blockchain Ticketing Platform Architecture" class="img-fluid rounded shadow-sm" width="1257" height="692" loading="lazy" decoding="async"> <p class="text-muted mt-2"><small>Blockchain Ticketing Platform Multi-layered Architecture</small></p> </div> <h3 id="1-blockchain-foundation-layer">1. Blockchain Foundation Layer</h3> <p>At the base level, the solution uses Ethereum-compatible infrastructure for transparent ownership and auditable transfers. For day-to-day ticketing throughput and lower fees, the design can run on <a href="https://docs.polygon.technology/pos/" rel="external nofollow noopener" target="_blank">Polygon PoS</a> (an EVM-compatible Proof-of-Stake sidechain for Ethereum), while anchoring selected checkpoints to Ethereum mainnet when stronger settlement assurances are needed.</p> <p><strong>Ethereum</strong> provides the secure foundation with its well-established consensus mechanism and widespread adoption. It offers a robust security model where thousands of independent nodes validate transactions, making it extremely difficult for any single entity to compromise the system.</p> <p><strong>Polygon PoS</strong> addresses practical throughput and fee constraints for high-volume events. Polygon’s own positioning highlights throughput on the order of ~1,000 TPS with fees typically under $0.01 (<a href="https://polygon.technology/polygon-pos" rel="external nofollow noopener" target="_blank">Polygon PoS overview</a>), which is better aligned with bursty ticket issuance and transfer demand than relying on Ethereum mainnet alone.</p> <p>All core ticket transactions - creation, transfers, and redemptions - are recorded at this layer, creating an immutable record of the entire ticket lifecycle.</p> <h3 id="2-smart-contract-layer">2. Smart Contract Layer</h3> <p>This layer contains the programmatic logic that governs ticket behavior:</p> <p><strong>NFT Ticket Contract:</strong> The central contract that issues tickets as non-fungible tokens. Based primarily on the ERC-1155 standard (which we’ll explain in more detail later), this contract maintains a registry of all valid tickets, their current owners, and their status (available, sold, used, invalidated).</p> <p><strong>Marketplace Contract:</strong> Handles listing, pricing, and transfer of tickets on the secondary market. When resale is executed through this contract (for example, escrow listing + atomic settlement), it can enforce maximum resale prices and royalty distributions on-chain. If free transfers are allowed outside the marketplace, off-platform OTC sales can bypass those constraints.</p> <p><strong>Supporting Contracts:</strong> Additional contracts manage auxiliary functions such as royalty calculations, event management, and identity verification integration.</p> <p>Here’s a simplified pseudo-implementation sketch for redemption logic:</p> <pre><code class="language-solidity">// Pseudo-implementation sketch (illustrative)
+enum TicketState { Unused, Used, Invalid }
+
+mapping(uint256 =&gt; TicketState) public state;
+
+function redeem(uint256 tokenId, address owner)
+    external
+    onlyRole(SCANNER_ROLE)
+{
+    require(state[tokenId] == TicketState.Unused, "Used/invalid");
+    require(balanceOf(owner, tokenId) == 1, "Not owner");
+
+    state[tokenId] = TicketState.Used;
+    _burn(owner, tokenId, 1);
+
+    emit TicketUsed(tokenId, owner, block.timestamp);
+}
+</code></pre> <p>Burn-on-entry is the strongest anti-reuse option. If the product keeps used tickets as collectibles, the contract should retain the token but lock transfers and rely on a strict <code class="language-plaintext highlighter-rouge">Used</code> state check for gate validation.</p> <h3 id="3-integration--off-chain-services">3. Integration &amp; Off-chain Services</h3> <p>These services bridge the blockchain with traditional systems and enhance user experience:</p> <p><strong>Backend API &amp; Database:</strong> Processes user requests, interacts with the blockchain, and stores supplementary event information that would be inefficient to keep entirely on-chain (such as event images, detailed venue information, etc.).</p> <p><strong>Decentralized Identity Service:</strong> Manages user credentials and verifications without storing sensitive personal data centrally. This allows for identity verification while preserving privacy.</p> <p><strong>Analytics Engine:</strong> Processes on-chain and off-chain data to provide insights for event organizers about sales patterns, attendance, and market behavior.</p> <h3 id="4-application-layer">4. Application Layer</h3> <p>This is where users interact with the system:</p> <p><strong>Mobile Wallet App:</strong> The primary interface for ticket buyers. It displays owned tickets with dynamic QR codes, facilitates purchases and transfers, and integrates with the user’s digital identity.</p> <p><strong>Organizer Dashboard:</strong> A web interface where event creators can set up events, configure ticket types and pricing rules, monitor sales, and access analytics.</p> <p><strong>Venue Scanning App:</strong> Used by staff at event entries to validate tickets, supporting both online and offline operation modes.</p> <p>This split keeps hard guarantees on-chain and high-frequency product logic off-chain.</p> <h2 id="nft-standards-and-implementation-choices">NFT standards and implementation choices</h2> <p>The solution primarily uses ERC-1155 tokens to represent tickets, though it also considers ERC-721 for specific scenarios. Understanding these standards helps explain key design choices:</p> <h3 id="erc-721-vs-erc-1155">ERC-721 vs ERC-1155</h3> <p><strong>ERC-721</strong> was the original NFT standard on Ethereum. Under this standard:</p> <ul> <li>Each token has a unique ID</li> <li>Each token is managed individually</li> <li>Every operation (minting, transferring) affects one token at a time</li> <li>Typically requires deploying a new contract for each collection (potentially each event)</li> </ul> <p>In contrast, <strong>ERC-1155</strong> is a multi-token standard that offers several advantages:</p> <ul> <li> <p><strong>Batch operations:</strong> Multiple tokens can be minted or transferred in a single transaction. For example, an organizer could mint 10,000 tickets in one transaction rather than 10,000 separate transactions, dramatically reducing gas costs and improving efficiency.</p> </li> <li> <p><strong>Flexible token types:</strong> One contract can manage both fungible and non-fungible tokens. This allows a single contract to handle various ticket types - from unique assigned seats to general admission tickets where multiple identical tokens represent the same ticket type.</p> </li> <li> <p><strong>Resource optimization:</strong> Instead of deploying a separate contract for each event (consuming blockchain space and increasing costs), one ERC-1155 contract can manage tickets for all events by using the token ID space to distinguish between events.</p> </li> <li> <p><strong>Gas efficiency:</strong> The ERC-1155 standard uses less gas (transaction fees) for operations like approvals and transfers, making the system more cost-effective at scale.</p> </li> </ul> <p>Here’s how this can look in practice for a 5,000-ticket concert:</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Event ID: 12345
+
+Assigned seats (unique):
+- Seat A-01 -&gt; tokenId 123450001, supply 1
+- Seat A-02 -&gt; tokenId 123450002, supply 1
+- VIP-V1    -&gt; tokenId 123450901, supply 1
+
+General admission (semi-fungible):
+- GA Floor  -&gt; tokenId 123459000, initial supply 3000
+</code></pre></div></div> <p>This model makes the ERC-1155 choice intentional: unique seats use <code class="language-plaintext highlighter-rouge">supply=1</code>, while GA uses one token ID with <code class="language-plaintext highlighter-rouge">supply=N</code>, and each entry redemption burns one unit.</p> <h3 id="ticket-lifecycle-state-machine">Ticket lifecycle state machine</h3> <p>Each ticket progresses through a defined lifecycle managed by smart contracts:</p> <div class="text-center mb-4"> <img src="/assets/img/projects/ticket-states.png" alt="NFT Ticket Lifecycle State Machine" class="img-fluid rounded shadow-sm" width="1415" height="159" loading="lazy" decoding="async"> <p class="text-muted mt-2"><small>NFT Ticket Lifecycle State Machine</small></p> </div> <ol> <li> <p><strong>Available (Unsold):</strong> When first minted by the event organizer, tickets are in an available state.</p> </li> <li> <p><strong>Sold/Owned:</strong> Once purchased, the NFT transfers to the buyer’s wallet. The blockchain records this ownership change, creating an immutable record of the purchase.</p> </li> <li> <p><strong>Listed for Resale (Optional):</strong> If the owner wishes to resell the ticket, they can list it on the marketplace. The ticket remains in their ownership until sold.</p> </li> <li> <p><strong>Redeemed/Used:</strong> Upon entry to the event, the ticket is scanned and marked as used in the smart contract. This permanently changes its state to prevent reuse.</p> </li> <li> <p><strong>Invalidated/Cancelled:</strong> If an event is canceled or a ticket is revoked for any reason, it can be marked as invalid, triggering refund processes.</p> </li> </ol> <p>The contract enforces these transitions and rejects invalid state changes, including attempts to transfer or resell a used ticket.</p> <h2 id="anti-fraud-validation-flow">Anti-fraud validation flow</h2> <p>The most sensitive part of this system is gate validation, so the design avoids static QR codes.</p> <h3 id="problem-with-static-codes">Problem with static codes</h3> <p>In traditional ticketing, tickets contain a static barcode or QR code that remains the same from purchase to event. This creates a fundamental security flaw: anyone who obtains a copy of this code (through screenshots, photocopies, or forwarded emails) can potentially use it for entry if they arrive before the legitimate ticket holder.</p> <h3 id="challenge-response-validation-flow">Challenge-response validation flow</h3> <p>To reduce replay risk beyond simple time-rotation, validation can use a scanner-driven challenge-response flow:</p> <ol> <li> <strong>Scanner challenge:</strong> The scanner generates a random nonce and short expiry.</li> <li> <strong>Wallet proof:</strong> The attendee wallet signs <code class="language-plaintext highlighter-rouge">(ticketId, eventId, challenge, expiry)</code> with the owner key.</li> <li> <strong>Local verification:</strong> The scanner verifies the signature, expiry window, and local ticket state snapshot.</li> <li> <strong>Single-use acceptance:</strong> The scanner records the challenge and redemption attempt so the same payload cannot be replayed.</li> </ol> <p>If a QR payload is screenshotted and forwarded, it will fail at the gate unless it matches a live scanner challenge within the short validity window. This materially improves resistance to screenshot fraud and live-forward attacks.</p> <h3 id="offline-operation">Offline operation</h3> <p>Recognizing that internet connectivity at large venues is often unreliable, the solution includes an offline mode. The hardest edge case is double-entry across unsynced gates: if Gate A and Gate B are both offline and not sharing state, the same ticket could be admitted twice before sync.</p> <p>Mitigations include:</p> <ol> <li> <strong>Local scanner mesh / venue LAN sync:</strong> Replicate used-ticket and spent-challenge state across scanners on local infrastructure, even without internet.</li> <li> <strong>Gate partitioning:</strong> Restrict each gate to a subset of tickets to reduce collision probability.</li> <li> <strong>Short-lived challenge windows:</strong> Combine challenge-response with rapidly expiring payloads and local spent-nonce sets.</li> <li> <strong>Fast reconciliation:</strong> Push used status on reconnect and flag conflicts for operator review.</li> </ol> <p>These controls reduce offline risk, but they do not eliminate it. Without shared live state, there is always some residual race-condition risk.</p> <h3 id="threat-model-and-security-boundaries">Threat model and security boundaries</h3> <ul> <li> <strong>Primary adversaries:</strong> Bot operators, counterfeiters, malicious insiders (scanner misuse), and OTC off-platform resellers.</li> <li> <strong>What this design prevents well:</strong> On-platform policy violations, static-code forgery, and most replay/double-scan attempts under synchronized scanner state.</li> <li> <strong>What it only partially mitigates:</strong> Offline multi-gate race conditions during network outages.</li> <li> <strong>What it does not fully prevent without tighter transfer controls:</strong> OTC price gouging and royalty bypass via direct wallet-to-wallet transfers outside marketplace constraints.</li> </ul> <h2 id="decentralized-identity-and-privacy">Decentralized identity and privacy</h2> <p>Identity is where ticketing systems usually over-collect data. The design goal here is strict minimum disclosure.</p> <h3 id="identity-constraints-in-ticketing">Identity constraints in ticketing</h3> <p>Event ticketing faces competing requirements:</p> <ul> <li> <strong>Preventing bulk buying</strong> requires identifying unique individuals</li> <li> <strong>Limiting scalping</strong> needs systems to verify the legitimacy of resales</li> <li> <strong>Security concerns</strong> at major events increasingly call for knowing who is attending</li> <li> <strong>Privacy regulations</strong> like GDPR restrict how personal data can be collected and stored</li> <li> <strong>User experience</strong> suffers if identity verification is too burdensome</li> </ul> <p>Traditional solutions typically involve storing personal data in centralized databases, creating privacy risks and compliance challenges, especially since blockchain’s immutable nature conflicts with “right to be forgotten” provisions in privacy laws.</p> <h3 id="dids-and-verifiable-credentials">DIDs and verifiable credentials</h3> <p>The solution implements a decentralized identity system based on two key concepts:</p> <p><strong>Decentralized Identifiers (DIDs)</strong> are unique identifiers that users control through private keys, similar to how they control blockchain wallets. Unlike traditional identifiers (email addresses, usernames), DIDs aren’t controlled by any central authority.</p> <p><strong>Verifiable Credentials (VCs)</strong> are cryptographically signed attestations about a DID holder. For example, a government agency might issue a credential confirming “this DID belongs to someone over 18” without revealing the exact birthdate or other personal information.</p> <h3 id="how-this-works-in-practice">How this works in practice</h3> <p>When a user registers on the platform:</p> <ol> <li>The mobile app creates or imports a DID controlled by the user.</li> <li>The user can obtain verifiable credentials from trusted issuers. For example: <ul> <li>A one-time identity verification with a KYC provider might issue a “verified human” credential</li> <li>An age verification service might issue an “over 18” credential</li> <li>A university might issue a “student status” credential for student discounts</li> </ul> </li> </ol> <p>These credentials are stored in the user’s mobile wallet, not in a central database.</p> <p>When purchasing tickets with restrictions:</p> <ol> <li>The user proves relevant attributes without revealing unnecessary data. For example: <ul> <li>To enforce a “4 tickets per person” rule, they prove they control a unique DID without revealing their identity</li> <li>For an 18+ event, they prove they have an “over 18” credential without sharing their actual birthdate</li> <li>For a student discount, they prove their student status without exposing personal details</li> </ul> </li> <li>For high-security events requiring full identification, users can selectively disclose required information with consent, maintaining compliance with privacy regulations.</li> </ol> <p>This approach addresses several practical needs:</p> <ul> <li>Scalpers can’t easily use multiple fake identities to bulk-purchase tickets</li> <li>Event organizers can enforce attendance policies without storing sensitive data</li> <li>Users maintain control over their personal information</li> <li>The system remains compliant with privacy regulations even while using blockchain technology</li> </ul> <h3 id="optional-zkp-based-privacy-layer">Optional ZKP-based privacy layer</h3> <p>For enhanced privacy, the system can implement zero-knowledge proofs (ZKPs) - cryptographic methods that allow one party to prove they know something without revealing what that something is.</p> <p>For example, at an event entry:</p> <ol> <li>The scanning app generates a cryptographic challenge</li> <li>The user’s app creates a zero-knowledge proof demonstrating “I own a valid, unused ticket for this event” without revealing which specific ticket until entry is approved</li> <li>The proof is verified mathematically without exposing sensitive details</li> </ol> <p>This prevents surveillance of specific tickets being scanned in real-time and adds another layer of privacy protection for attendees.</p> <h2 id="economic-model">Economic model</h2> <p>The pricing and resale model is designed to make value flow explicit and enforceable on-platform.</p> <h3 id="primary-sale-and-pricing">Primary sale and pricing</h3> <p>Traditional ticketing typically uses fixed pricing, which often fails to match actual market demand. When tickets are underpriced relative to demand, the difference is captured by scalpers rather than artists or fans.</p> <p>This design supports several pricing modes:</p> <p><strong>Tiered Pricing:</strong> Smart contracts can automatically implement stepped pricing tiers. For example:</p> <ul> <li>First 1,000 tickets: $50 (Early Bird)</li> <li>Next 2,000 tickets: $75 (Regular)</li> <li>Final 1,000 tickets: $100 (Late Purchase)</li> </ul> <p>This rewards early fans while capturing more value as demand increases.</p> <p><strong>Dutch Auctions:</strong> For high-demand events, tickets can start at a higher price and gradually decrease until all are sold. This finds the true market price efficiently and ensures tickets go to those who value them most, while still being fair.</p> <p><strong>Dynamic Floor Pricing:</strong> The contract can adjust prices based on real-time demand metrics, finding the optimal balance between accessibility and value capture.</p> <h3 id="secondary-market-controls-and-royalties">Secondary market controls and royalties</h3> <p>Most harm happens in secondary resale, so controls are concentrated there:</p> <p><strong>Price Caps:</strong> The marketplace contract can enforce maximum resale prices, typically as a percentage of the original price. For example, listings above 150% of face value can be rejected automatically when transactions are routed through platform escrow.</p> <p><strong>Automatic Royalties:</strong> When tickets are resold through the platform marketplace, the contract can automatically direct a portion of the payment to original stakeholders. For example:</p> <ul> <li>10% to the artist or event organizer</li> <li>85% to the seller</li> <li>5% to the platform for sustainability</li> </ul> <p>This ensures that if ticket values increase on-platform, value is shared with those who created it.</p> <p><strong>Transparent Fee Structure:</strong> Unlike traditional ticketing where fees are often hidden or revealed late in the purchase process, blockchain enables complete transparency. All fees and distributions are visible on-chain and known upfront.</p> <p>Here’s how this might work in practice:</p> <ol> <li>An artist sells concert tickets at $100 face value</li> <li>A fan buys a ticket but later cannot attend</li> <li>The fan lists the ticket for resale at $150 (the maximum allowed by the 150% cap)</li> <li>Another fan purchases the resale ticket</li> <li>Automatically: $15 (10%) goes to the artist, $7.50 (5%) goes to the platform, and $127.50 (85%) goes to the seller</li> </ol> <p>In that example:</p> <ul> <li>The artist receives additional revenue from the secondary market</li> <li>The seller receives fair compensation for their ticket</li> <li>The buyer pays a reasonable price with transparent fees</li> <li>On-platform scalpers cannot exceed configured caps</li> </ul> <h3 id="market-integrity-mechanisms">Market integrity mechanisms</h3> <p>Additional controls include:</p> <p><strong>Anti-whale protections:</strong> Smart contracts can limit the number of tickets purchasable by a single identity, preventing bulk buying.</p> <p><strong>Verified resellers:</strong> For high-volume or commercial resellers, the platform can implement additional verification requirements, creating accountability while still allowing casual fan-to-fan resales.</p> <p><strong>Atomic swaps:</strong> The marketplace contract ensures that ticket transfers and payments happen simultaneously in a single transaction, eliminating the risk of scams where one party fails to deliver after receiving payment.</p> <p>The key point is simple: rules are checked by contract logic, not by manual moderation after disputes happen.</p> <h2 id="user-experience">User experience</h2> <p>Most users should not need to care about chain details.</p> <h3 id="for-ticket-buyers">For ticket buyers</h3> <p>The buyer flow stays close to mainstream ticketing apps:</p> <ol> <li> <p><strong>Download and Setup:</strong> Users download the mobile app and create an account. Behind the scenes, this generates a blockchain wallet, but users don’t need to understand the technical details.</p> </li> <li> <p><strong>Purchase Experience:</strong> Browsing and purchasing tickets feels similar to any other ticketing app. Users can pay with credit cards, Apple/Google Pay, or cryptocurrency if desired. The blockchain transactions happen invisibly in the background.</p> </li> <li> <p><strong>Ticket Management:</strong> Purchased tickets appear in the app’s wallet section with clear event details, location information, and timing. Users don’t need to understand that these are actually NFTs.</p> </li> <li> <p><strong>Ticket Transfer:</strong> To send a ticket to a friend, the user simply selects the ticket, taps “Transfer,” and enters the friend’s email or phone number. The app handles all the blockchain complexity.</p> </li> <li> <p><strong>Event Entry:</strong> At the venue, the user opens their ticket which displays a dynamic QR code. Venue staff scan this code just like traditional tickets, but with much higher security.</p> </li> </ol> <p>The interface uses familiar metaphors and interactions, hiding the complexity of the blockchain technology underneath.</p> <h3 id="for-event-organizers">For event organizers</h3> <p>Organizers get:</p> <ol> <li> <p><strong>Event Creation:</strong> A web dashboard allows organizers to set up events, define seating plans, configure pricing tiers, and set resale rules.</p> </li> <li> <p><strong>Sales Monitoring:</strong> Real-time analytics show ticket sales, revenue, and market activity. Blockchain transparency allows much deeper insights into ticket movement than traditional systems.</p> </li> <li> <p><strong>Direct Communication:</strong> Because the system maintains a record of current ticket holders (even after resales), organizers can communicate directly with actual attendees rather than just original purchasers.</p> </li> <li> <p><strong>Venue Operations:</strong> On event day, staff use a scanning app optimized for quick entry processing, with both online and offline modes to ensure reliability.</p> </li> </ol> <h3 id="practical-usability-details">Practical usability details</h3> <p>For reliability in real venues:</p> <p><strong>Offline Functionality:</strong> Venue scanning can operate without internet connectivity through local validation plus intra-venue state sharing, reducing congestion-related failures while managing offline double-entry risk.</p> <p><strong>Recovery Mechanisms:</strong> If a user loses their phone, account abstraction patterns (for example, ERC-4337 smart accounts with social recovery and gas sponsorship) can restore access without requiring users to manage seed phrases like advanced crypto users.</p> <p><strong>Gradual Onboarding:</strong> Users can start with simple email/password authentication before gradually adopting more advanced security features, creating a smooth adoption curve.</p> <p>The product goal is boring, reliable behavior for users, with stronger guarantees under the hood.</p> <h2 id="governance-model">Governance model</h2> <p>Governance starts centralized and can decentralize later if usage justifies it.</p> <h3 id="initial-phase">Initial phase</h3> <p>Early on, centralized control is practical:</p> <ul> <li>A founding team makes key decisions about platform features and policies</li> <li>Smart contracts include admin controls for updates and emergency interventions</li> <li>The focus is on rapid iteration and problem-solving</li> </ul> <h3 id="later-phase">Later phase</h3> <p>As the system matures, governance can shift toward stakeholders:</p> <ul> <li>A governance token is distributed to event organizers, artists, and active users</li> <li>Token holders can propose and vote on platform changes</li> <li>Multi-signature requirements ensure no single entity can make unilateral changes</li> </ul> <h3 id="governance-scope">Governance scope</h3> <p>Stakeholders can vote on:</p> <p><strong>Fee Structures:</strong> Adjusting platform fees and royalty distributions to ensure sustainability while remaining competitive.</p> <p><strong>Technical Upgrades:</strong> Approving new contract implementations or feature additions through a transparent proposal process.</p> <p><strong>Policy Changes:</strong> Setting default parameters like maximum resale percentages or identity requirements based on community consensus.</p> <p><strong>Dispute Resolution:</strong> Establishing arbitration processes for complex cases that cannot be resolved automatically.</p> <p>This keeps policy changes transparent and slows down unilateral rule changes.</p> <h2 id="implementation-challenges-and-trade-offs">Implementation challenges and trade-offs</h2> <p>There are hard constraints that need explicit trade-offs.</p> <h3 id="scalability">Scalability</h3> <p><strong>Challenge:</strong> Blockchain networks like Ethereum have limited transaction throughput, potentially constraining ticket sales and transfers during high-demand periods.</p> <p><strong>Solution:</strong> The platform uses a hybrid approach:</p> <ul> <li>Primary operations occur on Polygon for high throughput and low fees</li> <li>Critical data is periodically anchored to Ethereum mainnet for maximum security</li> <li>Batch processing of operations (like scanning tickets) reduces on-chain transactions</li> <li>Additional L2/sidechain techniques and state channels can further optimize transaction efficiency</li> </ul> <h3 id="privacy-and-compliance">Privacy and compliance</h3> <p><strong>Challenge:</strong> Blockchain’s transparent, immutable nature conflicts with privacy regulations like GDPR’s “right to be forgotten.”</p> <p><strong>Solution:</strong> The platform implements:</p> <ul> <li>Storage of personal data off-chain in conventional databases that can be modified</li> <li>On-chain data limited to pseudonymous identifiers and cryptographic proofs</li> <li>Encrypted metadata that can be made inaccessible by destroying decryption keys</li> <li>Verifiable credentials that enable compliance checks without storing sensitive data</li> </ul> <h3 id="legacy-system-integration">Legacy system integration</h3> <p><strong>Challenge:</strong> Many venues have existing ticketing hardware and software that cannot be completely replaced.</p> <p><strong>Solution:</strong> The platform provides:</p> <ul> <li>API integration layers that allow existing systems to validate blockchain tickets</li> <li>Hardware adapters that can bridge between blockchain validation and conventional entrance systems</li> <li>Transitional approaches where blockchain and traditional tickets can coexist during migration periods</li> </ul> <h3 id="security-against-advanced-attacks">Security against advanced attacks</h3> <p><strong>Challenge:</strong> As a financial system handling valuable assets, the platform must resist sophisticated attacks.</p> <p><strong>Solution:</strong> The security architecture includes:</p> <ul> <li>Formal verification of critical smart contract functions</li> <li>Bug bounty programs to incentivize responsible vulnerability disclosure</li> <li>Rate limiting and monitoring to detect unusual patterns</li> <li>Multi-signature controls for administrative functions</li> <li>Time-locked upgrades that allow users to exit before changes take effect</li> </ul> <p>None of these points are unique to blockchain products, but ticketing magnifies them because traffic is bursty and failures happen in public at venue gates.</p> <h2 id="why-this-project-made-the-bcolbd-finalist-list">Why this project made the BCOLBD finalist list</h2> <p>From my perspective, this project stood out because it was opinionated about constraints instead of pretending there were none.</p> <ol> <li>We modeled the full lifecycle, not just minting and transfers.</li> <li>We treated resale enforcement as a systems problem, not a UI policy.</li> <li>We addressed offline gate behavior instead of assuming perfect connectivity.</li> <li>We kept a realistic migration path for venues with existing scanners and workflows.</li> </ol> <p>That combination made the design more credible as a deployable product concept, not just a demo contract.</p> <h2 id="conclusion">Conclusion</h2> <p>This project does not claim to “fix ticketing” in one shot. It does show a practical direction:</p> <ul> <li>Fans know every ticket they purchase is guaranteed authentic</li> <li>Organizers can enforce clear resale rules on-platform</li> <li>Venues can validate tickets with stronger anti-fraud checks</li> <li>Buyers can see pricing and fee logic up front</li> </ul> <p>I still think the biggest differentiator is explicit rule enforcement. If you make assumptions clear, especially around resale paths and offline scanning, the design becomes both more honest and more useful.</p> <h2 id="references">References</h2> <ul> <li><a href="https://bcolbd.org/2021/teams" rel="external nofollow noopener" target="_blank">BCOLBD 2021 teams/finalists list</a></li> <li><a href="https://www.gao.gov/assets/gao-18-347.pdf" rel="external nofollow noopener" target="_blank">US GAO report on ticket resale markups (GAO-18-347)</a></li> <li><a href="https://www.nysenate.gov/sites/default/files/article/attachment/nys_senate_igo_committee_report_-_live_event_ticketing_practices.pdf" rel="external nofollow noopener" target="_blank">NYS Senate investigative report on live event ticketing practices</a></li> <li><a href="https://docs.polygon.technology/pos/" rel="external nofollow noopener" target="_blank">Polygon PoS docs (EVM-compatible PoS sidechain positioning)</a></li> <li><a href="https://polygon.technology/polygon-pos" rel="external nofollow noopener" target="_blank">Polygon PoS overview (throughput/fee positioning)</a></li> <li><a href="https://www.grandviewresearch.com/industry-analysis/online-event-ticketing-market" rel="external nofollow noopener" target="_blank">Grand View Research: online event ticketing market</a></li> </ul> </article> </div> </div> <footer class="fixed-bottom" role="contentinfo"> <div class="container mt-0"> © Copyright 2026 Tanzim Hossain Romel. © Tanzim Hossain Romel. Powered by <a href="https://jekyllrb.com/" target="_blank" rel="external nofollow noopener">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio" rel="external nofollow noopener" target="_blank">al-folio</a> theme. </div> </footer> <script>
+  window.alFolio = {
+    compatBootstrap: false
+  };
+</script> <script src="/assets/js/nav-toggle.js?v=141bd79a73ebc0f0b6ea58e440ae79fc"></script> <script defer src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script> <script defer src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script> <script defer src="/assets/js/masonry.js?v=e49affc7bd2646f6acdad1dbe02c2359" type="text/javascript"></script> <script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js" integrity="sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI=" crossorigin="anonymous"></script> <script src="/assets/al_math/js/mathjax-setup.js"></script> <script src="/assets/js/tooltips-setup.js?v=fe487e99db6c43751e6e7bdb2d6a0611"></script> <script src="/assets/js/no_defer.js?v=53b1b1a645525975c963ce8bf8bfefcf"></script> <script defer src="/assets/js/common.js?v=87baac90f765f2f3362dcf6aaf312a8a"></script> <script defer src="/assets/js/copy_code.js?v=c8a01c11a92744d44b093fc3bda915df" type="text/javascript"></script> <script defer src="/assets/js/jupyter_new_tab.js?v=896d254890d9b47f0281f63bfccf0dee"></script> <script async src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script> <script async src="https://badge.dimensions.ai/badge.js"></script> <script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script> <script defer src="/assets/al_img_tools/js/zoom.js"></script> <script defer src="/assets/js/progress-bar.js?v=499464c5c63ced6cf7ad62509f1e2610" type="text/javascript"></script> <script src="https://cdn.jsdelivr.net/npm/vanilla-back-to-top@7.2.1/dist/vanilla-back-to-top.min.js" integrity="sha256-uMJJ3EoTyfRBoTbR+lrfu1uRQ87RZG8AR3cVNuQVeFg=" crossorigin="anonymous"></script> <script>
+    addBackToTop();
+  </script> <script type="module" src="/assets/al_search/js/search/ninja-keys.min.js"></script> <ninja-keys hidebreadcrumbs noautoloadmdicons placeholder="Type to start searching"></ninja-keys> <script src="/assets/al_search/js/search-setup.js"></script> <script>
+// get the ninja-keys element
+const ninja = document.querySelector('ninja-keys');
+
+// add the home and posts menu items
+ninja.data = [{
+    id: "nav-about",
+    title: "about",
+    section: "Navigation",
+    handler: () => {
+      window.location.href = "/";
+    },
+  },{id: "nav-blog",
+          title: "blog",
+          description: "",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/blog/";
+          },
+        },{id: "nav-publications",
+          title: "publications",
+          description: "Publications.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/publications/";
+          },
+        },{id: "nav-research",
+          title: "research",
+          description: "Research on reliable AI agents, SRE-agent evaluation, ML ecosystem security, agent-choice auditing, and developer tools.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/research/";
+          },
+        },{id: "nav-projects",
+          title: "projects",
+          description: "Research and engineering projects.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/projects/";
+          },
+        },{id: "nav-cv",
+          title: "CV",
+          description: "Curriculum vitae.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/cv/";
+          },
+        },{id: "nav-contributions",
+          title: "contributions",
+          description: "Curated open-source contribution evidence across research infrastructure, frameworks, and language tooling.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/contributions/";
+          },
+        },{id: "post-building-a-fast-1brc-solver-in-c-on-apple-silicon",
+        
+          title: "Building a fast 1BRC solver in C# on Apple Silicon",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/building-fast-1brc-csharp-apple-silicon/";
+          
+        },
+      },{id: "post-memory-management-in-production-avoiding-the-silent-killers",
+        
+          title: "Memory Management in Production: Avoiding the Silent Killers",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/memory-management-production-silent-killers/";
+          
+        },
+      },{id: "post-growing-as-a-software-engineer-in-the-age-of-llms-and-vibe-coding",
+        
+          title: "Growing as a Software Engineer in the Age of LLMs and Vibe Coding...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/vibe-coding/";
+          
+        },
+      },{id: "post-taming-the-imagination-a-comprehensive-guide-to-handling-hallucinations-and-implementing-guardrails-in-agentic-ai",
+        
+          title: "Taming the Imagination: A Comprehensive Guide to Handling Hallucinations and Implementing Guardrails in...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/how-to-handle-hallucinations/";
+          
+        },
+      },{id: "post-building-an-agentic-ai-analytics-dashboard-a-deep-dive-with-langchain-langgraph-and-fine-tuned-llama",
+        
+          title: "Building an Agentic AI Analytics Dashboard: A Deep Dive with LangChain, LangGraph, and...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/intro-to-agentic-ai/";
+          
+        },
+      },{id: "post-neural-algorithmic-reasoning-teaching-neural-networks-to-think-like-algorithms",
+        
+          title: "Neural Algorithmic Reasoning: Teaching Neural Networks to Think Like Algorithms",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/intro-to-nar/";
+          
+        },
+      },{id: "post-opentelemetry-in-microservices-how-we-transformed-our-observability-strategy",
+        
+          title: "OpenTelemetry in Microservices: How We Transformed Our Observability Strategy",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/opentelemetry/";
+          
+        },
+      },{id: "post-using-ai-tools-in-software-engineering-and-research-workflows",
+        
+          title: "Using AI Tools in Software Engineering and Research Workflows",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/leveraging-ai-tools-software-engineering/";
+          
+        },
+      },{id: "post-the-performance-crisis-how-we-rescued-a-net-8-microservice-from-10-critical-bottlenecks",
+        
+          title: "The Performance Crisis: How We Rescued a .NET 8 Microservice from 10 Critical...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2024/optimizing-dotnet-microservices-performance/";
+          
+        },
+      },{id: "post-zero-downtime-deployments-in-kubernetes-how-we-keep-our-services-running-while-we-ship",
+        
+          title: "Zero Downtime Deployments in Kubernetes: How We Keep Our Services Running While We...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2024/zero-downtime/";
+          
+        },
+      },{id: "post-mastering-unit-testing-and-bdd-with-xunit-and-specflow-in-net-9-a-comprehensive-guide",
+        
+          title: "Mastering Unit Testing and BDD with xUnit and SpecFlow in .NET 9: A...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2024/dotnet-tests/";
+          
+        },
+      },{id: "post-design-patterns-your-first-step-toward-professional-software-engineering",
+        
+          title: "Design Patterns: Your First Step Toward Professional Software Engineering",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2024/design-patterns-professional-software-engineering/";
+          
+        },
+      },{id: "post-setting-up-github-actions-ci-cd-with-aws-a-practical-journey",
+        
+          title: "Setting Up GitHub Actions CI/CD with AWS: A Practical Journey",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2024/intro-to-ci-cd/";
+          
+        },
+      },{id: "post-the-clique-partition-problem-dividing-networks-into-perfect-communities",
+        
+          title: "The Clique Partition Problem: Dividing Networks into Perfect Communities",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2023/clique-partition-problem-graph-theory/";
+          
+        },
+      },{id: "post-advice-complexity-in-online-algorithms-when-knowing-the-future-makes-all-the-difference",
+        
+          title: "Advice Complexity in Online Algorithms: When Knowing the Future Makes All the Difference...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2023/advice-complexity-online-algorithms/";
+          
+        },
+      },{id: "post-getting-started-with-kubernetes-deploying-microservice-architectures-at-scale",
+        
+          title: "Getting Started with Kubernetes: Deploying Microservice Architectures at Scale",
+        
+        description: "A practical Kubernetes guide covering microservice deployment, service-mesh integration, observability, and the operational checks needed before production use.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2022/getting-started-with-kubernetes-microservices/";
+          
+        },
+      },{id: "post-understanding-xv6-a-practical-introduction-to-operating-systems",
+        
+          title: "Understanding xv6: A Practical Introduction to Operating Systems",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2022/understanding-xv6-operating-systems/";
+          
+        },
+      },{id: "post-getting-started-with-ns3-a-hands-on-guide-to-network-simulation",
+        
+          title: "Getting Started with NS3: A Hands-On Guide to Network Simulation",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2021/getting-started-with-ns3/";
+          
+        },
+      },{id: "news-completed-b-sc-in-computer-science-and-engineering-from-bangladesh-university-of-engineering-and-technology-with-a-gpa-of-3-53-4-00-link",
+          title: 'Completed B.Sc in Computer Science and Engineering from Bangladesh University of Engineering and...',
+          description: "",
+          section: "News",},{id: "news-joined-iqvia-as-a-software-development-engineer-on-kpi-library-the-dynamic-reporting-layer-within-orchestrated-analytics-link",
+          title: 'Joined IQVIA as a Software Development Engineer on KPI Library, the dynamic reporting...',
+          description: "",
+          section: "News",},{id: "news-submitted-sentiment-analysis-of-anonymous-crisis-reports-in-bangladesh-to-acm-cscw-2025-analyzing-crowd-sourced-reports-from-bangladesh-s-2024-national-crisis-using-transformer-models-link",
+          title: 'Submitted ‘Sentiment Analysis of Anonymous Crisis Reports in Bangladesh’ to ACM CSCW 2025,...',
+          description: "",
+          section: "News",},{id: "news-honored-with-the-iqvia-impact-program-silver-award-for-outstanding-performance-and-contributions-to-the-kpi-library-team-link",
+          title: 'Honored with the IQVIA Impact Program Silver Award for outstanding performance and contributions...',
+          description: "",
+          section: "News",},{id: "news-submitted-an-empirical-study-on-remote-code-execution-in-machine-learning-model-hosting-ecosystems-to-the-mining-software-repositories-msr-2026-conference-first-large-scale-cross-platform-security-study-analyzing-45-000-repositories-across-5-major-ml-platforms-link",
+          title: 'Submitted ‘An Empirical Study on Remote Code Execution in Machine Learning Model Hosting...',
+          description: "",
+          section: "News",},{id: "news-resubmitted-an-empirical-study-on-remote-code-execution-in-machine-learning-model-hosting-ecosystems-to-acm-transactions-on-software-engineering-and-methodology-tosem-2026-preprint-available-on-arxiv-link",
+          title: 'Resubmitted ‘An Empirical Study on Remote Code Execution in Machine Learning Model Hosting...',
+          description: "",
+          section: "News",},{id: "news-started-a-remote-summer-research-internship-at-the-university-of-illinois-urbana-champaign-through-uiuc-summer-research-in-software-engineering-srse-2026-with-professor-tianyin-xu-link",
+          title: 'Started a remote summer research internship at the University of Illinois Urbana-Champaign through...',
+          description: "",
+          section: "News",},{id: "news-submitted-the-choice-can-be-the-attack-auditing-aligned-backdoors-in-llm-agents-to-the-transactions-of-the-association-for-computational-linguistics-tacl-2026-with-chowdhury-rakin-haider-link",
+          title: 'Submitted ‘The Choice Can Be the Attack: Auditing Aligned Backdoors in LLM Agents’...',
+          description: "",
+          section: "News",},{id: "news-an-empirical-study-on-remote-code-execution-in-machine-learning-model-hosting-ecosystems-is-under-review-at-the-international-conference-on-software-engineering-icse-2027-preprint-available-on-arxiv-link",
+          title: '‘An Empirical Study on Remote Code Execution in Machine Learning Model Hosting Ecosystems’...',
+          description: "",
+          section: "News",},{id: "news-will-begin-graduate-study-in-computing-science-at-the-university-of-alberta-on-september-1-2026-link",
+          title: 'Will begin graduate study in Computing Science at the University of Alberta on...',
+          description: "",
+          section: "News",},{id: "projects-1brc-c-on-apple-silicon",
+          title: '1BRC C# on Apple Silicon',
+          description: "A .NET 10 NativeAOT performance case study: byte parsing, native aggregation, ARM64 tuning, and a size-aware macOS pread path",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/1brc-csharp/";
+            },},{id: "projects-building-a-bangla-handwritten-digit-recognizer-from-scratch",
+          title: 'Building a Bangla Handwritten Digit Recognizer from Scratch',
+          description: "A Deep Dive into Custom CNN Implementation",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/bangla-digit-recognition/";
+            },},{id: "projects-blockchain-based-ticketing-platform",
+          title: 'Blockchain Based Ticketing Platform',
+          description: "A practical approach to reducing ticket fraud and abusive resale",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/blockchain-ticketing/";
+            },},{id: "projects-yet-another-c-compiler",
+          title: 'Yet Another C Compiler',
+          description: "A complete multi-pass compiler for a subset of C",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/compiler/";
+            },},{id: "projects-contextledger-context-accounting-for-coding-agents",
+          title: 'ContextLedger: context accounting for coding agents',
+          description: "A research notebook on OpenCode compaction, provenance, and live GPT-5.5 experiments",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/contextledger/";
+            },},{id: "projects-ctxhelm-agent-native-context-compiler",
+          title: 'ctxhelm: agent-native context compiler',
+          description: "Local-first context plans, release proof, and source-free agent evaluation",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/ctxhelm/";
+            },},{id: "projects-mini-deep-learning-framework-pytorch-from-scratch",
+          title: 'Mini Deep Learning Framework: PyTorch from Scratch',
+          description: "A freelance learning project for tensors, autograd, and neural-network internals",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/deep-learning-framework-capstone/";
+            },},{id: "projects-go-container-runtime-docker-from-scratch",
+          title: 'Go Container Runtime: Docker from Scratch',
+          description: "A freelance learning project for Linux containers, networking, and Go systems programming",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/docker-from-scratch-go/";
+            },},{id: "projects-eventfly-distributed-microservices-event-platform",
+          title: 'EventFly – Distributed Microservices Event Platform',
+          description: "A six-person BUET course project for event creation, ticketing, announcements, participant engagement, analytics, and payments, implemented with Node.js, React, NATS, Kubernetes, MongoDB, Redis, and Stripe.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/eventfly-an-end-to-end-event-management-system/";
+            },},{id: "projects-building-a-go-database-engine-from-scratch",
+          title: 'Building a Go Database Engine from Scratch',
+          description: "An educational ACID-oriented database engine with advanced features",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/go-database/";
+            },},{id: "projects-image-caption-generation-with-bert-context-vectors",
+          title: 'Image Caption Generation with BERT Context Vectors',
+          description: "Extended the &quot;Show, Attend, and Tell&quot; image captioning model with BERT to improve caption quality and reduce training time, achieving 36% improvement in CIDEr score and 43% improvement in BLEU-4.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/image-caption-generator/";
+            },},{id: "projects-patchsmith-a-harness-for-repair-agents",
+          title: 'PatchSmith: a harness for repair agents',
+          description: "System design and R&amp;D notes for bounded patches, sandbox validation, and auditable repair runs",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/patchsmith/";
+            },},{id: "projects-ray-tracing-from-scratch-a-comprehensive-guide-to-3d-rendering-physics-and-implementation",
+          title: 'Ray Tracing from Scratch: A Comprehensive Guide to 3D Rendering Physics and Implementation...',
+          description: "Implementing physically-based rendering with C++",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/ray-tracing/";
+            },},{id: "projects-an-empirical-study-on-remote-code-execution-in-machine-learning-model-hosting-ecosystems",
+          title: 'An Empirical Study on Remote Code Execution in Machine Learning Model Hosting Ecosystems...',
+          description: "A cross-platform study of model-loading risk across five ML hosting ecosystems, using static analysis, malware-signature scanning, and analysis of more than 600 developer discussions.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/research-ml-remote-code-execution/";
+            },},{id: "projects-verischema-verified-database-schema-generation",
+          title: 'VeriSchema: verified database-schema generation',
+          description: "How can specialized agents generate relational schemas from natural-language requirements while formal checks and targeted repair keep the result consistent?",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/research-multi-agent-db-schema/";
+            },},{id: "projects-the-choice-can-be-the-attack-auditing-aligned-backdoors-in-llm-agents",
+          title: 'The Choice Can Be the Attack: Auditing Aligned Backdoors in LLM Agents',
+          description: "Abstract-level summary of SHIFT, submitted to TACL 2026 on aligned backdoor attacks in LLM agents.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/research-reagent-plus-plus/";
+            },},{id: "projects-sentiment-analysis-of-anonymous-crisis-reports-in-bangladesh",
+          title: 'Sentiment Analysis of Anonymous Crisis Reports in Bangladesh',
+          description: "A multilingual analysis of anonymous, crowd-sourced reports from Bangladesh&#39;s 2024 national crisis.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/research-ureporter/";
+            },},{id: "projects-enhancing-tcp-fairness-tcp-vegas-implementation",
+          title: 'Enhancing TCP Fairness: TCP Vegas+ Implementation',
+          description: "A dual-mode solution for TCP Vegas fairness issues",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/tcp-vegas-plus/";
+            },},{
+        id: 'social-email',
+        title: 'email',
+        section: 'Socials',
+        handler: () => {
+          window.open("mailto:%74%61%6E%68%72%6F%6D%65%6C@%67%6D%61%69%6C.%63%6F%6D", "_blank");
+        },
+      },{
+        id: 'social-github',
+        title: 'GitHub',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://github.com/thromel", "_blank");
+        },
+      },{
+        id: 'social-scholar',
+        title: 'Google Scholar',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://scholar.google.com/citations?user=zHV4EU8AAAAJ", "_blank");
+        },
+      },{
+        id: 'social-linkedin',
+        title: 'LinkedIn',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://www.linkedin.com/in/thromel", "_blank");
+        },
+      },{
+        id: 'social-orcid',
+        title: 'ORCID',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://orcid.org/0009-0009-2432-8960", "_blank");
+        },
+      },{
+        id: 'social-rss',
+        title: 'RSS Feed',
+        section: 'Socials',
+        handler: () => {
+          window.open("/feed.xml", "_blank");
+        },
+      },{
+        id: 'social-x',
+        title: 'X',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://twitter.com/tanzimhromel", "_blank");
+        },
+      },{
+      id: 'light-theme',
+      title: 'Change theme to light',
+      description: 'Change the theme of the site to Light',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("light");
+      },
+    },
+    {
+      id: 'dark-theme',
+      title: 'Change theme to dark',
+      description: 'Change the theme of the site to Dark',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("dark");
+      },
+    },
+    {
+      id: 'system-theme',
+      title: 'Use system default theme',
+      description: 'Change the theme of the site to System Default',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("system");
+      },
+    },];
+
+</script> <script src="/assets/al_search/js/shortcut-key.js"></script> </body> </html>

@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1180" height="620" viewBox="0 0 1180 620" role="img" aria-labelledby="title desc">
+  <title id="title">PatchSmith latest run ledger</title>
+  <desc id="desc">Ledger showing the latest PatchSmith public issue repair run: three validated tasks, four model calls, 924,137 tokens, and 0.261364 dollars estimated cost.</desc>
+  <defs>
+    <style>
+      .bg { fill: #fbfcfd; }
+      .card { fill: #ffffff; stroke: #cbd5e1; stroke-width: 1.3; }
+      .head { fill: #0f172a; }
+      .row1 { fill: #f8fafc; }
+      .row2 { fill: #ffffff; }
+      .ok { fill: #dcfce7; stroke: #86efac; stroke-width: 1; }
+      .title { font: 700 30px ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #0f172a; }
+      .subtitle { font: 500 15px ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #475569; }
+      .headtext { font: 800 13px ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #ffffff; letter-spacing: .03em; }
+      .cell { font: 600 14px ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #0f172a; }
+      .small { font: 500 12px ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #475569; }
+      .metric { font: 800 24px ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #0f766e; }
+      .mono { font: 650 13px ui-monospace, SFMono-Regular, Menlo, monospace; fill: #334155; }
+    </style>
+  </defs>
+  <rect class="bg" width="1180" height="620" rx="24" />
+  <text x="58" y="62" class="title">Latest DeepAgents public-issue repair ledger</text>
+  <text x="58" y="90" class="subtitle">This is a focused smoke lane. The useful part is that cost, tokens, validation, and caveats stay next to the result.</text>
+
+  <rect x="58" y="128" width="1064" height="324" rx="18" class="card" />
+  <rect x="58" y="128" width="1064" height="58" rx="18" class="head" />
+  <text x="82" y="164" class="headtext">TASK</text>
+  <text x="386" y="164" class="headtext">REPO</text>
+  <text x="562" y="164" class="headtext">CALLS</text>
+  <text x="682" y="164" class="headtext">TOKENS</text>
+  <text x="834" y="164" class="headtext">COST</text>
+  <text x="970" y="164" class="headtext">RESULT</text>
+
+  <rect x="58" y="186" width="1064" height="78" class="row1" />
+  <text x="82" y="220" class="cell">pytest_14552_moved_file_filename</text>
+  <text x="386" y="220" class="cell">pytest-dev/pytest</text>
+  <text x="588" y="220" class="cell">2</text>
+  <text x="682" y="220" class="mono">563,202</text>
+  <text x="834" y="220" class="mono">$0.159015</text>
+  <rect x="970" y="201" width="96" height="30" rx="15" class="ok" />
+  <text x="988" y="221" class="small">validated</text>
+  <text x="82" y="246" class="small">Retry turned an unresolved first attempt into a passing focused pytest command.</text>
+
+  <rect x="58" y="264" width="1064" height="78" class="row2" />
+  <text x="82" y="298" class="cell">requests_7223_chardet_extra</text>
+  <text x="386" y="298" class="cell">psf/requests</text>
+  <text x="588" y="298" class="cell">1</text>
+  <text x="682" y="298" class="mono">278,975</text>
+  <text x="834" y="298" class="mono">$0.079113</text>
+  <rect x="970" y="279" width="96" height="30" rx="15" class="ok" />
+  <text x="988" y="299" class="small">validated</text>
+  <text x="82" y="324" class="small">PatchSmith generated a bounded patch and the selected regression test exited zero.</text>
+
+  <rect x="58" y="342" width="1064" height="78" class="row1" />
+  <text x="82" y="376" class="cell">requests_7341_chunked_encoding_docs</text>
+  <text x="386" y="376" class="cell">psf/requests</text>
+  <text x="588" y="376" class="cell">1</text>
+  <text x="682" y="376" class="mono">81,960</text>
+  <text x="834" y="376" class="mono">$0.023236</text>
+  <rect x="970" y="357" width="96" height="30" rx="15" class="ok" />
+  <text x="988" y="377" class="small">validated</text>
+  <text x="82" y="402" class="small">One model-backed plan changed the runtime docstring path covered by the issue test.</text>
+
+  <rect x="92" y="492" width="220" height="78" rx="16" class="card" />
+  <text x="116" y="524" class="small">tasks validated</text>
+  <text x="116" y="554" class="metric">3 / 3</text>
+
+  <rect x="362" y="492" width="220" height="78" rx="16" class="card" />
+  <text x="386" y="524" class="small">model calls</text>
+  <text x="386" y="554" class="metric">4</text>
+
+  <rect x="632" y="492" width="220" height="78" rx="16" class="card" />
+  <text x="656" y="524" class="small">total tokens</text>
+  <text x="656" y="554" class="metric">924,137</text>
+
+  <rect x="902" y="492" width="220" height="78" rx="16" class="card" />
+  <text x="926" y="524" class="small">estimated cost</text>
+  <text x="926" y="554" class="metric">$0.261364</text>
+</svg>

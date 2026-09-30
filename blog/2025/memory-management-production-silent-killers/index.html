@@ -1,0 +1,1548 @@
+<!DOCTYPE html> <html lang="en"> <head> <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <title> Memory Management in Production: Avoiding the Silent Killers | Tanzim Hossain Romel </title> <meta name="author" content="Tanzim Hossain Romel"> <meta name="description" content="Academic and engineering portfolio of Tanzim Hossain Romel, focused on reliable AI agents, software engineering research, and developer tools."> <meta name="keywords" content=""> <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https:; style-src 'self' 'unsafe-inline' https:; img-src 'self' data: https:; font-src 'self' data: https:; media-src 'self' https:; frame-src 'self' https:; connect-src 'self' https:;"> <style>
+  :root {
+    --max-content-width: 930px;
+  }
+</style> <link rel="stylesheet" href="/assets/css/tailwind.css?v=50c64c15cbb9fd1ce6056fdb8bcb4b62"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.2.0/css/all.min.css" integrity="sha256-MVopmdyC2tYTiJ8wlktf0uh0v4NgT+vNdyVFepi7Q0c=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.5/css/academicons.min.css" integrity="sha256-SzrCOBJbGVFMahewkgjwnApaV2+av1DwMAA+/QGLyZw=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/scholar-icons@1.0.3/css/scholar-icons.css" integrity="sha256-VY3hHVj/hNX3fYG6wtbA6TcKJQl7+FthzGSyIB64klY=" crossorigin="anonymous"> <link defer rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons&amp;display=swap"> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-github.css?v=591dab5a4e56573bf4ef7fd332894c99" media="" id="highlight_theme_light"> <link rel="shortcut icon" href="data:image/svg+xml,&lt;svg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20100%20100%22&gt;&lt;text%20y=%22.9em%22%20font-size=%2290%22&gt;%E2%9A%9B%EF%B8%8F&lt;/text&gt;&lt;/svg&gt;"> <link rel="stylesheet" href="/assets/css/main.css?v=3116ba77db9ee1581d05bb3e86fbf7f1"> <link rel="canonical" href="https://tanzimhromel.com/blog/2025/memory-management-production-silent-killers/"> <script src="/assets/js/theme.js?v=5286c3e4c334d0ecb8fc0c40ff4fa7ec"></script> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-native.css?v=5847e5ed4a4568527aa6cfab446049ca" media="none" id="highlight_theme_dark"> <script>
+    initTheme();
+  </script> </head> <body class="fixed-top-nav "> <header> <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top" role="navigation"> <div class="container"> <a class="navbar-brand title font-weight-lighter" href="/"> Tanzim Hossain Romel </a> <button class="navbar-toggler collapsed navbar-toggler-main" type="button" data-nav-toggle="navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar top-bar"></span> <span class="icon-bar middle-bar"></span> <span class="icon-bar bottom-bar"></span> </button> <div class="collapse navbar-collapse navbar-collapse-main" id="navbarNav"> <ul class="navbar-nav navbar-menu-list flex-nowrap"> <li class="nav-item "> <a class="nav-link" href="/">about </a> </li> <li class="nav-item active"> <a class="nav-link" href="/blog/">blog </a> </li> <li class="nav-item "> <a class="nav-link" href="/publications/">publications </a> </li> <li class="nav-item "> <a class="nav-link" href="/research/">research </a> </li> <li class="nav-item "> <a class="nav-link" href="/projects/">projects </a> </li> <li class="nav-item "> <a class="nav-link" href="/cv/">CV </a> </li> <li class="nav-item "> <a class="nav-link" href="/contributions/">contributions </a> </li> <li class="nav-item"> <button id="search-toggle" type="button" title="Search" aria-label="Open search"> <span class="nav-link">ctrl k <i class="fa-solid fa-magnifying-glass"></i></span> </button> </li> <li class="toggle-container"> <button id="light-toggle" type="button" title="Change theme" aria-label="Change color theme"> <i class="fa-half-sun-moon" id="light-toggle-system"></i> <i class="fa-solid fa-moon" id="light-toggle-dark"></i> <i class="fa-solid fa-sun" id="light-toggle-light"></i> </button> </li> </ul> </div> </div> </nav> <progress id="progress" value="0"> <div class="progress-container"> <span class="progress-bar"></span> </div> </progress> </header> <div class="container mt-5" role="main"> <div class="post"> <header class="post-header"> <h1 class="post-title">Memory Management in Production: Avoiding the Silent Killers</h1> <p class="post-meta"> Created on June 01, 2025 </p> <p class="post-tags"> <a href="/blog/2025"> <i class="fa-solid fa-calendar fa-sm"></i> 2025 </a>   ·   <a href="/blog/tag/memory-management"> <i class="fa-solid fa-hashtag fa-sm"></i> memory-management</a>   <a href="/blog/tag/dotnet"> <i class="fa-solid fa-hashtag fa-sm"></i> dotnet</a>   <a href="/blog/tag/garbage-collection"> <i class="fa-solid fa-hashtag fa-sm"></i> garbage-collection</a>   <a href="/blog/tag/docker"> <i class="fa-solid fa-hashtag fa-sm"></i> docker</a>   <a href="/blog/tag/performance-optimization"> <i class="fa-solid fa-hashtag fa-sm"></i> performance-optimization</a>   <a href="/blog/tag/production-debugging"> <i class="fa-solid fa-hashtag fa-sm"></i> production-debugging</a>   <a href="/blog/tag/aspnet-core"> <i class="fa-solid fa-hashtag fa-sm"></i> aspnet-core</a>   ·   <a href="/blog/category/backend-engineering"> <i class="fa-solid fa-tag fa-sm"></i> backend-engineering</a>   <a href="/blog/category/performance"> <i class="fa-solid fa-tag fa-sm"></i> performance</a>   <a href="/blog/category/memory-management"> <i class="fa-solid fa-tag fa-sm"></i> memory-management</a> </p> </header> <article class="post-content"> <div id="markdown-content"> <p>It’s 2:47 AM when the alerts start flooding in. Your e-commerce platform - handling Black Friday traffic - begins throwing OutOfMemoryErrors. Orders are failing, customers are abandoning carts, and your revenue is hemorrhaging by the minute. The CPU usage looks normal, disk I/O is fine, but something is silently consuming memory until your applications crash.</p> <p>This was our reality eight months ago. What started as occasional “minor hiccups” escalated into a full-blown production crisis that taught our team hard lessons about memory management in .NET applications running in production. If you’re running .NET services, ASP.NET Core applications, or containerized .NET workloads in production, this story - and the solutions we discovered - could save you from similar catastrophic failures.</p> <p>Memory issues are the silent killers of production systems. Unlike CPU spikes or network outages that announce themselves dramatically, memory problems creep in slowly, often going unnoticed until they bring down your entire system. This comprehensive guide will equip you with the knowledge, tools, and strategies to identify, prevent, and resolve memory issues before they become business-critical failures.</p> <h2 id="the-hidden-cost-of-poor-memory-management">The Hidden Cost of Poor Memory Management</h2> <p>Before diving into solutions, let’s understand why memory management matters more than ever in modern .NET production environments. Our platform consisted of:</p> <ul> <li> <strong>ASP.NET Core 8 services</strong> handling order processing and user management</li> <li> <strong>.NET 8 microservices</strong> managing payments and inventory</li> <li> <strong>Entity Framework Core</strong> with connection pooling</li> <li> <strong>SQL Server and PostgreSQL</strong> databases</li> <li> <strong>Redis</strong> for caching and session storage</li> <li> <strong>Docker containers</strong> orchestrated by Kubernetes</li> </ul> <p>What we discovered was sobering: memory issues accounted for 67% of our production incidents, yet they received only 15% of our monitoring attention. The business impact was severe:</p> <ul> <li> <strong>$2.3M in lost revenue</strong> during a 4-hour memory-related outage</li> <li> <strong>Customer trust erosion</strong> with 23% of affected users not returning within 30 days</li> <li> <strong>Engineering productivity loss</strong> with 40% of developer time spent firefighting memory issues</li> </ul> <h2 id="issue-1-the-net-memory-leak-that-nearly-killed-black-friday">Issue #1: The .NET Memory Leak That Nearly Killed Black Friday</h2> <h3 id="the-problem">The Problem</h3> <p>Our ASP.NET Core order processing service was experiencing what appeared to be a classic memory leak. Memory usage grew steadily over 6-8 hours until the application crashed with OutOfMemoryException.</p> <div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// The innocent-looking code that was killing us</span>
+<span class="p">[</span><span class="n">ApiController</span><span class="p">]</span>
+<span class="p">[</span><span class="nf">Route</span><span class="p">(</span><span class="s">"api/[controller]"</span><span class="p">)]</span>
+<span class="k">public</span> <span class="k">class</span> <span class="nc">OrderProcessingController</span> <span class="p">:</span> <span class="n">ControllerBase</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="k">static</span> <span class="k">readonly</span> <span class="n">ConcurrentDictionary</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">OrderEvent</span><span class="p">&gt;&gt;</span> <span class="n">_orderEventCache</span> <span class="p">=</span> <span class="k">new</span><span class="p">();</span>
+    <span class="k">private</span> <span class="k">readonly</span> <span class="n">IServiceProvider</span> <span class="n">_serviceProvider</span><span class="p">;</span>
+    
+    <span class="k">public</span> <span class="nf">OrderProcessingController</span><span class="p">(</span><span class="n">IServiceProvider</span> <span class="n">serviceProvider</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">_serviceProvider</span> <span class="p">=</span> <span class="n">serviceProvider</span><span class="p">;</span>
+    <span class="p">}</span>
+    
+    <span class="p">[</span><span class="n">HttpPost</span><span class="p">]</span>
+    <span class="k">public</span> <span class="k">async</span> <span class="n">Task</span><span class="p">&lt;</span><span class="n">ActionResult</span><span class="p">&lt;</span><span class="n">OrderResult</span><span class="p">&gt;&gt;</span> <span class="nf">ProcessOrder</span><span class="p">(</span><span class="n">Order</span> <span class="n">order</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// This seemed harmless but was accumulating unbounded data</span>
+        <span class="kt">var</span> <span class="n">orderId</span> <span class="p">=</span> <span class="n">order</span><span class="p">.</span><span class="n">Id</span><span class="p">;</span>
+        <span class="n">_orderEventCache</span><span class="p">.</span><span class="nf">AddOrUpdate</span><span class="p">(</span><span class="n">orderId</span><span class="p">,</span>
+            <span class="k">new</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">OrderEvent</span><span class="p">&gt;</span> <span class="p">{</span> <span class="k">new</span> <span class="nf">OrderEvent</span><span class="p">(</span><span class="n">order</span><span class="p">,</span> <span class="n">DateTime</span><span class="p">.</span><span class="n">UtcNow</span><span class="p">)</span> <span class="p">},</span>
+            <span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">existing</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+                <span class="n">existing</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="k">new</span> <span class="nf">OrderEvent</span><span class="p">(</span><span class="n">order</span><span class="p">,</span> <span class="n">DateTime</span><span class="p">.</span><span class="n">UtcNow</span><span class="p">));</span>
+                <span class="k">return</span> <span class="n">existing</span><span class="p">;</span>
+            <span class="p">});</span>
+        
+        <span class="c1">// Fire and forget background processing</span>
+        <span class="n">_</span> <span class="p">=</span> <span class="n">Task</span><span class="p">.</span><span class="nf">Run</span><span class="p">(</span><span class="k">async</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="k">await</span> <span class="nf">ProcessOrderInBackground</span><span class="p">(</span><span class="n">order</span><span class="p">));</span>
+        
+        <span class="k">return</span> <span class="nf">Ok</span><span class="p">(</span><span class="k">new</span> <span class="n">OrderResult</span> <span class="p">{</span> <span class="n">OrderId</span> <span class="p">=</span> <span class="n">orderId</span><span class="p">,</span> <span class="n">Status</span> <span class="p">=</span> <span class="s">"Processing"</span> <span class="p">});</span>
+    <span class="p">}</span>
+    
+    <span class="c1">// The cleanup method that was never called properly</span>
+    <span class="k">private</span> <span class="k">void</span> <span class="nf">CleanupOrderEvents</span><span class="p">(</span><span class="kt">string</span> <span class="n">orderId</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">_orderEventCache</span><span class="p">.</span><span class="nf">TryRemove</span><span class="p">(</span><span class="n">orderId</span><span class="p">,</span> <span class="k">out</span> <span class="n">_</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div> <h3 id="the-investigation-net-memory-forensics">The Investigation: .NET Memory Forensics</h3> <p>We started with .NET memory dump analysis using dotMemory and PerfView:</p> <div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Program.cs - Enable memory monitoring</span>
+<span class="kt">var</span> <span class="n">builder</span> <span class="p">=</span> <span class="n">WebApplication</span><span class="p">.</span><span class="nf">CreateBuilder</span><span class="p">(</span><span class="n">args</span><span class="p">);</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="n">builder</span><span class="p">.</span><span class="n">Environment</span><span class="p">.</span><span class="nf">IsProduction</span><span class="p">())</span>
+<span class="p">{</span>
+    <span class="c1">// Configure automatic heap dump generation</span>
+    <span class="n">builder</span><span class="p">.</span><span class="n">Services</span><span class="p">.</span><span class="n">Configure</span><span class="p">&lt;</span><span class="n">EventStoreClientSettings</span><span class="p">&gt;(</span><span class="n">options</span> <span class="p">=&gt;</span>
+    <span class="p">{</span>
+        <span class="n">options</span><span class="p">.</span><span class="n">CreateHttpMessageHandler</span> <span class="p">=</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="k">new</span> <span class="n">SocketsHttpHandler</span>
+        <span class="p">{</span>
+            <span class="n">PooledConnectionLifetime</span> <span class="p">=</span> <span class="n">TimeSpan</span><span class="p">.</span><span class="nf">FromMinutes</span><span class="p">(</span><span class="m">2</span><span class="p">)</span>
+        <span class="p">};</span>
+    <span class="p">});</span>
+<span class="p">}</span>
+
+<span class="kt">var</span> <span class="n">app</span> <span class="p">=</span> <span class="n">builder</span><span class="p">.</span><span class="nf">Build</span><span class="p">();</span>
+
+<span class="c1">// Add memory monitoring middleware</span>
+<span class="n">app</span><span class="p">.</span><span class="nf">Use</span><span class="p">(</span><span class="k">async</span> <span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">next</span><span class="p">)</span> <span class="p">=&gt;</span>
+<span class="p">{</span>
+    <span class="kt">var</span> <span class="n">memoryBefore</span> <span class="p">=</span> <span class="n">GC</span><span class="p">.</span><span class="nf">GetTotalMemory</span><span class="p">(</span><span class="k">false</span><span class="p">);</span>
+    <span class="k">await</span> <span class="nf">next</span><span class="p">();</span>
+    <span class="kt">var</span> <span class="n">memoryAfter</span> <span class="p">=</span> <span class="n">GC</span><span class="p">.</span><span class="nf">GetTotalMemory</span><span class="p">(</span><span class="k">false</span><span class="p">);</span>
+    
+    <span class="k">if</span> <span class="p">(</span><span class="n">memoryAfter</span> <span class="p">-</span> <span class="n">memoryBefore</span> <span class="p">&gt;</span> <span class="m">10_000_000</span><span class="p">)</span> <span class="c1">// 10MB allocation</span>
+    <span class="p">{</span>
+        <span class="kt">var</span> <span class="n">logger</span> <span class="p">=</span> <span class="n">context</span><span class="p">.</span><span class="n">RequestServices</span><span class="p">.</span><span class="n">GetRequiredService</span><span class="p">&lt;</span><span class="n">ILogger</span><span class="p">&lt;</span><span class="n">Program</span><span class="p">&gt;&gt;();</span>
+        <span class="n">logger</span><span class="p">.</span><span class="nf">LogWarning</span><span class="p">(</span><span class="s">"High memory allocation detected: {MemoryDelta} bytes for {Path}"</span><span class="p">,</span>
+            <span class="n">memoryAfter</span> <span class="p">-</span> <span class="n">memoryBefore</span><span class="p">,</span> <span class="n">context</span><span class="p">.</span><span class="n">Request</span><span class="p">.</span><span class="n">Path</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">});</span>
+</code></pre></div></div> <p>The memory dump revealed shocking statistics:</p> <ul> <li> <strong>ConcurrentDictionary entries</strong>: 3.8GB (62% of heap)</li> <li>**List<orderevent> instances**: 1.9GB (31% of heap)</orderevent> </li> <li> <strong>OrderEvent objects</strong>: 1.1GB (18% of heap)</li> </ul> <p>Our “harmless” static cache had accumulated 2.1 million OrderEvent objects over 8 hours of operation.</p> <h3 id="the-solution-comprehensive-net-memory-management">The Solution: Comprehensive .NET Memory Management</h3> <p><strong>1. Bounded Caches with Expiration using Microsoft.Extensions.Caching</strong></p> <div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="n">ApiController</span><span class="p">]</span>
+<span class="p">[</span><span class="nf">Route</span><span class="p">(</span><span class="s">"api/[controller]"</span><span class="p">)]</span>
+<span class="k">public</span> <span class="k">class</span> <span class="nc">OptimizedOrderProcessingController</span> <span class="p">:</span> <span class="n">ControllerBase</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="k">readonly</span> <span class="n">IMemoryCache</span> <span class="n">_memoryCache</span><span class="p">;</span>
+    <span class="k">private</span> <span class="k">readonly</span> <span class="n">ILogger</span><span class="p">&lt;</span><span class="n">OptimizedOrderProcessingController</span><span class="p">&gt;</span> <span class="n">_logger</span><span class="p">;</span>
+    <span class="k">private</span> <span class="k">readonly</span> <span class="n">IHostedService</span> <span class="n">_backgroundProcessor</span><span class="p">;</span>
+    
+    <span class="k">public</span> <span class="nf">OptimizedOrderProcessingController</span><span class="p">(</span>
+        <span class="n">IMemoryCache</span> <span class="n">memoryCache</span><span class="p">,</span> 
+        <span class="n">ILogger</span><span class="p">&lt;</span><span class="n">OptimizedOrderProcessingController</span><span class="p">&gt;</span> <span class="n">logger</span><span class="p">,</span>
+        <span class="n">BackgroundOrderProcessor</span> <span class="n">backgroundProcessor</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">_memoryCache</span> <span class="p">=</span> <span class="n">memoryCache</span><span class="p">;</span>
+        <span class="n">_logger</span> <span class="p">=</span> <span class="n">logger</span><span class="p">;</span>
+        <span class="n">_backgroundProcessor</span> <span class="p">=</span> <span class="n">backgroundProcessor</span><span class="p">;</span>
+    <span class="p">}</span>
+    
+    <span class="p">[</span><span class="n">HttpPost</span><span class="p">]</span>
+    <span class="k">public</span> <span class="k">async</span> <span class="n">Task</span><span class="p">&lt;</span><span class="n">ActionResult</span><span class="p">&lt;</span><span class="n">OrderResult</span><span class="p">&gt;&gt;</span> <span class="nf">ProcessOrder</span><span class="p">(</span><span class="n">Order</span> <span class="n">order</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="kt">var</span> <span class="n">orderId</span> <span class="p">=</span> <span class="n">order</span><span class="p">.</span><span class="n">Id</span><span class="p">;</span>
+        <span class="kt">var</span> <span class="n">cacheKey</span> <span class="p">=</span> <span class="s">$"order_events_</span><span class="p">{</span><span class="n">orderId</span><span class="p">}</span><span class="s">"</span><span class="p">;</span>
+        
+        <span class="c1">// Use bounded memory cache with expiration</span>
+        <span class="kt">var</span> <span class="n">events</span> <span class="p">=</span> <span class="n">_memoryCache</span><span class="p">.</span><span class="nf">GetOrCreate</span><span class="p">(</span><span class="n">cacheKey</span><span class="p">,</span> <span class="n">cacheEntry</span> <span class="p">=&gt;</span>
+        <span class="p">{</span>
+            <span class="n">cacheEntry</span><span class="p">.</span><span class="n">SlidingExpiration</span> <span class="p">=</span> <span class="n">TimeSpan</span><span class="p">.</span><span class="nf">FromMinutes</span><span class="p">(</span><span class="m">30</span><span class="p">);</span>
+            <span class="n">cacheEntry</span><span class="p">.</span><span class="n">AbsoluteExpirationRelativeToNow</span> <span class="p">=</span> <span class="n">TimeSpan</span><span class="p">.</span><span class="nf">FromHours</span><span class="p">(</span><span class="m">2</span><span class="p">);</span>
+            <span class="n">cacheEntry</span><span class="p">.</span><span class="n">Size</span> <span class="p">=</span> <span class="m">1</span><span class="p">;</span> <span class="c1">// For size-based eviction</span>
+            <span class="n">cacheEntry</span><span class="p">.</span><span class="n">Priority</span> <span class="p">=</span> <span class="n">CacheItemPriority</span><span class="p">.</span><span class="n">Normal</span><span class="p">;</span>
+            
+            <span class="n">cacheEntry</span><span class="p">.</span><span class="nf">RegisterPostEvictionCallback</span><span class="p">((</span><span class="n">key</span><span class="p">,</span> <span class="k">value</span><span class="p">,</span> <span class="n">reason</span><span class="p">,</span> <span class="n">state</span><span class="p">)</span> <span class="p">=&gt;</span>
+            <span class="p">{</span>
+                <span class="n">_logger</span><span class="p">.</span><span class="nf">LogDebug</span><span class="p">(</span><span class="s">"Evicted order events for {OrderId} due to {Reason}"</span><span class="p">,</span> 
+                    <span class="n">orderId</span><span class="p">,</span> <span class="n">reason</span><span class="p">);</span>
+            <span class="p">});</span>
+            
+            <span class="k">return</span> <span class="k">new</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">OrderEvent</span><span class="p">&gt;();</span>
+        <span class="p">});</span>
+        
+        <span class="n">events</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="k">new</span> <span class="nf">OrderEvent</span><span class="p">(</span><span class="n">order</span><span class="p">,</span> <span class="n">DateTime</span><span class="p">.</span><span class="n">UtcNow</span><span class="p">));</span>
+        
+        <span class="c1">// Use hosted service for background processing instead of Task.Run</span>
+        <span class="k">await</span> <span class="n">_backgroundProcessor</span><span class="p">.</span><span class="nf">EnqueueOrderAsync</span><span class="p">(</span><span class="n">order</span><span class="p">);</span>
+        
+        <span class="k">return</span> <span class="nf">Ok</span><span class="p">(</span><span class="k">new</span> <span class="n">OrderResult</span> <span class="p">{</span> <span class="n">OrderId</span> <span class="p">=</span> <span class="n">orderId</span><span class="p">,</span> <span class="n">Status</span> <span class="p">=</span> <span class="s">"Processing"</span> <span class="p">});</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Proper background service implementation</span>
+<span class="k">public</span> <span class="k">class</span> <span class="nc">BackgroundOrderProcessor</span> <span class="p">:</span> <span class="n">BackgroundService</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="k">readonly</span> <span class="n">Channel</span><span class="p">&lt;</span><span class="n">Order</span><span class="p">&gt;</span> <span class="n">_orderQueue</span><span class="p">;</span>
+    <span class="k">private</span> <span class="k">readonly</span> <span class="n">IServiceScopeFactory</span> <span class="n">_scopeFactory</span><span class="p">;</span>
+    <span class="k">private</span> <span class="k">readonly</span> <span class="n">ILogger</span><span class="p">&lt;</span><span class="n">BackgroundOrderProcessor</span><span class="p">&gt;</span> <span class="n">_logger</span><span class="p">;</span>
+    
+    <span class="k">public</span> <span class="nf">BackgroundOrderProcessor</span><span class="p">(</span><span class="n">IServiceScopeFactory</span> <span class="n">scopeFactory</span><span class="p">,</span> <span class="n">ILogger</span><span class="p">&lt;</span><span class="n">BackgroundOrderProcessor</span><span class="p">&gt;</span> <span class="n">logger</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">_scopeFactory</span> <span class="p">=</span> <span class="n">scopeFactory</span><span class="p">;</span>
+        <span class="n">_logger</span> <span class="p">=</span> <span class="n">logger</span><span class="p">;</span>
+        
+        <span class="c1">// Create bounded channel to prevent memory growth</span>
+        <span class="kt">var</span> <span class="n">options</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">BoundedChannelOptions</span><span class="p">(</span><span class="m">1000</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">FullMode</span> <span class="p">=</span> <span class="n">BoundedChannelFullMode</span><span class="p">.</span><span class="n">Wait</span><span class="p">,</span>
+            <span class="n">SingleReader</span> <span class="p">=</span> <span class="k">false</span><span class="p">,</span>
+            <span class="n">SingleWriter</span> <span class="p">=</span> <span class="k">false</span>
+        <span class="p">};</span>
+        
+        <span class="n">_orderQueue</span> <span class="p">=</span> <span class="n">Channel</span><span class="p">.</span><span class="n">CreateBounded</span><span class="p">&lt;</span><span class="n">Order</span><span class="p">&gt;(</span><span class="n">options</span><span class="p">);</span>
+    <span class="p">}</span>
+    
+    <span class="k">public</span> <span class="k">async</span> <span class="n">Task</span> <span class="nf">EnqueueOrderAsync</span><span class="p">(</span><span class="n">Order</span> <span class="n">order</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">await</span> <span class="n">_orderQueue</span><span class="p">.</span><span class="n">Writer</span><span class="p">.</span><span class="nf">WriteAsync</span><span class="p">(</span><span class="n">order</span><span class="p">);</span>
+    <span class="p">}</span>
+    
+    <span class="k">protected</span> <span class="k">override</span> <span class="k">async</span> <span class="n">Task</span> <span class="nf">ExecuteAsync</span><span class="p">(</span><span class="n">CancellationToken</span> <span class="n">stoppingToken</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">await</span> <span class="k">foreach</span> <span class="p">(</span><span class="kt">var</span> <span class="n">order</span> <span class="k">in</span> <span class="n">_orderQueue</span><span class="p">.</span><span class="n">Reader</span><span class="p">.</span><span class="nf">ReadAllAsync</span><span class="p">(</span><span class="n">stoppingToken</span><span class="p">))</span>
+        <span class="p">{</span>
+            <span class="k">try</span>
+            <span class="p">{</span>
+                <span class="k">using</span> <span class="nn">var</span> <span class="n">scope</span> <span class="p">=</span> <span class="n">_scopeFactory</span><span class="p">.</span><span class="nf">CreateScope</span><span class="p">();</span>
+                <span class="kt">var</span> <span class="n">orderService</span> <span class="p">=</span> <span class="n">scope</span><span class="p">.</span><span class="n">ServiceProvider</span><span class="p">.</span><span class="n">GetRequiredService</span><span class="p">&lt;</span><span class="n">IOrderService</span><span class="p">&gt;();</span>
+                <span class="k">await</span> <span class="n">orderService</span><span class="p">.</span><span class="nf">ProcessOrderAsync</span><span class="p">(</span><span class="n">order</span><span class="p">);</span>
+            <span class="p">}</span>
+            <span class="k">catch</span> <span class="p">(</span><span class="n">Exception</span> <span class="n">ex</span><span class="p">)</span>
+            <span class="p">{</span>
+                <span class="n">_logger</span><span class="p">.</span><span class="nf">LogError</span><span class="p">(</span><span class="n">ex</span><span class="p">,</span> <span class="s">"Error processing order {OrderId}"</span><span class="p">,</span> <span class="n">order</span><span class="p">.</span><span class="n">Id</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div> <p><strong>2. Memory Cache Configuration for Production</strong></p> <div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Program.cs - Proper memory cache configuration</span>
+<span class="n">builder</span><span class="p">.</span><span class="n">Services</span><span class="p">.</span><span class="nf">AddMemoryCache</span><span class="p">(</span><span class="n">options</span> <span class="p">=&gt;</span>
+<span class="p">{</span>
+    <span class="c1">// Set size limit to prevent unbounded growth</span>
+    <span class="n">options</span><span class="p">.</span><span class="n">SizeLimit</span> <span class="p">=</span> <span class="m">100_000</span><span class="p">;</span>
+    
+    <span class="c1">// Compact cache when it reaches 75% capacity</span>
+    <span class="n">options</span><span class="p">.</span><span class="n">CompactionPercentage</span> <span class="p">=</span> <span class="m">0.25</span><span class="p">;</span>
+    
+    <span class="c1">// Check for expired items every 30 seconds</span>
+    <span class="n">options</span><span class="p">.</span><span class="n">ExpirationScanFrequency</span> <span class="p">=</span> <span class="n">TimeSpan</span><span class="p">.</span><span class="nf">FromSeconds</span><span class="p">(</span><span class="m">30</span><span class="p">);</span>
+<span class="p">});</span>
+
+<span class="c1">// Register background services properly</span>
+<span class="n">builder</span><span class="p">.</span><span class="n">Services</span><span class="p">.</span><span class="n">AddSingleton</span><span class="p">&lt;</span><span class="n">BackgroundOrderProcessor</span><span class="p">&gt;();</span>
+<span class="n">builder</span><span class="p">.</span><span class="n">Services</span><span class="p">.</span><span class="nf">AddHostedService</span><span class="p">(</span><span class="n">provider</span> <span class="p">=&gt;</span> <span class="n">provider</span><span class="p">.</span><span class="n">GetService</span><span class="p">&lt;</span><span class="n">BackgroundOrderProcessor</span><span class="p">&gt;());</span>
+</code></pre></div></div> <p><strong>Result</strong>: Memory usage stabilized at 2.1GB with zero OutOfMemoryExceptions over 8 months of production operation.</p> <h3 id="the-deeper-insight-memory-aware-net-architecture">The Deeper Insight: Memory-Aware .NET Architecture</h3> <p>The real lesson wasn’t just fixing the immediate leak - it was designing memory-conscious .NET systems:</p> <div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Memory-efficient event processing pattern</span>
+<span class="k">public</span> <span class="k">class</span> <span class="nc">MemoryEfficientOrderProcessor</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="k">readonly</span> <span class="n">IServiceScopeFactory</span> <span class="n">_scopeFactory</span><span class="p">;</span>
+    <span class="k">private</span> <span class="k">readonly</span> <span class="n">ILogger</span><span class="p">&lt;</span><span class="n">MemoryEfficientOrderProcessor</span><span class="p">&gt;</span> <span class="n">_logger</span><span class="p">;</span>
+    
+    <span class="k">public</span> <span class="k">async</span> <span class="n">Task</span> <span class="nf">HandleOrderCreatedAsync</span><span class="p">(</span><span class="n">OrderCreatedEvent</span> <span class="n">orderEvent</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// Process immediately, don't store in memory</span>
+        <span class="k">await</span> <span class="nf">ProcessOrderImmediatelyAsync</span><span class="p">(</span><span class="n">orderEvent</span><span class="p">.</span><span class="n">Order</span><span class="p">);</span>
+        
+        <span class="c1">// If state must be maintained, use external storage (database/Redis)</span>
+        <span class="k">using</span> <span class="nn">var</span> <span class="n">scope</span> <span class="p">=</span> <span class="n">_scopeFactory</span><span class="p">.</span><span class="nf">CreateScope</span><span class="p">();</span>
+        <span class="kt">var</span> <span class="n">repository</span> <span class="p">=</span> <span class="n">scope</span><span class="p">.</span><span class="n">ServiceProvider</span><span class="p">.</span><span class="n">GetRequiredService</span><span class="p">&lt;</span><span class="n">IOrderEventRepository</span><span class="p">&gt;();</span>
+        <span class="k">await</span> <span class="n">repository</span><span class="p">.</span><span class="nf">SaveAsync</span><span class="p">(</span><span class="k">new</span> <span class="nf">OrderEventEntity</span><span class="p">(</span><span class="n">orderEvent</span><span class="p">));</span>
+    <span class="p">}</span>
+    
+    <span class="c1">// Use streaming for large datasets with Entity Framework</span>
+    <span class="k">public</span> <span class="k">async</span> <span class="n">Task</span> <span class="nf">ProcessBulkOrdersAsync</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">using</span> <span class="nn">var</span> <span class="n">scope</span> <span class="p">=</span> <span class="n">_scopeFactory</span><span class="p">.</span><span class="nf">CreateScope</span><span class="p">();</span>
+        <span class="kt">var</span> <span class="n">context</span> <span class="p">=</span> <span class="n">scope</span><span class="p">.</span><span class="n">ServiceProvider</span><span class="p">.</span><span class="n">GetRequiredService</span><span class="p">&lt;</span><span class="n">OrderDbContext</span><span class="p">&gt;();</span>
+        
+        <span class="k">await</span> <span class="k">foreach</span> <span class="p">(</span><span class="kt">var</span> <span class="n">order</span> <span class="k">in</span> <span class="n">context</span><span class="p">.</span><span class="n">Orders</span>
+            <span class="p">.</span><span class="nf">Where</span><span class="p">(</span><span class="n">o</span> <span class="p">=&gt;</span> <span class="n">o</span><span class="p">.</span><span class="n">Status</span> <span class="p">==</span> <span class="n">OrderStatus</span><span class="p">.</span><span class="n">Pending</span><span class="p">)</span>
+            <span class="p">.</span><span class="nf">AsAsyncEnumerable</span><span class="p">())</span>
+        <span class="p">{</span>
+            <span class="k">await</span> <span class="nf">ProcessOrderAsync</span><span class="p">(</span><span class="n">order</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    
+    <span class="c1">// Memory-conscious data processing using projections</span>
+    <span class="k">public</span> <span class="k">async</span> <span class="n">Task</span><span class="p">&lt;</span><span class="n">OrderSummary</span><span class="p">&gt;</span> <span class="nf">GenerateOrderSummaryAsync</span><span class="p">(</span><span class="n">DateTime</span> <span class="n">date</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">using</span> <span class="nn">var</span> <span class="n">scope</span> <span class="p">=</span> <span class="n">_scopeFactory</span><span class="p">.</span><span class="nf">CreateScope</span><span class="p">();</span>
+        <span class="kt">var</span> <span class="n">context</span> <span class="p">=</span> <span class="n">scope</span><span class="p">.</span><span class="n">ServiceProvider</span><span class="p">.</span><span class="n">GetRequiredService</span><span class="p">&lt;</span><span class="n">OrderDbContext</span><span class="p">&gt;();</span>
+        
+        <span class="c1">// Use database aggregation instead of loading all orders into memory</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="n">context</span><span class="p">.</span><span class="n">Orders</span>
+            <span class="p">.</span><span class="nf">Where</span><span class="p">(</span><span class="n">o</span> <span class="p">=&gt;</span> <span class="n">o</span><span class="p">.</span><span class="n">CreatedDate</span><span class="p">.</span><span class="n">Date</span> <span class="p">==</span> <span class="n">date</span><span class="p">.</span><span class="n">Date</span><span class="p">)</span>
+            <span class="p">.</span><span class="nf">GroupBy</span><span class="p">(</span><span class="n">o</span> <span class="p">=&gt;</span> <span class="m">1</span><span class="p">)</span>
+            <span class="p">.</span><span class="nf">Select</span><span class="p">(</span><span class="n">g</span> <span class="p">=&gt;</span> <span class="k">new</span> <span class="n">OrderSummary</span>
+            <span class="p">{</span>
+                <span class="n">TotalOrders</span> <span class="p">=</span> <span class="n">g</span><span class="p">.</span><span class="nf">Count</span><span class="p">(),</span>
+                <span class="n">TotalRevenue</span> <span class="p">=</span> <span class="n">g</span><span class="p">.</span><span class="nf">Sum</span><span class="p">(</span><span class="n">o</span> <span class="p">=&gt;</span> <span class="n">o</span><span class="p">.</span><span class="n">Total</span><span class="p">),</span>
+                <span class="n">AverageOrderValue</span> <span class="p">=</span> <span class="n">g</span><span class="p">.</span><span class="nf">Average</span><span class="p">(</span><span class="n">o</span> <span class="p">=&gt;</span> <span class="n">o</span><span class="p">.</span><span class="n">Total</span><span class="p">)</span>
+            <span class="p">})</span>
+            <span class="p">.</span><span class="nf">FirstOrDefaultAsync</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="err">##</span> <span class="n">Issue</span> <span class="err">#</span><span class="m">2</span><span class="p">:</span> <span class="p">.</span><span class="n">NET</span> <span class="n">Garbage</span> <span class="n">Collection</span> <span class="n">Nightmares</span>
+
+<span class="err">###</span> <span class="n">The</span> <span class="n">Problem</span>
+
+<span class="n">Our</span> <span class="p">.</span><span class="n">NET</span> <span class="n">payment</span> <span class="n">service</span> <span class="n">was</span> <span class="n">experiencing</span> <span class="n">GC</span> <span class="n">pressure</span> <span class="n">that</span> <span class="n">caused</span> <span class="m">500m</span><span class="n">s</span><span class="p">+</span> <span class="n">response</span> <span class="n">time</span> <span class="n">spikes</span> <span class="n">every</span> <span class="m">30</span> <span class="n">seconds</span><span class="p">.</span> <span class="n">The</span> <span class="n">service</span> <span class="n">was</span> <span class="n">healthy</span> <span class="n">between</span> <span class="n">spikes</span><span class="p">,</span> <span class="n">but</span> <span class="n">those</span> <span class="n">periodic</span> <span class="n">freezes</span> <span class="n">were</span> <span class="n">killing</span> <span class="n">user</span> <span class="n">experience</span><span class="p">.</span>
+
+<span class="err">```</span><span class="n">csharp</span>
+<span class="c1">// The problematic payment processing code</span>
+<span class="k">public</span> <span class="k">class</span> <span class="nc">PaymentProcessingService</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="k">readonly</span> <span class="n">HttpClient</span> <span class="n">_httpClient</span><span class="p">;</span>
+    <span class="k">private</span> <span class="k">readonly</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">PaymentTransaction</span><span class="p">&gt;</span> <span class="n">_transactionHistory</span> <span class="p">=</span> <span class="k">new</span><span class="p">();</span>
+    
+    <span class="k">public</span> <span class="k">async</span> <span class="n">Task</span><span class="p">&lt;</span><span class="n">PaymentResult</span><span class="p">&gt;</span> <span class="nf">ProcessPaymentAsync</span><span class="p">(</span><span class="n">PaymentRequest</span> <span class="n">request</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// Creating large objects frequently</span>
+        <span class="kt">var</span> <span class="n">paymentData</span> <span class="p">=</span> <span class="k">new</span> <span class="n">PaymentData</span>
+        <span class="p">{</span>
+            <span class="n">RequestId</span> <span class="p">=</span> <span class="n">Guid</span><span class="p">.</span><span class="nf">NewGuid</span><span class="p">(),</span>
+            <span class="n">Timestamp</span> <span class="p">=</span> <span class="n">DateTime</span><span class="p">.</span><span class="n">UtcNow</span><span class="p">,</span>
+            <span class="n">CustomerInfo</span> <span class="p">=</span> <span class="k">await</span> <span class="nf">GetCustomerInfoAsync</span><span class="p">(</span><span class="n">request</span><span class="p">.</span><span class="n">CustomerId</span><span class="p">),</span>
+            <span class="n">PaymentDetails</span> <span class="p">=</span> <span class="n">request</span><span class="p">.</span><span class="n">PaymentDetails</span><span class="p">,</span>
+            <span class="n">ValidationResults</span> <span class="p">=</span> <span class="k">await</span> <span class="nf">ValidatePaymentAsync</span><span class="p">(</span><span class="n">request</span><span class="p">),</span>
+            <span class="n">AuditTrail</span> <span class="p">=</span> <span class="nf">GenerateAuditTrail</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+        <span class="p">};</span>
+        
+        <span class="c1">// Keeping references to large objects</span>
+        <span class="n">_transactionHistory</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="k">new</span> <span class="nf">PaymentTransaction</span><span class="p">(</span><span class="n">paymentData</span><span class="p">));</span>
+        
+        <span class="c1">// Processing large JSON payloads</span>
+        <span class="kt">var</span> <span class="n">jsonPayload</span> <span class="p">=</span> <span class="n">JsonSerializer</span><span class="p">.</span><span class="nf">Serialize</span><span class="p">(</span><span class="n">paymentData</span><span class="p">);</span>
+        <span class="kt">var</span> <span class="n">response</span> <span class="p">=</span> <span class="k">await</span> <span class="n">_httpClient</span><span class="p">.</span><span class="nf">PostAsync</span><span class="p">(</span><span class="s">"/process"</span><span class="p">,</span> <span class="k">new</span> <span class="nf">StringContent</span><span class="p">(</span><span class="n">jsonPayload</span><span class="p">));</span>
+        
+        <span class="k">return</span> <span class="k">await</span> <span class="nf">ProcessResponseAsync</span><span class="p">(</span><span class="n">response</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div> <h3 id="the-investigation-gc-analysis">The Investigation: GC Analysis</h3> <p>We analyzed GC behavior using Application Insights and custom performance counters:</p> <div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// GC monitoring setup</span>
+<span class="k">public</span> <span class="k">class</span> <span class="nc">GCMonitoringService</span> <span class="p">:</span> <span class="n">IHostedService</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="k">readonly</span> <span class="n">ILogger</span><span class="p">&lt;</span><span class="n">GCMonitoringService</span><span class="p">&gt;</span> <span class="n">_logger</span><span class="p">;</span>
+    <span class="k">private</span> <span class="k">readonly</span> <span class="n">IMetrics</span> <span class="n">_metrics</span><span class="p">;</span>
+    <span class="k">private</span> <span class="n">Timer</span> <span class="n">_timer</span><span class="p">;</span>
+    
+    <span class="k">public</span> <span class="n">Task</span> <span class="nf">StartAsync</span><span class="p">(</span><span class="n">CancellationToken</span> <span class="n">cancellationToken</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">_timer</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Timer</span><span class="p">(</span><span class="n">CollectGCMetrics</span><span class="p">,</span> <span class="k">null</span><span class="p">,</span> <span class="n">TimeSpan</span><span class="p">.</span><span class="n">Zero</span><span class="p">,</span> <span class="n">TimeSpan</span><span class="p">.</span><span class="nf">FromSeconds</span><span class="p">(</span><span class="m">10</span><span class="p">));</span>
+        <span class="k">return</span> <span class="n">Task</span><span class="p">.</span><span class="n">CompletedTask</span><span class="p">;</span>
+    <span class="p">}</span>
+    
+    <span class="k">private</span> <span class="k">void</span> <span class="nf">CollectGCMetrics</span><span class="p">(</span><span class="kt">object</span> <span class="n">state</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="kt">var</span> <span class="n">gen0Collections</span> <span class="p">=</span> <span class="n">GC</span><span class="p">.</span><span class="nf">CollectionCount</span><span class="p">(</span><span class="m">0</span><span class="p">);</span>
+        <span class="kt">var</span> <span class="n">gen1Collections</span> <span class="p">=</span> <span class="n">GC</span><span class="p">.</span><span class="nf">CollectionCount</span><span class="p">(</span><span class="m">1</span><span class="p">);</span>
+        <span class="kt">var</span> <span class="n">gen2Collections</span> <span class="p">=</span> <span class="n">GC</span><span class="p">.</span><span class="nf">CollectionCount</span><span class="p">(</span><span class="m">2</span><span class="p">);</span>
+        <span class="kt">var</span> <span class="n">totalMemory</span> <span class="p">=</span> <span class="n">GC</span><span class="p">.</span><span class="nf">GetTotalMemory</span><span class="p">(</span><span class="k">false</span><span class="p">);</span>
+        <span class="kt">var</span> <span class="n">gen0Size</span> <span class="p">=</span> <span class="n">GC</span><span class="p">.</span><span class="nf">GetGeneration</span><span class="p">(</span><span class="k">new</span> <span class="kt">object</span><span class="p">());</span>
+        
+        <span class="n">_metrics</span><span class="p">.</span><span class="nf">Gauge</span><span class="p">(</span><span class="s">"gc.gen0.collections"</span><span class="p">).</span><span class="nf">Set</span><span class="p">(</span><span class="n">gen0Collections</span><span class="p">);</span>
+        <span class="n">_metrics</span><span class="p">.</span><span class="nf">Gauge</span><span class="p">(</span><span class="s">"gc.gen1.collections"</span><span class="p">).</span><span class="nf">Set</span><span class="p">(</span><span class="n">gen1Collections</span><span class="p">);</span>
+        <span class="n">_metrics</span><span class="p">.</span><span class="nf">Gauge</span><span class="p">(</span><span class="s">"gc.gen2.collections"</span><span class="p">).</span><span class="nf">Set</span><span class="p">(</span><span class="n">gen2Collections</span><span class="p">);</span>
+        <span class="n">_metrics</span><span class="p">.</span><span class="nf">Gauge</span><span class="p">(</span><span class="s">"gc.total.memory.bytes"</span><span class="p">).</span><span class="nf">Set</span><span class="p">(</span><span class="n">totalMemory</span><span class="p">);</span>
+        
+        <span class="c1">// Log concerning patterns</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">gen2Collections</span> <span class="p">&gt;</span> <span class="n">_previousGen2Count</span> <span class="p">+</span> <span class="m">5</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">_logger</span><span class="p">.</span><span class="nf">LogWarning</span><span class="p">(</span><span class="s">"High Gen2 GC activity detected: {Gen2Collections}"</span><span class="p">,</span> <span class="n">gen2Collections</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div> <p>The analysis revealed:</p> <ul> <li> <strong>Gen 2 collections</strong> every 30 seconds lasting 400-600ms</li> <li> <strong>Large Object Heap (LOH)</strong> pressure from JSON serialization</li> <li> <strong>Memory pressure</strong> from unbounded list growth</li> </ul> <h3 id="the-solution-net-memory-optimization">The Solution: .NET Memory Optimization</h3> <p><strong>1. Object Pooling and Memory Management</strong></p> <div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">class</span> <span class="nc">OptimizedPaymentProcessingService</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="k">readonly</span> <span class="n">ObjectPool</span><span class="p">&lt;</span><span class="n">StringBuilder</span><span class="p">&gt;</span> <span class="n">_stringBuilderPool</span><span class="p">;</span>
+    <span class="k">private</span> <span class="k">readonly</span> <span class="n">IMemoryCache</span> <span class="n">_memoryCache</span><span class="p">;</span>
+    <span class="k">private</span> <span class="k">readonly</span> <span class="n">ArrayPool</span><span class="p">&lt;</span><span class="kt">byte</span><span class="p">&gt;</span> <span class="n">_arrayPool</span> <span class="p">=</span> <span class="n">ArrayPool</span><span class="p">&lt;</span><span class="kt">byte</span><span class="p">&gt;.</span><span class="n">Shared</span><span class="p">;</span>
+    
+    <span class="c1">// Use bounded concurrent collection instead of unbounded List</span>
+    <span class="k">private</span> <span class="k">readonly</span> <span class="n">ConcurrentQueue</span><span class="p">&lt;</span><span class="n">PaymentTransaction</span><span class="p">&gt;</span> <span class="n">_recentTransactions</span> <span class="p">=</span> <span class="k">new</span><span class="p">();</span>
+    <span class="k">private</span> <span class="k">const</span> <span class="kt">int</span> <span class="n">MaxRecentTransactions</span> <span class="p">=</span> <span class="m">1000</span><span class="p">;</span>
+    
+    <span class="k">public</span> <span class="nf">OptimizedPaymentProcessingService</span><span class="p">(</span><span class="n">ObjectPool</span><span class="p">&lt;</span><span class="n">StringBuilder</span><span class="p">&gt;</span> <span class="n">stringBuilderPool</span><span class="p">,</span> <span class="n">IMemoryCache</span> <span class="n">memoryCache</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">_stringBuilderPool</span> <span class="p">=</span> <span class="n">stringBuilderPool</span><span class="p">;</span>
+        <span class="n">_memoryCache</span> <span class="p">=</span> <span class="n">memoryCache</span><span class="p">;</span>
+    <span class="p">}</span>
+    
+    <span class="k">public</span> <span class="k">async</span> <span class="n">Task</span><span class="p">&lt;</span><span class="n">PaymentResult</span><span class="p">&gt;</span> <span class="nf">ProcessPaymentAsync</span><span class="p">(</span><span class="n">PaymentRequest</span> <span class="n">request</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// Use object pooling for frequently allocated objects</span>
+        <span class="kt">var</span> <span class="n">stringBuilder</span> <span class="p">=</span> <span class="n">_stringBuilderPool</span><span class="p">.</span><span class="nf">Get</span><span class="p">();</span>
+        
+        <span class="k">try</span>
+        <span class="p">{</span>
+            <span class="c1">// Create payment data with memory-conscious approach</span>
+            <span class="kt">var</span> <span class="n">paymentData</span> <span class="p">=</span> <span class="k">await</span> <span class="nf">CreatePaymentDataAsync</span><span class="p">(</span><span class="n">request</span><span class="p">);</span>
+            
+            <span class="c1">// Use System.Text.Json with pre-allocated buffers</span>
+            <span class="kt">var</span> <span class="n">jsonBytes</span> <span class="p">=</span> <span class="k">await</span> <span class="nf">SerializeToJsonBytesAsync</span><span class="p">(</span><span class="n">paymentData</span><span class="p">);</span>
+            
+            <span class="c1">// Process payment with efficient memory usage</span>
+            <span class="kt">var</span> <span class="n">result</span> <span class="p">=</span> <span class="k">await</span> <span class="nf">ProcessPaymentInternalAsync</span><span class="p">(</span><span class="n">jsonBytes</span><span class="p">);</span>
+            
+            <span class="c1">// Maintain bounded transaction history</span>
+            <span class="k">await</span> <span class="nf">AddTransactionToHistoryAsync</span><span class="p">(</span><span class="n">paymentData</span><span class="p">,</span> <span class="n">result</span><span class="p">);</span>
+            
+            <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">finally</span>
+        <span class="p">{</span>
+            <span class="n">_stringBuilderPool</span><span class="p">.</span><span class="nf">Return</span><span class="p">(</span><span class="n">stringBuilder</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    
+    <span class="k">private</span> <span class="k">async</span> <span class="n">Task</span><span class="p">&lt;</span><span class="kt">byte</span><span class="p">[</span><span class="k">]&gt;</span> <span class="nf">SerializeToJsonBytesAsync</span><span class="p">(</span><span class="n">PaymentData</span> <span class="n">paymentData</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// Rent buffer from array pool to avoid LOH allocations</span>
+        <span class="kt">var</span> <span class="n">rentedBuffer</span> <span class="p">=</span> <span class="n">_arrayPool</span><span class="p">.</span><span class="nf">Rent</span><span class="p">(</span><span class="m">4096</span><span class="p">);</span>
+        
+        <span class="k">try</span>
+        <span class="p">{</span>
+            <span class="k">using</span> <span class="nn">var</span> <span class="n">stream</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">MemoryStream</span><span class="p">(</span><span class="n">rentedBuffer</span><span class="p">);</span>
+            <span class="k">await</span> <span class="n">JsonSerializer</span><span class="p">.</span><span class="nf">SerializeAsync</span><span class="p">(</span><span class="n">stream</span><span class="p">,</span> <span class="n">paymentData</span><span class="p">,</span> <span class="k">new</span> <span class="n">JsonSerializerOptions</span>
+            <span class="p">{</span>
+                <span class="n">DefaultBufferSize</span> <span class="p">=</span> <span class="m">1024</span>  <span class="c1">// Smaller buffer size</span>
+            <span class="p">});</span>
+            
+            <span class="k">return</span> <span class="n">stream</span><span class="p">.</span><span class="nf">ToArray</span><span class="p">();</span>
+        <span class="p">}</span>
+        <span class="k">finally</span>
+        <span class="p">{</span>
+            <span class="n">_arrayPool</span><span class="p">.</span><span class="nf">Return</span><span class="p">(</span><span class="n">rentedBuffer</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    
+    <span class="k">private</span> <span class="k">async</span> <span class="n">Task</span> <span class="nf">AddTransactionToHistoryAsync</span><span class="p">(</span><span class="n">PaymentData</span> <span class="n">paymentData</span><span class="p">,</span> <span class="n">PaymentResult</span> <span class="n">result</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="kt">var</span> <span class="n">transaction</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">PaymentTransaction</span><span class="p">(</span><span class="n">paymentData</span><span class="p">.</span><span class="n">RequestId</span><span class="p">,</span> <span class="n">result</span><span class="p">.</span><span class="n">Status</span><span class="p">,</span> <span class="n">DateTime</span><span class="p">.</span><span class="n">UtcNow</span><span class="p">);</span>
+        
+        <span class="n">_recentTransactions</span><span class="p">.</span><span class="nf">Enqueue</span><span class="p">(</span><span class="n">transaction</span><span class="p">);</span>
+        
+        <span class="c1">// Maintain bounded size</span>
+        <span class="k">while</span> <span class="p">(</span><span class="n">_recentTransactions</span><span class="p">.</span><span class="n">Count</span> <span class="p">&gt;</span> <span class="n">MaxRecentTransactions</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">_recentTransactions</span><span class="p">.</span><span class="nf">TryDequeue</span><span class="p">(</span><span class="k">out</span> <span class="n">_</span><span class="p">);</span>
+        <span class="p">}</span>
+        
+        <span class="c1">// Persist to external storage instead of keeping in memory</span>
+        <span class="k">await</span> <span class="n">_transactionRepository</span><span class="p">.</span><span class="nf">SaveAsync</span><span class="p">(</span><span class="n">transaction</span><span class="p">);</span>
+    <span class="p">}</span>
+    
+    <span class="c1">// Use memory caching with expiration</span>
+    <span class="k">private</span> <span class="k">async</span> <span class="n">Task</span><span class="p">&lt;</span><span class="n">CustomerInfo</span><span class="p">&gt;</span> <span class="nf">GetCustomerInfoAsync</span><span class="p">(</span><span class="kt">string</span> <span class="n">customerId</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="kt">var</span> <span class="n">cacheKey</span> <span class="p">=</span> <span class="s">$"customer:</span><span class="p">{</span><span class="n">customerId</span><span class="p">}</span><span class="s">"</span><span class="p">;</span>
+        
+        <span class="k">if</span> <span class="p">(</span><span class="n">_memoryCache</span><span class="p">.</span><span class="nf">TryGetValue</span><span class="p">(</span><span class="n">cacheKey</span><span class="p">,</span> <span class="k">out</span> <span class="n">CustomerInfo</span> <span class="n">customerInfo</span><span class="p">))</span>
+        <span class="p">{</span>
+            <span class="k">return</span> <span class="n">customerInfo</span><span class="p">;</span>
+        <span class="p">}</span>
+        
+        <span class="n">customerInfo</span> <span class="p">=</span> <span class="k">await</span> <span class="n">_customerRepository</span><span class="p">.</span><span class="nf">GetByIdAsync</span><span class="p">(</span><span class="n">customerId</span><span class="p">);</span>
+        
+        <span class="n">_memoryCache</span><span class="p">.</span><span class="nf">Set</span><span class="p">(</span><span class="n">cacheKey</span><span class="p">,</span> <span class="n">customerInfo</span><span class="p">,</span> <span class="k">new</span> <span class="n">MemoryCacheEntryOptions</span>
+        <span class="p">{</span>
+            <span class="n">AbsoluteExpirationRelativeToNow</span> <span class="p">=</span> <span class="n">TimeSpan</span><span class="p">.</span><span class="nf">FromMinutes</span><span class="p">(</span><span class="m">5</span><span class="p">),</span>
+            <span class="n">SlidingExpiration</span> <span class="p">=</span> <span class="n">TimeSpan</span><span class="p">.</span><span class="nf">FromMinutes</span><span class="p">(</span><span class="m">1</span><span class="p">),</span>
+            <span class="n">Size</span> <span class="p">=</span> <span class="m">1</span><span class="p">,</span>
+            <span class="n">Priority</span> <span class="p">=</span> <span class="n">CacheItemPriority</span><span class="p">.</span><span class="n">Normal</span>
+        <span class="p">});</span>
+        
+        <span class="k">return</span> <span class="n">customerInfo</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div> <p><strong>2. GC Configuration and Monitoring</strong></p> <div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Program.cs - GC configuration</span>
+<span class="k">public</span> <span class="k">static</span> <span class="n">IHostBuilder</span> <span class="nf">CreateHostBuilder</span><span class="p">(</span><span class="kt">string</span><span class="p">[]</span> <span class="n">args</span><span class="p">)</span> <span class="p">=&gt;</span>
+    <span class="n">Host</span><span class="p">.</span><span class="nf">CreateDefaultBuilder</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
+        <span class="p">.</span><span class="nf">ConfigureServices</span><span class="p">((</span><span class="n">context</span><span class="p">,</span> <span class="n">services</span><span class="p">)</span> <span class="p">=&gt;</span>
+        <span class="p">{</span>
+            <span class="c1">// Configure memory cache with size limit</span>
+            <span class="n">services</span><span class="p">.</span><span class="nf">AddMemoryCache</span><span class="p">(</span><span class="n">options</span> <span class="p">=&gt;</span>
+            <span class="p">{</span>
+                <span class="n">options</span><span class="p">.</span><span class="n">SizeLimit</span> <span class="p">=</span> <span class="m">100_000</span><span class="p">;</span> <span class="c1">// Limit cache entries</span>
+                <span class="n">options</span><span class="p">.</span><span class="n">CompactionPercentage</span> <span class="p">=</span> <span class="m">0.25</span><span class="p">;</span> <span class="c1">// Compact when 75% full</span>
+            <span class="p">});</span>
+            
+            <span class="c1">// Configure object pooling</span>
+            <span class="n">services</span><span class="p">.</span><span class="n">AddSingleton</span><span class="p">&lt;</span><span class="n">ObjectPoolProvider</span><span class="p">,</span> <span class="n">DefaultObjectPoolProvider</span><span class="p">&gt;();</span>
+            <span class="n">services</span><span class="p">.</span><span class="nf">AddSingleton</span><span class="p">(</span><span class="n">serviceProvider</span> <span class="p">=&gt;</span>
+            <span class="p">{</span>
+                <span class="kt">var</span> <span class="n">provider</span> <span class="p">=</span> <span class="n">serviceProvider</span><span class="p">.</span><span class="n">GetService</span><span class="p">&lt;</span><span class="n">ObjectPoolProvider</span><span class="p">&gt;();</span>
+                <span class="k">return</span> <span class="n">provider</span><span class="p">.</span><span class="nf">CreateStringBuilderPool</span><span class="p">();</span>
+            <span class="p">});</span>
+            
+            <span class="c1">// Add custom GC monitoring</span>
+            <span class="n">services</span><span class="p">.</span><span class="n">AddSingleton</span><span class="p">&lt;</span><span class="n">GCMonitoringService</span><span class="p">&gt;();</span>
+            <span class="n">services</span><span class="p">.</span><span class="n">AddHostedService</span><span class="p">&lt;</span><span class="n">GCMonitoringService</span><span class="p">&gt;();</span>
+        <span class="p">})</span>
+        <span class="p">.</span><span class="nf">ConfigureWebHostDefaults</span><span class="p">(</span><span class="n">webBuilder</span> <span class="p">=&gt;</span>
+        <span class="p">{</span>
+            <span class="n">webBuilder</span><span class="p">.</span><span class="n">UseStartup</span><span class="p">&lt;</span><span class="n">Startup</span><span class="p">&gt;();</span>
+            
+            <span class="c1">// Configure Kestrel with memory limits</span>
+            <span class="n">webBuilder</span><span class="p">.</span><span class="nf">UseKestrel</span><span class="p">(</span><span class="n">options</span> <span class="p">=&gt;</span>
+            <span class="p">{</span>
+                <span class="n">options</span><span class="p">.</span><span class="n">Limits</span><span class="p">.</span><span class="n">MaxRequestBodySize</span> <span class="p">=</span> <span class="m">10</span> <span class="p">*</span> <span class="m">1024</span> <span class="p">*</span> <span class="m">1024</span><span class="p">;</span> <span class="c1">// 10MB limit</span>
+                <span class="n">options</span><span class="p">.</span><span class="n">Limits</span><span class="p">.</span><span class="n">MaxRequestBufferSize</span> <span class="p">=</span> <span class="m">1024</span> <span class="p">*</span> <span class="m">1024</span><span class="p">;</span>    <span class="c1">// 1MB buffer</span>
+            <span class="p">});</span>
+        <span class="p">});</span>
+</code></pre></div></div> <p><strong>3. Advanced GC Tuning for Production</strong></p> <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!-- In .csproj for Server GC --&gt;</span>
+<span class="nt">&lt;PropertyGroup&gt;</span>
+  <span class="nt">&lt;ServerGarbageCollection&gt;</span>true<span class="nt">&lt;/ServerGarbageCollection&gt;</span>
+  <span class="nt">&lt;ConcurrentGarbageCollection&gt;</span>true<span class="nt">&lt;/ConcurrentGarbageCollection&gt;</span>
+  <span class="nt">&lt;RetainVMGarbageCollection&gt;</span>true<span class="nt">&lt;/RetainVMGarbageCollection&gt;</span>
+<span class="nt">&lt;/PropertyGroup&gt;</span>
+</code></pre></div></div> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Environment variables for GC tuning</span>
+<span class="nb">export </span><span class="nv">DOTNET_gcServer</span><span class="o">=</span>1
+<span class="nb">export </span><span class="nv">DOTNET_gcConcurrent</span><span class="o">=</span>1
+<span class="nb">export </span><span class="nv">DOTNET_GCHeapHardLimit</span><span class="o">=</span>0x200000000  <span class="c"># 8GB heap limit</span>
+<span class="nb">export </span><span class="nv">DOTNET_GCHighMemPercent</span><span class="o">=</span>90
+<span class="nb">export </span><span class="nv">DOTNET_GCConserveMemory</span><span class="o">=</span>5
+</code></pre></div></div> <p><strong>Result</strong>: P95 response times dropped from 650ms to 85ms, and GC pause times reduced by 78%.</p> <h2 id="issue-3-docker-memory-limits-and-oomkilled">Issue #3: Docker Memory Limits and OOMKilled</h2> <h3 id="the-problem-1">The Problem</h3> <p>Our containerized services were randomly dying with exit code 137 (OOMKilled). Container memory usage looked normal in monitoring dashboards, but containers were still being killed by the OOM killer.</p> <h3 id="the-investigation-container-memory-deep-dive">The Investigation: Container Memory Deep Dive</h3> <p>The issue was subtle but deadly - we were monitoring application memory usage, not total container memory consumption:</p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="c"># What we were monitoring (application memory)</span>
+docker stats <span class="nt">--format</span> <span class="s2">"table {{.Container}}</span><span class="se">\t</span><span class="s2">{{.CPUPerc}}</span><span class="se">\t</span><span class="s2">{{.MemUsage}}</span><span class="se">\t</span><span class="s2">{{.MemPerc}}"</span>
+
+<span class="c"># What we should have been monitoring (total memory including buffers, cache, etc.)</span>
+docker <span class="nb">exec</span> &lt;container_id&gt; <span class="nb">cat</span> /sys/fs/cgroup/memory/memory.usage_in_bytes
+docker <span class="nb">exec</span> &lt;container_id&gt; <span class="nb">cat</span> /sys/fs/cgroup/memory/memory.limit_in_bytes
+
+</code></pre></div></div> <h3 id="the-solution-comprehensive-container-memory-management">The Solution: Comprehensive Container Memory Management</h3> <p><strong>1. Proper Memory Limit Configuration</strong></p> <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Kubernetes deployment with proper memory management</span>
+<span class="na">apiVersion</span><span class="pi">:</span> <span class="s">apps/v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">Deployment</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">payment-service</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">replicas</span><span class="pi">:</span> <span class="m">3</span>
+  <span class="na">template</span><span class="pi">:</span>
+    <span class="na">spec</span><span class="pi">:</span>
+      <span class="na">containers</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">payment-service</span>
+        <span class="na">image</span><span class="pi">:</span> <span class="s">payment-service:latest</span>
+        <span class="na">resources</span><span class="pi">:</span>
+          <span class="na">requests</span><span class="pi">:</span>
+            <span class="na">memory</span><span class="pi">:</span> <span class="s2">"</span><span class="s">2Gi"</span>
+            <span class="na">cpu</span><span class="pi">:</span> <span class="s2">"</span><span class="s">500m"</span>
+          <span class="na">limits</span><span class="pi">:</span>
+            <span class="na">memory</span><span class="pi">:</span> <span class="s2">"</span><span class="s">4Gi"</span>        <span class="c1"># 2x request for burst capacity</span>
+            <span class="na">cpu</span><span class="pi">:</span> <span class="s2">"</span><span class="s">2000m"</span>
+        <span class="na">env</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">DOTNET_GCHeapHardLimit</span>
+          <span class="na">value</span><span class="pi">:</span> <span class="s2">"</span><span class="s">0xC0000000"</span>    <span class="c1"># 3GB (75% of 4GB limit)</span>
+        <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">DOTNET_GCServer</span>
+          <span class="na">value</span><span class="pi">:</span> <span class="s2">"</span><span class="s">1"</span>             <span class="c1"># Enable server GC for better throughput</span>
+          
+        <span class="c1"># Liveness probe with proper failure threshold</span>
+        <span class="na">livenessProbe</span><span class="pi">:</span>
+          <span class="na">httpGet</span><span class="pi">:</span>
+            <span class="na">path</span><span class="pi">:</span> <span class="s">/health/live</span>
+            <span class="na">port</span><span class="pi">:</span> <span class="m">8080</span>
+          <span class="na">initialDelaySeconds</span><span class="pi">:</span> <span class="m">60</span>
+          <span class="na">periodSeconds</span><span class="pi">:</span> <span class="m">30</span>
+          <span class="na">failureThreshold</span><span class="pi">:</span> <span class="m">3</span>
+          <span class="na">timeoutSeconds</span><span class="pi">:</span> <span class="m">10</span>
+          
+        <span class="c1"># Readiness probe</span>
+        <span class="na">readinessProbe</span><span class="pi">:</span>
+          <span class="na">httpGet</span><span class="pi">:</span>
+            <span class="na">path</span><span class="pi">:</span> <span class="s">/health/ready</span>
+            <span class="na">port</span><span class="pi">:</span> <span class="m">8080</span>
+          <span class="na">initialDelaySeconds</span><span class="pi">:</span> <span class="m">30</span>
+          <span class="na">periodSeconds</span><span class="pi">:</span> <span class="m">10</span>
+          <span class="na">failureThreshold</span><span class="pi">:</span> <span class="m">3</span>
+          
+      <span class="c1"># Configure pod disruption budget</span>
+      <span class="na">terminationGracePeriodSeconds</span><span class="pi">:</span> <span class="m">45</span>
+</code></pre></div></div> <p><strong>2. Memory Monitoring and Alerting</strong></p> <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="c1"># Prometheus alerts for memory issues</span>
+<span class="na">groups</span><span class="pi">:</span>
+<span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">memory-alerts</span>
+  <span class="na">rules</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">alert</span><span class="pi">:</span> <span class="s">ContainerMemoryUsageHigh</span>
+    <span class="na">expr</span><span class="pi">:</span> <span class="s">(container_memory_usage_bytes / container_spec_memory_limit_bytes) &gt; </span><span class="m">0.8</span>
+    <span class="na">for</span><span class="pi">:</span> <span class="s">5m</span>
+    <span class="na">labels</span><span class="pi">:</span>
+      <span class="na">severity</span><span class="pi">:</span> <span class="s">warning</span>
+    <span class="na">annotations</span><span class="pi">:</span>
+      <span class="na">summary</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Container</span><span class="nv"> </span><span class="s">memory</span><span class="nv"> </span><span class="s">usage</span><span class="nv"> </span><span class="s">is</span><span class="nv"> </span><span class="s">above</span><span class="nv"> </span><span class="s">80%"</span>
+      <span class="na">description</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Container</span><span class="nv"> </span><span class="s">{{</span><span class="nv"> </span><span class="s">$labels.container</span><span class="nv"> </span><span class="s">}}</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">pod</span><span class="nv"> </span><span class="s">{{</span><span class="nv"> </span><span class="s">$labels.pod</span><span class="nv"> </span><span class="s">}}</span><span class="nv"> </span><span class="s">is</span><span class="nv"> </span><span class="s">using</span><span class="nv"> </span><span class="s">{{</span><span class="nv"> </span><span class="s">$value</span><span class="nv"> </span><span class="s">|</span><span class="nv"> </span><span class="s">humanizePercentage</span><span class="nv"> </span><span class="s">}}</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">its</span><span class="nv"> </span><span class="s">memory</span><span class="nv"> </span><span class="s">limit"</span>
+      
+  <span class="pi">-</span> <span class="na">alert</span><span class="pi">:</span> <span class="s">ContainerMemoryUsageCritical</span>
+    <span class="na">expr</span><span class="pi">:</span> <span class="s">(container_memory_usage_bytes / container_spec_memory_limit_bytes) &gt; </span><span class="m">0.9</span>
+    <span class="na">for</span><span class="pi">:</span> <span class="s">2m</span>
+    <span class="na">labels</span><span class="pi">:</span>
+      <span class="na">severity</span><span class="pi">:</span> <span class="s">critical</span>
+    <span class="na">annotations</span><span class="pi">:</span>
+      <span class="na">summary</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Container</span><span class="nv"> </span><span class="s">memory</span><span class="nv"> </span><span class="s">usage</span><span class="nv"> </span><span class="s">is</span><span class="nv"> </span><span class="s">critically</span><span class="nv"> </span><span class="s">high"</span>
+      
+  <span class="pi">-</span> <span class="na">alert</span><span class="pi">:</span> <span class="s">PodOOMKilled</span>
+    <span class="na">expr</span><span class="pi">:</span> <span class="s">increase(kube_pod_container_status_restarts_total[5m]) &gt; 0 and kube_pod_container_status_last_terminated_reason{reason="OOMKilled"} == </span><span class="m">1</span>
+    <span class="na">for</span><span class="pi">:</span> <span class="s">0m</span>
+    <span class="na">labels</span><span class="pi">:</span>
+      <span class="na">severity</span><span class="pi">:</span> <span class="s">critical</span>
+    <span class="na">annotations</span><span class="pi">:</span>
+      <span class="na">summary</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Pod</span><span class="nv"> </span><span class="s">was</span><span class="nv"> </span><span class="s">OOMKilled"</span>
+      <span class="na">description</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Pod</span><span class="nv"> </span><span class="s">{{</span><span class="nv"> </span><span class="s">$labels.pod</span><span class="nv"> </span><span class="s">}}</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">namespace</span><span class="nv"> </span><span class="s">{{</span><span class="nv"> </span><span class="s">$labels.namespace</span><span class="nv"> </span><span class="s">}}</span><span class="nv"> </span><span class="s">was</span><span class="nv"> </span><span class="s">killed</span><span class="nv"> </span><span class="s">due</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">out</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">memory"</span>
+
+</code></pre></div></div> <p><strong>3. Memory-Aware Application Configuration</strong></p> <div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Startup.cs - Configure services for container memory constraints</span>
+<span class="k">public</span> <span class="k">void</span> <span class="nf">ConfigureServices</span><span class="p">(</span><span class="n">IServiceCollection</span> <span class="n">services</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="c1">// Configure HTTP client with connection pooling</span>
+    <span class="n">services</span><span class="p">.</span><span class="n">AddHttpClient</span><span class="p">&lt;</span><span class="n">PaymentGatewayClient</span><span class="p">&gt;(</span><span class="n">client</span> <span class="p">=&gt;</span>
+    <span class="p">{</span>
+        <span class="n">client</span><span class="p">.</span><span class="n">Timeout</span> <span class="p">=</span> <span class="n">TimeSpan</span><span class="p">.</span><span class="nf">FromSeconds</span><span class="p">(</span><span class="m">30</span><span class="p">);</span>
+    <span class="p">}).</span><span class="nf">ConfigurePrimaryHttpMessageHandler</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="k">new</span> <span class="n">SocketsHttpHandler</span>
+    <span class="p">{</span>
+        <span class="n">PooledConnectionLifetime</span> <span class="p">=</span> <span class="n">TimeSpan</span><span class="p">.</span><span class="nf">FromMinutes</span><span class="p">(</span><span class="m">2</span><span class="p">),</span>
+        <span class="n">MaxConnectionsPerServer</span> <span class="p">=</span> <span class="m">50</span><span class="p">,</span>
+        <span class="n">UseProxy</span> <span class="p">=</span> <span class="k">false</span>
+    <span class="p">});</span>
+    
+    <span class="c1">// Configure memory cache with container-aware limits</span>
+    <span class="n">services</span><span class="p">.</span><span class="nf">AddMemoryCache</span><span class="p">(</span><span class="n">options</span> <span class="p">=&gt;</span>
+    <span class="p">{</span>
+        <span class="c1">// Use percentage of available memory</span>
+        <span class="kt">var</span> <span class="n">totalMemory</span> <span class="p">=</span> <span class="n">GC</span><span class="p">.</span><span class="nf">GetTotalMemory</span><span class="p">(</span><span class="k">false</span><span class="p">);</span>
+        <span class="n">options</span><span class="p">.</span><span class="n">SizeLimit</span> <span class="p">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)(</span><span class="n">totalMemory</span> <span class="p">*</span> <span class="m">0.1</span><span class="p">);</span> <span class="c1">// 10% of heap for cache</span>
+    <span class="p">});</span>
+    
+    <span class="c1">// Configure Entity Framework with connection pooling</span>
+    <span class="n">services</span><span class="p">.</span><span class="n">AddDbContextPool</span><span class="p">&lt;</span><span class="n">PaymentDbContext</span><span class="p">&gt;(</span><span class="n">options</span> <span class="p">=&gt;</span>
+        <span class="n">options</span><span class="p">.</span><span class="nf">UseNpgsql</span><span class="p">(</span><span class="n">connectionString</span><span class="p">,</span> <span class="n">npgsqlOptions</span> <span class="p">=&gt;</span>
+        <span class="p">{</span>
+            <span class="n">npgsqlOptions</span><span class="p">.</span><span class="nf">CommandTimeout</span><span class="p">(</span><span class="m">30</span><span class="p">);</span>
+        <span class="p">}),</span> <span class="n">poolSize</span><span class="p">:</span> <span class="m">128</span><span class="p">);</span> <span class="c1">// Limit connection pool size</span>
+<span class="p">}</span>
+</code></pre></div></div> <h2 id="issue-4-entity-framework-connection-pool-memory-leaks">Issue #4: Entity Framework Connection Pool Memory Leaks</h2> <h3 id="the-problem-2">The Problem</h3> <p>Our Entity Framework DbContext instances were slowly leaking memory, and database connections weren’t being properly disposed in high-concurrency scenarios. We discovered that long-lived DbContext instances were holding onto connections and change tracking data.</p> <h3 id="the-investigation-and-solution">The Investigation and Solution</h3> <div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// The problematic pattern - long-lived DbContext</span>
+<span class="k">public</span> <span class="k">class</span> <span class="nc">OrderRepository</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="k">readonly</span> <span class="n">OrderDbContext</span> <span class="n">_context</span><span class="p">;</span> <span class="c1">// Singleton DbContext - BAD!</span>
+    
+    <span class="k">public</span> <span class="nf">OrderRepository</span><span class="p">(</span><span class="n">OrderDbContext</span> <span class="n">context</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">_context</span> <span class="p">=</span> <span class="n">context</span><span class="p">;</span>
+    <span class="p">}</span>
+    
+    <span class="k">public</span> <span class="k">async</span> <span class="n">Task</span><span class="p">&lt;</span><span class="n">Order</span><span class="p">&gt;</span> <span class="nf">GetOrderAsync</span><span class="p">(</span><span class="kt">int</span> <span class="n">orderId</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// Long-lived context accumulates change tracking data</span>
+        <span class="kt">var</span> <span class="n">order</span> <span class="p">=</span> <span class="k">await</span> <span class="n">_context</span><span class="p">.</span><span class="n">Orders</span>
+            <span class="p">.</span><span class="nf">Include</span><span class="p">(</span><span class="n">o</span> <span class="p">=&gt;</span> <span class="n">o</span><span class="p">.</span><span class="n">Items</span><span class="p">)</span>
+            <span class="p">.</span><span class="nf">FirstOrDefaultAsync</span><span class="p">(</span><span class="n">o</span> <span class="p">=&gt;</span> <span class="n">o</span><span class="p">.</span><span class="n">Id</span> <span class="p">==</span> <span class="n">orderId</span><span class="p">);</span>
+            
+        <span class="k">return</span> <span class="n">order</span><span class="p">;</span>
+    <span class="p">}</span>
+    
+    <span class="k">public</span> <span class="k">async</span> <span class="n">Task</span> <span class="nf">UpdateOrderAsync</span><span class="p">(</span><span class="n">Order</span> <span class="n">order</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// Change tracker keeps growing over time</span>
+        <span class="n">_context</span><span class="p">.</span><span class="n">Orders</span><span class="p">.</span><span class="nf">Update</span><span class="p">(</span><span class="n">order</span><span class="p">);</span>
+        <span class="k">await</span> <span class="n">_context</span><span class="p">.</span><span class="nf">SaveChangesAsync</span><span class="p">();</span>
+        <span class="c1">// Context never disposed, memory keeps growing</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// The optimized solution using DbContextFactory</span>
+<span class="k">public</span> <span class="k">class</span> <span class="nc">OptimizedOrderRepository</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="k">readonly</span> <span class="n">IDbContextFactory</span><span class="p">&lt;</span><span class="n">OrderDbContext</span><span class="p">&gt;</span> <span class="n">_contextFactory</span><span class="p">;</span>
+    <span class="k">private</span> <span class="k">readonly</span> <span class="n">ILogger</span><span class="p">&lt;</span><span class="n">OptimizedOrderRepository</span><span class="p">&gt;</span> <span class="n">_logger</span><span class="p">;</span>
+    
+    <span class="k">public</span> <span class="nf">OptimizedOrderRepository</span><span class="p">(</span>
+        <span class="n">IDbContextFactory</span><span class="p">&lt;</span><span class="n">OrderDbContext</span><span class="p">&gt;</span> <span class="n">contextFactory</span><span class="p">,</span>
+        <span class="n">ILogger</span><span class="p">&lt;</span><span class="n">OptimizedOrderRepository</span><span class="p">&gt;</span> <span class="n">logger</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">_contextFactory</span> <span class="p">=</span> <span class="n">contextFactory</span><span class="p">;</span>
+        <span class="n">_logger</span> <span class="p">=</span> <span class="n">logger</span><span class="p">;</span>
+    <span class="p">}</span>
+    
+    <span class="k">public</span> <span class="k">async</span> <span class="n">Task</span><span class="p">&lt;</span><span class="n">Order</span><span class="p">&gt;</span> <span class="nf">GetOrderAsync</span><span class="p">(</span><span class="kt">int</span> <span class="n">orderId</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// Create short-lived context for each operation</span>
+        <span class="k">await</span> <span class="k">using</span> <span class="nn">var</span> <span class="n">context</span> <span class="p">=</span> <span class="k">await</span> <span class="n">_contextFactory</span><span class="p">.</span><span class="nf">CreateDbContextAsync</span><span class="p">();</span>
+        
+        <span class="c1">// Disable change tracking for read-only operations</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="n">context</span><span class="p">.</span><span class="n">Orders</span>
+            <span class="p">.</span><span class="nf">Include</span><span class="p">(</span><span class="n">o</span> <span class="p">=&gt;</span> <span class="n">o</span><span class="p">.</span><span class="n">Items</span><span class="p">)</span>
+            <span class="p">.</span><span class="nf">AsNoTracking</span><span class="p">()</span>
+            <span class="p">.</span><span class="nf">FirstOrDefaultAsync</span><span class="p">(</span><span class="n">o</span> <span class="p">=&gt;</span> <span class="n">o</span><span class="p">.</span><span class="n">Id</span> <span class="p">==</span> <span class="n">orderId</span><span class="p">);</span>
+    <span class="p">}</span>
+    
+    <span class="k">public</span> <span class="k">async</span> <span class="n">Task</span><span class="p">&lt;</span><span class="n">IEnumerable</span><span class="p">&lt;</span><span class="n">Order</span><span class="p">&gt;&gt;</span> <span class="nf">GetOrdersBatchAsync</span><span class="p">(</span><span class="n">IEnumerable</span><span class="p">&lt;</span><span class="kt">int</span><span class="p">&gt;</span> <span class="n">orderIds</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">await</span> <span class="k">using</span> <span class="nn">var</span> <span class="n">context</span> <span class="p">=</span> <span class="k">await</span> <span class="n">_contextFactory</span><span class="p">.</span><span class="nf">CreateDbContextAsync</span><span class="p">();</span>
+        
+        <span class="c1">// Use efficient batch query with projection to reduce memory</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="n">context</span><span class="p">.</span><span class="n">Orders</span>
+            <span class="p">.</span><span class="nf">Where</span><span class="p">(</span><span class="n">o</span> <span class="p">=&gt;</span> <span class="n">orderIds</span><span class="p">.</span><span class="nf">Contains</span><span class="p">(</span><span class="n">o</span><span class="p">.</span><span class="n">Id</span><span class="p">))</span>
+            <span class="p">.</span><span class="nf">AsNoTracking</span><span class="p">()</span>
+            <span class="p">.</span><span class="nf">Select</span><span class="p">(</span><span class="n">o</span> <span class="p">=&gt;</span> <span class="k">new</span> <span class="n">Order</span>
+            <span class="p">{</span>
+                <span class="n">Id</span> <span class="p">=</span> <span class="n">o</span><span class="p">.</span><span class="n">Id</span><span class="p">,</span>
+                <span class="n">CustomerId</span> <span class="p">=</span> <span class="n">o</span><span class="p">.</span><span class="n">CustomerId</span><span class="p">,</span>
+                <span class="n">Total</span> <span class="p">=</span> <span class="n">o</span><span class="p">.</span><span class="n">Total</span><span class="p">,</span>
+                <span class="n">Status</span> <span class="p">=</span> <span class="n">o</span><span class="p">.</span><span class="n">Status</span><span class="p">,</span>
+                <span class="n">CreatedDate</span> <span class="p">=</span> <span class="n">o</span><span class="p">.</span><span class="n">CreatedDate</span>
+                <span class="c1">// Only select fields you need</span>
+            <span class="p">})</span>
+            <span class="p">.</span><span class="nf">ToListAsync</span><span class="p">();</span>
+    <span class="p">}</span>
+    
+    <span class="k">public</span> <span class="k">async</span> <span class="n">Task</span> <span class="nf">UpdateOrderAsync</span><span class="p">(</span><span class="n">Order</span> <span class="n">order</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">await</span> <span class="k">using</span> <span class="nn">var</span> <span class="n">context</span> <span class="p">=</span> <span class="k">await</span> <span class="n">_contextFactory</span><span class="p">.</span><span class="nf">CreateDbContextAsync</span><span class="p">();</span>
+        
+        <span class="k">try</span>
+        <span class="p">{</span>
+            <span class="c1">// Attach and mark as modified to avoid loading from database</span>
+            <span class="n">context</span><span class="p">.</span><span class="n">Orders</span><span class="p">.</span><span class="nf">Attach</span><span class="p">(</span><span class="n">order</span><span class="p">);</span>
+            <span class="n">context</span><span class="p">.</span><span class="nf">Entry</span><span class="p">(</span><span class="n">order</span><span class="p">).</span><span class="n">State</span> <span class="p">=</span> <span class="n">EntityState</span><span class="p">.</span><span class="n">Modified</span><span class="p">;</span>
+            
+            <span class="kt">var</span> <span class="n">rowsAffected</span> <span class="p">=</span> <span class="k">await</span> <span class="n">context</span><span class="p">.</span><span class="nf">SaveChangesAsync</span><span class="p">();</span>
+            
+            <span class="k">if</span> <span class="p">(</span><span class="n">rowsAffected</span> <span class="p">==</span> <span class="m">0</span><span class="p">)</span>
+            <span class="p">{</span>
+                <span class="n">_logger</span><span class="p">.</span><span class="nf">LogWarning</span><span class="p">(</span><span class="s">"No rows affected when updating order {OrderId}"</span><span class="p">,</span> <span class="n">order</span><span class="p">.</span><span class="n">Id</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">catch</span> <span class="p">(</span><span class="n">Exception</span> <span class="n">ex</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">_logger</span><span class="p">.</span><span class="nf">LogError</span><span class="p">(</span><span class="n">ex</span><span class="p">,</span> <span class="s">"Error updating order {OrderId}"</span><span class="p">,</span> <span class="n">order</span><span class="p">.</span><span class="n">Id</span><span class="p">);</span>
+            <span class="k">throw</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="c1">// Context automatically disposed, connections returned to pool</span>
+    <span class="p">}</span>
+    
+    <span class="k">public</span> <span class="k">async</span> <span class="n">Task</span> <span class="nf">ProcessLargeOrderBatchAsync</span><span class="p">(</span><span class="n">IEnumerable</span><span class="p">&lt;</span><span class="kt">int</span><span class="p">&gt;</span> <span class="n">orderIds</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">const</span> <span class="kt">int</span> <span class="n">batchSize</span> <span class="p">=</span> <span class="m">1000</span><span class="p">;</span>
+        <span class="kt">var</span> <span class="n">orderIdsList</span> <span class="p">=</span> <span class="n">orderIds</span><span class="p">.</span><span class="nf">ToList</span><span class="p">();</span>
+        
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="p">=</span> <span class="m">0</span><span class="p">;</span> <span class="n">i</span> <span class="p">&lt;</span> <span class="n">orderIdsList</span><span class="p">.</span><span class="n">Count</span><span class="p">;</span> <span class="n">i</span> <span class="p">+=</span> <span class="n">batchSize</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="kt">var</span> <span class="n">batch</span> <span class="p">=</span> <span class="n">orderIdsList</span><span class="p">.</span><span class="nf">Skip</span><span class="p">(</span><span class="n">i</span><span class="p">).</span><span class="nf">Take</span><span class="p">(</span><span class="n">batchSize</span><span class="p">);</span>
+            
+            <span class="c1">// Use separate context for each batch to prevent memory accumulation</span>
+            <span class="k">await</span> <span class="k">using</span> <span class="nn">var</span> <span class="n">context</span> <span class="p">=</span> <span class="k">await</span> <span class="n">_contextFactory</span><span class="p">.</span><span class="nf">CreateDbContextAsync</span><span class="p">();</span>
+            
+            <span class="kt">var</span> <span class="n">orders</span> <span class="p">=</span> <span class="k">await</span> <span class="n">context</span><span class="p">.</span><span class="n">Orders</span>
+                <span class="p">.</span><span class="nf">Where</span><span class="p">(</span><span class="n">o</span> <span class="p">=&gt;</span> <span class="n">batch</span><span class="p">.</span><span class="nf">Contains</span><span class="p">(</span><span class="n">o</span><span class="p">.</span><span class="n">Id</span><span class="p">))</span>
+                <span class="p">.</span><span class="nf">AsNoTracking</span><span class="p">()</span>
+                <span class="p">.</span><span class="nf">ToListAsync</span><span class="p">();</span>
+            
+            <span class="k">foreach</span> <span class="p">(</span><span class="kt">var</span> <span class="n">order</span> <span class="k">in</span> <span class="n">orders</span><span class="p">)</span>
+            <span class="p">{</span>
+                <span class="k">await</span> <span class="nf">ProcessOrderAsync</span><span class="p">(</span><span class="n">order</span><span class="p">);</span>
+            <span class="p">}</span>
+            
+            <span class="c1">// Context disposed after each batch, memory freed</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div> <p><strong>DbContext Factory Configuration for Production</strong>:</p> <div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Program.cs - Proper DbContext factory setup</span>
+<span class="n">builder</span><span class="p">.</span><span class="n">Services</span><span class="p">.</span><span class="n">AddDbContextFactory</span><span class="p">&lt;</span><span class="n">OrderDbContext</span><span class="p">&gt;(</span><span class="n">options</span> <span class="p">=&gt;</span>
+<span class="p">{</span>
+    <span class="n">options</span><span class="p">.</span><span class="nf">UseSqlServer</span><span class="p">(</span><span class="n">connectionString</span><span class="p">,</span> <span class="n">sqlOptions</span> <span class="p">=&gt;</span>
+    <span class="p">{</span>
+        <span class="n">sqlOptions</span><span class="p">.</span><span class="nf">CommandTimeout</span><span class="p">(</span><span class="m">30</span><span class="p">);</span>
+        <span class="n">sqlOptions</span><span class="p">.</span><span class="nf">EnableRetryOnFailure</span><span class="p">(</span>
+            <span class="n">maxRetryCount</span><span class="p">:</span> <span class="m">3</span><span class="p">,</span>
+            <span class="n">maxRetryDelay</span><span class="p">:</span> <span class="n">TimeSpan</span><span class="p">.</span><span class="nf">FromSeconds</span><span class="p">(</span><span class="m">5</span><span class="p">),</span>
+            <span class="n">errorNumbersToAdd</span><span class="p">:</span> <span class="k">null</span><span class="p">);</span>
+    <span class="p">});</span>
+    
+    <span class="c1">// Optimize for production</span>
+    <span class="n">options</span><span class="p">.</span><span class="nf">EnableSensitiveDataLogging</span><span class="p">(</span><span class="k">false</span><span class="p">);</span>
+    <span class="n">options</span><span class="p">.</span><span class="nf">EnableServiceProviderCaching</span><span class="p">();</span>
+    <span class="n">options</span><span class="p">.</span><span class="nf">EnableDetailedErrors</span><span class="p">(</span><span class="n">builder</span><span class="p">.</span><span class="n">Environment</span><span class="p">.</span><span class="nf">IsDevelopment</span><span class="p">());</span>
+    
+    <span class="c1">// Configure change tracking behavior</span>
+    <span class="n">options</span><span class="p">.</span><span class="nf">UseQueryTrackingBehavior</span><span class="p">(</span><span class="n">QueryTrackingBehavior</span><span class="p">.</span><span class="n">NoTracking</span><span class="p">);</span>
+<span class="p">},</span> <span class="n">ServiceLifetime</span><span class="p">.</span><span class="n">Scoped</span><span class="p">);</span>
+
+<span class="c1">// Configure connection pooling at the database level</span>
+<span class="n">builder</span><span class="p">.</span><span class="n">Services</span><span class="p">.</span><span class="n">AddPooledDbContextFactory</span><span class="p">&lt;</span><span class="n">OrderDbContext</span><span class="p">&gt;(</span><span class="n">options</span> <span class="p">=&gt;</span>
+<span class="p">{</span>
+    <span class="n">options</span><span class="p">.</span><span class="nf">UseSqlServer</span><span class="p">(</span><span class="n">connectionString</span><span class="p">);</span>
+<span class="p">},</span> <span class="n">poolSize</span><span class="p">:</span> <span class="m">128</span><span class="p">);</span> <span class="c1">// Limit pool size to prevent excessive connections</span>
+</code></pre></div></div> <p><strong>Advanced Entity Framework Memory Optimization</strong>:</p> <div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Custom DbContext with memory optimizations</span>
+<span class="k">public</span> <span class="k">class</span> <span class="nc">OptimizedOrderDbContext</span> <span class="p">:</span> <span class="n">DbContext</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="nf">OptimizedOrderDbContext</span><span class="p">(</span><span class="n">DbContextOptions</span><span class="p">&lt;</span><span class="n">OptimizedOrderDbContext</span><span class="p">&gt;</span> <span class="n">options</span><span class="p">)</span> <span class="p">:</span> <span class="k">base</span><span class="p">(</span><span class="n">options</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// Optimize change tracker for memory</span>
+        <span class="n">ChangeTracker</span><span class="p">.</span><span class="n">AutoDetectChangesEnabled</span> <span class="p">=</span> <span class="k">false</span><span class="p">;</span>
+        <span class="n">ChangeTracker</span><span class="p">.</span><span class="n">LazyLoadingEnabled</span> <span class="p">=</span> <span class="k">false</span><span class="p">;</span>
+        <span class="n">ChangeTracker</span><span class="p">.</span><span class="n">QueryTrackingBehavior</span> <span class="p">=</span> <span class="n">QueryTrackingBehavior</span><span class="p">.</span><span class="n">NoTracking</span><span class="p">;</span>
+    <span class="p">}</span>
+    
+    <span class="k">public</span> <span class="n">DbSet</span><span class="p">&lt;</span><span class="n">Order</span><span class="p">&gt;</span> <span class="n">Orders</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+    <span class="k">public</span> <span class="n">DbSet</span><span class="p">&lt;</span><span class="n">OrderItem</span><span class="p">&gt;</span> <span class="n">OrderItems</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+    
+    <span class="k">protected</span> <span class="k">override</span> <span class="k">void</span> <span class="nf">OnModelCreating</span><span class="p">(</span><span class="n">ModelBuilder</span> <span class="n">modelBuilder</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">base</span><span class="p">.</span><span class="nf">OnModelCreating</span><span class="p">(</span><span class="n">modelBuilder</span><span class="p">);</span>
+        
+        <span class="c1">// Configure value converters to reduce memory allocations</span>
+        <span class="n">modelBuilder</span><span class="p">.</span><span class="n">Entity</span><span class="p">&lt;</span><span class="n">Order</span><span class="p">&gt;()</span>
+            <span class="p">.</span><span class="nf">Property</span><span class="p">(</span><span class="n">e</span> <span class="p">=&gt;</span> <span class="n">e</span><span class="p">.</span><span class="n">CreatedDate</span><span class="p">)</span>
+            <span class="p">.</span><span class="nf">HasConversion</span><span class="p">(</span>
+                <span class="n">v</span> <span class="p">=&gt;</span> <span class="n">v</span><span class="p">.</span><span class="nf">ToUniversalTime</span><span class="p">(),</span>
+                <span class="n">v</span> <span class="p">=&gt;</span> <span class="n">DateTime</span><span class="p">.</span><span class="nf">SpecifyKind</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">DateTimeKind</span><span class="p">.</span><span class="n">Utc</span><span class="p">));</span>
+    <span class="p">}</span>
+    
+    <span class="c1">// Override SaveChanges to optimize memory usage</span>
+    <span class="k">public</span> <span class="k">override</span> <span class="k">async</span> <span class="n">Task</span><span class="p">&lt;</span><span class="kt">int</span><span class="p">&gt;</span> <span class="nf">SaveChangesAsync</span><span class="p">(</span><span class="n">CancellationToken</span> <span class="n">cancellationToken</span> <span class="p">=</span> <span class="k">default</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">try</span>
+        <span class="p">{</span>
+            <span class="n">ChangeTracker</span><span class="p">.</span><span class="nf">DetectChanges</span><span class="p">();</span>
+            <span class="k">return</span> <span class="k">await</span> <span class="k">base</span><span class="p">.</span><span class="nf">SaveChangesAsync</span><span class="p">(</span><span class="n">cancellationToken</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">finally</span>
+        <span class="p">{</span>
+            <span class="c1">// Clear change tracker after save to free memory</span>
+            <span class="n">ChangeTracker</span><span class="p">.</span><span class="nf">Clear</span><span class="p">();</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="err">##</span> <span class="n">Advanced</span> <span class="n">Memory</span> <span class="n">Profiling</span> <span class="k">in</span> <span class="n">Production</span>
+
+<span class="err">###</span> <span class="n">Real</span><span class="p">-</span><span class="n">Time</span> <span class="n">Memory</span> <span class="n">Monitoring</span>
+
+<span class="err">```</span><span class="n">csharp</span>
+<span class="c1">// Production-safe memory profiling service</span>
+<span class="k">public</span> <span class="k">class</span> <span class="nc">ProductionMemoryProfiler</span> <span class="p">:</span> <span class="n">IHostedService</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="k">readonly</span> <span class="n">ILogger</span><span class="p">&lt;</span><span class="n">ProductionMemoryProfiler</span><span class="p">&gt;</span> <span class="n">_logger</span><span class="p">;</span>
+    <span class="k">private</span> <span class="k">readonly</span> <span class="n">IMetrics</span> <span class="n">_metrics</span><span class="p">;</span>
+    <span class="k">private</span> <span class="n">Timer</span> <span class="n">_profileTimer</span><span class="p">;</span>
+    
+    <span class="k">public</span> <span class="k">async</span> <span class="n">Task</span> <span class="nf">StartAsync</span><span class="p">(</span><span class="n">CancellationToken</span> <span class="n">cancellationToken</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">_profileTimer</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Timer</span><span class="p">(</span><span class="n">ProfileMemoryUsage</span><span class="p">,</span> <span class="k">null</span><span class="p">,</span> <span class="n">TimeSpan</span><span class="p">.</span><span class="n">Zero</span><span class="p">,</span> <span class="n">TimeSpan</span><span class="p">.</span><span class="nf">FromMinutes</span><span class="p">(</span><span class="m">1</span><span class="p">));</span>
+    <span class="p">}</span>
+    
+    <span class="k">private</span> <span class="k">void</span> <span class="nf">ProfileMemoryUsage</span><span class="p">(</span><span class="kt">object</span> <span class="n">state</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">try</span>
+        <span class="p">{</span>
+            <span class="c1">// Collect basic GC information</span>
+            <span class="kt">var</span> <span class="n">gen0Count</span> <span class="p">=</span> <span class="n">GC</span><span class="p">.</span><span class="nf">CollectionCount</span><span class="p">(</span><span class="m">0</span><span class="p">);</span>
+            <span class="kt">var</span> <span class="n">gen1Count</span> <span class="p">=</span> <span class="n">GC</span><span class="p">.</span><span class="nf">CollectionCount</span><span class="p">(</span><span class="m">1</span><span class="p">);</span>
+            <span class="kt">var</span> <span class="n">gen2Count</span> <span class="p">=</span> <span class="n">GC</span><span class="p">.</span><span class="nf">CollectionCount</span><span class="p">(</span><span class="m">2</span><span class="p">);</span>
+            <span class="kt">var</span> <span class="n">totalMemory</span> <span class="p">=</span> <span class="n">GC</span><span class="p">.</span><span class="nf">GetTotalMemory</span><span class="p">(</span><span class="k">false</span><span class="p">);</span>
+            
+            <span class="c1">// Check for memory pressure</span>
+            <span class="kt">var</span> <span class="n">allocatedBytes</span> <span class="p">=</span> <span class="n">GC</span><span class="p">.</span><span class="nf">GetTotalAllocatedBytes</span><span class="p">(</span><span class="k">false</span><span class="p">);</span>
+            
+            <span class="c1">// Monitor working set</span>
+            <span class="kt">var</span> <span class="n">process</span> <span class="p">=</span> <span class="n">Process</span><span class="p">.</span><span class="nf">GetCurrentProcess</span><span class="p">();</span>
+            <span class="kt">var</span> <span class="n">workingSet</span> <span class="p">=</span> <span class="n">process</span><span class="p">.</span><span class="n">WorkingSet64</span><span class="p">;</span>
+            <span class="kt">var</span> <span class="n">privateMemory</span> <span class="p">=</span> <span class="n">process</span><span class="p">.</span><span class="n">PrivateMemorySize64</span><span class="p">;</span>
+            
+            <span class="c1">// Record metrics</span>
+            <span class="n">_metrics</span><span class="p">.</span><span class="nf">Gauge</span><span class="p">(</span><span class="s">"memory.gc.gen0.count"</span><span class="p">).</span><span class="nf">Set</span><span class="p">(</span><span class="n">gen0Count</span><span class="p">);</span>
+            <span class="n">_metrics</span><span class="p">.</span><span class="nf">Gauge</span><span class="p">(</span><span class="s">"memory.gc.gen1.count"</span><span class="p">).</span><span class="nf">Set</span><span class="p">(</span><span class="n">gen1Count</span><span class="p">);</span>
+            <span class="n">_metrics</span><span class="p">.</span><span class="nf">Gauge</span><span class="p">(</span><span class="s">"memory.gc.gen2.count"</span><span class="p">).</span><span class="nf">Set</span><span class="p">(</span><span class="n">gen2Count</span><span class="p">);</span>
+            <span class="n">_metrics</span><span class="p">.</span><span class="nf">Gauge</span><span class="p">(</span><span class="s">"memory.heap.total.bytes"</span><span class="p">).</span><span class="nf">Set</span><span class="p">(</span><span class="n">totalMemory</span><span class="p">);</span>
+            <span class="n">_metrics</span><span class="p">.</span><span class="nf">Gauge</span><span class="p">(</span><span class="s">"memory.allocated.total.bytes"</span><span class="p">).</span><span class="nf">Set</span><span class="p">(</span><span class="n">allocatedBytes</span><span class="p">);</span>
+            <span class="n">_metrics</span><span class="p">.</span><span class="nf">Gauge</span><span class="p">(</span><span class="s">"memory.working.set.bytes"</span><span class="p">).</span><span class="nf">Set</span><span class="p">(</span><span class="n">workingSet</span><span class="p">);</span>
+            <span class="n">_metrics</span><span class="p">.</span><span class="nf">Gauge</span><span class="p">(</span><span class="s">"memory.private.bytes"</span><span class="p">).</span><span class="nf">Set</span><span class="p">(</span><span class="n">privateMemory</span><span class="p">);</span>
+            
+            <span class="c1">// Alert on concerning patterns</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">gen2Count</span> <span class="p">&gt;</span> <span class="n">_previousGen2Count</span> <span class="p">+</span> <span class="m">10</span><span class="p">)</span>
+            <span class="p">{</span>
+                <span class="n">_logger</span><span class="p">.</span><span class="nf">LogWarning</span><span class="p">(</span><span class="s">"High Gen2 GC activity: {Count} collections"</span><span class="p">,</span> <span class="n">gen2Count</span><span class="p">);</span>
+            <span class="p">}</span>
+            
+            <span class="k">if</span> <span class="p">(</span><span class="n">totalMemory</span> <span class="p">&gt;</span> <span class="n">workingSet</span> <span class="p">*</span> <span class="m">0.8</span><span class="p">)</span>
+            <span class="p">{</span>
+                <span class="n">_logger</span><span class="p">.</span><span class="nf">LogWarning</span><span class="p">(</span><span class="s">"High heap pressure: {HeapSize} bytes ({Percentage:P} of working set)"</span><span class="p">,</span> 
+                    <span class="n">totalMemory</span><span class="p">,</span> <span class="n">totalMemory</span> <span class="p">/</span> <span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">workingSet</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">catch</span> <span class="p">(</span><span class="n">Exception</span> <span class="n">ex</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">_logger</span><span class="p">.</span><span class="nf">LogError</span><span class="p">(</span><span class="n">ex</span><span class="p">,</span> <span class="s">"Error during memory profiling"</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div> <h3 id="memory-leak-detection-patterns">Memory Leak Detection Patterns</h3> <div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Memory leak detection utility</span>
+<span class="k">public</span> <span class="k">static</span> <span class="k">class</span> <span class="nc">MemoryLeakDetector</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="k">static</span> <span class="k">readonly</span> <span class="n">ConcurrentDictionary</span><span class="p">&lt;</span><span class="n">Type</span><span class="p">,</span> <span class="p">(</span><span class="kt">int</span> <span class="n">Count</span><span class="p">,</span> <span class="n">DateTime</span> <span class="n">LastCheck</span><span class="p">)&gt;</span> <span class="n">_objectCounts</span> <span class="p">=</span> <span class="k">new</span><span class="p">();</span>
+    
+    <span class="k">public</span> <span class="k">static</span> <span class="k">void</span> <span class="n">TrackObject</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;(</span><span class="n">T</span> <span class="n">obj</span><span class="p">)</span> <span class="k">where</span> <span class="n">T</span> <span class="p">:</span> <span class="k">class</span>
+    <span class="err">{</span>
+        <span class="nc">if</span> <span class="p">(!</span><span class="n">_objectCounts</span><span class="p">.</span><span class="nf">ContainsKey</span><span class="p">(</span><span class="k">typeof</span><span class="p">(</span><span class="n">T</span><span class="p">)))</span>
+        <span class="p">{</span>
+            <span class="n">_objectCounts</span><span class="p">[</span><span class="k">typeof</span><span class="p">(</span><span class="n">T</span><span class="p">)]</span> <span class="p">=</span> <span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="n">DateTime</span><span class="p">.</span><span class="n">UtcNow</span><span class="p">);</span>
+        <span class="p">}</span>
+        
+        <span class="n">_objectCounts</span><span class="p">.</span><span class="nf">AddOrUpdate</span><span class="p">(</span><span class="k">typeof</span><span class="p">(</span><span class="n">T</span><span class="p">),</span> 
+            <span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="n">DateTime</span><span class="p">.</span><span class="n">UtcNow</span><span class="p">),</span>
+            <span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="k">value</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">(</span><span class="k">value</span><span class="p">.</span><span class="n">Count</span> <span class="p">+</span> <span class="m">1</span><span class="p">,</span> <span class="n">DateTime</span><span class="p">.</span><span class="n">UtcNow</span><span class="p">));</span>
+    <span class="p">}</span>
+    
+    <span class="k">public</span> <span class="k">static</span> <span class="k">void</span> <span class="nf">PerformLeakDetection</span><span class="p">(</span><span class="n">ILogger</span> <span class="n">logger</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">foreach</span> <span class="p">(</span><span class="kt">var</span> <span class="n">kvp</span> <span class="k">in</span> <span class="n">_objectCounts</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="kt">var</span> <span class="n">type</span> <span class="p">=</span> <span class="n">kvp</span><span class="p">.</span><span class="n">Key</span><span class="p">;</span>
+            <span class="kt">var</span> <span class="p">(</span><span class="n">count</span><span class="p">,</span> <span class="n">lastCheck</span><span class="p">)</span> <span class="p">=</span> <span class="n">kvp</span><span class="p">.</span><span class="n">Value</span><span class="p">;</span>
+            
+            <span class="c1">// Check for objects that keep growing</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">count</span> <span class="p">&gt;</span> <span class="m">10000</span> <span class="p">&amp;&amp;</span> <span class="n">DateTime</span><span class="p">.</span><span class="n">UtcNow</span> <span class="p">-</span> <span class="n">lastCheck</span> <span class="p">&gt;</span> <span class="n">TimeSpan</span><span class="p">.</span><span class="nf">FromMinutes</span><span class="p">(</span><span class="m">5</span><span class="p">))</span>
+            <span class="p">{</span>
+                <span class="n">logger</span><span class="p">.</span><span class="nf">LogWarning</span><span class="p">(</span><span class="s">"Potential memory leak detected: {TypeName} has {Count} instances"</span><span class="p">,</span> 
+                    <span class="n">type</span><span class="p">.</span><span class="n">Name</span><span class="p">,</span> <span class="n">count</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div> <h2 id="production-memory-monitoring-dashboard">Production Memory Monitoring Dashboard</h2> <h3 id="essential-metrics-to-track">Essential Metrics to Track</h3> <pre><code class="language-promql"># Memory utilization
+(container_memory_usage_bytes / container_spec_memory_limit_bytes) * 100
+
+# Memory pressure
+rate(container_memory_usage_bytes[5m])
+
+# OOM kills
+increase(container_oom_kills_total[5m])
+
+# GC activity (.NET)
+rate(dotnet_gc_collections_total[5m])
+
+# .NET heap usage
+dotnet_gc_memory_total_available_bytes - dotnet_gc_heap_size_bytes
+
+# Entity Framework connection pool usage
+dotnet_ef_connection_pool_active / dotnet_ef_connection_pool_max
+</code></pre> <h3 id="grafana-dashboard-configuration">Grafana Dashboard Configuration</h3> <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"dashboard"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Production Memory Monitoring"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"panels"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Container Memory Usage"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"targets"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"expr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"(container_memory_usage_bytes{pod=~</span><span class="se">\"</span><span class="s2">$pod</span><span class="se">\"</span><span class="s2">} / container_spec_memory_limit_bytes{pod=~</span><span class="se">\"</span><span class="s2">$pod</span><span class="se">\"</span><span class="s2">}) * 100"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"legendFormat"</span><span class="p">:</span><span class="w"> </span><span class="s2">" - "</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="nl">"thresholds"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="mi">80</span><span class="p">,</span><span class="w"> </span><span class="nl">"color"</span><span class="p">:</span><span class="w"> </span><span class="s2">"yellow"</span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="mi">90</span><span class="p">,</span><span class="w"> </span><span class="nl">"color"</span><span class="p">:</span><span class="w"> </span><span class="s2">"red"</span><span class="p">}</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GC Collection Rate"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"targets"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"expr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rate(dotnet_gc_collections_total{pod=~</span><span class="se">\"</span><span class="s2">$pod</span><span class="se">\"</span><span class="s2">}[5m])"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"legendFormat"</span><span class="p">:</span><span class="w"> </span><span class="s2">" - Gen "</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Memory Allocation Rate"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"targets"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"expr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rate(dotnet_gc_allocated_bytes_total{pod=~</span><span class="se">\"</span><span class="s2">$pod</span><span class="se">\"</span><span class="s2">}[5m])"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"legendFormat"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div> <h2 id="net-specific-memory-optimization-patterns">.NET-Specific Memory Optimization Patterns</h2> <h3 id="issue-5-large-object-heap-loh-pressure">Issue #5: Large Object Heap (LOH) Pressure</h3> <p>The Large Object Heap in .NET is a special area where objects larger than 85KB are allocated. Unlike the regular heap, LOH objects are collected less frequently, leading to memory pressure.</p> <div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Problematic: Large arrays causing LOH pressure</span>
+<span class="k">public</span> <span class="k">class</span> <span class="nc">ReportGenerator</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">async</span> <span class="n">Task</span><span class="p">&lt;</span><span class="kt">byte</span><span class="p">[</span><span class="k">]&gt;</span> <span class="nf">GenerateLargeReportAsync</span><span class="p">(</span><span class="kt">int</span> <span class="n">reportId</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// This creates a large array that goes to LOH</span>
+        <span class="kt">var</span> <span class="n">reportData</span> <span class="p">=</span> <span class="k">new</span> <span class="kt">byte</span><span class="p">[</span><span class="m">1_000_000</span><span class="p">];</span> <span class="c1">// 1MB array</span>
+        
+        <span class="c1">// Fill report data...</span>
+        <span class="k">await</span> <span class="nf">FillReportDataAsync</span><span class="p">(</span><span class="n">reportData</span><span class="p">,</span> <span class="n">reportId</span><span class="p">);</span>
+        
+        <span class="k">return</span> <span class="n">reportData</span><span class="p">;</span> <span class="c1">// LOH object that's hard to collect</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Optimized: Use ArrayPool to reduce LOH pressure</span>
+<span class="k">public</span> <span class="k">class</span> <span class="nc">OptimizedReportGenerator</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="k">readonly</span> <span class="n">ArrayPool</span><span class="p">&lt;</span><span class="kt">byte</span><span class="p">&gt;</span> <span class="n">_arrayPool</span> <span class="p">=</span> <span class="n">ArrayPool</span><span class="p">&lt;</span><span class="kt">byte</span><span class="p">&gt;.</span><span class="n">Shared</span><span class="p">;</span>
+    
+    <span class="k">public</span> <span class="k">async</span> <span class="n">Task</span><span class="p">&lt;</span><span class="kt">byte</span><span class="p">[</span><span class="k">]&gt;</span> <span class="nf">GenerateLargeReportAsync</span><span class="p">(</span><span class="kt">int</span> <span class="n">reportId</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// Rent from pool instead of allocating</span>
+        <span class="kt">var</span> <span class="n">buffer</span> <span class="p">=</span> <span class="n">_arrayPool</span><span class="p">.</span><span class="nf">Rent</span><span class="p">(</span><span class="m">1_000_000</span><span class="p">);</span>
+        
+        <span class="k">try</span>
+        <span class="p">{</span>
+            <span class="k">await</span> <span class="nf">FillReportDataAsync</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="n">reportId</span><span class="p">);</span>
+            
+            <span class="c1">// Copy only the used portion</span>
+            <span class="kt">var</span> <span class="n">result</span> <span class="p">=</span> <span class="k">new</span> <span class="kt">byte</span><span class="p">[</span><span class="nf">GetActualSize</span><span class="p">(</span><span class="n">buffer</span><span class="p">)];</span>
+            <span class="n">Array</span><span class="p">.</span><span class="nf">Copy</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="n">result</span><span class="p">,</span> <span class="n">result</span><span class="p">.</span><span class="n">Length</span><span class="p">);</span>
+            
+            <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">finally</span>
+        <span class="p">{</span>
+            <span class="c1">// Always return to pool</span>
+            <span class="n">_arrayPool</span><span class="p">.</span><span class="nf">Return</span><span class="p">(</span><span class="n">buffer</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    
+    <span class="c1">// Alternative: Stream large data instead of buffering</span>
+    <span class="k">public</span> <span class="k">async</span> <span class="n">Task</span><span class="p">&lt;</span><span class="n">Stream</span><span class="p">&gt;</span> <span class="nf">GenerateLargeReportStreamAsync</span><span class="p">(</span><span class="kt">int</span> <span class="n">reportId</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="kt">var</span> <span class="n">stream</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">MemoryStream</span><span class="p">();</span>
+        
+        <span class="c1">// Write directly to stream to avoid large arrays</span>
+        <span class="k">await</span> <span class="nf">WriteReportDataToStreamAsync</span><span class="p">(</span><span class="n">stream</span><span class="p">,</span> <span class="n">reportId</span><span class="p">);</span>
+        
+        <span class="n">stream</span><span class="p">.</span><span class="n">Position</span> <span class="p">=</span> <span class="m">0</span><span class="p">;</span>
+        <span class="k">return</span> <span class="n">stream</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div> <h3 id="issue-6-string-allocation-and-stringbuilder-optimization">Issue #6: String Allocation and StringBuilder Optimization</h3> <p>Excessive string allocations are a common source of memory pressure in .NET applications.</p> <div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Memory-intensive string operations</span>
+<span class="k">public</span> <span class="k">class</span> <span class="nc">LogFormatter</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="kt">string</span> <span class="nf">FormatLogEntry</span><span class="p">(</span><span class="n">LogEntry</span> <span class="n">entry</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// Each concatenation creates a new string object</span>
+        <span class="kt">var</span> <span class="n">result</span> <span class="p">=</span> <span class="s">"["</span> <span class="p">+</span> <span class="n">entry</span><span class="p">.</span><span class="n">Timestamp</span><span class="p">.</span><span class="nf">ToString</span><span class="p">(</span><span class="s">"yyyy-MM-dd HH:mm:ss"</span><span class="p">)</span> <span class="p">+</span> <span class="s">"] "</span><span class="p">;</span>
+        <span class="n">result</span> <span class="p">+=</span> <span class="n">entry</span><span class="p">.</span><span class="n">Level</span><span class="p">.</span><span class="nf">ToString</span><span class="p">().</span><span class="nf">ToUpper</span><span class="p">()</span> <span class="p">+</span> <span class="s">" "</span><span class="p">;</span>
+        <span class="n">result</span> <span class="p">+=</span> <span class="n">entry</span><span class="p">.</span><span class="n">Category</span> <span class="p">+</span> <span class="s">": "</span><span class="p">;</span>
+        <span class="n">result</span> <span class="p">+=</span> <span class="n">entry</span><span class="p">.</span><span class="n">Message</span><span class="p">;</span>
+        
+        <span class="k">if</span> <span class="p">(</span><span class="n">entry</span><span class="p">.</span><span class="n">Exception</span> <span class="p">!=</span> <span class="k">null</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">result</span> <span class="p">+=</span> <span class="n">Environment</span><span class="p">.</span><span class="n">NewLine</span> <span class="p">+</span> <span class="n">entry</span><span class="p">.</span><span class="n">Exception</span><span class="p">.</span><span class="nf">ToString</span><span class="p">();</span>
+        <span class="p">}</span>
+        
+        <span class="k">return</span> <span class="n">result</span><span class="p">;</span> <span class="c1">// Multiple temporary strings created</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Optimized using StringBuilder and object pooling</span>
+<span class="k">public</span> <span class="k">class</span> <span class="nc">OptimizedLogFormatter</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="k">readonly</span> <span class="n">ObjectPool</span><span class="p">&lt;</span><span class="n">StringBuilder</span><span class="p">&gt;</span> <span class="n">_stringBuilderPool</span><span class="p">;</span>
+    
+    <span class="k">public</span> <span class="nf">OptimizedLogFormatter</span><span class="p">(</span><span class="n">ObjectPool</span><span class="p">&lt;</span><span class="n">StringBuilder</span><span class="p">&gt;</span> <span class="n">stringBuilderPool</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">_stringBuilderPool</span> <span class="p">=</span> <span class="n">stringBuilderPool</span><span class="p">;</span>
+    <span class="p">}</span>
+    
+    <span class="k">public</span> <span class="kt">string</span> <span class="nf">FormatLogEntry</span><span class="p">(</span><span class="n">LogEntry</span> <span class="n">entry</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="kt">var</span> <span class="n">sb</span> <span class="p">=</span> <span class="n">_stringBuilderPool</span><span class="p">.</span><span class="nf">Get</span><span class="p">();</span>
+        
+        <span class="k">try</span>
+        <span class="p">{</span>
+            <span class="n">sb</span><span class="p">.</span><span class="nf">Clear</span><span class="p">();</span>
+            <span class="n">sb</span><span class="p">.</span><span class="nf">Append</span><span class="p">(</span><span class="sc">'['</span><span class="p">)</span>
+              <span class="p">.</span><span class="nf">Append</span><span class="p">(</span><span class="n">entry</span><span class="p">.</span><span class="n">Timestamp</span><span class="p">.</span><span class="nf">ToString</span><span class="p">(</span><span class="s">"yyyy-MM-dd HH:mm:ss"</span><span class="p">))</span>
+              <span class="p">.</span><span class="nf">Append</span><span class="p">(</span><span class="s">"] "</span><span class="p">)</span>
+              <span class="p">.</span><span class="nf">Append</span><span class="p">(</span><span class="n">entry</span><span class="p">.</span><span class="n">Level</span><span class="p">.</span><span class="nf">ToString</span><span class="p">().</span><span class="nf">ToUpper</span><span class="p">())</span>
+              <span class="p">.</span><span class="nf">Append</span><span class="p">(</span><span class="sc">' '</span><span class="p">)</span>
+              <span class="p">.</span><span class="nf">Append</span><span class="p">(</span><span class="n">entry</span><span class="p">.</span><span class="n">Category</span><span class="p">)</span>
+              <span class="p">.</span><span class="nf">Append</span><span class="p">(</span><span class="s">": "</span><span class="p">)</span>
+              <span class="p">.</span><span class="nf">Append</span><span class="p">(</span><span class="n">entry</span><span class="p">.</span><span class="n">Message</span><span class="p">);</span>
+            
+            <span class="k">if</span> <span class="p">(</span><span class="n">entry</span><span class="p">.</span><span class="n">Exception</span> <span class="p">!=</span> <span class="k">null</span><span class="p">)</span>
+            <span class="p">{</span>
+                <span class="n">sb</span><span class="p">.</span><span class="nf">AppendLine</span><span class="p">()</span>
+                  <span class="p">.</span><span class="nf">Append</span><span class="p">(</span><span class="n">entry</span><span class="p">.</span><span class="n">Exception</span><span class="p">.</span><span class="nf">ToString</span><span class="p">());</span>
+            <span class="p">}</span>
+            
+            <span class="k">return</span> <span class="n">sb</span><span class="p">.</span><span class="nf">ToString</span><span class="p">();</span>
+        <span class="p">}</span>
+        <span class="k">finally</span>
+        <span class="p">{</span>
+            <span class="n">_stringBuilderPool</span><span class="p">.</span><span class="nf">Return</span><span class="p">(</span><span class="n">sb</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Configuration for StringBuilder pooling</span>
+<span class="n">builder</span><span class="p">.</span><span class="n">Services</span><span class="p">.</span><span class="n">AddSingleton</span><span class="p">&lt;</span><span class="n">ObjectPoolProvider</span><span class="p">,</span> <span class="n">DefaultObjectPoolProvider</span><span class="p">&gt;();</span>
+<span class="n">builder</span><span class="p">.</span><span class="n">Services</span><span class="p">.</span><span class="nf">AddSingleton</span><span class="p">(</span><span class="n">serviceProvider</span> <span class="p">=&gt;</span>
+<span class="p">{</span>
+    <span class="kt">var</span> <span class="n">provider</span> <span class="p">=</span> <span class="n">serviceProvider</span><span class="p">.</span><span class="n">GetService</span><span class="p">&lt;</span><span class="n">ObjectPoolProvider</span><span class="p">&gt;();</span>
+    <span class="k">return</span> <span class="n">provider</span><span class="p">.</span><span class="nf">CreateStringBuilderPool</span><span class="p">();</span>
+<span class="p">});</span>
+</code></pre></div></div> <h2 id="best-practices-the-net-memory-management-playbook">Best Practices: The .NET Memory Management Playbook</h2> <h3 id="1-design-for-memory-efficiency">1. Design for Memory Efficiency</h3> <p><strong>Use streaming for large datasets</strong>:</p> <div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Instead of loading everything into memory</span>
+<span class="k">public</span> <span class="k">async</span> <span class="n">Task</span><span class="p">&lt;</span><span class="n">List</span><span class="p">&lt;</span><span class="n">Order</span><span class="p">&gt;&gt;</span> <span class="nf">GetAllOrdersAsync</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="k">await</span> <span class="n">_context</span><span class="p">.</span><span class="n">Orders</span><span class="p">.</span><span class="nf">ToListAsync</span><span class="p">();</span> <span class="c1">// Bad: loads all orders</span>
+<span class="p">}</span>
+
+<span class="c1">// Use streaming and pagination</span>
+<span class="k">public</span> <span class="k">async</span> <span class="n">IAsyncEnumerable</span><span class="p">&lt;</span><span class="n">Order</span><span class="p">&gt;</span> <span class="nf">GetOrdersStreamAsync</span><span class="p">(</span><span class="kt">int</span> <span class="n">pageSize</span> <span class="p">=</span> <span class="m">1000</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">var</span> <span class="n">offset</span> <span class="p">=</span> <span class="m">0</span><span class="p">;</span>
+    <span class="n">List</span><span class="p">&lt;</span><span class="n">Order</span><span class="p">&gt;</span> <span class="n">batch</span><span class="p">;</span>
+    
+    <span class="k">do</span>
+    <span class="p">{</span>
+        <span class="n">batch</span> <span class="p">=</span> <span class="k">await</span> <span class="n">_context</span><span class="p">.</span><span class="n">Orders</span>
+            <span class="p">.</span><span class="nf">Skip</span><span class="p">(</span><span class="n">offset</span><span class="p">)</span>
+            <span class="p">.</span><span class="nf">Take</span><span class="p">(</span><span class="n">pageSize</span><span class="p">)</span>
+            <span class="p">.</span><span class="nf">ToListAsync</span><span class="p">();</span>
+            
+        <span class="k">foreach</span> <span class="p">(</span><span class="kt">var</span> <span class="n">order</span> <span class="k">in</span> <span class="n">batch</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="k">yield</span> <span class="k">return</span> <span class="n">order</span><span class="p">;</span>
+        <span class="p">}</span>
+        
+        <span class="n">offset</span> <span class="p">+=</span> <span class="n">pageSize</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">while</span> <span class="p">(</span><span class="n">batch</span><span class="p">.</span><span class="n">Count</span> <span class="p">==</span> <span class="n">pageSize</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div> <p><strong>Implement proper caching strategies</strong>:</p> <div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Memory-bounded caching with cleanup</span>
+<span class="k">public</span> <span class="k">class</span> <span class="nc">BoundedCache</span><span class="p">&lt;</span><span class="n">TKey</span><span class="p">,</span> <span class="n">TValue</span><span class="p">&gt;</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="k">readonly</span> <span class="n">ConcurrentLRUCache</span><span class="p">&lt;</span><span class="n">TKey</span><span class="p">,</span> <span class="n">TValue</span><span class="p">&gt;</span> <span class="n">_cache</span><span class="p">;</span>
+    <span class="k">private</span> <span class="k">readonly</span> <span class="n">Timer</span> <span class="n">_cleanupTimer</span><span class="p">;</span>
+    
+    <span class="k">public</span> <span class="nf">BoundedCache</span><span class="p">(</span><span class="kt">int</span> <span class="n">maxSize</span><span class="p">,</span> <span class="n">TimeSpan</span> <span class="n">expiration</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">_cache</span> <span class="p">=</span> <span class="k">new</span> <span class="n">ConcurrentLRUCache</span><span class="p">&lt;</span><span class="n">TKey</span><span class="p">,</span> <span class="n">TValue</span><span class="p">&gt;(</span><span class="n">maxSize</span><span class="p">);</span>
+        <span class="n">_cleanupTimer</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Timer</span><span class="p">(</span><span class="n">Cleanup</span><span class="p">,</span> <span class="k">null</span><span class="p">,</span> <span class="n">expiration</span><span class="p">,</span> <span class="n">expiration</span><span class="p">);</span>
+    <span class="p">}</span>
+    
+    <span class="k">private</span> <span class="k">void</span> <span class="nf">Cleanup</span><span class="p">(</span><span class="kt">object</span> <span class="n">state</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">_cache</span><span class="p">.</span><span class="nf">RemoveExpiredEntries</span><span class="p">();</span>
+        
+        <span class="c1">// Force GC if memory pressure is high</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">GC</span><span class="p">.</span><span class="nf">GetTotalMemory</span><span class="p">(</span><span class="k">false</span><span class="p">)</span> <span class="p">&gt;</span> <span class="n">Environment</span><span class="p">.</span><span class="n">WorkingSet</span> <span class="p">*</span> <span class="m">0.8</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">GC</span><span class="p">.</span><span class="nf">Collect</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="n">GCCollectionMode</span><span class="p">.</span><span class="n">Optimized</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div> <h3 id="2-container-memory-best-practices">2. Container Memory Best Practices</h3> <p><strong>Set appropriate memory limits</strong>:</p> <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">resources</span><span class="pi">:</span>
+  <span class="na">requests</span><span class="pi">:</span>
+    <span class="na">memory</span><span class="pi">:</span> <span class="s2">"</span><span class="s">1Gi"</span>    <span class="c1"># Guaranteed memory</span>
+  <span class="na">limits</span><span class="pi">:</span>
+    <span class="na">memory</span><span class="pi">:</span> <span class="s2">"</span><span class="s">2Gi"</span>    <span class="c1"># Maximum memory (2x request for burst)</span>
+</code></pre></div></div> <p><strong>Configure .NET heap limits relative to container limits</strong>:</p> <ul> <li>.NET Core/5+: 75-80% of container limit using DOTNET_GCHeapHardLimit</li> <li>.NET Framework: Configure explicitly using environment variables</li> <li>Leave 20-25% for OS, networking buffers, and unmanaged memory</li> </ul> <h3 id="3-monitoring-and-alerting-strategy">3. Monitoring and Alerting Strategy</h3> <p><strong>Implement predictive alerting</strong>:</p> <pre><code class="language-promql"># Alert when memory growth rate suggests OOM within 30 minutes
+predict_linear(container_memory_usage_bytes[10m], 30*60) &gt; container_spec_memory_limit_bytes
+</code></pre> <p><strong>Track memory efficiency metrics</strong>:</p> <ul> <li>Memory utilization per request</li> <li>GC pause time as percentage of request time</li> <li>Object allocation rate</li> <li>Connection pool efficiency</li> </ul> <h2 id="conclusion-building-memory-resilient-systems">Conclusion: Building Memory-Resilient Systems</h2> <p>Memory management in production environments isn’t just about preventing OutOfMemoryErrors - it’s about building systems that remain performant and predictable under varying load conditions. The lessons we learned from our production crises have shaped how we approach system design:</p> <p><strong>Key Takeaways</strong>:</p> <ol> <li> <p><strong>Proactive Monitoring</strong>: Don’t wait for OOM kills. Monitor memory pressure, allocation rates, and GC behavior continuously.</p> </li> <li> <p><strong>Bounded Resources</strong>: Every cache, collection, and pool should have limits. Unbounded growth is a ticking time bomb.</p> </li> <li> <p><strong>Container Awareness</strong>: Configure heap limits relative to container limits, leaving room for OS overhead.</p> </li> <li> <p><strong>Memory-Conscious Architecture</strong>: Design for streaming, use external storage for state, and implement proper resource disposal.</p> </li> <li> <p><strong>Testing Under Load</strong>: Memory issues often only surface under production-like load. Include memory pressure testing in your validation strategy.</p> </li> </ol> <p>The transformation in our system reliability has been remarkable:</p> <ul> <li> <strong>Zero OOM incidents</strong> in 8 months since implementing these practices</li> <li> <strong>67% reduction</strong> in memory-related alerts</li> <li> <strong>$2.3M in prevented downtime</strong> based on our previous incident costs</li> <li> <strong>40% improvement</strong> in developer productivity due to reduced firefighting</li> </ul> <p>Memory management is a journey, not a destination. As your applications evolve and scale, new memory challenges will emerge. The key is building systems with observability, limits, and cleanup mechanisms from the start. When memory issues do arise - and they will - you’ll have the tools and knowledge to identify and resolve them quickly.</p> <p>Remember: in production systems, memory leaks aren’t just technical debt - they’re business risk. Invest in proper memory management practices, and your future self (and your on-call teammates) will thank you.</p> <hr> <p><em>This post reflects real experiences managing memory in production environments serving millions of users. The specific metrics and code examples have been adapted for educational purposes while preserving the core lessons learned from production incidents. The patterns and practices described here are battle-tested in high-scale environments.</em></p> </div> </article> <br> <hr> <br> <h2 class="text-3xl font-semibold mb-4 mt-12">Enjoy Reading This Article?</h2> <p class="mb-2">Here are some more articles you might like to read next:</p> <ul class="list-disc pl-7 my-3 space-y-2 marker:text-[var(--global-theme-color)]"> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2026/building-fast-1brc-csharp-apple-silicon/">Building a fast 1BRC solver in C# on Apple Silicon</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2025/vibe-coding/">Growing as a Software Engineer in the Age of LLMs and Vibe Coding</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2025/how-to-handle-hallucinations/">Taming the Imagination: A Comprehensive Guide to Handling Hallucinations and Implementing Guardrails in Agentic AI</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2025/intro-to-agentic-ai/">Building an Agentic AI Analytics Dashboard: A Deep Dive with LangChain, LangGraph, and Fine-tuned LLAMA</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2025/intro-to-nar/">Neural Algorithmic Reasoning: Teaching Neural Networks to Think Like Algorithms</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2025/opentelemetry/">OpenTelemetry in Microservices: How We Transformed Our Observability Strategy</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2025/leveraging-ai-tools-software-engineering/">Using AI Tools in Software Engineering and Research Workflows</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2024/optimizing-dotnet-microservices-performance/">The Performance Crisis: How We Rescued a .NET 8 Microservice from 10 Critical Bottlenecks</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2024/zero-downtime/">Zero Downtime Deployments in Kubernetes: How We Keep Our Services Running While We Ship</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2024/dotnet-tests/">Mastering Unit Testing and BDD with xUnit and SpecFlow in .NET 9: A Comprehensive Guide</a> </li> </ul> </div> </div> <footer class="fixed-bottom" role="contentinfo"> <div class="container mt-0"> © Copyright 2026 Tanzim Hossain Romel. © Tanzim Hossain Romel. Powered by <a href="https://jekyllrb.com/" target="_blank" rel="external nofollow noopener">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio" rel="external nofollow noopener" target="_blank">al-folio</a> theme. </div> </footer> <script>
+  window.alFolio = {
+    compatBootstrap: false
+  };
+</script> <script src="/assets/js/nav-toggle.js?v=141bd79a73ebc0f0b6ea58e440ae79fc"></script> <script defer src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script> <script defer src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script> <script defer src="/assets/js/masonry.js?v=e49affc7bd2646f6acdad1dbe02c2359" type="text/javascript"></script> <script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js" integrity="sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI=" crossorigin="anonymous"></script> <script src="/assets/al_math/js/mathjax-setup.js"></script> <script src="/assets/js/tooltips-setup.js?v=fe487e99db6c43751e6e7bdb2d6a0611"></script> <script src="/assets/js/no_defer.js?v=53b1b1a645525975c963ce8bf8bfefcf"></script> <script defer src="/assets/js/common.js?v=87baac90f765f2f3362dcf6aaf312a8a"></script> <script defer src="/assets/js/copy_code.js?v=c8a01c11a92744d44b093fc3bda915df" type="text/javascript"></script> <script defer src="/assets/js/jupyter_new_tab.js?v=896d254890d9b47f0281f63bfccf0dee"></script> <script async src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script> <script async src="https://badge.dimensions.ai/badge.js"></script> <script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script> <script defer src="/assets/al_img_tools/js/zoom.js"></script> <script defer src="/assets/js/progress-bar.js?v=499464c5c63ced6cf7ad62509f1e2610" type="text/javascript"></script> <script src="https://cdn.jsdelivr.net/npm/vanilla-back-to-top@7.2.1/dist/vanilla-back-to-top.min.js" integrity="sha256-uMJJ3EoTyfRBoTbR+lrfu1uRQ87RZG8AR3cVNuQVeFg=" crossorigin="anonymous"></script> <script>
+    addBackToTop();
+  </script> <script type="module" src="/assets/al_search/js/search/ninja-keys.min.js"></script> <ninja-keys hidebreadcrumbs noautoloadmdicons placeholder="Type to start searching"></ninja-keys> <script src="/assets/al_search/js/search-setup.js"></script> <script>
+// get the ninja-keys element
+const ninja = document.querySelector('ninja-keys');
+
+// add the home and posts menu items
+ninja.data = [{
+    id: "nav-about",
+    title: "about",
+    section: "Navigation",
+    handler: () => {
+      window.location.href = "/";
+    },
+  },{id: "nav-blog",
+          title: "blog",
+          description: "",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/blog/";
+          },
+        },{id: "nav-publications",
+          title: "publications",
+          description: "Publications.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/publications/";
+          },
+        },{id: "nav-research",
+          title: "research",
+          description: "Research on reliable AI agents, SRE-agent evaluation, ML ecosystem security, agent-choice auditing, and developer tools.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/research/";
+          },
+        },{id: "nav-projects",
+          title: "projects",
+          description: "Research and engineering projects.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/projects/";
+          },
+        },{id: "nav-cv",
+          title: "CV",
+          description: "Curriculum vitae.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/cv/";
+          },
+        },{id: "nav-contributions",
+          title: "contributions",
+          description: "Curated open-source contribution evidence across research infrastructure, frameworks, and language tooling.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/contributions/";
+          },
+        },{id: "post-building-a-fast-1brc-solver-in-c-on-apple-silicon",
+        
+          title: "Building a fast 1BRC solver in C# on Apple Silicon",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/building-fast-1brc-csharp-apple-silicon/";
+          
+        },
+      },{id: "post-memory-management-in-production-avoiding-the-silent-killers",
+        
+          title: "Memory Management in Production: Avoiding the Silent Killers",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/memory-management-production-silent-killers/";
+          
+        },
+      },{id: "post-growing-as-a-software-engineer-in-the-age-of-llms-and-vibe-coding",
+        
+          title: "Growing as a Software Engineer in the Age of LLMs and Vibe Coding...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/vibe-coding/";
+          
+        },
+      },{id: "post-taming-the-imagination-a-comprehensive-guide-to-handling-hallucinations-and-implementing-guardrails-in-agentic-ai",
+        
+          title: "Taming the Imagination: A Comprehensive Guide to Handling Hallucinations and Implementing Guardrails in...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/how-to-handle-hallucinations/";
+          
+        },
+      },{id: "post-building-an-agentic-ai-analytics-dashboard-a-deep-dive-with-langchain-langgraph-and-fine-tuned-llama",
+        
+          title: "Building an Agentic AI Analytics Dashboard: A Deep Dive with LangChain, LangGraph, and...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/intro-to-agentic-ai/";
+          
+        },
+      },{id: "post-neural-algorithmic-reasoning-teaching-neural-networks-to-think-like-algorithms",
+        
+          title: "Neural Algorithmic Reasoning: Teaching Neural Networks to Think Like Algorithms",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/intro-to-nar/";
+          
+        },
+      },{id: "post-opentelemetry-in-microservices-how-we-transformed-our-observability-strategy",
+        
+          title: "OpenTelemetry in Microservices: How We Transformed Our Observability Strategy",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/opentelemetry/";
+          
+        },
+      },{id: "post-using-ai-tools-in-software-engineering-and-research-workflows",
+        
+          title: "Using AI Tools in Software Engineering and Research Workflows",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/leveraging-ai-tools-software-engineering/";
+          
+        },
+      },{id: "post-the-performance-crisis-how-we-rescued-a-net-8-microservice-from-10-critical-bottlenecks",
+        
+          title: "The Performance Crisis: How We Rescued a .NET 8 Microservice from 10 Critical...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2024/optimizing-dotnet-microservices-performance/";
+          
+        },
+      },{id: "post-zero-downtime-deployments-in-kubernetes-how-we-keep-our-services-running-while-we-ship",
+        
+          title: "Zero Downtime Deployments in Kubernetes: How We Keep Our Services Running While We...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2024/zero-downtime/";
+          
+        },
+      },{id: "post-mastering-unit-testing-and-bdd-with-xunit-and-specflow-in-net-9-a-comprehensive-guide",
+        
+          title: "Mastering Unit Testing and BDD with xUnit and SpecFlow in .NET 9: A...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2024/dotnet-tests/";
+          
+        },
+      },{id: "post-design-patterns-your-first-step-toward-professional-software-engineering",
+        
+          title: "Design Patterns: Your First Step Toward Professional Software Engineering",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2024/design-patterns-professional-software-engineering/";
+          
+        },
+      },{id: "post-setting-up-github-actions-ci-cd-with-aws-a-practical-journey",
+        
+          title: "Setting Up GitHub Actions CI/CD with AWS: A Practical Journey",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2024/intro-to-ci-cd/";
+          
+        },
+      },{id: "post-the-clique-partition-problem-dividing-networks-into-perfect-communities",
+        
+          title: "The Clique Partition Problem: Dividing Networks into Perfect Communities",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2023/clique-partition-problem-graph-theory/";
+          
+        },
+      },{id: "post-advice-complexity-in-online-algorithms-when-knowing-the-future-makes-all-the-difference",
+        
+          title: "Advice Complexity in Online Algorithms: When Knowing the Future Makes All the Difference...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2023/advice-complexity-online-algorithms/";
+          
+        },
+      },{id: "post-getting-started-with-kubernetes-deploying-microservice-architectures-at-scale",
+        
+          title: "Getting Started with Kubernetes: Deploying Microservice Architectures at Scale",
+        
+        description: "A practical Kubernetes guide covering microservice deployment, service-mesh integration, observability, and the operational checks needed before production use.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2022/getting-started-with-kubernetes-microservices/";
+          
+        },
+      },{id: "post-understanding-xv6-a-practical-introduction-to-operating-systems",
+        
+          title: "Understanding xv6: A Practical Introduction to Operating Systems",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2022/understanding-xv6-operating-systems/";
+          
+        },
+      },{id: "post-getting-started-with-ns3-a-hands-on-guide-to-network-simulation",
+        
+          title: "Getting Started with NS3: A Hands-On Guide to Network Simulation",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2021/getting-started-with-ns3/";
+          
+        },
+      },{id: "news-completed-b-sc-in-computer-science-and-engineering-from-bangladesh-university-of-engineering-and-technology-with-a-gpa-of-3-53-4-00-link-https-cse-buet-ac-bd-academics-bsc",
+          title: 'Completed B.Sc in Computer Science and Engineering from Bangladesh University of Engineering and...',
+          description: "",
+          section: "News",},{id: "news-joined-iqvia-as-a-software-development-engineer-on-kpi-library-the-dynamic-reporting-layer-within-orchestrated-analytics-link-https-www-iqvia-com-solutions-commercialization-commercial-analytics-orchestrated-analytics",
+          title: 'Joined IQVIA as a Software Development Engineer on KPI Library, the dynamic reporting...',
+          description: "",
+          section: "News",},{id: "news-submitted-39-sentiment-analysis-of-anonymous-crisis-reports-in-bangladesh-39-to-acm-cscw-2025-analyzing-crowd-sourced-reports-from-bangladesh-39-s-2024-national-crisis-using-transformer-models-link-projects-research-ureporter",
+          title: 'Submitted &amp;#39;Sentiment Analysis of Anonymous Crisis Reports in Bangladesh&amp;#39; to ACM CSCW 2025,...',
+          description: "",
+          section: "News",},{id: "news-honored-with-the-iqvia-impact-program-silver-award-for-outstanding-performance-and-contributions-to-the-kpi-library-team-link-https-drive-google-com-file-d-1vc4e2roqepmbfs56olduih-ojdbok9sp-view-usp-share-link",
+          title: 'Honored with the IQVIA Impact Program Silver Award for outstanding performance and contributions...',
+          description: "",
+          section: "News",},{id: "news-submitted-39-an-empirical-study-on-remote-code-execution-in-machine-learning-model-hosting-ecosystems-39-to-the-mining-software-repositories-msr-2026-conference-first-large-scale-cross-platform-security-study-analyzing-45-000-repositories-across-5-major-ml-platforms-link-https-arxiv-org-abs-2601-14163",
+          title: 'Submitted &amp;#39;An Empirical Study on Remote Code Execution in Machine Learning Model Hosting...',
+          description: "",
+          section: "News",},{id: "news-resubmitted-39-an-empirical-study-on-remote-code-execution-in-machine-learning-model-hosting-ecosystems-39-to-acm-transactions-on-software-engineering-and-methodology-tosem-2026-preprint-available-on-arxiv-link-https-arxiv-org-abs-2601-14163",
+          title: 'Resubmitted &amp;#39;An Empirical Study on Remote Code Execution in Machine Learning Model Hosting...',
+          description: "",
+          section: "News",},{id: "news-started-a-remote-summer-research-internship-at-the-university-of-illinois-urbana-champaign-through-uiuc-summer-research-in-software-engineering-srse-2026-with-professor-tianyin-xu-link-https-uiuc-srse-github-io",
+          title: 'Started a remote summer research internship at the University of Illinois Urbana-Champaign through...',
+          description: "",
+          section: "News",},{id: "news-submitted-39-the-choice-can-be-the-attack-auditing-aligned-backdoors-in-llm-agents-39-to-the-transactions-of-the-association-for-computational-linguistics-tacl-2026-with-chowdhury-rakin-haider-link-projects-research-reagent-plus-plus",
+          title: 'Submitted &amp;#39;The Choice Can Be the Attack: Auditing Aligned Backdoors in LLM Agents&amp;#39;...',
+          description: "",
+          section: "News",},{id: "news-39-an-empirical-study-on-remote-code-execution-in-machine-learning-model-hosting-ecosystems-39-is-under-review-at-the-international-conference-on-software-engineering-icse-2027-preprint-available-on-arxiv-link-https-arxiv-org-abs-2601-14163",
+          title: '&amp;#39;An Empirical Study on Remote Code Execution in Machine Learning Model Hosting Ecosystems&amp;#39;...',
+          description: "",
+          section: "News",},{id: "news-will-begin-graduate-study-in-computing-science-at-the-university-of-alberta-on-september-1-2026-link-https-www-ualberta-ca-en-computing-science-index-html",
+          title: 'Will begin graduate study in Computing Science at the University of Alberta on...',
+          description: "",
+          section: "News",},{id: "projects-1brc-c-on-apple-silicon",
+          title: '1BRC C# on Apple Silicon',
+          description: "A .NET 10 NativeAOT performance case study: byte parsing, native aggregation, ARM64 tuning, and a size-aware macOS pread path",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/1brc-csharp/";
+            },},{id: "projects-building-a-bangla-handwritten-digit-recognizer-from-scratch",
+          title: 'Building a Bangla Handwritten Digit Recognizer from Scratch',
+          description: "A Deep Dive into Custom CNN Implementation",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/bangla-digit-recognition/";
+            },},{id: "projects-blockchain-based-ticketing-platform",
+          title: 'Blockchain Based Ticketing Platform',
+          description: "A practical approach to reducing ticket fraud and abusive resale",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/blockchain-ticketing/";
+            },},{id: "projects-yet-another-c-compiler",
+          title: 'Yet Another C Compiler',
+          description: "A complete multi-pass compiler for a subset of C",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/compiler/";
+            },},{id: "projects-contextledger-context-accounting-for-coding-agents",
+          title: 'ContextLedger: context accounting for coding agents',
+          description: "A research notebook on OpenCode compaction, provenance, and live GPT-5.5 experiments",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/contextledger/";
+            },},{id: "projects-ctxhelm-agent-native-context-compiler",
+          title: 'ctxhelm: agent-native context compiler',
+          description: "Local-first context plans, release proof, and source-free agent evaluation",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/ctxhelm/";
+            },},{id: "projects-mini-deep-learning-framework-pytorch-from-scratch",
+          title: 'Mini Deep Learning Framework: PyTorch from Scratch',
+          description: "A freelance learning project for tensors, autograd, and neural-network internals",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/deep-learning-framework-capstone/";
+            },},{id: "projects-go-container-runtime-docker-from-scratch",
+          title: 'Go Container Runtime: Docker from Scratch',
+          description: "A freelance learning project for Linux containers, networking, and Go systems programming",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/docker-from-scratch-go/";
+            },},{id: "projects-eventfly-distributed-microservices-event-platform",
+          title: 'EventFly – Distributed Microservices Event Platform',
+          description: "A six-person BUET course project for event creation, ticketing, announcements, participant engagement, analytics, and payments, implemented with Node.js, React, NATS, Kubernetes, MongoDB, Redis, and Stripe.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/eventfly-an-end-to-end-event-management-system/";
+            },},{id: "projects-building-a-go-database-engine-from-scratch",
+          title: 'Building a Go Database Engine from Scratch',
+          description: "An educational ACID-oriented database engine with advanced features",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/go-database/";
+            },},{id: "projects-image-caption-generation-with-bert-context-vectors",
+          title: 'Image Caption Generation with BERT Context Vectors',
+          description: "Extended the &quot;Show, Attend, and Tell&quot; image captioning model with BERT to improve caption quality and reduce training time, achieving 36% improvement in CIDEr score and 43% improvement in BLEU-4.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/image-caption-generator/";
+            },},{id: "projects-patchsmith-a-harness-for-repair-agents",
+          title: 'PatchSmith: a harness for repair agents',
+          description: "System design and R&amp;D notes for bounded patches, sandbox validation, and auditable repair runs",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/patchsmith/";
+            },},{id: "projects-ray-tracing-from-scratch-a-comprehensive-guide-to-3d-rendering-physics-and-implementation",
+          title: 'Ray Tracing from Scratch: A Comprehensive Guide to 3D Rendering Physics and Implementation...',
+          description: "Implementing physically-based rendering with C++",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/ray-tracing/";
+            },},{id: "projects-an-empirical-study-on-remote-code-execution-in-machine-learning-model-hosting-ecosystems",
+          title: 'An Empirical Study on Remote Code Execution in Machine Learning Model Hosting Ecosystems...',
+          description: "A cross-platform study of model-loading risk across five ML hosting ecosystems, using static analysis, malware-signature scanning, and analysis of more than 600 developer discussions.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/research-ml-remote-code-execution/";
+            },},{id: "projects-verischema-verified-database-schema-generation",
+          title: 'VeriSchema: verified database-schema generation',
+          description: "How can specialized agents generate relational schemas from natural-language requirements while formal checks and targeted repair keep the result consistent?",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/research-multi-agent-db-schema/";
+            },},{id: "projects-the-choice-can-be-the-attack-auditing-aligned-backdoors-in-llm-agents",
+          title: 'The Choice Can Be the Attack: Auditing Aligned Backdoors in LLM Agents',
+          description: "Abstract-level summary of SHIFT, submitted to TACL 2026 on aligned backdoor attacks in LLM agents.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/research-reagent-plus-plus/";
+            },},{id: "projects-sentiment-analysis-of-anonymous-crisis-reports-in-bangladesh",
+          title: 'Sentiment Analysis of Anonymous Crisis Reports in Bangladesh',
+          description: "A multilingual analysis of anonymous, crowd-sourced reports from Bangladesh&#39;s 2024 national crisis.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/research-ureporter/";
+            },},{id: "projects-enhancing-tcp-fairness-tcp-vegas-implementation",
+          title: 'Enhancing TCP Fairness: TCP Vegas+ Implementation',
+          description: "A dual-mode solution for TCP Vegas fairness issues",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/tcp-vegas-plus/";
+            },},{
+        id: 'social-email',
+        title: 'email',
+        section: 'Socials',
+        handler: () => {
+          window.open("mailto:%74%61%6E%68%72%6F%6D%65%6C@%67%6D%61%69%6C.%63%6F%6D", "_blank");
+        },
+      },{
+        id: 'social-github',
+        title: 'GitHub',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://github.com/thromel", "_blank");
+        },
+      },{
+        id: 'social-scholar',
+        title: 'Google Scholar',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://scholar.google.com/citations?user=zHV4EU8AAAAJ", "_blank");
+        },
+      },{
+        id: 'social-linkedin',
+        title: 'LinkedIn',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://www.linkedin.com/in/thromel", "_blank");
+        },
+      },{
+        id: 'social-orcid',
+        title: 'ORCID',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://orcid.org/0009-0009-2432-8960", "_blank");
+        },
+      },{
+        id: 'social-rss',
+        title: 'RSS Feed',
+        section: 'Socials',
+        handler: () => {
+          window.open("/feed.xml", "_blank");
+        },
+      },{
+        id: 'social-x',
+        title: 'X',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://twitter.com/tanzimhromel", "_blank");
+        },
+      },{
+      id: 'light-theme',
+      title: 'Change theme to light',
+      description: 'Change the theme of the site to Light',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("light");
+      },
+    },
+    {
+      id: 'dark-theme',
+      title: 'Change theme to dark',
+      description: 'Change the theme of the site to Dark',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("dark");
+      },
+    },
+    {
+      id: 'system-theme',
+      title: 'Use system default theme',
+      description: 'Change the theme of the site to System Default',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("system");
+      },
+    },];
+
+</script> <script src="/assets/al_search/js/shortcut-key.js"></script> </body> </html>

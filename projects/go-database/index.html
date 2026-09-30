@@ -1,0 +1,543 @@
+<!DOCTYPE html> <html lang="en"> <head> <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <title> Building a Go Database Engine from Scratch | Tanzim Hossain Romel </title> <meta name="author" content="Tanzim Hossain Romel"> <meta name="description" content="An educational ACID-oriented database engine with advanced features"> <meta name="keywords" content=""> <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https:; style-src 'self' 'unsafe-inline' https:; img-src 'self' data: https:; font-src 'self' data: https:; media-src 'self' https:; frame-src 'self' https:; connect-src 'self' https:;"> <style>
+  :root {
+    --max-content-width: 930px;
+  }
+</style> <link rel="stylesheet" href="/assets/css/tailwind.css?v=50c64c15cbb9fd1ce6056fdb8bcb4b62"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.2.0/css/all.min.css" integrity="sha256-MVopmdyC2tYTiJ8wlktf0uh0v4NgT+vNdyVFepi7Q0c=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.5/css/academicons.min.css" integrity="sha256-SzrCOBJbGVFMahewkgjwnApaV2+av1DwMAA+/QGLyZw=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/scholar-icons@1.0.3/css/scholar-icons.css" integrity="sha256-VY3hHVj/hNX3fYG6wtbA6TcKJQl7+FthzGSyIB64klY=" crossorigin="anonymous"> <link defer rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons&amp;display=swap"> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-github.css?v=591dab5a4e56573bf4ef7fd332894c99" media="" id="highlight_theme_light"> <link rel="shortcut icon" href="data:image/svg+xml,&lt;svg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20100%20100%22&gt;&lt;text%20y=%22.9em%22%20font-size=%2290%22&gt;%E2%9A%9B%EF%B8%8F&lt;/text&gt;&lt;/svg&gt;"> <link rel="stylesheet" href="/assets/css/main.css?v=3116ba77db9ee1581d05bb3e86fbf7f1"> <link rel="canonical" href="https://tanzimhromel.com/projects/go-database/"> <script src="/assets/js/theme.js?v=5286c3e4c334d0ecb8fc0c40ff4fa7ec"></script> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-native.css?v=5847e5ed4a4568527aa6cfab446049ca" media="none" id="highlight_theme_dark"> <script>
+    initTheme();
+  </script> </head> <body class="fixed-top-nav "> <header> <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top" role="navigation"> <div class="container"> <a class="navbar-brand title font-weight-lighter" href="/"> Tanzim Hossain Romel </a> <button class="navbar-toggler collapsed navbar-toggler-main" type="button" data-nav-toggle="navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar top-bar"></span> <span class="icon-bar middle-bar"></span> <span class="icon-bar bottom-bar"></span> </button> <div class="collapse navbar-collapse navbar-collapse-main" id="navbarNav"> <ul class="navbar-nav navbar-menu-list flex-nowrap"> <li class="nav-item "> <a class="nav-link" href="/">about </a> </li> <li class="nav-item "> <a class="nav-link" href="/blog/">blog </a> </li> <li class="nav-item "> <a class="nav-link" href="/publications/">publications </a> </li> <li class="nav-item "> <a class="nav-link" href="/research/">research </a> </li> <li class="nav-item active"> <a class="nav-link" href="/projects/">projects <span class="sr-only">(current)</span> </a> </li> <li class="nav-item "> <a class="nav-link" href="/cv/">CV </a> </li> <li class="nav-item "> <a class="nav-link" href="/contributions/">contributions </a> </li> <li class="nav-item"> <button id="search-toggle" type="button" title="Search" aria-label="Open search"> <span class="nav-link">ctrl k <i class="fa-solid fa-magnifying-glass"></i></span> </button> </li> <li class="toggle-container"> <button id="light-toggle" type="button" title="Change theme" aria-label="Change color theme"> <i class="fa-half-sun-moon" id="light-toggle-system"></i> <i class="fa-solid fa-moon" id="light-toggle-dark"></i> <i class="fa-solid fa-sun" id="light-toggle-light"></i> </button> </li> </ul> </div> </div> </nav> <progress id="progress" value="0"> <div class="progress-container"> <span class="progress-bar"></span> </div> </progress> </header> <div class="container mt-5" role="main"> <div class="post"> <header class="post-header"> <h1 class="post-title">Building a Go Database Engine from Scratch</h1> <p class="post-description">An educational ACID-oriented database engine with advanced features</p> </header> <article> <p>A staged educational Go database-engine implementation covering B+ tree storage, write-ahead logging, transaction and concurrency primitives, query execution, and later adaptive-indexing experiments.</p> <h2 id="at-a-glance">At a glance</h2> <ul> <li> <strong>Status:</strong> Educational prototype; not a production database</li> <li> <strong>Problem:</strong> Learn how storage, recovery, transactions, query execution, and indexing fit together by implementing a small database engine in Go.</li> <li> <strong>Role:</strong> Independent implementer and technical author</li> <li> <strong>Outcome:</strong> Built and documented staged B+ tree, write-ahead log, transaction, concurrency, query, and indexing components as an educational prototype.</li> <li> <strong>Technologies:</strong> Go, Systems Programming, Database Systems, B+ Trees, Concurrency Control, Machine Learning, Performance Optimization</li> <li> <strong>Repository:</strong> No public repository is currently linked</li> </ul> <h2 id="15-sprint-implementation-plan--educational-database-engine--systems-programming">15-sprint implementation plan | Educational database engine | Systems programming</h2> <h2 id="introduction">Introduction</h2> <p>Database engines are among the most complex and critical pieces of software infrastructure, powering everything from simple applications to massive distributed systems. While there are many excellent database solutions available, building one from scratch provides unparalleled insight into the fundamental concepts that drive modern data systems.</p> <p>This project is a staged implementation of an embedded database engine in Go. The plan uses database internals as the learning objective: page storage, indexing, transactions, recovery, query execution, and experiments with adaptive indexing and learned query-cost estimates.</p> <h2 id="project-vision-and-goals">Project Vision and Goals</h2> <h3 id="educational-excellence">Educational Excellence</h3> <p>This project is a comprehensive learning platform for understanding database internals. Rather than simply using existing database libraries, every component - from page management to query optimization - is implemented from scratch, providing deep insights into how databases actually work.</p> <h3 id="production-oriented-design-goals">Production-oriented design goals</h3> <p>This is an educational system, not a deployment-ready database. Its implementation plan includes:</p> <ul> <li> <strong>ACID semantics</strong> evaluated with focused transaction tests</li> <li> <strong>Crash recovery</strong> experiments using write-ahead logging</li> <li> <strong>Performance measurement</strong> against declared local workloads</li> <li> <strong>Concurrent access</strong> with explicit correctness and contention tests</li> <li> <strong>Monitoring hooks</strong> for inspecting storage and transaction behavior</li> </ul> <h3 id="research-extensions">Research extensions</h3> <p>The project explores several research-informed database ideas:</p> <ul> <li> <strong>Adaptive indexing</strong> that automatically optimizes based on query patterns</li> <li> <strong>Time-travel queries</strong> enabling historical data access</li> <li> <strong>ML-enhanced optimization</strong> using machine learning for query planning</li> <li> <strong>Modern hardware optimization</strong> for NVMe SSDs and multi-core processors</li> </ul> <h2 id="technical-architecture">Technical Architecture</h2> <p>The database engine follows a strict layered architecture, ensuring clean separation of concerns and modularity:</p> <h3 id="storage-engine-layer">Storage Engine Layer</h3> <ul> <li> <strong>B+ Tree Implementation</strong>: Custom B+ tree with variable-length keys and efficient range scans</li> <li> <strong>Page Management</strong>: 8KB fixed-size pages with sophisticated buffer pool management</li> <li> <strong>File System Integration</strong>: Single-file database format with atomic writes and crash safety</li> </ul> <h3 id="transaction-management-layer">Transaction Management Layer</h3> <ul> <li> <strong>ACID Compliance</strong>: Full atomicity, consistency, isolation, and durability guarantees</li> <li> <strong>Concurrency Control</strong>: Two-Phase Locking (2PL) initially, evolving to Multi-Version Concurrency Control</li> <li> <strong>Deadlock Detection</strong>: Automatic detection and resolution using wait-for graphs</li> </ul> <h3 id="query-processing-layer">Query Processing Layer</h3> <ul> <li> <strong>SQL Parser</strong>: Complete SQL parsing with Abstract Syntax Tree generation</li> <li> <strong>Semantic Analyzer</strong>: Type checking, schema validation, and query rewriting</li> <li> <strong>Cost-Based Optimizer</strong>: Statistics-driven query optimization with multiple join algorithms</li> <li> <strong>Execution Engine</strong>: Iterator-based physical operators with parallel execution support</li> </ul> <h3 id="recovery-system">Recovery System</h3> <ul> <li> <strong>Write-Ahead Logging</strong>: ARIES-style recovery protocol ensuring data durability</li> <li> <strong>Checkpointing</strong>: Fuzzy checkpoints to minimize recovery time</li> <li> <strong>Crash Recovery</strong>: Three-phase recovery (Analysis, Redo, Undo) handling all failure scenarios</li> </ul> <h2 id="implementation-approach">Implementation Approach</h2> <h3 id="phase-1-foundation-sprints-1-3">Phase 1: Foundation (Sprints 1-3)</h3> <p>The project begins with core infrastructure and basic storage capabilities:</p> <p><strong>Sprint 1: Core Infrastructure</strong></p> <ul> <li>Project structure and development environment</li> <li>Core interfaces (Database, StorageEngine, Transaction)</li> <li>In-memory key-value store with thread-safe operations</li> <li>Testing framework and continuous integration</li> </ul> <p><strong>Sprint 2: Storage Engine</strong></p> <ul> <li>B+ tree implementation with efficient insertion and deletion</li> <li>Page-based storage architecture with buffer pool management</li> <li>File system integration with atomic operations</li> </ul> <p><strong>Sprint 3: Persistence &amp; WAL</strong></p> <ul> <li>Write-ahead logging for durability and crash recovery</li> <li>Checkpointing system for efficient recovery</li> <li>Comprehensive crash recovery testing</li> </ul> <h3 id="phase-2-transactional-layer-sprints-4-6">Phase 2: Transactional Layer (Sprints 4-6)</h3> <p>Building full ACID compliance with sophisticated concurrency control:</p> <p><strong>Sprint 4: Transaction Management</strong></p> <ul> <li>Transaction lifecycle management (begin/commit/rollback)</li> <li>Undo logging for transaction rollback</li> <li>Atomic multi-operation transactions</li> </ul> <p><strong>Sprint 5: Concurrency Control</strong></p> <ul> <li>Two-Phase Locking with deadlock detection</li> <li>Multiple isolation levels (Read Uncommitted through Serializable)</li> <li>Fair lock scheduling and contention management</li> </ul> <p><strong>Sprint 6: Recovery System</strong></p> <ul> <li>ARIES recovery protocol implementation</li> <li>Checkpoint coordination with active transactions</li> <li>Recovery testing with simulated failures</li> </ul> <h3 id="phase-3-query-processing-sprints-7-9">Phase 3: Query Processing (Sprints 7-9)</h3> <p>Implementing a complete SQL engine with optimization:</p> <p><strong>Sprint 7: Parser &amp; Analyzer</strong></p> <ul> <li>SQL lexer and parser generating Abstract Syntax Trees</li> <li>Semantic analysis with schema validation</li> <li>Expression evaluation engine</li> </ul> <p><strong>Sprint 8: Query Optimizer</strong></p> <ul> <li>Rule-based optimization (predicate pushdown, projection elimination)</li> <li>Cost-based optimization with statistics collection</li> <li>Join order optimization using dynamic programming</li> </ul> <p><strong>Sprint 9: Query Executor</strong></p> <ul> <li>Physical operator framework with iterator pattern</li> <li>Join algorithms (nested loop, hash join, sort-merge join)</li> <li>Parallel query execution using Go goroutines</li> </ul> <h3 id="phase-4-advanced-features-sprints-10-12">Phase 4: Advanced Features (Sprints 10-12)</h3> <p>Exploring research-informed database techniques:</p> <p><strong>Sprint 10: MVCC &amp; Time-Travel</strong></p> <ul> <li>Multi-Version Concurrency Control for enhanced read performance</li> <li>Snapshot isolation with garbage collection</li> <li>Time-travel queries for historical data access</li> </ul> <p><strong>Sprint 11: Adaptive Indexing</strong></p> <ul> <li>Query pattern analysis and index recommendation</li> <li>Automatic index creation based on workload</li> <li>Index effectiveness monitoring and adjustment</li> </ul> <p><strong>Sprint 12: ML-Enhanced Optimization</strong></p> <ul> <li>Machine learning models for cardinality estimation</li> <li>Learned cost models improving query optimization</li> <li>Automated database tuning based on workload patterns</li> </ul> <h3 id="phase-5-hardening-and-evaluation-sprints-13-15">Phase 5: Hardening and evaluation (Sprints 13-15)</h3> <p>Adding security, measurement, and operational documentation:</p> <p><strong>Sprint 13: Performance Optimization</strong></p> <ul> <li>Critical path optimization and SIMD utilization</li> <li>Memory management optimization</li> <li>I/O pattern optimization for modern storage</li> </ul> <p><strong>Sprint 14: Monitoring &amp; Observability</strong></p> <ul> <li>Comprehensive metrics collection and monitoring</li> <li>Distributed tracing and structured logging</li> <li>Performance dashboards and alerting</li> </ul> <p><strong>Sprint 15: Security &amp; Deployment</strong></p> <ul> <li>Authentication and authorization systems</li> <li>Data encryption at rest and in transit</li> <li>Deployment tools and production documentation</li> </ul> <h2 id="technical-deep-dive">Technical Deep Dive</h2> <h3 id="storage-engine-design">Storage Engine Design</h3> <p>The heart of any database is its storage engine, and this implementation features a sophisticated B+ tree design optimized for modern hardware:</p> <div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">type</span> <span class="n">BPlusTree</span> <span class="k">struct</span> <span class="p">{</span>
+    <span class="n">root</span>      <span class="n">PageID</span>
+    <span class="n">height</span>    <span class="kt">int</span>
+    <span class="n">numKeys</span>   <span class="kt">int64</span>
+    <span class="n">pageCache</span> <span class="o">*</span><span class="n">PageCache</span>
+    <span class="n">treeLatch</span> <span class="n">sync</span><span class="o">.</span><span class="n">RWMutex</span>
+<span class="p">}</span>
+
+<span class="k">type</span> <span class="n">Page</span> <span class="k">struct</span> <span class="p">{</span>
+    <span class="n">header</span> <span class="n">PageHeader</span>
+    <span class="n">data</span>   <span class="p">[</span><span class="n">PageSize</span> <span class="o">-</span> <span class="n">PageHeaderSize</span><span class="p">]</span><span class="kt">byte</span>
+<span class="p">}</span>
+
+<span class="k">type</span> <span class="n">PageHeader</span> <span class="k">struct</span> <span class="p">{</span>
+    <span class="n">PageID</span>       <span class="n">PageID</span>    <span class="c">// Unique page identifier</span>
+    <span class="n">PageType</span>     <span class="n">PageType</span>  <span class="c">// Leaf/Internal/Meta/Free</span>
+    <span class="n">LSN</span>          <span class="kt">uint64</span>    <span class="c">// Log Sequence Number</span>
+    <span class="n">NumSlots</span>     <span class="kt">uint16</span>    <span class="c">// Number of data slots</span>
+    <span class="n">FreeSpace</span>    <span class="kt">uint16</span>    <span class="c">// Bytes of free space</span>
+    <span class="n">Checksum</span>     <span class="kt">uint32</span>    <span class="c">// CRC32 checksum</span>
+<span class="p">}</span>
+</code></pre></div></div> <p>Key design decisions include:</p> <ul> <li> <strong>8KB pages</strong> optimized for modern SSD performance</li> <li> <strong>Variable-length keys and values</strong> for flexibility</li> <li> <strong>Sophisticated buffer pool</strong> with LRU eviction and pin/unpin semantics</li> <li> <strong>Page-level checksums</strong> for corruption detection</li> </ul> <h3 id="transaction-architecture">Transaction Architecture</h3> <p>The transaction system provides full ACID guarantees through careful coordination of multiple subsystems:</p> <div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">type</span> <span class="n">TransactionManager</span> <span class="k">struct</span> <span class="p">{</span>
+    <span class="n">nextTxnID</span>  <span class="n">atomic</span><span class="o">.</span><span class="n">Uint64</span>
+    <span class="n">activeTxns</span> <span class="k">map</span><span class="p">[</span><span class="n">TxnID</span><span class="p">]</span><span class="o">*</span><span class="n">Transaction</span>
+    <span class="n">lockMgr</span>    <span class="o">*</span><span class="n">LockManager</span>
+    <span class="n">logMgr</span>     <span class="o">*</span><span class="n">LogManager</span>
+    <span class="n">versionMgr</span> <span class="o">*</span><span class="n">VersionManager</span>
+<span class="p">}</span>
+
+<span class="k">type</span> <span class="n">Transaction</span> <span class="k">struct</span> <span class="p">{</span>
+    <span class="n">ID</span>         <span class="n">TxnID</span>
+    <span class="n">State</span>      <span class="n">TxnState</span>
+    <span class="n">IsolationLevel</span> <span class="n">IsolationLevel</span>
+    <span class="n">StartTime</span>  <span class="n">time</span><span class="o">.</span><span class="n">Time</span>
+    <span class="n">readSet</span>    <span class="o">*</span><span class="n">ReadSet</span>
+    <span class="n">writeSet</span>   <span class="o">*</span><span class="n">WriteSet</span>
+    <span class="n">undoLog</span>    <span class="p">[]</span><span class="n">UndoRecord</span>
+<span class="p">}</span>
+</code></pre></div></div> <p>The transaction system implements:</p> <ul> <li> <strong>Strict Two-Phase Locking</strong> for serializability</li> <li> <strong>Multiple isolation levels</strong> from Read Uncommitted to Serializable</li> <li> <strong>Deadlock detection</strong> using wait-for graphs</li> <li> <strong>Efficient rollback</strong> using undo logging</li> </ul> <h3 id="query-optimization">Query Optimization</h3> <p>The query optimizer uses both rule-based and cost-based techniques:</p> <div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">type</span> <span class="n">QueryOptimizer</span> <span class="k">struct</span> <span class="p">{</span>
+    <span class="n">rules</span>        <span class="p">[]</span><span class="n">OptimizationRule</span>
+    <span class="n">costModel</span>    <span class="n">CostModel</span>
+    <span class="n">statistics</span>   <span class="o">*</span><span class="n">StatisticsManager</span>
+    <span class="n">adaptiveOpt</span>  <span class="o">*</span><span class="n">AdaptiveOptimizer</span>
+<span class="p">}</span>
+
+<span class="k">type</span> <span class="n">PhysicalPlan</span> <span class="k">interface</span> <span class="p">{</span>
+    <span class="n">Execute</span><span class="p">(</span><span class="n">ctx</span> <span class="n">context</span><span class="o">.</span><span class="n">Context</span><span class="p">)</span> <span class="p">(</span><span class="n">ResultSet</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span>
+    <span class="n">EstimateCost</span><span class="p">()</span> <span class="n">Cost</span>
+    <span class="n">ExplainPlan</span><span class="p">()</span> <span class="kt">string</span>
+<span class="p">}</span>
+</code></pre></div></div> <p>Optimization techniques include:</p> <ul> <li> <strong>Predicate pushdown</strong> to reduce data movement</li> <li> <strong>Join order optimization</strong> using dynamic programming</li> <li> <strong>Index selection</strong> based on selectivity estimates</li> <li> <strong>Parallel execution</strong> leveraging Go’s concurrency primitives</li> </ul> <h2 id="performance-characteristics">Performance Characteristics</h2> <p>The database engine is designed to meet aggressive performance targets:</p> <h3 id="storage-performance">Storage Performance</h3> <ul> <li> <strong>Point lookups</strong>: &lt;1ms for cached pages, &lt;10ms for disk reads</li> <li> <strong>Range scans</strong>: &gt;10,000 keys/second for sequential access</li> <li> <strong>Insert throughput</strong>: &gt;5,000 inserts/second sustained</li> <li> <strong>Buffer pool hit rate</strong>: &gt;90% for typical workloads</li> </ul> <h3 id="transaction-performance">Transaction Performance</h3> <ul> <li> <strong>Transaction begin</strong>: &lt;100μs overhead</li> <li> <strong>Transaction commit</strong>: &lt;1ms for small transactions</li> <li> <strong>Concurrent capacity</strong>: &gt;1,000 active transactions</li> <li> <strong>Transaction throughput</strong>: &gt;10,000 transactions/second</li> </ul> <h3 id="query-performance">Query Performance</h3> <ul> <li> <strong>Simple query latency</strong>: &lt;1ms for cached queries</li> <li> <strong>Query throughput</strong>: &gt;10,000 simple queries/second</li> <li> <strong>Parse time</strong>: &lt;10ms for typical queries</li> <li> <strong>Optimization time</strong>: &lt;100ms even for complex queries</li> </ul> <h2 id="advanced-features">Advanced features</h2> <h3 id="adaptive-indexing">Adaptive Indexing</h3> <p>One useful part of this database is its adaptive indexing system:</p> <div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">type</span> <span class="n">AdaptiveIndexManager</span> <span class="k">struct</span> <span class="p">{</span>
+    <span class="n">queryStats</span>   <span class="o">*</span><span class="n">QueryStatistics</span>
+    <span class="n">indexAdvisor</span> <span class="o">*</span><span class="n">IndexAdvisor</span>
+    <span class="n">builder</span>      <span class="o">*</span><span class="n">IndexBuilder</span>
+    <span class="n">threshold</span>    <span class="kt">int</span>
+<span class="p">}</span>
+
+<span class="k">type</span> <span class="n">QueryStatistics</span> <span class="k">struct</span> <span class="p">{</span>
+    <span class="n">predicateFreq</span> <span class="k">map</span><span class="p">[</span><span class="n">Predicate</span><span class="p">]</span><span class="kt">int64</span>
+    <span class="n">selectivity</span>   <span class="k">map</span><span class="p">[</span><span class="n">Predicate</span><span class="p">]</span><span class="kt">float64</span>
+    <span class="n">executionTime</span> <span class="k">map</span><span class="p">[</span><span class="n">Predicate</span><span class="p">]</span><span class="n">time</span><span class="o">.</span><span class="n">Duration</span>
+<span class="p">}</span>
+</code></pre></div></div> <p>The system automatically:</p> <ul> <li> <strong>Analyzes query patterns</strong> to identify frequently used predicates</li> <li> <strong>Estimates selectivity</strong> for potential index candidates</li> <li> <strong>Creates indexes automatically</strong> when benefit exceeds threshold</li> <li> <strong>Monitors effectiveness</strong> and removes ineffective indexes</li> </ul> <h3 id="time-travel-queries">Time-Travel Queries</h3> <p>Building on the MVCC infrastructure, the database supports time-travel queries:</p> <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">-- Query data as it existed at a specific timestamp</span>
+<span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">orders</span> <span class="k">AS</span> <span class="k">OF</span> <span class="k">SYSTEM</span> <span class="nb">TIME</span> <span class="s1">'2024-01-01 12:00:00'</span><span class="p">;</span>
+
+<span class="c1">-- Find all changes to a record over time</span>
+<span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">audit_log</span> 
+<span class="k">WHERE</span> <span class="n">record_id</span> <span class="o">=</span> <span class="mi">123</span> 
+<span class="k">ORDER</span> <span class="k">BY</span> <span class="n">system_time</span><span class="p">;</span>
+</code></pre></div></div> <p>This feature enables:</p> <ul> <li> <strong>Historical analysis</strong> without separate audit systems</li> <li> <strong>Data recovery</strong> from accidental modifications</li> <li> <strong>Regulatory compliance</strong> with automatic audit trails</li> </ul> <h3 id="ml-enhanced-optimization">ML-Enhanced Optimization</h3> <p>The query optimizer incorporates machine learning for improved decision-making:</p> <div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">type</span> <span class="n">MLOptimizer</span> <span class="k">struct</span> <span class="p">{</span>
+    <span class="n">model</span>       <span class="n">MLModel</span>
+    <span class="n">features</span>    <span class="o">*</span><span class="n">FeatureExtractor</span>
+    <span class="n">trainer</span>     <span class="o">*</span><span class="n">OnlineTrainer</span>
+<span class="p">}</span>
+
+<span class="k">type</span> <span class="n">QueryFeatures</span> <span class="k">struct</span> <span class="p">{</span>
+    <span class="n">TableSizes</span>      <span class="p">[]</span><span class="kt">int64</span>
+    <span class="n">PredicateTypes</span>  <span class="p">[]</span><span class="n">PredicateType</span>
+    <span class="n">JoinTypes</span>       <span class="p">[]</span><span class="n">JoinType</span>
+    <span class="n">EstimatedCard</span>   <span class="kt">int64</span>
+<span class="p">}</span>
+</code></pre></div></div> <p>The ML system:</p> <ul> <li> <strong>Learns from execution feedback</strong> to improve cost estimates</li> <li> <strong>Adapts to workload changes</strong> automatically</li> <li> <strong>Provides explainable decisions</strong> for query plan selection</li> </ul> <h2 id="why-go-for-database-implementation">Why Go for Database Implementation?</h2> <p>Go provides several advantages for database implementation:</p> <h3 id="concurrency-primitives">Concurrency Primitives</h3> <ul> <li> <strong>Goroutines</strong> for lightweight concurrent operations</li> <li> <strong>Channels</strong> for safe communication between components</li> <li> <strong>Sync package</strong> for low-level synchronization primitives</li> <li> <strong>Context</strong> for cancellation and timeout handling</li> </ul> <h3 id="memory-management">Memory Management</h3> <ul> <li> <strong>Garbage collector</strong> eliminates memory leaks</li> <li> <strong>Efficient allocation</strong> with good performance characteristics</li> <li> <strong>Memory mapping</strong> support for large data files</li> <li> <strong>Bounded memory usage</strong> with predictable behavior</li> </ul> <h3 id="standard-library">Standard Library</h3> <ul> <li> <strong>Excellent I/O support</strong> with buffering and async operations</li> <li> <strong>Cryptography</strong> for security features</li> <li> <strong>JSON/encoding</strong> for configuration and metadata</li> <li> <strong>Testing framework</strong> for comprehensive validation</li> </ul> <h3 id="performance-characteristics-1">Performance Characteristics</h3> <ul> <li> <strong>Compiled language</strong> with excellent runtime performance</li> <li> <strong>Static linking</strong> for easy deployment</li> <li> <strong>Cross-platform</strong> support for multiple architectures</li> <li> <strong>Profiling tools</strong> for performance optimization</li> </ul> <h2 id="learning-outcomes-and-technical-growth">Learning Outcomes and Technical Growth</h2> <p>This project provides comprehensive exposure to:</p> <h3 id="systems-programming">Systems Programming</h3> <ul> <li> <strong>Memory management</strong> and cache optimization</li> <li> <strong>File system interactions</strong> and I/O optimization</li> <li> <strong>Concurrent programming</strong> patterns and primitives</li> <li> <strong>Performance tuning</strong> and profiling techniques</li> </ul> <h3 id="database-theory">Database Theory</h3> <ul> <li> <strong>Storage structures</strong> (B+ trees, LSM trees, heap files)</li> <li> <strong>Transaction processing</strong> and ACID properties</li> <li> <strong>Query optimization</strong> algorithms and cost models</li> <li> <strong>Recovery algorithms</strong> and durability guarantees</li> </ul> <h3 id="advanced-topics">Advanced Topics</h3> <ul> <li> <strong>Machine learning</strong> integration in systems software</li> <li> <strong>Adaptive algorithms</strong> for self-tuning systems</li> <li> <strong>Modern hardware</strong> optimization techniques</li> <li> <strong>Distributed systems</strong> concepts and patterns</li> </ul> <h2 id="real-world-applications">Real-World Applications</h2> <p>This database engine is designed for several practical use cases:</p> <h3 id="embedded-applications">Embedded Applications</h3> <ul> <li> <strong>Desktop applications</strong> requiring local storage</li> <li> <strong>IoT devices</strong> with limited resources</li> <li> <strong>Mobile applications</strong> needing offline capabilities</li> <li> <strong>Edge computing</strong> scenarios with intermittent connectivity</li> </ul> <h3 id="development-and-testing">Development and Testing</h3> <ul> <li> <strong>Unit testing</strong> with lightweight database instances</li> <li> <strong>Prototyping</strong> without external database dependencies</li> <li> <strong>Educational environments</strong> for teaching database concepts</li> <li> <strong>Research platforms</strong> for database algorithm experimentation</li> </ul> <h3 id="specialized-workloads">Specialized Workloads</h3> <ul> <li> <strong>Time-series data</strong> with efficient time-based queries</li> <li> <strong>Audit logging</strong> with built-in historical access</li> <li> <strong>Configuration storage</strong> with ACID guarantees</li> <li> <strong>Cache layers</strong> with persistent backing</li> </ul> <h2 id="performance-optimization-techniques">Performance Optimization Techniques</h2> <p>The implementation incorporates numerous optimization techniques:</p> <h3 id="cpu-optimization">CPU Optimization</h3> <ul> <li> <strong>SIMD instructions</strong> for bulk data processing</li> <li> <strong>Cache-friendly data structures</strong> to minimize memory access</li> <li> <strong>Branch prediction</strong> optimization in critical loops</li> <li> <strong>Lock-free algorithms</strong> where possible</li> </ul> <h3 id="memory-optimization">Memory Optimization</h3> <ul> <li> <strong>Object pooling</strong> to reduce GC pressure</li> <li> <strong>Memory mapping</strong> for large read-only data</li> <li> <strong>Efficient serialization</strong> with minimal allocations</li> <li> <strong>Tunable buffer sizes</strong> for different workloads</li> </ul> <h3 id="io-optimization">I/O Optimization</h3> <ul> <li> <strong>Group commit</strong> for transaction durability</li> <li> <strong>Read-ahead</strong> for sequential access patterns</li> <li> <strong>Direct I/O</strong> for large operations</li> <li> <strong>Asynchronous writes</strong> for background processes</li> </ul> <h2 id="testing-and-validation-strategy">Testing and Validation Strategy</h2> <p>Comprehensive testing ensures reliability and correctness:</p> <h3 id="unit-testing">Unit Testing</h3> <ul> <li> <strong>Component isolation</strong> through interface mocking</li> <li> <strong>Property-based testing</strong> for complex algorithms</li> <li> <strong>Coverage analysis</strong> ensuring &gt;80% code coverage</li> <li> <strong>Race detection</strong> for concurrent components</li> </ul> <h3 id="integration-testing">Integration Testing</h3> <ul> <li> <strong>End-to-end scenarios</strong> with realistic workloads</li> <li> <strong>Crash recovery testing</strong> with simulated failures</li> <li> <strong>Performance regression</strong> detection</li> <li><strong>Multi-client stress testing</strong></li> </ul> <h3 id="validation-testing">Validation Testing</h3> <ul> <li> <strong>ACID compliance</strong> verification</li> <li> <strong>Isolation level</strong> correctness testing</li> <li> <strong>Recovery correctness</strong> after various failure modes</li> <li> <strong>Performance benchmark</strong> validation</li> </ul> <h2 id="future-enhancements-and-research-directions">Future Enhancements and Research Directions</h2> <p>The project provides a foundation for exploring advanced database research:</p> <h3 id="distributed-systems">Distributed Systems</h3> <ul> <li> <strong>Replication protocols</strong> for high availability</li> <li> <strong>Sharding strategies</strong> for horizontal scaling</li> <li> <strong>Consensus algorithms</strong> for distributed consistency</li> <li> <strong>Network partitioning</strong> handling and recovery</li> </ul> <h3 id="advanced-storage">Advanced Storage</h3> <ul> <li> <strong>Columnar storage</strong> for analytical workloads</li> <li> <strong>Compression algorithms</strong> for storage efficiency</li> <li> <strong>Tiered storage</strong> with hot/cold data separation</li> <li> <strong>Modern storage devices</strong> optimization (NVMe, persistent memory)</li> </ul> <h3 id="machine-learning-integration">Machine Learning Integration</h3> <ul> <li> <strong>Learned indexes</strong> replacing traditional data structures</li> <li> <strong>Workload prediction</strong> for proactive optimization</li> <li> <strong>Anomaly detection</strong> for operational monitoring</li> <li> <strong>Automated tuning</strong> for configuration parameters</li> </ul> <h2 id="conclusion">Conclusion</h2> <p>Building a database engine from scratch exposes the interaction between storage, transactions, recovery, and query execution. This staged implementation is an educational record of those tradeoffs, including where research-oriented ideas require additional evidence before they can be treated as reliable features.</p> <p>The project shows expertise in:</p> <ul> <li> <strong>Low-level systems programming</strong> with Go</li> <li> <strong>Advanced algorithms</strong> and data structures</li> <li> <strong>Concurrent programming</strong> and synchronization</li> <li> <strong>Performance optimization</strong> and profiling</li> <li> <strong>Software architecture</strong> and design patterns</li> </ul> <p>More importantly, it provides deep insights into how modern databases work, making the complex seem approachable and inspiring confidence to tackle other ambitious systems programming challenges.</p> <p>The resulting database engine highlights the value of strong fundamentals and provides a practical tool that could find real-world applications in embedded systems, edge computing, and specialized workloads where a lightweight, Go-native database solution would be valuable.</p> <p>This project represents the intersection of theoretical computer science and practical engineering, demonstrating how academic concepts translate into working systems that solve real problems. It’s a portfolio piece that shows programming ability, deep technical understanding, and the persistence to tackle complex, multi-faceted engineering challenges.</p> </article> </div> </div> <footer class="fixed-bottom" role="contentinfo"> <div class="container mt-0"> © Copyright 2026 Tanzim Hossain Romel. © Tanzim Hossain Romel. Powered by <a href="https://jekyllrb.com/" target="_blank" rel="external nofollow noopener">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio" rel="external nofollow noopener" target="_blank">al-folio</a> theme. </div> </footer> <script>
+  window.alFolio = {
+    compatBootstrap: false
+  };
+</script> <script src="/assets/js/nav-toggle.js?v=141bd79a73ebc0f0b6ea58e440ae79fc"></script> <script defer src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script> <script defer src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script> <script defer src="/assets/js/masonry.js?v=e49affc7bd2646f6acdad1dbe02c2359" type="text/javascript"></script> <script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js" integrity="sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI=" crossorigin="anonymous"></script> <script src="/assets/al_math/js/mathjax-setup.js"></script> <script src="/assets/js/tooltips-setup.js?v=fe487e99db6c43751e6e7bdb2d6a0611"></script> <script src="/assets/js/no_defer.js?v=53b1b1a645525975c963ce8bf8bfefcf"></script> <script defer src="/assets/js/common.js?v=87baac90f765f2f3362dcf6aaf312a8a"></script> <script defer src="/assets/js/copy_code.js?v=c8a01c11a92744d44b093fc3bda915df" type="text/javascript"></script> <script defer src="/assets/js/jupyter_new_tab.js?v=896d254890d9b47f0281f63bfccf0dee"></script> <script async src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script> <script async src="https://badge.dimensions.ai/badge.js"></script> <script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script> <script defer src="/assets/al_img_tools/js/zoom.js"></script> <script defer src="/assets/js/progress-bar.js?v=499464c5c63ced6cf7ad62509f1e2610" type="text/javascript"></script> <script src="https://cdn.jsdelivr.net/npm/vanilla-back-to-top@7.2.1/dist/vanilla-back-to-top.min.js" integrity="sha256-uMJJ3EoTyfRBoTbR+lrfu1uRQ87RZG8AR3cVNuQVeFg=" crossorigin="anonymous"></script> <script>
+    addBackToTop();
+  </script> <script type="module" src="/assets/al_search/js/search/ninja-keys.min.js"></script> <ninja-keys hidebreadcrumbs noautoloadmdicons placeholder="Type to start searching"></ninja-keys> <script src="/assets/al_search/js/search-setup.js"></script> <script>
+// get the ninja-keys element
+const ninja = document.querySelector('ninja-keys');
+
+// add the home and posts menu items
+ninja.data = [{
+    id: "nav-about",
+    title: "about",
+    section: "Navigation",
+    handler: () => {
+      window.location.href = "/";
+    },
+  },{id: "nav-blog",
+          title: "blog",
+          description: "",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/blog/";
+          },
+        },{id: "nav-publications",
+          title: "publications",
+          description: "Publications.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/publications/";
+          },
+        },{id: "nav-research",
+          title: "research",
+          description: "Research on reliable AI agents, SRE-agent evaluation, ML ecosystem security, agent-choice auditing, and developer tools.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/research/";
+          },
+        },{id: "nav-projects",
+          title: "projects",
+          description: "Research and engineering projects.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/projects/";
+          },
+        },{id: "nav-cv",
+          title: "CV",
+          description: "Curriculum vitae.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/cv/";
+          },
+        },{id: "nav-contributions",
+          title: "contributions",
+          description: "Curated open-source contribution evidence across research infrastructure, frameworks, and language tooling.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/contributions/";
+          },
+        },{id: "post-building-a-fast-1brc-solver-in-c-on-apple-silicon",
+        
+          title: "Building a fast 1BRC solver in C# on Apple Silicon",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/building-fast-1brc-csharp-apple-silicon/";
+          
+        },
+      },{id: "post-memory-management-in-production-avoiding-the-silent-killers",
+        
+          title: "Memory Management in Production: Avoiding the Silent Killers",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/memory-management-production-silent-killers/";
+          
+        },
+      },{id: "post-growing-as-a-software-engineer-in-the-age-of-llms-and-vibe-coding",
+        
+          title: "Growing as a Software Engineer in the Age of LLMs and Vibe Coding...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/vibe-coding/";
+          
+        },
+      },{id: "post-taming-the-imagination-a-comprehensive-guide-to-handling-hallucinations-and-implementing-guardrails-in-agentic-ai",
+        
+          title: "Taming the Imagination: A Comprehensive Guide to Handling Hallucinations and Implementing Guardrails in...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/how-to-handle-hallucinations/";
+          
+        },
+      },{id: "post-building-an-agentic-ai-analytics-dashboard-a-deep-dive-with-langchain-langgraph-and-fine-tuned-llama",
+        
+          title: "Building an Agentic AI Analytics Dashboard: A Deep Dive with LangChain, LangGraph, and...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/intro-to-agentic-ai/";
+          
+        },
+      },{id: "post-neural-algorithmic-reasoning-teaching-neural-networks-to-think-like-algorithms",
+        
+          title: "Neural Algorithmic Reasoning: Teaching Neural Networks to Think Like Algorithms",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/intro-to-nar/";
+          
+        },
+      },{id: "post-opentelemetry-in-microservices-how-we-transformed-our-observability-strategy",
+        
+          title: "OpenTelemetry in Microservices: How We Transformed Our Observability Strategy",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/opentelemetry/";
+          
+        },
+      },{id: "post-using-ai-tools-in-software-engineering-and-research-workflows",
+        
+          title: "Using AI Tools in Software Engineering and Research Workflows",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/leveraging-ai-tools-software-engineering/";
+          
+        },
+      },{id: "post-the-performance-crisis-how-we-rescued-a-net-8-microservice-from-10-critical-bottlenecks",
+        
+          title: "The Performance Crisis: How We Rescued a .NET 8 Microservice from 10 Critical...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2024/optimizing-dotnet-microservices-performance/";
+          
+        },
+      },{id: "post-zero-downtime-deployments-in-kubernetes-how-we-keep-our-services-running-while-we-ship",
+        
+          title: "Zero Downtime Deployments in Kubernetes: How We Keep Our Services Running While We...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2024/zero-downtime/";
+          
+        },
+      },{id: "post-mastering-unit-testing-and-bdd-with-xunit-and-specflow-in-net-9-a-comprehensive-guide",
+        
+          title: "Mastering Unit Testing and BDD with xUnit and SpecFlow in .NET 9: A...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2024/dotnet-tests/";
+          
+        },
+      },{id: "post-design-patterns-your-first-step-toward-professional-software-engineering",
+        
+          title: "Design Patterns: Your First Step Toward Professional Software Engineering",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2024/design-patterns-professional-software-engineering/";
+          
+        },
+      },{id: "post-setting-up-github-actions-ci-cd-with-aws-a-practical-journey",
+        
+          title: "Setting Up GitHub Actions CI/CD with AWS: A Practical Journey",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2024/intro-to-ci-cd/";
+          
+        },
+      },{id: "post-the-clique-partition-problem-dividing-networks-into-perfect-communities",
+        
+          title: "The Clique Partition Problem: Dividing Networks into Perfect Communities",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2023/clique-partition-problem-graph-theory/";
+          
+        },
+      },{id: "post-advice-complexity-in-online-algorithms-when-knowing-the-future-makes-all-the-difference",
+        
+          title: "Advice Complexity in Online Algorithms: When Knowing the Future Makes All the Difference...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2023/advice-complexity-online-algorithms/";
+          
+        },
+      },{id: "post-getting-started-with-kubernetes-deploying-microservice-architectures-at-scale",
+        
+          title: "Getting Started with Kubernetes: Deploying Microservice Architectures at Scale",
+        
+        description: "A practical Kubernetes guide covering microservice deployment, service-mesh integration, observability, and the operational checks needed before production use.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2022/getting-started-with-kubernetes-microservices/";
+          
+        },
+      },{id: "post-understanding-xv6-a-practical-introduction-to-operating-systems",
+        
+          title: "Understanding xv6: A Practical Introduction to Operating Systems",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2022/understanding-xv6-operating-systems/";
+          
+        },
+      },{id: "post-getting-started-with-ns3-a-hands-on-guide-to-network-simulation",
+        
+          title: "Getting Started with NS3: A Hands-On Guide to Network Simulation",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2021/getting-started-with-ns3/";
+          
+        },
+      },{id: "news-completed-b-sc-in-computer-science-and-engineering-from-bangladesh-university-of-engineering-and-technology-with-a-gpa-of-3-53-4-00-link",
+          title: 'Completed B.Sc in Computer Science and Engineering from Bangladesh University of Engineering and...',
+          description: "",
+          section: "News",},{id: "news-joined-iqvia-as-a-software-development-engineer-on-kpi-library-the-dynamic-reporting-layer-within-orchestrated-analytics-link",
+          title: 'Joined IQVIA as a Software Development Engineer on KPI Library, the dynamic reporting...',
+          description: "",
+          section: "News",},{id: "news-submitted-sentiment-analysis-of-anonymous-crisis-reports-in-bangladesh-to-acm-cscw-2025-analyzing-crowd-sourced-reports-from-bangladesh-s-2024-national-crisis-using-transformer-models-link",
+          title: 'Submitted ‘Sentiment Analysis of Anonymous Crisis Reports in Bangladesh’ to ACM CSCW 2025,...',
+          description: "",
+          section: "News",},{id: "news-honored-with-the-iqvia-impact-program-silver-award-for-outstanding-performance-and-contributions-to-the-kpi-library-team-link",
+          title: 'Honored with the IQVIA Impact Program Silver Award for outstanding performance and contributions...',
+          description: "",
+          section: "News",},{id: "news-submitted-an-empirical-study-on-remote-code-execution-in-machine-learning-model-hosting-ecosystems-to-the-mining-software-repositories-msr-2026-conference-first-large-scale-cross-platform-security-study-analyzing-45-000-repositories-across-5-major-ml-platforms-link",
+          title: 'Submitted ‘An Empirical Study on Remote Code Execution in Machine Learning Model Hosting...',
+          description: "",
+          section: "News",},{id: "news-resubmitted-an-empirical-study-on-remote-code-execution-in-machine-learning-model-hosting-ecosystems-to-acm-transactions-on-software-engineering-and-methodology-tosem-2026-preprint-available-on-arxiv-link",
+          title: 'Resubmitted ‘An Empirical Study on Remote Code Execution in Machine Learning Model Hosting...',
+          description: "",
+          section: "News",},{id: "news-started-a-remote-summer-research-internship-at-the-university-of-illinois-urbana-champaign-through-uiuc-summer-research-in-software-engineering-srse-2026-with-professor-tianyin-xu-link",
+          title: 'Started a remote summer research internship at the University of Illinois Urbana-Champaign through...',
+          description: "",
+          section: "News",},{id: "news-submitted-the-choice-can-be-the-attack-auditing-aligned-backdoors-in-llm-agents-to-the-transactions-of-the-association-for-computational-linguistics-tacl-2026-with-chowdhury-rakin-haider-link",
+          title: 'Submitted ‘The Choice Can Be the Attack: Auditing Aligned Backdoors in LLM Agents’...',
+          description: "",
+          section: "News",},{id: "news-an-empirical-study-on-remote-code-execution-in-machine-learning-model-hosting-ecosystems-is-under-review-at-the-international-conference-on-software-engineering-icse-2027-preprint-available-on-arxiv-link",
+          title: '‘An Empirical Study on Remote Code Execution in Machine Learning Model Hosting Ecosystems’...',
+          description: "",
+          section: "News",},{id: "news-will-begin-graduate-study-in-computing-science-at-the-university-of-alberta-on-september-1-2026-link",
+          title: 'Will begin graduate study in Computing Science at the University of Alberta on...',
+          description: "",
+          section: "News",},{id: "projects-1brc-c-on-apple-silicon",
+          title: '1BRC C# on Apple Silicon',
+          description: "A .NET 10 NativeAOT performance case study: byte parsing, native aggregation, ARM64 tuning, and a size-aware macOS pread path",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/1brc-csharp/";
+            },},{id: "projects-building-a-bangla-handwritten-digit-recognizer-from-scratch",
+          title: 'Building a Bangla Handwritten Digit Recognizer from Scratch',
+          description: "A Deep Dive into Custom CNN Implementation",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/bangla-digit-recognition/";
+            },},{id: "projects-blockchain-based-ticketing-platform",
+          title: 'Blockchain Based Ticketing Platform',
+          description: "A practical approach to reducing ticket fraud and abusive resale",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/blockchain-ticketing/";
+            },},{id: "projects-yet-another-c-compiler",
+          title: 'Yet Another C Compiler',
+          description: "A complete multi-pass compiler for a subset of C",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/compiler/";
+            },},{id: "projects-contextledger-context-accounting-for-coding-agents",
+          title: 'ContextLedger: context accounting for coding agents',
+          description: "A research notebook on OpenCode compaction, provenance, and live GPT-5.5 experiments",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/contextledger/";
+            },},{id: "projects-ctxhelm-agent-native-context-compiler",
+          title: 'ctxhelm: agent-native context compiler',
+          description: "Local-first context plans, release proof, and source-free agent evaluation",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/ctxhelm/";
+            },},{id: "projects-mini-deep-learning-framework-pytorch-from-scratch",
+          title: 'Mini Deep Learning Framework: PyTorch from Scratch',
+          description: "A freelance learning project for tensors, autograd, and neural-network internals",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/deep-learning-framework-capstone/";
+            },},{id: "projects-go-container-runtime-docker-from-scratch",
+          title: 'Go Container Runtime: Docker from Scratch',
+          description: "A freelance learning project for Linux containers, networking, and Go systems programming",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/docker-from-scratch-go/";
+            },},{id: "projects-eventfly-distributed-microservices-event-platform",
+          title: 'EventFly – Distributed Microservices Event Platform',
+          description: "A six-person BUET course project for event creation, ticketing, announcements, participant engagement, analytics, and payments, implemented with Node.js, React, NATS, Kubernetes, MongoDB, Redis, and Stripe.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/eventfly-an-end-to-end-event-management-system/";
+            },},{id: "projects-building-a-go-database-engine-from-scratch",
+          title: 'Building a Go Database Engine from Scratch',
+          description: "An educational ACID-oriented database engine with advanced features",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/go-database/";
+            },},{id: "projects-image-caption-generation-with-bert-context-vectors",
+          title: 'Image Caption Generation with BERT Context Vectors',
+          description: "Extended the &quot;Show, Attend, and Tell&quot; image captioning model with BERT to improve caption quality and reduce training time, achieving 36% improvement in CIDEr score and 43% improvement in BLEU-4.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/image-caption-generator/";
+            },},{id: "projects-patchsmith-a-harness-for-repair-agents",
+          title: 'PatchSmith: a harness for repair agents',
+          description: "System design and R&amp;D notes for bounded patches, sandbox validation, and auditable repair runs",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/patchsmith/";
+            },},{id: "projects-ray-tracing-from-scratch-a-comprehensive-guide-to-3d-rendering-physics-and-implementation",
+          title: 'Ray Tracing from Scratch: A Comprehensive Guide to 3D Rendering Physics and Implementation...',
+          description: "Implementing physically-based rendering with C++",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/ray-tracing/";
+            },},{id: "projects-an-empirical-study-on-remote-code-execution-in-machine-learning-model-hosting-ecosystems",
+          title: 'An Empirical Study on Remote Code Execution in Machine Learning Model Hosting Ecosystems...',
+          description: "A cross-platform study of model-loading risk across five ML hosting ecosystems, using static analysis, malware-signature scanning, and analysis of more than 600 developer discussions.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/research-ml-remote-code-execution/";
+            },},{id: "projects-verischema-verified-database-schema-generation",
+          title: 'VeriSchema: verified database-schema generation',
+          description: "How can specialized agents generate relational schemas from natural-language requirements while formal checks and targeted repair keep the result consistent?",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/research-multi-agent-db-schema/";
+            },},{id: "projects-the-choice-can-be-the-attack-auditing-aligned-backdoors-in-llm-agents",
+          title: 'The Choice Can Be the Attack: Auditing Aligned Backdoors in LLM Agents',
+          description: "Abstract-level summary of SHIFT, submitted to TACL 2026 on aligned backdoor attacks in LLM agents.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/research-reagent-plus-plus/";
+            },},{id: "projects-sentiment-analysis-of-anonymous-crisis-reports-in-bangladesh",
+          title: 'Sentiment Analysis of Anonymous Crisis Reports in Bangladesh',
+          description: "A multilingual analysis of anonymous, crowd-sourced reports from Bangladesh&#39;s 2024 national crisis.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/research-ureporter/";
+            },},{id: "projects-enhancing-tcp-fairness-tcp-vegas-implementation",
+          title: 'Enhancing TCP Fairness: TCP Vegas+ Implementation',
+          description: "A dual-mode solution for TCP Vegas fairness issues",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/tcp-vegas-plus/";
+            },},{
+        id: 'social-email',
+        title: 'email',
+        section: 'Socials',
+        handler: () => {
+          window.open("mailto:%74%61%6E%68%72%6F%6D%65%6C@%67%6D%61%69%6C.%63%6F%6D", "_blank");
+        },
+      },{
+        id: 'social-github',
+        title: 'GitHub',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://github.com/thromel", "_blank");
+        },
+      },{
+        id: 'social-scholar',
+        title: 'Google Scholar',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://scholar.google.com/citations?user=zHV4EU8AAAAJ", "_blank");
+        },
+      },{
+        id: 'social-linkedin',
+        title: 'LinkedIn',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://www.linkedin.com/in/thromel", "_blank");
+        },
+      },{
+        id: 'social-orcid',
+        title: 'ORCID',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://orcid.org/0009-0009-2432-8960", "_blank");
+        },
+      },{
+        id: 'social-rss',
+        title: 'RSS Feed',
+        section: 'Socials',
+        handler: () => {
+          window.open("/feed.xml", "_blank");
+        },
+      },{
+        id: 'social-x',
+        title: 'X',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://twitter.com/tanzimhromel", "_blank");
+        },
+      },{
+      id: 'light-theme',
+      title: 'Change theme to light',
+      description: 'Change the theme of the site to Light',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("light");
+      },
+    },
+    {
+      id: 'dark-theme',
+      title: 'Change theme to dark',
+      description: 'Change the theme of the site to Dark',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("dark");
+      },
+    },
+    {
+      id: 'system-theme',
+      title: 'Use system default theme',
+      description: 'Change the theme of the site to System Default',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("system");
+      },
+    },];
+
+</script> <script src="/assets/al_search/js/shortcut-key.js"></script> </body> </html>

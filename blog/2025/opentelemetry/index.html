@@ -1,0 +1,916 @@
+<!DOCTYPE html> <html lang="en"> <head> <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <title> OpenTelemetry in Microservices: How We Transformed Our Observability Strategy | Tanzim Hossain Romel </title> <meta name="author" content="Tanzim Hossain Romel"> <meta name="description" content="Academic and engineering portfolio of Tanzim Hossain Romel, focused on reliable AI agents, software engineering research, and developer tools."> <meta name="keywords" content=""> <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https:; style-src 'self' 'unsafe-inline' https:; img-src 'self' data: https:; font-src 'self' data: https:; media-src 'self' https:; frame-src 'self' https:; connect-src 'self' https:;"> <style>
+  :root {
+    --max-content-width: 930px;
+  }
+</style> <link rel="stylesheet" href="/assets/css/tailwind.css?v=50c64c15cbb9fd1ce6056fdb8bcb4b62"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.2.0/css/all.min.css" integrity="sha256-MVopmdyC2tYTiJ8wlktf0uh0v4NgT+vNdyVFepi7Q0c=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.5/css/academicons.min.css" integrity="sha256-SzrCOBJbGVFMahewkgjwnApaV2+av1DwMAA+/QGLyZw=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/scholar-icons@1.0.3/css/scholar-icons.css" integrity="sha256-VY3hHVj/hNX3fYG6wtbA6TcKJQl7+FthzGSyIB64klY=" crossorigin="anonymous"> <link defer rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons&amp;display=swap"> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-github.css?v=591dab5a4e56573bf4ef7fd332894c99" media="" id="highlight_theme_light"> <link rel="shortcut icon" href="data:image/svg+xml,&lt;svg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20100%20100%22&gt;&lt;text%20y=%22.9em%22%20font-size=%2290%22&gt;%E2%9A%9B%EF%B8%8F&lt;/text&gt;&lt;/svg&gt;"> <link rel="stylesheet" href="/assets/css/main.css?v=3116ba77db9ee1581d05bb3e86fbf7f1"> <link rel="canonical" href="https://tanzimhromel.com/blog/2025/opentelemetry/"> <script src="/assets/js/theme.js?v=5286c3e4c334d0ecb8fc0c40ff4fa7ec"></script> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-native.css?v=5847e5ed4a4568527aa6cfab446049ca" media="none" id="highlight_theme_dark"> <script>
+    initTheme();
+  </script> </head> <body class="fixed-top-nav "> <header> <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top" role="navigation"> <div class="container"> <a class="navbar-brand title font-weight-lighter" href="/"> Tanzim Hossain Romel </a> <button class="navbar-toggler collapsed navbar-toggler-main" type="button" data-nav-toggle="navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar top-bar"></span> <span class="icon-bar middle-bar"></span> <span class="icon-bar bottom-bar"></span> </button> <div class="collapse navbar-collapse navbar-collapse-main" id="navbarNav"> <ul class="navbar-nav navbar-menu-list flex-nowrap"> <li class="nav-item "> <a class="nav-link" href="/">about </a> </li> <li class="nav-item active"> <a class="nav-link" href="/blog/">blog </a> </li> <li class="nav-item "> <a class="nav-link" href="/publications/">publications </a> </li> <li class="nav-item "> <a class="nav-link" href="/research/">research </a> </li> <li class="nav-item "> <a class="nav-link" href="/projects/">projects </a> </li> <li class="nav-item "> <a class="nav-link" href="/cv/">CV </a> </li> <li class="nav-item "> <a class="nav-link" href="/contributions/">contributions </a> </li> <li class="nav-item"> <button id="search-toggle" type="button" title="Search" aria-label="Open search"> <span class="nav-link">ctrl k <i class="fa-solid fa-magnifying-glass"></i></span> </button> </li> <li class="toggle-container"> <button id="light-toggle" type="button" title="Change theme" aria-label="Change color theme"> <i class="fa-half-sun-moon" id="light-toggle-system"></i> <i class="fa-solid fa-moon" id="light-toggle-dark"></i> <i class="fa-solid fa-sun" id="light-toggle-light"></i> </button> </li> </ul> </div> </div> </nav> <progress id="progress" value="0"> <div class="progress-container"> <span class="progress-bar"></span> </div> </progress> </header> <div class="container mt-5" role="main"> <div class="post"> <header class="post-header"> <h1 class="post-title">OpenTelemetry in Microservices: How We Transformed Our Observability Strategy</h1> <p class="post-meta"> Created on March 20, 2025 </p> <p class="post-tags"> <a href="/blog/2025"> <i class="fa-solid fa-calendar fa-sm"></i> 2025 </a>   ·   <a href="/blog/tag/opentelemetry"> <i class="fa-solid fa-hashtag fa-sm"></i> opentelemetry</a>   <a href="/blog/tag/distributed-tracing"> <i class="fa-solid fa-hashtag fa-sm"></i> distributed-tracing</a>   <a href="/blog/tag/monitoring"> <i class="fa-solid fa-hashtag fa-sm"></i> monitoring</a>   <a href="/blog/tag/observability"> <i class="fa-solid fa-hashtag fa-sm"></i> observability</a>   <a href="/blog/tag/microservices"> <i class="fa-solid fa-hashtag fa-sm"></i> microservices</a>   ·   <a href="/blog/category/observability"> <i class="fa-solid fa-tag fa-sm"></i> observability</a>   <a href="/blog/category/microservices"> <i class="fa-solid fa-tag fa-sm"></i> microservices</a>   <a href="/blog/category/devops"> <i class="fa-solid fa-tag fa-sm"></i> devops</a> </p> </header> <article class="post-content"> <div id="markdown-content"> <h2 id="introduction-the-observability-challenge-we-faced">Introduction: The Observability Challenge We Faced</h2> <p>Picture this: It’s 3 AM, and you’re awakened by an alert. Your e-commerce platform is experiencing intermittent failures, but the error messages are cryptic. You have logs scattered across dozens of microservices, metrics in three different systems, and traces that don’t connect across service boundaries. Sound familiar?</p> <p>This was our reality eighteen months ago. Our microservices architecture had grown organically from a handful of services to over forty, each with its own logging approach, metrics collection, and sparse tracing implementation. We knew we needed a unified observability strategy, and that’s when we discovered OpenTelemetry.</p> <h2 id="understanding-opentelemetry-the-foundation-of-modern-observability">Understanding OpenTelemetry: The Foundation of Modern Observability</h2> <p>Before diving into our implementation journey, let’s establish what OpenTelemetry is and why it matters for microservices architectures.</p> <p>OpenTelemetry (often abbreviated as OTel) is an open-source observability framework that provides a standardized way to collect and export telemetry data. Think of it as a universal translator for your application’s core signals - it speaks the language of logs, metrics, and traces fluently and can translate them into formats that various observability backends understand.</p> <p>The framework emerged from the merger of two earlier projects: OpenTracing and OpenCensus. This unification created a vendor-neutral standard that has become the de facto approach for instrumenting cloud-native applications. What makes OpenTelemetry particularly powerful is its comprehensive approach to the three pillars of observability:</p> <p><strong>1. Traces</strong> tell the story of a request as it travels through your system, like following breadcrumbs through a forest of microservices.</p> <p><strong>2. Metrics</strong> provide operating statistics - the heartbeat, blood pressure, and temperature of your applications.</p> <p><strong>3. Logs</strong> capture the detailed narrative, the “what happened and when” that helps you understand system behavior.</p> <p><img src="/assets/img/blog-opentelemetry-diagram1_otel_pipeline.png" alt="OpenTelemetry pipeline architecture" width="1356" height="203" decoding="async"> <em>OpenTelemetry Pipeline: How traces, metrics, and logs flow from application code through the SDK to observability backends</em></p> <h2 id="our-architecture-before-the-transformation">Our Architecture: Before the Transformation</h2> <p>To understand why OpenTelemetry was an important shift for us, you need to see where we started. Our e-commerce platform consisted of:</p> <ul> <li> <strong>API Gateway</strong>: Built with Kong, handling request routing</li> <li> <strong>User Service</strong>: Node.js application managing authentication and profiles</li> <li> <strong>Product Catalog</strong>: Java Spring Boot service with PostgreSQL</li> <li> <strong>Order Service</strong>: Python FastAPI with MongoDB</li> <li> <strong>Payment Service</strong>: Go microservice integrating with payment providers</li> <li> <strong>Inventory Service</strong>: .NET Core service with SQL Server</li> <li> <strong>Notification Service</strong>: Node.js service handling emails and SMS</li> <li> <strong>Recommendation Engine</strong>: Python service with machine learning models</li> </ul> <p>Each service had evolved independently, resulting in a Tower of Babel situation for observability:</p> <p><img src="/assets/img/blog-opentelemetry-diagram2_before_otel.png" alt="Microservice architecture before OpenTelemetry" width="719" height="665" loading="lazy" decoding="async"> <em>Our heterogeneous observability landscape before OpenTelemetry: Each service used different logging, metrics, and tracing approaches</em></p> <p>This heterogeneous landscape created several pain points:</p> <ol> <li> <strong>Correlation Complexity</strong>: Tracing a single user request across services required manual correlation using timestamps and user IDs</li> <li> <strong>Monitoring Overhead</strong>: We maintained five different monitoring dashboards</li> <li> <strong>Knowledge Silos</strong>: Each team understood only their service’s observability tools</li> <li> <strong>Debugging Difficulties</strong>: Root cause analysis for cross-service issues took hours or days</li> <li> <strong>Cost Inefficiencies</strong>: Multiple observability vendors meant redundant costs</li> </ol> <h2 id="why-we-chose-opentelemetry-the-decision-matrix">Why We Chose OpenTelemetry: The Decision Matrix</h2> <p>When evaluating observability solutions, we considered several options. Let me walk you through our decision-making process.</p> <p>We evaluated three main approaches:</p> <ol> <li> <strong>Standardize on a Single Vendor</strong>: Lock into one observability platform</li> <li> <strong>Build Custom Abstraction Layer</strong>: Create our own instrumentation framework</li> <li> <strong>Adopt OpenTelemetry</strong>: Implement the open standard</li> </ol> <p>Our evaluation criteria focused on several key factors:</p> <p><strong>Vendor Independence</strong> was crucial. We’d been burned before by vendor lock-in, and OpenTelemetry’s vendor-neutral approach meant we could switch backends without rewriting instrumentation code. As Alistair Cockburn explains in the original <a href="https://alistair.cockburn.us/hexagonal-architecture" rel="external nofollow noopener" target="_blank">Hexagonal Architecture</a> article, keeping infrastructure concerns at the edges of your system provides flexibility.</p> <p><strong>Language Support</strong> mattered significantly given our polyglot architecture. OpenTelemetry provides first-class support for all our languages, with consistent APIs across platforms. This meant our Node.js developers and Java developers could speak the same observability language.</p> <p><strong>Community and Ecosystem</strong> health indicated long-term viability. With backing from major cloud providers and observability vendors, OpenTelemetry had the momentum we needed. The CNCF’s <a href="https://www.cncf.io/reports/cncf-annual-survey-2023/" rel="external nofollow noopener" target="_blank">2023 survey</a> showed OpenTelemetry adoption growing by 170% year-over-year.</p> <p><strong>Performance Overhead</strong> was a concern. Our benchmarks showed OpenTelemetry added less than 3% overhead when properly configured, which aligned with our performance SLAs.</p> <p><strong>Migration Path</strong> needed to be gradual. OpenTelemetry’s compatibility with existing standards meant we could migrate service by service rather than requiring a big-bang approach.</p> <h2 id="implementation-strategy-the-phased-approach">Implementation Strategy: The Phased Approach</h2> <p>Rather than attempting to instrument everything at once, we developed a phased strategy that minimized risk and maximized learning.</p> <h3 id="phase-1-establishing-the-foundation-months-1-2">Phase 1: Establishing the Foundation (Months 1-2)</h3> <p>We started by setting up the OpenTelemetry Collector as our central telemetry hub. Think of the Collector as a Swiss Army knife for telemetry data – it can receive data in multiple formats, process it, and export it to various backends.</p> <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># otel-collector-config.yaml</span>
+<span class="na">receivers</span><span class="pi">:</span>
+  <span class="na">otlp</span><span class="pi">:</span>
+    <span class="na">protocols</span><span class="pi">:</span>
+      <span class="na">grpc</span><span class="pi">:</span>
+        <span class="na">endpoint</span><span class="pi">:</span> <span class="s">0.0.0.0:4317</span>
+      <span class="na">http</span><span class="pi">:</span>
+        <span class="na">endpoint</span><span class="pi">:</span> <span class="s">0.0.0.0:4318</span>
+  
+  <span class="c1"># Bridge for existing Prometheus metrics</span>
+  <span class="na">prometheus</span><span class="pi">:</span>
+    <span class="na">config</span><span class="pi">:</span>
+      <span class="na">scrape_configs</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="na">job_name</span><span class="pi">:</span> <span class="s1">'</span><span class="s">legacy-services'</span>
+          <span class="na">static_configs</span><span class="pi">:</span>
+            <span class="pi">-</span> <span class="na">targets</span><span class="pi">:</span> <span class="pi">[</span><span class="s1">'</span><span class="s">inventory-service:9090'</span><span class="pi">]</span>
+
+<span class="na">processors</span><span class="pi">:</span>
+  <span class="na">batch</span><span class="pi">:</span>
+    <span class="na">timeout</span><span class="pi">:</span> <span class="s">1s</span>
+    <span class="na">send_batch_size</span><span class="pi">:</span> <span class="m">1024</span>
+  
+  <span class="na">memory_limiter</span><span class="pi">:</span>
+    <span class="na">check_interval</span><span class="pi">:</span> <span class="s">1s</span>
+    <span class="na">limit_mib</span><span class="pi">:</span> <span class="m">512</span>
+  
+  <span class="na">resource</span><span class="pi">:</span>
+    <span class="na">attributes</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">key</span><span class="pi">:</span> <span class="s">environment</span>
+        <span class="na">value</span><span class="pi">:</span> <span class="s">production</span>
+        <span class="na">action</span><span class="pi">:</span> <span class="s">upsert</span>
+
+<span class="na">exporters</span><span class="pi">:</span>
+  <span class="na">jaeger</span><span class="pi">:</span>
+    <span class="na">endpoint</span><span class="pi">:</span> <span class="s">jaeger-collector:14250</span>
+    <span class="na">tls</span><span class="pi">:</span>
+      <span class="na">insecure</span><span class="pi">:</span> <span class="kc">false</span>
+  
+  <span class="na">prometheus</span><span class="pi">:</span>
+    <span class="na">endpoint</span><span class="pi">:</span> <span class="s2">"</span><span class="s">0.0.0.0:8889"</span>
+  
+  <span class="na">elasticsearch</span><span class="pi">:</span>
+    <span class="na">endpoints</span><span class="pi">:</span> <span class="pi">[</span><span class="s2">"</span><span class="s">https://es-cluster:9200"</span><span class="pi">]</span>
+    <span class="na">logs_index</span><span class="pi">:</span> <span class="s">otel-logs</span>
+
+<span class="na">service</span><span class="pi">:</span>
+  <span class="na">pipelines</span><span class="pi">:</span>
+    <span class="na">traces</span><span class="pi">:</span>
+      <span class="na">receivers</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">otlp</span><span class="pi">]</span>
+      <span class="na">processors</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">memory_limiter</span><span class="pi">,</span> <span class="nv">batch</span><span class="pi">]</span>
+      <span class="na">exporters</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">jaeger</span><span class="pi">]</span>
+    
+    <span class="na">metrics</span><span class="pi">:</span>
+      <span class="na">receivers</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">otlp</span><span class="pi">,</span> <span class="nv">prometheus</span><span class="pi">]</span>
+      <span class="na">processors</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">memory_limiter</span><span class="pi">,</span> <span class="nv">batch</span><span class="pi">]</span>
+      <span class="na">exporters</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">prometheus</span><span class="pi">]</span>
+    
+    <span class="na">logs</span><span class="pi">:</span>
+      <span class="na">receivers</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">otlp</span><span class="pi">]</span>
+      <span class="na">processors</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">memory_limiter</span><span class="pi">,</span> <span class="nv">batch</span><span class="pi">,</span> <span class="nv">resource</span><span class="pi">]</span>
+      <span class="na">exporters</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">elasticsearch</span><span class="pi">]</span>
+</code></pre></div></div> <p>This configuration established our collector with three important design decisions:</p> <ol> <li> <strong>Protocol Support</strong>: We enabled both gRPC and HTTP to accommodate different service preferences</li> <li> <strong>Backward Compatibility</strong>: The Prometheus receiver allowed us to continue collecting metrics from services not yet migrated</li> <li> <strong>Processing Pipeline</strong>: The batch processor improved efficiency, while the memory limiter prevented resource exhaustion</li> </ol> <h3 id="phase-2-pilot-service-implementation-months-2-3">Phase 2: Pilot Service Implementation (Months 2-3)</h3> <p>We chose the Order Service as our pilot for several reasons:</p> <ul> <li>It was critical enough to validate our approach</li> <li>Small enough to iterate quickly</li> <li>Had clear boundaries with other services</li> <li>The Python team was eager to improve observability</li> </ul> <p>Here’s how we instrumented the Order Service:</p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># order_service/telemetry.py
+</span><span class="kn">import</span> <span class="n">os</span>
+<span class="kn">from</span> <span class="n">opentelemetry</span> <span class="kn">import</span> <span class="n">trace</span><span class="p">,</span> <span class="n">metrics</span>
+<span class="kn">from</span> <span class="n">opentelemetry.sdk.trace</span> <span class="kn">import</span> <span class="n">TracerProvider</span>
+<span class="kn">from</span> <span class="n">opentelemetry.sdk.trace.export</span> <span class="kn">import</span> <span class="n">BatchSpanProcessor</span>
+<span class="kn">from</span> <span class="n">opentelemetry.sdk.metrics</span> <span class="kn">import</span> <span class="n">MeterProvider</span>
+<span class="kn">from</span> <span class="n">opentelemetry.sdk.metrics.export</span> <span class="kn">import</span> <span class="n">PeriodicExportingMetricReader</span>
+<span class="kn">from</span> <span class="n">opentelemetry.exporter.otlp.proto.grpc.trace_exporter</span> <span class="kn">import</span> <span class="n">OTLPSpanExporter</span>
+<span class="kn">from</span> <span class="n">opentelemetry.exporter.otlp.proto.grpc.metric_exporter</span> <span class="kn">import</span> <span class="n">OTLPMetricExporter</span>
+<span class="kn">from</span> <span class="n">opentelemetry.instrumentation.fastapi</span> <span class="kn">import</span> <span class="n">FastAPIInstrumentor</span>
+<span class="kn">from</span> <span class="n">opentelemetry.instrumentation.pymongo</span> <span class="kn">import</span> <span class="n">PymongoInstrumentor</span>
+<span class="kn">from</span> <span class="n">opentelemetry.instrumentation.requests</span> <span class="kn">import</span> <span class="n">RequestsInstrumentor</span>
+<span class="kn">from</span> <span class="n">opentelemetry.sdk.resources</span> <span class="kn">import</span> <span class="n">Resource</span>
+<span class="kn">from</span> <span class="n">opentelemetry.semconv.resource</span> <span class="kn">import</span> <span class="n">ResourceAttributes</span>
+
+<span class="k">def</span> <span class="nf">configure_telemetry</span><span class="p">(</span><span class="n">app_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">app_version</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">
+    Configure OpenTelemetry for the Order Service.
+    This setup ensures we capture traces, metrics, and logs with proper context.
+    </span><span class="sh">"""</span>
+    
+    <span class="c1"># Define resource attributes that identify this service
+</span>    <span class="n">resource</span> <span class="o">=</span> <span class="nc">Resource</span><span class="p">(</span><span class="n">attributes</span><span class="o">=</span><span class="p">{</span>
+        <span class="n">ResourceAttributes</span><span class="p">.</span><span class="n">SERVICE_NAME</span><span class="p">:</span> <span class="n">app_name</span><span class="p">,</span>
+        <span class="n">ResourceAttributes</span><span class="p">.</span><span class="n">SERVICE_VERSION</span><span class="p">:</span> <span class="n">app_version</span><span class="p">,</span>
+        <span class="n">ResourceAttributes</span><span class="p">.</span><span class="n">DEPLOYMENT_ENVIRONMENT</span><span class="p">:</span> <span class="n">os</span><span class="p">.</span><span class="nf">getenv</span><span class="p">(</span><span class="sh">"</span><span class="s">ENVIRONMENT</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">production</span><span class="sh">"</span><span class="p">),</span>
+        <span class="sh">"</span><span class="s">team</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">orders-team</span><span class="sh">"</span><span class="p">,</span>
+        <span class="sh">"</span><span class="s">language</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">python</span><span class="sh">"</span>
+    <span class="p">})</span>
+    
+    <span class="c1"># Configure Tracing
+</span>    <span class="n">tracer_provider</span> <span class="o">=</span> <span class="nc">TracerProvider</span><span class="p">(</span><span class="n">resource</span><span class="o">=</span><span class="n">resource</span><span class="p">)</span>
+    
+    <span class="c1"># Set up the OTLP exporter for traces
+</span>    <span class="n">otlp_trace_exporter</span> <span class="o">=</span> <span class="nc">OTLPSpanExporter</span><span class="p">(</span>
+        <span class="n">endpoint</span><span class="o">=</span><span class="n">os</span><span class="p">.</span><span class="nf">getenv</span><span class="p">(</span><span class="sh">"</span><span class="s">OTEL_EXPORTER_OTLP_ENDPOINT</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">otel-collector:4317</span><span class="sh">"</span><span class="p">),</span>
+        <span class="n">insecure</span><span class="o">=</span><span class="n">os</span><span class="p">.</span><span class="nf">getenv</span><span class="p">(</span><span class="sh">"</span><span class="s">OTEL_EXPORTER_OTLP_INSECURE</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">true</span><span class="sh">"</span><span class="p">).</span><span class="nf">lower</span><span class="p">()</span> <span class="o">==</span> <span class="sh">"</span><span class="s">true</span><span class="sh">"</span>
+    <span class="p">)</span>
+    
+    <span class="c1"># Use BatchSpanProcessor for better performance
+</span>    <span class="n">span_processor</span> <span class="o">=</span> <span class="nc">BatchSpanProcessor</span><span class="p">(</span>
+        <span class="n">otlp_trace_exporter</span><span class="p">,</span>
+        <span class="n">max_export_batch_size</span><span class="o">=</span><span class="mi">512</span><span class="p">,</span>
+        <span class="n">max_queue_size</span><span class="o">=</span><span class="mi">2048</span><span class="p">,</span>
+        <span class="n">schedule_delay_millis</span><span class="o">=</span><span class="mi">5000</span>
+    <span class="p">)</span>
+    
+    <span class="n">tracer_provider</span><span class="p">.</span><span class="nf">add_span_processor</span><span class="p">(</span><span class="n">span_processor</span><span class="p">)</span>
+    <span class="n">trace</span><span class="p">.</span><span class="nf">set_tracer_provider</span><span class="p">(</span><span class="n">tracer_provider</span><span class="p">)</span>
+    
+    <span class="c1"># Configure Metrics
+</span>    <span class="n">metric_reader</span> <span class="o">=</span> <span class="nc">PeriodicExportingMetricReader</span><span class="p">(</span>
+        <span class="nc">OTLPMetricExporter</span><span class="p">(</span>
+            <span class="n">endpoint</span><span class="o">=</span><span class="n">os</span><span class="p">.</span><span class="nf">getenv</span><span class="p">(</span><span class="sh">"</span><span class="s">OTEL_EXPORTER_OTLP_ENDPOINT</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">otel-collector:4317</span><span class="sh">"</span><span class="p">),</span>
+            <span class="n">insecure</span><span class="o">=</span><span class="n">os</span><span class="p">.</span><span class="nf">getenv</span><span class="p">(</span><span class="sh">"</span><span class="s">OTEL_EXPORTER_OTLP_INSECURE</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">true</span><span class="sh">"</span><span class="p">).</span><span class="nf">lower</span><span class="p">()</span> <span class="o">==</span> <span class="sh">"</span><span class="s">true</span><span class="sh">"</span>
+        <span class="p">),</span>
+        <span class="n">export_interval_millis</span><span class="o">=</span><span class="mi">60000</span>  <span class="c1"># Export metrics every minute
+</span>    <span class="p">)</span>
+    
+    <span class="n">meter_provider</span> <span class="o">=</span> <span class="nc">MeterProvider</span><span class="p">(</span>
+        <span class="n">resource</span><span class="o">=</span><span class="n">resource</span><span class="p">,</span>
+        <span class="n">metric_readers</span><span class="o">=</span><span class="p">[</span><span class="n">metric_reader</span><span class="p">]</span>
+    <span class="p">)</span>
+    <span class="n">metrics</span><span class="p">.</span><span class="nf">set_meter_provider</span><span class="p">(</span><span class="n">meter_provider</span><span class="p">)</span>
+    
+    <span class="c1"># Auto-instrument libraries
+</span>    <span class="n">FastAPIInstrumentor</span><span class="p">.</span><span class="nf">instrument</span><span class="p">(</span><span class="n">tracer_provider</span><span class="o">=</span><span class="n">tracer_provider</span><span class="p">)</span>
+    <span class="n">PymongoInstrumentor</span><span class="p">.</span><span class="nf">instrument</span><span class="p">(</span><span class="n">tracer_provider</span><span class="o">=</span><span class="n">tracer_provider</span><span class="p">)</span>
+    <span class="n">RequestsInstrumentor</span><span class="p">.</span><span class="nf">instrument</span><span class="p">(</span><span class="n">tracer_provider</span><span class="o">=</span><span class="n">tracer_provider</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">trace</span><span class="p">.</span><span class="nf">get_tracer</span><span class="p">(</span><span class="n">app_name</span><span class="p">),</span> <span class="n">metrics</span><span class="p">.</span><span class="nf">get_meter</span><span class="p">(</span><span class="n">app_name</span><span class="p">)</span>
+
+<span class="c1"># order_service/main.py
+</span><span class="kn">from</span> <span class="n">fastapi</span> <span class="kn">import</span> <span class="n">FastAPI</span><span class="p">,</span> <span class="n">Request</span>
+<span class="kn">from</span> <span class="n">contextlib</span> <span class="kn">import</span> <span class="n">asynccontextmanager</span>
+<span class="kn">import</span> <span class="n">time</span>
+<span class="kn">from</span> <span class="n">telemetry</span> <span class="kn">import</span> <span class="n">configure_telemetry</span>
+<span class="kn">from</span> <span class="n">opentelemetry</span> <span class="kn">import</span> <span class="n">trace</span>
+<span class="kn">from</span> <span class="n">opentelemetry.trace</span> <span class="kn">import</span> <span class="n">Status</span><span class="p">,</span> <span class="n">StatusCode</span>
+
+<span class="c1"># Initialize telemetry before creating the app
+</span><span class="n">tracer</span><span class="p">,</span> <span class="n">meter</span> <span class="o">=</span> <span class="nf">configure_telemetry</span><span class="p">(</span><span class="sh">"</span><span class="s">order-service</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">1.2.0</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># Create metrics instruments
+</span><span class="n">order_counter</span> <span class="o">=</span> <span class="n">meter</span><span class="p">.</span><span class="nf">create_counter</span><span class="p">(</span>
+    <span class="sh">"</span><span class="s">orders_created_total</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">description</span><span class="o">=</span><span class="sh">"</span><span class="s">Total number of orders created</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">unit</span><span class="o">=</span><span class="sh">"</span><span class="s">orders</span><span class="sh">"</span>
+<span class="p">)</span>
+
+<span class="n">order_value_histogram</span> <span class="o">=</span> <span class="n">meter</span><span class="p">.</span><span class="nf">create_histogram</span><span class="p">(</span>
+    <span class="sh">"</span><span class="s">order_value_dollars</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">description</span><span class="o">=</span><span class="sh">"</span><span class="s">Distribution of order values</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">unit</span><span class="o">=</span><span class="sh">"</span><span class="s">dollars</span><span class="sh">"</span>
+<span class="p">)</span>
+
+<span class="n">order_processing_duration</span> <span class="o">=</span> <span class="n">meter</span><span class="p">.</span><span class="nf">create_histogram</span><span class="p">(</span>
+    <span class="sh">"</span><span class="s">order_processing_duration_seconds</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">description</span><span class="o">=</span><span class="sh">"</span><span class="s">Time taken to process an order</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">unit</span><span class="o">=</span><span class="sh">"</span><span class="s">seconds</span><span class="sh">"</span>
+<span class="p">)</span>
+
+<span class="nd">@asynccontextmanager</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">lifespan</span><span class="p">(</span><span class="n">app</span><span class="p">:</span> <span class="n">FastAPI</span><span class="p">):</span>
+    <span class="c1"># Startup
+</span>    <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">Starting Order Service with OpenTelemetry instrumentation</span><span class="sh">"</span><span class="p">)</span>
+    <span class="k">yield</span>
+    <span class="c1"># Shutdown
+</span>    <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">Shutting down Order Service</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="nc">FastAPI</span><span class="p">(</span><span class="n">lifespan</span><span class="o">=</span><span class="n">lifespan</span><span class="p">)</span>
+
+<span class="nd">@app.post</span><span class="p">(</span><span class="sh">"</span><span class="s">/orders</span><span class="sh">"</span><span class="p">)</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">create_order</span><span class="p">(</span><span class="n">request</span><span class="p">:</span> <span class="n">Request</span><span class="p">,</span> <span class="n">order_data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">
+    Create a new order with comprehensive telemetry.
+    This demonstrates manual instrumentation alongside auto-instrumentation.
+    </span><span class="sh">"""</span>
+    
+    <span class="c1"># Get the current span from auto-instrumentation
+</span>    <span class="n">current_span</span> <span class="o">=</span> <span class="n">trace</span><span class="p">.</span><span class="nf">get_current_span</span><span class="p">()</span>
+    
+    <span class="c1"># Add custom attributes to the span
+</span>    <span class="n">current_span</span><span class="p">.</span><span class="nf">set_attribute</span><span class="p">(</span><span class="sh">"</span><span class="s">order.customer_id</span><span class="sh">"</span><span class="p">,</span> <span class="n">order_data</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="sh">"</span><span class="s">customer_id</span><span class="sh">"</span><span class="p">))</span>
+    <span class="n">current_span</span><span class="p">.</span><span class="nf">set_attribute</span><span class="p">(</span><span class="sh">"</span><span class="s">order.total_items</span><span class="sh">"</span><span class="p">,</span> <span class="nf">len</span><span class="p">(</span><span class="n">order_data</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="sh">"</span><span class="s">items</span><span class="sh">"</span><span class="p">,</span> <span class="p">[])))</span>
+    
+    <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span>
+    
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># Create a child span for inventory check
+</span>        <span class="k">with</span> <span class="n">tracer</span><span class="p">.</span><span class="nf">start_as_current_span</span><span class="p">(</span><span class="sh">"</span><span class="s">check_inventory</span><span class="sh">"</span><span class="p">)</span> <span class="k">as</span> <span class="n">inventory_span</span><span class="p">:</span>
+            <span class="n">inventory_span</span><span class="p">.</span><span class="nf">set_attribute</span><span class="p">(</span><span class="sh">"</span><span class="s">items.count</span><span class="sh">"</span><span class="p">,</span> <span class="nf">len</span><span class="p">(</span><span class="n">order_data</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="sh">"</span><span class="s">items</span><span class="sh">"</span><span class="p">,</span> <span class="p">[])))</span>
+            
+            <span class="c1"># Simulate inventory check
+</span>            <span class="n">available</span> <span class="o">=</span> <span class="k">await</span> <span class="nf">check_inventory</span><span class="p">(</span><span class="n">order_data</span><span class="p">[</span><span class="sh">"</span><span class="s">items</span><span class="sh">"</span><span class="p">])</span>
+            
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">available</span><span class="p">:</span>
+                <span class="n">inventory_span</span><span class="p">.</span><span class="nf">set_status</span><span class="p">(</span><span class="nc">Status</span><span class="p">(</span><span class="n">StatusCode</span><span class="p">.</span><span class="n">ERROR</span><span class="p">,</span> <span class="sh">"</span><span class="s">Insufficient inventory</span><span class="sh">"</span><span class="p">))</span>
+                <span class="k">raise</span> <span class="nc">ValueError</span><span class="p">(</span><span class="sh">"</span><span class="s">Insufficient inventory</span><span class="sh">"</span><span class="p">)</span>
+        
+        <span class="c1"># Create a child span for payment processing
+</span>        <span class="k">with</span> <span class="n">tracer</span><span class="p">.</span><span class="nf">start_as_current_span</span><span class="p">(</span><span class="sh">"</span><span class="s">process_payment</span><span class="sh">"</span><span class="p">)</span> <span class="k">as</span> <span class="n">payment_span</span><span class="p">:</span>
+            <span class="n">payment_span</span><span class="p">.</span><span class="nf">set_attribute</span><span class="p">(</span><span class="sh">"</span><span class="s">payment.method</span><span class="sh">"</span><span class="p">,</span> <span class="n">order_data</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="sh">"</span><span class="s">payment_method</span><span class="sh">"</span><span class="p">))</span>
+            <span class="n">payment_span</span><span class="p">.</span><span class="nf">set_attribute</span><span class="p">(</span><span class="sh">"</span><span class="s">payment.amount</span><span class="sh">"</span><span class="p">,</span> <span class="n">order_data</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="sh">"</span><span class="s">total_amount</span><span class="sh">"</span><span class="p">))</span>
+            
+            <span class="n">payment_result</span> <span class="o">=</span> <span class="k">await</span> <span class="nf">process_payment</span><span class="p">(</span><span class="n">order_data</span><span class="p">)</span>
+            <span class="n">payment_span</span><span class="p">.</span><span class="nf">set_attribute</span><span class="p">(</span><span class="sh">"</span><span class="s">payment.transaction_id</span><span class="sh">"</span><span class="p">,</span> <span class="n">payment_result</span><span class="p">[</span><span class="sh">"</span><span class="s">transaction_id</span><span class="sh">"</span><span class="p">])</span>
+        
+        <span class="c1"># Record metrics
+</span>        <span class="n">order_counter</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="p">{</span><span class="sh">"</span><span class="s">payment_method</span><span class="sh">"</span><span class="p">:</span> <span class="n">order_data</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="sh">"</span><span class="s">payment_method</span><span class="sh">"</span><span class="p">)})</span>
+        <span class="n">order_value_histogram</span><span class="p">.</span><span class="nf">record</span><span class="p">(</span><span class="n">order_data</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="sh">"</span><span class="s">total_amount</span><span class="sh">"</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+        
+        <span class="c1"># Record processing duration
+</span>        <span class="n">duration</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span>
+        <span class="n">order_processing_duration</span><span class="p">.</span><span class="nf">record</span><span class="p">(</span><span class="n">duration</span><span class="p">)</span>
+        
+        <span class="n">current_span</span><span class="p">.</span><span class="nf">set_status</span><span class="p">(</span><span class="nc">Status</span><span class="p">(</span><span class="n">StatusCode</span><span class="p">.</span><span class="n">OK</span><span class="p">))</span>
+        
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="sh">"</span><span class="s">order_id</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">ORD-12345</span><span class="sh">"</span><span class="p">,</span>
+            <span class="sh">"</span><span class="s">status</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">confirmed</span><span class="sh">"</span><span class="p">,</span>
+            <span class="sh">"</span><span class="s">estimated_delivery</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">2024-01-15</span><span class="sh">"</span>
+        <span class="p">}</span>
+        
+    <span class="k">except</span> <span class="nb">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">current_span</span><span class="p">.</span><span class="nf">set_status</span><span class="p">(</span><span class="nc">Status</span><span class="p">(</span><span class="n">StatusCode</span><span class="p">.</span><span class="n">ERROR</span><span class="p">,</span> <span class="nf">str</span><span class="p">(</span><span class="n">e</span><span class="p">)))</span>
+        <span class="n">current_span</span><span class="p">.</span><span class="nf">record_exception</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+        
+        <span class="c1"># Record failed order metric
+</span>        <span class="n">order_counter</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="p">{</span><span class="sh">"</span><span class="s">payment_method</span><span class="sh">"</span><span class="p">:</span> <span class="n">order_data</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="sh">"</span><span class="s">payment_method</span><span class="sh">"</span><span class="p">),</span> <span class="sh">"</span><span class="s">status</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">failed</span><span class="sh">"</span><span class="p">})</span>
+        
+        <span class="k">raise</span>
+</code></pre></div></div> <p>This implementation shows several important patterns:</p> <ol> <li> <strong>Resource Attributes</strong>: We defined service-level attributes that get attached to all telemetry</li> <li> <strong>Auto-instrumentation</strong>: Libraries like FastAPI, PyMongo, and Requests were automatically instrumented</li> <li> <strong>Manual Instrumentation</strong>: We added custom spans for business-critical operations</li> <li> <strong>Error Handling</strong>: Exceptions were properly recorded in traces</li> <li> <strong>Metrics Collection</strong>: Business metrics were collected alongside operational metrics</li> </ol> <h3 id="phase-3-expanding-to-critical-path-services-months-3-5">Phase 3: Expanding to Critical Path Services (Months 3-5)</h3> <p>After validating our approach with the Order Service, we expanded to services in the critical order flow: Payment Service (Go) and Inventory Service (.NET).</p> <p>For the Go Payment Service, we leveraged OpenTelemetry’s excellent Go support:</p> <div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">// payment_service/telemetry/telemetry.go</span>
+<span class="k">package</span> <span class="n">telemetry</span>
+
+<span class="k">import</span> <span class="p">(</span>
+    <span class="s">"context"</span>
+    <span class="s">"fmt"</span>
+    <span class="s">"os"</span>
+    
+    <span class="s">"go.opentelemetry.io/otel"</span>
+    <span class="s">"go.opentelemetry.io/otel/attribute"</span>
+    <span class="s">"go.opentelemetry.io/otel/exporters/otlp/otlptrace/otlptracegrpc"</span>
+    <span class="s">"go.opentelemetry.io/otel/exporters/otlp/otlpmetric/otlpmetricgrpc"</span>
+    <span class="s">"go.opentelemetry.io/otel/propagation"</span>
+    <span class="s">"go.opentelemetry.io/otel/sdk/metric"</span>
+    <span class="s">"go.opentelemetry.io/otel/sdk/resource"</span>
+    <span class="s">"go.opentelemetry.io/otel/sdk/trace"</span>
+    <span class="n">semconv</span> <span class="s">"go.opentelemetry.io/otel/semconv/v1.17.0"</span>
+<span class="p">)</span>
+
+<span class="c">// InitTelemetry initializes OpenTelemetry with traces and metrics</span>
+<span class="k">func</span> <span class="n">InitTelemetry</span><span class="p">(</span><span class="n">ctx</span> <span class="n">context</span><span class="o">.</span><span class="n">Context</span><span class="p">,</span> <span class="n">serviceName</span><span class="p">,</span> <span class="n">serviceVersion</span> <span class="kt">string</span><span class="p">)</span> <span class="p">(</span><span class="k">func</span><span class="p">(),</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c">// Create resource with service information</span>
+    <span class="n">res</span><span class="p">,</span> <span class="n">err</span> <span class="o">:=</span> <span class="n">resource</span><span class="o">.</span><span class="n">Merge</span><span class="p">(</span>
+        <span class="n">resource</span><span class="o">.</span><span class="n">Default</span><span class="p">(),</span>
+        <span class="n">resource</span><span class="o">.</span><span class="n">NewWithAttributes</span><span class="p">(</span>
+            <span class="n">semconv</span><span class="o">.</span><span class="n">SchemaURL</span><span class="p">,</span>
+            <span class="n">semconv</span><span class="o">.</span><span class="n">ServiceName</span><span class="p">(</span><span class="n">serviceName</span><span class="p">),</span>
+            <span class="n">semconv</span><span class="o">.</span><span class="n">ServiceVersion</span><span class="p">(</span><span class="n">serviceVersion</span><span class="p">),</span>
+            <span class="n">attribute</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="s">"environment"</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">Getenv</span><span class="p">(</span><span class="s">"ENVIRONMENT"</span><span class="p">)),</span>
+            <span class="n">attribute</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="s">"team"</span><span class="p">,</span> <span class="s">"payments-team"</span><span class="p">),</span>
+        <span class="p">),</span>
+    <span class="p">)</span>
+    <span class="k">if</span> <span class="n">err</span> <span class="o">!=</span> <span class="no">nil</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="no">nil</span><span class="p">,</span> <span class="n">fmt</span><span class="o">.</span><span class="n">Errorf</span><span class="p">(</span><span class="s">"failed to create resource: %w"</span><span class="p">,</span> <span class="n">err</span><span class="p">)</span>
+    <span class="p">}</span>
+    
+    <span class="c">// Set up trace exporter</span>
+    <span class="n">traceExporter</span><span class="p">,</span> <span class="n">err</span> <span class="o">:=</span> <span class="n">otlptracegrpc</span><span class="o">.</span><span class="n">New</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span>
+        <span class="n">otlptracegrpc</span><span class="o">.</span><span class="n">WithEndpoint</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">Getenv</span><span class="p">(</span><span class="s">"OTEL_EXPORTER_OTLP_ENDPOINT"</span><span class="p">,</span> <span class="s">"otel-collector:4317"</span><span class="p">)),</span>
+        <span class="n">otlptracegrpc</span><span class="o">.</span><span class="n">WithInsecure</span><span class="p">(),</span>
+    <span class="p">)</span>
+    <span class="k">if</span> <span class="n">err</span> <span class="o">!=</span> <span class="no">nil</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="no">nil</span><span class="p">,</span> <span class="n">fmt</span><span class="o">.</span><span class="n">Errorf</span><span class="p">(</span><span class="s">"failed to create trace exporter: %w"</span><span class="p">,</span> <span class="n">err</span><span class="p">)</span>
+    <span class="p">}</span>
+    
+    <span class="c">// Create trace provider with batching for better performance</span>
+    <span class="n">tracerProvider</span> <span class="o">:=</span> <span class="n">trace</span><span class="o">.</span><span class="n">NewTracerProvider</span><span class="p">(</span>
+        <span class="n">trace</span><span class="o">.</span><span class="n">WithBatcher</span><span class="p">(</span><span class="n">traceExporter</span><span class="p">),</span>
+        <span class="n">trace</span><span class="o">.</span><span class="n">WithResource</span><span class="p">(</span><span class="n">res</span><span class="p">),</span>
+        <span class="n">trace</span><span class="o">.</span><span class="n">WithSampler</span><span class="p">(</span><span class="n">trace</span><span class="o">.</span><span class="n">AlwaysSample</span><span class="p">()),</span> <span class="c">// In production, use trace.TraceIDRatioBased(0.1)</span>
+    <span class="p">)</span>
+    
+    <span class="c">// Set up metric exporter</span>
+    <span class="n">metricExporter</span><span class="p">,</span> <span class="n">err</span> <span class="o">:=</span> <span class="n">otlpmetricgrpc</span><span class="o">.</span><span class="n">New</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span>
+        <span class="n">otlpmetricgrpc</span><span class="o">.</span><span class="n">WithEndpoint</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">Getenv</span><span class="p">(</span><span class="s">"OTEL_EXPORTER_OTLP_ENDPOINT"</span><span class="p">,</span> <span class="s">"otel-collector:4317"</span><span class="p">)),</span>
+        <span class="n">otlpmetricgrpc</span><span class="o">.</span><span class="n">WithInsecure</span><span class="p">(),</span>
+    <span class="p">)</span>
+    <span class="k">if</span> <span class="n">err</span> <span class="o">!=</span> <span class="no">nil</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="no">nil</span><span class="p">,</span> <span class="n">fmt</span><span class="o">.</span><span class="n">Errorf</span><span class="p">(</span><span class="s">"failed to create metric exporter: %w"</span><span class="p">,</span> <span class="n">err</span><span class="p">)</span>
+    <span class="p">}</span>
+    
+    <span class="c">// Create metric provider</span>
+    <span class="n">meterProvider</span> <span class="o">:=</span> <span class="n">metric</span><span class="o">.</span><span class="n">NewMeterProvider</span><span class="p">(</span>
+        <span class="n">metric</span><span class="o">.</span><span class="n">WithReader</span><span class="p">(</span><span class="n">metric</span><span class="o">.</span><span class="n">NewPeriodicReader</span><span class="p">(</span><span class="n">metricExporter</span><span class="p">)),</span>
+        <span class="n">metric</span><span class="o">.</span><span class="n">WithResource</span><span class="p">(</span><span class="n">res</span><span class="p">),</span>
+    <span class="p">)</span>
+    
+    <span class="c">// Set global providers</span>
+    <span class="n">otel</span><span class="o">.</span><span class="n">SetTracerProvider</span><span class="p">(</span><span class="n">tracerProvider</span><span class="p">)</span>
+    <span class="n">otel</span><span class="o">.</span><span class="n">SetMeterProvider</span><span class="p">(</span><span class="n">meterProvider</span><span class="p">)</span>
+    
+    <span class="c">// Set up propagators for distributed tracing</span>
+    <span class="n">otel</span><span class="o">.</span><span class="n">SetTextMapPropagator</span><span class="p">(</span><span class="n">propagation</span><span class="o">.</span><span class="n">NewCompositeTextMapPropagator</span><span class="p">(</span>
+        <span class="n">propagation</span><span class="o">.</span><span class="n">TraceContext</span><span class="p">{},</span>
+        <span class="n">propagation</span><span class="o">.</span><span class="n">Baggage</span><span class="p">{},</span>
+    <span class="p">))</span>
+    
+    <span class="c">// Return a cleanup function</span>
+    <span class="n">cleanup</span> <span class="o">:=</span> <span class="k">func</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">ctx</span> <span class="o">:=</span> <span class="n">context</span><span class="o">.</span><span class="n">Background</span><span class="p">()</span>
+        <span class="n">tracerProvider</span><span class="o">.</span><span class="n">Shutdown</span><span class="p">(</span><span class="n">ctx</span><span class="p">)</span>
+        <span class="n">meterProvider</span><span class="o">.</span><span class="n">Shutdown</span><span class="p">(</span><span class="n">ctx</span><span class="p">)</span>
+    <span class="p">}</span>
+    
+    <span class="k">return</span> <span class="n">cleanup</span><span class="p">,</span> <span class="no">nil</span>
+<span class="p">}</span>
+</code></pre></div></div> <p>The Go implementation highlighted OpenTelemetry’s consistency across languages – the concepts remained the same even as the syntax changed.</p> <h3 id="phase-4-observability-infrastructure-evolution-months-5-6">Phase 4: Observability Infrastructure Evolution (Months 5-6)</h3> <p>As we instrumented more services, we evolved our observability infrastructure to handle the increased telemetry volume:</p> <p><img src="/assets/img/blog-opentelemetry-diagram3_infra_evolution.png" alt="Observability infrastructure evolution" width="1551" height="636" loading="lazy" decoding="async"> <em>Our evolved observability infrastructure: Microservices send telemetry through load-balanced OpenTelemetry Collector pools to centralized storage and visualization</em></p> <p>Key infrastructure decisions included:</p> <p><strong>Collector Scaling</strong>: We deployed OpenTelemetry Collectors as a StatefulSet in Kubernetes with horizontal pod autoscaling based on CPU and memory usage. This handled our peak load of 50,000 spans per second.</p> <p><strong>High Availability</strong>: HAProxy distributed telemetry data across collector pools in different availability zones, ensuring no single point of failure.</p> <p><strong>Storage Optimization</strong>: We implemented sampling strategies to manage storage costs while maintaining visibility:</p> <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Tail-based sampling configuration</span>
+<span class="na">processors</span><span class="pi">:</span>
+  <span class="na">tail_sampling</span><span class="pi">:</span>
+    <span class="na">decision_wait</span><span class="pi">:</span> <span class="s">10s</span>
+    <span class="na">num_traces</span><span class="pi">:</span> <span class="m">100000</span>
+    <span class="na">expected_new_traces_per_sec</span><span class="pi">:</span> <span class="m">10000</span>
+    <span class="na">policies</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">errors-policy</span>
+        <span class="na">type</span><span class="pi">:</span> <span class="s">status_code</span>
+        <span class="na">status_code</span><span class="pi">:</span> <span class="pi">{</span><span class="nv">status_codes</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">ERROR</span><span class="pi">]}</span>
+        
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">slow-traces-policy</span>  
+        <span class="na">type</span><span class="pi">:</span> <span class="s">latency</span>
+        <span class="na">latency</span><span class="pi">:</span> <span class="pi">{</span><span class="nv">threshold_ms</span><span class="pi">:</span> <span class="nv">1000</span><span class="pi">}</span>
+        
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">important-services</span>
+        <span class="na">type</span><span class="pi">:</span> <span class="s">and</span>
+        <span class="na">and</span><span class="pi">:</span>
+          <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">service-name-policy</span>
+            <span class="na">type</span><span class="pi">:</span> <span class="s">string_attribute</span>
+            <span class="na">string_attribute</span><span class="pi">:</span>
+              <span class="na">key</span><span class="pi">:</span> <span class="s">service.name</span>
+              <span class="na">values</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">payment-service</span><span class="pi">,</span> <span class="nv">order-service</span><span class="pi">]</span>
+              
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">probabilistic-policy</span>
+        <span class="na">type</span><span class="pi">:</span> <span class="s">probabilistic</span>
+        <span class="na">probabilistic</span><span class="pi">:</span> <span class="pi">{</span><span class="nv">sampling_percentage</span><span class="pi">:</span> <span class="nv">10</span><span class="pi">}</span>
+</code></pre></div></div> <p>This configuration ensured we kept 100% of error traces, all slow traces, all traces from critical services, and a 10% sample of everything else.</p> <h2 id="tackling-implementation-challenges">Tackling Implementation Challenges</h2> <p>Our journey wasn’t without obstacles. Let me share the key challenges we faced and how we overcame them.</p> <h3 id="challenge-1-context-propagation-across-async-boundaries">Challenge 1: Context Propagation Across Async Boundaries</h3> <p>Python’s async/await pattern initially broke our trace context propagation. When a request spawned background tasks, we lost the trace context:</p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># The problem:
+</span><span class="k">async</span> <span class="k">def</span> <span class="nf">create_order</span><span class="p">(</span><span class="n">order_data</span><span class="p">):</span>
+    <span class="c1"># This worked - context was preserved
+</span>    <span class="k">await</span> <span class="nf">validate_order</span><span class="p">(</span><span class="n">order_data</span><span class="p">)</span>
+    
+    <span class="c1"># This didn't work - context was lost
+</span>    <span class="n">asyncio</span><span class="p">.</span><span class="nf">create_task</span><span class="p">(</span><span class="nf">send_order_notification</span><span class="p">(</span><span class="n">order_data</span><span class="p">))</span>
+    
+<span class="c1"># The solution:
+</span><span class="kn">from</span> <span class="n">opentelemetry</span> <span class="kn">import</span> <span class="n">context</span> <span class="k">as</span> <span class="n">otel_context</span>
+
+<span class="k">async</span> <span class="k">def</span> <span class="nf">create_order</span><span class="p">(</span><span class="n">order_data</span><span class="p">):</span>
+    <span class="k">await</span> <span class="nf">validate_order</span><span class="p">(</span><span class="n">order_data</span><span class="p">)</span>
+    
+    <span class="c1"># Capture current context
+</span>    <span class="n">ctx</span> <span class="o">=</span> <span class="n">otel_context</span><span class="p">.</span><span class="nf">get_current</span><span class="p">()</span>
+    
+    <span class="c1"># Create task with context
+</span>    <span class="n">asyncio</span><span class="p">.</span><span class="nf">create_task</span><span class="p">(</span>
+        <span class="nf">send_order_notification_with_context</span><span class="p">(</span><span class="n">order_data</span><span class="p">,</span> <span class="n">ctx</span><span class="p">)</span>
+    <span class="p">)</span>
+
+<span class="k">async</span> <span class="k">def</span> <span class="nf">send_order_notification_with_context</span><span class="p">(</span><span class="n">order_data</span><span class="p">,</span> <span class="n">ctx</span><span class="p">):</span>
+    <span class="c1"># Restore context in the background task
+</span>    <span class="n">token</span> <span class="o">=</span> <span class="n">otel_context</span><span class="p">.</span><span class="nf">attach</span><span class="p">(</span><span class="n">ctx</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">await</span> <span class="nf">send_order_notification</span><span class="p">(</span><span class="n">order_data</span><span class="p">)</span>
+    <span class="k">finally</span><span class="p">:</span>
+        <span class="n">otel_context</span><span class="p">.</span><span class="nf">detach</span><span class="p">(</span><span class="n">token</span><span class="p">)</span>
+</code></pre></div></div> <h3 id="challenge-2-performance-impact-in-high-volume-services">Challenge 2: Performance Impact in High-Volume Services</h3> <p>Our Product Catalog service handled 10,000 requests per second. Initial instrumentation added 15% latency – unacceptable for our SLAs.</p> <p>We optimized through several approaches:</p> <ol> <li> <strong>Sampling at the Edge</strong>: Implemented head-based sampling in the API Gateway</li> <li> <strong>Batch Processing</strong>: Increased batch sizes and export intervals</li> <li> <strong>Selective Instrumentation</strong>: Disabled automatic instrumentation for non-critical paths</li> </ol> <p>The result was a reduction to 2.5% overhead, well within our performance budget.</p> <h3 id="challenge-3-correlating-logs-with-traces">Challenge 3: Correlating Logs with Traces</h3> <p>Our existing logs didn’t include trace context, making correlation difficult. We developed a pattern for enhancing logs with trace information:</p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Enhanced logging with trace context
+</span><span class="kn">import</span> <span class="n">logging</span>
+<span class="kn">from</span> <span class="n">opentelemetry</span> <span class="kn">import</span> <span class="n">trace</span>
+<span class="kn">from</span> <span class="n">opentelemetry.trace</span> <span class="kn">import</span> <span class="n">format_trace_id</span><span class="p">,</span> <span class="n">format_span_id</span>
+
+<span class="k">class</span> <span class="nc">TraceContextFilter</span><span class="p">(</span><span class="n">logging</span><span class="p">.</span><span class="n">Filter</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">Add trace context to log records</span><span class="sh">"""</span>
+    
+    <span class="k">def</span> <span class="nf">filter</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">record</span><span class="p">):</span>
+        <span class="n">span</span> <span class="o">=</span> <span class="n">trace</span><span class="p">.</span><span class="nf">get_current_span</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">span</span><span class="p">.</span><span class="nf">is_recording</span><span class="p">():</span>
+            <span class="n">span_context</span> <span class="o">=</span> <span class="n">span</span><span class="p">.</span><span class="nf">get_span_context</span><span class="p">()</span>
+            <span class="n">record</span><span class="p">.</span><span class="n">trace_id</span> <span class="o">=</span> <span class="nf">format_trace_id</span><span class="p">(</span><span class="n">span_context</span><span class="p">.</span><span class="n">trace_id</span><span class="p">)</span>
+            <span class="n">record</span><span class="p">.</span><span class="n">span_id</span> <span class="o">=</span> <span class="nf">format_span_id</span><span class="p">(</span><span class="n">span_context</span><span class="p">.</span><span class="n">span_id</span><span class="p">)</span>
+            <span class="n">record</span><span class="p">.</span><span class="n">service_name</span> <span class="o">=</span> <span class="sh">"</span><span class="s">order-service</span><span class="sh">"</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">record</span><span class="p">.</span><span class="n">trace_id</span> <span class="o">=</span> <span class="sh">"</span><span class="s">000000000000000000000000000000</span><span class="sh">"</span>
+            <span class="n">record</span><span class="p">.</span><span class="n">span_id</span> <span class="o">=</span> <span class="sh">"</span><span class="s">0000000000000000</span><span class="sh">"</span>
+            <span class="n">record</span><span class="p">.</span><span class="n">service_name</span> <span class="o">=</span> <span class="sh">"</span><span class="s">order-service</span><span class="sh">"</span>
+        <span class="k">return</span> <span class="bp">True</span>
+
+<span class="c1"># Configure structured logging
+</span><span class="n">logging</span><span class="p">.</span><span class="nf">basicConfig</span><span class="p">(</span>
+    <span class="nb">format</span><span class="o">=</span><span class="sh">'</span><span class="s">{</span><span class="sh">"</span><span class="s">timestamp</span><span class="sh">"</span><span class="s">: </span><span class="sh">"</span><span class="s">%(asctime)s</span><span class="sh">"</span><span class="s">, </span><span class="sh">"</span><span class="s">level</span><span class="sh">"</span><span class="s">: </span><span class="sh">"</span><span class="s">%(levelname)s</span><span class="sh">"</span><span class="s">, </span><span class="sh">'</span>
+           <span class="sh">'"</span><span class="s">trace_id</span><span class="sh">"</span><span class="s">: </span><span class="sh">"</span><span class="s">%(trace_id)s</span><span class="sh">"</span><span class="s">, </span><span class="sh">"</span><span class="s">span_id</span><span class="sh">"</span><span class="s">: </span><span class="sh">"</span><span class="s">%(span_id)s</span><span class="sh">"</span><span class="s">, </span><span class="sh">'</span>
+           <span class="sh">'"</span><span class="s">service</span><span class="sh">"</span><span class="s">: </span><span class="sh">"</span><span class="s">%(service_name)s</span><span class="sh">"</span><span class="s">, </span><span class="sh">"</span><span class="s">message</span><span class="sh">"</span><span class="s">: </span><span class="sh">"</span><span class="s">%(message)s</span><span class="sh">"</span><span class="s">}</span><span class="sh">'</span><span class="p">,</span>
+    <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="p">.</span><span class="n">INFO</span>
+<span class="p">)</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="p">.</span><span class="nf">getLogger</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
+<span class="n">logger</span><span class="p">.</span><span class="nf">addFilter</span><span class="p">(</span><span class="nc">TraceContextFilter</span><span class="p">())</span>
+</code></pre></div></div> <p>This approach allowed us to click from a trace span directly to related logs in Elasticsearch.</p> <h2 id="measuring-success-the-transformation-impact">Measuring Success: The Transformation Impact</h2> <p>After six months of implementation, the results spoke for themselves:</p> <p><strong>Mean Time to Detection (MTTD)</strong> dropped from 45 minutes to 5 minutes. Distributed tracing made issues immediately visible.</p> <p><strong>Mean Time to Resolution (MTTR)</strong> improved from 3 hours to 30 minutes. Engineers could follow a request through its entire lifecycle.</p> <p><strong>Cross-team Collaboration</strong> improved dramatically. The shared observability language broke down silos.</p> <p><strong>Cost Optimization</strong> resulted in 30% reduction in observability spending by consolidating vendors and implementing intelligent sampling.</p> <p><strong>Developer Productivity</strong> increased as measured by our quarterly surveys. 89% of engineers reported spending less time debugging production issues.</p> <p>Here’s a before-and-after view of investigating a typical production issue:</p> <p><img src="/assets/img/blog-opentelemetry-diagram4_incident_flow.png" alt="Incident response flow with trace context" width="1940" height="291" loading="lazy" decoding="async"> <em>Incident response transformation: From manual correlation across multiple systems to unified observability with distributed tracing</em></p> <h2 id="best-practices-and-lessons-learned">Best Practices and Lessons Learned</h2> <p>Through our journey, we developed several best practices that I recommend for any team implementing OpenTelemetry:</p> <h3 id="1-start-with-auto-instrumentation">1. Start with Auto-Instrumentation</h3> <p>Begin with automatic instrumentation for frameworks and libraries. This provides immediate value with minimal effort. Manual instrumentation should focus on business-critical paths and custom metrics.</p> <h3 id="2-implement-semantic-conventions">2. Implement Semantic Conventions</h3> <p>Follow OpenTelemetry’s <a href="https://opentelemetry.io/docs/concepts/semantic-conventions/" rel="external nofollow noopener" target="_blank">semantic conventions</a> religiously. Consistent attribute naming across services makes querying and alerting much easier:</p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Good: Using semantic conventions
+</span><span class="n">span</span><span class="p">.</span><span class="nf">set_attribute</span><span class="p">(</span><span class="sh">"</span><span class="s">http.method</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">POST</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">span</span><span class="p">.</span><span class="nf">set_attribute</span><span class="p">(</span><span class="sh">"</span><span class="s">http.route</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">/api/orders</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">span</span><span class="p">.</span><span class="nf">set_attribute</span><span class="p">(</span><span class="sh">"</span><span class="s">http.status_code</span><span class="sh">"</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+
+<span class="c1"># Bad: Custom attribute names
+</span><span class="n">span</span><span class="p">.</span><span class="nf">set_attribute</span><span class="p">(</span><span class="sh">"</span><span class="s">request_method</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">POST</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">span</span><span class="p">.</span><span class="nf">set_attribute</span><span class="p">(</span><span class="sh">"</span><span class="s">endpoint</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">/api/orders</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">span</span><span class="p">.</span><span class="nf">set_attribute</span><span class="p">(</span><span class="sh">"</span><span class="s">response_code</span><span class="sh">"</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+</code></pre></div></div> <h3 id="3-design-for-sampling-from-day-one">3. Design for Sampling from Day One</h3> <p>Implement sampling strategies early. We learned this the hard way when our tracing storage costs exploded. Consider both head-based and tail-based sampling:</p> <ul> <li>Head-based sampling at service entry points for predictable volume</li> <li>Tail-based sampling at collectors for keeping interesting traces</li> </ul> <h3 id="4-create-service-level-dashboards">4. Create Service-Level Dashboards</h3> <p>Build dashboards that show the golden signals (latency, traffic, errors, saturation) for each service. We created a template that every service could customize:</p> <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"dashboard"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"${service_name} Golden Signals"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"panels"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Request Rate"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"query"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rate(http_server_requests_total{service_name=</span><span class="se">\"</span><span class="s2">${service_name}</span><span class="se">\"</span><span class="s2">}[5m])"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Error Rate"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"query"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rate(http_server_requests_total{service_name=</span><span class="se">\"</span><span class="s2">${service_name}</span><span class="se">\"</span><span class="s2">,status_code=~</span><span class="se">\"</span><span class="s2">5..</span><span class="se">\"</span><span class="s2">}[5m])"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"P95 Latency"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"query"</span><span class="p">:</span><span class="w"> </span><span class="s2">"histogram_quantile(0.95, rate(http_server_duration_seconds_bucket{service_name=</span><span class="se">\"</span><span class="s2">${service_name}</span><span class="se">\"</span><span class="s2">}[5m]))"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CPU Usage"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"query"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rate(process_cpu_seconds_total{service_name=</span><span class="se">\"</span><span class="s2">${service_name}</span><span class="se">\"</span><span class="s2">}[5m])"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div> <h3 id="5-educate-your-teams">5. Educate Your Teams</h3> <p>Observability is a practice, not just a technology. We ran workshops covering:</p> <ul> <li>How to read distributed traces</li> <li>Writing effective queries</li> <li>Creating meaningful alerts</li> <li>Debugging with traces and metrics</li> </ul> <h3 id="6-version-your-telemetry">6. Version Your Telemetry</h3> <p>Treat telemetry configuration as code. Version it, review it, and test it:</p> <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># telemetry/v1.2.0/base-config.yaml</span>
+<span class="na">apiVersion</span><span class="pi">:</span> <span class="s">v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">TelemetryConfig</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">version</span><span class="pi">:</span> <span class="s">1.2.0</span>
+  <span class="na">description</span><span class="pi">:</span> <span class="s">Added new custom metrics for cart abandonment</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">traces</span><span class="pi">:</span>
+    <span class="na">sampling_rate</span><span class="pi">:</span> <span class="m">0.1</span>
+    <span class="na">include_errors</span><span class="pi">:</span> <span class="s">always</span>
+  <span class="na">metrics</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">cart_abandonment_rate</span>
+      <span class="na">type</span><span class="pi">:</span> <span class="s">histogram</span>
+      <span class="na">description</span><span class="pi">:</span> <span class="s">Rate of cart abandonment by step</span>
+  <span class="na">logs</span><span class="pi">:</span>
+    <span class="na">include_trace_context</span><span class="pi">:</span> <span class="kc">true</span>
+</code></pre></div></div> <h2 id="looking-forward-the-continuous-journey">Looking Forward: The Continuous Journey</h2> <p>Implementing OpenTelemetry transformed our observability capabilities, but the journey continues. We’re now exploring:</p> <p><strong>Continuous Profiling</strong>: Adding profiling data as the fourth pillar of observability using projects like <a href="https://pyroscope.io/" rel="external nofollow noopener" target="_blank">Pyroscope</a></p> <p><strong>AIOps Integration</strong>: Using machine learning to detect anomalies in our telemetry data</p> <p><strong>Business Metrics Correlation</strong>: Connecting technical metrics with business KPIs for better decision-making</p> <p><strong>Edge Observability</strong>: Extending OpenTelemetry to our edge services and CDN</p> <h2 id="resources-for-your-journey">Resources for Your Journey</h2> <p>If you’re embarking on your own OpenTelemetry journey, these resources proved invaluable:</p> <ol> <li> <a href="https://opentelemetry.io/docs/" rel="external nofollow noopener" target="_blank">OpenTelemetry Documentation</a> - The official docs are comprehensive and well-maintained</li> <li> <a href="https://www.oreilly.com/library/view/distributed-tracing-in/9781492056638/" rel="external nofollow noopener" target="_blank">Distributed Tracing in Practice</a> by Austin Parker - Essential reading for understanding distributed tracing</li> <li> <a href="https://www.weave.works/blog/the-red-method-key-metrics-for-microservices-architecture/" rel="external nofollow noopener" target="_blank">The RED Method</a> - For choosing the right metrics</li> <li> <a href="https://sre.google/books/" rel="external nofollow noopener" target="_blank">Google SRE Books</a> - For understanding observability in the context of reliability</li> </ol> <h2 id="conclusion-the-observability-transformation">Conclusion: The Observability Transformation</h2> <p>Our OpenTelemetry implementation journey transformed not just our technology stack, but our engineering culture. We moved from reactive firefighting to proactive optimization. Issues that once took hours to diagnose now take minutes. Most importantly, our teams now share a common observability language that breaks down silos and accelerates innovation.</p> <p>The path wasn’t always smooth, but the destination was worth it. OpenTelemetry provided the foundation for observability that scales with our architecture, adapts to our needs, and prepares us for future challenges.</p> <p>If you’re considering OpenTelemetry for your microservices architecture, my advice is simple: start small, iterate quickly, and focus on value. Begin with one service, prove the value, and expand systematically. The observability transformation awaits, and OpenTelemetry is your guide.</p> <hr> <p><em>This post represents our 18-month journey implementing OpenTelemetry. Your mileage may vary, but the principles remain constant: unified observability accelerates understanding, and understanding accelerates everything else.</em></p> </div> </article> <br> <hr> <br> <h2 class="text-3xl font-semibold mb-4 mt-12">Enjoy Reading This Article?</h2> <p class="mb-2">Here are some more articles you might like to read next:</p> <ul class="list-disc pl-7 my-3 space-y-2 marker:text-[var(--global-theme-color)]"> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2026/building-fast-1brc-csharp-apple-silicon/">Building a fast 1BRC solver in C# on Apple Silicon</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2025/memory-management-production-silent-killers/">Memory Management in Production: Avoiding the Silent Killers</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2025/vibe-coding/">Growing as a Software Engineer in the Age of LLMs and Vibe Coding</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2025/how-to-handle-hallucinations/">Taming the Imagination: A Comprehensive Guide to Handling Hallucinations and Implementing Guardrails in Agentic AI</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2025/intro-to-agentic-ai/">Building an Agentic AI Analytics Dashboard: A Deep Dive with LangChain, LangGraph, and Fine-tuned LLAMA</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2025/intro-to-nar/">Neural Algorithmic Reasoning: Teaching Neural Networks to Think Like Algorithms</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2025/leveraging-ai-tools-software-engineering/">Using AI Tools in Software Engineering and Research Workflows</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2024/optimizing-dotnet-microservices-performance/">The Performance Crisis: How We Rescued a .NET 8 Microservice from 10 Critical Bottlenecks</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2024/zero-downtime/">Zero Downtime Deployments in Kubernetes: How We Keep Our Services Running While We Ship</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2024/dotnet-tests/">Mastering Unit Testing and BDD with xUnit and SpecFlow in .NET 9: A Comprehensive Guide</a> </li> </ul> </div> </div> <footer class="fixed-bottom" role="contentinfo"> <div class="container mt-0"> © Copyright 2026 Tanzim Hossain Romel. © Tanzim Hossain Romel. Powered by <a href="https://jekyllrb.com/" target="_blank" rel="external nofollow noopener">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio" rel="external nofollow noopener" target="_blank">al-folio</a> theme. </div> </footer> <script>
+  window.alFolio = {
+    compatBootstrap: false
+  };
+</script> <script src="/assets/js/nav-toggle.js?v=141bd79a73ebc0f0b6ea58e440ae79fc"></script> <script defer src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script> <script defer src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script> <script defer src="/assets/js/masonry.js?v=e49affc7bd2646f6acdad1dbe02c2359" type="text/javascript"></script> <script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js" integrity="sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI=" crossorigin="anonymous"></script> <script src="/assets/al_math/js/mathjax-setup.js"></script> <script src="/assets/js/tooltips-setup.js?v=fe487e99db6c43751e6e7bdb2d6a0611"></script> <script src="/assets/js/no_defer.js?v=53b1b1a645525975c963ce8bf8bfefcf"></script> <script defer src="/assets/js/common.js?v=87baac90f765f2f3362dcf6aaf312a8a"></script> <script defer src="/assets/js/copy_code.js?v=c8a01c11a92744d44b093fc3bda915df" type="text/javascript"></script> <script defer src="/assets/js/jupyter_new_tab.js?v=896d254890d9b47f0281f63bfccf0dee"></script> <script async src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script> <script async src="https://badge.dimensions.ai/badge.js"></script> <script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script> <script defer src="/assets/al_img_tools/js/zoom.js"></script> <script defer src="/assets/js/progress-bar.js?v=499464c5c63ced6cf7ad62509f1e2610" type="text/javascript"></script> <script src="https://cdn.jsdelivr.net/npm/vanilla-back-to-top@7.2.1/dist/vanilla-back-to-top.min.js" integrity="sha256-uMJJ3EoTyfRBoTbR+lrfu1uRQ87RZG8AR3cVNuQVeFg=" crossorigin="anonymous"></script> <script>
+    addBackToTop();
+  </script> <script type="module" src="/assets/al_search/js/search/ninja-keys.min.js"></script> <ninja-keys hidebreadcrumbs noautoloadmdicons placeholder="Type to start searching"></ninja-keys> <script src="/assets/al_search/js/search-setup.js"></script> <script>
+// get the ninja-keys element
+const ninja = document.querySelector('ninja-keys');
+
+// add the home and posts menu items
+ninja.data = [{
+    id: "nav-about",
+    title: "about",
+    section: "Navigation",
+    handler: () => {
+      window.location.href = "/";
+    },
+  },{id: "nav-blog",
+          title: "blog",
+          description: "",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/blog/";
+          },
+        },{id: "nav-publications",
+          title: "publications",
+          description: "Publications.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/publications/";
+          },
+        },{id: "nav-research",
+          title: "research",
+          description: "Research on reliable AI agents, SRE-agent evaluation, ML ecosystem security, agent-choice auditing, and developer tools.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/research/";
+          },
+        },{id: "nav-projects",
+          title: "projects",
+          description: "Research and engineering projects.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/projects/";
+          },
+        },{id: "nav-cv",
+          title: "CV",
+          description: "Curriculum vitae.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/cv/";
+          },
+        },{id: "nav-contributions",
+          title: "contributions",
+          description: "Curated open-source contribution evidence across research infrastructure, frameworks, and language tooling.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/contributions/";
+          },
+        },{id: "post-building-a-fast-1brc-solver-in-c-on-apple-silicon",
+        
+          title: "Building a fast 1BRC solver in C# on Apple Silicon",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/building-fast-1brc-csharp-apple-silicon/";
+          
+        },
+      },{id: "post-memory-management-in-production-avoiding-the-silent-killers",
+        
+          title: "Memory Management in Production: Avoiding the Silent Killers",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/memory-management-production-silent-killers/";
+          
+        },
+      },{id: "post-growing-as-a-software-engineer-in-the-age-of-llms-and-vibe-coding",
+        
+          title: "Growing as a Software Engineer in the Age of LLMs and Vibe Coding...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/vibe-coding/";
+          
+        },
+      },{id: "post-taming-the-imagination-a-comprehensive-guide-to-handling-hallucinations-and-implementing-guardrails-in-agentic-ai",
+        
+          title: "Taming the Imagination: A Comprehensive Guide to Handling Hallucinations and Implementing Guardrails in...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/how-to-handle-hallucinations/";
+          
+        },
+      },{id: "post-building-an-agentic-ai-analytics-dashboard-a-deep-dive-with-langchain-langgraph-and-fine-tuned-llama",
+        
+          title: "Building an Agentic AI Analytics Dashboard: A Deep Dive with LangChain, LangGraph, and...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/intro-to-agentic-ai/";
+          
+        },
+      },{id: "post-neural-algorithmic-reasoning-teaching-neural-networks-to-think-like-algorithms",
+        
+          title: "Neural Algorithmic Reasoning: Teaching Neural Networks to Think Like Algorithms",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/intro-to-nar/";
+          
+        },
+      },{id: "post-opentelemetry-in-microservices-how-we-transformed-our-observability-strategy",
+        
+          title: "OpenTelemetry in Microservices: How We Transformed Our Observability Strategy",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/opentelemetry/";
+          
+        },
+      },{id: "post-using-ai-tools-in-software-engineering-and-research-workflows",
+        
+          title: "Using AI Tools in Software Engineering and Research Workflows",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/leveraging-ai-tools-software-engineering/";
+          
+        },
+      },{id: "post-the-performance-crisis-how-we-rescued-a-net-8-microservice-from-10-critical-bottlenecks",
+        
+          title: "The Performance Crisis: How We Rescued a .NET 8 Microservice from 10 Critical...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2024/optimizing-dotnet-microservices-performance/";
+          
+        },
+      },{id: "post-zero-downtime-deployments-in-kubernetes-how-we-keep-our-services-running-while-we-ship",
+        
+          title: "Zero Downtime Deployments in Kubernetes: How We Keep Our Services Running While We...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2024/zero-downtime/";
+          
+        },
+      },{id: "post-mastering-unit-testing-and-bdd-with-xunit-and-specflow-in-net-9-a-comprehensive-guide",
+        
+          title: "Mastering Unit Testing and BDD with xUnit and SpecFlow in .NET 9: A...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2024/dotnet-tests/";
+          
+        },
+      },{id: "post-design-patterns-your-first-step-toward-professional-software-engineering",
+        
+          title: "Design Patterns: Your First Step Toward Professional Software Engineering",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2024/design-patterns-professional-software-engineering/";
+          
+        },
+      },{id: "post-setting-up-github-actions-ci-cd-with-aws-a-practical-journey",
+        
+          title: "Setting Up GitHub Actions CI/CD with AWS: A Practical Journey",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2024/intro-to-ci-cd/";
+          
+        },
+      },{id: "post-the-clique-partition-problem-dividing-networks-into-perfect-communities",
+        
+          title: "The Clique Partition Problem: Dividing Networks into Perfect Communities",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2023/clique-partition-problem-graph-theory/";
+          
+        },
+      },{id: "post-advice-complexity-in-online-algorithms-when-knowing-the-future-makes-all-the-difference",
+        
+          title: "Advice Complexity in Online Algorithms: When Knowing the Future Makes All the Difference...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2023/advice-complexity-online-algorithms/";
+          
+        },
+      },{id: "post-getting-started-with-kubernetes-deploying-microservice-architectures-at-scale",
+        
+          title: "Getting Started with Kubernetes: Deploying Microservice Architectures at Scale",
+        
+        description: "A practical Kubernetes guide covering microservice deployment, service-mesh integration, observability, and the operational checks needed before production use.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2022/getting-started-with-kubernetes-microservices/";
+          
+        },
+      },{id: "post-understanding-xv6-a-practical-introduction-to-operating-systems",
+        
+          title: "Understanding xv6: A Practical Introduction to Operating Systems",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2022/understanding-xv6-operating-systems/";
+          
+        },
+      },{id: "post-getting-started-with-ns3-a-hands-on-guide-to-network-simulation",
+        
+          title: "Getting Started with NS3: A Hands-On Guide to Network Simulation",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2021/getting-started-with-ns3/";
+          
+        },
+      },{id: "news-completed-b-sc-in-computer-science-and-engineering-from-bangladesh-university-of-engineering-and-technology-with-a-gpa-of-3-53-4-00-link-https-cse-buet-ac-bd-academics-bsc",
+          title: 'Completed B.Sc in Computer Science and Engineering from Bangladesh University of Engineering and...',
+          description: "",
+          section: "News",},{id: "news-joined-iqvia-as-a-software-development-engineer-on-kpi-library-the-dynamic-reporting-layer-within-orchestrated-analytics-link-https-www-iqvia-com-solutions-commercialization-commercial-analytics-orchestrated-analytics",
+          title: 'Joined IQVIA as a Software Development Engineer on KPI Library, the dynamic reporting...',
+          description: "",
+          section: "News",},{id: "news-submitted-39-sentiment-analysis-of-anonymous-crisis-reports-in-bangladesh-39-to-acm-cscw-2025-analyzing-crowd-sourced-reports-from-bangladesh-39-s-2024-national-crisis-using-transformer-models-link-projects-research-ureporter",
+          title: 'Submitted &amp;#39;Sentiment Analysis of Anonymous Crisis Reports in Bangladesh&amp;#39; to ACM CSCW 2025,...',
+          description: "",
+          section: "News",},{id: "news-honored-with-the-iqvia-impact-program-silver-award-for-outstanding-performance-and-contributions-to-the-kpi-library-team-link-https-drive-google-com-file-d-1vc4e2roqepmbfs56olduih-ojdbok9sp-view-usp-share-link",
+          title: 'Honored with the IQVIA Impact Program Silver Award for outstanding performance and contributions...',
+          description: "",
+          section: "News",},{id: "news-submitted-39-an-empirical-study-on-remote-code-execution-in-machine-learning-model-hosting-ecosystems-39-to-the-mining-software-repositories-msr-2026-conference-first-large-scale-cross-platform-security-study-analyzing-45-000-repositories-across-5-major-ml-platforms-link-https-arxiv-org-abs-2601-14163",
+          title: 'Submitted &amp;#39;An Empirical Study on Remote Code Execution in Machine Learning Model Hosting...',
+          description: "",
+          section: "News",},{id: "news-resubmitted-39-an-empirical-study-on-remote-code-execution-in-machine-learning-model-hosting-ecosystems-39-to-acm-transactions-on-software-engineering-and-methodology-tosem-2026-preprint-available-on-arxiv-link-https-arxiv-org-abs-2601-14163",
+          title: 'Resubmitted &amp;#39;An Empirical Study on Remote Code Execution in Machine Learning Model Hosting...',
+          description: "",
+          section: "News",},{id: "news-started-a-remote-summer-research-internship-at-the-university-of-illinois-urbana-champaign-through-uiuc-summer-research-in-software-engineering-srse-2026-with-professor-tianyin-xu-link-https-uiuc-srse-github-io",
+          title: 'Started a remote summer research internship at the University of Illinois Urbana-Champaign through...',
+          description: "",
+          section: "News",},{id: "news-submitted-39-the-choice-can-be-the-attack-auditing-aligned-backdoors-in-llm-agents-39-to-the-transactions-of-the-association-for-computational-linguistics-tacl-2026-with-chowdhury-rakin-haider-link-projects-research-reagent-plus-plus",
+          title: 'Submitted &amp;#39;The Choice Can Be the Attack: Auditing Aligned Backdoors in LLM Agents&amp;#39;...',
+          description: "",
+          section: "News",},{id: "news-39-an-empirical-study-on-remote-code-execution-in-machine-learning-model-hosting-ecosystems-39-is-under-review-at-the-international-conference-on-software-engineering-icse-2027-preprint-available-on-arxiv-link-https-arxiv-org-abs-2601-14163",
+          title: '&amp;#39;An Empirical Study on Remote Code Execution in Machine Learning Model Hosting Ecosystems&amp;#39;...',
+          description: "",
+          section: "News",},{id: "news-will-begin-graduate-study-in-computing-science-at-the-university-of-alberta-on-september-1-2026-link-https-www-ualberta-ca-en-computing-science-index-html",
+          title: 'Will begin graduate study in Computing Science at the University of Alberta on...',
+          description: "",
+          section: "News",},{id: "projects-1brc-c-on-apple-silicon",
+          title: '1BRC C# on Apple Silicon',
+          description: "A .NET 10 NativeAOT performance case study: byte parsing, native aggregation, ARM64 tuning, and a size-aware macOS pread path",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/1brc-csharp/";
+            },},{id: "projects-building-a-bangla-handwritten-digit-recognizer-from-scratch",
+          title: 'Building a Bangla Handwritten Digit Recognizer from Scratch',
+          description: "A Deep Dive into Custom CNN Implementation",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/bangla-digit-recognition/";
+            },},{id: "projects-blockchain-based-ticketing-platform",
+          title: 'Blockchain Based Ticketing Platform',
+          description: "A practical approach to reducing ticket fraud and abusive resale",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/blockchain-ticketing/";
+            },},{id: "projects-yet-another-c-compiler",
+          title: 'Yet Another C Compiler',
+          description: "A complete multi-pass compiler for a subset of C",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/compiler/";
+            },},{id: "projects-contextledger-context-accounting-for-coding-agents",
+          title: 'ContextLedger: context accounting for coding agents',
+          description: "A research notebook on OpenCode compaction, provenance, and live GPT-5.5 experiments",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/contextledger/";
+            },},{id: "projects-ctxhelm-agent-native-context-compiler",
+          title: 'ctxhelm: agent-native context compiler',
+          description: "Local-first context plans, release proof, and source-free agent evaluation",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/ctxhelm/";
+            },},{id: "projects-mini-deep-learning-framework-pytorch-from-scratch",
+          title: 'Mini Deep Learning Framework: PyTorch from Scratch',
+          description: "A freelance learning project for tensors, autograd, and neural-network internals",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/deep-learning-framework-capstone/";
+            },},{id: "projects-go-container-runtime-docker-from-scratch",
+          title: 'Go Container Runtime: Docker from Scratch',
+          description: "A freelance learning project for Linux containers, networking, and Go systems programming",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/docker-from-scratch-go/";
+            },},{id: "projects-eventfly-distributed-microservices-event-platform",
+          title: 'EventFly – Distributed Microservices Event Platform',
+          description: "A six-person BUET course project for event creation, ticketing, announcements, participant engagement, analytics, and payments, implemented with Node.js, React, NATS, Kubernetes, MongoDB, Redis, and Stripe.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/eventfly-an-end-to-end-event-management-system/";
+            },},{id: "projects-building-a-go-database-engine-from-scratch",
+          title: 'Building a Go Database Engine from Scratch',
+          description: "An educational ACID-oriented database engine with advanced features",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/go-database/";
+            },},{id: "projects-image-caption-generation-with-bert-context-vectors",
+          title: 'Image Caption Generation with BERT Context Vectors',
+          description: "Extended the &quot;Show, Attend, and Tell&quot; image captioning model with BERT to improve caption quality and reduce training time, achieving 36% improvement in CIDEr score and 43% improvement in BLEU-4.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/image-caption-generator/";
+            },},{id: "projects-patchsmith-a-harness-for-repair-agents",
+          title: 'PatchSmith: a harness for repair agents',
+          description: "System design and R&amp;D notes for bounded patches, sandbox validation, and auditable repair runs",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/patchsmith/";
+            },},{id: "projects-ray-tracing-from-scratch-a-comprehensive-guide-to-3d-rendering-physics-and-implementation",
+          title: 'Ray Tracing from Scratch: A Comprehensive Guide to 3D Rendering Physics and Implementation...',
+          description: "Implementing physically-based rendering with C++",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/ray-tracing/";
+            },},{id: "projects-an-empirical-study-on-remote-code-execution-in-machine-learning-model-hosting-ecosystems",
+          title: 'An Empirical Study on Remote Code Execution in Machine Learning Model Hosting Ecosystems...',
+          description: "A cross-platform study of model-loading risk across five ML hosting ecosystems, using static analysis, malware-signature scanning, and analysis of more than 600 developer discussions.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/research-ml-remote-code-execution/";
+            },},{id: "projects-verischema-verified-database-schema-generation",
+          title: 'VeriSchema: verified database-schema generation',
+          description: "How can specialized agents generate relational schemas from natural-language requirements while formal checks and targeted repair keep the result consistent?",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/research-multi-agent-db-schema/";
+            },},{id: "projects-the-choice-can-be-the-attack-auditing-aligned-backdoors-in-llm-agents",
+          title: 'The Choice Can Be the Attack: Auditing Aligned Backdoors in LLM Agents',
+          description: "Abstract-level summary of SHIFT, submitted to TACL 2026 on aligned backdoor attacks in LLM agents.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/research-reagent-plus-plus/";
+            },},{id: "projects-sentiment-analysis-of-anonymous-crisis-reports-in-bangladesh",
+          title: 'Sentiment Analysis of Anonymous Crisis Reports in Bangladesh',
+          description: "A multilingual analysis of anonymous, crowd-sourced reports from Bangladesh&#39;s 2024 national crisis.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/research-ureporter/";
+            },},{id: "projects-enhancing-tcp-fairness-tcp-vegas-implementation",
+          title: 'Enhancing TCP Fairness: TCP Vegas+ Implementation',
+          description: "A dual-mode solution for TCP Vegas fairness issues",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/tcp-vegas-plus/";
+            },},{
+        id: 'social-email',
+        title: 'email',
+        section: 'Socials',
+        handler: () => {
+          window.open("mailto:%74%61%6E%68%72%6F%6D%65%6C@%67%6D%61%69%6C.%63%6F%6D", "_blank");
+        },
+      },{
+        id: 'social-github',
+        title: 'GitHub',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://github.com/thromel", "_blank");
+        },
+      },{
+        id: 'social-scholar',
+        title: 'Google Scholar',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://scholar.google.com/citations?user=zHV4EU8AAAAJ", "_blank");
+        },
+      },{
+        id: 'social-linkedin',
+        title: 'LinkedIn',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://www.linkedin.com/in/thromel", "_blank");
+        },
+      },{
+        id: 'social-orcid',
+        title: 'ORCID',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://orcid.org/0009-0009-2432-8960", "_blank");
+        },
+      },{
+        id: 'social-rss',
+        title: 'RSS Feed',
+        section: 'Socials',
+        handler: () => {
+          window.open("/feed.xml", "_blank");
+        },
+      },{
+        id: 'social-x',
+        title: 'X',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://twitter.com/tanzimhromel", "_blank");
+        },
+      },{
+      id: 'light-theme',
+      title: 'Change theme to light',
+      description: 'Change the theme of the site to Light',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("light");
+      },
+    },
+    {
+      id: 'dark-theme',
+      title: 'Change theme to dark',
+      description: 'Change the theme of the site to Dark',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("dark");
+      },
+    },
+    {
+      id: 'system-theme',
+      title: 'Use system default theme',
+      description: 'Change the theme of the site to System Default',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("system");
+      },
+    },];
+
+</script> <script src="/assets/al_search/js/shortcut-key.js"></script> </body> </html>

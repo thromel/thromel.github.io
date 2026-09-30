@@ -1,0 +1,882 @@
+<!DOCTYPE html> <html lang="en"> <head> <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <title> Building a fast 1BRC solver in C# on Apple Silicon | Tanzim Hossain Romel </title> <meta name="author" content="Tanzim Hossain Romel"> <meta name="description" content="Academic and engineering portfolio of Tanzim Hossain Romel, focused on reliable AI agents, software engineering research, and developer tools."> <meta name="keywords" content=""> <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https:; style-src 'self' 'unsafe-inline' https:; img-src 'self' data: https:; font-src 'self' data: https:; media-src 'self' https:; frame-src 'self' https:; connect-src 'self' https:;"> <style>
+  :root {
+    --max-content-width: 930px;
+  }
+</style> <link rel="stylesheet" href="/assets/css/tailwind.css?v=50c64c15cbb9fd1ce6056fdb8bcb4b62"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.2.0/css/all.min.css" integrity="sha256-MVopmdyC2tYTiJ8wlktf0uh0v4NgT+vNdyVFepi7Q0c=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.5/css/academicons.min.css" integrity="sha256-SzrCOBJbGVFMahewkgjwnApaV2+av1DwMAA+/QGLyZw=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/scholar-icons@1.0.3/css/scholar-icons.css" integrity="sha256-VY3hHVj/hNX3fYG6wtbA6TcKJQl7+FthzGSyIB64klY=" crossorigin="anonymous"> <link defer rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons&amp;display=swap"> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-github.css?v=591dab5a4e56573bf4ef7fd332894c99" media="" id="highlight_theme_light"> <link rel="shortcut icon" href="data:image/svg+xml,&lt;svg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20100%20100%22&gt;&lt;text%20y=%22.9em%22%20font-size=%2290%22&gt;%E2%9A%9B%EF%B8%8F&lt;/text&gt;&lt;/svg&gt;"> <link rel="stylesheet" href="/assets/css/main.css?v=3116ba77db9ee1581d05bb3e86fbf7f1"> <link rel="canonical" href="https://tanzimhromel.com/blog/2026/building-fast-1brc-csharp-apple-silicon/"> <script src="/assets/js/theme.js?v=5286c3e4c334d0ecb8fc0c40ff4fa7ec"></script> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-native.css?v=5847e5ed4a4568527aa6cfab446049ca" media="none" id="highlight_theme_dark"> <script>
+    initTheme();
+  </script> </head> <body class="fixed-top-nav "> <header> <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top" role="navigation"> <div class="container"> <a class="navbar-brand title font-weight-lighter" href="/"> Tanzim Hossain Romel </a> <button class="navbar-toggler collapsed navbar-toggler-main" type="button" data-nav-toggle="navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar top-bar"></span> <span class="icon-bar middle-bar"></span> <span class="icon-bar bottom-bar"></span> </button> <div class="collapse navbar-collapse navbar-collapse-main" id="navbarNav"> <ul class="navbar-nav navbar-menu-list flex-nowrap"> <li class="nav-item "> <a class="nav-link" href="/">about </a> </li> <li class="nav-item active"> <a class="nav-link" href="/blog/">blog </a> </li> <li class="nav-item "> <a class="nav-link" href="/publications/">publications </a> </li> <li class="nav-item "> <a class="nav-link" href="/research/">research </a> </li> <li class="nav-item "> <a class="nav-link" href="/projects/">projects </a> </li> <li class="nav-item "> <a class="nav-link" href="/cv/">CV </a> </li> <li class="nav-item "> <a class="nav-link" href="/contributions/">contributions </a> </li> <li class="nav-item"> <button id="search-toggle" type="button" title="Search" aria-label="Open search"> <span class="nav-link">ctrl k <i class="fa-solid fa-magnifying-glass"></i></span> </button> </li> <li class="toggle-container"> <button id="light-toggle" type="button" title="Change theme" aria-label="Change color theme"> <i class="fa-half-sun-moon" id="light-toggle-system"></i> <i class="fa-solid fa-moon" id="light-toggle-dark"></i> <i class="fa-solid fa-sun" id="light-toggle-light"></i> </button> </li> </ul> </div> </div> </nav> <progress id="progress" value="0"> <div class="progress-container"> <span class="progress-bar"></span> </div> </progress> </header> <div class="container mt-5" role="main"> <div class="post"> <header class="post-header"> <h1 class="post-title">Building a fast 1BRC solver in C# on Apple Silicon</h1> <p class="post-meta"> Created on June 18, 2026 </p> <p class="post-tags"> <a href="/blog/2026"> <i class="fa-solid fa-calendar fa-sm"></i> 2026 </a>   ·   <a href="/blog/tag/csharp"> <i class="fa-solid fa-hashtag fa-sm"></i> csharp</a>   <a href="/blog/tag/dotnet"> <i class="fa-solid fa-hashtag fa-sm"></i> dotnet</a>   <a href="/blog/tag/nativeaot"> <i class="fa-solid fa-hashtag fa-sm"></i> nativeaot</a>   <a href="/blog/tag/1brc"> <i class="fa-solid fa-hashtag fa-sm"></i> 1brc</a>   <a href="/blog/tag/performance"> <i class="fa-solid fa-hashtag fa-sm"></i> performance</a>   <a href="/blog/tag/arm64"> <i class="fa-solid fa-hashtag fa-sm"></i> arm64</a>   <a href="/blog/tag/macos"> <i class="fa-solid fa-hashtag fa-sm"></i> macos</a>   ·   <a href="/blog/category/performance-engineering"> <i class="fa-solid fa-tag fa-sm"></i> performance-engineering</a>   <a href="/blog/category/dotnet"> <i class="fa-solid fa-tag fa-sm"></i> dotnet</a>   <a href="/blog/category/systems"> <i class="fa-solid fa-tag fa-sm"></i> systems</a> </p> </header> <article class="post-content"> <div id="markdown-content"> <p>This is a long write-up about building a C# solver for the One Billion Row Challenge on Apple Silicon. I am going to start from the boring version, explain why it falls apart, then rebuild the system one layer at a time.</p> <p>The final code is here: <a href="https://github.com/thromel/1brc-csharp" rel="external nofollow noopener" target="_blank">thromel/1brc-csharp</a>. The shorter case-study page is here: <a href="/projects/1brc-csharp/">1BRC C# on Apple Silicon</a>.</p> <p>The result is not a generic “make C# fast” story. It is more specific than that. It is about reading a 13 GiB text file, parsing one billion rows, aggregating station statistics, and finding out that the big win on my machine was not the parser trick I expected. It was changing the file input path.</p> <p>That surprise is the useful part.</p> <h2 id="reading-map">reading map</h2> <p>This article has two jobs. First, it teaches the system from the naive C# version up to the native table and parser. Second, it explains why the final promoted path is size-aware: <code class="language-plaintext highlighter-rouge">mmap</code> for smaller files, macOS <code class="language-plaintext highlighter-rouge">pread</code> for the full-size file on my machine.</p> <p>If you only want the result, read the case-study page. If you want to rebuild the design, read in this order:</p> <ol> <li>the challenge contract</li> <li>the naive implementation</li> <li>integer-tenth parsing</li> <li>byte keys and native tables</li> <li>line-aligned parallel ranges</li> <li>the <code class="language-plaintext highlighter-rouge">mmap</code> versus <code class="language-plaintext highlighter-rouge">pread</code> evidence</li> <li>rejected experiments</li> <li>porting notes</li> </ol> <h2 id="what-1brc-asks-you-to-do">what 1BRC asks you to do</h2> <p>The input is a text file. Each line has a station name, a semicolon, and a temperature with one decimal digit:</p> <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Hamburg;12.0
+Dhaka;32.4
+Edmonton;-18.7
+</code></pre></div></div> <p>The output is one record per station:</p> <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{Dhaka=32.4/32.4/32.4, Edmonton=-18.7/-18.7/-18.7, Hamburg=12.0/12.0/12.0}
+</code></pre></div></div> <p>For every station, we need:</p> <ul> <li>the minimum temperature</li> <li>the mean temperature</li> <li>the maximum temperature</li> </ul> <p>Then we sort stations by name.</p> <p>The constraints make the problem interesting:</p> <ul> <li>station names are UTF-8</li> <li>station names can be 1 to 100 bytes</li> <li>there can be up to 10,000 unique stations</li> <li>there are one billion rows in the full challenge</li> <li>the result must be exact</li> </ul> <p>The input format looks friendly. It is not friendly at this size.</p> <h2 id="how-i-measured">how I measured</h2> <p>The benchmark protocol mattered as much as the code. Every serious candidate had to pass correctness first, then output parity on generated data, then paired timing runs. I did not treat one good run as evidence.</p> <p>The gates were:</p> <table> <thead> <tr> <th>Gate</th> <th>Purpose</th> </tr> </thead> <tbody> <tr> <td>Official fixtures</td> <td>Catch formatting, parsing, rounding, and edge-case regressions.</td> </tr> <tr> <td>Generated parity</td> <td>Compare candidate output byte-for-byte against the current solver on canonical and high-cardinality generated files.</td> </tr> <tr> <td>Bounded timing</td> <td>Use 100M canonical and 10M high-cardinality data to reject parser/table changes quickly.</td> </tr> <tr> <td>Full 1B timing</td> <td>Promote I/O and scheduler decisions only after the full 13 GiB file agrees.</td> </tr> </tbody> </table> <p>That distinction is important. The <code class="language-plaintext highlighter-rouge">pread</code> path lost the bounded 100M lane and still won the full 1B lane. If I had collapsed those into one benchmark, I would have made the wrong default.</p> <h2 id="the-final-pipeline-before-we-build-it">the final pipeline, before we build it</h2> <p>Here is the shape we are walking toward:</p> <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>input file
+  -&gt; runtime policy chooses mmap or pread
+  -&gt; line-aligned worker ranges
+  -&gt; byte parser
+  -&gt; per-worker native station table
+  -&gt; merge partial tables
+  -&gt; decode station names once
+  -&gt; sort and format output
+</code></pre></div></div> <p>Most of the code exists to protect that shape. The parser does not own file I/O. The table does not know which input strategy supplied the bytes. The formatter does not run until aggregation is finished. Those boundaries are what made it possible to swap the full-size input path without rewriting the whole solver.</p> <h2 id="the-version-everyone-writes-first">the version everyone writes first</h2> <p>The natural C# version is easy to write:</p> <div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">readonly</span> <span class="k">record</span> <span class="nc">struct</span> <span class="nf">Aggregate</span><span class="p">(</span><span class="kt">int</span> <span class="n">Min</span><span class="p">,</span> <span class="kt">int</span> <span class="n">Max</span><span class="p">,</span> <span class="kt">long</span> <span class="n">Sum</span><span class="p">,</span> <span class="kt">int</span> <span class="n">Count</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="n">Aggregate</span> <span class="nf">Add</span><span class="p">(</span><span class="kt">int</span> <span class="k">value</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nf">Aggregate</span><span class="p">(</span>
+            <span class="n">Math</span><span class="p">.</span><span class="nf">Min</span><span class="p">(</span><span class="n">Min</span><span class="p">,</span> <span class="k">value</span><span class="p">),</span>
+            <span class="n">Math</span><span class="p">.</span><span class="nf">Max</span><span class="p">(</span><span class="n">Max</span><span class="p">,</span> <span class="k">value</span><span class="p">),</span>
+            <span class="n">Sum</span> <span class="p">+</span> <span class="k">value</span><span class="p">,</span>
+            <span class="n">Count</span> <span class="p">+</span> <span class="m">1</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">var</span> <span class="n">table</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Dictionary</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="n">Aggregate</span><span class="p">&gt;(</span><span class="n">StringComparer</span><span class="p">.</span><span class="n">Ordinal</span><span class="p">);</span>
+
+<span class="k">foreach</span> <span class="p">(</span><span class="kt">var</span> <span class="n">line</span> <span class="k">in</span> <span class="n">File</span><span class="p">.</span><span class="nf">ReadLines</span><span class="p">(</span><span class="s">"measurements.txt"</span><span class="p">))</span>
+<span class="p">{</span>
+    <span class="kt">var</span> <span class="n">separator</span> <span class="p">=</span> <span class="n">line</span><span class="p">.</span><span class="nf">IndexOf</span><span class="p">(</span><span class="sc">';'</span><span class="p">);</span>
+    <span class="kt">var</span> <span class="n">station</span> <span class="p">=</span> <span class="n">line</span><span class="p">[..</span><span class="n">separator</span><span class="p">];</span>
+    <span class="kt">var</span> <span class="n">temperature</span> <span class="p">=</span> <span class="kt">decimal</span><span class="p">.</span><span class="nf">Parse</span><span class="p">(</span><span class="n">line</span><span class="p">[(</span><span class="n">separator</span> <span class="p">+</span> <span class="m">1</span><span class="p">)..],</span> <span class="n">CultureInfo</span><span class="p">.</span><span class="n">InvariantCulture</span><span class="p">);</span>
+    <span class="kt">var</span> <span class="n">tenths</span> <span class="p">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)(</span><span class="n">temperature</span> <span class="p">*</span> <span class="m">10</span><span class="p">);</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">table</span><span class="p">.</span><span class="nf">TryGetValue</span><span class="p">(</span><span class="n">station</span><span class="p">,</span> <span class="k">out</span> <span class="kt">var</span> <span class="n">aggregate</span><span class="p">))</span>
+    <span class="p">{</span>
+        <span class="n">table</span><span class="p">[</span><span class="n">station</span><span class="p">]</span> <span class="p">=</span> <span class="n">aggregate</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="n">tenths</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">else</span>
+    <span class="p">{</span>
+        <span class="n">table</span><span class="p">[</span><span class="n">station</span><span class="p">]</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Aggregate</span><span class="p">(</span><span class="n">tenths</span><span class="p">,</span> <span class="n">tenths</span><span class="p">,</span> <span class="n">tenths</span><span class="p">,</span> <span class="m">1</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div> <p>This is a good teaching implementation. It makes the algorithm obvious:</p> <ol> <li>read a line</li> <li>split station and temperature</li> <li>parse the temperature</li> <li>update a dictionary</li> <li>sort at the end</li> </ol> <p>It is also a performance disaster for the full challenge.</p> <p>Each row creates or touches managed strings. <code class="language-plaintext highlighter-rouge">decimal.Parse</code> is a general-purpose parser. <code class="language-plaintext highlighter-rouge">File.ReadLines</code> decodes text before we know whether we need text. The dictionary is good software engineering for normal data sizes, but here it sits directly in the hottest loop. One billion rows turns every small convenience into a bill.</p> <p>The first lesson is simple: the file is not text yet. It is bytes. We should only turn bytes into strings when we actually need strings.</p> <h2 id="the-data-model-use-integer-tenths">the data model: use integer tenths</h2> <p>Temperatures have one decimal digit. That means we do not need floating point while parsing.</p> <p>Use integer tenths:</p> <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>12.3  -&gt;  123
+-5.0  -&gt;  -50
+0.0   -&gt;  0
+</code></pre></div></div> <p>The aggregate can be plain integers:</p> <div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">internal</span> <span class="k">struct</span> <span class="nc">StationAggregate</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="kt">int</span> <span class="n">Min</span><span class="p">;</span>
+    <span class="k">public</span> <span class="kt">int</span> <span class="n">Max</span><span class="p">;</span>
+    <span class="k">public</span> <span class="kt">long</span> <span class="n">Sum</span><span class="p">;</span>
+    <span class="k">public</span> <span class="kt">int</span> <span class="n">Count</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">void</span> <span class="nf">Add</span><span class="p">(</span><span class="kt">int</span> <span class="n">temperature</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">temperature</span> <span class="p">&lt;</span> <span class="n">Min</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">Min</span> <span class="p">=</span> <span class="n">temperature</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">temperature</span> <span class="p">&gt;</span> <span class="n">Max</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">Max</span> <span class="p">=</span> <span class="n">temperature</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="n">Sum</span> <span class="p">+=</span> <span class="n">temperature</span><span class="p">;</span>
+        <span class="n">Count</span><span class="p">++;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div> <p>The mean is computed only at the end:</p> <div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">static</span> <span class="kt">int</span> <span class="nf">RoundMean</span><span class="p">(</span><span class="kt">long</span> <span class="n">sum</span><span class="p">,</span> <span class="kt">int</span> <span class="n">count</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">Math</span><span class="p">.</span><span class="nf">Floor</span><span class="p">((</span><span class="n">sum</span> <span class="p">/</span> <span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">count</span><span class="p">)</span> <span class="p">+</span> <span class="m">0.5</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div> <p>The current code formats carefully to match the challenge’s expected one-decimal output, but the design idea is this: keep parser math cheap and exact enough for the contract.</p> <h2 id="parsing-temperature-by-shape">parsing temperature by shape</h2> <p>A 1BRC temperature has only a few shapes:</p> <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1.2
+12.3
+-1.2
+-12.3
+</code></pre></div></div> <p>So a parser does not need culture, decimal types, exponent handling, whitespace rules, or thousands separators. It can read bytes and assemble an integer.</p> <p>A readable version looks like this:</p> <div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">static</span> <span class="k">unsafe</span> <span class="kt">int</span> <span class="nf">ParseTemperature</span><span class="p">(</span><span class="kt">byte</span><span class="p">*</span> <span class="n">p</span><span class="p">,</span> <span class="k">out</span> <span class="kt">int</span> <span class="n">bytesConsumed</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">var</span> <span class="n">sign</span> <span class="p">=</span> <span class="m">1</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(*</span><span class="n">p</span> <span class="p">==</span> <span class="p">(</span><span class="kt">byte</span><span class="p">)</span><span class="sc">'-'</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">sign</span> <span class="p">=</span> <span class="p">-</span><span class="m">1</span><span class="p">;</span>
+        <span class="n">p</span><span class="p">++;</span>
+        <span class="n">bytesConsumed</span> <span class="p">=</span> <span class="m">1</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">else</span>
+    <span class="p">{</span>
+        <span class="n">bytesConsumed</span> <span class="p">=</span> <span class="m">0</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kt">var</span> <span class="k">value</span> <span class="p">=</span> <span class="p">*</span><span class="n">p</span> <span class="p">-</span> <span class="p">(</span><span class="kt">byte</span><span class="p">)</span><span class="sc">'0'</span><span class="p">;</span>
+    <span class="n">p</span><span class="p">++;</span>
+    <span class="n">bytesConsumed</span><span class="p">++;</span>
+
+    <span class="k">if</span> <span class="p">(*</span><span class="n">p</span> <span class="p">!=</span> <span class="p">(</span><span class="kt">byte</span><span class="p">)</span><span class="sc">'.'</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">value</span> <span class="p">=</span> <span class="p">(</span><span class="k">value</span> <span class="p">*</span> <span class="m">10</span><span class="p">)</span> <span class="p">+</span> <span class="p">(*</span><span class="n">p</span> <span class="p">-</span> <span class="p">(</span><span class="kt">byte</span><span class="p">)</span><span class="sc">'0'</span><span class="p">);</span>
+        <span class="n">p</span><span class="p">++;</span>
+        <span class="n">bytesConsumed</span><span class="p">++;</span>
+    <span class="p">}</span>
+
+    <span class="n">p</span><span class="p">++;</span>
+    <span class="n">bytesConsumed</span><span class="p">++;</span>
+
+    <span class="k">value</span> <span class="p">=</span> <span class="p">(</span><span class="k">value</span> <span class="p">*</span> <span class="m">10</span><span class="p">)</span> <span class="p">+</span> <span class="p">(*</span><span class="n">p</span> <span class="p">-</span> <span class="p">(</span><span class="kt">byte</span><span class="p">)</span><span class="sc">'0'</span><span class="p">);</span>
+    <span class="n">bytesConsumed</span><span class="p">++;</span>
+
+    <span class="k">return</span> <span class="n">sign</span> <span class="p">*</span> <span class="k">value</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div> <p>The current parser is tighter because it can often read a word and use byte arithmetic, but the point is the same. The input grammar is tiny. Parse that grammar, not every number humans have ever written.</p> <h2 id="station-names-do-not-decode-in-the-hot-path">station names: do not decode in the hot path</h2> <p>Station names are UTF-8. Sorting the final output needs strings, but aggregation does not.</p> <p>During parsing, station names can stay as byte slices:</p> <div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">internal</span> <span class="k">readonly</span> <span class="k">unsafe</span> <span class="k">struct</span> <span class="nc">StationNameSlice</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="nf">StationNameSlice</span><span class="p">(</span><span class="kt">byte</span><span class="p">*</span> <span class="n">pointer</span><span class="p">,</span> <span class="kt">int</span> <span class="n">length</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">Pointer</span> <span class="p">=</span> <span class="n">pointer</span><span class="p">;</span>
+        <span class="n">Length</span> <span class="p">=</span> <span class="n">length</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="kt">byte</span><span class="p">*</span> <span class="n">Pointer</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="p">}</span>
+
+    <span class="k">public</span> <span class="kt">int</span> <span class="n">Length</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div> <p>With a memory-mapped file, the input bytes stay alive while we parse and merge. A table entry can point directly into the mapped file:</p> <div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">entry</span><span class="p">.</span><span class="n">NamePointer</span> <span class="p">=</span> <span class="n">nameStart</span><span class="p">;</span>
+<span class="n">entry</span><span class="p">.</span><span class="n">NameLength</span> <span class="p">=</span> <span class="n">nameLength</span><span class="p">;</span>
+</code></pre></div></div> <p>That is not safe for every input strategy. It is safe for mmap because the mapping owns the bytes. It is not safe for a reusable read buffer, because the next read overwrites the buffer. This difference becomes important later.</p> <h2 id="finding-the-semicolon">finding the semicolon</h2> <p>Every row has a semicolon. Finding it is row framing.</p> <p>The simplest byte parser does this:</p> <div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">static</span> <span class="k">unsafe</span> <span class="kt">int</span> <span class="nf">FindSemicolon</span><span class="p">(</span><span class="kt">byte</span><span class="p">*</span> <span class="n">start</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">var</span> <span class="n">p</span> <span class="p">=</span> <span class="n">start</span><span class="p">;</span>
+    <span class="k">while</span> <span class="p">(*</span><span class="n">p</span> <span class="p">!=</span> <span class="p">(</span><span class="kt">byte</span><span class="p">)</span><span class="sc">';'</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">p</span><span class="p">++;</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="p">(</span><span class="kt">int</span><span class="p">)(</span><span class="n">p</span> <span class="p">-</span> <span class="n">start</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div> <p>That works, but it checks one byte at a time. Station names are often short, so this is not terrible. Still, it is hot enough to matter.</p> <p>A common trick is to read eight bytes at a time and detect whether any byte equals <code class="language-plaintext highlighter-rouge">;</code>.</p> <div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">static</span> <span class="k">unsafe</span> <span class="kt">int</span> <span class="nf">FindSemicolonInWord</span><span class="p">(</span><span class="kt">byte</span><span class="p">*</span> <span class="n">start</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">const</span> <span class="kt">ulong</span> <span class="n">SemicolonBytes</span> <span class="p">=</span> <span class="m">0x3B3B3B3B3B3B3B3BU</span><span class="n">L</span><span class="p">;</span>
+    <span class="k">const</span> <span class="kt">ulong</span> <span class="n">LowBits</span> <span class="p">=</span> <span class="m">0x0101010101010101U</span><span class="n">L</span><span class="p">;</span>
+    <span class="k">const</span> <span class="kt">ulong</span> <span class="n">HighBits</span> <span class="p">=</span> <span class="m">0x8080808080808080U</span><span class="n">L</span><span class="p">;</span>
+
+    <span class="kt">var</span> <span class="n">word</span> <span class="p">=</span> <span class="n">Unsafe</span><span class="p">.</span><span class="n">ReadUnaligned</span><span class="p">&lt;</span><span class="kt">ulong</span><span class="p">&gt;(</span><span class="n">start</span><span class="p">);</span>
+    <span class="kt">var</span> <span class="n">comparison</span> <span class="p">=</span> <span class="n">word</span> <span class="p">^</span> <span class="n">SemicolonBytes</span><span class="p">;</span>
+    <span class="kt">var</span> <span class="n">mask</span> <span class="p">=</span> <span class="p">(</span><span class="n">comparison</span> <span class="p">-</span> <span class="n">LowBits</span><span class="p">)</span> <span class="p">&amp;</span> <span class="p">~</span><span class="n">comparison</span> <span class="p">&amp;</span> <span class="n">HighBits</span><span class="p">;</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">mask</span> <span class="p">==</span> <span class="m">0</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="p">-</span><span class="m">1</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">BitOperations</span><span class="p">.</span><span class="nf">TrailingZeroCount</span><span class="p">(</span><span class="n">mask</span><span class="p">)</span> <span class="p">&gt;&gt;</span> <span class="m">3</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div> <p>The trick works because after XOR, bytes equal to <code class="language-plaintext highlighter-rouge">;</code> become zero bytes. The <code class="language-plaintext highlighter-rouge">(x - lowBits) &amp; ~x &amp; highBits</code> expression marks zero bytes. Then <code class="language-plaintext highlighter-rouge">TrailingZeroCount</code> tells us the first matching byte.</p> <p>The promoted parser checks the first few words inline, then sends uncommon long names to a no-inline tail helper. That shape matters because code size matters. The hot path should stay hot.</p> <h2 id="building-a-station-key">building a station key</h2> <p>A table lookup needs a hash and a way to check identity.</p> <p>One option is to hash the entire station name every time. That is correct, but it repeats work for long names. In this solver, the key uses:</p> <ul> <li>station-name length</li> <li>first 8 bytes</li> <li>last 8 bytes</li> <li>a hash derived from those fields</li> </ul> <p>The simplified version looks like this:</p> <div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">internal</span> <span class="k">readonly</span> <span class="k">unsafe</span> <span class="k">struct</span> <span class="nc">StationKey</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="nf">StationKey</span><span class="p">(</span><span class="kt">int</span> <span class="n">hash</span><span class="p">,</span> <span class="kt">ulong</span> <span class="n">first</span><span class="p">,</span> <span class="kt">ulong</span> <span class="n">last</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">Hash</span> <span class="p">=</span> <span class="n">hash</span><span class="p">;</span>
+        <span class="n">First</span> <span class="p">=</span> <span class="n">first</span><span class="p">;</span>
+        <span class="n">Last</span> <span class="p">=</span> <span class="n">last</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="kt">int</span> <span class="n">Hash</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="p">}</span>
+    <span class="k">public</span> <span class="kt">ulong</span> <span class="n">First</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="p">}</span>
+    <span class="k">public</span> <span class="kt">ulong</span> <span class="n">Last</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">static</span> <span class="n">StationKey</span> <span class="nf">Create</span><span class="p">(</span><span class="kt">byte</span><span class="p">*</span> <span class="n">name</span><span class="p">,</span> <span class="kt">int</span> <span class="n">length</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="kt">var</span> <span class="n">first</span> <span class="p">=</span> <span class="nf">ReadUpToEightBytes</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">length</span><span class="p">);</span>
+        <span class="kt">var</span> <span class="n">last</span> <span class="p">=</span> <span class="n">length</span> <span class="p">&gt;=</span> <span class="m">8</span>
+            <span class="p">?</span> <span class="n">Unsafe</span><span class="p">.</span><span class="n">ReadUnaligned</span><span class="p">&lt;</span><span class="kt">ulong</span><span class="p">&gt;(</span><span class="n">name</span> <span class="p">+</span> <span class="n">length</span> <span class="p">-</span> <span class="m">8</span><span class="p">)</span>
+            <span class="p">:</span> <span class="n">first</span><span class="p">;</span>
+
+        <span class="kt">var</span> <span class="n">mixed</span> <span class="p">=</span> <span class="n">first</span> <span class="p">^</span> <span class="n">BitOperations</span><span class="p">.</span><span class="nf">RotateLeft</span><span class="p">(</span><span class="n">last</span><span class="p">,</span> <span class="m">42</span><span class="p">)</span> <span class="p">^</span> <span class="p">(</span><span class="kt">uint</span><span class="p">)</span><span class="n">length</span><span class="p">;</span>
+        <span class="n">mixed</span> <span class="p">^=</span> <span class="n">mixed</span> <span class="p">&gt;&gt;</span> <span class="m">32</span><span class="p">;</span>
+
+        <span class="k">return</span> <span class="k">new</span> <span class="nf">StationKey</span><span class="p">((</span><span class="kt">int</span><span class="p">)</span><span class="n">mixed</span><span class="p">,</span> <span class="n">first</span><span class="p">,</span> <span class="n">last</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div> <p>On ARM64, the current code uses hardware CRC32C when available:</p> <div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="p">(</span><span class="n">Crc32</span><span class="p">.</span><span class="n">Arm64</span><span class="p">.</span><span class="n">IsSupported</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">hash</span> <span class="p">=</span> <span class="n">Crc32</span><span class="p">.</span><span class="n">Arm64</span><span class="p">.</span><span class="nf">ComputeCrc32C</span><span class="p">((</span><span class="kt">uint</span><span class="p">)</span><span class="n">length</span><span class="p">,</span> <span class="n">first</span><span class="p">);</span>
+    <span class="n">hash</span> <span class="p">=</span> <span class="n">Crc32</span><span class="p">.</span><span class="n">Arm64</span><span class="p">.</span><span class="nf">ComputeCrc32C</span><span class="p">(</span><span class="n">hash</span><span class="p">,</span> <span class="n">last</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div> <p>This is a hash, not a proof of equality. The table still checks the actual identity:</p> <div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">entry</span><span class="p">.</span><span class="n">NameLength</span> <span class="p">==</span> <span class="n">nameLength</span> <span class="p">&amp;&amp;</span>
+<span class="n">entry</span><span class="p">.</span><span class="n">First</span> <span class="p">==</span> <span class="n">key</span><span class="p">.</span><span class="n">First</span> <span class="p">&amp;&amp;</span>
+<span class="n">entry</span><span class="p">.</span><span class="n">Last</span> <span class="p">==</span> <span class="n">key</span><span class="p">.</span><span class="n">Last</span> <span class="p">&amp;&amp;</span>
+<span class="p">(</span><span class="n">nameLength</span> <span class="p">&lt;=</span> <span class="m">16</span> <span class="p">||</span>
+ <span class="k">new</span> <span class="n">ReadOnlySpan</span><span class="p">&lt;</span><span class="kt">byte</span><span class="p">&gt;(</span><span class="n">name</span><span class="p">,</span> <span class="n">nameLength</span><span class="p">)</span>
+     <span class="p">.</span><span class="nf">SequenceEqual</span><span class="p">(</span><span class="k">new</span> <span class="n">ReadOnlySpan</span><span class="p">&lt;</span><span class="kt">byte</span><span class="p">&gt;(</span><span class="n">entry</span><span class="p">.</span><span class="n">NamePointer</span><span class="p">,</span> <span class="n">nameLength</span><span class="p">)))</span>
+</code></pre></div></div> <p>That last full comparison is only needed for names longer than 16 bytes after the cheap checks match. It protects correctness without making every row pay the full price.</p> <h2 id="building-the-table">building the table</h2> <p>The original challenge caps unique stations at 10,000. That lets us use a fixed table. The current table uses 32,768 buckets, so the load factor stays comfortable.</p> <p>A simplified open-addressing update looks like this:</p> <div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">unsafe</span> <span class="k">void</span> <span class="nf">AddOrUpdate</span><span class="p">(</span><span class="kt">byte</span><span class="p">*</span> <span class="n">name</span><span class="p">,</span> <span class="kt">int</span> <span class="n">nameLength</span><span class="p">,</span> <span class="n">StationKey</span> <span class="n">key</span><span class="p">,</span> <span class="kt">int</span> <span class="n">temperature</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">var</span> <span class="n">index</span> <span class="p">=</span> <span class="n">key</span><span class="p">.</span><span class="n">Hash</span> <span class="p">&amp;</span> <span class="n">CapacityMask</span><span class="p">;</span>
+
+    <span class="k">while</span> <span class="p">(</span><span class="k">true</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">ref</span> <span class="kt">var</span> <span class="n">entry</span> <span class="p">=</span> <span class="k">ref</span> <span class="n">_entries</span><span class="p">[</span><span class="n">index</span><span class="p">];</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">entry</span><span class="p">.</span><span class="n">NameLength</span> <span class="p">==</span> <span class="m">0</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">entry</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">StationEntry</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">nameLength</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">temperature</span><span class="p">);</span>
+            <span class="k">return</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">entry</span><span class="p">.</span><span class="nf">Matches</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">nameLength</span><span class="p">,</span> <span class="n">key</span><span class="p">))</span>
+        <span class="p">{</span>
+            <span class="n">entry</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="n">temperature</span><span class="p">);</span>
+            <span class="k">return</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="n">index</span> <span class="p">=</span> <span class="p">(</span><span class="n">index</span> <span class="p">+</span> <span class="m">1</span><span class="p">)</span> <span class="p">&amp;</span> <span class="n">CapacityMask</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div> <p>There are no locks here. Each worker has its own table. That is the real concurrency design.</p> <p>Shared mutable state in a one-billion-row hot loop is expensive. Per-worker state is simpler and faster:</p> <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>worker 0 -&gt; table 0
+worker 1 -&gt; table 1
+worker 2 -&gt; table 2
+...
+merge after workers finish
+</code></pre></div></div> <p>Merging is cheap compared with parsing one billion rows because there are only thousands of stations per worker, not hundreds of millions of rows.</p> <h2 id="step-one-architecture-mmap-plus-line-aligned-ranges">step one architecture: mmap plus line-aligned ranges</h2> <p>The first serious architecture was:</p> <ol> <li>memory-map the file</li> <li>split the byte range into worker ranges</li> <li>move each split point to the next newline</li> <li>parse each range on a fixed thread</li> <li>merge partial tables</li> <li>decode station names and format output</li> </ol> <p>The split has to respect line boundaries. If a worker starts in the middle of a station name, everything after it is wrong.</p> <p>The range partitioner is conceptually this:</p> <div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">static</span> <span class="k">unsafe</span> <span class="n">InputRange</span><span class="p">[]</span> <span class="nf">CreateRanges</span><span class="p">(</span><span class="kt">byte</span><span class="p">*</span> <span class="n">basePointer</span><span class="p">,</span> <span class="kt">long</span> <span class="n">length</span><span class="p">,</span> <span class="kt">int</span> <span class="n">workers</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">var</span> <span class="n">ranges</span> <span class="p">=</span> <span class="k">new</span> <span class="n">InputRange</span><span class="p">[</span><span class="n">workers</span><span class="p">];</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="kt">var</span> <span class="n">i</span> <span class="p">=</span> <span class="m">0</span><span class="p">;</span> <span class="n">i</span> <span class="p">&lt;</span> <span class="n">workers</span><span class="p">;</span> <span class="n">i</span><span class="p">++)</span>
+    <span class="p">{</span>
+        <span class="kt">var</span> <span class="n">rawStart</span> <span class="p">=</span> <span class="n">length</span> <span class="p">*</span> <span class="n">i</span> <span class="p">/</span> <span class="n">workers</span><span class="p">;</span>
+        <span class="kt">var</span> <span class="n">rawEnd</span> <span class="p">=</span> <span class="n">length</span> <span class="p">*</span> <span class="p">(</span><span class="n">i</span> <span class="p">+</span> <span class="m">1</span><span class="p">)</span> <span class="p">/</span> <span class="n">workers</span><span class="p">;</span>
+
+        <span class="kt">var</span> <span class="n">start</span> <span class="p">=</span> <span class="n">i</span> <span class="p">==</span> <span class="m">0</span>
+            <span class="p">?</span> <span class="m">0</span>
+            <span class="p">:</span> <span class="nf">MoveToNextLine</span><span class="p">(</span><span class="n">basePointer</span><span class="p">,</span> <span class="n">rawStart</span><span class="p">,</span> <span class="n">length</span><span class="p">);</span>
+
+        <span class="kt">var</span> <span class="n">end</span> <span class="p">=</span> <span class="n">i</span> <span class="p">==</span> <span class="n">workers</span> <span class="p">-</span> <span class="m">1</span>
+            <span class="p">?</span> <span class="n">length</span>
+            <span class="p">:</span> <span class="nf">MoveToNextLine</span><span class="p">(</span><span class="n">basePointer</span><span class="p">,</span> <span class="n">rawEnd</span><span class="p">,</span> <span class="n">length</span><span class="p">);</span>
+
+        <span class="n">ranges</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">InputRange</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">ranges</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div> <p><code class="language-plaintext highlighter-rouge">MoveToNextLine</code> is deliberately boring:</p> <div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">static</span> <span class="k">unsafe</span> <span class="kt">long</span> <span class="nf">MoveToNextLine</span><span class="p">(</span><span class="kt">byte</span><span class="p">*</span> <span class="n">basePointer</span><span class="p">,</span> <span class="kt">long</span> <span class="n">offset</span><span class="p">,</span> <span class="kt">long</span> <span class="n">length</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">offset</span> <span class="p">&lt;</span> <span class="n">length</span> <span class="p">&amp;&amp;</span> <span class="n">basePointer</span><span class="p">[</span><span class="n">offset</span><span class="p">]</span> <span class="p">!=</span> <span class="p">(</span><span class="kt">byte</span><span class="p">)</span><span class="sc">'\n'</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">offset</span><span class="p">++;</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">offset</span> <span class="p">&lt;</span> <span class="n">length</span> <span class="p">?</span> <span class="n">offset</span> <span class="p">+</span> <span class="m">1</span> <span class="p">:</span> <span class="n">length</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div> <p>This split happens once per worker. It does not need to be clever.</p> <h2 id="parsing-a-range">parsing a range</h2> <p>Inside each range, the parser walks bytes:</p> <div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">static</span> <span class="k">unsafe</span> <span class="k">void</span> <span class="nf">ParseRangeInto</span><span class="p">(</span><span class="n">StationTable</span> <span class="n">table</span><span class="p">,</span> <span class="kt">byte</span><span class="p">*</span> <span class="n">start</span><span class="p">,</span> <span class="kt">byte</span><span class="p">*</span> <span class="n">end</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">var</span> <span class="n">cursor</span> <span class="p">=</span> <span class="n">start</span><span class="p">;</span>
+
+    <span class="k">while</span> <span class="p">(</span><span class="n">cursor</span> <span class="p">&lt;</span> <span class="n">end</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="kt">var</span> <span class="n">nameStart</span> <span class="p">=</span> <span class="n">cursor</span><span class="p">;</span>
+        <span class="kt">var</span> <span class="n">nameLength</span> <span class="p">=</span> <span class="nf">FindSemicolon</span><span class="p">(</span><span class="n">nameStart</span><span class="p">,</span> <span class="n">end</span><span class="p">);</span>
+        <span class="n">cursor</span> <span class="p">+=</span> <span class="n">nameLength</span> <span class="p">+</span> <span class="m">1</span><span class="p">;</span>
+
+        <span class="kt">var</span> <span class="n">temperature</span> <span class="p">=</span> <span class="nf">ParseTemperature</span><span class="p">(</span><span class="k">ref</span> <span class="n">cursor</span><span class="p">,</span> <span class="n">end</span><span class="p">);</span>
+        <span class="kt">var</span> <span class="n">key</span> <span class="p">=</span> <span class="n">StationKey</span><span class="p">.</span><span class="nf">Create</span><span class="p">(</span><span class="n">nameStart</span><span class="p">,</span> <span class="n">nameLength</span><span class="p">);</span>
+
+        <span class="n">table</span><span class="p">.</span><span class="nf">AddOrUpdate</span><span class="p">(</span><span class="n">nameStart</span><span class="p">,</span> <span class="n">nameLength</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">temperature</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div> <p>The current version has two paths:</p> <ul> <li>a fast path when there are enough readable bytes left</li> <li>a bounded path near the end of a shard</li> </ul> <p>The fast path can safely do unaligned word reads because every 1BRC row is bounded by the station-name and temperature limits. Near the end of a range, the bounded path avoids reading beyond the range.</p> <p>This is one of the small details that keeps unsafe code honest. The fastest path should be allowed to assume what is true, but only where it is true.</p> <h2 id="why-multiple-cursors-helped">why multiple cursors helped</h2> <p>One worker parsing one row at a time creates a chain of dependencies:</p> <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>find semicolon -&gt; parse temperature -&gt; build key -&gt; table update -&gt; next row
+</code></pre></div></div> <p>Modern CPUs can do more work if independent operations are available. The current parser splits a worker range into thirds and walks three cursors:</p> <div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">var</span> <span class="n">cursor0</span> <span class="p">=</span> <span class="n">start</span><span class="p">;</span>
+<span class="kt">var</span> <span class="n">cursor1</span> <span class="p">=</span> <span class="n">split1</span><span class="p">;</span>
+<span class="kt">var</span> <span class="n">cursor2</span> <span class="p">=</span> <span class="n">split2</span><span class="p">;</span>
+
+<span class="k">while</span> <span class="p">(</span><span class="n">allCursorsHaveRoom</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="nf">ParseRowFast</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="k">ref</span> <span class="n">cursor0</span><span class="p">);</span>
+    <span class="nf">ParseRowFast</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="k">ref</span> <span class="n">cursor1</span><span class="p">);</span>
+    <span class="nf">ParseRowFast</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="k">ref</span> <span class="n">cursor2</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div> <p>This is not parallelism in the thread sense. It is instruction-level parallelism. While one row waits on a load or branch, the CPU may have useful work from another cursor.</p> <p>We tested variants. Four cursors added complexity without enough speed. Three survived. This is the pattern of the whole project: keep the idea only if measurement pays for it.</p> <h2 id="the-first-result-was-good-but-incomplete">the first result was good but incomplete</h2> <p>At this point the solver had the shape I expected:</p> <ul> <li>memory-mapped input</li> <li>fixed worker threads</li> <li>byte parser</li> <li>integer temperatures</li> <li>byte-key table</li> <li>final string formatting</li> <li>NativeAOT publish</li> </ul> <p>On bounded 100M-row runs, that was a strong direction. Parser and table changes showed up clearly. Most experiments could be accepted or rejected quickly.</p> <p>But the full 1B file changed the profile.</p> <p>Warm mmap runs on my machine were around 16 seconds. User time was not the whole story. System time was huge, and page faults dominated the shape. The parser was still important, but the full run was saying something else:</p> <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>the file input path is now the bottleneck candidate
+</code></pre></div></div> <p>That is where the project stopped being a parser exercise.</p> <h2 id="mmap-and-pread-in-plain-terms">mmap and pread in plain terms</h2> <p>With mmap, the operating system maps file pages into the process address space. The code reads memory addresses, and the OS brings pages in as needed.</p> <p>That is elegant. It also means page faults become part of the runtime story.</p> <p>With <code class="language-plaintext highlighter-rouge">pread</code>, the code explicitly asks the kernel to copy bytes from a file descriptor into a buffer at a given offset:</p> <div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">pread</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span> <span class="n">buffer</span><span class="p">,</span> <span class="n">byteCount</span><span class="p">,</span> <span class="n">offset</span><span class="p">)</span>
+</code></pre></div></div> <p>The program controls the chunking. The worker reads a chunk, parses complete rows, then reads the next chunk.</p> <p>Neither model is universally better. mmap was better for bounded 100M runs. <code class="language-plaintext highlighter-rouge">pread</code> was much better for full 1B on this macOS ARM64 machine.</p> <p>That is why the promoted solver does not pick one globally. It has a runtime policy:</p> <div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">static</span> <span class="n">InputStrategy</span> <span class="nf">SelectInputStrategy</span><span class="p">(</span><span class="kt">long</span> <span class="n">inputLength</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">var</span> <span class="n">configured</span> <span class="p">=</span> <span class="n">Environment</span><span class="p">.</span><span class="nf">GetEnvironmentVariable</span><span class="p">(</span><span class="s">"BRC_IO"</span><span class="p">);</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="kt">string</span><span class="p">.</span><span class="nf">Equals</span><span class="p">(</span><span class="n">configured</span><span class="p">,</span> <span class="s">"pread"</span><span class="p">,</span> <span class="n">StringComparison</span><span class="p">.</span><span class="n">OrdinalIgnoreCase</span><span class="p">))</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="n">InputStrategy</span><span class="p">.</span><span class="n">PRead</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="kt">string</span><span class="p">.</span><span class="nf">Equals</span><span class="p">(</span><span class="n">configured</span><span class="p">,</span> <span class="s">"mmap"</span><span class="p">,</span> <span class="n">StringComparison</span><span class="p">.</span><span class="n">OrdinalIgnoreCase</span><span class="p">))</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="n">InputStrategy</span><span class="p">.</span><span class="n">MemoryMapped</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">OperatingSystem</span><span class="p">.</span><span class="nf">IsMacOS</span><span class="p">()</span> <span class="p">&amp;&amp;</span> <span class="n">inputLength</span> <span class="p">&gt;=</span> <span class="m">8L</span> <span class="p">&lt;&lt;</span> <span class="m">30</span>
+        <span class="p">?</span> <span class="n">InputStrategy</span><span class="p">.</span><span class="n">PRead</span>
+        <span class="p">:</span> <span class="n">InputStrategy</span><span class="p">.</span><span class="n">MemoryMapped</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div> <p>The exact thresholds are local tuning. The design is the important part: make the strategy explicit, overridable, and easy to retune.</p> <h2 id="building-the-pread-path">building the pread path</h2> <p>The <code class="language-plaintext highlighter-rouge">pread</code> path keeps the same parser and table idea, but changes byte ownership.</p> <p>Each worker:</p> <ol> <li>owns a line-aligned file range</li> <li>allocates a reusable native buffer</li> <li>reads up to 16 MiB from its current offset</li> <li>finds the last complete line in the buffer</li> <li>parses only complete rows</li> <li>advances by the parsed byte count</li> <li>repeats until the range is done</li> </ol> <p>The loop is roughly:</p> <div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">var</span> <span class="n">offset</span> <span class="p">=</span> <span class="n">range</span><span class="p">.</span><span class="n">Start</span><span class="p">;</span>
+
+<span class="k">while</span> <span class="p">(</span><span class="n">offset</span> <span class="p">&lt;</span> <span class="n">range</span><span class="p">.</span><span class="n">End</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">var</span> <span class="n">requested</span> <span class="p">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">Math</span><span class="p">.</span><span class="nf">Min</span><span class="p">(</span><span class="n">ChunkBytes</span><span class="p">,</span> <span class="n">range</span><span class="p">.</span><span class="n">End</span> <span class="p">-</span> <span class="n">offset</span><span class="p">);</span>
+    <span class="kt">var</span> <span class="n">read</span> <span class="p">=</span> <span class="n">NativePRead</span><span class="p">.</span><span class="nf">ReadFull</span><span class="p">(</span><span class="n">fileDescriptor</span><span class="p">,</span> <span class="n">buffer</span><span class="p">,</span> <span class="n">requested</span><span class="p">,</span> <span class="n">offset</span><span class="p">);</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">read</span> <span class="p">==</span> <span class="m">0</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">break</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kt">var</span> <span class="n">parseLength</span> <span class="p">=</span> <span class="n">read</span><span class="p">;</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">offset</span> <span class="p">+</span> <span class="n">read</span> <span class="p">&lt;</span> <span class="n">range</span><span class="p">.</span><span class="n">End</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">parseLength</span> <span class="p">=</span> <span class="nf">FindLastLineEnd</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="n">read</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">parseLength</span> <span class="p">==</span> <span class="m">0</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="nf">InvalidDataException</span><span class="p">(</span><span class="s">"No complete row in chunk."</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="n">MeasurementParser</span><span class="p">.</span><span class="nf">ParseRangeInto</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="n">buffer</span><span class="p">,</span> <span class="n">buffer</span> <span class="p">+</span> <span class="n">parseLength</span><span class="p">);</span>
+    <span class="n">offset</span> <span class="p">+=</span> <span class="n">parseLength</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div> <p>The last-line scan matters. If we parse a partial row at the end of a chunk, the next chunk begins with the rest of that row and everything breaks. Instead, we parse up to the last newline and let the next read start at the unparsed row.</p> <p>The <code class="language-plaintext highlighter-rouge">ReadFull</code> wrapper handles short reads:</p> <div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">static</span> <span class="k">unsafe</span> <span class="kt">int</span> <span class="nf">ReadFull</span><span class="p">(</span><span class="kt">int</span> <span class="n">fd</span><span class="p">,</span> <span class="kt">byte</span><span class="p">*</span> <span class="n">buffer</span><span class="p">,</span> <span class="kt">int</span> <span class="n">byteCount</span><span class="p">,</span> <span class="kt">long</span> <span class="n">offset</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">var</span> <span class="n">total</span> <span class="p">=</span> <span class="m">0</span><span class="p">;</span>
+
+    <span class="k">while</span> <span class="p">(</span><span class="n">total</span> <span class="p">&lt;</span> <span class="n">byteCount</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="kt">var</span> <span class="n">read</span> <span class="p">=</span> <span class="nf">Read</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span> <span class="n">buffer</span> <span class="p">+</span> <span class="n">total</span><span class="p">,</span> <span class="n">byteCount</span> <span class="p">-</span> <span class="n">total</span><span class="p">,</span> <span class="n">offset</span> <span class="p">+</span> <span class="n">total</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">read</span> <span class="p">==</span> <span class="m">0</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="k">break</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="n">total</span> <span class="p">+=</span> <span class="n">read</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">total</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div> <p>This is not glamorous code. It is the code that made the full-size run fast.</p> <h2 id="name-ownership-changes-under-pread">name ownership changes under pread</h2> <p>mmap lets the table point into the input file:</p> <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>table entry -&gt; pointer into mapped file
+</code></pre></div></div> <p><code class="language-plaintext highlighter-rouge">pread</code> cannot do that because every worker reuses its chunk buffer:</p> <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>chunk buffer contains rows 0..N
+parse
+chunk buffer now contains rows N..M
+old station-name pointers are invalid
+</code></pre></div></div> <p>So the <code class="language-plaintext highlighter-rouge">pread</code> table copies station names when it first inserts them:</p> <div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">private</span> <span class="k">unsafe</span> <span class="kt">byte</span><span class="p">*</span> <span class="nf">StoreName</span><span class="p">(</span><span class="kt">byte</span><span class="p">*</span> <span class="n">name</span><span class="p">,</span> <span class="kt">int</span> <span class="n">nameLength</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(!</span><span class="n">_copyNames</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="n">name</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">_nameCursor</span> <span class="p">==</span> <span class="k">null</span> <span class="p">||</span> <span class="n">_nameEnd</span> <span class="p">-</span> <span class="n">_nameCursor</span> <span class="p">&lt;</span> <span class="n">nameLength</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nf">AllocateNameBlock</span><span class="p">(</span><span class="n">nameLength</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="kt">var</span> <span class="n">stored</span> <span class="p">=</span> <span class="n">_nameCursor</span><span class="p">;</span>
+    <span class="n">Buffer</span><span class="p">.</span><span class="nf">MemoryCopy</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">stored</span><span class="p">,</span> <span class="n">nameLength</span><span class="p">,</span> <span class="n">nameLength</span><span class="p">);</span>
+    <span class="n">_nameCursor</span> <span class="p">+=</span> <span class="n">nameLength</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">stored</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div> <p>This would be a bad design if it copied every row. It does not. It copies when a station is inserted into a worker table. With up to 10,000 stations, that is a tiny amount of copying compared with one billion rows.</p> <p>This is the kind of ownership distinction that makes unsafe code maintainable. The table has a <code class="language-plaintext highlighter-rouge">copyNames</code> mode. The parser does not need to know why.</p> <h2 id="full-size-result">full-size result</h2> <p>On my 10-core Apple Silicon machine, the full canonical 1B file was about 13 GiB. The important claim is narrow: paired warm runs on this machine showed the macOS <code class="language-plaintext highlighter-rouge">mmap</code> path spending heavily in VM/page-fault behavior, and the native <code class="language-plaintext highlighter-rouge">pread</code> path removed most of that cost.</p> <table> <thead> <tr> <th>Lane</th> <th>Evidence</th> </tr> </thead> <tbody> <tr> <td>Bounded 100M</td> <td> <code class="language-plaintext highlighter-rouge">pread</code> was still worse than <code class="language-plaintext highlighter-rouge">mmap</code>: <code class="language-plaintext highlighter-rouge">+0.033671s</code> median wall and <code class="language-plaintext highlighter-rouge">+0.135181s</code> median system time.</td> </tr> <tr> <td>First full 1B parity run</td> <td> <code class="language-plaintext highlighter-rouge">mmap</code>/<code class="language-plaintext highlighter-rouge">pread</code> wall: <code class="language-plaintext highlighter-rouge">16.227s</code>/<code class="language-plaintext highlighter-rouge">4.297s</code>; user: <code class="language-plaintext highlighter-rouge">13.198s</code>/<code class="language-plaintext highlighter-rouge">8.937s</code>; sys: <code class="language-plaintext highlighter-rouge">26.026s</code>/<code class="language-plaintext highlighter-rouge">3.902s</code>; major faults: <code class="language-plaintext highlighter-rouge">777206</code>/<code class="language-plaintext highlighter-rouge">76</code>.</td> </tr> <tr> <td>Five paired warm full 1B runs</td> <td> <code class="language-plaintext highlighter-rouge">pread</code> won <code class="language-plaintext highlighter-rouge">5/5</code>; candidate-minus-baseline medians were <code class="language-plaintext highlighter-rouge">-11.785s</code> wall, <code class="language-plaintext highlighter-rouge">-5.373s</code> user, <code class="language-plaintext highlighter-rouge">-26.445s</code> sys, and <code class="language-plaintext highlighter-rouge">-842044</code> major faults.</td> </tr> <tr> <td>Worker-count follow-up</td> <td>The full-size <code class="language-plaintext highlighter-rouge">pread</code> default moved to 8 workers after randomized pairs showed <code class="language-plaintext highlighter-rouge">4.08s</code> versus <code class="language-plaintext highlighter-rouge">4.18s</code> medians against the older 13-worker default.</td> </tr> </tbody> </table> <p>Wall time was not the only signal. System time and major-fault counts moved with it. That is what made the result convincing. If only one metric had moved, I would have treated it as suspect.</p> <p>The final default is size-aware. Smaller files use <code class="language-plaintext highlighter-rouge">mmap</code>; macOS files at least 8 GiB use <code class="language-plaintext highlighter-rouge">pread</code>. That is not a claim that <code class="language-plaintext highlighter-rouge">pread</code> is better everywhere. It is a claim that this full-size run, on this machine, exposed a different bottleneck from the bounded benchmarks.</p> <h2 id="experiments-that-looked-good-and-lost">experiments that looked good and lost</h2> <p>A large part of this project was rejecting good-looking ideas.</p> <h3 id="simd-temperature-parsing">SIMD temperature parsing</h3> <p>Temperature parsing looked like the obvious SIMD target. Temperatures are short and regular.</p> <p>The catch is their addresses:</p> <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>StationName;12.3
+VeryLongStationName;-4.5
+X;0.1
+</code></pre></div></div> <p>The temperature starts after a variable-length station name. Four rows give four unrelated temperature pointers. To vectorize them, we would have to gather bytes into lanes manually. On this path, that setup cost more than scalar parsing.</p> <p>The lesson: contiguous data vectorizes naturally. Scattered tiny fields often do not.</p> <h3 id="64-byte-simd-row-framing">64-byte SIMD row framing</h3> <p>Another idea was to scan 64-byte blocks and discover semicolon and newline masks together:</p> <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>load 64 bytes
+compare with ';'
+compare with '\n'
+extract masks
+walk complete rows inside the block
+</code></pre></div></div> <p>This kept hash, temperature parsing, and table updates scalar. It attacked row framing, not scattered temperature math.</p> <p>It still lost. Mask extraction and row bookkeeping cost more than the scalar delimiter path saved on this NativeAOT ARM64 build.</p> <p>The lesson: SIMD is not free. The setup and extraction path has to be cheaper than the scalar work it replaces.</p> <h3 id="station-front-cache">station front cache</h3> <p>A direct-mapped station cache sounds reasonable:</p> <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hash -&gt; last table bucket
+</code></pre></div></div> <p>If stations repeat, maybe we can skip the table probe.</p> <p>It lost because the table already averaged close to one probe on canonical data. The cache added another load and another equality check to almost every row.</p> <p>The lesson: do not optimize a bottleneck you have already mostly removed.</p> <h3 id="known-station-direct-path">known-station direct path</h3> <p>The canonical generator has a known station list. That invites a direct aggregate array:</p> <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>known station -&gt; direct slot
+unknown station -&gt; fallback table
+</code></pre></div></div> <p>I built a fallback-safe version. It passed correctness and matched output. It still lost. Exact known-name checks and separate aggregate handling cost more than the existing table lookup.</p> <p>The lesson: specializing for a benchmark can still be slower if the generic path is already cheap.</p> <h3 id="control-byte-metadata">control-byte metadata</h3> <p>SwissTable-style control bytes can reduce expensive equality checks. The candidate kept the same table but added a byte of hash metadata per bucket.</p> <p>It helped too little on high-cardinality data and hurt canonical data.</p> <p>The lesson: extra metadata is an extra memory access. It has to save enough downstream work to pay for itself.</p> <h3 id="dynamic-microshards">dynamic microshards</h3> <p>Dynamic scheduling can reduce tail imbalance. The candidate split full-size <code class="language-plaintext highlighter-rouge">pread</code> work into many microshards and had persistent workers pull ranges.</p> <p>The result was mixed. Some CPU counters improved, but full 1B wall time did not improve robustly enough. The simpler fixed-range scheduler stayed.</p> <p>The lesson: lower CPU time is not automatically lower wall time. The promotion criterion has to match the goal.</p> <h2 id="the-validation-loop">the validation loop</h2> <p>Every serious candidate went through this shape:</p> <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>official fixtures
+generated output parity
+paired timing
+promotion or rejection note
+</code></pre></div></div> <p>The official fixtures catch correctness mistakes:</p> <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./test.sh csharp
+</code></pre></div></div> <p>For I/O changes on macOS, both paths need coverage:</p> <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">BRC_IO</span><span class="o">=</span>mmap ./test.sh csharp
+<span class="nv">BRC_IO</span><span class="o">=</span>pread ./test.sh csharp
+</code></pre></div></div> <p>Generated files catch broader differences:</p> <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./calculate_average_csharp.sh measurements-100m.txt <span class="o">&gt;</span> baseline.out
+./calculate_average_csharp.sh measurements-100m.txt <span class="o">&gt;</span> candidate.out
+diff <span class="nt">-u</span> baseline.out candidate.out
+</code></pre></div></div> <p>Paired timing avoids comparing one lucky run against one unlucky run:</p> <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>baseline, candidate, baseline, candidate, ...
+</code></pre></div></div> <p>For parser changes, bounded 100M and high-cardinality 10M data were good kill gates. For I/O changes, full 1B was required because the hypothesis was specifically about the full-size mmap fault cost.</p> <p>The benchmark must match the claim.</p> <h2 id="how-to-build-this-system-from-scratch">how to build this system from scratch</h2> <p>If I were teaching someone to build this solver, I would do it in this order.</p> <h3 id="stage-1-write-the-obvious-version">stage 1: write the obvious version</h3> <p>Start with <code class="language-plaintext highlighter-rouge">File.ReadLines</code> and <code class="language-plaintext highlighter-rouge">Dictionary&lt;string, Aggregate&gt;</code>.</p> <p>Do not optimize yet. Make the output correct. Learn the rounding rule. Run the official fixtures. This version is the reference you understand.</p> <h3 id="stage-2-switch-from-decimal-to-integer-tenths">stage 2: switch from decimal to integer tenths</h3> <p>Keep strings for now, but parse temperatures into integers:</p> <div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">static</span> <span class="kt">int</span> <span class="nf">ParseTenths</span><span class="p">(</span><span class="n">ReadOnlySpan</span><span class="p">&lt;</span><span class="kt">char</span><span class="p">&gt;</span> <span class="n">text</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">var</span> <span class="n">sign</span> <span class="p">=</span> <span class="m">1</span><span class="p">;</span>
+    <span class="kt">var</span> <span class="n">index</span> <span class="p">=</span> <span class="m">0</span><span class="p">;</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">text</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="p">==</span> <span class="sc">'-'</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">sign</span> <span class="p">=</span> <span class="p">-</span><span class="m">1</span><span class="p">;</span>
+        <span class="n">index</span><span class="p">++;</span>
+    <span class="p">}</span>
+
+    <span class="kt">var</span> <span class="n">whole</span> <span class="p">=</span> <span class="n">text</span><span class="p">[</span><span class="n">index</span><span class="p">++]</span> <span class="p">-</span> <span class="sc">'0'</span><span class="p">;</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">text</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="p">!=</span> <span class="sc">'.'</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">whole</span> <span class="p">=</span> <span class="p">(</span><span class="n">whole</span> <span class="p">*</span> <span class="m">10</span><span class="p">)</span> <span class="p">+</span> <span class="p">(</span><span class="n">text</span><span class="p">[</span><span class="n">index</span><span class="p">++]</span> <span class="p">-</span> <span class="sc">'0'</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="n">index</span><span class="p">++;</span>
+    <span class="kt">var</span> <span class="n">fraction</span> <span class="p">=</span> <span class="n">text</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="p">-</span> <span class="sc">'0'</span><span class="p">;</span>
+
+    <span class="k">return</span> <span class="n">sign</span> <span class="p">*</span> <span class="p">((</span><span class="n">whole</span> <span class="p">*</span> <span class="m">10</span><span class="p">)</span> <span class="p">+</span> <span class="n">fraction</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div> <p>This teaches the data shape without unsafe code.</p> <h3 id="stage-3-parse-bytes">stage 3: parse bytes</h3> <p>Move from lines to bytes. At first, use <code class="language-plaintext highlighter-rouge">ReadOnlySpan&lt;byte&gt;</code> and a single-threaded parser. Find <code class="language-plaintext highlighter-rouge">;</code>, parse temperature, and decode station names only when inserting into a dictionary.</p> <p>This stage shows how much text decoding costs.</p> <h3 id="stage-4-keep-station-names-as-byte-keys">stage 4: keep station names as byte keys</h3> <p>Replace <code class="language-plaintext highlighter-rouge">Dictionary&lt;string, Aggregate&gt;</code> with a table keyed by byte slices. Store first word, last word, length, and hash. Decode only at the end.</p> <p>This is the stage where the program stops being a normal text-processing script and becomes a systems program.</p> <h3 id="stage-5-split-by-line-boundaries">stage 5: split by line boundaries</h3> <p>Partition the file into ranges and parse in parallel. Give each worker a table. Merge after parsing.</p> <p>Do not share a dictionary across workers. That is the wrong fight.</p> <h3 id="stage-6-publish-nativeaot">stage 6: publish NativeAOT</h3> <p>NativeAOT mattered for this project because startup, code generation, and direct native execution all affect short warm runs. Use the published binary for timing; a JIT build answers a different question.</p> <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./publish_aot.sh
+./calculate_average_csharp.sh measurements.txt
+</code></pre></div></div> <h3 id="stage-7-profile-full-size-behavior">stage 7: profile full-size behavior</h3> <p>Do not assume the 100M profile predicts the 1B profile. It did not here.</p> <p>Look at:</p> <ul> <li>wall time</li> <li>user time</li> <li>system time</li> <li>page faults</li> <li>RSS</li> <li>per-worker balance</li> </ul> <p>When system time and faults dominate, parser changes are probably not the next big lever.</p> <h3 id="stage-8-add-an-explicit-io-strategy-boundary">stage 8: add an explicit I/O strategy boundary</h3> <p>Keep mmap and read-based paths behind a strategy selector. Do not scatter platform checks through the parser.</p> <div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">return</span> <span class="n">strategy</span> <span class="k">switch</span>
+<span class="p">{</span>
+    <span class="n">InputStrategy</span><span class="p">.</span><span class="n">MemoryMapped</span> <span class="p">=&gt;</span> <span class="n">MMapSolver</span><span class="p">.</span><span class="nf">Calculate</span><span class="p">(</span><span class="n">input</span><span class="p">),</span>
+    <span class="n">InputStrategy</span><span class="p">.</span><span class="n">PRead</span> <span class="p">=&gt;</span> <span class="n">PReadSolver</span><span class="p">.</span><span class="nf">Calculate</span><span class="p">(</span><span class="n">input</span><span class="p">),</span>
+    <span class="n">_</span> <span class="p">=&gt;</span> <span class="k">throw</span> <span class="k">new</span> <span class="nf">InvalidOperationException</span><span class="p">()</span>
+<span class="p">};</span>
+</code></pre></div></div> <p>This makes the system easier to port and easier to test.</p> <h2 id="porting-the-solver">porting the solver</h2> <p>I would not port this by changing random constants.</p> <p>On a new machine, I would first run the current code unchanged:</p> <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dotnet build OneBrc.CSharp/OneBrc.CSharp.csproj <span class="nt">-c</span> Release
+./test.sh csharp
+./publish_aot.sh
+</code></pre></div></div> <p>Then sweep worker counts:</p> <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">BRC_THREADS</span><span class="o">=</span>6 ./calculate_average_csharp.sh measurements.txt
+<span class="nv">BRC_THREADS</span><span class="o">=</span>8 ./calculate_average_csharp.sh measurements.txt
+<span class="nv">BRC_THREADS</span><span class="o">=</span>10 ./calculate_average_csharp.sh measurements.txt
+<span class="nv">BRC_THREADS</span><span class="o">=</span>12 ./calculate_average_csharp.sh measurements.txt
+</code></pre></div></div> <p>Then compare input strategies where available:</p> <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">BRC_IO</span><span class="o">=</span>mmap ./calculate_average_csharp.sh measurements.txt
+<span class="nv">BRC_IO</span><span class="o">=</span>pread ./calculate_average_csharp.sh measurements.txt
+</code></pre></div></div> <p>For Linux, I would add a Linux-specific read wrapper. For Windows, I would add a Windows-specific path. For x64 AVX2 or AVX-512, I would add a separate parser path rather than mixing those assumptions into the ARM64 parser.</p> <p>The boundaries are already there:</p> <ul> <li> <code class="language-plaintext highlighter-rouge">RuntimeOptions</code> for policy</li> <li> <code class="language-plaintext highlighter-rouge">NativePRead</code> for macOS native I/O</li> <li> <code class="language-plaintext highlighter-rouge">MeasurementParser</code> for row parsing</li> <li> <code class="language-plaintext highlighter-rouge">StationKey</code> for hash and identity shortcuts</li> <li> <code class="language-plaintext highlighter-rouge">StationTable</code> for storage and name ownership</li> </ul> <p>That is what maintainability means in this kind of code. Not removing unsafe code. Giving unsafe code a small address.</p> <h2 id="what-generalizes-and-what-does-not">what generalizes and what does not</h2> <p>The process generalizes better than the numbers.</p> <p>These parts are worth carrying to another implementation:</p> <ul> <li>validate output before timing</li> <li>parse the 1BRC grammar directly instead of using general-purpose text APIs</li> <li>keep temperatures as integer tenths</li> <li>avoid per-row string allocation</li> <li>split work on newline boundaries</li> <li>keep one aggregation table per worker and merge afterward</li> <li>write down rejected experiments</li> </ul> <p>These parts should be retuned:</p> <ul> <li>worker count</li> <li>input strategy</li> <li>chunk size</li> <li>table layout</li> <li>hash shortcuts</li> <li>SIMD choices</li> </ul> <p>The <code class="language-plaintext highlighter-rouge">pread</code> result especially should not be copied blindly. Linux, Windows, x64, different Apple Silicon generations, different storage, and different .NET builds can all move the bottleneck. The right port is not “use my constants.” The right port is “keep the boundaries, rerun the gates, and promote only what your machine proves.”</p> <h2 id="the-part-i-would-keep">the part I would keep</h2> <p>The specific numbers are local. The process is more durable.</p> <p>The project started as a parser exercise. It became an I/O exercise only after the full input proved that the mmap path was spending too much time in the kernel. If I had trusted only the 100M benchmark, I would have kept shaving cycles from the wrong place.</p> <p>That is the real lesson.</p> <p>Build the simple version. Make it correct. Replace abstractions only when you can explain the cost. Keep measurements paired. Write down failed ideas. Treat a different machine as a new experiment.</p> <p>Performance work rewards humility more than cleverness. The machine does not care which optimization looked best in your head. It only cares where the time actually went.</p> </div> </article> <br> <hr> <br> <h2 class="text-3xl font-semibold mb-4 mt-12">Enjoy Reading This Article?</h2> <p class="mb-2">Here are some more articles you might like to read next:</p> <ul class="list-disc pl-7 my-3 space-y-2 marker:text-[var(--global-theme-color)]"> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2025/memory-management-production-silent-killers/">Memory Management in Production: Avoiding the Silent Killers</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2025/vibe-coding/">Growing as a Software Engineer in the Age of LLMs and Vibe Coding</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2025/how-to-handle-hallucinations/">Taming the Imagination: A Comprehensive Guide to Handling Hallucinations and Implementing Guardrails in Agentic AI</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2025/intro-to-agentic-ai/">Building an Agentic AI Analytics Dashboard: A Deep Dive with LangChain, LangGraph, and Fine-tuned LLAMA</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2025/intro-to-nar/">Neural Algorithmic Reasoning: Teaching Neural Networks to Think Like Algorithms</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2025/opentelemetry/">OpenTelemetry in Microservices: How We Transformed Our Observability Strategy</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2025/leveraging-ai-tools-software-engineering/">Using AI Tools in Software Engineering and Research Workflows</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2024/optimizing-dotnet-microservices-performance/">The Performance Crisis: How We Rescued a .NET 8 Microservice from 10 Critical Bottlenecks</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2024/zero-downtime/">Zero Downtime Deployments in Kubernetes: How We Keep Our Services Running While We Ship</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2024/dotnet-tests/">Mastering Unit Testing and BDD with xUnit and SpecFlow in .NET 9: A Comprehensive Guide</a> </li> </ul> </div> </div> <footer class="fixed-bottom" role="contentinfo"> <div class="container mt-0"> © Copyright 2026 Tanzim Hossain Romel. © Tanzim Hossain Romel. Powered by <a href="https://jekyllrb.com/" target="_blank" rel="external nofollow noopener">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio" rel="external nofollow noopener" target="_blank">al-folio</a> theme. </div> </footer> <script>
+  window.alFolio = {
+    compatBootstrap: false
+  };
+</script> <script src="/assets/js/nav-toggle.js?v=141bd79a73ebc0f0b6ea58e440ae79fc"></script> <script defer src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script> <script defer src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script> <script defer src="/assets/js/masonry.js?v=e49affc7bd2646f6acdad1dbe02c2359" type="text/javascript"></script> <script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js" integrity="sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI=" crossorigin="anonymous"></script> <script src="/assets/al_math/js/mathjax-setup.js"></script> <script src="/assets/js/tooltips-setup.js?v=fe487e99db6c43751e6e7bdb2d6a0611"></script> <script src="/assets/js/no_defer.js?v=53b1b1a645525975c963ce8bf8bfefcf"></script> <script defer src="/assets/js/common.js?v=87baac90f765f2f3362dcf6aaf312a8a"></script> <script defer src="/assets/js/copy_code.js?v=c8a01c11a92744d44b093fc3bda915df" type="text/javascript"></script> <script defer src="/assets/js/jupyter_new_tab.js?v=896d254890d9b47f0281f63bfccf0dee"></script> <script async src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script> <script async src="https://badge.dimensions.ai/badge.js"></script> <script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script> <script defer src="/assets/al_img_tools/js/zoom.js"></script> <script defer src="/assets/js/progress-bar.js?v=499464c5c63ced6cf7ad62509f1e2610" type="text/javascript"></script> <script src="https://cdn.jsdelivr.net/npm/vanilla-back-to-top@7.2.1/dist/vanilla-back-to-top.min.js" integrity="sha256-uMJJ3EoTyfRBoTbR+lrfu1uRQ87RZG8AR3cVNuQVeFg=" crossorigin="anonymous"></script> <script>
+    addBackToTop();
+  </script> <script type="module" src="/assets/al_search/js/search/ninja-keys.min.js"></script> <ninja-keys hidebreadcrumbs noautoloadmdicons placeholder="Type to start searching"></ninja-keys> <script src="/assets/al_search/js/search-setup.js"></script> <script>
+// get the ninja-keys element
+const ninja = document.querySelector('ninja-keys');
+
+// add the home and posts menu items
+ninja.data = [{
+    id: "nav-about",
+    title: "about",
+    section: "Navigation",
+    handler: () => {
+      window.location.href = "/";
+    },
+  },{id: "nav-blog",
+          title: "blog",
+          description: "",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/blog/";
+          },
+        },{id: "nav-publications",
+          title: "publications",
+          description: "Publications.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/publications/";
+          },
+        },{id: "nav-research",
+          title: "research",
+          description: "Research on reliable AI agents, SRE-agent evaluation, ML ecosystem security, agent-choice auditing, and developer tools.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/research/";
+          },
+        },{id: "nav-projects",
+          title: "projects",
+          description: "Research and engineering projects.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/projects/";
+          },
+        },{id: "nav-cv",
+          title: "CV",
+          description: "Curriculum vitae.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/cv/";
+          },
+        },{id: "nav-contributions",
+          title: "contributions",
+          description: "Curated open-source contribution evidence across research infrastructure, frameworks, and language tooling.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/contributions/";
+          },
+        },{id: "post-building-a-fast-1brc-solver-in-c-on-apple-silicon",
+        
+          title: "Building a fast 1BRC solver in C# on Apple Silicon",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/building-fast-1brc-csharp-apple-silicon/";
+          
+        },
+      },{id: "post-memory-management-in-production-avoiding-the-silent-killers",
+        
+          title: "Memory Management in Production: Avoiding the Silent Killers",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/memory-management-production-silent-killers/";
+          
+        },
+      },{id: "post-growing-as-a-software-engineer-in-the-age-of-llms-and-vibe-coding",
+        
+          title: "Growing as a Software Engineer in the Age of LLMs and Vibe Coding...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/vibe-coding/";
+          
+        },
+      },{id: "post-taming-the-imagination-a-comprehensive-guide-to-handling-hallucinations-and-implementing-guardrails-in-agentic-ai",
+        
+          title: "Taming the Imagination: A Comprehensive Guide to Handling Hallucinations and Implementing Guardrails in...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/how-to-handle-hallucinations/";
+          
+        },
+      },{id: "post-building-an-agentic-ai-analytics-dashboard-a-deep-dive-with-langchain-langgraph-and-fine-tuned-llama",
+        
+          title: "Building an Agentic AI Analytics Dashboard: A Deep Dive with LangChain, LangGraph, and...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/intro-to-agentic-ai/";
+          
+        },
+      },{id: "post-neural-algorithmic-reasoning-teaching-neural-networks-to-think-like-algorithms",
+        
+          title: "Neural Algorithmic Reasoning: Teaching Neural Networks to Think Like Algorithms",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/intro-to-nar/";
+          
+        },
+      },{id: "post-opentelemetry-in-microservices-how-we-transformed-our-observability-strategy",
+        
+          title: "OpenTelemetry in Microservices: How We Transformed Our Observability Strategy",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/opentelemetry/";
+          
+        },
+      },{id: "post-using-ai-tools-in-software-engineering-and-research-workflows",
+        
+          title: "Using AI Tools in Software Engineering and Research Workflows",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/leveraging-ai-tools-software-engineering/";
+          
+        },
+      },{id: "post-the-performance-crisis-how-we-rescued-a-net-8-microservice-from-10-critical-bottlenecks",
+        
+          title: "The Performance Crisis: How We Rescued a .NET 8 Microservice from 10 Critical...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2024/optimizing-dotnet-microservices-performance/";
+          
+        },
+      },{id: "post-zero-downtime-deployments-in-kubernetes-how-we-keep-our-services-running-while-we-ship",
+        
+          title: "Zero Downtime Deployments in Kubernetes: How We Keep Our Services Running While We...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2024/zero-downtime/";
+          
+        },
+      },{id: "post-mastering-unit-testing-and-bdd-with-xunit-and-specflow-in-net-9-a-comprehensive-guide",
+        
+          title: "Mastering Unit Testing and BDD with xUnit and SpecFlow in .NET 9: A...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2024/dotnet-tests/";
+          
+        },
+      },{id: "post-design-patterns-your-first-step-toward-professional-software-engineering",
+        
+          title: "Design Patterns: Your First Step Toward Professional Software Engineering",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2024/design-patterns-professional-software-engineering/";
+          
+        },
+      },{id: "post-setting-up-github-actions-ci-cd-with-aws-a-practical-journey",
+        
+          title: "Setting Up GitHub Actions CI/CD with AWS: A Practical Journey",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2024/intro-to-ci-cd/";
+          
+        },
+      },{id: "post-the-clique-partition-problem-dividing-networks-into-perfect-communities",
+        
+          title: "The Clique Partition Problem: Dividing Networks into Perfect Communities",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2023/clique-partition-problem-graph-theory/";
+          
+        },
+      },{id: "post-advice-complexity-in-online-algorithms-when-knowing-the-future-makes-all-the-difference",
+        
+          title: "Advice Complexity in Online Algorithms: When Knowing the Future Makes All the Difference...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2023/advice-complexity-online-algorithms/";
+          
+        },
+      },{id: "post-getting-started-with-kubernetes-deploying-microservice-architectures-at-scale",
+        
+          title: "Getting Started with Kubernetes: Deploying Microservice Architectures at Scale",
+        
+        description: "A practical Kubernetes guide covering microservice deployment, service-mesh integration, observability, and the operational checks needed before production use.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2022/getting-started-with-kubernetes-microservices/";
+          
+        },
+      },{id: "post-understanding-xv6-a-practical-introduction-to-operating-systems",
+        
+          title: "Understanding xv6: A Practical Introduction to Operating Systems",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2022/understanding-xv6-operating-systems/";
+          
+        },
+      },{id: "post-getting-started-with-ns3-a-hands-on-guide-to-network-simulation",
+        
+          title: "Getting Started with NS3: A Hands-On Guide to Network Simulation",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2021/getting-started-with-ns3/";
+          
+        },
+      },{id: "news-completed-b-sc-in-computer-science-and-engineering-from-bangladesh-university-of-engineering-and-technology-with-a-gpa-of-3-53-4-00-link-https-cse-buet-ac-bd-academics-bsc",
+          title: 'Completed B.Sc in Computer Science and Engineering from Bangladesh University of Engineering and...',
+          description: "",
+          section: "News",},{id: "news-joined-iqvia-as-a-software-development-engineer-on-kpi-library-the-dynamic-reporting-layer-within-orchestrated-analytics-link-https-www-iqvia-com-solutions-commercialization-commercial-analytics-orchestrated-analytics",
+          title: 'Joined IQVIA as a Software Development Engineer on KPI Library, the dynamic reporting...',
+          description: "",
+          section: "News",},{id: "news-submitted-39-sentiment-analysis-of-anonymous-crisis-reports-in-bangladesh-39-to-acm-cscw-2025-analyzing-crowd-sourced-reports-from-bangladesh-39-s-2024-national-crisis-using-transformer-models-link-projects-research-ureporter",
+          title: 'Submitted &amp;#39;Sentiment Analysis of Anonymous Crisis Reports in Bangladesh&amp;#39; to ACM CSCW 2025,...',
+          description: "",
+          section: "News",},{id: "news-honored-with-the-iqvia-impact-program-silver-award-for-outstanding-performance-and-contributions-to-the-kpi-library-team-link-https-drive-google-com-file-d-1vc4e2roqepmbfs56olduih-ojdbok9sp-view-usp-share-link",
+          title: 'Honored with the IQVIA Impact Program Silver Award for outstanding performance and contributions...',
+          description: "",
+          section: "News",},{id: "news-submitted-39-an-empirical-study-on-remote-code-execution-in-machine-learning-model-hosting-ecosystems-39-to-the-mining-software-repositories-msr-2026-conference-first-large-scale-cross-platform-security-study-analyzing-45-000-repositories-across-5-major-ml-platforms-link-https-arxiv-org-abs-2601-14163",
+          title: 'Submitted &amp;#39;An Empirical Study on Remote Code Execution in Machine Learning Model Hosting...',
+          description: "",
+          section: "News",},{id: "news-resubmitted-39-an-empirical-study-on-remote-code-execution-in-machine-learning-model-hosting-ecosystems-39-to-acm-transactions-on-software-engineering-and-methodology-tosem-2026-preprint-available-on-arxiv-link-https-arxiv-org-abs-2601-14163",
+          title: 'Resubmitted &amp;#39;An Empirical Study on Remote Code Execution in Machine Learning Model Hosting...',
+          description: "",
+          section: "News",},{id: "news-started-a-remote-summer-research-internship-at-the-university-of-illinois-urbana-champaign-through-uiuc-summer-research-in-software-engineering-srse-2026-with-professor-tianyin-xu-link-https-uiuc-srse-github-io",
+          title: 'Started a remote summer research internship at the University of Illinois Urbana-Champaign through...',
+          description: "",
+          section: "News",},{id: "news-submitted-39-the-choice-can-be-the-attack-auditing-aligned-backdoors-in-llm-agents-39-to-the-transactions-of-the-association-for-computational-linguistics-tacl-2026-with-chowdhury-rakin-haider-link-projects-research-reagent-plus-plus",
+          title: 'Submitted &amp;#39;The Choice Can Be the Attack: Auditing Aligned Backdoors in LLM Agents&amp;#39;...',
+          description: "",
+          section: "News",},{id: "news-39-an-empirical-study-on-remote-code-execution-in-machine-learning-model-hosting-ecosystems-39-is-under-review-at-the-international-conference-on-software-engineering-icse-2027-preprint-available-on-arxiv-link-https-arxiv-org-abs-2601-14163",
+          title: '&amp;#39;An Empirical Study on Remote Code Execution in Machine Learning Model Hosting Ecosystems&amp;#39;...',
+          description: "",
+          section: "News",},{id: "news-will-begin-graduate-study-in-computing-science-at-the-university-of-alberta-on-september-1-2026-link-https-www-ualberta-ca-en-computing-science-index-html",
+          title: 'Will begin graduate study in Computing Science at the University of Alberta on...',
+          description: "",
+          section: "News",},{id: "projects-1brc-c-on-apple-silicon",
+          title: '1BRC C# on Apple Silicon',
+          description: "A .NET 10 NativeAOT performance case study: byte parsing, native aggregation, ARM64 tuning, and a size-aware macOS pread path",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/1brc-csharp/";
+            },},{id: "projects-building-a-bangla-handwritten-digit-recognizer-from-scratch",
+          title: 'Building a Bangla Handwritten Digit Recognizer from Scratch',
+          description: "A Deep Dive into Custom CNN Implementation",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/bangla-digit-recognition/";
+            },},{id: "projects-blockchain-based-ticketing-platform",
+          title: 'Blockchain Based Ticketing Platform',
+          description: "A practical approach to reducing ticket fraud and abusive resale",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/blockchain-ticketing/";
+            },},{id: "projects-yet-another-c-compiler",
+          title: 'Yet Another C Compiler',
+          description: "A complete multi-pass compiler for a subset of C",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/compiler/";
+            },},{id: "projects-contextledger-context-accounting-for-coding-agents",
+          title: 'ContextLedger: context accounting for coding agents',
+          description: "A research notebook on OpenCode compaction, provenance, and live GPT-5.5 experiments",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/contextledger/";
+            },},{id: "projects-ctxhelm-agent-native-context-compiler",
+          title: 'ctxhelm: agent-native context compiler',
+          description: "Local-first context plans, release proof, and source-free agent evaluation",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/ctxhelm/";
+            },},{id: "projects-mini-deep-learning-framework-pytorch-from-scratch",
+          title: 'Mini Deep Learning Framework: PyTorch from Scratch',
+          description: "A freelance learning project for tensors, autograd, and neural-network internals",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/deep-learning-framework-capstone/";
+            },},{id: "projects-go-container-runtime-docker-from-scratch",
+          title: 'Go Container Runtime: Docker from Scratch',
+          description: "A freelance learning project for Linux containers, networking, and Go systems programming",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/docker-from-scratch-go/";
+            },},{id: "projects-eventfly-distributed-microservices-event-platform",
+          title: 'EventFly – Distributed Microservices Event Platform',
+          description: "A six-person BUET course project for event creation, ticketing, announcements, participant engagement, analytics, and payments, implemented with Node.js, React, NATS, Kubernetes, MongoDB, Redis, and Stripe.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/eventfly-an-end-to-end-event-management-system/";
+            },},{id: "projects-building-a-go-database-engine-from-scratch",
+          title: 'Building a Go Database Engine from Scratch',
+          description: "An educational ACID-oriented database engine with advanced features",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/go-database/";
+            },},{id: "projects-image-caption-generation-with-bert-context-vectors",
+          title: 'Image Caption Generation with BERT Context Vectors',
+          description: "Extended the &quot;Show, Attend, and Tell&quot; image captioning model with BERT to improve caption quality and reduce training time, achieving 36% improvement in CIDEr score and 43% improvement in BLEU-4.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/image-caption-generator/";
+            },},{id: "projects-patchsmith-a-harness-for-repair-agents",
+          title: 'PatchSmith: a harness for repair agents',
+          description: "System design and R&amp;D notes for bounded patches, sandbox validation, and auditable repair runs",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/patchsmith/";
+            },},{id: "projects-ray-tracing-from-scratch-a-comprehensive-guide-to-3d-rendering-physics-and-implementation",
+          title: 'Ray Tracing from Scratch: A Comprehensive Guide to 3D Rendering Physics and Implementation...',
+          description: "Implementing physically-based rendering with C++",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/ray-tracing/";
+            },},{id: "projects-an-empirical-study-on-remote-code-execution-in-machine-learning-model-hosting-ecosystems",
+          title: 'An Empirical Study on Remote Code Execution in Machine Learning Model Hosting Ecosystems...',
+          description: "A cross-platform study of model-loading risk across five ML hosting ecosystems, using static analysis, malware-signature scanning, and analysis of more than 600 developer discussions.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/research-ml-remote-code-execution/";
+            },},{id: "projects-verischema-verified-database-schema-generation",
+          title: 'VeriSchema: verified database-schema generation',
+          description: "How can specialized agents generate relational schemas from natural-language requirements while formal checks and targeted repair keep the result consistent?",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/research-multi-agent-db-schema/";
+            },},{id: "projects-the-choice-can-be-the-attack-auditing-aligned-backdoors-in-llm-agents",
+          title: 'The Choice Can Be the Attack: Auditing Aligned Backdoors in LLM Agents',
+          description: "Abstract-level summary of SHIFT, submitted to TACL 2026 on aligned backdoor attacks in LLM agents.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/research-reagent-plus-plus/";
+            },},{id: "projects-sentiment-analysis-of-anonymous-crisis-reports-in-bangladesh",
+          title: 'Sentiment Analysis of Anonymous Crisis Reports in Bangladesh',
+          description: "A multilingual analysis of anonymous, crowd-sourced reports from Bangladesh&#39;s 2024 national crisis.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/research-ureporter/";
+            },},{id: "projects-enhancing-tcp-fairness-tcp-vegas-implementation",
+          title: 'Enhancing TCP Fairness: TCP Vegas+ Implementation',
+          description: "A dual-mode solution for TCP Vegas fairness issues",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/tcp-vegas-plus/";
+            },},{
+        id: 'social-email',
+        title: 'email',
+        section: 'Socials',
+        handler: () => {
+          window.open("mailto:%74%61%6E%68%72%6F%6D%65%6C@%67%6D%61%69%6C.%63%6F%6D", "_blank");
+        },
+      },{
+        id: 'social-github',
+        title: 'GitHub',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://github.com/thromel", "_blank");
+        },
+      },{
+        id: 'social-scholar',
+        title: 'Google Scholar',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://scholar.google.com/citations?user=zHV4EU8AAAAJ", "_blank");
+        },
+      },{
+        id: 'social-linkedin',
+        title: 'LinkedIn',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://www.linkedin.com/in/thromel", "_blank");
+        },
+      },{
+        id: 'social-orcid',
+        title: 'ORCID',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://orcid.org/0009-0009-2432-8960", "_blank");
+        },
+      },{
+        id: 'social-rss',
+        title: 'RSS Feed',
+        section: 'Socials',
+        handler: () => {
+          window.open("/feed.xml", "_blank");
+        },
+      },{
+        id: 'social-x',
+        title: 'X',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://twitter.com/tanzimhromel", "_blank");
+        },
+      },{
+      id: 'light-theme',
+      title: 'Change theme to light',
+      description: 'Change the theme of the site to Light',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("light");
+      },
+    },
+    {
+      id: 'dark-theme',
+      title: 'Change theme to dark',
+      description: 'Change the theme of the site to Dark',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("dark");
+      },
+    },
+    {
+      id: 'system-theme',
+      title: 'Use system default theme',
+      description: 'Change the theme of the site to System Default',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("system");
+      },
+    },];
+
+</script> <script src="/assets/al_search/js/shortcut-key.js"></script> </body> </html>

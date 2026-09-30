@@ -1,0 +1,1248 @@
+<!DOCTYPE html> <html lang="en"> <head> <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <title> Design Patterns: Your First Step Toward Professional Software Engineering | Tanzim Hossain Romel </title> <meta name="author" content="Tanzim Hossain Romel"> <meta name="description" content="Academic and engineering portfolio of Tanzim Hossain Romel, focused on reliable AI agents, software engineering research, and developer tools."> <meta name="keywords" content=""> <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https:; style-src 'self' 'unsafe-inline' https:; img-src 'self' data: https:; font-src 'self' data: https:; media-src 'self' https:; frame-src 'self' https:; connect-src 'self' https:;"> <style>
+  :root {
+    --max-content-width: 930px;
+  }
+</style> <link rel="stylesheet" href="/assets/css/tailwind.css?v=50c64c15cbb9fd1ce6056fdb8bcb4b62"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.2.0/css/all.min.css" integrity="sha256-MVopmdyC2tYTiJ8wlktf0uh0v4NgT+vNdyVFepi7Q0c=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.5/css/academicons.min.css" integrity="sha256-SzrCOBJbGVFMahewkgjwnApaV2+av1DwMAA+/QGLyZw=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/scholar-icons@1.0.3/css/scholar-icons.css" integrity="sha256-VY3hHVj/hNX3fYG6wtbA6TcKJQl7+FthzGSyIB64klY=" crossorigin="anonymous"> <link defer rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons&amp;display=swap"> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-github.css?v=591dab5a4e56573bf4ef7fd332894c99" media="" id="highlight_theme_light"> <link rel="shortcut icon" href="data:image/svg+xml,&lt;svg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20100%20100%22&gt;&lt;text%20y=%22.9em%22%20font-size=%2290%22&gt;%E2%9A%9B%EF%B8%8F&lt;/text&gt;&lt;/svg&gt;"> <link rel="stylesheet" href="/assets/css/main.css?v=3116ba77db9ee1581d05bb3e86fbf7f1"> <link rel="canonical" href="https://tanzimhromel.com/blog/2024/design-patterns-professional-software-engineering/"> <script src="/assets/js/theme.js?v=5286c3e4c334d0ecb8fc0c40ff4fa7ec"></script> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-native.css?v=5847e5ed4a4568527aa6cfab446049ca" media="none" id="highlight_theme_dark"> <script>
+    initTheme();
+  </script> </head> <body class="fixed-top-nav "> <header> <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top" role="navigation"> <div class="container"> <a class="navbar-brand title font-weight-lighter" href="/"> Tanzim Hossain Romel </a> <button class="navbar-toggler collapsed navbar-toggler-main" type="button" data-nav-toggle="navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar top-bar"></span> <span class="icon-bar middle-bar"></span> <span class="icon-bar bottom-bar"></span> </button> <div class="collapse navbar-collapse navbar-collapse-main" id="navbarNav"> <ul class="navbar-nav navbar-menu-list flex-nowrap"> <li class="nav-item "> <a class="nav-link" href="/">about </a> </li> <li class="nav-item active"> <a class="nav-link" href="/blog/">blog </a> </li> <li class="nav-item "> <a class="nav-link" href="/publications/">publications </a> </li> <li class="nav-item "> <a class="nav-link" href="/research/">research </a> </li> <li class="nav-item "> <a class="nav-link" href="/projects/">projects </a> </li> <li class="nav-item "> <a class="nav-link" href="/cv/">CV </a> </li> <li class="nav-item "> <a class="nav-link" href="/contributions/">contributions </a> </li> <li class="nav-item"> <button id="search-toggle" type="button" title="Search" aria-label="Open search"> <span class="nav-link">ctrl k <i class="fa-solid fa-magnifying-glass"></i></span> </button> </li> <li class="toggle-container"> <button id="light-toggle" type="button" title="Change theme" aria-label="Change color theme"> <i class="fa-half-sun-moon" id="light-toggle-system"></i> <i class="fa-solid fa-moon" id="light-toggle-dark"></i> <i class="fa-solid fa-sun" id="light-toggle-light"></i> </button> </li> </ul> </div> </div> </nav> <progress id="progress" value="0"> <div class="progress-container"> <span class="progress-bar"></span> </div> </progress> </header> <div class="container mt-5" role="main"> <div class="post"> <header class="post-header"> <h1 class="post-title">Design Patterns: Your First Step Toward Professional Software Engineering</h1> <p class="post-meta"> Created on May 22, 2024 </p> <p class="post-tags"> <a href="/blog/2024"> <i class="fa-solid fa-calendar fa-sm"></i> 2024 </a>   ·   <a href="/blog/tag/design-patterns"> <i class="fa-solid fa-hashtag fa-sm"></i> design-patterns</a>   <a href="/blog/tag/java"> <i class="fa-solid fa-hashtag fa-sm"></i> java</a>   <a href="/blog/tag/object-oriented"> <i class="fa-solid fa-hashtag fa-sm"></i> object-oriented</a>   <a href="/blog/tag/programming"> <i class="fa-solid fa-hashtag fa-sm"></i> programming</a>   <a href="/blog/tag/software-engineering"> <i class="fa-solid fa-hashtag fa-sm"></i> software-engineering</a>   <a href="/blog/tag/singleton"> <i class="fa-solid fa-hashtag fa-sm"></i> singleton</a>   <a href="/blog/tag/strategy"> <i class="fa-solid fa-hashtag fa-sm"></i> strategy</a>   <a href="/blog/tag/observer"> <i class="fa-solid fa-hashtag fa-sm"></i> observer</a>   <a href="/blog/tag/decorator"> <i class="fa-solid fa-hashtag fa-sm"></i> decorator</a>   ·   <a href="/blog/category/programming"> <i class="fa-solid fa-tag fa-sm"></i> programming</a>   <a href="/blog/category/software-engineering"> <i class="fa-solid fa-tag fa-sm"></i> software-engineering</a>   <a href="/blog/category/education"> <i class="fa-solid fa-tag fa-sm"></i> education</a> </p> </header> <article class="post-content"> <div id="markdown-content"> <p>Picture this scenario: You’re building a messaging app for your software engineering class. At first, everything seems straightforward - users can send messages to each other, and you store everything in a simple database. But then requirements start piling up. Users want group chats, message reactions, read receipts, typing indicators, and the ability to share files. Suddenly, your neat little program becomes a tangled web of if-else statements and copy-pasted code. Sound familiar?</p> <p>This is the moment when most students realize that software engineering is about more than just making things work. It’s about building systems that can grow, adapt, and survive in the real world. Design patterns are your toolkit for this challenge - they’re battle-tested solutions to problems that developers have been solving for decades.</p> <h2 id="understanding-the-need-why-clean-code-matters">Understanding the Need: Why Clean Code Matters</h2> <p>Let’s start with a fundamental truth: the code you write in university will likely be the worst code you’ll ever write, and that’s perfectly fine. What matters is recognizing why it’s problematic and learning how to improve. Clean code isn’t about impressing your professors or following arbitrary rules - it’s about writing software that won’t make you (or your teammates) want to tear your hair out six months later.</p> <p>Consider these essential principles that form the foundation of professional software development:</p> <h3 id="the-single-responsibility-principle-srp">The Single Responsibility Principle (SRP)</h3> <p>Imagine you’re building a food delivery app. You might be tempted to create a <code class="language-plaintext highlighter-rouge">Restaurant</code> class that handles everything: menu management, order processing, payment handling, delivery tracking, and customer reviews. This seems logical at first - after all, restaurants do all these things, right?</p> <p>The problem emerges when you need to change how payments are processed. Suddenly, you’re modifying a class that dozens of other components depend on, risking breaks in completely unrelated features like menu display or review posting. SRP tells us that each class should have exactly one reason to change. In our example, we’d separate concerns into focused classes: <code class="language-plaintext highlighter-rouge">Menu</code>, <code class="language-plaintext highlighter-rouge">OrderProcessor</code>, <code class="language-plaintext highlighter-rouge">PaymentGateway</code>, <code class="language-plaintext highlighter-rouge">DeliveryTracker</code>, and <code class="language-plaintext highlighter-rouge">ReviewSystem</code>.</p> <h3 id="the-openclosed-principle">The Open/Closed Principle</h3> <p>Think about how Netflix regularly adds new features - new types of content, viewing modes, or recommendation algorithms - without breaking existing functionality. This is the Open/Closed Principle in action. Your code should welcome new features (open for extension) without requiring surgery on working components (closed for modification).</p> <h3 id="dont-repeat-yourself-dry">Don’t Repeat Yourself (DRY)</h3> <p>Every time you copy and paste code, you’re creating a future bug. When that inevitable change request comes, will you remember to update all seven places where you pasted that validation logic? DRY isn’t just about avoiding repetition - it’s about creating a single source of truth for each piece of functionality in your system.</p> <h3 id="dependency-inversion">Dependency Inversion</h3> <p>High-level business logic shouldn’t depend on low-level implementation details. Imagine if Instagram’s photo-sharing logic was tightly coupled to a specific cloud storage provider. Switching providers would require rewriting core application logic. Instead, the app should depend on an abstract storage interface, making the actual provider a swappable implementation detail.</p> <h2 id="design-patterns-in-action-real-world-examples">Design Patterns in Action: Real-World Examples</h2> <p>Now let’s explore how design patterns help us implement these principles in systems you interact with every day. We’ll examine patterns from each major category: Creational, Structural, and Behavioral.</p> <h3 id="the-singleton-pattern-managing-shared-resources">The Singleton Pattern: Managing Shared Resources</h3> <p>Think about your computer’s print spooler or the settings manager in your favorite mobile app. These are real-world examples where you need exactly one instance managing a shared resource. Let’s implement a <code class="language-plaintext highlighter-rouge">DatabaseConnectionPool</code> that ensures our application doesn’t create excessive database connections:</p> <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">DatabaseConnectionPool</span> <span class="o">{</span>
+    <span class="c1">// The single instance, created when first needed</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="nc">DatabaseConnectionPool</span> <span class="n">instance</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="nc">Object</span> <span class="n">lock</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Object</span><span class="o">();</span>
+    
+    <span class="c1">// Pool of available connections</span>
+    <span class="kd">private</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Connection</span><span class="o">&gt;</span> <span class="n">availableConnections</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Connection</span><span class="o">&gt;</span> <span class="n">usedConnections</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="kt">int</span> <span class="no">MAX_CONNECTIONS</span> <span class="o">=</span> <span class="mi">10</span><span class="o">;</span>
+    
+    <span class="c1">// Database configuration</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">url</span> <span class="o">=</span> <span class="s">"jdbc:mysql://localhost:3306/myapp"</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">user</span> <span class="o">=</span> <span class="s">"appuser"</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">password</span> <span class="o">=</span> <span class="s">"secure_password"</span><span class="o">;</span>
+    
+    <span class="c1">// Private constructor prevents direct instantiation</span>
+    <span class="kd">private</span> <span class="nf">DatabaseConnectionPool</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">availableConnections</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;();</span>
+        <span class="n">usedConnections</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;();</span>
+        
+        <span class="c1">// Initialize the pool with connections</span>
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="no">MAX_CONNECTIONS</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="k">try</span> <span class="o">{</span>
+                <span class="nc">Connection</span> <span class="n">conn</span> <span class="o">=</span> <span class="nc">DriverManager</span><span class="o">.</span><span class="na">getConnection</span><span class="o">(</span><span class="n">url</span><span class="o">,</span> <span class="n">user</span><span class="o">,</span> <span class="n">password</span><span class="o">);</span>
+                <span class="n">availableConnections</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">conn</span><span class="o">);</span>
+            <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">SQLException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+                <span class="nc">System</span><span class="o">.</span><span class="na">err</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Error creating connection: "</span> <span class="o">+</span> <span class="n">e</span><span class="o">.</span><span class="na">getMessage</span><span class="o">());</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+    
+    <span class="c1">// Thread-safe way to get the single instance</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="nc">DatabaseConnectionPool</span> <span class="nf">getInstance</span><span class="o">()</span> <span class="o">{</span>
+        <span class="c1">// Double-check locking for thread safety and performance</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">instance</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="kd">synchronized</span> <span class="o">(</span><span class="n">lock</span><span class="o">)</span> <span class="o">{</span>
+                <span class="k">if</span> <span class="o">(</span><span class="n">instance</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+                    <span class="n">instance</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">DatabaseConnectionPool</span><span class="o">();</span>
+                <span class="o">}</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="n">instance</span><span class="o">;</span>
+    <span class="o">}</span>
+    
+    <span class="c1">// Get a connection from the pool</span>
+    <span class="kd">public</span> <span class="kd">synchronized</span> <span class="nc">Connection</span> <span class="nf">getConnection</span><span class="o">()</span> <span class="kd">throws</span> <span class="nc">SQLException</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">availableConnections</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">())</span> <span class="o">{</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="nf">SQLException</span><span class="o">(</span><span class="s">"No connections available"</span><span class="o">);</span>
+        <span class="o">}</span>
+        
+        <span class="nc">Connection</span> <span class="n">connection</span> <span class="o">=</span> <span class="n">availableConnections</span><span class="o">.</span><span class="na">remove</span><span class="o">(</span><span class="n">availableConnections</span><span class="o">.</span><span class="na">size</span><span class="o">()</span> <span class="o">-</span> <span class="mi">1</span><span class="o">);</span>
+        <span class="n">usedConnections</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">connection</span><span class="o">);</span>
+        <span class="k">return</span> <span class="n">connection</span><span class="o">;</span>
+    <span class="o">}</span>
+    
+    <span class="c1">// Return a connection to the pool</span>
+    <span class="kd">public</span> <span class="kd">synchronized</span> <span class="kt">void</span> <span class="nf">releaseConnection</span><span class="o">(</span><span class="nc">Connection</span> <span class="n">connection</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">usedConnections</span><span class="o">.</span><span class="na">remove</span><span class="o">(</span><span class="n">connection</span><span class="o">);</span>
+        <span class="n">availableConnections</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">connection</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div> <p>This pattern ensures that your application maintains a controlled number of database connections, preventing resource exhaustion. Notice how we use double-check locking to ensure thread safety while maintaining performance - a crucial consideration in real applications where multiple threads might request connections simultaneously.</p> <p>The Singleton pattern appears in many frameworks and libraries. Spring Framework’s application context, logging frameworks, and configuration managers often use this pattern. However, be cautious: overusing Singleton can lead to hidden dependencies and make testing difficult. Use it only when you genuinely need to ensure a single instance, not just as a convenient global access point.</p> <h3 id="the-strategy-pattern-flexible-algorithms">The Strategy Pattern: Flexible Algorithms</h3> <p>Consider how navigation apps like Google Maps or Waze offer different route options: fastest, shortest, avoid tolls, or avoid highways. Each option represents a different algorithm for solving the same problem. The Strategy pattern makes this flexibility possible without creating a maintenance nightmare.</p> <p>Let’s build a payment processing system that supports multiple payment methods:</p> <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Strategy interface defines the contract all payment methods must follow</span>
+<span class="kd">public</span> <span class="kd">interface</span> <span class="nc">PaymentStrategy</span> <span class="o">{</span>
+    <span class="kt">boolean</span> <span class="nf">processPayment</span><span class="o">(</span><span class="kt">double</span> <span class="n">amount</span><span class="o">);</span>
+    <span class="kt">boolean</span> <span class="nf">validatePaymentDetails</span><span class="o">();</span>
+    <span class="nc">String</span> <span class="nf">getPaymentMethodName</span><span class="o">();</span>
+<span class="o">}</span>
+
+<span class="c1">// Concrete strategy for credit card payments</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">CreditCardPayment</span> <span class="kd">implements</span> <span class="nc">PaymentStrategy</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">cardNumber</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">cvv</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">expiryDate</span><span class="o">;</span>
+    
+    <span class="kd">public</span> <span class="nf">CreditCardPayment</span><span class="o">(</span><span class="nc">String</span> <span class="n">cardNumber</span><span class="o">,</span> <span class="nc">String</span> <span class="n">cvv</span><span class="o">,</span> <span class="nc">String</span> <span class="n">expiryDate</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">cardNumber</span> <span class="o">=</span> <span class="n">cardNumber</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">cvv</span> <span class="o">=</span> <span class="n">cvv</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">expiryDate</span> <span class="o">=</span> <span class="n">expiryDate</span><span class="o">;</span>
+    <span class="o">}</span>
+    
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">validatePaymentDetails</span><span class="o">()</span> <span class="o">{</span>
+        <span class="c1">// Validate card number using Luhn algorithm</span>
+        <span class="c1">// Check CVV format and expiry date</span>
+        <span class="k">return</span> <span class="nf">isValidCardNumber</span><span class="o">()</span> <span class="o">&amp;&amp;</span> <span class="n">isValidCVV</span><span class="o">()</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">isExpired</span><span class="o">();</span>
+    <span class="o">}</span>
+    
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">processPayment</span><span class="o">(</span><span class="kt">double</span> <span class="n">amount</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(!</span><span class="n">validatePaymentDetails</span><span class="o">())</span> <span class="o">{</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Invalid credit card details"</span><span class="o">);</span>
+            <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+        <span class="o">}</span>
+        
+        <span class="c1">// In real implementation, this would connect to payment gateway</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Processing $"</span> <span class="o">+</span> <span class="n">amount</span> <span class="o">+</span> <span class="s">" via Credit Card ending in "</span> <span class="o">+</span> 
+                         <span class="n">cardNumber</span><span class="o">.</span><span class="na">substring</span><span class="o">(</span><span class="n">cardNumber</span><span class="o">.</span><span class="na">length</span><span class="o">()</span> <span class="o">-</span> <span class="mi">4</span><span class="o">));</span>
+        
+        <span class="c1">// Simulate processing delay</span>
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="nc">Thread</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="mi">1000</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">InterruptedException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+            <span class="nc">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">().</span><span class="na">interrupt</span><span class="o">();</span>
+        <span class="o">}</span>
+        
+        <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+    <span class="o">}</span>
+    
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getPaymentMethodName</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="s">"Credit Card"</span><span class="o">;</span>
+    <span class="o">}</span>
+    
+    <span class="kd">private</span> <span class="kt">boolean</span> <span class="nf">isValidCardNumber</span><span class="o">()</span> <span class="o">{</span>
+        <span class="c1">// Simplified validation - real implementation would use Luhn algorithm</span>
+        <span class="k">return</span> <span class="n">cardNumber</span><span class="o">.</span><span class="na">length</span><span class="o">()</span> <span class="o">==</span> <span class="mi">16</span> <span class="o">&amp;&amp;</span> <span class="n">cardNumber</span><span class="o">.</span><span class="na">matches</span><span class="o">(</span><span class="s">"\\d+"</span><span class="o">);</span>
+    <span class="o">}</span>
+    
+    <span class="kd">private</span> <span class="kt">boolean</span> <span class="nf">isValidCVV</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">cvv</span><span class="o">.</span><span class="na">length</span><span class="o">()</span> <span class="o">==</span> <span class="mi">3</span> <span class="o">&amp;&amp;</span> <span class="n">cvv</span><span class="o">.</span><span class="na">matches</span><span class="o">(</span><span class="s">"\\d+"</span><span class="o">);</span>
+    <span class="o">}</span>
+    
+    <span class="kd">private</span> <span class="kt">boolean</span> <span class="nf">isExpired</span><span class="o">()</span> <span class="o">{</span>
+        <span class="c1">// Check if card is expired based on expiryDate</span>
+        <span class="k">return</span> <span class="kc">false</span><span class="o">;</span> <span class="c1">// Simplified for example</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="c1">// Digital wallet strategy (PayPal, Apple Pay, etc.)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">DigitalWalletPayment</span> <span class="kd">implements</span> <span class="nc">PaymentStrategy</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">email</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">password</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">walletType</span><span class="o">;</span>
+    
+    <span class="kd">public</span> <span class="nf">DigitalWalletPayment</span><span class="o">(</span><span class="nc">String</span> <span class="n">email</span><span class="o">,</span> <span class="nc">String</span> <span class="n">password</span><span class="o">,</span> <span class="nc">String</span> <span class="n">walletType</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">email</span> <span class="o">=</span> <span class="n">email</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">password</span> <span class="o">=</span> <span class="n">password</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">walletType</span> <span class="o">=</span> <span class="n">walletType</span><span class="o">;</span>
+    <span class="o">}</span>
+    
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">validatePaymentDetails</span><span class="o">()</span> <span class="o">{</span>
+        <span class="c1">// Validate email format and check credentials</span>
+        <span class="k">return</span> <span class="n">email</span><span class="o">.</span><span class="na">contains</span><span class="o">(</span><span class="s">"@"</span><span class="o">)</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">password</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">();</span>
+    <span class="o">}</span>
+    
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">processPayment</span><span class="o">(</span><span class="kt">double</span> <span class="n">amount</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(!</span><span class="n">validatePaymentDetails</span><span class="o">())</span> <span class="o">{</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Invalid "</span> <span class="o">+</span> <span class="n">walletType</span> <span class="o">+</span> <span class="s">" credentials"</span><span class="o">);</span>
+            <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+        <span class="o">}</span>
+        
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Processing $"</span> <span class="o">+</span> <span class="n">amount</span> <span class="o">+</span> <span class="s">" via "</span> <span class="o">+</span> <span class="n">walletType</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Authenticating with "</span> <span class="o">+</span> <span class="n">email</span> <span class="o">+</span> <span class="s">"..."</span><span class="o">);</span>
+        
+        <span class="c1">// Simulate API call to wallet service</span>
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="nc">Thread</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="mi">1500</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">InterruptedException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+            <span class="nc">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">().</span><span class="na">interrupt</span><span class="o">();</span>
+        <span class="o">}</span>
+        
+        <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+    <span class="o">}</span>
+    
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getPaymentMethodName</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">walletType</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="c1">// Context class that uses the strategies</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">ShoppingCart</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Item</span><span class="o">&gt;</span> <span class="n">items</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">PaymentStrategy</span> <span class="n">paymentStrategy</span><span class="o">;</span>
+    
+    <span class="kd">public</span> <span class="nf">ShoppingCart</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">items</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;();</span>
+    <span class="o">}</span>
+    
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">addItem</span><span class="o">(</span><span class="nc">Item</span> <span class="n">item</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">items</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">item</span><span class="o">);</span>
+    <span class="o">}</span>
+    
+    <span class="kd">public</span> <span class="kt">double</span> <span class="nf">calculateTotal</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">items</span><span class="o">.</span><span class="na">stream</span><span class="o">()</span>
+                   <span class="o">.</span><span class="na">mapToDouble</span><span class="o">(</span><span class="nl">Item:</span><span class="o">:</span><span class="n">getPrice</span><span class="o">)</span>
+                   <span class="o">.</span><span class="na">sum</span><span class="o">();</span>
+    <span class="o">}</span>
+    
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setPaymentStrategy</span><span class="o">(</span><span class="nc">PaymentStrategy</span> <span class="n">strategy</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">paymentStrategy</span> <span class="o">=</span> <span class="n">strategy</span><span class="o">;</span>
+    <span class="o">}</span>
+    
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">checkout</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">paymentStrategy</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Please select a payment method"</span><span class="o">);</span>
+            <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+        <span class="o">}</span>
+        
+        <span class="kt">double</span> <span class="n">total</span> <span class="o">=</span> <span class="n">calculateTotal</span><span class="o">();</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Total amount: $"</span> <span class="o">+</span> <span class="n">total</span><span class="o">);</span>
+        
+        <span class="kt">boolean</span> <span class="n">success</span> <span class="o">=</span> <span class="n">paymentStrategy</span><span class="o">.</span><span class="na">processPayment</span><span class="o">(</span><span class="n">total</span><span class="o">);</span>
+        
+        <span class="k">if</span> <span class="o">(</span><span class="n">success</span><span class="o">)</span> <span class="o">{</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Payment successful! Thank you for your purchase."</span><span class="o">);</span>
+            <span class="n">items</span><span class="o">.</span><span class="na">clear</span><span class="o">();</span> <span class="c1">// Empty the cart after successful payment</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Payment failed. Please try again."</span><span class="o">);</span>
+        <span class="o">}</span>
+        
+        <span class="k">return</span> <span class="n">success</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="c1">// Usage example</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">OnlineStore</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">ShoppingCart</span> <span class="n">cart</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ShoppingCart</span><span class="o">();</span>
+        <span class="n">cart</span><span class="o">.</span><span class="na">addItem</span><span class="o">(</span><span class="k">new</span> <span class="nc">Item</span><span class="o">(</span><span class="s">"Laptop"</span><span class="o">,</span> <span class="mf">999.99</span><span class="o">));</span>
+        <span class="n">cart</span><span class="o">.</span><span class="na">addItem</span><span class="o">(</span><span class="k">new</span> <span class="nc">Item</span><span class="o">(</span><span class="s">"Mouse"</span><span class="o">,</span> <span class="mf">29.99</span><span class="o">));</span>
+        
+        <span class="c1">// Customer chooses credit card</span>
+        <span class="nc">PaymentStrategy</span> <span class="n">creditCard</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">CreditCardPayment</span><span class="o">(</span>
+            <span class="s">"1234567812345678"</span><span class="o">,</span> <span class="s">"123"</span><span class="o">,</span> <span class="s">"12/25"</span>
+        <span class="o">);</span>
+        <span class="n">cart</span><span class="o">.</span><span class="na">setPaymentStrategy</span><span class="o">(</span><span class="n">creditCard</span><span class="o">);</span>
+        <span class="n">cart</span><span class="o">.</span><span class="na">checkout</span><span class="o">();</span>
+        
+        <span class="c1">// Same cart, different payment method</span>
+        <span class="n">cart</span><span class="o">.</span><span class="na">addItem</span><span class="o">(</span><span class="k">new</span> <span class="nc">Item</span><span class="o">(</span><span class="s">"Keyboard"</span><span class="o">,</span> <span class="mf">79.99</span><span class="o">));</span>
+        <span class="nc">PaymentStrategy</span> <span class="n">paypal</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">DigitalWalletPayment</span><span class="o">(</span>
+            <span class="s">"user@email.com"</span><span class="o">,</span> <span class="s">"password"</span><span class="o">,</span> <span class="s">"PayPal"</span>
+        <span class="o">);</span>
+        <span class="n">cart</span><span class="o">.</span><span class="na">setPaymentStrategy</span><span class="o">(</span><span class="n">paypal</span><span class="o">);</span>
+        <span class="n">cart</span><span class="o">.</span><span class="na">checkout</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div> <p>The beauty of this pattern lies in its flexibility. Adding a new payment method - say, cryptocurrency - requires only creating a new class implementing <code class="language-plaintext highlighter-rouge">PaymentStrategy</code>. The <code class="language-plaintext highlighter-rouge">ShoppingCart</code> class remains unchanged, perfectly demonstrating the Open/Closed Principle.</p> <p>This pattern appears everywhere in real applications. Text editors use it for different file saving formats, compression utilities use it for different algorithms, and game engines use it for different rendering techniques. The key insight is separating the algorithm from the code that uses it.</p> <h3 id="the-observer-pattern-event-driven-architecture">The Observer Pattern: Event-Driven Architecture</h3> <p>Think about how social media notifications work. When someone likes your post, comments on your photo, or mentions you in a story, you receive notifications across multiple devices. The Observer pattern makes this synchronized updating possible without creating a tangled web of dependencies.</p> <p>Let’s build a weather monitoring system that notifies multiple displays when conditions change:</p> <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Subject interface for observable objects</span>
+<span class="kd">public</span> <span class="kd">interface</span> <span class="nc">WeatherSubject</span> <span class="o">{</span>
+    <span class="kt">void</span> <span class="nf">registerObserver</span><span class="o">(</span><span class="nc">WeatherObserver</span> <span class="n">observer</span><span class="o">);</span>
+    <span class="kt">void</span> <span class="nf">removeObserver</span><span class="o">(</span><span class="nc">WeatherObserver</span> <span class="n">observer</span><span class="o">);</span>
+    <span class="kt">void</span> <span class="nf">notifyObservers</span><span class="o">();</span>
+<span class="o">}</span>
+
+<span class="c1">// Observer interface for objects that need updates</span>
+<span class="kd">public</span> <span class="kd">interface</span> <span class="nc">WeatherObserver</span> <span class="o">{</span>
+    <span class="kt">void</span> <span class="nf">update</span><span class="o">(</span><span class="kt">float</span> <span class="n">temperature</span><span class="o">,</span> <span class="kt">float</span> <span class="n">humidity</span><span class="o">,</span> <span class="kt">float</span> <span class="n">pressure</span><span class="o">);</span>
+<span class="o">}</span>
+
+<span class="c1">// Concrete subject that maintains weather data</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">WeatherStation</span> <span class="kd">implements</span> <span class="nc">WeatherSubject</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">WeatherObserver</span><span class="o">&gt;</span> <span class="n">observers</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kt">float</span> <span class="n">temperature</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kt">float</span> <span class="n">humidity</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kt">float</span> <span class="n">pressure</span><span class="o">;</span>
+    
+    <span class="kd">public</span> <span class="nf">WeatherStation</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">observers</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;();</span>
+    <span class="o">}</span>
+    
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">registerObserver</span><span class="o">(</span><span class="nc">WeatherObserver</span> <span class="n">observer</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">observers</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">observer</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"New observer registered: "</span> <span class="o">+</span> <span class="n">observer</span><span class="o">.</span><span class="na">getClass</span><span class="o">().</span><span class="na">getSimpleName</span><span class="o">());</span>
+    <span class="o">}</span>
+    
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">removeObserver</span><span class="o">(</span><span class="nc">WeatherObserver</span> <span class="n">observer</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">observers</span><span class="o">.</span><span class="na">remove</span><span class="o">(</span><span class="n">observer</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Observer removed: "</span> <span class="o">+</span> <span class="n">observer</span><span class="o">.</span><span class="na">getClass</span><span class="o">().</span><span class="na">getSimpleName</span><span class="o">());</span>
+    <span class="o">}</span>
+    
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">notifyObservers</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">for</span> <span class="o">(</span><span class="nc">WeatherObserver</span> <span class="n">observer</span> <span class="o">:</span> <span class="n">observers</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">observer</span><span class="o">.</span><span class="na">update</span><span class="o">(</span><span class="n">temperature</span><span class="o">,</span> <span class="n">humidity</span><span class="o">,</span> <span class="n">pressure</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+    
+    <span class="c1">// Called when new measurements are available</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setMeasurements</span><span class="o">(</span><span class="kt">float</span> <span class="n">temperature</span><span class="o">,</span> <span class="kt">float</span> <span class="n">humidity</span><span class="o">,</span> <span class="kt">float</span> <span class="n">pressure</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">temperature</span> <span class="o">=</span> <span class="n">temperature</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">humidity</span> <span class="o">=</span> <span class="n">humidity</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">pressure</span> <span class="o">=</span> <span class="n">pressure</span><span class="o">;</span>
+        <span class="n">measurementsChanged</span><span class="o">();</span>
+    <span class="o">}</span>
+    
+    <span class="kd">private</span> <span class="kt">void</span> <span class="nf">measurementsChanged</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">notifyObservers</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="c1">// Concrete observer for current conditions display</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">CurrentConditionsDisplay</span> <span class="kd">implements</span> <span class="nc">WeatherObserver</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kt">float</span> <span class="n">temperature</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kt">float</span> <span class="n">humidity</span><span class="o">;</span>
+    
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">update</span><span class="o">(</span><span class="kt">float</span> <span class="n">temperature</span><span class="o">,</span> <span class="kt">float</span> <span class="n">humidity</span><span class="o">,</span> <span class="kt">float</span> <span class="n">pressure</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">temperature</span> <span class="o">=</span> <span class="n">temperature</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">humidity</span> <span class="o">=</span> <span class="n">humidity</span><span class="o">;</span>
+        <span class="n">display</span><span class="o">();</span>
+    <span class="o">}</span>
+    
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">display</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"\n=== Current Conditions ==="</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Temperature: "</span> <span class="o">+</span> <span class="n">temperature</span> <span class="o">+</span> <span class="s">"°F"</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Humidity: "</span> <span class="o">+</span> <span class="n">humidity</span> <span class="o">+</span> <span class="s">"%"</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="c1">// Observer for weather statistics</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">StatisticsDisplay</span> <span class="kd">implements</span> <span class="nc">WeatherObserver</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Float</span><span class="o">&gt;</span> <span class="n">temperatureHistory</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kt">float</span> <span class="n">maxTemp</span> <span class="o">=</span> <span class="nc">Float</span><span class="o">.</span><span class="na">MIN_VALUE</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kt">float</span> <span class="n">minTemp</span> <span class="o">=</span> <span class="nc">Float</span><span class="o">.</span><span class="na">MAX_VALUE</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kt">float</span> <span class="n">tempSum</span> <span class="o">=</span> <span class="mf">0.0f</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">numReadings</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+    
+    <span class="kd">public</span> <span class="nf">StatisticsDisplay</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">temperatureHistory</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;();</span>
+    <span class="o">}</span>
+    
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">update</span><span class="o">(</span><span class="kt">float</span> <span class="n">temperature</span><span class="o">,</span> <span class="kt">float</span> <span class="n">humidity</span><span class="o">,</span> <span class="kt">float</span> <span class="n">pressure</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">temperatureHistory</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">temperature</span><span class="o">);</span>
+        <span class="n">tempSum</span> <span class="o">+=</span> <span class="n">temperature</span><span class="o">;</span>
+        <span class="n">numReadings</span><span class="o">++;</span>
+        
+        <span class="k">if</span> <span class="o">(</span><span class="n">temperature</span> <span class="o">&gt;</span> <span class="n">maxTemp</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">maxTemp</span> <span class="o">=</span> <span class="n">temperature</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">temperature</span> <span class="o">&lt;</span> <span class="n">minTemp</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">minTemp</span> <span class="o">=</span> <span class="n">temperature</span><span class="o">;</span>
+        <span class="o">}</span>
+        
+        <span class="n">display</span><span class="o">();</span>
+    <span class="o">}</span>
+    
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">display</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"\n=== Weather Statistics ==="</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Avg temperature: "</span> <span class="o">+</span> <span class="o">(</span><span class="n">tempSum</span> <span class="o">/</span> <span class="n">numReadings</span><span class="o">)</span> <span class="o">+</span> <span class="s">"°F"</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Max temperature: "</span> <span class="o">+</span> <span class="n">maxTemp</span> <span class="o">+</span> <span class="s">"°F"</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Min temperature: "</span> <span class="o">+</span> <span class="n">minTemp</span> <span class="o">+</span> <span class="s">"°F"</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="c1">// Observer for weather alerts</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">WeatherAlertSystem</span> <span class="kd">implements</span> <span class="nc">WeatherObserver</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kt">float</span> <span class="n">previousPressure</span> <span class="o">=</span> <span class="mf">0.0f</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="kt">float</span> <span class="no">STORM_THRESHOLD</span> <span class="o">=</span> <span class="mf">29.2f</span><span class="o">;</span>
+    
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">update</span><span class="o">(</span><span class="kt">float</span> <span class="n">temperature</span><span class="o">,</span> <span class="kt">float</span> <span class="n">humidity</span><span class="o">,</span> <span class="kt">float</span> <span class="n">pressure</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// Check for rapid pressure drop indicating storms</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">previousPressure</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">pressure</span> <span class="o">&lt;</span> <span class="n">previousPressure</span> <span class="o">-</span> <span class="mf">0.5</span><span class="o">)</span> <span class="o">{</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"\n⚠️  WEATHER ALERT: Rapid pressure drop detected!"</span><span class="o">);</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Possible storm approaching."</span><span class="o">);</span>
+        <span class="o">}</span>
+        
+        <span class="k">if</span> <span class="o">(</span><span class="n">pressure</span> <span class="o">&lt;</span> <span class="no">STORM_THRESHOLD</span><span class="o">)</span> <span class="o">{</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"\n⚠️  WEATHER ALERT: Low pressure system!"</span><span class="o">);</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Storm conditions likely."</span><span class="o">);</span>
+        <span class="o">}</span>
+        
+        <span class="k">if</span> <span class="o">(</span><span class="n">temperature</span> <span class="o">&gt;</span> <span class="mi">95</span><span class="o">)</span> <span class="o">{</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"\n⚠️  HEAT ADVISORY: Temperature exceeds 95°F"</span><span class="o">);</span>
+        <span class="o">}</span>
+        
+        <span class="n">previousPressure</span> <span class="o">=</span> <span class="n">pressure</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="c1">// Usage demonstration</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">WeatherMonitoringApp</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// Create the weather station</span>
+        <span class="nc">WeatherStation</span> <span class="n">weatherStation</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">WeatherStation</span><span class="o">();</span>
+        
+        <span class="c1">// Create different displays and systems</span>
+        <span class="nc">CurrentConditionsDisplay</span> <span class="n">currentDisplay</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">CurrentConditionsDisplay</span><span class="o">();</span>
+        <span class="nc">StatisticsDisplay</span> <span class="n">statisticsDisplay</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">StatisticsDisplay</span><span class="o">();</span>
+        <span class="nc">WeatherAlertSystem</span> <span class="n">alertSystem</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">WeatherAlertSystem</span><span class="o">();</span>
+        
+        <span class="c1">// Register all observers</span>
+        <span class="n">weatherStation</span><span class="o">.</span><span class="na">registerObserver</span><span class="o">(</span><span class="n">currentDisplay</span><span class="o">);</span>
+        <span class="n">weatherStation</span><span class="o">.</span><span class="na">registerObserver</span><span class="o">(</span><span class="n">statisticsDisplay</span><span class="o">);</span>
+        <span class="n">weatherStation</span><span class="o">.</span><span class="na">registerObserver</span><span class="o">(</span><span class="n">alertSystem</span><span class="o">);</span>
+        
+        <span class="c1">// Simulate weather updates</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Weather Station Starting...\n"</span><span class="o">);</span>
+        
+        <span class="n">weatherStation</span><span class="o">.</span><span class="na">setMeasurements</span><span class="o">(</span><span class="mi">80</span><span class="o">,</span> <span class="mi">65</span><span class="o">,</span> <span class="mf">30.4f</span><span class="o">);</span>
+        <span class="nc">Thread</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="mi">2000</span><span class="o">);</span> <span class="c1">// Simulate time passing</span>
+        
+        <span class="n">weatherStation</span><span class="o">.</span><span class="na">setMeasurements</span><span class="o">(</span><span class="mi">82</span><span class="o">,</span> <span class="mi">70</span><span class="o">,</span> <span class="mf">29.9f</span><span class="o">);</span>
+        <span class="nc">Thread</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="mi">2000</span><span class="o">);</span>
+        
+        <span class="n">weatherStation</span><span class="o">.</span><span class="na">setMeasurements</span><span class="o">(</span><span class="mi">78</span><span class="o">,</span> <span class="mi">75</span><span class="o">,</span> <span class="mf">29.2f</span><span class="o">);</span>
+        <span class="nc">Thread</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="mi">2000</span><span class="o">);</span>
+        
+        <span class="c1">// Simulate severe weather</span>
+        <span class="n">weatherStation</span><span class="o">.</span><span class="na">setMeasurements</span><span class="o">(</span><span class="mi">96</span><span class="o">,</span> <span class="mi">85</span><span class="o">,</span> <span class="mf">28.5f</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div> <p>This implementation shows how the Observer pattern creates a loosely coupled system. The <code class="language-plaintext highlighter-rouge">WeatherStation</code> doesn’t need to know anything about how the displays work or what they do with the data. New observers can be added without modifying the station’s code - perhaps a <code class="language-plaintext highlighter-rouge">MobileAppNotifier</code> or a <code class="language-plaintext highlighter-rouge">WeatherAPIPublisher</code>.</p> <p>The Observer pattern is fundamental to modern software architecture. It’s the foundation of:</p> <ul> <li>Event handling in GUI frameworks</li> <li>The Model-View-Controller (MVC) architecture</li> <li>Reactive programming libraries like RxJava or React</li> <li>Message queuing systems</li> <li>WebSocket connections for real-time updates</li> </ul> <h3 id="the-decorator-pattern-flexible-feature-composition">The Decorator Pattern: Flexible Feature Composition</h3> <p>Imagine you’re at a coffee shop. You start with a simple espresso, then add steamed milk to make a latte, then add vanilla syrup, and finally top it with whipped cream. Each addition wraps around your drink, adding new features and cost. This is exactly how the Decorator pattern works.</p> <p>Let’s build a notification system that can enhance messages with various features:</p> <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Component interface - the base notification</span>
+<span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Notification</span> <span class="o">{</span>
+    <span class="nc">String</span> <span class="nf">getMessage</span><span class="o">();</span>
+    <span class="kt">void</span> <span class="nf">send</span><span class="o">();</span>
+    <span class="kt">double</span> <span class="nf">getCost</span><span class="o">();</span> <span class="c1">// Cost of sending the notification</span>
+<span class="o">}</span>
+
+<span class="c1">// Concrete component - basic email notification</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">EmailNotification</span> <span class="kd">implements</span> <span class="nc">Notification</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">recipient</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">message</span><span class="o">;</span>
+    
+    <span class="kd">public</span> <span class="nf">EmailNotification</span><span class="o">(</span><span class="nc">String</span> <span class="n">recipient</span><span class="o">,</span> <span class="nc">String</span> <span class="n">message</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">recipient</span> <span class="o">=</span> <span class="n">recipient</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">message</span> <span class="o">=</span> <span class="n">message</span><span class="o">;</span>
+    <span class="o">}</span>
+    
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getMessage</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">message</span><span class="o">;</span>
+    <span class="o">}</span>
+    
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">send</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Sending email to: "</span> <span class="o">+</span> <span class="n">recipient</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Message: "</span> <span class="o">+</span> <span class="n">message</span><span class="o">);</span>
+    <span class="o">}</span>
+    
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">double</span> <span class="nf">getCost</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="mf">0.01</span><span class="o">;</span> <span class="c1">// Basic email cost</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="c1">// Base decorator class</span>
+<span class="kd">public</span> <span class="kd">abstract</span> <span class="kd">class</span> <span class="nc">NotificationDecorator</span> <span class="kd">implements</span> <span class="nc">Notification</span> <span class="o">{</span>
+    <span class="kd">protected</span> <span class="nc">Notification</span> <span class="n">wrappedNotification</span><span class="o">;</span>
+    
+    <span class="kd">public</span> <span class="nf">NotificationDecorator</span><span class="o">(</span><span class="nc">Notification</span> <span class="n">notification</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">wrappedNotification</span> <span class="o">=</span> <span class="n">notification</span><span class="o">;</span>
+    <span class="o">}</span>
+    
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getMessage</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">wrappedNotification</span><span class="o">.</span><span class="na">getMessage</span><span class="o">();</span>
+    <span class="o">}</span>
+    
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">send</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">wrappedNotification</span><span class="o">.</span><span class="na">send</span><span class="o">();</span>
+    <span class="o">}</span>
+    
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">double</span> <span class="nf">getCost</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">wrappedNotification</span><span class="o">.</span><span class="na">getCost</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="c1">// Concrete decorator - adds encryption</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">EncryptedNotification</span> <span class="kd">extends</span> <span class="nc">NotificationDecorator</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">encryptionKey</span><span class="o">;</span>
+    
+    <span class="kd">public</span> <span class="nf">EncryptedNotification</span><span class="o">(</span><span class="nc">Notification</span> <span class="n">notification</span><span class="o">,</span> <span class="nc">String</span> <span class="n">key</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">super</span><span class="o">(</span><span class="n">notification</span><span class="o">);</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">encryptionKey</span> <span class="o">=</span> <span class="n">key</span><span class="o">;</span>
+    <span class="o">}</span>
+    
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getMessage</span><span class="o">()</span> <span class="o">{</span>
+        <span class="c1">// In real implementation, this would actually encrypt</span>
+        <span class="k">return</span> <span class="s">"[ENCRYPTED with key: "</span> <span class="o">+</span> <span class="n">encryptionKey</span> <span class="o">+</span> <span class="s">"] "</span> <span class="o">+</span> 
+               <span class="kd">super</span><span class="o">.</span><span class="na">getMessage</span><span class="o">();</span>
+    <span class="o">}</span>
+    
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">send</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"🔒 Applying end-to-end encryption..."</span><span class="o">);</span>
+        <span class="kd">super</span><span class="o">.</span><span class="na">send</span><span class="o">();</span>
+    <span class="o">}</span>
+    
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">double</span> <span class="nf">getCost</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="kd">super</span><span class="o">.</span><span class="na">getCost</span><span class="o">()</span> <span class="o">+</span> <span class="mf">0.05</span><span class="o">;</span> <span class="c1">// Encryption adds cost</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="c1">// Concrete decorator - adds priority delivery</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">PriorityNotification</span> <span class="kd">extends</span> <span class="nc">NotificationDecorator</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">priorityLevel</span><span class="o">;</span>
+    
+    <span class="kd">public</span> <span class="nf">PriorityNotification</span><span class="o">(</span><span class="nc">Notification</span> <span class="n">notification</span><span class="o">,</span> <span class="kt">int</span> <span class="n">level</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">super</span><span class="o">(</span><span class="n">notification</span><span class="o">);</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">priorityLevel</span> <span class="o">=</span> <span class="n">level</span><span class="o">;</span>
+    <span class="o">}</span>
+    
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">send</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"🚀 Priority Level "</span> <span class="o">+</span> <span class="n">priorityLevel</span> <span class="o">+</span> <span class="s">" - Expedited Delivery"</span><span class="o">);</span>
+        <span class="kd">super</span><span class="o">.</span><span class="na">send</span><span class="o">();</span>
+    <span class="o">}</span>
+    
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">double</span> <span class="nf">getCost</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="kd">super</span><span class="o">.</span><span class="na">getCost</span><span class="o">()</span> <span class="o">+</span> <span class="o">(</span><span class="mf">0.10</span> <span class="o">*</span> <span class="n">priorityLevel</span><span class="o">);</span> <span class="c1">// Higher priority costs more</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="c1">// Concrete decorator - adds read receipts</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">TrackedNotification</span> <span class="kd">extends</span> <span class="nc">NotificationDecorator</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">trackingId</span><span class="o">;</span>
+    
+    <span class="kd">public</span> <span class="nf">TrackedNotification</span><span class="o">(</span><span class="nc">Notification</span> <span class="n">notification</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">super</span><span class="o">(</span><span class="n">notification</span><span class="o">);</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">trackingId</span> <span class="o">=</span> <span class="n">generateTrackingId</span><span class="o">();</span>
+    <span class="o">}</span>
+    
+    <span class="kd">private</span> <span class="nc">String</span> <span class="nf">generateTrackingId</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="s">"TRK-"</span> <span class="o">+</span> <span class="nc">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">();</span>
+    <span class="o">}</span>
+    
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">send</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"📍 Tracking enabled: "</span> <span class="o">+</span> <span class="n">trackingId</span><span class="o">);</span>
+        <span class="kd">super</span><span class="o">.</span><span class="na">send</span><span class="o">();</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"✓ Delivery confirmed for tracking ID: "</span> <span class="o">+</span> <span class="n">trackingId</span><span class="o">);</span>
+    <span class="o">}</span>
+    
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">double</span> <span class="nf">getCost</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="kd">super</span><span class="o">.</span><span class="na">getCost</span><span class="o">()</span> <span class="o">+</span> <span class="mf">0.03</span><span class="o">;</span> <span class="c1">// Tracking adds cost</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="c1">// Concrete decorator - adds SMS backup</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">SMSBackupNotification</span> <span class="kd">extends</span> <span class="nc">NotificationDecorator</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">phoneNumber</span><span class="o">;</span>
+    
+    <span class="kd">public</span> <span class="nf">SMSBackupNotification</span><span class="o">(</span><span class="nc">Notification</span> <span class="n">notification</span><span class="o">,</span> <span class="nc">String</span> <span class="n">phone</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">super</span><span class="o">(</span><span class="n">notification</span><span class="o">);</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">phoneNumber</span> <span class="o">=</span> <span class="n">phone</span><span class="o">;</span>
+    <span class="o">}</span>
+    
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">send</span><span class="o">()</span> <span class="o">{</span>
+        <span class="kd">super</span><span class="o">.</span><span class="na">send</span><span class="o">();</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"📱 SMS backup sent to: "</span> <span class="o">+</span> <span class="n">phoneNumber</span><span class="o">);</span>
+    <span class="o">}</span>
+    
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">double</span> <span class="nf">getCost</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="kd">super</span><span class="o">.</span><span class="na">getCost</span><span class="o">()</span> <span class="o">+</span> <span class="mf">0.15</span><span class="o">;</span> <span class="c1">// SMS is expensive</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="c1">// Usage example</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">NotificationService</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// Simple email</span>
+        <span class="nc">Notification</span> <span class="n">simple</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">EmailNotification</span><span class="o">(</span><span class="s">"user@example.com"</span><span class="o">,</span> <span class="s">"Hello!"</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"=== Simple Email ==="</span><span class="o">);</span>
+        <span class="n">simple</span><span class="o">.</span><span class="na">send</span><span class="o">();</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Cost: $"</span> <span class="o">+</span> <span class="n">simple</span><span class="o">.</span><span class="na">getCost</span><span class="o">()</span> <span class="o">+</span> <span class="s">"\n"</span><span class="o">);</span>
+        
+        <span class="c1">// Email with encryption and tracking</span>
+        <span class="nc">Notification</span> <span class="n">secure</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">TrackedNotification</span><span class="o">(</span>
+            <span class="k">new</span> <span class="nf">EncryptedNotification</span><span class="o">(</span>
+                <span class="k">new</span> <span class="nf">EmailNotification</span><span class="o">(</span><span class="s">"ceo@company.com"</span><span class="o">,</span> <span class="s">"Confidential Report"</span><span class="o">),</span>
+                <span class="s">"AES-256"</span>
+            <span class="o">)</span>
+        <span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"=== Secure Tracked Email ==="</span><span class="o">);</span>
+        <span class="n">secure</span><span class="o">.</span><span class="na">send</span><span class="o">();</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Cost: $"</span> <span class="o">+</span> <span class="n">secure</span><span class="o">.</span><span class="na">getCost</span><span class="o">()</span> <span class="o">+</span> <span class="s">"\n"</span><span class="o">);</span>
+        
+        <span class="c1">// High priority with SMS backup</span>
+        <span class="nc">Notification</span> <span class="n">urgent</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">SMSBackupNotification</span><span class="o">(</span>
+            <span class="k">new</span> <span class="nf">PriorityNotification</span><span class="o">(</span>
+                <span class="k">new</span> <span class="nf">EncryptedNotification</span><span class="o">(</span>
+                    <span class="k">new</span> <span class="nf">EmailNotification</span><span class="o">(</span><span class="s">"doctor@hospital.com"</span><span class="o">,</span> <span class="s">"Emergency Alert"</span><span class="o">),</span>
+                    <span class="s">"RSA-2048"</span>
+                <span class="o">),</span>
+                <span class="mi">3</span> <span class="c1">// Highest priority</span>
+            <span class="o">),</span>
+            <span class="s">"+1-555-0123"</span>
+        <span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"=== Urgent Medical Alert ==="</span><span class="o">);</span>
+        <span class="n">urgent</span><span class="o">.</span><span class="na">send</span><span class="o">();</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Cost: $"</span> <span class="o">+</span> <span class="n">urgent</span><span class="o">.</span><span class="na">getCost</span><span class="o">()</span> <span class="o">+</span> <span class="s">"\n"</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div> <p>The Decorator pattern shines when you need to add responsibilities to objects dynamically. Real-world applications include:</p> <ul> <li>Input/output streams in Java (BufferedReader wrapping FileReader)</li> <li>Middleware in web frameworks (authentication, logging, compression)</li> <li>UI components (borders, scrollbars, shadows added to windows)</li> <li>Game power-ups and character enhancements</li> </ul> <h2 id="combining-patterns-building-complete-systems">Combining Patterns: Building Complete Systems</h2> <p>Real applications rarely use patterns in isolation. Let’s see how multiple patterns work together by building a simplified ride-sharing system:</p> <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Strategy pattern for pricing algorithms</span>
+<span class="kd">public</span> <span class="kd">interface</span> <span class="nc">PricingStrategy</span> <span class="o">{</span>
+    <span class="kt">double</span> <span class="nf">calculatePrice</span><span class="o">(</span><span class="kt">double</span> <span class="n">distance</span><span class="o">,</span> <span class="kt">int</span> <span class="n">duration</span><span class="o">,</span> <span class="kt">boolean</span> <span class="n">isPeakHour</span><span class="o">);</span>
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">StandardPricing</span> <span class="kd">implements</span> <span class="nc">PricingStrategy</span> <span class="o">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">double</span> <span class="nf">calculatePrice</span><span class="o">(</span><span class="kt">double</span> <span class="n">distance</span><span class="o">,</span> <span class="kt">int</span> <span class="n">duration</span><span class="o">,</span> <span class="kt">boolean</span> <span class="n">isPeakHour</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">double</span> <span class="n">basePrice</span> <span class="o">=</span> <span class="mf">2.50</span><span class="o">;</span>
+        <span class="kt">double</span> <span class="n">perMile</span> <span class="o">=</span> <span class="mf">1.50</span><span class="o">;</span>
+        <span class="kt">double</span> <span class="n">perMinute</span> <span class="o">=</span> <span class="mf">0.25</span><span class="o">;</span>
+        
+        <span class="kt">double</span> <span class="n">price</span> <span class="o">=</span> <span class="n">basePrice</span> <span class="o">+</span> <span class="o">(</span><span class="n">distance</span> <span class="o">*</span> <span class="n">perMile</span><span class="o">)</span> <span class="o">+</span> <span class="o">(</span><span class="n">duration</span> <span class="o">*</span> <span class="n">perMinute</span><span class="o">);</span>
+        
+        <span class="k">if</span> <span class="o">(</span><span class="n">isPeakHour</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">price</span> <span class="o">*=</span> <span class="mf">1.5</span><span class="o">;</span> <span class="c1">// 50% surge during peak hours</span>
+        <span class="o">}</span>
+        
+        <span class="k">return</span> <span class="n">price</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">LuxuryPricing</span> <span class="kd">implements</span> <span class="nc">PricingStrategy</span> <span class="o">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">double</span> <span class="nf">calculatePrice</span><span class="o">(</span><span class="kt">double</span> <span class="n">distance</span><span class="o">,</span> <span class="kt">int</span> <span class="n">duration</span><span class="o">,</span> <span class="kt">boolean</span> <span class="n">isPeakHour</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">double</span> <span class="n">basePrice</span> <span class="o">=</span> <span class="mf">5.00</span><span class="o">;</span>
+        <span class="kt">double</span> <span class="n">perMile</span> <span class="o">=</span> <span class="mf">3.00</span><span class="o">;</span>
+        <span class="kt">double</span> <span class="n">perMinute</span> <span class="o">=</span> <span class="mf">0.50</span><span class="o">;</span>
+        
+        <span class="kt">double</span> <span class="n">price</span> <span class="o">=</span> <span class="n">basePrice</span> <span class="o">+</span> <span class="o">(</span><span class="n">distance</span> <span class="o">*</span> <span class="n">perMile</span><span class="o">)</span> <span class="o">+</span> <span class="o">(</span><span class="n">duration</span> <span class="o">*</span> <span class="n">perMinute</span><span class="o">);</span>
+        
+        <span class="k">if</span> <span class="o">(</span><span class="n">isPeakHour</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">price</span> <span class="o">*=</span> <span class="mf">1.3</span><span class="o">;</span> <span class="c1">// Lower surge for luxury rides</span>
+        <span class="o">}</span>
+        
+        <span class="k">return</span> <span class="nc">Math</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="n">price</span><span class="o">,</span> <span class="mf">15.00</span><span class="o">);</span> <span class="c1">// Minimum fare for luxury</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="c1">// Observer pattern for ride status updates</span>
+<span class="kd">public</span> <span class="kd">interface</span> <span class="nc">RideObserver</span> <span class="o">{</span>
+    <span class="kt">void</span> <span class="nf">updateRideStatus</span><span class="o">(</span><span class="nc">String</span> <span class="n">rideId</span><span class="o">,</span> <span class="nc">RideStatus</span> <span class="n">status</span><span class="o">,</span> <span class="nc">String</span> <span class="n">details</span><span class="o">);</span>
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">PassengerApp</span> <span class="kd">implements</span> <span class="nc">RideObserver</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">passengerId</span><span class="o">;</span>
+    
+    <span class="kd">public</span> <span class="nf">PassengerApp</span><span class="o">(</span><span class="nc">String</span> <span class="n">passengerId</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">passengerId</span> <span class="o">=</span> <span class="n">passengerId</span><span class="o">;</span>
+    <span class="o">}</span>
+    
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">updateRideStatus</span><span class="o">(</span><span class="nc">String</span> <span class="n">rideId</span><span class="o">,</span> <span class="nc">RideStatus</span> <span class="n">status</span><span class="o">,</span> <span class="nc">String</span> <span class="n">details</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"📱 Passenger App Update:"</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"   Status: "</span> <span class="o">+</span> <span class="n">status</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"   "</span> <span class="o">+</span> <span class="n">details</span><span class="o">);</span>
+        
+        <span class="c1">// In real app, this would update UI and send push notifications</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">status</span> <span class="o">==</span> <span class="nc">RideStatus</span><span class="o">.</span><span class="na">DRIVER_ARRIVED</span><span class="o">)</span> <span class="o">{</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"   🚗 Your driver has arrived!"</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">DriverApp</span> <span class="kd">implements</span> <span class="nc">RideObserver</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">driverId</span><span class="o">;</span>
+    
+    <span class="kd">public</span> <span class="nf">DriverApp</span><span class="o">(</span><span class="nc">String</span> <span class="n">driverId</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">driverId</span> <span class="o">=</span> <span class="n">driverId</span><span class="o">;</span>
+    <span class="o">}</span>
+    
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">updateRideStatus</span><span class="o">(</span><span class="nc">String</span> <span class="n">rideId</span><span class="o">,</span> <span class="nc">RideStatus</span> <span class="n">status</span><span class="o">,</span> <span class="nc">String</span> <span class="n">details</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"🚗 Driver App Update:"</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"   Status: "</span> <span class="o">+</span> <span class="n">status</span><span class="o">);</span>
+        
+        <span class="k">if</span> <span class="o">(</span><span class="n">status</span> <span class="o">==</span> <span class="nc">RideStatus</span><span class="o">.</span><span class="na">RIDE_REQUESTED</span><span class="o">)</span> <span class="o">{</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"   💰 New ride available! "</span> <span class="o">+</span> <span class="n">details</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="c1">// Singleton for the ride matching system</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">RideDispatcher</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="nc">RideDispatcher</span> <span class="n">instance</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="nc">Object</span> <span class="n">lock</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Object</span><span class="o">();</span>
+    
+    <span class="kd">private</span> <span class="nc">Map</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">Ride</span><span class="o">&gt;</span> <span class="n">activeRides</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">Queue</span><span class="o">&lt;</span><span class="nc">Driver</span><span class="o">&gt;</span> <span class="n">availableDrivers</span><span class="o">;</span>
+    
+    <span class="kd">private</span> <span class="nf">RideDispatcher</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">activeRides</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ConcurrentHashMap</span><span class="o">&lt;&gt;();</span>
+        <span class="n">availableDrivers</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ConcurrentLinkedQueue</span><span class="o">&lt;&gt;();</span>
+    <span class="o">}</span>
+    
+    <span class="kd">public</span> <span class="kd">static</span> <span class="nc">RideDispatcher</span> <span class="nf">getInstance</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">instance</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="kd">synchronized</span> <span class="o">(</span><span class="n">lock</span><span class="o">)</span> <span class="o">{</span>
+                <span class="k">if</span> <span class="o">(</span><span class="n">instance</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+                    <span class="n">instance</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">RideDispatcher</span><span class="o">();</span>
+                <span class="o">}</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="n">instance</span><span class="o">;</span>
+    <span class="o">}</span>
+    
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">registerDriver</span><span class="o">(</span><span class="nc">Driver</span> <span class="n">driver</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">availableDrivers</span><span class="o">.</span><span class="na">offer</span><span class="o">(</span><span class="n">driver</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Driver registered: "</span> <span class="o">+</span> <span class="n">driver</span><span class="o">.</span><span class="na">getName</span><span class="o">());</span>
+    <span class="o">}</span>
+    
+    <span class="kd">public</span> <span class="nc">Ride</span> <span class="nf">requestRide</span><span class="o">(</span><span class="nc">Passenger</span> <span class="n">passenger</span><span class="o">,</span> <span class="nc">Location</span> <span class="n">pickup</span><span class="o">,</span> <span class="nc">Location</span> <span class="n">destination</span><span class="o">,</span> 
+                           <span class="nc">RideType</span> <span class="n">rideType</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">Driver</span> <span class="n">driver</span> <span class="o">=</span> <span class="n">findNearestDriver</span><span class="o">(</span><span class="n">pickup</span><span class="o">);</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">driver</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"No drivers available!"</span><span class="o">);</span>
+            <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+        <span class="o">}</span>
+        
+        <span class="nc">Ride</span> <span class="n">ride</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Ride</span><span class="o">(</span><span class="n">passenger</span><span class="o">,</span> <span class="n">driver</span><span class="o">,</span> <span class="n">pickup</span><span class="o">,</span> <span class="n">destination</span><span class="o">,</span> <span class="n">rideType</span><span class="o">);</span>
+        <span class="n">activeRides</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">ride</span><span class="o">.</span><span class="na">getId</span><span class="o">(),</span> <span class="n">ride</span><span class="o">);</span>
+        
+        <span class="c1">// Notify observers about new ride</span>
+        <span class="n">ride</span><span class="o">.</span><span class="na">updateStatus</span><span class="o">(</span><span class="nc">RideStatus</span><span class="o">.</span><span class="na">RIDE_REQUESTED</span><span class="o">,</span> 
+                         <span class="s">"Pickup: "</span> <span class="o">+</span> <span class="n">pickup</span> <span class="o">+</span> <span class="s">", Destination: "</span> <span class="o">+</span> <span class="n">destination</span><span class="o">);</span>
+        
+        <span class="k">return</span> <span class="n">ride</span><span class="o">;</span>
+    <span class="o">}</span>
+    
+    <span class="kd">private</span> <span class="nc">Driver</span> <span class="nf">findNearestDriver</span><span class="o">(</span><span class="nc">Location</span> <span class="n">pickup</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// Simplified - just returns first available driver</span>
+        <span class="k">return</span> <span class="n">availableDrivers</span><span class="o">.</span><span class="na">poll</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="c1">// Main ride class combining everything</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Ride</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">id</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">Passenger</span> <span class="n">passenger</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">Driver</span> <span class="n">driver</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">Location</span> <span class="n">pickup</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">Location</span> <span class="n">destination</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">RideType</span> <span class="n">rideType</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">RideStatus</span> <span class="n">status</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">PricingStrategy</span> <span class="n">pricingStrategy</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">RideObserver</span><span class="o">&gt;</span> <span class="n">observers</span><span class="o">;</span>
+    
+    <span class="kd">public</span> <span class="nf">Ride</span><span class="o">(</span><span class="nc">Passenger</span> <span class="n">passenger</span><span class="o">,</span> <span class="nc">Driver</span> <span class="n">driver</span><span class="o">,</span> <span class="nc">Location</span> <span class="n">pickup</span><span class="o">,</span> 
+                <span class="nc">Location</span> <span class="n">destination</span><span class="o">,</span> <span class="nc">RideType</span> <span class="n">rideType</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">id</span> <span class="o">=</span> <span class="n">generateId</span><span class="o">();</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">passenger</span> <span class="o">=</span> <span class="n">passenger</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">driver</span> <span class="o">=</span> <span class="n">driver</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">pickup</span> <span class="o">=</span> <span class="n">pickup</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">destination</span> <span class="o">=</span> <span class="n">destination</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">rideType</span> <span class="o">=</span> <span class="n">rideType</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">status</span> <span class="o">=</span> <span class="nc">RideStatus</span><span class="o">.</span><span class="na">MATCHED</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">observers</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;();</span>
+        
+        <span class="c1">// Set pricing strategy based on ride type</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">pricingStrategy</span> <span class="o">=</span> <span class="n">rideType</span> <span class="o">==</span> <span class="nc">RideType</span><span class="o">.</span><span class="na">LUXURY</span> <span class="o">?</span> 
+                              <span class="k">new</span> <span class="nf">LuxuryPricing</span><span class="o">()</span> <span class="o">:</span> <span class="k">new</span> <span class="nc">StandardPricing</span><span class="o">();</span>
+        
+        <span class="c1">// Register observers</span>
+        <span class="n">observers</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">passenger</span><span class="o">.</span><span class="na">getApp</span><span class="o">());</span>
+        <span class="n">observers</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">driver</span><span class="o">.</span><span class="na">getApp</span><span class="o">());</span>
+    <span class="o">}</span>
+    
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">updateStatus</span><span class="o">(</span><span class="nc">RideStatus</span> <span class="n">newStatus</span><span class="o">,</span> <span class="nc">String</span> <span class="n">details</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">status</span> <span class="o">=</span> <span class="n">newStatus</span><span class="o">;</span>
+        <span class="n">notifyObservers</span><span class="o">(</span><span class="n">details</span><span class="o">);</span>
+    <span class="o">}</span>
+    
+    <span class="kd">private</span> <span class="kt">void</span> <span class="nf">notifyObservers</span><span class="o">(</span><span class="nc">String</span> <span class="n">details</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">for</span> <span class="o">(</span><span class="nc">RideObserver</span> <span class="n">observer</span> <span class="o">:</span> <span class="n">observers</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">observer</span><span class="o">.</span><span class="na">updateRideStatus</span><span class="o">(</span><span class="n">id</span><span class="o">,</span> <span class="n">status</span><span class="o">,</span> <span class="n">details</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+    
+    <span class="kd">public</span> <span class="kt">double</span> <span class="nf">calculateFare</span><span class="o">()</span> <span class="o">{</span>
+        <span class="kt">double</span> <span class="n">distance</span> <span class="o">=</span> <span class="n">calculateDistance</span><span class="o">(</span><span class="n">pickup</span><span class="o">,</span> <span class="n">destination</span><span class="o">);</span>
+        <span class="kt">int</span> <span class="n">duration</span> <span class="o">=</span> <span class="n">estimateDuration</span><span class="o">(</span><span class="n">distance</span><span class="o">);</span>
+        <span class="kt">boolean</span> <span class="n">isPeakHour</span> <span class="o">=</span> <span class="n">isPeakHour</span><span class="o">();</span>
+        
+        <span class="k">return</span> <span class="n">pricingStrategy</span><span class="o">.</span><span class="na">calculatePrice</span><span class="o">(</span><span class="n">distance</span><span class="o">,</span> <span class="n">duration</span><span class="o">,</span> <span class="n">isPeakHour</span><span class="o">);</span>
+    <span class="o">}</span>
+    
+    <span class="c1">// Helper methods...</span>
+<span class="o">}</span>
+</code></pre></div></div> <p>This example demonstrates how patterns complement each other:</p> <ul> <li> <strong>Singleton</strong> ensures one central dispatcher managing all rides</li> <li> <strong>Strategy</strong> allows flexible pricing without modifying core ride logic</li> <li> <strong>Observer</strong> keeps all parties informed of ride status changes</li> </ul> <h2 id="best-practices-and-common-pitfalls">Best Practices and Common Pitfalls</h2> <p>As you begin implementing design patterns, keep these guidelines in mind:</p> <h3 id="start-simple">Start Simple</h3> <p>Don’t try to use every pattern you learn immediately. Start with one pattern that solves a real problem in your code. Understand it thoroughly before moving to the next.</p> <h3 id="recognize-the-problem-first">Recognize the Problem First</h3> <p>Never apply a pattern just because you can. Each pattern solves specific problems. If you don’t have that problem, you don’t need that pattern. Ask yourself: “What problem am I trying to solve?” before reaching for a pattern.</p> <h3 id="favor-composition-over-inheritance">Favor Composition Over Inheritance</h3> <p>Many patterns (like Strategy and Decorator) use composition rather than inheritance. This approach provides more flexibility and avoids the fragile base class problem.</p> <h3 id="keep-it-testable">Keep It Testable</h3> <p>Good use of patterns improves testability. You can easily mock strategies, inject test observers, or create test decorators. If your pattern implementation makes testing harder, reconsider your approach.</p> <h3 id="document-your-intent">Document Your Intent</h3> <p>When you use a pattern, make it clear in your code. Comments, class names, and documentation should indicate which pattern you’re using and why. Future maintainers (including yourself) will thank you.</p> <h2 id="learning-resources-and-next-steps">Learning Resources and Next Steps</h2> <p>To deepen your understanding of design patterns, I recommend these resources:</p> <ol> <li> <strong>“Head First Design Patterns”</strong> by Eric Freeman and Elisabeth Robson - An approachable, visual introduction perfect for students</li> <li> <strong>Refactoring Guru</strong> (https://refactoring.guru/design-patterns) - Excellent visual explanations with code examples in multiple languages</li> <li> <strong>“Design Patterns: Elements of Reusable Object-Oriented Software”</strong> by the Gang of Four - The original patterns book, more technical but comprehensive</li> </ol> <p>For hands-on practice:</p> <ul> <li>Start with your current projects. Look for code smells like duplicate code, large switch statements, or tightly coupled classes</li> <li>Implement each pattern in a small, focused project before using it in larger applications</li> <li>Study open-source projects to see patterns in real-world use</li> <li>Join coding communities and participate in code reviews to learn from others’ pattern usage</li> </ul> <h2 id="conclusion-patterns-as-a-professional-mindset">Conclusion: Patterns as a Professional Mindset</h2> <p>Design patterns represent more than just coding techniques - they embody a professional approach to software development. They teach you to think beyond immediate requirements, to anticipate change, and to value clarity and maintainability.</p> <p>As you progress from student to professional developer, patterns become part of your mental toolkit. You’ll start recognizing situations where a particular pattern fits naturally. You’ll communicate more effectively with other developers using the shared vocabulary patterns provide. Most importantly, you’ll write code that stands the test of time.</p> <p>Remember that mastering patterns is a journey, not a destination. Even experienced developers continually refine their understanding and discover new ways to apply these timeless solutions. The key is to start practicing now, learn from your mistakes, and gradually build your expertise.</p> <p>The transition from writing code that merely works to writing code that thrives under change is what separates amateur programmers from software engineers. Design patterns are your guide on this journey. Use them wisely, and they’ll serve you throughout your career in building software that’s not just functional, but truly well-designed.</p> <hr> </div> </article> <br> <hr> <br> <h2 class="text-3xl font-semibold mb-4 mt-12">Enjoy Reading This Article?</h2> <p class="mb-2">Here are some more articles you might like to read next:</p> <ul class="list-disc pl-7 my-3 space-y-2 marker:text-[var(--global-theme-color)]"> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2026/building-fast-1brc-csharp-apple-silicon/">Building a fast 1BRC solver in C# on Apple Silicon</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2025/memory-management-production-silent-killers/">Memory Management in Production: Avoiding the Silent Killers</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2025/vibe-coding/">Growing as a Software Engineer in the Age of LLMs and Vibe Coding</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2025/how-to-handle-hallucinations/">Taming the Imagination: A Comprehensive Guide to Handling Hallucinations and Implementing Guardrails in Agentic AI</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2025/intro-to-agentic-ai/">Building an Agentic AI Analytics Dashboard: A Deep Dive with LangChain, LangGraph, and Fine-tuned LLAMA</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2025/intro-to-nar/">Neural Algorithmic Reasoning: Teaching Neural Networks to Think Like Algorithms</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2025/opentelemetry/">OpenTelemetry in Microservices: How We Transformed Our Observability Strategy</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2025/leveraging-ai-tools-software-engineering/">Using AI Tools in Software Engineering and Research Workflows</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2024/optimizing-dotnet-microservices-performance/">The Performance Crisis: How We Rescued a .NET 8 Microservice from 10 Critical Bottlenecks</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2024/zero-downtime/">Zero Downtime Deployments in Kubernetes: How We Keep Our Services Running While We Ship</a> </li> </ul> </div> </div> <footer class="fixed-bottom" role="contentinfo"> <div class="container mt-0"> © Copyright 2026 Tanzim Hossain Romel. © Tanzim Hossain Romel. Powered by <a href="https://jekyllrb.com/" target="_blank" rel="external nofollow noopener">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio" rel="external nofollow noopener" target="_blank">al-folio</a> theme. </div> </footer> <script>
+  window.alFolio = {
+    compatBootstrap: false
+  };
+</script> <script src="/assets/js/nav-toggle.js?v=141bd79a73ebc0f0b6ea58e440ae79fc"></script> <script defer src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script> <script defer src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script> <script defer src="/assets/js/masonry.js?v=e49affc7bd2646f6acdad1dbe02c2359" type="text/javascript"></script> <script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js" integrity="sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI=" crossorigin="anonymous"></script> <script src="/assets/al_math/js/mathjax-setup.js"></script> <script src="/assets/js/tooltips-setup.js?v=fe487e99db6c43751e6e7bdb2d6a0611"></script> <script src="/assets/js/no_defer.js?v=53b1b1a645525975c963ce8bf8bfefcf"></script> <script defer src="/assets/js/common.js?v=87baac90f765f2f3362dcf6aaf312a8a"></script> <script defer src="/assets/js/copy_code.js?v=c8a01c11a92744d44b093fc3bda915df" type="text/javascript"></script> <script defer src="/assets/js/jupyter_new_tab.js?v=896d254890d9b47f0281f63bfccf0dee"></script> <script async src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script> <script async src="https://badge.dimensions.ai/badge.js"></script> <script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script> <script defer src="/assets/al_img_tools/js/zoom.js"></script> <script defer src="/assets/js/progress-bar.js?v=499464c5c63ced6cf7ad62509f1e2610" type="text/javascript"></script> <script src="https://cdn.jsdelivr.net/npm/vanilla-back-to-top@7.2.1/dist/vanilla-back-to-top.min.js" integrity="sha256-uMJJ3EoTyfRBoTbR+lrfu1uRQ87RZG8AR3cVNuQVeFg=" crossorigin="anonymous"></script> <script>
+    addBackToTop();
+  </script> <script type="module" src="/assets/al_search/js/search/ninja-keys.min.js"></script> <ninja-keys hidebreadcrumbs noautoloadmdicons placeholder="Type to start searching"></ninja-keys> <script src="/assets/al_search/js/search-setup.js"></script> <script>
+// get the ninja-keys element
+const ninja = document.querySelector('ninja-keys');
+
+// add the home and posts menu items
+ninja.data = [{
+    id: "nav-about",
+    title: "about",
+    section: "Navigation",
+    handler: () => {
+      window.location.href = "/";
+    },
+  },{id: "nav-blog",
+          title: "blog",
+          description: "",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/blog/";
+          },
+        },{id: "nav-publications",
+          title: "publications",
+          description: "Publications.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/publications/";
+          },
+        },{id: "nav-research",
+          title: "research",
+          description: "Research on reliable AI agents, SRE-agent evaluation, ML ecosystem security, agent-choice auditing, and developer tools.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/research/";
+          },
+        },{id: "nav-projects",
+          title: "projects",
+          description: "Research and engineering projects.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/projects/";
+          },
+        },{id: "nav-cv",
+          title: "CV",
+          description: "Curriculum vitae.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/cv/";
+          },
+        },{id: "nav-contributions",
+          title: "contributions",
+          description: "Curated open-source contribution evidence across research infrastructure, frameworks, and language tooling.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/contributions/";
+          },
+        },{id: "post-building-a-fast-1brc-solver-in-c-on-apple-silicon",
+        
+          title: "Building a fast 1BRC solver in C# on Apple Silicon",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/building-fast-1brc-csharp-apple-silicon/";
+          
+        },
+      },{id: "post-memory-management-in-production-avoiding-the-silent-killers",
+        
+          title: "Memory Management in Production: Avoiding the Silent Killers",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/memory-management-production-silent-killers/";
+          
+        },
+      },{id: "post-growing-as-a-software-engineer-in-the-age-of-llms-and-vibe-coding",
+        
+          title: "Growing as a Software Engineer in the Age of LLMs and Vibe Coding...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/vibe-coding/";
+          
+        },
+      },{id: "post-taming-the-imagination-a-comprehensive-guide-to-handling-hallucinations-and-implementing-guardrails-in-agentic-ai",
+        
+          title: "Taming the Imagination: A Comprehensive Guide to Handling Hallucinations and Implementing Guardrails in...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/how-to-handle-hallucinations/";
+          
+        },
+      },{id: "post-building-an-agentic-ai-analytics-dashboard-a-deep-dive-with-langchain-langgraph-and-fine-tuned-llama",
+        
+          title: "Building an Agentic AI Analytics Dashboard: A Deep Dive with LangChain, LangGraph, and...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/intro-to-agentic-ai/";
+          
+        },
+      },{id: "post-neural-algorithmic-reasoning-teaching-neural-networks-to-think-like-algorithms",
+        
+          title: "Neural Algorithmic Reasoning: Teaching Neural Networks to Think Like Algorithms",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/intro-to-nar/";
+          
+        },
+      },{id: "post-opentelemetry-in-microservices-how-we-transformed-our-observability-strategy",
+        
+          title: "OpenTelemetry in Microservices: How We Transformed Our Observability Strategy",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/opentelemetry/";
+          
+        },
+      },{id: "post-using-ai-tools-in-software-engineering-and-research-workflows",
+        
+          title: "Using AI Tools in Software Engineering and Research Workflows",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/leveraging-ai-tools-software-engineering/";
+          
+        },
+      },{id: "post-the-performance-crisis-how-we-rescued-a-net-8-microservice-from-10-critical-bottlenecks",
+        
+          title: "The Performance Crisis: How We Rescued a .NET 8 Microservice from 10 Critical...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2024/optimizing-dotnet-microservices-performance/";
+          
+        },
+      },{id: "post-zero-downtime-deployments-in-kubernetes-how-we-keep-our-services-running-while-we-ship",
+        
+          title: "Zero Downtime Deployments in Kubernetes: How We Keep Our Services Running While We...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2024/zero-downtime/";
+          
+        },
+      },{id: "post-mastering-unit-testing-and-bdd-with-xunit-and-specflow-in-net-9-a-comprehensive-guide",
+        
+          title: "Mastering Unit Testing and BDD with xUnit and SpecFlow in .NET 9: A...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2024/dotnet-tests/";
+          
+        },
+      },{id: "post-design-patterns-your-first-step-toward-professional-software-engineering",
+        
+          title: "Design Patterns: Your First Step Toward Professional Software Engineering",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2024/design-patterns-professional-software-engineering/";
+          
+        },
+      },{id: "post-setting-up-github-actions-ci-cd-with-aws-a-practical-journey",
+        
+          title: "Setting Up GitHub Actions CI/CD with AWS: A Practical Journey",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2024/intro-to-ci-cd/";
+          
+        },
+      },{id: "post-the-clique-partition-problem-dividing-networks-into-perfect-communities",
+        
+          title: "The Clique Partition Problem: Dividing Networks into Perfect Communities",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2023/clique-partition-problem-graph-theory/";
+          
+        },
+      },{id: "post-advice-complexity-in-online-algorithms-when-knowing-the-future-makes-all-the-difference",
+        
+          title: "Advice Complexity in Online Algorithms: When Knowing the Future Makes All the Difference...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2023/advice-complexity-online-algorithms/";
+          
+        },
+      },{id: "post-getting-started-with-kubernetes-deploying-microservice-architectures-at-scale",
+        
+          title: "Getting Started with Kubernetes: Deploying Microservice Architectures at Scale",
+        
+        description: "A practical Kubernetes guide covering microservice deployment, service-mesh integration, observability, and the operational checks needed before production use.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2022/getting-started-with-kubernetes-microservices/";
+          
+        },
+      },{id: "post-understanding-xv6-a-practical-introduction-to-operating-systems",
+        
+          title: "Understanding xv6: A Practical Introduction to Operating Systems",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2022/understanding-xv6-operating-systems/";
+          
+        },
+      },{id: "post-getting-started-with-ns3-a-hands-on-guide-to-network-simulation",
+        
+          title: "Getting Started with NS3: A Hands-On Guide to Network Simulation",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2021/getting-started-with-ns3/";
+          
+        },
+      },{id: "news-completed-b-sc-in-computer-science-and-engineering-from-bangladesh-university-of-engineering-and-technology-with-a-gpa-of-3-53-4-00-link-https-cse-buet-ac-bd-academics-bsc",
+          title: 'Completed B.Sc in Computer Science and Engineering from Bangladesh University of Engineering and...',
+          description: "",
+          section: "News",},{id: "news-joined-iqvia-as-a-software-development-engineer-on-kpi-library-the-dynamic-reporting-layer-within-orchestrated-analytics-link-https-www-iqvia-com-solutions-commercialization-commercial-analytics-orchestrated-analytics",
+          title: 'Joined IQVIA as a Software Development Engineer on KPI Library, the dynamic reporting...',
+          description: "",
+          section: "News",},{id: "news-submitted-39-sentiment-analysis-of-anonymous-crisis-reports-in-bangladesh-39-to-acm-cscw-2025-analyzing-crowd-sourced-reports-from-bangladesh-39-s-2024-national-crisis-using-transformer-models-link-projects-research-ureporter",
+          title: 'Submitted &amp;#39;Sentiment Analysis of Anonymous Crisis Reports in Bangladesh&amp;#39; to ACM CSCW 2025,...',
+          description: "",
+          section: "News",},{id: "news-honored-with-the-iqvia-impact-program-silver-award-for-outstanding-performance-and-contributions-to-the-kpi-library-team-link-https-drive-google-com-file-d-1vc4e2roqepmbfs56olduih-ojdbok9sp-view-usp-share-link",
+          title: 'Honored with the IQVIA Impact Program Silver Award for outstanding performance and contributions...',
+          description: "",
+          section: "News",},{id: "news-submitted-39-an-empirical-study-on-remote-code-execution-in-machine-learning-model-hosting-ecosystems-39-to-the-mining-software-repositories-msr-2026-conference-first-large-scale-cross-platform-security-study-analyzing-45-000-repositories-across-5-major-ml-platforms-link-https-arxiv-org-abs-2601-14163",
+          title: 'Submitted &amp;#39;An Empirical Study on Remote Code Execution in Machine Learning Model Hosting...',
+          description: "",
+          section: "News",},{id: "news-resubmitted-39-an-empirical-study-on-remote-code-execution-in-machine-learning-model-hosting-ecosystems-39-to-acm-transactions-on-software-engineering-and-methodology-tosem-2026-preprint-available-on-arxiv-link-https-arxiv-org-abs-2601-14163",
+          title: 'Resubmitted &amp;#39;An Empirical Study on Remote Code Execution in Machine Learning Model Hosting...',
+          description: "",
+          section: "News",},{id: "news-started-a-remote-summer-research-internship-at-the-university-of-illinois-urbana-champaign-through-uiuc-summer-research-in-software-engineering-srse-2026-with-professor-tianyin-xu-link-https-uiuc-srse-github-io",
+          title: 'Started a remote summer research internship at the University of Illinois Urbana-Champaign through...',
+          description: "",
+          section: "News",},{id: "news-submitted-39-the-choice-can-be-the-attack-auditing-aligned-backdoors-in-llm-agents-39-to-the-transactions-of-the-association-for-computational-linguistics-tacl-2026-with-chowdhury-rakin-haider-link-projects-research-reagent-plus-plus",
+          title: 'Submitted &amp;#39;The Choice Can Be the Attack: Auditing Aligned Backdoors in LLM Agents&amp;#39;...',
+          description: "",
+          section: "News",},{id: "news-39-an-empirical-study-on-remote-code-execution-in-machine-learning-model-hosting-ecosystems-39-is-under-review-at-the-international-conference-on-software-engineering-icse-2027-preprint-available-on-arxiv-link-https-arxiv-org-abs-2601-14163",
+          title: '&amp;#39;An Empirical Study on Remote Code Execution in Machine Learning Model Hosting Ecosystems&amp;#39;...',
+          description: "",
+          section: "News",},{id: "news-will-begin-graduate-study-in-computing-science-at-the-university-of-alberta-on-september-1-2026-link-https-www-ualberta-ca-en-computing-science-index-html",
+          title: 'Will begin graduate study in Computing Science at the University of Alberta on...',
+          description: "",
+          section: "News",},{id: "projects-1brc-c-on-apple-silicon",
+          title: '1BRC C# on Apple Silicon',
+          description: "A .NET 10 NativeAOT performance case study: byte parsing, native aggregation, ARM64 tuning, and a size-aware macOS pread path",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/1brc-csharp/";
+            },},{id: "projects-building-a-bangla-handwritten-digit-recognizer-from-scratch",
+          title: 'Building a Bangla Handwritten Digit Recognizer from Scratch',
+          description: "A Deep Dive into Custom CNN Implementation",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/bangla-digit-recognition/";
+            },},{id: "projects-blockchain-based-ticketing-platform",
+          title: 'Blockchain Based Ticketing Platform',
+          description: "A practical approach to reducing ticket fraud and abusive resale",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/blockchain-ticketing/";
+            },},{id: "projects-yet-another-c-compiler",
+          title: 'Yet Another C Compiler',
+          description: "A complete multi-pass compiler for a subset of C",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/compiler/";
+            },},{id: "projects-contextledger-context-accounting-for-coding-agents",
+          title: 'ContextLedger: context accounting for coding agents',
+          description: "A research notebook on OpenCode compaction, provenance, and live GPT-5.5 experiments",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/contextledger/";
+            },},{id: "projects-ctxhelm-agent-native-context-compiler",
+          title: 'ctxhelm: agent-native context compiler',
+          description: "Local-first context plans, release proof, and source-free agent evaluation",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/ctxhelm/";
+            },},{id: "projects-mini-deep-learning-framework-pytorch-from-scratch",
+          title: 'Mini Deep Learning Framework: PyTorch from Scratch',
+          description: "A freelance learning project for tensors, autograd, and neural-network internals",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/deep-learning-framework-capstone/";
+            },},{id: "projects-go-container-runtime-docker-from-scratch",
+          title: 'Go Container Runtime: Docker from Scratch',
+          description: "A freelance learning project for Linux containers, networking, and Go systems programming",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/docker-from-scratch-go/";
+            },},{id: "projects-eventfly-distributed-microservices-event-platform",
+          title: 'EventFly – Distributed Microservices Event Platform',
+          description: "A six-person BUET course project for event creation, ticketing, announcements, participant engagement, analytics, and payments, implemented with Node.js, React, NATS, Kubernetes, MongoDB, Redis, and Stripe.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/eventfly-an-end-to-end-event-management-system/";
+            },},{id: "projects-building-a-go-database-engine-from-scratch",
+          title: 'Building a Go Database Engine from Scratch',
+          description: "An educational ACID-oriented database engine with advanced features",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/go-database/";
+            },},{id: "projects-image-caption-generation-with-bert-context-vectors",
+          title: 'Image Caption Generation with BERT Context Vectors',
+          description: "Extended the &quot;Show, Attend, and Tell&quot; image captioning model with BERT to improve caption quality and reduce training time, achieving 36% improvement in CIDEr score and 43% improvement in BLEU-4.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/image-caption-generator/";
+            },},{id: "projects-patchsmith-a-harness-for-repair-agents",
+          title: 'PatchSmith: a harness for repair agents',
+          description: "System design and R&amp;D notes for bounded patches, sandbox validation, and auditable repair runs",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/patchsmith/";
+            },},{id: "projects-ray-tracing-from-scratch-a-comprehensive-guide-to-3d-rendering-physics-and-implementation",
+          title: 'Ray Tracing from Scratch: A Comprehensive Guide to 3D Rendering Physics and Implementation...',
+          description: "Implementing physically-based rendering with C++",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/ray-tracing/";
+            },},{id: "projects-an-empirical-study-on-remote-code-execution-in-machine-learning-model-hosting-ecosystems",
+          title: 'An Empirical Study on Remote Code Execution in Machine Learning Model Hosting Ecosystems...',
+          description: "A cross-platform study of model-loading risk across five ML hosting ecosystems, using static analysis, malware-signature scanning, and analysis of more than 600 developer discussions.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/research-ml-remote-code-execution/";
+            },},{id: "projects-verischema-verified-database-schema-generation",
+          title: 'VeriSchema: verified database-schema generation',
+          description: "How can specialized agents generate relational schemas from natural-language requirements while formal checks and targeted repair keep the result consistent?",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/research-multi-agent-db-schema/";
+            },},{id: "projects-the-choice-can-be-the-attack-auditing-aligned-backdoors-in-llm-agents",
+          title: 'The Choice Can Be the Attack: Auditing Aligned Backdoors in LLM Agents',
+          description: "Abstract-level summary of SHIFT, submitted to TACL 2026 on aligned backdoor attacks in LLM agents.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/research-reagent-plus-plus/";
+            },},{id: "projects-sentiment-analysis-of-anonymous-crisis-reports-in-bangladesh",
+          title: 'Sentiment Analysis of Anonymous Crisis Reports in Bangladesh',
+          description: "A multilingual analysis of anonymous, crowd-sourced reports from Bangladesh&#39;s 2024 national crisis.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/research-ureporter/";
+            },},{id: "projects-enhancing-tcp-fairness-tcp-vegas-implementation",
+          title: 'Enhancing TCP Fairness: TCP Vegas+ Implementation',
+          description: "A dual-mode solution for TCP Vegas fairness issues",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/tcp-vegas-plus/";
+            },},{
+        id: 'social-email',
+        title: 'email',
+        section: 'Socials',
+        handler: () => {
+          window.open("mailto:%74%61%6E%68%72%6F%6D%65%6C@%67%6D%61%69%6C.%63%6F%6D", "_blank");
+        },
+      },{
+        id: 'social-github',
+        title: 'GitHub',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://github.com/thromel", "_blank");
+        },
+      },{
+        id: 'social-scholar',
+        title: 'Google Scholar',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://scholar.google.com/citations?user=zHV4EU8AAAAJ", "_blank");
+        },
+      },{
+        id: 'social-linkedin',
+        title: 'LinkedIn',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://www.linkedin.com/in/thromel", "_blank");
+        },
+      },{
+        id: 'social-orcid',
+        title: 'ORCID',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://orcid.org/0009-0009-2432-8960", "_blank");
+        },
+      },{
+        id: 'social-rss',
+        title: 'RSS Feed',
+        section: 'Socials',
+        handler: () => {
+          window.open("/feed.xml", "_blank");
+        },
+      },{
+        id: 'social-x',
+        title: 'X',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://twitter.com/tanzimhromel", "_blank");
+        },
+      },{
+      id: 'light-theme',
+      title: 'Change theme to light',
+      description: 'Change the theme of the site to Light',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("light");
+      },
+    },
+    {
+      id: 'dark-theme',
+      title: 'Change theme to dark',
+      description: 'Change the theme of the site to Dark',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("dark");
+      },
+    },
+    {
+      id: 'system-theme',
+      title: 'Use system default theme',
+      description: 'Change the theme of the site to System Default',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("system");
+      },
+    },];
+
+</script> <script src="/assets/al_search/js/shortcut-key.js"></script> </body> </html>

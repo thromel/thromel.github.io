@@ -1,0 +1,546 @@
+<!DOCTYPE html> <html lang="en"> <head> <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <title> EventFly – Distributed Microservices Event Platform | Tanzim Hossain Romel </title> <meta name="author" content="Tanzim Hossain Romel"> <meta name="description" content="A six-person BUET course project for event creation, ticketing, announcements, participant engagement, analytics, and payments, implemented with Node.js, React, NATS, Kubernetes, MongoDB, Redis, and Stripe."> <meta name="keywords" content=""> <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https:; style-src 'self' 'unsafe-inline' https:; img-src 'self' data: https:; font-src 'self' data: https:; media-src 'self' https:; frame-src 'self' https:; connect-src 'self' https:;"> <style>
+  :root {
+    --max-content-width: 930px;
+  }
+</style> <link rel="stylesheet" href="/assets/css/tailwind.css?v=50c64c15cbb9fd1ce6056fdb8bcb4b62"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.2.0/css/all.min.css" integrity="sha256-MVopmdyC2tYTiJ8wlktf0uh0v4NgT+vNdyVFepi7Q0c=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.5/css/academicons.min.css" integrity="sha256-SzrCOBJbGVFMahewkgjwnApaV2+av1DwMAA+/QGLyZw=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/scholar-icons@1.0.3/css/scholar-icons.css" integrity="sha256-VY3hHVj/hNX3fYG6wtbA6TcKJQl7+FthzGSyIB64klY=" crossorigin="anonymous"> <link defer rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons&amp;display=swap"> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-github.css?v=591dab5a4e56573bf4ef7fd332894c99" media="" id="highlight_theme_light"> <link rel="shortcut icon" href="data:image/svg+xml,&lt;svg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20100%20100%22&gt;&lt;text%20y=%22.9em%22%20font-size=%2290%22&gt;%E2%9A%9B%EF%B8%8F&lt;/text&gt;&lt;/svg&gt;"> <link rel="stylesheet" href="/assets/css/main.css?v=3116ba77db9ee1581d05bb3e86fbf7f1"> <link rel="canonical" href="https://tanzimhromel.com/projects/eventfly-an-end-to-end-event-management-system/"> <script src="/assets/js/theme.js?v=5286c3e4c334d0ecb8fc0c40ff4fa7ec"></script> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-native.css?v=5847e5ed4a4568527aa6cfab446049ca" media="none" id="highlight_theme_dark"> <script>
+    initTheme();
+  </script> </head> <body class="fixed-top-nav "> <header> <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top" role="navigation"> <div class="container"> <a class="navbar-brand title font-weight-lighter" href="/"> Tanzim Hossain Romel </a> <button class="navbar-toggler collapsed navbar-toggler-main" type="button" data-nav-toggle="navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar top-bar"></span> <span class="icon-bar middle-bar"></span> <span class="icon-bar bottom-bar"></span> </button> <div class="collapse navbar-collapse navbar-collapse-main" id="navbarNav"> <ul class="navbar-nav navbar-menu-list flex-nowrap"> <li class="nav-item "> <a class="nav-link" href="/">about </a> </li> <li class="nav-item "> <a class="nav-link" href="/blog/">blog </a> </li> <li class="nav-item "> <a class="nav-link" href="/publications/">publications </a> </li> <li class="nav-item "> <a class="nav-link" href="/research/">research </a> </li> <li class="nav-item active"> <a class="nav-link" href="/projects/">projects <span class="sr-only">(current)</span> </a> </li> <li class="nav-item "> <a class="nav-link" href="/cv/">CV </a> </li> <li class="nav-item "> <a class="nav-link" href="/contributions/">contributions </a> </li> <li class="nav-item"> <button id="search-toggle" type="button" title="Search" aria-label="Open search"> <span class="nav-link">ctrl k <i class="fa-solid fa-magnifying-glass"></i></span> </button> </li> <li class="toggle-container"> <button id="light-toggle" type="button" title="Change theme" aria-label="Change color theme"> <i class="fa-half-sun-moon" id="light-toggle-system"></i> <i class="fa-solid fa-moon" id="light-toggle-dark"></i> <i class="fa-solid fa-sun" id="light-toggle-light"></i> </button> </li> </ul> </div> </div> </nav> <progress id="progress" value="0"> <div class="progress-container"> <span class="progress-bar"></span> </div> </progress> </header> <div class="container mt-5" role="main"> <div class="post"> <header class="post-header"> <h1 class="post-title">EventFly – Distributed Microservices Event Platform</h1> <p class="post-description">A six-person BUET course project for event creation, ticketing, announcements, participant engagement, analytics, and payments, implemented with Node.js, React, NATS, Kubernetes, MongoDB, Redis, and Stripe.</p> </header> <article> <h2 id="at-a-glance">At a glance</h2> <ul> <li> <strong>Status:</strong> Completed BUET course project</li> <li> <strong>Problem:</strong> Coordinate event creation, participation, payments, announcements, and analytics across independently deployable services.</li> <li> <strong>Role:</strong> Lead architect; backend and DevOps contributor</li> <li> <strong>Outcome:</strong> Built a working event-management course project with a six-person team during a two-month BUET software-development lab.</li> <li> <strong>Technologies:</strong> TypeScript, Node.js, Python, React, Kubernetes, Skaffold, Helm, NATS Streaming, MongoDB Atlas, Redis, Stripe API, Prometheus, Grafana, Docker, GitHub Actions</li> <li> <strong>Repository:</strong> Public team repository</li> </ul> <p><a href="https://github.com/eventfly/Microservices" target="_blank" rel="noopener noreferrer">View on GitHub</a></p> <h2 id="lead-architect--developer--may-2022---july-2022">Lead Architect &amp; Developer | May 2022 - July 2022</h2> <p><a href="https://docs.google.com/presentation/d/16TGaHVFcs2hX8-8C9ajktorYIgw4xa6C/edit?usp=sharing&amp;ouid=105896456680904202887&amp;rtpof=true&amp;sd=true" target="_blank" rel="noopener noreferrer">Project Demonstration</a></p> <p><img src="/assets/img/projects/eventfly.png" class="img-fluid mb-4" alt="EventFly Platform" width="2375" height="1580" decoding="async"></p> <h2 id="introduction">Introduction</h2> <p>Hello everyone! I’m excited to share our journey of building EventFly, a comprehensive event management platform. We created this system as part of our Software Development Lab course in Level 4, Term 1 at Bangladesh University of Engineering and Technology (BUET). Our small team of just six members had only two months to complete this ambitious project. As the lead architect, I handled backend development, DevOps responsibilities, and the overall system architecture.</p> <h2 id="what-is-eventfly">What Is EventFly?</h2> <p>EventFly helps people create and manage events of all sizes. We designed it to be a complete solution that handles everything from event creation to participant engagement. An organizer can set up an event, sell tickets, send announcements, and collect feedback - all in one platform.</p> <h3 id="features-we-built">Features We Built</h3> <p>Our platform includes features that solve real problems for event organizers:</p> <ul> <li> <strong>Event Creation</strong>: Organizers can create events with detailed information including name, description, location, and time</li> <li> <strong>Staff Management</strong>: Organizers can add team members and assign specific roles with customized permissions</li> <li> <strong>Ticketing System</strong>: Create different ticket types with varying prices and access levels</li> <li> <strong>Participant Registration</strong>: Easy registration process for attendees with profile management</li> <li> <strong>Interactive Feed</strong>: Create posts, polls, and quizzes to engage with participants before, during, and after events</li> <li> <strong>Feedback Collection</strong>: Gather ratings and comments from attendees after events</li> <li> <strong>Analytics Dashboard</strong>: View attendance statistics, ticket sales, and engagement metrics</li> <li> <strong>Smart Recommendations</strong>: Participants receive personalized event suggestions based on location and interests</li> <li> <strong>Secure Payments</strong>: Process ticket purchases and subscription payments with Stripe integration</li> </ul> <h2 id="our-team-structure">Our Team Structure</h2> <p>Our team of six had clear roles that aligned with our architecture:</p> <ul> <li> <strong>2 Frontend Developers</strong>: Focused exclusively on building our Next.js-based interfaces</li> <li> <strong>3 Backend Developers</strong>: Worked on service implementation and database management</li> <li> <strong>1 Architect (me)</strong>: Handled backend development, DevOps setup, and overall architecture design</li> </ul> <p>This small team size influenced many of our architectural decisions, as we needed an approach that would maximize our productivity.</p> <h2 id="why-we-chose-microservices">Why We Chose Microservices</h2> <p>Choosing between a monolithic architecture and microservices was our first major decision. Let me explain why we went with microservices in simple terms.</p> <h3 id="the-decision-process">The Decision Process</h3> <p>A monolith is like a single large apartment where everything is connected. Microservices are more like a housing complex with separate units that communicate with each other.</p> <p><strong>The Monolith Option:</strong></p> <ul> <li>Would be faster to set up initially</li> <li>Would require less operational complexity</li> <li>Might be simpler for our small team</li> </ul> <p><strong>The Microservices Option:</strong></p> <ul> <li>Would allow team members to work independently</li> <li>Would let us use different technologies where appropriate</li> <li>Would make the system more resilient to failures</li> <li>Would be easier to extend and maintain long-term</li> </ul> <p>We chose microservices for several practical reasons:</p> <ol> <li> <p><strong>Team Autonomy</strong>: Even with only six members, we wanted developers to work on separate services without stepping on each other’s toes. This was crucial for our tight two-month timeline.</p> </li> <li> <p><strong>Technology Requirements</strong>: Our analytics features needed Python for machine learning capabilities, while our core services were built with Node.js. Microservices allowed this mixed technology approach.</p> </li> <li> <p><strong>Learning Opportunity</strong>: As a university project, we wanted to gain experience with modern architectural patterns used in industry.</p> </li> <li> <p><strong>Feature Independence</strong>: Some features like payments needed to be extremely reliable, while others like the newsfeed could tolerate occasional issues. Microservices let us apply different reliability standards to different components.</p> </li> </ol> <p>I remember explaining it to our professor: “With only two months and six people, we need an architecture that lets everyone work productively in parallel. Microservices will let us divide the work cleanly while learning valuable industry practices.”</p> <h2 id="domain-driven-design-making-sense-of-complexity">Domain-Driven Design: Making Sense of Complexity</h2> <p>We embraced Domain-Driven Design (DDD) principles to guide our microservices architecture. This approach helped us create services that aligned with business capabilities rather than technical concerns.</p> <h3 id="event-storming-sessions">Event Storming Sessions</h3> <p>We began with event storming sessions where we mapped out the entire business domain on a whiteboard using colorful sticky notes:</p> <ul> <li>Orange notes for domain events (“Event Created,” “Ticket Purchased”)</li> <li>Blue notes for commands (“Create Event,” “Purchase Ticket”)</li> <li>Green notes for aggregates (“Event,” “Organization,” “Participant”)</li> <li>Yellow notes for queries (“Find Events Near Me,” “Get Event Details”)</li> </ul> <p>This visual exercise helped us identify natural boundaries in our system. We could clearly see which operations and data belonged together, and which were separate concerns.</p> <h3 id="bounded-contexts">Bounded Contexts</h3> <p>From our event storming sessions, we identified distinct bounded contexts - areas of the system with their own consistent terminology and rules. These became our microservices:</p> <ol> <li> <strong>Authentication &amp; Identity</strong>: Handling user accounts and authentication</li> <li> <strong>Organization Management</strong>: Managing organizations and their staff</li> <li> <strong>Event Management</strong>: Handling event creation and details</li> <li> <strong>Participant Engagement</strong>: Managing interactive content and feeds</li> <li> <strong>Registration</strong>: Processing participant sign-ups and check-ins</li> <li> <strong>Payment Processing</strong>: Handling financial transactions</li> <li> <strong>Analytics &amp; Recommendations</strong>: Providing insights and suggestions</li> </ol> <p>Each bounded context had its own ubiquitous language - a consistent set of terms used by both developers and business stakeholders. For example, in the Event Management context, we used terms like “organizer,” “venue,” and “schedule.” In the Payment context, we used “transaction,” “refund,” and “payment method.”</p> <p>For more on Domain-Driven Design, I recommend the article <a href="https://martinfowler.com/bliki/DomainDrivenDesign.html" rel="external nofollow noopener" target="_blank">“Domain-Driven Design: Tackling Complexity in the Heart of Software”</a> by Martin Fowler, which greatly influenced our approach.</p> <h2 id="our-architecture---the-seven-services">Our Architecture - The Seven Services</h2> <p>Based on our DDD analysis, we divided EventFly into seven core services:</p> <p><img src="/assets/img/projects/eventfly-architecture.png" class="img-fluid mb-4" alt="EventFly System Architecture" width="2375" height="1580" loading="lazy" decoding="async"></p> <ol> <li> <strong>Auth Service</strong>: Handles user authentication, authorization, and profile management</li> <li> <strong>Organization Service</strong>: Manages organization profiles, staff, and subscription packages</li> <li> <strong>Events Service</strong>: Stores event details, schedules, and manages event-specific staff</li> <li> <strong>Newsfeed Service</strong>: Manages posts, polls, quizzes, and other interactive content</li> <li> <strong>Participant Service</strong>: Handles attendee registration, check-ins, and feedback</li> <li> <strong>Payment Service</strong>: Processes ticket purchases and subscription payments</li> <li> <strong>Analytics Service</strong>: Provides recommendation algorithms and event insights</li> </ol> <p>Each service had its own MongoDB database and communicated through a NATS Streaming server for asynchronous messaging. For synchronous communication, services exposed REST APIs.</p> <p>Our frontend consisted of two Next.js applications:</p> <ul> <li>An organizer portal for event management</li> <li>A participant-facing app for discovering and attending events</li> </ul> <h2 id="technical-implementation-details">Technical Implementation Details</h2> <p>Let me share some of the more interesting technical aspects of our implementation.</p> <h3 id="deployment-architecture">Deployment Architecture</h3> <p>Our deployment architecture was designed for scalability and resilience, utilizing Kubernetes for orchestration:</p> <p><img src="/assets/img/projects/eventfly-deployment-architecture.png" class="img-fluid mb-4" alt="EventFly Deployment Architecture" width="3315" height="1907" loading="lazy" decoding="async"></p> <h3 id="service-independence-with-docker">Service Independence with Docker</h3> <p>We containerized each service using Docker. This gave us several benefits:</p> <ul> <li>Each service could be developed and deployed independently</li> <li>We could use different Node.js versions or libraries if needed</li> <li>New team members could start developing quickly with a consistent environment</li> <li>Services could be scaled individually based on load</li> </ul> <p>Our docker-compose.yaml file defined the entire development environment, making it easy for any team member to run the complete system locally:</p> <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">version</span><span class="pi">:</span> <span class="s2">"</span><span class="s">3.9"</span>
+<span class="na">services</span><span class="pi">:</span>  
+  <span class="na">nats_server</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">nats-streaming</span>
+    <span class="na">ports</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s2">"</span><span class="s">4222:4222"</span>
+  <span class="na">auth</span><span class="pi">:</span>
+    <span class="na">build</span><span class="pi">:</span> <span class="s">./auth</span>
+    <span class="na">ports</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s2">"</span><span class="s">3000:3000"</span>
+    <span class="na">environment</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">NATS_CLIENT_ID=auth</span>
+  <span class="na">org</span><span class="pi">:</span>
+    <span class="na">build</span><span class="pi">:</span> <span class="s">./org</span>
+    <span class="na">ports</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s2">"</span><span class="s">3001:3000"</span>
+    <span class="na">environment</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">NATS_CLIENT_ID=org</span>
+  <span class="c1"># Other services followed the same pattern</span>
+</code></pre></div></div> <p>For additional container-packaging guidance, we consulted <a href="https://www.docker.com/blog/production-ready-docker-packaging/" rel="external nofollow noopener" target="_blank">Docker’s packaging article</a>.</p> <h3 id="event-driven-communication">Event-Driven Communication</h3> <p>We used an event-driven architecture for communication between services. When something important happened in one service, it published an event to NATS Streaming. Other services subscribed to relevant events and updated their own data accordingly.</p> <p>For example, when a new event was created:</p> <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// In the Organization service</span>
+<span class="nx">natsWrapper</span><span class="p">.</span><span class="nx">client</span><span class="p">.</span><span class="nf">publish</span><span class="p">(</span><span class="dl">'</span><span class="s1">event:created</span><span class="dl">'</span><span class="p">,</span> <span class="nx">JSON</span><span class="p">.</span><span class="nf">stringify</span><span class="p">({</span>
+  <span class="na">id</span><span class="p">:</span> <span class="nx">event</span><span class="p">.</span><span class="nx">id</span><span class="p">,</span>
+  <span class="na">name</span><span class="p">:</span> <span class="nx">event</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span>
+  <span class="na">organizer</span><span class="p">:</span> <span class="nx">event</span><span class="p">.</span><span class="nx">organizer</span><span class="p">,</span>
+  <span class="na">start_date</span><span class="p">:</span> <span class="nx">event</span><span class="p">.</span><span class="nx">start_date</span><span class="p">,</span>
+  <span class="na">end_date</span><span class="p">:</span> <span class="nx">event</span><span class="p">.</span><span class="nx">end_date</span><span class="p">,</span>
+  <span class="c1">// other event properties</span>
+<span class="p">}));</span>
+</code></pre></div></div> <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// In the Events service</span>
+<span class="kd">class</span> <span class="nc">EventCreatedListener</span> <span class="kd">extends</span> <span class="nc">Listener</span> <span class="p">{</span>
+  <span class="nx">subject</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">event:created</span><span class="dl">'</span><span class="p">;</span>
+  <span class="nx">queueGroupName</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">event-created-event</span><span class="dl">'</span><span class="p">;</span>
+  
+  <span class="k">async</span> <span class="nf">onMessage</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="nx">msg</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Event Created! Data: </span><span class="dl">'</span><span class="p">,</span> <span class="nx">data</span><span class="p">);</span>
+    
+    <span class="kd">const</span> <span class="nx">event</span> <span class="o">=</span> <span class="nx">Event</span><span class="p">.</span><span class="nf">build</span><span class="p">({</span>
+      <span class="na">name</span><span class="p">:</span> <span class="nx">data</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span>
+      <span class="na">organizer</span><span class="p">:</span> <span class="nx">data</span><span class="p">.</span><span class="nx">organizer</span><span class="p">,</span>
+      <span class="c1">// other properties</span>
+    <span class="p">});</span>
+
+    <span class="k">await</span> <span class="nx">event</span><span class="p">.</span><span class="nf">save</span><span class="p">();</span>
+    <span class="nx">msg</span><span class="p">.</span><span class="nf">ack</span><span class="p">();</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div> <p>This pattern helped us maintain loose coupling between services while ensuring data consistency across the system. The article <a href="https://martinfowler.com/articles/201701-event-driven.html" rel="external nofollow noopener" target="_blank">“Event-Driven Architecture”</a> by Martin Fowler provided excellent guidance in this area.</p> <h3 id="python-integration-for-analytics">Python Integration for Analytics</h3> <p>One unique challenge was integrating Python-based machine learning algorithms with our Node.js services. We solved this by creating a hybrid service:</p> <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// In our Analytics service (Node.js)</span>
+<span class="kd">const</span> <span class="nx">runPythonScript</span> <span class="o">=</span> <span class="p">(</span><span class="nx">events</span><span class="p">,</span> <span class="nx">participantData</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">python</span> <span class="o">=</span> <span class="nf">spawn</span><span class="p">(</span><span class="dl">'</span><span class="s1">python3</span><span class="dl">'</span><span class="p">,</span> <span class="p">[</span>
+    <span class="dl">'</span><span class="s1">recommender.py</span><span class="dl">'</span><span class="p">,</span>
+    <span class="nx">JSON</span><span class="p">.</span><span class="nf">stringify</span><span class="p">(</span><span class="nx">events</span><span class="p">),</span>
+    <span class="nx">JSON</span><span class="p">.</span><span class="nf">stringify</span><span class="p">(</span><span class="nx">participantData</span><span class="p">)</span>
+  <span class="p">]);</span>
+
+  <span class="nx">python</span><span class="p">.</span><span class="nx">stdout</span><span class="p">.</span><span class="nf">on</span><span class="p">(</span><span class="dl">'</span><span class="s1">data</span><span class="dl">'</span><span class="p">,</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">recommendations</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nf">toString</span><span class="p">());</span>
+    <span class="k">return</span> <span class="nx">recommendations</span><span class="p">;</span>
+  <span class="p">});</span>
+<span class="p">};</span>
+</code></pre></div></div> <p>This approach allowed us to use Python’s rich data science libraries while maintaining consistency with our overall architecture.</p> <h3 id="cicd-pipeline-automating-our-workflow">CI/CD Pipeline: Automating Our Workflow</h3> <p>With a microservices architecture, having a solid CI/CD pipeline was essential. We set up GitHub Actions to automate our development workflow:</p> <ol> <li> <strong>Continuous Integration</strong>: <ul> <li>Automated testing for each service when code was pushed</li> <li>Linting checks to maintain code quality</li> <li>Build verification to catch issues early</li> </ul> </li> <li> <strong>Continuous Deployment</strong>: <ul> <li>Automatic Docker image building for updated services</li> <li>Deployment to our development environment for feature branches</li> <li>Production deployment when changes were merged to main</li> </ul> </li> </ol> <p>Here’s a simplified example of our GitHub Actions workflow:</p> <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">name</span><span class="pi">:</span> <span class="s">Deploy to Dev Environment</span>
+
+<span class="na">on</span><span class="pi">:</span>
+  <span class="na">push</span><span class="pi">:</span>
+    <span class="na">branches</span><span class="pi">:</span> <span class="pi">[</span> <span class="nv">feature/*</span> <span class="pi">]</span>
+
+<span class="na">jobs</span><span class="pi">:</span>
+  <span class="na">test</span><span class="pi">:</span>
+    <span class="na">runs-on</span><span class="pi">:</span> <span class="s">ubuntu-latest</span>
+    <span class="na">steps</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/checkout@v2</span>
+      <span class="pi">-</span> <span class="na">run</span><span class="pi">:</span> <span class="s">cd auth &amp;&amp; npm install &amp;&amp; npm test</span>
+      <span class="c1"># Similar steps for other changed services</span>
+
+  <span class="na">build-and-deploy</span><span class="pi">:</span>
+    <span class="na">needs</span><span class="pi">:</span> <span class="s">test</span>
+    <span class="na">runs-on</span><span class="pi">:</span> <span class="s">ubuntu-latest</span>
+    <span class="na">steps</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/checkout@v2</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Build Docker images</span>
+        <span class="na">run</span><span class="pi">:</span> <span class="s">docker-compose build</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Push to registry</span>
+        <span class="na">run</span><span class="pi">:</span> <span class="s">docker-compose push</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Deploy to Dev</span>
+        <span class="na">run</span><span class="pi">:</span> <span class="s">kubectl apply -f infra/k8s/dev</span>
+</code></pre></div></div> <p>This automation was crucial for our small team, as it freed us from manual deployment tasks and provided consistent quality checks. Kubernetes’ current <a href="https://kubernetes.io/docs/tasks/manage-kubernetes-objects/kustomization/" rel="external nofollow noopener" target="_blank">Kustomize documentation</a> explains how to structure and apply environment-specific overlays used in workflows like this one.</p> <h2 id="challenges-we-faced-with-our-small-team">Challenges We Faced With Our Small Team</h2> <p>Building a microservices system with just six people in two months presented unique challenges:</p> <h3 id="balancing-team-size-with-service-count">Balancing Team Size with Service Count</h3> <p>With seven services and only six team members, we had to be strategic. We prioritized:</p> <ol> <li>Core services (Auth, Events, Participant) got full-time attention</li> <li>Less critical services were developed part-time</li> <li>Some team members worked across multiple services</li> </ol> <p>The lesson: Even with microservices, you need to balance service count with team capacity. We could have combined some services, but the clear boundaries were worth the extra effort.</p> <h3 id="data-consistency-without-complex-mechanisms">Data Consistency Without Complex Mechanisms</h3> <p>With separate databases for each service, keeping data consistent was challenging. We couldn’t implement complex distributed transaction systems in our timeframe.</p> <p>Our solution was a pragmatic approach to eventual consistency:</p> <ol> <li>Use event messages to propagate changes</li> <li>Include timestamps with all data</li> <li>Build reconciliation processes for critical data</li> <li>Accept that some non-critical data might be temporarily out of sync</li> </ol> <p>I explained it to our team using a simple analogy: “It’s like how universities handle student information. The registrar, accounting, and library departments all have your data. When you change your address, it might take time for all departments to update their records.”</p> <p>For more insights on managing data in distributed systems, <a href="https://microservices.io/patterns/data/saga.html" rel="external nofollow noopener" target="_blank">“Data Consistency in Microservices Architecture”</a> was invaluable.</p> <h3 id="limited-devops-resources">Limited DevOps Resources</h3> <p>With only one person (me) handling DevOps, we needed to keep operations simple but effective.</p> <p>We implemented:</p> <ol> <li>Automated deployment with GitHub Actions</li> <li>Basic monitoring using Prometheus and Grafana</li> <li>Centralized logging with ELK Stack</li> <li>Simple health check endpoints for each service</li> </ol> <p>The key was automation. Everything from testing to deployment was automated, allowing our small team to focus on development rather than operations.</p> <h2 id="how-microservices-helped-our-team-work-better">How Microservices Helped Our Team Work Better</h2> <p>Despite the challenges, microservices significantly improved our team’s productivity:</p> <h3 id="independent-development">Independent Development</h3> <p>With our team split between frontend and backend, microservices allowed everyone to work productively:</p> <ul> <li>Frontend developers could work with mocked backend responses</li> <li>Backend developers could work on different services simultaneously</li> <li>Services could be deployed independently as they were completed</li> </ul> <p>This independence was crucial for meeting our two-month deadline. We didn’t need to coordinate deployments or worry about breaking each other’s code.</p> <h3 id="technology-flexibility">Technology Flexibility</h3> <p>Microservices allowed us to use different technologies where appropriate:</p> <ul> <li>Core services used Node.js with Express</li> <li>Analytics used Node.js to invoke Python scripts</li> <li>Frontend used Next.js for server-side rendering</li> <li>Infrastructure as Code used Terraform</li> </ul> <p>This flexibility let us choose the right tool for each job rather than forcing a one-size-fits-all approach.</p> <h3 id="clear-ownership">Clear Ownership</h3> <p>Each service had a primary owner who was responsible for its design and implementation. This created:</p> <ul> <li>Deeper expertise in specific areas</li> <li>Pride in ownership that motivated quality work</li> <li>Faster decision-making</li> <li>More innovative solutions</li> </ul> <p>For example, our analytics specialist became an expert in recommendation algorithms, while our payment specialist mastered secure transaction processing.</p> <h2 id="my-role-as-lead-architect">My Role as Lead Architect</h2> <p>As the sole architect in our six-person team, I had to balance hands-on development with architectural guidance:</p> <h3 id="setting-the-foundation">Setting the Foundation</h3> <p>I created:</p> <ul> <li>A reference architecture that all services followed</li> <li>Standardized patterns for common problems</li> <li>Infrastructure as Code templates for deployment</li> <li>Guidelines for API design and event schemas</li> </ul> <p>These standards gave the team a consistent starting point while allowing flexibility for specific service needs.</p> <h3 id="hands-on-technical-leadership">Hands-On Technical Leadership</h3> <p>Unlike in larger teams where an architect might focus exclusively on design, I was both architect and developer:</p> <ul> <li>Implemented the core authentication service myself</li> <li>Set up the CI/CD pipeline</li> <li>Created shared libraries for common functionality</li> <li>Rotated between services to help other developers</li> </ul> <p>This hands-on approach let me identify and address cross-cutting concerns early. When I noticed teams implementing similar logging patterns differently, I created a shared logging library that standardized the approach across services.</p> <h3 id="knowledge-sharing">Knowledge Sharing</h3> <p>In our small team, knowledge sharing was important. I established:</p> <ul> <li>Weekly architecture review sessions</li> <li>Pair programming for complex features</li> <li>Comprehensive documentation requirements</li> <li>Cross-service code reviews</li> </ul> <p>These practices ensured that although each person had primary ownership of specific services, everyone understood the overall system.</p> <h2 id="lessons-learned-in-our-university-project">Lessons Learned in Our University Project</h2> <p>Building EventFly as part of our university course provided unique insights:</p> <ol> <li> <p><strong>Right-sized services</strong>: We initially planned nine services but realized that was too many for our team size. Combining some related functionality into seven services was more manageable.</p> </li> <li> <p><strong>Documentation is essential</strong>: With different people owning different services, good documentation became our shared language. Services with thorough documentation were integrated more easily.</p> </li> <li> <p><strong>Start with infrastructure</strong>: Setting up a solid development environment and CI/CD pipeline early saved countless hours later. Automation is worth the initial investment.</p> </li> <li> <p><strong>Domain-driven design works</strong>: Taking time to understand the business domain before writing code led to more intuitive service boundaries and better system design.</p> </li> <li> <p><strong>Balance theory and pragmatism</strong>: While we followed microservices best practices where possible, we also made pragmatic compromises when needed for our timeline.</p> </li> </ol> <h2 id="the-academic-context">The Academic Context</h2> <p>Completing EventFly as part of our Software Development Lab at BUET provided both advantages and constraints:</p> <p><strong>Advantages:</strong></p> <ul> <li>Access to professors with expertise in distributed systems</li> <li>Freedom to compare different architectural approaches</li> <li>Opportunity to apply theoretical concepts in a practical project</li> </ul> <p><strong>Constraints:</strong></p> <ul> <li>The strict two-month timeline</li> <li>Limited team size of just six members</li> <li>Balancing this project with other coursework</li> <li>Limited budget for infrastructure</li> </ul> <p>Despite these constraints, we built a working system that demonstrated both technical excellence and practical usability. Our professors were particularly impressed with how we applied microservices concepts in a real-world project with such a small team.</p> <h2 id="conclusion">Conclusion</h2> <p>Building EventFly using microservices was the right choice for our specific context. The architecture allowed our small team to:</p> <ul> <li>Work independently on different parts of the system</li> <li>Use appropriate technologies for each component</li> <li>Create clear boundaries between different functionality</li> <li>Meet our ambitious two-month deadline</li> </ul> <p>For small teams considering microservices, I recommend:</p> <ul> <li>Start with domain-driven design to identify service boundaries</li> <li>Invest early in CI/CD automation</li> <li>Use simple, pragmatic approaches to cross-cutting concerns</li> <li>Balance service count with team capacity</li> <li>Prioritize clear documentation and knowledge sharing</li> </ul> <p>Our experience shows that microservices aren’t just for large teams. With careful planning and the right tools, even a small team of six university students can successfully implement a microservices architecture in a tight timeframe.</p> <h2 id="further-reading">Further Reading</h2> <p>If you’re interested in exploring these concepts more deeply, here are some resources that helped us:</p> <ol> <li> <p><a href="https://samnewman.io/books/building_microservices/" rel="external nofollow noopener" target="_blank">“Building Microservices” by Sam Newman</a> - The definitive guide that shaped our overall approach</p> </li> <li> <p><a href="https://www.oreilly.com/library/view/domain-driven-design-distilled/9780134434421/" rel="external nofollow noopener" target="_blank">“Domain-Driven Design Distilled” by Vaughn Vernon</a> - Helped us apply DDD principles to our microservices architecture</p> </li> <li> <p><a href="https://dataintensive.net/" rel="external nofollow noopener" target="_blank">“Designing Data-Intensive Applications” by Martin Kleppmann</a> - Invaluable for understanding data consistency challenges</p> </li> <li> <p><a href="https://itrevolution.com/the-devops-handbook/" rel="external nofollow noopener" target="_blank">“The DevOps Handbook” by Gene Kim et al.</a> - Guided our CI/CD implementation</p> </li> <li> <p><a href="https://samnewman.io/books/monolith-to-microservices/" rel="external nofollow noopener" target="_blank">“Monolith to Microservices” by Sam Newman</a> - Provided patterns for establishing service boundaries</p> </li> </ol> <p>These resources provided the theoretical foundation that we translated into practical implementation in our EventFly project.</p> </article> </div> </div> <footer class="fixed-bottom" role="contentinfo"> <div class="container mt-0"> © Copyright 2026 Tanzim Hossain Romel. © Tanzim Hossain Romel. Powered by <a href="https://jekyllrb.com/" target="_blank" rel="external nofollow noopener">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio" rel="external nofollow noopener" target="_blank">al-folio</a> theme. </div> </footer> <script>
+  window.alFolio = {
+    compatBootstrap: false
+  };
+</script> <script src="/assets/js/nav-toggle.js?v=141bd79a73ebc0f0b6ea58e440ae79fc"></script> <script defer src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script> <script defer src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script> <script defer src="/assets/js/masonry.js?v=e49affc7bd2646f6acdad1dbe02c2359" type="text/javascript"></script> <script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js" integrity="sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI=" crossorigin="anonymous"></script> <script src="/assets/al_math/js/mathjax-setup.js"></script> <script src="/assets/js/tooltips-setup.js?v=fe487e99db6c43751e6e7bdb2d6a0611"></script> <script src="/assets/js/no_defer.js?v=53b1b1a645525975c963ce8bf8bfefcf"></script> <script defer src="/assets/js/common.js?v=87baac90f765f2f3362dcf6aaf312a8a"></script> <script defer src="/assets/js/copy_code.js?v=c8a01c11a92744d44b093fc3bda915df" type="text/javascript"></script> <script defer src="/assets/js/jupyter_new_tab.js?v=896d254890d9b47f0281f63bfccf0dee"></script> <script async src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script> <script async src="https://badge.dimensions.ai/badge.js"></script> <script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script> <script defer src="/assets/al_img_tools/js/zoom.js"></script> <script defer src="/assets/js/progress-bar.js?v=499464c5c63ced6cf7ad62509f1e2610" type="text/javascript"></script> <script src="https://cdn.jsdelivr.net/npm/vanilla-back-to-top@7.2.1/dist/vanilla-back-to-top.min.js" integrity="sha256-uMJJ3EoTyfRBoTbR+lrfu1uRQ87RZG8AR3cVNuQVeFg=" crossorigin="anonymous"></script> <script>
+    addBackToTop();
+  </script> <script type="module" src="/assets/al_search/js/search/ninja-keys.min.js"></script> <ninja-keys hidebreadcrumbs noautoloadmdicons placeholder="Type to start searching"></ninja-keys> <script src="/assets/al_search/js/search-setup.js"></script> <script>
+// get the ninja-keys element
+const ninja = document.querySelector('ninja-keys');
+
+// add the home and posts menu items
+ninja.data = [{
+    id: "nav-about",
+    title: "about",
+    section: "Navigation",
+    handler: () => {
+      window.location.href = "/";
+    },
+  },{id: "nav-blog",
+          title: "blog",
+          description: "",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/blog/";
+          },
+        },{id: "nav-publications",
+          title: "publications",
+          description: "Publications.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/publications/";
+          },
+        },{id: "nav-research",
+          title: "research",
+          description: "Research on reliable AI agents, SRE-agent evaluation, ML ecosystem security, agent-choice auditing, and developer tools.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/research/";
+          },
+        },{id: "nav-projects",
+          title: "projects",
+          description: "Research and engineering projects.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/projects/";
+          },
+        },{id: "nav-cv",
+          title: "CV",
+          description: "Curriculum vitae.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/cv/";
+          },
+        },{id: "nav-contributions",
+          title: "contributions",
+          description: "Curated open-source contribution evidence across research infrastructure, frameworks, and language tooling.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/contributions/";
+          },
+        },{id: "post-building-a-fast-1brc-solver-in-c-on-apple-silicon",
+        
+          title: "Building a fast 1BRC solver in C# on Apple Silicon",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/building-fast-1brc-csharp-apple-silicon/";
+          
+        },
+      },{id: "post-memory-management-in-production-avoiding-the-silent-killers",
+        
+          title: "Memory Management in Production: Avoiding the Silent Killers",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/memory-management-production-silent-killers/";
+          
+        },
+      },{id: "post-growing-as-a-software-engineer-in-the-age-of-llms-and-vibe-coding",
+        
+          title: "Growing as a Software Engineer in the Age of LLMs and Vibe Coding...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/vibe-coding/";
+          
+        },
+      },{id: "post-taming-the-imagination-a-comprehensive-guide-to-handling-hallucinations-and-implementing-guardrails-in-agentic-ai",
+        
+          title: "Taming the Imagination: A Comprehensive Guide to Handling Hallucinations and Implementing Guardrails in...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/how-to-handle-hallucinations/";
+          
+        },
+      },{id: "post-building-an-agentic-ai-analytics-dashboard-a-deep-dive-with-langchain-langgraph-and-fine-tuned-llama",
+        
+          title: "Building an Agentic AI Analytics Dashboard: A Deep Dive with LangChain, LangGraph, and...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/intro-to-agentic-ai/";
+          
+        },
+      },{id: "post-neural-algorithmic-reasoning-teaching-neural-networks-to-think-like-algorithms",
+        
+          title: "Neural Algorithmic Reasoning: Teaching Neural Networks to Think Like Algorithms",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/intro-to-nar/";
+          
+        },
+      },{id: "post-opentelemetry-in-microservices-how-we-transformed-our-observability-strategy",
+        
+          title: "OpenTelemetry in Microservices: How We Transformed Our Observability Strategy",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/opentelemetry/";
+          
+        },
+      },{id: "post-using-ai-tools-in-software-engineering-and-research-workflows",
+        
+          title: "Using AI Tools in Software Engineering and Research Workflows",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/leveraging-ai-tools-software-engineering/";
+          
+        },
+      },{id: "post-the-performance-crisis-how-we-rescued-a-net-8-microservice-from-10-critical-bottlenecks",
+        
+          title: "The Performance Crisis: How We Rescued a .NET 8 Microservice from 10 Critical...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2024/optimizing-dotnet-microservices-performance/";
+          
+        },
+      },{id: "post-zero-downtime-deployments-in-kubernetes-how-we-keep-our-services-running-while-we-ship",
+        
+          title: "Zero Downtime Deployments in Kubernetes: How We Keep Our Services Running While We...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2024/zero-downtime/";
+          
+        },
+      },{id: "post-mastering-unit-testing-and-bdd-with-xunit-and-specflow-in-net-9-a-comprehensive-guide",
+        
+          title: "Mastering Unit Testing and BDD with xUnit and SpecFlow in .NET 9: A...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2024/dotnet-tests/";
+          
+        },
+      },{id: "post-design-patterns-your-first-step-toward-professional-software-engineering",
+        
+          title: "Design Patterns: Your First Step Toward Professional Software Engineering",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2024/design-patterns-professional-software-engineering/";
+          
+        },
+      },{id: "post-setting-up-github-actions-ci-cd-with-aws-a-practical-journey",
+        
+          title: "Setting Up GitHub Actions CI/CD with AWS: A Practical Journey",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2024/intro-to-ci-cd/";
+          
+        },
+      },{id: "post-the-clique-partition-problem-dividing-networks-into-perfect-communities",
+        
+          title: "The Clique Partition Problem: Dividing Networks into Perfect Communities",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2023/clique-partition-problem-graph-theory/";
+          
+        },
+      },{id: "post-advice-complexity-in-online-algorithms-when-knowing-the-future-makes-all-the-difference",
+        
+          title: "Advice Complexity in Online Algorithms: When Knowing the Future Makes All the Difference...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2023/advice-complexity-online-algorithms/";
+          
+        },
+      },{id: "post-getting-started-with-kubernetes-deploying-microservice-architectures-at-scale",
+        
+          title: "Getting Started with Kubernetes: Deploying Microservice Architectures at Scale",
+        
+        description: "A practical Kubernetes guide covering microservice deployment, service-mesh integration, observability, and the operational checks needed before production use.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2022/getting-started-with-kubernetes-microservices/";
+          
+        },
+      },{id: "post-understanding-xv6-a-practical-introduction-to-operating-systems",
+        
+          title: "Understanding xv6: A Practical Introduction to Operating Systems",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2022/understanding-xv6-operating-systems/";
+          
+        },
+      },{id: "post-getting-started-with-ns3-a-hands-on-guide-to-network-simulation",
+        
+          title: "Getting Started with NS3: A Hands-On Guide to Network Simulation",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2021/getting-started-with-ns3/";
+          
+        },
+      },{id: "news-completed-b-sc-in-computer-science-and-engineering-from-bangladesh-university-of-engineering-and-technology-with-a-gpa-of-3-53-4-00-link",
+          title: 'Completed B.Sc in Computer Science and Engineering from Bangladesh University of Engineering and...',
+          description: "",
+          section: "News",},{id: "news-joined-iqvia-as-a-software-development-engineer-on-kpi-library-the-dynamic-reporting-layer-within-orchestrated-analytics-link",
+          title: 'Joined IQVIA as a Software Development Engineer on KPI Library, the dynamic reporting...',
+          description: "",
+          section: "News",},{id: "news-submitted-sentiment-analysis-of-anonymous-crisis-reports-in-bangladesh-to-acm-cscw-2025-analyzing-crowd-sourced-reports-from-bangladesh-s-2024-national-crisis-using-transformer-models-link",
+          title: 'Submitted ‘Sentiment Analysis of Anonymous Crisis Reports in Bangladesh’ to ACM CSCW 2025,...',
+          description: "",
+          section: "News",},{id: "news-honored-with-the-iqvia-impact-program-silver-award-for-outstanding-performance-and-contributions-to-the-kpi-library-team-link",
+          title: 'Honored with the IQVIA Impact Program Silver Award for outstanding performance and contributions...',
+          description: "",
+          section: "News",},{id: "news-submitted-an-empirical-study-on-remote-code-execution-in-machine-learning-model-hosting-ecosystems-to-the-mining-software-repositories-msr-2026-conference-first-large-scale-cross-platform-security-study-analyzing-45-000-repositories-across-5-major-ml-platforms-link",
+          title: 'Submitted ‘An Empirical Study on Remote Code Execution in Machine Learning Model Hosting...',
+          description: "",
+          section: "News",},{id: "news-resubmitted-an-empirical-study-on-remote-code-execution-in-machine-learning-model-hosting-ecosystems-to-acm-transactions-on-software-engineering-and-methodology-tosem-2026-preprint-available-on-arxiv-link",
+          title: 'Resubmitted ‘An Empirical Study on Remote Code Execution in Machine Learning Model Hosting...',
+          description: "",
+          section: "News",},{id: "news-started-a-remote-summer-research-internship-at-the-university-of-illinois-urbana-champaign-through-uiuc-summer-research-in-software-engineering-srse-2026-with-professor-tianyin-xu-link",
+          title: 'Started a remote summer research internship at the University of Illinois Urbana-Champaign through...',
+          description: "",
+          section: "News",},{id: "news-submitted-the-choice-can-be-the-attack-auditing-aligned-backdoors-in-llm-agents-to-the-transactions-of-the-association-for-computational-linguistics-tacl-2026-with-chowdhury-rakin-haider-link",
+          title: 'Submitted ‘The Choice Can Be the Attack: Auditing Aligned Backdoors in LLM Agents’...',
+          description: "",
+          section: "News",},{id: "news-an-empirical-study-on-remote-code-execution-in-machine-learning-model-hosting-ecosystems-is-under-review-at-the-international-conference-on-software-engineering-icse-2027-preprint-available-on-arxiv-link",
+          title: '‘An Empirical Study on Remote Code Execution in Machine Learning Model Hosting Ecosystems’...',
+          description: "",
+          section: "News",},{id: "news-will-begin-graduate-study-in-computing-science-at-the-university-of-alberta-on-september-1-2026-link",
+          title: 'Will begin graduate study in Computing Science at the University of Alberta on...',
+          description: "",
+          section: "News",},{id: "projects-1brc-c-on-apple-silicon",
+          title: '1BRC C# on Apple Silicon',
+          description: "A .NET 10 NativeAOT performance case study: byte parsing, native aggregation, ARM64 tuning, and a size-aware macOS pread path",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/1brc-csharp/";
+            },},{id: "projects-building-a-bangla-handwritten-digit-recognizer-from-scratch",
+          title: 'Building a Bangla Handwritten Digit Recognizer from Scratch',
+          description: "A Deep Dive into Custom CNN Implementation",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/bangla-digit-recognition/";
+            },},{id: "projects-blockchain-based-ticketing-platform",
+          title: 'Blockchain Based Ticketing Platform',
+          description: "A practical approach to reducing ticket fraud and abusive resale",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/blockchain-ticketing/";
+            },},{id: "projects-yet-another-c-compiler",
+          title: 'Yet Another C Compiler',
+          description: "A complete multi-pass compiler for a subset of C",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/compiler/";
+            },},{id: "projects-contextledger-context-accounting-for-coding-agents",
+          title: 'ContextLedger: context accounting for coding agents',
+          description: "A research notebook on OpenCode compaction, provenance, and live GPT-5.5 experiments",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/contextledger/";
+            },},{id: "projects-ctxhelm-agent-native-context-compiler",
+          title: 'ctxhelm: agent-native context compiler',
+          description: "Local-first context plans, release proof, and source-free agent evaluation",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/ctxhelm/";
+            },},{id: "projects-mini-deep-learning-framework-pytorch-from-scratch",
+          title: 'Mini Deep Learning Framework: PyTorch from Scratch',
+          description: "A freelance learning project for tensors, autograd, and neural-network internals",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/deep-learning-framework-capstone/";
+            },},{id: "projects-go-container-runtime-docker-from-scratch",
+          title: 'Go Container Runtime: Docker from Scratch',
+          description: "A freelance learning project for Linux containers, networking, and Go systems programming",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/docker-from-scratch-go/";
+            },},{id: "projects-eventfly-distributed-microservices-event-platform",
+          title: 'EventFly – Distributed Microservices Event Platform',
+          description: "A six-person BUET course project for event creation, ticketing, announcements, participant engagement, analytics, and payments, implemented with Node.js, React, NATS, Kubernetes, MongoDB, Redis, and Stripe.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/eventfly-an-end-to-end-event-management-system/";
+            },},{id: "projects-building-a-go-database-engine-from-scratch",
+          title: 'Building a Go Database Engine from Scratch',
+          description: "An educational ACID-oriented database engine with advanced features",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/go-database/";
+            },},{id: "projects-image-caption-generation-with-bert-context-vectors",
+          title: 'Image Caption Generation with BERT Context Vectors',
+          description: "Extended the &quot;Show, Attend, and Tell&quot; image captioning model with BERT to improve caption quality and reduce training time, achieving 36% improvement in CIDEr score and 43% improvement in BLEU-4.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/image-caption-generator/";
+            },},{id: "projects-patchsmith-a-harness-for-repair-agents",
+          title: 'PatchSmith: a harness for repair agents',
+          description: "System design and R&amp;D notes for bounded patches, sandbox validation, and auditable repair runs",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/patchsmith/";
+            },},{id: "projects-ray-tracing-from-scratch-a-comprehensive-guide-to-3d-rendering-physics-and-implementation",
+          title: 'Ray Tracing from Scratch: A Comprehensive Guide to 3D Rendering Physics and Implementation...',
+          description: "Implementing physically-based rendering with C++",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/ray-tracing/";
+            },},{id: "projects-an-empirical-study-on-remote-code-execution-in-machine-learning-model-hosting-ecosystems",
+          title: 'An Empirical Study on Remote Code Execution in Machine Learning Model Hosting Ecosystems...',
+          description: "A cross-platform study of model-loading risk across five ML hosting ecosystems, using static analysis, malware-signature scanning, and analysis of more than 600 developer discussions.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/research-ml-remote-code-execution/";
+            },},{id: "projects-verischema-verified-database-schema-generation",
+          title: 'VeriSchema: verified database-schema generation',
+          description: "How can specialized agents generate relational schemas from natural-language requirements while formal checks and targeted repair keep the result consistent?",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/research-multi-agent-db-schema/";
+            },},{id: "projects-the-choice-can-be-the-attack-auditing-aligned-backdoors-in-llm-agents",
+          title: 'The Choice Can Be the Attack: Auditing Aligned Backdoors in LLM Agents',
+          description: "Abstract-level summary of SHIFT, submitted to TACL 2026 on aligned backdoor attacks in LLM agents.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/research-reagent-plus-plus/";
+            },},{id: "projects-sentiment-analysis-of-anonymous-crisis-reports-in-bangladesh",
+          title: 'Sentiment Analysis of Anonymous Crisis Reports in Bangladesh',
+          description: "A multilingual analysis of anonymous, crowd-sourced reports from Bangladesh&#39;s 2024 national crisis.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/research-ureporter/";
+            },},{id: "projects-enhancing-tcp-fairness-tcp-vegas-implementation",
+          title: 'Enhancing TCP Fairness: TCP Vegas+ Implementation',
+          description: "A dual-mode solution for TCP Vegas fairness issues",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/tcp-vegas-plus/";
+            },},{
+        id: 'social-email',
+        title: 'email',
+        section: 'Socials',
+        handler: () => {
+          window.open("mailto:%74%61%6E%68%72%6F%6D%65%6C@%67%6D%61%69%6C.%63%6F%6D", "_blank");
+        },
+      },{
+        id: 'social-github',
+        title: 'GitHub',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://github.com/thromel", "_blank");
+        },
+      },{
+        id: 'social-scholar',
+        title: 'Google Scholar',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://scholar.google.com/citations?user=zHV4EU8AAAAJ", "_blank");
+        },
+      },{
+        id: 'social-linkedin',
+        title: 'LinkedIn',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://www.linkedin.com/in/thromel", "_blank");
+        },
+      },{
+        id: 'social-orcid',
+        title: 'ORCID',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://orcid.org/0009-0009-2432-8960", "_blank");
+        },
+      },{
+        id: 'social-rss',
+        title: 'RSS Feed',
+        section: 'Socials',
+        handler: () => {
+          window.open("/feed.xml", "_blank");
+        },
+      },{
+        id: 'social-x',
+        title: 'X',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://twitter.com/tanzimhromel", "_blank");
+        },
+      },{
+      id: 'light-theme',
+      title: 'Change theme to light',
+      description: 'Change the theme of the site to Light',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("light");
+      },
+    },
+    {
+      id: 'dark-theme',
+      title: 'Change theme to dark',
+      description: 'Change the theme of the site to Dark',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("dark");
+      },
+    },
+    {
+      id: 'system-theme',
+      title: 'Use system default theme',
+      description: 'Change the theme of the site to System Default',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("system");
+      },
+    },];
+
+</script> <script src="/assets/al_search/js/shortcut-key.js"></script> </body> </html>

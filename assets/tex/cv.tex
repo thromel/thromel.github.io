@@ -1,0 +1,371 @@
+\documentclass[a4paper,11pt]{article}
+
+% Package imports
+\usepackage{latexsym}
+\usepackage{xcolor}
+\usepackage{float}
+\usepackage{ragged2e}
+\usepackage[empty]{fullpage}
+\usepackage{wrapfig}
+\usepackage{lipsum}
+\usepackage{tabularx}
+\usepackage{titlesec}
+\usepackage{geometry}
+\usepackage{marvosym}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage[T1]{fontenc}
+
+% Color definitions
+\definecolor{darkblue}{RGB}{0,0,139}
+
+% Page layout
+\setlength{\multicolsep}{0pt} 
+\pagestyle{fancy}
+\fancyhf{} % clear all header and footer fields
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+\geometry{left=1.4cm, top=0.8cm, right=1.2cm, bottom=1cm}
+\setlength{\footskip}{5pt} % Addressing fancyhdr warning
+
+% Hyperlink setup (moved after fancyhdr to address warning)
+\usepackage[hidelinks]{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=darkblue,
+    filecolor=darkblue,
+    urlcolor=darkblue,
+}
+
+% Custom box settings
+\usepackage[most]{tcolorbox}
+\tcbset{
+    frame code={},
+    center title,
+    left=0pt,
+    right=0pt,
+    top=0pt,
+    bottom=0pt,
+    colback=gray!20,
+    colframe=white,
+    width=\dimexpr\textwidth\relax,
+    enlarge left by=-2mm,
+    boxsep=4pt,
+    arc=0pt,outer arc=0pt,
+}
+
+% URL style
+\urlstyle{same}
+
+% Text alignment
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+% Section formatting
+\titleformat{\section}{
+  \vspace{-4pt}\scshape\raggedright\large
+}{}{0em}{}[\color{black}\titlerule \vspace{-7pt}]
+
+% Custom commands
+\newcommand{\resumeItem}[2]{
+  \item{
+    \textbf{#1}{\hspace{0.5mm}#2 \vspace{-0.5mm}}
+  }
+}
+
+\newcommand{\resumePOR}[3]{
+\vspace{0.5mm}\item
+    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+        \textbf{#1}\hspace{0.3mm}#2 & \textit{\small{#3}} 
+    \end{tabular*}
+    \vspace{-2mm}
+}
+
+\newcommand{\resumeSubheading}[4]{
+\vspace{0.5mm}\item
+    \begin{tabular*}{0.98\textwidth}[t]{l@{\extracolsep{\fill}}r}
+        \textbf{#1} & \textit{\footnotesize{#4}} \\
+        \textit{\footnotesize{#3}} &  \footnotesize{#2}\\
+    \end{tabular*}
+    \vspace{-2.4mm}
+}
+
+\newcommand{\resumeProject}[4]{
+\vspace{0.5mm}\item
+    \begin{tabular*}{0.98\textwidth}[t]{l@{\extracolsep{\fill}}r}
+        \textbf{#1} & \textit{\footnotesize{#3}} \\
+        \footnotesize{\textit{#2}} & \footnotesize{#4}
+    \end{tabular*}
+    \vspace{-2.4mm}
+}
+
+\newcommand{\resumeSubItem}[2]{\resumeItem{#1}{#2}\vspace{-4pt}}
+
+\renewcommand{\labelitemi}{$\vcenter{\hbox{\tiny$\bullet$}}$}
+\renewcommand{\labelitemii}{$\vcenter{\hbox{\tiny$\circ$}}$}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=*,labelsep=1mm]}
+\newcommand{\resumeHeadingSkillStart}{\begin{itemize}[leftmargin=*,itemsep=1.7mm, rightmargin=2ex]}
+\newcommand{\resumeItemListStart}{\begin{itemize}[leftmargin=*,labelsep=1mm,itemsep=0.5mm]}
+
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}\vspace{2mm}}
+\newcommand{\resumeHeadingSkillEnd}{\end{itemize}\vspace{-2mm}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-2mm}}
+\newcommand{\cvsection}[1]{%
+\vspace{2mm}
+\begin{tcolorbox}
+    \textbf{\large #1}
+\end{tcolorbox}
+    \vspace{-4mm}
+}
+
+\newcolumntype{L}{>{\raggedright\arraybackslash}X}%
+\newcolumntype{R}{>{\raggedleft\arraybackslash}X}%
+\newcolumntype{C}{>{\centering\arraybackslash}X}%
+
+% Font options
+\newcommand{\headerfonti}{\fontfamily{phv}\selectfont} % Helvetica-like (similar to Arial/Calibri)
+\newcommand{\headerfontii}{\fontfamily{ptm}\selectfont} % Times-like (similar to Times New Roman)
+\newcommand{\headerfontiii}{\fontfamily{ppl}\selectfont} % Palatino (elegant serif)
+\newcommand{\headerfontiv}{\fontfamily{pbk}\selectfont} % Bookman (readable serif)
+\newcommand{\headerfontv}{\fontfamily{pag}\selectfont} % Avant Garde-like (similar to Trebuchet MS)
+\newcommand{\headerfontvi}{\fontfamily{cmss}\selectfont} % Computer Modern Sans Serif
+\newcommand{\headerfontvii}{\fontfamily{qhv}\selectfont} % Quasi-Helvetica (another Arial/Calibri alternative)
+\newcommand{\headerfontviii}{\fontfamily{qpl}\selectfont} % Quasi-Palatino (another elegant serif option)
+\newcommand{\headerfontix}{\fontfamily{qtm}\selectfont} % Quasi-Times (another Times New Roman alternative)
+\newcommand{\headerfontx}{\fontfamily{bch}\selectfont} % Charter (clean serif font)
+
+\begin{document}
+\headerfontiii
+
+% Header
+\begin{center}
+    {\Huge\textbf{Tanzim Hossain Romel}}
+\end{center}
+\vspace{-6mm}
+
+\begin{center}
+    \small{
+    \href{mailto:tanzimho@ualberta.ca}{tanzimho@ualberta.ca} |
+    \href{mailto:tanhromel@gmail.com}{tanhromel@gmail.com} |
+    \href{https://tanzimhromel.com}{tanzimhromel.com}
+    }
+\end{center}
+\vspace{-6mm}
+
+\begin{center}
+    \small{
+    LinkedIn: \href{https://www.linkedin.com/in/thromel/}{thromel} | 
+    GitHub: \href{https://github.com/thromel}{thromel}
+    | \href{https://scholar.google.com/citations?user=zHV4EU8AAAAJ}{Google Scholar}
+    }
+\end{center}
+\vspace{-6mm}
+\begin{center}
+    \small{Uttara, Dhaka, Bangladesh}
+\end{center}
+
+\vspace{-3mm}
+\begin{center}
+    \small{\textit{Incoming University of Alberta M.Sc. student with about three years of professional software-engineering experience, building dependable AI-agent, developer-tooling, and healthcare analytics systems.}}
+\end{center}
+
+\vspace{-4mm}
+
+\section{\textbf{Research Interests}}
+\vspace{1mm}
+\small{
+AI4SE, AI for SRE, LLM4Coding, Trustworthy AI, Long-horizon Coding Agents
+}
+\vspace{-2mm}
+
+\section{\textbf{Education}}
+\vspace{-0.4mm}
+\resumeSubHeadingListStart
+
+\resumeSubheading
+{\href{https://www.ualberta.ca/en/computing-science/index.html}{University of Alberta}}{Edmonton, Canada}
+{Incoming M.Sc. in Computing Science}{Sep 2026}
+\resumeItemListStart
+\item Incoming thesis-based M.Sc. student in the \href{https://u-a-goose.github.io}{U-A-Goose} research group, supervised by \href{https://apps.ualberta.ca/directory/person/zy25}{Dr. Zhou Yang}, with affiliation to \href{https://www.amii.ca/}{Amii (Alberta Machine Intelligence Institute)}.
+\resumeItemListEnd
+
+\resumeSubheading
+{\href{https://cse.buet.ac.bd/academics/bsc}{Bangladesh University of Engineering and Technology (BUET)}}{Dhaka, Bangladesh}
+{B.Sc. in Computer Science and Engineering}{Mar 2018 - May 2023}
+\resumeItemListStart
+\item Selected coursework: Machine Learning, Operating Systems, Computer Security, Fault-Tolerant Systems, and High-Performance Database Systems.
+\resumeItemListEnd
+
+\resumeSubHeadingListEnd
+\vspace{-6mm}
+
+
+\section{\textbf{Research Experience}}
+\vspace{-0.4mm}
+\resumeSubHeadingListStart
+
+\resumeProject
+  {University of Illinois Urbana-Champaign (UIUC)}
+  {Remote Research Intern through \href{https://uiuc-srse.github.io/}{UIUC++ SRSE 2026}; Professor \href{https://tianyin.github.io/}{Tianyin Xu's lab}}
+  {Jun 2026 - Aug 2026}
+  {{}}
+\resumeItemListStart
+  \item Working on software and systems reliability research with emphasis on rigorous empirical evaluation and reproducible research artifacts.
+  \item Preparing research prototypes, benchmark artifacts, and evaluation evidence for agentic software engineering and reliability tasks.
+  \item Building SRE-style benchmark artifacts around fault injection, mitigation oracles, shortcut rejection, and lifecycle evidence for Kubernetes reliability scenarios.
+\resumeItemListEnd
+
+\vspace{0.5mm}\item
+  \textbf{\href{https://arxiv.org/abs/2601.14163}{An Empirical Study on Remote Code Execution in Machine Learning Model Hosting Ecosystems}}
+  \hfill \textit{\footnotesize{Jun 2025 - Oct 2025}}\\
+  \footnotesize{\textit{Tools: Python, Bandit, CodeQL, Semgrep, YARA | Under review at ICSE 2027; preprint: \href{https://arxiv.org/abs/2601.14163}{arXiv:2601.14163}}}
+  \vspace{-2.4mm}
+\resumeItemListStart
+  \item Conducted a large-scale study of \textasciitilde45,000 ML model repositories across Hugging Face, ModelScope, OpenCSG, OpenMMLab, and PyTorch Hub.
+  \item Detected unsafe deserialization, eval-injection, malware-signature, and platform-safety risks using Bandit, CodeQL, Semgrep, YARA, and CWE-based classification.
+  \item Analyzed 600+ developer discussions to build a taxonomy of misconceptions around remote code execution, trust flags, and model-loading safety.
+  \item Compared platform defenses such as warning systems, scanning, SafeTensors support, and \texttt{trust\_remote\_code} controls to connect repository-level findings with ecosystem-level mitigation gaps.
+\resumeItemListEnd
+
+\resumeProject
+  {The Choice Can Be the Attack: Auditing Aligned Backdoors in LLM Agents}
+  {Tools: Python, vLLM, PyTorch, pandas, NumPy | Submitted to TACL 2026}
+  {Aug 2025 - Present}
+  {}
+\resumeItemListStart
+  \item Studied a hidden backdoor risk where a trigger changes which valid option an LLM agent chooses while the final answer still appears correct.
+  \item Built \textbf{SHIFT}, which reruns the same task with and without a known trigger, then checks whether the changed choice favors the attacker's target rather than normal reasons like price or rating.
+  \item Instrumented structured choice tasks with valid-option sets, logged option features, and matched no-trigger/trigger endpoint runs so the audit does not require model weights, logits, or hidden states.
+\resumeItemListEnd
+
+\resumeProject
+  {Multi-Agent Framework for Generating Relational DB Schema \& ERD}
+  {Tools: Python, LangGraph, StateGraph, Z3 Solver, SQLAlchemy, Text2Schema}
+  {Jul 2025 - Present}
+  {{}}
+\resumeItemListStart
+  \item Extended SchemaAgent with Dr. Sukarna Barua (BUET) to turn natural-language requirements into relational schemas and ER diagrams.
+  \item Built a LangGraph pipeline for entity extraction, relationship detection, normalization checks, Z3 validation, and targeted retry.
+  \item Designed verification gates for entity/relation completeness, functional dependencies, normal-form compliance, key soundness, requirement coverage, and executable DDL repair.
+\resumeItemListEnd
+
+\resumeSubHeadingListEnd
+
+\section{\textbf{Selected Research Software and Systems Projects}}
+\vspace{-0.4mm}
+\resumeSubHeadingListStart
+
+\resumeProject
+{\href{https://github.com/thromel/ctxhelm}{ctxhelm + \href{https://github.com/thromel/helmbench}{HelmBench}: Context Compiler and Source-Free Agent Evaluation}}
+{Tools: Rust, MCP, CLI, Git, Hybrid Retrieval, Symbol Indexing, JSON Schema, Agent Tracing}
+{May 2026 - Present}
+{}
+\resumeItemListStart
+\item Built a local-first, read-only context compiler for coding agents, combining lexical search, symbol search, dependency expansion, related-test mapping, git co-change hints, semantic metadata, and memory signals.
+\item Shipped ctxhelm releases with archive/Homebrew installation, checksum verification, doctor checks, MCP smoke tests, and source-free evaluation artifacts.
+\item Built HelmBench as active evaluation infrastructure with trace schemas, privacy checks, evidence bundles, matrix runs, and quality gates that separate context-selection quality from downstream patch quality without exposing source, prompts, transcripts, or terminal logs.
+\resumeItemListEnd
+
+\resumeProject
+{\href{https://github.com/thromel/Yet-Another-C-Compiler}{Yet Another C Compiler}}
+{Tools: C++17, Flex, Bison, CMake, x86-64 Assembly, SSA/IR Optimization}
+{Jun 2021 - Aug 2021; revised Oct 2024}
+{}
+\resumeItemListStart
+\item Built a C compiler with lexer/parser, semantic analysis, x86-64 code generation, and a linear-scan register allocator.
+\item Modernized the Flex/Bison prototype with modular IR passes and SSA optimizations including SCCP, GVN, LICM, and dead-code elimination.
+\resumeItemListEnd
+
+\resumeProject
+{\href{https://github.com/thromel/CSE-472-Machine-Learning}{Bangla Handwritten Digit Recognition}}
+{Tools: Python, NumPy, OpenCV, CNN from Scratch, NumtaDB}
+{Jan 2023 - Feb 2023}
+{}
+\resumeItemListStart
+\item Implemented a NumPy CNN from scratch to recognize handwritten Bangla digits from the NumtaDB dataset.
+\item Built the preprocessing and training pipeline, reaching \textbf{95.9\% accuracy} and placing \textbf{2nd among 120 students}.
+\resumeItemListEnd
+
+\resumeSubHeadingListEnd
+
+\vspace{-2mm}
+\section{\textbf{Open Source Contributions}}
+\vspace{-0.4mm}
+\resumeSubHeadingListStart
+
+\resumeProject
+  {Selected Upstream Contributions}
+  {Selected upstream contributions across SRE benchmarks, program analysis, .NET, web servers, agent systems, and compilers}
+  {2025 - 2026}
+  {\href{https://github.com/thromel?tab=pull_requests}{GitHub}}
+\resumeItemListStart
+  \item \textbf{\href{https://github.com/SREGym/SREGym}{SREGym}}: authored and hardened Kubernetes SRE benchmark work, including scheduler priority-preemption and Calico route-reflector label-drift scenarios with fault/oracle design, validation checks, and reviewer-facing evidence.
+  \item \textbf{\href{https://github.com/tsantalis/RefactoringMiner/pulls?q=author\%3Athromel}{RefactoringMiner}}: merged local MCP tooling, WebDiff workflow support, merge-parent-aware commit diffs, assertion migration matching, and single-page PR viewed toggles for refactoring-analysis workflows.
+  \item \textbf{\href{https://github.com/dotnet/efcore}{EF Core}}: merged targeted data-stack changes for runtime migration creation/application, \texttt{ON DELETE SET DEFAULT} support, and nullable complex-property reload handling.
+  \item \textbf{\href{https://github.com/Kaliumhexacyanoferrat/GenHTTP}{GenHTTP}}: added automatic request-body decompression and binary-response support with focused framework behavior tests.
+  \item \textbf{\href{https://github.com/langchain-ai/deepagents/pull/2396}{deepagents}}: merged a CLI fix that stops and clears \texttt{LoadingWidget} animation timers on stop and unmount, preventing interval leaks in long-running terminal sessions and adding regression coverage for both cleanup paths.
+  \item \textbf{\href{https://github.com/microsoft/typescript-go/pull/3314}{TypeScript}}: merged an upstream-aligned declaration-emit alias-resolution fix that preserves imported type aliases for inferred exports across module boundaries in Microsoft's Go port of TypeScript.
+\resumeItemListEnd
+
+\resumeSubHeadingListEnd
+
+\vspace{-2mm}
+\section{\textbf{Professional Experience}}
+\vspace{-0.4mm}
+  \resumeSubHeadingListStart
+  \resumeSubheading
+      {\href{https://www.ualberta.ca/en/computing-science/index.html}{University of Alberta}}{Edmonton, Canada}
+      {Graduate Teaching and Research Assistant (GTA, GRA, GRAF)}{Starting Sep 1, 2026}
+      \resumeItemListStart
+        \item Incoming M.Sc. student supporting graduate teaching and research in software engineering and dependable AI with the \href{https://u-a-goose.github.io/}{U-A-Goose} group.
+      \resumeItemListEnd
+  \resumeSubheading
+      {\href{https://www.iqvia.com/}{IQVIA}}{Dhaka, Bangladesh}
+      {Software Development Engineer}{Jun 2023 - Jun 2026}
+      \resumeItemListStart
+        \item Built and maintained \href{https://www.iqvia.com/library/fact-sheets/kpi-library}{KPI Library}, the dynamic reporting layer within \href{https://www.iqvia.com/solutions/commercialization/commercial-analytics/orchestrated-analytics}{IQVIA Orchestrated Analytics}, using C\#/.NET, EF Core, and AWS for healthcare analytics workflows.
+        \item Refactored a complex healthcare-analytics filter path into reusable query components, reducing duplicated business rules and improving filtering performance by 70\% in the targeted workflow.
+        \item Reworked selected high-latency analytics paths with PostgreSQL query planning, targeted indexing, materialized views, Redis caching, and MongoDB tuning, reducing complex query time by 60\% and API latency by 40\%.
+        \item Designed Playwright-backed export regression tests with multi-layer hashing to compare generated artifacts deterministically, raising export-workflow coverage from 72\% to 95\% and catching content-level regressions.
+        \item Added OpenTelemetry and Jaeger tracing around API, query, and cache paths, making latency and regression sources visible across distributed services.
+        \item Built LangGraph/LangChain workflows with MCP, RAG, and \texttt{deepagents} to map analyst prompts into structured dashboard setup, modification, drill-down analysis, and validated export actions, reducing setup effort by 85\% in the targeted workflow.
+        \item Optimized CI/CD build stages and parallel test execution, reducing deployment time by 35\%; led POC work, mentored junior developers, and received the IQVIA Impact Program Silver Award for essential feature delivery.
+      \resumeItemListEnd
+  \resumeSubHeadingListEnd
+
+\vspace{-2mm}
+\section{\textbf{Skills}}
+\vspace{-0.4mm}
+\small{
+\textbf{Primary:} Python, C\#/.NET, Rust, TypeScript, Go, PostgreSQL, AWS, Docker, Kubernetes, LangGraph, MCP \\
+\textbf{Research and agent tooling:} CodeQL, Semgrep, Bandit, YARA, Z3, RefactoringMiner, deepagents, vLLM, JSON Schema, source-free tracing \\
+\textbf{Systems and ML tooling:} C++, Java, Flex, Bison, CMake, NS-3, NumPy, OpenCV, PyTorch, Linux namespaces \\
+\textbf{Backend and production tooling:} EF Core, SQLAlchemy, REST APIs, Redis, MongoDB, SQL Server, DynamoDB, OpenTelemetry, Jaeger, Playwright
+}
+\vspace{-2mm}
+
+
+\section{\textbf{Honors and Awards}}
+\vspace{-0.4mm}
+\resumeSubHeadingListStart
+
+\resumePOR{\href{https://github.com/thromel/CSE-472-Machine-Learning}{2nd Place -- Bangla Handwritten Digits Recognition}}{: 95.9\% accuracy, BUET ML Lab contest}{2022}
+\resumePOR{\href{https://cse.buet.ac.bd/academics/fund}{Dean's List Award}}{: academic performance, BUET Level 2}{}
+\resumePOR{National Science Olympiads}{: prize winner in Bangladesh Physics and Chemistry Olympiads}{2017}
+\resumePOR{Talentpool HSC Scholarship}{: 15th in Rajshahi Board with 95.6\% marks}{2017}
+
+\resumeSubHeadingListEnd
+
+\vspace{-6mm}
+
+\section{\textbf{References}}
+\vspace{-0.4mm}
+\small{References available upon request.}
+\vspace{-4mm}
+
+\end{document}
