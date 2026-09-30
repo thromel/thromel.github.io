@@ -9,9 +9,7 @@ profile:
   image: prof_pic.webp
   image_circular: false
   more_info: >
-    <p>Department of Computing Science</p>
-    <p>University of Alberta</p>
-    <p><em>Me in front of Lake Minnewanka, Banff National Park.</em></p>
+    <p><em>Me in front of Lake Minnewanka, Banff National Park, September 2026.</em></p>
 
 selected_papers: true # includes papers marked selected={true} in the bib
 social: true
