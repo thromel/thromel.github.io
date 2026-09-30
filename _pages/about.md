@@ -25,6 +25,8 @@ latest_posts:
   limit: 3
 ---
 
+**Contact:** <a href="mailto:{{ 'tanzimho@ualberta.ca' | encode_email }}">tanzimho@ualberta.ca</a> &middot; <a href="mailto:{{ 'tanhromel@gmail.com' | encode_email }}">tanhromel@gmail.com</a>
+
 I study how AI agents behave in real software systems, and how to make their decisions inspectable, reliable, and trustworthy.
 
 I bring about three years of professional software-engineering experience, formerly at <a href="https://www.iqvia.com/" target="_blank" rel="noopener noreferrer">IQVIA</a>.
