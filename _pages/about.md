@@ -2,7 +2,7 @@
 layout: about
 title: about
 permalink: /
-subtitle: <a href="https://www.ualberta.ca/en/computing-science/index.html" target="_blank" rel="noopener noreferrer">University of Alberta</a> &middot; M.Sc. in Computing Science
+subtitle: <a href="https://www.ualberta.ca/en/computing-science/index.html" target="_blank" rel="noopener noreferrer">University of Alberta</a> &middot; M.Sc. in Computing Science &middot; <a href="https://u-a-goose.github.io/" target="_blank" rel="noopener noreferrer">U-A-Goose Lab</a>
 
 profile:
   align: right

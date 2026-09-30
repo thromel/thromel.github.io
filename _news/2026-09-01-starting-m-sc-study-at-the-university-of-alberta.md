@@ -4,6 +4,6 @@ date: 2026-09-01 00:00:00+0000
 inline: true
 ---
 
-Will begin graduate study in Computing Science at the University of Alberta on September 1, 2026.
+I have started graduate study in Computing Science at the University of Alberta, in the U-A-Goose group.
 
 [Link](https://www.ualberta.ca/en/computing-science/index.html)
