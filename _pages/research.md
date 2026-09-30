@@ -41,7 +41,7 @@ scholar_id: zHV4EU8AAAAJ
       </tbody>
     </table>
     {% if anchor.publicity == 'abstract-only' %}<p class="small text-muted">The manuscript is not public; this record is deliberately limited to an abstract-level summary.</p>{% endif %}
-    <p class="mb-0">{% for link in anchor.links limit:2 %}<a class="btn btn-sm z-depth-0" role="button" href="{{ link.url | relative_url }}"{% if link.url contains '://' %} target="_blank" rel="noopener noreferrer" aria-label="{{ link.label | escape }} for {{ anchor.title | escape }} (opens in a new tab)"{% endif %}>{{ link.label }}</a> {% endfor %}</p>
+    <p class="mb-0">{% for link in anchor.links limit:3 %}<a class="btn btn-sm z-depth-0" role="button" href="{{ link.url | relative_url }}"{% if link.url contains '://' %} target="_blank" rel="noopener noreferrer" aria-label="{{ link.label | escape }} for {{ anchor.title | escape }} (opens in a new tab)"{% endif %}>{{ link.label }}</a> {% endfor %}</p>
   </div>
 </div>
 {% endfor %}

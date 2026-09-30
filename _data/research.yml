@@ -60,6 +60,8 @@ anchors:
     image_kind: "mark"
     image_caption: "Research context · UIUC++ SRSE 2026"
     links:
+      - label: "SREGym blog post"
+        url: "https://sregym.com/blog/postmortems-to-sre-benchmarks"
       - label: "SREGym project"
         url: "https://www.sregym.com/"
       - label: "Public repository"
@@ -211,6 +213,8 @@ homepage:
       image_kind: "mark"
       image_caption: "Research context · UIUC++ SRSE 2026"
       links:
+        - label: "SREGym blog post"
+          url: "https://sregym.com/blog/postmortems-to-sre-benchmarks"
         - label: "SREGym project"
           url: "https://www.sregym.com/"
         - label: "Public repository"
