@@ -659,3 +659,22 @@ h2.bibliography,
 .projects h2.category {
   color: var(--global-text-color-light) !important;
 }
+
+/* Profile block: social icons and emails under the photo */
+.profile .more-info .contact-icons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.35rem 0.55rem;
+  margin: 0.9rem 0 0.6rem;
+  font-size: 1.35rem;
+  line-height: 1;
+}
+
+.profile .more-info .contact-icons a {
+  padding: 0.15rem;
+}
+
+.profile .more-info p {
+  margin-bottom: 0.25rem;
+}
