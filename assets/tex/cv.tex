@@ -29,7 +29,7 @@
 \fancyfoot{}
 \renewcommand{\headrulewidth}{0pt}
 \renewcommand{\footrulewidth}{0pt}
-\geometry{left=1.4cm, top=0.8cm, right=1.2cm, bottom=1cm}
+\geometry{left=1.4cm, top=1.2cm, right=1.4cm, bottom=1.2cm}
 \setlength{\footskip}{5pt} % Addressing fancyhdr warning
 
 % Hyperlink setup (moved after fancyhdr to address warning)
@@ -88,8 +88,8 @@
 \newcommand{\resumeSubheading}[4]{
 \vspace{0.5mm}\item
     \begin{tabular*}{0.98\textwidth}[t]{l@{\extracolsep{\fill}}r}
-        \textbf{#1} & \textit{\footnotesize{#4}} \\
-        \textit{\footnotesize{#3}} &  \footnotesize{#2}\\
+        \textbf{#1} & \textit{\small{#4}} \\
+        \textit{\small{#3}} &  \small{#2}\\
     \end{tabular*}
     \vspace{-2.4mm}
 }
@@ -97,8 +97,8 @@
 \newcommand{\resumeProject}[4]{
 \vspace{0.5mm}\item
     \begin{tabular*}{0.98\textwidth}[t]{l@{\extracolsep{\fill}}r}
-        \textbf{#1} & \textit{\footnotesize{#3}} \\
-        \footnotesize{\textit{#2}} & \footnotesize{#4}
+        \textbf{#1} & \textit{\small{#3}} \\
+        \small{\textit{#2}} & \small{#4}
     \end{tabular*}
     \vspace{-2.4mm}
 }
@@ -139,236 +139,152 @@
 \newcommand{\headerfontix}{\fontfamily{qtm}\selectfont} % Quasi-Times (another Times New Roman alternative)
 \newcommand{\headerfontx}{\fontfamily{bch}\selectfont} % Charter (clean serif font)
 
+
+% Wrapping titles keep long research titles clear of their dates.
+\newcommand{\resumeCompactProject}[2]{
+\vspace{0.5mm}\item
+    \begin{tabularx}{0.98\linewidth}[t]{@{}>{\raggedright\arraybackslash}X@{\hspace{1em}}r@{}}
+        \textbf{#1} & \textit{\small #2}
+    \end{tabularx}
+    \vspace{-2.4mm}
+}
+\newcommand{\resumePublication}[3]{
+\vspace{0.5mm}\item
+    \begin{tabularx}{0.98\linewidth}[t]{@{}>{\raggedright\arraybackslash}X@{\hspace{1em}}r@{}}
+        \textbf{#1} & \textit{\small #2}\\
+        \multicolumn{2}{@{}l@{}}{\small\textit{#3}}
+    \end{tabularx}
+    \vspace{-2.4mm}
+}
 \begin{document}
 \headerfontiii
 
-% Header
 \begin{center}
-    {\Huge\textbf{Tanzim Hossain Romel}}
+    {\Huge\textbf{Tanzim Hossain Romel}}\\[3pt]
+    {\small\href{mailto:tanzimho@ualberta.ca}{tanzimho@ualberta.ca} | \href{mailto:tanhromel@gmail.com}{tanhromel@gmail.com} | \href{https://tanzimhromel.com}{tanzimhromel.com}}\\[2pt]
+    {\small LinkedIn: \href{https://www.linkedin.com/in/thromel/}{thromel} | GitHub: \href{https://github.com/thromel}{thromel} | \href{https://scholar.google.com/citations?user=zHV4EU8AAAAJ}{Google Scholar}}\\[2pt]
+    {\small Edmonton, Alberta, Canada}
 \end{center}
-\vspace{-6mm}
-
-\begin{center}
-    \small{
-    \href{mailto:tanzimho@ualberta.ca}{tanzimho@ualberta.ca} |
-    \href{mailto:tanhromel@gmail.com}{tanhromel@gmail.com} |
-    \href{https://tanzimhromel.com}{tanzimhromel.com}
-    }
-\end{center}
-\vspace{-6mm}
-
-\begin{center}
-    \small{
-    LinkedIn: \href{https://www.linkedin.com/in/thromel/}{thromel} | 
-    GitHub: \href{https://github.com/thromel}{thromel}
-    | \href{https://scholar.google.com/citations?user=zHV4EU8AAAAJ}{Google Scholar}
-    }
-\end{center}
-\vspace{-6mm}
-\begin{center}
-    \small{Edmonton, Alberta, Canada}
-\end{center}
-
 \vspace{-3mm}
-\begin{center}
-    \small{\textit{University of Alberta M.Sc. student with about three years of professional software-engineering experience, building dependable AI-agent, developer-tooling, and healthcare analytics systems.}}
-\end{center}
-
-\vspace{-4mm}
-
-\section{\textbf{Research Interests}}
-\vspace{1mm}
-\small{
-AI4SE, AI for SRE, LLM4Coding, Trustworthy AI, Long-horizon Coding Agents
-}
-\vspace{-2mm}
+\normalsize
+{\small\textbf{Research interests:} AI for software engineering and reliability, trustworthy AI, and long-horizon coding agents.}
 
 \section{\textbf{Education}}
-\vspace{-0.4mm}
 \resumeSubHeadingListStart
-
 \resumeSubheading
 {\href{https://www.ualberta.ca/en/computing-science/index.html}{University of Alberta}}{Edmonton, Canada}
 {M.Sc. in Computing Science}{Sep 2026 - Present}
 \resumeItemListStart
-\item Thesis-based M.Sc. student in the \href{https://u-a-goose.github.io}{U-A-Goose} research group, supervised by \href{https://apps.ualberta.ca/directory/person/zy25}{Dr. Zhou Yang}, with affiliation to \href{https://www.amii.ca/}{Amii (Alberta Machine Intelligence Institute)}.
-\item Current coursework: Human-AI Interaction and Formal Verification.
+\item Thesis-based M.Sc. supervised by \href{https://apps.ualberta.ca/directory/person/zy25}{Dr. Zhou Yang}.
 \resumeItemListEnd
-
 \resumeSubheading
 {\href{https://cse.buet.ac.bd/academics/bsc}{Bangladesh University of Engineering and Technology (BUET)}}{Dhaka, Bangladesh}
 {B.Sc. in Computer Science and Engineering}{Mar 2018 - May 2023}
-\resumeItemListStart
-\item Selected coursework: Machine Learning, Operating Systems, Computer Security, Fault-Tolerant Systems, and High-Performance Database Systems.
-\resumeItemListEnd
-
 \resumeSubHeadingListEnd
-\vspace{-6mm}
-
+\vspace{-4mm}
 
 \section{\textbf{Research Experience}}
-\vspace{-0.4mm}
 \resumeSubHeadingListStart
-
+\resumeSubheading
+{\href{https://www.ualberta.ca/en/computing-science/index.html}{University of Alberta}}{Edmonton, Canada}
+{Graduate Research Assistantship Fellowship (GRAF)}{Sep 2026 - Dec 2026}
+\resumeItemListStart
+\item Research reliable LLM coding agents, with a focus on behavior steering and code maintainability over long tasks, under Dr. Zhou Yang's supervision.
+\resumeItemListEnd
 \resumeProject
-  {University of Illinois Urbana-Champaign (UIUC)}
-  {Remote Research Intern through \href{https://uiuc-srse.github.io/}{UIUC++ SRSE 2026}; Professor \href{https://tianyin.github.io/}{Tianyin Xu's lab}}
-  {Jun 2026 - Aug 2026}
-  {{}}
+{University of Illinois Urbana-Champaign (UIUC)}
+{Remote Research Intern, \href{https://uiuc-srse.github.io/}{UIUC++ SRSE 2026}, Professor \href{https://tianyin.github.io/}{Tianyin Xu's lab}}
+{Jun 2026 - Aug 2026}{}
 \resumeItemListStart
-  \item Curated real-world postmortem reports into reproducible SRE benchmark problems on \href{https://sregym.com/blog/postmortems-to-sre-benchmarks}{SREGym}.
-  \item Worked on software and systems reliability research with emphasis on rigorous empirical evaluation and reproducible research artifacts.
-  \item Prepared research prototypes, benchmark artifacts, and evaluation evidence for agentic software engineering and reliability tasks.
-  \item Built SRE-style benchmark artifacts around fault injection, mitigation oracles, shortcut rejection, and lifecycle evidence for Kubernetes reliability scenarios.
+\item Curated real-world postmortems into reproducible \href{https://sregym.com/blog/postmortems-to-sre-benchmarks}{SREGym} benchmark problems.
+\item Built Kubernetes scenarios with fault injection, mitigation oracles, and checks that reject shortcuts.
 \resumeItemListEnd
-
-\vspace{0.5mm}\item
-  \textbf{\href{https://arxiv.org/abs/2601.14163}{An Empirical Study on Remote Code Execution in Machine Learning Model Hosting Ecosystems}}
-  \hfill \textit{\footnotesize{Jun 2025 - Oct 2025}}\\
-  \footnotesize{\textit{Tools: Python, Bandit, CodeQL, Semgrep, YARA | Under review at ICSE 2027; preprint: \href{https://arxiv.org/abs/2601.14163}{arXiv:2601.14163}}}
-  \vspace{-2.4mm}
-\resumeItemListStart
-  \item Conducted a large-scale study of \textasciitilde45,000 ML model repositories across Hugging Face, ModelScope, OpenCSG, OpenMMLab, and PyTorch Hub.
-  \item Detected unsafe deserialization, eval-injection, malware-signature, and platform-safety risks using Bandit, CodeQL, Semgrep, YARA, and CWE-based classification.
-  \item Analyzed 600+ developer discussions to build a taxonomy of misconceptions around remote code execution, trust flags, and model-loading safety.
-  \item Compared platform defenses such as warning systems, scanning, SafeTensors support, and \texttt{trust\_remote\_code} controls to connect repository-level findings with ecosystem-level mitigation gaps.
-\resumeItemListEnd
-
-\resumeProject
-  {The Choice Can Be the Attack: Auditing Aligned Backdoors in LLM Agents}
-  {Tools: Python, vLLM, PyTorch, pandas, NumPy | Submitted to TACL 2026}
-  {Aug 2025 - Present}
-  {}
-\resumeItemListStart
-  \item Studied a hidden backdoor risk where a trigger changes which valid option an LLM agent chooses while the final answer still appears correct.
-  \item Built \textbf{SHIFT}, which reruns the same task with and without a known trigger, then checks whether the changed choice favors the attacker's target rather than normal reasons like price or rating.
-  \item Instrumented structured choice tasks with valid-option sets, logged option features, and matched no-trigger/trigger endpoint runs so the audit does not require model weights, logits, or hidden states.
-\resumeItemListEnd
-
-\resumeProject
-  {Multi-Agent Framework for Generating Relational DB Schema \& ERD}
-  {Tools: Python, LangGraph, StateGraph, Z3 Solver, SQLAlchemy, Text2Schema}
-  {Jul 2025 - Present}
-  {{}}
-\resumeItemListStart
-  \item Extended SchemaAgent with Dr. Sukarna Barua (BUET) to turn natural-language requirements into relational schemas and ER diagrams.
-  \item Built a LangGraph pipeline for entity extraction, relationship detection, normalization checks, Z3 validation, and targeted retry.
-  \item Designed verification gates for entity/relation completeness, functional dependencies, normal-form compliance, key soundness, requirement coverage, and executable DDL repair.
-\resumeItemListEnd
-
 \resumeSubHeadingListEnd
-
-\section{\textbf{Selected Research Software and Systems Projects}}
-\vspace{-0.4mm}
-\resumeSubHeadingListStart
-
-\resumeProject
-{\href{https://github.com/thromel/ctxhelm}{ctxhelm + \href{https://github.com/thromel/helmbench}{HelmBench}: Context Compiler and Source-Free Agent Evaluation}}
-{Tools: Rust, MCP, CLI, Git, Hybrid Retrieval, Symbol Indexing, JSON Schema, Agent Tracing}
-{May 2026 - Present}
-{}
-\resumeItemListStart
-\item Built a local-first, read-only context compiler for coding agents, combining lexical search, symbol search, dependency expansion, related-test mapping, git co-change hints, semantic metadata, and memory signals.
-\item Shipped ctxhelm releases with archive/Homebrew installation, checksum verification, doctor checks, MCP smoke tests, and source-free evaluation artifacts.
-\item Built HelmBench as active evaluation infrastructure with trace schemas, privacy checks, evidence bundles, matrix runs, and quality gates that separate context-selection quality from downstream patch quality without exposing source, prompts, transcripts, or terminal logs.
-\resumeItemListEnd
-
-\resumeProject
-{\href{https://github.com/thromel/Yet-Another-C-Compiler}{Yet Another C Compiler}}
-{Tools: C++17, Flex, Bison, CMake, x86-64 Assembly, SSA/IR Optimization}
-{Jun 2021 - Aug 2021; revised Oct 2024}
-{}
-\resumeItemListStart
-\item Built a C compiler with lexer/parser, semantic analysis, x86-64 code generation, and a linear-scan register allocator.
-\item Modernized the Flex/Bison prototype with modular IR passes and SSA optimizations including SCCP, GVN, LICM, and dead-code elimination.
-\resumeItemListEnd
-
-\resumeProject
-{\href{https://github.com/thromel/CSE-472-Machine-Learning}{Bangla Handwritten Digit Recognition}}
-{Tools: Python, NumPy, OpenCV, CNN from Scratch, NumtaDB}
-{Jan 2023 - Feb 2023}
-{}
-\resumeItemListStart
-\item Implemented a NumPy CNN from scratch to recognize handwritten Bangla digits from the NumtaDB dataset.
-\item Built the preprocessing and training pipeline, reaching \textbf{95.9\% accuracy} and placing \textbf{2nd among 120 students}.
-\resumeItemListEnd
-
-\resumeSubHeadingListEnd
-
-\vspace{-2mm}
-\section{\textbf{Open Source Contributions}}
-\vspace{-0.4mm}
-\resumeSubHeadingListStart
-
-\resumeProject
-  {Selected Upstream Contributions}
-  {Selected upstream contributions across SRE benchmarks, program analysis, .NET, web servers, agent systems, and compilers}
-  {2025 - 2026}
-  {\href{https://github.com/thromel?tab=pull_requests}{GitHub}}
-\resumeItemListStart
-  \item \textbf{\href{https://github.com/SREGym/SREGym}{SREGym}}: authored and hardened Kubernetes SRE benchmark work, including scheduler priority-preemption and Calico route-reflector label-drift scenarios with fault/oracle design, validation checks, and reviewer-facing evidence.
-  \item \textbf{\href{https://github.com/tsantalis/RefactoringMiner/pulls?q=author\%3Athromel}{RefactoringMiner}}: merged local MCP tooling, WebDiff workflow support, merge-parent-aware commit diffs, assertion migration matching, and single-page PR viewed toggles for refactoring-analysis workflows.
-  \item \textbf{\href{https://github.com/dotnet/efcore}{EF Core}}: merged targeted data-stack changes for runtime migration creation/application, \texttt{ON DELETE SET DEFAULT} support, and nullable complex-property reload handling.
-  \item \textbf{\href{https://github.com/Kaliumhexacyanoferrat/GenHTTP}{GenHTTP}}: added automatic request-body decompression and binary-response support with focused framework behavior tests.
-  \item \textbf{\href{https://github.com/langchain-ai/deepagents/pull/2396}{deepagents}}: merged a CLI fix that stops and clears \texttt{LoadingWidget} animation timers on stop and unmount, preventing interval leaks in long-running terminal sessions and adding regression coverage for both cleanup paths.
-  \item \textbf{\href{https://github.com/microsoft/typescript-go/pull/3314}{TypeScript}}: merged an upstream-aligned declaration-emit alias-resolution fix that preserves imported type aliases for inferred exports across module boundaries in Microsoft's Go port of TypeScript.
-\resumeItemListEnd
-
-\resumeSubHeadingListEnd
-
-\vspace{-2mm}
-\section{\textbf{Professional Experience}}
-\vspace{-0.4mm}
-  \resumeSubHeadingListStart
-  \resumeSubheading
-      {\href{https://www.ualberta.ca/en/computing-science/index.html}{University of Alberta}}{Edmonton, Canada}
-      {Graduate Teaching and Research Assistant (GTA, GRA, GRAF)}{Sep 2026 - Present}
-      \resumeItemListStart
-        \item Teaching assistant for CMPUT 174.
-        \item M.Sc. student supporting graduate teaching and research in software engineering and dependable AI with the \href{https://u-a-goose.github.io/}{U-A-Goose} group.
-      \resumeItemListEnd
-  \resumeSubheading
-      {\href{https://www.iqvia.com/}{IQVIA}}{Dhaka, Bangladesh}
-      {Software Development Engineer}{Jun 2023 - Jun 2026}
-      \resumeItemListStart
-        \item Built and maintained \href{https://www.iqvia.com/library/fact-sheets/kpi-library}{KPI Library}, the dynamic reporting layer within \href{https://www.iqvia.com/solutions/commercialization/commercial-analytics/orchestrated-analytics}{IQVIA Orchestrated Analytics}, using C\#/.NET, EF Core, and AWS for healthcare analytics workflows.
-        \item Refactored a complex healthcare-analytics filter path into reusable query components, reducing duplicated business rules and improving filtering performance by 70\% in the targeted workflow.
-        \item Reworked selected high-latency analytics paths with PostgreSQL query planning, targeted indexing, materialized views, Redis caching, and MongoDB tuning, reducing complex query time by 60\% and API latency by 40\%.
-        \item Designed Playwright-backed export regression tests with multi-layer hashing to compare generated artifacts deterministically, raising export-workflow coverage from 72\% to 95\% and catching content-level regressions.
-        \item Added OpenTelemetry and Jaeger tracing around API, query, and cache paths, making latency and regression sources visible across distributed services.
-        \item Built LangGraph/LangChain workflows with MCP, RAG, and \texttt{deepagents} to map analyst prompts into structured dashboard setup, modification, drill-down analysis, and validated export actions, reducing setup effort by 85\% in the targeted workflow.
-        \item Optimized CI/CD build stages and parallel test execution, reducing deployment time by 35\%; led POC work, mentored junior developers, and received the IQVIA Impact Program Silver Award for essential feature delivery.
-      \resumeItemListEnd
-  \resumeSubHeadingListEnd
-
-\vspace{-2mm}
-\section{\textbf{Skills}}
-\vspace{-0.4mm}
-\small{
-\textbf{Primary:} Python, C\#/.NET, Rust, TypeScript, Go, PostgreSQL, AWS, Docker, Kubernetes, LangGraph, MCP \\
-\textbf{Research and agent tooling:} CodeQL, Semgrep, Bandit, YARA, Z3, RefactoringMiner, deepagents, vLLM, JSON Schema, source-free tracing \\
-\textbf{Systems and ML tooling:} C++, Java, Flex, Bison, CMake, NS-3, NumPy, OpenCV, PyTorch, Linux namespaces \\
-\textbf{Backend and production tooling:} EF Core, SQLAlchemy, REST APIs, Redis, MongoDB, SQL Server, DynamoDB, OpenTelemetry, Jaeger, Playwright
-}
-\vspace{-2mm}
-
-
-\section{\textbf{Honors and Awards}}
-\vspace{-0.4mm}
-\resumeSubHeadingListStart
-
-\resumePOR{\href{https://github.com/thromel/CSE-472-Machine-Learning}{2nd Place -- Bangla Handwritten Digits Recognition}}{: 95.9\% accuracy, BUET ML Lab contest}{2022}
-\resumePOR{\href{https://cse.buet.ac.bd/academics/fund}{Dean's List Award}}{: academic performance, BUET Level 2}{}
-\resumePOR{National Science Olympiads}{: prize winner in Bangladesh Physics and Chemistry Olympiads}{2017}
-\resumePOR{Talentpool HSC Scholarship}{: 15th in Rajshahi Board with 95.6\% marks}{2017}
-
-\resumeSubHeadingListEnd
-
-\vspace{-6mm}
-
-\section{\textbf{References}}
-\vspace{-0.4mm}
-\small{References available upon request.}
 \vspace{-4mm}
+
+\section{\textbf{Selected Research Papers}}
+\resumeSubHeadingListStart
+\resumePublication
+{Choice as an Attack: Auditing Aligned Backdoor Attacks in LLM Agents}
+{Aug 2025 - Present}
+{Submitted to ACL Rolling Review (ARR), 2026}
+\resumeItemListStart
+\item Implemented \textbf{SHIFT}'s matched trigger/no-trigger audits with clean-model controls, permutation tests, and conditional-logit models that account for option quality.
+\item Added product-order shuffles, reversible brand aliases, and option-level logging of price, rating, display position, and target labels.
+\item Built evaluation configurations for Qwen, Ministral, and Llama across controlled shopping and two-tool routing tasks.
+\resumeItemListEnd
+\resumePublication
+{\href{https://arxiv.org/abs/2601.14163}{An Empirical Study on Remote Code Execution in Machine Learning Model Hosting Ecosystems}}
+{Jun 2025 - Oct 2025}
+{Under review at ICSE 2027 | Preprint: \href{https://arxiv.org/abs/2601.14163}{arXiv:2601.14163}}
+\resumeItemListStart
+\item Analyzed about 45,000 ML repositories across five hosting platforms for unsafe deserialization, code injection, and malware risks.
+\item Analyzed 600+ developer discussions to classify misconceptions about remote code execution and compared platform defenses.
+\resumeItemListEnd
+\resumeSubHeadingListEnd
+
+\section{\textbf{Teaching Experience}}
+\resumeSubHeadingListStart
+\resumeSubheading
+{\href{https://www.ualberta.ca/en/computing-science/index.html}{University of Alberta}}{Edmonton, Canada}
+{Graduate Teaching Assistant (GTA)}{Sep 2026 - Present}
+\resumeItemListStart
+\item Teach introductory computing labs for CMPUT 174, sections D15 and Online Lab 804 (Fall 2026).
+\item Conduct lab check-ins, assess student code demonstrations, answer questions, and grade lab work.
+\resumeItemListEnd
+\resumeSubHeadingListEnd
+
+\newpage
+\section{\textbf{Professional Experience}}
+\resumeSubHeadingListStart
+\resumeSubheading
+{\href{https://www.iqvia.com/}{IQVIA}}{Dhaka, Bangladesh}
+{Software Development Engineer}{Jun 2023 - Jun 2026}
+\resumeItemListStart
+\item Built and maintained \href{https://www.iqvia.com/library/fact-sheets/kpi-library}{KPI Library}, IQVIA's healthcare analytics reporting layer, using C\#/.NET, EF Core, and AWS.
+\item Optimized selected analytics paths, reducing complex query time by 60\% and API latency by 40\%.
+\item Built LangGraph/LangChain workflows for dashboard setup and analysis, reducing setup effort by 85\% in the targeted workflow.
+\resumeItemListEnd
+\resumeSubHeadingListEnd
+\vspace{-4mm}
+
+\section{\textbf{Selected Research Software}}
+\resumeSubHeadingListStart
+\resumeCompactProject
+{\href{https://github.com/thromel/ctxhelm}{ctxhelm} + \href{https://github.com/thromel/helmbench}{HelmBench}}
+{May 2026 - Present}
+\resumeItemListStart
+\item Built a read-only context compiler for coding agents using lexical and symbol search, dependency expansion, and related-test mapping.
+\item Built evaluation infrastructure with trace schemas, evidence bundles, and quality checks that separate context selection from patch quality without exposing source or prompts.
+\resumeItemListEnd
+\resumeCompactProject
+{SchemaAgent: Relational Schema and ER Diagram Generation}
+{Jul 2025 - Present}
+\resumeItemListStart
+\item Extended SchemaAgent with Dr. Sukarna Barua (BUET), using LangGraph and Z3 to generate and validate relational schemas from natural-language requirements.
+\resumeItemListEnd
+\resumeSubHeadingListEnd
+\vspace{-4mm}
+
+\section{\textbf{Selected Open Source Contributions}}
+{\small 2025 - 2026}
+\resumeItemListStart
+\item \textbf{\href{https://github.com/tsantalis/RefactoringMiner/pulls?q=author\%3Athromel}{RefactoringMiner}}: merged MCP tooling, WebDiff support, merge-parent-aware commit diffs, and assertion migration matching.
+\item \textbf{\href{https://github.com/dotnet/efcore}{EF Core}}: merged changes to runtime migration creation/application, \texttt{ON DELETE SET DEFAULT} support, and nullable complex-property reload handling.
+\item \textbf{\href{https://github.com/microsoft/typescript-go/pull/3314}{TypeScript's Go port}}: merged a declaration-emit fix that preserves imported type aliases for inferred exports across module boundaries.
+\resumeItemListEnd
+
+\section{\textbf{Technical Skills}}
+{\small
+\textbf{Languages and systems:} Python, C\#/.NET, Rust, TypeScript, Go, C++, PostgreSQL, AWS, Docker, Kubernetes.\\[2pt]
+\textbf{Research and agent tooling:} PyTorch, vLLM, LangGraph, MCP, CodeQL, Semgrep, Bandit, YARA, Z3.
+}
+
+\section{\textbf{Selected Honors}}
+\resumeItemListStart
+\item \textbf{IQVIA Impact Program Silver Award} for essential feature delivery.
+\item \textbf{2nd among 120 students}, BUET Bangla handwritten-digit recognition contest, with 95.9\% accuracy.
+\item \textbf{Dean's List Award}, BUET Level 2.
+\resumeItemListEnd
 
 \end{document}
