@@ -161,21 +161,6 @@ anchors:
       - label: "Research collaborator"
         url: "https://homepage.zhouyang.me/"
 
-  - id: verified-schema-generation
-    publicity: "public"
-    label: "Multi-agent verification"
-    title: "VeriSchema: verified database-schema generation"
-    question: "How can specialized agents generate relational schemas while formal checks and targeted repair keep the result consistent?"
-    description: >-
-      VeriSchema uses agents for entity extraction, relationship mining, normalization,
-      and repair, with Z3 checks and component-level retries for relational consistency.
-    status: "Active research · targeting PVLDB"
-    context: "With Dr. Sukarna Barua · BUET"
-    last_verified: "2026-07-10"
-    links:
-      - label: "Research summary"
-        url: "/projects/research-multi-agent-db-schema/"
-
 supporting_systems:
   - name: "ContextLedger"
     role: "Typed, provenance-carrying session facts for measuring context compaction."

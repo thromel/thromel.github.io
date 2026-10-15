@@ -78,7 +78,7 @@ ctxhelm is now public-release ready. I trust it for demos, pilots, and my own ag
 The parts I trust most:
 
 - `v2.4.0` is published with release archives, audit and manifest files, checksum verification, public archive install proof, Homebrew formula verification, and a clean release gate.
-- The four-repo product proof reports zero protected target misses across RefactoringMiner, ctxhelm, ReAgent, and VeriSchema.
+- The three-repo product proof reports zero protected target misses across RefactoringMiner, ctxhelm, and ReAgent.
 - The agent-evidence retrieval channel beats or matches lexical on measured corpora, with average Recall@10 delta `+0.19379663`.
 - Codex CLI real-client proof is current: retry-enabled ctxhelm lanes reached `1.00` average target-read coverage versus a `70.8%` baseline, with no evidence misses, evidence-only targets, under-read targets, forbidden commands, client failures, or rate limits.
 - Memory reuse is guarded by source-free Codex outcome suites, including cases where memory improves target reads and reduces irrelevant reads.
