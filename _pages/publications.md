@@ -5,6 +5,7 @@ title: publications
 description: Publications.
 nav: true
 nav_order: 2
+nav_title: pubs
 ---
 
 <!-- _pages/publications.md -->

@@ -2,6 +2,7 @@
 layout: post
 date: 2025-05-15 12:00:00+0000
 inline: true
+tag: PRESS
 ---
 
 Honored with the IQVIA Impact Program Silver Award for outstanding performance and contributions to the KPI Library team.

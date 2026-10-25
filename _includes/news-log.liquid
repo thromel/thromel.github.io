@@ -1,0 +1,11 @@
+{%- assign news_items = site.news | sort: 'date' | reverse -%}
+<ul class="news-log">
+  {%- for item in news_items limit: include.limit | default: 999 -%}
+  {%- assign tag = item.tag | default: 'NEW' -%}
+  <li>
+    <time datetime="{{ item.date | date: '%Y-%m-%d' }}">{{ item.date | date: '%Y-%m' }}</time>
+    <span class="tag tag-{{ tag | downcase }}">{{ tag }}</span>
+    <div class="news-text">{{ item.content | markdownify | remove: '<p>' | remove: '</p>' | emojify }}</div>
+  </li>
+  {%- endfor -%}
+</ul>

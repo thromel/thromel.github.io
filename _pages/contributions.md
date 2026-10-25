@@ -4,7 +4,7 @@ title: contributions
 permalink: /contributions/
 description: Curated open-source contribution evidence across research infrastructure, frameworks, and language tooling.
 nav: true
-nav_order: 6
+nav_order: 7
 github_user: thromel
 ---
 

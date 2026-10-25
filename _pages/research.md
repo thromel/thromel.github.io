@@ -4,7 +4,7 @@ title: research
 permalink: /research/
 description: Research on reliable AI agents, SRE-agent evaluation, ML ecosystem security, agent-choice auditing, and developer tools.
 nav: true
-nav_order: 3
+nav_order: 4
 scholar_id: zHV4EU8AAAAJ
 ---
 
