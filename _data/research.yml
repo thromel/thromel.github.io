@@ -76,7 +76,7 @@ anchors:
       A cross-platform empirical study examines custom model-loading risk across five ML
       hosting ecosystems, using static analysis, malware-signature scanning, and more than
       600 developer discussions.
-    status: "Under review at ICSE 2027"
+    status: "Preprint on arXiv"
     context: "With Mohammed Latif Siddiq, Natalie Sekerak, Beatrice Casey, and Joanna C. S. Santos"
     last_verified: "2026-07-10"
     image: "/assets/img/research/ml-rce.webp"
@@ -247,7 +247,7 @@ homepage:
       contribution: >-
         I co-authored a cross-platform empirical study spanning five ML hosting
         ecosystems, static security analysis, malware signatures, and developer discussions.
-      status: "Under review at ICSE 2027"
+      status: "Preprint on arXiv"
       methods:
         - static analysis
         - CodeQL
@@ -400,7 +400,7 @@ homepage:
     - id: ml-hosting-rce
       title: "An Empirical Study on Remote Code Execution in Machine Learning Model Hosting Ecosystems"
       citation: "Mohammed Latif Siddiq, Tanzim Hossain Romel, Natalie Sekerak, Beatrice Casey, and Joanna C. S. Santos."
-      status: "Under review at ICSE 2027"
+      status: "Preprint on arXiv"
       contribution: >-
         Co-authored the empirical study and its cross-platform security analysis; the
         manuscript is publicly available on arXiv.
@@ -453,11 +453,6 @@ homepage:
       date_label: "September 1, 2026"
       summary: "I have started graduate study in Computing Science with the U-A-Goose group under Dr. Zhou Yang."
       url: "https://www.ualberta.ca/en/computing-science/index.html"
-    - title: "ML hosting RCE study under review at ICSE 2027"
-      date: "2026-06-30"
-      date_label: "June 30, 2026"
-      summary: "Our cross-platform empirical security study is under review, with the manuscript available on arXiv."
-      url: "https://arxiv.org/abs/2601.14163"
     - title: "Started UIUC++ SRSE research internship"
       date: "2026-06-01"
       date_label: "June 1, 2026"
@@ -472,7 +467,7 @@ contact:
 
 detail_pages:
   ml_hosting_rce:
-    status: "Under review at ICSE 2027"
+    status: "Preprint on arXiv"
     publicity: "Public arXiv artifact"
     methods:
       - static analysis

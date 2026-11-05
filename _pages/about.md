@@ -15,7 +15,6 @@ permalink: /
     <p class="term-tag">M.Sc. student @ University of Alberta &middot; AI4SE &middot; trustworthy AI agents</p>
     <p class="ln"><span class="gt">&gt;</span> SREGym blog on turning postmortems into SRE benchmark problems</p>
     <p class="ln"><span class="gt">&gt;</span> GTA/GRA at UAlberta, TA for CMPUT 174</p>
-    <p class="ln"><span class="gt">&gt;</span> ICSE 2027 submission under review</p>
     <p class="ln muted" id="term-hint">type 'help' for commands, or just scroll</p>
     <div id="term-out" aria-live="polite"></div>
   </div>

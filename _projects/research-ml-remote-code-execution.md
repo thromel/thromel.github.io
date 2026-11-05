@@ -9,7 +9,7 @@ category: research
 
 *ML ecosystem security · public artifact*
 
-- **Status:** Under review at ICSE 2027
+- **Status:** Preprint on arXiv
 - **Public boundary:** Public arXiv artifact
 - **Methods:** static analysis · CodeQL · Semgrep · YARA · qualitative analysis
 - **Last verified:** 2026-07-10
