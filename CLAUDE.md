@@ -1,48 +1,154 @@
-# CLAUDE.md
+# CLAUDE.md — as-folio
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+Instructions for Claude Code when working on this repository.
 
-@AGENTS.md
+---
 
-`AGENTS.md` (imported above) is the **authoritative** agent entry point: change routing, the stop sign for gem-owned paths, the three silent failure modes, and the validated command set. Keep it short and ecosystem-neutral. Cross-repo architecture — the wrapper/tag/gem delegation table, feature gating, the v1 config contract, local overrides — lives in [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md); area-to-gem ownership lives in [`docs/BOUNDARIES.md`](docs/BOUNDARIES.md).
+## Project overview
 
-**Read those three before editing anything.** Everything below is Claude-specific or longer-form operational detail that does not belong in the short entry point. Do not restate facts from those files here — link to them.
+**as-folio** is a standalone Astro v6 template for academic portfolios, built with
+TypeScript and Tailwind CSS v4.
 
-## Daily dev loop
+Key constraint: this is a **reusable template**, not a personal site. Demo content uses
+Einstein, Torvalds, and Dadang NH as personas. All configuration is exposed via
+`src/config/site.ts` (single source of truth).
+
+---
+
+## Package manager
+
+**Always use `yarn`. Never use `npm` or `npx`.**
 
 ```bash
-bundle install                                # ruby gems
-bundle exec jekyll serve                      # dev server → http://localhost:4000/al-folio/  (NOTE baseurl)
-bundle exec jekyll build --baseurl /al-folio  # production-style build to _site/
-bash test/integration_distill.sh              # run ONE integration test (any of the seven in test/)
-npm run test:visual:update                    # refresh playwright snapshots after intentional UI change
-bundle exec al-folio upgrade apply --safe     # deterministic codemods (font-weight-* → font-*, remote→local URLs)
-bundle exec al-folio upgrade overrides diff <path>    # then `overrides accept <path>` to acknowledge an override
+yarn install        # install dependencies
+yarn dev            # development server
+yarn build          # production build (includes pagefind indexing)
+yarn lint           # ESLint
+yarn format         # Prettier
 ```
 
-## Optional toolchains
+---
 
-- **Jupyter posts.** `bin/setup-python-deps` installs _only_ `jupyter` and `nbconvert` (via `pip --user --break-system-packages`) for `jekyll-jupyter-notebook`. It does **not** read `requirements.txt`. Missing `jupyter-nbconvert` is warn-and-continue; notebook rendering is skipped.
-- **Everything else Python.** [`requirements.txt`](requirements.txt) is the fuller list and must be installed separately (`python3 -m pip install -r requirements.txt`): `rendercv[full]` for CV rendering, `scholarly` for `bin/update_scholar_citations.py`, plus `nbconvert` and `pyyaml`.
-- **Responsive images.** `imagemagick.enabled: true` needs ImageMagick `convert` on `PATH`.
-- **Manual deploy.** `bin/deploy` is the manual `gh-pages` build + purgecss + force-push path; CI normally deploys. `purgecss` is not a devDependency — install it with `npm install -g purgecss`.
+## Architecture
 
-## Docker serving model (v1-specific)
+### Config
 
-`docker compose up -d` bind-mounts the repo to `/srv/jekyll` and runs `bin/entry_point.sh`, which serves with `--force_polling --destination /tmp/_site`. The build output deliberately goes to **container-local `/tmp/_site`, not the bind-mounted `_site`** — writing `_site` back across the host bind mount caused write deadlocks. The container also `inotifywait`s `_config.yml` and restarts Jekyll on change (config edits aren't hot-reloaded by `--watch`). Verify with the `/al-folio` baseurl: `curl -fsS http://127.0.0.1:8080/al-folio/`. `docker-compose-slim.yml` pulls a prebuilt `:slim` image instead of building locally.
+- `src/config/site.ts` — all site settings, typed, JSDoc-documented. This is the one file
+  template users edit. Add new config here (with JSDoc) when adding features.
 
-## CI gates and the style contract
+### Content Layer (Astro 6)
 
-`npm run lint:style-contract` (`test/style_contract.js`) is the automated enforcement of the thin-starter boundary and will fail CI if you cross it. Beyond the forbidden paths listed in `AGENTS.md`, it also asserts that `_config.yml` keeps `theme: al_folio_core` and the required plugins, that the `third_party_libraries` SRI pins are present, and that the `al_math` Gemfile pin stays on a released version rather than a git branch.
+- `src/content.config.ts` — collection schemas using `glob` loader + Zod
+- Collections: `posts`, `projects`, `people`, `teaching`, `announcements`, `books`
+- Use `z.coerce.string()` for ISBN/OLID fields (YAML parses bare numbers as JS numbers)
+- Use `render(entry)` not `entry.render()` (Astro 6 API)
+- Posts support `draft: boolean` (excluded from listings and search index) and `lastmod: date` (shown in header, used in JSON-LD `dateModified`)
 
-Other gates:
+### CSS
 
-- `unit-tests.yml` — style contract plus all seven `test/integration_*.sh` scripts (`comments`, `plugin_toggles`, `distill`, `bootstrap_compat`, `upgrade_cli`, `css_minify`, `new_plugins`).
-- `visual-regression.yml` — Playwright on chromium + webkit, diffing the candidate build against a `v0.16.3` baseline worktree served on `:4100` via `BASELINE_URL`.
-- `upgrade-check.yml` — `bundle exec al-folio upgrade audit`.
-- `prettier.yml` — Prettier with `@shopify/prettier-plugin-liquid` and `printWidth: 150`. Run `npm run lint:prettier` before pushing; `npx prettier . --write` fixes.
-- `update-tocs.yml` — regenerates `<!--ts-->…<!--te-->` blocks in changed root and `docs/` Markdown files. If you add or rename a heading, expect a follow-up auto-commit on `main`.
+- Tailwind v4 via `@tailwindcss/vite` plugin — no `tailwind.config.js`
+- CSS custom properties defined in `src/styles/_colors.css`
+- Dark mode via `[data-theme='dark']` selector on `<html>` (not Tailwind's `dark:` variant)
+- Never use `dark:` Tailwind prefix — use CSS variable overrides instead
 
-## Gem version pins
+### Icons
 
-`Gemfile` pins every `al-*` gem to an exact released version in `group :al_folio_plugins`, and `_config.yml` lists the same gems under `plugins:`. Read the current pins from the `Gemfile` rather than trusting any version quoted in prose — including here. To test a gem fix against this site, repoint the `Gemfile` at a sibling checkout (`path:`, `git:`, or `branch:`) and `bundle install`; see [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md#working-on-a-gem-alongside-the-starter). Revert the pin before committing.
+- `unplugin-icons` (`compiler: 'astro'`) with `@iconify-json/fa-brands`, `@iconify-json/fa-solid`, `@iconify-json/fa-regular`
+- `@iconify-json/academicons` for academic social icons
+- Usage: `import IconGithub from '~icons/fa-brands/github'` → `<IconGithub />` (unknown name = build error)
+- Data-driven icons: put the component in the data — `{ Icon: IconGithub }` → `<item.Icon />`
+
+### BibTeX
+
+- `src/utils/bibtex.ts` — custom build-time BibTeX parser (no external dependencies), produces typed `BibEntry[]`
+  - `BIBTEX_INTERNAL_FIELDS` — set of display-only fields excluded from the copyable BibTeX citation block
+  - `getCleanBibtex(entry)` — returns a citation-safe BibTeX string with internal fields stripped
+- `src/data/papers.bib` — Einstein demo papers
+- `src/data/coauthors.yml` — co-author profile links; format: `LastName: { url, scholar, orcid }`
+- `src/data/citations.yml` — citation counts keyed by `google_scholar_id`; auto-updated by `scripts/update-citations.ts`
+- Never fetch BibTeX at runtime; always parse at build time in `getStaticPaths` or page frontmatter
+
+### Citations update script
+
+- `scripts/update-citations.ts` — fetches citation counts from the OpenAlex API (by DOI) and writes `src/data/citations.yml`
+- Run manually: `yarn citations:update`
+- Runs automatically as `prebuild` before every `yarn build`
+- GitHub Actions workflow (`.github/workflows/update-citations.yml`) also runs this weekly and commits the result
+
+### Analytics
+
+- All analytics scripts loaded via Partytown (`@astrojs/partytown`)
+- Only inject scripts when the relevant `site.analytics.*` field is non-empty
+
+---
+
+## Coding conventions
+
+### Astro components
+
+- All CSS in `<style>` blocks (scoped) or inline `style` attributes using CSS variables
+- Avoid Tailwind classes for component-level layout — use CSS custom properties for theming
+- Script blocks use vanilla JS only (no framework imports in `<script>`)
+- Use `is:inline` only when the script must run before hydration (e.g., dark mode FOUC prevention)
+
+### TypeScript
+
+- Strict mode is on. No `any` types without a comment explaining why.
+- Use `as const` on config objects to preserve literal types
+- Prefer `z.coerce.string()` over `z.string()` for data that YAML may parse as numbers
+
+### Security
+
+- Never use `innerHTML` or `set:html` with user-provided content
+- Use `textContent` for dynamic text in client scripts
+- Sanitize any content coming from external APIs before rendering
+
+### No backwards-compat hacks
+
+- Delete unused code outright — don't leave `// removed` comments or re-export removed types
+- Don't add `_var` renaming just to silence "unused" warnings — fix the actual issue
+
+---
+
+## Adding a new feature
+
+1. Add the feature flag to `site.ts` with a JSDoc comment
+2. Add any new content schema fields to `src/content.config.ts`
+3. Implement in the relevant component/page
+4. If it's a per-post CDN widget, add the frontmatter flag to `posts` schema and
+   inject the CDN script in `src/layouts/Post.astro` following the existing pattern
+5. Document in `CUSTOMIZE.md` under the appropriate section
+
+---
+
+## Common pitfalls
+
+| Issue                        | Fix                                                                                                                                                                                              |
+| ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `render()` error             | Use `const { Content } = await render(entry)` (Astro 6 API)                                                                                                                                      |
+| YAML number parsed as string | Use `z.coerce.string()` in schema                                                                                                                                                                |
+| Dark mode flash              | Ensure `<script is:inline>` with `localStorage` check is in `<head>` before CSS                                                                                                                  |
+| Nested `<a>` elements        | Use `data-href` + JS click handler for clickable cards; inner links stay real `<a>`                                                                                                              |
+| `as const` type error        | Use `as 'literal'` type assertion for string union fields in site config                                                                                                                         |
+| ISBN coercion                | Always `z.coerce.string()` for isbn/olid fields                                                                                                                                                  |
+| Icon not found at build      | Import it as `~icons/<collection>/<name>`; an unknown name is a build error, not a silent warning                                                                                                |
+| Hardcoded persona string     | Never embed persona names (e.g. `'einstein'`) in components — pass all user-visible text as props from `site.ts`                                                                                 |
+| Image zoom stuck / no close  | medium-zoom only attaches to `img[data-zoomable]`; use `<Figure zoomable />` to opt in. The `transitionend` failsafe (400ms timeout) handles environments where the CSS transition doesn't fire. |
+| BibTeX field shows in cite   | Add the field name to `BIBTEX_INTERNAL_FIELDS` in `src/utils/bibtex.ts` so it's stripped from the copyable citation block.                                                                       |
+
+---
+
+## Build verification
+
+After any significant change:
+
+```bash
+yarn build
+```
+
+The build must:
+
+- Exit with code 0
+- Have 0 TypeScript errors
+- Produce all expected pages in `dist/`
+- Include `dist/pagefind/` (search index)

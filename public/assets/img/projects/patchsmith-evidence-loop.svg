@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1180" height="620" viewBox="0 0 1180 620" role="img" aria-labelledby="title desc">
+  <title id="title">PatchSmith evidence loop</title>
+  <desc id="desc">Circular evaluation flow from issue corpus to reproduction, repair, validation, failure inspection, quality gates, and next benchmark design.</desc>
+  <defs>
+    <style>
+      .bg { fill: #f8fafc; }
+      .ring { fill: none; stroke: #dbe4ed; stroke-width: 30; }
+      .arc1 { fill: none; stroke: #2563eb; stroke-width: 30; stroke-linecap: round; }
+      .arc2 { fill: none; stroke: #0f766e; stroke-width: 30; stroke-linecap: round; }
+      .arc3 { fill: none; stroke: #f97316; stroke-width: 30; stroke-linecap: round; }
+      .card { fill: #ffffff; stroke: #cbd5e1; stroke-width: 1.3; }
+      .title { font: 700 30px ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #0f172a; }
+      .subtitle { font: 500 15px ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #475569; }
+      .center { font: 800 21px ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #0f172a; }
+      .label { font: 800 15px ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #0f172a; }
+      .small { font: 500 13px ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #475569; }
+      .metric { font: 800 26px ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #0f766e; }
+    </style>
+  </defs>
+  <rect class="bg" width="1180" height="620" rx="24" />
+  <text x="58" y="62" class="title">A run is not just a pass or fail</text>
+  <text x="58" y="90" class="subtitle">PatchSmith keeps the intermediate evidence because that is where repair systems usually lie to you.</text>
+
+  <circle cx="590" cy="324" r="190" class="ring" />
+  <path d="M590 134 A190 190 0 0 1 778 296" class="arc1" />
+  <path d="M778 352 A190 190 0 0 1 506 494" class="arc2" />
+  <path d="M474 470 A190 190 0 0 1 544 140" class="arc3" />
+
+  <rect x="92" y="164" width="236" height="94" rx="14" class="card" />
+  <text x="116" y="195" class="label">1. curate corpus</text>
+  <text x="116" y="222" class="small">public issue, repo snapshot,</text>
+  <text x="116" y="244" class="small">validation fixture, runbook</text>
+
+  <rect x="72" y="392" width="254" height="94" rx="14" class="card" />
+  <text x="96" y="423" class="label">6. inspect failures</text>
+  <text x="96" y="450" class="small">no patch, bad patch, setup issue,</text>
+  <text x="96" y="472" class="small">sandbox failure, retry signal</text>
+
+  <rect x="850" y="164" width="236" height="94" rx="14" class="card" />
+  <text x="874" y="195" class="label">2. reproduce first</text>
+  <text x="874" y="222" class="small">save failing evidence before</text>
+  <text x="874" y="244" class="small">repair attempts count</text>
+
+  <rect x="850" y="392" width="236" height="94" rx="14" class="card" />
+  <text x="874" y="423" class="label">4. validate patch</text>
+  <text x="874" y="450" class="small">focused command exits zero</text>
+  <text x="874" y="472" class="small">or failure remains visible</text>
+
+  <rect x="450" y="214" width="280" height="220" rx="20" class="card" />
+  <text x="514" y="270" class="center">latest saved lane</text>
+  <text x="524" y="320" class="metric">3 / 3 validated</text>
+  <text x="503" y="352" class="small">pytest-dev/pytest and psf/requests</text>
+  <text x="512" y="378" class="small">DeepAgents planner, native hybrid context</text>
+  <text x="536" y="404" class="small">focused public issue validation</text>
+
+  <rect x="468" y="516" width="244" height="58" rx="14" class="card" />
+  <text x="494" y="549" class="small">Then the benchmark design gets stricter.</text>
+</svg>
