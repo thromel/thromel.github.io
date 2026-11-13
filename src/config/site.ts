@@ -131,8 +131,7 @@ export const site = {
      * Text shown in footer. HTML is supported.
      * Leave empty string to hide.
      */
-    text: `Powered by <a href="https://github.com/dadangnh/as-folio" target="_blank" rel="noopener noreferrer">as-folio</a>.
-      Hosted by <a href="https://pages.github.com/" target="_blank" rel="noopener noreferrer">GitHub Pages</a>.`,
+    text: '',
     /** Show "Last updated" timestamp in footer. */
     lastUpdated: false,
     /** Path to impressum/legal page (EU GDPR). Leave undefined to hide. */
@@ -143,7 +142,7 @@ export const site = {
      * 'normal'  — sits at the natural bottom of page content (only visible when scrolled down)
      * 'hidden'  — footer is not rendered at all
      */
-    position: 'sticky' as 'sticky' | 'normal' | 'hidden',
+    position: 'hidden' as 'sticky' | 'normal' | 'hidden',
   },
 
   // ─── CV page ───────────────────────────────────────────────────────────────

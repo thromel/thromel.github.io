@@ -191,7 +191,7 @@ function PublicationEntry({
           {authorLinks.length > 0 && (
             <div className="author">
               {visibleAuthorLinks.map((al, i) => {
-                const isLast = i === visibleAuthorLinks.length - 1 && hiddenCount === 0;
+                const isLast = i === visibleAuthorLinks.length - 1;
                 const nameEl = al.isSelf ? <em>{al.name}</em> : <>{al.name}</>;
                 return (
                   <span key={i}>
@@ -202,13 +202,13 @@ function PublicationEntry({
                     ) : (
                       nameEl
                     )}
-                    {!isLast && ', '}
+                    {(!isLast || hiddenCount > 0) && ', '}
                   </span>
                 );
               })}
               {hiddenCount > 0 && (
                 <span>
-                  , and {hiddenCount} more author{hiddenCount > 1 ? 's' : ''}
+                  and {hiddenCount} more author{hiddenCount > 1 ? 's' : ''}
                 </span>
               )}
               {/* Annotation tooltip — info icon with hover text */}

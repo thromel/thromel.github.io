@@ -1394,3 +1394,62 @@ body[data-tooltips] [data-tooltip]:focus-within::before {
     page-break-inside: avoid;
   }
 }
+
+/* ─── Polish: readability, rhythm, interaction ─────────────────────────── */
+@layer base {
+  .prose p,
+  .prose ul,
+  .prose ol {
+    margin-bottom: 1rem;
+  }
+  .prose h2 {
+    margin: 2rem 0 0.75rem;
+    font-size: 1.4rem;
+  }
+  .prose ul {
+    padding-left: 1.25rem;
+    list-style: disc;
+  }
+  .prose li {
+    margin-bottom: 0.5rem;
+  }
+  body {
+    font-size: 1.0625rem;
+  }
+  main section > h2 {
+    font-size: 1.35rem;
+  }
+  a:focus-visible,
+  button:focus-visible {
+    outline: 2px solid var(--global-theme-color);
+    outline-offset: 2px;
+    border-radius: 3px;
+  }
+  .hoverable {
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.25s ease;
+  }
+  .hoverable:hover {
+    transform: translateY(-2px);
+  }
+  .header-bar h1 {
+    font-size: 2.25rem;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      transition: none !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@media (max-width: 640px) {
+  .publications ol.bibliography li .preview {
+    max-height: 200px;
+    width: auto;
+    max-width: 100%;
+    object-fit: contain;
+    margin: 0.5rem 0;
+  }
+}
