@@ -5,8 +5,14 @@ import { withBase } from '@utils/base';
 interface Props {
   src?: string;
   alt?: string;
-  align?: 'left' | 'right';
+  /** 'none' renders a block-level photo for grid/flex layouts instead of floating it. */
+  align?: 'left' | 'right' | 'none';
   circular?: boolean;
+  /** Intrinsic image size, used to reserve space and avoid layout shift. */
+  width?: number;
+  height?: number;
+  /** Render `site.author.moreInfo` under the photo. */
+  showMoreInfo?: boolean;
 }
 
 const {
@@ -14,23 +20,32 @@ const {
   alt = site.author.name,
   align = 'right',
   circular = false,
+  width = 480,
+  height = 640,
+  showMoreInfo = true,
 } = Astro.props;
 
 const imgSrc = withBase(src);
 const fallback = withBase('/assets/img/prof_pic.jpg');
 const imgClass = circular ? 'img-fluid z-depth-1 rounded-circle' : 'img-fluid z-depth-1 rounded';
+const wrapperClass = align === 'none' ? 'profile profile--block' : `profile float-${align}`;
 ---
 
-<div class={`profile float-${align}`}>
+<div class={wrapperClass}>
   <img
     src={imgSrc}
     alt={alt}
     loading="eager"
     fetchpriority="high"
-    width="200"
-    height="200"
+    decoding="async"
+    width={width}
+    height={height}
     class={imgClass}
-    onerror={`this.src='${fallback}'`}
+    onerror={`this.onerror=null;this.src='${fallback}'`}
   />
-  {site.author.moreInfo && <div class="more-info" set:html={site.author.moreInfo} />}
+  {
+    showMoreInfo && site.author.moreInfo && (
+      <div class="more-info" set:html={site.author.moreInfo} />
+    )
+  }
 </div>
