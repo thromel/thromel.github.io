@@ -111,7 +111,7 @@ const allItems: SearchItem[] = [...posts, ...projects, ...teaching];
     nk.data = navData; // show nav items while idle
 
     // Open on search button click
-    document.querySelectorAll('#search-toggle').forEach((btn) => {
+    document.querySelectorAll('[data-search-toggle]').forEach((btn) => {
       btn.addEventListener('click', (e) => {
         e.preventDefault();
         nk.open();
