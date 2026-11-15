@@ -44,19 +44,20 @@
 
   --global-bg-color: var(--color-white);
   --global-code-bg-color: #f3f4f6;
-  --global-text-color: #1a1a1a;
-  --global-text-color-light: #6c757d;
+  --global-text-color: #16181d;
+  --global-text-color-light: #5b6470;
   --global-theme-color: var(--user-accent-light, var(--color-purple));
   --global-hover-color: var(--user-hover-light, var(--color-purple-dark));
   --global-hover-text-color: var(--color-white);
-  --global-dropdown-hover-bg: var(--color-purple-dark);
-  --global-dropdown-hover-text: var(--color-white);
+  --global-theme-tint: color-mix(in srgb, var(--global-theme-color) 9%, transparent);
+  --global-dropdown-hover-bg: var(--global-theme-tint);
+  --global-dropdown-hover-text: var(--global-theme-color);
   --global-footer-bg-color: var(--color-grey-dark);
   --global-footer-text-color: var(--color-grey-light);
   --global-footer-link-color: var(--color-white);
   --global-distill-app-color: var(--color-grey);
-  --global-divider-color: rgba(0, 0, 0, 0.1);
-  --global-card-bg-color: #f8f9fa;
+  --global-divider-color: rgba(15, 23, 42, 0.1);
+  --global-card-bg-color: #f7f8fa;
   --global-highlight-color: var(--color-red-dark);
   --global-back-to-top-bg-color: rgba(0, 0, 0, 0.4);
   --global-back-to-top-text-color: var(--color-white);
@@ -83,21 +84,23 @@
 html[data-theme='dark'] {
   color-scheme: dark;
 
-  --global-bg-color: var(--color-grey-dark);
-  --global-code-bg-color: var(--color-code-bg-dark);
-  --global-text-color: var(--color-grey-light);
-  --global-text-color-light: #9e9e9e;
+  --global-bg-color: #121417;
+  --global-code-bg-color: #1e2227;
+  --global-text-color: #e6e8eb;
+  --global-text-color-light: #a3a9b1;
   --global-theme-color: var(--user-accent-dark, var(--color-cyan));
   --global-hover-color: var(--user-hover-dark, var(--color-cyan));
-  --global-hover-text-color: var(--color-white);
-  --global-dropdown-hover-bg: rgba(38, 152, 186, 0.12);
+  /* Dark accents are light, so text placed on them must be dark to stay legible. */
+  --global-hover-text-color: #0b1220;
+  --global-theme-tint: color-mix(in srgb, var(--global-theme-color) 14%, transparent);
+  --global-dropdown-hover-bg: var(--global-theme-tint);
   --global-dropdown-hover-text: var(--global-text-color);
   --global-footer-bg-color: var(--color-grey-light);
   --global-footer-text-color: var(--color-grey-dark);
   --global-footer-link-color: var(--color-black);
   --global-distill-app-color: var(--color-grey-light);
-  --global-divider-color: #424246;
-  --global-card-bg-color: var(--color-grey-900);
+  --global-divider-color: #2e333a;
+  --global-card-bg-color: #181b1f;
   --global-back-to-top-bg-color: rgba(255, 255, 255, 0.5);
   --global-back-to-top-text-color: var(--color-black);
   --global-newsletter-bg-color: var(--color-grey-light);
@@ -122,6 +125,13 @@ html[data-theme='dark'] {
 
 :root {
   --navbar-height: 57px;
+  --ui-radius-sm: 6px;
+  --ui-radius: 10px;
+  --ui-shadow-hover: 0 6px 20px rgba(15, 23, 42, 0.1), 0 2px 6px rgba(15, 23, 42, 0.06);
+}
+
+html[data-theme='dark'] {
+  --ui-shadow-hover: 0 6px 20px rgba(0, 0, 0, 0.45), 0 2px 6px rgba(0, 0, 0, 0.3);
 }
 
 /* ─── Utility classes ────────────────────────────────────────────────────── */
