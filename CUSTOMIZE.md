@@ -122,7 +122,9 @@ author: {
 }
 ```
 
-Recommended: square image, at least 400×400 px.
+The homepage shows the photo at a 3:4 portrait ratio (cropped with `object-fit: cover`).
+Recommended: 480×640 px WebP, plus a JPEG of the same photo at `public/assets/img/prof_pic.jpg`,
+which is used as the fallback if the main image fails to load.
 
 ---
 
@@ -161,7 +163,24 @@ Edit `src/pages/index.astro` to change the bio text. The About page auto-pulls f
 - **Latest posts**: up to `site.latestPosts.limit` posts from `src/content/posts/`
 - **Selected papers**: entries with `selected = {true}` in `src/data/papers.bib`
 
-All three sections can be disabled in `site.ts`.
+All three sections can be disabled in `site.ts`. Each has a `title` (the section heading),
+and `site.viewAllLabel` sets the text of the link to the full list next to each heading.
+Set `scrollable: true` on `announcements` / `latestPosts` to cap the list in a scroll box.
+
+### Hero links
+
+The hero under your name shows labelled buttons for the platforms listed in
+`site.hero.primaryLinks`, in that order. Keys are `socials` field names; unset platforms are
+skipped. The first button is styled as the primary action.
+
+```typescript
+hero: {
+  primaryLinks: ['cv_pdf', 'scholar_userid', 'github_username', 'linkedin_username', 'orcid_id', 'email'],
+},
+```
+
+`<SocialLinks />` accepts the same keys elsewhere: `variant="buttons"` renders labelled pills
+(default `"icons"`), and `include={[...]}` picks and orders the platforms.
 
 ---
 
@@ -288,6 +307,14 @@ Edit `src/data/papers.bib`. Standard BibTeX format with extra as-folio fields:
 ```
 
 The publication page groups entries by year, newest first. BibTeX is parsed at build time — no runtime dependency.
+
+When an entry has no venue (`journal`, `booktitle`, `publisher`, or `howpublished`), its `note`
+field is shown in the venue line instead — useful for statuses such as "Submitted to …".
+
+The text under the page heading comes from `site.pages.publications.description`; when
+`socials.scholar_userid` is set, a link labelled `site.pages.publications.scholarLinkLabel` is
+appended. The Altmetric and Dimensions badge scripts are only loaded when at least one entry sets
+the matching `altmetric` / `dimensions` field.
 
 ### Author highlighting and asset paths
 
