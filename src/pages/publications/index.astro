@@ -20,8 +20,12 @@ const entries = parseBibtex(bibRaw).sort((a, b) => {
 const coauthors = (yaml.load(coauthorsRaw) ?? {}) as CoauthorMap;
 const citations = (yaml.load(citationsRaw) ?? {}) as Record<string, number>;
 
-const showAltmetric = site.publications.badges.altmetric;
-const showDimensions = site.publications.badges.dimensions;
+// Third-party badge scripts are only worth loading when some entry asks for that badge.
+const showAltmetric =
+  site.publications.badges.altmetric && entries.some((e) => !!e.fields.altmetric);
+const showDimensions =
+  site.publications.badges.dimensions && entries.some((e) => !!e.fields.dimensions);
+const { description: pageDescription, scholarLinkLabel } = site.pages.publications;
 const maxAuthorLimit = site.publications.maxAuthorLimit;
 const showThumbnails = site.publications.thumbnails;
 const authorLastName = site.publications.authorLastName ?? site.author.name.split(' ').pop() ?? '';
@@ -68,6 +72,26 @@ const badges = site.publications.badges;
   <div class="post">
     <header class="post-header">
       <h1 class="post-title">Publications</h1>
+      {
+        (pageDescription || scholarUserId) && (
+          <p class="post-description">
+            {pageDescription}
+            {scholarUserId && (
+              <>
+                {pageDescription && ' '}
+                <a
+                  href={`https://scholar.google.com/citations?user=${scholarUserId}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {scholarLinkLabel}
+                  <span aria-hidden="true"> &#8599;</span>
+                </a>
+              </>
+            )}
+          </p>
+        )
+      }
     </header>
 
     <article>
