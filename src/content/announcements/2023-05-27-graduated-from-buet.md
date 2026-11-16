@@ -1,4 +1,5 @@
 ---
+type: education
 date: 2023-05-27
 ---
 

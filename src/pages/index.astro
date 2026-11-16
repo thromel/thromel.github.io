@@ -4,6 +4,7 @@ import SocialLinks from '@components/SocialLinks.astro';
 import { site } from '@config/site';
 import Base from '@layouts/Base.astro';
 import { linkAuthors } from '@utils/authors';
+import { withBase } from '@utils/base';
 import { getAuthors, getBoolField, getTitle, getVenue, getYear, parseBibtex } from '@utils/bibtex';
 import { getCollection, render } from 'astro:content';
 
@@ -44,6 +45,13 @@ const renderedAnnouncements = await Promise.all(
   allAnnouncements.map(async (item) => ({ item, rendered: await render(item) })),
 );
 
+// Selected work
+const allProjects = site.selectedWork.enabled ? await getCollection('projects') : [];
+const selectedWork = site.selectedWork.projects
+  .map((id) => allProjects.find((proj) => proj.id === id))
+  .filter((proj) => proj !== undefined);
+const pdfDir = withBase(site.publications.pdfDir);
+
 const heroName = (site.title as string) === 'blank' ? site.author.name : site.title;
 ---
 
@@ -57,6 +65,7 @@ const heroName = (site.title as string) === 'blank' ? site.author.name : site.ti
       <header class="hero-intro">
         <h1 id="hero-name" class="hero-name">{heroName}</h1>
         {site.author.subtitle && <p class="hero-subtitle" set:html={site.author.subtitle} />}
+        {site.hero.currently && <p class="hero-currently" set:html={site.hero.currently} />}
         {site.author.moreInfo && <div class="hero-meta" set:html={site.author.moreInfo} />}
         <SocialLinks
           variant="buttons"
@@ -86,6 +95,7 @@ const heroName = (site.title as string) === 'blank' ? site.author.name : site.ti
               <li>
                 <time datetime={isoDate(item.data.date)}>{formatDate(item.data.date)}</time>
                 <div class="dated-body news-body">
+                  {item.data.type && <span class="news-tag">{item.data.type}</span>}
                   <Content />
                 </div>
               </li>
@@ -136,7 +146,8 @@ const heroName = (site.title as string) === 'blank' ? site.author.name : site.ti
               const authors = linkAuthors(getAuthors(entry).split(', '), {}, authorLastName);
               const venue = getVenue(entry);
               const year = getYear(entry);
-              const { abbr, note, award } = entry.fields;
+              const { abbr, note, award, tldr, arxiv, pdf } = entry.fields;
+              const pdfHref = pdf && (pdf.startsWith('http') ? pdf : `${pdfDir}${pdf}`);
               return (
                 <li class="paper-item">
                   <div class="paper-tags">
@@ -158,10 +169,62 @@ const heroName = (site.title as string) === 'blank' ? site.author.name : site.ti
                     ))}
                   </p>
                   {(venue || note) && <p class="paper-venue">{venue || note}</p>}
+                  {tldr && <p class="paper-tldr">{tldr}</p>}
+                  <p class="paper-links">
+                    {arxiv && (
+                      <a
+                        href={`https://arxiv.org/abs/${arxiv}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        arXiv
+                      </a>
+                    )}
+                    {pdfHref && (
+                      <a href={pdfHref} target="_blank" rel="noopener noreferrer">
+                        PDF
+                      </a>
+                    )}
+                    <a href={`${site.base}/publications/${entry.key}/`}>Details</a>
+                  </p>
                 </li>
               );
             })}
           </ol>
+        </section>
+      )
+    }
+
+    {
+      site.selectedWork.enabled && selectedWork.length > 0 && (
+        <section class="home-section" aria-labelledby="home-work">
+          <div class="section-head">
+            <h2 id="home-work">{site.selectedWork.title}</h2>
+            <a href={`${site.base}/projects/`} class="section-more">
+              {site.viewAllLabel}
+              <span aria-hidden="true"> &rarr;</span>
+            </a>
+          </div>
+          <ul class="work-list">
+            {selectedWork.map((proj) => (
+              <li class="work-item">
+                <a href={`${site.base}/projects/${proj.id}/`} class="work-title">
+                  {proj.data.title}
+                </a>
+                {proj.data.description && <p class="work-desc">{proj.data.description}</p>}
+                {proj.data.github && (
+                  <a
+                    href={`https://github.com/${proj.data.github}`}
+                    class="work-repo"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {proj.data.github}
+                  </a>
+                )}
+              </li>
+            ))}
+          </ul>
         </section>
       )
     }
@@ -418,5 +481,80 @@ const heroName = (site.title as string) === 'blank' ? site.author.name : site.ti
 
   .paper-venue {
     font-style: italic;
+  }
+
+  .paper-tldr {
+    margin: 0.45rem 0 0;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: var(--global-text-color);
+  }
+
+  .paper-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 1rem;
+    margin: 0.5rem 0 0;
+    font-size: 0.85rem;
+    font-weight: 500;
+  }
+
+  /* ── Hero "currently" note ─────────────────────────────────────────── */
+  .hero-currently {
+    margin: 0.5rem 0 0.25rem;
+    padding-left: 0.75rem;
+    border-left: 3px solid var(--global-theme-color);
+    font-size: 0.95rem;
+    color: var(--global-text-color);
+  }
+
+  /* ── Selected work ─────────────────────────────────────────────────── */
+  .work-list {
+    list-style: none;
+    margin: 0.75rem 0 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+    gap: 0.75rem;
+  }
+
+  .work-item {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem 1.15rem;
+    border: 1px solid var(--global-divider-color);
+    border-radius: var(--ui-radius);
+    background: var(--global-card-bg-color);
+    transition:
+      border-color 0.15s ease,
+      box-shadow 0.2s ease;
+  }
+
+  .work-item:hover {
+    border-color: color-mix(in srgb, var(--global-theme-color) 45%, var(--global-divider-color));
+    box-shadow: var(--ui-shadow-hover);
+  }
+
+  .work-title {
+    font-weight: 600;
+    line-height: 1.4;
+    color: var(--global-text-color);
+  }
+
+  .work-title:hover {
+    color: var(--global-theme-color);
+  }
+
+  .work-desc {
+    flex: 1;
+    margin: 0.35rem 0 0.6rem;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    color: var(--global-text-color-light);
+  }
+
+  .work-repo {
+    font-size: 0.8rem;
+    font-family: var(--font-mono, ui-monospace, monospace);
   }
 </style>

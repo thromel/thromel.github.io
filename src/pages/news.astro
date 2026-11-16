@@ -36,6 +36,7 @@ const formatDate = (d: Date) =>
                     {formatDate(item.data.date)}
                   </td>
                   <td style="padding: 0.5rem 0; font-size: 0.9rem; color: var(--global-text-color);">
+                    {item.data.type && <span class="news-tag">{item.data.type}</span>}
                     <Content />
                   </td>
                 </tr>

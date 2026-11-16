@@ -1537,3 +1537,18 @@ body[data-tooltips] [data-tooltip]:focus-within::before {
     display: none;
   }
 }
+
+/* ── News type tag (homepage + /news/) ─────────────────────────────── */
+.news-tag {
+  display: inline-block;
+  margin-right: 0.45rem;
+  padding: 0.05em 0.45em;
+  border: 1px solid var(--global-divider-color);
+  border-radius: var(--ui-radius-sm);
+  font-size: 0.72rem;
+  font-weight: 600;
+  line-height: 1.5;
+  vertical-align: 0.1em;
+  color: var(--global-text-color-light);
+  text-transform: capitalize;
+}

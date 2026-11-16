@@ -164,6 +164,8 @@ const announcements = defineCollection({
     pinned: z.boolean().optional().default(false),
     /** Hide from the announcements list. */
     hidden: z.boolean().optional().default(false),
+    /** Optional label shown before the item, e.g. 'paper' or 'award'. */
+    type: z.enum(['paper', 'award', 'role', 'education', 'blog', 'talk']).optional(),
   }),
 });
 
