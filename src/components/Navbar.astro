@@ -280,6 +280,7 @@ const items = site.navbar.items;
     letter-spacing: -0.01em;
     color: var(--global-text-color);
     text-decoration: none;
+    white-space: nowrap;
   }
 
   .nav-brand:hover {
@@ -288,7 +289,7 @@ const items = site.navbar.items;
 
   .nav-link {
     position: relative;
-    padding: 0.35rem 0.7rem;
+    padding: 0.35rem 0.55rem;
     font-size: 0.9rem;
     font-weight: 500;
     color: var(--global-text-color-light);
@@ -311,8 +312,8 @@ const items = site.navbar.items;
   .nav-link.is-active::after {
     content: '';
     position: absolute;
-    left: 0.7rem;
-    right: 0.7rem;
+    left: 0.55rem;
+    right: 0.55rem;
     bottom: -0.65rem;
     height: 2px;
     border-radius: 2px;
@@ -452,7 +453,7 @@ const items = site.navbar.items;
     cursor: pointer;
     color: var(--global-text-color-light);
     font-size: 0.8rem;
-    width: 170px;
+    width: 140px;
     transition:
       border-color 0.15s,
       color 0.15s;
@@ -483,6 +484,28 @@ const items = site.navbar.items;
     color: var(--global-text-color-light);
     font-family: var(--font-mono, monospace);
     white-space: nowrap;
+  }
+
+  /* Narrow desktops: icon-only search and tighter links so the row never wraps. */
+  @media (max-width: 1100px) {
+    .search-pill {
+      width: auto;
+      padding: 0.4rem;
+    }
+
+    .search-pill .search-pill-text,
+    .search-pill .search-kbd {
+      display: none;
+    }
+
+    .nav-link {
+      padding: 0.35rem 0.5rem;
+    }
+
+    .nav-link.is-active::after {
+      left: 0.5rem;
+      right: 0.5rem;
+    }
   }
 </style>
 

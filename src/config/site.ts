@@ -142,6 +142,7 @@ export const site = {
       { label: 'Blog', href: '/blog/' },
       { label: 'CV', href: '/cv/' },
       { label: 'News', href: '/news/' },
+      { label: 'Resources', href: '/resources/' },
     ] as NavItem[],
   },
 
@@ -220,10 +221,16 @@ export const site = {
    */
   hero: {
     /**
-     * One-line "what I'm working on now" note under the subtitle. HTML is supported.
-     * Set to '' to hide it.
+     * "What I'm working on now" list under the subtitle. Each item is HTML.
+     * Set to [] to hide it.
      */
-    currently: 'Currently doing long-horizon coding agent research.',
+    currently: [
+      'Steering long-horizon coding agents: reproducing <a href="https://arxiv.org/abs/2605.05980">TACT</a>, which uses activation steering to curb overthinking and overacting, on SWE-bench Verified.',
+      '<a href="https://blp-workshop.github.io/">BLP 2027</a> shared tasks (NAACL 2027): adversarial Bangla prompt classification.',
+      'Formal-verification-guided schema synthesis with LLMs: turning English database specifications into relational schemas with verified design contracts.',
+      'Runtime verification using formal verification.',
+      'Human-AI interaction: when AI assistants apply stored user memories, and when they apply them where they do not belong.',
+    ] as string[],
     primaryLinks: [
       'cv_pdf',
       'scholar_userid',

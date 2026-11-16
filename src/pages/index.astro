@@ -65,7 +65,6 @@ const heroName = (site.title as string) === 'blank' ? site.author.name : site.ti
       <header class="hero-intro">
         <h1 id="hero-name" class="hero-name">{heroName}</h1>
         {site.author.subtitle && <p class="hero-subtitle" set:html={site.author.subtitle} />}
-        {site.hero.currently && <p class="hero-currently" set:html={site.hero.currently} />}
         {site.author.moreInfo && <div class="hero-meta" set:html={site.author.moreInfo} />}
         <SocialLinks
           variant="buttons"
@@ -73,6 +72,18 @@ const heroName = (site.title as string) === 'blank' ? site.author.name : site.ti
           size={15}
           class="hero-links"
         />
+        {
+          site.hero.currently.length > 0 && (
+            <div class="hero-currently">
+              <p class="hero-currently-label">Currently</p>
+              <ul>
+                {site.hero.currently.map((item) => (
+                  <li set:html={item} />
+                ))}
+              </ul>
+            </div>
+          )
+        }
       </header>
 
       <div class="hero-bio prose max-w-none">
@@ -501,11 +512,30 @@ const heroName = (site.title as string) === 'blank' ? site.author.name : site.ti
 
   /* ── Hero "currently" note ─────────────────────────────────────────── */
   .hero-currently {
-    margin: 0.5rem 0 0.25rem;
-    padding-left: 0.75rem;
+    margin: 1.25rem 0 0;
+    padding-left: 0.85rem;
     border-left: 3px solid var(--global-theme-color);
-    font-size: 0.95rem;
+    font-size: 0.9rem;
+    line-height: 1.5;
     color: var(--global-text-color);
+  }
+
+  .hero-currently-label {
+    margin: 0 0 0.2rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--global-text-color-light);
+  }
+
+  .hero-currently ul {
+    margin: 0;
+    padding-left: 1rem;
+  }
+
+  .hero-currently li + li {
+    margin-top: 0.2rem;
   }
 
   /* ── Selected work ─────────────────────────────────────────────────── */
