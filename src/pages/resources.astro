@@ -1,0 +1,72 @@
+---
+import Page from '@layouts/Page.astro';
+
+/** Links worth sharing. Newest first. */
+const resources = [
+  {
+    title: 'Advice for young researchers',
+    author: 'Julian Togelius',
+    date: 'Nov 2026',
+    href: 'https://togelius.blogspot.com/2026/11/advice-for-young-researchers.html',
+  },
+];
+---
+
+<Page title="Resources" description="Writing and resources I find useful.">
+  <div class="post">
+    <header class="post-header">
+      <h1 class="post-title">Resources</h1>
+      <p class="post-description">Writing and resources I find useful.</p>
+    </header>
+    <ul class="resource-list">
+      {
+        resources.map((r) => (
+          <li>
+            <a href={r.href} target="_blank" rel="noopener noreferrer">
+              {r.title}
+            </a>
+            <span class="resource-meta">
+              {r.author} · {r.date}
+            </span>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</Page>
+
+<style>
+  .post-header {
+    margin-bottom: 1.5rem;
+  }
+
+  .post-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--global-text-color);
+    font-family: var(--font-sans);
+    margin-bottom: 0;
+  }
+
+  .resource-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .resource-list li {
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--global-divider-color);
+  }
+
+  .resource-list a {
+    font-weight: 500;
+  }
+
+  .resource-meta {
+    display: block;
+    margin-top: 0.15rem;
+    font-size: 0.85rem;
+    color: var(--global-text-color-light);
+  }
+</style>
