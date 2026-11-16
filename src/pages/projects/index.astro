@@ -133,18 +133,21 @@ const hasCategories = categories.length > 0;
     text-decoration: none;
   }
 
-  /* Category headings — right-aligned with divider (matches al-folio) */
   h2.category {
-    color: var(--global-divider-color);
+    color: var(--global-text-color);
     border-bottom: 1px solid var(--global-divider-color);
-    padding-top: 0.5rem;
-    margin-top: 2rem;
+    padding-bottom: 0.4rem;
+    margin-top: 2.25rem;
     margin-bottom: 1rem;
-    text-align: right;
     font-family: var(--font-sans);
-    font-size: 1.25rem;
+    font-size: 1.2rem;
     font-weight: 600;
-    text-transform: lowercase;
+    letter-spacing: -0.01em;
+    text-transform: capitalize;
+  }
+
+  .projects a:hover h2.category {
+    color: var(--global-theme-color);
   }
 
   /* Remove underline from category anchor */

@@ -116,6 +116,8 @@ function PublicationEntry({
   const bibtex_show = getBoolField(entry, 'bibtex_show');
   const annotation = entry.fields.annotation ?? '';
   const additionalInfo = entry.fields.additional_info ?? '';
+  const note = entry.fields.note ?? '';
+  const panelId = (kind: string) => `${entry.key}-${kind}`;
 
   // Badge fields
   const googleScholarId = entry.fields.google_scholar_id ?? '';
@@ -160,15 +162,8 @@ function PublicationEntry({
         {/* Left column: abbr badge + thumbnail */}
         {showThumbnails && (abbr || preview) && (
           <div className="col col-sm-2 abbr">
-            {abbr && <abbr className="badge w-100 rounded">{abbr}</abbr>}
-            {preview && (
-              <img
-                className="preview z-depth-1 rounded"
-                src={previewSrc}
-                alt={preview}
-                loading="lazy"
-              />
-            )}
+            {abbr && <abbr className="badge rounded">{abbr}</abbr>}
+            {preview && <img className="preview rounded" src={previewSrc} alt="" loading="lazy" />}
           </div>
         )}
 
@@ -226,31 +221,42 @@ function PublicationEntry({
           )}
 
           {/* Venue + year + additional_info */}
-          {(venue || year) && (
+          {venue ? (
             <div className="periodical">
-              {venue && <em>{venue}</em>}
-              {venue && year ? ', ' : ''}
-              {year || ''}
+              <em>{venue}</em>
+              {year ? `, ${year}` : ''}
               {additionalInfo && <span style={{ marginLeft: '0.25rem' }}> · {additionalInfo}</span>}
             </div>
+          ) : (
+            (note || additionalInfo) && (
+              <div className="periodical">
+                {note}
+                {note && additionalInfo ? ' · ' : ''}
+                {additionalInfo}
+              </div>
+            )
           )}
 
           {/* Link buttons */}
           <div className="links">
             {hasAward && (
               <button
+                type="button"
                 className="award btn btn-sm z-depth-0"
                 onClick={() => setAwardOpen(!awardOpen)}
-                style={{ cursor: 'pointer', background: 'none' }}
+                aria-expanded={awardOpen}
+                aria-controls={panelId('award')}
               >
                 {awardName || 'Awarded'}
               </button>
             )}
             {abstract && (
               <button
+                type="button"
                 className="abstract btn btn-sm z-depth-0"
                 onClick={() => setAbstractOpen(!abstractOpen)}
-                style={{ cursor: 'pointer', background: 'none' }}
+                aria-expanded={abstractOpen}
+                aria-controls={panelId('abstract')}
               >
                 {labels.abstract ?? 'Abs'}
               </button>
@@ -287,9 +293,11 @@ function PublicationEntry({
             )}
             {bibtex_show && (
               <button
+                type="button"
                 className="bibtex btn btn-sm z-depth-0"
                 onClick={() => setBibtexOpen(!bibtexOpen)}
-                style={{ cursor: 'pointer', background: 'none' }}
+                aria-expanded={bibtexOpen}
+                aria-controls={panelId('bibtex')}
               >
                 {labels.bibtex ?? 'Bib'}
               </button>
@@ -422,21 +430,20 @@ function PublicationEntry({
 
           {/* Award hidden block */}
           {hasAward && (
-            <div className={`award hidden${awardOpen ? 'open' : ''}`}>
+            <div id={panelId('award')} className="pub-panel award" hidden={!awardOpen}>
               <p>{hasAward}</p>
             </div>
           )}
 
-          {/* Abstract hidden block */}
           {abstract && (
-            <div className={`abstract hidden${abstractOpen ? 'open' : ''}`}>
+            <div id={panelId('abstract')} className="pub-panel abstract" hidden={!abstractOpen}>
               <p>{abstract}</p>
             </div>
           )}
 
-          {/* BibTeX hidden block — internal fields filtered out */}
+          {/* BibTeX block — internal fields filtered out */}
           {bibtex_show && (
-            <div className={`bibtex hidden${bibtexOpen ? 'open' : ''}`}>
+            <div id={panelId('bibtex')} className="pub-panel bibtex" hidden={!bibtexOpen}>
               <pre>{getCleanBibtex(entry)}</pre>
             </div>
           )}
@@ -495,25 +502,10 @@ export function BibSearch({
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder={labels.searchPlaceholder ?? 'Search publications\u2026'}
-          style={{
-            width: '100%',
-            padding: '0.5rem 0.75rem',
-            fontSize: '0.9375rem',
-            border: '1px solid var(--global-divider-color)',
-            borderRadius: '6px',
-            color: 'var(--global-text-color)',
-            backgroundColor: 'transparent',
-            outline: 'none',
-          }}
+          className="pub-search"
           aria-label="Search publications"
         />
-        <p
-          style={{
-            marginTop: '0.375rem',
-            fontSize: '0.8125rem',
-            color: 'var(--global-text-color-light)',
-          }}
-        >
+        <p className="pub-count" aria-live="polite">
           Showing {filtered.length} of {entries.length} publication{entries.length !== 1 ? 's' : ''}
         </p>
       </div>

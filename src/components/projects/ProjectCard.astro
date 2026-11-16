@@ -111,7 +111,7 @@ const isExternal = !!project.data.redirect;
 
   .card {
     border: 1px solid var(--global-divider-color);
-    border-radius: 4px;
+    border-radius: var(--ui-radius);
     background-color: var(--global-card-bg-color);
     overflow: hidden;
     display: flex;
@@ -123,13 +123,19 @@ const isExternal = !!project.data.redirect;
   }
 
   .hoverable {
-    transition: box-shadow 0.25s ease;
+    transition:
+      box-shadow 0.25s ease,
+      border-color 0.2s ease,
+      transform 0.2s ease;
   }
 
   .hoverable:hover {
-    box-shadow:
-      0 5px 11px 0 rgba(0, 0, 0, 0.18),
-      0 4px 15px 0 rgba(0, 0, 0, 0.15);
+    border-color: color-mix(in srgb, var(--global-theme-color) 45%, var(--global-divider-color));
+    box-shadow: var(--ui-shadow-hover);
+  }
+
+  .card:focus-within {
+    border-color: var(--global-theme-color);
   }
 
   .card-img-top {

@@ -20,6 +20,26 @@ export type NavDropdown = { label: string; children: NavLeaf[] };
 /** A top-level nav entry — either a plain link or a dropdown group. */
 export type NavItem = NavLeaf | NavDropdown;
 
+/** Keys of `site.socials`, used to pick and order links (e.g. `hero.primaryLinks`). */
+export type SocialKey =
+  | 'email'
+  | 'x_username'
+  | 'linkedin_username'
+  | 'github_username'
+  | 'gitlab_username'
+  | 'scholar_userid'
+  | 'orcid_id'
+  | 'inspire_id'
+  | 'researchgate_username'
+  | 'arxiv_id'
+  | 'youtube_id'
+  | 'instagram_username'
+  | 'mastodon_url'
+  | 'bluesky_handle'
+  | 'medium_username'
+  | 'cv_pdf'
+  | 'rss_icon';
+
 export const site = {
   // ─── Derived deployment values ────────────────────────────────────────────
 
@@ -35,7 +55,8 @@ export const site = {
   title: 'Tanzim Hossain Romel',
 
   /** Site description. Used in meta tags. */
-  description: 'Academic and engineering portfolio of Tanzim Hossain Romel, focused on reliable AI agents, software engineering research, and developer tools.',
+  description:
+    'Academic and engineering portfolio of Tanzim Hossain Romel, focused on reliable AI agents, software engineering research, and developer tools.',
 
   /** Language code for the site. */
   lang: 'en',
@@ -115,12 +136,12 @@ export const site = {
      * `href` values are relative to the site root (base is prepended automatically).
      */
     items: [
-      { label: 'about', href: '/' },
-      { label: 'blog', href: '/blog/' },
-      { label: 'publications', href: '/publications/' },
-      { label: 'projects', href: '/projects/' },
-      { label: 'cv', href: '/cv/' },
-      { label: 'news', href: '/news/' },
+      { label: 'About', href: '/' },
+      { label: 'Publications', href: '/publications/' },
+      { label: 'Projects', href: '/projects/' },
+      { label: 'Blog', href: '/blog/' },
+      { label: 'CV', href: '/cv/' },
+      { label: 'News', href: '/news/' },
     ] as NavItem[],
   },
 
@@ -192,11 +213,32 @@ export const site = {
 
   // ─── About page sections ──────────────────────────────────────────────────
 
+  /**
+   * Homepage hero: labelled action buttons shown under the name.
+   * Keys are social platform ids from `socials` above (in display order);
+   * platforms that are unset in `socials` are skipped.
+   */
+  hero: {
+    primaryLinks: [
+      'cv_pdf',
+      'scholar_userid',
+      'github_username',
+      'linkedin_username',
+      'orcid_id',
+      'email',
+    ] as SocialKey[],
+  },
+
+  /** Label for the "see everything" link shown next to homepage section headings. */
+  viewAllLabel: 'View all',
+
   announcements: {
     /** Show news/announcements section on the about page. */
     enabled: true,
-    /** Enable vertical scroll if more than 3 items. */
-    scrollable: true,
+    /** Section heading on the about page. */
+    title: 'News',
+    /** Constrain the list to a scroll box. Nested scroll areas are awkward on touch devices. */
+    scrollable: false,
     /** Max news items to show (undefined = show all). */
     limit: 5 as number | undefined,
   },
@@ -204,13 +246,17 @@ export const site = {
   latestPosts: {
     /** Show latest blog posts section on the about page. */
     enabled: true,
-    scrollable: true,
+    /** Section heading on the about page. */
+    title: 'Latest posts',
+    scrollable: false,
     limit: 3 as number | undefined,
   },
 
   selectedPapers: {
     /** Show selected publications section on the about page. */
     enabled: true,
+    /** Section heading on the about page. */
+    title: 'Selected publications',
   },
 
   // ─── Features ─────────────────────────────────────────────────────────────
@@ -395,6 +441,12 @@ export const site = {
   // ─── Page copy ────────────────────────────────────────────────────────────
 
   pages: {
+    publications: {
+      /** Description shown below the "Publications" heading. */
+      description: 'Papers, preprints, and manuscripts under review, newest first.',
+      /** Text of the Google Scholar link appended to the description (needs `socials.scholar_userid`). */
+      scholarLinkLabel: 'Google Scholar profile',
+    },
     projects: {
       /** Description shown below the "projects" heading on the projects page. */
       description: 'Research prototypes, systems work, and engineering case studies.',
@@ -428,10 +480,10 @@ export const site = {
      *   Custom hover:     { light: '#0076df', dark: '#68c0d9', hoverLight: '#0a53be', hoverDark: '#9fd8ea' }
      */
     color: {
-      light: 'auto' as string,
-      dark: 'auto' as string,
-      hoverLight: 'auto' as string,
-      hoverDark: 'auto' as string,
+      light: '#1d4ed8' as string,
+      dark: '#7cb4ff' as string,
+      hoverLight: '#1e3a8a' as string,
+      hoverDark: '#b3d4ff' as string,
     },
   },
 } as const;

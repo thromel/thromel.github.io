@@ -30,18 +30,15 @@ const items = site.navbar.items;
 
 <nav
   class="navbar fixed top-0 right-0 left-0 z-40"
-  style="background-color: var(--global-bg-color); border-bottom: 1px solid var(--global-divider-color); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); height: 57px;"
+  aria-label="Main"
+  style="background-color: color-mix(in srgb, var(--global-bg-color) 88%, transparent); border-bottom: 1px solid var(--global-divider-color); backdrop-filter: saturate(160%) blur(10px); -webkit-backdrop-filter: saturate(160%) blur(10px); height: 57px;"
 >
   <div
     class="page-container flex h-full items-center justify-between"
     style="max-width: 930px; margin: 0 auto; padding: 0 1rem;"
   >
     <!-- Brand -->
-    <a
-      href={`${site.base}/`}
-      class="text-lg font-bold"
-      style="color: var(--global-text-color); text-decoration: none;"
-    >
+    <a href={`${site.base}/`} class="nav-brand">
       {site.author.name}
     </a>
 
@@ -54,8 +51,8 @@ const items = site.navbar.items;
             return (
               <a
                 href={`${site.base}${item.href}`}
-                class={`px-3 py-1 text-sm transition-colors ${active ? 'font-bold' : ''}`}
-                style={`color: ${active ? 'var(--global-theme-color)' : 'var(--global-text-color)'}; text-decoration: none;`}
+                class:list={['nav-link', { 'is-active': active }]}
+                aria-current={active ? 'page' : undefined}
               >
                 {item.label}
               </a>
@@ -122,7 +119,7 @@ const items = site.navbar.items;
 
       <!-- Search pill (desktop) -->
       <button
-        id="search-toggle"
+        data-search-toggle
         class="search-pill"
         aria-label="Search"
         title="Search"
@@ -152,13 +149,8 @@ const items = site.navbar.items;
     </div>
 
     <!-- Mobile controls (icon-only search + theme + hamburger) -->
-    <div class="flex items-center gap-2 md:hidden">
-      <button
-        id="search-toggle"
-        aria-label="Search"
-        type="button"
-        style="padding: 0; border: 0; background: inherit; color: var(--global-text-color); cursor: pointer;"
-      >
+    <div class="flex items-center gap-1 md:hidden">
+      <button data-search-toggle aria-label="Search" type="button" class="mobile-icon-btn">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="18"
@@ -178,11 +170,11 @@ const items = site.navbar.items;
       <ThemeToggle />
       <button
         id="navbar-toggler"
-        class="navbar-toggler collapsed"
+        class="navbar-toggler mobile-icon-btn collapsed"
         aria-label="Toggle navigation"
         aria-expanded="false"
+        aria-controls="navbar-collapse"
         type="button"
-        style="padding: 0.25rem; border: 0; background: inherit; cursor: pointer;"
       >
         <span
           class="icon-bar top-bar"
@@ -204,7 +196,7 @@ const items = site.navbar.items;
   <div
     id="navbar-collapse"
     class="hidden md:hidden"
-    style="background-color: var(--global-bg-color); border-top: 1px solid var(--global-divider-color); padding: 0.5rem 0;"
+    style="background-color: var(--global-bg-color); border-top: 1px solid var(--global-divider-color); border-bottom: 1px solid var(--global-divider-color); box-shadow: var(--ui-shadow-hover); padding: 0.5rem 0;"
   >
     {
       items.map((item) => {
@@ -213,8 +205,8 @@ const items = site.navbar.items;
           return (
             <a
               href={`${site.base}${item.href}`}
-              class="block px-4 py-2 text-sm"
-              style={`color: ${active ? 'var(--global-theme-color)' : 'var(--global-text-color)'}; font-weight: ${active ? '700' : '400'}; text-decoration: none;`}
+              class:list={['mobile-nav-link', { 'is-active': active }]}
+              aria-current={active ? 'page' : undefined}
             >
               {item.label}
             </a>
@@ -281,6 +273,83 @@ const items = site.navbar.items;
 </script>
 
 <style>
+  /* ── Brand + links ──────────────────────────────────────────────────── */
+  .nav-brand {
+    font-size: 1.05rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: var(--global-text-color);
+    text-decoration: none;
+  }
+
+  .nav-brand:hover {
+    color: var(--global-theme-color);
+  }
+
+  .nav-link {
+    position: relative;
+    padding: 0.35rem 0.7rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--global-text-color-light);
+    text-decoration: none;
+    border-radius: var(--ui-radius-sm);
+    transition:
+      color 0.15s,
+      background-color 0.15s;
+  }
+
+  .nav-link:hover {
+    color: var(--global-text-color);
+    background-color: var(--global-theme-tint);
+  }
+
+  .nav-link.is-active {
+    color: var(--global-theme-color);
+  }
+
+  .nav-link.is-active::after {
+    content: '';
+    position: absolute;
+    left: 0.7rem;
+    right: 0.7rem;
+    bottom: -0.65rem;
+    height: 2px;
+    border-radius: 2px;
+    background-color: var(--global-theme-color);
+  }
+
+  .mobile-icon-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 2.5rem;
+    height: 2.5rem;
+    padding: 0;
+    border: 0;
+    border-radius: var(--ui-radius-sm);
+    background: transparent;
+    color: var(--global-text-color);
+    cursor: pointer;
+  }
+
+  .mobile-nav-link {
+    display: block;
+    padding: 0.75rem 1.25rem;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--global-text-color);
+    text-decoration: none;
+    border-left: 3px solid transparent;
+  }
+
+  .mobile-nav-link.is-active {
+    color: var(--global-theme-color);
+    border-left-color: var(--global-theme-color);
+    background-color: var(--global-theme-tint);
+  }
+
   /* ── Hamburger animation ────────────────────────────────────────────── */
   .icon-bar {
     transition: all 0.2s;
@@ -450,19 +519,28 @@ const items = site.navbar.items;
       { signal },
     );
 
+    const closeMenu = () => {
+      collapse?.classList.add('hidden');
+      toggler?.setAttribute('aria-expanded', 'false');
+      toggler?.classList.add('collapsed');
+      document.body.style.overflow = '';
+    };
+
     // Close mobile menu on link click
     document.querySelectorAll('#navbar-collapse a').forEach((link) => {
-      link.addEventListener(
-        'click',
-        () => {
-          collapse?.classList.add('hidden');
-          toggler?.setAttribute('aria-expanded', 'false');
-          toggler?.classList.add('collapsed');
-          document.body.style.overflow = '';
-        },
-        { signal },
-      );
+      link.addEventListener('click', closeMenu, { signal });
     });
+
+    // Close mobile menu on Escape and return focus to the toggle
+    document.addEventListener(
+      'keydown',
+      (e) => {
+        if (e.key !== 'Escape' || collapse?.classList.contains('hidden')) return;
+        closeMenu();
+        toggler?.focus();
+      },
+      { signal },
+    );
 
     // ── Mobile sub-dropdowns ──────────────────────────────────────────────
     document.querySelectorAll('.mobile-dropdown-trigger').forEach((btn) => {
