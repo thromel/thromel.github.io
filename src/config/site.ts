@@ -223,8 +223,7 @@ export const site = {
      * One-line "what I'm working on now" note under the subtitle. HTML is supported.
      * Set to '' to hide it.
      */
-    currently:
-      'Currently building <a href="/projects/contextledger/">ContextLedger</a>, context accounting for coding agents.',
+    currently: 'Currently doing long-horizon coding agent research.',
     primaryLinks: [
       'cv_pdf',
       'scholar_userid',
