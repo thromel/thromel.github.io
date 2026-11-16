@@ -519,19 +519,28 @@ const items = site.navbar.items;
       { signal },
     );
 
+    const closeMenu = () => {
+      collapse?.classList.add('hidden');
+      toggler?.setAttribute('aria-expanded', 'false');
+      toggler?.classList.add('collapsed');
+      document.body.style.overflow = '';
+    };
+
     // Close mobile menu on link click
     document.querySelectorAll('#navbar-collapse a').forEach((link) => {
-      link.addEventListener(
-        'click',
-        () => {
-          collapse?.classList.add('hidden');
-          toggler?.setAttribute('aria-expanded', 'false');
-          toggler?.classList.add('collapsed');
-          document.body.style.overflow = '';
-        },
-        { signal },
-      );
+      link.addEventListener('click', closeMenu, { signal });
     });
+
+    // Close mobile menu on Escape and return focus to the toggle
+    document.addEventListener(
+      'keydown',
+      (e) => {
+        if (e.key !== 'Escape' || collapse?.classList.contains('hidden')) return;
+        closeMenu();
+        toggler?.focus();
+      },
+      { signal },
+    );
 
     // ── Mobile sub-dropdowns ──────────────────────────────────────────────
     document.querySelectorAll('.mobile-dropdown-trigger').forEach((btn) => {
