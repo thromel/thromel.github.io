@@ -184,6 +184,7 @@ export const BIBTEX_INTERNAL_FIELDS = new Set([
   'selected',
   'slides',
   'supp',
+  'tldr',
   'video',
   'website',
 ]);

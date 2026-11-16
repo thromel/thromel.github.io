@@ -219,6 +219,12 @@ export const site = {
    * platforms that are unset in `socials` are skipped.
    */
   hero: {
+    /**
+     * One-line "what I'm working on now" note under the subtitle. HTML is supported.
+     * Set to '' to hide it.
+     */
+    currently:
+      'Currently building <a href="/projects/contextledger/">ContextLedger</a>, context accounting for coding agents.',
     primaryLinks: [
       'cv_pdf',
       'scholar_userid',
@@ -250,6 +256,15 @@ export const site = {
     title: 'Latest posts',
     scrollable: false,
     limit: 3 as number | undefined,
+  },
+
+  selectedWork: {
+    /** Show the selected work (projects) section on the about page. */
+    enabled: true,
+    /** Section heading on the about page. */
+    title: 'Selected work',
+    /** Project ids (file names in src/content/projects/, no extension), in display order. */
+    projects: ['ctxhelm', 'patchsmith', 'contextledger'] as string[],
   },
 
   selectedPapers: {
