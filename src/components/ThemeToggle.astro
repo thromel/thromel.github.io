@@ -1,22 +1,24 @@
 ---
-// ThemeToggle — simple light ↔ dark toggle.
-// Uses data-attributes so both desktop and mobile instances work correctly.
+// ThemeToggle — light ↔ dark toggle.
+// Uses data-attributes so both desktop and mobile instances stay in sync.
 // Initial state is set by the FOUC inline script in Base.astro (respects OS preference).
 ---
 
 <button
   data-light-toggle
-  title="Toggle theme"
-  aria-label="Toggle theme"
-  style="padding: 0; border: 0; background-color: inherit; color: var(--global-text-color); width: 2rem; height: 2rem; display: inline-flex; align-items: center; justify-content: center; cursor: pointer;"
+  class="theme-toggle-btn"
+  type="button"
+  title="Switch to dark mode"
+  aria-label="Switch to dark mode"
+  aria-pressed="false"
 >
   <!-- Moon icon: shown in light mode (click to go dark) -->
   <span data-light-toggle-icon="moon">
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
-      width="18"
-      height="18"
+      width="17"
+      height="17"
       fill="none"
       stroke="currentColor"
       stroke-width="1.8"
@@ -33,8 +35,8 @@
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
-      width="18"
-      height="18"
+      width="17"
+      height="17"
       fill="none"
       stroke="currentColor"
       stroke-width="1.8"
@@ -55,20 +57,70 @@
   </span>
 </button>
 
+<style>
+  .theme-toggle-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    padding: 0;
+    border: 0;
+    border-radius: var(--ui-radius-sm);
+    background: transparent;
+    color: var(--global-text-color-light);
+    cursor: pointer;
+    flex-shrink: 0;
+    transition:
+      color 0.15s ease,
+      background-color 0.15s ease;
+  }
+
+  .theme-toggle-btn:hover {
+    color: var(--global-theme-color);
+    background-color: var(--global-theme-tint);
+  }
+
+  @media (max-width: 767px) {
+    .theme-toggle-btn {
+      width: 2.5rem;
+      height: 2.5rem;
+      color: var(--global-text-color);
+    }
+  }
+</style>
+
 <script>
+  function syncThemeMeta(theme: string) {
+    const themeColor = document.getElementById('theme-color');
+    if (themeColor) {
+      themeColor.setAttribute('content', theme === 'dark' ? '#111317' : '#faf9f6');
+    }
+  }
+
   function updateIcons(theme: string) {
-    // Update icons on ALL toggle instances (desktop + mobile are both in the DOM)
+    const isDark = theme === 'dark';
+    const nextLabel = isDark ? 'Switch to light mode' : 'Switch to dark mode';
+
+    // Update icons and accessible state on ALL toggle instances (desktop + mobile)
     document.querySelectorAll<HTMLElement>('[data-light-toggle-icon]').forEach((el) => {
       const show =
-        (theme === 'dark' && el.getAttribute('data-light-toggle-icon') === 'sun') ||
-        (theme === 'light' && el.getAttribute('data-light-toggle-icon') === 'moon');
+        (isDark && el.getAttribute('data-light-toggle-icon') === 'sun') ||
+        (!isDark && el.getAttribute('data-light-toggle-icon') === 'moon');
       el.style.display = show ? 'inline-block' : 'none';
+    });
+
+    document.querySelectorAll<HTMLButtonElement>('[data-light-toggle]').forEach((btn) => {
+      btn.setAttribute('aria-pressed', String(isDark));
+      btn.setAttribute('aria-label', nextLabel);
+      btn.setAttribute('title', nextLabel);
     });
   }
 
   function applyTheme(theme: string) {
     document.documentElement.setAttribute('data-theme', theme);
     localStorage.setItem('theme', theme);
+    syncThemeMeta(theme);
     updateIcons(theme);
   }
 
@@ -86,20 +138,26 @@
   }
 
   // Wire buttons and sync icons with the theme already applied by the FOUC script
+  const initialTheme = document.documentElement.getAttribute('data-theme') ?? 'light';
   wire();
-  updateIcons(document.documentElement.getAttribute('data-theme') ?? 'light');
+  syncThemeMeta(initialTheme);
+  updateIcons(initialTheme);
 
   // Re-wire after Astro View Transitions (soft navigation)
   document.addEventListener('astro:after-swap', () => {
+    const currentTheme = document.documentElement.getAttribute('data-theme') ?? 'light';
     wire();
-    updateIcons(document.documentElement.getAttribute('data-theme') ?? 'light');
+    syncThemeMeta(currentTheme);
+    updateIcons(currentTheme);
   });
 
   // Follow OS preference changes only when the user has no explicit stored preference
   window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
     if (!localStorage.getItem('theme')) {
-      document.documentElement.setAttribute('data-theme', e.matches ? 'dark' : 'light');
-      updateIcons(e.matches ? 'dark' : 'light');
+      const theme = e.matches ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', theme);
+      syncThemeMeta(theme);
+      updateIcons(theme);
     }
   });
 </script>

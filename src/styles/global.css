@@ -297,69 +297,93 @@
     height: 0.875em;
   }
 
-  /* ─── Blog-specific classes (matches al-folio) ───────────────────── */
+  /* ─── Blog & archive headers (editorial unified system) ───────────── */
   .header-bar {
     border-bottom: 1px solid var(--global-divider-color);
-    text-align: center;
-    padding-top: 2rem;
-    padding-bottom: 3rem;
+    text-align: left;
+    padding-top: 0;
+    padding-bottom: 1.25rem;
+    margin-bottom: 1.5rem;
   }
   .header-bar h1 {
-    color: var(--global-theme-color);
-    font-size: 5rem;
-    font-family: var(--font-sans);
+    color: var(--global-text-color);
+    font-size: clamp(1.9rem, 3.6vw, 2.35rem);
+    font-family: var(--font-serif);
     font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
   }
   .header-bar h2 {
+    margin-top: 0.45rem;
     color: var(--global-text-color-light);
-    font-size: 1.25rem;
+    font-family: var(--font-sans);
+    font-size: 1.02rem;
+    font-weight: 400;
+    line-height: 1.55;
   }
   .tag-category-list {
-    border-bottom: 1px solid var(--global-divider-color);
-    text-align: center;
-    padding-top: 1rem;
-    padding-bottom: 0.5rem;
+    margin-bottom: 1.75rem;
   }
   .tag-category-list ul {
-    justify-content: center;
-    display: flow-root;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.45rem;
     padding: 0;
     margin: 0;
-  }
-  .tag-category-list ul li,
-  .tag-category-list ul p {
     list-style: none;
-    display: inline-block;
-    padding: 0.5rem 0.5rem;
-    color: var(--global-text-color-light);
+  }
+  .tag-category-list ul li {
+    list-style: none;
+    display: inline-flex;
+    align-items: center;
+    margin: 0;
+    padding: 0;
   }
   .tag-category-list ul li a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.3rem 0.75rem;
+    border: 1px solid var(--global-divider-color);
+    border-radius: 999px;
+    background-color: var(--global-card-bg-color);
     color: var(--global-text-color-light);
+    font-size: 0.8125rem;
+    font-weight: 500;
     text-decoration: none;
+    transition:
+      color 0.15s ease,
+      border-color 0.15s ease,
+      background-color 0.15s ease;
   }
   .tag-category-list ul li a:hover {
     color: var(--global-theme-color);
+    border-color: var(--global-theme-color);
+    background-color: var(--global-theme-tint);
   }
   .post-list {
-    margin: 0;
-    margin-bottom: 40px;
+    margin: 0 0 2.5rem;
     padding: 0;
   }
   .post-list li {
     border-bottom: 1px solid var(--global-divider-color);
     list-style: none;
-    padding-top: 2rem;
-    padding-bottom: 2rem;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+  }
+  .post-list li:last-child {
+    border-bottom: 0;
   }
   .post-list .post-meta {
     color: var(--global-text-color-light);
-    font-size: 0.875rem;
+    font-size: 0.85rem;
     margin-bottom: 0;
   }
   .post-list .post-tags {
     color: var(--global-text-color-light);
-    font-size: 0.875rem;
-    padding-top: 0.25rem;
+    font-size: 0.8125rem;
+    padding-top: 0.35rem;
   }
   .post-list .post-tags a {
     color: var(--global-text-color-light);
@@ -371,39 +395,50 @@
   .post-list li a.post-title {
     color: var(--global-text-color);
     text-decoration: none;
+    font-family: var(--font-serif);
     font-weight: 700;
+    letter-spacing: -0.015em;
   }
   .post-list li a.post-title:hover {
     color: var(--global-theme-color);
   }
   h2.year {
     color: var(--global-text-color-light);
-    padding-top: 1rem;
-    margin-top: 2rem;
-    margin-bottom: 0;
-    text-align: right;
-    font-family: var(--font-sans);
-    font-size: 1.5rem;
-    font-weight: 700;
+    border-bottom: 1px solid var(--global-divider-color);
+    padding-top: 0;
+    padding-bottom: 0.45rem;
+    margin-top: 2.25rem;
+    margin-bottom: 0.75rem;
+    text-align: left;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-variant-numeric: tabular-nums;
   }
 
   /* ─── Shared page-level heading (used on publications, cv, teaching, etc.) ── */
   .post-header {
-    margin-bottom: 1.5rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid var(--global-divider-color);
   }
   h1.post-title {
-    font-size: 2rem;
+    font-size: clamp(1.9rem, 3.6vw, 2.35rem);
     font-weight: 700;
     letter-spacing: -0.02em;
-    line-height: 1.2;
+    line-height: 1.15;
     color: var(--global-text-color);
-    font-family: var(--font-sans);
+    font-family: var(--font-serif);
   }
   .post-header .post-description {
-    margin-top: 0.4rem;
+    margin-top: 0.5rem;
     margin-bottom: 0;
-    font-size: 1rem;
+    font-size: 1.02rem;
+    line-height: 1.55;
     color: var(--global-text-color-light);
+    max-width: 62ch;
   }
 
   /* ─── Profile (matches al-folio .profile) ────────────────────────── */
@@ -493,11 +528,11 @@
   /* ─── Abbr labels ────────────────────────────────────────────────── */
   .badge-abbr {
     display: inline-block;
-    padding: 0.15em 0.5em;
-    border-radius: 3px;
-    font-size: 0.7rem;
+    padding: 0.18em 0.6em;
+    border-radius: 999px;
+    font-size: 0.72rem;
     font-weight: 600;
-    letter-spacing: 0.03em;
+    letter-spacing: 0.02em;
     background-color: var(--global-theme-color);
     color: var(--global-hover-text-color);
   }
@@ -567,7 +602,7 @@
     margin-left: 0.25rem !important;
   }
   .ml-2 {
-    margin-right: 0.5rem !important;
+    margin-left: 0.5rem !important;
   }
   .ml-md-4 {
     margin-left: 1.5rem !important;
@@ -775,31 +810,6 @@
     color: var(--global-hover-text-color) !important;
   }
 
-  /* CV h6 headings */
-  .cv h6 {
-    font-size: 1rem;
-    font-weight: 400;
-    margin-bottom: 0.25rem;
-    color: var(--global-text-color);
-  }
-  .cv h6.title {
-    font-weight: 700;
-  }
-  .cv h6 a {
-    color: var(--global-text-color);
-    text-decoration: none;
-  }
-  .cv h6 a:hover {
-    color: var(--global-theme-color);
-  }
-
-  /* CV skill-item (skills, languages, interests) */
-  .skill-item {
-    padding: 0.35rem 0;
-    font-size: 0.875rem;
-    color: var(--global-text-color);
-  }
-
   /* Anchor for CV TOC links */
   a.anchor {
     display: block;
@@ -808,21 +818,23 @@
     visibility: hidden;
   }
 
-  /* ─── Publications styles (matches al-folio _publications.scss) ──── */
+  /* ─── Publications styles ─────────────────────────────────────────── */
   .publications {
-    margin-top: 2rem;
+    margin-top: 1.5rem;
   }
   .publications h2.year {
     color: var(--global-text-color-light);
     border-bottom: 1px solid var(--global-divider-color);
     text-align: left;
     padding-top: 0;
-    padding-bottom: 0.4rem;
-    margin-top: 2rem;
-    margin-bottom: 1rem;
-    font-family: var(--font-sans);
-    font-size: 1.1rem;
+    padding-bottom: 0.45rem;
+    margin-top: 2.25rem;
+    margin-bottom: 0.75rem;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
     font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
     font-variant-numeric: tabular-nums;
   }
   .publications ol.bibliography {
@@ -831,19 +843,24 @@
     margin-top: 0;
   }
   .publications ol.bibliography li {
-    margin-bottom: 1.5rem;
+    padding-block: 1.25rem;
+    margin-bottom: 0;
+    border-bottom: 1px solid var(--global-divider-color);
+  }
+  .publications ol.bibliography li:last-child {
+    border-bottom: 0;
   }
   .publications ol.bibliography li .row {
     flex-wrap: nowrap;
-    gap: 1.25rem;
+    gap: 1.35rem;
     margin: 0;
   }
   .publications ol.bibliography li .row > * {
     padding: 0;
   }
   .publications ol.bibliography li .abbr {
-    flex: 0 0 7.5rem;
-    width: 7.5rem;
+    flex: 0 0 7.75rem;
+    width: 7.75rem;
   }
   .publications ol.bibliography li .row > [id] {
     flex: 1 1 auto;
@@ -853,12 +870,12 @@
   .publications ol.bibliography li .abbr abbr {
     display: inline-block;
     background-color: var(--global-theme-color);
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.55rem;
     color: var(--global-hover-text-color) !important;
-    padding: 0.25em 0.6em;
-    border-radius: var(--ui-radius-sm) !important;
-    font-size: 0.7rem;
-    font-weight: 700;
+    padding: 0.2em 0.65em;
+    border-radius: 999px !important;
+    font-size: 0.72rem;
+    font-weight: 600;
     letter-spacing: 0.02em;
     text-decoration: none;
   }
@@ -870,18 +887,24 @@
     display: block;
     border: 1px solid var(--global-divider-color);
     border-radius: var(--ui-radius-sm) !important;
-    background: #fff;
+    background: #faf9f6;
+  }
+  html[data-theme='dark'] .publications ol.bibliography li .preview {
+    background: #f2f0ea;
+    opacity: 0.94;
   }
   .publications ol.bibliography li .title {
-    font-weight: 600;
-    font-size: 1.05rem;
-    line-height: 1.4;
-    margin-bottom: 0.2rem;
+    font-family: var(--font-serif);
+    font-weight: 700;
+    font-size: 1.12rem;
+    line-height: 1.38;
+    letter-spacing: -0.01em;
+    margin-bottom: 0.25rem;
     color: var(--global-text-color);
   }
   .publications ol.bibliography li .author {
     color: var(--global-text-color);
-    font-size: 0.875rem;
+    font-size: 0.89rem;
   }
   .publications ol.bibliography li .author a {
     border-bottom: 1px dashed var(--global-theme-color);
@@ -899,22 +922,22 @@
   .publications ol.bibliography li .periodical {
     color: var(--global-text-color-light);
     font-size: 0.875rem;
-    margin-top: 0.15rem;
+    margin-top: 0.2rem;
   }
   .publications ol.bibliography li .links {
     display: flex;
     flex-wrap: wrap;
     gap: 0.4rem;
-    margin-top: 0.6rem;
+    margin-top: 0.7rem;
   }
   .publications ol.bibliography li .links a.btn,
   .publications ol.bibliography li .links button.btn {
     display: inline-flex;
     align-items: center;
-    min-height: 1.85rem;
+    min-height: 1.9rem;
     color: var(--global-text-color);
     border: 1px solid var(--global-divider-color);
-    padding: 0.2rem 0.7rem;
+    padding: 0.2rem 0.75rem;
     font-size: 0.78rem;
     font-weight: 500;
     border-radius: 999px;
@@ -934,56 +957,133 @@
     border-color: var(--global-theme-color);
     background: var(--global-theme-tint);
   }
+  .publications .pub-search-wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+  .publications .pub-search-icon {
+    position: absolute;
+    left: 0.85rem;
+    color: var(--global-text-color-light);
+    pointer-events: none;
+    flex-shrink: 0;
+  }
   .publications .pub-search {
     width: 100%;
-    padding: 0.6rem 0.85rem;
+    padding: 0.65rem 2.35rem 0.65rem 2.4rem;
     font-size: 0.9375rem;
     border: 1px solid var(--global-divider-color);
-    border-radius: var(--ui-radius-sm);
+    border-radius: var(--ui-radius);
     color: var(--global-text-color);
     background-color: var(--global-card-bg-color);
+    box-shadow: var(--ui-shadow-sm);
     transition:
       border-color 0.15s,
       box-shadow 0.15s;
+  }
+  .publications .pub-search::-webkit-search-cancel-button {
+    -webkit-appearance: none;
+    appearance: none;
   }
   .publications .pub-search:focus {
     outline: none;
     border-color: var(--global-theme-color);
     box-shadow: 0 0 0 3px var(--global-theme-tint);
   }
+  .publications .pub-search-clear {
+    position: absolute;
+    right: 0.5rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.75rem;
+    height: 1.75rem;
+    border: 0;
+    border-radius: 999px;
+    background: transparent;
+    color: var(--global-text-color-light);
+    font-size: 1.05rem;
+    line-height: 1;
+    cursor: pointer;
+    transition:
+      color 0.15s,
+      background-color 0.15s;
+  }
+  .publications .pub-search-clear:hover {
+    color: var(--global-text-color);
+    background-color: var(--global-theme-tint);
+  }
   .publications .pub-count {
-    margin-top: 0.4rem;
+    margin-top: 0.45rem;
     font-size: 0.8125rem;
     color: var(--global-text-color-light);
   }
   .publications .pub-panel {
-    margin-top: 0.75rem;
-    font-size: 0.875rem;
+    margin-top: 0.8rem;
+    font-size: 0.89rem;
     border: 1px solid var(--global-divider-color);
     border-radius: var(--ui-radius-sm);
     background: var(--global-card-bg-color);
+    overflow: hidden;
   }
   .publications .pub-panel[hidden] {
     display: none;
   }
   .publications .pub-panel p {
-    line-height: 1.6;
+    line-height: 1.65;
     margin: 0;
-    padding: 0.75rem 1rem;
+    padding: 0.85rem 1rem;
+  }
+  .publications .pub-panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.4rem 0.75rem;
+    border-bottom: 1px solid var(--global-divider-color);
+    background: var(--global-card-bg-color);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--global-text-color-light);
+  }
+  .publications .pub-copy-btn {
+    padding: 0.18rem 0.55rem;
+    border: 1px solid var(--global-divider-color);
+    border-radius: var(--ui-radius-sm);
+    background: transparent;
+    color: var(--global-text-color-light);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition:
+      color 0.15s,
+      border-color 0.15s,
+      background-color 0.15s;
+  }
+  .publications .pub-copy-btn:hover {
+    color: var(--global-theme-color);
+    border-color: var(--global-theme-color);
+    background: var(--global-theme-tint);
   }
   .publications .pub-panel pre {
     margin: 0;
     font-size: 0.8rem;
-    line-height: 1.5;
-    padding: 0.75rem 1rem;
+    line-height: 1.55;
+    padding: 0.85rem 1rem;
     background: var(--global-code-bg-color);
-    border-radius: var(--ui-radius-sm);
+    border-radius: 0;
     overflow-x: auto;
   }
   .publications ol.bibliography li .links a.award.btn,
   .publications ol.bibliography li .links button.award.btn {
-    border-color: var(--global-highlight-color, #a00000);
-    color: var(--global-highlight-color, #a00000);
+    border-color: var(--global-award-bg);
+    color: var(--global-award-bg);
+  }
+  html[data-theme='dark'] .publications ol.bibliography li .links a.award.btn,
+  html[data-theme='dark'] .publications ol.bibliography li .links button.award.btn {
+    border-color: var(--global-award-bg);
+    color: var(--global-award-bg);
   }
   .publications ol.bibliography li .badges {
     padding-bottom: 0.5rem;
@@ -1005,92 +1105,6 @@
     display: inline-flex;
     align-items: center;
     line-height: 0;
-  }
-
-  /* ─── CV card layout (matches al-folio _cv.scss) ─────────────────── */
-  .cv .card {
-    border: 1px solid var(--global-divider-color);
-    border-radius: 4px;
-    background: var(--global-card-bg-color);
-    margin-top: 1rem;
-    padding: 1rem;
-  }
-  .cv .card-title {
-    font-size: 1.1rem;
-    font-weight: 500;
-    color: var(--global-text-color);
-    margin-bottom: 0.75rem;
-  }
-  .date-column {
-    text-align: center;
-    padding-right: 0.5rem;
-  }
-  .date-column .badge-date {
-    display: inline-block;
-    background-color: var(--global-theme-color);
-    color: var(--global-hover-text-color);
-    padding: 0.2em 0.5em;
-    border-radius: 3px;
-    font-size: 0.7rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    white-space: nowrap;
-  }
-  .date-column .location {
-    font-size: 0.7rem;
-    white-space: nowrap;
-    color: var(--global-text-color-light);
-    margin-top: 0.25rem;
-  }
-  .cv .list-group-item {
-    padding: 0.75rem 0;
-    border: 0;
-    border-bottom: 1px solid var(--global-divider-color);
-    background: transparent;
-  }
-  .cv .list-group-item:last-child {
-    border-bottom: 0;
-  }
-  .cv .entry-title {
-    font-weight: 700;
-    font-size: 0.95rem;
-    color: var(--global-text-color);
-  }
-  .cv .entry-institution {
-    font-size: 0.9rem;
-    color: var(--global-text-color-light);
-  }
-  .cv .entry-summary {
-    font-size: 0.875rem;
-    font-style: italic;
-    color: var(--global-text-color-light);
-    margin-top: 0.25rem;
-  }
-  .cv ul.items {
-    padding-left: 1.5rem;
-    margin-top: 0.25rem;
-    font-size: 0.875rem;
-    color: var(--global-text-color);
-  }
-  .cv ul.items li {
-    margin-bottom: 0.1rem;
-  }
-  .btncv {
-    color: var(--global-text-color) !important;
-    border: 1px solid var(--global-text-color) !important;
-    border-radius: 2px;
-    padding: 0.25rem 1rem;
-    text-decoration: none;
-    font-weight: 400;
-    font-size: 0.7rem;
-    text-align: center;
-    text-transform: uppercase;
-    white-space: nowrap;
-    display: inline-block;
-  }
-  .btncv:hover {
-    color: var(--global-theme-color) !important;
-    border-color: var(--global-theme-color) !important;
   }
 
   /* ─── Teaching page (matches al-folio _teachings.scss) ──────────── */
@@ -1172,30 +1186,74 @@
   }
 }
 
-/* ─── Prose (Markdown body) ──────────────────────────────────────────────── */
+/* ─── Prose (Markdown body) & Editorial Polish ────────────────────────────── */
 
 @layer base {
+  body {
+    font-size: 1.03125rem;
+  }
+
   .prose {
     color: var(--global-text-color);
-    line-height: 1.7;
+    line-height: 1.72;
+  }
+
+  .prose p,
+  .prose ul,
+  .prose ol {
+    margin-bottom: 1.05rem;
+  }
+
+  .prose h2 {
+    font-family: var(--font-serif);
+    font-size: 1.45rem;
+    font-weight: 700;
+    letter-spacing: -0.015em;
+    margin: 2.25rem 0 0.75rem;
+  }
+
+  .prose h3 {
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin: 1.75rem 0 0.5rem;
   }
 
   .prose a {
     color: var(--global-theme-color);
+    text-decoration: underline;
+    text-decoration-color: color-mix(in srgb, currentColor 35%, transparent);
+    text-underline-offset: 0.2em;
+    text-decoration-thickness: 1px;
   }
 
   .prose a:hover {
     color: var(--global-hover-color);
+    text-decoration-color: currentColor;
+  }
+
+  .prose ul {
+    padding-left: 1.25rem;
+    list-style: disc;
+  }
+
+  .prose ol {
+    padding-left: 1.25rem;
+    list-style: decimal;
+  }
+
+  .prose li {
+    margin-bottom: 0.45rem;
   }
 
   .prose img {
-    border-radius: 4px;
+    border-radius: var(--ui-radius-sm);
   }
 
   /* Shiki code blocks */
   .prose pre {
-    border-radius: 6px;
-    padding: 1rem;
+    border: 1px solid var(--global-divider-color);
+    border-radius: var(--ui-radius-sm);
+    padding: 1rem 1.1rem;
     overflow-x: auto;
   }
 
@@ -1203,12 +1261,13 @@
     width: 100%;
     border-collapse: collapse;
     font-size: 0.9rem;
+    margin: 1.5rem 0;
   }
 
   .prose table th,
   .prose table td {
     border: 1px solid var(--global-divider-color);
-    padding: 0.5rem 0.75rem;
+    padding: 0.55rem 0.8rem;
     text-align: left;
   }
 
@@ -1221,6 +1280,38 @@
   .prose .math-display {
     overflow-x: auto;
     padding: 0.5rem 0;
+  }
+
+  main section > h2 {
+    font-size: 1.4rem;
+  }
+
+  a:focus-visible,
+  button:focus-visible {
+    outline: 2px solid var(--global-theme-color);
+    outline-offset: 2px;
+    border-radius: 3px;
+  }
+
+  .hoverable {
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.25s ease;
+  }
+
+  .hoverable:hover {
+    transform: translateY(-2px);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
   }
 }
 
@@ -1298,12 +1389,13 @@ body[data-footer-position='sticky'] {
 
 #back-to-top {
   position: fixed;
-  bottom: 30px;
-  right: 30px;
-  width: 40px;
-  height: 40px;
+  bottom: 24px;
+  right: 24px;
+  width: 42px;
+  height: 42px;
   border-radius: 50%;
-  border: none;
+  border: 1px solid var(--global-divider-color);
+  box-shadow: var(--ui-shadow-sm);
   cursor: pointer;
   z-index: 200; /* above sticky footer (z-index: 100) */
   display: none;
@@ -1311,7 +1403,10 @@ body[data-footer-position='sticky'] {
   justify-content: center;
   background: var(--global-back-to-top-bg-color);
   color: var(--global-back-to-top-text-color);
-  transition: opacity 0.2s ease;
+  transition:
+    border-color 0.15s ease,
+    color 0.15s ease,
+    box-shadow 0.15s ease;
 }
 
 #back-to-top.visible {
@@ -1319,7 +1414,9 @@ body[data-footer-position='sticky'] {
 }
 
 #back-to-top:hover {
-  opacity: 0.8;
+  border-color: var(--global-theme-color);
+  color: var(--global-theme-color);
+  box-shadow: var(--ui-shadow-hover);
 }
 
 /* Lift the button above the sticky footer */
@@ -1402,7 +1499,8 @@ body[data-tooltips] [data-tooltip]:focus-within::before {
   footer,
   .reading-progress,
   .copy-btn,
-  button:not(.btncv) {
+  .cv-download-btn,
+  button {
     display: none !important;
   }
 
@@ -1451,65 +1549,6 @@ body[data-tooltips] [data-tooltip]:focus-within::before {
   }
 }
 
-/* ─── Polish: readability, rhythm, interaction ─────────────────────────── */
-@layer base {
-  .prose p,
-  .prose ul,
-  .prose ol {
-    margin-bottom: 1rem;
-  }
-  .prose h2 {
-    margin: 2rem 0 0.75rem;
-    font-size: 1.4rem;
-    letter-spacing: -0.01em;
-  }
-  .prose a {
-    text-decoration: underline;
-    text-decoration-color: color-mix(in srgb, currentColor 35%, transparent);
-    text-underline-offset: 0.2em;
-    text-decoration-thickness: 1px;
-  }
-  .prose a:hover {
-    text-decoration-color: currentColor;
-  }
-  .prose ul {
-    padding-left: 1.25rem;
-    list-style: disc;
-  }
-  .prose li {
-    margin-bottom: 0.5rem;
-  }
-  body {
-    font-size: 1.0625rem;
-  }
-  main section > h2 {
-    font-size: 1.35rem;
-  }
-  a:focus-visible,
-  button:focus-visible {
-    outline: 2px solid var(--global-theme-color);
-    outline-offset: 2px;
-    border-radius: 3px;
-  }
-  .hoverable {
-    transition:
-      transform 0.2s ease,
-      box-shadow 0.25s ease;
-  }
-  .hoverable:hover {
-    transform: translateY(-2px);
-  }
-  .header-bar h1 {
-    font-size: 2.25rem;
-  }
-  @media (prefers-reduced-motion: reduce) {
-    * {
-      transition: none !important;
-      scroll-behavior: auto !important;
-    }
-  }
-}
-
 /* Unlayered so they beat the unlayered global `a` color in _typography.css. */
 .publications ol.bibliography li .title a,
 .publications ol.bibliography li .links a.btn {
@@ -1542,9 +1581,10 @@ body[data-tooltips] [data-tooltip]:focus-within::before {
 .news-tag {
   display: inline-block;
   margin-right: 0.45rem;
-  padding: 0.05em 0.45em;
+  padding: 0.08em 0.55em;
+  background-color: var(--global-code-bg-color);
   border: 1px solid var(--global-divider-color);
-  border-radius: var(--ui-radius-sm);
+  border-radius: 999px;
   font-size: 0.72rem;
   font-weight: 600;
   line-height: 1.5;

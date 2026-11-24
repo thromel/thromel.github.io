@@ -1,25 +1,117 @@
 ---
 import { site } from '@config/site';
 import Base from '@layouts/Base.astro';
+
+const quickLinks = site.navbar.items
+  .flatMap((item) => ('href' in item ? [item] : item.children))
+  .filter((item) => item.href !== '/');
 ---
 
 <Base title="404 — Page Not Found" noindex>
-  <div class="page-container py-16 text-center" style="min-height: calc(100vh - 57px - 4rem);">
-    <h1
-      class="mb-4 text-8xl font-bold"
-      style="color: var(--global-theme-color); font-family: var(--font-condensed);"
-    >
-      404
-    </h1>
-    <p class="mb-2 text-xl" style="color: var(--global-text-color);">Page not found</p>
-    <p class="mb-8 text-sm" style="color: var(--global-text-color-light);">
-      The page you were looking for doesn't exist or has been moved.
-    </p>
-    <a
-      href={`${site.base}/`}
-      style="color: var(--global-theme-color); text-decoration: none; font-weight: 500;"
-    >
-      &larr; Go back home
-    </a>
+  <div class="page-container not-found">
+    <h1 class="not-found-code">404</h1>
+    <p class="not-found-title">Page not found</p>
+    <p class="not-found-desc">The page you were looking for doesn't exist or has been moved.</p>
+    <a href={`${site.base}/`} class="not-found-cta">&larr; Go back home</a>
+    {
+      quickLinks.length > 0 && (
+        <nav aria-label="Quick navigation" class="not-found-links">
+          {quickLinks.map((item) => (
+            <a href={`${site.base}${item.href}`} class="not-found-link">
+              {item.label}
+            </a>
+          ))}
+        </nav>
+      )
+    }
   </div>
 </Base>
+
+<style>
+  .not-found {
+    min-height: calc(100vh - 57px - 4rem);
+    padding: 4.5rem 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .not-found-code {
+    margin: 0 0 0.75rem;
+    font-family: var(--font-serif);
+    font-size: clamp(4.25rem, 11vw, 6.25rem);
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    color: var(--global-theme-color);
+  }
+
+  .not-found-title {
+    margin: 0 0 0.5rem;
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--global-text-color);
+  }
+
+  .not-found-desc {
+    margin: 0 0 2rem;
+    max-width: 42ch;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--global-text-color-light);
+  }
+
+  .not-found-cta {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.5rem 1.25rem;
+    border-radius: 999px;
+    border: 1px solid var(--global-theme-color);
+    background-color: var(--global-theme-color);
+    color: var(--global-hover-text-color);
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition:
+      background-color 0.15s ease,
+      border-color 0.15s ease;
+  }
+
+  .not-found-cta:hover {
+    background-color: var(--global-hover-color);
+    border-color: var(--global-hover-color);
+    color: var(--global-hover-text-color);
+  }
+
+  .not-found-links {
+    margin-top: 1.75rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+
+  .not-found-link {
+    padding: 0.25rem 0.75rem;
+    border-radius: 999px;
+    border: 1px solid var(--global-divider-color);
+    background-color: var(--global-card-bg-color);
+    color: var(--global-text-color-light);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition:
+      color 0.15s ease,
+      border-color 0.15s ease,
+      background-color 0.15s ease;
+  }
+
+  .not-found-link:hover {
+    color: var(--global-theme-color);
+    border-color: var(--global-theme-color);
+    background-color: var(--global-theme-tint);
+  }
+</style>

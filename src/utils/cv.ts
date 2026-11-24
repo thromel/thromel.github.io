@@ -164,3 +164,38 @@ export function formatDateRange(
   if (!e || s === e) return s;
   return `${s} – ${e}`;
 }
+
+function escapeHtml(text: string): string {
+  return text
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+const SAFE_URL_SCHEME = /^(?:https?:\/\/|mailto:|\/(?!\/))/i;
+
+/**
+ * Safely render inline Markdown links, `**bold**`, and basic formatting tags
+ * (`<b>`, `<strong>`, `<i>`, `<em>`, `<code>`) inside CV highlight strings.
+ */
+export function renderCVHighlight(text: string): string {
+  const escaped = escapeHtml(text)
+    .replace(
+      /&lt;(b|strong|i|em|code)&gt;([\s\S]*?)&lt;\/\1&gt;/gi,
+      (_m, tag: string, inner: string) => {
+        const lowerTag = tag.toLowerCase();
+        return `<${lowerTag}>${inner}</${lowerTag}>`;
+      },
+    )
+    .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+
+  return escaped.replace(/\[([^\]]+)\]\(([^\s)]+)\)/g, (full, label: string, href: string) => {
+    if (!SAFE_URL_SCHEME.test(href)) return full;
+    if (/^https?:\/\//i.test(href)) {
+      return `<a href="${href}" target="_blank" rel="noopener noreferrer">${label}</a>`;
+    }
+    return `<a href="${href}">${label}</a>`;
+  });
+}

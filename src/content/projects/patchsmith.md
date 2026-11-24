@@ -25,7 +25,7 @@ PatchSmith is an auditable repair harness for coding agents: it gives an agent b
 - **Last verified:** 2026-06-12
 - **Links:** [ctxhelm engineering case study](/projects/ctxhelm/)
 
-[View on GitHub](https://github.com/thromel/patchsmith){:target="_blank" rel="noopener noreferrer"}
+[View on GitHub](https://github.com/thromel/patchsmith)
 
 Coding agents often end with a confident little green check mark.
 

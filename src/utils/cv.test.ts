@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { formatCVDate, formatDateRange } from './cv';
+import { formatCVDate, formatDateRange, renderCVHighlight } from './cv';
 
 describe('formatCVDate', () => {
   it('formats ISO year-month string', () => {
@@ -70,5 +70,42 @@ describe('formatDateRange', () => {
     const result = formatDateRange('2020', undefined);
     // end is undefined → "Present"; s !== e → "2020 – Present"
     expect(result).toMatch(/2020/);
+  });
+});
+
+describe('renderCVHighlight', () => {
+  it('passes plain text through unchanged', () => {
+    expect(renderCVHighlight('Teaching assistant for CMPUT 174')).toBe(
+      'Teaching assistant for CMPUT 174',
+    );
+  });
+
+  it('renders external HTTPS Markdown links with target and rel', () => {
+    expect(renderCVHighlight('with affiliation to [Amii (Alberta)](https://www.amii.ca/).')).toBe(
+      'with affiliation to <a href="https://www.amii.ca/" target="_blank" rel="noopener noreferrer">Amii (Alberta)</a>.',
+    );
+  });
+
+  it('renders internal root-relative Markdown links without target="_blank"', () => {
+    expect(renderCVHighlight('shared in [blog posts](/blog/).')).toBe(
+      'shared in <a href="/blog/">blog posts</a>.',
+    );
+  });
+
+  it('preserves simple <b> tags and **bold** syntax', () => {
+    expect(renderCVHighlight('Built <b>C#/.NET</b> and **Rust** services')).toBe(
+      'Built <b>C#/.NET</b> and <strong>Rust</strong> services',
+    );
+  });
+
+  it('escapes raw HTML tags and rejects unsafe link schemes', () => {
+    expect(renderCVHighlight('<script>alert(1)</script>')).toBe(
+      '&lt;script&gt;alert(1)&lt;/script&gt;',
+    );
+    expect(renderCVHighlight('<b onclick="alert(1)">test</b>')).toBe(
+      '&lt;b onclick=&quot;alert(1)&quot;&gt;test&lt;/b&gt;',
+    );
+    expect(renderCVHighlight('[click](javascript:alert(1))')).toBe('[click](javascript:alert(1))');
+    expect(renderCVHighlight('[proto](//evil.example/x)')).toBe('[proto](//evil.example/x)');
   });
 });

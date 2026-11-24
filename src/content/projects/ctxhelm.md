@@ -22,9 +22,9 @@ A technical write-up on ctxhelm, a released Rust tool that helps coding agents i
 - **Technologies:** Rust, MCP, Coding Agents, Hybrid Retrieval, Graph Signals, Tree-sitter, Evaluation, Privacy, Release Engineering, HelmBench, CLI
 - **Repository:** Public source repository
 - **Last verified:** 2026-06-08
-- **Links:** [Release v2.4.0](https://github.com/thromel/ctxhelm/releases/tag/v2.4.0){:target="_blank" rel="noopener noreferrer"} · [ContextLedger research notebook](/projects/contextledger/)
+- **Links:** [Release v2.4.0](https://github.com/thromel/ctxhelm/releases/tag/v2.4.0) · [ContextLedger research notebook](/projects/contextledger/)
 
-[View on GitHub](https://github.com/thromel/ctxhelm){:target="_blank" rel="noopener noreferrer"}
+[View on GitHub](https://github.com/thromel/ctxhelm)
 
 ctxhelm solves a problem I kept running into while using coding agents: the agents were rarely blocked by editing. They were blocked by context. They would grep around, open plausible files, read too much, miss the one test that mattered, and then make a change that looked reasonable but had the wrong shape for the repository.
 

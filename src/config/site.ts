@@ -160,11 +160,11 @@ export const site = {
     impressum: undefined as string | undefined,
     /**
      * Footer display mode:
-     * 'sticky'  — always visible at the bottom of the viewport (al-folio default)
-     * 'normal'  — sits at the natural bottom of page content (only visible when scrolled down)
+     * 'sticky'  — always visible at the bottom of the viewport
+     * 'normal'  — sits quietly at the natural bottom of page content
      * 'hidden'  — footer is not rendered at all
      */
-    position: 'hidden' as 'sticky' | 'normal' | 'hidden',
+    position: 'normal' as 'sticky' | 'normal' | 'hidden',
   },
 
   // ─── CV page ───────────────────────────────────────────────────────────────
@@ -178,6 +178,8 @@ export const site = {
     format: 'rendercv' as 'rendercv' | 'jsonresume',
     /** Path to CV PDF for the download button in public/assets/pdf/. */
     pdfPath: '/assets/pdf/cv.pdf',
+    /** Label for the CV PDF download button. */
+    downloadLabel: 'Download PDF',
   },
 
   // ─── Blog ──────────────────────────────────────────────────────────────────
@@ -471,6 +473,8 @@ export const site = {
     projects: {
       /** Description shown below the "projects" heading on the projects page. */
       description: 'Research prototypes, systems work, and engineering case studies.',
+      /** Footer cue label shown on project cards. */
+      detailsLabel: 'Details',
     },
     teaching: {
       /** Description shown below the "teaching" heading on the teaching page. */
@@ -501,10 +505,10 @@ export const site = {
      *   Custom hover:     { light: '#0076df', dark: '#68c0d9', hoverLight: '#0a53be', hoverDark: '#9fd8ea' }
      */
     color: {
-      light: '#1d4ed8' as string,
-      dark: '#7cb4ff' as string,
-      hoverLight: '#1e3a8a' as string,
-      hoverDark: '#b3d4ff' as string,
+      light: '#1b4d89' as string,
+      dark: '#85b6ff' as string,
+      hoverLight: '#133866' as string,
+      hoverDark: '#b0d0ff' as string,
     },
   },
 } as const;

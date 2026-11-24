@@ -16,7 +16,7 @@ A blockchain ticketing prototype for fraud-resistant issuance, controlled resale
 - **Outcome:** The team was selected as a Blockchain Olympiad Bangladesh 2021 finalist with a prototype covering ticket issuance, marketplace resale, and validation flows.
 - **Technologies:** Ethereum, Solidity, Smart Contracts, Web3.js, NFT, ERC-1155, ERC-721, Polygon
 - **Repository:** Prototype repository not public
-- **Links:** [Official finalist listing](https://bcolbd.org/2021/teams){:target="_blank" rel="noopener noreferrer"}
+- **Links:** [Official finalist listing](https://bcolbd.org/2021/teams)
 
 The online event ticketing market is widely estimated to be in the tens of billions of USD annually (for example, one industry report estimates roughly USD 55.4B in 2022, with continued growth projected from that base ([Grand View Research](https://www.grandviewresearch.com/industry-analysis/online-event-ticketing-market))). The secondary market creates real consumer harm when fraud, opaque fees, and bot-driven bulk buying push buyers away from face-value pricing. At the same time, not all resale is exploitative: a meaningful share of secondary listings can be below face value. The goal, then, is not to ban resale outright, but to make resale verifiable, fair, and transparent.
 

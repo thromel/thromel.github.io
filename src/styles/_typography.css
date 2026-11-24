@@ -5,6 +5,9 @@
 
 @theme {
   --font-sans: 'Roboto', system-ui, -apple-system, sans-serif;
+  --font-serif:
+    'Iowan Old Style', 'Charter', 'Palatino Linotype', 'Book Antiqua', Georgia, Cambria,
+    'Times New Roman', serif;
   --font-condensed: 'Roboto Condensed', 'Arial Narrow', sans-serif;
   --font-mono: 'Source Code Pro', 'Roboto Mono', 'Fira Code', ui-monospace, monospace;
 }
@@ -14,7 +17,7 @@
 html {
   font-family: var(--font-sans);
   font-size: 16px;
-  line-height: 1.6;
+  line-height: 1.65;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -22,6 +25,10 @@ html {
 body {
   color: var(--global-text-color);
   background-color: var(--global-bg-color);
+}
+
+::selection {
+  background-color: var(--global-theme-tint);
 }
 
 /* Headings */
@@ -32,8 +39,21 @@ h4,
 h5,
 h6 {
   font-family: var(--font-sans);
+  font-weight: 600;
+  scroll-margin-top: 76px; /* offset for fixed navbar */
+  text-wrap: balance;
+}
+
+h1,
+h2 {
+  font-family: var(--font-serif);
   font-weight: 700;
-  scroll-margin-top: 66px; /* offset for fixed navbar */
+  letter-spacing: -0.018em;
+}
+
+p,
+li {
+  text-wrap: pretty;
 }
 
 /* Links */
@@ -56,18 +76,22 @@ pre {
 
 code:not(pre code) {
   background-color: var(--global-code-bg-color);
-  border-radius: 3px;
-  padding: 0.1em 0.3em;
+  border: 1px solid var(--global-divider-color);
+  border-radius: 4px;
+  padding: 0.1em 0.35em;
+  font-size: 0.875em;
 }
 
 /* Blockquotes */
 blockquote {
-  border-left: 5px solid var(--global-theme-color);
-  padding: 10px 30px;
+  font-family: var(--font-serif);
+  border-left: 3px solid var(--global-theme-color);
+  padding: 0.35rem 0 0.35rem 1.25rem;
   color: var(--global-text-color-light);
   font-style: italic;
-  font-size: 1.2rem;
-  background: var(--global-bg-color);
+  font-size: 1.08rem;
+  line-height: 1.65;
+  background: transparent;
   margin: 1.5rem 0;
 }
 

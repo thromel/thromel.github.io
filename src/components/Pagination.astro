@@ -35,23 +35,15 @@ function pageUrl(n: number): string {
 }
 ---
 
-<nav aria-label="Pagination" class="mt-8 flex flex-wrap items-center justify-center gap-1">
+<nav aria-label="Pagination" class="pagination-nav">
   <!-- Previous -->
   {
     prevUrl ? (
-      <a
-        href={prevUrl}
-        aria-label="Previous page"
-        class="pagination-btn"
-        style="padding: 0.35rem 0.65rem; border-radius: 4px; text-decoration: none; color: var(--global-text-color); border: 1px solid var(--global-divider-color);"
-      >
+      <a href={prevUrl} aria-label="Previous page" class="pagination-btn">
         &laquo;
       </a>
     ) : (
-      <span
-        aria-disabled="true"
-        style="padding: 0.35rem 0.65rem; border-radius: 4px; color: var(--global-text-color-light); border: 1px solid var(--global-divider-color); opacity: 0.5;"
-      >
+      <span aria-disabled="true" class="pagination-btn pagination-btn--disabled">
         &laquo;
       </span>
     )
@@ -61,14 +53,13 @@ function pageUrl(n: number): string {
   {
     pageList.map((p) =>
       p === '...' ? (
-        <span style="padding: 0.35rem 0.25rem; color: var(--global-text-color-light);">…</span>
+        <span class="pagination-ellipsis">…</span>
       ) : (
         <a
           href={pageUrl(p as number)}
           aria-label={`Page ${p}`}
           aria-current={p === currentPage ? 'page' : undefined}
-          class="pagination-btn"
-          style={`padding: 0.35rem 0.65rem; border-radius: 4px; text-decoration: none; border: 1px solid ${p === currentPage ? 'var(--global-theme-color)' : 'var(--global-divider-color)'}; color: ${p === currentPage ? 'var(--global-hover-text-color)' : 'var(--global-text-color)'}; background-color: ${p === currentPage ? 'var(--global-theme-color)' : 'transparent'};`}
+          class:list={['pagination-btn', { 'pagination-btn--active': p === currentPage }]}
         >
           {p}
         </a>
@@ -79,19 +70,11 @@ function pageUrl(n: number): string {
   <!-- Next -->
   {
     nextUrl ? (
-      <a
-        href={nextUrl}
-        aria-label="Next page"
-        class="pagination-btn"
-        style="padding: 0.35rem 0.65rem; border-radius: 4px; text-decoration: none; color: var(--global-text-color); border: 1px solid var(--global-divider-color);"
-      >
+      <a href={nextUrl} aria-label="Next page" class="pagination-btn">
         &raquo;
       </a>
     ) : (
-      <span
-        aria-disabled="true"
-        style="padding: 0.35rem 0.65rem; border-radius: 4px; color: var(--global-text-color-light); border: 1px solid var(--global-divider-color); opacity: 0.5;"
-      >
+      <span aria-disabled="true" class="pagination-btn pagination-btn--disabled">
         &raquo;
       </span>
     )
@@ -99,7 +82,58 @@ function pageUrl(n: number): string {
 </nav>
 
 <style>
-  .pagination-btn:hover {
-    background-color: var(--global-hover-color) !important;
+  .pagination-nav {
+    margin-top: 2.25rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35rem;
+  }
+
+  .pagination-btn {
+    min-width: 2.5rem;
+    min-height: 2.5rem;
+    padding: 0 0.65rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--ui-radius-sm);
+    border: 1px solid var(--global-divider-color);
+    background-color: var(--global-card-bg-color);
+    color: var(--global-text-color);
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    font-variant-numeric: tabular-nums;
+    text-decoration: none;
+    transition:
+      background-color 0.15s ease,
+      border-color 0.15s ease,
+      color 0.15s ease;
+  }
+
+  a.pagination-btn:hover {
+    background-color: var(--global-hover-color);
+    border-color: var(--global-hover-color);
+    color: var(--global-hover-text-color);
+  }
+
+  .pagination-btn--active {
+    border-color: var(--global-theme-color);
+    background-color: var(--global-theme-color);
+    color: var(--global-hover-text-color);
+    font-weight: 600;
+  }
+
+  .pagination-btn--disabled {
+    color: var(--global-text-color-light);
+    background-color: transparent;
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+
+  .pagination-ellipsis {
+    padding: 0 0.3rem;
+    color: var(--global-text-color-light);
   }
 </style>

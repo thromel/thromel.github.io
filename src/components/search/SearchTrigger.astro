@@ -93,7 +93,13 @@ const allItems: SearchItem[] = [...posts, ...projects, ...teaching];
     };
   }
 
+  let searchController: AbortController | null = null;
+
   async function initSearch() {
+    searchController?.abort();
+    searchController = new AbortController();
+    const { signal } = searchController;
+
     await customElements.whenDefined('ninja-keys');
 
     const nk = document.querySelector('#ninja-search') as any;
@@ -112,19 +118,27 @@ const allItems: SearchItem[] = [...posts, ...projects, ...teaching];
 
     // Open on search button click
     document.querySelectorAll('[data-search-toggle]').forEach((btn) => {
-      btn.addEventListener('click', (e) => {
-        e.preventDefault();
-        nk.open();
-      });
+      btn.addEventListener(
+        'click',
+        (e) => {
+          e.preventDefault();
+          nk.open();
+        },
+        { signal },
+      );
     });
 
     // ⌘K / Ctrl+K
-    document.addEventListener('keydown', (e) => {
-      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
-        e.preventDefault();
-        nk.open();
-      }
-    });
+    document.addEventListener(
+      'keydown',
+      (e) => {
+        if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+          e.preventDefault();
+          nk.open();
+        }
+      },
+      { signal },
+    );
 
     // Pagefind — lazy-loaded on first search query
     let pagefind: any = null;
@@ -139,42 +153,48 @@ const allItems: SearchItem[] = [...posts, ...projects, ...teaching];
       return pagefind;
     }
 
-    nk.addEventListener('change', async (e: CustomEvent) => {
-      const query = (e.detail?.search ?? '').trim().toLowerCase();
+    nk.addEventListener(
+      'change',
+      async (e: CustomEvent) => {
+        const query = (e.detail?.search ?? '').trim().toLowerCase();
 
-      if (!query) {
-        nk.data = navData;
-        return;
-      }
-
-      // Try Pagefind first (full-text, available after yarn build)
-      const pf = await loadPagefind();
-      if (pf) {
-        const response = await pf.search(query);
-        const results = await Promise.all(response.results.slice(0, 10).map((r: any) => r.data()));
-        if (results.length > 0) {
-          nk.data = results.map((item: any) => ({
-            id: item.url,
-            title: item.meta?.title || item.url,
-            section: 'Search Results',
-            description: item.excerpt?.replace(/<[^>]*>/g, '') ?? '',
-            handler: () => {
-              window.location.href = item.url;
-            },
-          }));
+        if (!query) {
+          nk.data = navData;
           return;
         }
-      }
 
-      // Fallback: filter pre-built title/keyword index (works in dev mode too)
-      const filtered = defaultData.filter((item) => {
-        const raw =
-          contentItems.find((c) => c.id === item.id) ?? navItems.find((n) => n.id === item.id);
-        const haystack = `${item.title} ${raw?.keywords ?? ''}`.toLowerCase();
-        return haystack.includes(query);
-      });
-      nk.data = filtered.length > 0 ? filtered : navData;
-    });
+        // Try Pagefind first (full-text, available after yarn build)
+        const pf = await loadPagefind();
+        if (pf) {
+          const response = await pf.search(query);
+          const results = await Promise.all(
+            response.results.slice(0, 10).map((r: any) => r.data()),
+          );
+          if (results.length > 0) {
+            nk.data = results.map((item: any) => ({
+              id: item.url,
+              title: item.meta?.title || item.url,
+              section: 'Search Results',
+              description: item.excerpt?.replace(/<[^>]*>/g, '') ?? '',
+              handler: () => {
+                window.location.href = item.url;
+              },
+            }));
+            return;
+          }
+        }
+
+        // Fallback: filter pre-built title/keyword index (works in dev mode too)
+        const filtered = defaultData.filter((item) => {
+          const raw =
+            contentItems.find((c) => c.id === item.id) ?? navItems.find((n) => n.id === item.id);
+          const haystack = `${item.title} ${raw?.keywords ?? ''}`.toLowerCase();
+          return haystack.includes(query);
+        });
+        nk.data = filtered.length > 0 ? filtered : navData;
+      },
+      { signal },
+    );
   }
 
   // Sync .dark class with document theme so ninja-keys uses its built-in dark styles
@@ -202,8 +222,9 @@ const allItems: SearchItem[] = [...posts, ...projects, ...teaching];
   ninja-keys {
     --ninja-accent-color: var(--global-theme-color);
     --ninja-text-color: var(--global-text-color);
+    --ninja-selected-text-color: var(--global-hover-text-color);
     --ninja-secondary-text-color: var(--global-text-color-light);
-    --ninja-secondary-background-color: var(--global-divider-color);
+    --ninja-secondary-background-color: var(--global-code-bg-color);
     --ninja-selected-background: var(--global-theme-color);
     --ninja-icon-color: var(--global-text-color-light);
     --ninja-icon-size: 1rem;
@@ -213,19 +234,20 @@ const allItems: SearchItem[] = [...posts, ...projects, ...teaching];
     --ninja-group-text-color: var(--global-text-color-light);
     --ninja-placeholder-color: var(--global-text-color-light);
     --ninja-z-index: 9999;
-    --ninja-modal-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
-    --ninja-overflow-background: rgba(0, 0, 0, 0.5);
+    --ninja-modal-shadow: 0 18px 50px rgba(24, 24, 27, 0.16);
+    --ninja-overflow-background: rgba(24, 24, 27, 0.45);
   }
 
   /* Dark mode — override ninja-keys' built-in .dark defaults to match our scheme */
   html[data-theme='dark'] ninja-keys {
-    --ninja-text-color: var(--global-text-color); /* #e0e0e0 not ninja's dim #7d7d7d */
+    --ninja-text-color: var(--global-text-color);
     --ninja-selected-text-color: var(--global-hover-text-color);
-    --ninja-accent-color: var(--global-theme-color); /* cyan, not ninja's purple */
-    --ninja-selected-background: var(--global-theme-color); /* cyan highlight */
-    --ninja-modal-background: var(--global-card-bg-color); /* #212529 */
-    --ninja-footer-background: var(--global-bg-color); /* #1c1c1d */
-    --ninja-modal-shadow: 0 16px 70px rgba(0, 0, 0, 0.5);
+    --ninja-accent-color: var(--global-theme-color);
+    --ninja-selected-background: var(--global-theme-color);
+    --ninja-secondary-background-color: var(--global-code-bg-color);
+    --ninja-modal-background: var(--global-card-bg-color);
+    --ninja-footer-background: var(--global-bg-color);
+    --ninja-modal-shadow: 0 20px 64px rgba(0, 0, 0, 0.55);
     --ninja-overflow-background: rgba(0, 0, 0, 0.7);
   }
 </style>

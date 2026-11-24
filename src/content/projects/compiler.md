@@ -19,7 +19,7 @@ A sophisticated multi-pass compiler for a subset of C programming language, feat
 - **Technologies:** C++, Flex, Bison, Assembly, Compiler Design
 - **Repository:** Public course repository
 
-[View on GitHub](https://github.com/thromel/Yet-Another-C-Compiler){:target="_blank" rel="noopener noreferrer"}
+[View on GitHub](https://github.com/thromel/Yet-Another-C-Compiler)
 
 ## Introduction to Compiler Design
 

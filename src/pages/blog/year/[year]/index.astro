@@ -32,12 +32,13 @@ const base = site.base;
 ---
 
 <Page title={`Blog — ${year}`} description={`All posts from ${year}`}>
+  <nav aria-label="Breadcrumb" class="mb-4 text-sm">
+    <a href={`${base}/blog/`} class="archive-back-link">&larr; Back to blog</a>
+  </nav>
+
   <div class="post">
     <header class="post-header">
       <h1 class="post-title">{year}</h1>
-      <p>
-        <a href={`${base}/blog/`} style="color: var(--global-theme-color);">← Back to blog</a>
-      </p>
     </header>
     <ul class="post-list">
       {
@@ -57,3 +58,15 @@ const base = site.base;
     />
   </div>
 </Page>
+
+<style>
+  .archive-back-link {
+    color: var(--global-theme-color);
+    text-decoration: none;
+  }
+
+  .archive-back-link:hover {
+    color: var(--global-hover-color);
+    text-decoration: underline;
+  }
+</style>

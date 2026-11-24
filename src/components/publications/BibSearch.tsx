@@ -90,6 +90,7 @@ function PublicationEntry({
   const [abstractOpen, setAbstractOpen] = useState(false);
   const [bibtexOpen, setBibtexOpen] = useState(false);
   const [awardOpen, setAwardOpen] = useState(false);
+  const [copied, setCopied] = useState(false);
 
   const abbr = entry.fields.abbr ?? '';
   const preview = entry.fields.preview ?? '';
@@ -155,6 +156,17 @@ function PublicationEntry({
   const posterHref = poster.startsWith('http') ? poster : `${pdfDir}${poster}`;
 
   const scholarCount = googleScholarId ? citations[googleScholarId] : undefined;
+  const cleanBibtex = useMemo(() => getCleanBibtex(entry), [entry]);
+
+  async function handleCopyBibtex() {
+    try {
+      await navigator.clipboard.writeText(cleanBibtex);
+      setCopied(true);
+      window.setTimeout(() => setCopied(false), 2000);
+    } catch {
+      // Ignore clipboard errors in restricted browser contexts
+    }
+  }
 
   return (
     <li>
@@ -444,7 +456,18 @@ function PublicationEntry({
           {/* BibTeX block — internal fields filtered out */}
           {bibtex_show && (
             <div id={panelId('bibtex')} className="pub-panel bibtex" hidden={!bibtexOpen}>
-              <pre>{getCleanBibtex(entry)}</pre>
+              <div className="pub-panel-header">
+                <span>BibTeX</span>
+                <button
+                  type="button"
+                  className="pub-copy-btn"
+                  onClick={handleCopyBibtex}
+                  aria-label={copied ? 'Copied BibTeX' : 'Copy BibTeX'}
+                >
+                  {copied ? 'Copied!' : 'Copy BibTeX'}
+                </button>
+              </div>
+              <pre>{cleanBibtex}</pre>
             </div>
           )}
         </div>
@@ -497,14 +520,42 @@ export function BibSearch({
     <div className="publications">
       {/* Search bar */}
       <div style={{ marginBottom: '1.5rem' }}>
-        <input
-          type="search"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          placeholder={labels.searchPlaceholder ?? 'Search publications\u2026'}
-          className="pub-search"
-          aria-label="Search publications"
-        />
+        <div className="pub-search-wrap">
+          <svg
+            className="pub-search-icon"
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            aria-hidden="true"
+          >
+            <circle cx="11" cy="11" r="8" />
+            <line x1="21" y1="21" x2="16.65" y2="16.65" />
+          </svg>
+          <input
+            type="search"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder={labels.searchPlaceholder ?? 'Search publications\u2026'}
+            className="pub-search"
+            aria-label="Search publications"
+          />
+          {query && (
+            <button
+              type="button"
+              className="pub-search-clear"
+              onClick={() => setQuery('')}
+              aria-label="Clear search"
+            >
+              &times;
+            </button>
+          )}
+        </div>
         <p className="pub-count" aria-live="polite">
           Showing {filtered.length} of {entries.length} publication{entries.length !== 1 ? 's' : ''}
         </p>

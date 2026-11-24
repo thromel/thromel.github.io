@@ -428,6 +428,7 @@ Set the subtitle shown below the page heading in `site.ts`:
 pages: {
   projects: {
     description: 'A growing collection of your cool projects.',
+    detailsLabel: 'Details',
   },
 },
 ```
@@ -473,6 +474,7 @@ Place your CV PDF in `public/assets/pdf/` and set:
 ```typescript
 cv: {
   pdfPath: '/assets/pdf/your-cv.pdf',
+  downloadLabel: 'Download PDF',
 }
 ```
 
@@ -838,8 +840,8 @@ footer: {
 
 | Value      | Behaviour                                                                                 |
 | ---------- | ----------------------------------------------------------------------------------------- |
-| `'sticky'` | Footer is always visible at the bottom of the viewport (default, matches al-folio)        |
-| `'normal'` | Footer sits at the natural bottom of the page content — only visible after scrolling down |
+| `'sticky'` | Footer is always visible at the bottom of the viewport                                    |
+| `'normal'` | Quiet colophon at the natural bottom of the page content                                  |
 | `'hidden'` | Footer is not rendered at all                                                             |
 
 When `'sticky'`, the body automatically gains `padding-bottom` to prevent page content from being obscured by the footer. The back-to-top button is also repositioned to sit above it.

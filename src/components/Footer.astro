@@ -9,44 +9,136 @@ const lastUpdated = new Date().toLocaleDateString('en-US', {
 });
 
 const isSticky = site.footer.position === 'sticky';
-const footerStyle = [
-  'background-color: var(--global-footer-bg-color);',
-  'color: var(--global-footer-text-color);',
-  'padding: 1rem 0;',
-  isSticky ? 'position: fixed; bottom: 0; left: 0; right: 0; z-index: 100;' : 'margin-top: auto;',
-].join(' ');
+const s = site.socials;
+
+const footerLinks: Array<{ label: string; href: string; external: boolean }> = [];
+if (s.email) {
+  footerLinks.push({ label: 'Email', href: `mailto:${s.email}`, external: false });
+}
+if (s.scholar_userid) {
+  footerLinks.push({
+    label: 'Scholar',
+    href: `https://scholar.google.com/citations?user=${s.scholar_userid}`,
+    external: true,
+  });
+}
+if (s.github_username) {
+  footerLinks.push({
+    label: 'GitHub',
+    href: `https://github.com/${s.github_username}`,
+    external: true,
+  });
+}
+if (s.linkedin_username) {
+  footerLinks.push({
+    label: 'LinkedIn',
+    href: `https://www.linkedin.com/in/${s.linkedin_username}`,
+    external: true,
+  });
+}
+if (s.orcid_id) {
+  footerLinks.push({
+    label: 'ORCID',
+    href: `https://orcid.org/${s.orcid_id}`,
+    external: true,
+  });
+}
+if (s.rss_icon) {
+  footerLinks.push({ label: 'RSS', href: `${site.base}/rss.xml`, external: false });
+}
 ---
 
-<footer style={footerStyle}>
-  <div class="page-container text-center text-sm">
-    <p>
-      &copy; {year}
-      {site.author.name}.
-      {site.footer.text && <span set:html={site.footer.text} />}
-      {site.footer.lastUpdated && <span class="ml-2">Last updated: {lastUpdated}.</span>}
-    </p>
+<footer class:list={['site-footer', { 'site-footer--sticky': isSticky }]}>
+  <div class="page-container footer-inner">
+    <div class="footer-meta">
+      <p>
+        &copy; {year}
+        {site.author.name}.
+        {site.footer.text && <span set:html={site.footer.text} />}
+        {site.footer.lastUpdated && <span class="ml-2">Last updated: {lastUpdated}.</span>}
+      </p>
+      {
+        site.footer.impressum && (
+          <p class="footer-legal">
+            <a href={site.footer.impressum}>Legal Notice</a>
+          </p>
+        )
+      }
+    </div>
+
     {
-      site.footer.impressum && (
-        <p class="mt-1">
-          <a
-            href={site.footer.impressum}
-            style="color: var(--global-footer-link-color); text-decoration: none;"
-          >
-            Legal Notice
-          </a>
-        </p>
+      footerLinks.length > 0 && (
+        <nav class="footer-links" aria-label="Profile links">
+          {footerLinks.map((link) => (
+            <a
+              href={link.href}
+              target={link.external ? '_blank' : undefined}
+              rel={link.external ? 'noopener noreferrer' : undefined}
+            >
+              {link.label}
+            </a>
+          ))}
+        </nav>
       )
     }
   </div>
 </footer>
 
 <style>
-  footer a {
-    color: var(--global-footer-link-color);
+  .site-footer {
+    margin-top: 4rem;
+    padding: 1.75rem 0 2.5rem;
+    border-top: 1px solid var(--global-divider-color);
+    background-color: var(--global-footer-bg-color);
+    color: var(--global-footer-text-color);
   }
 
-  footer a:hover {
-    color: var(--global-footer-text-color);
+  .site-footer--sticky {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    margin-top: 0;
+    padding: 0.9rem 0;
+    background-color: color-mix(in srgb, var(--global-bg-color) 92%, transparent);
+    backdrop-filter: saturate(160%) blur(10px);
+    -webkit-backdrop-filter: saturate(160%) blur(10px);
+  }
+
+  .footer-inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.75rem 1.5rem;
+    font-size: 0.85rem;
+  }
+
+  .footer-meta p {
+    margin: 0;
+  }
+
+  .footer-legal {
+    margin-top: 0.25rem !important;
+  }
+
+  .footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.35rem 1rem;
+  }
+
+  .site-footer a {
+    color: var(--global-text-color-light);
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+
+  .site-footer a:hover {
+    color: var(--global-theme-color);
     text-decoration: underline;
+    text-underline-offset: 0.2em;
   }
 </style>

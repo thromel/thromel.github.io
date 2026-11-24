@@ -10,9 +10,13 @@ const projects = (await getCollection('projects')).sort(
 
 // Collect unique categories preserving first-appearance order
 const categories: string[] = [];
+const categoryCounts = new Map<string, number>();
 for (const p of projects) {
-  if (p.data.category && !categories.includes(p.data.category)) {
-    categories.push(p.data.category);
+  if (p.data.category) {
+    if (!categories.includes(p.data.category)) {
+      categories.push(p.data.category);
+    }
+    categoryCounts.set(p.data.category, (categoryCounts.get(p.data.category) ?? 0) + 1);
   }
 }
 const hasCategories = categories.length > 0;
@@ -23,6 +27,18 @@ const hasCategories = categories.length > 0;
     <header class="post-header">
       <h1 class="post-title">Projects</h1>
       <p class="post-description">{site.pages.projects.description}</p>
+      {
+        categories.length > 1 && (
+          <nav class="category-pills" aria-label="Project categories">
+            {categories.map((cat) => (
+              <a href={`#${cat}`} class="category-pill">
+                <span class="category-pill-name">{cat}</span>
+                <span class="category-pill-count">{categoryCounts.get(cat)}</span>
+              </a>
+            ))}
+          </nav>
+        )
+      }
     </header>
 
     <article>
@@ -34,16 +50,18 @@ const hasCategories = categories.length > 0;
             categories.map((cat) => {
               const catProjects = projects.filter((p) => p.data.category === cat);
               return (
-                <>
-                  <a id={cat} href={`#${cat}`}>
-                    <h2 class="category">{cat}</h2>
+                <section aria-labelledby={`cat-${cat}`}>
+                  <a id={cat} href={`#${cat}`} class="category-heading-link">
+                    <h2 id={`cat-${cat}`} class="category">
+                      {cat}
+                    </h2>
                   </a>
                   <div class="projects-grid">
                     {catProjects.map((project) => (
                       <ProjectCard project={project} />
                     ))}
                   </div>
-                </>
+                </section>
               );
             })
           ) : (
@@ -117,15 +135,44 @@ const hasCategories = categories.length > 0;
 </script>
 
 <style>
-  /* ── Page structure ─────────────────────────────────────────────────────── */
-  .post {
-    padding-top: 0;
+  /* ── Category jump pills ───────────────────────────────────────────────── */
+  .category-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1.1rem;
   }
 
-  .post-description {
+  .category-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.3rem 0.8rem;
+    border: 1px solid var(--global-divider-color);
+    border-radius: 999px;
+    background: var(--global-card-bg-color);
+    color: var(--global-text-color);
+    font-size: 0.84rem;
+    font-weight: 500;
+    text-decoration: none;
+    text-transform: capitalize;
+    box-shadow: var(--ui-shadow-sm);
+    transition:
+      border-color 0.15s ease,
+      color 0.15s ease,
+      background-color 0.15s ease;
+  }
+
+  .category-pill:hover {
+    border-color: var(--global-theme-color);
+    color: var(--global-theme-color);
+    background: var(--global-theme-tint);
+  }
+
+  .category-pill-count {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
     color: var(--global-text-color-light);
-    font-size: 1rem;
-    margin: 0;
   }
 
   /* ── Projects container ─────────────────────────────────────────────────── */
@@ -133,32 +180,37 @@ const hasCategories = categories.length > 0;
     text-decoration: none;
   }
 
+  .category-heading-link {
+    display: block;
+    text-decoration: none;
+  }
+
   h2.category {
     color: var(--global-text-color);
     border-bottom: 1px solid var(--global-divider-color);
-    padding-bottom: 0.4rem;
-    margin-top: 2.25rem;
-    margin-bottom: 1rem;
-    font-family: var(--font-sans);
-    font-size: 1.2rem;
-    font-weight: 600;
-    letter-spacing: -0.01em;
+    padding-bottom: 0.45rem;
+    margin-top: 2.5rem;
+    margin-bottom: 1.25rem;
+    font-family: var(--font-serif);
+    font-size: 1.35rem;
+    font-weight: 700;
+    letter-spacing: -0.015em;
     text-transform: capitalize;
+    transition: color 0.15s ease;
   }
 
-  .projects a:hover h2.category {
+  .projects section:first-child h2.category {
+    margin-top: 0.25rem;
+  }
+
+  .category-heading-link:hover h2.category {
     color: var(--global-theme-color);
-  }
-
-  /* Remove underline from category anchor */
-  .projects a:has(h2.category) {
-    text-decoration: none;
   }
 
   /* ── Responsive grid ─────────────────────────────────────────────────────── */
   .projects-grid {
-    display: flex;
-    flex-wrap: wrap;
-    margin: 0 -0.5rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(17.5rem, 1fr));
+    gap: 1.25rem;
   }
 </style>

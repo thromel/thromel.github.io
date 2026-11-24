@@ -72,6 +72,7 @@ const personJsonLd = isHome ? JSON.stringify({
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta id="theme-color" name="theme-color" content="#faf9f6" />
     <meta name="description" content={description} />
     {(robots || noindex) && <meta name="robots" content={robots ?? 'noindex, nofollow'} />}
 
@@ -197,6 +198,10 @@ const personJsonLd = isHome ? JSON.stringify({
         }
         document.documentElement.setAttribute('data-theme', theme);
         document.documentElement.setAttribute('data-theme-setting', stored || 'system');
+        const themeColor = document.getElementById('theme-color');
+        if (themeColor) {
+          themeColor.setAttribute('content', theme === 'dark' ? '#111317' : '#faf9f6');
+        }
       }
       applyTheme();
       document.addEventListener('astro:after-swap', applyTheme);

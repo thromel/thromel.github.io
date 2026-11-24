@@ -57,40 +57,39 @@ const postYears = [...postsByYear.keys()].sort((a, b) => b - a);
 ---
 
 <PageLayout title={`Blog — Page ${currentPage}`} description={site.blog.description}>
-  <!-- Header bar -->
-  <div class="header-bar">
-    <h1>{site.blog.name}</h1>
-    <h2>{site.blog.description}</h2>
-  </div>
+  <header class="post-header">
+    <h1 class="post-title">{site.blog.name}</h1>
+    <p class="post-description">{site.blog.description}</p>
+  </header>
 
   <!-- Tag / category list + all-tags link -->
   <div class="tag-category-list">
-    <ul class="m-0 p-0">
+    <ul>
       {
-        displayTags.map((tag, i) => (
-          <>
-            <li>
-              <IconHashtag /> <a href={`${base}/blog/tag/${tag}/`}>{tag}</a>
-            </li>
-            {i < displayTags.length - 1 && <p>&bull;</p>}
-          </>
+        displayTags.map((tag) => (
+          <li>
+            <a href={`${base}/blog/tag/${tag}/`}>
+              <IconHashtag />
+              <span>{tag}</span>
+            </a>
+          </li>
         ))
       }
-      {displayTags.length > 0 && displayCategories.length > 0 && <p>&bull;</p>}
       {
-        displayCategories.map((cat, i) => (
-          <>
-            <li>
-              <IconTag /> <a href={`${base}/blog/category/${cat}/`}>{cat}</a>
-            </li>
-            {i < displayCategories.length - 1 && <p>&bull;</p>}
-          </>
+        displayCategories.map((cat) => (
+          <li>
+            <a href={`${base}/blog/category/${cat}/`}>
+              <IconTag />
+              <span>{cat}</span>
+            </a>
+          </li>
         ))
       }
-      {(displayTags.length > 0 || displayCategories.length > 0) && <p>&bull;</p>}
       <li>
-        <IconTags />{' '}
-        <a href={`${base}/blog/tags/`}>all tags</a>
+        <a href={`${base}/blog/tags/`}>
+          <IconTags />
+          <span>all tags</span>
+        </a>
       </li>
     </ul>
   </div>
@@ -98,8 +97,7 @@ const postYears = [...postsByYear.keys()].sort((a, b) => b - a);
   <!-- Featured / Pinned posts card grid -->
   {
     pinnedPosts.length > 0 && (
-      <>
-        <br />
+      <div class="featured-posts-wrap">
         <div class="featured-posts container">
           <div class={`row row-cols-${featuredCols}`}>
             {pinnedPosts.map((post) => {
@@ -115,7 +113,7 @@ const postYears = [...postsByYear.keys()].sort((a, b) => b - a);
                             <div class="float-right">
                               <IconThumbtack style="font-size:0.75rem;" />
                             </div>
-                            <h3 class="card-title text-lowercase">{post.data.title}</h3>
+                            <h3 class="card-title">{post.data.title}</h3>
                             {post.data.description && (
                               <p class="card-text">{post.data.description}</p>
                             )}
@@ -136,7 +134,7 @@ const postYears = [...postsByYear.keys()].sort((a, b) => b - a);
           </div>
         </div>
         <hr style="margin-bottom: 2rem;" />
-      </>
+      </div>
     )
   }
 

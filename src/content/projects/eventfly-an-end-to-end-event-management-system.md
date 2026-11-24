@@ -19,11 +19,11 @@ url: https://github.com/eventfly/Microservices
 - **Technologies:** TypeScript, Node.js, Python, React, Kubernetes, Skaffold, Helm, NATS Streaming, MongoDB Atlas, Redis, Stripe API, Prometheus, Grafana, Docker, GitHub Actions
 - **Repository:** Public team repository
 
-[View on GitHub](https://github.com/eventfly/Microservices){:target="_blank" rel="noopener noreferrer"}
+[View on GitHub](https://github.com/eventfly/Microservices)
 
 ## Lead Architect & Developer | May 2022 - July 2022
 
-[Project Demonstration](https://docs.google.com/presentation/d/16TGaHVFcs2hX8-8C9ajktorYIgw4xa6C/edit?usp=sharing&ouid=105896456680904202887&rtpof=true&sd=true){:target="_blank" rel="noopener noreferrer"}
+[Project Demonstration](https://docs.google.com/presentation/d/16TGaHVFcs2hX8-8C9ajktorYIgw4xa6C/edit?usp=sharing&ouid=105896456680904202887&rtpof=true&sd=true)
 
 <img src="/assets/img/projects/eventfly.png" class="img-fluid mb-4" alt="EventFly Platform" width="2375" height="1580" decoding="async">
 

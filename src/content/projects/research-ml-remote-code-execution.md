@@ -18,4 +18,4 @@ category: research
 
 The study examines how custom code and artifacts enter model-hosting workflows, then maps recurring technical risks and developer misconceptions without treating model popularity as a proxy for safety.
 
-[Read on arXiv](https://arxiv.org/abs/2601.14163){:target="_blank" rel="noopener noreferrer"} · [PDF](https://arxiv.org/pdf/2601.14163){:target="_blank" rel="noopener noreferrer"} · [Publication record](/publications/)
+[Read on arXiv](https://arxiv.org/abs/2601.14163) · [PDF](https://arxiv.org/pdf/2601.14163) · [Publication record](/publications/)

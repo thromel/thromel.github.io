@@ -19,7 +19,7 @@ url: https://github.com/thromel/Image-Captioning-ML-Project
 - **Technologies:** PyTorch, BERT, Computer Vision, NLP, Deep Learning
 - **Repository:** Public source repository
 
-[View on GitHub](https://github.com/thromel/Image-Captioning-ML-Project){:target="_blank" rel="noopener noreferrer"}
+[View on GitHub](https://github.com/thromel/Image-Captioning-ML-Project)
 
 ## Lead Researcher | 6-week Project | Image Understanding
 

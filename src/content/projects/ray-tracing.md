@@ -20,7 +20,7 @@ A deep dive into ray tracing implementation, exploring the physics of light tran
 - **Technologies:** C++, Computer Graphics, Physics Simulation, 3D Rendering, Ray Tracing
 - **Repository:** Public course repository
 
-[View on GitHub](https://github.com/thromel/CSE-410-Computer-Graphics-Sessional){:target="_blank" rel="noopener noreferrer"}
+[View on GitHub](https://github.com/thromel/CSE-410-Computer-Graphics-Sessional)
 
 <img src="/assets/img/projects/ray-tracing.png" class="img-fluid mb-4" alt="Ray Tracing Render" width="300" height="225" decoding="async">
 

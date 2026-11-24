@@ -8,7 +8,7 @@ category: research
 
 *Agent security · abstract-level summary*
 
-Submitted to TACL 2026 with [Chowdhury Rakin Haider](https://cse.buet.ac.bd/faculty/faculty_detail/rakinhaider){:target="_blank" rel="noopener noreferrer"}. The manuscript is not public, so this record is deliberately limited to an abstract-level summary.
+Submitted to TACL 2026 with [Chowdhury Rakin Haider](https://cse.buet.ac.bd/faculty/faculty_detail/rakinhaider). The manuscript is not public, so this record is deliberately limited to an abstract-level summary.
 
 - **Status:** Submitted to TACL 2026
 - **Public boundary:** Abstract-level summary · manuscript not public

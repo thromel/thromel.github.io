@@ -13,6 +13,8 @@ interface Props {
   height?: number;
   /** Render `site.author.moreInfo` under the photo. */
   showMoreInfo?: boolean;
+  /** Apply card shadow around the portrait image. */
+  elevated?: boolean;
 }
 
 const {
@@ -23,11 +25,13 @@ const {
   width = 480,
   height = 640,
   showMoreInfo = true,
+  elevated = true,
 } = Astro.props;
 
 const imgSrc = withBase(src);
 const fallback = withBase('/assets/img/prof_pic.jpg');
-const imgClass = circular ? 'img-fluid z-depth-1 rounded-circle' : 'img-fluid z-depth-1 rounded';
+const shapeClass = circular ? 'rounded-circle' : 'rounded';
+const imgClass = elevated ? `img-fluid z-depth-1 ${shapeClass}` : `img-fluid ${shapeClass}`;
 const wrapperClass = align === 'none' ? 'profile profile--block' : `profile float-${align}`;
 ---
 

@@ -42,25 +42,27 @@
 :root {
   color-scheme: light;
 
-  --global-bg-color: var(--color-white);
-  --global-code-bg-color: #f3f4f6;
-  --global-text-color: #16181d;
-  --global-text-color-light: #5b6470;
+  --global-bg-color: #faf9f6;
+  --global-code-bg-color: #f2f0ea;
+  --global-text-color: #18191c;
+  --global-text-color-light: #525866;
   --global-theme-color: var(--user-accent-light, var(--color-purple));
   --global-hover-color: var(--user-hover-light, var(--color-purple-dark));
   --global-hover-text-color: var(--color-white);
-  --global-theme-tint: color-mix(in srgb, var(--global-theme-color) 9%, transparent);
+  --global-theme-tint: color-mix(in srgb, var(--global-theme-color) 8%, transparent);
   --global-dropdown-hover-bg: var(--global-theme-tint);
   --global-dropdown-hover-text: var(--global-theme-color);
-  --global-footer-bg-color: var(--color-grey-dark);
-  --global-footer-text-color: var(--color-grey-light);
-  --global-footer-link-color: var(--color-white);
+  --global-footer-bg-color: transparent;
+  --global-footer-text-color: var(--global-text-color-light);
+  --global-footer-link-color: var(--global-text-color);
   --global-distill-app-color: var(--color-grey);
-  --global-divider-color: rgba(15, 23, 42, 0.1);
-  --global-card-bg-color: #f7f8fa;
+  --global-divider-color: rgba(24, 24, 27, 0.11);
+  --global-card-bg-color: #ffffff;
   --global-highlight-color: var(--color-red-dark);
-  --global-back-to-top-bg-color: rgba(0, 0, 0, 0.4);
-  --global-back-to-top-text-color: var(--color-white);
+  --global-award-bg: #9a3412;
+  --global-award-text: #ffffff;
+  --global-back-to-top-bg-color: #ffffff;
+  --global-back-to-top-text-color: var(--global-text-color);
   --global-newsletter-bg-color: var(--color-white);
   --global-newsletter-text-color: var(--color-black);
 
@@ -84,25 +86,27 @@
 html[data-theme='dark'] {
   color-scheme: dark;
 
-  --global-bg-color: #121417;
-  --global-code-bg-color: #1e2227;
-  --global-text-color: #e6e8eb;
-  --global-text-color-light: #a3a9b1;
+  --global-bg-color: #111317;
+  --global-code-bg-color: #1e222a;
+  --global-text-color: #ebeae6;
+  --global-text-color-light: #9fa6b2;
   --global-theme-color: var(--user-accent-dark, var(--color-cyan));
   --global-hover-color: var(--user-hover-dark, var(--color-cyan));
   /* Dark accents are light, so text placed on them must be dark to stay legible. */
-  --global-hover-text-color: #0b1220;
+  --global-hover-text-color: #0d1320;
   --global-theme-tint: color-mix(in srgb, var(--global-theme-color) 14%, transparent);
   --global-dropdown-hover-bg: var(--global-theme-tint);
   --global-dropdown-hover-text: var(--global-text-color);
-  --global-footer-bg-color: var(--color-grey-light);
-  --global-footer-text-color: var(--color-grey-dark);
-  --global-footer-link-color: var(--color-black);
+  --global-footer-bg-color: transparent;
+  --global-footer-text-color: var(--global-text-color-light);
+  --global-footer-link-color: var(--global-text-color);
   --global-distill-app-color: var(--color-grey-light);
-  --global-divider-color: #2e333a;
-  --global-card-bg-color: #181b1f;
-  --global-back-to-top-bg-color: rgba(255, 255, 255, 0.5);
-  --global-back-to-top-text-color: var(--color-black);
+  --global-divider-color: rgba(235, 234, 230, 0.12);
+  --global-card-bg-color: #171a20;
+  --global-award-bg: #d97706;
+  --global-award-text: #111317;
+  --global-back-to-top-bg-color: #171a20;
+  --global-back-to-top-text-color: var(--global-text-color);
   --global-newsletter-bg-color: var(--color-grey-light);
   --global-newsletter-text-color: var(--color-grey-dark);
 
@@ -127,11 +131,14 @@ html[data-theme='dark'] {
   --navbar-height: 57px;
   --ui-radius-sm: 6px;
   --ui-radius: 10px;
-  --ui-shadow-hover: 0 6px 20px rgba(15, 23, 42, 0.1), 0 2px 6px rgba(15, 23, 42, 0.06);
+  --ui-shadow-sm: 0 1px 2px rgba(24, 24, 27, 0.05);
+  --ui-shadow-hover:
+    0 10px 26px -12px rgba(24, 24, 27, 0.14), 0 2px 6px rgba(24, 24, 27, 0.05);
 }
 
 html[data-theme='dark'] {
-  --ui-shadow-hover: 0 6px 20px rgba(0, 0, 0, 0.45), 0 2px 6px rgba(0, 0, 0, 0.3);
+  --ui-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.35);
+  --ui-shadow-hover: 0 12px 28px -12px rgba(0, 0, 0, 0.55), 0 2px 6px rgba(0, 0, 0, 0.35);
 }
 
 /* ─── Utility classes ────────────────────────────────────────────────────── */

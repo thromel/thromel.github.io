@@ -36,18 +36,6 @@ const resources = [
 </Page>
 
 <style>
-  .post-header {
-    margin-bottom: 1.5rem;
-  }
-
-  .post-title {
-    font-size: 2rem;
-    font-weight: 700;
-    color: var(--global-text-color);
-    font-family: var(--font-sans);
-    margin-bottom: 0;
-  }
-
   .resource-list {
     list-style: none;
     margin: 0;
@@ -55,18 +43,40 @@ const resources = [
   }
 
   .resource-list li {
-    padding: 0.75rem 0;
+    padding: 0.95rem 0;
     border-bottom: 1px solid var(--global-divider-color);
   }
 
+  .resource-list li:last-child {
+    border-bottom: 0;
+  }
+
   .resource-list a {
-    font-weight: 500;
+    color: var(--global-text-color);
+    font-family: var(--font-serif);
+    font-size: 1.12rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+
+  .resource-list a:hover {
+    color: var(--global-theme-color);
+  }
+
+  .resource-list a::after {
+    content: ' \2197';
+    font-family: var(--font-sans);
+    font-size: 0.78em;
+    opacity: 0.7;
   }
 
   .resource-meta {
     display: block;
-    margin-top: 0.15rem;
-    font-size: 0.85rem;
+    margin-top: 0.25rem;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
     color: var(--global-text-color-light);
   }
 </style>

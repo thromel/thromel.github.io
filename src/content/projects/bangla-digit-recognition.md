@@ -19,7 +19,7 @@ A custom convolutional neural network implementation from scratch using only Num
 - **Technologies:** Python, NumPy, Computer Vision, Neural Networks, Deep Learning
 - **Repository:** Public course repository
 
-[View on GitHub](https://github.com/thromel/CSE-472-Machine-Learning){:target="_blank" rel="noopener noreferrer"}
+[View on GitHub](https://github.com/thromel/CSE-472-Machine-Learning)
 
 ## 2nd Place Winner | 4-week Project | Image Recognition
 

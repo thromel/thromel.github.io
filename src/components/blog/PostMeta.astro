@@ -19,56 +19,103 @@ const formattedDate = d.toLocaleDateString('en-US', {
 const isoDate = d.toISOString();
 ---
 
-<div
-  class="post-meta mt-1 flex flex-wrap items-center gap-2 text-xs"
-  style="color: var(--global-text-color-light);"
->
-  <time datetime={isoDate}>{formattedDate}</time>
-
-  {
-    readingTime && (
-      <>
-        <span aria-hidden="true">·</span>
-        <span>{readingTime} min read</span>
-      </>
-    )
-  }
+<div class="post-meta">
+  <span class="post-meta-time">
+    <time datetime={isoDate}>{formattedDate}</time>
+    {
+      readingTime && (
+        <>
+          <span aria-hidden="true">&middot;</span>
+          <span>{readingTime} min read</span>
+        </>
+      )
+    }
+  </span>
 
   {
     categories.length > 0 && (
-      <>
-        <span aria-hidden="true">·</span>
-        <div class="flex flex-wrap gap-1">
-          {categories.map((cat) => (
-            <a
-              href={`${site.base}/blog/category/${cat}/`}
-              class="badge-abbr text-xs"
-              style="background-color: var(--global-text-color-light); color: var(--global-hover-text-color);"
-            >
-              {cat}
-            </a>
-          ))}
-        </div>
-      </>
+      <div class="post-meta-pills">
+        {categories.map((cat) => (
+          <a
+            href={`${site.base}/blog/category/${cat}/`}
+            class="post-meta-pill post-meta-pill--category"
+          >
+            {cat}
+          </a>
+        ))}
+      </div>
     )
   }
 
   {
     tags.length > 0 && (
-      <>
-        <span aria-hidden="true">·</span>
-        <div class="flex flex-wrap gap-1">
-          {tags.map((tag) => (
-            <a
-              href={`${site.base}/blog/tag/${tag}/`}
-              class="badge-abbr text-xs"
-              style="background-color: var(--global-theme-color); color: var(--global-hover-text-color);"
-            >
-              {tag}
-            </a>
-          ))}
-        </div>
-      </>
+      <div class="post-meta-pills">
+        {tags.map((tag) => (
+          <a href={`${site.base}/blog/tag/${tag}/`} class="post-meta-pill post-meta-pill--tag">
+            #{tag}
+          </a>
+        ))}
+      </div>
     )
   }
 </div>
+
+<style>
+  .post-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.45rem 0.65rem;
+    margin-top: 0.25rem;
+    color: var(--global-text-color-light);
+  }
+
+  .post-meta-time {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .post-meta-pills {
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.35rem;
+  }
+
+  .post-meta-pill {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.14rem 0.62rem;
+    border-radius: 999px;
+    font-size: 0.76rem;
+    font-weight: 500;
+    line-height: 1.35;
+    text-decoration: none;
+    transition:
+      color 0.15s ease,
+      border-color 0.15s ease,
+      background-color 0.15s ease;
+  }
+
+  .post-meta-pill--category {
+    background-color: var(--global-code-bg-color);
+    border: 1px solid var(--global-divider-color);
+    color: var(--global-text-color-light);
+  }
+
+  .post-meta-pill--tag {
+    background-color: var(--global-theme-tint);
+    border: 1px solid color-mix(in srgb, var(--global-theme-color) 28%, transparent);
+    color: var(--global-theme-color);
+  }
+
+  .post-meta-pill:hover {
+    border-color: var(--global-theme-color);
+    background-color: var(--global-theme-tint);
+    color: var(--global-theme-color);
+  }
+</style>

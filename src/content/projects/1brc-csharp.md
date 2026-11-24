@@ -21,7 +21,7 @@ A C#/.NET 10 systems-performance project for the One Billion Row Challenge. The 
 - **Technologies:** C#, .NET 10, NativeAOT, Apple Silicon, ARM64, macOS, mmap, pread, Unsafe Code, Benchmarking
 - **Repository:** Public source repository
 
-[View on GitHub](https://github.com/thromel/1brc-csharp){:target="_blank" rel="noopener noreferrer"}
+[View on GitHub](https://github.com/thromel/1brc-csharp)
 
 I built a standalone C# solver for the [One Billion Row Challenge](https://github.com/gunnarmorling/1brc), then treated every improvement as something that had to survive correctness checks and paired timings. The full 1B file changed the bottleneck.
 

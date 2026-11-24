@@ -29,6 +29,8 @@ const interests = (rc?.sections?.interests ?? []) as RenderCVEntry[];
 const jr = jsonResume ?? null;
 const jrLabel = jr?.basics?.label ?? '';
 
+const downloadLabel = site.cv.downloadLabel ?? 'Download PDF';
+
 // Build sidebar TOC items based on which sections have data
 type TocItem = { label: string; href: string };
 
@@ -56,21 +58,20 @@ if (format === 'rendercv' && rc) {
 
 <Page title="CV" description={`Curriculum vitae of ${site.author.name}`}>
   <div class="post">
-    <header class="post-header">
-      <h1 class="post-title">
-        CV
-        {site.cv.pdfPath && (
-          <a
-            href={withBase(site.cv.pdfPath)}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="float-right"
-            aria-label="Download CV PDF"
-          >
-            <IconFilePdf />
-          </a>
-        )}
-      </h1>
+    <header class="post-header cv-header">
+      <h1 class="post-title">CV</h1>
+      {site.cv.pdfPath && (
+        <a
+          href={withBase(site.cv.pdfPath)}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="cv-download-btn"
+          aria-label="Download CV PDF"
+        >
+          <IconFilePdf width={14} height={14} aria-hidden="true" />
+          <span>{downloadLabel}</span>
+        </a>
+      )}
     </header>
 
     <article>
@@ -81,7 +82,7 @@ if (format === 'rendercv' && rc) {
             <ul>
               {tocItems.map((item) => (
                 <li>
-                  <a href={item.href}>{item.label}</a>
+                  <a href={item.href} class="cv-toc-link">{item.label}</a>
                 </li>
               ))}
             </ul>
@@ -95,61 +96,53 @@ if (format === 'rendercv' && rc) {
           {format === 'rendercv' && renderCV && (
             <>
               {rc && (rc.name || rc.email || rc.phone || rc.website || rc.location) && (
-                <>
-                  <a class="anchor" id="contact"></a>
-                  <div class="card mt-3 p-3">
-                    <h3 class="card-title font-weight-medium">Contact Information</h3>
-                    <table class="table table-cv table-sm table-borderless">
-                      {rc.name && (
-                        <tr>
-                          <td class="p-1 pr-2 font-weight-bold"><b>Name</b></td>
-                          <td class="p-1 pl-2 font-weight-light">{rc.name}</td>
-                        </tr>
-                      )}
-                      {rc.email && (
-                        <tr>
-                          <td class="p-1 pr-2 font-weight-bold"><b>Email</b></td>
-                          <td class="p-1 pl-2 font-weight-light">{rc.email}</td>
-                        </tr>
-                      )}
-                      {rc.phone && (
-                        <tr>
-                          <td class="p-1 pr-2 font-weight-bold"><b>Phone</b></td>
-                          <td class="p-1 pl-2 font-weight-light">{rc.phone}</td>
-                        </tr>
-                      )}
-                      {rc.location && (
-                        <tr>
-                          <td class="p-1 pr-2 font-weight-bold"><b>Location</b></td>
-                          <td class="p-1 pl-2 font-weight-light">{rc.location}</td>
-                        </tr>
-                      )}
-                      {rc.website && (
-                        <tr>
-                          <td class="p-1 pr-2 font-weight-bold"><b>Website</b></td>
-                          <td class="p-1 pl-2 font-weight-light">
-                            <a href={rc.website} target="_blank" rel="noopener noreferrer">{rc.website}</a>
-                          </td>
-                        </tr>
-                      )}
-                    </table>
-                  </div>
-                </>
+                <CVSection title="Contact Information" id="contact">
+                  <dl class="cv-contact-grid">
+                    {rc.name && (
+                      <>
+                        <dt>Name</dt>
+                        <dd>{rc.name}</dd>
+                      </>
+                    )}
+                    {rc.email && (
+                      <>
+                        <dt>Email</dt>
+                        <dd><a href={`mailto:${rc.email}`}>{rc.email}</a></dd>
+                      </>
+                    )}
+                    {rc.phone && (
+                      <>
+                        <dt>Phone</dt>
+                        <dd>{rc.phone}</dd>
+                      </>
+                    )}
+                    {rc.location && (
+                      <>
+                        <dt>Location</dt>
+                        <dd>{rc.location}</dd>
+                      </>
+                    )}
+                    {rc.website && (
+                      <>
+                        <dt>Website</dt>
+                        <dd>
+                          <a href={rc.website} target="_blank" rel="noopener noreferrer">{rc.website}</a>
+                        </dd>
+                      </>
+                    )}
+                  </dl>
+                </CVSection>
               )}
 
-                {rc?.summary && (
-                <>
-                  <a class="anchor" id="summary"></a>
-                  <div class="card mt-3 p-3">
-                    <h3 class="card-title font-weight-medium">Professional Summary</h3>
-                    <p class="card-text font-weight-light">{rc.summary}</p>
-                  </div>
-                </>
+              {rc?.summary && (
+                <CVSection title="Professional Summary" id="summary">
+                  <p class="cv-summary-text">{rc.summary}</p>
+                </CVSection>
               )}
 
-            {education.length > 0 && (
+              {education.length > 0 && (
                 <CVSection title="Education" id="education">
-                  <ul class="card-text font-weight-light list-group list-group-flush">
+                  <ul class="cv-entry-list">
                     {education.map((e) => (
                       <CVEntry
                         title={[e.degree, e.area].filter(Boolean).join(' in ')}
@@ -165,7 +158,7 @@ if (format === 'rendercv' && rc) {
 
               {experience.length > 0 && (
                 <CVSection title="Experience" id="experience">
-                  <ul class="card-text font-weight-light list-group list-group-flush">
+                  <ul class="cv-entry-list">
                     {experience.map((e) => (
                       <CVEntry
                         title={e.position ?? ''}
@@ -181,7 +174,7 @@ if (format === 'rendercv' && rc) {
 
               {rcPublications.length > 0 && (
                 <CVSection title="Selected Publications" id="publications">
-                  <ul class="card-text font-weight-light list-group list-group-flush">
+                  <ul class="cv-entry-list">
                     {rcPublications.map((e) => (
                       <CVEntry
                         title={e.title ?? ''}
@@ -196,7 +189,7 @@ if (format === 'rendercv' && rc) {
 
               {awards.length > 0 && (
                 <CVSection title="Honors &amp; Awards" id="awards">
-                  <ul class="card-text font-weight-light list-group list-group-flush">
+                  <ul class="cv-entry-list">
                     {awards.map((e) => (
                       <CVEntry
                         title={e.name ?? ''}
@@ -211,25 +204,27 @@ if (format === 'rendercv' && rc) {
 
               {skills.length > 0 && (
                 <CVSection title="Skills" id="skills">
-                  <div class="card-text font-weight-light">
+                  <dl class="cv-skill-grid">
                     {skills.map((e) => (
-                      <div class="skill-item">
-                        <strong>{e.label}:</strong>{' '}{e.details}
-                      </div>
+                      <>
+                        <dt>{e.label}</dt>
+                        <dd>{e.details}</dd>
+                      </>
                     ))}
-                  </div>
+                  </dl>
                 </CVSection>
               )}
 
               {interests.length > 0 && (
                 <CVSection title="Interests" id="interests">
-                  <div class="card-text font-weight-light">
+                  <dl class="cv-skill-grid">
                     {interests.map((e) => (
-                      <div class="skill-item">
-                        <strong>{e.label}:</strong>{' '}{e.details}
-                      </div>
+                      <>
+                        <dt>{e.label}</dt>
+                        <dd>{e.details}</dd>
+                      </>
                     ))}
-                  </div>
+                  </dl>
                 </CVSection>
               )}
             </>
@@ -239,51 +234,47 @@ if (format === 'rendercv' && rc) {
           {format === 'jsonresume' && jsonResume && (
             <>
               {jr?.basics && (
-                <>
-                  <a class="anchor" id="contact"></a>
-                  <div class="card mt-3 p-3">
-                    <h3 class="card-title font-weight-medium">Contact Information</h3>
-                    <table class="table table-cv table-sm table-borderless">
-                      {jr.basics.name && (
-                        <tr>
-                          <td class="p-1 pr-2 font-weight-bold"><b>Name</b></td>
-                          <td class="p-1 pl-2 font-weight-light">{jr.basics.name}</td>
-                        </tr>
-                      )}
-                      {jrLabel && (
-                        <tr>
-                          <td class="p-1 pr-2 font-weight-bold"><b>Professional Title</b></td>
-                          <td class="p-1 pl-2 font-weight-light">{jrLabel}</td>
-                        </tr>
-                      )}
-                      {jr.basics.email && (
-                        <tr>
-                          <td class="p-1 pr-2 font-weight-bold"><b>Email</b></td>
-                          <td class="p-1 pl-2 font-weight-light">{jr.basics.email}</td>
-                        </tr>
-                      )}
-                      {jr.basics.phone && (
-                        <tr>
-                          <td class="p-1 pr-2 font-weight-bold"><b>Phone</b></td>
-                          <td class="p-1 pl-2 font-weight-light">{jr.basics.phone}</td>
-                        </tr>
-                      )}
-                      {jr.basics.url && (
-                        <tr>
-                          <td class="p-1 pr-2 font-weight-bold"><b>Website</b></td>
-                          <td class="p-1 pl-2 font-weight-light">
-                            <a href={jr.basics.url} target="_blank" rel="noopener noreferrer">{jr.basics.url}</a>
-                          </td>
-                        </tr>
-                      )}
-                    </table>
-                  </div>
-                </>
+                <CVSection title="Contact Information" id="contact">
+                  <dl class="cv-contact-grid">
+                    {jr.basics.name && (
+                      <>
+                        <dt>Name</dt>
+                        <dd>{jr.basics.name}</dd>
+                      </>
+                    )}
+                    {jrLabel && (
+                      <>
+                        <dt>Title</dt>
+                        <dd>{jrLabel}</dd>
+                      </>
+                    )}
+                    {jr.basics.email && (
+                      <>
+                        <dt>Email</dt>
+                        <dd><a href={`mailto:${jr.basics.email}`}>{jr.basics.email}</a></dd>
+                      </>
+                    )}
+                    {jr.basics.phone && (
+                      <>
+                        <dt>Phone</dt>
+                        <dd>{jr.basics.phone}</dd>
+                      </>
+                    )}
+                    {jr.basics.url && (
+                      <>
+                        <dt>Website</dt>
+                        <dd>
+                          <a href={jr.basics.url} target="_blank" rel="noopener noreferrer">{jr.basics.url}</a>
+                        </dd>
+                      </>
+                    )}
+                  </dl>
+                </CVSection>
               )}
 
               {jr?.work && jr.work.length > 0 && (
                 <CVSection title="Experience" id="experience">
-                  <ul class="card-text font-weight-light list-group list-group-flush">
+                  <ul class="cv-entry-list">
                     {jr.work.map((e) => (
                       <CVEntry
                         title={e.position ?? ''}
@@ -299,7 +290,7 @@ if (format === 'rendercv' && rc) {
 
               {jr?.education && jr.education.length > 0 && (
                 <CVSection title="Education" id="education">
-                  <ul class="card-text font-weight-light list-group list-group-flush">
+                  <ul class="cv-entry-list">
                     {jr.education.map((e) => (
                       <CVEntry
                         title={[e.studyType, e.area].filter(Boolean).join(' in ')}
@@ -315,7 +306,7 @@ if (format === 'rendercv' && rc) {
 
               {jr?.publications && jr.publications.length > 0 && (
                 <CVSection title="Selected Publications" id="publications">
-                  <ul class="card-text font-weight-light list-group list-group-flush">
+                  <ul class="cv-entry-list">
                     {jr.publications.map((e) => (
                       <CVEntry
                         title={e.name ?? ''}
@@ -331,7 +322,7 @@ if (format === 'rendercv' && rc) {
 
               {jr?.awards && jr.awards.length > 0 && (
                 <CVSection title="Honors &amp; Awards" id="awards">
-                  <ul class="card-text font-weight-light list-group list-group-flush">
+                  <ul class="cv-entry-list">
                     {jr.awards.map((e) => (
                       <CVEntry
                         title={e.title ?? ''}
@@ -346,37 +337,40 @@ if (format === 'rendercv' && rc) {
 
               {jr?.skills && jr.skills.length > 0 && (
                 <CVSection title="Skills" id="skills">
-                  <div class="card-text font-weight-light">
+                  <dl class="cv-skill-grid">
                     {jr.skills.map((e) => (
-                      <div class="skill-item">
-                        <strong>{e.name}:</strong>{' '}{e.keywords?.join(', ')}
-                      </div>
+                      <>
+                        <dt>{e.name}</dt>
+                        <dd>{e.keywords?.join(', ')}</dd>
+                      </>
                     ))}
-                  </div>
+                  </dl>
                 </CVSection>
               )}
 
               {jr?.languages && jr.languages.length > 0 && (
                 <CVSection title="Languages" id="languages">
-                  <div class="card-text font-weight-light">
+                  <dl class="cv-skill-grid">
                     {jr.languages.map((e) => (
-                      <div class="skill-item">
-                        <strong>{e.language}:</strong>{' '}{e.fluency}
-                      </div>
+                      <>
+                        <dt>{e.language}</dt>
+                        <dd>{e.fluency}</dd>
+                      </>
                     ))}
-                  </div>
+                  </dl>
                 </CVSection>
               )}
 
               {jr?.interests && jr.interests.length > 0 && (
                 <CVSection title="Interests" id="interests">
-                  <div class="card-text font-weight-light">
+                  <dl class="cv-skill-grid">
                     {jr.interests.map((e) => (
-                      <div class="skill-item">
-                        <strong>{e.name}:</strong>{' '}{e.keywords?.join(', ')}
-                      </div>
+                      <>
+                        <dt>{e.name}</dt>
+                        <dd>{e.keywords?.join(', ')}</dd>
+                      </>
                     ))}
-                  </div>
+                  </dl>
                 </CVSection>
               )}
             </>
@@ -388,7 +382,85 @@ if (format === 'rendercv' && rc) {
   </div>
 </Page>
 
+<script>
+  let cvTocObserver: IntersectionObserver | null = null;
+
+  function initCvToc() {
+    cvTocObserver?.disconnect();
+    cvTocObserver = null;
+
+    const links = Array.from(document.querySelectorAll<HTMLAnchorElement>('.cv-toc-link'));
+    if (links.length === 0) return;
+
+    const setActive = (id: string) => {
+      links.forEach((link) => {
+        const active = link.getAttribute('href') === `#${id}`;
+        link.classList.toggle('is-active', active);
+      });
+    };
+
+    const navbarHeight =
+      parseInt(getComputedStyle(document.documentElement).getPropertyValue('--navbar-height'), 10) ||
+      57;
+
+    cvTocObserver = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            const sectionAnchor = entry.target.querySelector<HTMLElement>('a.anchor[id]');
+            if (sectionAnchor?.id) {
+              setActive(sectionAnchor.id);
+              break;
+            }
+          }
+        }
+      },
+      { rootMargin: `-${navbarHeight + 16}px 0px -70% 0px`, threshold: 0 },
+    );
+
+    document.querySelectorAll('.cv-section').forEach((section) => {
+      cvTocObserver?.observe(section);
+    });
+  }
+
+  document.addEventListener('astro:page-load', initCvToc);
+</script>
+
 <style>
+  /* Header with PDF action pill */
+  .cv-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .cv-download-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    min-height: 2.4rem;
+    padding: 0.42rem 0.95rem;
+    border: 1px solid var(--global-theme-color);
+    border-radius: 999px;
+    background-color: var(--global-theme-color);
+    color: var(--global-hover-text-color);
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-decoration: none;
+    box-shadow: var(--ui-shadow-sm);
+    transition:
+      background-color 0.15s ease,
+      border-color 0.15s ease;
+  }
+
+  .cv-download-btn:hover {
+    background-color: var(--global-hover-color);
+    border-color: var(--global-hover-color);
+    color: var(--global-hover-text-color);
+  }
+
   /* Two-column layout: sidebar + content */
   .cv-page-wrapper {
     display: flex;
@@ -399,10 +471,10 @@ if (format === 'rendercv' && rc) {
   /* Sticky left sidebar TOC */
   .cv-sidebar-toc {
     flex-shrink: 0;
-    width: 180px;
+    width: 184px;
     position: sticky;
-    top: 80px;
-    max-height: calc(100vh - 100px);
+    top: calc(var(--navbar-height) + 1.5rem);
+    max-height: calc(100vh - 6rem);
     overflow-y: auto;
   }
 
@@ -415,22 +487,81 @@ if (format === 'rendercv' && rc) {
 
   .cv-sidebar-toc li a {
     display: block;
-    padding: 0.3rem 0 0.3rem 0.75rem;
-    font-size: 0.8rem;
+    padding: 0.35rem 0 0.35rem 0.85rem;
+    margin-left: -2px;
+    border-left: 2px solid transparent;
+    font-size: 0.82rem;
     color: var(--global-text-color-light);
     text-decoration: none;
-    transition: color 0.15s ease;
-    line-height: 1.3;
+    transition:
+      color 0.15s ease,
+      border-color 0.15s ease;
+    line-height: 1.35;
   }
 
-  .cv-sidebar-toc li a:hover {
+  .cv-sidebar-toc li a:hover,
+  .cv-sidebar-toc li a.is-active {
     color: var(--global-theme-color);
+    border-left-color: var(--global-theme-color);
+  }
+
+  .cv-sidebar-toc li a.is-active {
+    font-weight: 600;
   }
 
   /* Main CV content fills remaining space */
   .cv {
     flex: 1;
     min-width: 0;
+  }
+
+  .cv-entry-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .cv-summary-text {
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 1.65;
+    color: var(--global-text-color);
+  }
+
+  /* Contact & Skills definition grids */
+  .cv-contact-grid,
+  .cv-skill-grid {
+    display: grid;
+    grid-template-columns: 9.5rem minmax(0, 1fr);
+    gap: 0.5rem 1.35rem;
+    margin: 0;
+    font-size: 0.91rem;
+    line-height: 1.55;
+  }
+
+  .cv-contact-grid dt,
+  .cv-skill-grid dt {
+    font-weight: 600;
+    color: var(--global-text-color-light);
+  }
+
+  .cv-contact-grid dd,
+  .cv-skill-grid dd {
+    margin: 0;
+    color: var(--global-text-color);
+    min-width: 0;
+  }
+
+  .cv-skill-grid dt,
+  .cv-skill-grid dd {
+    padding-block: 0.35rem;
+    border-bottom: 1px solid var(--global-divider-color);
+  }
+
+  .cv-skill-grid dt:last-of-type,
+  .cv-skill-grid dd:last-of-type {
+    border-bottom: 0;
+    padding-bottom: 0;
   }
 
   /* Hide sidebar on small screens */
@@ -440,6 +571,25 @@ if (format === 'rendercv' && rc) {
     }
     .cv-sidebar-toc {
       display: none;
+    }
+  }
+
+  @media (max-width: 540px) {
+    .cv-contact-grid,
+    .cv-skill-grid {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 0.15rem;
+    }
+
+    .cv-skill-grid dt {
+      border-bottom: 0;
+      padding-bottom: 0;
+      padding-top: 0.65rem;
+    }
+
+    .cv-skill-grid dd {
+      padding-top: 0;
+      padding-bottom: 0.65rem;
     }
   }
 </style>

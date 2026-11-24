@@ -18,7 +18,7 @@ Modified TCP Vegas implementation with dynamic aggressiveness to address fairnes
 - **Technologies:** C++, NS3, Networking, TCP/IP, Protocol Design
 - **Repository:** Public course repository
 
-[View on GitHub](https://github.com/thromel/CSE-322-Computer-Networks-Sessional){:target="_blank" rel="noopener noreferrer"}
+[View on GitHub](https://github.com/thromel/CSE-322-Computer-Networks-Sessional)
 
 ## Introduction
 

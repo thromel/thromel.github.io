@@ -5,12 +5,49 @@ interface Props {
 }
 
 const { title, id } = Astro.props;
+const headingId = id ? `${id}-heading` : undefined;
 ---
 
-<a class="anchor" id={id}></a>
-<div class="card mt-3 p-3">
-  <h3 class="card-title font-weight-medium">{title}</h3>
-  <div>
+<section class="cv-section" aria-labelledby={headingId}>
+  {id && <a class="anchor" id={id} aria-hidden="true" tabindex="-1" />}
+  <h2 id={headingId} class="cv-section-title">{title}</h2>
+  <div class="cv-section-body">
     <slot />
   </div>
-</div>
+</section>
+
+<style>
+  .cv-section {
+    border: 1px solid var(--global-divider-color);
+    border-radius: var(--ui-radius);
+    background-color: var(--global-card-bg-color);
+    box-shadow: var(--ui-shadow-sm);
+    padding: 1.5rem;
+    margin-top: 1.25rem;
+  }
+
+  .cv-section:first-child {
+    margin-top: 0;
+  }
+
+  .cv-section-title {
+    font-family: var(--font-serif);
+    font-size: 1.25rem;
+    font-weight: 700;
+    letter-spacing: -0.015em;
+    color: var(--global-text-color);
+    margin: 0 0 0.9rem;
+    padding-bottom: 0.6rem;
+    border-bottom: 1px solid var(--global-divider-color);
+  }
+
+  .cv-section-body {
+    min-width: 0;
+  }
+
+  @media (max-width: 640px) {
+    .cv-section {
+      padding: 1.15rem;
+    }
+  }
+</style>

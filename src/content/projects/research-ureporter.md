@@ -14,4 +14,4 @@ category: research
 
 The work uses a multilingual pipeline for Bengali and Romanized Bengali to study sentiment in anonymous crisis reporting.
 
-[Read the manuscript PDF](/assets/pdf/Ureporter.pdf){:target="_blank" rel="noopener noreferrer"} · [uReporter project](https://ureporter.cse.buet.ac.bd/about_us){:target="_blank" rel="noopener noreferrer"} · [Publication record](/publications/)
+[Read the manuscript PDF](/assets/pdf/Ureporter.pdf) · [uReporter project](https://ureporter.cse.buet.ac.bd/about_us) · [Publication record](/publications/)

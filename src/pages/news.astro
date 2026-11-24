@@ -16,6 +16,7 @@ const rendered = await Promise.all(
 
 const formatDate = (d: Date) =>
   d.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+const isoDate = (d: Date) => d.toISOString().slice(0, 10);
 ---
 
 <Page title="News" description={`News and announcements from ${site.author.name}`}>
@@ -26,23 +27,19 @@ const formatDate = (d: Date) =>
     <article>
       {
         rendered.length === 0 ? (
-          <p style="color: var(--global-text-color-light);">No announcements yet.</p>
+          <p class="news-empty">No announcements yet.</p>
         ) : (
-          <table style="width: 100%; border-collapse: collapse;">
-            <tbody>
-              {rendered.map(({ item, rendered: { Content } }) => (
-                <tr style="border-bottom: 1px solid var(--global-divider-color);">
-                  <td style="padding: 0.5rem 1rem 0.5rem 0; white-space: nowrap; vertical-align: top; color: var(--global-text-color-light); font-size: 0.8rem;">
-                    {formatDate(item.data.date)}
-                  </td>
-                  <td style="padding: 0.5rem 0; font-size: 0.9rem; color: var(--global-text-color);">
-                    {item.data.type && <span class="news-tag">{item.data.type}</span>}
-                    <Content />
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          <ul class="dated-list">
+            {rendered.map(({ item, rendered: { Content } }) => (
+              <li>
+                <time datetime={isoDate(item.data.date)}>{formatDate(item.data.date)}</time>
+                <div class="dated-body news-body">
+                  {item.data.type && <span class="news-tag">{item.data.type}</span>}
+                  <Content />
+                </div>
+              </li>
+            ))}
+          </ul>
         )
       }
     </article>
@@ -50,15 +47,65 @@ const formatDate = (d: Date) =>
 </Page>
 
 <style>
-  .post-header {
-    margin-bottom: 1.5rem;
+  .news-empty {
+    color: var(--global-text-color-light);
   }
 
-  .post-title {
-    font-size: 2rem;
-    font-weight: 700;
+  .dated-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .dated-list li {
+    display: grid;
+    grid-template-columns: 7.5rem minmax(0, 1fr);
+    gap: 1rem;
+    padding: 0.9rem 0;
+    border-bottom: 1px solid var(--global-divider-color);
+  }
+
+  .dated-list li:last-child {
+    border-bottom: 0;
+  }
+
+  .dated-list time {
+    font-family: var(--font-mono);
+    color: var(--global-text-color-light);
+    font-size: 0.78rem;
+    font-variant-numeric: tabular-nums;
+    padding-top: 0.22rem;
+    white-space: nowrap;
+  }
+
+  .dated-body {
+    font-size: 0.95rem;
+    line-height: 1.6;
     color: var(--global-text-color);
-    font-family: var(--font-sans);
-    margin-bottom: 0;
+  }
+
+  .news-body :global(p) {
+    display: inline;
+    margin: 0;
+  }
+
+  .news-body :global(p + p) {
+    margin-left: 0.35rem;
+  }
+
+  .news-body :global(p + p a)::after {
+    content: ' \2197';
+    font-size: 0.8em;
+  }
+
+  @media (max-width: 540px) {
+    .dated-list li {
+      grid-template-columns: 1fr;
+      gap: 0.3rem;
+    }
+
+    .dated-list time {
+      padding-top: 0;
+    }
   }
 </style>

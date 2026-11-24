@@ -210,11 +210,14 @@ const isButtons = variant === 'buttons';
 
   .social-links--buttons .social-link {
     gap: 0.45rem;
-    padding: 0.4rem 0.85rem;
-    font-size: 0.875rem;
+    min-height: 2.35rem;
+    padding: 0.4rem 0.9rem;
+    font-size: 0.85rem;
     font-weight: 500;
+    border-radius: 999px;
     border: 1px solid var(--global-divider-color);
     background-color: var(--global-card-bg-color);
+    box-shadow: var(--ui-shadow-sm);
   }
 
   .social-links--buttons .social-link:first-child {
@@ -224,6 +227,7 @@ const isButtons = variant === 'buttons';
   }
 
   .social-links--buttons .social-link:hover {
+    color: var(--global-theme-color);
     border-color: var(--global-theme-color);
     background-color: var(--global-theme-tint);
   }

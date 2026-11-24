@@ -60,106 +60,194 @@ const formattedDate = d.toLocaleDateString('en-US', {
 const year = d.getFullYear();
 ---
 
-{
-  thumbnail ? (
-    <div class="row">
-      <div class="col-sm-9">
-        <h3>
-          <a
-            class="post-title"
-            href={href}
-            {...(isExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-          >
-            {title}
-            {isExternal && (
-              <span style="font-size: 0.7em; opacity: 0.6; margin-left: 0.25em;">&#x2197;</span>
-            )}
+<article class:list={['post-card', { 'post-card--with-thumb': Boolean(thumbnailSrc) }]}>
+  <div class="post-card-main">
+    <h3 class="post-card-title">
+      <a
+        class="post-title"
+        href={href}
+        {...isExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {}}
+      >
+        {title}
+        {
+          isExternal && (
+            <span class="post-card-external" aria-hidden="true">
+              &#x2197;
+            </span>
+          )
+        }
+      </a>
+    </h3>
+    {description && <p class="post-card-desc">{description}</p>}
+    <p class="post-meta post-card-meta">
+      {
+        minutes && (
+          <>
+            <span>{minutes} min read</span>
+            <span aria-hidden="true">&middot;</span>
+          </>
+        )
+      }
+      <time datetime={d.toISOString()}>{formattedDate}</time>
+    </p>
+    <div class="post-tags post-card-pills">
+      <a class="post-pill" href={`${site.base}/blog/year/${year}/`}>
+        <IconCalendar />
+        <span>{year}</span>
+      </a>
+      {
+        tags.map((tag) => (
+          <a class="post-pill post-pill--tag" href={`${site.base}/blog/tag/${tag}/`}>
+            <IconHashtag />
+            <span>{tag}</span>
           </a>
-        </h3>
-        {description && <p>{description}</p>}
-        <p class="post-meta">
-          {minutes && <>{minutes} min read &nbsp;&middot;&nbsp; </>}
-          <time datetime={d.toISOString()}>{formattedDate}</time>
-        </p>
-        <p class="post-tags">
-          <a href={`${site.base}/blog/`}>
-            <IconCalendar />
-            &nbsp;{year}
+        ))
+      }
+      {
+        categories.map((cat) => (
+          <a class="post-pill post-pill--category" href={`${site.base}/blog/category/${cat}/`}>
+            <IconTag />
+            <span>{cat}</span>
           </a>
-          {tags.map((tag) => (
-            <>
-              &nbsp;&middot;&nbsp;
-              <a href={`${site.base}/blog/tag/${tag}/`}>
-                <IconHashtag />
-                &nbsp;{tag}
-              </a>
-            </>
-          ))}
-          {categories.map((cat) => (
-            <>
-              &nbsp;&middot;&nbsp;
-              <a href={`${site.base}/blog/category/${cat}/`}>
-                <IconTag />
-                &nbsp;{cat}
-              </a>
-            </>
-          ))}
-        </p>
-      </div>
-      <div class="col-sm-3">
-        <img
-          class="img-fluid z-depth-1 rounded"
-          src={thumbnailSrc}
-          alt=""
-          loading="lazy"
-          width="150"
-          height="120"
-        />
-      </div>
+        ))
+      }
     </div>
-  ) : (
-    <>
-      <h3>
-        <a
-          class="post-title"
-          href={href}
-          {...(isExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-        >
-          {title}
-          {isExternal && (
-            <span style="font-size: 0.7em; opacity: 0.6; margin-left: 0.25em;">&#x2197;</span>
-          )}
-        </a>
-      </h3>
-      {description && <p>{description}</p>}
-      <p class="post-meta">
-        {minutes && <>{minutes} min read &nbsp;&middot;&nbsp; </>}
-        <time datetime={d.toISOString()}>{formattedDate}</time>
-      </p>
-      <p class="post-tags">
-        <a href={`${site.base}/blog/`}>
-          <IconCalendar />
-          &nbsp;{year}
-        </a>
-        {tags.map((tag) => (
-          <>
-            &nbsp;&middot;&nbsp;
-            <a href={`${site.base}/blog/tag/${tag}/`}>
-              <IconHashtag />
-              &nbsp;{tag}
-            </a>
-          </>
-        ))}
-        {categories.map((cat) => (
-          <>
-            &nbsp;&middot;&nbsp;
-            <a href={`${site.base}/blog/category/${cat}/`}>
-              <IconTag />
-              &nbsp;{cat}
-            </a>
-          </>
-        ))}
-      </p>
-    </>
-  )
-}
+  </div>
+  {
+    thumbnailSrc && (
+      <div class="post-card-thumb">
+        <img src={thumbnailSrc} alt="" loading="lazy" width="160" height="120" />
+      </div>
+    )
+  }
+</article>
+
+<style>
+  .post-card {
+    display: block;
+  }
+
+  .post-card--with-thumb {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 9.5rem;
+    gap: 1.25rem;
+    align-items: start;
+  }
+
+  .post-card-main {
+    min-width: 0;
+  }
+
+  .post-card-title {
+    margin: 0 0 0.4rem;
+    font-size: 1.25rem;
+    line-height: 1.3;
+  }
+
+  .post-card-title .post-title {
+    color: var(--global-text-color);
+    font-family: var(--font-serif);
+    font-weight: 700;
+    letter-spacing: -0.015em;
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+
+  .post-card-title .post-title:hover {
+    color: var(--global-theme-color);
+  }
+
+  .post-card-external {
+    font-size: 0.72em;
+    opacity: 0.65;
+    margin-left: 0.25em;
+  }
+
+  .post-card-desc {
+    margin: 0 0 0.55rem;
+    color: var(--global-text-color-light);
+    font-size: 0.94rem;
+    line-height: 1.55;
+    max-width: 64ch;
+  }
+
+  .post-card-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.4rem;
+    margin: 0 0 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    font-variant-numeric: tabular-nums;
+    color: var(--global-text-color-light);
+  }
+
+  .post-card-pills {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.4rem;
+    padding-top: 0.15rem;
+  }
+
+  .post-card-pills .post-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0.16rem 0.6rem;
+    border-radius: 999px;
+    border: 1px solid var(--global-divider-color);
+    background-color: var(--global-card-bg-color);
+    color: var(--global-text-color-light);
+    font-size: 0.76rem;
+    font-weight: 500;
+    line-height: 1.35;
+    text-decoration: none;
+    transition:
+      color 0.15s ease,
+      border-color 0.15s ease,
+      background-color 0.15s ease;
+  }
+
+  .post-card-pills .post-pill--tag {
+    background-color: var(--global-theme-tint);
+    border-color: color-mix(in srgb, var(--global-theme-color) 24%, transparent);
+    color: var(--global-theme-color);
+  }
+
+  .post-card-pills .post-pill--category {
+    background-color: var(--global-code-bg-color);
+  }
+
+  .post-card-pills .post-pill:hover {
+    color: var(--global-theme-color);
+    border-color: var(--global-theme-color);
+    background-color: var(--global-theme-tint);
+  }
+
+  .post-card-thumb {
+    overflow: hidden;
+    border-radius: var(--ui-radius-sm);
+    border: 1px solid var(--global-divider-color);
+    background-color: var(--global-code-bg-color);
+  }
+
+  .post-card-thumb img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+  }
+
+  @media (max-width: 560px) {
+    .post-card--with-thumb {
+      grid-template-columns: 1fr;
+    }
+
+    .post-card-thumb {
+      max-width: 14rem;
+    }
+  }
+</style>
