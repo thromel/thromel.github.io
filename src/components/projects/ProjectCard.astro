@@ -8,7 +8,7 @@ interface Props {
 }
 
 const { project } = Astro.props;
-const href = project.data.redirect ?? project.data.url ?? `${site.base}/projects/${project.id}/`;
+const href = project.data.redirect ?? `${site.base}/projects/${project.id}/`;
 const isExternal = !!project.data.redirect;
 const detailsLabel = site.pages.projects.detailsLabel ?? 'Details';
 ---

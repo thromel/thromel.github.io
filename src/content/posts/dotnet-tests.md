@@ -22,22 +22,22 @@ tags:
 
 
 ## Table of Contents
-1. [Introduction: Why Testing Saves Your Project](#introduction)
-2. [Unit Testing with xUnit in .NET 9](#unit-testing-with-xunit)
-3. [Behavior-Driven Development with SpecFlow](#bdd-with-specflow)
-4. [Code Coverage: Measuring and Improving Test Quality](#code-coverage)
-5. [Surviving Critical Scenarios: Real-World Testing Patterns](#critical-scenarios)
-6. [Comprehensive Example: Building a Tested E-Commerce System](#comprehensive-example)
-7. [Best Practices and Advanced Patterns](#best-practices)
-8. [Conclusion and Next Steps](#conclusion)
+1. [Introduction: Why Testing Saves Your Project](#introduction-why-testing-saves-your-project)
+2. [Unit Testing with xUnit in .NET 9](#unit-testing-with-xunit-in-net-9)
+3. [Behavior-Driven Development with SpecFlow](#behavior-driven-development-with-specflow)
+4. [Code Coverage: Measuring and Improving Test Quality](#code-coverage-measuring-and-improving-test-quality)
+5. [Surviving Critical Scenarios: Real-World Testing Patterns](#surviving-critical-scenarios-real-world-testing-patterns)
+6. [Comprehensive Example: Building a Tested E-Commerce System](#comprehensive-example-building-a-tested-e-commerce-system)
+7. [Best Practices and Advanced Patterns](#best-practices-and-advanced-patterns)
+8. [Conclusion and Next Steps](#conclusion-and-next-steps)
 
-## Introduction: Why Testing Saves Your Project {#introduction}
+## Introduction: Why Testing Saves Your Project
 
 Imagine deploying a critical update to your e-commerce platform on Black Friday, only to discover that the payment processing module fails under load. Or consider a healthcare application where a simple calculation error could lead to incorrect medication dosages. These scenarios aren't just theoretical – they represent real-world disasters that proper testing could have prevented.
 
 Testing isn't just about finding bugs; it's about building confidence in your code, enabling fearless refactoring, and creating a safety net that catches problems before they reach production. In this comprehensive guide, we'll explore how to leverage .NET 9's powerful testing capabilities to build robust, reliable applications.
 
-## Unit Testing with xUnit in .NET 9 {#unit-testing-with-xunit}
+## Unit Testing with xUnit in .NET 9
 
 ### Why xUnit?
 
@@ -344,7 +344,7 @@ public class DatabaseIntegrationTests
 }
 ```
 
-## Behavior-Driven Development with SpecFlow {#bdd-with-specflow}
+## Behavior-Driven Development with SpecFlow
 
 ### Understanding BDD
 
@@ -606,7 +606,7 @@ public class ShoppingCartSteps
 }
 ```
 
-## Code Coverage: Measuring and Improving Test Quality {#code-coverage}
+## Code Coverage: Measuring and Improving Test Quality
 
 ### Understanding Code Coverage Metrics
 
@@ -766,7 +766,7 @@ public void ClearCart_RaisesOnCartClearedEvent()
 4. **Exclude Generated Code**: Don't waste time testing auto-generated code
 5. **Test Behavior, Not Implementation**: Focus on what the code does, not how it does it
 
-## Surviving Critical Scenarios: Real-World Testing Patterns {#critical-scenarios}
+## Surviving Critical Scenarios: Real-World Testing Patterns
 
 ### 1. Testing for Race Conditions
 
@@ -979,7 +979,7 @@ public async Task PlaceOrder_TransientFailures_RetriesAndSucceeds()
 }
 ```
 
-## Comprehensive Example: Building a Tested E-Commerce System {#comprehensive-example}
+## Comprehensive Example: Building a Tested E-Commerce System
 
 Let's bring everything together with a complete e-commerce order processing system that demonstrates unit testing, BDD, and real-world patterns.
 
@@ -1494,7 +1494,7 @@ Scenario: Order fails due to payment decline
     And the inventory reservation should be released
 ```
 
-## Best Practices and Advanced Patterns {#best-practices}
+## Best Practices and Advanced Patterns
 
 ### 1. Test Organization Patterns
 
@@ -1727,7 +1727,7 @@ public abstract class IntegrationTestBase : IAsyncLifetime
 }
 ```
 
-## Conclusion and Next Steps {#conclusion}
+## Conclusion and Next Steps
 
 We've covered a comprehensive approach to testing in .NET 9, from unit testing with xUnit to behavior-driven development with SpecFlow. The key takeaways are:
 

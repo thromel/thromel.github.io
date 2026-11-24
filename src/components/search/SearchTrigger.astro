@@ -142,6 +142,7 @@ const allItems: SearchItem[] = [...posts, ...projects, ...teaching];
 
     // Pagefind — lazy-loaded on first search query
     let pagefind: any = null;
+    let searchSeq = 0;
     async function loadPagefind() {
       if (pagefind) return pagefind;
       try {
@@ -156,6 +157,7 @@ const allItems: SearchItem[] = [...posts, ...projects, ...teaching];
     nk.addEventListener(
       'change',
       async (e: CustomEvent) => {
+        const seq = ++searchSeq;
         const query = (e.detail?.search ?? '').trim().toLowerCase();
 
         if (!query) {
@@ -165,11 +167,14 @@ const allItems: SearchItem[] = [...posts, ...projects, ...teaching];
 
         // Try Pagefind first (full-text, available after yarn build)
         const pf = await loadPagefind();
+        if (seq !== searchSeq) return;
         if (pf) {
           const response = await pf.search(query);
+          if (seq !== searchSeq) return;
           const results = await Promise.all(
             response.results.slice(0, 10).map((r: any) => r.data()),
           );
+          if (seq !== searchSeq) return;
           if (results.length > 0) {
             nk.data = results.map((item: any) => ({
               id: item.url,
@@ -191,6 +196,7 @@ const allItems: SearchItem[] = [...posts, ...projects, ...teaching];
           const haystack = `${item.title} ${raw?.keywords ?? ''}`.toLowerCase();
           return haystack.includes(query);
         });
+        if (seq !== searchSeq) return;
         nk.data = filtered.length > 0 ? filtered : navData;
       },
       { signal },

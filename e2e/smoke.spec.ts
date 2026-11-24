@@ -200,3 +200,136 @@ test('404 page returns not-found response', async ({ page }) => {
   const response = await page.goto('/this-page-does-not-exist/');
   expect(response?.status()).toBe(404);
 });
+
+// ── Route accessibility, View Transitions, search, and legacy redirects ───────
+
+test('all project cards link internally and ctxhelm opens case study', async ({ page }) => {
+  await page.goto('/projects/');
+  const hrefs = await page
+    .locator('.card[data-href]')
+    .evaluateAll((cards) => cards.map((c) => c.getAttribute('data-href') ?? ''));
+
+  expect(hrefs.length).toBeGreaterThan(0);
+  for (const href of hrefs) {
+    expect(href).toMatch(/^\/projects\/[^/]+\/$/);
+  }
+
+  await page.locator('.card[data-href="/projects/ctxhelm/"] .card-title-link').click();
+  await page.waitForURL(/\/projects\/ctxhelm\/$/);
+  await expect(page.locator('h1')).toContainText('ctxhelm');
+});
+
+test('sitemap URLs all resolve with HTTP 200 and exclude removed pages', async ({ page }) => {
+  const res = await page.request.get('/sitemap.xml');
+  expect(res.status()).toBe(200);
+  const xml = await res.text();
+
+  const locs = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
+  expect(locs.length).toBeGreaterThan(0);
+
+  for (const removed of ['/teaching/', '/people/', '/books/', '/repositories/']) {
+    expect(xml).not.toContain(removed);
+  }
+
+  for (const loc of locs) {
+    const pathname = new URL(loc).pathname;
+    const check = await page.request.get(pathname);
+    expect(check.status(), `Expected 200 for ${pathname}`).toBe(200);
+  }
+});
+
+test('view transitions navigation and interactive controls work without console or page errors', async ({
+  page,
+}) => {
+  const pageErrors: string[] = [];
+  const consoleErrors: string[] = [];
+  page.on('pageerror', (err) => pageErrors.push(err.message));
+  page.on('console', (msg) => {
+    if (msg.type() === 'error') consoleErrors.push(msg.text());
+  });
+
+  await page.setViewportSize({ width: 1280, height: 900 });
+  await page.goto('/');
+
+  await page.locator('#site-navbar a.nav-link[href="/publications/"]').click();
+  await page.waitForURL(/\/publications\/$/);
+  const pubSearch = page.getByRole('searchbox', { name: 'Search publications' });
+  await expect(pubSearch).toHaveAttribute('data-hydrated', 'true');
+  await pubSearch.fill('Backdoors');
+  await expect(page.locator('.pub-count')).toContainText('Showing 1 of');
+
+  await page.locator('#site-navbar a.nav-link[href="/projects/"]').click();
+  await page.waitForURL(/\/projects\/$/);
+  await page.locator('.card[data-href="/projects/ctxhelm/"] .card-title-link').click();
+  await page.waitForURL(/\/projects\/ctxhelm\/$/);
+
+  await page.locator('#site-navbar a.nav-link[href="/blog/"]').click();
+  await page.waitForURL(/\/blog\/$/);
+  await page.locator('a.post-title').first().click();
+  await page.waitForURL(/\/blog\/[^/]+\/$/);
+
+  for (const href of ['/cv/', '/news/', '/resources/']) {
+    await page.locator(`#site-navbar a.nav-link[href="${href}"]`).click();
+    await page.waitForURL(new RegExp(`${href.replace(/\//g, '\\/')}$`));
+  }
+
+  expect(pageErrors).toEqual([]);
+  expect(consoleErrors).toEqual([]);
+});
+
+test('search modal returns ctxhelm results cleanly under rapid typing', async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 900 });
+  await page.goto('/');
+
+  await page.locator('[data-search-toggle]:visible').first().click();
+  const modalInput = page.getByRole('textbox', { name: 'Search or jump to…' });
+  await expect(modalInput).toBeVisible();
+  await expect(modalInput).toBeFocused();
+  await modalInput.pressSequentially('ctxhelm', { delay: 15 });
+
+  await expect
+    .poll(
+      () =>
+        page.evaluate(() => {
+          const nk = document.querySelector('#ninja-search') as { data?: Array<{ id?: string }> };
+          return (nk?.data ?? []).some((item) => item.id === '/projects/ctxhelm/');
+        }),
+      { timeout: 5000 },
+    )
+    .toBe(true);
+});
+
+test('legacy Jekyll redirects and kill-switch service worker resolve cleanly', async ({ page }) => {
+  const sw = await page.request.get('/sw.js');
+  expect(sw.status()).toBe(200);
+
+  const legacyPairs: Array<[string, RegExp]> = [
+    ['/blog/2025/05/28/vibe-coding/', /\/blog\/vibe-coding\/$/],
+    ['/projects.html', /\/projects\/$/],
+    ['/research/reagent-plus-plus.html', /\/projects\/research-reagent-plus-plus\/$/],
+    ['/projects/bangla_digit_recognition/', /\/projects\/bangla-digit-recognition\/$/],
+  ];
+
+  for (const [from, toPattern] of legacyPairs) {
+    await page.goto(from);
+    await page.waitForURL(toPattern, { timeout: 5000 });
+  }
+});
+
+test('long blog posts have valid internal TOC anchor targets without raw kramdown syntax', async ({
+  page,
+}) => {
+  for (const slug of ['dotnet-tests', 'getting-started-with-kubernetes-microservices']) {
+    await page.goto(`/blog/${slug}/`);
+    const bodyText = await page.locator('#post-content').textContent();
+    expect(bodyText).not.toContain('{#');
+
+    const missingTargets = await page.evaluate(() => {
+      const links = [...document.querySelectorAll<HTMLAnchorElement>('#post-content a[href^="#"]')];
+      return links
+        .map((a) => a.getAttribute('href')?.slice(1) ?? '')
+        .filter((id) => id.length > 0 && !document.getElementById(id));
+    });
+    expect(missingTargets, `Broken anchors in ${slug}`).toEqual([]);
+  }
+});

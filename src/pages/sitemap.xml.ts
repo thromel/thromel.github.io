@@ -15,8 +15,11 @@
 import { spawnSync } from 'node:child_process';
 
 import { site } from '@config/site';
+import { parseBibtex } from '@utils/bibtex';
 import type { APIContext } from 'astro';
 import { getCollection } from 'astro:content';
+
+import bibRaw from '../data/papers.bib?raw';
 
 const siteUrl = site.url.replace(/\/$/, '');
 const base = (site.base ?? '').replace(/\/$/, '');
@@ -105,30 +108,26 @@ export async function GET(_ctx: APIContext): Promise<Response> {
       priority: 0.7,
     },
     {
-      url: loc('/teaching/'),
-      lastmod: gitLastmod('src/pages/teaching/index.astro'),
+      url: loc('/news/'),
+      lastmod: gitLastmod('src/pages/news.astro'),
       changefreq: 'monthly',
       priority: 0.6,
     },
     {
-      url: loc('/people/'),
-      lastmod: gitLastmod('src/pages/people/index.astro'),
+      url: loc('/resources/'),
+      lastmod: gitLastmod('src/pages/resources.astro'),
       changefreq: 'monthly',
       priority: 0.6,
-    },
-    {
-      url: loc('/books/'),
-      lastmod: gitLastmod('src/pages/books.astro'),
-      changefreq: 'monthly',
-      priority: 0.5,
-    },
-    {
-      url: loc('/repositories/'),
-      lastmod: gitLastmod('src/pages/repositories.astro'),
-      changefreq: 'monthly',
-      priority: 0.5,
     },
   ];
+
+  const publicationLastmod = gitLastmod('src/data/papers.bib');
+  const publicationUrls: UrlEntry[] = parseBibtex(bibRaw).map((entry) => ({
+    url: loc(`/publications/${entry.key}/`),
+    lastmod: publicationLastmod,
+    changefreq: 'monthly',
+    priority: 0.7,
+  }));
 
   const postUrls: UrlEntry[] = posts
     .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
@@ -151,7 +150,7 @@ export async function GET(_ctx: APIContext): Promise<Response> {
     priority: 0.7,
   }));
 
-  const allUrls = [...staticUrls, ...postUrls, ...projectUrls];
+  const allUrls = [...staticUrls, ...publicationUrls, ...postUrls, ...projectUrls];
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">

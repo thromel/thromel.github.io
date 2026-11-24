@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 import type { CoauthorMap } from '../../utils/authors';
 import { linkAuthors } from '../../utils/authors';
@@ -491,6 +491,10 @@ export function BibSearch({
   badges,
 }: Props) {
   const [query, setQuery] = useState('');
+  const [hydrated, setHydrated] = useState(false);
+  useEffect(() => {
+    setHydrated(true);
+  }, []);
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -544,6 +548,7 @@ export function BibSearch({
             placeholder={labels.searchPlaceholder ?? 'Search publications\u2026'}
             className="pub-search"
             aria-label="Search publications"
+            data-hydrated={hydrated ? 'true' : undefined}
           />
           {query && (
             <button

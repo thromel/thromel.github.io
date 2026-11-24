@@ -73,6 +73,41 @@ export default defineConfig({
   output: 'static',
   trailingSlash: 'always',
   compressHTML: true,
+  redirects: {
+    // Legacy Jekyll blog URLs (/blog/:year/:month/:day/:title/)
+    '/blog/2021/01/24/getting-started-with-ns3/': '/blog/getting-started-with-ns3/',
+    '/blog/2022/08/23/getting-started-with-kubernetes-microservices/':
+      '/blog/getting-started-with-kubernetes-microservices/',
+    '/blog/2024/04/21/intro-to-ci-cd/': '/blog/intro-to-ci-cd/',
+    '/blog/2024/11/05/dotnet-tests/': '/blog/dotnet-tests/',
+    '/blog/2024/11/29/zero-downtime/': '/blog/zero-downtime/',
+    '/blog/2024/12/27/advice-complexity-online-algorithms/':
+      '/blog/advice-complexity-online-algorithms/',
+    '/blog/2024/12/27/clique-partition-problem-graph-theory/':
+      '/blog/clique-partition-problem-graph-theory/',
+    '/blog/2024/12/27/design-patterns-professional-software-engineering/':
+      '/blog/design-patterns-professional-software-engineering/',
+    '/blog/2024/12/27/optimizing-dotnet-microservices-performance/':
+      '/blog/optimizing-dotnet-microservices-performance/',
+    '/blog/2024/12/27/understanding-xv6-operating-systems/':
+      '/blog/understanding-xv6-operating-systems/',
+    '/blog/2025/01/20/leveraging-ai-tools-software-engineering/':
+      '/blog/leveraging-ai-tools-software-engineering/',
+    '/blog/2025/03/20/opentelemetry/': '/blog/opentelemetry/',
+    '/blog/2025/04/05/intro-to-nar/': '/blog/intro-to-nar/',
+    '/blog/2025/05/20/intro-to-agentic-ai/': '/blog/intro-to-agentic-ai/',
+    '/blog/2025/05/23/how-to-handle-hallucinations/': '/blog/how-to-handle-hallucinations/',
+    '/blog/2025/05/28/vibe-coding/': '/blog/vibe-coding/',
+    '/blog/2025/06/05/memory-management-production-silent-killers/':
+      '/blog/memory-management-production-silent-killers/',
+    '/blog/2026/06/18/building-fast-1brc-csharp-apple-silicon/':
+      '/blog/building-fast-1brc-csharp-apple-silicon/',
+    // Legacy Jekyll pagination and project slug paths
+    '/blog/page2/': '/blog/page/2/',
+    '/blog/page3/': '/blog/page/3/',
+    '/blog/page4/': '/blog/page/4/',
+    '/projects/bangla_digit_recognition/': '/projects/bangla-digit-recognition/',
+  },
   prefetch: {
     prefetchAll: false,
     defaultStrategy: 'hover',

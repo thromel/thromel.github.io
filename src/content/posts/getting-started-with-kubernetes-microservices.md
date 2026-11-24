@@ -32,17 +32,17 @@ This guide moves from Kubernetes fundamentals to a deployment-oriented microserv
 
 1. [Why Microservices Need Orchestration](#why-microservices-need-orchestration)
 2. [Kubernetes Fundamentals](#kubernetes-fundamentals)
-3. [Setting Up Your Development Environment](#setting-up-development-environment)
-4. [Building a Sample Microservice Architecture](#building-sample-architecture)
-5. [Core Kubernetes Resources for Microservices](#core-kubernetes-resources)
-6. [Service Discovery and Communication](#service-discovery-communication)
-7. [Configuration Management and Secrets](#configuration-management)
-8. [Persistent Storage in Microservices](#persistent-storage)
-9. [Monitoring and Observability](#monitoring-observability)
-10. [Production Deployment Strategies](#production-deployment)
+3. [Setting Up Your Development Environment](#setting-up-your-development-environment)
+4. [Building a Sample Microservice Architecture](#building-a-sample-microservice-architecture)
+5. [Core Kubernetes Resources for Microservices](#core-kubernetes-resources-for-microservices)
+6. [Service Discovery and Communication](#service-discovery-and-communication)
+7. [Configuration Management and Secrets](#configuration-management-and-secrets)
+8. [Persistent Storage in Microservices](#persistent-storage-in-microservices)
+9. [Monitoring and Observability](#monitoring-and-observability)
+10. [Production Deployment Strategies](#production-deployment-strategies)
 11. [Security Best Practices](#security-best-practices)
-12. [Troubleshooting Common Issues](#troubleshooting)
-13. [Advanced Patterns and Next Steps](#advanced-patterns)
+12. [Troubleshooting Common Issues](#troubleshooting-common-issues)
+13. [Advanced Patterns and Next Steps](#advanced-patterns-and-next-steps)
 
 ## Why Microservices Need Orchestration
 
@@ -157,7 +157,7 @@ Understanding these fundamental concepts is crucial for effective Kubernetes usa
 
 > **Essential Reading**: The [Kubernetes Concepts documentation](https://kubernetes.io/docs/concepts/) provides authoritative explanations of these concepts. Brendan Burns' book ["Kubernetes: Up and Running"](https://www.oreilly.com/library/view/kubernetes-up-and/9781492046523/) also offers practical insights from one of Kubernetes' creators.
 
-## Setting Up Your Development Environment {#setting-up-development-environment}
+## Setting Up Your Development Environment
 
 Before jumping into production deployments, it's essential to have a local development environment where you can experiment safely. **Why start locally?** Local development provides fast feedback loops, no cloud costs, and the ability to break things without consequences.
 
@@ -316,7 +316,7 @@ kubectl delete service nginx
 
 > **Troubleshooting Resources**: If you encounter issues, the [Kubernetes Troubleshooting Guide](https://kubernetes.io/docs/tasks/debug-application-cluster/troubleshooting/) and [Minikube Troubleshooting](https://minikube.sigs.k8s.io/docs/handbook/troubleshooting/) documentation provide comprehensive solutions.
 
-## Building a Sample Microservice Architecture {#building-sample-architecture}
+## Building a Sample Microservice Architecture
 
 Now that we have our development environment ready, let's build a realistic microservice architecture. **Why start with a concrete example?** Learning Kubernetes concepts in isolation can be abstract and difficult to relate to real-world scenarios. By building an actual application, we can understand how the pieces fit together.
 
@@ -888,7 +888,7 @@ CMD ["node", "src/app.js"]
 
 > **Build Optimization**: For more advanced Docker optimization techniques, see the [Docker Build Best Practices Guide](https://docs.docker.com/build/building/best-practices/) and Google's [Container Image Building Best Practices](https://cloud.google.com/architecture/best-practices-for-building-containers).
 
-## Core Kubernetes Resources for Microservices {#core-kubernetes-resources}
+## Core Kubernetes Resources for Microservices
 
 Now let's deploy our microservices to Kubernetes using core resources. **Why start with core resources?** Understanding the fundamental building blocks helps you make informed decisions about when to use higher-level abstractions like Helm charts or operators.
 
@@ -1702,7 +1702,7 @@ kubectl run test-pod --image=busybox --rm -it --restart=Never -n microservices -
 
 This foundation provides a solid base for understanding how Kubernetes orchestrates microservices. In the following sections, we'll explore advanced topics like service discovery, configuration management, and production deployment strategies.
 
-## Service Discovery and Communication {#service-discovery-communication}
+## Service Discovery and Communication
 
 Kubernetes provides built-in service discovery through DNS and environment variables, but understanding the mechanisms and best practices is crucial for reliable microservice communication.
 
@@ -1913,7 +1913,7 @@ spec:
         subset: v1
 ```
 
-## Configuration Management and Secrets {#configuration-management}
+## Configuration Management and Secrets
 
 Proper configuration management is essential for microservice deployments across different environments.
 
@@ -2114,7 +2114,7 @@ kubectl apply -k k8s/base/
 kubectl apply -k k8s/overlays/production/
 ```
 
-## Persistent Storage in Microservices {#persistent-storage}
+## Persistent Storage in Microservices
 
 Stateful services require persistent storage that survives pod restarts and rescheduling.
 
@@ -2283,7 +2283,7 @@ spec:
           restartPolicy: OnFailure
 ```
 
-## Monitoring and Observability {#monitoring-observability}
+## Monitoring and Observability
 
 Comprehensive monitoring is crucial for maintaining microservice health and performance.
 
@@ -2675,7 +2675,7 @@ data:
         Time_Keep   On
 ```
 
-## Production Deployment Strategies {#production-deployment}
+## Production Deployment Strategies
 
 Moving from development to production requires careful consideration of deployment strategies, scaling, and reliability.
 
@@ -2949,7 +2949,7 @@ spec:
           value: "read-replica-west"
 ```
 
-## Security Best Practices {#security-best-practices}
+## Security Best Practices
 
 Security must be built into every layer of your Kubernetes microservice architecture.
 
@@ -3193,7 +3193,7 @@ jobs:
         sarif_file: 'trivy-results.sarif'
 ```
 
-## Troubleshooting Common Issues {#troubleshooting}
+## Troubleshooting Common Issues
 
 Understanding how to diagnose and resolve common Kubernetes issues is essential for maintaining microservice deployments.
 
@@ -3316,7 +3316,7 @@ kubectl port-forward service/user-service 8080:3001 -n microservices
 kubectl port-forward pod/<pod-name> 8080:3001 -n microservices
 ```
 
-## Advanced Patterns and Next Steps {#advanced-patterns}
+## Advanced Patterns and Next Steps
 
 As your Kubernetes microservice architecture matures, consider these advanced patterns and technologies.
 
