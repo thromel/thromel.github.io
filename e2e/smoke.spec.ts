@@ -196,6 +196,21 @@ test('SHIFT publication detail page shows ACL ARR Oct 2026 in-review metadata an
   expect(mainText).toContain('62.5–100%');
 });
 
+test('SHIFT preview thumbnail loads on desktop publications and projects pages', async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 1280, height: 800 });
+
+  for (const route of ['/publications/', '/projects/']) {
+    await page.goto(route);
+    const img = page.locator('img[src*="shift-audit.webp"]');
+    await expect(img).toBeVisible();
+    await img.scrollIntoViewIfNeeded();
+    const naturalWidth = await img.evaluate((el: HTMLImageElement) => el.naturalWidth);
+    expect(naturalWidth, `SHIFT thumbnail broken on ${route}`).toBeGreaterThan(0);
+  }
+});
+
 test('cv page renders clickable links without raw markdown syntax', async ({ page }) => {
   await page.goto('/cv/');
   const main = page.locator('main');

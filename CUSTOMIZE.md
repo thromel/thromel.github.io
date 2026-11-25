@@ -167,14 +167,17 @@ All three sections can be disabled in `site.ts`. Each has a `title` (the section
 and `site.viewAllLabel` sets the text of the link to the full list next to each heading.
 Set `scrollable: true` on `announcements` / `latestPosts` to cap the list in a scroll box.
 
-### Hero links
+### Hero card, lead, and links
 
-The hero under your name shows labelled buttons for the platforms listed in
-`site.hero.primaryLinks`, in that order. Keys are `socials` field names; unset platforms are
-skipped. The first button is styled as the primary action.
+The homepage hero card displays your photo alongside your name, subtitle, `site.hero.lead`
+(short research statement above the buttons), `site.hero.primaryLinks`, and an optional
+`site.hero.currently` list beside the bio prose. Keys for `primaryLinks` are `socials` field names;
+unset platforms are skipped. The first button is styled as the primary action.
 
 ```typescript
 hero: {
+  lead: 'Short lead statement shown inside the hero card.',
+  currently: ['Current project or focus (HTML supported).'],
   primaryLinks: ['cv_pdf', 'scholar_userid', 'github_username', 'linkedin_username', 'orcid_id', 'email'],
 },
 ```

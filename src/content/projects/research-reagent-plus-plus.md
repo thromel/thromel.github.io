@@ -2,6 +2,8 @@
 title: "Choice as an Attack: Auditing Aligned Backdoor Attacks in LLM Agents"
 description: In review at ACL ARR (October 2026). Abstract-level summary of
   SHIFT, a known-trigger audit for aligned backdoor attacks in LLM agents.
+img: /assets/img/publication_preview/shift-audit.webp
+img_alt: "Schematic diagram of SHIFT showing Clean and Triggered tasks passing through a black-box LLM Agent into Shift Detection and Attribution layers."
 importance: 5
 category: research
 ---

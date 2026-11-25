@@ -222,8 +222,10 @@ export const site = {
    * platforms that are unset in `socials` are skipped.
    */
   hero: {
+    /** Short lead sentence shown inside the homepage hero card above the action buttons. Leave empty to hide. */
+    lead: 'I study how AI agents behave in real software systems, and how to make their decisions inspectable, reliable, and trustworthy.' as string,
     /**
-     * "What I'm working on now" list under the subtitle. Each item is HTML.
+     * "What I'm working on now" list beside the bio. Each item is HTML.
      * Set to [] to hide it.
      */
     currently: [
