@@ -59,11 +59,11 @@ from typing import Dict, List, Tuple, Optional
 def bellman_ford(graph: nx.DiGraph, source: int) -> Tuple[Dict[int, float], Dict[int, Optional[int]]]:
     """
     Classic Bellman-Ford algorithm implementation.
-    
+
     Args:
         graph: Directed graph with edge weights
         source: Starting node
-        
+
     Returns:
         distances: Shortest distances from source to all nodes
         predecessors: Previous node in shortest path
@@ -72,26 +72,26 @@ def bellman_ford(graph: nx.DiGraph, source: int) -> Tuple[Dict[int, float], Dict
     distances = {node: float('inf') for node in graph.nodes()}
     distances[source] = 0
     predecessors = {node: None for node in graph.nodes()}
-    
+
     # Relax edges repeatedly
     for _ in range(len(graph.nodes()) - 1):
         for u, v, weight in graph.edges(data='weight'):
             if distances[u] + weight < distances[v]:
                 distances[v] = distances[u] + weight
                 predecessors[v] = u
-    
+
     # Check for negative cycles (optional)
     for u, v, weight in graph.edges(data='weight'):
         if distances[u] + weight < distances[v]:
             raise ValueError("Graph contains negative cycle")
-    
+
     return distances, predecessors
 
 # Let's create a simple city network
 def create_city_graph():
     """Create a graph representing city intersections and roads."""
     G = nx.DiGraph()
-    
+
     # Add intersections (nodes)
     intersections = [
         (0, "Downtown"),
@@ -102,10 +102,10 @@ def create_city_graph():
         (5, "Residential South"),
         (6, "Airport")
     ]
-    
+
     for idx, name in intersections:
         G.add_node(idx, name=name)
-    
+
     # Add roads (edges) with travel times
     roads = [
         (0, 1, 5),   # Downtown to University: 5 minutes
@@ -119,10 +119,10 @@ def create_city_graph():
         (5, 6, 6),   # Residential South to Airport: 6 minutes
         (5, 4, 4)    # Residential South to Industrial: 4 minutes
     ]
-    
+
     for u, v, weight in roads:
         G.add_edge(u, v, weight=weight)
-    
+
     return G
 
 # Visualize our city network
@@ -162,17 +162,17 @@ from torch_geometric.data import Data
 
 class GraphEncoder(nn.Module):
     """Encode graph structure and features into neural representations."""
-    
+
     def __init__(self, node_features: int, edge_features: int, hidden_dim: int):
         super().__init__()
         self.node_encoder = nn.Linear(node_features, hidden_dim)
         self.edge_encoder = nn.Linear(edge_features, hidden_dim)
         self.hidden_dim = hidden_dim
-        
+
     def forward(self, node_features: torch.Tensor, edge_features: torch.Tensor):
         """
         Encode nodes and edges into hidden representations.
-        
+
         This is like translating the problem into a language the neural network understands.
         """
         node_hidden = F.relu(self.node_encoder(node_features))
@@ -182,28 +182,28 @@ class GraphEncoder(nn.Module):
 class AlgorithmicProcessor(MessagePassing):
     """
     The heart of NAR: a neural network that mimics algorithmic steps.
-    
+
     This uses message passing to simulate how algorithms propagate information
     through a graph structure.
     """
-    
+
     def __init__(self, hidden_dim: int):
         super().__init__(aggr='min')  # Min aggregation mimics Bellman-Ford's relaxation
         self.hidden_dim = hidden_dim
-        
+
         # Neural network components for processing messages
         self.message_mlp = nn.Sequential(
             nn.Linear(3 * hidden_dim, hidden_dim),
             nn.ReLU(),
             nn.Linear(hidden_dim, hidden_dim)
         )
-        
+
         self.update_mlp = nn.Sequential(
             nn.Linear(2 * hidden_dim, hidden_dim),
             nn.ReLU(),
             nn.Linear(hidden_dim, hidden_dim)
         )
-        
+
         # Gating mechanism for selective updates (mimics conditional logic)
         self.gate = nn.Sequential(
             nn.Linear(2 * hidden_dim, hidden_dim),
@@ -211,41 +211,41 @@ class AlgorithmicProcessor(MessagePassing):
             nn.Linear(hidden_dim, 1),
             nn.Sigmoid()
         )
-        
-    def forward(self, x: torch.Tensor, edge_index: torch.Tensor, 
+
+    def forward(self, x: torch.Tensor, edge_index: torch.Tensor,
                 edge_attr: torch.Tensor) -> torch.Tensor:
         """
         Perform one step of algorithmic reasoning.
-        
+
         This is analogous to one iteration of the Bellman-Ford algorithm.
         """
         return self.propagate(edge_index, x=x, edge_attr=edge_attr)
-    
-    def message(self, x_i: torch.Tensor, x_j: torch.Tensor, 
+
+    def message(self, x_i: torch.Tensor, x_j: torch.Tensor,
                 edge_attr: torch.Tensor) -> torch.Tensor:
         """
         Compute messages between nodes.
-        
+
         In Bellman-Ford, this would be: distance[u] + weight(u,v)
         """
         # Concatenate source node, destination node, and edge features
         combined = torch.cat([x_i, x_j, edge_attr], dim=-1)
         return self.message_mlp(combined)
-    
+
     def update(self, aggr_out: torch.Tensor, x: torch.Tensor) -> torch.Tensor:
         """
         Update node representations based on aggregated messages.
-        
+
         This mimics the relaxation step: if new_dist < current_dist, update
         """
         # Compute gate values (should we update?)
         gate_input = torch.cat([aggr_out, x], dim=-1)
         gate_values = self.gate(gate_input)
-        
+
         # Compute potential new values
         update_input = torch.cat([aggr_out, x], dim=-1)
         new_values = self.update_mlp(update_input)
-        
+
         # Selectively update (gating mechanism)
         return gate_values * new_values + (1 - gate_values) * x
 
@@ -253,36 +253,36 @@ class NeuralBellmanFord(nn.Module):
     """
     Complete Neural Algorithmic Reasoning model for shortest path computation.
     """
-    
-    def __init__(self, node_features: int, edge_features: int, hidden_dim: int, 
+
+    def __init__(self, node_features: int, edge_features: int, hidden_dim: int,
                  num_iterations: int):
         super().__init__()
         self.encoder = GraphEncoder(node_features, edge_features, hidden_dim)
         self.processor = AlgorithmicProcessor(hidden_dim)
         self.decoder = nn.Linear(hidden_dim, 1)  # Output: distance value
         self.num_iterations = num_iterations
-        
+
     def forward(self, data: Data) -> Tuple[torch.Tensor, List[torch.Tensor]]:
         """
         Execute neural algorithmic reasoning.
-        
+
         Returns both final distances and intermediate steps for interpretability.
         """
         # Encode input
         node_hidden, edge_hidden = self.encoder(data.x, data.edge_attr)
-        
+
         # Store intermediate steps (for visualization and learning)
         intermediate_distances = []
-        
+
         # Iterative processing (mimicking algorithm iterations)
         current_hidden = node_hidden
         for _ in range(self.num_iterations):
             current_hidden = self.processor(current_hidden, data.edge_index, edge_hidden)
-            
+
             # Decode current distances
             current_distances = self.decoder(current_hidden)
             intermediate_distances.append(current_distances)
-        
+
         final_distances = intermediate_distances[-1]
         return final_distances, intermediate_distances
 ```
@@ -295,133 +295,133 @@ NAR supervises every step. We show the network how the distances change at each 
 def generate_training_data(num_graphs: int, min_nodes: int = 5, max_nodes: int = 15):
     """
     Generate random graphs with ground truth Bellman-Ford executions.
-    
+
     This creates our curriculum: from simple graphs to complex ones.
     """
     training_data = []
-    
+
     for _ in range(num_graphs):
         # Create random graph
         num_nodes = np.random.randint(min_nodes, max_nodes + 1)
         G = nx.erdos_renyi_graph(num_nodes, 0.3, directed=True)
-        
+
         # Add weights (including some negative ones for interesting cases)
         for (u, v) in G.edges():
             weight = np.random.uniform(-2, 10)
             G[u][v]['weight'] = weight
-        
+
         # Choose random source
         source = np.random.randint(0, num_nodes)
-        
+
         # Execute Bellman-Ford and record all intermediate steps
         distances_history = execute_bellman_ford_with_history(G, source)
-        
+
         # Convert to PyTorch geometric data
         data = graph_to_pytorch_geometric(G, source, distances_history)
         training_data.append(data)
-    
+
     return training_data
 
 def execute_bellman_ford_with_history(graph: nx.DiGraph, source: int) -> List[Dict[int, float]]:
     """
     Execute Bellman-Ford while recording state at each iteration.
-    
+
     This gives us the step-by-step supervision signal.
     """
     distances = {node: float('inf') for node in graph.nodes()}
     distances[source] = 0
     history = [distances.copy()]
-    
+
     for iteration in range(len(graph.nodes()) - 1):
         updated = False
         for u, v, weight in graph.edges(data='weight'):
             if distances[u] + weight < distances[v]:
                 distances[v] = distances[u] + weight
                 updated = True
-        
+
         history.append(distances.copy())
-        
+
         if not updated:  # Early stopping if converged
             break
-    
+
     return history
 
-def train_neural_bellman_ford(model: NeuralBellmanFord, train_data: List[Data], 
+def train_neural_bellman_ford(model: NeuralBellmanFord, train_data: List[Data],
                             num_epochs: int = 100, lr: float = 0.01):
     """
     Train the neural network to mimic Bellman-Ford execution.
-    
+
     Key insight: We supervise at every algorithmic step, not just the final output.
     """
     optimizer = torch.optim.Adam(model.parameters(), lr=lr)
-    
+
     for epoch in range(num_epochs):
         total_loss = 0
-        
+
         for data in train_data:
             optimizer.zero_grad()
-            
+
             # Forward pass
             final_distances, intermediate_distances = model(data)
-            
+
             # Compute loss at each step (algorithmic supervision)
             loss = 0
             for step, pred_distances in enumerate(intermediate_distances):
                 if step < len(data.y_history):
                     target_distances = data.y_history[step]
-                    
+
                     # Use Huber loss (robust to outliers)
                     step_loss = F.huber_loss(pred_distances, target_distances)
-                    
+
                     # Weight later steps more (they're harder to predict)
                     weight = (step + 1) / len(intermediate_distances)
                     loss += weight * step_loss
-            
+
             # Backward pass
             loss.backward()
             optimizer.step()
-            
+
             total_loss += loss.item()
-        
+
         if epoch % 10 == 0:
             print(f"Epoch {epoch}, Average Loss: {total_loss / len(train_data):.4f}")
-    
+
     return model
 
 # Let's see it in action!
-def visualize_neural_reasoning(model: NeuralBellmanFord, test_graph: nx.DiGraph, 
+def visualize_neural_reasoning(model: NeuralBellmanFord, test_graph: nx.DiGraph,
                               source: int):
     """
     Visualize how the neural network reasons through the problem.
-    
+
     This shows the learned algorithmic behavior.
     """
     # Convert graph to model input
     data = graph_to_pytorch_geometric(test_graph, source, None)
-    
+
     # Get predictions
     with torch.no_grad():
         final_distances, intermediate_distances = model(data)
-    
+
     # Create visualization
     fig, axes = plt.subplots(2, 3, figsize=(15, 10))
     axes = axes.flatten()
-    
+
     # Show first few iterations
     for i, (ax, distances) in enumerate(zip(axes, intermediate_distances[:6])):
         # Convert predictions to numpy
         pred_distances = distances.numpy().flatten()
-        
+
         # Create node colors based on distances
         node_colors = plt.cm.viridis(pred_distances / pred_distances.max())
-        
+
         # Draw graph
         pos = nx.spring_layout(test_graph, seed=42)
-        nx.draw(test_graph, pos, ax=ax, node_color=node_colors, 
+        nx.draw(test_graph, pos, ax=ax, node_color=node_colors,
                 with_labels=True, node_size=500)
-        
+
         ax.set_title(f"Iteration {i+1}")
-    
+
     plt.tight_layout()
     plt.show()
 ```
@@ -442,25 +442,25 @@ class RobustNeuralNavigator(nn.Module):
     """
     Enhanced NAR model that handles real-world navigation challenges.
     """
-    
+
     def __init__(self, hidden_dim: int, num_iterations: int):
         super().__init__()
-        
+
         # Multiple encoders for different input modalities
         self.static_encoder = GraphEncoder(2, 3, hidden_dim)  # Road network
         self.dynamic_encoder = nn.LSTM(hidden_dim, hidden_dim, batch_first=True)  # Traffic patterns
         self.uncertainty_encoder = nn.Linear(2, hidden_dim)  # Mean and variance
-        
+
         # Adaptive processor that adjusts to conditions
         self.processor = AdaptiveAlgorithmicProcessor(hidden_dim)
-        
+
         # Multi-objective decoder
         self.time_decoder = nn.Linear(hidden_dim, 1)
         self.distance_decoder = nn.Linear(hidden_dim, 1)
         self.reliability_decoder = nn.Linear(hidden_dim, 1)
-        
+
         self.num_iterations = num_iterations
-        
+
     def forward(self, static_graph: Data, traffic_sequence: torch.Tensor,
                 uncertainty_estimates: torch.Tensor) -> Dict[str, torch.Tensor]:
         """
@@ -470,17 +470,17 @@ class RobustNeuralNavigator(nn.Module):
         node_hidden, edge_hidden = self.static_encoder(
             static_graph.x, static_graph.edge_attr
         )
-        
+
         # Encode dynamic traffic patterns
         _, (traffic_hidden, _) = self.dynamic_encoder(traffic_sequence)
         traffic_hidden = traffic_hidden.squeeze(0)
-        
+
         # Encode uncertainty
         uncertainty_hidden = self.uncertainty_encoder(uncertainty_estimates)
-        
+
         # Combine all information
         combined_node_features = node_hidden + traffic_hidden + uncertainty_hidden
-        
+
         # Run adaptive algorithmic reasoning
         current_hidden = combined_node_features
         for i in range(self.num_iterations):
@@ -490,7 +490,7 @@ class RobustNeuralNavigator(nn.Module):
                 current_hidden, static_graph.edge_index, edge_hidden,
                 adaptation_factor
             )
-        
+
         # Decode multiple objectives
         return {
             'time': self.time_decoder(current_hidden),
@@ -501,18 +501,18 @@ class RobustNeuralNavigator(nn.Module):
 class AdaptiveAlgorithmicProcessor(MessagePassing):
     """
     Processor that adapts its behavior based on uncertainty and conditions.
-    
+
     This goes beyond standard algorithms by adjusting to real-world messiness.
     """
-    
+
     def __init__(self, hidden_dim: int):
         super().__init__(aggr='add')
         self.hidden_dim = hidden_dim
-        
+
         # Learnable algorithm components
         self.deterministic_processor = AlgorithmicProcessor(hidden_dim)
         self.stochastic_processor = nn.GRUCell(hidden_dim, hidden_dim)
-        
+
         # Adaptation network
         self.adaptation_mlp = nn.Sequential(
             nn.Linear(hidden_dim + 1, hidden_dim),
@@ -520,7 +520,7 @@ class AdaptiveAlgorithmicProcessor(MessagePassing):
             nn.Linear(hidden_dim, hidden_dim),
             nn.Sigmoid()
         )
-        
+
     def forward(self, x: torch.Tensor, edge_index: torch.Tensor,
                 edge_attr: torch.Tensor, adaptation_factor: float) -> torch.Tensor:
         """
@@ -528,15 +528,15 @@ class AdaptiveAlgorithmicProcessor(MessagePassing):
         """
         # Deterministic processing (standard algorithm)
         deterministic_output = self.deterministic_processor(x, edge_index, edge_attr)
-        
+
         # Stochastic processing (handles uncertainty)
         stochastic_output = self.stochastic_processor(x, deterministic_output)
-        
+
         # Adaptive blending
         adaptation_weights = self.adaptation_mlp(
             torch.cat([x, adaptation_factor.unsqueeze(-1).expand(-1, 1)], dim=-1)
         )
-        
+
         return adaptation_weights * stochastic_output + (1 - adaptation_weights) * deterministic_output
 ```
 
@@ -551,65 +551,65 @@ class SmartCityNavigationSystem:
     """
     Complete navigation system using Neural Algorithmic Reasoning.
     """
-    
+
     def __init__(self, city_graph: nx.DiGraph):
         self.city_graph = city_graph
         self.model = RobustNeuralNavigator(hidden_dim=64, num_iterations=10)
         self.traffic_history = []
         self.model_trained = False
-        
+
     def collect_traffic_data(self, num_days: int = 30):
         """
         Simulate collecting real-world traffic data.
         """
         print("Collecting traffic patterns...")
-        
+
         for day in range(num_days):
             daily_traffic = {}
-            
+
             for u, v in self.city_graph.edges():
                 base_time = self.city_graph[u][v]['weight']
-                
+
                 # Morning rush hour
                 morning_factor = np.random.normal(1.5, 0.3) if 7 <= (day % 24) <= 9 else 1.0
-                
-                # Evening rush hour  
+
+                # Evening rush hour
                 evening_factor = np.random.normal(1.8, 0.4) if 17 <= (day % 24) <= 19 else 1.0
-                
+
                 # Random events (accidents, construction)
                 random_event = np.random.exponential(0.1) if np.random.random() < 0.05 else 0
-                
+
                 actual_time = base_time * max(morning_factor, evening_factor) + random_event
                 uncertainty = np.random.gamma(2, 0.5)
-                
+
                 daily_traffic[(u, v)] = {
                     'time': actual_time,
                     'uncertainty': uncertainty
                 }
-            
+
             self.traffic_history.append(daily_traffic)
-    
+
     def train_navigation_model(self):
         """
         Train the neural reasoner on collected data.
         """
         print("Training neural navigation model...")
-        
+
         # Generate training examples
         training_data = []
-        
+
         for traffic_snapshot in self.traffic_history:
             # Update graph with current traffic
             for (u, v), data in traffic_snapshot.items():
                 self.city_graph[u][v]['current_weight'] = data['time']
                 self.city_graph[u][v]['uncertainty'] = data['uncertainty']
-            
+
             # Generate multiple source-destination pairs
             for source in range(len(self.city_graph.nodes())):
                 # Run classical algorithm for ground truth
                 try:
                     distances, _ = bellman_ford(self.city_graph, source)
-                    
+
                     # Create training example
                     example = self.create_training_example(
                         self.city_graph, source, distances, traffic_snapshot
@@ -617,19 +617,19 @@ class SmartCityNavigationSystem:
                     training_data.append(example)
                 except ValueError:
                     continue  # Skip if negative cycle
-        
+
         # Train model
         self.model = train_neural_bellman_ford(self.model, training_data)
         self.model_trained = True
-        
-    def find_route(self, start: str, destination: str, 
+
+    def find_route(self, start: str, destination: str,
                    preferences: Dict[str, float] = None) -> Dict[str, any]:
         """
         Find optimal route using trained neural reasoner.
         """
         if not self.model_trained:
             raise RuntimeError("Model must be trained before routing")
-        
+
         # Default preferences
         if preferences is None:
             preferences = {
@@ -637,17 +637,17 @@ class SmartCityNavigationSystem:
                 'distance': 0.2,
                 'reliability': 0.2
             }
-        
+
         # Convert location names to node indices
         node_names = nx.get_node_attributes(self.city_graph, 'name')
         name_to_node = {v: k for k, v in node_names.items()}
-        
+
         start_node = name_to_node[start]
         dest_node = name_to_node[destination]
-        
+
         # Prepare current traffic data
         current_traffic = self.get_current_traffic()
-        
+
         # Run neural reasoner
         with torch.no_grad():
             predictions = self.model(
@@ -655,27 +655,27 @@ class SmartCityNavigationSystem:
                 current_traffic['sequence'],
                 current_traffic['uncertainty']
             )
-        
+
         # Combine objectives based on preferences
         combined_score = sum(
-            preferences[obj] * predictions[obj] 
+            preferences[obj] * predictions[obj]
             for obj in ['time', 'distance', 'reliability']
         )
-        
+
         # Extract path using learned representations
         path = self.extract_path(start_node, dest_node, combined_score)
-        
+
         # Calculate route statistics
         total_time = sum(
             self.city_graph[u][v].get('current_weight', self.city_graph[u][v]['weight'])
             for u, v in zip(path[:-1], path[1:])
         )
-        
+
         reliability = np.mean([
             1.0 / (1.0 + self.city_graph[u][v].get('uncertainty', 0.1))
             for u, v in zip(path[:-1], path[1:])
         ])
-        
+
         return {
             'path': [node_names[node] for node in path],
             'estimated_time': total_time,
@@ -692,19 +692,19 @@ def demo_smart_navigation():
     """
     # Create city network
     city = create_city_graph()
-    
+
     # Initialize navigation system
     nav_system = SmartCityNavigationSystem(city)
-    
+
     # Collect traffic data
     nav_system.collect_traffic_data(num_days=30)
-    
+
     # Train neural reasoner
     nav_system.train_navigation_model()
-    
+
     # Find routes with different preferences
     print("\n=== Route Planning Demo ===\n")
-    
+
     # Fastest route
     print("1. Fastest Route (Time-optimized):")
     route1 = nav_system.find_route(
@@ -714,24 +714,24 @@ def demo_smart_navigation():
     print(f"   Path: {' -> '.join(route1['path'])}")
     print(f"   Estimated time: {route1['estimated_time']:.1f} minutes")
     print(f"   Reliability: {route1['reliability']:.2%}\n")
-    
+
     # Most reliable route
     print("2. Most Reliable Route (Consistency-optimized):")
     route2 = nav_system.find_route(
-        "Downtown", "Airport", 
+        "Downtown", "Airport",
         preferences={'time': 0.2, 'distance': 0.1, 'reliability': 0.7}
     )
     print(f"   Path: {' -> '.join(route2['path'])}")
     print(f"   Estimated time: {route2['estimated_time']:.1f} minutes")
     print(f"   Reliability: {route2['reliability']:.2%}\n")
-    
+
     # Balanced route
     print("3. Balanced Route:")
     route3 = nav_system.find_route("Downtown", "Airport")
     print(f"   Path: {' -> '.join(route3['path'])}")
     print(f"   Estimated time: {route3['estimated_time']:.1f} minutes")
     print(f"   Reliability: {route3['reliability']:.2%}")
-    
+
     return nav_system
 
 # Run the demo
@@ -753,7 +753,7 @@ Classical algorithms assume perfect inputs. Our neural reasoner handles noisy se
 
 ### 3. Generalization Beyond Training
 
-The model learns algorithmic _principles_ instead of memorizing solutions. So it can generalize to larger graphs than it saw during training, to different graph structures, and to new combinations of conditions.
+The model learns algorithmic _principles_ instead of memorizing solutions. This can help it generalize to larger graphs than it saw during training, to different graph structures, and to new combinations of conditions.
 
 ### 4. Efficient Learning Through Algorithmic Supervision
 
@@ -804,14 +804,14 @@ Better algorithmic supervision and better neural architectures can give us AI sy
 
 For more on Neural Algorithmic Reasoning:
 
-1. **"Neural Algorithmic Reasoning"** - Veličković et al. (2021): The foundational paper that formally introduced NAR.
+1. **"Neural Algorithmic Reasoning"** - Veličković & Blundell (2021): The position paper that named and framed NAR.
 
-2. **"Pointer Graph Networks"** - Veličković et al. (2020): Shows how neural networks can learn to execute classical graph algorithms.
+2. **"Neural Execution of Graph Algorithms"** - Veličković et al. (2020): Trains graph networks to execute BFS and Bellman-Ford step by step.
 
 3. **"The CLRS Algorithmic Reasoning Benchmark"** - Veličković et al. (2022): A benchmark for evaluating NAR approaches.
 
-4. **"What can transformers learn in-context? A case study of simple function classes"** - Garg et al. (2022): Explores how transformer models can learn to execute algorithms.
+4. **"What can transformers learn in-context? A case study of simple function classes"** - Garg et al. (2022): Shows that transformers can learn simple function classes, such as linear functions, in context.
 
 5. **"Learning to Execute"** - Zaremba & Sutskever (2014): An early work showing neural networks can learn to execute simple programs.
 
-The code examples in this post are a starting point for NAR experiments. Start with the Bellman–Ford notebook above. Then vary the graph distribution, supervision signal, and evaluation split, and keep the classical baseline visible.
+The code examples in this post are a starting point for NAR experiments. Start with the Bellman–Ford code above. Then vary the graph distribution, supervision signal, and evaluation split, and keep the classical baseline visible.

@@ -23,7 +23,7 @@ tags:
 
 It is Friday afternoon, and your team needs to deploy a critical bug fix. In the old days, you built the application by hand, ran tests locally, uploaded files to servers, and crossed your fingers. This guide automates that process with GitHub Actions and AWS. The nerve-wracking manual process becomes an automated pipeline.
 
-According to the [2021 State of DevOps Report](https://cloud.google.com/devops/state-of-devops/), organizations with mature CI/CD practices deploy 208 times more frequently and have 106 times faster lead times than low performers. They also have 7 times lower change failure rates and recover from incidents 2,604 times faster.
+According to the [2019 Accelerate State of DevOps Report](https://cloud.google.com/devops/state-of-devops/), elite performers deploy 208 times more frequently and have 106 times faster lead times than low performers. They also have 7 times lower change failure rates and recover from incidents 2,604 times faster.
 
 This guide builds a deployment-oriented CI/CD pipeline for a Node.js application. We start from nothing and finish with automated deployment. For each decision, I explain the implementation and the reason for it.
 
@@ -31,13 +31,13 @@ This guide builds a deployment-oriented CI/CD pipeline for a Node.js application
 
 ## Understanding CI/CD: The Foundation
 
-**Continuous Integration (CI)** automatically merges code changes from many contributors into a shared repository. Each time someone pushes code, automated checks confirm that the new code does not break existing functionality. It is like a diligent assistant who checks every piece of work before it goes into the main project.
+**Continuous Integration (CI)** is the practice of merging code changes from many contributors into a shared repository often. Each time someone pushes code, automated checks confirm that the new code does not break existing functionality. It is like a diligent assistant who checks every piece of work before it goes into the main project.
 
 Without CI, integration is painful and risky. Teams that work on separate features for weeks end up in "integration hell" when they merge. CI finds integration issues early, when they are easier and cheaper to fix.
 
 **Continuous Deployment (CD)** goes one step further. It automatically deploys code that passes all tests to production. The same assistant now checks the work and also publishes it when everything looks good.
 
-Manual deployments are slow, error-prone, and cause bottlenecks. As Jez Humble explains in [Continuous Delivery](https://continuousdelivery.com/), "The key insight is that the deployment pipeline should be the only way to deploy to production." One path to production keeps deployments consistent and reduces human error.
+Manual deployments are slow, error-prone, and cause bottlenecks. Jez Humble and David Farley argue in [Continuous Delivery](https://continuousdelivery.com/) that the deployment pipeline should be the only way to deploy to production. One path to production keeps deployments consistent and reduces human error.
 
 CI protects code quality, and CD delivers changes to users quickly and reliably. For more on the concepts, read Martin Fowler's article on [Continuous Integration](https://martinfowler.com/articles/continuousIntegration.html).
 
@@ -68,7 +68,7 @@ GitHub Actions is GitHub's built-in CI/CD service. It runs automated workflows d
 
 1. **Native integration**: You manage no external services.
 2. **Ecosystem**: The marketplace has thousands of pre-built actions.
-3. **Free tier**: 2,000 minutes per month for public repositories.
+3. **Free tier**: Free for public repositories, and 2,000 minutes per month for private repositories on the Free plan.
 4. **Security**: Secret management and permissions are built in.
 5. **Ease of use**: The YAML configuration lives in your repository.
 
@@ -123,24 +123,24 @@ jobs:
     # Why ubuntu-latest? It's free, fast, and has excellent tool support
     # Alternatives: windows-latest, macos-latest (but cost more)
     runs-on: ubuntu-latest
-    
+
     # Node.js versions to test against
     # Why matrix testing? Ensures compatibility across versions your users might have
     strategy:
       matrix:
         node-version: [16.x, 18.x, 20.x]
-    
+
     steps:
     # Check out the repository code
     # Why v3? It's the latest stable version with security improvements
     - uses: actions/checkout@v3
-    
+
     # Set up Node.js environment
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
-        
+
     # Cache dependencies for faster builds
     # Why cache? npm install can take 30-60 seconds; caching reduces this to 5-10 seconds
     - name: Cache dependencies
@@ -151,22 +151,22 @@ jobs:
         key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
         restore-keys: |
           ${{ runner.os }}-node-
-    
+
     # Install project dependencies
     # Why npm ci instead of npm install? It's faster and more reliable for CI environments
     - name: Install dependencies
       run: npm ci
-    
+
     # Run linting to check code style
     # Why lint first? Code style issues are faster to check than running full test suite
     - name: Run linter
       run: npm run lint
-    
+
     # Run unit tests
     # Why after linting? No point running tests if code doesn't meet style standards
     - name: Run tests
       run: npm test
-    
+
     # Generate test coverage report
     # Why coverage? Helps identify untested code and technical debt
     - name: Generate coverage report
@@ -196,7 +196,7 @@ GitHub Actions supports service containers directly:
 jobs:
   test:
     runs-on: ubuntu-latest
-    
+
     # Service containers run alongside your job
     # Why alongside? They share the same network, making connection simple
     services:
@@ -216,18 +216,18 @@ jobs:
         ports:
           # Why port mapping? Makes the service accessible to our test jobs
           - 5432:5432
-    
+
     steps:
     - uses: actions/checkout@v3
-    
+
     - name: Use Node.js
       uses: actions/setup-node@v3
       with:
         node-version: '18.x'
-    
+
     - name: Install dependencies
       run: npm ci
-    
+
     - name: Run tests with database
       env:
         # These environment variables are used by our app
@@ -247,7 +247,7 @@ With CI in place, we add continuous deployment to AWS. AWS has a mature set of s
 
 We deploy to an EC2 instance that runs Ubuntu. The same concepts apply to other AWS services such as ECS or Elastic Beanstalk.
 
-Elastic Beanstalk and ECS do more for you, but EC2 teaches the fundamentals. As the AWS Well-Architected Framework states, "Understand what you implement."
+Elastic Beanstalk and ECS do more for you, but EC2 teaches the fundamentals.
 
 ### Understanding AWS Credentials and Security
 
@@ -342,51 +342,53 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
-    
+
     - name: Use Node.js
       uses: actions/setup-node@v3
       with:
         node-version: '18.x'
-    
+
     - name: Install dependencies
       run: npm ci
-    
+
     - name: Run tests
       run: npm test
-    
+
     # Only proceed to build job if tests pass
     # This creates a gate in our pipeline
-    
+
   build:
     needs: test  # This job depends on 'test' job success
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
-    
+
     - name: Use Node.js
       uses: actions/setup-node@v3
       with:
         node-version: '18.x'
-    
+
     - name: Install production dependencies
       # Why --only=production? Smaller package, faster deploys, fewer security vulnerabilities
       run: npm ci --only=production
-    
+
     - name: Build application
       run: npm run build
-    
+
     # Create deployment artifact
     - name: Create deployment package
       run: |
         # Remove development files
         rm -rf .git .github test coverage docs
-        
+
         # Create timestamp for versioning
-        echo "DEPLOY_VERSION=$(date +%Y%m%d%H%M%S)" >> $GITHUB_ENV
-        
+        # (a value written to $GITHUB_ENV is only visible in later steps)
+        DEPLOY_VERSION=$(date +%Y%m%d%H%M%S)
+        echo "DEPLOY_VERSION=$DEPLOY_VERSION" >> $GITHUB_ENV
+
         # Package application
-        tar -czf deploy-${{ env.DEPLOY_VERSION }}.tar.gz .
-    
+        tar -czf /tmp/deploy-$DEPLOY_VERSION.tar.gz . && mv /tmp/deploy-$DEPLOY_VERSION.tar.gz .
+
     # Upload artifact for deployment job
     # Why separate build and deploy jobs? Enables different runners, security boundaries
     - name: Upload deployment artifact
@@ -395,19 +397,19 @@ jobs:
         name: deploy-package
         path: deploy-*.tar.gz
         retention-days: 7
-  
+
   deploy:
     needs: build
     runs-on: ubuntu-latest
     # Only deploy from main branch
     if: github.ref == 'refs/heads/main'
-    
+
     steps:
     - name: Download deployment artifact
       uses: actions/download-artifact@v3
       with:
         name: deploy-package
-    
+
     # Configure AWS credentials
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v2
@@ -415,7 +417,7 @@ jobs:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: ${{ secrets.AWS_REGION }}
-    
+
     # Upload to S3 first (backup and staging)
     # Why S3 first? Creates a backup, enables multi-server deployments, provides audit trail
     - name: Upload to S3
@@ -423,7 +425,7 @@ jobs:
         DEPLOY_FILE=$(ls deploy-*.tar.gz)
         aws s3 cp $DEPLOY_FILE s3://your-deployment-bucket/releases/
         echo "DEPLOY_FILE=$DEPLOY_FILE" >> $GITHUB_ENV
-    
+
     # Deploy to EC2
     - name: Deploy to EC2
       env:
@@ -432,53 +434,53 @@ jobs:
         # Save private key
         echo "$PRIVATE_KEY" > private_key
         chmod 600 private_key
-        
+
         # Create deployment script
         cat > deploy.sh << 'EOF'
         #!/bin/bash
         set -e  # Exit on error
-        
+
         # Variables
         DEPLOY_FILE=$1
         APP_DIR=/home/ubuntu/app
         BACKUP_DIR=/home/ubuntu/backups
-        
+
         # Create backup of current deployment
         if [ -d "$APP_DIR" ]; then
           echo "Creating backup..."
           sudo mkdir -p $BACKUP_DIR
           sudo tar -czf $BACKUP_DIR/backup-$(date +%Y%m%d%H%M%S).tar.gz -C $APP_DIR .
-          
+
           # Keep only last 5 backups
           sudo find $BACKUP_DIR -name "backup-*.tar.gz" -type f | sort -r | tail -n +6 | sudo xargs -r rm
         fi
-        
+
         # Download new version from S3
         echo "Downloading new version..."
         aws s3 cp s3://your-deployment-bucket/releases/$DEPLOY_FILE /tmp/
-        
+
         # Extract new version
         echo "Extracting application..."
         sudo mkdir -p $APP_DIR
         sudo rm -rf $APP_DIR/*
         sudo tar -xzf /tmp/$DEPLOY_FILE -C $APP_DIR
-        
+
         # Install dependencies and build
         cd $APP_DIR
         sudo npm ci --only=production
-        
+
         # Run database migrations
         echo "Running migrations..."
         NODE_ENV=production npm run migrate
-        
+
         # Restart application using PM2
         echo "Restarting application..."
         pm2 restart ecosystem.config.js --update-env
-        
+
         # Health check
         echo "Performing health check..."
         sleep 10
-        
+
         # Try health check with retries
         for i in {1..5}; do
           if curl -f http://localhost:3000/health; then
@@ -488,24 +490,24 @@ jobs:
             echo "Health check attempt $i failed, retrying..."
             sleep 5
           fi
-          
+
           if [ $i -eq 5 ]; then
             echo "Health check failed after 5 attempts"
             exit 1
           fi
         done
-        
+
         echo "Deployment successful!"
         EOF
-        
+
         # Execute deployment
         ssh -o StrictHostKeyChecking=no -i private_key \
           ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} \
           'bash -s' < deploy.sh ${{ env.DEPLOY_FILE }}
-        
+
         # Cleanup
         rm -f private_key deploy.sh
-    
+
     # Notify team of deployment
     - name: Send deployment notification
       if: always()  # Run even if deployment fails
@@ -519,11 +521,11 @@ jobs:
           COMMIT_MSG="Failed deployment"
           AUTHOR="GitHub Actions"
         fi
-        
+
         echo "Status: $MESSAGE"
         echo "Commit: $COMMIT_MSG"
         echo "Author: $AUTHOR"
-        
+
         # You can integrate with Slack, Discord, Microsoft Teams, etc.
         # Example Slack webhook:
         # curl -X POST -H 'Content-type: application/json' \
@@ -535,12 +537,12 @@ jobs:
 
 The workflow uses four common practices:
 
-1. **Blue-green preparation**: The workflow backs up the current version, so we can revert quickly.
+1. **Backup before deploy**: The workflow backs up the current version, so we can revert quickly.
 2. **Health checks**: The workflow confirms that the application runs after deployment.
-3. **Atomic deployments**: The whole deployment succeeds or fails as a unit.
-4. **Zero downtime**: PM2 reloads the application without dropped connections.
+3. **Fail on error**: `set -e` stops the script at the first failed command.
+4. **Process restart**: PM2 restarts the application. For zero-downtime reloads, run PM2 in cluster mode and use `pm2 reload`.
 
-The safety checks stop broken deployments. A deployment takes 2-3 minutes, compared with 30 minutes by hand. Each deployment has a timestamp and commit hash for audits. If a problem occurs, a rollback restores service quickly.
+A failed health check fails the job, so a broken deployment never looks successful. A deployment takes 2-3 minutes, compared with 30 minutes by hand. Each deployment has a timestamp and commit hash for audits. If a problem occurs, a rollback restores service quickly.
 
 > For more deployment strategies, see Martin Fowler's [Deployment Pipeline](https://martinfowler.com/bliki/DeploymentPipeline.html) and the [AWS Deployment Best Practices](https://aws.amazon.com/builders-library/automating-safe-hands-off-deployments/) guide.
 
@@ -587,7 +589,7 @@ jobs:
         else
           echo "environment=development" >> $GITHUB_OUTPUT
         fi
-  
+
   deploy:
     needs: determine-environment
     runs-on: ubuntu-latest
@@ -595,7 +597,7 @@ jobs:
     environment: ${{ needs.determine-environment.outputs.environment }}
     steps:
     - uses: actions/checkout@v3
-    
+
     # Environment-specific secrets are automatically available
     # Why automatic? GitHub manages secret scoping by environment
     - name: Deploy to ${{ needs.determine-environment.outputs.environment }}
@@ -610,7 +612,7 @@ GitHub environment protection rules can require manual approval for production d
 
 ### Implementing Rollback Capability
 
-According to [Google's SRE practices](https://sre.google/sre-book/monitoring-distributed-systems/), a fast rollback is more important than the prevention of all failures. When something breaks, fast recovery matters more than prevention.
+The [Google SRE Book](https://sre.google/sre-book/embracing-risk/) argues that 100% reliability is the wrong target. Failures will happen, so fast recovery matters.
 
 Teams often prefer a forward fix. A rollback is faster, though. It returns to a known good state instead of an uncertain fix, and users get service back sooner.
 
@@ -647,7 +649,7 @@ jobs:
           echo "❌ Version ${{ inputs.version }} not found!"
           exit 1
         }
-    
+
     - name: Rollback to version ${{ inputs.version }}
       env:
         PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
@@ -655,46 +657,46 @@ jobs:
         # Save private key
         echo "$PRIVATE_KEY" > private_key
         chmod 600 private_key
-        
+
         # Create rollback script
         cat > rollback.sh << 'EOF'
         #!/bin/bash
         set -e
-        
+
         VERSION=$1
         APP_DIR=/home/ubuntu/app
         FAILED_DIR=/home/ubuntu/failed-deployments
-        
+
         # Why capture failed deployment? Helps with post-incident analysis
         echo "Capturing failed deployment for analysis..."
         sudo mkdir -p $FAILED_DIR
         sudo tar -czf $FAILED_DIR/failed-$(date +%Y%m%d%H%M%S).tar.gz -C $APP_DIR .
-        
+
         # Download specified version
         echo "Downloading version $VERSION..."
         aws s3 cp s3://your-deployment-bucket/releases/deploy-$VERSION.tar.gz /tmp/
-        
+
         # Extract rollback version
         echo "Extracting rollback version..."
         sudo rm -rf $APP_DIR/*
         sudo tar -xzf /tmp/deploy-$VERSION.tar.gz -C $APP_DIR
-        
+
         # Restore application
         cd $APP_DIR
         sudo npm ci --only=production
-        
+
         # Check if database rollback is needed
         # Why manual check? Database rollbacks are riskier and need careful consideration
         echo "⚠️  WARNING: This rollback may require database changes"
         echo "Please verify database compatibility manually if needed"
-        
+
         # Restart application
         pm2 restart ecosystem.config.js --update-env
-        
+
         # Health check with longer timeout for rollbacks
         echo "Performing health check..."
         sleep 10
-        
+
         for i in {1..10}; do
           if curl -f http://localhost:3000/health; then
             echo "✅ Rollback health check passed!"
@@ -703,31 +705,31 @@ jobs:
             echo "⏳ Health check attempt $i failed, retrying..."
             sleep 5
           fi
-          
+
           if [ $i -eq 10 ]; then
             echo "❌ Rollback health check failed after 10 attempts"
             echo "Manual intervention required!"
             exit 1
           fi
         done
-        
+
         echo "🎉 Rollback to version $VERSION successful!"
         EOF
-        
+
         # Execute rollback
         ssh -o StrictHostKeyChecking=no -i private_key \
           ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} \
           'bash -s' < rollback.sh ${{ inputs.version }}
-        
+
         # Cleanup
         rm -f private_key rollback.sh
-    
+
     # Post-rollback notification
     - name: Notify team of rollback
       run: |
         MESSAGE="🔄 Rollback completed to version ${{ inputs.version }} on ${{ inputs.environment }}"
         echo "$MESSAGE"
-        
+
         # Post to incident management system
         # Example: PagerDuty, Opsgenie, or internal systems
 ```
@@ -763,58 +765,58 @@ class MigrationRunner {
     this.client = new Client({ connectionString: databaseUrl });
     this.migrationsDir = path.join(__dirname, 'sql');
   }
-  
+
   async run() {
     await this.client.connect();
-    
+
     try {
       // Create migrations table if not exists
       await this.ensureMigrationsTable();
-      
+
       // Get pending migrations
       const pending = await this.getPendingMigrations();
-      
+
       if (pending.length === 0) {
         console.log('✅ No pending migrations');
         return;
       }
-      
+
       console.log(`📦 Found ${pending.length} pending migrations`);
-      
+
       // Run migrations in transaction
       await this.client.query('BEGIN');
-      
+
       for (const migration of pending) {
         console.log(`🔄 Running migration: ${migration}`);
-        
+
         const startTime = Date.now();
-        
+
         // Read migration file
         const sql = await fs.readFile(
           path.join(this.migrationsDir, migration),
           'utf8'
         );
-        
+
         // Validate migration before executing
         await this.validateMigration(sql);
-        
+
         // Execute migration
         await this.client.query(sql);
-        
+
         const duration = Date.now() - startTime;
-        
+
         // Record migration
         await this.client.query(
           'INSERT INTO schema_migrations (version, duration_ms) VALUES ($1, $2)',
           [migration, duration]
         );
-        
+
         console.log(`✅ Migration ${migration} completed in ${duration}ms`);
       }
-      
+
       await this.client.query('COMMIT');
       console.log('🎉 All migrations completed successfully');
-      
+
     } catch (error) {
       await this.client.query('ROLLBACK');
       console.error('❌ Migration failed:', error.message);
@@ -823,7 +825,7 @@ class MigrationRunner {
       await this.client.end();
     }
   }
-  
+
   async ensureMigrationsTable() {
     await this.client.query(`
       CREATE TABLE IF NOT EXISTS schema_migrations (
@@ -833,50 +835,50 @@ class MigrationRunner {
       )
     `);
   }
-  
+
   async validateMigration(sql) {
     // Basic validation rules
     const lowerSql = sql.toLowerCase();
-    
+
     // Check for dangerous operations
     if (lowerSql.includes('drop table') && !lowerSql.includes('if exists')) {
       throw new Error('DROP TABLE without IF EXISTS is not allowed');
     }
-    
+
     if (lowerSql.includes('truncate')) {
       throw new Error('TRUNCATE operations are not allowed in migrations');
     }
-    
+
     // Check for missing semicolons (common error)
     const statements = sql.split(';').filter(s => s.trim());
     if (statements.length > 1 && !sql.trim().endsWith(';')) {
       console.warn('⚠️  Warning: Migration may be missing final semicolon');
     }
   }
-  
+
   async getPendingMigrations() {
     // Get all migration files
     const files = await fs.readdir(this.migrationsDir);
     const migrations = files
       .filter(f => f.endsWith('.sql'))
       .sort(); // Important: migrations run in order
-    
+
     // Get executed migrations
     const result = await this.client.query(
       'SELECT version FROM schema_migrations ORDER BY executed_at'
     );
     const executed = new Set(result.rows.map(r => r.version));
-    
+
     // Return pending migrations
     return migrations.filter(m => !executed.has(m));
   }
-  
+
   // Migration rollback support (limited)
   async rollback(steps = 1) {
     // Why limited rollback? Most database operations can't be safely reversed
     console.warn('⚠️  Database rollbacks are dangerous and limited');
     console.warn('This will only work for specific types of migrations');
-    
+
     // Implementation would depend on your specific needs
     // Generally, database rollbacks require pre-planned rollback scripts
   }
@@ -885,7 +887,7 @@ class MigrationRunner {
 // Usage in deployment
 if (require.main === module) {
   const runner = new MigrationRunner(process.env.DATABASE_URL);
-  
+
   runner.run().catch(error => {
     console.error('💥 Migration failed:', error);
     process.exit(1);
@@ -905,7 +907,7 @@ For safe migrations:
 
 ### Monitoring and Alerting
 
-A deployment is not complete without monitoring. As the [Google SRE Book](https://sre.google/sre-book/monitoring-distributed-systems/) states, "Monitoring is one of the primary means by which service owners keep track of a system's health and availability."
+A deployment is not complete without monitoring. As the [Google SRE Book](https://sre.google/sre-book/introduction/) states, "Monitoring is one of the primary means by which service owners keep track of a system's health and availability."
 
 Google SRE defines four golden signals:
 
@@ -925,54 +927,54 @@ This step adds basic monitoring to the workflow:
       local expected_status=$2
       local max_attempts=10
       local attempt=0
-      
+
       echo "🔍 Checking $url (expecting $expected_status)"
-      
+
       while [ $attempt -lt $max_attempts ]; do
         # Why curl flags? -s (silent), -o /dev/null (ignore body), -w (write out format)
         response=$(curl -s -o /dev/null -w "%{http_code},%{time_total},%{size_download}" $url)
         status=$(echo $response | cut -d',' -f1)
         time_total=$(echo $response | cut -d',' -f2)
         size=$(echo $response | cut -d',' -f3)
-        
+
         if [ "$status" = "$expected_status" ]; then
           echo "✅ $url returned $status in ${time_total}s (${size} bytes)"
           return 0
         fi
-        
+
         echo "⏳ $url returned $status (expected $expected_status), attempt $((attempt + 1))/$max_attempts"
         attempt=$((attempt + 1))
         sleep 5
       done
-      
+
       echo "❌ $url failed after $max_attempts attempts"
       return 1
     }
-    
+
     echo "🩺 Starting post-deployment health checks..."
-    
+
     # Check critical endpoints
     check_endpoint "https://api.example.com/health" "200"
     check_endpoint "https://api.example.com/api/v1/status" "200"
     check_endpoint "https://api.example.com/api/v1/users/me" "401"  # Should require auth
-    
+
     echo "⏱️  Measuring performance..."
-    
+
     # Check response times
     response_time=$(curl -s -o /dev/null -w "%{time_total}" https://api.example.com/health)
     echo "Health check response time: ${response_time}s"
-    
+
     # Alert if response time is too high
     if (( $(echo "$response_time > 2.0" | bc -l) )); then
       echo "⚠️  WARNING: High response time detected! (${response_time}s > 2.0s)"
-      
+
       # Send alert to monitoring system
       # Example: Post to Slack, PagerDuty, or custom monitoring
       curl -X POST -H 'Content-type: application/json' \
         --data "{\"text\":\"🚨 High response time after deployment: ${response_time}s\"}" \
         ${{ secrets.MONITORING_WEBHOOK_URL }} || echo "Failed to send alert"
     fi
-    
+
     # Check database connection
     echo "🗄️  Checking database connectivity..."
     ssh -o StrictHostKeyChecking=no -i private_key \
@@ -981,19 +983,19 @@ This step adds basic monitoring to the workflow:
       echo "❌ Database connectivity check failed"
       exit 1
     }
-    
+
     # Check memory usage
     echo "💾 Checking system resources..."
     memory_usage=$(ssh -o StrictHostKeyChecking=no -i private_key \
       ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} \
       "free | grep Mem | awk '{printf \"%.0f\", \$3/\$2 * 100.0}'")
-    
+
     echo "Memory usage: ${memory_usage}%"
-    
+
     if [ "$memory_usage" -gt 85 ]; then
       echo "⚠️  WARNING: High memory usage detected! (${memory_usage}% > 85%)"
     fi
-    
+
     echo "✅ Post-deployment monitoring completed"
 ```
 
@@ -1011,17 +1013,17 @@ Add automated dependency scanning:
 - name: Run security audit
   run: |
     echo "🔍 Scanning for known vulnerabilities..."
-    
+
     # Check for known vulnerabilities - Why npm audit? Built into npm, checks against npm security database
     npm audit --production
-    
+
     # For more strict checking (fails on any vulnerability)
     # Uncomment the line below for zero-tolerance security policy
     # npm audit --production --audit-level=low
-    
+
     # Generate detailed audit report
     npm audit --json > audit-report.json || true
-    
+
     # Parse and display critical vulnerabilities
     if command -v jq &> /dev/null; then
       echo "🚨 Critical vulnerabilities found:"
@@ -1145,7 +1147,7 @@ Static analysis finds security issues in your code before production. Tools such
 
 ## Chapter 6: Debugging Common Issues
 
-Even with good planning, things go wrong. According to [research by IBM](https://www.ibm.com/thought-leadership/institute-business-value/report/debugging), developers spend 50% of their time debugging. This chapter covers common issues and a systematic way to debug each one.
+Even with good planning, things go wrong. This chapter covers common issues and a systematic way to debug each one.
 
 ### Debugging Failed Workflows
 
@@ -1167,12 +1169,12 @@ GitHub Actions has several debugging tools:
     echo "Job: ${{ github.job }}"
     echo "Run ID: ${{ github.run_id }}"
     echo "Run Number: ${{ github.run_number }}"
-    
+
     # Show environment variables (be careful with secrets!)
     echo ""
     echo "🌍 Environment Variables (filtered):"
     env | grep -v SECRET | grep -v TOKEN | grep -v KEY | sort
-    
+
     # Show runner information
     echo ""
     echo "🖥️  Runner Information:"
@@ -1180,12 +1182,12 @@ GitHub Actions has several debugging tools:
     echo "Runner Arch: ${{ runner.arch }}"
     echo "Runner Temp: ${{ runner.temp }}"
     echo "Runner Tool Cache: ${{ runner.tool_cache }}"
-    
+
     # Show disk space (common issue)
     echo ""
     echo "💾 Disk Usage:"
     df -h
-    
+
     # Show system resources
     echo ""
     echo "⚡ System Resources:"
@@ -1230,27 +1232,27 @@ SSH connections fail for many reasons: security groups, key permissions, network
   run: |
     echo "🔧 Debugging SSH Connection Issues"
     echo "================================"
-    
+
     # Test basic connectivity
     echo "🌐 Testing network connectivity..."
     ping -c 4 ${{ secrets.EC2_HOST }} || echo "❌ Ping failed - check security groups and network"
-    
+
     # Test SSH port
     echo ""
     echo "🔌 Testing SSH port 22..."
     timeout 10 nc -zv ${{ secrets.EC2_HOST }} 22 || echo "❌ Port 22 not accessible - check security groups"
-    
+
     # Check if host key has changed
     echo ""
     echo "🔑 Testing SSH host key..."
     ssh-keyscan -H ${{ secrets.EC2_HOST }} 2>/dev/null || echo "❌ SSH host key scan failed"
-    
+
     # Verbose SSH attempt (remove sensitive key content from logs)
     echo ""
     echo "🐛 Verbose SSH connection test..."
     echo "${{ secrets.EC2_SSH_KEY }}" > private_key
     chmod 600 private_key
-    
+
     # Why timeout? Prevents hanging on failed connections
     timeout 30 ssh -vvv -o StrictHostKeyChecking=no -o ConnectTimeout=10 -i private_key \
       ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} \
@@ -1263,9 +1265,9 @@ SSH connections fail for many reasons: security groups, key permissions, network
       echo "3. Check SSH key format and permissions"
       echo "4. Ensure EC2_USER is correct (ubuntu for Ubuntu, ec2-user for Amazon Linux)"
     }
-    
+
     rm -f private_key
-    
+
     # Check GitHub Actions IP ranges
     echo ""
     echo "📡 GitHub Actions IP ranges (for security group configuration):"
@@ -1275,7 +1277,7 @@ SSH connections fail for many reasons: security groups, key permissions, network
   if: failure()
   run: |
     echo "🖥️  Checking EC2 instance status..."
-    
+
     # This requires EC2 permissions in your IAM policy
     aws ec2 describe-instances \
       --filters "Name=ip-address,Values=${{ secrets.EC2_HOST }}" \
@@ -1314,7 +1316,7 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - name: Run ${{ matrix.test-suite }} tests
       run: npm run test:${{ matrix.test-suite }}
-  
+
   # Jobs run in parallel by default - Why? Maximize resource utilization
   lint:
     runs-on: ubuntu-latest
@@ -1322,7 +1324,7 @@ jobs:
     - uses: actions/checkout@v3
     - name: Run linting
       run: npm run lint
-  
+
   security-scan:
     runs-on: ubuntu-latest
     steps:
@@ -1381,7 +1383,7 @@ Good caching can cut build time from 5 minutes to 1 minute. Over hundreds of bui
   with:
     path: /tmp/test-db
     key: test-db-${{ hashFiles('migrations/**') }}
-  
+
 # Warm up cache in separate job
 warm-cache:
   runs-on: ubuntu-latest
@@ -1442,12 +1444,12 @@ jobs:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         script: |
           const workflow_run = context.payload.workflow_run;
-          
+
           // Calculate duration - Why important? Track performance trends
           const started = new Date(workflow_run.created_at);
           const completed = new Date(workflow_run.updated_at);
           const duration = (completed - started) / 1000 / 60; // minutes
-          
+
           // Extract useful information
           const metrics = {
             workflow_name: workflow_run.name,
@@ -1460,7 +1462,7 @@ jobs:
             attempt: workflow_run.run_attempt,
             event: workflow_run.event
           };
-          
+
           console.log('📊 Pipeline Metrics:');
           console.log(`Workflow: ${metrics.workflow_name}`);
           console.log(`Status: ${metrics.status}`);
@@ -1468,11 +1470,11 @@ jobs:
           console.log(`Branch: ${metrics.branch}`);
           console.log(`Author: ${metrics.author}`);
           console.log(`Attempt: ${metrics.attempt}`);
-          
+
           // Store in repository (simple approach)
           try {
             const metricsFile = `metrics/${new Date().toISOString().split('T')[0]}.json`;
-            
+
             // Try to get existing metrics for today
             let existingMetrics = [];
             try {
@@ -1485,13 +1487,13 @@ jobs:
             } catch (error) {
               // File doesn't exist yet, that's okay
             }
-            
+
             // Add new metrics
             existingMetrics.push(metrics);
-            
+
             // Store updated metrics
             const content = Buffer.from(JSON.stringify(existingMetrics, null, 2)).toString('base64');
-            
+
             await github.rest.repos.createOrUpdateFileContents({
               owner: context.repo.owner,
               repo: context.repo.repo,
@@ -1500,16 +1502,16 @@ jobs:
               content: content,
               sha: fileData?.sha // Include SHA if file exists
             });
-            
+
           } catch (error) {
             console.log('Failed to store metrics:', error.message);
           }
-          
+
           // Alert on failures or slow builds
           if (metrics.status === 'failure') {
             console.log('🚨 Build failed! Consider alerting the team.');
           }
-          
+
           if (metrics.duration_minutes > 10) {
             console.log(`⚠️ Slow build detected: ${metrics.duration_minutes} minutes`);
           }
@@ -1540,7 +1542,7 @@ app.use(express.static('public'));
 app.get('/api/deployments', async (req, res) => {
   try {
     console.log('📊 Fetching deployment data...');
-    
+
     // Get recent workflow runs
     const { data: workflows } = await octokit.actions.listWorkflowRunsForRepo({
       owner: process.env.GITHUB_OWNER || 'your-org',
@@ -1548,7 +1550,7 @@ app.get('/api/deployments', async (req, res) => {
       workflow_id: 'deploy.yml',
       per_page: 50 // Why 50? Balance between completeness and performance
     });
-    
+
     // Transform data for dashboard
     const deployments = workflows.workflow_runs.map(run => ({
       id: run.id,
@@ -1563,21 +1565,21 @@ app.get('/api/deployments', async (req, res) => {
       url: run.html_url,
       attempt: run.run_attempt
     }));
-    
+
     // Calculate statistics
     const stats = calculateStats(deployments);
-    
-    res.json({ 
+
+    res.json({
       deployments,
       stats,
       lastUpdated: new Date().toISOString()
     });
-    
+
   } catch (error) {
     console.error('❌ Error fetching deployments:', error);
-    res.status(500).json({ 
+    res.status(500).json({
       error: 'Failed to fetch deployments',
-      message: error.message 
+      message: error.message
     });
   }
 });
@@ -1588,15 +1590,15 @@ function calculateStats(deployments) {
   const successful = deployments.filter(d => d.status === 'success').length;
   const failed = deployments.filter(d => d.status === 'failure').length;
   const successRate = total > 0 ? ((successful / total) * 100).toFixed(1) : 0;
-  
+
   // Calculate average duration
   const durations = deployments
     .filter(d => d.status === 'success')
     .map(d => parseDuration(d.duration));
-  const avgDuration = durations.length > 0 
-    ? durations.reduce((a, b) => a + b, 0) / durations.length 
+  const avgDuration = durations.length > 0
+    ? durations.reduce((a, b) => a + b, 0) / durations.length
     : 0;
-  
+
   return {
     total,
     successful,
@@ -1630,7 +1632,7 @@ function formatDuration(seconds) {
 
 // Health check endpoint
 app.get('/health', (req, res) => {
-  res.json({ 
+  res.json({
     status: 'healthy',
     service: 'deployment-dashboard',
     timestamp: new Date().toISOString()
@@ -1640,7 +1642,7 @@ app.get('/health', (req, res) => {
 // Error handling middleware
 app.use((error, req, res, next) => {
   console.error('💥 Unhandled error:', error);
-  res.status(500).json({ 
+  res.status(500).json({
     error: 'Internal server error',
     message: process.env.NODE_ENV === 'development' ? error.message : 'Something went wrong'
   });
@@ -1680,7 +1682,7 @@ Example integration with CloudWatch:
       --metric-data \
         MetricName=DeploymentDuration,Value=${{ env.DEPLOY_DURATION }},Unit=Seconds \
         MetricName=DeploymentSuccess,Value=1,Unit=Count
-    
+
     # Create deployment marker in CloudWatch Insights
     aws logs put-log-events \
       --log-group-name "/aws/lambda/deployment-events" \
@@ -1704,7 +1706,7 @@ Don't try to build the perfect pipeline on day one. As the [Lean Startup](https:
 
 ### 2. Fail Fast, Fail Clearly
 
-Design your pipeline to find issues as early as possible. The cost of a fix increases exponentially as an issue moves through the pipeline. A linting error in CI takes seconds to fix. The same issue in production takes hours.
+Design your pipeline to find issues as early as possible. A fix usually costs more the later you find the issue. A linting error in CI takes seconds to fix. The same issue in production takes hours.
 
 - Run the fastest checks first (linting before tests).
 - Write clear, actionable error messages.

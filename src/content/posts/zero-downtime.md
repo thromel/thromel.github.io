@@ -69,7 +69,7 @@ spec:
         image: mycompany/order-service:v2.1.0
         ports:
         - containerPort: 8080
-        
+
         # Startup probe - gives the app time to initialize
         startupProbe:
           httpGet:
@@ -78,7 +78,7 @@ spec:
           initialDelaySeconds: 10
           periodSeconds: 5
           failureThreshold: 30  # Allows up to 150 seconds for startup
-        
+
         # Liveness probe - restarts if the app crashes
         livenessProbe:
           httpGet:
@@ -87,7 +87,7 @@ spec:
           initialDelaySeconds: 0
           periodSeconds: 10
           failureThreshold: 3
-        
+
         # Readiness probe - controls traffic routing
         readinessProbe:
           httpGet:
@@ -136,33 +136,33 @@ import (
 func main() {
     // Create our HTTP server
     srv := &http.Server{Addr: ":8080"}
-    
+
     // Handle our routes
     http.HandleFunc("/api/orders", handleOrders)
-    
+
     // Start server in a goroutine
     go func() {
         if err := srv.ListenAndServe(); err != http.ErrServerClosed {
             log.Fatalf("ListenAndServe(): %v", err)
         }
     }()
-    
+
     // Wait for interrupt signal
     sigterm := make(chan os.Signal, 1)
     signal.Notify(sigterm, syscall.SIGTERM, syscall.SIGINT)
     <-sigterm
-    
+
     log.Println("Shutdown signal received, draining requests...")
-    
+
     // Give ongoing requests 30 seconds to complete
     ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
     defer cancel()
-    
+
     // Stop accepting new requests and wait for existing ones
     if err := srv.Shutdown(ctx); err != nil {
         log.Printf("HTTP server Shutdown error: %v", err)
     }
-    
+
     log.Println("Graceful shutdown complete")
 }
 ```
@@ -202,7 +202,7 @@ spec:
       simple: ROUND_ROBIN
     outlierDetection:
       # Remove unhealthy instances from load balancing
-      consecutiveErrors: 5
+      consecutive5xxErrors: 5
       interval: 30s
       baseEjectionTime: 30s
       maxEjectionPercent: 50
@@ -272,7 +272,7 @@ ALTER TABLE orders ADD COLUMN customer_email VARCHAR(255);
 -- Step 2: Backfill existing data
 UPDATE orders o
 SET customer_email = (
-    SELECT email FROM customers c 
+    SELECT email FROM customers c
     WHERE c.id = o.customer_id
 )
 WHERE customer_email IS NULL;
@@ -313,8 +313,8 @@ This is a Prometheus query we use to track errors during deployments:
 
 ```promql
 # Error rate in the last 5 minutes
-sum(rate(http_requests_total{status=~"5.."}[5m])) 
-/ 
+sum(rate(http_requests_total{status=~"5.."}[5m]))
+/
 sum(rate(http_requests_total[5m]))
 ```
 
@@ -371,7 +371,7 @@ spec:
 2. In another terminal, curl the service in a loop:
 
 ```bash
-while true; do 
+while true; do
   curl -s http://hello-world | grep -o "Server address: [^<]*"
   sleep 0.5
 done

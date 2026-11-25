@@ -70,6 +70,7 @@ Create a new file called `campus-network.cc` in the `scratch` directory of your 
 #include "ns3/network-module.h"
 #include "ns3/internet-module.h"
 #include "ns3/point-to-point-module.h"
+#include "ns3/csma-module.h"
 #include "ns3/wifi-module.h"
 #include "ns3/mobility-module.h"
 #include "ns3/applications-module.h"
@@ -84,9 +85,9 @@ int main(int argc, char *argv[])
 {
     // Enable logging so we can see what's happening
     LogComponentEnable("CampusNetworkSimulation", LOG_LEVEL_INFO);
-    
+
     NS_LOG_INFO("Creating our campus network simulation");
-    
+
     // Let's start building!
 }
 ```
@@ -101,27 +102,27 @@ Next, add the network devices. Our campus has 1 media server and 1 router that c
 int main(int argc, char *argv[])
 {
     LogComponentEnable("CampusNetworkSimulation", LOG_LEVEL_INFO);
-    
+
     // Create the media server
     NS_LOG_INFO("Creating media server");
     NodeContainer mediaServer;
     mediaServer.Create(1);  // Just one server
-    
+
     // Create the router that connects everything
     NS_LOG_INFO("Creating router");
     NodeContainer router;
     router.Create(1);
-    
+
     // Create lab computers (connected via Ethernet)
     NS_LOG_INFO("Creating lab computers");
     NodeContainer labComputers;
     labComputers.Create(3);
-    
+
     // Create student laptops (connected via WiFi)
     NS_LOG_INFO("Creating student laptops");
     NodeContainer wifiStudents;
     wifiStudents.Create(5);
-    
+
     // The router will also act as the WiFi access point
     NodeContainer wifiAP = router;
 }
@@ -137,12 +138,12 @@ A high-speed link connects our media server to the router. The `PointToPointHelp
     // Configure the point-to-point link between server and router
     NS_LOG_INFO("Configuring server-to-router link");
     PointToPointHelper serverLink;
-    
+
     // Set link properties: 1 Gbps bandwidth, 1ms delay
     // Think of this as a fiber optic connection
     serverLink.SetDeviceAttribute("DataRate", StringValue("1Gbps"));
     serverLink.SetChannelAttribute("Delay", StringValue("1ms"));
-    
+
     // Install the link on both devices
     NetDeviceContainer serverDevices;
     serverDevices = serverLink.Install(mediaServer.Get(0), router.Get(0));
@@ -158,21 +159,21 @@ Lab computers connect through Ethernet. We use the CSMA (Carrier Sense Multiple 
     // Configure Ethernet for lab computers
     NS_LOG_INFO("Setting up Ethernet for lab computers");
     CsmaHelper csma;
-    
+
     // 100 Mbps Ethernet with 2 microsecond delay
     csma.SetChannelAttribute("DataRate", StringValue("100Mbps"));
     csma.SetChannelAttribute("Delay", TimeValue(NanoSeconds(2000)));
-    
+
     // Connect all lab computers and the router to the same Ethernet
     NodeContainer csmaNodes;
     csmaNodes.Add(router.Get(0));  // Router first
     csmaNodes.Add(labComputers);   // Then all lab computers
-    
+
     NetDeviceContainer csmaDevices;
     csmaDevices = csma.Install(csmaNodes);
 ```
 
-In CSMA, all devices share the same medium, like several computers on the same switch. They must take turns to transmit, and NS3 simulates this realistically.
+In CSMA, all devices share one medium, like computers on an old Ethernet hub. They take turns to transmit. NS3 uses a simplified carrier-sense model without collisions.
 
 ## Step 4: Creating the WiFi Network
 
@@ -181,32 +182,32 @@ WiFi is more complex because wireless signals can interfere and nodes can move. 
 ```cpp
     // Configure WiFi for student laptops
     NS_LOG_INFO("Setting up WiFi network");
-    
+
     // The PHY layer (physical layer) handles radio transmission
     YansWifiPhyHelper wifiPhy;
     YansWifiChannelHelper wifiChannel = YansWifiChannelHelper::Default();
     wifiPhy.SetChannel(wifiChannel.Create());
-    
+
     // The MAC layer handles when devices can transmit
     WifiMacHelper wifiMac;
     WifiHelper wifi;
-    
+
     // Use 802.11n (common in campuses)
     wifi.SetStandard(WIFI_STANDARD_80211n);
-    
+
     // Configure the access point (router)
     Ssid ssid = Ssid("CampusWiFi");
     wifiMac.SetType("ns3::ApWifiMac",
                     "Ssid", SsidValue(ssid));
-    
+
     NetDeviceContainer apDevice;
     apDevice = wifi.Install(wifiPhy, wifiMac, wifiAP);
-    
+
     // Configure the student devices
     wifiMac.SetType("ns3::StaWifiMac",
                     "Ssid", SsidValue(ssid),
                     "ActiveProbing", BooleanValue(false));
-    
+
     NetDeviceContainer staDevices;
     staDevices = wifi.Install(wifiPhy, wifiMac, wifiStudents);
 ```
@@ -223,21 +224,21 @@ Wireless nodes need positions because signal strength depends on distance:
     // Set up mobility (positions) for WiFi nodes
     NS_LOG_INFO("Positioning WiFi nodes");
     MobilityHelper mobility;
-    
+
     // Access point is stationary at the origin
     mobility.SetMobilityModel("ns3::ConstantPositionMobilityModel");
     mobility.Install(wifiAP);
-    
+
     // Students are scattered around the library
     mobility.SetPositionAllocator("ns3::RandomRectanglePositionAllocator",
                                   "X", StringValue("ns3::UniformRandomVariable[Min=0.0|Max=30.0]"),
                                   "Y", StringValue("ns3::UniformRandomVariable[Min=0.0|Max=30.0]"));
-    
+
     // Students might move around slowly (studying, getting coffee)
     mobility.SetMobilityModel("ns3::RandomWalk2dMobilityModel",
                               "Bounds", RectangleValue(Rectangle(0, 30, 0, 30)),
                               "Speed", StringValue("ns3::ConstantRandomVariable[Constant=1.0]"));
-    
+
     mobility.Install(wifiStudents);
 ```
 
@@ -267,24 +268,24 @@ Each network segment needs its own IP address range:
     // Assign IP addresses to each network segment
     NS_LOG_INFO("Assigning IP addresses");
     Ipv4AddressHelper address;
-    
+
     // Server-to-router link: 10.1.1.0/30
     address.SetBase("10.1.1.0", "255.255.255.252");
     Ipv4InterfaceContainer serverInterfaces;
     serverInterfaces = address.Assign(serverDevices);
-    
+
     // Ethernet network: 10.1.2.0/24
     address.SetBase("10.1.2.0", "255.255.255.0");
     Ipv4InterfaceContainer csmaInterfaces;
     csmaInterfaces = address.Assign(csmaDevices);
-    
+
     // WiFi network: 10.1.3.0/24
     address.SetBase("10.1.3.0", "255.255.255.0");
     Ipv4InterfaceContainer apInterface;
     apInterface = address.Assign(apDevice);
     Ipv4InterfaceContainer staInterfaces;
     staInterfaces = address.Assign(staDevices);
-    
+
     // Enable routing
     Ipv4GlobalRoutingHelper::PopulateRoutingTables();
 ```
@@ -299,51 +300,56 @@ Now we use the network. This code creates a video streaming server and clients:
     // Create video streaming server on the media server
     NS_LOG_INFO("Creating video streaming application");
     uint16_t videoPort = 5000;
-    
+
     // Server application - sends video data
     OnOffHelper videoServer("ns3::UdpSocketFactory",
                             InetSocketAddress(Ipv4Address::GetAny(), videoPort));
-    
+
     // Configure to simulate 4K video streaming (25 Mbps)
     videoServer.SetAttribute("DataRate", StringValue("25Mbps"));
     videoServer.SetAttribute("PacketSize", UintegerValue(1400));
-    
-    // Install server app on media server
-    ApplicationContainer serverApp = videoServer.Install(mediaServer.Get(0));
-    serverApp.Start(Seconds(0.0));
-    serverApp.Stop(Seconds(30.0));
-    
+    // Send continuously (the default is 1 s on, 1 s off)
+    videoServer.SetAttribute("OnTime", StringValue("ns3::ConstantRandomVariable[Constant=1]"));
+    videoServer.SetAttribute("OffTime", StringValue("ns3::ConstantRandomVariable[Constant=0]"));
+
+    // One sender app per client is added below
+    ApplicationContainer serverApp;
+
     // Create video clients on all student devices
     PacketSinkHelper videoClient("ns3::UdpSocketFactory",
                                  InetSocketAddress(Ipv4Address::GetAny(), videoPort));
-    
+
     // Install on lab computers
     ApplicationContainer labClientApps = videoClient.Install(labComputers);
     labClientApps.Start(Seconds(1.0));
     labClientApps.Stop(Seconds(30.0));
-    
+
     // Install on WiFi students
     ApplicationContainer wifiClientApps = videoClient.Install(wifiStudents);
     wifiClientApps.Start(Seconds(1.0));
     wifiClientApps.Stop(Seconds(30.0));
-    
+
     // Configure the server to send to all clients
     for (uint32_t i = 0; i < labComputers.GetN(); ++i)
     {
-        videoServer.SetAttribute("Remote", 
+        videoServer.SetAttribute("Remote",
             AddressValue(InetSocketAddress(csmaInterfaces.GetAddress(i+1), videoPort)));
         serverApp.Add(videoServer.Install(mediaServer.Get(0)));
     }
-    
+
     for (uint32_t i = 0; i < wifiStudents.GetN(); ++i)
     {
         videoServer.SetAttribute("Remote",
             AddressValue(InetSocketAddress(staInterfaces.GetAddress(i), videoPort)));
         serverApp.Add(videoServer.Install(mediaServer.Get(0)));
     }
+
+    // Start and stop all sender apps after they are created
+    serverApp.Start(Seconds(1.0));
+    serverApp.Stop(Seconds(30.0));
 ```
 
-The `OnOffHelper` creates an application that alternates between sending data (On) and silence (Off). Real video streams behave like this. The `PacketSinkHelper` creates applications that receive and consume data.
+The `OnOffHelper` creates an application that alternates between sending data (On) and silence (Off). We set the Off time to zero, so each stream sends a constant 25 Mbps. The `PacketSinkHelper` creates applications that receive and consume data.
 
 ## Step 9: Monitoring Network Performance
 
@@ -354,7 +360,7 @@ To know whether the network design works, add monitoring:
     NS_LOG_INFO("Setting up performance monitoring");
     FlowMonitorHelper flowHelper;
     Ptr<FlowMonitor> flowMonitor = flowHelper.InstallAll();
-    
+
     // Also enable pcap tracing for detailed packet analysis
     serverLink.EnablePcap("campus-server", serverDevices.Get(0), true);
     csma.EnablePcap("campus-ethernet", csmaDevices.Get(1), true);
@@ -372,40 +378,40 @@ Finally, run the simulation and print the results:
     NS_LOG_INFO("Starting simulation");
     Simulator::Stop(Seconds(31.0));
     Simulator::Run();
-    
+
     // Print flow statistics
     flowMonitor->CheckForLostPackets();
     Ptr<Ipv4FlowClassifier> classifier = DynamicCast<Ipv4FlowClassifier>
         (flowHelper.GetClassifier());
-    
+
     FlowMonitor::FlowStatsContainer stats = flowMonitor->GetFlowStats();
-    
+
     std::cout << "\n=== Flow Statistics ===" << std::endl;
     for (auto iter = stats.begin(); iter != stats.end(); ++iter)
     {
         Ipv4FlowClassifier::FiveTuple t = classifier->FindFlow(iter->first);
-        
+
         std::cout << "Flow " << iter->first << " ("
                   << t.sourceAddress << ":" << t.sourcePort << " -> "
                   << t.destinationAddress << ":" << t.destinationPort << ")"
                   << std::endl;
-        
+
         std::cout << "  Tx Packets: " << iter->second.txPackets << std::endl;
         std::cout << "  Rx Packets: " << iter->second.rxPackets << std::endl;
-        std::cout << "  Throughput: " 
-                  << iter->second.rxBytes * 8.0 / 30.0 / 1000000.0 
+        std::cout << "  Throughput: "
+                  << iter->second.rxBytes * 8.0 / 30.0 / 1000000.0
                   << " Mbps" << std::endl;
-        std::cout << "  Mean Delay: " << iter->second.delaySum.GetSeconds() / 
+        std::cout << "  Mean Delay: " << iter->second.delaySum.GetSeconds() /
                      iter->second.rxPackets << " s" << std::endl;
-        std::cout << "  Packet Loss: " 
-                  << (iter->second.txPackets - iter->second.rxPackets) * 100.0 / 
+        std::cout << "  Packet Loss: "
+                  << (iter->second.txPackets - iter->second.rxPackets) * 100.0 /
                      iter->second.txPackets << " %" << std::endl;
         std::cout << std::endl;
     }
-    
+
     // Clean up
     Simulator::Destroy();
-    
+
     return 0;
 }
 ```
@@ -474,7 +480,7 @@ energyHelper.Set("BasicEnergySourceInitialEnergyJ", DoubleValue(100.0));
 EnergySourceContainer sources = energyHelper.Install(wifiStudents);
 
 WifiRadioEnergyModelHelper radioEnergyHelper;
-DeviceEnergyModelContainer deviceModels = 
+DeviceEnergyModelContainer deviceModels =
     radioEnergyHelper.Install(staDevices, sources);
 ```
 

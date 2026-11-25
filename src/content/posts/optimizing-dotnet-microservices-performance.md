@@ -32,11 +32,11 @@ graph TB
     Gateway --> Patient[Patient Service]
     Gateway --> Analytics[Analytics Service]
     Gateway --> Reports[Reports Service]
-    
+
     Patient --> PatientDB[(Patient Database)]
     Analytics --> AnalyticsDB[(Analytics Database)]
     Reports --> ReportsDB[(Reports Database)]
-    
+
     Analytics --> Cache[Redis Cache]
     Reports --> Queue[Message Queue]
 ```
@@ -62,21 +62,21 @@ The first warning sign came from the Patient Service. A simple API call to get p
 public async Task<IActionResult> GetPatientsWithHistory()
 {
     var patients = await _context.Patients.ToListAsync();
-    
+
     var result = new List<PatientWithHistoryDto>();
     foreach (var patient in patients)
     {
         var history = await _context.MedicalHistories
             .Where(h => h.PatientId == patient.Id)
             .ToListAsync();
-            
+
         result.Add(new PatientWithHistoryDto
         {
             Patient = patient,
             MedicalHistory = history
         });
     }
-    
+
     return Ok(result);
 }
 ```
@@ -99,13 +99,13 @@ public async Task<IActionResult> GetPatientsWithHistory()
     var patients = await _context.Patients
         .Include(p => p.MedicalHistories)
         .ToListAsync();
-    
+
     var result = patients.Select(p => new PatientWithHistoryDto
     {
         Patient = p,
         MedicalHistory = p.MedicalHistories.ToList()
     }).ToList();
-    
+
     return Ok(result);
 }
 ```
@@ -154,7 +154,7 @@ public class AnalyticsResult
 public async Task<IActionResult> GetAnalytics(int reportId)
 {
     var data = await _analyticsService.GenerateReport(reportId);
-    
+
     // This was using System.Text.Json with default settings
     return Ok(data);
 }
@@ -173,8 +173,8 @@ builder.Services.ConfigureHttpJsonOptions(options =>
     options.SerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
     options.SerializerOptions.WriteIndented = false; // Reduces size
     options.SerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
-    
-    // Use source generators for better performance (requires .NET 6+)
+
+    // Use source generators for better performance (TypeInfoResolverChain requires .NET 8+)
     options.SerializerOptions.TypeInfoResolverChain.Insert(0, AppJsonSerializerContext.Default);
 });
 
@@ -190,14 +190,14 @@ public class AnalyticsResult
 {
     [JsonPropertyName("timestamp")]
     public DateTime Timestamp { get; set; }
-    
+
     [JsonPropertyName("metrics")]
     public List<MetricData> Metrics { get; set; }
-    
+
     [JsonPropertyName("metadata")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public Dictionary<string, object>? Metadata { get; set; }
-    
+
     [JsonPropertyName("chartData")]
     public List<ChartDataPoint> ChartData { get; set; }
 }
@@ -216,13 +216,13 @@ public async Task<IActionResult> GetAnalyticsStream(int reportId)
     };
 
     Response.ContentType = "application/json";
-    
+
     await foreach (var chunk in _analyticsService.GenerateReportStream(reportId))
     {
         await JsonSerializer.SerializeAsync(Response.Body, chunk, options);
         await Response.Body.FlushAsync();
     }
-    
+
     return new EmptyResult();
 }
 ```
@@ -243,8 +243,8 @@ A query in our Reports Service took 45 seconds. It searched millions of records 
 public async Task<List<Report>> GetReportsByDateRange(DateTime startDate, DateTime endDate, string category)
 {
     return await _context.Reports
-        .Where(r => r.CreatedDate >= startDate && 
-                   r.CreatedDate <= endDate && 
+        .Where(r => r.CreatedDate >= startDate &&
+                   r.CreatedDate <= endDate &&
                    r.Category == category &&
                    r.IsActive == true)
         .OrderBy(r => r.CreatedDate)
@@ -262,11 +262,11 @@ First, we analyzed the query execution plan:
 
 ```sql
 -- PostgreSQL EXPLAIN ANALYZE
-EXPLAIN ANALYZE SELECT * FROM reports 
-WHERE created_date >= '2024-01-01' 
-  AND created_date <= '2024-12-31' 
+EXPLAIN ANALYZE SELECT * FROM reports
+WHERE created_date >= '2024-01-01'
+  AND created_date <= '2024-12-31'
   AND category = 'financial'
-  AND is_active = true 
+  AND is_active = true
 ORDER BY created_date;
 ```
 
@@ -282,12 +282,12 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
     modelBuilder.Entity<Report>()
         .HasIndex(r => new { r.Category, r.IsActive, r.CreatedDate })
         .HasDatabaseName("IX_Reports_Category_IsActive_CreatedDate");
-    
+
     // Additional index for date range queries
     modelBuilder.Entity<Report>()
         .HasIndex(r => r.CreatedDate)
         .HasDatabaseName("IX_Reports_CreatedDate");
-    
+
     // Index for active reports
     modelBuilder.Entity<Report>()
         .HasIndex(r => r.IsActive)
@@ -307,16 +307,16 @@ public partial class AddReportsIndexes : Migration
             name: "IX_Reports_Category_IsActive_CreatedDate",
             table: "Reports",
             columns: new[] { "Category", "IsActive", "CreatedDate" });
-            
+
         migrationBuilder.CreateIndex(
             name: "IX_Reports_CreatedDate",
             table: "Reports",
             column: "CreatedDate");
-            
+
         // PostgreSQL partial index for active reports only
         migrationBuilder.Sql(@"
-            CREATE INDEX CONCURRENTLY IX_Reports_IsActive 
-            ON ""Reports"" (""IsActive"") 
+            CREATE INDEX CONCURRENTLY IX_Reports_IsActive
+            ON ""Reports"" (""IsActive"")
             WHERE ""IsActive"" = true;
         ");
     }
@@ -360,19 +360,19 @@ public async Task<IActionResult> Authenticate([FromBody] LoginRequest request)
 {
     // This was calling external identity providers synchronously
     var user = _userService.ValidateUser(request.Username, request.Password);
-    
+
     if (user != null)
     {
         var token = _tokenService.GenerateToken(user);
         var profile = _profileService.GetUserProfile(user.Id);
-        
-        return Ok(new AuthResponse 
-        { 
-            Token = token, 
-            Profile = profile 
+
+        return Ok(new AuthResponse
+        {
+            Token = token,
+            Profile = profile
         });
     }
-    
+
     return Unauthorized();
 }
 ```
@@ -383,7 +383,7 @@ The underlying services made synchronous HTTP calls:
 public class UserService
 {
     private readonly HttpClient _httpClient;
-    
+
     public User ValidateUser(string username, string password)
     {
         // This blocks a thread while waiting for HTTP response
@@ -396,7 +396,7 @@ public class UserService
 
 ### The Concept: Asynchronous Programming and Thread Pool
 
-The .NET thread pool has a limited number of threads (typically CPU cores × 2 for worker threads). If you block threads with synchronous I/O, the pool runs out of threads quickly, and new requests wait in a queue.
+By default, the .NET thread pool keeps one worker thread per CPU core and adds more threads slowly. If you block threads with synchronous I/O, the pool runs out of threads quickly, and new requests wait in a queue.
 
 Never block on async code. Use `async`/`await` all the way down.
 
@@ -407,39 +407,39 @@ Never block on async code. Use `async`/`await` all the way down.
 public async Task<IActionResult> Authenticate([FromBody] LoginRequest request)
 {
     var user = await _userService.ValidateUserAsync(request.Username, request.Password);
-    
+
     if (user != null)
     {
         // Run independent operations concurrently
         var tokenTask = _tokenService.GenerateTokenAsync(user);
         var profileTask = _profileService.GetUserProfileAsync(user.Id);
-        
+
         await Task.WhenAll(tokenTask, profileTask);
-        
-        return Ok(new AuthResponse 
-        { 
-            Token = tokenTask.Result, 
-            Profile = profileTask.Result 
+
+        return Ok(new AuthResponse
+        {
+            Token = tokenTask.Result,
+            Profile = profileTask.Result
         });
     }
-    
+
     return Unauthorized();
 }
 
 public class UserService
 {
     private readonly HttpClient _httpClient;
-    
+
     public async Task<User> ValidateUserAsync(string username, string password)
     {
         var content = new StringContent(
             JsonSerializer.Serialize(new { username, password }),
             Encoding.UTF8,
             "application/json");
-            
+
         var response = await _httpClient.PostAsync("/validate", content);
         response.EnsureSuccessStatusCode();
-        
+
         var jsonResponse = await response.Content.ReadAsStringAsync();
         return JsonSerializer.Deserialize<User>(jsonResponse);
     }
@@ -454,11 +454,11 @@ public async Task<User> ValidateUserAsync(string username, string password)
     var response = await _httpClient
         .PostAsync("/validate", content)
         .ConfigureAwait(false);
-        
+
     var jsonResponse = await response.Content
         .ReadAsStringAsync()
         .ConfigureAwait(false);
-        
+
     return JsonSerializer.Deserialize<User>(jsonResponse);
 }
 ```
@@ -495,15 +495,15 @@ public class ReportGenerator
     {
         // Creating new HttpClient for each request - MEMORY LEAK
         var httpClient = new HttpClient();
-        
+
         // Not disposing DbContext properly
         var context = new AppDbContext();
-        
+
         var data = await context.Reports.FindAsync(reportId);
         var externalData = await httpClient.GetStringAsync($"https://api.external.com/data/{reportId}");
-        
+
         // Process data...
-        
+
         return ProcessedData;
         // Objects are not disposed - memory leak!
     }
@@ -529,12 +529,12 @@ builder.Services.AddHttpClient<ExternalApiService>(client =>
 public class ExternalApiService
 {
     private readonly HttpClient _httpClient;
-    
+
     public ExternalApiService(HttpClient httpClient)
     {
         _httpClient = httpClient;
     }
-    
+
     public async Task<string> GetDataAsync(int reportId)
     {
         return await _httpClient.GetStringAsync($"data/{reportId}");
@@ -549,7 +549,7 @@ public class ReportGenerator
 {
     private readonly IDbContextFactory<AppDbContext> _contextFactory;
     private readonly ExternalApiService _externalApiService;
-    
+
     public ReportGenerator(
         IDbContextFactory<AppDbContext> contextFactory,
         ExternalApiService externalApiService)
@@ -557,14 +557,14 @@ public class ReportGenerator
         _contextFactory = contextFactory;
         _externalApiService = externalApiService;
     }
-    
+
     public async Task<byte[]> GenerateReport(int reportId)
     {
         await using var context = await _contextFactory.CreateDbContextAsync();
-        
+
         var data = await context.Reports.FindAsync(reportId);
         var externalData = await _externalApiService.GetDataAsync(reportId);
-        
+
         return ProcessData(data, externalData);
     }
 }
@@ -577,7 +577,7 @@ public class ReportProcessor : IAsyncDisposable
 {
     private readonly SemaphoreSlim _semaphore = new(1, 1);
     private bool _disposed;
-    
+
     public async Task<ProcessedReport> ProcessAsync(Report report)
     {
         await _semaphore.WaitAsync();
@@ -591,7 +591,7 @@ public class ReportProcessor : IAsyncDisposable
             _semaphore.Release();
         }
     }
-    
+
     public async ValueTask DisposeAsync()
     {
         if (!_disposed)
@@ -639,17 +639,17 @@ Our caching strategy caused more problems than it solved. Several threads regene
 public async Task<IActionResult> GetDashboard(int userId)
 {
     var cacheKey = $"dashboard_{userId}";
-    
+
     // Multiple threads could all find null and start generating
     if (!_cache.TryGetValue(cacheKey, out var dashboard))
     {
         // Expensive operation taking 5+ seconds
         dashboard = await _dashboardService.GenerateDashboard(userId);
-        
+
         // Set cache for 1 hour
         _cache.Set(cacheKey, dashboard, TimeSpan.FromHours(1));
     }
-    
+
     return Ok(dashboard);
 }
 ```
@@ -666,27 +666,27 @@ public class DashboardService
     private readonly IDistributedCache _cache;
     private readonly IDatabase _redisDb;
     private readonly IDashboardGenerator _generator;
-    
+
     public async Task<Dashboard> GetDashboardAsync(int userId)
     {
         var cacheKey = $"dashboard_{userId}";
         var lockKey = $"lock_{cacheKey}";
-        
+
         // Try to get from cache first
         var cachedData = await _cache.GetStringAsync(cacheKey);
         if (cachedData != null)
         {
             return JsonSerializer.Deserialize<Dashboard>(cachedData);
         }
-        
+
         // Use Redis distributed lock to prevent stampede
         var lockValue = Guid.NewGuid().ToString();
         var lockTaken = await _redisDb.StringSetAsync(
-            lockKey, 
-            lockValue, 
-            TimeSpan.FromMinutes(5), 
+            lockKey,
+            lockValue,
+            TimeSpan.FromMinutes(5),
             When.NotExists);
-        
+
         if (lockTaken)
         {
             try
@@ -697,10 +697,10 @@ public class DashboardService
                 {
                     return JsonSerializer.Deserialize<Dashboard>(cachedData);
                 }
-                
+
                 // Generate dashboard
                 var dashboard = await _generator.GenerateDashboardAsync(userId);
-                
+
                 // Cache the result
                 await _cache.SetStringAsync(
                     cacheKey,
@@ -710,7 +710,7 @@ public class DashboardService
                         AbsoluteExpirationRelativeToNow = TimeSpan.FromHours(1),
                         SlidingExpiration = TimeSpan.FromMinutes(20)
                     });
-                
+
                 return dashboard;
             }
             finally
@@ -722,7 +722,7 @@ public class DashboardService
                     else
                         return 0
                     end";
-                        
+
                 await _redisDb.ScriptEvaluateAsync(script, new RedisKey[] { lockKey }, new RedisValue[] { lockValue });
             }
         }
@@ -730,7 +730,7 @@ public class DashboardService
         {
             // Wait for the other thread to finish and try cache again
             await Task.Delay(100);
-            
+
             for (int i = 0; i < 50; i++) // Wait up to 5 seconds
             {
                 cachedData = await _cache.GetStringAsync(cacheKey);
@@ -738,10 +738,10 @@ public class DashboardService
                 {
                     return JsonSerializer.Deserialize<Dashboard>(cachedData);
                 }
-                
+
                 await Task.Delay(100);
             }
-            
+
             // Fallback: generate without caching if lock holder failed
             return await _generator.GenerateDashboardAsync(userId);
         }
@@ -756,7 +756,7 @@ public class BackgroundCacheService : BackgroundService
 {
     private readonly IServiceProvider _serviceProvider;
     private readonly ILogger<BackgroundCacheService> _logger;
-    
+
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
         while (!stoppingToken.IsCancellationRequested)
@@ -772,15 +772,15 @@ public class BackgroundCacheService : BackgroundService
             }
         }
     }
-    
+
     private async Task RefreshExpiredCaches()
     {
         using var scope = _serviceProvider.CreateScope();
         var cacheService = scope.ServiceProvider.GetRequiredService<IDashboardService>();
-        
+
         // Get list of users whose cache is about to expire
         var usersToRefresh = await GetUsersWithExpiringSoonCache();
-        
+
         foreach (var userId in usersToRefresh)
         {
             try
@@ -813,12 +813,12 @@ public async Task<AnalyticsReport> GetUserAnalytics(int userId, DateTime startDa
 {
     // This loads ALL user activities into memory first!
     var activities = await _context.UserActivities.ToListAsync();
-    
+
     var userActivities = activities
         .Where(a => a.UserId == userId)
         .Where(a => a.Timestamp >= startDate && a.Timestamp <= endDate)
         .ToList();
-    
+
     // More LINQ operations on in-memory collections
     var analytics = new AnalyticsReport
     {
@@ -833,7 +833,7 @@ public async Task<AnalyticsReport> GetUserAnalytics(int userId, DateTime startDa
             .Take(10)
             .ToDictionary(g => g.Key, g => g.Count())
     };
-    
+
     return analytics;
 }
 ```
@@ -851,18 +851,18 @@ public async Task<AnalyticsReport> GetUserAnalytics(int userId, DateTime startDa
     var baseQuery = _context.UserActivities
         .Where(a => a.UserId == userId)
         .Where(a => a.Timestamp >= startDate && a.Timestamp <= endDate);
-    
+
     var analytics = new AnalyticsReport();
-    
+
     // Single query for total count
     analytics.TotalActivities = await baseQuery.CountAsync();
-    
+
     // Single query for unique actions
     analytics.UniqueActionsCount = await baseQuery
         .Select(a => a.ActionType)
         .Distinct()
         .CountAsync();
-    
+
     // Complex aggregation in database
     analytics.AverageSessionDuration = await baseQuery
         .GroupBy(a => a.SessionId)
@@ -873,7 +873,7 @@ public async Task<AnalyticsReport> GetUserAnalytics(int userId, DateTime startDa
                 .TotalMinutes
         })
         .AverageAsync(x => x.SessionDuration);
-    
+
     // Top actions with a single query
     analytics.TopActions = await baseQuery
         .GroupBy(a => a.ActionType)
@@ -881,7 +881,7 @@ public async Task<AnalyticsReport> GetUserAnalytics(int userId, DateTime startDa
         .OrderByDescending(x => x.Count)
         .Take(10)
         .ToDictionaryAsync(x => x.ActionType, x => x.Count);
-    
+
     return analytics;
 }
 ```
@@ -895,40 +895,40 @@ public async Task<Dictionary<string, object>> GetAdvancedAnalytics(int userId, D
 {
     var sql = @"
         WITH session_durations AS (
-            SELECT 
+            SELECT
                 session_id,
                 EXTRACT(EPOCH FROM (MAX(timestamp) - MIN(timestamp)))/60 as duration_minutes
-            FROM user_activities 
-            WHERE user_id = @userId 
+            FROM user_activities
+            WHERE user_id = @userId
               AND timestamp BETWEEN @startDate AND @endDate
             GROUP BY session_id
         ),
         action_stats AS (
-            SELECT 
+            SELECT
                 action_type,
                 COUNT(*) as action_count,
                 COUNT(DISTINCT session_id) as sessions_with_action
-            FROM user_activities 
-            WHERE user_id = @userId 
+            FROM user_activities
+            WHERE user_id = @userId
               AND timestamp BETWEEN @startDate AND @endDate
             GROUP BY action_type
         )
-        SELECT 
+        SELECT
             'total_activities' as metric,
             COUNT(*)::text as value
-        FROM user_activities 
+        FROM user_activities
         WHERE user_id = @userId AND timestamp BETWEEN @startDate AND @endDate
-        
+
         UNION ALL
-        
-        SELECT 
+
+        SELECT
             'avg_session_duration' as metric,
             AVG(duration_minutes)::text as value
         FROM session_durations
-        
+
         UNION ALL
-        
-        SELECT 
+
+        SELECT
             'top_action' as metric,
             action_type as value
         FROM action_stats
@@ -974,7 +974,7 @@ LINQ to Entities is like asking a librarian to find specific books (the database
 
 ### The Problem
 
-Under high load, our application started to throw `TimeoutException: Timeout expired. The timeout period elapsed prior to obtaining a connection from the pool.` The connection pool ran out of connections.
+Under high load, Npgsql started to throw `NpgsqlException: The connection pool has been exhausted`. The connection pool ran out of connections.
 
 ```csharp
 // This configuration was causing connection pool issues
@@ -994,7 +994,7 @@ We monitored our connection pool usage:
 public class ConnectionPoolMonitoringService : BackgroundService
 {
     private readonly ILogger<ConnectionPoolMonitoringService> _logger;
-    
+
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
         while (!stoppingToken.IsCancellationRequested)
@@ -1005,26 +1005,26 @@ public class ConnectionPoolMonitoringService : BackgroundService
                 var connectionString = Configuration.GetConnectionString("DefaultConnection");
                 using var connection = new NpgsqlConnection(connectionString);
                 await connection.OpenAsync();
-                
+
                 using var command = new NpgsqlCommand(@"
-                    SELECT 
+                    SELECT
                         state,
                         COUNT(*) as connection_count
-                    FROM pg_stat_activity 
+                    FROM pg_stat_activity
                     WHERE datname = current_database()
                     GROUP BY state", connection);
-                
+
                 using var reader = await command.ExecuteReaderAsync();
                 var stats = new Dictionary<string, int>();
-                
+
                 while (await reader.ReadAsync())
                 {
                     stats[reader.GetString("state")] = reader.GetInt32("connection_count");
                 }
-                
-                _logger.LogInformation("Connection Pool Stats: {Stats}", 
+
+                _logger.LogInformation("Connection Pool Stats: {Stats}",
                     JsonSerializer.Serialize(stats));
-                    
+
                 await Task.Delay(TimeSpan.FromMinutes(1), stoppingToken);
             }
             catch (Exception ex)
@@ -1049,7 +1049,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
         // Connection pool settings
         npgsqlOptions.CommandTimeout(30); // 30 seconds command timeout
     });
-    
+
     // Enable connection pooling optimizations
     options.EnableServiceProviderCaching();
     options.EnableSensitiveDataLogging(false); // Turn off in production
@@ -1063,14 +1063,14 @@ var connectionStringBuilder = new NpgsqlConnectionStringBuilder(connectionString
     MaxPoolSize = 100,        // Maximum connections (adjust based on your needs)
     ConnectionIdleLifetime = 300, // Close idle connections after 5 minutes
     ConnectionPruningInterval = 10, // Check for idle connections every 10 seconds
-    
+
     // Connection timeout settings
     Timeout = 30,             // Connection timeout in seconds
     CommandTimeout = 30,      // Command timeout in seconds
-    
+
     // Connection reliability
     Pooling = true,
-    ConnectionLifeTime = 600  // Force connection refresh every 10 minutes
+    ConnectionLifetime = 600  // Force connection refresh every 10 minutes
 };
 
 // Use the optimized connection string
@@ -1090,30 +1090,30 @@ builder.Services.AddDbContextFactory<AppDbContext>(options =>
 public class ReportService
 {
     private readonly IDbContextFactory<AppDbContext> _contextFactory;
-    
+
     public ReportService(IDbContextFactory<AppDbContext> contextFactory)
     {
         _contextFactory = contextFactory;
     }
-    
+
     public async Task<Report> GetReportAsync(int id)
     {
         // Create short-lived context
         await using var context = await _contextFactory.CreateDbContextAsync();
         return await context.Reports.FindAsync(id);
     }
-    
+
     public async Task ProcessReportsBatchAsync(int[] reportIds)
     {
         // Each batch gets its own context
         await using var context = await _contextFactory.CreateDbContextAsync();
-        
+
         foreach (var id in reportIds)
         {
             var report = await context.Reports.FindAsync(id);
             // Process report...
         }
-        
+
         await context.SaveChangesAsync();
     }
 }
@@ -1125,16 +1125,16 @@ public class ReportService
 public class HealthCheckExtensions
 {
     public static IServiceCollection AddDatabaseHealthChecks(
-        this IServiceCollection services, 
+        this IServiceCollection services,
         string connectionString)
     {
         services.AddHealthChecks()
-            .AddNpgSql(connectionString, 
+            .AddNpgSql(connectionString,
                 healthQuery: "SELECT 1",
                 name: "postgresql-health",
                 tags: new[] { "database", "postgresql" })
             .AddCheck<ConnectionPoolHealthCheck>("connection-pool-health");
-            
+
         return services;
     }
 }
@@ -1142,23 +1142,23 @@ public class HealthCheckExtensions
 public class ConnectionPoolHealthCheck : IHealthCheck
 {
     private readonly IDbContextFactory<AppDbContext> _contextFactory;
-    
+
     public async Task<HealthCheckResult> CheckHealthAsync(
-        HealthCheckContext context, 
+        HealthCheckContext context,
         CancellationToken cancellationToken = default)
     {
         try
         {
             await using var dbContext = await _contextFactory.CreateDbContextAsync();
-            
+
             // Test connection by executing a simple query
             var canConnect = await dbContext.Database.CanConnectAsync(cancellationToken);
-            
+
             if (canConnect)
             {
                 return HealthCheckResult.Healthy("Database connection pool is healthy");
             }
-            
+
             return HealthCheckResult.Unhealthy("Cannot connect to database");
         }
         catch (Exception ex)
@@ -1187,7 +1187,7 @@ app.Use(async (context, next) =>
 {
     // Heavy logging middleware running on every request
     var stopwatch = Stopwatch.StartNew();
-    
+
     var requestBody = "";
     if (context.Request.Body.CanSeek)
     {
@@ -1196,14 +1196,14 @@ app.Use(async (context, next) =>
         requestBody = await reader.ReadToEndAsync();
         context.Request.Body.Position = 0;
     }
-    
-    _logger.LogInformation("Request: {Method} {Path} Body: {Body}", 
-        context.Request.Method, 
-        context.Request.Path, 
+
+    _logger.LogInformation("Request: {Method} {Path} Body: {Body}",
+        context.Request.Method,
+        context.Request.Path,
         requestBody);
-    
+
     await next();
-    
+
     stopwatch.Stop();
     _logger.LogInformation("Response took {Duration}ms", stopwatch.ElapsedMilliseconds);
 });
@@ -1285,7 +1285,7 @@ if (app.Environment.IsDevelopment())
         var stopwatch = Stopwatch.StartNew();
         await next();
         stopwatch.Stop();
-        
+
         if (stopwatch.ElapsedMilliseconds > 1000) // Only log slow requests
         {
             _logger.LogWarning("Slow request: {Method} {Path} took {Duration}ms",
@@ -1363,7 +1363,7 @@ builder.Services.AddOutputCache(options =>
     options.AddBasePolicy(builder => builder
         .Expire(TimeSpan.FromMinutes(10))
         .SetVaryByQuery("page", "size", "filter"));
-        
+
     options.AddPolicy("reports", builder => builder
         .Expire(TimeSpan.FromMinutes(30))
         .SetVaryByQuery("userId", "dateRange"));
@@ -1401,7 +1401,7 @@ public async Task<User> GetUserAsync(int userId)
         {
             throw new UserNotFoundException($"User {userId} not found");
         }
-        
+
         return user;
     }
     catch (UserNotFoundException)
@@ -1418,12 +1418,12 @@ public async Task<decimal> CalculateUserScoreAsync(int userId)
         var activities = await _context.UserActivities
             .Where(a => a.UserId == userId)
             .ToListAsync();
-            
+
         if (!activities.Any())
         {
             throw new NoActivitiesException($"No activities for user {userId}");
         }
-        
+
         return activities.Sum(a => a.Points);
     }
     catch (NoActivitiesException)
@@ -1435,7 +1435,7 @@ public async Task<decimal> CalculateUserScoreAsync(int userId)
 
 ### The Concept: Exception Performance Cost
 
-Exceptions are expensive because they capture the entire call stack, unwind the stack, and trigger garbage collection. If you use exceptions for expected conditions (like "user not found"), performance can drop severely.
+Exceptions are expensive because they capture a stack trace, unwind the stack, and allocate objects that add garbage collection pressure. If you use exceptions for expected conditions (like "user not found"), performance can drop severely.
 
 ### The Solution: Result Pattern and Proper Exception Handling
 
@@ -1447,17 +1447,17 @@ public class Result<T>
     public bool IsSuccess { get; }
     public T Value { get; }
     public string Error { get; }
-    
+
     private Result(bool isSuccess, T value, string error)
     {
         IsSuccess = isSuccess;
         Value = value;
         Error = error;
     }
-    
+
     public static Result<T> Success(T value) => new(true, value, null);
     public static Result<T> Failure(string error) => new(false, default(T), error);
-    
+
     public static implicit operator Result<T>(T value) => Success(value);
 }
 
@@ -1466,18 +1466,18 @@ public static class ResultExtensions
 {
     public static Result<TResult> Map<T, TResult>(this Result<T> result, Func<T, TResult> map)
     {
-        return result.IsSuccess 
+        return result.IsSuccess
             ? Result<TResult>.Success(map(result.Value))
             : Result<TResult>.Failure(result.Error);
     }
-    
+
     public static async Task<Result<TResult>> MapAsync<T, TResult>(
-        this Result<T> result, 
+        this Result<T> result,
         Func<T, Task<TResult>> map)
     {
         if (!result.IsSuccess)
             return Result<TResult>.Failure(result.Error);
-            
+
         try
         {
             var value = await map(result.Value);
@@ -1497,8 +1497,8 @@ public static class ResultExtensions
 public async Task<Result<User>> GetUserAsync(int userId)
 {
     var user = await _context.Users.FindAsync(userId);
-    
-    return user != null 
+
+    return user != null
         ? Result<User>.Success(user)
         : Result<User>.Failure($"User {userId} not found");
 }
@@ -1506,12 +1506,12 @@ public async Task<Result<User>> GetUserAsync(int userId)
 public async Task<Result<User>> GetUserOrGuestAsync(int userId)
 {
     var userResult = await GetUserAsync(userId);
-    
+
     if (userResult.IsSuccess)
     {
         return userResult;
     }
-    
+
     // Return guest user instead of exception
     var guestUser = new User { Id = userId, Name = "Guest", IsGuest = true };
     return Result<User>.Success(guestUser);
@@ -1524,11 +1524,11 @@ public async Task<Result<decimal>> CalculateUserScoreAsync(int userId)
     {
         return Result<decimal>.Failure(userResult.Error);
     }
-    
+
     var activities = await _context.UserActivities
         .Where(a => a.UserId == userId)
         .ToListAsync();
-    
+
     var score = activities.Sum(a => a.Points);
     return Result<decimal>.Success(score);
 }
@@ -1541,8 +1541,8 @@ public async Task<Result<decimal>> CalculateUserScoreAsync(int userId)
 public async Task<IActionResult> GetUser(int userId)
 {
     var result = await _userService.GetUserAsync(userId);
-    
-    return result.IsSuccess 
+
+    return result.IsSuccess
         ? Ok(result.Value)
         : NotFound(new { error = result.Error });
 }
@@ -1551,12 +1551,12 @@ public async Task<IActionResult> GetUser(int userId)
 public async Task<IActionResult> GetUserScore(int userId)
 {
     var result = await _userService.CalculateUserScoreAsync(userId);
-    
+
     if (!result.IsSuccess)
     {
         return BadRequest(new { error = result.Error });
     }
-    
+
     return Ok(new { score = result.Value });
 }
 ```
@@ -1568,13 +1568,13 @@ public class GlobalExceptionMiddleware
 {
     private readonly RequestDelegate _next;
     private readonly ILogger<GlobalExceptionMiddleware> _logger;
-    
+
     public GlobalExceptionMiddleware(RequestDelegate next, ILogger<GlobalExceptionMiddleware> logger)
     {
         _next = next;
         _logger = logger;
     }
-    
+
     public async Task InvokeAsync(HttpContext context)
     {
         try
@@ -1587,11 +1587,11 @@ public class GlobalExceptionMiddleware
             await HandleExceptionAsync(context, ex);
         }
     }
-    
+
     private static async Task HandleExceptionAsync(HttpContext context, Exception exception)
     {
         context.Response.ContentType = "application/json";
-        
+
         var response = exception switch
         {
             TimeoutException => new ErrorResponse(408, "Request timeout"),
@@ -1599,9 +1599,9 @@ public class GlobalExceptionMiddleware
             ArgumentException => new ErrorResponse(400, "Bad request"),
             _ => new ErrorResponse(500, "Internal server error")
         };
-        
+
         context.Response.StatusCode = response.StatusCode;
-        
+
         var jsonResponse = JsonSerializer.Serialize(response);
         await context.Response.WriteAsync(jsonResponse);
     }
@@ -1620,25 +1620,25 @@ public static class ValidationExtensions
 {
     public static Result<T> ValidateRequired<T>(this T value, string fieldName) where T : class
     {
-        return value != null 
+        return value != null
             ? Result<T>.Success(value)
             : Result<T>.Failure($"{fieldName} is required");
     }
-    
+
     public static Result<string> ValidateEmail(this string email)
     {
         if (string.IsNullOrWhiteSpace(email))
             return Result<string>.Failure("Email is required");
-            
+
         if (!email.Contains('@'))
             return Result<string>.Failure("Invalid email format");
-            
+
         return Result<string>.Success(email);
     }
-    
+
     public static Result<int> ValidatePositive(this int value, string fieldName)
     {
-        return value > 0 
+        return value > 0
             ? Result<int>.Success(value)
             : Result<int>.Failure($"{fieldName} must be positive");
     }
@@ -1650,16 +1650,16 @@ public async Task<Result<User>> CreateUserAsync(CreateUserRequest request)
     var emailResult = request.Email.ValidateEmail();
     if (!emailResult.IsSuccess)
         return Result<User>.Failure(emailResult.Error);
-    
+
     var ageResult = request.Age.ValidatePositive("Age");
     if (!ageResult.IsSuccess)
         return Result<User>.Failure(ageResult.Error);
-    
+
     // Create user...
     var user = new User { Email = emailResult.Value, Age = ageResult.Value };
     await _context.Users.AddAsync(user);
     await _context.SaveChangesAsync();
-    
+
     return Result<User>.Success(user);
 }
 ```
@@ -1680,7 +1680,7 @@ After these 10 optimizations, our numbers changed as follows:
 | ----------------------------- | ------------- | -------------- | ----------- |
 | Average Response Time         | 8.2 seconds   | 180ms          | 97.8%       |
 | 95th Percentile Response Time | 15+ seconds   | 450ms          | 97%         |
-| Throughput (requests/second)  | 12            | 2,400          | 20,000%     |
+| Throughput (requests/second)  | 12            | 2,400          | 200×        |
 | Memory Usage                  | 8GB (growing) | 2.1GB (stable) | 74%         |
 | CPU Usage (under load)        | 95%           | 35%            | 63%         |
 | Database Query Time (avg)     | 2.1 seconds   | 45ms           | 97.9%       |
@@ -1733,7 +1733,7 @@ To learn more about the concepts in this post:
 ### Essential Books
 
 - **"Designing Data-Intensive Applications" by Martin Kleppmann**: A guide to building scalable systems
-- **"High Performance .NET Core" by Bartosz Adamczewski**: .NET-specific performance optimization
+- **"Writing High-Performance .NET Code" (2nd ed., 2018) by Ben Watson**: .NET-specific performance optimization
 - **"Database Internals" by Alex Petrov**: How databases work internally
 
 ### Online Resources
@@ -1744,7 +1744,7 @@ To learn more about the concepts in this post:
 
 ### Communities and Blogs
 
-- **The Morning Dew** (.NET blog aggregator)
+- **The Morning Brew** by Chris Alcock (.NET link blog)
 - **High Scalability** (architecture and performance blog)
 - **Reddit r/dotnet** and **Stack Overflow** for specific questions
 

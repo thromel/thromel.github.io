@@ -25,7 +25,7 @@ First, here is what OpenTelemetry is and why it matters for microservices.
 
 OpenTelemetry (OTel) is an open-source observability framework. It gives you one standard way to collect and export telemetry data. Think of it as a universal translator for your application's core signals. It understands logs, metrics, and traces, and it converts them into formats that many observability backends can read.
 
-OpenTelemetry came from the merger of two earlier projects, OpenTracing and OpenCensus. The merged project is a vendor-neutral standard and the de facto way to instrument cloud-native applications. It covers all three pillars of observability:
+OpenTelemetry came from the merger of two earlier projects, OpenTracing and OpenCensus. The merged project is a vendor-neutral CNCF standard, and most major observability vendors support it. It covers all three pillars of observability:
 
 **1. Traces** follow a request as it travels through your system, like a trail of breadcrumbs through a forest of microservices.
 
@@ -76,7 +76,7 @@ We judged them on five factors.
 
 **Language support** mattered because we use many languages. OpenTelemetry supports all of them well, with consistent APIs across platforms. So our Node.js and Java developers could use the same observability terms.
 
-**Community and ecosystem** health showed long-term viability. Major cloud providers and observability vendors back OpenTelemetry. The CNCF's [2023 survey](https://www.cncf.io/reports/cncf-annual-survey-2023/) showed OpenTelemetry adoption growing by 170% year-over-year.
+**Community and ecosystem** health showed long-term viability. Major cloud providers and observability vendors back OpenTelemetry. The CNCF's [2023 survey](https://www.cncf.io/reports/cncf-annual-survey-2023/) reported wider adoption of OpenTelemetry in 2023.
 
 **Performance overhead** worried us. In our benchmarks, a well-configured OpenTelemetry added less than 3% overhead, which fit our performance SLAs.
 
@@ -99,7 +99,7 @@ receivers:
         endpoint: 0.0.0.0:4317
       http:
         endpoint: 0.0.0.0:4318
-  
+
   # Bridge for existing Prometheus metrics
   prometheus:
     config:
@@ -112,11 +112,11 @@ processors:
   batch:
     timeout: 1s
     send_batch_size: 1024
-  
+
   memory_limiter:
     check_interval: 1s
     limit_mib: 512
-  
+
   resource:
     attributes:
       - key: environment
@@ -124,14 +124,15 @@ processors:
         action: upsert
 
 exporters:
-  jaeger:
-    endpoint: jaeger-collector:14250
+  # Jaeger accepts OTLP natively; the old "jaeger" exporter was removed in Collector v0.85
+  otlp/jaeger:
+    endpoint: jaeger-collector:4317
     tls:
       insecure: false
-  
+
   prometheus:
     endpoint: "0.0.0.0:8889"
-  
+
   elasticsearch:
     endpoints: ["https://es-cluster:9200"]
     logs_index: otel-logs
@@ -141,13 +142,13 @@ service:
     traces:
       receivers: [otlp]
       processors: [memory_limiter, batch]
-      exporters: [jaeger]
-    
+      exporters: [otlp/jaeger]
+
     metrics:
       receivers: [otlp, prometheus]
       processors: [memory_limiter, batch]
       exporters: [prometheus]
-    
+
     logs:
       receivers: [otlp]
       processors: [memory_limiter, batch, resource]
@@ -187,7 +188,7 @@ def configure_telemetry(app_name: str, app_version: str):
     Configure OpenTelemetry for the Order Service.
     This setup ensures we capture traces, metrics, and logs with proper context.
     """
-    
+
     # Define resource attributes that identify this service
     resource = Resource(attributes={
         ResourceAttributes.SERVICE_NAME: app_name,
@@ -196,16 +197,16 @@ def configure_telemetry(app_name: str, app_version: str):
         "team": "orders-team",
         "language": "python"
     })
-    
+
     # Configure Tracing
     tracer_provider = TracerProvider(resource=resource)
-    
+
     # Set up the OTLP exporter for traces
     otlp_trace_exporter = OTLPSpanExporter(
         endpoint=os.getenv("OTEL_EXPORTER_OTLP_ENDPOINT", "otel-collector:4317"),
         insecure=os.getenv("OTEL_EXPORTER_OTLP_INSECURE", "true").lower() == "true"
     )
-    
+
     # Use BatchSpanProcessor for better performance
     span_processor = BatchSpanProcessor(
         otlp_trace_exporter,
@@ -213,10 +214,10 @@ def configure_telemetry(app_name: str, app_version: str):
         max_queue_size=2048,
         schedule_delay_millis=5000
     )
-    
+
     tracer_provider.add_span_processor(span_processor)
     trace.set_tracer_provider(tracer_provider)
-    
+
     # Configure Metrics
     metric_reader = PeriodicExportingMetricReader(
         OTLPMetricExporter(
@@ -225,18 +226,18 @@ def configure_telemetry(app_name: str, app_version: str):
         ),
         export_interval_millis=60000  # Export metrics every minute
     )
-    
+
     meter_provider = MeterProvider(
         resource=resource,
         metric_readers=[metric_reader]
     )
     metrics.set_meter_provider(meter_provider)
-    
+
     # Auto-instrument libraries
-    FastAPIInstrumentor.instrument(tracer_provider=tracer_provider)
-    PymongoInstrumentor.instrument(tracer_provider=tracer_provider)
-    RequestsInstrumentor.instrument(tracer_provider=tracer_provider)
-    
+    FastAPIInstrumentor().instrument(tracer_provider=tracer_provider)
+    PymongoInstrumentor().instrument(tracer_provider=tracer_provider)
+    RequestsInstrumentor().instrument(tracer_provider=tracer_provider)
+
     return trace.get_tracer(app_name), metrics.get_meter(app_name)
 
 # order_service/main.py
@@ -285,59 +286,59 @@ async def create_order(request: Request, order_data: dict):
     Create a new order with comprehensive telemetry.
     This demonstrates manual instrumentation alongside auto-instrumentation.
     """
-    
+
     # Get the current span from auto-instrumentation
     current_span = trace.get_current_span()
-    
+
     # Add custom attributes to the span
     current_span.set_attribute("order.customer_id", order_data.get("customer_id"))
     current_span.set_attribute("order.total_items", len(order_data.get("items", [])))
-    
+
     start_time = time.time()
-    
+
     try:
         # Create a child span for inventory check
         with tracer.start_as_current_span("check_inventory") as inventory_span:
             inventory_span.set_attribute("items.count", len(order_data.get("items", [])))
-            
+
             # Simulate inventory check
             available = await check_inventory(order_data["items"])
-            
+
             if not available:
                 inventory_span.set_status(Status(StatusCode.ERROR, "Insufficient inventory"))
                 raise ValueError("Insufficient inventory")
-        
+
         # Create a child span for payment processing
         with tracer.start_as_current_span("process_payment") as payment_span:
             payment_span.set_attribute("payment.method", order_data.get("payment_method"))
             payment_span.set_attribute("payment.amount", order_data.get("total_amount"))
-            
+
             payment_result = await process_payment(order_data)
             payment_span.set_attribute("payment.transaction_id", payment_result["transaction_id"])
-        
+
         # Record metrics
         order_counter.add(1, {"payment_method": order_data.get("payment_method")})
         order_value_histogram.record(order_data.get("total_amount", 0))
-        
+
         # Record processing duration
         duration = time.time() - start_time
         order_processing_duration.record(duration)
-        
+
         current_span.set_status(Status(StatusCode.OK))
-        
+
         return {
             "order_id": "ORD-12345",
             "status": "confirmed",
             "estimated_delivery": "2024-01-15"
         }
-        
+
     except Exception as e:
         current_span.set_status(Status(StatusCode.ERROR, str(e)))
         current_span.record_exception(e)
-        
+
         # Record failed order metric
         order_counter.add(1, {"payment_method": order_data.get("payment_method"), "status": "failed"})
-        
+
         raise
 ```
 
@@ -363,7 +364,7 @@ import (
     "context"
     "fmt"
     "os"
-    
+
     "go.opentelemetry.io/otel"
     "go.opentelemetry.io/otel/attribute"
     "go.opentelemetry.io/otel/exporters/otlp/otlptrace/otlptracegrpc"
@@ -391,55 +392,61 @@ func InitTelemetry(ctx context.Context, serviceName, serviceVersion string) (fun
     if err != nil {
         return nil, fmt.Errorf("failed to create resource: %w", err)
     }
-    
+
+    // os.Getenv takes no default, so fall back by hand
+    endpoint := os.Getenv("OTEL_EXPORTER_OTLP_ENDPOINT")
+    if endpoint == "" {
+        endpoint = "otel-collector:4317"
+    }
+
     // Set up trace exporter
     traceExporter, err := otlptracegrpc.New(ctx,
-        otlptracegrpc.WithEndpoint(os.Getenv("OTEL_EXPORTER_OTLP_ENDPOINT", "otel-collector:4317")),
+        otlptracegrpc.WithEndpoint(endpoint),
         otlptracegrpc.WithInsecure(),
     )
     if err != nil {
         return nil, fmt.Errorf("failed to create trace exporter: %w", err)
     }
-    
+
     // Create trace provider with batching for better performance
     tracerProvider := trace.NewTracerProvider(
         trace.WithBatcher(traceExporter),
         trace.WithResource(res),
         trace.WithSampler(trace.AlwaysSample()), // In production, use trace.TraceIDRatioBased(0.1)
     )
-    
+
     // Set up metric exporter
     metricExporter, err := otlpmetricgrpc.New(ctx,
-        otlpmetricgrpc.WithEndpoint(os.Getenv("OTEL_EXPORTER_OTLP_ENDPOINT", "otel-collector:4317")),
+        otlpmetricgrpc.WithEndpoint(endpoint),
         otlpmetricgrpc.WithInsecure(),
     )
     if err != nil {
         return nil, fmt.Errorf("failed to create metric exporter: %w", err)
     }
-    
+
     // Create metric provider
     meterProvider := metric.NewMeterProvider(
         metric.WithReader(metric.NewPeriodicReader(metricExporter)),
         metric.WithResource(res),
     )
-    
+
     // Set global providers
     otel.SetTracerProvider(tracerProvider)
     otel.SetMeterProvider(meterProvider)
-    
+
     // Set up propagators for distributed tracing
     otel.SetTextMapPropagator(propagation.NewCompositeTextMapPropagator(
         propagation.TraceContext{},
         propagation.Baggage{},
     ))
-    
+
     // Return a cleanup function
     cleanup := func() {
         ctx := context.Background()
         tracerProvider.Shutdown(ctx)
         meterProvider.Shutdown(ctx)
     }
-    
+
     return cleanup, nil
 }
 ```
@@ -472,11 +479,11 @@ processors:
       - name: errors-policy
         type: status_code
         status_code: {status_codes: [ERROR]}
-        
-      - name: slow-traces-policy  
+
+      - name: slow-traces-policy
         type: latency
         latency: {threshold_ms: 1000}
-        
+
       - name: important-services
         type: and
         and:
@@ -485,7 +492,7 @@ processors:
             string_attribute:
               key: service.name
               values: [payment-service, order-service]
-              
+
       - name: probabilistic-policy
         type: probabilistic
         probabilistic: {sampling_percentage: 10}
@@ -504,19 +511,19 @@ At first, Python's async/await pattern broke our trace context propagation. When
 async def create_order(order_data):
     # This worked - context was preserved
     await validate_order(order_data)
-    
+
     # This didn't work - context was lost
     asyncio.create_task(send_order_notification(order_data))
-    
+
 # The solution:
 from opentelemetry import context as otel_context
 
 async def create_order(order_data):
     await validate_order(order_data)
-    
+
     # Capture current context
     ctx = otel_context.get_current()
-    
+
     # Create task with context
     asyncio.create_task(
         send_order_notification_with_context(order_data, ctx)
@@ -555,7 +562,7 @@ from opentelemetry.trace import format_trace_id, format_span_id
 
 class TraceContextFilter(logging.Filter):
     """Add trace context to log records"""
-    
+
     def filter(self, record):
         span = trace.get_current_span()
         if span.is_recording():
@@ -564,7 +571,7 @@ class TraceContextFilter(logging.Filter):
             record.span_id = format_span_id(span_context.span_id)
             record.service_name = "order-service"
         else:
-            record.trace_id = "000000000000000000000000000000"
+            record.trace_id = "00000000000000000000000000000000"
             record.span_id = "0000000000000000"
             record.service_name = "order-service"
         return True
@@ -701,8 +708,8 @@ We are now exploring four next steps:
 These resources helped us most:
 
 1. [OpenTelemetry Documentation](https://opentelemetry.io/docs/) - The official docs are comprehensive and well-maintained
-2. [Distributed Tracing in Practice](https://www.oreilly.com/library/view/distributed-tracing-in/9781492056638/) by Austin Parker - Essential reading for understanding distributed tracing
-3. [The RED Method](https://www.weave.works/blog/the-red-method-key-metrics-for-microservices-architecture/) - For choosing the right metrics
+2. [Distributed Tracing in Practice](https://www.oreilly.com/library/view/distributed-tracing-in/9781492056638/) by Austin Parker et al. - Essential reading for understanding distributed tracing
+3. [The RED Method](https://grafana.com/blog/the-red-method-how-to-instrument-your-services/) - For choosing the right metrics
 4. [Google SRE Books](https://sre.google/books/) - For understanding observability in the context of reliability
 
 ## Conclusion: The Observability Transformation

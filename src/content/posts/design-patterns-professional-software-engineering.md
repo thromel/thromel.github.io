@@ -56,24 +56,24 @@ Think about your computer's print spooler or the settings manager in your favori
 ```java
 public class DatabaseConnectionPool {
     // The single instance, created when first needed
-    private static DatabaseConnectionPool instance = null;
+    private static volatile DatabaseConnectionPool instance = null;
     private static final Object lock = new Object();
-    
+
     // Pool of available connections
     private List<Connection> availableConnections;
     private List<Connection> usedConnections;
     private final int MAX_CONNECTIONS = 10;
-    
+
     // Database configuration
     private String url = "jdbc:mysql://localhost:3306/myapp";
     private String user = "appuser";
     private String password = "secure_password";
-    
+
     // Private constructor prevents direct instantiation
     private DatabaseConnectionPool() {
         availableConnections = new ArrayList<>();
         usedConnections = new ArrayList<>();
-        
+
         // Initialize the pool with connections
         for (int i = 0; i < MAX_CONNECTIONS; i++) {
             try {
@@ -84,7 +84,7 @@ public class DatabaseConnectionPool {
             }
         }
     }
-    
+
     // Thread-safe way to get the single instance
     public static DatabaseConnectionPool getInstance() {
         // Double-check locking for thread safety and performance
@@ -97,18 +97,18 @@ public class DatabaseConnectionPool {
         }
         return instance;
     }
-    
+
     // Get a connection from the pool
     public synchronized Connection getConnection() throws SQLException {
         if (availableConnections.isEmpty()) {
             throw new SQLException("No connections available");
         }
-        
+
         Connection connection = availableConnections.remove(availableConnections.size() - 1);
         usedConnections.add(connection);
         return connection;
     }
-    
+
     // Return a connection to the pool
     public synchronized void releaseConnection(Connection connection) {
         usedConnections.remove(connection);
@@ -140,55 +140,55 @@ public class CreditCardPayment implements PaymentStrategy {
     private String cardNumber;
     private String cvv;
     private String expiryDate;
-    
+
     public CreditCardPayment(String cardNumber, String cvv, String expiryDate) {
         this.cardNumber = cardNumber;
         this.cvv = cvv;
         this.expiryDate = expiryDate;
     }
-    
+
     @Override
     public boolean validatePaymentDetails() {
         // Validate card number using Luhn algorithm
         // Check CVV format and expiry date
         return isValidCardNumber() && isValidCVV() && !isExpired();
     }
-    
+
     @Override
     public boolean processPayment(double amount) {
         if (!validatePaymentDetails()) {
             System.out.println("Invalid credit card details");
             return false;
         }
-        
+
         // In real implementation, this would connect to payment gateway
-        System.out.println("Processing $" + amount + " via Credit Card ending in " + 
+        System.out.println("Processing $" + amount + " via Credit Card ending in " +
                          cardNumber.substring(cardNumber.length() - 4));
-        
+
         // Simulate processing delay
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }
-        
+
         return true;
     }
-    
+
     @Override
     public String getPaymentMethodName() {
         return "Credit Card";
     }
-    
+
     private boolean isValidCardNumber() {
         // Simplified validation - real implementation would use Luhn algorithm
         return cardNumber.length() == 16 && cardNumber.matches("\\d+");
     }
-    
+
     private boolean isValidCVV() {
         return cvv.length() == 3 && cvv.matches("\\d+");
     }
-    
+
     private boolean isExpired() {
         // Check if card is expired based on expiryDate
         return false; // Simplified for example
@@ -200,39 +200,39 @@ public class DigitalWalletPayment implements PaymentStrategy {
     private String email;
     private String password;
     private String walletType;
-    
+
     public DigitalWalletPayment(String email, String password, String walletType) {
         this.email = email;
         this.password = password;
         this.walletType = walletType;
     }
-    
+
     @Override
     public boolean validatePaymentDetails() {
         // Validate email format and check credentials
         return email.contains("@") && !password.isEmpty();
     }
-    
+
     @Override
     public boolean processPayment(double amount) {
         if (!validatePaymentDetails()) {
             System.out.println("Invalid " + walletType + " credentials");
             return false;
         }
-        
+
         System.out.println("Processing $" + amount + " via " + walletType);
         System.out.println("Authenticating with " + email + "...");
-        
+
         // Simulate API call to wallet service
         try {
             Thread.sleep(1500);
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }
-        
+
         return true;
     }
-    
+
     @Override
     public String getPaymentMethodName() {
         return walletType;
@@ -243,43 +243,43 @@ public class DigitalWalletPayment implements PaymentStrategy {
 public class ShoppingCart {
     private List<Item> items;
     private PaymentStrategy paymentStrategy;
-    
+
     public ShoppingCart() {
         this.items = new ArrayList<>();
     }
-    
+
     public void addItem(Item item) {
         items.add(item);
     }
-    
+
     public double calculateTotal() {
         return items.stream()
                    .mapToDouble(Item::getPrice)
                    .sum();
     }
-    
+
     public void setPaymentStrategy(PaymentStrategy strategy) {
         this.paymentStrategy = strategy;
     }
-    
+
     public boolean checkout() {
         if (paymentStrategy == null) {
             System.out.println("Please select a payment method");
             return false;
         }
-        
+
         double total = calculateTotal();
         System.out.println("Total amount: $" + total);
-        
+
         boolean success = paymentStrategy.processPayment(total);
-        
+
         if (success) {
             System.out.println("Payment successful! Thank you for your purchase.");
             items.clear(); // Empty the cart after successful payment
         } else {
             System.out.println("Payment failed. Please try again.");
         }
-        
+
         return success;
     }
 }
@@ -290,14 +290,14 @@ public class OnlineStore {
         ShoppingCart cart = new ShoppingCart();
         cart.addItem(new Item("Laptop", 999.99));
         cart.addItem(new Item("Mouse", 29.99));
-        
+
         // Customer chooses credit card
         PaymentStrategy creditCard = new CreditCardPayment(
             "1234567812345678", "123", "12/25"
         );
         cart.setPaymentStrategy(creditCard);
         cart.checkout();
-        
+
         // Same cart, different payment method
         cart.addItem(new Item("Keyboard", 79.99));
         PaymentStrategy paypal = new DigitalWalletPayment(
@@ -338,30 +338,30 @@ public class WeatherStation implements WeatherSubject {
     private float temperature;
     private float humidity;
     private float pressure;
-    
+
     public WeatherStation() {
         observers = new ArrayList<>();
     }
-    
+
     @Override
     public void registerObserver(WeatherObserver observer) {
         observers.add(observer);
         System.out.println("New observer registered: " + observer.getClass().getSimpleName());
     }
-    
+
     @Override
     public void removeObserver(WeatherObserver observer) {
         observers.remove(observer);
         System.out.println("Observer removed: " + observer.getClass().getSimpleName());
     }
-    
+
     @Override
     public void notifyObservers() {
         for (WeatherObserver observer : observers) {
             observer.update(temperature, humidity, pressure);
         }
     }
-    
+
     // Called when new measurements are available
     public void setMeasurements(float temperature, float humidity, float pressure) {
         this.temperature = temperature;
@@ -369,7 +369,7 @@ public class WeatherStation implements WeatherSubject {
         this.pressure = pressure;
         measurementsChanged();
     }
-    
+
     private void measurementsChanged() {
         notifyObservers();
     }
@@ -379,14 +379,14 @@ public class WeatherStation implements WeatherSubject {
 public class CurrentConditionsDisplay implements WeatherObserver {
     private float temperature;
     private float humidity;
-    
+
     @Override
     public void update(float temperature, float humidity, float pressure) {
         this.temperature = temperature;
         this.humidity = humidity;
         display();
     }
-    
+
     public void display() {
         System.out.println("\n=== Current Conditions ===");
         System.out.println("Temperature: " + temperature + "°F");
@@ -401,27 +401,27 @@ public class StatisticsDisplay implements WeatherObserver {
     private float minTemp = Float.MAX_VALUE;
     private float tempSum = 0.0f;
     private int numReadings = 0;
-    
+
     public StatisticsDisplay() {
         temperatureHistory = new ArrayList<>();
     }
-    
+
     @Override
     public void update(float temperature, float humidity, float pressure) {
         temperatureHistory.add(temperature);
         tempSum += temperature;
         numReadings++;
-        
+
         if (temperature > maxTemp) {
             maxTemp = temperature;
         }
         if (temperature < minTemp) {
             minTemp = temperature;
         }
-        
+
         display();
     }
-    
+
     public void display() {
         System.out.println("\n=== Weather Statistics ===");
         System.out.println("Avg temperature: " + (tempSum / numReadings) + "°F");
@@ -434,7 +434,7 @@ public class StatisticsDisplay implements WeatherObserver {
 public class WeatherAlertSystem implements WeatherObserver {
     private float previousPressure = 0.0f;
     private final float STORM_THRESHOLD = 29.2f;
-    
+
     @Override
     public void update(float temperature, float humidity, float pressure) {
         // Check for rapid pressure drop indicating storms
@@ -442,16 +442,16 @@ public class WeatherAlertSystem implements WeatherObserver {
             System.out.println("\n⚠️  WEATHER ALERT: Rapid pressure drop detected!");
             System.out.println("Possible storm approaching.");
         }
-        
+
         if (pressure < STORM_THRESHOLD) {
             System.out.println("\n⚠️  WEATHER ALERT: Low pressure system!");
             System.out.println("Storm conditions likely.");
         }
-        
+
         if (temperature > 95) {
             System.out.println("\n⚠️  HEAT ADVISORY: Temperature exceeds 95°F");
         }
-        
+
         previousPressure = pressure;
     }
 }
@@ -461,29 +461,29 @@ public class WeatherMonitoringApp {
     public static void main(String[] args) {
         // Create the weather station
         WeatherStation weatherStation = new WeatherStation();
-        
+
         // Create different displays and systems
         CurrentConditionsDisplay currentDisplay = new CurrentConditionsDisplay();
         StatisticsDisplay statisticsDisplay = new StatisticsDisplay();
         WeatherAlertSystem alertSystem = new WeatherAlertSystem();
-        
+
         // Register all observers
         weatherStation.registerObserver(currentDisplay);
         weatherStation.registerObserver(statisticsDisplay);
         weatherStation.registerObserver(alertSystem);
-        
+
         // Simulate weather updates
         System.out.println("Weather Station Starting...\n");
-        
+
         weatherStation.setMeasurements(80, 65, 30.4f);
         Thread.sleep(2000); // Simulate time passing
-        
+
         weatherStation.setMeasurements(82, 70, 29.9f);
         Thread.sleep(2000);
-        
+
         weatherStation.setMeasurements(78, 75, 29.2f);
         Thread.sleep(2000);
-        
+
         // Simulate severe weather
         weatherStation.setMeasurements(96, 85, 28.5f);
     }
@@ -496,7 +496,7 @@ Much of modern software architecture uses the Observer pattern. It is the founda
 
 - Event handling in GUI frameworks
 - The Model-View-Controller (MVC) architecture
-- Reactive programming libraries like RxJava or React
+- Reactive programming libraries like RxJava or RxJS
 - Message queuing systems
 - WebSocket connections for real-time updates
 
@@ -518,23 +518,23 @@ public interface Notification {
 public class EmailNotification implements Notification {
     private String recipient;
     private String message;
-    
+
     public EmailNotification(String recipient, String message) {
         this.recipient = recipient;
         this.message = message;
     }
-    
+
     @Override
     public String getMessage() {
         return message;
     }
-    
+
     @Override
     public void send() {
         System.out.println("Sending email to: " + recipient);
         System.out.println("Message: " + message);
     }
-    
+
     @Override
     public double getCost() {
         return 0.01; // Basic email cost
@@ -544,21 +544,21 @@ public class EmailNotification implements Notification {
 // Base decorator class
 public abstract class NotificationDecorator implements Notification {
     protected Notification wrappedNotification;
-    
+
     public NotificationDecorator(Notification notification) {
         this.wrappedNotification = notification;
     }
-    
+
     @Override
     public String getMessage() {
         return wrappedNotification.getMessage();
     }
-    
+
     @Override
     public void send() {
         wrappedNotification.send();
     }
-    
+
     @Override
     public double getCost() {
         return wrappedNotification.getCost();
@@ -568,25 +568,25 @@ public abstract class NotificationDecorator implements Notification {
 // Concrete decorator - adds encryption
 public class EncryptedNotification extends NotificationDecorator {
     private String encryptionKey;
-    
+
     public EncryptedNotification(Notification notification, String key) {
         super(notification);
         this.encryptionKey = key;
     }
-    
+
     @Override
     public String getMessage() {
         // In real implementation, this would actually encrypt
-        return "[ENCRYPTED with key: " + encryptionKey + "] " + 
+        return "[ENCRYPTED with key: " + encryptionKey + "] " +
                super.getMessage();
     }
-    
+
     @Override
     public void send() {
         System.out.println("🔒 Applying end-to-end encryption...");
         super.send();
     }
-    
+
     @Override
     public double getCost() {
         return super.getCost() + 0.05; // Encryption adds cost
@@ -596,18 +596,18 @@ public class EncryptedNotification extends NotificationDecorator {
 // Concrete decorator - adds priority delivery
 public class PriorityNotification extends NotificationDecorator {
     private int priorityLevel;
-    
+
     public PriorityNotification(Notification notification, int level) {
         super(notification);
         this.priorityLevel = level;
     }
-    
+
     @Override
     public void send() {
         System.out.println("🚀 Priority Level " + priorityLevel + " - Expedited Delivery");
         super.send();
     }
-    
+
     @Override
     public double getCost() {
         return super.getCost() + (0.10 * priorityLevel); // Higher priority costs more
@@ -617,23 +617,23 @@ public class PriorityNotification extends NotificationDecorator {
 // Concrete decorator - adds read receipts
 public class TrackedNotification extends NotificationDecorator {
     private String trackingId;
-    
+
     public TrackedNotification(Notification notification) {
         super(notification);
         this.trackingId = generateTrackingId();
     }
-    
+
     private String generateTrackingId() {
         return "TRK-" + System.currentTimeMillis();
     }
-    
+
     @Override
     public void send() {
         System.out.println("📍 Tracking enabled: " + trackingId);
         super.send();
         System.out.println("✓ Delivery confirmed for tracking ID: " + trackingId);
     }
-    
+
     @Override
     public double getCost() {
         return super.getCost() + 0.03; // Tracking adds cost
@@ -643,18 +643,18 @@ public class TrackedNotification extends NotificationDecorator {
 // Concrete decorator - adds SMS backup
 public class SMSBackupNotification extends NotificationDecorator {
     private String phoneNumber;
-    
+
     public SMSBackupNotification(Notification notification, String phone) {
         super(notification);
         this.phoneNumber = phone;
     }
-    
+
     @Override
     public void send() {
         super.send();
         System.out.println("📱 SMS backup sent to: " + phoneNumber);
     }
-    
+
     @Override
     public double getCost() {
         return super.getCost() + 0.15; // SMS is expensive
@@ -669,7 +669,7 @@ public class NotificationService {
         System.out.println("=== Simple Email ===");
         simple.send();
         System.out.println("Cost: $" + simple.getCost() + "\n");
-        
+
         // Email with encryption and tracking
         Notification secure = new TrackedNotification(
             new EncryptedNotification(
@@ -680,7 +680,7 @@ public class NotificationService {
         System.out.println("=== Secure Tracked Email ===");
         secure.send();
         System.out.println("Cost: $" + secure.getCost() + "\n");
-        
+
         // High priority with SMS backup
         Notification urgent = new SMSBackupNotification(
             new PriorityNotification(
@@ -722,13 +722,13 @@ public class StandardPricing implements PricingStrategy {
         double basePrice = 2.50;
         double perMile = 1.50;
         double perMinute = 0.25;
-        
+
         double price = basePrice + (distance * perMile) + (duration * perMinute);
-        
+
         if (isPeakHour) {
             price *= 1.5; // 50% surge during peak hours
         }
-        
+
         return price;
     }
 }
@@ -739,13 +739,13 @@ public class LuxuryPricing implements PricingStrategy {
         double basePrice = 5.00;
         double perMile = 3.00;
         double perMinute = 0.50;
-        
+
         double price = basePrice + (distance * perMile) + (duration * perMinute);
-        
+
         if (isPeakHour) {
             price *= 1.3; // Lower surge for luxury rides
         }
-        
+
         return Math.max(price, 15.00); // Minimum fare for luxury
     }
 }
@@ -757,17 +757,17 @@ public interface RideObserver {
 
 public class PassengerApp implements RideObserver {
     private String passengerId;
-    
+
     public PassengerApp(String passengerId) {
         this.passengerId = passengerId;
     }
-    
+
     @Override
     public void updateRideStatus(String rideId, RideStatus status, String details) {
         System.out.println("📱 Passenger App Update:");
         System.out.println("   Status: " + status);
         System.out.println("   " + details);
-        
+
         // In real app, this would update UI and send push notifications
         if (status == RideStatus.DRIVER_ARRIVED) {
             System.out.println("   🚗 Your driver has arrived!");
@@ -777,16 +777,16 @@ public class PassengerApp implements RideObserver {
 
 public class DriverApp implements RideObserver {
     private String driverId;
-    
+
     public DriverApp(String driverId) {
         this.driverId = driverId;
     }
-    
+
     @Override
     public void updateRideStatus(String rideId, RideStatus status, String details) {
         System.out.println("🚗 Driver App Update:");
         System.out.println("   Status: " + status);
-        
+
         if (status == RideStatus.RIDE_REQUESTED) {
             System.out.println("   💰 New ride available! " + details);
         }
@@ -797,15 +797,15 @@ public class DriverApp implements RideObserver {
 public class RideDispatcher {
     private static RideDispatcher instance;
     private static final Object lock = new Object();
-    
+
     private Map<String, Ride> activeRides;
     private Queue<Driver> availableDrivers;
-    
+
     private RideDispatcher() {
         activeRides = new ConcurrentHashMap<>();
         availableDrivers = new ConcurrentLinkedQueue<>();
     }
-    
+
     public static RideDispatcher getInstance() {
         if (instance == null) {
             synchronized (lock) {
@@ -816,30 +816,30 @@ public class RideDispatcher {
         }
         return instance;
     }
-    
+
     public void registerDriver(Driver driver) {
         availableDrivers.offer(driver);
         System.out.println("Driver registered: " + driver.getName());
     }
-    
-    public Ride requestRide(Passenger passenger, Location pickup, Location destination, 
+
+    public Ride requestRide(Passenger passenger, Location pickup, Location destination,
                            RideType rideType) {
         Driver driver = findNearestDriver(pickup);
         if (driver == null) {
             System.out.println("No drivers available!");
             return null;
         }
-        
+
         Ride ride = new Ride(passenger, driver, pickup, destination, rideType);
         activeRides.put(ride.getId(), ride);
-        
+
         // Notify observers about new ride
-        ride.updateStatus(RideStatus.RIDE_REQUESTED, 
+        ride.updateStatus(RideStatus.RIDE_REQUESTED,
                          "Pickup: " + pickup + ", Destination: " + destination);
-        
+
         return ride;
     }
-    
+
     private Driver findNearestDriver(Location pickup) {
         // Simplified - just returns first available driver
         return availableDrivers.poll();
@@ -857,8 +857,8 @@ public class Ride {
     private RideStatus status;
     private PricingStrategy pricingStrategy;
     private List<RideObserver> observers;
-    
-    public Ride(Passenger passenger, Driver driver, Location pickup, 
+
+    public Ride(Passenger passenger, Driver driver, Location pickup,
                 Location destination, RideType rideType) {
         this.id = generateId();
         this.passenger = passenger;
@@ -868,35 +868,35 @@ public class Ride {
         this.rideType = rideType;
         this.status = RideStatus.MATCHED;
         this.observers = new ArrayList<>();
-        
+
         // Set pricing strategy based on ride type
-        this.pricingStrategy = rideType == RideType.LUXURY ? 
+        this.pricingStrategy = rideType == RideType.LUXURY ?
                               new LuxuryPricing() : new StandardPricing();
-        
+
         // Register observers
         observers.add(passenger.getApp());
         observers.add(driver.getApp());
     }
-    
+
     public void updateStatus(RideStatus newStatus, String details) {
         this.status = newStatus;
         notifyObservers(details);
     }
-    
+
     private void notifyObservers(String details) {
         for (RideObserver observer : observers) {
             observer.updateRideStatus(id, status, details);
         }
     }
-    
+
     public double calculateFare() {
         double distance = calculateDistance(pickup, destination);
         int duration = estimateDuration(distance);
         boolean isPeakHour = isPeakHour();
-        
+
         return pricingStrategy.calculatePrice(distance, duration, isPeakHour);
     }
-    
+
     // Helper methods...
 }
 ```

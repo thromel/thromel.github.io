@@ -1,6 +1,6 @@
 ---
 title: "Building an Agentic AI Analytics Dashboard with LangChain, LangGraph, and
-  Fine-tuned LLAMA"
+  Fine-tuned Llama"
 date: 2025-05-20
 categories:
   - artificial-intelligence
@@ -31,7 +31,7 @@ First, what makes AI "agentic"? Compare a calculator and a mathematician. A calc
 
 Agentic AI systems act like the mathematician. They process queries, plan, execute, observe, and adapt. In our analytics dashboard, the AI retrieves data, forms hypotheses, runs analyses, and iterates on the findings.
 
-## The Architecture Stack: Why LangChain, LangGraph, and Fine-tuned LLAMA?
+## The Architecture Stack: Why LangChain, LangGraph, and Fine-tuned Llama?
 
 ### LangChain: The Foundation
 
@@ -53,15 +53,15 @@ from langchain.llms import LlamaCpp
 def analyze_data_manual(data, question):
     prompt = f"Given this data: {data}, answer: {question}"
     # Manual API call, error handling, parsing...
-    
+
 # With LangChain - structured, reusable, maintainable
 prompt_template = PromptTemplate(
     input_variables=["data", "question"],
-    template="""You are a data analyst. 
-    
+    template="""You are a data analyst.
+
     Data: {data}
     Question: {question}
-    
+
     Provide a detailed analysis with reasoning steps."""
 )
 
@@ -114,9 +114,9 @@ workflow.add_conditional_edges(
 )
 ```
 
-### Fine-tuned LLAMA: The Domain Expert
+### Fine-tuned Llama: The Domain Expert
 
-Generic language models are like talented generalists. They know a little about everything, but they can be weak in your specific domain. We fine-tuned LLAMA on our analytics domain. The result was like a specialist who understands our business context, metrics, and analytical patterns.
+Generic language models are like talented generalists. They know a little about everything, but they can be weak in your specific domain. We fine-tuned Llama on our analytics domain. The result was like a specialist who understands our business context, metrics, and analytical patterns.
 
 ## The Fine-tuning Journey: Creating Our Analytics Expert
 
@@ -157,7 +157,7 @@ This represents a 1.4 percentage point increase. Let me investigate potential ca
 
 ### Step 2: Implementing QLoRA for Efficient Fine-tuning
 
-We used QLoRA (Quantized Low-Rank Adaptation) to fine-tune LLAMA efficiently. It is like teaching someone a specialty, and they keep their general knowledge.
+We used QLoRA (Quantized Low-Rank Adaptation) to fine-tune Llama efficiently. It is like teaching someone a specialty, and they keep their general knowledge.
 
 ```python
 from transformers import AutoModelForCausalLM, AutoTokenizer
@@ -243,10 +243,10 @@ class AnalyticsTrainer(Trainer):
         # Custom loss that weighs analytical reasoning higher
         outputs = model(**inputs)
         loss = outputs.loss
-        
+
         # Add custom penalties/rewards based on output structure
         # (e.g., penalize responses without reasoning steps)
-        
+
         return (loss, outputs) if return_outputs else loss
 ```
 
@@ -302,39 +302,39 @@ class AgentState(TypedDict):
 # Node implementations
 async def understand_query(state: AgentState) -> AgentState:
     """Parse user query and extract analytical intent"""
-    
+
     prompt = f"""Analyze this analytics query and extract:
     1. Primary metric of interest
     2. Time period
     3. Comparison dimensions
     4. Analytical depth required (exploratory vs. specific)
-    
+
     Query: {state['user_query']}
     """
-    
+
     response = await llm.ainvoke(prompt)
     state['parsed_intent'] = parse_llm_response(response)
     state['reasoning_trace'].append(f"Understood query: {state['parsed_intent']}")
-    
+
     return state
 
 async def discover_data(state: AgentState) -> AgentState:
     """Find relevant data sources based on parsed intent"""
-    
+
     # Use our fine-tuned model's knowledge of the data schema
     prompt = f"""Given this analytical intent: {state['parsed_intent']}
-    
+
     List all relevant tables and columns from our data warehouse.
     Consider joining patterns and data freshness.
     """
-    
+
     response = await llm.ainvoke(prompt)
     state['relevant_tables'] = extract_tables(response)
-    
+
     # Verify tables exist and user has access
     verified_tables = await verify_table_access(state['relevant_tables'])
     state['relevant_tables'] = verified_tables
-    
+
     return state
 ```
 
@@ -351,53 +351,53 @@ The center of our approach is the hypothesis-driven analysis loop. Our agent doe
 ```python
 async def generate_hypotheses(state: AgentState) -> AgentState:
     """Generate testable hypotheses based on the query and available data"""
-    
+
     prompt = f"""Based on this analytics question: {state['user_query']}
     And available data: {state['relevant_tables']}
-    
+
     Generate 3-5 testable hypotheses. Each hypothesis should:
     1. Be specific and measurable
     2. Include the expected relationship
     3. Specify how to test it
-    
+
     Example format:
     Hypothesis: "Customer churn is positively correlated with support ticket volume"
     Test: "Calculate correlation between monthly churn rate and average tickets per customer"
     """
-    
+
     response = await llm.ainvoke(prompt)
     state['hypotheses'] = parse_hypotheses(response)
-    
+
     return state
 
 async def test_hypothesis(state: AgentState) -> AgentState:
     """Execute analysis for each hypothesis"""
-    
+
     for hypothesis in state['hypotheses']:
         # Design the analysis
         analysis_plan = await design_analysis(hypothesis, state['relevant_tables'])
-        
+
         # Execute queries and statistical tests
         if analysis_plan['type'] == 'sql':
             result = await sql_tool.arun(analysis_plan['query'])
         elif analysis_plan['type'] == 'statistical':
             result = await stats_tool.arun(analysis_plan['params'])
-        
+
         # Interpret results
         interpretation = await interpret_results(result, hypothesis)
-        
+
         state['analysis_results'].append({
             'hypothesis': hypothesis,
             'result': result,
             'interpretation': interpretation,
             'confidence': calculate_confidence(result)
         })
-        
+
         # Create visualization if appropriate
         if should_visualize(result):
             viz = await viz_tool.arun(result)
             state['visualizations'].append(viz)
-    
+
     return state
 ```
 
@@ -408,23 +408,23 @@ Agentic systems can reflect on their work and correct themselves. We built this 
 ```python
 async def reflect_on_analysis(state: AgentState) -> AgentState:
     """Reflect on analysis completeness and quality"""
-    
+
     reflection_prompt = f"""Review this analysis:
     Query: {state['user_query']}
     Hypotheses tested: {len(state['hypotheses'])}
     Results: {summarize_results(state['analysis_results'])}
-    
+
     Consider:
     1. Did we fully answer the original question?
     2. Are there unexplored angles?
     3. Do the results make business sense?
     4. Should we dig deeper into any findings?
-    
+
     Provide a reflection and recommendation.
     """
-    
+
     reflection = await llm.ainvoke(reflection_prompt)
-    
+
     # Decide next action based on reflection
     if should_continue_analysis(reflection):
         # Generate follow-up hypotheses
@@ -437,15 +437,15 @@ async def reflect_on_analysis(state: AgentState) -> AgentState:
 # Conditional edge function
 def should_continue_analysis(state: AgentState) -> str:
     """Decide whether to continue analysis or synthesize results"""
-    
+
     # Check iteration count
     if state.get('iteration_count', 0) > 3:
         return "synthesize"
-    
+
     # Check if reflection suggests more analysis
     if state.get('needs_deeper_analysis', False):
         return "generate_hypotheses"
-    
+
     return "synthesize"
 ```
 
@@ -465,19 +465,19 @@ class AnalyticsMemory:
             llm=llm,
             max_token_limit=2000
         )
-        
+
         # Long-term memory for insights and patterns
         self.vector_store = chromadb.Client()
         self.insights_collection = self.vector_store.create_collection(
             "analytics_insights"
         )
-        
+
     async def remember_insight(self, insight: Dict[str, Any]):
         """Store important findings for future reference"""
-        
+
         # Create embedding of the insight
         embedding = await create_embedding(insight['summary'])
-        
+
         # Store with metadata
         self.insights_collection.add(
             embeddings=[embedding],
@@ -490,17 +490,17 @@ class AnalyticsMemory:
             }],
             ids=[insight['id']]
         )
-    
+
     async def recall_relevant_insights(self, query: str, n_results: int = 5):
         """Retrieve relevant past insights"""
-        
+
         query_embedding = await create_embedding(query)
-        
+
         results = self.insights_collection.query(
             query_embeddings=[query_embedding],
             n_results=n_results
         )
-        
+
         return results
 ```
 
@@ -516,10 +516,10 @@ class AnalyticsAgent:
         self.tools = tools
         self.memory = AnalyticsMemory()
         self.workflow = self._build_workflow()
-        
+
     def _build_workflow(self):
         workflow = StateGraph(AgentState)
-        
+
         # Add all nodes
         workflow.add_node("understand", understand_query)
         workflow.add_node("discover", discover_data)
@@ -527,14 +527,14 @@ class AnalyticsAgent:
         workflow.add_node("analyze", test_hypothesis)
         workflow.add_node("reflect", reflect_on_analysis)
         workflow.add_node("synthesize", create_final_report)
-        
+
         # Define flow
         workflow.set_entry_point("understand")
         workflow.add_edge("understand", "discover")
         workflow.add_edge("discover", "hypothesize")
         workflow.add_edge("hypothesize", "analyze")
         workflow.add_edge("analyze", "reflect")
-        
+
         # Conditional edge from reflect
         workflow.add_conditional_edges(
             "reflect",
@@ -544,17 +544,17 @@ class AnalyticsAgent:
                 "synthesize": "synthesize"
             }
         )
-        
+
         workflow.add_edge("synthesize", END)
-        
+
         return workflow.compile()
-    
+
     async def analyze(self, query: str) -> Dict[str, Any]:
         """Run complete analysis for a query"""
-        
+
         # Check for relevant past insights
         past_insights = await self.memory.recall_relevant_insights(query)
-        
+
         # Initialize state
         initial_state = {
             "user_query": query,
@@ -562,15 +562,15 @@ class AnalyticsAgent:
             "past_insights": past_insights,
             "iteration_count": 0
         }
-        
+
         # Run workflow
         result = await self.workflow.ainvoke(initial_state)
-        
+
         # Store valuable insights
         if result.get('valuable_insights'):
             for insight in result['valuable_insights']:
                 await self.memory.remember_insight(insight)
-        
+
         return result
 
 # Usage example
@@ -578,7 +578,7 @@ agent = AnalyticsAgent(llm=fine_tuned_llama, tools=[sql_tool, stats_tool, viz_to
 
 # Complex multi-faceted query
 result = await agent.analyze("""
-    Why did customer churn increase by 40% last quarter? 
+    Why did customer churn increase by 40% last quarter?
     I need to understand the root causes and predict if this trend will continue.
     Also suggest interventions to reduce churn.
 """)
@@ -603,27 +603,27 @@ Production systems need good error handling. This is how we handle common scenar
 class SafeAnalyticsExecutor:
     def __init__(self, timeout: int = 300):
         self.timeout = timeout
-        
+
     async def execute_with_fallback(self, func, *args, **kwargs):
         """Execute function with timeout and fallback strategies"""
-        
+
         try:
             # Primary execution with timeout
             result = await asyncio.wait_for(
-                func(*args, **kwargs), 
+                func(*args, **kwargs),
                 timeout=self.timeout
             )
             return result
-            
+
         except asyncio.TimeoutError:
             # Fallback to simpler analysis
             logger.warning(f"Analysis timeout for {func.__name__}")
             return await self.simplified_analysis(*args, **kwargs)
-            
+
         except DatabaseConnectionError:
             # Try cached results
             return await self.get_cached_analysis(*args, **kwargs)
-            
+
         except InsufficientDataError as e:
             # Provide partial analysis with caveats
             return {
@@ -631,23 +631,23 @@ class SafeAnalyticsExecutor:
                 "message": f"Limited analysis due to: {e}",
                 "results": await self.partial_analysis(*args, **kwargs)
             }
-    
+
     async def validate_sql_safety(self, query: str) -> bool:
         """Ensure SQL queries are safe to execute"""
-        
+
         dangerous_patterns = [
-            r'\bDROP\b', r'\bDELETE\b', r'\bUPDATE\b', 
+            r'\bDROP\b', r'\bDELETE\b', r'\bUPDATE\b',
             r'\bINSERT\b', r'\bCREATE\b', r'\bALTER\b'
         ]
-        
+
         for pattern in dangerous_patterns:
             if re.search(pattern, query, re.IGNORECASE):
                 raise SecurityError(f"Unsafe SQL pattern detected: {pattern}")
-        
+
         # Additional checks for query complexity
         if query.count('JOIN') > 5:
             logger.warning("Complex query with many JOINs, may be slow")
-        
+
         return True
 ```
 
@@ -665,30 +665,30 @@ class QueryCache:
     def __init__(self, redis_client):
         self.redis = redis_client
         self.ttl = 3600  # 1 hour default
-        
+
     def cache_key(self, query: str, params: Dict) -> str:
         """Generate deterministic cache key"""
         content = f"{query}:{json.dumps(params, sort_keys=True)}"
         return hashlib.sha256(content.encode()).hexdigest()
-    
+
     async def get_or_compute(self, query: str, params: Dict, compute_func):
         """Try cache first, compute if miss"""
-        
+
         key = self.cache_key(query, params)
-        
+
         # Check cache
         cached = await self.redis.get(key)
         if cached:
             return json.loads(cached)
-        
+
         # Compute and cache
         result = await compute_func(query, params)
         await self.redis.setex(
-            key, 
-            self.ttl, 
+            key,
+            self.ttl,
             json.dumps(result)
         )
-        
+
         return result
 ```
 
@@ -697,25 +697,25 @@ class QueryCache:
 ```python
 async def test_hypotheses_parallel(hypotheses: List[Dict]) -> List[Dict]:
     """Test multiple hypotheses in parallel"""
-    
+
     # Group by data requirements to optimize queries
     grouped = group_by_data_needs(hypotheses)
-    
+
     tasks = []
     for group, hyps in grouped.items():
         # Fetch data once for the group
         task = test_hypothesis_group(group, hyps)
         tasks.append(task)
-    
+
     # Execute in parallel with concurrency limit
     semaphore = asyncio.Semaphore(5)  # Max 5 concurrent analyses
-    
+
     async def bounded_task(task):
         async with semaphore:
             return await task
-    
+
     results = await asyncio.gather(*[bounded_task(t) for t in tasks])
-    
+
     return flatten_results(results)
 ```
 
@@ -726,39 +726,39 @@ For a better user experience, we stream results as soon as they are available:
 ```python
 async def stream_analysis(query: str):
     """Stream analysis results as they're generated"""
-    
+
     async def generate():
         # Initial understanding
         yield {"type": "status", "message": "Understanding your query..."}
         intent = await understand_query(query)
         yield {"type": "intent", "data": intent}
-        
+
         # Data discovery
         yield {"type": "status", "message": "Finding relevant data..."}
         tables = await discover_data(intent)
         yield {"type": "data_sources", "data": tables}
-        
+
         # Hypotheses
         yield {"type": "status", "message": "Generating hypotheses..."}
         hypotheses = await generate_hypotheses(intent, tables)
-        
+
         for i, hyp in enumerate(hypotheses):
             yield {"type": "hypothesis", "index": i, "data": hyp}
-            
+
             # Test and stream result
             result = await test_hypothesis(hyp)
             yield {"type": "result", "index": i, "data": result}
-            
+
             # Generate visualization if applicable
             if result['visualizable']:
                 viz = await create_visualization(result)
                 yield {"type": "visualization", "index": i, "data": viz}
-        
+
         # Final synthesis
         yield {"type": "status", "message": "Synthesizing insights..."}
         synthesis = await synthesize_results(all_results)
         yield {"type": "final_report", "data": synthesis}
-    
+
     return generate()
 ```
 
@@ -785,7 +785,7 @@ async def traced_node(func):
         with tracer.start_as_current_span(func.__name__) as span:
             span.set_attribute("state.query", state.get("user_query", ""))
             span.set_attribute("state.iteration", state.get("iteration_count", 0))
-            
+
             try:
                 result = await func(state)
                 span.set_attribute("success", True)
@@ -794,7 +794,7 @@ async def traced_node(func):
                 span.set_attribute("success", False)
                 span.set_attribute("error", str(e))
                 raise
-    
+
     return wrapper
 ```
 
@@ -805,18 +805,18 @@ Not every query needs the full agent:
 ```python
 def classify_query_complexity(query: str) -> str:
     """Classify query complexity to route appropriately"""
-    
+
     simple_patterns = [
         r"what is the .+ for .+",
         r"show me .+ from last .+",
         r"how many .+ in .+"
     ]
-    
+
     complex_indicators = [
         "why", "root cause", "correlation", "predict",
         "trend", "anomaly", "compare", "impact"
     ]
-    
+
     if any(re.match(pattern, query.lower()) for pattern in simple_patterns):
         return "simple"
     elif any(indicator in query.lower() for indicator in complex_indicators):
@@ -846,7 +846,7 @@ Add ways to learn from user interactions:
 class FeedbackCollector:
     async def collect_feedback(self, session_id: str, result: Dict):
         """Collect user feedback on analysis quality"""
-        
+
         feedback = {
             "session_id": session_id,
             "result_helpful": None,  # User rates
@@ -854,10 +854,10 @@ class FeedbackCollector:
             "unnecessary_parts": [],  # What was superfluous
             "followed_up": False      # Did user ask follow-up
         }
-        
+
         # Store for future fine-tuning
         await self.store_feedback(feedback)
-        
+
         # If consistently poor feedback, flag for review
         if await self.check_feedback_pattern(session_id):
             await self.alert_improvement_needed(session_id)
@@ -872,24 +872,24 @@ class AnalyticsDashboardIntegration:
     def __init__(self, agent, dashboard_api):
         self.agent = agent
         self.dashboard = dashboard_api
-        
+
     async def handle_dashboard_interaction(self, event: Dict):
         """Handle interactions from the dashboard"""
-        
+
         if event['type'] == 'chart_click':
             # Generate contextual analysis based on what user clicked
             context = await self.get_chart_context(event['chart_id'])
             query = f"Explain the {event['data_point']} in {context['metric']}"
-            
+
         elif event['type'] == 'anomaly_detected':
             # Proactive analysis of anomalies
             query = f"Investigate the anomaly in {event['metric']} at {event['timestamp']}"
-            
+
         result = await self.agent.analyze(query)
-        
+
         # Update dashboard with insights
         await self.dashboard.add_insight_panel(result)
-        
+
         return result
 ```
 
@@ -916,15 +916,11 @@ A successful agentic AI system does not need the most powerful model or the most
 
 Start small, iterate on real usage, and keep the user's analytical needs at the center of your design. Dashboards show data. Agents like this one also help us understand what the data means and what to do next.
 
-## Code Repository and Resources
-
-The complete implementation, including training scripts and example notebooks, is available at: []
-
-Additional resources:
+## Resources
 
 - [LangChain Documentation](https://python.langchain.com/docs/get_started/introduction)
 - [LangGraph Tutorial](https://langchain-ai.github.io/langgraph/)
-- [LLAMA Fine-tuning Guide](https://github.com/facebookresearch/llama-recipes)
+- [Llama Fine-tuning Guide](https://github.com/facebookresearch/llama-recipes)
 
 The best way to learn is to build. Start with a simple analytics question and a basic agent. Add features as you learn more about your users' needs.
 

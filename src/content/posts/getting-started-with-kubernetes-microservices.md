@@ -49,7 +49,7 @@ This guide starts with Kubernetes fundamentals and ends with a microservice arch
 
 Before we look at Kubernetes, we need to understand why we need orchestration at all. A microservices architecture breaks a monolithic application into smaller, independent services that communicate over well-defined APIs. This approach improves scalability, allows technology diversity, and isolates faults. It also adds operational complexity that you cannot manage without proper tooling.
 
-Imagine that you manage a modest e-commerce platform by hand. It has 10 microservices, and each runs 3 instances across 5 servers. You already have 30 containers to track, update, and maintain. At the scale of Netflix's 700+ microservices or Amazon's thousands of services, the manual approach is impossible.
+Imagine that you manage a modest e-commerce platform by hand. It has 10 microservices, and each runs 3 instances across 5 servers. You already have 30 containers to track, update, and maintain. At the scale of Netflix or Amazon, which run [hundreds to thousands of services](https://www.f5.com/company/blog/nginx/microservices-at-netflix-architectural-best-practices), the manual approach is impossible.
 
 A typical e-commerce platform splits into these microservices:
 
@@ -83,7 +83,7 @@ Without orchestration, you must manage all of this by hand. That work includes:
 
 7. **Scaling**: To adjust the number of instances to demand, you need real-time monitoring and a fast response. With manual scaling, you either over-provision (and waste money) or under-provision (and give users a poor experience).
 
-> In his [Microservices article](https://martinfowler.com/articles/microservices.html), Martin Fowler writes, "The microservice architectural style is an approach to developing a single application as a suite of small services." He also notes that this approach adds significant operational overhead, and you need sophisticated tooling to manage it.
+> In his [Microservices article](https://martinfowler.com/articles/microservices.html), Martin Fowler writes, "The microservice architectural style is an approach to developing a single application as a suite of small services." He also notes that many services are harder to deploy than one monolith, so investment in tooling is a must.
 
 ### How Kubernetes Solves These Challenges
 
@@ -93,13 +93,13 @@ Think of a thermostat. You do not start and stop the heater by hand (imperative)
 
 **Declarative Configuration**: You describe the desired state of your system, and Kubernetes works continuously to keep that state. This approach gives better reliability and consistency. The [Kubernetes documentation on declarative management](https://kubernetes.io/docs/tasks/manage-kubernetes-objects/declarative-config/) describes it in detail.
 
-**Service Discovery and Load Balancing**: Built-in mechanisms let services find each other and distribute traffic automatically. Kubernetes creates DNS entries for every service. To reach a service, you send an HTTP request to its name.
+**Service Discovery and Load Balancing**: Built-in mechanisms let services find each other and distribute traffic automatically. Kubernetes creates DNS entries for every service. To reach a service, you connect to its DNS name.
 
 **Self-Healing**: Kubernetes replaces failed containers, reschedules workloads on healthy nodes, and runs health checks automatically. The [Kubernetes control plane](https://kubernetes.io/docs/concepts/overview/components/) monitors the cluster state continuously and takes corrective action.
 
 **Horizontal Scaling**: Kubernetes scales applications automatically based on CPU usage, memory consumption, or custom metrics such as request rate or queue length.
 
-**Rolling Updates and Rollbacks**: Kubernetes deploys with zero downtime and reverts automatically when it detects issues. This implements the deployment patterns in [Jez Humble's "Continuous Delivery"](https://continuousdelivery.com/).
+**Rolling Updates and Rollbacks**: Kubernetes replaces pods gradually to avoid downtime. A failing rollout stops and reports `ProgressDeadlineExceeded`, and you revert with `kubectl rollout undo`. This implements the deployment patterns in [Jez Humble's "Continuous Delivery"](https://continuousdelivery.com/).
 
 **Resource Management**: Kubernetes bin-packs containers onto cluster nodes with resource guarantees and limits. This uses node capacity well and prevents resource contention.
 
@@ -136,7 +136,7 @@ Kubernetes uses a master-worker architecture. The control plane manages the clus
 
 **kube-proxy**: Maintains network rules for service load balancing and lets pods communicate across the cluster. DNS can resolve service names to IPs, but it does not balance load. kube-proxy does the actual load balancing and adds features such as session affinity and different load balancing algorithms.
 
-**Container Runtime**: The software that runs containers (Docker, containerd, or CRI-O). Organizations have different runtime requirements for security, performance, and compliance. So Kubernetes uses the Container Runtime Interface (CRI) to support multiple runtimes.
+**Container Runtime**: The software that runs containers (containerd, CRI-O, or Docker Engine through `cri-dockerd`). Kubernetes 1.24 removed the built-in Docker support (dockershim). Organizations have different runtime requirements for security, performance, and compliance. So Kubernetes uses the Container Runtime Interface (CRI) to support multiple runtimes.
 
 ### Core Concepts
 
@@ -168,7 +168,7 @@ Developers have different needs. Some want full multi-node clusters for testing,
 
 **When to Use**: Learning Kubernetes concepts, and testing applications that do not need multi-node features.
 
-Minikube runs a full Kubernetes cluster in a single VM, with all control plane components. This gives you the most authentic Kubernetes experience, and it stays lightweight.
+Minikube runs a full local Kubernetes cluster in a VM or container, with all control plane components. This gives you the most authentic Kubernetes experience, and it stays lightweight.
 
 Use Minikube for local development and testing:
 
@@ -444,16 +444,16 @@ app.get('/health', async (req, res) => {
   try {
     // Check database connectivity
     await pool.query('SELECT 1');
-    res.json({ 
-      status: 'healthy', 
+    res.json({
+      status: 'healthy',
       service: 'user-service',
       timestamp: new Date().toISOString(),
       version: process.env.APP_VERSION || '1.0.0'
     });
   } catch (error) {
-    res.status(503).json({ 
-      status: 'unhealthy', 
-      error: 'Database connection failed' 
+    res.status(503).json({
+      status: 'unhealthy',
+      error: 'Database connection failed'
     });
   }
 });
@@ -474,47 +474,47 @@ app.get('/ready', async (req, res) => {
 app.post('/api/users/register', async (req, res) => {
   try {
     const { email, password, name } = req.body;
-    
+
     // Input validation - Why? Prevent SQL injection and data corruption
     if (!email || !password || !name) {
       return res.status(400).json({ error: 'Missing required fields' });
     }
-    
+
     if (password.length < 8) {
       return res.status(400).json({ error: 'Password must be at least 8 characters' });
     }
-    
+
     // Why salt rounds = 12? Balances security with performance
     const hashedPassword = await bcrypt.hash(password, 12);
-    
+
     const result = await pool.query(
       'INSERT INTO users (email, password_hash, name, created_at) VALUES ($1, $2, $3, NOW()) RETURNING id, email, name, created_at',
       [email, hashedPassword, name]
     );
-    
+
     // Why JWT? Stateless authentication that works well in distributed systems
     const token = jwt.sign(
-      { 
+      {
         userId: result.rows[0].id,
         email: result.rows[0].email
-      }, 
+      },
       process.env.JWT_SECRET || 'default-secret',
       { expiresIn: '24h' } // Why 24h? Balance between security and user experience
     );
-    
-    res.status(201).json({ 
-      user: result.rows[0], 
+
+    res.status(201).json({
+      user: result.rows[0],
       token,
       expiresIn: '24h'
     });
   } catch (error) {
     console.error('Registration error:', error);
-    
+
     // Why check for unique constraint? Provide user-friendly error messages
     if (error.code === '23505') { // PostgreSQL unique violation
       return res.status(409).json({ error: 'Email already exists' });
     }
-    
+
     res.status(500).json({ error: 'Registration failed' });
   }
 });
@@ -523,39 +523,39 @@ app.post('/api/users/register', async (req, res) => {
 app.post('/api/users/login', async (req, res) => {
   try {
     const { email, password } = req.body;
-    
+
     if (!email || !password) {
       return res.status(400).json({ error: 'Email and password required' });
     }
-    
+
     const result = await pool.query(
       'SELECT id, email, name, password_hash FROM users WHERE email = $1',
       [email]
     );
-    
+
     if (result.rows.length === 0) {
       // Why same error message? Prevents email enumeration attacks
       return res.status(401).json({ error: 'Invalid credentials' });
     }
-    
+
     const user = result.rows[0];
     const validPassword = await bcrypt.compare(password, user.password_hash);
-    
+
     if (!validPassword) {
       return res.status(401).json({ error: 'Invalid credentials' });
     }
-    
+
     const token = jwt.sign(
-      { 
+      {
         userId: user.id,
         email: user.email
-      }, 
+      },
       process.env.JWT_SECRET || 'default-secret',
       { expiresIn: '24h' }
     );
-    
-    res.json({ 
-      user: { id: user.id, email: user.email, name: user.name }, 
+
+    res.json({
+      user: { id: user.id, email: user.email, name: user.name },
       token,
       expiresIn: '24h'
     });
@@ -590,11 +590,11 @@ app.get('/api/users/profile', authenticateToken, async (req, res) => {
       'SELECT id, email, name, created_at FROM users WHERE id = $1',
       [req.user.userId]
     );
-    
+
     if (result.rows.length === 0) {
       return res.status(404).json({ error: 'User not found' });
     }
-    
+
     res.json(result.rows[0]);
   } catch (error) {
     console.error('Profile fetch error:', error);
@@ -666,9 +666,9 @@ app.get('/health', async (req, res) => {
   try {
     await pool.query('SELECT 1');
     const redisHealthy = redis.connected;
-    
-    res.json({ 
-      status: 'healthy', 
+
+    res.json({
+      status: 'healthy',
       service: 'product-service',
       dependencies: {
         database: 'healthy',
@@ -676,9 +676,9 @@ app.get('/health', async (req, res) => {
       }
     });
   } catch (error) {
-    res.status(503).json({ 
-      status: 'unhealthy', 
-      error: 'Database connection failed' 
+    res.status(503).json({
+      status: 'unhealthy',
+      error: 'Database connection failed'
     });
   }
 });
@@ -708,31 +708,31 @@ app.get('/api/products', async (req, res) => {
   try {
     const { category, page = 1, limit = 20 } = req.query;
     const cacheKey = `products:${category || 'all'}:${page}:${limit}`;
-    
+
     // Try cache first
     let products = await getCachedProducts(cacheKey);
-    
+
     if (!products) {
       // Cache miss - fetch from database
       const offset = (page - 1) * limit;
       let query = 'SELECT id, name, description, price, stock_quantity, category FROM products WHERE active = true';
       let params = [];
-      
+
       if (category) {
         query += ' AND category = $1';
         params.push(category);
       }
-      
+
       query += ' ORDER BY created_at DESC LIMIT $' + (params.length + 1) + ' OFFSET $' + (params.length + 2);
       params.push(limit, offset);
-      
+
       const result = await pool.query(query, params);
       products = result.rows;
-      
+
       // Cache the results
       await setCachedProducts(cacheKey, products, 300); // 5-minute cache
     }
-    
+
     res.json(products);
   } catch (error) {
     console.error('Error fetching products:', error);
@@ -745,23 +745,23 @@ app.get('/api/products/:id', async (req, res) => {
   try {
     const { id } = req.params;
     const cacheKey = `product:${id}`;
-    
+
     let product = await getCachedProducts(cacheKey);
-    
+
     if (!product) {
       const result = await pool.query(
         'SELECT id, name, description, price, stock_quantity, category, created_at FROM products WHERE id = $1 AND active = true',
         [id]
       );
-      
+
       if (result.rows.length === 0) {
         return res.status(404).json({ error: 'Product not found' });
       }
-      
+
       product = result.rows[0];
       await setCachedProducts(cacheKey, product, 600); // 10-minute cache for individual products
     }
-    
+
     res.json(product);
   } catch (error) {
     console.error('Error fetching product:', error);
@@ -773,17 +773,17 @@ app.get('/api/products/:id', async (req, res) => {
 app.post('/api/products', async (req, res) => {
   try {
     const { name, description, price, stock_quantity, category } = req.body;
-    
+
     // Validation
     if (!name || !price || stock_quantity === undefined) {
       return res.status(400).json({ error: 'Missing required fields' });
     }
-    
+
     const result = await pool.query(
       'INSERT INTO products (name, description, price, stock_quantity, category, created_at) VALUES ($1, $2, $3, $4, $5, NOW()) RETURNING *',
       [name, description, price, stock_quantity, category]
     );
-    
+
     // Invalidate relevant caches
     // Why invalidate? Ensure cache consistency when data changes
     const cachePatterns = ['products:*', `product:${result.rows[0].id}`];
@@ -797,7 +797,7 @@ app.post('/api/products', async (req, res) => {
         console.warn('Cache invalidation error:', error);
       }
     }
-    
+
     res.status(201).json(result.rows[0]);
   } catch (error) {
     console.error('Error creating product:', error);
@@ -974,7 +974,7 @@ data:
     CREATE DATABASE IF NOT EXISTS userdb;
     CREATE DATABASE IF NOT EXISTS productdb;
     CREATE DATABASE IF NOT EXISTS orderdb;
-    
+
     -- Create users table
     \c userdb;
     CREATE TABLE IF NOT EXISTS users (
@@ -984,7 +984,7 @@ data:
         name VARCHAR(255) NOT NULL,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     );
-    
+
     -- Create products table
     \c productdb;
     CREATE TABLE IF NOT EXISTS products (
@@ -997,7 +997,7 @@ data:
         active BOOLEAN DEFAULT true,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     );
-    
+
     -- Insert sample data
     INSERT INTO products (name, description, price, stock_quantity, category) VALUES
     ('Laptop', 'High-performance laptop', 1299.99, 10, 'Electronics'),
@@ -1489,39 +1489,39 @@ data:
     events {
         worker_connections 1024;
     }
-    
+
     http {
         # Why upstream blocks? Enable load balancing and health checks
         upstream user-service {
             server user-service:3001;
         }
-        
+
         upstream product-service {
             server product-service:3002;
         }
-        
+
         # Why custom log format? Better observability for microservices
         log_format main '$remote_addr - $remote_user [$time_local] "$request" '
                        '$status $body_bytes_sent "$http_referer" '
                        '"$http_user_agent" "$http_x_forwarded_for" '
                        'upstream_addr=$upstream_addr '
                        'upstream_response_time=$upstream_response_time';
-        
+
         access_log /var/log/nginx/access.log main;
-        
+
         server {
             listen 80;
-            
+
             # Why CORS headers? Enable frontend applications to call APIs
             add_header Access-Control-Allow-Origin *;
             add_header Access-Control-Allow-Methods "GET, POST, PUT, DELETE, OPTIONS";
             add_header Access-Control-Allow-Headers "Authorization, Content-Type";
-            
+
             # Handle preflight requests
             if ($request_method = 'OPTIONS') {
                 return 204;
             }
-            
+
             # Route user service requests
             location /api/users/ {
                 proxy_pass http://user-service;
@@ -1529,13 +1529,13 @@ data:
                 proxy_set_header X-Real-IP $remote_addr;
                 proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
                 proxy_set_header X-Forwarded-Proto $scheme;
-                
+
                 # Why timeouts? Prevent hanging requests
                 proxy_connect_timeout 5s;
                 proxy_send_timeout 10s;
                 proxy_read_timeout 10s;
             }
-            
+
             # Route product service requests
             location /api/products/ {
                 proxy_pass http://product-service;
@@ -1543,18 +1543,18 @@ data:
                 proxy_set_header X-Real-IP $remote_addr;
                 proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
                 proxy_set_header X-Forwarded-Proto $scheme;
-                
+
                 proxy_connect_timeout 5s;
                 proxy_send_timeout 10s;
                 proxy_read_timeout 10s;
             }
-            
+
             # Health check endpoint
             location /health {
                 return 200 "API Gateway is healthy\n";
                 add_header Content-Type text/plain;
             }
-            
+
             # Default location for unmatched requests
             location / {
                 return 404 "Service not found";
@@ -1937,13 +1937,13 @@ data:
   database.host: "postgres-service"
   database.port: "5432"
   redis.ttl: "3600"
-  
+
   # Configuration files
   app.properties: |
     spring.datasource.url=jdbc:postgresql://postgres-service:5432/ecommerce
     spring.jpa.hibernate.ddl-auto=update
     logging.level.root=INFO
-    
+
   nginx.conf: |
     upstream backend {
         server product-service:3002;
@@ -2020,21 +2020,21 @@ spec:
             configMapKeyRef:
               name: app-config
               key: database.host
-        
+
         # Single values from Secret
         - name: DATABASE_PASSWORD
           valueFrom:
             secretKeyRef:
               name: database-credentials
               key: password
-        
+
         # All ConfigMap keys as environment variables
         envFrom:
         - configMapRef:
             name: app-config
         - secretRef:
             name: database-credentials
-        
+
         volumeMounts:
         # Mount ConfigMap as files
         - name: config-volume
@@ -2043,7 +2043,7 @@ spec:
         - name: secret-volume
           mountPath: /etc/secrets
           readOnly: true
-      
+
       volumes:
       - name: config-volume
         configMap:
@@ -2387,17 +2387,17 @@ const activeConnections = new promClient.Gauge({
 // Middleware for Express
 function metricsMiddleware(req, res, next) {
   const start = Date.now();
-  
+
   res.on('finish', () => {
     const duration = (Date.now() - start) / 1000;
     const route = req.route ? req.route.path : req.url;
-    
+
     httpRequestsTotal.inc({
       method: req.method,
       route: route,
       status_code: res.statusCode
     });
-    
+
     httpRequestDuration.observe(
       {
         method: req.method,
@@ -2407,7 +2407,7 @@ function metricsMiddleware(req, res, next) {
       duration
     );
   });
-  
+
   next();
 }
 
@@ -2640,7 +2640,7 @@ data:
         HTTP_Server   On
         HTTP_Listen   0.0.0.0
         HTTP_Port     2020
-        
+
     [INPUT]
         Name              tail
         Path              /var/log/containers/*.log
@@ -2649,7 +2649,7 @@ data:
         Refresh_Interval  5
         Mem_Buf_Limit     50MB
         Skip_Long_Lines   On
-        
+
     [FILTER]
         Name                kubernetes
         Match               kube.*
@@ -2660,7 +2660,7 @@ data:
         Merge_Log           On
         K8S-Logging.Parser  On
         K8S-Logging.Exclude Off
-        
+
     [OUTPUT]
         Name            es
         Match           kube.*
@@ -2670,7 +2670,7 @@ data:
         HTTP_Passwd     ${ELASTICSEARCH_PASSWORD}
         Index           kubernetes-logs
         Type            _doc
-        
+
   parsers.conf: |
     [PARSER]
         Name        docker
@@ -2925,7 +2925,7 @@ spec:
         - name: DATABASE_REPLICA
           value: "read-replica-east"
 ---
-# cluster-2-deployment.yaml  
+# cluster-2-deployment.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -3181,17 +3181,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
-    
+
     - name: Build image
       run: docker build -t user-service:${{ github.sha }} ./user-service
-    
+
     - name: Run Trivy vulnerability scanner
       uses: aquasecurity/trivy-action@master
       with:
         image-ref: 'user-service:${{ github.sha }}'
         format: 'sarif'
         output: 'trivy-results.sarif'
-    
+
     - name: Upload Trivy scan results to GitHub Security tab
       uses: github/codeql-action/upload-sarif@v2
       with:
@@ -3576,7 +3576,7 @@ class EventConsumer {
 
   async subscribeToUserEvents() {
     const sub = this.nc.subscribe('user.*');
-    
+
     for await (const msg of sub) {
       try {
         const event = JSON.parse(this.sc.decode(msg.data));

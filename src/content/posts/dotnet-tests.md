@@ -39,11 +39,11 @@ Tests find bugs. They also build confidence in your code, let you refactor witho
 
 ### Why xUnit?
 
-After research and real-world experience, I prefer xUnit for .NET projects. The original author of NUnit v2 created xUnit, and it has these advantages:
+After research and real-world experience, I prefer xUnit for .NET projects. James Newkirk, an author of NUnit v2, co-created xUnit with Brad Wilson, and it has these advantages:
 
-- **Performance**: xUnit runs tests faster than alternatives due to its lightweight architecture
+- **Lean Design**: xUnit drops setup and teardown attributes and uses constructors and `IDisposable` instead
 - **Modern Design**: Built from the ground up for .NET, using modern C# features
-- **Parallel Execution**: Tests run in parallel by default, which reduces test suite execution time
+- **Parallel Execution**: Test classes run in parallel by default, which reduces test suite execution time
 - **Better Isolation**: Each test runs in its own instance, preventing state pollution
 - **Excellent Tooling**: First-class support in Visual Studio, VS Code, Rider, and CI/CD pipelines
 
@@ -114,7 +114,7 @@ public class ShoppingCartService
     }
 
     public IReadOnlyList<CartItem> Items => _items.AsReadOnly();
-    
+
     public decimal TotalAmount => _items.Sum(item => item.TotalPrice);
 
     public void AddItem(Product product, int quantity)
@@ -484,9 +484,9 @@ public class ShoppingCartSteps
                 Price = decimal.Parse(row["Price"]),
                 StockQuantity = int.Parse(row["Stock"])
             };
-            
+
             _products[product.Name] = product;
-            
+
             // Setup inventory mock for this product
             _inventoryServiceMock
                 .Setup(x => x.IsInStock(product.Id, It.IsAny<int>()))
@@ -521,7 +521,7 @@ public class ShoppingCartSteps
     {
         var product = _products[productName];
         product.StockQuantity = stockQuantity;
-        
+
         _inventoryServiceMock
             .Setup(x => x.IsInStock(product.Id, It.IsAny<int>()))
             .Returns<string, int>((id, qty) => qty <= stockQuantity);
@@ -694,7 +694,7 @@ public class ShoppingCartService
             throw new InvalidOperationException($"Coupon {couponCode} already applied");
 
         var discount = _pricingService.GetCouponDiscount(couponCode);
-        
+
         // Edge case: Invalid or expired coupon
         if (discount == null)
             throw new InvalidOperationException($"Invalid or expired coupon: {couponCode}");
@@ -743,7 +743,7 @@ public void ClearCart_RaisesOnCartClearedEvent()
     // Arrange
     var eventRaised = false;
     _sut.OnCartCleared += (sender, args) => eventRaised = true;
-    
+
     var product = new Product { Id = "1", Name = "Test", Price = 10m };
     _inventoryServiceMock.Setup(x => x.IsInStock("1", 1)).Returns(true);
     _sut.AddItem(product, 1);
@@ -801,7 +801,7 @@ public async Task TryReserveStock_ConcurrentRequests_HandlesRaceCondition()
     // Arrange
     var service = new InventoryService();
     service.SetStock("PROD1", 10);
-    
+
     var tasks = new List<Task<bool>>();
 
     // Act - 20 concurrent requests for 1 item each (only 10 should succeed)
@@ -809,7 +809,7 @@ public async Task TryReserveStock_ConcurrentRequests_HandlesRaceCondition()
     {
         tasks.Add(Task.Run(() => service.TryReserveStockAsync("PROD1", 1)));
     }
-    
+
     var results = await Task.WhenAll(tasks);
 
     // Assert
@@ -827,7 +827,7 @@ public void ShoppingCart_Disposal_ReleasesResources()
 {
     // Arrange
     WeakReference weakRef;
-    
+
     // Create cart in separate method to ensure it goes out of scope
     void CreateAndUseCart()
     {
@@ -862,7 +862,7 @@ public class OrderServiceIntegrationTests : IClassFixture<DatabaseFixture>
         using var scope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled);
         var orderService = new OrderService(_fixture.ConnectionString);
         var paymentService = new Mock<IPaymentService>();
-        
+
         paymentService
             .Setup(x => x.ProcessPaymentAsync(It.IsAny<decimal>()))
             .ThrowsAsync(new PaymentFailedException("Card declined"));
@@ -880,7 +880,7 @@ public class OrderServiceIntegrationTests : IClassFixture<DatabaseFixture>
         // Verify rollback - no order should exist in database
         var savedOrder = await orderService.GetOrderAsync(order.Id);
         savedOrder.Should().BeNull();
-        
+
         // Don't complete the transaction scope, ensuring rollback
     }
 }
@@ -895,7 +895,7 @@ public async Task ShoppingCart_HighVolume_MaintainsPerformance()
     // Arrange
     var stopwatch = new Stopwatch();
     var cart = new ShoppingCartService(_inventoryServiceMock.Object, _pricingServiceMock.Object);
-    
+
     // Setup mock to always return true for stock
     _inventoryServiceMock
         .Setup(x => x.IsInStock(It.IsAny<string>(), It.IsAny<int>()))
@@ -905,11 +905,11 @@ public async Task ShoppingCart_HighVolume_MaintainsPerformance()
     stopwatch.Start();
     for (int i = 0; i < 1000; i++)
     {
-        var product = new Product 
-        { 
-            Id = i.ToString(), 
-            Name = $"Product {i}", 
-            Price = Random.Shared.Next(10, 1000) 
+        var product = new Product
+        {
+            Id = i.ToString(),
+            Name = $"Product {i}",
+            Price = Random.Shared.Next(10, 1000)
         };
         cart.AddItem(product, Random.Shared.Next(1, 10));
     }
@@ -917,7 +917,7 @@ public async Task ShoppingCart_HighVolume_MaintainsPerformance()
 
     // Assert
     cart.Items.Count.Should().Be(1000);
-    stopwatch.ElapsedMilliseconds.Should().BeLessThan(100, 
+    stopwatch.ElapsedMilliseconds.Should().BeLessThan(100,
         "Adding 1000 items should complete within 100ms");
 }
 ```
@@ -958,7 +958,7 @@ public async Task PlaceOrder_TransientFailures_RetriesAndSucceeds()
     // Arrange
     var service = new ResilientOrderService(_circuitBreaker, _retryPolicy);
     var callCount = 0;
-    
+
     _orderProcessorMock
         .Setup(x => x.ProcessAsync(It.IsAny<Order>()))
         .ReturnsAsync(() =>
@@ -1066,12 +1066,12 @@ public class OrderProcessor : IOrderProcessor
             var validationResult = ValidateOrder(order);
             if (!validationResult.IsValid)
             {
-                _logger.LogWarning("Order validation failed: {Errors}", 
+                _logger.LogWarning("Order validation failed: {Errors}",
                     string.Join(", ", validationResult.Errors));
-                return new OrderResult 
-                { 
-                    Success = false, 
-                    Errors = validationResult.Errors 
+                return new OrderResult
+                {
+                    Success = false,
+                    Errors = validationResult.Errors
                 };
             }
 
@@ -1079,10 +1079,10 @@ public class OrderProcessor : IOrderProcessor
             var reservationResult = await ReserveInventoryAsync(order);
             if (!reservationResult.Success)
             {
-                return new OrderResult 
-                { 
-                    Success = false, 
-                    Errors = new[] { "Insufficient inventory" } 
+                return new OrderResult
+                {
+                    Success = false,
+                    Errors = new[] { "Insufficient inventory" }
                 };
             }
 
@@ -1097,14 +1097,14 @@ public class OrderProcessor : IOrderProcessor
                 {
                     // Rollback inventory reservation
                     await ReleaseInventoryAsync(order);
-                    
+
                     order.Status = OrderStatus.PaymentFailed;
                     await _orderRepository.UpdateAsync(order);
-                    
-                    return new OrderResult 
-                    { 
-                        Success = false, 
-                        Errors = new[] { "Payment processing failed" } 
+
+                    return new OrderResult
+                    {
+                        Success = false,
+                        Errors = new[] { "Payment processing failed" }
                     };
                 }
 
@@ -1123,11 +1123,11 @@ public class OrderProcessor : IOrderProcessor
                 await _notificationService.SendOrderConfirmationAsync(order);
 
                 _logger.LogInformation("Order {OrderId} processed successfully", order.Id);
-                
-                return new OrderResult 
-                { 
-                    Success = true, 
-                    Order = order 
+
+                return new OrderResult
+                {
+                    Success = true,
+                    Order = order
                 };
             }
             catch (Exception ex)
@@ -1141,11 +1141,11 @@ public class OrderProcessor : IOrderProcessor
         {
             _logger.LogError(ex, "Error processing order {OrderId}", order.Id);
             activity?.SetStatus(ActivityStatusCode.Error, ex.Message);
-            
-            return new OrderResult 
-            { 
-                Success = false, 
-                Errors = new[] { "An error occurred processing your order" } 
+
+            return new OrderResult
+            {
+                Success = false,
+                Errors = new[] { "An error occurred processing your order" }
             };
         }
     }
@@ -1167,28 +1167,28 @@ public class OrderProcessor : IOrderProcessor
         {
             if (item.Quantity <= 0)
                 errors.Add($"Invalid quantity for product {item.ProductId}");
-            
+
             if (item.UnitPrice <= 0)
                 errors.Add($"Invalid price for product {item.ProductId}");
         }
 
-        return new ValidationResult 
-        { 
-            IsValid = !errors.Any(), 
-            Errors = errors 
+        return new ValidationResult
+        {
+            IsValid = !errors.Any(),
+            Errors = errors
         };
     }
 
     private async Task<InventoryReservationResult> ReserveInventoryAsync(Order order)
     {
         var reservations = new List<(string ProductId, int Quantity)>();
-        
+
         foreach (var item in order.Items)
         {
             var reserved = await _inventoryService.TryReserveStockAsync(
-                item.ProductId, 
+                item.ProductId,
                 item.Quantity);
-                
+
             if (!reserved)
             {
                 // Rollback previous reservations
@@ -1196,17 +1196,17 @@ public class OrderProcessor : IOrderProcessor
                 {
                     await _inventoryService.ReleaseStockAsync(productId, quantity);
                 }
-                
+
                 return new InventoryReservationResult { Success = false };
             }
-            
+
             reservations.Add((item.ProductId, item.Quantity));
         }
 
-        return new InventoryReservationResult 
-        { 
-            Success = true, 
-            Reservations = reservations 
+        return new InventoryReservationResult
+        {
+            Success = true,
+            Reservations = reservations
         };
     }
 
@@ -1276,15 +1276,15 @@ public class OrderProcessorTests
         result.Success.Should().BeTrue();
         result.Order.Should().NotBeNull();
         result.Order!.Status.Should().Be(OrderStatus.Preparing);
-        
+
         // Verify all services were called
-        _inventoryServiceMock.Verify(x => x.TryReserveStockAsync(It.IsAny<string>(), It.IsAny<int>()), 
+        _inventoryServiceMock.Verify(x => x.TryReserveStockAsync(It.IsAny<string>(), It.IsAny<int>()),
             Times.Exactly(order.Items.Count));
-        _paymentServiceMock.Verify(x => x.ProcessPaymentAsync(It.IsAny<PaymentRequest>()), 
+        _paymentServiceMock.Verify(x => x.ProcessPaymentAsync(It.IsAny<PaymentRequest>()),
             Times.Once);
-        _shippingServiceMock.Verify(x => x.CreateShippingLabelAsync(It.IsAny<Order>()), 
+        _shippingServiceMock.Verify(x => x.CreateShippingLabelAsync(It.IsAny<Order>()),
             Times.Once);
-        _notificationServiceMock.Verify(x => x.SendOrderConfirmationAsync(It.IsAny<Order>()), 
+        _notificationServiceMock.Verify(x => x.SendOrderConfirmationAsync(It.IsAny<Order>()),
             Times.Once);
     }
 
@@ -1293,7 +1293,7 @@ public class OrderProcessorTests
     {
         // Arrange
         var order = CreateValidOrder();
-        
+
         // First item succeeds, second fails
         _inventoryServiceMock
             .SetupSequence(x => x.TryReserveStockAsync(It.IsAny<string>(), It.IsAny<int>()))
@@ -1306,13 +1306,13 @@ public class OrderProcessorTests
         // Assert
         result.Success.Should().BeFalse();
         result.Errors.Should().Contain("Insufficient inventory");
-        
+
         // Verify rollback was called for the first item
-        _inventoryServiceMock.Verify(x => x.ReleaseStockAsync(order.Items[0].ProductId, order.Items[0].Quantity), 
+        _inventoryServiceMock.Verify(x => x.ReleaseStockAsync(order.Items[0].ProductId, order.Items[0].Quantity),
             Times.Once);
-        
+
         // Verify payment was never attempted
-        _paymentServiceMock.Verify(x => x.ProcessPaymentAsync(It.IsAny<PaymentRequest>()), 
+        _paymentServiceMock.Verify(x => x.ProcessPaymentAsync(It.IsAny<PaymentRequest>()),
             Times.Never);
     }
 
@@ -1321,11 +1321,11 @@ public class OrderProcessorTests
     {
         // Arrange
         var order = CreateValidOrder();
-        
+
         _inventoryServiceMock
             .Setup(x => x.TryReserveStockAsync(It.IsAny<string>(), It.IsAny<int>()))
             .ReturnsAsync(true);
-            
+
         _paymentServiceMock
             .Setup(x => x.ProcessPaymentAsync(It.IsAny<PaymentRequest>()))
             .ReturnsAsync(new PaymentResult { Success = false });
@@ -1336,16 +1336,16 @@ public class OrderProcessorTests
         // Assert
         result.Success.Should().BeFalse();
         result.Errors.Should().Contain("Payment processing failed");
-        
+
         // Verify inventory was rolled back
         foreach (var item in order.Items)
         {
-            _inventoryServiceMock.Verify(x => x.ReleaseStockAsync(item.ProductId, item.Quantity), 
+            _inventoryServiceMock.Verify(x => x.ReleaseStockAsync(item.ProductId, item.Quantity),
                 Times.Once);
         }
-        
+
         // Verify order status was updated to PaymentFailed
-        _orderRepositoryMock.Verify(x => x.UpdateAsync(It.Is<Order>(o => o.Status == OrderStatus.PaymentFailed)), 
+        _orderRepositoryMock.Verify(x => x.UpdateAsync(It.Is<Order>(o => o.Status == OrderStatus.PaymentFailed)),
             Times.Once);
     }
 
@@ -1359,39 +1359,39 @@ public class OrderProcessorTests
         // Assert
         result.Success.Should().BeFalse();
         result.Errors.Should().Contain(error => error.Contains(expectedError));
-        
+
         // Verify no services were called
-        _inventoryServiceMock.Verify(x => x.TryReserveStockAsync(It.IsAny<string>(), It.IsAny<int>()), 
+        _inventoryServiceMock.Verify(x => x.TryReserveStockAsync(It.IsAny<string>(), It.IsAny<int>()),
             Times.Never);
-        _paymentServiceMock.Verify(x => x.ProcessPaymentAsync(It.IsAny<PaymentRequest>()), 
+        _paymentServiceMock.Verify(x => x.ProcessPaymentAsync(It.IsAny<PaymentRequest>()),
             Times.Never);
     }
 
     public static IEnumerable<object[]> InvalidOrders()
     {
-        yield return new object[] 
-        { 
-            new Order { CustomerId = "123", Items = new List<OrderItem>() }, 
-            "at least one item" 
+        yield return new object[]
+        {
+            new Order { CustomerId = "123", Items = new List<OrderItem>() },
+            "at least one item"
         };
-        
-        yield return new object[] 
-        { 
-            new Order { Items = new List<OrderItem> { new() { ProductId = "1", Quantity = 1 } } }, 
-            "Customer ID" 
+
+        yield return new object[]
+        {
+            new Order { Items = new List<OrderItem> { new() { ProductId = "1", Quantity = 1 } } },
+            "Customer ID"
         };
-        
-        yield return new object[] 
-        { 
-            new Order 
-            { 
-                CustomerId = "123", 
-                Items = new List<OrderItem> 
-                { 
-                    new() { ProductId = "1", Quantity = -1, UnitPrice = 10 } 
-                } 
-            }, 
-            "Invalid quantity" 
+
+        yield return new object[]
+        {
+            new Order
+            {
+                CustomerId = "123",
+                Items = new List<OrderItem>
+                {
+                    new() { ProductId = "1", Quantity = -1, UnitPrice = 10 }
+                }
+            },
+            "Invalid quantity"
         };
     }
 
@@ -1416,18 +1416,18 @@ public class OrderProcessorTests
 
         _paymentServiceMock
             .Setup(x => x.ProcessPaymentAsync(It.IsAny<PaymentRequest>()))
-            .ReturnsAsync(new PaymentResult 
-            { 
-                Success = true, 
-                PaymentInfo = new PaymentInfo { TransactionId = "TXN123" } 
+            .ReturnsAsync(new PaymentResult
+            {
+                Success = true,
+                PaymentInfo = new PaymentInfo { TransactionId = "TXN123" }
             });
 
         _shippingServiceMock
             .Setup(x => x.CreateShippingLabelAsync(It.IsAny<Order>()))
-            .ReturnsAsync(new ShippingResult 
-            { 
-                Success = true, 
-                ShippingInfo = new ShippingInfo { TrackingNumber = "TRACK123" } 
+            .ReturnsAsync(new ShippingResult
+            {
+                Success = true,
+                ShippingInfo = new ShippingInfo { TrackingNumber = "TRACK123" }
             });
 
         _orderRepositoryMock
@@ -1505,7 +1505,7 @@ public class ShoppingCartServiceTests
     {
         [Fact]
         public void WhenProductIsValid_AddsToCart() { }
-        
+
         [Fact]
         public void WhenProductIsNull_ThrowsException() { }
     }
@@ -1514,7 +1514,7 @@ public class ShoppingCartServiceTests
     {
         [Fact]
         public void WhenItemExists_RemovesFromCart() { }
-        
+
         [Fact]
         public void WhenItemDoesNotExist_DoesNothing() { }
     }
@@ -1536,11 +1536,11 @@ public class OrderBuilder
 
     public OrderBuilder WithItem(string productId, int quantity, decimal price)
     {
-        _order.Items.Add(new OrderItem 
-        { 
-            ProductId = productId, 
-            Quantity = quantity, 
-            UnitPrice = price 
+        _order.Items.Add(new OrderItem
+        {
+            ProductId = productId,
+            Quantity = quantity,
+            UnitPrice = price
         });
         return this;
     }
@@ -1629,7 +1629,7 @@ public class SystemTimeProvider : ITimeProvider
 public class TestTimeProvider : ITimeProvider
 {
     public DateTime UtcNow { get; set; } = DateTime.UtcNow;
-    
+
     public void AdvanceBy(TimeSpan timeSpan)
     {
         UtcNow = UtcNow.Add(timeSpan);
@@ -1700,7 +1700,7 @@ public abstract class IntegrationTestBase : IAsyncLifetime
         // Add common services
         services.AddLogging();
         services.AddAutoMapper(typeof(MappingProfile));
-        
+
         // Add test-specific implementations
         services.AddSingleton<ITimeProvider, TestTimeProvider>();
     }
@@ -1710,7 +1710,7 @@ public abstract class IntegrationTestBase : IAsyncLifetime
     public async Task DisposeAsync()
     {
         await CleanupTestDataAsync();
-        
+
         if (ServiceProvider is IDisposable disposable)
         {
             disposable.Dispose();

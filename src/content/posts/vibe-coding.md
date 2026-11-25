@@ -20,7 +20,7 @@ _A software engineer's view on how to grow when AI writes part of the code_
 
 ## Introduction: The Ground is Shifting
 
-I have written code professionally for over five years, and the technology changed a lot in that time. Kubernetes went from a complex orchestration tool to the default way to deploy. TypeScript went from a Microsoft experiment to the base of most new web projects. I also saw serverless computing, cloud-native architectures, and microservices become common. None of these changes felt as large, or as unsettling, as Large Language Models (LLMs) in my daily work.
+I have written code professionally for over five years, and the technology changed a lot in that time. Kubernetes went from a complex orchestration tool to the default way to deploy. TypeScript went from an optional extra to the base of most new web projects. I also saw serverless computing, cloud-native architectures, and microservices become common. None of these changes felt as large, or as unsettling, as Large Language Models (LLMs) in my daily work.
 
 Yesterday I watched a junior developer use Claude to prototype a complex React component in minutes. The component had proper state management and error handling, and the code was clean. In the same hour, I designed a distributed system by hand, and I asked myself whether my years of experience still counted.
 
@@ -40,7 +40,7 @@ Vibe coding still needs programming knowledge. You apply that knowledge in a dif
 
 ### The LLM Revolution: More Than Just Code Generation
 
-When ChatGPT first appeared, many of us saw it as a fancy autocomplete. Then GitHub Copilot showed that AI could write whole functions. Now tools like Claude, Cursor, and specialized coding assistants can:
+GitHub Copilot showed in 2021 that AI could write whole functions. When ChatGPT appeared in late 2022, many of us still saw it as a fancy autocomplete. Now tools like Claude, Cursor, and specialized coding assistants can:
 
 - Design whole applications from specifications
 - Debug complex issues from stack traces

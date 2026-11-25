@@ -20,7 +20,7 @@ Operating systems form the foundation of modern computing, but many computer sci
 
 ## What Makes xv6 Special
 
-xv6 is a teaching operating system from MIT, inspired by Unix Version 6. Production operating systems have millions of lines of code. xv6 has roughly 15,000 lines of well-commented C code and assembly. Because it is this small, you can understand the entire system, from the boot sequence to system calls, in a single semester.
+xv6 is a teaching operating system from MIT, inspired by Unix Version 6. Production operating systems have millions of lines of code. xv6 has roughly 10,000 lines of well-commented C code and assembly. Because it is this small, you can understand the entire system, from the boot sequence to system calls, in a single semester.
 
 xv6 is simple but complete. It implements the concepts you need to understand: process management, virtual memory, file systems, and device drivers. Each component keeps only its essential elements, so the principles stay clear without optimization details or edge cases.
 
@@ -37,21 +37,21 @@ void bootmain(void)
     struct elfhdr *elf;
     struct proghdr *ph, *eph;
     void (*entry)(void);
-    
+
     // Read first page of kernel from disk
     readseg((uchar*)elf, 4096, 0);
-    
+
     // Check if this is an ELF file
     if(elf->magic != ELF_MAGIC)
         return;  // Not a valid kernel
-    
+
     // Load each program segment
     ph = (struct proghdr*)((uchar*)elf + elf->phoff);
     eph = ph + elf->phnum;
     for(; ph < eph; ph++){
         readseg(ph->paddr, ph->memsz, ph->offset);
     }
-    
+
     // Transfer control to kernel
     entry = (void(*)(void))(elf->entry);
     entry();
@@ -93,11 +93,11 @@ int fork(void)
 {
     int i, pid;
     struct proc *np;
-    
+
     // Allocate new process structure
     if((np = allocproc()) == 0)
         return -1;
-    
+
     // Copy process state from parent
     if((np->pgdir = copyuvm(proc->pgdir, proc->sz)) == 0){
         kfree(np->kstack);
@@ -108,29 +108,29 @@ int fork(void)
     np->sz = proc->sz;
     np->parent = proc;
     *np->tf = *proc->tf;
-    
+
     // Clear %eax so that fork returns 0 in child
     np->tf->eax = 0;
-    
+
     // Copy file descriptors
     for(i = 0; i < NOFILE; i++)
         if(proc->ofile[i])
             np->ofile[i] = filedup(proc->ofile[i]);
     np->cwd = idup(proc->cwd);
-    
+
     safestrcpy(np->name, proc->name, sizeof(proc->name));
     pid = np->pid;
-    
+
     // Set child runnable
     acquire(&ptable.lock);
     np->state = RUNNABLE;
     release(&ptable.lock);
-    
+
     return pid;  // Return child's PID to parent
 }
 ```
 
-After fork, only the return value tells the parent and the child apart. This is how operating systems create new execution contexts. The copy of the process state shows what makes each process independent. The shared resources, like the current directory, show how processes can communicate.
+After fork, only the return value tells the parent and the child apart. This is how operating systems create new execution contexts. The copy of the process state shows what makes each process independent. The shared resources, like open files and pipes, show how processes can communicate.
 
 ## Memory Management: Creating Virtual Worlds
 
@@ -146,10 +146,10 @@ static pte_t* walkpgdir(pde_t *pgdir, const void *va, int alloc)
 {
     pde_t *pde;
     pte_t *pgtab;
-    
+
     // Extract page directory index from virtual address
     pde = &pgdir[PDX(va)];
-    
+
     if(*pde & PTE_P){
         // Page table exists
         pgtab = (pte_t*)P2V(PTE_ADDR(*pde));
@@ -160,7 +160,7 @@ static pte_t* walkpgdir(pde_t *pgdir, const void *va, int alloc)
         memset(pgtab, 0, PGSIZE);
         *pde = V2P(pgtab) | PTE_P | PTE_W | PTE_U;
     }
-    
+
     // Return pointer to page table entry
     return &pgtab[PTX(va)];
 }
@@ -173,13 +173,13 @@ The memory allocator in xv6 (`kalloc.c`) manages physical memory with a simple f
 char* kalloc(void)
 {
     struct run *r;
-    
+
     acquire(&kmem.lock);
     r = kmem.freelist;
     if(r)
         kmem.freelist = r->next;
     release(&kmem.lock);
-    
+
     if(r)
         memset((char*)r, 5, PGSIZE); // Fill with junk
     return (char*)r;
@@ -219,7 +219,7 @@ static uint balloc(uint dev)
 {
     int b, bi, m;
     struct buf *bp;
-    
+
     bp = 0;
     for(b = 0; b < sb.size; b += BPB){
         bp = bread(dev, BBLOCK(b, sb));
@@ -273,7 +273,7 @@ fork:
 void syscall(void)
 {
     int num;
-    
+
     num = proc->tf->eax;
     if(num > 0 && num < NELEM(syscalls) && syscalls[num]) {
         proc->tf->eax = syscalls[num]();
@@ -298,11 +298,11 @@ Spinlocks provide mutual exclusion for short critical sections. A processor acqu
 void acquire(struct spinlock *lk)
 {
     pushcli(); // disable interrupts
-    
+
     // The xchg is atomic
     while(xchg(&lk->locked, 1) != 0)
         ;
-    
+
     // Record info about lock acquisition for debugging
     lk->cpu = cpu;
     getcallerpcs(&lk, lk->pcs);
@@ -313,10 +313,10 @@ void release(struct spinlock *lk)
 {
     lk->pcs[0] = 0;
     lk->cpu = 0;
-    
+
     // The xchg instruction is atomic
     xchg(&lk->locked, 0);
-    
+
     popcli(); // enable interrupts
 }
 ```
@@ -331,25 +331,25 @@ void sleep(void *chan, struct spinlock *lk)
 {
     if(proc == 0)
         panic("sleep");
-    
+
     if(lk == 0)
         panic("sleep without lk");
-    
+
     // Must acquire ptable.lock to change proc->state
     // and then release lk
     if(lk != &ptable.lock){
         acquire(&ptable.lock);
         release(lk);
     }
-    
+
     // Go to sleep
     proc->chan = chan;
     proc->state = SLEEPING;
     sched();
-    
+
     // Tidy up
     proc->chan = 0;
-    
+
     // Reacquire original lock
     if(lk != &ptable.lock){
         release(&ptable.lock);
@@ -369,24 +369,24 @@ The xv6 scheduler uses a simple round-robin policy. Each processor loops continu
 void scheduler(void)
 {
     struct proc *p;
-    
+
     for(;;){
         // Enable interrupts on this processor
         sti();
-        
+
         // Loop over process table looking for process to run
         acquire(&ptable.lock);
         for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
             if(p->state != RUNNABLE)
                 continue;
-            
+
             // Switch to chosen process
             proc = p;
             switchuvm(p);
             p->state = RUNNING;
             swtch(&cpu->scheduler, p->context);
             switchkvm();
-            
+
             // Process is done running for now
             proc = 0;
         }
@@ -407,17 +407,17 @@ The context switch in `swtch.S` saves the current register state and loads the s
 swtch:
     movl 4(%esp), %eax
     movl 8(%esp), %edx
-    
+
     # Save old callee-save registers
     pushl %ebp
     pushl %ebx
     pushl %esi
     pushl %edi
-    
+
     # Switch stacks
     movl %esp, (%eax)
     movl %edx, %esp
-    
+
     # Load new callee-save registers
     popl %edi
     popl %esi
@@ -449,12 +449,12 @@ static int kbdgetc(void)
         normalmap, shiftmap, ctlmap, ctlmap
     };
     uint st, data, c;
-    
+
     st = inb(KBSTATP);
     if((st & KBS_DIB) == 0)
         return -1;
     data = inb(KBDATAP);
-    
+
     if(data == 0xE0){
         shift |= E0ESC;
         return 0;
@@ -468,7 +468,7 @@ static int kbdgetc(void)
         data |= 0x80;
         shift &= ~E0ESC;
     }
-    
+
     shift |= shiftcode[data];
     shift ^= togglecode[data];
     c = charcode[shift & (CTL | SHIFT)][data];
@@ -496,7 +496,7 @@ int main(void)
 {
     static char buf[100];
     int fd;
-    
+
     // Ensure three file descriptors are open
     while((fd = open("console", O_RDWR)) >= 0){
         if(fd >= 3){
@@ -504,7 +504,7 @@ int main(void)
             break;
         }
     }
-    
+
     // Read and run input commands
     while(getcmd(buf, sizeof(buf)) >= 0){
         if(buf[0] == 'c' && buf[1] == 'd' && buf[2] == ' '){
@@ -590,7 +590,7 @@ Debugging operating system code is hard. When your code runs in kernel mode, tra
 The `cprintf()` function works like `printf()` but outputs to the console even from interrupt handlers:
 
 ```c
-cprintf("proc %d (%s) allocating page at %x\n", 
+cprintf("proc %d (%s) allocating page at %x\n",
         proc->pid, proc->name, a);
 ```
 
@@ -598,7 +598,7 @@ QEMU's monitor (Ctrl-a c) has debugging features. You can examine registers and 
 
 ```
 (qemu) info registers
-(qemu) x/10x 0x80100000  
+(qemu) x/10x 0x80100000
 (qemu) stop
 (qemu) cont
 ```
@@ -637,7 +637,7 @@ Students who work with xv6 often hit the same problems.
 
 xv6 simplifies many parts of an operating system, but its concepts map directly to modern systems. Linux uses similar process structures, with hundreds of fields instead of dozens. Windows implements threads within processes, but the basic scheduling concepts are the same.
 
-Modern file systems like ext4 or NTFS add features like journaling, extents, and B-trees, but build on the same inode concept. Virtual memory systems now support huge pages, NUMA awareness, and complex sharing schemes, but still use page tables for address translation.
+Modern file systems like ext4 add extents and tree-indexed directories but keep the inode concept. NTFS keeps similar metadata in Master File Table records. Virtual memory systems now support huge pages, NUMA awareness, and complex sharing schemes, but still use page tables for address translation.
 
 xv6 gives you the foundation for these advanced topics. Because it is simple, it is a good starting point for complex production systems.
 
@@ -669,7 +669,7 @@ The resources below help you go further, whether you want to master xv6, try oth
 **Video Lectures and Courses**
 
 - MIT 6.828 Operating System Engineering: https://pdos.csail.mit.edu/6.828/2018/schedule.html
-- Frans Kaashoek's lectures: https://www.youtube.com/playlist?list=PLfciLKR3SgqNJKKIKUliWoNBBH1VHL3AP
+- MIT 6.828 lecture videos: https://www.youtube.com/playlist?list=PLfciLKR3SgqNJKKIKUliWoNBBH1VHL3AP
 - CS 537 (Wisconsin) videos: https://pages.cs.wisc.edu/~remzi/Classes/537/Spring2018/
 
 ### Classic Operating Systems Texts
@@ -719,7 +719,7 @@ Focus on x86 architecture details
 **Virtual Memory**
 
 - "The Multics Virtual Memory: Concepts and Design" (1972)  
-  https://multicians.org/multics-vm.pdf
+  https://multicians.org/multics-vm.html
 - "The Working Set Model for Program Behavior" by Denning (1968)  
   https://denninginstitute.com/pjd/PUBS/WSModel_1968.pdf
 
@@ -734,4 +734,3 @@ Focus on x86 architecture details
 
 - "Lottery Scheduling" by Waldspurger & Weihl (1994)  
   https://www.usenix.org/legacy/publications/library/proceedings/osdi/full_papers/waldspurger.pdf
--

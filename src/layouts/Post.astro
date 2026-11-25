@@ -288,7 +288,33 @@ const jsonLd = {
           .then(function (mod) {
             var mermaid = mod.default;
             var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-            mermaid.initialize({ startOnLoad: false, theme: isDark ? 'dark' : 'default' });
+            // Charts: transparent background and the site's accent palette, so they sit on the
+            // page in both themes. A post can still override with a %%{init: ...}%% directive.
+            mermaid.initialize({
+              startOnLoad: false,
+              theme: isDark ? 'dark' : 'default',
+              themeVariables: {
+                // Setting xyChart replaces Mermaid's per-theme defaults, so set text colors too.
+                xyChart: (function () {
+                  var ink = isDark ? '#ece5d8' : '#1c1a17';
+                  return {
+                    backgroundColor: 'transparent',
+                    titleColor: ink,
+                    xAxisLabelColor: ink,
+                    xAxisTitleColor: ink,
+                    xAxisLineColor: ink,
+                    xAxisTickColor: ink,
+                    yAxisLabelColor: ink,
+                    yAxisTitleColor: ink,
+                    yAxisLineColor: ink,
+                    yAxisTickColor: ink,
+                    plotColorPalette: isDark
+                      ? '#e59a82, #8fb8d8, #d9b86c'
+                      : '#8a2b1f, #2f6f8f, #a07a1f',
+                  };
+                })(),
+              },
+            });
 
             // Astro/Shiki renders ```mermaid fences as <pre data-language="mermaid">
             document.querySelectorAll('pre[data-language="mermaid"]').forEach(function (pre) {

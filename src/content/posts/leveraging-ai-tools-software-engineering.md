@@ -56,8 +56,8 @@ def process_user_analytics(user_data):
     # Knows your data validation patterns
     # Understands your error handling approach
     return self.analytics_engine.process(
-        user_data, 
-        validate=True, 
+        user_data,
+        validate=True,
         format_output=self.config.output_format
     )
 ```
@@ -86,43 +86,43 @@ from your_app import db, User  # Cursor knows your imports
 def register_user():
     try:
         data = request.get_json()
-        
+
         # Validate email format
         email_pattern = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
         if not re.match(email_pattern, data.get('email', '')):
             return jsonify({'error': 'Invalid email format'}), 400
-        
+
         # Check for existing user
         existing_user = User.query.filter_by(email=data['email']).first()
         if existing_user:
             return jsonify({'error': 'User already exists'}), 409
-        
+
         # Hash password
         hashed_password = generate_password_hash(data['password'])
-        
+
         # Create user
         new_user = User(
             email=data['email'],
             password_hash=hashed_password,
             created_at=datetime.utcnow()
         )
-        
+
         db.session.add(new_user)
         db.session.commit()
-        
+
         # Generate JWT token
         payload = {
             'user_id': new_user.id,
             'exp': datetime.utcnow() + timedelta(days=1)
         }
         token = jwt.encode(payload, app.config['SECRET_KEY'], algorithm='HS256')
-        
+
         return jsonify({
             'message': 'User registered successfully',
             'token': token,
             'user_id': new_user.id
         }), 201
-        
+
     except Exception as e:
         db.session.rollback()
         return jsonify({'error': 'Registration failed'}), 500
@@ -184,15 +184,15 @@ Prompt: "Refactor this 200-line function to follow single responsibility princip
 1. **Give specific context**: Include relevant details about your architecture, frameworks, and conventions
 2. **Iterate in small steps**: Start with small, specific requests and add complexity
 3. **Review and understand**: Always review generated code, and learn from it
-4. **Customize for your stack**: Use Cursor consistently so it learns your project patterns
+4. **Customize for your stack**: Add project rules (for example, a `.cursorrules` file) so Cursor follows your project patterns
 
 ## Tool 2: ChatGPT Plus - Your Research and Reasoning Engine
 
 ### Why ChatGPT Plus Over Free Version
 
-The Plus subscription gives access to GPT-4, advanced data analysis, web browsing, and custom GPTs. It offers:
+As of early 2025, free users get limited access to most of these features. Plus raises the limits and adds stronger models such as o1. It offers:
 
-- **Code Interpreter**: Run Python code for data analysis
+- **Advanced data analysis** (formerly Code Interpreter): Run Python code for data analysis
 - **Web browsing**: Read current information and documentation
 - **Custom GPTs**: Specialized assistants for specific domains
 - **Higher usage limits**: Necessary for heavy development work
@@ -308,7 +308,7 @@ Split complex problems into separate conversation threads:
 
 ```
 Session 1: High-level architecture discussion
-Session 2: Detailed implementation planning  
+Session 2: Detailed implementation planning
 Session 3: Security and performance considerations
 Session 4: Testing strategy development
 ```
@@ -343,7 +343,7 @@ Upload: Entire Flask application (20+ files)
 
 Prompt: "Analyze this Flask application and create comprehensive documentation including architecture overview, API endpoints, database schema, and deployment instructions"
 
-Output: 
+Output:
 - System architecture diagram (text-based)
 - Complete API documentation
 - Database relationship analysis
@@ -571,7 +571,7 @@ Prompt 4: "Add two-factor authentication support"
 ```
 "Review this code for:
 - Security vulnerabilities
-- Performance bottlenecks  
+- Performance bottlenecks
 - Code maintainability
 - Best practices adherence
 - Potential edge cases
@@ -590,7 +590,7 @@ Never copy AI-generated code blindly. Understand what the code does, why it work
 # Create checklists for AI-generated code
 REVIEW_CHECKLIST = [
     "Error handling implemented",
-    "Input validation present", 
+    "Input validation present",
     "Security considerations addressed",
     "Performance implications understood",
     "Tests written and passing",
@@ -606,14 +606,14 @@ Start with small, isolated components. Add AI-generated code to critical systems
 
 **1. Tool Configuration**
 
-```json
-// Cursor settings for optimal AI integration
-{
-    "cursor.ai.model": "gpt-4",
-    "cursor.ai.context.maxTokens": 8000,
-    "cursor.ai.autocomplete.enabled": true,
-    "cursor.ai.chat.followups": true
-}
+Pick the model in Cursor's settings. Then add a project rules file (for example, `.cursorrules` in the repository root) so Cursor follows your conventions:
+
+```text
+# .cursorrules
+- Use TypeScript strict mode. Do not use `any`.
+- Follow the existing folder structure under src/.
+- Write a unit test for every new function.
+- Prefer small, pure functions and early returns.
 ```
 
 **2. Workflow Automation**
@@ -628,7 +628,7 @@ echo "Starting AI-enhanced development session..."
 # Generate project documentation with Claude
 claude-cli analyze-project --output docs/
 
-# Run code quality checks with ChatGPT integration  
+# Run code quality checks with ChatGPT integration
 gpt-review --codebase . --output reviews/
 
 # Start Cursor with project context
@@ -733,7 +733,7 @@ class ProductivityMetrics:
             'bug_fix_time': '4 hours',
             'learning_curve': '1 month'
         }
-        
+
         self.post_ai_metrics = {
             'feature_development_time': '1 week',
             'documentation_time': '4 hours',
@@ -741,7 +741,7 @@ class ProductivityMetrics:
             'bug_fix_time': '1 hour',
             'learning_curve': '1 week'
         }
-    
+
     def calculate_improvement(self):
         # Track and visualize productivity gains
         pass
@@ -855,7 +855,7 @@ Engineers who use AI well while keeping strong critical thinking and problem-sol
 
 ### Additional Resources
 
-- **Cursor Documentation**: [cursor.sh/docs](https://cursor.sh/docs) - Comprehensive guide to Cursor's AI features
+- **Cursor Documentation**: [cursor.com/docs](https://cursor.com/docs) - Comprehensive guide to Cursor's AI features
 - **OpenAI API Documentation**: [platform.openai.com](https://platform.openai.com) - Advanced ChatGPT integration techniques
 - **Anthropic Claude Documentation**: [docs.anthropic.com](https://docs.anthropic.com) - Claude API and best practices
 - **AI for Software Engineering**: [GitHub AI Engineering Guide](https://github.com/features/ai) - Industry best practices and case studies

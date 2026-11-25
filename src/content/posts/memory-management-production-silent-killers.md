@@ -15,7 +15,7 @@ tags:
   - aspnet-core
 ---
 
-It's 2:47 AM when the alerts start to flood in. Your e-commerce platform, which handles Black Friday traffic, starts to throw OutOfMemoryErrors. Orders fail, customers abandon carts, and your revenue is hemorrhaging by the minute. CPU usage looks normal and disk I/O is fine, but something silently consumes memory until your applications crash.
+It's 2:47 AM when the alerts start to flood in. Your e-commerce platform, which handles Black Friday traffic, starts to throw OutOfMemoryExceptions. Orders fail, customers abandon carts, and your revenue is hemorrhaging by the minute. CPU usage looks normal and disk I/O is fine, but something silently consumes memory until your applications crash.
 
 This was our reality eight months ago. Occasional "minor hiccups" grew into a full production crisis, and that crisis taught our team hard lessons about memory management in .NET applications. If you run .NET services, ASP.NET Core applications, or containerized .NET workloads in production, this story and our solutions could save you from similar failures.
 
@@ -52,12 +52,12 @@ public class OrderProcessingController : ControllerBase
 {
     private static readonly ConcurrentDictionary<string, List<OrderEvent>> _orderEventCache = new();
     private readonly IServiceProvider _serviceProvider;
-    
+
     public OrderProcessingController(IServiceProvider serviceProvider)
     {
         _serviceProvider = serviceProvider;
     }
-    
+
     [HttpPost]
     public async Task<ActionResult<OrderResult>> ProcessOrder(Order order)
     {
@@ -69,13 +69,13 @@ public class OrderProcessingController : ControllerBase
                 existing.Add(new OrderEvent(order, DateTime.UtcNow));
                 return existing;
             });
-        
+
         // Fire and forget background processing
         _ = Task.Run(async () => await ProcessOrderInBackground(order));
-        
+
         return Ok(new OrderResult { OrderId = orderId, Status = "Processing" });
     }
-    
+
     // The cleanup method that was never called properly
     private void CleanupOrderEvents(string orderId)
     {
@@ -112,7 +112,7 @@ app.Use(async (context, next) =>
     var memoryBefore = GC.GetTotalMemory(false);
     await next();
     var memoryAfter = GC.GetTotalMemory(false);
-    
+
     if (memoryAfter - memoryBefore > 10_000_000) // 10MB allocation
     {
         var logger = context.RequestServices.GetRequiredService<ILogger<Program>>();
@@ -122,7 +122,7 @@ app.Use(async (context, next) =>
 });
 ```
 
-The memory dump showed these numbers:
+The memory dump showed these retained sizes. They overlap and do not add up to 100%, because the dictionary holds the lists and the lists hold the events:
 
 - **ConcurrentDictionary entries**: 3.8GB (62% of heap)
 - **List<OrderEvent> instances**: 1.9GB (31% of heap)
@@ -142,9 +142,9 @@ public class OptimizedOrderProcessingController : ControllerBase
     private readonly IMemoryCache _memoryCache;
     private readonly ILogger<OptimizedOrderProcessingController> _logger;
     private readonly IHostedService _backgroundProcessor;
-    
+
     public OptimizedOrderProcessingController(
-        IMemoryCache memoryCache, 
+        IMemoryCache memoryCache,
         ILogger<OptimizedOrderProcessingController> logger,
         BackgroundOrderProcessor backgroundProcessor)
     {
@@ -152,13 +152,13 @@ public class OptimizedOrderProcessingController : ControllerBase
         _logger = logger;
         _backgroundProcessor = backgroundProcessor;
     }
-    
+
     [HttpPost]
     public async Task<ActionResult<OrderResult>> ProcessOrder(Order order)
     {
         var orderId = order.Id;
         var cacheKey = $"order_events_{orderId}";
-        
+
         // Use bounded memory cache with expiration
         var events = _memoryCache.GetOrCreate(cacheKey, cacheEntry =>
         {
@@ -166,21 +166,21 @@ public class OptimizedOrderProcessingController : ControllerBase
             cacheEntry.AbsoluteExpirationRelativeToNow = TimeSpan.FromHours(2);
             cacheEntry.Size = 1; // For size-based eviction
             cacheEntry.Priority = CacheItemPriority.Normal;
-            
+
             cacheEntry.RegisterPostEvictionCallback((key, value, reason, state) =>
             {
-                _logger.LogDebug("Evicted order events for {OrderId} due to {Reason}", 
+                _logger.LogDebug("Evicted order events for {OrderId} due to {Reason}",
                     orderId, reason);
             });
-            
+
             return new List<OrderEvent>();
         });
-        
+
         events.Add(new OrderEvent(order, DateTime.UtcNow));
-        
+
         // Use hosted service for background processing instead of Task.Run
         await _backgroundProcessor.EnqueueOrderAsync(order);
-        
+
         return Ok(new OrderResult { OrderId = orderId, Status = "Processing" });
     }
 }
@@ -191,12 +191,12 @@ public class BackgroundOrderProcessor : BackgroundService
     private readonly Channel<Order> _orderQueue;
     private readonly IServiceScopeFactory _scopeFactory;
     private readonly ILogger<BackgroundOrderProcessor> _logger;
-    
+
     public BackgroundOrderProcessor(IServiceScopeFactory scopeFactory, ILogger<BackgroundOrderProcessor> logger)
     {
         _scopeFactory = scopeFactory;
         _logger = logger;
-        
+
         // Create bounded channel to prevent memory growth
         var options = new BoundedChannelOptions(1000)
         {
@@ -204,15 +204,15 @@ public class BackgroundOrderProcessor : BackgroundService
             SingleReader = false,
             SingleWriter = false
         };
-        
+
         _orderQueue = Channel.CreateBounded<Order>(options);
     }
-    
+
     public async Task EnqueueOrderAsync(Order order)
     {
         await _orderQueue.Writer.WriteAsync(order);
     }
-    
+
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
         await foreach (var order in _orderQueue.Reader.ReadAllAsync(stoppingToken))
@@ -240,10 +240,10 @@ builder.Services.AddMemoryCache(options =>
 {
     // Set size limit to prevent unbounded growth
     options.SizeLimit = 100_000;
-    
+
     // Compact cache when it reaches 75% capacity
     options.CompactionPercentage = 0.25;
-    
+
     // Check for expired items every 30 seconds
     options.ExpirationScanFrequency = TimeSpan.FromSeconds(30);
 });
@@ -265,24 +265,24 @@ public class MemoryEfficientOrderProcessor
 {
     private readonly IServiceScopeFactory _scopeFactory;
     private readonly ILogger<MemoryEfficientOrderProcessor> _logger;
-    
+
     public async Task HandleOrderCreatedAsync(OrderCreatedEvent orderEvent)
     {
         // Process immediately, don't store in memory
         await ProcessOrderImmediatelyAsync(orderEvent.Order);
-        
+
         // If state must be maintained, use external storage (database/Redis)
         using var scope = _scopeFactory.CreateScope();
         var repository = scope.ServiceProvider.GetRequiredService<IOrderEventRepository>();
         await repository.SaveAsync(new OrderEventEntity(orderEvent));
     }
-    
+
     // Use streaming for large datasets with Entity Framework
     public async Task ProcessBulkOrdersAsync()
     {
         using var scope = _scopeFactory.CreateScope();
         var context = scope.ServiceProvider.GetRequiredService<OrderDbContext>();
-        
+
         await foreach (var order in context.Orders
             .Where(o => o.Status == OrderStatus.Pending)
             .AsAsyncEnumerable())
@@ -290,13 +290,13 @@ public class MemoryEfficientOrderProcessor
             await ProcessOrderAsync(order);
         }
     }
-    
+
     // Memory-conscious data processing using projections
     public async Task<OrderSummary> GenerateOrderSummaryAsync(DateTime date)
     {
         using var scope = _scopeFactory.CreateScope();
         var context = scope.ServiceProvider.GetRequiredService<OrderDbContext>();
-        
+
         // Use database aggregation instead of loading all orders into memory
         return await context.Orders
             .Where(o => o.CreatedDate.Date == date.Date)
@@ -324,7 +324,7 @@ public class PaymentProcessingService
 {
     private readonly HttpClient _httpClient;
     private readonly List<PaymentTransaction> _transactionHistory = new();
-    
+
     public async Task<PaymentResult> ProcessPaymentAsync(PaymentRequest request)
     {
         // Creating large objects frequently
@@ -337,14 +337,14 @@ public class PaymentProcessingService
             ValidationResults = await ValidatePaymentAsync(request),
             AuditTrail = GenerateAuditTrail(request)
         };
-        
+
         // Keeping references to large objects
         _transactionHistory.Add(new PaymentTransaction(paymentData));
-        
+
         // Processing large JSON payloads
         var jsonPayload = JsonSerializer.Serialize(paymentData);
         var response = await _httpClient.PostAsync("/process", new StringContent(jsonPayload));
-        
+
         return await ProcessResponseAsync(response);
     }
 }
@@ -361,13 +361,13 @@ public class GCMonitoringService : IHostedService
     private readonly ILogger<GCMonitoringService> _logger;
     private readonly IMetrics _metrics;
     private Timer _timer;
-    
+
     public Task StartAsync(CancellationToken cancellationToken)
     {
         _timer = new Timer(CollectGCMetrics, null, TimeSpan.Zero, TimeSpan.FromSeconds(10));
         return Task.CompletedTask;
     }
-    
+
     private void CollectGCMetrics(object state)
     {
         var gen0Collections = GC.CollectionCount(0);
@@ -375,12 +375,12 @@ public class GCMonitoringService : IHostedService
         var gen2Collections = GC.CollectionCount(2);
         var totalMemory = GC.GetTotalMemory(false);
         var gen0Size = GC.GetGeneration(new object());
-        
+
         _metrics.Gauge("gc.gen0.collections").Set(gen0Collections);
         _metrics.Gauge("gc.gen1.collections").Set(gen1Collections);
         _metrics.Gauge("gc.gen2.collections").Set(gen2Collections);
         _metrics.Gauge("gc.total.memory.bytes").Set(totalMemory);
-        
+
         // Log concerning patterns
         if (gen2Collections > _previousGen2Count + 5)
         {
@@ -406,36 +406,36 @@ public class OptimizedPaymentProcessingService
     private readonly ObjectPool<StringBuilder> _stringBuilderPool;
     private readonly IMemoryCache _memoryCache;
     private readonly ArrayPool<byte> _arrayPool = ArrayPool<byte>.Shared;
-    
+
     // Use bounded concurrent collection instead of unbounded List
     private readonly ConcurrentQueue<PaymentTransaction> _recentTransactions = new();
     private const int MaxRecentTransactions = 1000;
-    
+
     public OptimizedPaymentProcessingService(ObjectPool<StringBuilder> stringBuilderPool, IMemoryCache memoryCache)
     {
         _stringBuilderPool = stringBuilderPool;
         _memoryCache = memoryCache;
     }
-    
+
     public async Task<PaymentResult> ProcessPaymentAsync(PaymentRequest request)
     {
         // Use object pooling for frequently allocated objects
         var stringBuilder = _stringBuilderPool.Get();
-        
+
         try
         {
             // Create payment data with memory-conscious approach
             var paymentData = await CreatePaymentDataAsync(request);
-            
+
             // Use System.Text.Json with pre-allocated buffers
             var jsonBytes = await SerializeToJsonBytesAsync(paymentData);
-            
+
             // Process payment with efficient memory usage
             var result = await ProcessPaymentInternalAsync(jsonBytes);
-            
+
             // Maintain bounded transaction history
             await AddTransactionToHistoryAsync(paymentData, result);
-            
+
             return result;
         }
         finally
@@ -443,12 +443,12 @@ public class OptimizedPaymentProcessingService
             _stringBuilderPool.Return(stringBuilder);
         }
     }
-    
+
     private async Task<byte[]> SerializeToJsonBytesAsync(PaymentData paymentData)
     {
         // Rent buffer from array pool to avoid LOH allocations
         var rentedBuffer = _arrayPool.Rent(4096);
-        
+
         try
         {
             using var stream = new MemoryStream(rentedBuffer);
@@ -456,7 +456,7 @@ public class OptimizedPaymentProcessingService
             {
                 DefaultBufferSize = 1024  // Smaller buffer size
             });
-            
+
             return stream.ToArray();
         }
         finally
@@ -464,35 +464,35 @@ public class OptimizedPaymentProcessingService
             _arrayPool.Return(rentedBuffer);
         }
     }
-    
+
     private async Task AddTransactionToHistoryAsync(PaymentData paymentData, PaymentResult result)
     {
         var transaction = new PaymentTransaction(paymentData.RequestId, result.Status, DateTime.UtcNow);
-        
+
         _recentTransactions.Enqueue(transaction);
-        
+
         // Maintain bounded size
         while (_recentTransactions.Count > MaxRecentTransactions)
         {
             _recentTransactions.TryDequeue(out _);
         }
-        
+
         // Persist to external storage instead of keeping in memory
         await _transactionRepository.SaveAsync(transaction);
     }
-    
+
     // Use memory caching with expiration
     private async Task<CustomerInfo> GetCustomerInfoAsync(string customerId)
     {
         var cacheKey = $"customer:{customerId}";
-        
+
         if (_memoryCache.TryGetValue(cacheKey, out CustomerInfo customerInfo))
         {
             return customerInfo;
         }
-        
+
         customerInfo = await _customerRepository.GetByIdAsync(customerId);
-        
+
         _memoryCache.Set(cacheKey, customerInfo, new MemoryCacheEntryOptions
         {
             AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(5),
@@ -500,7 +500,7 @@ public class OptimizedPaymentProcessingService
             Size = 1,
             Priority = CacheItemPriority.Normal
         });
-        
+
         return customerInfo;
     }
 }
@@ -518,9 +518,9 @@ public static IHostBuilder CreateHostBuilder(string[] args) =>
             services.AddMemoryCache(options =>
             {
                 options.SizeLimit = 100_000; // Limit cache entries
-                options.CompactionPercentage = 0.25; // Compact when 75% full
+                options.CompactionPercentage = 0.25; // Remove 25% of entries when SizeLimit is reached
             });
-            
+
             // Configure object pooling
             services.AddSingleton<ObjectPoolProvider, DefaultObjectPoolProvider>();
             services.AddSingleton(serviceProvider =>
@@ -528,7 +528,7 @@ public static IHostBuilder CreateHostBuilder(string[] args) =>
                 var provider = serviceProvider.GetService<ObjectPoolProvider>();
                 return provider.CreateStringBuilderPool();
             });
-            
+
             // Add custom GC monitoring
             services.AddSingleton<GCMonitoringService>();
             services.AddHostedService<GCMonitoringService>();
@@ -536,7 +536,7 @@ public static IHostBuilder CreateHostBuilder(string[] args) =>
         .ConfigureWebHostDefaults(webBuilder =>
         {
             webBuilder.UseStartup<Startup>();
-            
+
             // Configure Kestrel with memory limits
             webBuilder.UseKestrel(options =>
             {
@@ -618,7 +618,7 @@ spec:
           value: "0xC0000000"    # 3GB (75% of 4GB limit)
         - name: DOTNET_GCServer
           value: "1"             # Enable server GC for better throughput
-          
+
         # Liveness probe with proper failure threshold
         livenessProbe:
           httpGet:
@@ -628,7 +628,7 @@ spec:
           periodSeconds: 30
           failureThreshold: 3
           timeoutSeconds: 10
-          
+
         # Readiness probe
         readinessProbe:
           httpGet:
@@ -637,7 +637,7 @@ spec:
           initialDelaySeconds: 30
           periodSeconds: 10
           failureThreshold: 3
-          
+
       # Configure pod disruption budget
       terminationGracePeriodSeconds: 45
 ```
@@ -658,7 +658,7 @@ groups:
     annotations:
       summary: "Container memory usage is above 80%"
       description: "Container {{ $labels.container }} in pod {{ $labels.pod }} is using {{ $value | humanizePercentage }} of its memory limit"
-      
+
   - alert: ContainerMemoryUsageCritical
     expr: (container_memory_usage_bytes / container_spec_memory_limit_bytes) > 0.9
     for: 2m
@@ -666,7 +666,7 @@ groups:
       severity: critical
     annotations:
       summary: "Container memory usage is critically high"
-      
+
   - alert: PodOOMKilled
     expr: increase(kube_pod_container_status_restarts_total[5m]) > 0 and kube_pod_container_status_last_terminated_reason{reason="OOMKilled"} == 1
     for: 0m
@@ -694,7 +694,7 @@ public void ConfigureServices(IServiceCollection services)
         MaxConnectionsPerServer = 50,
         UseProxy = false
     });
-    
+
     // Configure memory cache with container-aware limits
     services.AddMemoryCache(options =>
     {
@@ -702,7 +702,7 @@ public void ConfigureServices(IServiceCollection services)
         var totalMemory = GC.GetTotalMemory(false);
         options.SizeLimit = (int)(totalMemory * 0.1); // 10% of heap for cache
     });
-    
+
     // Configure Entity Framework with connection pooling
     services.AddDbContextPool<PaymentDbContext>(options =>
         options.UseNpgsql(connectionString, npgsqlOptions =>
@@ -725,22 +725,22 @@ Our Entity Framework DbContext instances slowly leaked memory, and database conn
 public class OrderRepository
 {
     private readonly OrderDbContext _context; // Singleton DbContext - BAD!
-    
+
     public OrderRepository(OrderDbContext context)
     {
         _context = context;
     }
-    
+
     public async Task<Order> GetOrderAsync(int orderId)
     {
         // Long-lived context accumulates change tracking data
         var order = await _context.Orders
             .Include(o => o.Items)
             .FirstOrDefaultAsync(o => o.Id == orderId);
-            
+
         return order;
     }
-    
+
     public async Task UpdateOrderAsync(Order order)
     {
         // Change tracker keeps growing over time
@@ -755,7 +755,7 @@ public class OptimizedOrderRepository
 {
     private readonly IDbContextFactory<OrderDbContext> _contextFactory;
     private readonly ILogger<OptimizedOrderRepository> _logger;
-    
+
     public OptimizedOrderRepository(
         IDbContextFactory<OrderDbContext> contextFactory,
         ILogger<OptimizedOrderRepository> logger)
@@ -763,23 +763,23 @@ public class OptimizedOrderRepository
         _contextFactory = contextFactory;
         _logger = logger;
     }
-    
+
     public async Task<Order> GetOrderAsync(int orderId)
     {
         // Create short-lived context for each operation
         await using var context = await _contextFactory.CreateDbContextAsync();
-        
+
         // Disable change tracking for read-only operations
         return await context.Orders
             .Include(o => o.Items)
             .AsNoTracking()
             .FirstOrDefaultAsync(o => o.Id == orderId);
     }
-    
+
     public async Task<IEnumerable<Order>> GetOrdersBatchAsync(IEnumerable<int> orderIds)
     {
         await using var context = await _contextFactory.CreateDbContextAsync();
-        
+
         // Use efficient batch query with projection to reduce memory
         return await context.Orders
             .Where(o => orderIds.Contains(o.Id))
@@ -795,19 +795,19 @@ public class OptimizedOrderRepository
             })
             .ToListAsync();
     }
-    
+
     public async Task UpdateOrderAsync(Order order)
     {
         await using var context = await _contextFactory.CreateDbContextAsync();
-        
+
         try
         {
             // Attach and mark as modified to avoid loading from database
             context.Orders.Attach(order);
             context.Entry(order).State = EntityState.Modified;
-            
+
             var rowsAffected = await context.SaveChangesAsync();
-            
+
             if (rowsAffected == 0)
             {
                 _logger.LogWarning("No rows affected when updating order {OrderId}", order.Id);
@@ -820,29 +820,29 @@ public class OptimizedOrderRepository
         }
         // Context automatically disposed, connections returned to pool
     }
-    
+
     public async Task ProcessLargeOrderBatchAsync(IEnumerable<int> orderIds)
     {
         const int batchSize = 1000;
         var orderIdsList = orderIds.ToList();
-        
+
         for (int i = 0; i < orderIdsList.Count; i += batchSize)
         {
             var batch = orderIdsList.Skip(i).Take(batchSize);
-            
+
             // Use separate context for each batch to prevent memory accumulation
             await using var context = await _contextFactory.CreateDbContextAsync();
-            
+
             var orders = await context.Orders
                 .Where(o => batch.Contains(o.Id))
                 .AsNoTracking()
                 .ToListAsync();
-            
+
             foreach (var order in orders)
             {
                 await ProcessOrderAsync(order);
             }
-            
+
             // Context disposed after each batch, memory freed
         }
     }
@@ -863,12 +863,12 @@ builder.Services.AddDbContextFactory<OrderDbContext>(options =>
             maxRetryDelay: TimeSpan.FromSeconds(5),
             errorNumbersToAdd: null);
     });
-    
+
     // Optimize for production
     options.EnableSensitiveDataLogging(false);
     options.EnableServiceProviderCaching();
     options.EnableDetailedErrors(builder.Environment.IsDevelopment());
-    
+
     // Configure change tracking behavior
     options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
 }, ServiceLifetime.Scoped);
@@ -893,14 +893,14 @@ public class OptimizedOrderDbContext : DbContext
         ChangeTracker.LazyLoadingEnabled = false;
         ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
     }
-    
+
     public DbSet<Order> Orders { get; set; }
     public DbSet<OrderItem> OrderItems { get; set; }
-    
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
-        
+
         // Configure value converters to reduce memory allocations
         modelBuilder.Entity<Order>()
             .Property(e => e.CreatedDate)
@@ -908,7 +908,7 @@ public class OptimizedOrderDbContext : DbContext
                 v => v.ToUniversalTime(),
                 v => DateTime.SpecifyKind(v, DateTimeKind.Utc));
     }
-    
+
     // Override SaveChanges to optimize memory usage
     public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
     {
@@ -937,12 +937,12 @@ public class ProductionMemoryProfiler : IHostedService
     private readonly ILogger<ProductionMemoryProfiler> _logger;
     private readonly IMetrics _metrics;
     private Timer _profileTimer;
-    
+
     public async Task StartAsync(CancellationToken cancellationToken)
     {
         _profileTimer = new Timer(ProfileMemoryUsage, null, TimeSpan.Zero, TimeSpan.FromMinutes(1));
     }
-    
+
     private void ProfileMemoryUsage(object state)
     {
         try
@@ -952,15 +952,15 @@ public class ProductionMemoryProfiler : IHostedService
             var gen1Count = GC.CollectionCount(1);
             var gen2Count = GC.CollectionCount(2);
             var totalMemory = GC.GetTotalMemory(false);
-            
+
             // Check for memory pressure
             var allocatedBytes = GC.GetTotalAllocatedBytes(false);
-            
+
             // Monitor working set
             var process = Process.GetCurrentProcess();
             var workingSet = process.WorkingSet64;
             var privateMemory = process.PrivateMemorySize64;
-            
+
             // Record metrics
             _metrics.Gauge("memory.gc.gen0.count").Set(gen0Count);
             _metrics.Gauge("memory.gc.gen1.count").Set(gen1Count);
@@ -969,16 +969,16 @@ public class ProductionMemoryProfiler : IHostedService
             _metrics.Gauge("memory.allocated.total.bytes").Set(allocatedBytes);
             _metrics.Gauge("memory.working.set.bytes").Set(workingSet);
             _metrics.Gauge("memory.private.bytes").Set(privateMemory);
-            
+
             // Alert on concerning patterns
             if (gen2Count > _previousGen2Count + 10)
             {
                 _logger.LogWarning("High Gen2 GC activity: {Count} collections", gen2Count);
             }
-            
+
             if (totalMemory > workingSet * 0.8)
             {
-                _logger.LogWarning("High heap pressure: {HeapSize} bytes ({Percentage:P} of working set)", 
+                _logger.LogWarning("High heap pressure: {HeapSize} bytes ({Percentage:P} of working set)",
                     totalMemory, totalMemory / (double)workingSet);
             }
         }
@@ -997,30 +997,30 @@ public class ProductionMemoryProfiler : IHostedService
 public static class MemoryLeakDetector
 {
     private static readonly ConcurrentDictionary<Type, (int Count, DateTime LastCheck)> _objectCounts = new();
-    
+
     public static void TrackObject<T>(T obj) where T : class
     {
         if (!_objectCounts.ContainsKey(typeof(T)))
         {
             _objectCounts[typeof(T)] = (0, DateTime.UtcNow);
         }
-        
-        _objectCounts.AddOrUpdate(typeof(T), 
+
+        _objectCounts.AddOrUpdate(typeof(T),
             (1, DateTime.UtcNow),
             (key, value) => (value.Count + 1, DateTime.UtcNow));
     }
-    
+
     public static void PerformLeakDetection(ILogger logger)
     {
         foreach (var kvp in _objectCounts)
         {
             var type = kvp.Key;
             var (count, lastCheck) = kvp.Value;
-            
+
             // Check for objects that keep growing
             if (count > 10000 && DateTime.UtcNow - lastCheck > TimeSpan.FromMinutes(5))
             {
-                logger.LogWarning("Potential memory leak detected: {TypeName} has {Count} instances", 
+                logger.LogWarning("Potential memory leak detected: {TypeName} has {Count} instances",
                     type.Name, count);
             }
         }
@@ -1099,7 +1099,7 @@ dotnet_ef_connection_pool_active / dotnet_ef_connection_pool_max
 
 ### Issue #5: Large Object Heap (LOH) Pressure
 
-The Large Object Heap (LOH) in .NET is a special area for objects larger than 85KB. The GC collects LOH objects less frequently than objects on the regular heap, and this causes memory pressure.
+The Large Object Heap (LOH) in .NET is a special area for objects of 85,000 bytes or more. The GC collects LOH objects less frequently than objects on the regular heap, and this causes memory pressure.
 
 ```csharp
 // Problematic: Large arrays causing LOH pressure
@@ -1109,10 +1109,10 @@ public class ReportGenerator
     {
         // This creates a large array that goes to LOH
         var reportData = new byte[1_000_000]; // 1MB array
-        
+
         // Fill report data...
         await FillReportDataAsync(reportData, reportId);
-        
+
         return reportData; // LOH object that's hard to collect
     }
 }
@@ -1121,20 +1121,20 @@ public class ReportGenerator
 public class OptimizedReportGenerator
 {
     private readonly ArrayPool<byte> _arrayPool = ArrayPool<byte>.Shared;
-    
+
     public async Task<byte[]> GenerateLargeReportAsync(int reportId)
     {
         // Rent from pool instead of allocating
         var buffer = _arrayPool.Rent(1_000_000);
-        
+
         try
         {
             await FillReportDataAsync(buffer, reportId);
-            
+
             // Copy only the used portion
             var result = new byte[GetActualSize(buffer)];
             Array.Copy(buffer, result, result.Length);
-            
+
             return result;
         }
         finally
@@ -1143,15 +1143,15 @@ public class OptimizedReportGenerator
             _arrayPool.Return(buffer);
         }
     }
-    
+
     // Alternative: Stream large data instead of buffering
     public async Task<Stream> GenerateLargeReportStreamAsync(int reportId)
     {
         var stream = new MemoryStream();
-        
+
         // Write directly to stream to avoid large arrays
         await WriteReportDataToStreamAsync(stream, reportId);
-        
+
         stream.Position = 0;
         return stream;
     }
@@ -1173,12 +1173,12 @@ public class LogFormatter
         result += entry.Level.ToString().ToUpper() + " ";
         result += entry.Category + ": ";
         result += entry.Message;
-        
+
         if (entry.Exception != null)
         {
             result += Environment.NewLine + entry.Exception.ToString();
         }
-        
+
         return result; // Multiple temporary strings created
     }
 }
@@ -1187,16 +1187,16 @@ public class LogFormatter
 public class OptimizedLogFormatter
 {
     private readonly ObjectPool<StringBuilder> _stringBuilderPool;
-    
+
     public OptimizedLogFormatter(ObjectPool<StringBuilder> stringBuilderPool)
     {
         _stringBuilderPool = stringBuilderPool;
     }
-    
+
     public string FormatLogEntry(LogEntry entry)
     {
         var sb = _stringBuilderPool.Get();
-        
+
         try
         {
             sb.Clear();
@@ -1208,13 +1208,13 @@ public class OptimizedLogFormatter
               .Append(entry.Category)
               .Append(": ")
               .Append(entry.Message);
-            
+
             if (entry.Exception != null)
             {
                 sb.AppendLine()
                   .Append(entry.Exception.ToString());
             }
-            
+
             return sb.ToString();
         }
         finally
@@ -1251,19 +1251,19 @@ public async IAsyncEnumerable<Order> GetOrdersStreamAsync(int pageSize = 1000)
 {
     var offset = 0;
     List<Order> batch;
-    
+
     do
     {
         batch = await _context.Orders
             .Skip(offset)
             .Take(pageSize)
             .ToListAsync();
-            
+
         foreach (var order in batch)
         {
             yield return order;
         }
-        
+
         offset += pageSize;
     } while (batch.Count == pageSize);
 }
@@ -1277,17 +1277,17 @@ public class BoundedCache<TKey, TValue>
 {
     private readonly ConcurrentLRUCache<TKey, TValue> _cache;
     private readonly Timer _cleanupTimer;
-    
+
     public BoundedCache(int maxSize, TimeSpan expiration)
     {
         _cache = new ConcurrentLRUCache<TKey, TValue>(maxSize);
         _cleanupTimer = new Timer(Cleanup, null, expiration, expiration);
     }
-    
+
     private void Cleanup(object state)
     {
         _cache.RemoveExpiredEntries();
-        
+
         // Force GC if memory pressure is high
         if (GC.GetTotalMemory(false) > Environment.WorkingSet * 0.8)
         {
@@ -1311,7 +1311,7 @@ resources:
 
 **Configure .NET heap limits relative to container limits**:
 
-- .NET Core/5+: 75-80% of container limit using DOTNET_GCHeapHardLimit
+- .NET Core 3.0+/5+: 75-80% of container limit. The default is 75%. Set `DOTNET_GCHeapHardLimit` or `DOTNET_GCHeapHardLimitPercent` to change it
 - .NET Framework: Configure explicitly using environment variables
 - Leave 20-25% for OS, networking buffers, and unmanaged memory
 
@@ -1333,7 +1333,7 @@ predict_linear(container_memory_usage_bytes[10m], 30*60) > container_spec_memory
 
 ## Conclusion: Building Memory-Resilient Systems
 
-Memory management in production prevents more than OutOfMemoryErrors. It keeps systems fast and predictable under changing load. Our production crises changed how we approach system design:
+Memory management in production prevents more than OutOfMemoryExceptions. It keeps systems fast and predictable under changing load. Our production crises changed how we approach system design:
 
 **Key Takeaways**:
 
