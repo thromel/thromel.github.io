@@ -1,14 +1,10 @@
 /*
- * Typography — matches al-folio's font stack exactly.
- * Fonts are loaded via Google Fonts in Base.astro.
+ * Typography — Newsreader (display) + Inter (text), self-hosted in global.css.
  */
 
 @theme {
-  --font-sans: 'Roboto', system-ui, -apple-system, sans-serif;
-  --font-serif:
-    'Iowan Old Style', 'Charter', 'Palatino Linotype', 'Book Antiqua', Georgia, Cambria,
-    'Times New Roman', serif;
-  --font-condensed: 'Roboto Condensed', 'Arial Narrow', sans-serif;
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-serif: 'Newsreader', 'Iowan Old Style', Charter, Georgia, serif;
   --font-mono: 'Source Code Pro', 'Roboto Mono', 'Fira Code', ui-monospace, monospace;
 }
 
@@ -18,6 +14,8 @@ html {
   font-family: var(--font-sans);
   font-size: 16px;
   line-height: 1.65;
+  font-feature-settings: 'cv11', 'ss01';
+  font-optical-sizing: auto;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -45,10 +43,15 @@ h6 {
 }
 
 h1,
-h2 {
+h2,
+h3 {
   font-family: var(--font-serif);
-  font-weight: 700;
-  letter-spacing: -0.018em;
+  font-weight: 500;
+  letter-spacing: -0.012em;
+}
+
+h1 {
+  letter-spacing: -0.022em;
 }
 
 p,

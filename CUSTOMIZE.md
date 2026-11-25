@@ -167,16 +167,19 @@ All three sections can be disabled in `site.ts`. Each has a `title` (the section
 and `site.viewAllLabel` sets the text of the link to the full list next to each heading.
 Set `scrollable: true` on `announcements` / `latestPosts` to cap the list in a scroll box.
 
-### Hero card, lead, and links
+### Hero, lead, and links
 
-The homepage hero card displays your photo alongside your name, subtitle, `site.hero.lead`
-(short research statement above the buttons), `site.hero.primaryLinks`, and an optional
-`site.hero.currently` list beside the bio prose. Keys for `primaryLinks` are `socials` field names;
-unset platforms are skipped. The first button is styled as the primary action.
+The homepage hero sets `site.hero.lead` as the display headline (your research statement), with
+your name as a small kicker above it, then subtitle, `site.hero.primaryLinks`, and your photo on
+the right. `lead` supports HTML: wrap a phrase in `<em>` to set it in the accent color.
+`site.hero.currently` renders as a numbered "Currently" row under the hero. Below that, every
+homepage section is a two-column row: an italic label in the margin, content on the right.
+Keys for `primaryLinks` are `socials` field names; unset platforms are skipped. The first button
+is styled as the primary action.
 
 ```typescript
 hero: {
-  lead: 'Short lead statement shown inside the hero card.',
+  lead: 'I study how X works, and how to make it <em>reliable</em>.',
   currently: ['Current project or focus (HTML supported).'],
   primaryLinks: ['cv_pdf', 'scholar_userid', 'github_username', 'linkedin_username', 'orcid_id', 'email'],
 },
@@ -646,13 +649,14 @@ Set either value to `'auto'` to keep the built-in default for that mode.
 
 **Preset palettes:**
 
-| Name             | `light`   | `dark`    |
-| ---------------- | --------- | --------- |
-| Purple (default) | `#b509ac` | `#2698ba` |
-| Blue             | `#0076df` | `#68c0d9` |
-| Red              | `#ff3636` | `#f29105` |
-| Green            | `#009f06` | `#b7d12a` |
-| Orange           | `#f29105` | `#efcc00` |
+| Name              | `light`   | `dark`    |
+| ----------------- | --------- | --------- |
+| Oxblood (default) | `#8a2b1f` | `#e59a82` |
+| Purple            | `#b509ac` | `#2698ba` |
+| Blue              | `#0076df` | `#68c0d9` |
+| Red               | `#ff3636` | `#f29105` |
+| Green             | `#009f06` | `#b7d12a` |
+| Orange            | `#f29105` | `#efcc00` |
 
 ---
 
@@ -807,11 +811,17 @@ features: {
 
 ## 22. Custom styles
 
-All theming is done through CSS custom properties defined in `src/styles/_colors.css`. Override them to change colors, fonts, and spacing site-wide:
+All theming is done through CSS custom properties defined in `src/styles/_colors.css`. Override them to change colors, fonts, and spacing site-wide.
+
+The default design is editorial: warm paper background, Newsreader (serif display) + Inter
+(text), self-hosted in `global.css`, one accent color, and hairline rules instead of cards and
+shadows. `_colors.css` also defines the type scale (`--text-xs` … `--text-display`), spacing scale
+(`--space-1` … `--space-16`), radii (`--ui-radius`, `--ui-radius-pill`), and `--margin-col` (width
+of the homepage label column).
 
 ```css
 :root {
-  --global-theme-color: #b509ac; /* accent color (default: purple) */
+  --global-theme-color: #8a2b1f; /* accent color (default: oxblood) */
   --global-bg-color: #ffffff;
   --global-text-color: #000000;
   /* ... see _colors.css for full list */
@@ -841,10 +851,10 @@ footer: {
 },
 ```
 
-| Value      | Behaviour                                                                                 |
-| ---------- | ----------------------------------------------------------------------------------------- |
-| `'sticky'` | Footer is always visible at the bottom of the viewport                                    |
-| `'normal'` | Quiet colophon at the natural bottom of the page content                                  |
-| `'hidden'` | Footer is not rendered at all                                                             |
+| Value      | Behaviour                                                |
+| ---------- | -------------------------------------------------------- |
+| `'sticky'` | Footer is always visible at the bottom of the viewport   |
+| `'normal'` | Quiet colophon at the natural bottom of the page content |
+| `'hidden'` | Footer is not rendered at all                            |
 
 When `'sticky'`, the body automatically gains `padding-bottom` to prevent page content from being obscured by the footer. The back-to-top button is also repositioned to sit above it.

@@ -85,7 +85,7 @@ export const site = {
      * Address block below profile photo.
      * HTML is supported.
      */
-    moreInfo: `<p>U-A-Goose Lab, Advisor: Dr. Zhou Yang</p>
+    moreInfo: `<p><a href="https://u-a-goose.github.io/">U-A-Goose Lab</a>, Advisor: <a href="https://homepage.zhouyang.me/">Dr. Zhou Yang</a></p>
       <p>Edmonton, Alberta</p>`,
   },
 
@@ -222,10 +222,13 @@ export const site = {
    * platforms that are unset in `socials` are skipped.
    */
   hero: {
-    /** Short lead sentence shown inside the homepage hero card above the action buttons. Leave empty to hide. */
-    lead: 'I study how AI agents behave in real software systems, and how to make their decisions inspectable, reliable, and trustworthy.' as string,
     /**
-     * "What I'm working on now" list beside the bio. Each item is HTML.
+     * Research statement shown as the homepage headline. HTML is supported;
+     * wrap a phrase in <em> to set it in the accent color. Leave empty to hide.
+     */
+    lead: 'I study how AI agents behave in real software systems, and how to make their decisions <em>inspectable, reliable, and trustworthy.</em>' as string,
+    /**
+     * "What I'm working on now" list shown under the hero. Each item is HTML.
      * Set to [] to hide it.
      */
     currently: [
@@ -496,10 +499,11 @@ export const site = {
     /**
      * Primary accent color used for links, active nav items, badges, and highlights.
      * Accepts any CSS color string (hex, hsl, rgb, etc.).
-     * Set to 'auto' to use the built-in defaults (purple in light mode, cyan in dark mode).
+     * Set to 'auto' to use the built-in defaults (oxblood in light mode, salmon in dark mode).
      *
      * Example presets:
-     *   Purple (default): { light: '#b509ac', dark: '#2698ba' }
+     *   Oxblood (default): { light: '#8a2b1f', dark: '#e59a82' }
+     *   Purple:           { light: '#b509ac', dark: '#2698ba' }
      *   Blue:             { light: '#0076df', dark: '#68c0d9' }
      *   Red:              { light: '#ff3636', dark: '#f29105' }
      *   Green:            { light: '#009f06', dark: '#b7d12a' }
@@ -507,10 +511,10 @@ export const site = {
      *   Custom hover:     { light: '#0076df', dark: '#68c0d9', hoverLight: '#0a53be', hoverDark: '#9fd8ea' }
      */
     color: {
-      light: '#1b4d89' as string,
-      dark: '#85b6ff' as string,
-      hoverLight: '#133866' as string,
-      hoverDark: '#b0d0ff' as string,
+      light: '#8a2b1f' as string,
+      dark: '#e59a82' as string,
+      hoverLight: '#6a1f15' as string,
+      hoverDark: '#f2b9a6' as string,
     },
   },
 } as const;

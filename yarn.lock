@@ -1233,17 +1233,24 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fontsource/roboto-condensed@npm:^5.2.8":
-  version: 5.2.8
-  resolution: "@fontsource/roboto-condensed@npm:5.2.8"
-  checksum: 10c0/b6af7f0a89b7d0b5a1953d008dba9e048f64cc4459931b7fd21d875f97e6aeb36431a1a825e2778748ff1ae22f920fd0f49f901dfb1169ab2441a3ad57ab5434
+"@fontsource-variable/inter@npm:^5.3.0":
+  version: 5.3.0
+  resolution: "@fontsource-variable/inter@npm:5.3.0"
+  checksum: 10c0/46fbe41e8482a718f99634c8254346c6081d615415059be12e177224c903d688199125967825e75d4b8122668fd83f70880e11d4e02d08c20b503c65fe2a96d1
+  languageName: node
+  linkType: hard
+
+"@fontsource-variable/newsreader@npm:^5.3.0":
+  version: 5.3.0
+  resolution: "@fontsource-variable/newsreader@npm:5.3.0"
+  checksum: 10c0/e0e7131141e8de6ddd82d45b401af22f9a4c737bd3f633eab150430751d99d8b00a37bf1cb319fabdc4acada311e3f7d76a7ce44a6910fb0828a17c37f9187de
   languageName: node
   linkType: hard
 
 "@fontsource/roboto@npm:^5.2.10":
-  version: 5.2.10
-  resolution: "@fontsource/roboto@npm:5.2.10"
-  checksum: 10c0/abadfcaefbe2196bbd36d9258b336063f721894a3624a9639da00792583c565bfd0748ef978f91a38c3c0de8d247615c9be92a763184c085c630fa43f04b1cd9
+  version: 5.3.0
+  resolution: "@fontsource/roboto@npm:5.3.0"
+  checksum: 10c0/68420d2c669ba05f0ea466343151c6d2efff85b05cedbf0f990c58635d86035cae5e7c4904db9abc7b9fd21c5ad179788243ec9dff0c30dfab90679ae2d226f9
   languageName: node
   linkType: hard
 
@@ -3552,8 +3559,9 @@ __metadata:
     "@commitlint/cli": "npm:^21.0.0"
     "@commitlint/config-conventional": "npm:^21.0.0"
     "@eslint/js": "npm:^10.0.0"
+    "@fontsource-variable/inter": "npm:^5.3.0"
+    "@fontsource-variable/newsreader": "npm:^5.3.0"
     "@fontsource/roboto": "npm:^5.2.10"
-    "@fontsource/roboto-condensed": "npm:^5.2.8"
     "@fontsource/source-code-pro": "npm:^5.2.7"
     "@iconify-json/academicons": "npm:^1.2.4"
     "@iconify-json/fa-brands": "npm:^1.2.2"

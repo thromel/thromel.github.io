@@ -70,7 +70,7 @@ const tags = [...tagCounts.entries()].sort((a, b) => b[1] - a[1]);
     gap: 0.45rem;
     padding: 0.35rem 0.8rem;
     border: 1px solid var(--global-divider-color);
-    border-radius: 999px;
+    border-radius: var(--ui-radius-pill);
     background-color: var(--global-card-bg-color);
     color: var(--global-text-color);
     font-size: 0.875rem;
@@ -93,7 +93,7 @@ const tags = [...tagCounts.entries()].sort((a, b) => b[1] - a[1]);
     font-size: 0.72rem;
     font-variant-numeric: tabular-nums;
     padding: 0.08rem 0.42rem;
-    border-radius: 999px;
+    border-radius: var(--ui-radius-pill);
     background-color: var(--global-code-bg-color);
     color: var(--global-text-color-light);
   }

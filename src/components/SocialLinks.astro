@@ -210,31 +210,29 @@ const isButtons = variant === 'buttons';
 
   .social-links--buttons .social-link {
     gap: 0.45rem;
-    min-height: 2.35rem;
-    padding: 0.4rem 0.9rem;
-    font-size: 0.85rem;
+    min-height: 2.25rem;
+    padding: 0.35rem 0.85rem;
+    font-size: var(--text-sm, 0.875rem);
     font-weight: 500;
-    border-radius: 999px;
+    border-radius: var(--ui-radius);
     border: 1px solid var(--global-divider-color);
-    background-color: var(--global-card-bg-color);
-    box-shadow: var(--ui-shadow-sm);
+    background-color: transparent;
   }
 
   .social-links--buttons .social-link:first-child {
-    color: var(--global-hover-text-color);
-    background-color: var(--global-theme-color);
-    border-color: var(--global-theme-color);
+    color: var(--global-bg-color);
+    background-color: var(--global-text-color);
+    border-color: var(--global-text-color);
   }
 
   .social-links--buttons .social-link:hover {
     color: var(--global-theme-color);
     border-color: var(--global-theme-color);
-    background-color: var(--global-theme-tint);
   }
 
   .social-links--buttons .social-link:first-child:hover {
     color: var(--global-hover-text-color);
-    background-color: var(--global-hover-color);
-    border-color: var(--global-hover-color);
+    background-color: var(--global-theme-color);
+    border-color: var(--global-theme-color);
   }
 </style>

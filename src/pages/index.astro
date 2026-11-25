@@ -56,64 +56,56 @@ const heroName = (site.title as string) === 'blank' ? site.author.name : site.ti
 ---
 
 <Base isHome={true}>
-  <div class="page-container home py-8">
+  <div class="page-container home">
     <section class="hero" aria-labelledby="hero-name">
-      <div class="hero-card">
-        <div class="hero-photo">
-          <ProfilePhoto align="none" showMoreInfo={false} elevated={false} />
+      <div class="hero-text">
+        <h1 id="hero-name" class="hero-name">{heroName}</h1>
+        {site.hero.lead && <p class="hero-lead" set:html={site.hero.lead} />}
+        <div class="hero-affil">
+          {site.author.subtitle && <p set:html={site.author.subtitle} />}
+          {site.author.moreInfo && <div class="hero-meta" set:html={site.author.moreInfo} />}
         </div>
-
-        <div class="hero-card-body">
-          <header class="hero-intro">
-            <h1 id="hero-name" class="hero-name">{heroName}</h1>
-            {site.author.subtitle && <p class="hero-subtitle" set:html={site.author.subtitle} />}
-            {site.author.moreInfo && <div class="hero-meta" set:html={site.author.moreInfo} />}
-          </header>
-
-          {site.hero.lead && <p class="hero-lead">{site.hero.lead}</p>}
-
-          <div class="hero-actions">
-            <SocialLinks
-              variant="buttons"
-              include={site.hero.primaryLinks}
-              size={15}
-              class="hero-links"
-            />
-          </div>
-        </div>
+        <SocialLinks
+          variant="buttons"
+          include={site.hero.primaryLinks}
+          size={14}
+          class="hero-links"
+        />
       </div>
+      <div class="hero-photo">
+        <ProfilePhoto align="none" showMoreInfo={false} elevated={false} />
+      </div>
+    </section>
 
-      <div class:list={['hero-body', { 'hero-body--single': site.hero.currently.length === 0 }]}>
-        <div class="hero-bio prose max-w-none">
-          <AboutContent />
-        </div>
+    {
+      site.hero.currently.length > 0 && (
+        <section class="home-row" aria-labelledby="home-currently">
+          <h2 id="home-currently" class="row-label">
+            Currently
+          </h2>
+          <ol class="currently-list">
+            {site.hero.currently.map((item) => (
+              <li set:html={item} />
+            ))}
+          </ol>
+        </section>
+      )
+    }
 
-        {
-          site.hero.currently.length > 0 && (
-            <aside class="hero-currently" aria-label="Currently working on">
-              <p class="hero-currently-label">Currently</p>
-              <ul>
-                {site.hero.currently.map((item) => (
-                  <li set:html={item} />
-                ))}
-              </ul>
-            </aside>
-          )
-        }
+    <section class="home-row" aria-labelledby="home-about">
+      <h2 id="home-about" class="row-label">About</h2>
+      <div class="about-prose prose max-w-none">
+        <AboutContent />
       </div>
     </section>
 
     {
       site.announcements.enabled && allAnnouncements.length > 0 && (
-        <section class="home-section" aria-labelledby="home-news">
-          <div class="section-head">
+        <section class="home-row" aria-labelledby="home-news">
+          <div class="row-label">
             <h2 id="home-news">{site.announcements.title}</h2>
-            <a href={`${site.base}/news/`} class="section-more">
-              {site.viewAllLabel}
-              <span class="section-arrow" aria-hidden="true">
-                {' '}
-                &rarr;
-              </span>
+            <a href={`${site.base}/news/`} class="row-more">
+              {site.viewAllLabel} <span aria-hidden="true">&rarr;</span>
             </a>
           </div>
           <ul class:list={['dated-list', { 'scrollable-list': site.announcements.scrollable }]}>
@@ -121,7 +113,7 @@ const heroName = (site.title as string) === 'blank' ? site.author.name : site.ti
               <li>
                 <time datetime={isoDate(item.data.date)}>{formatDate(item.data.date)}</time>
                 <div class="dated-body news-body">
-                  {item.data.type && <span class="news-tag">{item.data.type}</span>}
+                  {item.data.type && <span class="news-kind">{item.data.type}</span>}
                   <Content />
                 </div>
               </li>
@@ -132,45 +124,12 @@ const heroName = (site.title as string) === 'blank' ? site.author.name : site.ti
     }
 
     {
-      site.latestPosts.enabled && allPosts.length > 0 && (
-        <section class="home-section" aria-labelledby="home-posts">
-          <div class="section-head">
-            <h2 id="home-posts">{site.latestPosts.title}</h2>
-            <a href={`${site.base}/blog/`} class="section-more">
-              {site.viewAllLabel}
-              <span class="section-arrow" aria-hidden="true">
-                {' '}
-                &rarr;
-              </span>
-            </a>
-          </div>
-          <ul class:list={['dated-list', { 'scrollable-list': site.latestPosts.scrollable }]}>
-            {allPosts.map((post) => (
-              <li>
-                <time datetime={isoDate(post.data.date)}>{formatDate(post.data.date)}</time>
-                <div class="dated-body">
-                  <a href={`${site.base}/blog/${post.id}/`} class="post-link">
-                    {post.data.title}
-                  </a>
-                </div>
-              </li>
-            ))}
-          </ul>
-        </section>
-      )
-    }
-
-    {
       site.selectedPapers.enabled && selectedPapers.length > 0 && (
-        <section class="home-section" aria-labelledby="home-papers">
-          <div class="section-head">
+        <section class="home-row" aria-labelledby="home-papers">
+          <div class="row-label">
             <h2 id="home-papers">{site.selectedPapers.title}</h2>
-            <a href={`${site.base}/publications/`} class="section-more">
-              {site.viewAllLabel}
-              <span class="section-arrow" aria-hidden="true">
-                {' '}
-                &rarr;
-              </span>
+            <a href={`${site.base}/publications/`} class="row-more">
+              {site.viewAllLabel} <span aria-hidden="true">&rarr;</span>
             </a>
           </div>
           <ol class="paper-list">
@@ -182,13 +141,11 @@ const heroName = (site.title as string) === 'blank' ? site.author.name : site.ti
               const pdfHref = pdf && (pdf.startsWith('http') ? pdf : `${pdfDir}${pdf}`);
               return (
                 <li class="paper-item">
-                  <div class="paper-tags">
-                    {abbr && <span class="badge-abbr">{abbr}</span>}
-                    {year > 0 && <span class="paper-year">{year}</span>}
-                    {award && (
-                      <span class="badge-abbr badge-award">{entry.fields.award_name ?? '🏆'}</span>
-                    )}
-                  </div>
+                  <p class="paper-kicker">
+                    {abbr && <span class="paper-venue-abbr">{abbr}</span>}
+                    {year > 0 && <span>{year}</span>}
+                    {award && <span class="paper-award">{entry.fields.award_name ?? 'Award'}</span>}
+                  </p>
                   <a href={`${site.base}/publications/${entry.key}/`} class="paper-title">
                     {getTitle(entry)}
                   </a>
@@ -229,15 +186,11 @@ const heroName = (site.title as string) === 'blank' ? site.author.name : site.ti
 
     {
       site.selectedWork.enabled && selectedWork.length > 0 && (
-        <section class="home-section" aria-labelledby="home-work">
-          <div class="section-head">
+        <section class="home-row" aria-labelledby="home-work">
+          <div class="row-label">
             <h2 id="home-work">{site.selectedWork.title}</h2>
-            <a href={`${site.base}/projects/`} class="section-more">
-              {site.viewAllLabel}
-              <span class="section-arrow" aria-hidden="true">
-                {' '}
-                &rarr;
-              </span>
+            <a href={`${site.base}/projects/`} class="row-more">
+              {site.viewAllLabel} <span aria-hidden="true">&rarr;</span>
             </a>
           </div>
           <ul class="work-list">
@@ -263,155 +216,97 @@ const heroName = (site.title as string) === 'blank' ? site.author.name : site.ti
         </section>
       )
     }
+
+    {
+      site.latestPosts.enabled && allPosts.length > 0 && (
+        <section class="home-row" aria-labelledby="home-posts">
+          <div class="row-label">
+            <h2 id="home-posts">{site.latestPosts.title}</h2>
+            <a href={`${site.base}/blog/`} class="row-more">
+              {site.viewAllLabel} <span aria-hidden="true">&rarr;</span>
+            </a>
+          </div>
+          <ul class:list={['dated-list', { 'scrollable-list': site.latestPosts.scrollable }]}>
+            {allPosts.map((post) => (
+              <li>
+                <time datetime={isoDate(post.data.date)}>{formatDate(post.data.date)}</time>
+                <div class="dated-body">
+                  <a href={`${site.base}/blog/${post.id}/`} class="post-link">
+                    {post.data.title}
+                  </a>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )
+    }
   </div>
 </Base>
 
 <style>
-  /* ── Hero ──────────────────────────────────────────────────────────── */
+  .home {
+    padding-top: var(--space-12);
+    padding-bottom: var(--space-16);
+  }
+
+  /* ── Hero: the research statement is the headline ─────────────────── */
   .hero {
-    display: flex;
-    flex-direction: column;
-    gap: 1.85rem;
-  }
-
-  .hero-card {
     display: grid;
-    grid-template-columns: 12.25rem minmax(0, 1fr);
-    gap: 2rem;
-    align-items: center;
-    padding: 1.65rem 1.85rem;
-    border-radius: 16px;
-    background: var(--global-card-bg-color);
-    border: 1px solid var(--global-divider-color);
-    box-shadow: var(--ui-shadow-sm);
-  }
-
-  .hero-photo {
-    width: 12.25rem;
-    padding-top: 0;
-  }
-
-  .hero-photo :global(img) {
-    width: 100%;
-    aspect-ratio: 4 / 5;
-    object-fit: cover;
-    object-position: 50% 18%;
-    border-radius: 12px !important;
-    border: 1px solid var(--global-divider-color);
-    box-shadow: 0 10px 24px -10px rgba(24, 24, 27, 0.25);
-  }
-
-  :global(html[data-theme='dark']) .hero-photo :global(img) {
-    box-shadow: 0 12px 26px -10px rgba(0, 0, 0, 0.7);
-  }
-
-  .hero-card-body {
-    min-width: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 0.85rem;
-  }
-
-  .hero-intro {
-    min-width: 0;
-    margin-bottom: 0;
-  }
-
-  .hero-actions {
-    min-width: 0;
-  }
-
-  .hero-actions :global(.social-links) {
-    gap: 0.38rem;
-  }
-
-  .hero-actions :global(.social-links--buttons .social-link) {
-    min-height: 2.05rem;
-    padding: 0.32rem 0.68rem;
-    font-size: 0.8rem;
-    gap: 0.38rem;
+    grid-template-columns: minmax(0, 1fr) 13rem;
+    grid-template-areas:
+      'name photo'
+      'lead photo'
+      'affil photo'
+      'links links';
+    column-gap: var(--space-12);
+    align-items: start;
+    padding-bottom: var(--space-8);
+    border-bottom: 1px solid var(--global-rule-strong);
   }
 
   .hero-name {
-    font-family: var(--font-serif);
-    font-size: clamp(1.75rem, 3.6vw, 2.35rem);
-    line-height: 1.12;
-    letter-spacing: -0.025em;
-    margin: 0 0 0.25rem;
-    color: var(--global-text-color);
-  }
-
-  .hero-subtitle {
-    font-size: 1.04rem;
-    color: var(--global-text-color);
-    margin: 0 0 0.2rem;
+    margin: 0 0 var(--space-4);
+    font-family: var(--font-sans);
+    font-size: var(--text-xs);
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--global-theme-color);
   }
 
   .hero-lead {
-    margin: 0.1rem 0 0.15rem;
-    font-size: 0.96rem;
-    line-height: 1.55;
-    color: var(--global-text-color);
-    opacity: 0.92;
-  }
-
-  .hero-body {
-    display: grid;
-    grid-template-columns: 1.05fr 0.95fr;
-    gap: 2.25rem;
-    align-items: start;
-  }
-
-  .hero-body--single {
-    grid-template-columns: minmax(0, 1fr);
-  }
-
-  .hero-body--single .hero-bio {
-    max-width: 72ch;
-  }
-
-  .hero-currently {
-    width: 100%;
     margin: 0;
-    padding: 1.1rem 1.25rem;
-    border: 1px solid var(--global-divider-color);
-    border-left: 3px solid var(--global-theme-color);
-    border-radius: var(--ui-radius-sm);
-    background: var(--global-theme-tint);
-    font-size: 0.9rem;
-    line-height: 1.55;
+    font-family: var(--font-serif);
+    font-size: var(--text-display);
+    font-weight: 400;
+    line-height: 1.08;
+    letter-spacing: -0.022em;
     color: var(--global-text-color);
+    text-wrap: balance;
   }
 
-  .hero-currently-label {
-    margin: 0 0 0.45rem;
-    font-family: var(--font-mono);
-    font-size: 0.72rem;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
+  .hero-lead :global(em) {
+    color: var(--global-theme-color);
+  }
+
+  .hero-affil {
+    margin-top: var(--space-6);
+    font-size: var(--text-sm);
+    line-height: 1.6;
     color: var(--global-text-color-light);
   }
 
-  .hero-currently ul {
+  .hero-affil :global(p) {
     margin: 0;
-    padding-left: 1.15rem;
-    list-style: disc;
   }
 
-  .hero-currently li + li {
-    margin-top: 0.35rem;
-  }
-
-  .hero-meta {
-    color: var(--global-text-color-light);
-    font-size: 0.9375rem;
-    margin-bottom: 0;
+  .hero-affil > :global(p:first-child) {
+    color: var(--global-text-color);
   }
 
   .hero-meta :global(p) {
     display: inline;
-    margin: 0;
   }
 
   .hero-meta :global(p + p)::before {
@@ -419,127 +314,136 @@ const heroName = (site.title as string) === 'blank' ? site.author.name : site.ti
     margin: 0 0.5rem;
   }
 
-  .hero-bio {
-    min-width: 0;
-    max-width: 100%;
-    margin-top: 0;
+  /* Flatten .hero-text so its children sit directly on the hero grid. */
+  .hero-text {
+    display: contents;
   }
 
-  .hero-bio :global(h2) {
-    margin-top: 2rem;
-    font-size: 1.4rem;
+  .hero-name {
+    grid-area: name;
   }
 
-  @media (max-width: 820px) {
-    .hero-body {
-      grid-template-columns: minmax(0, 1fr);
-      gap: 1.5rem;
-    }
+  .hero-lead {
+    grid-area: lead;
   }
 
-  @media (max-width: 680px) {
-    .hero-card {
-      padding: 1.25rem;
-      grid-template-columns: 5.75rem minmax(0, 1fr);
-      grid-template-areas:
-        'photo intro'
-        'lead lead'
-        'links links';
-      column-gap: 1rem;
-      row-gap: 0.85rem;
-      align-items: center;
-    }
-
-    .hero-photo {
-      grid-area: photo;
-      width: 5.75rem;
-      margin-bottom: 0;
-    }
-
-    .hero-photo :global(img) {
-      aspect-ratio: 1 / 1;
-      object-position: 50% 22%;
-    }
-
-    .hero-card-body {
-      display: contents;
-    }
-
-    .hero-intro {
-      grid-area: intro;
-    }
-
-    .hero-lead {
-      grid-area: lead;
-    }
-
-    .hero-actions {
-      grid-area: links;
-    }
-
-    .hero-meta :global(p) {
-      display: block;
-    }
-
-    .hero-meta :global(p + p)::before {
-      content: none;
-    }
+  .hero-affil {
+    grid-area: affil;
   }
 
-  @media (max-width: 359px) {
-    .hero-card {
-      grid-template-columns: minmax(0, 1fr);
-      grid-template-areas:
-        'photo'
-        'intro'
-        'lead'
-        'links';
-    }
-
-    .hero-photo {
-      width: 5.75rem;
-    }
+  .hero :global(.hero-links) {
+    grid-area: links;
+    margin-top: var(--space-6);
   }
 
-  /* ── Sections ──────────────────────────────────────────────────────── */
-  .home-section {
-    margin-top: 3.5rem;
+  .hero-photo {
+    grid-area: photo;
+    align-self: center;
+    overflow: hidden;
+    border-radius: var(--ui-radius-sm);
   }
 
-  .section-head {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 1rem;
-    padding-bottom: 0.55rem;
-    margin-bottom: 0.5rem;
+  .hero-photo :global(img) {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    border-radius: 0 !important;
+  }
+
+  :global(html[data-theme='dark']) .hero-photo :global(img) {
+    filter: brightness(0.88);
+  }
+
+  /* ── Editorial rows: margin label | content ───────────────────────── */
+  .home-row {
+    display: grid;
+    grid-template-columns: var(--margin-col) minmax(0, 1fr);
+    gap: var(--space-8);
+    padding: var(--space-8) 0;
     border-bottom: 1px solid var(--global-divider-color);
   }
 
-  .section-head h2 {
-    font-family: var(--font-serif);
-    font-size: 1.4rem;
-    letter-spacing: -0.015em;
+  .home-row:last-child {
+    border-bottom: 0;
+  }
+
+  .row-label,
+  .row-label h2 {
     margin: 0;
-    color: var(--global-text-color);
+    font-family: var(--font-serif);
+    font-size: var(--text-md);
+    font-style: italic;
+    font-weight: 400;
+    line-height: 1.4;
+    letter-spacing: 0;
+    color: var(--global-theme-color);
   }
 
-  .section-more {
-    font-size: 0.875rem;
-    font-weight: 500;
-    white-space: nowrap;
+  .row-label {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
   }
 
-  .section-more .section-arrow {
-    display: inline-block;
-    transition: transform 0.15s ease;
+  .row-more {
+    font-family: var(--font-sans);
+    font-style: normal;
+    font-size: var(--text-xs);
+    color: var(--global-text-color-light);
   }
 
-  .section-more:hover .section-arrow {
-    transform: translateX(2px);
+  .row-more:hover {
+    color: var(--global-theme-color);
   }
 
-  /* ── Dated lists (news, posts) ─────────────────────────────────────── */
+  /* Currently: numbered margin notes */
+  .currently-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    counter-reset: now;
+    display: grid;
+    gap: var(--space-3);
+    max-width: 64ch;
+    font-size: 0.95rem;
+    line-height: 1.55;
+  }
+
+  .currently-list li {
+    counter-increment: now;
+    position: relative;
+    padding-left: 1.75rem;
+  }
+
+  .currently-list li::before {
+    content: counter(now, decimal-leading-zero);
+    position: absolute;
+    left: 0;
+    top: 0.1em;
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--global-text-color-light);
+  }
+
+  /* About prose */
+  .about-prose {
+    max-width: 64ch;
+    font-size: var(--text-md);
+    line-height: 1.7;
+  }
+
+  .about-prose :global(p:first-child) {
+    margin-top: 0;
+  }
+
+  .about-prose :global(h2) {
+    margin: var(--space-8) 0 var(--space-3);
+    font-size: var(--text-lg);
+  }
+
+  /* ── Dated lists (news, writing) ──────────────────────────────────── */
   .dated-list {
     list-style: none;
     margin: 0;
@@ -548,29 +452,40 @@ const heroName = (site.title as string) === 'blank' ? site.author.name : site.ti
 
   .dated-list li {
     display: grid;
-    grid-template-columns: 7rem minmax(0, 1fr);
-    gap: 1rem;
-    padding: 0.85rem 0;
-    border-bottom: 1px solid var(--global-divider-color);
+    grid-template-columns: 6.5rem minmax(0, 1fr);
+    gap: var(--space-4);
+    padding: var(--space-3) 0;
   }
 
-  .dated-list li:last-child {
-    border-bottom: 0;
+  .dated-list li + li {
+    border-top: 1px solid var(--global-divider-color);
+  }
+
+  .dated-list li:first-child {
+    padding-top: 0.2rem;
   }
 
   .dated-list time {
-    font-family: var(--font-mono);
-    color: var(--global-text-color-light);
-    font-size: 0.78rem;
+    padding-top: 0.15rem;
+    font-size: var(--text-xs);
     font-variant-numeric: tabular-nums;
-    padding-top: 0.22rem;
+    letter-spacing: 0.02em;
+    color: var(--global-text-color-light);
     white-space: nowrap;
   }
 
   .dated-body {
     font-size: 0.95rem;
-    line-height: 1.55;
-    color: var(--global-text-color);
+    line-height: 1.6;
+  }
+
+  .news-kind {
+    margin-right: 0.5rem;
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--global-theme-color);
   }
 
   .news-body :global(p) {
@@ -588,73 +503,55 @@ const heroName = (site.title as string) === 'blank' ? site.author.name : site.ti
   }
 
   .post-link {
+    font-family: var(--font-serif);
+    font-size: var(--text-md);
     color: var(--global-text-color);
-    font-weight: 500;
   }
 
   .post-link:hover {
     color: var(--global-theme-color);
   }
 
-  @media (max-width: 540px) {
-    .dated-list li {
-      grid-template-columns: minmax(0, 1fr);
-      gap: 0.2rem;
-    }
-  }
-
-  /* ── Selected publications ─────────────────────────────────────────── */
+  /* ── Selected publications ────────────────────────────────────────── */
   .paper-list {
     list-style: none;
-    margin: 1rem 0 0;
+    margin: 0;
     padding: 0;
-    display: grid;
-    gap: 0.9rem;
   }
 
-  .paper-item {
-    padding: 1.15rem 1.3rem;
-    border: 1px solid var(--global-divider-color);
-    border-radius: var(--ui-radius);
-    background: var(--global-card-bg-color);
-    box-shadow: var(--ui-shadow-sm);
-    transition:
-      border-color 0.15s ease,
-      box-shadow 0.2s ease;
+  .paper-item + .paper-item {
+    margin-top: var(--space-6);
+    padding-top: var(--space-6);
+    border-top: 1px solid var(--global-divider-color);
   }
 
-  .paper-item:hover {
-    border-color: color-mix(in srgb, var(--global-theme-color) 45%, var(--global-divider-color));
-    box-shadow: var(--ui-shadow-hover);
-  }
-
-  .paper-tags {
+  .paper-kicker {
     display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    margin-bottom: 0.45rem;
-  }
-
-  .paper-year {
-    font-family: var(--font-mono);
-    font-size: 0.78rem;
+    gap: var(--space-3);
+    margin: 0 0 var(--space-1);
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
     color: var(--global-text-color-light);
-    font-variant-numeric: tabular-nums;
   }
 
-  .badge-award {
-    background-color: var(--global-award-bg);
-    color: var(--global-award-text);
+  .paper-venue-abbr {
+    color: var(--global-theme-color);
+  }
+
+  .paper-award {
+    color: var(--global-award-bg);
   }
 
   .paper-title {
     display: block;
     font-family: var(--font-serif);
-    font-weight: 700;
-    font-size: 1.08rem;
-    line-height: 1.35;
+    font-size: var(--text-lg);
+    line-height: 1.25;
     letter-spacing: -0.01em;
     color: var(--global-text-color);
+    text-wrap: balance;
   }
 
   .paper-title:hover {
@@ -663,8 +560,8 @@ const heroName = (site.title as string) === 'blank' ? site.author.name : site.ti
 
   .paper-authors,
   .paper-venue {
-    margin: 0.3rem 0 0;
-    font-size: 0.875rem;
+    margin: var(--space-2) 0 0;
+    font-size: var(--text-sm);
     color: var(--global-text-color-light);
   }
 
@@ -674,81 +571,55 @@ const heroName = (site.title as string) === 'blank' ? site.author.name : site.ti
   }
 
   .paper-venue {
+    margin-top: 0.1rem;
+    font-family: var(--font-serif);
     font-style: italic;
+    font-size: 0.95rem;
   }
 
   .paper-tldr {
-    margin: 0.5rem 0 0;
-    font-size: 0.9rem;
-    line-height: 1.55;
-    color: var(--global-text-color);
+    max-width: 64ch;
+    margin: var(--space-3) 0 0;
+    font-size: 0.95rem;
+    line-height: 1.6;
   }
 
   .paper-links {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.4rem;
-    margin: 0.75rem 0 0;
+    gap: var(--space-4);
+    margin: var(--space-3) 0 0;
+    font-size: var(--text-sm);
+    font-weight: 500;
   }
 
   .paper-links a {
-    display: inline-flex;
-    align-items: center;
-    min-height: 1.85rem;
-    padding: 0.2rem 0.75rem;
-    border: 1px solid var(--global-divider-color);
-    border-radius: 999px;
-    background: var(--global-bg-color);
-    color: var(--global-text-color);
-    font-size: 0.78rem;
-    font-weight: 500;
-    text-decoration: none;
-    transition:
-      color 0.15s ease,
-      border-color 0.15s ease,
-      background-color 0.15s ease;
+    text-decoration: underline;
+    text-decoration-color: color-mix(in srgb, currentColor 35%, transparent);
+    text-underline-offset: 3px;
   }
 
-  .paper-links a:hover {
-    color: var(--global-theme-color);
-    border-color: var(--global-theme-color);
-    background: var(--global-theme-tint);
-  }
-
-  /* ── Selected work ─────────────────────────────────────────────────── */
+  /* ── Selected work ────────────────────────────────────────────────── */
   .work-list {
     list-style: none;
-    margin: 1rem 0 0;
+    margin: 0;
     padding: 0;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
-    gap: 0.9rem;
+    grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+    gap: var(--space-8);
   }
 
   .work-item {
     display: flex;
     flex-direction: column;
-    padding: 1.15rem 1.3rem;
-    border: 1px solid var(--global-divider-color);
-    border-radius: var(--ui-radius);
-    background: var(--global-card-bg-color);
-    box-shadow: var(--ui-shadow-sm);
-    transition:
-      border-color 0.15s ease,
-      box-shadow 0.2s ease;
-  }
-
-  .work-item:hover {
-    border-color: color-mix(in srgb, var(--global-theme-color) 45%, var(--global-divider-color));
-    box-shadow: var(--ui-shadow-hover);
+    padding-top: var(--space-3);
+    border-top: 2px solid var(--global-rule-strong);
   }
 
   .work-title {
     font-family: var(--font-serif);
-    font-weight: 700;
-    font-size: 1.06rem;
-    line-height: 1.35;
-    letter-spacing: -0.01em;
+    font-size: var(--text-md);
+    line-height: 1.3;
     color: var(--global-text-color);
   }
 
@@ -758,17 +629,68 @@ const heroName = (site.title as string) === 'blank' ? site.author.name : site.ti
 
   .work-desc {
     flex: 1;
-    margin: 0.4rem 0 0.85rem;
-    font-size: 0.885rem;
+    margin: var(--space-2) 0 var(--space-3);
+    font-size: var(--text-sm);
     line-height: 1.55;
     color: var(--global-text-color-light);
   }
 
   .work-repo {
-    margin-top: auto;
-    padding-top: 0.65rem;
-    border-top: 1px solid var(--global-divider-color);
-    font-size: 0.78rem;
-    font-family: var(--font-mono, ui-monospace, monospace);
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+  }
+
+  /* ── Responsive ───────────────────────────────────────────────────── */
+  @media (max-width: 760px) {
+    .home {
+      padding-top: var(--space-8);
+    }
+
+    .hero {
+      grid-template-columns: minmax(0, 1fr) 5.5rem;
+      grid-template-areas:
+        'name photo'
+        'lead lead'
+        'affil affil'
+        'links links';
+      gap: var(--space-6);
+    }
+
+    .hero-name {
+      align-self: center;
+      margin: 0;
+    }
+
+    .hero-photo {
+      border-radius: 50%;
+    }
+
+    .hero-photo :global(img) {
+      aspect-ratio: 1 / 1;
+      object-position: 50% 25%;
+    }
+
+    .hero-affil,
+    .hero :global(.hero-links) {
+      margin-top: 0;
+    }
+
+    .home-row {
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--space-4);
+    }
+
+    .row-label {
+      flex-direction: row;
+      align-items: baseline;
+      justify-content: space-between;
+    }
+  }
+
+  @media (max-width: 540px) {
+    .dated-list li {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 0.1rem;
+    }
   }
 </style>

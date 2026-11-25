@@ -4,63 +4,40 @@
 /* KaTeX math CSS — bundled locally so it's always available (no CDN dependency) */
 @import 'katex/dist/katex.min.css';
 
-/* ─── Self-hosted fonts — Latin subset only, font-display: fallback (no FOUT) ── */
-/* Custom @font-face rules referencing Fontsource WOFF2 files (Latin only).
-   font-display: fallback = 100ms block period, then 3s swap window.
-   If font loads within that window it swaps; otherwise fallback persists
-   for the rest of the page load. Cached on subsequent visits = instant. */
-
-/* Roboto 300 */
+/* ─── Self-hosted fonts — Latin subset, variable axes ───────────────────── */
+/* Newsreader (display/serif, opsz + wght) and Inter (UI/body, wght). */
 @font-face {
-  font-family: 'Roboto';
+  font-family: 'Newsreader';
   font-style: normal;
-  font-display: fallback;
-  font-weight: 300;
-  src: url('@fontsource/roboto/files/roboto-latin-300-normal.woff2') format('woff2');
+  font-display: swap;
+  font-weight: 200 800;
+  src: url('@fontsource-variable/newsreader/files/newsreader-latin-standard-normal.woff2')
+    format('woff2-variations');
 }
-/* Roboto 400 */
 @font-face {
-  font-family: 'Roboto';
-  font-style: normal;
-  font-display: fallback;
-  font-weight: 400;
-  src: url('@fontsource/roboto/files/roboto-latin-400-normal.woff2') format('woff2');
-}
-/* Roboto 400 italic */
-@font-face {
-  font-family: 'Roboto';
+  font-family: 'Newsreader';
   font-style: italic;
-  font-display: fallback;
-  font-weight: 400;
-  src: url('@fontsource/roboto/files/roboto-latin-400-italic.woff2') format('woff2');
+  font-display: swap;
+  font-weight: 200 800;
+  src: url('@fontsource-variable/newsreader/files/newsreader-latin-standard-italic.woff2')
+    format('woff2-variations');
 }
-/* Roboto 700 */
 @font-face {
-  font-family: 'Roboto';
+  font-family: 'Inter';
   font-style: normal;
-  font-display: fallback;
-  font-weight: 700;
-  src: url('@fontsource/roboto/files/roboto-latin-700-normal.woff2') format('woff2');
+  font-display: swap;
+  font-weight: 100 900;
+  src: url('@fontsource-variable/inter/files/inter-latin-wght-normal.woff2')
+    format('woff2-variations');
 }
-/* Roboto Condensed 400 */
 @font-face {
-  font-family: 'Roboto Condensed';
-  font-style: normal;
-  font-display: fallback;
-  font-weight: 400;
-  src: url('@fontsource/roboto-condensed/files/roboto-condensed-latin-400-normal.woff2')
-    format('woff2');
+  font-family: 'Inter';
+  font-style: italic;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url('@fontsource-variable/inter/files/inter-latin-wght-italic.woff2')
+    format('woff2-variations');
 }
-/* Roboto Condensed 700 */
-@font-face {
-  font-family: 'Roboto Condensed';
-  font-style: normal;
-  font-display: fallback;
-  font-weight: 700;
-  src: url('@fontsource/roboto-condensed/files/roboto-condensed-latin-700-normal.woff2')
-    format('woff2');
-}
-/* Source Code Pro 400 */
 @font-face {
   font-family: 'Source Code Pro';
   font-style: normal;
@@ -69,7 +46,6 @@
   src: url('@fontsource/source-code-pro/files/source-code-pro-latin-400-normal.woff2')
     format('woff2');
 }
-/* Source Code Pro 600 */
 @font-face {
   font-family: 'Source Code Pro';
   font-style: normal;
@@ -309,7 +285,7 @@
     color: var(--global-text-color);
     font-size: clamp(1.9rem, 3.6vw, 2.35rem);
     font-family: var(--font-serif);
-    font-weight: 700;
+    font-weight: 500;
     letter-spacing: -0.02em;
     line-height: 1.15;
   }
@@ -346,7 +322,7 @@
     gap: 0.35rem;
     padding: 0.3rem 0.75rem;
     border: 1px solid var(--global-divider-color);
-    border-radius: 999px;
+    border-radius: var(--ui-radius-pill);
     background-color: var(--global-card-bg-color);
     color: var(--global-text-color-light);
     font-size: 0.8125rem;
@@ -396,7 +372,7 @@
     color: var(--global-text-color);
     text-decoration: none;
     font-family: var(--font-serif);
-    font-weight: 700;
+    font-weight: 500;
     letter-spacing: -0.015em;
   }
   .post-list li a.post-title:hover {
@@ -528,13 +504,15 @@
   /* ─── Abbr labels ────────────────────────────────────────────────── */
   .badge-abbr {
     display: inline-block;
-    padding: 0.18em 0.6em;
-    border-radius: 999px;
-    font-size: 0.72rem;
+    padding: 0.15em 0.5em;
+    border: 1px solid currentColor;
+    border-radius: var(--ui-radius-sm);
+    font-size: 0.68rem;
     font-weight: 600;
-    letter-spacing: 0.02em;
-    background-color: var(--global-theme-color);
-    color: var(--global-hover-text-color);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    background-color: transparent;
+    color: var(--global-theme-color);
   }
 
   /* ─── Bootstrap grid additions (col-sm-2, col-sm-10, row-cols) ───── */
@@ -869,14 +847,16 @@
   }
   .publications ol.bibliography li .abbr abbr {
     display: inline-block;
-    background-color: var(--global-theme-color);
+    background-color: transparent;
     margin-bottom: 0.55rem;
-    color: var(--global-hover-text-color) !important;
-    padding: 0.2em 0.65em;
-    border-radius: 999px !important;
-    font-size: 0.72rem;
+    color: var(--global-theme-color) !important;
+    padding: 0.15em 0.5em;
+    border: 1px solid currentColor;
+    border-radius: var(--ui-radius-sm) !important;
+    font-size: 0.68rem;
     font-weight: 600;
-    letter-spacing: 0.02em;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
     text-decoration: none;
   }
   .publications ol.bibliography li .preview {
@@ -887,7 +867,7 @@
     display: block;
     border: 1px solid var(--global-divider-color);
     border-radius: var(--ui-radius-sm) !important;
-    background: #faf9f6;
+    background: var(--global-card-bg-color);
   }
   html[data-theme='dark'] .publications ol.bibliography li .preview {
     background: #f2f0ea;
@@ -895,7 +875,7 @@
   }
   .publications ol.bibliography li .title {
     font-family: var(--font-serif);
-    font-weight: 700;
+    font-weight: 500;
     font-size: 1.12rem;
     line-height: 1.38;
     letter-spacing: -0.01em;
@@ -940,7 +920,7 @@
     padding: 0.2rem 0.75rem;
     font-size: 0.78rem;
     font-weight: 500;
-    border-radius: 999px;
+    border-radius: var(--ui-radius-pill);
     text-decoration: none;
     cursor: pointer;
     background: var(--global-card-bg-color);
@@ -1000,7 +980,7 @@
     width: 1.75rem;
     height: 1.75rem;
     border: 0;
-    border-radius: 999px;
+    border-radius: var(--ui-radius-pill);
     background: transparent;
     color: var(--global-text-color-light);
     font-size: 1.05rem;
@@ -1207,7 +1187,7 @@
   .prose h2 {
     font-family: var(--font-serif);
     font-size: 1.45rem;
-    font-weight: 700;
+    font-weight: 500;
     letter-spacing: -0.015em;
     margin: 2.25rem 0 0.75rem;
   }
@@ -1342,21 +1322,24 @@ html[data-theme='dark'] {
   --d2h-line-border-color: var(--d2h-dark-line-border-color, #21262d);
   --d2h-file-header-bg-color: var(--d2h-dark-file-header-bg-color, #161b22);
   --d2h-file-header-border-color: var(--d2h-dark-file-header-border-color, #30363d);
-  --d2h-empty-placeholder-bg-color: var(--d2h-dark-empty-placeholder-bg-color, hsla(215,8%,47%,.1));
+  --d2h-empty-placeholder-bg-color: var(
+    --d2h-dark-empty-placeholder-bg-color,
+    hsla(215, 8%, 47%, 0.1)
+  );
   --d2h-empty-placeholder-border-color: var(--d2h-dark-empty-placeholder-border-color, #30363d);
-  --d2h-selected-color: var(--d2h-dark-selected-color, rgba(56,139,253,.1));
-  --d2h-ins-bg-color: var(--d2h-dark-ins-bg-color, rgba(46,160,67,.15));
-  --d2h-ins-border-color: var(--d2h-dark-ins-border-color, rgba(46,160,67,.4));
-  --d2h-ins-highlight-bg-color: var(--d2h-dark-ins-highlight-bg-color, rgba(46,160,67,.4));
+  --d2h-selected-color: var(--d2h-dark-selected-color, rgba(56, 139, 253, 0.1));
+  --d2h-ins-bg-color: var(--d2h-dark-ins-bg-color, rgba(46, 160, 67, 0.15));
+  --d2h-ins-border-color: var(--d2h-dark-ins-border-color, rgba(46, 160, 67, 0.4));
+  --d2h-ins-highlight-bg-color: var(--d2h-dark-ins-highlight-bg-color, rgba(46, 160, 67, 0.4));
   --d2h-ins-label-color: var(--d2h-dark-ins-label-color, #3fb950);
-  --d2h-del-bg-color: var(--d2h-dark-del-bg-color, rgba(248,81,73,.1));
-  --d2h-del-border-color: var(--d2h-dark-del-border-color, rgba(248,81,73,.4));
-  --d2h-del-highlight-bg-color: var(--d2h-dark-del-highlight-bg-color, rgba(248,81,73,.4));
+  --d2h-del-bg-color: var(--d2h-dark-del-bg-color, rgba(248, 81, 73, 0.1));
+  --d2h-del-border-color: var(--d2h-dark-del-border-color, rgba(248, 81, 73, 0.4));
+  --d2h-del-highlight-bg-color: var(--d2h-dark-del-highlight-bg-color, rgba(248, 81, 73, 0.4));
   --d2h-del-label-color: var(--d2h-dark-del-label-color, #f85149);
-  --d2h-change-del-color: var(--d2h-dark-change-del-color, rgba(210,153,34,.2));
-  --d2h-change-ins-color: var(--d2h-dark-change-ins-color, rgba(46,160,67,.25));
-  --d2h-info-bg-color: var(--d2h-dark-info-bg-color, rgba(56,139,253,.1));
-  --d2h-info-border-color: var(--d2h-dark-info-border-color, rgba(56,139,253,.4));
+  --d2h-change-del-color: var(--d2h-dark-change-del-color, rgba(210, 153, 34, 0.2));
+  --d2h-change-ins-color: var(--d2h-dark-change-ins-color, rgba(46, 160, 67, 0.25));
+  --d2h-info-bg-color: var(--d2h-dark-info-bg-color, rgba(56, 139, 253, 0.1));
+  --d2h-info-border-color: var(--d2h-dark-info-border-color, rgba(56, 139, 253, 0.4));
   --d2h-change-label-color: var(--d2h-dark-change-label-color, #d29922);
   --d2h-moved-label-color: var(--d2h-dark-moved-label-color, #3572b0);
   --d2h-color: var(--d2h-dark-color, #e6edf3);
@@ -1584,7 +1567,7 @@ body[data-tooltips] [data-tooltip]:focus-within::before {
   padding: 0.08em 0.55em;
   background-color: var(--global-code-bg-color);
   border: 1px solid var(--global-divider-color);
-  border-radius: 999px;
+  border-radius: var(--ui-radius-pill);
   font-size: 0.72rem;
   font-weight: 600;
   line-height: 1.5;

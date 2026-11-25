@@ -1,70 +1,40 @@
 /*
- * as-folio color system
+ * Editorial design tokens.
  *
- * CSS custom properties ported 1:1 from al-folio's _variables.scss + _themes.scss.
- * Variable names are preserved exactly so dark mode and component styles
- * remain consistent with the al-folio specification.
+ * Warm paper + ink, one oxblood accent (salmon in dark mode).
+ * Structure comes from hairline rules and type, not cards and shadows.
+ * Variable names keep the al-folio --global-* contract so every component follows.
  */
-
-/* ─── Base color palette ─────────────────────────────────────────────────── */
-
-:root {
-  --color-red: #ff3636;
-  --color-red-dark: #b71c1c;
-  --color-orange: #f29105;
-  --color-blue: #0076df;
-  --color-blue-dark: #00369f;
-  --color-cyan: #2698ba;
-  --color-cyan-light: #68c0d9;
-  --color-green: #00ab37;
-  --color-green-lime: #b7d12a;
-  --color-green-dark: #009f06;
-  --color-green-light: #ddffdd;
-  --color-green-bright: #11d68b;
-  --color-purple: #b509ac;
-  --color-purple-dark: #8a0686;
-  --color-purple-light: #d467d0;
-  --color-pink: #f92080;
-  --color-pink-light: #ffdddd;
-  --color-yellow: #efcc00;
-  --color-grey: #828282;
-  --color-grey-light: #e0e0e0;
-  --color-grey-dark: #1c1c1d;
-  --color-grey-900: #212529;
-  --color-white: #ffffff;
-  --color-black: #000000;
-  --color-code-bg-light: rgba(181, 9, 172, 0.05);
-  --color-code-bg-dark: #2c3237;
-}
 
 /* ─── Light theme (default) ──────────────────────────────────────────────── */
 
 :root {
   color-scheme: light;
 
-  --global-bg-color: #faf9f6;
-  --global-code-bg-color: #f2f0ea;
-  --global-text-color: #18191c;
-  --global-text-color-light: #525866;
-  --global-theme-color: var(--user-accent-light, var(--color-purple));
-  --global-hover-color: var(--user-hover-light, var(--color-purple-dark));
-  --global-hover-text-color: var(--color-white);
+  --global-bg-color: #f6f3ec;
+  --global-code-bg-color: #ede8dd;
+  --global-text-color: #1c1a17;
+  --global-text-color-light: #625b50;
+  --global-theme-color: var(--user-accent-light, #8a2b1f);
+  --global-hover-color: var(--user-hover-light, #6a1f15);
+  --global-hover-text-color: #ffffff;
   --global-theme-tint: color-mix(in srgb, var(--global-theme-color) 8%, transparent);
   --global-dropdown-hover-bg: var(--global-theme-tint);
   --global-dropdown-hover-text: var(--global-theme-color);
   --global-footer-bg-color: transparent;
   --global-footer-text-color: var(--global-text-color-light);
   --global-footer-link-color: var(--global-text-color);
-  --global-distill-app-color: var(--color-grey);
-  --global-divider-color: rgba(24, 24, 27, 0.11);
-  --global-card-bg-color: #ffffff;
-  --global-highlight-color: var(--color-red-dark);
-  --global-award-bg: #9a3412;
+  --global-distill-app-color: #828282;
+  --global-divider-color: rgba(60, 45, 25, 0.16);
+  --global-rule-strong: #1c1a17;
+  --global-card-bg-color: #fbf9f4;
+  --global-highlight-color: #b71c1c;
+  --global-award-bg: #8a5a0b;
   --global-award-text: #ffffff;
-  --global-back-to-top-bg-color: #ffffff;
+  --global-back-to-top-bg-color: #fbf9f4;
   --global-back-to-top-text-color: var(--global-text-color);
-  --global-newsletter-bg-color: var(--color-white);
-  --global-newsletter-text-color: var(--color-black);
+  --global-newsletter-bg-color: #ffffff;
+  --global-newsletter-text-color: #000000;
 
   /* Callout / alert blocks */
   --global-tip-block: #42b983;
@@ -86,29 +56,30 @@
 html[data-theme='dark'] {
   color-scheme: dark;
 
-  --global-bg-color: #111317;
-  --global-code-bg-color: #1e222a;
-  --global-text-color: #ebeae6;
-  --global-text-color-light: #9fa6b2;
-  --global-theme-color: var(--user-accent-dark, var(--color-cyan));
-  --global-hover-color: var(--user-hover-dark, var(--color-cyan));
+  --global-bg-color: #14120f;
+  --global-code-bg-color: #221f1a;
+  --global-text-color: #ece5d8;
+  --global-text-color-light: #a89e8e;
+  --global-theme-color: var(--user-accent-dark, #e59a82);
+  --global-hover-color: var(--user-hover-dark, #f2b9a6);
   /* Dark accents are light, so text placed on them must be dark to stay legible. */
-  --global-hover-text-color: #0d1320;
+  --global-hover-text-color: #14120f;
   --global-theme-tint: color-mix(in srgb, var(--global-theme-color) 14%, transparent);
   --global-dropdown-hover-bg: var(--global-theme-tint);
   --global-dropdown-hover-text: var(--global-text-color);
   --global-footer-bg-color: transparent;
   --global-footer-text-color: var(--global-text-color-light);
   --global-footer-link-color: var(--global-text-color);
-  --global-distill-app-color: var(--color-grey-light);
-  --global-divider-color: rgba(235, 234, 230, 0.12);
-  --global-card-bg-color: #171a20;
-  --global-award-bg: #d97706;
-  --global-award-text: #111317;
-  --global-back-to-top-bg-color: #171a20;
+  --global-distill-app-color: #e0e0e0;
+  --global-divider-color: rgba(236, 229, 216, 0.13);
+  --global-rule-strong: #ece5d8;
+  --global-card-bg-color: #1b1915;
+  --global-award-bg: #d9a441;
+  --global-award-text: #14120f;
+  --global-back-to-top-bg-color: #1b1915;
   --global-back-to-top-text-color: var(--global-text-color);
-  --global-newsletter-bg-color: var(--color-grey-light);
-  --global-newsletter-text-color: var(--color-grey-dark);
+  --global-newsletter-bg-color: #e0e0e0;
+  --global-newsletter-text-color: #1c1c1d;
 
   /* Callout / alert blocks — inverted */
   --global-tip-block: #42b983;
@@ -125,20 +96,42 @@ html[data-theme='dark'] {
   --global-danger-block-title: #ffe0e0;
 }
 
-/* ─── Layout constants ───────────────────────────────────────────────────── */
+/* ─── Layout, type and spacing scale ─────────────────────────────────────── */
 
 :root {
   --navbar-height: 57px;
-  --ui-radius-sm: 6px;
-  --ui-radius: 10px;
-  --ui-shadow-sm: 0 1px 2px rgba(24, 24, 27, 0.05);
-  --ui-shadow-hover:
-    0 10px 26px -12px rgba(24, 24, 27, 0.14), 0 2px 6px rgba(24, 24, 27, 0.05);
-}
 
-html[data-theme='dark'] {
-  --ui-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.35);
-  --ui-shadow-hover: 0 12px 28px -12px rgba(0, 0, 0, 0.55), 0 2px 6px rgba(0, 0, 0, 0.35);
+  /* Radii: editorial = nearly square. "Pill" controls (tags, chips) share --ui-radius-pill. */
+  --ui-radius-sm: 3px;
+  --ui-radius: 4px;
+  --ui-radius-pill: 4px;
+
+  /* Elevation: rules, not shadows. Hover lifts only images. */
+  --ui-shadow-sm: none;
+  --ui-shadow-hover: none;
+
+  /* Type scale (1.25 ratio, fluid at the top end) */
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-md: 1.125rem;
+  --text-lg: 1.375rem;
+  --text-xl: 1.75rem;
+  --text-2xl: clamp(2rem, 4.2vw, 2.75rem);
+  --text-display: clamp(2.1rem, 5.2vw, 3.4rem);
+
+  /* Spacing scale */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+
+  /* Width of the left "margin label" column in editorial sections */
+  --margin-col: 9.5rem;
 }
 
 /* ─── Utility classes ────────────────────────────────────────────────────── */
