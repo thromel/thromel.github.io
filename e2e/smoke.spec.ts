@@ -180,6 +180,22 @@ test('publications search filters, clears, and BibTeX panel shows copy button', 
   await expect(bibPanel.locator('.pub-copy-btn')).toBeVisible();
 });
 
+test('SHIFT publication detail page shows ACL ARR Oct 2026 in-review metadata and three authors', async ({
+  page,
+}) => {
+  await page.goto('/publications/romel2026shift/');
+  const mainText = await page.locator('main').textContent();
+  expect(mainText).toContain(
+    'Choice as an Attack: Auditing Aligned Backdoor Attacks in LLM Agents',
+  );
+  expect(mainText).toContain('Tanzim Hossain Romel');
+  expect(mainText).toContain('Kawshik Kumar Paul');
+  expect(mainText).toContain('Chowdhury Mohammad Rakin Haider');
+  expect(mainText).toContain('In review at ACL ARR (October 2026)');
+  expect(mainText).toContain('75–100%');
+  expect(mainText).toContain('62.5–100%');
+});
+
 test('cv page renders clickable links without raw markdown syntax', async ({ page }) => {
   await page.goto('/cv/');
   const main = page.locator('main');
@@ -255,7 +271,7 @@ test('view transitions navigation and interactive controls work without console 
   await page.waitForURL(/\/publications\/$/);
   const pubSearch = page.getByRole('searchbox', { name: 'Search publications' });
   await expect(pubSearch).toHaveAttribute('data-hydrated', 'true');
-  await pubSearch.fill('Backdoors');
+  await pubSearch.fill('Backdoor');
   await expect(page.locator('.pub-count')).toContainText('Showing 1 of');
 
   await page.locator('#site-navbar a.nav-link[href="/projects/"]').click();

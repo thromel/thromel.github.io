@@ -43,15 +43,19 @@ describe('parseBibtex', () => {
     expect(entries[0].key).toBe('key2024');
   });
 
-  it('strips line comments', () => {
+  it('strips line comments without corrupting percent signs inside field values', () => {
     const bib = `@article{key, % this is a comment
   title = {Title}, % another comment
+  note = "Quoted 50% metric",
+  abstract = {Finds 75–100% in triggered and 0% in clean runs.},
   author = {Author},
   year = {2024},
 }`;
     const entries = parseBibtex(bib);
     expect(entries).toHaveLength(1);
     expect(entries[0].fields.title).toBe('Title');
+    expect(entries[0].fields.note).toBe('Quoted 50% metric');
+    expect(entries[0].fields.abstract).toBe('Finds 75–100% in triggered and 0% in clean runs.');
   });
 
   it('parses multiple entries', () => {

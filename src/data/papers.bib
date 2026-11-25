@@ -14,13 +14,15 @@
 }
 
 @misc{romel2026shift,
-  abbr = {TACL},
-  title = {The Choice Can Be the Attack: Auditing Aligned Backdoors in {LLM} Agents},
-  author = {Romel, Tanzim Hossain and Haider, Chowdhury Rakin},
+  abbr = {ACL ARR},
+  title = {Choice as an Attack: Auditing Aligned Backdoor Attacks in {LLM} Agents},
+  author = {Romel, Tanzim Hossain and Paul, Kawshik Kumar and Haider, Chowdhury Mohammad Rakin},
   year = {2026},
-  note = {Submitted to TACL 2026; manuscript not public},
-  tldr = {SHIFT, a known-trigger audit for backdoors that make an agent prefer one valid option over another while the final answer still looks acceptable.},
-  abstract = {LLM agents can be backdoored without visibly failing the task: a trigger can steer an agent toward an attacker's preferred valid option while the final answer still looks acceptable. SHIFT (Structured Hidden Influence Test) reruns matched tasks with and without a known trigger and checks whether the changed choice favors the attacker's target after accounting for ordinary option quality such as price or rating.},
+  month = {oct},
+  note = {In review at ACL ARR (October 2026); manuscript not public},
+  keywords = {backdoor attacks, LLM agents, auditing, choice steering, aligned backdoors, tool routing, conditional logit, agent security},
+  tldr = {A known-trigger audit detects backdoors that steer which valid option an LLM agent chooses, using only the options, their features, and the final choices.},
+  abstract = {Backdoor attacks can trigger LLM agents to prefer one valid option over others, without noticeably failing the task. The Structured Hidden Influence Test (SHIFT) is a known-trigger audit of choice-steering that analyzes only the valid options, their features, and the final choices, while remaining agnostic to the model internals. SHIFT includes a Shift Detection Layer to identify a shift in choice by comparing matched non-triggered and triggered tasks. Then the Attribution Layer checks whether the detected movement favors the attacker's target after accounting for ordinary option quality. Simulations with known ground truth show that the Attribution Layer separates target-directed steering from ordinary quality preferences when the relevant option features are logged, and that feature coverage is the key calibration condition. In the shopping tests, the Shift Detection Layer finds the trigger effect in 75–100% of the tested cases for the trigger-trained models and in 0% for the clean models. In the tool-routing test, it finds the effect in 62.5–100% of the tested cases for the trigger-trained models, but Qwen is noisy because the clean Qwen model also chooses the target tool in some cases. When the Shift Detection Layer finds a trigger effect, the Attribution Layer also points toward the attacker's target.},
   selected = {true},
   bibtex_show = {true}
 }

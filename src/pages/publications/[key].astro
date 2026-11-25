@@ -51,6 +51,7 @@ const award = entry.fields.award;
 const awardName = entry.fields.award_name;
 const annotation = entry.fields.annotation;
 const additionalInfo = entry.fields.additional_info;
+const note = entry.fields.note;
 const googleScholarId = entry.fields.google_scholar_id;
 const inspirehepId = entry.fields.inspirehep_id;
 const altmetricField = entry.fields.altmetric;
@@ -196,13 +197,20 @@ const breadcrumbLd = {
           ))
         }
         {
-          (venue || yearStr) && (
+          venue ? (
             <em>
               {' '}
               &middot; {venue}
-              {venue && yearStr ? ', ' : ''}
-              {yearStr}
+              {yearStr ? `, ${yearStr}` : ''}
             </em>
+          ) : note ? (
+            <em>
+              {' '}
+              &middot; {note}
+              {yearStr && !note.includes(yearStr) ? `, ${yearStr}` : ''}
+            </em>
+          ) : (
+            yearStr && <em> &middot; {yearStr}</em>
           )
         }
         {additionalInfo && <span class="additional-info"> · {additionalInfo}</span>}

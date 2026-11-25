@@ -1,22 +1,23 @@
 ---
-title: "The Choice Can Be the Attack: Auditing Aligned Backdoors in LLM Agents"
-description: Abstract-level summary of SHIFT, submitted to TACL 2026 on aligned
-  backdoor attacks in LLM agents.
+title: "Choice as an Attack: Auditing Aligned Backdoor Attacks in LLM Agents"
+description: In review at ACL ARR (October 2026). Abstract-level summary of
+  SHIFT, a known-trigger audit for aligned backdoor attacks in LLM agents.
 importance: 5
 category: research
 ---
 
-*Agent security · abstract-level summary*
+*Agent security · abstract-level summary · in review*
 
-Submitted to TACL 2026 with [Chowdhury Rakin Haider](https://cse.buet.ac.bd/faculty/faculty_detail/rakinhaider). The manuscript is not public, so this record is deliberately limited to an abstract-level summary.
+Submitted to ACL Rolling Review (ARR) October 2026 with Kawshik Kumar Paul and [Chowdhury Mohammad Rakin Haider](https://cse.buet.ac.bd/faculty/faculty_detail/rakinhaider), and currently **in review**. The manuscript is not yet public (a non-anonymous preprint is planned during review), so this record is limited to an abstract-level summary.
 
-- **Status:** Submitted to TACL 2026
-- **Public boundary:** Abstract-level summary · manuscript not public
-- **Methods:** known-trigger audit · matched task pairs · choice-feature accounting
-- **Last verified:** 2026-07-10
+- **Status:** In review at ACL ARR (October 2026)
+- **Authors:** Tanzim Hossain Romel, Kawshik Kumar Paul, Chowdhury Mohammad Rakin Haider
+- **Public boundary:** Abstract-level summary · manuscript not public (preprint planned during review)
+- **Keywords:** backdoor attacks · LLM agents · auditing · choice steering · aligned backdoors · tool routing · conditional logit · agent security
+- **Last verified:** 2026-11-25
 
-LLM agents can be backdoored without visibly failing the task. A trigger can make an agent prefer one valid option over another, such as a brand, vendor, or tool, while the final answer still looks acceptable. SHIFT, the Structured Hidden Influence Test, is a known-trigger audit for this kind of choice steering.
+Backdoor attacks can trigger LLM agents to prefer one valid option over others, without noticeably failing the task. The Structured Hidden Influence Test (SHIFT) is a known-trigger audit of choice-steering that analyzes only the valid options, their features, and the final choices, while remaining agnostic to the model internals.
 
-SHIFT reruns matched tasks with and without the trigger, records the valid options and their features, and checks whether the changed choice favors the attacker's target after accounting for ordinary option quality. The current draft positions SHIFT as a practical validation audit for structured choice settings where the auditor can observe the options but not the model internals.
+SHIFT combines a **Shift Detection Layer**—which identifies a shift in choice by comparing matched non-triggered and triggered tasks—with an **Attribution Layer** that checks whether the detected movement favors the attacker's target after accounting for ordinary option quality. Across simulations with known ground truth as well as shopping and tool-routing evaluations, the Shift Detection Layer detects trigger effects in 75–100% of tested trigger-trained shopping cases (0% on clean models) and 62.5–100% of tested trigger-trained tool-routing cases, while the Attribution Layer points toward the attacker's target when relevant option features are logged.
 
-Related: [ctxhelm case study](/projects/ctxhelm/)
+Related: [Publication record](/publications/romel2026shift/) · [ctxhelm case study](/projects/ctxhelm/)

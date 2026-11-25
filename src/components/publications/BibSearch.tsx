@@ -501,7 +501,14 @@ export function BibSearch({
     if (!q) return entries;
     const words = q.split(/\s+/).filter(Boolean);
     return entries.filter((entry) => {
-      const haystack = [getTitle(entry), getAuthors(entry), getVenue(entry), String(getYear(entry))]
+      const haystack = [
+        getTitle(entry),
+        getAuthors(entry),
+        getVenue(entry),
+        entry.fields.abbr ?? '',
+        entry.fields.note ?? '',
+        String(getYear(entry)),
+      ]
         .join(' ')
         .toLowerCase();
       return words.every((word) => haystack.includes(word));

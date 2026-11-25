@@ -30,14 +30,65 @@ function matchingBrace(src: string, from: number): number {
 }
 
 /**
+ * Strip BibTeX `%` line comments while preserving literal `%` inside braced or
+ * quoted field values and backslash-escaped `\%` characters.
+ */
+function stripBibtexComments(src: string): string {
+  let out = '';
+  let braceDepth = 0;
+  let inQuote = false;
+
+  for (let i = 0; i < src.length; i++) {
+    const ch = src[i];
+
+    // Preserve escaped characters so \%, \{, \}, and \" do not alter parser state
+    if (ch === '\\' && i + 1 < src.length) {
+      out += ch + src[i + 1];
+      i++;
+      continue;
+    }
+
+    if (!inQuote) {
+      if (ch === '{') {
+        braceDepth++;
+        out += ch;
+        continue;
+      }
+      if (ch === '}' && braceDepth > 0) {
+        braceDepth--;
+        out += ch;
+        continue;
+      }
+    }
+
+    if (ch === '"' && braceDepth === 1) {
+      inQuote = !inQuote;
+      out += ch;
+      continue;
+    }
+
+    if (ch === '%' && braceDepth <= 1 && !inQuote) {
+      while (i + 1 < src.length && src[i + 1] !== '\n') {
+        i++;
+      }
+      continue;
+    }
+
+    out += ch;
+  }
+
+  return out;
+}
+
+/**
  * Parse a BibTeX string into an array of entries.
  * Comments (`% ...`) and `@string` / `@preamble` directives are ignored.
  */
 export function parseBibtex(src: string): BibEntry[] {
   const entries: BibEntry[] = [];
 
-  // Remove line comments
-  const cleaned = src.replace(/%[^\n]*/g, '');
+  // Remove line comments outside field values
+  const cleaned = stripBibtexComments(src);
 
   // Find all @type{ positions
   const entryPattern = /@(\w+)\s*\{/g;
