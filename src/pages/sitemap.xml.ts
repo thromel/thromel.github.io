@@ -121,6 +121,14 @@ export async function GET(_ctx: APIContext): Promise<Response> {
     },
   ];
 
+  if (site.photography.enabled && site.photography.photos.length) {
+    staticUrls.push({
+      url: loc(site.photography.href),
+      lastmod: gitLastmod('src/config/site.ts'),
+      changefreq: 'monthly',
+    });
+  }
+
   const publicationLastmod = gitLastmod('src/data/papers.bib');
   const publicationUrls: UrlEntry[] = parseBibtex(bibRaw).map((entry) => ({
     url: loc(`/publications/${entry.key}/`),

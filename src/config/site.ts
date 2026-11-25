@@ -40,6 +40,27 @@ export type SocialKey =
   | 'cv_pdf'
   | 'rss_icon';
 
+/** One web-ready photograph, with dimensions to avoid layout shift. */
+type LandscapePhoto = {
+  image: `/assets/photography/${string}.webp`;
+  thumbnail: `/assets/photography/${string}.webp`;
+  width: number;
+  height: number;
+  alt: string;
+  caption?: string;
+};
+
+const photography = {
+  /** Show the gallery and its nav link once selected images are available. */
+  enabled: true,
+  href: '/photography/',
+  title: 'Photography',
+  description: 'A selection of landscape photographs.',
+  empty: 'The gallery is being prepared.',
+  /** Curated order; the first photograph leads the gallery. */
+  photos: [] as LandscapePhoto[],
+};
+
 export const site = {
   // ─── Derived deployment values ────────────────────────────────────────────
 
@@ -143,8 +164,13 @@ export const site = {
       { label: 'CV', href: '/cv/' },
       { label: 'News', href: '/news/' },
       { label: 'Resources', href: '/resources/' },
+      ...(photography.enabled && photography.photos.length
+        ? [{ label: photography.title, href: photography.href }]
+        : []),
     ] as NavItem[],
   },
+
+  photography,
 
   // ─── Footer ────────────────────────────────────────────────────────────────
 

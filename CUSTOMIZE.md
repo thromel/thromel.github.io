@@ -858,3 +858,14 @@ footer: {
 | `'hidden'` | Footer is not rendered at all                            |
 
 When `'sticky'`, the body automatically gains `padding-bottom` to prevent page content from being obscured by the footer. The back-to-top button is also repositioned to sit above it.
+
+## 24. Photography
+
+Edit `photography` in `src/config/site.ts` to curate the page and toggle its visibility. Add
+photos in display order to `photography.photos`. Each item uses a larger `image` and a smaller
+`thumbnail` under `public/assets/photography/`, plus original aspect-ratio dimensions
+(`width`, `height`), descriptive `alt` text, and an optional `caption`. Use web-ready WebP copies
+with matching aspect ratios and strip location and other embedded metadata before putting them
+in the repository. Keep originals and rejected photos out of the public directory.
+The first photo opens the gallery at full width; subsequent photos use a responsive grid.
+An empty or disabled gallery is excluded from navigation and the sitemap and marked noindex.
