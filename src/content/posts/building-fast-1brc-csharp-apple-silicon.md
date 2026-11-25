@@ -19,9 +19,7 @@ This is a long write-up about building a C# solver for the One Billion Row Chall
 
 The final code is here: [thromel/1brc-csharp](https://github.com/thromel/1brc-csharp). The shorter case-study page is here: [1BRC C# on Apple Silicon](/projects/1brc-csharp/).
 
-The result is not a generic "make C# fast" story. It is more specific than that. It is about reading a 13 GiB text file, parsing one billion rows, aggregating station statistics, and finding out that the big win on my machine was not the parser trick I expected. It was changing the file input path.
-
-That surprise is the useful part.
+This is a specific story about reading a 13 GiB text file, parsing one billion rows, and aggregating station statistics. On my machine, the big win came from changing the file input path, not from the parser trick I expected.
 
 ## reading map
 
@@ -70,7 +68,7 @@ The constraints make the problem interesting:
 - there are one billion rows in the full challenge
 - the result must be exact
 
-The input format looks friendly. It is not friendly at this size.
+The input format looks friendly, but at this size it is not.
 
 ## how I measured
 
@@ -78,14 +76,14 @@ The benchmark protocol mattered as much as the code. Every serious candidate had
 
 The gates were:
 
-| Gate | Purpose |
-| --- | --- |
-| Official fixtures | Catch formatting, parsing, rounding, and edge-case regressions. |
-| Generated parity | Compare candidate output byte-for-byte against the current solver on canonical and high-cardinality generated files. |
-| Bounded timing | Use 100M canonical and 10M high-cardinality data to reject parser/table changes quickly. |
-| Full 1B timing | Promote I/O and scheduler decisions only after the full 13 GiB file agrees. |
+| Gate              | Purpose                                                                                                              |
+| ----------------- | -------------------------------------------------------------------------------------------------------------------- |
+| Official fixtures | Catch formatting, parsing, rounding, and edge-case regressions.                                                      |
+| Generated parity  | Compare candidate output byte-for-byte against the current solver on canonical and high-cardinality generated files. |
+| Bounded timing    | Use 100M canonical and 10M high-cardinality data to reject parser/table changes quickly.                             |
+| Full 1B timing    | Promote I/O and scheduler decisions only after the full 13 GiB file agrees.                                          |
 
-That distinction is important. The `pread` path lost the bounded 100M lane and still won the full 1B lane. If I had collapsed those into one benchmark, I would have made the wrong default.
+The `pread` path lost the bounded 100M lane and still won the full 1B lane. If I had collapsed those into one benchmark, I would have made the wrong default.
 
 ## the final pipeline, before we build it
 
@@ -102,7 +100,7 @@ input file
   -> sort and format output
 ```
 
-Most of the code exists to protect that shape. The parser does not own file I/O. The table does not know which input strategy supplied the bytes. The formatter does not run until aggregation is finished. Those boundaries are what made it possible to swap the full-size input path without rewriting the whole solver.
+Most of the code exists to protect that shape. The parser does not own file I/O. The table does not know which input strategy supplied the bytes. The formatter does not run until aggregation is finished. Those boundaries let me swap the full-size input path without rewriting the whole solver.
 
 ## the version everyone writes first
 
@@ -153,7 +151,7 @@ It is also a performance disaster for the full challenge.
 
 Each row creates or touches managed strings. `decimal.Parse` is a general-purpose parser. `File.ReadLines` decodes text before we know whether we need text. The dictionary is good software engineering for normal data sizes, but here it sits directly in the hottest loop. One billion rows turns every small convenience into a bill.
 
-The first lesson is simple: the file is not text yet. It is bytes. We should only turn bytes into strings when we actually need strings.
+The file is not text yet. It is bytes. We should turn bytes into strings only when we need strings.
 
 ## the data model: use integer tenths
 
@@ -204,7 +202,7 @@ static int RoundMean(long sum, int count)
 }
 ```
 
-The current code formats carefully to match the challenge's expected one-decimal output, but the design idea is this: keep parser math cheap and exact enough for the contract.
+The current code formats carefully to match the challenge's expected one-decimal output, but the design idea is to keep parser math cheap and exact enough for the contract.
 
 ## parsing temperature by shape
 
@@ -287,7 +285,7 @@ entry.NamePointer = nameStart;
 entry.NameLength = nameLength;
 ```
 
-That is not safe for every input strategy. It is safe for mmap because the mapping owns the bytes. It is not safe for a reusable read buffer, because the next read overwrites the buffer. This difference becomes important later.
+That is not safe for every input strategy. It is safe for mmap because the mapping owns the bytes. It is not safe for a reusable read buffer, because the next read overwrites the buffer. The `pread` path depends on this difference.
 
 ## finding the semicolon
 
@@ -334,7 +332,7 @@ static unsafe int FindSemicolonInWord(byte* start)
 
 The trick works because after XOR, bytes equal to `;` become zero bytes. The `(x - lowBits) & ~x & highBits` expression marks zero bytes. Then `TrailingZeroCount` tells us the first matching byte.
 
-The promoted parser checks the first few words inline, then sends uncommon long names to a no-inline tail helper. That shape matters because code size matters. The hot path should stay hot.
+The promoted parser checks the first few words inline, then sends uncommon long names to a no-inline tail helper. This keeps the hot path small, and code size matters in a loop this hot.
 
 ## building a station key
 
@@ -533,7 +531,7 @@ The current version has two paths:
 
 The fast path can safely do unaligned word reads because every 1BRC row is bounded by the station-name and temperature limits. Near the end of a range, the bounded path avoids reading beyond the range.
 
-This is one of the small details that keeps unsafe code honest. The fastest path should be allowed to assume what is true, but only where it is true.
+This is one of the small details that keeps unsafe code honest. The fastest path can assume what is true, but only where it is true.
 
 ## why multiple cursors helped
 
@@ -558,9 +556,9 @@ while (allCursorsHaveRoom)
 }
 ```
 
-This is not parallelism in the thread sense. It is instruction-level parallelism. While one row waits on a load or branch, the CPU may have useful work from another cursor.
+This is instruction-level parallelism, not thread parallelism. While one row waits on a load or branch, the CPU may have useful work from another cursor.
 
-We tested variants. Four cursors added complexity without enough speed. Three survived. This is the pattern of the whole project: keep the idea only if measurement pays for it.
+We tested variants. Four cursors added complexity without enough speed. Three survived. The whole project followed this pattern. Keep an idea only if measurement pays for it.
 
 ## the first result was good but incomplete
 
@@ -578,7 +576,7 @@ On bounded 100M-row runs, that was a strong direction. Parser and table changes 
 
 But the full 1B file changed the profile.
 
-Warm mmap runs on my machine were around 16 seconds. User time was not the whole story. System time was huge, and page faults dominated the shape. The parser was still important, but the full run was saying something else:
+Warm mmap runs on my machine were around 16 seconds. System time was huge, and page faults dominated the profile. The parser still mattered, but the full run pointed somewhere else:
 
 ```text
 the file input path is now the bottleneck candidate
@@ -590,7 +588,7 @@ That is where the project stopped being a parser exercise.
 
 With mmap, the operating system maps file pages into the process address space. The code reads memory addresses, and the OS brings pages in as needed.
 
-That is elegant. It also means page faults become part of the runtime story.
+That is elegant, but it also makes page faults part of the runtime cost.
 
 With `pread`, the code explicitly asks the kernel to copy bytes from a file descriptor into a buffer at a given offset:
 
@@ -625,7 +623,7 @@ public static InputStrategy SelectInputStrategy(long inputLength)
 }
 ```
 
-The exact thresholds are local tuning. The design is the important part: make the strategy explicit, overridable, and easy to retune.
+The exact thresholds are local tuning. The design matters more. Make the strategy explicit, overridable, and easy to retune.
 
 ## building the pread path
 
@@ -696,7 +694,7 @@ public static unsafe int ReadFull(int fd, byte* buffer, int byteCount, long offs
 }
 ```
 
-This is not glamorous code. It is the code that made the full-size run fast.
+This code is not glamorous, but it made the full-size run fast.
 
 ## name ownership changes under pread
 
@@ -743,18 +741,18 @@ This is the kind of ownership distinction that makes unsafe code maintainable. T
 
 ## full-size result
 
-On my 10-core Apple Silicon machine, the full canonical 1B file was about 13 GiB. The important claim is narrow: paired warm runs on this machine showed the macOS `mmap` path spending heavily in VM/page-fault behavior, and the native `pread` path removed most of that cost.
+On my 10-core Apple Silicon machine, the full canonical 1B file was about 13 GiB. The claim is narrow. Paired warm runs on this machine showed the macOS `mmap` path spending heavily in VM/page-fault behavior, and the native `pread` path removed most of that cost.
 
-| Lane | Evidence |
-| --- | --- |
-| Bounded 100M | `pread` was still worse than `mmap`: `+0.033671s` median wall and `+0.135181s` median system time. |
-| First full 1B parity run | `mmap`/`pread` wall: `16.227s`/`4.297s`; user: `13.198s`/`8.937s`; sys: `26.026s`/`3.902s`; major faults: `777206`/`76`. |
-| Five paired warm full 1B runs | `pread` won `5/5`; candidate-minus-baseline medians were `-11.785s` wall, `-5.373s` user, `-26.445s` sys, and `-842044` major faults. |
-| Worker-count follow-up | The full-size `pread` default moved to 8 workers after randomized pairs showed `4.08s` versus `4.18s` medians against the older 13-worker default. |
+| Lane                          | Evidence                                                                                                                                           |
+| ----------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Bounded 100M                  | `pread` was still worse than `mmap`: `+0.033671s` median wall and `+0.135181s` median system time.                                                 |
+| First full 1B parity run      | `mmap`/`pread` wall: `16.227s`/`4.297s`; user: `13.198s`/`8.937s`; sys: `26.026s`/`3.902s`; major faults: `777206`/`76`.                           |
+| Five paired warm full 1B runs | `pread` won `5/5`; candidate-minus-baseline medians were `-11.785s` wall, `-5.373s` user, `-26.445s` sys, and `-842044` major faults.              |
+| Worker-count follow-up        | The full-size `pread` default moved to 8 workers after randomized pairs showed `4.08s` versus `4.18s` medians against the older 13-worker default. |
 
 Wall time was not the only signal. System time and major-fault counts moved with it. That is what made the result convincing. If only one metric had moved, I would have treated it as suspect.
 
-The final default is size-aware. Smaller files use `mmap`; macOS files at least 8 GiB use `pread`. That is not a claim that `pread` is better everywhere. It is a claim that this full-size run, on this machine, exposed a different bottleneck from the bounded benchmarks.
+The final default is size-aware. Smaller files use `mmap`. macOS files of at least 8 GiB use `pread`. The result does not show that `pread` is better everywhere. It shows that this full-size run, on this machine, exposed a different bottleneck from the bounded benchmarks.
 
 ## experiments that looked good and lost
 
@@ -774,7 +772,7 @@ X;0.1
 
 The temperature starts after a variable-length station name. Four rows give four unrelated temperature pointers. To vectorize them, we would have to gather bytes into lanes manually. On this path, that setup cost more than scalar parsing.
 
-The lesson: contiguous data vectorizes naturally. Scattered tiny fields often do not.
+Contiguous data vectorizes naturally. Scattered tiny fields often do not.
 
 ### 64-byte SIMD row framing
 
@@ -792,7 +790,7 @@ This kept hash, temperature parsing, and table updates scalar. It attacked row f
 
 It still lost. Mask extraction and row bookkeeping cost more than the scalar delimiter path saved on this NativeAOT ARM64 build.
 
-The lesson: SIMD is not free. The setup and extraction path has to be cheaper than the scalar work it replaces.
+SIMD has a cost. The setup and extraction path has to be cheaper than the scalar work it replaces.
 
 ### station front cache
 
@@ -806,7 +804,7 @@ If stations repeat, maybe we can skip the table probe.
 
 It lost because the table already averaged close to one probe on canonical data. The cache added another load and another equality check to almost every row.
 
-The lesson: do not optimize a bottleneck you have already mostly removed.
+Do not optimize a bottleneck you have already mostly removed.
 
 ### known-station direct path
 
@@ -819,7 +817,7 @@ unknown station -> fallback table
 
 I built a fallback-safe version. It passed correctness and matched output. It still lost. Exact known-name checks and separate aggregate handling cost more than the existing table lookup.
 
-The lesson: specializing for a benchmark can still be slower if the generic path is already cheap.
+Specializing for a benchmark can still be slower if the generic path is already cheap.
 
 ### control-byte metadata
 
@@ -827,7 +825,7 @@ SwissTable-style control bytes can reduce expensive equality checks. The candida
 
 It helped too little on high-cardinality data and hurt canonical data.
 
-The lesson: extra metadata is an extra memory access. It has to save enough downstream work to pay for itself.
+Extra metadata is an extra memory access. It has to save enough downstream work to pay for itself.
 
 ### dynamic microshards
 
@@ -835,7 +833,7 @@ Dynamic scheduling can reduce tail imbalance. The candidate split full-size `pre
 
 The result was mixed. Some CPU counters improved, but full 1B wall time did not improve robustly enough. The simpler fixed-range scheduler stayed.
 
-The lesson: lower CPU time is not automatically lower wall time. The promotion criterion has to match the goal.
+Lower CPU time does not always mean lower wall time. The promotion criterion has to match the goal.
 
 ## the validation loop
 
@@ -941,7 +939,7 @@ Do not share a dictionary across workers. That is the wrong fight.
 
 ### stage 6: publish NativeAOT
 
-NativeAOT mattered for this project because startup, code generation, and direct native execution all affect short warm runs. Use the published binary for timing; a JIT build answers a different question.
+NativeAOT mattered for this project because startup, code generation, and direct native execution all affect short warm runs. Use the published binary for timing. A JIT build answers a different question.
 
 ```sh
 ./publish_aot.sh
@@ -1016,7 +1014,7 @@ The boundaries are already there:
 - `StationKey` for hash and identity shortcuts
 - `StationTable` for storage and name ownership
 
-That is what maintainability means in this kind of code. Not removing unsafe code. Giving unsafe code a small address.
+In this kind of code, maintainability means giving unsafe code a small address, not removing it.
 
 ## what generalizes and what does not
 
@@ -1041,7 +1039,7 @@ These parts should be retuned:
 - hash shortcuts
 - SIMD choices
 
-The `pread` result especially should not be copied blindly. Linux, Windows, x64, different Apple Silicon generations, different storage, and different .NET builds can all move the bottleneck. The right port is not "use my constants." The right port is "keep the boundaries, rerun the gates, and promote only what your machine proves."
+The `pread` result especially should not be copied blindly. Linux, Windows, x64, different Apple Silicon generations, different storage, and different .NET builds can all move the bottleneck. A good port does not "use my constants." It keeps the boundaries, reruns the gates, and promotes only what your machine proves.
 
 ## the part I would keep
 
@@ -1049,8 +1047,4 @@ The specific numbers are local. The process is more durable.
 
 The project started as a parser exercise. It became an I/O exercise only after the full input proved that the mmap path was spending too much time in the kernel. If I had trusted only the 100M benchmark, I would have kept shaving cycles from the wrong place.
 
-That is the real lesson.
-
 Build the simple version. Make it correct. Replace abstractions only when you can explain the cost. Keep measurements paired. Write down failed ideas. Treat a different machine as a new experiment.
-
-Performance work rewards humility more than cleverness. The machine does not care which optimization looked best in your head. It only cares where the time actually went.

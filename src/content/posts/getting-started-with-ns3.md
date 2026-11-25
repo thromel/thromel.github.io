@@ -14,18 +14,17 @@ tags:
   - campus-network
 ---
 
-
 <img src="/assets/img/blog-ns3_campus_network_topology.png" class="img-fluid rounded z-depth-1 mb-4" alt="NS3 Campus Network Topology" width="1096" height="992" decoding="async">
 
 ## What We're Building Today
 
-Picture this: You're tasked with designing a campus network where students stream videos from a media server. Some students connect via WiFi in the library, others use Ethernet in computer labs, and everyone wants smooth playback without buffering. How do you test if your network design will actually work before spending thousands on equipment?
+Suppose you must design a campus network where students stream videos from a media server. Some students connect via WiFi in the library, and others use Ethernet in computer labs. Everyone wants smooth playback without buffering. How do you test your network design before you spend thousands on equipment?
 
-This is exactly where NS3 shines. Today, we'll build this very simulation together, learning NS3's essential modules along the way. By the end of this guide, you'll understand how to create nodes, connect them with different technologies, run applications, and analyze whether your network can handle the load.
+NS3 answers that question. In this guide we build this simulation together and learn NS3's essential modules on the way. You will learn how to create nodes and connect them with different technologies. You will also run applications and check whether your network can handle the load.
 
 ## Setting Up Your NS3 Environment
 
-Before we dive into coding, let's get NS3 installed. On Ubuntu (which I recommend for beginners), you'll need these prerequisites:
+First, install NS3. On Ubuntu (which I recommend for beginners), you need these prerequisites:
 
 ```bash
 sudo apt-get update
@@ -33,7 +32,7 @@ sudo apt-get install g++ python3 python3-dev cmake git
 sudo apt-get install python3-setuptools qtbase5-dev qtchooser qt5-qmake qtbase5-dev-tools
 ```
 
-Now, let's download and build NS3:
+Next, download and build NS3:
 
 ```bash
 # Download NS3 (using version 3.39 as an example)
@@ -46,21 +45,21 @@ cd ns-allinone-3.39/ns-3.39
 ./ns3 build
 ```
 
-The build process takes about 10-15 minutes. While it compiles, let's understand what we're about to create.
+The build takes about 10-15 minutes. While it compiles, read about the parts we will use.
 
 ## Understanding NS3's Building Blocks
 
-NS3 works like digital LEGO blocks. Each module represents a different networking component:
+NS3 works like digital LEGO blocks. Each module is a different networking component:
 
-- **Node Module**: Think of nodes as computers, phones, or any device in your network
-- **NetDevice Module**: These are like network cards (WiFi adapters, Ethernet ports)
-- **Channel Module**: The medium connecting devices (air for WiFi, cables for Ethernet)
-- **Protocol Stack Module**: The software that handles networking (like TCP/IP)
-- **Application Module**: Programs that generate network traffic (video servers, web browsers)
+- **Node module**: computers, phones, or any other device in your network
+- **NetDevice module**: network cards, such as WiFi adapters and Ethernet ports
+- **Channel module**: the medium between devices (air for WiFi, cables for Ethernet)
+- **Protocol stack module**: the software that handles networking (like TCP/IP)
+- **Application module**: programs that generate network traffic (video servers, web browsers)
 
 <img src="/assets/img/blog-ns3_building_blocks.png" class="img-fluid rounded z-depth-1 mb-4" alt="NS3 Building Blocks Architecture" width="911" height="528" loading="lazy" decoding="async">
 
-Let's see how these pieces fit together by building our campus network simulation.
+The campus network simulation below shows how these pieces fit together.
 
 ## Creating Our First Simulation: The Campus Network
 
@@ -92,15 +91,11 @@ int main(int argc, char *argv[])
 }
 ```
 
-This basic structure imports all the modules we'll need. The logging component helps us debug by printing messages during simulation. Think of `NS_LOG_INFO` as a sophisticated `printf` that you can turn on or off.
+This basic structure imports all the modules we need. The logging component prints messages during the simulation, which helps us debug. Think of `NS_LOG_INFO` as a `printf` that you can turn on or off.
 
 ## Step 1: Creating Nodes (The Network Devices)
 
-Let's add our network devices. In our campus scenario, we have:
-- 1 media server
-- 1 router (connecting everything)
-- 3 Ethernet-connected lab computers
-- 5 WiFi-connected student laptops
+Next, add the network devices. Our campus has 1 media server and 1 router that connects everything. It also has 3 lab computers on Ethernet and 5 student laptops on WiFi.
 
 ```cpp
 int main(int argc, char *argv[])
@@ -132,11 +127,11 @@ int main(int argc, char *argv[])
 }
 ```
 
-Notice how we use `NodeContainer` to group similar nodes. This makes it easier to configure multiple nodes at once. Think of it like creating a list of devices that share similar properties.
+We use `NodeContainer` to group similar nodes, so we can configure many nodes at once. A container is a list of devices that share properties.
 
 ## Step 2: Setting Up the Point-to-Point Connection (Server to Router)
 
-Our media server connects to the router with a high-speed link. The `PointToPointHelper` module makes this easy:
+A high-speed link connects our media server to the router. The `PointToPointHelper` module sets up this link:
 
 ```cpp
     // Configure the point-to-point link between server and router
@@ -153,11 +148,11 @@ Our media server connects to the router with a high-speed link. The `PointToPoin
     serverDevices = serverLink.Install(mediaServer.Get(0), router.Get(0));
 ```
 
-The `DataRate` is how fast data can flow (like the width of a pipe), while `Delay` is how long it takes for data to travel through the link (like the length of the pipe). These parameters directly affect application performance!
+`DataRate` is how fast data can flow, like the width of a pipe. `Delay` is how long data takes to cross the link, like the length of the pipe. These parameters directly affect application performance.
 
 ## Step 3: Configuring Ethernet for Lab Computers
 
-Lab computers connect via Ethernet. We'll use the CSMA (Carrier Sense Multiple Access) module, which simulates Ethernet behavior:
+Lab computers connect through Ethernet. We use the CSMA (Carrier Sense Multiple Access) module, which simulates Ethernet behavior:
 
 ```cpp
     // Configure Ethernet for lab computers
@@ -177,11 +172,11 @@ Lab computers connect via Ethernet. We'll use the CSMA (Carrier Sense Multiple A
     csmaDevices = csma.Install(csmaNodes);
 ```
 
-CSMA is interesting because all devices share the same medium (like multiple computers on the same switch). They have to take turns transmitting, which NS3 simulates realistically.
+In CSMA, all devices share the same medium, like several computers on the same switch. They must take turns to transmit, and NS3 simulates this realistically.
 
 ## Step 4: Creating the WiFi Network
 
-WiFi is more complex because wireless signals can interfere and nodes can move. Let's set it up:
+WiFi is more complex because wireless signals can interfere and nodes can move. This code sets it up:
 
 ```cpp
     // Configure WiFi for student laptops
@@ -216,11 +211,9 @@ WiFi is more complex because wireless signals can interfere and nodes can move. 
     staDevices = wifi.Install(wifiPhy, wifiMac, wifiStudents);
 ```
 
-The WiFi setup involves two layers:
-- **PHY (Physical)**: Handles radio waves, signal strength, interference
-- **MAC (Media Access Control)**: Manages who talks when to avoid collisions
+The WiFi setup has two layers. The **PHY (Physical)** layer handles radio waves, signal strength, and interference. The **MAC (Media Access Control)** layer decides who transmits when, so transmissions do not collide.
 
-We configure one node as an Access Point (AP) and others as Stations (STA) that connect to it.
+We configure one node as an Access Point (AP) and the others as Stations (STA) that connect to it.
 
 ## Step 5: Positioning WiFi Nodes
 
@@ -248,11 +241,11 @@ Wireless nodes need positions because signal strength depends on distance:
     mobility.Install(wifiStudents);
 ```
 
-The `MobilityHelper` module controls node positions and movement. Fixed nodes use `ConstantPositionMobilityModel`, while mobile nodes can use various movement patterns. Here, students wander randomly within a 30x30 meter area.
+The `MobilityHelper` module controls node positions and movement. Fixed nodes use `ConstantPositionMobilityModel`, and mobile nodes can use other movement patterns. Here, students move randomly within a 30x30 meter area.
 
 ## Step 6: Installing the Internet Stack
 
-Now we need to give our nodes the ability to speak Internet protocols:
+Next, give the nodes Internet protocols:
 
 ```cpp
     // Install Internet stack on all nodes
@@ -264,7 +257,7 @@ Now we need to give our nodes the ability to speak Internet protocols:
     internet.Install(wifiStudents);
 ```
 
-This installs TCP/IP on each node. Without this, nodes can send raw frames but can't use IP addresses or run typical Internet applications.
+This installs TCP/IP on each node. Without it, nodes can send raw frames, but they cannot use IP addresses or run typical Internet applications.
 
 ## Step 7: Assigning IP Addresses
 
@@ -296,11 +289,11 @@ Each network segment needs its own IP address range:
     Ipv4GlobalRoutingHelper::PopulateRoutingTables();
 ```
 
-Each `SetBase` call defines a new subnet. The router connects all three subnets, and `PopulateRoutingTables()` automatically configures routing between them.
+Each `SetBase` call defines a new subnet. The router connects all three subnets, and `PopulateRoutingTables()` configures routing between them automatically.
 
 ## Step 8: Creating the Video Streaming Application
 
-Now for the fun part - actually using the network! We'll create a video streaming server and clients:
+Now we use the network. This code creates a video streaming server and clients:
 
 ```cpp
     // Create video streaming server on the media server
@@ -350,11 +343,11 @@ Now for the fun part - actually using the network! We'll create a video streamin
     }
 ```
 
-The `OnOffHelper` creates an application that alternates between sending data (On) and being quiet (Off). This mimics real video streaming behavior. The `PacketSinkHelper` creates applications that receive and consume data.
+The `OnOffHelper` creates an application that alternates between sending data (On) and silence (Off). Real video streams behave like this. The `PacketSinkHelper` creates applications that receive and consume data.
 
 ## Step 9: Monitoring Network Performance
 
-How do we know if our network design works? Let's add monitoring:
+To know whether the network design works, add monitoring:
 
 ```cpp
     // Set up flow monitor to track performance
@@ -368,11 +361,11 @@ How do we know if our network design works? Let's add monitoring:
     wifiPhy.EnablePcap("campus-wifi", apDevice.Get(0), true);
 ```
 
-The `FlowMonitor` tracks every flow (stream of packets between two endpoints) and collects statistics like throughput, delay, and packet loss. PCAP files can be opened in Wireshark for detailed analysis.
+The `FlowMonitor` tracks every flow (a stream of packets between two endpoints). It collects statistics like throughput, delay, and packet loss. You can open the PCAP files in Wireshark for detailed analysis.
 
 ## Step 10: Running the Simulation and Analyzing Results
 
-Finally, let's run the simulation and print results:
+Finally, run the simulation and print the results:
 
 ```cpp
     // Run the simulation
@@ -432,41 +425,48 @@ Run the simulation:
 ./ns3 run campus-network
 ```
 
-You'll see output showing each flow's performance. Look for:
+The output shows the performance of each flow. Check three values:
+
 - **Throughput**: Is it close to 25 Mbps per stream?
-- **Packet Loss**: Should be near 0% for good video quality
-- **Delay**: Lower is better for real-time applications
+- **Packet loss**: It should be near 0% for good video quality.
+- **Delay**: Lower is better for real-time applications.
 
 ## Understanding What Just Happened
 
-Our simulation revealed several important insights:
+The simulation shows three things:
 
-1. **Wired connections perform better**: Lab computers likely show consistent 25 Mbps throughput with minimal loss
-2. **WiFi varies with distance**: Students farther from the access point may experience lower throughput
-3. **Shared medium effects**: Multiple WiFi users compete for airtime, potentially reducing individual throughput
+1. **Wired connections perform better.** Lab computers likely show a steady 25 Mbps throughput with minimal loss.
+2. **WiFi varies with distance.** Students farther from the access point can get lower throughput.
+3. **WiFi users share the medium.** They compete for airtime, which can reduce the throughput of each user.
 
-This is exactly what you'd see in a real campus network!
+A real campus network behaves the same way.
 
 ## Key Modules Deep Dive
 
-Let's explore the modules we used more deeply:
+This section looks at the modules we used in more detail.
 
 ### The Application Module
+
 NS3 includes several application models:
-- **OnOffApplication**: Generates traffic in bursts (perfect for video)
+
+- **OnOffApplication**: Generates traffic in bursts (good for video)
 - **BulkSendApplication**: Sends data as fast as possible (good for file transfers)
 - **UdpEchoClient/Server**: Simple request-response (useful for testing)
 - **PacketSink**: Receives and discards packets (simulates consumers)
 
 ### The Mobility Module
+
 Controls node movement with models like:
+
 - **ConstantPositionMobilityModel**: Nodes don't move
 - **RandomWalk2dMobilityModel**: Random movement in 2D
 - **GaussMarkovMobilityModel**: Smooth, realistic movement
 - **WaypointMobilityModel**: Movement between specific points
 
 ### The Energy Module (Not used above, but important)
+
 Simulates battery-powered devices:
+
 ```cpp
 // Example: Adding battery to a WiFi node
 BasicEnergySourceHelper energyHelper;
@@ -480,26 +480,28 @@ DeviceEnergyModelContainer deviceModels =
 
 ## Experimenting and Learning More
 
-Now that you have a working simulation, try these experiments:
+You have a working simulation. Try these experiments:
 
 1. **Increase WiFi users**: What happens with 20 students instead of 5?
 2. **Change video bitrate**: Try 4K (25 Mbps) vs HD (5 Mbps)
-3. **Add movement**: Make students move faster - does it affect quality?
+3. **Add movement**: Make students move faster. Does it affect quality?
 4. **Test different WiFi standards**: Try 802.11g vs 802.11n vs 802.11ac
 
-Each experiment teaches you something about network behavior!
+Each experiment teaches you something about network behavior.
 
 ## Common Pitfalls and Debugging Tips
 
-When things go wrong (and they will!), here's how to debug:
+Things will go wrong. Use these steps to debug:
 
 1. **Enable logging for specific modules**:
+
 ```cpp
 LogComponentEnable("OnOffApplication", LOG_LEVEL_ALL);
 LogComponentEnable("PacketSink", LOG_LEVEL_INFO);
 ```
 
 2. **Use NS_ASSERT for sanity checks**:
+
 ```cpp
 NS_ASSERT_MSG(nodes.GetN() > 0, "Must create at least one node!");
 ```
@@ -510,7 +512,7 @@ NS_ASSERT_MSG(nodes.GetN() > 0, "Must create at least one node!");
 
 ## Next Steps in Your NS3 Journey
 
-You've just built a complete network simulation! Here's where to go next:
+You built a complete network simulation. These are good next steps:
 
 1. **Explore more modules**: Try LTE, 5G, or IoT protocols
 2. **Implement custom protocols**: Create your own transport or routing protocol
@@ -518,11 +520,11 @@ You've just built a complete network simulation! Here's where to go next:
 4. **Integrate with real code**: Use DCE to run real Linux applications
 5. **Contribute**: Fix bugs or add features to NS3
 
-Remember, every expert started exactly where you are now. The key is to experiment, break things, and learn from what happens. NS3 is forgiving - you can't break real equipment, so experiment freely!
+Every expert started where you are now. Experiment, break things, and learn from what happens. In NS3 you cannot break real equipment, so experiment freely.
 
 ## Quick Reference: Essential NS3 Patterns
 
-Here are the patterns you'll use repeatedly:
+You will use these patterns again and again:
 
 ```cpp
 // Creating nodes
@@ -555,6 +557,6 @@ Simulator::Run();
 Simulator::Destroy();
 ```
 
-These patterns form the backbone of every NS3 simulation. Master them, and you'll be building complex networks in no time!
+Every NS3 simulation uses these patterns. Learn them well, and complex networks become much easier to build.
 
-Happy simulating! Remember, the best way to learn NS3 is by doing. Start with this example, modify it, break it, fix it, and most importantly, have fun exploring the fascinating world of network simulation!
+Happy simulating! The best way to learn NS3 is to use it. Start with this example, then change it, break it, and fix it.

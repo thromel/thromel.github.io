@@ -1,5 +1,5 @@
 ---
-title: "Understanding xv6: A Practical Introduction to Operating Systems"
+title: 'Understanding xv6: A Practical Introduction to Operating Systems'
 date: 2022-04-21
 categories:
   - operating-systems
@@ -16,20 +16,19 @@ tags:
   - computer-science
 ---
 
-
-Operating systems form the foundation of modern computing, yet their inner workings often remain mysterious to many computer science students. If you're embarking on your journey into operating systems through xv6, you're about to explore one of the most elegant teaching tools in computer science education. This post will guide you through xv6's architecture, connecting fundamental OS concepts with concrete implementation details you can examine and modify yourself.
+Operating systems form the foundation of modern computing, but many computer science students find their inner workings mysterious. If you are starting operating systems with xv6, you will work with one of the clearest teaching tools in computer science education. This post explains xv6's architecture. It connects basic OS concepts to concrete implementation details that you can examine and modify yourself.
 
 ## What Makes xv6 Special
 
-xv6 is a teaching operating system developed at MIT, inspired by Unix Version 6. Unlike production operating systems with millions of lines of code, xv6 contains roughly 15,000 lines of well-commented C code and assembly. This deliberate simplicity means you can understand the entire system, from boot sequence to system calls, in a single semester.
+xv6 is a teaching operating system from MIT, inspired by Unix Version 6. Production operating systems have millions of lines of code. xv6 has roughly 15,000 lines of well-commented C code and assembly. Because it is this small, you can understand the entire system, from the boot sequence to system calls, in a single semester.
 
-The genius of xv6 lies in its completeness despite its simplicity. It implements all the fundamental concepts you need to understand: process management, virtual memory, file systems, and device drivers. Each component is stripped to its essential elements, making the underlying principles clear without getting lost in optimization details or edge cases.
+xv6 is simple but complete. It implements the concepts you need to understand: process management, virtual memory, file systems, and device drivers. Each component keeps only its essential elements, so the principles stay clear without optimization details or edge cases.
 
 ## The Boot Process: Where Everything Begins
 
-When you power on a computer running xv6, a carefully choreographed sequence unfolds. Understanding this boot process reveals how an operating system transforms raw hardware into a managed computing environment.
+When you power on a computer that runs xv6, a precise sequence of steps occurs. The boot process shows how an operating system turns raw hardware into a managed computing environment.
 
-The journey begins in the file `bootasm.S`, where the BIOS loads the boot sector into memory at address 0x7c00. At this point, the processor runs in 16-bit real mode, a legacy from the original 8086 processor. The bootloader's first task is switching to 32-bit protected mode, which provides access to more memory and better protection mechanisms.
+The sequence starts in the file `bootasm.S`, where the BIOS loads the boot sector into memory at address 0x7c00. At this point, the processor runs in 16-bit real mode, a legacy of the original 8086 processor. The bootloader's first task is to switch to 32-bit protected mode, which gives access to more memory and better protection mechanisms.
 
 ```c
 // In bootmain.c - simplified version
@@ -59,13 +58,13 @@ void bootmain(void)
 }
 ```
 
-This boot process teaches several crucial concepts. First, it demonstrates how software and hardware interact at the lowest level. Second, it shows how an operating system bootstraps itself from nothing to a fully functional system. The transition from real mode to protected mode illustrates how modern processors maintain backward compatibility while providing advanced features.
+The boot process shows how software and hardware interact at the lowest level. It also shows how an operating system bootstraps itself from nothing to a fully functional system. The transition from real mode to protected mode shows how modern processors keep backward compatibility and still provide advanced features.
 
 ## Process Management: The Illusion of Simultaneity
 
-At the heart of any operating system lies process management. xv6 implements processes with elegant simplicity, yet the implementation contains all the essential elements found in production systems.
+Process management is central to any operating system. xv6 keeps its process implementation simple, but it contains all the essential elements of production systems.
 
-In xv6, each process is represented by a `struct proc` defined in `proc.h`. This structure contains everything the kernel needs to know about a process: its state, memory mappings, open files, and saved register values. The process table, a fixed-size array of these structures, limits xv6 to 64 concurrent processes - a reasonable constraint for a teaching system.
+In xv6, each process is represented by a `struct proc` defined in `proc.h`. This structure contains everything the kernel needs to know about a process: its state, memory mappings, open files, and saved register values. The process table is a fixed-size array of these structures. It limits xv6 to 64 concurrent processes, a reasonable constraint for a teaching system.
 
 ```c
 // Simplified proc structure from proc.h
@@ -86,7 +85,7 @@ struct proc {
 };
 ```
 
-Process creation in xv6 follows the Unix model through the `fork()` system call. When a process calls fork, xv6 creates an exact copy of the calling process, including its memory, open files, and register state. The implementation in `proc.c` reveals the complexity hidden behind this simple interface:
+xv6 creates processes with the Unix `fork()` system call. When a process calls fork, xv6 creates an exact copy of the calling process, including its memory, open files, and register state. The implementation in `proc.c` shows the complexity behind this simple interface:
 
 ```c
 // Simplified fork implementation
@@ -131,15 +130,15 @@ int fork(void)
 }
 ```
 
-This implementation teaches several fundamental concepts. The distinction between parent and child processes after fork, identified only by the return value, demonstrates how operating systems create new execution contexts. The careful copying of process state shows what makes each process independent, while the sharing of certain resources (like the current directory) illustrates how processes can communicate.
+After fork, only the return value tells the parent and the child apart. This is how operating systems create new execution contexts. The copy of the process state shows what makes each process independent. The shared resources, like the current directory, show how processes can communicate.
 
 ## Memory Management: Creating Virtual Worlds
 
-Memory management in xv6 demonstrates how operating systems create the illusion that each process has its own private memory space. This virtual memory system, though simpler than those in production systems, contains all the essential elements.
+Memory management in xv6 shows how operating systems give each process the illusion of its own private memory space. This virtual memory system is simpler than those in production systems, but it contains all the essential elements.
 
-xv6 uses a two-level page table structure on x86. Each process has its own page directory, which points to page tables, which in turn map virtual addresses to physical addresses. This hierarchical structure allows efficient memory usage - unmapped regions don't require page table entries.
+xv6 uses a two-level page table structure on x86. Each process has its own page directory, which points to page tables, which in turn map virtual addresses to physical addresses. This hierarchy uses memory efficiently, because unmapped regions need no page table entries.
 
-The virtual memory layout in xv6 is straightforward. Each process sees a virtual address space from 0 to 2GB. The kernel maps itself at high virtual addresses (above 2GB), allowing it to access process memory directly while remaining protected from user code.
+The virtual memory layout in xv6 is simple. Each process sees a virtual address space from 0 to 2GB. The kernel maps itself at high virtual addresses (above 2GB). So the kernel can access process memory directly and stays protected from user code.
 
 ```c
 // Virtual address to physical address translation
@@ -167,7 +166,7 @@ static pte_t* walkpgdir(pde_t *pgdir, const void *va, int alloc)
 }
 ```
 
-The memory allocator in xv6 (`kalloc.c`) manages physical memory with a simple free list. Each free page contains a pointer to the next free page, creating a linked list of available memory. This design, while not optimal for performance, clearly illustrates memory allocation concepts:
+The memory allocator in xv6 (`kalloc.c`) manages physical memory with a simple free list. Each free page contains a pointer to the next free page, so the free pages form a linked list. This design is not optimal for performance, but it shows the memory allocation concepts clearly:
 
 ```c
 // Allocate one 4096-byte page of physical memory
@@ -187,13 +186,13 @@ char* kalloc(void)
 }
 ```
 
-This implementation teaches how operating systems manage the finite resource of physical memory. The use of a free list demonstrates a fundamental data structure in systems programming, while the lock protection introduces the concept of synchronization in kernel code.
+This code shows how operating systems manage physical memory, a finite resource. The free list is a basic data structure in systems programming, and the lock introduces synchronization in kernel code.
 
 ## The File System: Persistence and Organization
 
-The xv6 file system provides a complete implementation of hierarchical file storage. Built in layers, each level adds functionality while hiding complexity from the layers above. This design exemplifies good systems architecture.
+The xv6 file system is a complete implementation of hierarchical file storage. It is built in layers. Each layer adds functionality and hides complexity from the layers above it.
 
-At the lowest level, the buffer cache (`bio.c`) manages disk blocks in memory. This cache serves two purposes: improving performance by avoiding disk reads and providing synchronization for disk blocks. The buffer cache ensures that only one kernel thread modifies a disk block at a time.
+At the lowest level, the buffer cache (`bio.c`) keeps disk blocks in memory. The cache has two purposes. It improves performance because it avoids disk reads, and it synchronizes access to disk blocks. The buffer cache makes sure that only one kernel thread modifies a disk block at a time.
 
 ```c
 // Buffer cache structure
@@ -210,9 +209,9 @@ struct buf {
 };
 ```
 
-Above the buffer cache, the logging layer (`log.c`) provides crash recovery. xv6 uses a write-ahead log to ensure file system consistency. All file system modifications first go to the log, then to their final locations. If the system crashes, the log can replay or discard incomplete operations.
+Above the buffer cache, the logging layer (`log.c`) provides crash recovery. xv6 uses a write-ahead log to keep the file system consistent. All file system modifications go to the log first, then to their final locations. If the system crashes, xv6 uses the log to replay or discard incomplete operations.
 
-The block allocator manages free disk blocks using a bitmap. Each bit represents one disk block - 1 for free, 0 for allocated. This simple scheme allows quick allocation and deallocation:
+The block allocator tracks free disk blocks with a bitmap. Each bit represents one disk block: 0 for free, 1 for allocated. This simple scheme makes allocation and deallocation fast:
 
 ```c
 // Allocate a disk block
@@ -240,7 +239,7 @@ static uint balloc(uint dev)
 }
 ```
 
-The inode layer implements files and directories. Each inode contains metadata about a file (size, type, link count) and pointers to data blocks. xv6 uses a Unix-like structure with direct blocks and one indirect block:
+The inode layer implements files and directories. Each inode holds metadata about a file (size, type, link count) and pointers to data blocks. xv6 uses a Unix-like structure with direct blocks and one indirect block:
 
 ```c
 // On-disk inode structure
@@ -254,13 +253,13 @@ struct dinode {
 };
 ```
 
-This design allows small files to be accessed efficiently (through direct blocks) while still supporting larger files (through the indirect block). The implementation demonstrates the trade-offs in file system design between simplicity, performance, and maximum file size.
+With this design, xv6 accesses small files efficiently through the direct blocks and still supports larger files through the indirect block. The design shows the trade-offs between simplicity, performance, and maximum file size.
 
 ## System Calls: The Kernel Interface
 
-System calls form the boundary between user programs and the kernel. In xv6, this interface consists of about 20 calls that provide all necessary functionality. Understanding how system calls work reveals the fundamental separation between user and kernel mode.
+System calls form the boundary between user programs and the kernel. In xv6, this interface has about 20 calls that provide all the necessary functionality. The system call path shows the separation between user mode and kernel mode.
 
-When a user program invokes a system call, several steps occur. First, the program executes an `int` instruction, which triggers a processor interrupt. The processor switches to kernel mode, saves the user state, and jumps to the interrupt handler. The kernel examines the system call number, executes the appropriate function, and returns the result.
+When a user program makes a system call, several steps occur. First, the program executes an `int` instruction, which triggers a processor interrupt. The processor switches to kernel mode, saves the user state, and jumps to the interrupt handler. The kernel examines the system call number, executes the correct function, and returns the result.
 
 ```c
 // User-side system call stub (usys.S)
@@ -286,7 +285,7 @@ void syscall(void)
 }
 ```
 
-This mechanism teaches several crucial concepts. The transition from user to kernel mode demonstrates hardware protection mechanisms. The careful saving and restoring of state shows how the kernel maintains process isolation. The system call table illustrates how operating systems provide a stable interface while allowing internal implementation changes.
+The transition from user mode to kernel mode shows the hardware protection mechanisms. The kernel saves and restores state carefully, and this keeps each process isolated. The system call table shows how an operating system keeps a stable interface while its internal implementation changes.
 
 ## Synchronization: Coordinating Concurrent Activities
 
@@ -324,7 +323,7 @@ void release(struct spinlock *lk)
 
 The implementation uses the x86 `xchg` instruction, which atomically swaps a register with a memory location. This hardware support ensures that only one processor can acquire the lock at a time, even in multiprocessor systems.
 
-Sleep locks allow processes to sleep while waiting for a lock, making them suitable for longer critical sections:
+Sleep locks let a process sleep while it waits for a lock. This makes them suitable for longer critical sections:
 
 ```c
 // Sleep waiting for a condition
@@ -359,11 +358,11 @@ void sleep(void *chan, struct spinlock *lk)
 }
 ```
 
-This implementation demonstrates a subtle but crucial aspect of operating systems: avoiding lost wakeups. The careful dance of acquiring one lock before releasing another ensures that wakeup signals aren't missed.
+This code avoids lost wakeups. It acquires one lock before it releases the other, so no wakeup signal is missed.
 
 ## Scheduling: Sharing the CPU
 
-The xv6 scheduler implements a simple round-robin policy. Each processor continuously loops through the process table, running each RUNNABLE process for one timer interrupt (about 10ms). While basic, this scheduler illustrates fundamental scheduling concepts.
+The xv6 scheduler uses a simple round-robin policy. Each processor loops continuously through the process table and runs each RUNNABLE process for one timer interrupt (about 10ms). The scheduler is basic, but it shows the core scheduling concepts.
 
 ```c
 // Per-CPU scheduler loop
@@ -396,7 +395,7 @@ void scheduler(void)
 }
 ```
 
-The context switch, implemented in `swtch.S`, saves the current register state and loads the saved state of the next process. This assembly code must carefully preserve the stack and registers to maintain the illusion that each process runs continuously:
+The context switch in `swtch.S` saves the current register state and loads the saved state of the next process. This assembly code must preserve the stack and registers exactly, so that each process appears to run continuously:
 
 ```assembly
 # Context switch
@@ -427,11 +426,11 @@ swtch:
     ret
 ```
 
-This implementation teaches how operating systems create the illusion of concurrent execution on limited hardware. The round-robin policy, while not optimal for all workloads, provides fairness and prevents starvation.
+This is how an operating system creates the illusion of concurrent execution on limited hardware. The round-robin policy is not optimal for all workloads, but it is fair and it prevents starvation.
 
 ## Device Drivers: Bridging Software and Hardware
 
-Device drivers in xv6 demonstrate how operating systems interact with hardware. The console driver provides a good example, handling both keyboard input and screen output.
+Device drivers in xv6 show how an operating system interacts with hardware. The console driver is a good example. It handles both keyboard input and screen output.
 
 The keyboard driver responds to hardware interrupts. When a key is pressed, the keyboard controller triggers interrupt 33, causing the processor to execute the keyboard interrupt handler:
 
@@ -483,11 +482,11 @@ static int kbdgetc(void)
 }
 ```
 
-This code demonstrates several important concepts. The use of I/O ports (`inb` and `outb`) shows how software communicates with hardware. The handling of special keys (shift, control) illustrates state management in device drivers. The interrupt-driven design demonstrates how operating systems respond to external events efficiently.
+The I/O port instructions (`inb` and `outb`) show how software communicates with hardware. The handling of special keys (shift, control) shows state management in a device driver. The interrupt-driven design shows how an operating system responds to external events efficiently.
 
 ## The Shell: Bringing It All Together
 
-The xv6 shell (`sh.c`) is both a user interface and a demonstration of how system calls work together. Though simple, it implements core shell features: command execution, I/O redirection, and pipes.
+The xv6 shell (`sh.c`) is a user interface and also an example of how system calls work together. It is simple, but it implements the core shell features: command execution, I/O redirection, and pipes.
 
 The shell's main loop reads commands, parses them, and executes them:
 
@@ -523,7 +522,7 @@ int main(void)
 }
 ```
 
-The implementation of pipes demonstrates the power of Unix abstractions:
+The pipe implementation shows the strength of Unix abstractions:
 
 ```c
 // Execute pipe command
@@ -552,14 +551,14 @@ case PIPE:
     break;
 ```
 
-This code teaches how simple primitives (fork, pipe, dup) combine to create powerful abstractions. The careful manipulation of file descriptors shows how Unix achieves I/O redirection without special kernel support.
+Simple primitives (fork, pipe, dup) combine into larger abstractions. The shell manipulates file descriptors to get I/O redirection without special kernel support.
 
 ## Practical Exercises: Learning by Doing
 
-To truly understand xv6, you must experiment with it. Here are exercises that reinforce key concepts:
+To understand xv6, you must experiment with it. These exercises reinforce the key concepts.
 
 **Exercise 1: Adding a System Call**
-Implement a `getproccount()` system call that returns the number of active processes. This exercise teaches the entire system call path:
+Implement a `getproccount()` system call that returns the number of active processes. This exercise covers the entire system call path:
 
 1. Add the system call number to `syscall.h`
 2. Add the function prototype to `user.h`
@@ -582,11 +581,11 @@ Add support for symbolic links. This involves:
 2. Implementing `symlink()` and updating `open()` to follow links
 3. Handling link loops and permissions
 
-These exercises demonstrate that xv6, despite its simplicity, is a real operating system that you can extend and modify.
+These exercises show that xv6 is simple but real. You can extend and modify it.
 
 ## Debugging xv6: Tools and Techniques
 
-Debugging operating system code presents unique challenges. When your code runs in kernel mode, traditional debugging tools often don't work. xv6 provides several techniques for debugging:
+Debugging operating system code is hard. When your code runs in kernel mode, traditional debugging tools often do not work. xv6 gives you several debugging techniques.
 
 The `cprintf()` function works like `printf()` but outputs to the console even from interrupt handlers:
 
@@ -595,7 +594,7 @@ cprintf("proc %d (%s) allocating page at %x\n",
         proc->pid, proc->name, a);
 ```
 
-QEMU's monitor (accessed with Ctrl-a c) provides powerful debugging features. You can examine registers, memory, and control execution:
+QEMU's monitor (Ctrl-a c) has debugging features. You can examine registers and memory, and control execution:
 
 ```
 (qemu) info registers
@@ -604,7 +603,7 @@ QEMU's monitor (accessed with Ctrl-a c) provides powerful debugging features. Yo
 (qemu) cont
 ```
 
-GDB can debug xv6 when QEMU runs with the `-s` flag. This allows source-level debugging of kernel code:
+GDB can debug xv6 when QEMU runs with the `-s` flag. This gives you source-level debugging of kernel code:
 
 ```bash
 $ gdb kernel
@@ -622,53 +621,53 @@ if(np == 0)
 
 ## Common Pitfalls and How to Avoid Them
 
-Working with xv6, students often encounter similar challenges. Understanding these pitfalls helps avoid frustration:
+Students who work with xv6 often hit the same problems.
 
-**Race Conditions**: Forgetting to acquire locks before accessing shared data leads to mysterious bugs that appear randomly. Always identify shared data and protect it with appropriate locks.
+**Race Conditions**: If you forget to acquire locks before you access shared data, you get bugs that appear at random. Identify all shared data and protect it with the correct locks.
 
 **Stack Overflow**: The kernel stack is small (4KB). Avoid large local variables or deep recursion in kernel code.
 
-**Memory Leaks**: Forgetting to free allocated memory eventually exhausts the system. Match every `kalloc()` with `kfree()`.
+**Memory Leaks**: If you forget to free allocated memory, the system eventually runs out of memory. Match every `kalloc()` with `kfree()`.
 
-**Deadlocks**: Acquiring locks in different orders in different code paths causes deadlock. Establish a consistent locking order throughout the kernel.
+**Deadlocks**: If different code paths acquire locks in different orders, deadlock occurs. Use one consistent locking order in the whole kernel.
 
-**User/Kernel Confusion**: Remember that kernel code cannot directly access user memory. Use `copyin()` and `copyout()` to transfer data safely.
+**User/Kernel Confusion**: Kernel code cannot directly access user memory. Use `copyin()` and `copyout()` to transfer data safely.
 
 ## Beyond xv6: Connections to Modern Systems
 
-While xv6 simplifies many aspects of operating systems, its concepts directly relate to modern systems. Linux uses similar process structures, though with hundreds of fields instead of dozens. Windows implements threads within processes, but the basic scheduling concepts remain the same.
+xv6 simplifies many parts of an operating system, but its concepts map directly to modern systems. Linux uses similar process structures, with hundreds of fields instead of dozens. Windows implements threads within processes, but the basic scheduling concepts are the same.
 
 Modern file systems like ext4 or NTFS add features like journaling, extents, and B-trees, but build on the same inode concept. Virtual memory systems now support huge pages, NUMA awareness, and complex sharing schemes, but still use page tables for address translation.
 
-Understanding xv6 provides the foundation to explore these advanced topics. The simplicity that makes xv6 approachable also makes it an ideal starting point for understanding complex production systems.
+xv6 gives you the foundation for these advanced topics. Because it is simple, it is a good starting point for complex production systems.
 
 ## Moving Forward with xv6
 
-Your journey with xv6 has just begun. As you work with the code, you'll discover layers of subtlety in its seemingly simple implementation. Each reading reveals new insights about the careful design decisions that make operating systems work.
+As you work with the code, you will find more detail in its simple implementation. Each reading shows more of the design decisions that make operating systems work.
 
-Start by reading the xv6 book alongside the source code. Run xv6 in QEMU, try the exercises, and don't hesitate to add debug prints when confused. Join the community of students and educators using xv6 - their insights and questions will deepen your understanding.
+Read the xv6 book alongside the source code. Run xv6 in QEMU, try the exercises, and add debug prints when you are confused. Join the community of students and educators who use xv6. Their insights and questions will deepen your understanding.
 
-Remember that xv6 is a teaching tool. Its goal isn't to be fast or feature-complete, but to be understandable. Every line of code exists for a reason, usually to illustrate an important concept. When something seems unnecessarily complex, ask yourself what it teaches about operating system design.
+xv6 is a teaching tool. Its goal is to be understandable, not fast or feature-complete. Every line of code exists for a reason, usually to show an important concept. When something seems unnecessarily complex, ask what it teaches about operating system design.
 
-Operating systems remain one of the most challenging and rewarding areas of computer science. Through xv6, you're joining a tradition stretching back to the original Unix pioneers. The concepts you learn here - processes, virtual memory, file systems, and synchronization - form the foundation of all modern computing.
+Operating systems are one of the hardest and most rewarding areas of computer science. With xv6, you join a tradition that goes back to the original Unix pioneers. The concepts here (processes, virtual memory, file systems, and synchronization) form the foundation of all modern computing.
 
-Take time to appreciate the elegance of xv6's design. Notice how simple abstractions like files and processes combine to create a complete system. Observe how careful coding prevents race conditions and maintains invariants. These lessons extend far beyond operating systems to all systems programming.
-
-Your understanding will deepen with each pass through the code. What seems complex today will become clear with practice. The investment you make in understanding xv6 will pay dividends throughout your career in computer science.
+Notice how simple abstractions like files and processes combine into a complete system. Observe how careful code prevents race conditions and maintains invariants. These lessons apply to all systems programming, not only to operating systems.
 
 ## What's Next: Continuing Your Operating Systems Journey
 
-Now that you've grasped the fundamentals of xv6, you're ready to explore deeper waters. The resources below will help you expand your understanding, whether you want to master xv6, explore other teaching operating systems, or dive into production OS code.
+The resources below help you go further, whether you want to master xv6, try other teaching operating systems, or read production OS code.
 
 ### Essential xv6 Resources
 
 **xv6 Book and Source Code**
+
 - Official xv6 book: https://pdos.csail.mit.edu/6.828/2018/xv6/book-rev11.pdf
 - xv6 source with line numbers: https://pdos.csail.mit.edu/6.828/2018/xv6/xv6-rev11.pdf
 - MIT's xv6 repository: https://github.com/mit-pdos/xv6-public
 - RISC-V version: https://github.com/mit-pdos/xv6-riscv
 
 **Video Lectures and Courses**
+
 - MIT 6.828 Operating System Engineering: https://pdos.csail.mit.edu/6.828/2018/schedule.html
 - Frans Kaashoek's lectures: https://www.youtube.com/playlist?list=PLfciLKR3SgqNJKKIKUliWoNBBH1VHL3AP
 - CS 537 (Wisconsin) videos: https://pages.cs.wisc.edu/~remzi/Classes/537/Spring2018/
@@ -676,18 +675,19 @@ Now that you've grasped the fundamentals of xv6, you're ready to explore deeper 
 ### Classic Operating Systems Texts
 
 **Foundational Books**
+
 - "Operating Systems: Three Easy Pieces" by Remzi and Andrea Arpaci-Dusseau  
   Free online: https://pages.cs.wisc.edu/~remzi/OSTEP/  
   The modern standard for OS education, with clear explanations and practical examples
 
 - "The Design and Implementation of the FreeBSD Operating System" by McKusick et al.  
-  Bridges the gap between teaching systems and production code
+  Connects teaching systems to production code
 
 - "Linux Kernel Development" by Robert Love  
   A readable introduction to how Linux actually works
 
 - "Modern Operating Systems" by Andrew Tanenbaum  
-  Comprehensive coverage of OS concepts with real-world examples
+  Broad coverage of OS concepts with real-world examples
 
 ### Other Teaching Operating Systems
 
@@ -710,24 +710,28 @@ Focus on x86 architecture details
 ### Research Papers That Shaped Operating Systems
 
 **Unix and Plan 9**
+
 - "The UNIX Time-Sharing System" by Ritchie & Thompson (1974)  
   https://people.eecs.berkeley.edu/~brewer/cs262/unix.pdf
 - "Plan 9 from Bell Labs" by Pike et al.  
   https://9p.io/sys/doc/9.pdf
 
 **Virtual Memory**
+
 - "The Multics Virtual Memory: Concepts and Design" (1972)  
   https://multicians.org/multics-vm.pdf
 - "The Working Set Model for Program Behavior" by Denning (1968)  
   https://denninginstitute.com/pjd/PUBS/WSModel_1968.pdf
 
 **File Systems**
+
 - "A Fast File System for UNIX" by McKusick et al. (1984)  
   https://people.eecs.berkeley.edu/~brewer/cs262/FFS.pdf
 - "The Google File System" by Ghemawat et al. (2003)  
   https://static.googleusercontent.com/media/research.google.com/en//archive/gfs-sosp2003.pdf
 
 **Scheduling and Synchronization**
+
 - "Lottery Scheduling" by Waldspurger & Weihl (1994)  
   https://www.usenix.org/legacy/publications/library/proceedings/osdi/full_papers/waldspurger.pdf
 -

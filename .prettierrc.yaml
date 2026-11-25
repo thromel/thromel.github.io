@@ -14,3 +14,7 @@ overrides:
   - files: '*.astro'
     options:
       parser: astro
+  # Keep code samples in Markdown exactly as written.
+  - files: '*.md'
+    options:
+      embeddedLanguageFormatting: 'off'
