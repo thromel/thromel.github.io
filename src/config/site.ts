@@ -258,11 +258,7 @@ export const site = {
      * Set to [] to hide it.
      */
     currently: [
-      'Steering long-horizon coding agents: reproducing <a href="https://arxiv.org/abs/2605.05980">TACT</a>, which uses activation steering to curb overthinking and overacting, on SWE-bench Verified.',
-      '<a href="https://blp-workshop.github.io/">BLP 2027</a> shared tasks (NAACL 2027): adversarial Bangla prompt classification.',
-      'Formal-verification-guided schema synthesis with LLMs: turning English database specifications into relational schemas with verified design contracts.',
-      'Runtime verification using formal verification.',
-      'Human-AI interaction: when AI assistants apply stored user memories, and when they apply them where they do not belong.',
+      'Research on coding agents.',
     ] as string[],
     primaryLinks: [
       'cv_pdf',

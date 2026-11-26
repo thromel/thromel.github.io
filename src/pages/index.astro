@@ -427,6 +427,15 @@ const heroName = (site.title as string) === 'blank' ? site.author.name : site.ti
     color: var(--global-text-color-light);
   }
 
+  /* A single item needs no number. */
+  .currently-list li:only-child {
+    padding-left: 0;
+  }
+
+  .currently-list li:only-child::before {
+    content: none;
+  }
+
   /* About prose */
   .about-prose {
     max-width: 64ch;
